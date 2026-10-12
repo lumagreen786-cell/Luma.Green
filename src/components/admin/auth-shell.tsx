@@ -37,11 +37,11 @@ export function AdminAuthShell({
       <main
         id="main"
         tabIndex={-1}
-        className="mx-auto flex w-full max-w-lg flex-1 flex-col px-6 py-10 sm:justify-center sm:py-16"
+        className="mx-auto flex w-full max-w-lg flex-1 flex-col px-5 py-8 sm:px-8 sm:py-16"
       >
         <div>
           <div className="mb-7 flex flex-col gap-3">
-            <h1 className="font-display text-3xl leading-tight font-semibold tracking-tight sm:text-4xl">
+            <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
               {title}
             </h1>
             {description ? (

@@ -1,5 +1,6 @@
 "use client";
 
+import { useLocale } from "next-intl";
 import {
   createContext,
   type ReactNode,
@@ -9,6 +10,7 @@ import {
 } from "react";
 
 import { Toaster } from "@/components/ui/sonner";
+import { isLocale, localeDirection } from "@/i18n/locales";
 
 import {
   parseTheme,
@@ -110,7 +112,29 @@ export function useTheme() {
   return useContext(ThemeContext);
 }
 
-export function ThemeToaster() {
+export function ThemeToaster({
+  direction = "ltr",
+}: {
+  direction?: "ltr" | "rtl";
+}) {
   const { resolvedTheme } = useTheme();
-  return <Toaster theme={resolvedTheme} richColors closeButton />;
+  return (
+    <Toaster
+      theme={resolvedTheme}
+      dir={direction}
+      position={direction === "rtl" ? "bottom-left" : "bottom-right"}
+      richColors
+      closeButton
+    />
+  );
+}
+
+/** The admin toaster stays independent of the locale provider. */
+export function LocalizedThemeToaster() {
+  const locale = useLocale();
+  return (
+    <ThemeToaster
+      direction={isLocale(locale) ? localeDirection(locale) : "ltr"}
+    />
+  );
 }

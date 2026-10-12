@@ -141,6 +141,18 @@ async function settled(page, title) {
 }
 async function capture(page, stateName, detail = {}) {
   const name = `lots-${stateName}`;
+  const messages = JSON.parse(
+    await readFile(`${root}/messages/${detail.locale}.json`, "utf8"),
+  );
+  // A visible error-boundary heading is not the requested operational state.
+  await expect(
+    page.getByRole("heading", {
+      level: 1,
+      name: messages.common.error,
+      exact: true,
+      includeHidden: true,
+    }),
+  ).toHaveCount(0);
   await page.evaluate(() => document.fonts.ready);
   await page.evaluate(async () => {
     await Promise.allSettled(

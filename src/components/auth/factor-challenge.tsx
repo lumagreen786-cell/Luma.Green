@@ -108,7 +108,7 @@ export function FactorChallenge({
       <header className="space-y-2">
         <h1
           id={`${id}-title`}
-          className="font-display text-2xl leading-tight font-semibold tracking-tight sm:text-3xl"
+          className="font-display text-2xl leading-[1.25] font-semibold tracking-tight"
         >
           {t(mode === "totp" ? "twoFactorTitle" : "twoFactorBackupTitle")}
         </h1>

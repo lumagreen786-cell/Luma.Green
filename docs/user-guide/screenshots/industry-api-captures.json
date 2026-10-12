@@ -1,11 +1,11 @@
 {
-  "sourceCommit": "9146ce6840b86e6b9c26a63ea67a48f28f0cfa2c",
+  "sourceCommit": "4f704d44f47c83bb4d527a4eff2eb7ec5afd5c6d",
   "note": "Actual application components in the isolated documentation harness. Synthetic key metadata only; no raw key. This proves visual rendering, not authorization, provider access or a deployed API. All write adapters reject.",
   "sourceHashes": {
     "src/components/integrations/api-access.tsx": "2442e5117e9d4ac27fc7349aa45142be8aecbb6e1ce18cb4122131856953d5f7",
-    "src/components/app/app-shell.tsx": "2824d37e4e16717be6cbc88079f66087c8356ec5a3a1fe2ee27430fbdb849f06",
-    "src/components/app/page-parts.tsx": "3dd45298c34917424abb92916e71bbff759f0de850d5f2153fd47322b82b5c1a",
-    "src/components/theme/theme-provider.tsx": "16099dee8a247ce40bb5d410fc0a6ae58de226e89071fea987cef5114e6842c0",
+    "src/components/app/app-shell.tsx": "5140c054900afc2da4b3e84c26789fe3c4e1ef3b3ef8e9fb3d0b5be5074e98e5",
+    "src/components/app/page-parts.tsx": "6426cb090e93bb4485aed7643a6a2badf77cc53f17aa0f5380ed8f4c7bd5d293",
+    "src/components/theme/theme-provider.tsx": "b63770a104c7058b72a9086c14885c708feba4ebb9bf0d7dce9922ffe9af4c0f",
     "src/components/theme/theme-toggle.tsx": "b2340a73c1abcdf0552ecd40f4d8d6e0a03e2bca9ae25d2c55deb6853ebd1684",
     "src/components/site/language-switcher.tsx": "605c2aa7c55d4dafe0031fd72d36991c3a2cf854abc1b64126f674c66ade7224",
     "src/components/ui/button.tsx": "541fcd6054a1dfa7fc114bc8c3468b8d408a347a55938107e74f93cc504cb367",
@@ -74,7 +74,7 @@
       },
       "theme": "light",
       "locale": "en",
-      "capturedAt": "2026-10-06T22:42:16.292Z",
+      "capturedAt": "2026-10-12T05:41:41.518Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -82,7 +82,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "2450e1a6a078c6e97fcd424cdb729ccdfb213c9655904943d1d25f98f13d59eb",
+      "screenshotSha256": "a1b645d4563d77d9b8459ded31689155566a2c067dd42f1eb6817b44b5e287ff",
       "keyboardFieldTab": true,
       "layout": {
         "width": 360,
@@ -100,14 +100,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "2450e1a6a078c6e97fcd424cdb729ccdfb213c9655904943d1d25f98f13d59eb",
-        "reviewedAt": "2026-10-06T22:41:46.211536+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-en-360-dark",
@@ -119,7 +112,7 @@
       },
       "theme": "dark",
       "locale": "en",
-      "capturedAt": "2026-10-06T22:42:16.580Z",
+      "capturedAt": "2026-10-12T05:41:42.713Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -127,7 +120,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "d3829423ae7cf885ab73eb8903530811f9f2906b6a84829b91f8991418dd3a40",
+      "screenshotSha256": "69540eb31ae115e777c6cf86f1ad1808ce20854570762bf3046e16edbf950275",
       "keyboardFieldTab": true,
       "layout": {
         "width": 360,
@@ -145,14 +138,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "d3829423ae7cf885ab73eb8903530811f9f2906b6a84829b91f8991418dd3a40",
-        "reviewedAt": "2026-10-06T22:41:46.212005+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-en-390-light",
@@ -164,7 +150,7 @@
       },
       "theme": "light",
       "locale": "en",
-      "capturedAt": "2026-10-06T22:42:16.894Z",
+      "capturedAt": "2026-10-12T05:41:43.595Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -172,7 +158,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "7c913d537c57208f650b6f574ea42ca3d1d9bc207d4dc60fe26d8af4897ef3b4",
+      "screenshotSha256": "63132e58f1df54dccb71c3a03db39f8c6aec42b459b076d136144bd37cd2ab79",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -190,14 +176,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "7c913d537c57208f650b6f574ea42ca3d1d9bc207d4dc60fe26d8af4897ef3b4",
-        "reviewedAt": "2026-10-06T22:41:46.212078+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-en-390-dark",
@@ -209,7 +188,7 @@
       },
       "theme": "dark",
       "locale": "en",
-      "capturedAt": "2026-10-06T22:42:17.302Z",
+      "capturedAt": "2026-10-12T05:41:44.762Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -217,7 +196,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "62b1cdf7d0ccd20911a1ea5edd7054ee72733b731f759010d6a09d86ceca0b97",
+      "screenshotSha256": "8ac12da48fc72aff8975e053fca8b7c1bf974d2d88affe7f8a12f0baeffa66f4",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -235,14 +214,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "62b1cdf7d0ccd20911a1ea5edd7054ee72733b731f759010d6a09d86ceca0b97",
-        "reviewedAt": "2026-10-06T22:41:46.212144+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-en-768-light",
@@ -254,7 +226,7 @@
       },
       "theme": "light",
       "locale": "en",
-      "capturedAt": "2026-10-06T22:42:17.773Z",
+      "capturedAt": "2026-10-12T05:41:45.862Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -262,7 +234,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": true,
-      "screenshotSha256": "66cf7c88746b014dc2c702010af123f438fefbdc65db53a8d63e6eae198428b2",
+      "screenshotSha256": "8a9d195fc602c853e63685c4bd78c7ca8337317bd292d853f18548bf0c57a2fb",
       "keyboardFieldTab": true,
       "layout": {
         "width": 768,
@@ -280,14 +252,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "66cf7c88746b014dc2c702010af123f438fefbdc65db53a8d63e6eae198428b2",
-        "reviewedAt": "2026-10-06T22:42:35.511940+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-en-768-dark",
@@ -299,7 +264,7 @@
       },
       "theme": "dark",
       "locale": "en",
-      "capturedAt": "2026-10-06T22:42:18.126Z",
+      "capturedAt": "2026-10-12T05:41:46.806Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -307,7 +272,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": true,
-      "screenshotSha256": "97707887a91a27b71e8a76192cdf3ddcd5732f2c2df4bdc177a19dc77b72ddae",
+      "screenshotSha256": "c84a4b374698b7480258b1203049d9ed58c6e268ddfa009008d5dcf650c32f08",
       "keyboardFieldTab": true,
       "layout": {
         "width": 768,
@@ -325,14 +290,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "97707887a91a27b71e8a76192cdf3ddcd5732f2c2df4bdc177a19dc77b72ddae",
-        "reviewedAt": "2026-10-06T22:42:35.512083+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-en-1024-light",
@@ -344,7 +302,7 @@
       },
       "theme": "light",
       "locale": "en",
-      "capturedAt": "2026-10-06T22:42:18.514Z",
+      "capturedAt": "2026-10-12T05:41:47.592Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -352,7 +310,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": true,
-      "screenshotSha256": "9625c06d237cc5f1cfb29fdd71316f692ce26c91fcb139f9185d8f4427b285b7",
+      "screenshotSha256": "6164c6800155a600fdf3863e65dd3d48afa5aede7e32a2dd48f0b03cc21f322f",
       "keyboardFieldTab": true,
       "layout": {
         "width": 1024,
@@ -370,14 +328,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "9625c06d237cc5f1cfb29fdd71316f692ce26c91fcb139f9185d8f4427b285b7",
-        "reviewedAt": "2026-10-06T22:42:35.512166+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-en-1024-dark",
@@ -389,7 +340,7 @@
       },
       "theme": "dark",
       "locale": "en",
-      "capturedAt": "2026-10-06T22:42:18.899Z",
+      "capturedAt": "2026-10-12T05:41:48.317Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -397,7 +348,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": true,
-      "screenshotSha256": "0b1954d8835e105176364876614754c9c73b2b493ab565dd68824b616910e205",
+      "screenshotSha256": "502ed4ea58077be7dca651ae56959a7d71c92b39715386a698bcb7c96a3ea85b",
       "keyboardFieldTab": true,
       "layout": {
         "width": 1024,
@@ -415,14 +366,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "0b1954d8835e105176364876614754c9c73b2b493ab565dd68824b616910e205",
-        "reviewedAt": "2026-10-06T22:42:35.512238+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-en-1440-light",
@@ -434,7 +378,7 @@
       },
       "theme": "light",
       "locale": "en",
-      "capturedAt": "2026-10-06T22:42:19.262Z",
+      "capturedAt": "2026-10-12T05:41:49.073Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -442,7 +386,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": true,
-      "screenshotSha256": "0c5e50eb6cc35ca196bdbfb3c98a621d71c32473d0acccd0db94497b0cc58db8",
+      "screenshotSha256": "d044f24fc0e30e22ed5e5089bfbcbc5b9b4e6ff4cfe0829cf9b9eca63abe2f16",
       "keyboardFieldTab": true,
       "layout": {
         "width": 1440,
@@ -460,14 +404,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "0c5e50eb6cc35ca196bdbfb3c98a621d71c32473d0acccd0db94497b0cc58db8",
-        "reviewedAt": "2026-10-06T22:42:35.512325+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-en-1440-dark",
@@ -479,7 +416,7 @@
       },
       "theme": "dark",
       "locale": "en",
-      "capturedAt": "2026-10-06T22:42:19.629Z",
+      "capturedAt": "2026-10-12T05:41:49.913Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -487,7 +424,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": true,
-      "screenshotSha256": "490aae27847de27fdf1e980b9db023e326100ae69b2d8918d390d23591e81021",
+      "screenshotSha256": "48d623c4417d6df04a8c940fb8059596e942fb00151f0ff62f4d87f34c551728",
       "keyboardFieldTab": true,
       "layout": {
         "width": 1440,
@@ -505,14 +442,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "490aae27847de27fdf1e980b9db023e326100ae69b2d8918d390d23591e81021",
-        "reviewedAt": "2026-10-06T22:42:35.512409+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-hi-390-light",
@@ -524,7 +454,7 @@
       },
       "theme": "light",
       "locale": "hi",
-      "capturedAt": "2026-10-06T22:42:19.968Z",
+      "capturedAt": "2026-10-12T05:41:50.814Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -532,7 +462,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "e78b834809053015c301a04bdc11bef1e39ac7535569c2ea7532c074b06bf809",
+      "screenshotSha256": "639b1516f5d75ef195a2eab7e6fcea38d8d45329baebb0ecee4c0ceb645be7c7",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -551,14 +481,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "e78b834809053015c301a04bdc11bef1e39ac7535569c2ea7532c074b06bf809",
-        "reviewedAt": "2026-10-06T22:42:40.872311+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-hi-390-dark",
@@ -570,7 +493,7 @@
       },
       "theme": "dark",
       "locale": "hi",
-      "capturedAt": "2026-10-06T22:42:20.285Z",
+      "capturedAt": "2026-10-12T05:41:51.661Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -578,7 +501,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "d32b707865bbbc9a88a141814b6bceeb136cae74e4d355a343f55b04df8ab7db",
+      "screenshotSha256": "f286b953731f77f5cf782e41a3e254e6c90b64214858feeaae1efb431a254fe8",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -597,14 +520,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "d32b707865bbbc9a88a141814b6bceeb136cae74e4d355a343f55b04df8ab7db",
-        "reviewedAt": "2026-10-06T22:42:40.872433+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-bn-390-light",
@@ -616,7 +532,7 @@
       },
       "theme": "light",
       "locale": "bn",
-      "capturedAt": "2026-10-06T22:42:20.585Z",
+      "capturedAt": "2026-10-12T05:41:52.473Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -624,7 +540,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "377a255cd319a44cdd23144aad5d876215aee3c178c9a96a48373fd7b98b72b8",
+      "screenshotSha256": "a553184899559a39876ef95661cf40a8d79926203d9d9c6b80f252f7f2e47dbd",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -645,14 +561,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "377a255cd319a44cdd23144aad5d876215aee3c178c9a96a48373fd7b98b72b8",
-        "reviewedAt": "2026-10-06T22:42:40.872481+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-bn-390-dark",
@@ -664,7 +573,7 @@
       },
       "theme": "dark",
       "locale": "bn",
-      "capturedAt": "2026-10-06T22:42:20.883Z",
+      "capturedAt": "2026-10-12T05:41:53.336Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -672,7 +581,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "25eedf975778f081d173764befc627e4b32a063b6910dd8ec0f14e2e407909dc",
+      "screenshotSha256": "3886027e8ef8c30e3d8ca6e90490fe36c74daf0a2c639bb9f8e3c9ae3996d927",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -693,14 +602,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "25eedf975778f081d173764befc627e4b32a063b6910dd8ec0f14e2e407909dc",
-        "reviewedAt": "2026-10-06T22:42:40.872526+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-mr-390-light",
@@ -712,7 +614,7 @@
       },
       "theme": "light",
       "locale": "mr",
-      "capturedAt": "2026-10-06T22:42:21.183Z",
+      "capturedAt": "2026-10-12T05:41:54.163Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -720,7 +622,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "e0c734da4db278cb9d146908bcdf7acd57969ead0b16359781bc71c0093da2e9",
+      "screenshotSha256": "c629e36cfe4f96f4eae53b8df47c65c6086692eb5716c9dc93830d7a5a60c344",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -739,14 +641,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "e0c734da4db278cb9d146908bcdf7acd57969ead0b16359781bc71c0093da2e9",
-        "reviewedAt": "2026-10-06T22:42:40.872581+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-mr-390-dark",
@@ -758,7 +653,7 @@
       },
       "theme": "dark",
       "locale": "mr",
-      "capturedAt": "2026-10-06T22:42:21.496Z",
+      "capturedAt": "2026-10-12T05:41:54.993Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -766,7 +661,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "488cf21531c0498075ef9ba84191066aefa64379799c44ba6135b020fad29b9f",
+      "screenshotSha256": "aaf57fa95c9d55853004e7842013cf99a91217f81aad83833630a8a0035bef6a",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -785,14 +680,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "488cf21531c0498075ef9ba84191066aefa64379799c44ba6135b020fad29b9f",
-        "reviewedAt": "2026-10-06T22:42:40.872624+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-ta-390-light",
@@ -804,7 +692,7 @@
       },
       "theme": "light",
       "locale": "ta",
-      "capturedAt": "2026-10-06T22:42:21.782Z",
+      "capturedAt": "2026-10-12T05:41:55.788Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -812,7 +700,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "e44c4f787a1a19f063005ab31c3f4ffda31eb09dc272bc08dc8309eec71e6794",
+      "screenshotSha256": "5df2e04ee6b70dd7c897fbd787245563d20db951813e0c5d4946adf768815f99",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -832,14 +720,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "e44c4f787a1a19f063005ab31c3f4ffda31eb09dc272bc08dc8309eec71e6794",
-        "reviewedAt": "2026-10-06T22:42:40.872676+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-ta-390-dark",
@@ -851,7 +732,7 @@
       },
       "theme": "dark",
       "locale": "ta",
-      "capturedAt": "2026-10-06T22:42:22.066Z",
+      "capturedAt": "2026-10-12T05:41:56.563Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -859,7 +740,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "1cd492754d3024b83750beff2ec9f794ee0c8899cf3a1362a78ae3315fa0b109",
+      "screenshotSha256": "67889c58a77c17bbe62230a2e1555f44607e9232cbc9e4bfe3e34c0a88a72ae3",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -879,14 +760,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "1cd492754d3024b83750beff2ec9f794ee0c8899cf3a1362a78ae3315fa0b109",
-        "reviewedAt": "2026-10-06T22:42:40.872726+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-te-390-light",
@@ -898,7 +772,7 @@
       },
       "theme": "light",
       "locale": "te",
-      "capturedAt": "2026-10-06T22:42:22.365Z",
+      "capturedAt": "2026-10-12T05:41:57.431Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -906,7 +780,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "1e80cb8d1c8c023700399feffc7dee5a9e24074697a994ae8476447e00e8b6ff",
+      "screenshotSha256": "fe6755e7312d8756b8e6f154b21570de65096e8172e118c46aed4eb19b625b55",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -926,14 +800,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "1e80cb8d1c8c023700399feffc7dee5a9e24074697a994ae8476447e00e8b6ff",
-        "reviewedAt": "2026-10-06T22:42:49.181116+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-te-390-dark",
@@ -945,7 +812,7 @@
       },
       "theme": "dark",
       "locale": "te",
-      "capturedAt": "2026-10-06T22:42:22.649Z",
+      "capturedAt": "2026-10-12T05:41:58.505Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -953,7 +820,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "4c43be8d7c659c2b4b531c947bf6cb8c811e0fde40237c163d2f2e0b8ba30bfd",
+      "screenshotSha256": "fa275a19039c2e3136198ded3f4d14114b487ae1997ad5047ef6cbf60302cf5b",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -973,14 +840,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "4c43be8d7c659c2b4b531c947bf6cb8c811e0fde40237c163d2f2e0b8ba30bfd",
-        "reviewedAt": "2026-10-06T22:42:49.181398+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-kn-390-light",
@@ -992,7 +852,7 @@
       },
       "theme": "light",
       "locale": "kn",
-      "capturedAt": "2026-10-06T22:42:22.953Z",
+      "capturedAt": "2026-10-12T05:41:59.364Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -1000,7 +860,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "484142e4ce78dbc81f0c50cd97eaec701130545b874f2888268079decf5d5d63",
+      "screenshotSha256": "027b13541bf878e37e6ecb06d7619bad8ea6d5be262d423a7fb31a7f629008b1",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -1020,14 +880,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "484142e4ce78dbc81f0c50cd97eaec701130545b874f2888268079decf5d5d63",
-        "reviewedAt": "2026-10-06T22:42:49.181493+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-kn-390-dark",
@@ -1039,7 +892,7 @@
       },
       "theme": "dark",
       "locale": "kn",
-      "capturedAt": "2026-10-06T22:42:23.325Z",
+      "capturedAt": "2026-10-12T05:42:00.324Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -1047,7 +900,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "a85cc54c9bd0ebef534bd4c2c6de64096d02a1f48e8d4d723fbce207be69f8be",
+      "screenshotSha256": "b7fb73d7167bce1d94fad255a8aa0ce2b2037acbcca55750d73f2990398fd650",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -1067,14 +920,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "a85cc54c9bd0ebef534bd4c2c6de64096d02a1f48e8d4d723fbce207be69f8be",
-        "reviewedAt": "2026-10-06T22:42:49.181561+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-ml-390-light",
@@ -1086,7 +932,7 @@
       },
       "theme": "light",
       "locale": "ml",
-      "capturedAt": "2026-10-06T22:42:23.686Z",
+      "capturedAt": "2026-10-12T05:42:01.137Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -1094,7 +940,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "3dff3f00eaebcdb724b5d8f78220971ffc9c2325f4b5386596c2e2b428dcf4d0",
+      "screenshotSha256": "1fa5bc803547352a3804be6d2b03b73b9f82c39675433337e273da66e8fdc280",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -1114,14 +960,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "3dff3f00eaebcdb724b5d8f78220971ffc9c2325f4b5386596c2e2b428dcf4d0",
-        "reviewedAt": "2026-10-06T22:42:49.181631+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-ml-390-dark",
@@ -1133,7 +972,7 @@
       },
       "theme": "dark",
       "locale": "ml",
-      "capturedAt": "2026-10-06T22:42:24.051Z",
+      "capturedAt": "2026-10-12T05:42:01.923Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -1141,7 +980,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "bfad7cda5a0900f7b5a65e7fa4aec359aba2699f928f07b655eb973d57602f49",
+      "screenshotSha256": "0da28ff58ae8bc3e803c2b6f85a91b998bc9fad89d0bd54e134bc1b3dda7a8ca",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -1161,14 +1000,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "bfad7cda5a0900f7b5a65e7fa4aec359aba2699f928f07b655eb973d57602f49",
-        "reviewedAt": "2026-10-06T22:42:49.181698+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-gu-390-light",
@@ -1180,7 +1012,7 @@
       },
       "theme": "light",
       "locale": "gu",
-      "capturedAt": "2026-10-06T22:42:24.390Z",
+      "capturedAt": "2026-10-12T05:42:02.703Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -1188,7 +1020,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "9ea38be57584c48545888e8e6dfef4fed88bae9429d4b60f6c73569e50f9ca62",
+      "screenshotSha256": "4700ebeab594dfd0d92fb9b1faa6ee38451f85f874c21f3fdbf7b0a211b918b6",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -1208,14 +1040,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "9ea38be57584c48545888e8e6dfef4fed88bae9429d4b60f6c73569e50f9ca62",
-        "reviewedAt": "2026-10-06T22:42:49.181753+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-gu-390-dark",
@@ -1227,7 +1052,7 @@
       },
       "theme": "dark",
       "locale": "gu",
-      "capturedAt": "2026-10-06T22:42:24.774Z",
+      "capturedAt": "2026-10-12T05:42:03.530Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -1235,7 +1060,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "2946cdfb35ac88a09a816ca7692ef80b84b0f64c3de8f00b3f43bb4410472b3c",
+      "screenshotSha256": "69696692afd80df23983b4d8f180103d53e79fbf4452718f4e86d182f86168d7",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -1255,14 +1080,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "2946cdfb35ac88a09a816ca7692ef80b84b0f64c3de8f00b3f43bb4410472b3c",
-        "reviewedAt": "2026-10-06T22:42:49.181808+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-pa-390-light",
@@ -1274,7 +1092,7 @@
       },
       "theme": "light",
       "locale": "pa",
-      "capturedAt": "2026-10-06T22:42:25.098Z",
+      "capturedAt": "2026-10-12T05:42:04.331Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -1282,7 +1100,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "9485350d85641d03087bb256fb67827fe99da1bfdd67fad1f715d9e505860244",
+      "screenshotSha256": "465a10078190317e82205a758c2040c90e10f9a4d7da0ce2b2745b5ab3032732",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -1303,14 +1121,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "9485350d85641d03087bb256fb67827fe99da1bfdd67fad1f715d9e505860244",
-        "reviewedAt": "2026-10-06T22:42:58.894330+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-pa-390-dark",
@@ -1322,7 +1133,7 @@
       },
       "theme": "dark",
       "locale": "pa",
-      "capturedAt": "2026-10-06T22:42:25.419Z",
+      "capturedAt": "2026-10-12T05:42:05.127Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -1330,7 +1141,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "07a48714414ac5ac76d0e6c24f5338fc1a4cab3daef09b1602184927e644994d",
+      "screenshotSha256": "c7cdf65b3528010ea1f16df016ad7782aefba1fa0a71678315edd29b1b8145ad",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -1351,14 +1162,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "07a48714414ac5ac76d0e6c24f5338fc1a4cab3daef09b1602184927e644994d",
-        "reviewedAt": "2026-10-06T22:42:58.894596+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-ur-390-light",
@@ -1370,7 +1174,7 @@
       },
       "theme": "light",
       "locale": "ur",
-      "capturedAt": "2026-10-06T22:42:25.686Z",
+      "capturedAt": "2026-10-12T05:42:05.834Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -1378,7 +1182,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "448a6c5b74f8769ce76017c806548f6ecb06f23de3d0dcbb7c05a82bcb8e4ad2",
+      "screenshotSha256": "79b50c0a220cead3a3dfa81083b4c01904fedc78ccad53f351399c8425ebf0bb",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -1398,14 +1202,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "448a6c5b74f8769ce76017c806548f6ecb06f23de3d0dcbb7c05a82bcb8e4ad2",
-        "reviewedAt": "2026-10-06T22:42:58.894778+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-ur-390-dark",
@@ -1417,7 +1214,7 @@
       },
       "theme": "dark",
       "locale": "ur",
-      "capturedAt": "2026-10-06T22:42:25.986Z",
+      "capturedAt": "2026-10-12T05:42:06.581Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -1425,7 +1222,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "991af19afb0b2bd8c2980758b4dce91bc088dcdf88043ceb3ad8b596a9512e6f",
+      "screenshotSha256": "11ef448bae3d9bb9bd25791cf919a977bf96612d6fe3ad8afa7c003706837b70",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -1445,14 +1242,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "991af19afb0b2bd8c2980758b4dce91bc088dcdf88043ceb3ad8b596a9512e6f",
-        "reviewedAt": "2026-10-06T22:42:58.894961+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-ar-360-light",
@@ -1464,7 +1254,7 @@
       },
       "theme": "light",
       "locale": "ar",
-      "capturedAt": "2026-10-06T22:42:26.330Z",
+      "capturedAt": "2026-10-12T05:42:07.296Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -1472,7 +1262,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "cd6272b0a33f14c32b1217baa4c5b7baa1c7d46d470707c44f35a5782a88bb9b",
+      "screenshotSha256": "70d2ad527b7f781707ad822db7d9ca97f00be0150defc8e50f5d271b41ea3051",
       "keyboardFieldTab": true,
       "layout": {
         "width": 360,
@@ -1492,14 +1282,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "cd6272b0a33f14c32b1217baa4c5b7baa1c7d46d470707c44f35a5782a88bb9b",
-        "reviewedAt": "2026-10-06T22:42:58.895138+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-ar-360-dark",
@@ -1511,7 +1294,7 @@
       },
       "theme": "dark",
       "locale": "ar",
-      "capturedAt": "2026-10-06T22:42:26.699Z",
+      "capturedAt": "2026-10-12T05:42:08.131Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -1519,7 +1302,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "3b556e989cbfcdc940fcae7b30291b5ac525b41fb868386cd0491a90126d597f",
+      "screenshotSha256": "ace8acec69255060a4166387a215376faf3decffaf8577027fb339d3ede45022",
       "keyboardFieldTab": true,
       "layout": {
         "width": 360,
@@ -1539,14 +1322,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "3b556e989cbfcdc940fcae7b30291b5ac525b41fb868386cd0491a90126d597f",
-        "reviewedAt": "2026-10-06T22:42:58.895405+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-ar-390-light",
@@ -1558,7 +1334,7 @@
       },
       "theme": "light",
       "locale": "ar",
-      "capturedAt": "2026-10-06T22:42:27.051Z",
+      "capturedAt": "2026-10-12T05:42:08.906Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -1566,7 +1342,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "a2b00ff56c4a4be9dc6dfd350c4ef89dab549092b4638dbb700f003d8722906b",
+      "screenshotSha256": "7e87522cceff71663da45504e32ec249103e8e2daabfcc774cb31ae1aa362093",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -1586,14 +1362,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "a2b00ff56c4a4be9dc6dfd350c4ef89dab549092b4638dbb700f003d8722906b",
-        "reviewedAt": "2026-10-06T22:42:58.895574+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-ar-390-dark",
@@ -1605,7 +1374,7 @@
       },
       "theme": "dark",
       "locale": "ar",
-      "capturedAt": "2026-10-06T22:42:27.559Z",
+      "capturedAt": "2026-10-12T05:42:09.972Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -1613,7 +1382,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "58712311bbfb0b8ea1e0879917752c6c46cda87ebcbc49043058b6cf971d005e",
+      "screenshotSha256": "aa3d219382fa4034be2878fca862fb1801f45f2103aa184a0c7bf9692085fc59",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -1633,14 +1402,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "58712311bbfb0b8ea1e0879917752c6c46cda87ebcbc49043058b6cf971d005e",
-        "reviewedAt": "2026-10-06T22:42:58.895734+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-ar-768-light",
@@ -1652,7 +1414,7 @@
       },
       "theme": "light",
       "locale": "ar",
-      "capturedAt": "2026-10-06T22:42:28.081Z",
+      "capturedAt": "2026-10-12T05:42:11.008Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -1660,7 +1422,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": true,
-      "screenshotSha256": "d2f5a48afeae0244da6793f28dbb8cc59376859313f803ebafba8fa3f506dd2b",
+      "screenshotSha256": "f5a5e18d30e27cdfa98853efb01bd5fc1b83a3ef3294287295e36a4d59c134e0",
       "keyboardFieldTab": true,
       "layout": {
         "width": 768,
@@ -1680,14 +1442,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "d2f5a48afeae0244da6793f28dbb8cc59376859313f803ebafba8fa3f506dd2b",
-        "reviewedAt": "2026-10-06T22:43:06.928817+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-ar-768-dark",
@@ -1699,7 +1454,7 @@
       },
       "theme": "dark",
       "locale": "ar",
-      "capturedAt": "2026-10-06T22:42:28.614Z",
+      "capturedAt": "2026-10-12T05:42:11.830Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -1707,7 +1462,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": true,
-      "screenshotSha256": "affa28ea12277e79edaaada47ac232e776d1366f879dd1854f5f5a03b1f44218",
+      "screenshotSha256": "12ab331380a26402bde74dd2ee67e2cf1a08272e14833e8e64a76634e95ee781",
       "keyboardFieldTab": true,
       "layout": {
         "width": 768,
@@ -1727,14 +1482,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "affa28ea12277e79edaaada47ac232e776d1366f879dd1854f5f5a03b1f44218",
-        "reviewedAt": "2026-10-06T22:43:06.929155+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-ar-1024-light",
@@ -1746,7 +1494,7 @@
       },
       "theme": "light",
       "locale": "ar",
-      "capturedAt": "2026-10-06T22:42:29.060Z",
+      "capturedAt": "2026-10-12T05:42:12.853Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -1754,7 +1502,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": true,
-      "screenshotSha256": "26d52d66f16f0dee688ea4e1594d9b9e1d2a491c241323acef8cbeadaad0ba67",
+      "screenshotSha256": "a3c98dcc631a42b9cab9cdd88d2a16380359f10f711bd4fbc36bc226486d6364",
       "keyboardFieldTab": true,
       "layout": {
         "width": 1024,
@@ -1774,14 +1522,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "26d52d66f16f0dee688ea4e1594d9b9e1d2a491c241323acef8cbeadaad0ba67",
-        "reviewedAt": "2026-10-06T22:43:06.929234+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-ar-1024-dark",
@@ -1793,7 +1534,7 @@
       },
       "theme": "dark",
       "locale": "ar",
-      "capturedAt": "2026-10-06T22:42:29.533Z",
+      "capturedAt": "2026-10-12T05:42:13.707Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -1801,7 +1542,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": true,
-      "screenshotSha256": "7441b69d6287e4a59ac401ae5acce8fecac3f1bcf0a473f3dd8adbab5a76e118",
+      "screenshotSha256": "b86a8e98c8559e122879692bd2c97f8108d6cfbc67d10f04a6b693b8185ab38d",
       "keyboardFieldTab": true,
       "layout": {
         "width": 1024,
@@ -1821,14 +1562,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "7441b69d6287e4a59ac401ae5acce8fecac3f1bcf0a473f3dd8adbab5a76e118",
-        "reviewedAt": "2026-10-06T22:43:06.929304+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-ar-1440-light",
@@ -1840,7 +1574,7 @@
       },
       "theme": "light",
       "locale": "ar",
-      "capturedAt": "2026-10-06T22:42:29.952Z",
+      "capturedAt": "2026-10-12T05:42:14.551Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -1848,7 +1582,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": true,
-      "screenshotSha256": "e1aa143dff9649ce46a4316b90d13ae67dce1a6f4c9c69bbd9335bb11325faa8",
+      "screenshotSha256": "7cbb44350c9113958347d14340444a43c557a4c5c617f352934e6501b4743e65",
       "keyboardFieldTab": true,
       "layout": {
         "width": 1440,
@@ -1868,14 +1602,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "e1aa143dff9649ce46a4316b90d13ae67dce1a6f4c9c69bbd9335bb11325faa8",
-        "reviewedAt": "2026-10-06T22:43:06.929389+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-ar-1440-dark",
@@ -1887,7 +1614,7 @@
       },
       "theme": "dark",
       "locale": "ar",
-      "capturedAt": "2026-10-06T22:42:30.364Z",
+      "capturedAt": "2026-10-12T05:42:15.439Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -1895,7 +1622,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": true,
-      "screenshotSha256": "d96ed3db8da2c91fea17b9a28d15fe51b907afa85566def6f2cff92a8d5f7454",
+      "screenshotSha256": "827afc20064b7d4fbff84072d1c8ef01c141562232dc7c52871f193de88e1935",
       "keyboardFieldTab": true,
       "layout": {
         "width": 1440,
@@ -1915,14 +1642,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "d96ed3db8da2c91fea17b9a28d15fe51b907afa85566def6f2cff92a8d5f7454",
-        "reviewedAt": "2026-10-06T22:43:06.929468+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-as-390-light",
@@ -1934,7 +1654,7 @@
       },
       "theme": "light",
       "locale": "as",
-      "capturedAt": "2026-10-06T22:42:30.704Z",
+      "capturedAt": "2026-10-12T05:42:16.318Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -1942,7 +1662,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "aba8b5b5d69659f4ca7c6367e403653544244ce4dd1a4c895b8b506623367d55",
+      "screenshotSha256": "8678f50898f93561cf81473c3b8f65415a7ffd6d9ba12f6f349c3b1bb94e1ae3",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -1963,14 +1683,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "aba8b5b5d69659f4ca7c6367e403653544244ce4dd1a4c895b8b506623367d55",
-        "reviewedAt": "2026-10-06T22:43:13.193240+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-as-390-dark",
@@ -1982,7 +1695,7 @@
       },
       "theme": "dark",
       "locale": "as",
-      "capturedAt": "2026-10-06T22:42:31.128Z",
+      "capturedAt": "2026-10-12T05:42:17.213Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -1990,7 +1703,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "f90109a1e7d6b11656bd6080e03ffa765d4952c678563a15a50b00d5899d3fe4",
+      "screenshotSha256": "682841cc6cccb87a27303dde8a9c855d9c7e8d468f9301842697fb049b59dce4",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -2011,14 +1724,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "f90109a1e7d6b11656bd6080e03ffa765d4952c678563a15a50b00d5899d3fe4",
-        "reviewedAt": "2026-10-06T22:43:13.193353+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-ne-390-light",
@@ -2030,7 +1736,7 @@
       },
       "theme": "light",
       "locale": "ne",
-      "capturedAt": "2026-10-06T22:42:31.538Z",
+      "capturedAt": "2026-10-12T05:42:18.115Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -2038,7 +1744,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "a52eb31cb65935355aaf59fdcf7aea2e0cfc6458a7eb904c7b51116090f3303b",
+      "screenshotSha256": "863e0ed144e93d763221a123888d5c973f7f0d469aa60f149472aae1ea46e200",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -2057,14 +1763,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "a52eb31cb65935355aaf59fdcf7aea2e0cfc6458a7eb904c7b51116090f3303b",
-        "reviewedAt": "2026-10-06T22:43:13.193403+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-ne-390-dark",
@@ -2076,7 +1775,7 @@
       },
       "theme": "dark",
       "locale": "ne",
-      "capturedAt": "2026-10-06T22:42:32.029Z",
+      "capturedAt": "2026-10-12T05:42:19.041Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -2084,7 +1783,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "7dc7557c1dc38ce9e6283d0c804a5548c77267e6ed39775cd3952df68e539566",
+      "screenshotSha256": "7872c46a53c80cf79745e0f514a9419d646b70f22f8f7f229789a9cd86b1b2ba",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -2103,14 +1802,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "7dc7557c1dc38ce9e6283d0c804a5548c77267e6ed39775cd3952df68e539566",
-        "reviewedAt": "2026-10-06T22:43:13.193450+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-es-390-light",
@@ -2122,7 +1814,7 @@
       },
       "theme": "light",
       "locale": "es",
-      "capturedAt": "2026-10-06T22:42:32.396Z",
+      "capturedAt": "2026-10-12T05:42:19.809Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -2130,7 +1822,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "51a0cc5fb1301642b5fe2ea3df5562cbb8010a1121051145e25c9c7051e709b6",
+      "screenshotSha256": "12812d3e52770d3986364f1e740958f8b894cdeba602766478991bb32560293f",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -2148,14 +1840,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "51a0cc5fb1301642b5fe2ea3df5562cbb8010a1121051145e25c9c7051e709b6",
-        "reviewedAt": "2026-10-06T22:43:13.193495+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-es-390-dark",
@@ -2167,7 +1852,7 @@
       },
       "theme": "dark",
       "locale": "es",
-      "capturedAt": "2026-10-06T22:42:32.722Z",
+      "capturedAt": "2026-10-12T05:42:20.592Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -2175,7 +1860,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "daa8b862f4290242b2ff2bbd63a55636630078acc77ec4295b09e72eedf6ad30",
+      "screenshotSha256": "74ce34949ea0f0dfbe51de66e7d8b9d02ea3996df2f3f077b36fb4df2903e9fc",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -2193,14 +1878,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "daa8b862f4290242b2ff2bbd63a55636630078acc77ec4295b09e72eedf6ad30",
-        "reviewedAt": "2026-10-06T22:43:13.193539+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-fr-390-light",
@@ -2212,7 +1890,7 @@
       },
       "theme": "light",
       "locale": "fr",
-      "capturedAt": "2026-10-06T22:42:33.052Z",
+      "capturedAt": "2026-10-12T05:42:21.337Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -2220,7 +1898,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "10a9c43fed39f030aaee261822f2430350d42e153a2e34d873179bea2c649842",
+      "screenshotSha256": "746b9eb3b374b34b2b6366ffa178de732ca9a3dbfe2b9a2cc4df224d2d732eb6",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -2238,14 +1916,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "10a9c43fed39f030aaee261822f2430350d42e153a2e34d873179bea2c649842",
-        "reviewedAt": "2026-10-06T22:43:13.193584+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-fr-390-dark",
@@ -2257,7 +1928,7 @@
       },
       "theme": "dark",
       "locale": "fr",
-      "capturedAt": "2026-10-06T22:42:33.398Z",
+      "capturedAt": "2026-10-12T05:42:22.073Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -2265,7 +1936,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "8f53bea01b952a99e53d60e4b5e23d89ee11d42547830153b7070931ffd53c82",
+      "screenshotSha256": "c725d1c02d8f9d145c395973367361946bcaf849b688e14a7b587742b22a52db",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -2283,14 +1954,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "8f53bea01b952a99e53d60e4b5e23d89ee11d42547830153b7070931ffd53c82",
-        "reviewedAt": "2026-10-06T22:43:13.193628+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-vi-390-light",
@@ -2302,7 +1966,7 @@
       },
       "theme": "light",
       "locale": "vi",
-      "capturedAt": "2026-10-06T22:42:33.799Z",
+      "capturedAt": "2026-10-12T05:42:22.805Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -2310,7 +1974,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "2ac07c75905a45a167a1dc9d1f310f4dae6eccb16668cf81173a818a6d2f6b8a",
+      "screenshotSha256": "ba1c49a2de98b11a5b9834f620bd56e499afc866fca1bd93022796dc3b9ff5ef",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -2331,14 +1995,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "2ac07c75905a45a167a1dc9d1f310f4dae6eccb16668cf81173a818a6d2f6b8a",
-        "reviewedAt": "2026-10-06T22:43:21.637650+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-vi-390-dark",
@@ -2350,7 +2007,7 @@
       },
       "theme": "dark",
       "locale": "vi",
-      "capturedAt": "2026-10-06T22:42:34.195Z",
+      "capturedAt": "2026-10-12T05:42:23.571Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -2358,7 +2015,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "5c4e656b60f9d899f6c4cf4d97944fe39d0b6b5400aab2c586c397f1d6110c4a",
+      "screenshotSha256": "3afc8bab48f1196dca11e83f1061db193d21fe19a1860e8d3b69d665ef4bda07",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -2379,14 +2036,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "5c4e656b60f9d899f6c4cf4d97944fe39d0b6b5400aab2c586c397f1d6110c4a",
-        "reviewedAt": "2026-10-06T22:43:21.637759+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-si-390-light",
@@ -2398,7 +2048,7 @@
       },
       "theme": "light",
       "locale": "si",
-      "capturedAt": "2026-10-06T22:42:34.550Z",
+      "capturedAt": "2026-10-12T05:42:24.383Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -2406,7 +2056,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "f57cc636cd8b4e7f755f4c2de6edac7626ae6eb0d66851b3d247deba3fcafcd0",
+      "screenshotSha256": "db6bd71e38b3c1e773d3dc6b9e21f243d230f7d855732275dbd0ae1da92935ad",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -2428,14 +2078,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "f57cc636cd8b4e7f755f4c2de6edac7626ae6eb0d66851b3d247deba3fcafcd0",
-        "reviewedAt": "2026-10-06T22:43:21.637818+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-si-390-dark",
@@ -2447,7 +2090,7 @@
       },
       "theme": "dark",
       "locale": "si",
-      "capturedAt": "2026-10-06T22:42:34.912Z",
+      "capturedAt": "2026-10-12T05:42:25.275Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -2455,7 +2098,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "168e1e56b00b2612a9c39cccf4bcd6b0cbdc0cb8067489e84e545e90e2465d83",
+      "screenshotSha256": "b3ee2484f077d7970e91789d54e079786ef40b9213a1ff5a3e404371f8e579a1",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -2477,14 +2120,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "168e1e56b00b2612a9c39cccf4bcd6b0cbdc0cb8067489e84e545e90e2465d83",
-        "reviewedAt": "2026-10-06T22:43:21.637874+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-th-390-light",
@@ -2496,7 +2132,7 @@
       },
       "theme": "light",
       "locale": "th",
-      "capturedAt": "2026-10-06T22:42:35.213Z",
+      "capturedAt": "2026-10-12T05:42:26.111Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -2504,7 +2140,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "101a5873a6afeb790b0cc62dee8826a96b7f3d7de387318400eb1dfd0fa9f049",
+      "screenshotSha256": "22d75d43803e2cc583016afa7d3246ec75caad682cd8e61a43dcbcaa60c6847d",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -2524,14 +2160,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "101a5873a6afeb790b0cc62dee8826a96b7f3d7de387318400eb1dfd0fa9f049",
-        "reviewedAt": "2026-10-06T22:43:21.637917+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-th-390-dark",
@@ -2543,7 +2172,7 @@
       },
       "theme": "dark",
       "locale": "th",
-      "capturedAt": "2026-10-06T22:42:35.515Z",
+      "capturedAt": "2026-10-12T05:42:26.965Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -2551,7 +2180,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "4dd452fb3fcd96624c2311bdc344b416c8fb86364ab22c378f734e13a4248cb6",
+      "screenshotSha256": "3afe020bf46a115b736d075d791977efd4595fb32514003452c7b6aa45a19c6a",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -2571,14 +2200,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "4dd452fb3fcd96624c2311bdc344b416c8fb86364ab22c378f734e13a4248cb6",
-        "reviewedAt": "2026-10-06T22:43:21.637963+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-ru-390-light",
@@ -2590,7 +2212,7 @@
       },
       "theme": "light",
       "locale": "ru",
-      "capturedAt": "2026-10-06T22:42:35.803Z",
+      "capturedAt": "2026-10-12T05:42:27.776Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -2598,7 +2220,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "5f0ea9b2bcd1469ac73d092b2742c2e4dc614ba61a1877a8d2e21bb3a3969132",
+      "screenshotSha256": "f875d4071bee0302f654c3aa413cf7c80751149b11a61985d40e20c82316f5d0",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -2618,14 +2240,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "5f0ea9b2bcd1469ac73d092b2742c2e4dc614ba61a1877a8d2e21bb3a3969132",
-        "reviewedAt": "2026-10-06T22:43:21.638015+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-ru-390-dark",
@@ -2637,7 +2252,7 @@
       },
       "theme": "dark",
       "locale": "ru",
-      "capturedAt": "2026-10-06T22:42:36.147Z",
+      "capturedAt": "2026-10-12T05:42:28.768Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -2645,7 +2260,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "1a26924e451fbdf7531088a1ebb7682b94237c4a979834bbfe3794298de74a1d",
+      "screenshotSha256": "e28852e1e2ed5ecbd5df1f44e75f3db2eafd949660ca60a8f848c19479d95bcd",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -2665,14 +2280,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "1a26924e451fbdf7531088a1ebb7682b94237c4a979834bbfe3794298de74a1d",
-        "reviewedAt": "2026-10-06T22:43:21.638066+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-de-390-light",
@@ -2684,7 +2292,7 @@
       },
       "theme": "light",
       "locale": "de",
-      "capturedAt": "2026-10-06T22:42:36.467Z",
+      "capturedAt": "2026-10-12T05:42:29.599Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -2692,7 +2300,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "4b11a5e4558977be16a6ef10fdf7b162390b8adddac48dec4cd79a2c52cd8ce7",
+      "screenshotSha256": "eefb4a0cd0e7457c316eda690101716fee50e081157ae1185a6fb094d25f18ea",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -2710,14 +2318,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "4b11a5e4558977be16a6ef10fdf7b162390b8adddac48dec4cd79a2c52cd8ce7",
-        "reviewedAt": "2026-10-06T22:43:31.543802+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-de-390-dark",
@@ -2729,7 +2330,7 @@
       },
       "theme": "dark",
       "locale": "de",
-      "capturedAt": "2026-10-06T22:42:36.797Z",
+      "capturedAt": "2026-10-12T05:42:30.443Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -2737,7 +2338,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "16f355cf3ba3cf08e13e6b11d2ee7fbdc76c914648d73d04c230a4bb14add32d",
+      "screenshotSha256": "5284fa111a68dabf673c0078db7b27cf3769a6a026435c2b1a897681f0c5068b",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -2755,14 +2356,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "16f355cf3ba3cf08e13e6b11d2ee7fbdc76c914648d73d04c230a4bb14add32d",
-        "reviewedAt": "2026-10-06T22:43:31.543918+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-or-390-light",
@@ -2774,7 +2368,7 @@
       },
       "theme": "light",
       "locale": "or",
-      "capturedAt": "2026-10-06T22:42:37.237Z",
+      "capturedAt": "2026-10-12T05:42:31.319Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -2782,7 +2376,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "ddf2ccd6840ee2cd76d94ec86ffb61a938babe2473cc79e6c436b22a86df8f1e",
+      "screenshotSha256": "43df362d355444a0497fb522d28314f46041b38ab5792826ee9572230af394c4",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -2803,14 +2397,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "ddf2ccd6840ee2cd76d94ec86ffb61a938babe2473cc79e6c436b22a86df8f1e",
-        "reviewedAt": "2026-10-06T22:43:31.543978+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-or-390-dark",
@@ -2822,7 +2409,7 @@
       },
       "theme": "dark",
       "locale": "or",
-      "capturedAt": "2026-10-06T22:42:37.647Z",
+      "capturedAt": "2026-10-12T05:42:32.213Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -2830,7 +2417,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "cab5df0bbc56fff6effa82536d4bb994a7b8ad7299aeb8afbe84effce9feb0c9",
+      "screenshotSha256": "21a938ed598d3d2bef2979255c56ae7797433f3635e5c60010cc01a9b67d5ce6",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -2851,14 +2438,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "cab5df0bbc56fff6effa82536d4bb994a7b8ad7299aeb8afbe84effce9feb0c9",
-        "reviewedAt": "2026-10-06T22:43:31.544031+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-ja-390-light",
@@ -2870,7 +2450,7 @@
       },
       "theme": "light",
       "locale": "ja",
-      "capturedAt": "2026-10-06T22:42:38.058Z",
+      "capturedAt": "2026-10-12T05:42:33.104Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -2878,7 +2458,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "1756e9d8aa877e177089697d7aa34179229d0563f002e1c10978cfabba707ee7",
+      "screenshotSha256": "abbdc4b7f519b4f42c5ed7d197244f32b203c83254ce4b7dd1cf8e24f37e0224",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -2914,14 +2494,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "1756e9d8aa877e177089697d7aa34179229d0563f002e1c10978cfabba707ee7",
-        "reviewedAt": "2026-10-06T22:43:31.544085+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-ja-390-dark",
@@ -2933,7 +2506,7 @@
       },
       "theme": "dark",
       "locale": "ja",
-      "capturedAt": "2026-10-06T22:42:38.380Z",
+      "capturedAt": "2026-10-12T05:42:33.944Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -2941,7 +2514,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "357c964e1eed0db5de5d522385acf99c9ab7c39e053b981fbdd7ab98055c863d",
+      "screenshotSha256": "43c069da237046a864daa8223439bdbca3ca4922e744127935cf4dc212d91483",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -2977,14 +2550,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "357c964e1eed0db5de5d522385acf99c9ab7c39e053b981fbdd7ab98055c863d",
-        "reviewedAt": "2026-10-06T22:43:31.544137+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-uk-390-light",
@@ -2996,7 +2562,7 @@
       },
       "theme": "light",
       "locale": "uk",
-      "capturedAt": "2026-10-06T22:42:38.702Z",
+      "capturedAt": "2026-10-12T05:42:34.734Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -3004,7 +2570,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "be1961feb1c35d3f6ae996319c4818f9da1a0adcf71d306b78082c1dd1a50893",
+      "screenshotSha256": "ccbbc43bc8fd9f74f9e9ff3c10c9a2d1598185411f87bb750a9239712ff16c4a",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -3024,14 +2590,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "be1961feb1c35d3f6ae996319c4818f9da1a0adcf71d306b78082c1dd1a50893",
-        "reviewedAt": "2026-10-06T22:43:31.544187+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-uk-390-dark",
@@ -3043,7 +2602,7 @@
       },
       "theme": "dark",
       "locale": "uk",
-      "capturedAt": "2026-10-06T22:42:39.019Z",
+      "capturedAt": "2026-10-12T05:42:35.532Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -3051,7 +2610,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "5743630b70fad5209b334ac6867631e7c3ae93c204eb21039860871cbd4dc34a",
+      "screenshotSha256": "c9c2b428f1c9984a14833c08072fa2d5e7aa7a0a3621d86f00818c4cb97e5659",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -3071,14 +2630,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "5743630b70fad5209b334ac6867631e7c3ae93c204eb21039860871cbd4dc34a",
-        "reviewedAt": "2026-10-06T22:43:31.544234+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-ko-390-light",
@@ -3090,7 +2642,7 @@
       },
       "theme": "light",
       "locale": "ko",
-      "capturedAt": "2026-10-06T22:42:39.318Z",
+      "capturedAt": "2026-10-12T05:42:36.335Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -3098,7 +2650,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "81316c81c39a96d37986aa55a9cff7d2e7dffedcfe8dce883db30be498d06c11",
+      "screenshotSha256": "3aacf0a10fa32d511fbf704829321a13154cefeb54623535a44e357871b352f6",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -3125,14 +2677,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "81316c81c39a96d37986aa55a9cff7d2e7dffedcfe8dce883db30be498d06c11",
-        "reviewedAt": "2026-10-06T22:43:38.389829+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-ko-390-dark",
@@ -3144,7 +2689,7 @@
       },
       "theme": "dark",
       "locale": "ko",
-      "capturedAt": "2026-10-06T22:42:39.618Z",
+      "capturedAt": "2026-10-12T05:42:37.204Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -3152,7 +2697,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "20ad3eb2743cbb998f8e42e3d6b296b6e526e0bfbd1d4fed86934e67a5089463",
+      "screenshotSha256": "cd6863757fe5ae2adf9183e266650818ff772fa75e617e2509d22b151f8f6113",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -3179,14 +2724,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "20ad3eb2743cbb998f8e42e3d6b296b6e526e0bfbd1d4fed86934e67a5089463",
-        "reviewedAt": "2026-10-06T22:43:38.389973+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-it-390-light",
@@ -3198,7 +2736,7 @@
       },
       "theme": "light",
       "locale": "it",
-      "capturedAt": "2026-10-06T22:42:39.885Z",
+      "capturedAt": "2026-10-12T05:42:37.983Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -3206,7 +2744,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "e93de48e11a8b36e6d1fb725e0d8b7a6e6e8908ad5560a8cbf1fb3f60301e72a",
+      "screenshotSha256": "aee820ce4b8f4286ec31ffe3556cd67f19b4eb04ae54ca4beec129bd0b901743",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -3224,14 +2762,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "e93de48e11a8b36e6d1fb725e0d8b7a6e6e8908ad5560a8cbf1fb3f60301e72a",
-        "reviewedAt": "2026-10-06T22:43:38.390028+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-it-390-dark",
@@ -3243,7 +2774,7 @@
       },
       "theme": "dark",
       "locale": "it",
-      "capturedAt": "2026-10-06T22:42:40.168Z",
+      "capturedAt": "2026-10-12T05:42:38.733Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -3251,7 +2782,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "864055385ba93b97ae2b57872d050b5ab3536bb3a042866c7edfed1dd3a7687a",
+      "screenshotSha256": "5458e7c9376be3d4e6161f41f36461578a5598dae9adfc61c80a13e4f55a734a",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -3269,14 +2800,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "864055385ba93b97ae2b57872d050b5ab3536bb3a042866c7edfed1dd3a7687a",
-        "reviewedAt": "2026-10-06T22:43:38.390093+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-pl-390-light",
@@ -3288,7 +2812,7 @@
       },
       "theme": "light",
       "locale": "pl",
-      "capturedAt": "2026-10-06T22:42:40.436Z",
+      "capturedAt": "2026-10-12T05:42:39.533Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -3296,7 +2820,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "84fd89e5879e0d3e58b46bf58f49b3a68cf2db1581c73d23dea7232394553b8f",
+      "screenshotSha256": "f77b06bb3873f93a052ddd5e5a057a992985eb34f53ec061c243ca2e8d34da6f",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -3316,14 +2840,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "84fd89e5879e0d3e58b46bf58f49b3a68cf2db1581c73d23dea7232394553b8f",
-        "reviewedAt": "2026-10-06T22:43:38.390151+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-pl-390-dark",
@@ -3335,7 +2852,7 @@
       },
       "theme": "dark",
       "locale": "pl",
-      "capturedAt": "2026-10-06T22:42:40.702Z",
+      "capturedAt": "2026-10-12T05:42:40.273Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -3343,7 +2860,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "c134070050a86dd4e3a8fe966e6ec183e99f6451c335aec440cf3ee00b315d07",
+      "screenshotSha256": "af7879670492f9c0fa23dda72570e8d771d69e322ab511fad1dbf4ca9f5999f1",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -3363,14 +2880,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "c134070050a86dd4e3a8fe966e6ec183e99f6451c335aec440cf3ee00b315d07",
-        "reviewedAt": "2026-10-06T22:43:38.390338+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-tr-390-light",
@@ -3382,7 +2892,7 @@
       },
       "theme": "light",
       "locale": "tr",
-      "capturedAt": "2026-10-06T22:42:40.970Z",
+      "capturedAt": "2026-10-12T05:42:40.993Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -3390,7 +2900,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "d0c8ea332a145790beec1712afaf4367432a163b9a3b9d6f30d52a2e694ab708",
+      "screenshotSha256": "a4d25f9490d5c50ef6674f0485ffd5fbe88f2741effadc8f8fad8e170ad1538c",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -3410,14 +2920,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "d0c8ea332a145790beec1712afaf4367432a163b9a3b9d6f30d52a2e694ab708",
-        "reviewedAt": "2026-10-06T22:43:38.390562+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-tr-390-dark",
@@ -3429,7 +2932,7 @@
       },
       "theme": "dark",
       "locale": "tr",
-      "capturedAt": "2026-10-06T22:42:41.254Z",
+      "capturedAt": "2026-10-12T05:42:41.761Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -3437,7 +2940,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "7a03f302d229bf3e41fbd16510b82b26cadf2fb620e720e5dc1b27eedea08cf7",
+      "screenshotSha256": "4bc1348d9bfd6265cdc7a86ab1422d0776666da722fe1acb1a0d5a9fefc9bb28",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -3457,14 +2960,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "7a03f302d229bf3e41fbd16510b82b26cadf2fb620e720e5dc1b27eedea08cf7",
-        "reviewedAt": "2026-10-06T22:43:38.390617+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-zh-390-light",
@@ -3476,7 +2972,7 @@
       },
       "theme": "light",
       "locale": "zh",
-      "capturedAt": "2026-10-06T22:42:41.554Z",
+      "capturedAt": "2026-10-12T05:42:42.580Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -3484,7 +2980,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "410257c62d783060b158e5430605d89c8656520782a1afd984d62ddd323366c6",
+      "screenshotSha256": "7dfda4e43acb4d2aab5cb6b4d8a961dd542452834be6aa59f3dc2e06f363fc77",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -3513,14 +3009,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "410257c62d783060b158e5430605d89c8656520782a1afd984d62ddd323366c6",
-        "reviewedAt": "2026-10-06T22:43:44.208046+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-zh-390-dark",
@@ -3532,7 +3021,7 @@
       },
       "theme": "dark",
       "locale": "zh",
-      "capturedAt": "2026-10-06T22:42:41.862Z",
+      "capturedAt": "2026-10-12T05:42:43.382Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -3540,7 +3029,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "aa0f6fcc7f733a2635c103f9fd166789404f520ed6f06141c633fef6a7406e8c",
+      "screenshotSha256": "c60526825c1b274990c06b5554bc2589d0a51f07fbb3187b3d83766cd79f026b",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -3569,14 +3058,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "aa0f6fcc7f733a2635c103f9fd166789404f520ed6f06141c633fef6a7406e8c",
-        "reviewedAt": "2026-10-06T22:43:44.208266+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-pt-390-light",
@@ -3588,7 +3070,7 @@
       },
       "theme": "light",
       "locale": "pt",
-      "capturedAt": "2026-10-06T22:42:42.165Z",
+      "capturedAt": "2026-10-12T05:42:44.149Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -3596,7 +3078,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "72052632cdb7669e82fa03bc93f5abad69206567d2d07d0278f4ec679f08dd5b",
+      "screenshotSha256": "dc888aaadda822da1e8c5087e0cc8abf8ce7fe077b98a1f1ce3c4c0de0de151b",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -3614,14 +3096,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "72052632cdb7669e82fa03bc93f5abad69206567d2d07d0278f4ec679f08dd5b",
-        "reviewedAt": "2026-10-06T22:43:44.208353+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-pt-390-dark",
@@ -3633,7 +3108,7 @@
       },
       "theme": "dark",
       "locale": "pt",
-      "capturedAt": "2026-10-06T22:42:42.450Z",
+      "capturedAt": "2026-10-12T05:42:44.944Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -3641,7 +3116,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "208fe14e3bb1efc5ca9d892357d3bb4d3cfe8d3502dbed560be2a51756a58cbb",
+      "screenshotSha256": "0e663efe24fc1e4bfe382467c2451bee02f3ab9a9f75a4cca350ecfe03576120",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -3659,14 +3134,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "208fe14e3bb1efc5ca9d892357d3bb4d3cfe8d3502dbed560be2a51756a58cbb",
-        "reviewedAt": "2026-10-06T22:43:44.208411+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-id-390-light",
@@ -3678,7 +3146,7 @@
       },
       "theme": "light",
       "locale": "id",
-      "capturedAt": "2026-10-06T22:42:42.717Z",
+      "capturedAt": "2026-10-12T05:42:45.669Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -3686,7 +3154,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "1e3722d2c593ec148bbf023f23e7a84b7573259d2f73f15d4fe872e82a2d341c",
+      "screenshotSha256": "654e3b18f2386f94d15dda508f0db0d548c7782f65d8738c1b6d8e8c9dca9cfe",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -3704,14 +3172,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "1e3722d2c593ec148bbf023f23e7a84b7573259d2f73f15d4fe872e82a2d341c",
-        "reviewedAt": "2026-10-06T22:43:44.208474+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-id-390-dark",
@@ -3723,7 +3184,7 @@
       },
       "theme": "dark",
       "locale": "id",
-      "capturedAt": "2026-10-06T22:42:43.002Z",
+      "capturedAt": "2026-10-12T05:42:46.491Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -3731,7 +3192,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "eed996c15cab400a89ed576236312cdc7158811d8b045edc59969d1d6ce7dcee",
+      "screenshotSha256": "b0939302fa35308f79cebf83755b41ed6a8604280f86e879fdf82086f3ed3baa",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -3749,14 +3210,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "eed996c15cab400a89ed576236312cdc7158811d8b045edc59969d1d6ce7dcee",
-        "reviewedAt": "2026-10-06T22:43:44.208533+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-nl-390-light",
@@ -3768,7 +3222,7 @@
       },
       "theme": "light",
       "locale": "nl",
-      "capturedAt": "2026-10-06T22:42:43.277Z",
+      "capturedAt": "2026-10-12T05:42:47.255Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -3776,7 +3230,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "c700587740a59dd2e6e58b2a7989088181292a764c9f23bd4b9decef68fce6ef",
+      "screenshotSha256": "1d1359cd443fe1c29b525795b64b87c0a20d3bf0a97f911496be3f23401711ab",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -3794,14 +3248,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "c700587740a59dd2e6e58b2a7989088181292a764c9f23bd4b9decef68fce6ef",
-        "reviewedAt": "2026-10-06T22:43:44.208588+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-nl-390-dark",
@@ -3813,7 +3260,7 @@
       },
       "theme": "dark",
       "locale": "nl",
-      "capturedAt": "2026-10-06T22:42:43.544Z",
+      "capturedAt": "2026-10-12T05:42:48.018Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -3821,7 +3268,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "4d485c5a62b5e0b05cfd1f5fb35c6e28b44ecc34246f691520224e5ef59c59c6",
+      "screenshotSha256": "1cf53c2f97f4bb617c8b08fb8a8828fb815f91ab1fac25a52d1a0ef1faad580c",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -3839,14 +3286,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "4d485c5a62b5e0b05cfd1f5fb35c6e28b44ecc34246f691520224e5ef59c59c6",
-        "reviewedAt": "2026-10-06T22:43:44.208685+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-ms-390-light",
@@ -3858,7 +3298,7 @@
       },
       "theme": "light",
       "locale": "ms",
-      "capturedAt": "2026-10-06T22:42:43.811Z",
+      "capturedAt": "2026-10-12T05:42:48.849Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -3866,7 +3306,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "3992e2eb82941bb642a672c7f5f276da92281930be5354de3974f85c6becd210",
+      "screenshotSha256": "7f7cc741c6ac2e5bd0d98dd6deb2472365c0cea91cc35e592304d95db4ec130a",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -3884,14 +3324,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "3992e2eb82941bb642a672c7f5f276da92281930be5354de3974f85c6becd210",
-        "reviewedAt": "2026-10-06T22:43:44.208782+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     },
     {
       "name": "api-access-ms-390-dark",
@@ -3903,7 +3336,7 @@
       },
       "theme": "dark",
       "locale": "ms",
-      "capturedAt": "2026-10-06T22:42:44.081Z",
+      "capturedAt": "2026-10-12T05:42:49.698Z",
       "fixtureClock": "2026-10-14T06:00:00Z",
       "sourceKind": "isolated-current-components-synthetic-fixtures",
       "productionAuthenticationTested": false,
@@ -3911,7 +3344,7 @@
       "writesDisabled": true,
       "realCredentialCaptured": false,
       "fullPage": false,
-      "screenshotSha256": "95102fa2f301c692a5e9f7337fa1334236bd8682987e7f2a205ed8eb6a5f9859",
+      "screenshotSha256": "e0b513078f67203b02356912191a8869448ffa94a6819ac90b669356141ab8fb",
       "keyboardFieldTab": true,
       "layout": {
         "width": 390,
@@ -3929,14 +3362,7 @@
         "margin": "0px"
       },
       "browserErrors": [],
-      "blockedExternalRequests": [],
-      "visualReview": {
-        "sha256": "95102fa2f301c692a5e9f7337fa1334236bd8682987e7f2a205ed8eb6a5f9859",
-        "reviewedAt": "2026-10-06T22:43:44.208842+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "blockedExternalRequests": []
     }
   ],
   "controlCaptures": [
@@ -3949,7 +3375,7 @@
         "width": 390,
         "height": 844
       },
-      "screenshotSha256": "396a2d2b44601386ce637bec738328be40bc52c011f0746ab609d1ff23dd991f",
+      "screenshotSha256": "aa68dee942ac72336af266cbd37c47b45a238ee813d2ecfd03c4aff1336b1d00",
       "keyboardFocusOrder": [
         "api-key-expiry",
         "api-scope-organization",
@@ -3961,14 +3387,7 @@
       "createFocused": true,
       "revokeVisibleAboveNavigation": true,
       "writesDisabled": true,
-      "realCredentialCaptured": false,
-      "visualReview": {
-        "sha256": "396a2d2b44601386ce637bec738328be40bc52c011f0746ab609d1ff23dd991f",
-        "reviewedAt": "2026-10-06T22:44:00.729269+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "realCredentialCaptured": false
     },
     {
       "file": "api-revoke-en-390-light.png",
@@ -3984,14 +3403,7 @@
       "escapeClosesDialog": true,
       "escapeReturnsFocus": true,
       "writesDisabled": true,
-      "realCredentialCaptured": false,
-      "visualReview": {
-        "sha256": "4ee4fbfdec021d00de5ed898161fe238b464943df4fdd92250fa20771ea3cf4d",
-        "reviewedAt": "2026-10-06T22:44:00.729559+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "realCredentialCaptured": false
     },
     {
       "file": "api-controls-en-390-dark.png",
@@ -4002,7 +3414,7 @@
         "width": 390,
         "height": 844
       },
-      "screenshotSha256": "a9a30779b0fa9af7f70eafc4f21f39141c9b05ba6f1ee8e6862942d35398dbc6",
+      "screenshotSha256": "4fa6fbfa80cccc89b59d18ae59efd147cc3edcf466c87c26198f8a48a69e7f13",
       "keyboardFocusOrder": [
         "api-key-expiry",
         "api-scope-organization",
@@ -4014,14 +3426,7 @@
       "createFocused": true,
       "revokeVisibleAboveNavigation": true,
       "writesDisabled": true,
-      "realCredentialCaptured": false,
-      "visualReview": {
-        "sha256": "a9a30779b0fa9af7f70eafc4f21f39141c9b05ba6f1ee8e6862942d35398dbc6",
-        "reviewedAt": "2026-10-06T22:44:00.729734+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "realCredentialCaptured": false
     },
     {
       "file": "api-revoke-en-390-dark.png",
@@ -4037,14 +3442,7 @@
       "escapeClosesDialog": true,
       "escapeReturnsFocus": true,
       "writesDisabled": true,
-      "realCredentialCaptured": false,
-      "visualReview": {
-        "sha256": "e9124a57219313cc3edff6953b181b6b92a17319b4d30596c1ada554fbb43bc9",
-        "reviewedAt": "2026-10-06T22:44:00.729935+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "realCredentialCaptured": false
     },
     {
       "file": "api-controls-ar-390-light.png",
@@ -4055,7 +3453,7 @@
         "width": 390,
         "height": 844
       },
-      "screenshotSha256": "25eb00e5d1209145d4d1228d2ebbe94896d5dc9537cb6e4950991eb814e120df",
+      "screenshotSha256": "9583c8e8f9e18830a2682044ce548ecf6ba4859521e66b644ab387a1f42d8de9",
       "keyboardFocusOrder": [
         "api-key-expiry",
         "api-scope-organization",
@@ -4067,14 +3465,7 @@
       "createFocused": true,
       "revokeVisibleAboveNavigation": true,
       "writesDisabled": true,
-      "realCredentialCaptured": false,
-      "visualReview": {
-        "sha256": "25eb00e5d1209145d4d1228d2ebbe94896d5dc9537cb6e4950991eb814e120df",
-        "reviewedAt": "2026-10-06T22:44:00.730108+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "realCredentialCaptured": false
     },
     {
       "file": "api-revoke-ar-390-light.png",
@@ -4085,19 +3476,12 @@
         "width": 390,
         "height": 844
       },
-      "screenshotSha256": "6d5ed6c2bfbb9b276aacbe618938409291d336e2e873cc0412aaca95d399579a",
+      "screenshotSha256": "52fb341ee9be0014d9b6b6c815a08c714e71a0e8c0825533febf67e991606140",
       "revokeFocused": true,
       "escapeClosesDialog": true,
       "escapeReturnsFocus": true,
       "writesDisabled": true,
-      "realCredentialCaptured": false,
-      "visualReview": {
-        "sha256": "6d5ed6c2bfbb9b276aacbe618938409291d336e2e873cc0412aaca95d399579a",
-        "reviewedAt": "2026-10-06T22:44:00.730293+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "realCredentialCaptured": false
     },
     {
       "file": "api-controls-ar-390-dark.png",
@@ -4108,7 +3492,7 @@
         "width": 390,
         "height": 844
       },
-      "screenshotSha256": "b46de053d46bfff7213d69039bc9afe454282874a1db04d416e10c937fabbd9a",
+      "screenshotSha256": "853aaf2ecfb32dbbb25c0b44340ca850b06be435b34e2dc9a7ef70661dbe3508",
       "keyboardFocusOrder": [
         "api-key-expiry",
         "api-scope-organization",
@@ -4120,14 +3504,7 @@
       "createFocused": true,
       "revokeVisibleAboveNavigation": true,
       "writesDisabled": true,
-      "realCredentialCaptured": false,
-      "visualReview": {
-        "sha256": "b46de053d46bfff7213d69039bc9afe454282874a1db04d416e10c937fabbd9a",
-        "reviewedAt": "2026-10-06T22:44:00.730452+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "realCredentialCaptured": false
     },
     {
       "file": "api-revoke-ar-390-dark.png",
@@ -4138,113 +3515,12 @@
         "width": 390,
         "height": 844
       },
-      "screenshotSha256": "81b37afa889a9f90121c936d167b12f58996706496e948e3e2059f872cb6ed42",
+      "screenshotSha256": "5f5b71be3ed0d4818f922203ffe5da006b141b14d65d73956d434149e80569d4",
       "revokeFocused": true,
       "escapeClosesDialog": true,
       "escapeReturnsFocus": true,
       "writesDisabled": true,
-      "realCredentialCaptured": false,
-      "visualReview": {
-        "sha256": "81b37afa889a9f90121c936d167b12f58996706496e948e3e2059f872cb6ed42",
-        "reviewedAt": "2026-10-06T22:44:00.730629+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "realCredentialCaptured": false
     }
-  ],
-  "visualReview": {
-    "status": "passed",
-    "reviewedAt": "2026-10-06T22:44:05.049713+00:00",
-    "reviewedCount": 90,
-    "method": "Every original PNG inspected at readable resolution; exact image and source hashes checked.",
-    "productionAuthenticationTested": false,
-    "providerExecutionTested": false,
-    "writesDisabled": true,
-    "note": "82 base views across all 33 locales and 8 EN/AR lower-control and revoke views. Tablets use explicit 1600px documentation height; phone controls retain normal 844px height and scroll evidence."
-  },
-  "captureSourceSnapshot": {
-    "sourceHashes": {
-      "src/components/integrations/api-access.tsx": "2442e5117e9d4ac27fc7349aa45142be8aecbb6e1ce18cb4122131856953d5f7",
-      "src/components/app/app-shell.tsx": "2824d37e4e16717be6cbc88079f66087c8356ec5a3a1fe2ee27430fbdb849f06",
-      "src/components/app/page-parts.tsx": "3dd45298c34917424abb92916e71bbff759f0de850d5f2153fd47322b82b5c1a",
-      "src/components/theme/theme-provider.tsx": "16099dee8a247ce40bb5d410fc0a6ae58de226e89071fea987cef5114e6842c0",
-      "src/components/theme/theme-toggle.tsx": "b2340a73c1abcdf0552ecd40f4d8d6e0a03e2bca9ae25d2c55deb6853ebd1684",
-      "src/components/site/language-switcher.tsx": "605c2aa7c55d4dafe0031fd72d36991c3a2cf854abc1b64126f674c66ade7224",
-      "src/components/ui/button.tsx": "541fcd6054a1dfa7fc114bc8c3468b8d408a347a55938107e74f93cc504cb367",
-      "src/components/ui/input.tsx": "3417db3d25a5fbc95792c2f8d49cfce5190b51640da196f74246f5cae5c4f7ea",
-      "src/components/ui/select.tsx": "beab7e40b384a19e47f04e2bd1f0bb7f283128307521284994debb6c052223b8",
-      "src/components/ui/dialog.tsx": "9cee303ad5afb2d5b5e22c2219d972b54f656e66c4ac2157f9e1b6d126b53f12",
-      "src/components/ui/checkbox.tsx": "a90c9633def82f754c4182f0bf62215a03476bb479acf0689a3d86726d9580ff",
-      "src/app/globals.css": "7d48913ef6ba79d423f69f34e21ee3fecf87242e5da8d70869806e02d38e2c09",
-      "src/lib/fonts.ts": "ffb4b8691eadcdf377fd3c0e2584c82683ffbbef7008fe1800f31dcba8e785db",
-      "src/i18n/locales.ts": "2918d2ece108a441e092e293880709a5b9a5cf898dab9532ba7c4860ab7c06bb",
-      "scripts/guide-preview/api-main.tsx": "44f5173387b2f04c13987ac9e44cd70c238734fccacc287dcb6490e27fc280ed",
-      "scripts/guide-preview/api-vite.config.mts": "e1814f8e734589c7d02a03673a8254977b5d578e534434e0101dbd59c9926dad",
-      "scripts/guide-preview/api-capture.mjs": "72880ecd0058715178f1248f4a635bc2609393532c2d1d3adbed733a8a83da42",
-      "scripts/guide-preview/vite.config.mts": "e86ddf095fb8c7da843e6295beffbaf8f37b26e48a43581919770dcc31e91c99",
-      "scripts/guide-preview/queries.ts": "bd38c2dc9f8511ca158e91f608c0c928d42f33c8a5a68cd6c9db2f1be756e7b2",
-      "scripts/guide-preview/account-fixtures.ts": "854da1af247412ec0ff8c62fbb3ca723f467cd6f0d25d42e54d5b89c335a7722",
-      "scripts/guide-preview/auth.ts": "b786f9598d483e7778b4de998d8fd7cc6d5318efc11a28f4cd998cafd653d13c",
-      "scripts/guide-preview/provider.tsx": "97187377a9ad4ac5ea2b320e937bb78a95ccdbc644520dfaf5b5cf6dae80f802",
-      "src/components/account/account-links.tsx": "f2f13c7c4c48fbe492432529076b3ceeea9efabd73117bdc8e52c63bd74427f9",
-      "src/components/account/use-sign-out.ts": "1553c45b5602ef9a1cb369fcc946d453e37bc3eeca8e88cae3f95b66dac5d455",
-      "src/lib/sign-out.ts": "a25761b573f68d12bd62a3c303016a1bccd6879a1188e51ab012abd3aca1b9aa",
-      "src/components/notifications/device-provider.tsx": "c054c2f81074dec064c09d0b1b50545d42f3237f66971256a79e68401c4edbfd",
-      "scripts/guide-preview/fixtures.ts": "ba1258fa91c0bbaf6c79f39e0387769c2fdf4f021cc078041e3314f63c074bd5",
-      "messages/en.json": "c1318be00feb4378b7c68a4434a2f17b8e271cf7ed249e552c40a189a3cb2629",
-      "messages/hi.json": "bfa7223f6f6201baa6d55046497bdf6beaf743a158428eb3b5292a4b29ba7105",
-      "messages/bn.json": "ca4298743149ab02a20b944f23d2a4d2fb96ca4238d8283236b634aef4ffc354",
-      "messages/mr.json": "5c6ceef688c5b6bbbcb4f831b269ae13626b1c31f1805eeed3a78acc86af1f44",
-      "messages/ta.json": "85e7474aaf3a3389ba2ca7a3037874387a6e03caf41048b4bc941e3ebc6a525c",
-      "messages/te.json": "8cf3f98f695785f028d40d8bbe03091faafb8039a83e2fd5f1f783621e3ca5e1",
-      "messages/kn.json": "cfd47e3dc831f55ed336d86b1b518bcd9dd6a1f6435e9b956e2d4c5e5127ab30",
-      "messages/ml.json": "8d9de6fc47fbab4b6a0661ddbd7ed20d2357eb817fb305a3cc2b1b500981699e",
-      "messages/gu.json": "7ae841519db6b18e49e73b4ba33a1058811aac05db02094cb6093e6e7a6c1352",
-      "messages/pa.json": "c0c54713d55302e3c5c0e74dccddf9e4f79894bb730c6a629e10c28b456a6b97",
-      "messages/ur.json": "338f69f69c80f9322544a608bcb3db4fefd318be4ab7d1f9ee6d288cc160ebb3",
-      "messages/ar.json": "1e0e8764d13f7c3dc779e52d8c1ab4a9c0f6f9c4925dc991d45ecc4743d0dbb9",
-      "messages/as.json": "4c249aaea1060213315720438f85a6b4cbad74ca0695c7272ffe377a186113f9",
-      "messages/ne.json": "8855ea25b19339975ca2222cc4bcaea3f83a1d77deefb8d267e476a792046a8c",
-      "messages/es.json": "9a2aa9daff58befe1f6cc1289f73f32dc1a7d1f4432d3add15060b0d78f631ff",
-      "messages/fr.json": "c083ae49282f392527861571fef2eb41f101a2155574038d831dbd1a53e9fd78",
-      "messages/vi.json": "437d8403fb70107e7b53b3f008239ffe0f17df5873b1fdc494dea7edb2271eaf",
-      "messages/si.json": "69dd3befa9468eb7ddf168b55c11935d531e9f6c9e2f826069817603bf17466c",
-      "messages/th.json": "7051beb2cd470764aa361b3851353dd1d6a3d0fafe81f585cc82f468151a1e22",
-      "messages/ru.json": "28a3ffc1fa35c8469b81504a58a9a570eb2bf118d990c491fc4f928cf31d2926",
-      "messages/de.json": "cf6424d3d446a583fcae5cab92fcf18b424b2b3382e8b7af400522decfb934eb",
-      "messages/or.json": "3ac2db966e7f6e49835e355600e59d11c9173f86807a785db1ef001269d1afd8",
-      "messages/ja.json": "417f7308e3ccb73bc846fe5211b9b407db0a85860c1c9519ec5ff4ad92d4b9fd",
-      "messages/uk.json": "1fd15bb9a6f2f3fb1f387d903e94151ef4490e13e9e0094bb693398ac336b038",
-      "messages/ko.json": "8c7b63b288540ceaf532e03c0af7e7852f3bb2592cd8e1ade5be9e55e3c3c8c4",
-      "messages/it.json": "968e6efd535a0c6e53391da6d000ab83103fc9c6ca70f3fa6dd0e70c8861c977",
-      "messages/pl.json": "608bcc6c0614ee0e04cec9f7d6c3469bda518182992a99b4a915e53410683d2f",
-      "messages/tr.json": "851afc788b881a4145662b3a067db7059f61cc45cb27081b6be791797df6f5ba",
-      "messages/zh.json": "c367b41a5a95d02c549668b409867aec6ca70936a1c9db300e4342cbbe08b26a",
-      "messages/pt.json": "5ef2132722080fb14b5268c39266ecd26894487492a63d67a2f93a0451da8dad",
-      "messages/id.json": "5d1b212b0c9b59dbaeea793d15708ff584c3ac7ff24c5d52146b1a589428cbd7",
-      "messages/nl.json": "b30d4ea9f23e1c3aaacdec687a75151e4588b7f76f491c68bea118488f491e1a",
-      "messages/ms.json": "593306302263856308952b17f006aa54abde1dd176ede67d0e81ed1a5fbf0cc7"
-    },
-    "sourceCommit": "9146ce6840b86e6b9c26a63ea67a48f28f0cfa2c",
-    "capturedAt": null,
-    "manifestSha256": "c5bb69c473f3f00546c8535ba7227a980c9847e62b68f91fb65ab9d65a983dff"
-  },
-  "sourceCompatibilityReview": {
-    "reviewedAt": "2026-10-10T11:01:14.029775+00:00",
-    "reviewer": "auth_release",
-    "method": "unchanged-static-state-source-review-and-original-image-hash-check",
-    "changes": [
-      {
-        "path": "src/lib/sign-out.ts",
-        "beforeSha256": "a25761b573f68d12bd62a3c303016a1bccd6879a1188e51ab012abd3aca1b9aa",
-        "afterSha256": "9755828776420cc7019acb5db9efbfc8b12918b76936e2bae9b76ff93439e505"
-      }
-    ],
-    "newBrowserCapture": false,
-    "originalImageCountChecked": 90,
-    "originalCaptureAndReviewTimesPreserved": true,
-    "reason": "The shared sign-out helper now records exact-session logout intent only after device revocation, then clears or completes it with the real auth result. No captured page layout, copy, style or field changed. The synthetic sign-out failure fixture still rejects account changes and keeps the same error/retry screen. These historical images remain static visual evidence, not proof of the repaired real sign-out transition.",
-    "behaviorVerification": "docs/user-guide/investor-source-compatibility.json#additionalBehaviorReview.actualPostFixBrowser"
-  }
+  ]
 }

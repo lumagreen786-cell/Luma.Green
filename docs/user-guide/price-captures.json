@@ -8,14 +8,14 @@
       "width": 1280,
       "height": 900
     },
-    "revision": "9146ce6840b86e6b9c26a63ea67a48f28f0cfa2c",
+    "revision": "4f704d44f47c83bb4d527a4eff2eb7ec5afd5c6d",
     "sourceHashes": {
       "scripts/capture-price-guide.mts": "87e5e37bbb96368d6d7a54470c7c4589e871969d88f4c61b178607f4b1ae4d57",
       "convex/lib/catalogue.ts": "417c4c52a692e252ebacafeb9ac9f818dbee270c60bbc913360e439da1b10a3a",
       "src/app/globals.css": "7d48913ef6ba79d423f69f34e21ee3fecf87242e5da8d70869806e02d38e2c09",
       "src/lib/fonts.ts": "ffb4b8691eadcdf377fd3c0e2584c82683ffbbef7008fe1800f31dcba8e785db",
       "src/app/[locale]/(site)/prices/page.tsx": "1b078f2553ba20526a51cc3661a73b40e38cfb52ff9b68a0cff3bfaf6e00d308",
-      "src/components/site/page-header.tsx": "66f1c5b11bbf4b4be4ef05f5a298ac50ef831c77661e328d7a3478effed88511",
+      "src/components/site/page-header.tsx": "74d8fc6e11d02b6cf948fa216b18563d414bc8aa6e9d765fe5165141bd2e7bb1",
       "src/components/site/page-banner.tsx": "5c9bbdbfa88b8336e204c8aad939d2639c2e8a221e1692826b23940916b2ce6e",
       "src/components/showcase/role-story-image.tsx": "241cd78e6518cd8e1e6ec1b7bd02c15a0c8c977ef13bcbed11d3e4566d9a0504",
       "src/components/prices/price-guide.tsx": "5c8c14f3f52de8d24b8477dc4efae65dd9d55843aacf75096dd756b3596e6341",
@@ -29,14 +29,14 @@
       "src/components/prices/sparkline.tsx": "9a698a128f3802e5ac5127f00e2c1e5aaf1ea557d19dbe29a0f40d4fbbb19afe",
       "src/components/prices/chart-geometry.ts": "d034c72e1c151e90ee492a7bcdda4e05bb68dd82ef7b8b0c7df74955b45e04bf",
       "src/components/app/format.ts": "efea09a9f734c886248bc51e6eecd18f38dc8163444b9afb9f6c3d755592d0fe",
-      "src/components/app/page-parts.tsx": "3dd45298c34917424abb92916e71bbff759f0de850d5f2153fd47322b82b5c1a",
+      "src/components/app/page-parts.tsx": "6426cb090e93bb4485aed7643a6a2badf77cc53f17aa0f5380ed8f4c7bd5d293",
       "messages/en.json": "c1318be00feb4378b7c68a4434a2f17b8e271cf7ed249e552c40a189a3cb2629"
     },
-    "capturedAt": "2026-10-06T22:38:48.735Z",
+    "capturedAt": "2026-10-12T05:53:49.071Z",
     "kind": "current-local-connected-demo",
     "backendDeployment": "isolated-anonymous-local",
     "environment": "isolated-local",
-    "frontendOrigin": "http://localhost:3100",
+    "frontendOrigin": "http://localhost:3115",
     "backendOrigin": "http://127.0.0.1:3210",
     "backendSiteOrigin": "http://127.0.0.1:3211",
     "siteAgreement": true,
@@ -165,13 +165,7 @@
     "historyPoints": null,
     "browserErrors": [],
     "blockedRequests": [],
-    "sha256": "b0a9f3594d98922381e943c8d182b35833b882e5f06803a434eb1313935407d9",
-    "visualReview": {
-      "status": "passed",
-      "reviewedAt": "2026-10-06T22:45:12.966558+00:00",
-      "method": "original-png-at-readable-resolution",
-      "note": "Current local synthetic price rows and history table inspected; readable layout, no sensitive pixels. Not production market evidence."
-    }
+    "sha256": "074c65193a106fe20396b979fba45632ff566a97c9e6f1b0e1498fc1fb253603"
   },
   {
     "name": "public-price-history-demo-dark",
@@ -182,14 +176,14 @@
       "width": 1280,
       "height": 900
     },
-    "revision": "9146ce6840b86e6b9c26a63ea67a48f28f0cfa2c",
+    "revision": "4f704d44f47c83bb4d527a4eff2eb7ec5afd5c6d",
     "sourceHashes": {
       "scripts/capture-price-guide.mts": "87e5e37bbb96368d6d7a54470c7c4589e871969d88f4c61b178607f4b1ae4d57",
       "convex/lib/catalogue.ts": "417c4c52a692e252ebacafeb9ac9f818dbee270c60bbc913360e439da1b10a3a",
       "src/app/globals.css": "7d48913ef6ba79d423f69f34e21ee3fecf87242e5da8d70869806e02d38e2c09",
       "src/lib/fonts.ts": "ffb4b8691eadcdf377fd3c0e2584c82683ffbbef7008fe1800f31dcba8e785db",
       "src/app/[locale]/(site)/prices/page.tsx": "1b078f2553ba20526a51cc3661a73b40e38cfb52ff9b68a0cff3bfaf6e00d308",
-      "src/components/site/page-header.tsx": "66f1c5b11bbf4b4be4ef05f5a298ac50ef831c77661e328d7a3478effed88511",
+      "src/components/site/page-header.tsx": "74d8fc6e11d02b6cf948fa216b18563d414bc8aa6e9d765fe5165141bd2e7bb1",
       "src/components/site/page-banner.tsx": "5c9bbdbfa88b8336e204c8aad939d2639c2e8a221e1692826b23940916b2ce6e",
       "src/components/showcase/role-story-image.tsx": "241cd78e6518cd8e1e6ec1b7bd02c15a0c8c977ef13bcbed11d3e4566d9a0504",
       "src/components/prices/price-guide.tsx": "5c8c14f3f52de8d24b8477dc4efae65dd9d55843aacf75096dd756b3596e6341",
@@ -203,14 +197,14 @@
       "src/components/prices/sparkline.tsx": "9a698a128f3802e5ac5127f00e2c1e5aaf1ea557d19dbe29a0f40d4fbbb19afe",
       "src/components/prices/chart-geometry.ts": "d034c72e1c151e90ee492a7bcdda4e05bb68dd82ef7b8b0c7df74955b45e04bf",
       "src/components/app/format.ts": "efea09a9f734c886248bc51e6eecd18f38dc8163444b9afb9f6c3d755592d0fe",
-      "src/components/app/page-parts.tsx": "3dd45298c34917424abb92916e71bbff759f0de850d5f2153fd47322b82b5c1a",
+      "src/components/app/page-parts.tsx": "6426cb090e93bb4485aed7643a6a2badf77cc53f17aa0f5380ed8f4c7bd5d293",
       "messages/en.json": "c1318be00feb4378b7c68a4434a2f17b8e271cf7ed249e552c40a189a3cb2629"
     },
-    "capturedAt": "2026-10-06T22:38:49.283Z",
+    "capturedAt": "2026-10-12T05:53:49.719Z",
     "kind": "current-local-connected-demo",
     "backendDeployment": "isolated-anonymous-local",
     "environment": "isolated-local",
-    "frontendOrigin": "http://localhost:3100",
+    "frontendOrigin": "http://localhost:3115",
     "backendOrigin": "http://127.0.0.1:3210",
     "backendSiteOrigin": "http://127.0.0.1:3211",
     "siteAgreement": true,
@@ -336,15 +330,9 @@
     ],
     "originalCatalogueRows": 26,
     "localFixtureRows": 2,
-    "historyPoints": 29,
+    "historyPoints": 24,
     "browserErrors": [],
     "blockedRequests": [],
-    "sha256": "eb16f3c6094a07fd729be813fd728bb47144d846d5cfa4d3a45f33aa540b9c81",
-    "visualReview": {
-      "status": "passed",
-      "reviewedAt": "2026-10-06T22:45:12.968905+00:00",
-      "method": "original-png-at-readable-resolution",
-      "note": "Current local synthetic price rows and history table inspected; readable layout, no sensitive pixels. Not production market evidence."
-    }
+    "sha256": "55c4153d828636564bf978bdfb58e5dc5e33f822beb5ff7a6a17c5435dd9c58b"
   }
 ]

@@ -17,6 +17,8 @@ export function PricePlaceholder({
   const prices = useTranslations("prices");
   const teaser = useTranslations("home.teaser");
   const isLoading = state === "loading";
+  const loadingRows = compact ? 4 : 6;
+  const rowCount = isLoading ? loadingRows : 1;
   let title = common("loading");
   if (!isLoading) {
     title = compact ? teaser("unavailable") : prices(`${state}.title`);
@@ -46,7 +48,7 @@ export function PricePlaceholder({
       </div>
       <div aria-hidden className="divide-y border-y border-border">
         {compact ? null : <BoardColumns />}
-        {Array.from({ length: compact ? 4 : 6 }, (_, index) => (
+        {Array.from({ length: rowCount }, (_, index) => (
           <div
             key={index}
             className="flex min-h-16 items-center gap-4 py-4 sm:gap-6"

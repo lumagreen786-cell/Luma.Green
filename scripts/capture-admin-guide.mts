@@ -267,6 +267,11 @@ async function main() {
         await expect(
           page.getByRole("heading", { name: "Prices", exact: true }),
         ).toBeVisible();
+        // Catalogue captures represent settled local data, not query loading.
+        await expect(
+          page.getByLabel("Material to review", { exact: true }),
+        ).toBeVisible();
+        await expect(page.locator('[data-slot="skeleton"]')).toHaveCount(0);
         await page
           .getByRole("heading", {
             name: "Material catalogue setup",

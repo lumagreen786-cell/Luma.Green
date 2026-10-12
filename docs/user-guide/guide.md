@@ -2,7 +2,7 @@
 
 How to use the recycling platform and its admin console
 
-Edition: 7 October 2026, verified accounts, business workspaces, stakeholder requests and payment limits. Source baseline: f5c5b91. Each capture manifest records the exact reviewed source and image hashes. Launch target: Saturday, 10 October 2026; check the release handoff for current deployment and setup status.
+Edition: 12 October 2026, platform layout and navigation refresh. Source baseline: 4f704d44. This edition includes the reviewed Impeccable layout changes. Each capture manifest records the exact source and image hashes. Check the release handoff for the current deployment and setup status.
 
 This guide explains verified email and phone accounts, business workspaces, stakeholder requests, material collection, trade, quality evidence, sourcing and production records. Use the steps for your assigned role and workspace. Read the screenshot labels before using an example as a reference.
 
@@ -26,11 +26,11 @@ Use this guide beside the application. The chapter numbers are the same in the W
 
 1. Ask the owner for the current test address and your assigned account alias. The local address works only on the Mac running the test services. It does not open that Mac's app from a teammate's separate laptop. Use the owner's deployed test address when one is supplied.
 2. Open the address in a browser. Start with English for the first run. Select another language after you understand the route. Use the appearance control to choose light or dark mode.
-3. Read the home page. Open **View material prices**. A sample-data notice means the values are test examples. An unavailable price is not a zero price.
+3. Read the home page. Open **View material prices**. A sample-data notice means the values are test examples. An unavailable price is not a zero price. Read the unavailable message and return later; the static placeholder is not a live quote.
 4. Open **Sign in**, or add /login to the supplied address. Use **Email** with the account from the restricted credentials annex. Keep the password out of this guide, screenshots and bug reports. For an existing verified test account, use **Sign in**, not **Create account**.
 5. After sign-in, open the account menu. Open **Workspaces and team**. For a business account, check the selected business and your role. For a household, applicant or stakeholder without a workspace, an empty workspace list is expected.
-6. Business users open /app. Read the business name before making a change. Desktop navigation is at the side. On a phone, use the bottom navigation and **More** for the remaining pages.
-7. Open **Notifications** and **Account security** from the account menu. Confirm that both pages load. Do not turn on an authenticator during this first tour unless the test lead assigns that case.
+6. Business users open /app. Read the business name before making a change. Desktop navigation is at the side. Scroll the destination list to find more pages; language, appearance and sign-out controls stay below it. On a phone, use the bottom navigation and **More** for the remaining pages.
+7. Open **Notifications** and **Account security** from the account menu. On a wide screen, account pages also have direct section links at the side. Confirm that both pages load. Do not turn on an authenticator during this first tour unless the test lead assigns that case.
 8. Return to your role's chapter below. When finished, use **Sign out**. Open a private page again to check that sign-in is required.
 
 If a page shows a connection or sign-in service error, record it and use the offered retry after service returns. Do not create another account to work around the error. If the account's role is wrong, stop and ask the test lead to check its assignment.
@@ -114,7 +114,7 @@ Neither changes the current launch decision target of **Saturday, 10 October
 2. Business trades require provider-confirmed live payment before dispatch. Live activation is off until approved policy, provider and release gates pass. Sandbox evidence never unlocks live trade actions. Older prototype payment records are unverified.
 3. EPR and impact records are supporting records, not issued certificates or verified carbon credits.
 
-All paths in this guide are relative to the deployment address supplied by the platform owner. The current isolated local test app uses http://localhost:3100 with local Convex ports 3210 and 3211. Earlier captures used other local origins, including port 3107, or a separate fixture server. Their manifests retain those origins. Cloud development and production were reset, verified empty and paused on 6 October; the local test app is separate. Do not infer a live release or current cloud data from a screenshot.
+All paths in this guide are relative to the deployment address supplied by the platform owner. The layout review used an isolated local test app at http://localhost:3115 with local Convex ports 3210 and 3211. The original port 3100 test environment was preserved. Earlier captures used other local origins, including port 3107, or a separate fixture server. Their manifests retain those origins. The 6 October reset and pause notes are historical. For current cloud data and release status, read the delivery handoff. The local test app is separate; do not infer current cloud data or provider execution from these screenshots.
 
 ---
 
@@ -1738,9 +1738,7 @@ Use the language control to change language. On public pages and operational scr
 
 ![Current public explanation of the material chain.](screenshots/public-how-it-works.png)
 
-![Admin verification queue components with synthetic submitted applications.](screenshots/admin-verification.png)
-
-The retained queue image is an earlier component example and does not show the new stakeholder queue. It does not establish that a real application has been reviewed or approved. Follow chapter 20 for the decision process.
+![Admin verification queue with synthetic submitted applications. This component fixture excludes the stakeholder queue and proves no real review or approval. Follow chapter 20 for decisions.](screenshots/admin-verification.png)
 
 ---
 

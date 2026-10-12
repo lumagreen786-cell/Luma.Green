@@ -2,7 +2,10 @@ import { NextIntlClientProvider } from "next-intl";
 import type { ReactNode } from "react";
 
 import { NotificationDeviceProvider } from "@/components/notifications/device-provider";
-import { ThemeProvider, ThemeToaster } from "@/components/theme/theme-provider";
+import {
+  LocalizedThemeToaster,
+  ThemeProvider,
+} from "@/components/theme/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
 import { AnalyticsProvider } from "./analytics-provider";
@@ -21,7 +24,7 @@ export function Providers({ children }: { children: ReactNode }) {
             <NotificationDeviceProvider>
               <TooltipProvider>{children}</TooltipProvider>
             </NotificationDeviceProvider>
-            <ThemeToaster />
+            <LocalizedThemeToaster />
           </AnalyticsProvider>
         </ConvexClientProvider>
       </ThemeProvider>

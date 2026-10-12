@@ -341,15 +341,16 @@ where `String.raw` would break Next's static analysis of the matcher.
 
 ## 11. Skills
 
-| Skill                          | Use it when                                          |
-| ------------------------------ | ---------------------------------------------------- |
-| `.claude/skills/testing`       | Writing or changing any code — what to test and how  |
-| `.claude/skills/ci-checks`     | A check is red, or you're adding a new one           |
-| `.claude/skills/i18n`          | Any user-facing string, or adding a locale           |
-| `.claude/skills/design-system` | Building UI — tokens, shadcn, light/dark themes, RTL |
-| `.claude/skills/seo`           | Adding a route, metadata, sitemap or structured data |
-| `.claude/skills/convex-data`   | Schema changes, queries, mutations, migrations       |
-| `.claude/skills/ship-pr`       | Opening a PR or preparing a deployment               |
+| Skill                          | Use it when                                                                                 |
+| ------------------------------ | ------------------------------------------------------------------------------------------- |
+| `.claude/skills/testing`       | Writing or changing any code — what to test and how                                         |
+| `.claude/skills/ci-checks`     | A check is red, or you're adding a new one                                                  |
+| `.claude/skills/i18n`          | Any user-facing string, or adding a locale                                                  |
+| `.claude/skills/design-system` | Building UI — tokens, shadcn, light/dark themes, RTL                                        |
+| `.claude/skills/impeccable`    | Platform UI design, layout, critique and visual review; apply the current UI contract first |
+| `.claude/skills/seo`           | Adding a route, metadata, sitemap or structured data                                        |
+| `.claude/skills/convex-data`   | Schema changes, queries, mutations, migrations                                              |
+| `.claude/skills/ship-pr`       | Opening a PR or preparing a deployment                                                      |
 
 <!-- BEGIN:nextjs-agent-rules -->
 

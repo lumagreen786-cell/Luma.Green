@@ -293,19 +293,32 @@ function RecipeForm() {
         }}
       >
         <fieldset disabled={form.formState.isSubmitting} className="space-y-4">
-          {(["reference", "version", "name", "instructions"] as const).map(
-            (key) => (
-              <LotField
-                key={key}
-                label={t(key)}
-                registration={form.register(key)}
-                invalid={form.getFieldState(key, form.formState).invalid}
-              />
-            ),
-          )}
+          <div className="grid gap-4 sm:grid-cols-2">
+            {(["reference", "version", "name", "instructions"] as const).map(
+              (key) => (
+                <div
+                  key={key}
+                  className={
+                    key === "name" || key === "instructions"
+                      ? "sm:col-span-2"
+                      : "min-w-0"
+                  }
+                >
+                  <LotField
+                    label={t(key)}
+                    registration={form.register(key)}
+                    invalid={form.getFieldState(key, form.formState).invalid}
+                  />
+                </div>
+              ),
+            )}
+          </div>
           <h3 className="font-semibold">{t("ingredients")}</h3>
           {ingredients.fields.map((item, index) => (
-            <div key={item.id} className="space-y-3 border-b pb-4">
+            <div
+              key={item.id}
+              className="grid items-end gap-3 border-b pb-4 sm:grid-cols-2"
+            >
               <LotField
                 label={t("ingredient")}
                 registration={form.register(
@@ -500,7 +513,10 @@ function BatchForm({ data }: { data: Data }) {
             }
           />
           {transformation?.inputs.map((input, index) => (
-            <div key={input.lotId} className="space-y-3 border-b pb-4">
+            <div
+              key={input.lotId}
+              className="grid items-end gap-3 border-b pb-4 sm:grid-cols-2"
+            >
               <p>
                 {input.materialCode} · <Mass grams={input.grams} />
               </p>

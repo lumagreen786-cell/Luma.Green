@@ -68,8 +68,8 @@ before the next build. This prevents later builds from losing your changes.
    GUIDE_PRICE_LOCAL=true GUIDE_BASE_URL=http://localhost:3100 pnpm --config.verify-deps-before-run=false exec jiti scripts/capture-price-guide.mts
    ```
 
-   Use the approved isolated local app on port 3100 and the existing local
-   Convex data on ports 3210/3211. Do not resume the paused cloud deployments.
+   Use the approved isolated local app and its matching configured loopback port
+   (3115 for the 12 October layout review), with local Convex data on ports 3210/3211. This capture workflow does not access cloud deployments.
    The explicit local mode requires loopback HTTP origins and matching site
    settings in `.env.local` and the private
    `.convex/local-acceptance/backend.env`. Add `--check-config` to validate
@@ -161,13 +161,15 @@ before the next build. This prevents later builds from losing your changes.
 
 ## Google Docs copy
 
+The 12 October platform layout update is pending cloud publication. No connected document session was available. The existing document ID and sharing settings are preserved; `cloud.json` retains the last verified revision. Read `build.json` for the current reviewed local Word artifact.
+
 Current publication state is recorded in [cloud.json](cloud.json). The existing
 native [Luma.Green platform user guide](https://docs.google.com/document/d/17B40PdN8IyvydXhAH4r2nsfgy9Nt15cyzW5WZw6ecFY)
-contains the verified **7 October 2026 publication** from the current reviewed
+contains the verified **7 October 2026 publication** from the then-reviewed
 Word source. Its document ID, folder and sharing settings are unchanged. Earlier
 verified revisions remain in `cloud.json` as historical evidence.
 
-The reviewed Word source has 167 pages. The native document has 147 screenshot
+The last published Word source has 167 pages. The native document has 147 screenshot
 placements, 12 tables and 12 native date fields. Readback checked the source body,
 table cells, date values, image source order, captions and dimensions. All 170
 pages of the final native PDF passed review: 161 originals were inspected at full
@@ -300,3 +302,7 @@ The same static-state review also covers the shared sign-out helper in the admin
 failure, protected-screen and industry API capture manifests. Their original
 source maps and screenshot bytes are retained. The synthetic failure screens
 remain fixture evidence; the new real logout checks are recorded separately.
+
+## 12 October layout evidence
+
+The Impeccable layout release refreshes changed browser evidence from current source. The earlier investor compatibility record is retained as historical evidence only; it does not replace the new layout captures. The copied local test runtime uses port 3115 because another project owns port 3100. Capture guards still require matching frontend, credential and backend origins and loopback HTTP only.

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
 
+import { AccountLinks } from "@/components/account/account-links";
 import { AccountMenu } from "@/components/account/account-menu";
 import { Logo } from "@/components/brand/logo";
 import { SkipLink } from "@/components/site/skip-link";
@@ -16,6 +17,7 @@ export default async function AccountLayout({
   children: ReactNode;
 }) {
   const t = await getTranslations("nav");
+  const account = await getTranslations("accountSecurity");
   return (
     <div className="flex min-h-dvh flex-col bg-background">
       <SkipLink />
@@ -29,13 +31,17 @@ export default async function AccountLayout({
         </Link>
         <AccountMenu />
       </header>
-      <main
-        id="main"
-        tabIndex={-1}
-        className="mx-auto flex w-full max-w-4xl flex-1 flex-col px-4 py-6 sm:px-8 sm:py-8"
-      >
-        {children}
-      </main>
+      <div className="mx-auto grid w-full max-w-7xl flex-1 content-start gap-6 px-4 py-6 sm:px-8 lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-10 lg:py-8">
+        <nav
+          aria-label={account("title")}
+          className="hidden self-start border-e border-border pe-6 lg:grid"
+        >
+          <AccountLinks className="rounded-md px-2 hover:bg-muted" />
+        </nav>
+        <main id="main" tabIndex={-1} className="flex min-w-0 flex-col">
+          {children}
+        </main>
+      </div>
     </div>
   );
 }

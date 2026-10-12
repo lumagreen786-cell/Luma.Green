@@ -100,11 +100,13 @@ export function EvidenceDialog({
         className="flex flex-col gap-0 overflow-clip p-0 sm:max-w-2xl [&>button]:min-h-11 [&>button]:min-w-11"
         closeLabel={t("close")}
       >
-        <DialogHeader className="shrink-0 border-b p-4 pe-14">
+        <DialogHeader className="shrink-0 gap-2 border-b p-5 pe-14 sm:p-6 sm:pe-16">
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>{hint}</DialogDescription>
         </DialogHeader>
-        <div className="min-h-0 overflow-y-auto p-4">{children}</div>
+        <div className="min-h-0 overflow-y-auto overscroll-contain p-5 sm:p-6">
+          {children}
+        </div>
       </DialogContent>
     </Dialog>
   );

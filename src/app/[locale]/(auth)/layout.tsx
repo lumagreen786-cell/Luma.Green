@@ -42,32 +42,32 @@ export default async function AuthLayout({
           <LanguageSwitcher />
         </div>
       </header>
-      <div className="mx-auto grid w-full max-w-7xl flex-1 gap-8 px-4 py-6 sm:px-8 lg:grid-cols-[1fr_0.85fr] lg:gap-12 lg:py-10">
-        <aside className="relative hidden flex-col justify-center border-e border-border pe-8 text-foreground lg:flex">
-          <p className="max-w-md font-display text-4xl leading-[1.1] font-semibold tracking-tight text-balance">
+      <div className="mx-auto grid w-full max-w-5xl flex-1 content-start gap-10 px-4 py-8 sm:px-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:gap-16 lg:py-16">
+        <main
+          id="main"
+          tabIndex={-1}
+          className="mx-auto flex w-full max-w-md min-w-0 flex-col justify-start lg:justify-start"
+        >
+          {children}
+        </main>
+        <aside className="hidden min-w-0 flex-col gap-6 border-s border-border ps-10 text-foreground lg:flex">
+          <p className="max-w-md font-display text-2xl leading-tight font-semibold tracking-tight text-balance">
             {brand("tagline")}
           </p>
-          <figure className="mt-6">
+          <figure className="m-0">
             <div className="overflow-hidden">
               <Image
                 src={collectionPartners}
                 alt=""
-                sizes="(min-width: 1024px) 520px, 92vw"
+                sizes="(min-width: 1024px) 320px, 92vw"
                 className="aspect-[3/2] w-full object-cover"
               />
             </div>
           </figure>
-          <p className="mt-6 hidden text-sm font-medium text-muted-foreground lg:block">
+          <p className="hidden text-sm font-medium text-muted-foreground lg:block">
             {brand("name")}
           </p>
         </aside>
-        <main
-          id="main"
-          tabIndex={-1}
-          className="mx-auto flex w-full max-w-md min-w-0 flex-col justify-start lg:justify-center"
-        >
-          {children}
-        </main>
       </div>
     </div>
   );

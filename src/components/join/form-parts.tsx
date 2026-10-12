@@ -24,16 +24,18 @@ export function FormHeader({
   step?: string;
 }) {
   return (
-    <div className="flex flex-col gap-3 border-b border-border pb-5">
-      <p className="border-s-2 border-primary ps-3 text-sm font-medium text-primary">
-        {eyebrow}
-        {step ? <span className="text-muted-foreground"> · {step}</span> : null}
-      </p>
-      <h1 className="font-display text-2xl leading-tight font-semibold tracking-tight sm:text-3xl">
-        {title}
-      </h1>
+    <header className="grid gap-3 border-b border-border pb-6 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-start">
+      <div className="min-w-0 space-y-2">
+        <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
+          {title}
+        </h1>
+        <p className="text-sm text-muted-foreground">
+          {eyebrow}
+          {step ? <span> · {step}</span> : null}
+        </p>
+      </div>
       <SaveIndicator state={saveState} />
-    </div>
+    </header>
   );
 }
 

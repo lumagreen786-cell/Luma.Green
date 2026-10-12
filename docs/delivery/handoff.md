@@ -1,4 +1,46 @@
-# Agent handoff — updated 10 October 2026
+# Agent handoff — updated 12 October 2026
+
+## Impeccable platform UI release — 12 October 2026
+
+The owner authorized the dependency PR review, platform UI rewrite, skill installation,
+commit, push and deployment. Work is isolated on `codex/impeccable-platform` from
+main `4f704d44f47c83bb4d527a4eff2eb7ec5afd5c6d`; the dirty primary prototype checkout
+is unchanged. Read `impeccable-ui-2026-10-12.md` for the full review and release gates.
+
+Dependency PRs #50, #51, #53 and #54 were closed unmerged after compatibility and
+check review. Required Next.js 16.3.8 and eslint-config-next 16.3.8 are retained in
+this replacement release. Keep #52 open until that patch lands through the protected
+branch. Bot source branches are preserved.
+
+Impeccable 4.4.0 is installed under `.claude/skills/impeccable` with its license and
+notice. The existing product, design and translation owners remain canonical.
+The 64-route inventory is addressed through shared public, auth, join, account,
+operational and admin layouts. Task titles, action placement, form grouping and
+navigation spacing are consistent. Arabic and Urdu notices follow the locale
+direction. No route, authorization, business mutation, money/mass calculation,
+provider setting or native installer changed.
+
+Guide impact: affected screenshots have been recaptured from current source and visually reviewed.
+The platform Word source describes the new navigation and form layout. The platform Word document has 166 reviewed pages; the team
+Word document has 72 reviewed pages. Table rows stay on one page, step labels fit
+and the queue provenance note stays with its screenshot. Both build records match
+the current source and screenshot inputs. Capture uses this task's isolated database
+on ports 3210/3211 and frontend 3115 with approved synthetic accounts; it does not
+access hosted records. Parallel capture caused local database timeouts, so the
+final matrices completed sequentially. Error screens cannot be recorded as operational
+screens. The old source-compatibility record remains historical evidence only.
+
+Google Docs publication is pending because no document session is connected.
+Reuse document `17B40PdN8IyvydXhAH4r2nsfgy9Nt15cyzW5WZw6ecFY` and preserve its
+sharing and user edits. Read `docs/user-guide/cloud.json` before publication.
+
+Current checkpoint: all browser and Word evidence is reviewed. Local application,
+native, production-build and browser checks have passed as recorded in the release
+note. Final `pnpm check` passes: 279 web test files / 2,369 tests, 49 mobile
+tests and 22 desktop tests. Lint has zero errors and 30 warnings. Formatting and
+the default production build pass. PR checks, merge and production verification
+remain gates.
+No release is claimed by this checkpoint.
 
 ## Investor demo seed — 10 October 2026
 

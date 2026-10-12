@@ -178,7 +178,7 @@ def add_table(document, rows: list[list[str]]) -> None:
     if any(len(row) != count for row in rows):
         raise ValueError('A guide table has inconsistent column counts.')
     if count == 4 and rows[0][0] == 'Step':
-        proportions = [.06, .22, .38, .34]
+        proportions = [.08, .20, .38, .34]
     elif count == 3 and rows[0][0] == 'Your task':
         proportions = [.35, .17, .48]
     else:
@@ -204,6 +204,8 @@ def add_table(document, rows: list[list[str]]) -> None:
     props.append(margins)
     for row_index, values in enumerate(rows):
         row = table.add_row()
+        # Keep each service or task label with its setup/instruction cells.
+        row._tr.get_or_add_trPr().append(OxmlElement('w:cantSplit'))
         if row_index == 0:
             row._tr.get_or_add_trPr().append(OxmlElement('w:tblHeader'))
         for cell, value, proportion in zip(row.cells, values, proportions):

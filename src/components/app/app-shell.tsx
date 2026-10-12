@@ -212,22 +212,25 @@ export function AppShell({ children }: { children: ReactNode }) {
   };
 
   return (
-    <div className="flex min-h-dvh flex-col bg-muted/20 xl:flex-row">
+    <div className="flex min-h-dvh flex-col bg-background xl:flex-row">
       <SkipLink />
-      <aside className="sticky top-0 hidden h-dvh w-60 shrink-0 flex-col gap-3 overflow-y-auto border-e border-sidebar-border bg-background p-4 text-sidebar-foreground xl:flex xl:w-60">
+      <aside className="sticky top-0 hidden h-dvh w-64 shrink-0 flex-col gap-4 border-e border-sidebar-border bg-sidebar p-4 text-sidebar-foreground xl:flex">
         <Link
           href="/"
           className="inline-flex min-h-11 items-center rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
         >
           <Logo />
         </Link>
-        <div className="border-y border-sidebar-border px-2 py-3">
+        <div className="shrink-0 border-b border-sidebar-border px-2 pb-4">
           <p className="text-sm font-semibold break-words">{name}</p>
           <p className="mt-1 text-xs text-muted-foreground">
             {t(`roles.${role}`)}
           </p>
         </div>
-        <nav aria-label={t("navLabel")} className="flex flex-col gap-1">
+        <nav
+          aria-label={t("navLabel")}
+          className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto overscroll-contain pe-1"
+        >
           {primary.map((item) =>
             link(
               item,
@@ -253,7 +256,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           </Link>
           <AccountLinks className="rounded-lg px-3 hover:bg-sidebar-accent" />
         </nav>
-        <div className="mt-auto flex flex-col gap-2 border-t border-sidebar-border pt-3">
+        <div className="flex shrink-0 flex-col gap-2 border-t border-sidebar-border pt-4">
           <div className="flex items-center justify-between gap-2">
             <LanguageSwitcher />
             <ThemeToggle />
@@ -420,7 +423,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       <main
         id="main"
         tabIndex={-1}
-        className="mx-auto flex w-full max-w-7xl min-w-0 flex-1 flex-col gap-6 bg-background px-4 pt-5 pb-28 sm:px-6 md:px-8 md:pt-6 xl:pb-10"
+        className="mx-auto flex w-full max-w-7xl min-w-0 flex-1 flex-col gap-6 px-4 pt-6 pb-28 sm:px-8 xl:px-10 xl:pt-8 xl:pb-12"
       >
         <WorkspacePermissions
           key={

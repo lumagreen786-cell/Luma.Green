@@ -2,9 +2,9 @@
   "captures": [
     {
       "path": "docs/user-guide/screenshots/showcase-household.png",
-      "sha256": "e360545214b663a9e02da337f428b1b7e0a1cc7c361d970771d33b03b09d6618",
-      "url": "http://localhost:3004/participants",
-      "sourceRevision": "9146ce6840b86e6b9c26a63ea67a48f28f0cfa2c",
+      "sha256": "64a5d6a04de00469976cc7cb8e941e0db81b1de4fa3d12cfb7d302675c64a508",
+      "url": "http://localhost:3114/participants",
+      "sourceRevision": "4f704d44f47c83bb4d527a4eff2eb7ec5afd5c6d",
       "sourceHashes": {
         "src/components/showcase/role-story-image.tsx": "241cd78e6518cd8e1e6ec1b7bd02c15a0c8c977ef13bcbed11d3e4566d9a0504",
         "src/components/site/page-banner.tsx": "5c9bbdbfa88b8336e204c8aad939d2639c2e8a221e1692826b23940916b2ce6e",
@@ -23,46 +23,19 @@
         "width": 1280,
         "height": 1000
       },
-      "capturedAt": "2026-10-06T23:18:51.390Z",
+      "capturedAt": "2026-10-12T05:10:52.481Z",
       "actualBrowserUI": true,
       "kind": "current-public-role-section",
       "productionAuthenticationTested": false,
       "browserErrors": [],
       "blockedRequests": [],
-      "note": "Unmodified browser element screenshot. Public role information and generated decorative imagery; not authenticated operations or a native release.",
-      "visualReview": {
-        "status": "passed",
-        "reviewedAt": "2026-10-06T23:21:46.976385+00:00",
-        "method": "original-png-at-readable-resolution",
-        "sha256": "e360545214b663a9e02da337f428b1b7e0a1cc7c361d970771d33b03b09d6618",
-        "sourceHashes": {
-          "src/components/showcase/role-story-image.tsx": "241cd78e6518cd8e1e6ec1b7bd02c15a0c8c977ef13bcbed11d3e4566d9a0504",
-          "src/components/site/page-banner.tsx": "5c9bbdbfa88b8336e204c8aad939d2639c2e8a221e1692826b23940916b2ce6e",
-          "src/components/help/help-hero.tsx": "e1e60133eccc3dead41b6eb0ae2cbb212ebb892594b21b799e962aacb53d2743",
-          "src/app/[locale]/(site)/participants/page.tsx": "40feedf985202dfb16b4531a56bb7774775f3c377d4514fc12318f0b98c6c434",
-          "src/app/[locale]/(site)/help/[role]/page.tsx": "d05fb629c0fc46340bd708e6573fb358da2828cac9e1d29dbd94efe8d4c006e9",
-          "messages/en.json": "c1318be00feb4378b7c68a4434a2f17b8e271cf7ed249e552c40a189a3cb2629",
-          "messages/ar.json": "1e0e8764d13f7c3dc779e52d8c1ab4a9c0f6f9c4925dc991d45ecc4743d0dbb9",
-          "public/images/showcase/household-sorting.webp": "c3dd81eb46dd919f68f91aa89511450ea1ba4eff0fce77c285ccd090a0c6380f",
-          "public/images/showcase/material-yard.webp": "0ea4aebbd02335a2bbb8306532cb09d520b7f2f1e050dcb44174326fb3bed74d",
-          "public/images/showcase/operations-desk.webp": "6cfcff22dc4624253179004bebc99f4a70131154ed687c5708f66a3bf016419d",
-          "public/images/showcase/household-preparation.webp": "7b8bc39d23fcf4d859f5c57faac88c8be49832a5c270feae2d709d69beeab8c3",
-          "public/images/showcase/yard-dispatch.webp": "21f5007e7d8ab49c27baf706f418c3a66bc2d9d9d413c32901393ecc71f02a8f"
-        },
-        "checks": [
-          "readable text",
-          "no control overlap",
-          "no development badge",
-          "no secret or customer contact pixels"
-        ],
-        "scope": "Disconnected local production browser UI. Decorative role imagery and demo text do not prove authentication, provider execution or production deployment."
-      }
+      "note": "Unmodified browser element screenshot. Public role information and generated decorative imagery; not authenticated operations or a native release."
     },
     {
       "path": "docs/user-guide/screenshots/showcase-yard.png",
-      "sha256": "60d24f19f9af8ef62219ce278fcfac732319e2985305a838f2b694b51ecbf581",
-      "url": "http://localhost:3004/participants",
-      "sourceRevision": "9146ce6840b86e6b9c26a63ea67a48f28f0cfa2c",
+      "sha256": "d8fc4804a5bdc0c7e3c5367486e1f2d1b032e31ee616c5adde866295030ba88d",
+      "url": "http://localhost:3114/participants",
+      "sourceRevision": "4f704d44f47c83bb4d527a4eff2eb7ec5afd5c6d",
       "sourceHashes": {
         "src/components/showcase/role-story-image.tsx": "241cd78e6518cd8e1e6ec1b7bd02c15a0c8c977ef13bcbed11d3e4566d9a0504",
         "src/components/site/page-banner.tsx": "5c9bbdbfa88b8336e204c8aad939d2639c2e8a221e1692826b23940916b2ce6e",
@@ -81,46 +54,19 @@
         "width": 1280,
         "height": 1000
       },
-      "capturedAt": "2026-10-06T23:18:51.657Z",
+      "capturedAt": "2026-10-12T05:10:52.744Z",
       "actualBrowserUI": true,
       "kind": "current-public-role-section",
       "productionAuthenticationTested": false,
       "browserErrors": [],
       "blockedRequests": [],
-      "note": "Unmodified browser element screenshot. Public role information and generated decorative imagery; not authenticated operations or a native release.",
-      "visualReview": {
-        "status": "passed",
-        "reviewedAt": "2026-10-06T23:21:46.976385+00:00",
-        "method": "original-png-at-readable-resolution",
-        "sha256": "60d24f19f9af8ef62219ce278fcfac732319e2985305a838f2b694b51ecbf581",
-        "sourceHashes": {
-          "src/components/showcase/role-story-image.tsx": "241cd78e6518cd8e1e6ec1b7bd02c15a0c8c977ef13bcbed11d3e4566d9a0504",
-          "src/components/site/page-banner.tsx": "5c9bbdbfa88b8336e204c8aad939d2639c2e8a221e1692826b23940916b2ce6e",
-          "src/components/help/help-hero.tsx": "e1e60133eccc3dead41b6eb0ae2cbb212ebb892594b21b799e962aacb53d2743",
-          "src/app/[locale]/(site)/participants/page.tsx": "40feedf985202dfb16b4531a56bb7774775f3c377d4514fc12318f0b98c6c434",
-          "src/app/[locale]/(site)/help/[role]/page.tsx": "d05fb629c0fc46340bd708e6573fb358da2828cac9e1d29dbd94efe8d4c006e9",
-          "messages/en.json": "c1318be00feb4378b7c68a4434a2f17b8e271cf7ed249e552c40a189a3cb2629",
-          "messages/ar.json": "1e0e8764d13f7c3dc779e52d8c1ab4a9c0f6f9c4925dc991d45ecc4743d0dbb9",
-          "public/images/showcase/household-sorting.webp": "c3dd81eb46dd919f68f91aa89511450ea1ba4eff0fce77c285ccd090a0c6380f",
-          "public/images/showcase/material-yard.webp": "0ea4aebbd02335a2bbb8306532cb09d520b7f2f1e050dcb44174326fb3bed74d",
-          "public/images/showcase/operations-desk.webp": "6cfcff22dc4624253179004bebc99f4a70131154ed687c5708f66a3bf016419d",
-          "public/images/showcase/household-preparation.webp": "7b8bc39d23fcf4d859f5c57faac88c8be49832a5c270feae2d709d69beeab8c3",
-          "public/images/showcase/yard-dispatch.webp": "21f5007e7d8ab49c27baf706f418c3a66bc2d9d9d413c32901393ecc71f02a8f"
-        },
-        "checks": [
-          "readable text",
-          "no control overlap",
-          "no development badge",
-          "no secret or customer contact pixels"
-        ],
-        "scope": "Disconnected local production browser UI. Decorative role imagery and demo text do not prove authentication, provider execution or production deployment."
-      }
+      "note": "Unmodified browser element screenshot. Public role information and generated decorative imagery; not authenticated operations or a native release."
     },
     {
       "path": "docs/user-guide/screenshots/showcase-admin.png",
-      "sha256": "403599498b5c1e640a8e91dab30863a23c5237da869ada049f6fcf0a1347e60c",
-      "url": "http://localhost:3004/participants",
-      "sourceRevision": "9146ce6840b86e6b9c26a63ea67a48f28f0cfa2c",
+      "sha256": "4ad49b6a0c3c329c5120b0ceef5c840734891d744e3acea7020fefa8bb853663",
+      "url": "http://localhost:3114/participants",
+      "sourceRevision": "4f704d44f47c83bb4d527a4eff2eb7ec5afd5c6d",
       "sourceHashes": {
         "src/components/showcase/role-story-image.tsx": "241cd78e6518cd8e1e6ec1b7bd02c15a0c8c977ef13bcbed11d3e4566d9a0504",
         "src/components/site/page-banner.tsx": "5c9bbdbfa88b8336e204c8aad939d2639c2e8a221e1692826b23940916b2ce6e",
@@ -139,46 +85,19 @@
         "width": 1280,
         "height": 1000
       },
-      "capturedAt": "2026-10-06T23:18:51.939Z",
+      "capturedAt": "2026-10-12T05:10:53.005Z",
       "actualBrowserUI": true,
       "kind": "current-public-role-section",
       "productionAuthenticationTested": false,
       "browserErrors": [],
       "blockedRequests": [],
-      "note": "Unmodified browser element screenshot. Public role information and generated decorative imagery; not authenticated operations or a native release.",
-      "visualReview": {
-        "status": "passed",
-        "reviewedAt": "2026-10-06T23:21:46.976385+00:00",
-        "method": "original-png-at-readable-resolution",
-        "sha256": "403599498b5c1e640a8e91dab30863a23c5237da869ada049f6fcf0a1347e60c",
-        "sourceHashes": {
-          "src/components/showcase/role-story-image.tsx": "241cd78e6518cd8e1e6ec1b7bd02c15a0c8c977ef13bcbed11d3e4566d9a0504",
-          "src/components/site/page-banner.tsx": "5c9bbdbfa88b8336e204c8aad939d2639c2e8a221e1692826b23940916b2ce6e",
-          "src/components/help/help-hero.tsx": "e1e60133eccc3dead41b6eb0ae2cbb212ebb892594b21b799e962aacb53d2743",
-          "src/app/[locale]/(site)/participants/page.tsx": "40feedf985202dfb16b4531a56bb7774775f3c377d4514fc12318f0b98c6c434",
-          "src/app/[locale]/(site)/help/[role]/page.tsx": "d05fb629c0fc46340bd708e6573fb358da2828cac9e1d29dbd94efe8d4c006e9",
-          "messages/en.json": "c1318be00feb4378b7c68a4434a2f17b8e271cf7ed249e552c40a189a3cb2629",
-          "messages/ar.json": "1e0e8764d13f7c3dc779e52d8c1ab4a9c0f6f9c4925dc991d45ecc4743d0dbb9",
-          "public/images/showcase/household-sorting.webp": "c3dd81eb46dd919f68f91aa89511450ea1ba4eff0fce77c285ccd090a0c6380f",
-          "public/images/showcase/material-yard.webp": "0ea4aebbd02335a2bbb8306532cb09d520b7f2f1e050dcb44174326fb3bed74d",
-          "public/images/showcase/operations-desk.webp": "6cfcff22dc4624253179004bebc99f4a70131154ed687c5708f66a3bf016419d",
-          "public/images/showcase/household-preparation.webp": "7b8bc39d23fcf4d859f5c57faac88c8be49832a5c270feae2d709d69beeab8c3",
-          "public/images/showcase/yard-dispatch.webp": "21f5007e7d8ab49c27baf706f418c3a66bc2d9d9d413c32901393ecc71f02a8f"
-        },
-        "checks": [
-          "readable text",
-          "no control overlap",
-          "no development badge",
-          "no secret or customer contact pixels"
-        ],
-        "scope": "Disconnected local production browser UI. Decorative role imagery and demo text do not prove authentication, provider execution or production deployment."
-      }
+      "note": "Unmodified browser element screenshot. Public role information and generated decorative imagery; not authenticated operations or a native release."
     },
     {
       "path": "docs/user-guide/screenshots/showcase-arabic.png",
       "sha256": "381372ddd8f0e0f730e0eb460f21fd98d73246ca071ff7228f8d8b50c382ceea",
-      "url": "http://localhost:3004/ar/help/kabadiwala",
-      "sourceRevision": "9146ce6840b86e6b9c26a63ea67a48f28f0cfa2c",
+      "url": "http://localhost:3114/ar/help/kabadiwala",
+      "sourceRevision": "4f704d44f47c83bb4d527a4eff2eb7ec5afd5c6d",
       "sourceHashes": {
         "src/components/showcase/role-story-image.tsx": "241cd78e6518cd8e1e6ec1b7bd02c15a0c8c977ef13bcbed11d3e4566d9a0504",
         "src/components/site/page-banner.tsx": "5c9bbdbfa88b8336e204c8aad939d2639c2e8a221e1692826b23940916b2ce6e",
@@ -197,40 +116,13 @@
         "width": 390,
         "height": 844
       },
-      "capturedAt": "2026-10-06T23:18:52.203Z",
+      "capturedAt": "2026-10-12T05:10:53.269Z",
       "actualBrowserUI": true,
       "kind": "current-public-role-section",
       "productionAuthenticationTested": false,
       "browserErrors": [],
       "blockedRequests": [],
-      "note": "Unmodified browser element screenshot. Public role information and generated decorative imagery; not authenticated operations or a native release.",
-      "visualReview": {
-        "status": "passed",
-        "reviewedAt": "2026-10-06T23:21:46.976385+00:00",
-        "method": "original-png-at-readable-resolution",
-        "sha256": "381372ddd8f0e0f730e0eb460f21fd98d73246ca071ff7228f8d8b50c382ceea",
-        "sourceHashes": {
-          "src/components/showcase/role-story-image.tsx": "241cd78e6518cd8e1e6ec1b7bd02c15a0c8c977ef13bcbed11d3e4566d9a0504",
-          "src/components/site/page-banner.tsx": "5c9bbdbfa88b8336e204c8aad939d2639c2e8a221e1692826b23940916b2ce6e",
-          "src/components/help/help-hero.tsx": "e1e60133eccc3dead41b6eb0ae2cbb212ebb892594b21b799e962aacb53d2743",
-          "src/app/[locale]/(site)/participants/page.tsx": "40feedf985202dfb16b4531a56bb7774775f3c377d4514fc12318f0b98c6c434",
-          "src/app/[locale]/(site)/help/[role]/page.tsx": "d05fb629c0fc46340bd708e6573fb358da2828cac9e1d29dbd94efe8d4c006e9",
-          "messages/en.json": "c1318be00feb4378b7c68a4434a2f17b8e271cf7ed249e552c40a189a3cb2629",
-          "messages/ar.json": "1e0e8764d13f7c3dc779e52d8c1ab4a9c0f6f9c4925dc991d45ecc4743d0dbb9",
-          "public/images/showcase/household-sorting.webp": "c3dd81eb46dd919f68f91aa89511450ea1ba4eff0fce77c285ccd090a0c6380f",
-          "public/images/showcase/material-yard.webp": "0ea4aebbd02335a2bbb8306532cb09d520b7f2f1e050dcb44174326fb3bed74d",
-          "public/images/showcase/operations-desk.webp": "6cfcff22dc4624253179004bebc99f4a70131154ed687c5708f66a3bf016419d",
-          "public/images/showcase/household-preparation.webp": "7b8bc39d23fcf4d859f5c57faac88c8be49832a5c270feae2d709d69beeab8c3",
-          "public/images/showcase/yard-dispatch.webp": "21f5007e7d8ab49c27baf706f418c3a66bc2d9d9d413c32901393ecc71f02a8f"
-        },
-        "checks": [
-          "readable text",
-          "no control overlap",
-          "no development badge",
-          "no secret or customer contact pixels"
-        ],
-        "scope": "Disconnected local production browser UI. Decorative role imagery and demo text do not prove authentication, provider execution or production deployment."
-      }
+      "note": "Unmodified browser element screenshot. Public role information and generated decorative imagery; not authenticated operations or a native release."
     }
   ]
 }

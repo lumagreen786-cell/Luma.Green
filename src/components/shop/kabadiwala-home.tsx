@@ -48,10 +48,10 @@ function Greeting({ name }: { name: string }) {
   const now = useNow();
   return (
     <header className="flex flex-col gap-2 border-b border-border pb-5">
-      <p className="text-sm font-medium text-primary">{t("greeting")}</p>
-      <h1 className="font-display text-2xl leading-tight font-semibold tracking-tight sm:text-3xl">
+      <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
         {name}
       </h1>
+      <p className="text-sm font-medium text-primary">{t("greeting")}</p>
       <p className="text-sm text-muted-foreground">
         {format.dateTime(now, {
           weekday: "long",

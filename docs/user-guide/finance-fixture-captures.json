@@ -1,5 +1,5 @@
 {
-  "capturedAt": "2026-10-06T22:34:09.796Z",
+  "capturedAt": "2026-10-12T05:41:36.500Z",
   "origin": "http://127.0.0.1:3203",
   "sourceHashes": {
     "scripts/guide-preview/capture-finance.mjs": "7b8fbb73a769c4285b388c9736482b119a99e7d97997349017a5976bc4924acb",
@@ -15,14 +15,14 @@
     "scripts/guide-preview/index.html": "d324c2a9a9b99a5b2a4726b93d5307f7af7a1939efd1a3e4b088f11f7c8bbcbf",
     "src/components/market/financial-lifecycle.tsx": "91637794a353b59494be226722818f56e7e30c8af9d8568cf67e816d14449f4b",
     "src/components/market/sandbox-checkout.tsx": "139edcc34318c18f3d05da076209f7598edfb9aa3a0da3a5a10b83b711458bee",
-    "src/components/app/app-shell.tsx": "2824d37e4e16717be6cbc88079f66087c8356ec5a3a1fe2ee27430fbdb849f06",
+    "src/components/app/app-shell.tsx": "5140c054900afc2da4b3e84c26789fe3c4e1ef3b3ef8e9fb3d0b5be5074e98e5",
     "src/components/app/format.ts": "efea09a9f734c886248bc51e6eecd18f38dc8163444b9afb9f6c3d755592d0fe",
     "src/components/shop/use-shop.ts": "dda961bb19bf00e9b0d85c8c8ae93ab849801197bce25f79225a057848c17fbd",
     "src/components/workspace/permissions.tsx": "ba4d6ebb87cbb669d93f446164c46bcd3fd35aa2885c95c6c69ed1681623ff29",
     "src/components/ui/button.tsx": "541fcd6054a1dfa7fc114bc8c3468b8d408a347a55938107e74f93cc504cb367",
     "src/components/ui/input.tsx": "3417db3d25a5fbc95792c2f8d49cfce5190b51640da196f74246f5cae5c4f7ea",
     "src/components/ui/label.tsx": "aa863e67bad8eac1d75ebb56151645e1231c9f6688238cb1dc1b09f1e62b7f27",
-    "src/components/theme/theme-provider.tsx": "16099dee8a247ce40bb5d410fc0a6ae58de226e89071fea987cef5114e6842c0",
+    "src/components/theme/theme-provider.tsx": "b63770a104c7058b72a9086c14885c708feba4ebb9bf0d7dce9922ffe9af4c0f",
     "src/lib/money-format.ts": "f3cf7e5ade380ef829757b8dced8419143f545372df6af1e7515f970242ee2f4",
     "src/lib/fonts.ts": "ffb4b8691eadcdf377fd3c0e2584c82683ffbbef7008fe1800f31dcba8e785db",
     "src/app/globals.css": "7d48913ef6ba79d423f69f34e21ee3fecf87242e5da8d70869806e02d38e2c09",
@@ -32,18 +32,18 @@
     "messages/kn.json": "cfd47e3dc831f55ed336d86b1b518bcd9dd6a1f6435e9b956e2d4c5e5127ab30"
   },
   "buildStyles": {
-    "1ca95bb43d01f626.css": "2c41e4c92463ca1e43102a931707cbaded970be612e1041469bd29aeb05c07f2",
     "35b1be6cb4504fe3.css": "64f404f0bffb15a2acea6208babd4ed88959604613786644b29e0ed65d826cbf",
     "3794034283f7bd81.css": "e9a94587daddfd013601b6a7f3d19d797b8f874f6e1a4946df6279ff379e41d2",
     "3e82cec58f64b85a.css": "52cde787af503b70562b8482d89e2849c3aa4b286d32d6fbc88d8ea396094bea",
     "627d7aa884c6b6e8.css": "9afd537a38a3bf2c11a0bc99ca868271fe96f559537415ec0d64a95268fa24f1",
     "aa3081e675310d43.css": "abcf76fa74ef17c2343a9afbdb5332043cad941ba3d171e20f9b01468610f890",
-    "c3c2564de53b1461.css": "916ee05b24d3b0eb0940ebdc087e8579e36e21f2e17861aec33e2e759f4e9ba4"
+    "c3c2564de53b1461.css": "916ee05b24d3b0eb0940ebdc087e8579e36e21f2e17861aec33e2e759f4e9ba4",
+    "c68ffcc460dbeff2.css": "85d4317573456c588188a7e77053374b0fd0b1e50bf1439d8235951584805f9d"
   },
   "screenshots": [
     {
       "file": "screenshots/finance-fixture-authorized-dispatch-en-light-390.png",
-      "sha256": "701e0ebfd6d0fe0a43e11bc4e622bea76d20af9f496b46c0e7239f443d3251d1",
+      "sha256": "6b882e07e419247569ec39caf4c51d2d14b92b845ff54b7754fd126dc1a2e8fa",
       "locale": "en",
       "theme": "light",
       "scenario": "authorized-dispatch",
@@ -63,18 +63,11 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "701e0ebfd6d0fe0a43e11bc4e622bea76d20af9f496b46c0e7239f443d3251d1",
-        "reviewedAt": "2026-10-06T22:36:26.297801+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-financial-hold-en-light-390.png",
-      "sha256": "944c5bf2b4e8d8a72dac5c3d29f5cb3f14daf5c5a0f895cd7a3b882be81cc3dc",
+      "sha256": "41052eedc98637660c278807e16ae56b5a79168919034f1ce15ccd65eaa73440",
       "locale": "en",
       "theme": "light",
       "scenario": "financial-hold",
@@ -94,14 +87,7 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "944c5bf2b4e8d8a72dac5c3d29f5cb3f14daf5c5a0f895cd7a3b882be81cc3dc",
-        "reviewedAt": "2026-10-06T22:36:26.298076+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-authorized-dispatch-en-light-768.png",
@@ -125,14 +111,7 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "56f71d0f3b3704b67a0cc9a1d6c0cc1e26aaf9e47dd3cfa3e92d18f0f6cb46a1",
-        "reviewedAt": "2026-10-06T22:36:26.298290+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-financial-hold-en-light-768.png",
@@ -156,18 +135,11 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "895937cb0d02b59a861bc9fb21315b82883e89bcb5a988083b2f4dbbab28d49e",
-        "reviewedAt": "2026-10-06T22:36:26.298479+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-authorized-dispatch-en-light-1440.png",
-      "sha256": "bc844b064439d7d67f94ed374e0b4e8c42c5b590f2cade304a18586397ba7882",
+      "sha256": "a763d802e79c5b57e7b33b4e4f04a2ce42a2cf4f449752df0e3e31e443d447a0",
       "locale": "en",
       "theme": "light",
       "scenario": "authorized-dispatch",
@@ -187,18 +159,11 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "bc844b064439d7d67f94ed374e0b4e8c42c5b590f2cade304a18586397ba7882",
-        "reviewedAt": "2026-10-06T22:36:26.298718+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-financial-hold-en-light-1440.png",
-      "sha256": "5faffb26911229107bd6350e70a9f4f0745e884bdc7fe1c251f0fde9e9c2c4af",
+      "sha256": "21d3a8cf23bd2d03f76283515e35098b0c4486e7cdde24e86c9a736085d99e22",
       "locale": "en",
       "theme": "light",
       "scenario": "financial-hold",
@@ -218,18 +183,11 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "5faffb26911229107bd6350e70a9f4f0745e884bdc7fe1c251f0fde9e9c2c4af",
-        "reviewedAt": "2026-10-06T22:36:26.298930+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-authorized-dispatch-en-dark-390.png",
-      "sha256": "e2eb1ee8082384345568fa18c05c70a21fb8c04f4514366d743a4e2bbcce6c22",
+      "sha256": "71f8b39dfc606e22c860b0dae9c2624d51c1821b6d82de3ca2a9b6b74857b96d",
       "locale": "en",
       "theme": "dark",
       "scenario": "authorized-dispatch",
@@ -249,18 +207,11 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "e2eb1ee8082384345568fa18c05c70a21fb8c04f4514366d743a4e2bbcce6c22",
-        "reviewedAt": "2026-10-06T22:36:36.853550+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-financial-hold-en-dark-390.png",
-      "sha256": "aad63613a3b05d0e7969e0e352233f6db7f975f163bea2bd23f8ed35ff6f8b52",
+      "sha256": "cca06fcdaf3a181a20d8c84898a8cd4a09e24c518c132d037ba5a7124dabc062",
       "locale": "en",
       "theme": "dark",
       "scenario": "financial-hold",
@@ -280,18 +231,11 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "aad63613a3b05d0e7969e0e352233f6db7f975f163bea2bd23f8ed35ff6f8b52",
-        "reviewedAt": "2026-10-06T22:36:36.853669+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-authorized-dispatch-en-dark-768.png",
-      "sha256": "0fb79743bf91dd31a88a319f191bc4f1a5fa11e89f242adfe53f5e5f83883a75",
+      "sha256": "29eddadcca0d9ae75e32938c370015cd55a39ffe406fb090a6c028e14fd3cfd8",
       "locale": "en",
       "theme": "dark",
       "scenario": "authorized-dispatch",
@@ -311,18 +255,11 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "0fb79743bf91dd31a88a319f191bc4f1a5fa11e89f242adfe53f5e5f83883a75",
-        "reviewedAt": "2026-10-06T22:36:36.853724+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-financial-hold-en-dark-768.png",
-      "sha256": "406b1211f63cd1b3c926fcff76f0d96c334cb02e26b69f0a47b2f41845fd526c",
+      "sha256": "b240e18563cf2d9df739d0e6a01b71eb656b7d212ed1f0d7ce7551f41197fd05",
       "locale": "en",
       "theme": "dark",
       "scenario": "financial-hold",
@@ -342,18 +279,11 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "406b1211f63cd1b3c926fcff76f0d96c334cb02e26b69f0a47b2f41845fd526c",
-        "reviewedAt": "2026-10-06T22:36:36.853774+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-authorized-dispatch-en-dark-1440.png",
-      "sha256": "2e061d30f513d532b10bf57a902eecca74d0f1b76a4e29741c68263291476502",
+      "sha256": "9644fe82c9cf416359a57fa34d42d0c2f16e6996650332368ebe5b7c22f5ca26",
       "locale": "en",
       "theme": "dark",
       "scenario": "authorized-dispatch",
@@ -373,18 +303,11 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "2e061d30f513d532b10bf57a902eecca74d0f1b76a4e29741c68263291476502",
-        "reviewedAt": "2026-10-06T22:36:36.853843+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-financial-hold-en-dark-1440.png",
-      "sha256": "72e849b6b3e24b3c5f0d6d4baec924d5dd8f19dc09a1a6c707614ef2637f78b7",
+      "sha256": "3fcc465685e53b89bfe70ba40d3edbf4eb59f003d579074476e4c6e79f62efb4",
       "locale": "en",
       "theme": "dark",
       "scenario": "financial-hold",
@@ -404,18 +327,11 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "72e849b6b3e24b3c5f0d6d4baec924d5dd8f19dc09a1a6c707614ef2637f78b7",
-        "reviewedAt": "2026-10-06T22:36:36.853907+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-authorized-dispatch-ar-light-390.png",
-      "sha256": "887ca3e78172533d1f2512d46d85893cb3da926ac196e6ca27b06e53c31d992e",
+      "sha256": "3ba2e354245e202eb1d16b24473f488ee506812f0207ff913f5e387edee33623",
       "locale": "ar",
       "theme": "light",
       "scenario": "authorized-dispatch",
@@ -439,18 +355,11 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "887ca3e78172533d1f2512d46d85893cb3da926ac196e6ca27b06e53c31d992e",
-        "reviewedAt": "2026-10-06T22:37:00.785407+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-financial-hold-ar-light-390.png",
-      "sha256": "6b796e7f7ed8abc4db5d2c62eb1f3200c61e136da489a3fe0fda25b8dc13adc3",
+      "sha256": "2446867987e4634feeb222647965b8bcff3a4623b9311739e25ba91693fa3d14",
       "locale": "ar",
       "theme": "light",
       "scenario": "financial-hold",
@@ -474,14 +383,7 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "6b796e7f7ed8abc4db5d2c62eb1f3200c61e136da489a3fe0fda25b8dc13adc3",
-        "reviewedAt": "2026-10-06T22:37:00.785643+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-authorized-dispatch-ar-light-768.png",
@@ -510,14 +412,7 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "b64cde3f11f57f5ca516a373cb756e3559adc9e6ee5f617ac0883863eb9af5c5",
-        "reviewedAt": "2026-10-06T22:37:00.785827+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-financial-hold-ar-light-768.png",
@@ -546,18 +441,11 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "d57834b61570097fa25bb96c959d060df9d6b4f94ef1052ef58b7c4ce04a4c56",
-        "reviewedAt": "2026-10-06T22:37:00.785998+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-authorized-dispatch-ar-light-1440.png",
-      "sha256": "bbfeb35931138df7103d3a98456b42369d421418770445c916c6c894638c6937",
+      "sha256": "fb841bd6f8dafd0a810d8786575a276a7eda1e935b41ef5ddc03acc26bb6b31e",
       "locale": "ar",
       "theme": "light",
       "scenario": "authorized-dispatch",
@@ -582,18 +470,11 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "bbfeb35931138df7103d3a98456b42369d421418770445c916c6c894638c6937",
-        "reviewedAt": "2026-10-06T22:37:00.786195+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-financial-hold-ar-light-1440.png",
-      "sha256": "a438915dc2513a7cceceffe4d3a3c90d660da9c4b5b2ecfa472e87a2ca29bded",
+      "sha256": "1e6fa38cd57b381c5c4356e81406ce4ff2209811238fd8bfcb0de6b199b38241",
       "locale": "ar",
       "theme": "light",
       "scenario": "financial-hold",
@@ -618,18 +499,11 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "a438915dc2513a7cceceffe4d3a3c90d660da9c4b5b2ecfa472e87a2ca29bded",
-        "reviewedAt": "2026-10-06T22:37:00.786394+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-authorized-dispatch-ar-dark-390.png",
-      "sha256": "0b8159117083764f8365edda5a196b44d1ae9975520a34c06e783acf3a7add18",
+      "sha256": "b15e08de505fce8f21c12ce4b49fc836aa188249daa6ddcce8c3bc120c570b43",
       "locale": "ar",
       "theme": "dark",
       "scenario": "authorized-dispatch",
@@ -653,18 +527,11 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "0b8159117083764f8365edda5a196b44d1ae9975520a34c06e783acf3a7add18",
-        "reviewedAt": "2026-10-06T22:37:11.469155+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-financial-hold-ar-dark-390.png",
-      "sha256": "1e93a79632e6d8dc487bcc20f5f2c09972011e327bcd73ca8a796eb595e16f0a",
+      "sha256": "5d1c564752375a986d1dfab7df4348a2f86ecd4775267e17a5acd1770cf8bd9c",
       "locale": "ar",
       "theme": "dark",
       "scenario": "financial-hold",
@@ -688,18 +555,11 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "1e93a79632e6d8dc487bcc20f5f2c09972011e327bcd73ca8a796eb595e16f0a",
-        "reviewedAt": "2026-10-06T22:37:11.469482+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-authorized-dispatch-ar-dark-768.png",
-      "sha256": "e9c12c5abb7895d47ebcaa0472757770a84fdfa0a000fc2ecaa37cfaf429b93e",
+      "sha256": "c3c07b1cf56c670b094125aba7967dd3e2bf34ec59efc75e5c78d0f146089317",
       "locale": "ar",
       "theme": "dark",
       "scenario": "authorized-dispatch",
@@ -724,18 +584,11 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "e9c12c5abb7895d47ebcaa0472757770a84fdfa0a000fc2ecaa37cfaf429b93e",
-        "reviewedAt": "2026-10-06T22:37:11.469585+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-financial-hold-ar-dark-768.png",
-      "sha256": "4173e3c8c8218a40a49ae009c0bb16ed96c39476b5720fda9677e38e6403a935",
+      "sha256": "6fa9463f03c928bb256f8e3123c3f5db807e7c99d015c0622639c0177c04a917",
       "locale": "ar",
       "theme": "dark",
       "scenario": "financial-hold",
@@ -760,18 +613,11 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "4173e3c8c8218a40a49ae009c0bb16ed96c39476b5720fda9677e38e6403a935",
-        "reviewedAt": "2026-10-06T22:37:11.469699+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-authorized-dispatch-ar-dark-1440.png",
-      "sha256": "663fd23829d1c966eec2354073546605cfa9f0eaf9bc69119bdfc02a8dc201f0",
+      "sha256": "50a7dcccb314157dd3975f33ffc5790de9b107b384eda204ae37bb42611fa8b1",
       "locale": "ar",
       "theme": "dark",
       "scenario": "authorized-dispatch",
@@ -796,18 +642,11 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "663fd23829d1c966eec2354073546605cfa9f0eaf9bc69119bdfc02a8dc201f0",
-        "reviewedAt": "2026-10-06T22:37:11.469829+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-financial-hold-ar-dark-1440.png",
-      "sha256": "080ea08abb3ca87cec6fdf3b955471c5e51c1a0446df61f29fe31a9103f9dc70",
+      "sha256": "c80238678d5093068c83fd1ac31d7d029b8274083fa2b87f061cb6ea0ba7c553",
       "locale": "ar",
       "theme": "dark",
       "scenario": "financial-hold",
@@ -832,18 +671,11 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "080ea08abb3ca87cec6fdf3b955471c5e51c1a0446df61f29fe31a9103f9dc70",
-        "reviewedAt": "2026-10-06T22:37:11.469949+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-authorized-dispatch-kn-light-390.png",
-      "sha256": "60f64ce0d7d169716279e3d21c3dbfe9de307c479cfb4445c75ee86ef97fb60d",
+      "sha256": "901506c31647b2a0150c9282e236dfc7978329d11fe6ff294c5cadb7feddbf33",
       "locale": "kn",
       "theme": "light",
       "scenario": "authorized-dispatch",
@@ -867,18 +699,11 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "60f64ce0d7d169716279e3d21c3dbfe9de307c479cfb4445c75ee86ef97fb60d",
-        "reviewedAt": "2026-10-06T22:37:23.333128+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-financial-hold-kn-light-390.png",
-      "sha256": "92bacebb22ec5a4c274342970f67505cedd703c9b97cfd1d5b8f7e7ea6937d61",
+      "sha256": "20a972a1e40fc02892abd76d9eb0cefd03b00f6831ce1115288143a4b5246e11",
       "locale": "kn",
       "theme": "light",
       "scenario": "financial-hold",
@@ -902,14 +727,7 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "92bacebb22ec5a4c274342970f67505cedd703c9b97cfd1d5b8f7e7ea6937d61",
-        "reviewedAt": "2026-10-06T22:37:23.333611+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-authorized-dispatch-kn-light-768.png",
@@ -938,14 +756,7 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "6c58ff2a7f7df4c7ff6091d80ac63860c301519b0ee45c6dcbe292bf59daa59e",
-        "reviewedAt": "2026-10-06T22:37:23.333965+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-financial-hold-kn-light-768.png",
@@ -974,18 +785,11 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "019beb1325bb0c4ec55ef9792bf2ee3325e795c341dfdadca26290a6a9dc3363",
-        "reviewedAt": "2026-10-06T22:37:23.334305+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-authorized-dispatch-kn-light-1440.png",
-      "sha256": "853d18b4fda40ba6dd789bb07cdfcd88a49b87d3ab92cedf89e9354ea67eded4",
+      "sha256": "f268c4a2f9d6bd4ea3ee7dc28bc45906fcbd43f8835737290c9c2956b4494e06",
       "locale": "kn",
       "theme": "light",
       "scenario": "authorized-dispatch",
@@ -1010,18 +814,11 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "853d18b4fda40ba6dd789bb07cdfcd88a49b87d3ab92cedf89e9354ea67eded4",
-        "reviewedAt": "2026-10-06T22:37:23.334688+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-financial-hold-kn-light-1440.png",
-      "sha256": "b78d9f5c6e9bf29898932f9037ce0f5642e7ba8d8c8e2a473176276a29ac5b4e",
+      "sha256": "e30fae343f57c15456a0677f7ab8033982236c6df304ddef655b5a8e02dfead1",
       "locale": "kn",
       "theme": "light",
       "scenario": "financial-hold",
@@ -1046,18 +843,11 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "b78d9f5c6e9bf29898932f9037ce0f5642e7ba8d8c8e2a473176276a29ac5b4e",
-        "reviewedAt": "2026-10-06T22:37:23.335032+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-authorized-dispatch-kn-dark-390.png",
-      "sha256": "6343161c398fdc4ec21da7070e1d40e11857166dbbdaa752b39f1cebee20e442",
+      "sha256": "cdae14f1cb493d0bfc1378b9f59af880ea65b7590ad3fafb46d2cc78dd5c162e",
       "locale": "kn",
       "theme": "dark",
       "scenario": "authorized-dispatch",
@@ -1081,18 +871,11 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "6343161c398fdc4ec21da7070e1d40e11857166dbbdaa752b39f1cebee20e442",
-        "reviewedAt": "2026-10-06T22:39:04.710795+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-financial-hold-kn-dark-390.png",
-      "sha256": "521548af3916b9f33fd37989628176db91771ee1065e6ade615779c624470bed",
+      "sha256": "985d828881e68ea0b995aee877867e368dde560dea7c429434f63b6ef6613f80",
       "locale": "kn",
       "theme": "dark",
       "scenario": "financial-hold",
@@ -1116,18 +899,11 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "521548af3916b9f33fd37989628176db91771ee1065e6ade615779c624470bed",
-        "reviewedAt": "2026-10-06T22:39:04.711069+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-authorized-dispatch-kn-dark-768.png",
-      "sha256": "dbd0ad71b76661931f6c16b04c54c9c87ad54b8947c008ba835d93969e9bf210",
+      "sha256": "ee1aaf7591e55f02885df717d949a74b567a1a4220862d21ec210bdbfd7a04b2",
       "locale": "kn",
       "theme": "dark",
       "scenario": "authorized-dispatch",
@@ -1152,18 +928,11 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "dbd0ad71b76661931f6c16b04c54c9c87ad54b8947c008ba835d93969e9bf210",
-        "reviewedAt": "2026-10-06T22:39:04.711277+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-financial-hold-kn-dark-768.png",
-      "sha256": "3ed9a5f24bea7618f085b5c82e3c8929bd04f0db3852e36b43aca23781edcf5a",
+      "sha256": "584a6197684272b2c03848be309fc8b20976ccb932c497f805dadd89d3dc74d7",
       "locale": "kn",
       "theme": "dark",
       "scenario": "financial-hold",
@@ -1188,18 +957,11 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "3ed9a5f24bea7618f085b5c82e3c8929bd04f0db3852e36b43aca23781edcf5a",
-        "reviewedAt": "2026-10-06T22:39:04.711475+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-authorized-dispatch-kn-dark-1440.png",
-      "sha256": "66e08adfdc5d49c3a38ce67937522b02880136e3e59df7f5aafe60a4efe465b2",
+      "sha256": "d1d3e54a30cfc29b84150777befdb7174290873c23493d0c66ebd55ccbefb41e",
       "locale": "kn",
       "theme": "dark",
       "scenario": "authorized-dispatch",
@@ -1224,18 +986,11 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "66e08adfdc5d49c3a38ce67937522b02880136e3e59df7f5aafe60a4efe465b2",
-        "reviewedAt": "2026-10-06T22:39:04.711771+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     },
     {
       "file": "screenshots/finance-fixture-financial-hold-kn-dark-1440.png",
-      "sha256": "bbb1fe28df56776ea89f131f3ed77114b82e71792501ce79d64da4a4206d361b",
+      "sha256": "cc9a5760cadd7da71e4278007bbd74ebe0ab228b46766491f0ed2534870a43ea",
       "locale": "kn",
       "theme": "dark",
       "scenario": "financial-hold",
@@ -1260,24 +1015,267 @@
       "sourceKind": "synthetic-financial-interface-example",
       "authenticated": false,
       "providerExecutionTested": false,
-      "writesAttempted": false,
-      "visualReview": {
-        "sha256": "bbb1fe28df56776ea89f131f3ed77114b82e71792501ce79d64da4a4206d361b",
-        "reviewedAt": "2026-10-06T22:39:04.712028+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      "writesAttempted": false
     }
   ],
   "visualReview": {
     "status": "passed",
-    "reviewedAt": "2026-10-06T22:40:17.800101+00:00",
+    "method": "original-png-at-readable-resolution",
     "reviewedCount": 36,
-    "method": "Every original PNG inspected at readable resolution; exact image and source hashes checked.",
-    "authenticated": false,
-    "providerExecutionTested": false,
-    "writesAttempted": false,
-    "note": "Simulated financial states demonstrate the interface only; no real payment, authorization or stock movement."
+    "records": [
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-authorized-dispatch-en-light-390.png",
+        "sha256": "6b882e07e419247569ec39caf4c51d2d14b92b845ff54b7754fd126dc1a2e8fa",
+        "reviewedAt": "2026-10-12T05:26:21.237Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-financial-hold-en-light-390.png",
+        "sha256": "41052eedc98637660c278807e16ae56b5a79168919034f1ce15ccd65eaa73440",
+        "reviewedAt": "2026-10-12T05:26:21.237Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-authorized-dispatch-en-light-768.png",
+        "sha256": "56f71d0f3b3704b67a0cc9a1d6c0cc1e26aaf9e47dd3cfa3e92d18f0f6cb46a1",
+        "reviewedAt": "2026-10-12T05:26:21.237Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-financial-hold-en-light-768.png",
+        "sha256": "895937cb0d02b59a861bc9fb21315b82883e89bcb5a988083b2f4dbbab28d49e",
+        "reviewedAt": "2026-10-12T05:26:21.237Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-authorized-dispatch-en-light-1440.png",
+        "sha256": "a763d802e79c5b57e7b33b4e4f04a2ce42a2cf4f449752df0e3e31e443d447a0",
+        "reviewedAt": "2026-10-12T05:26:21.237Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-financial-hold-en-light-1440.png",
+        "sha256": "21d3a8cf23bd2d03f76283515e35098b0c4486e7cdde24e86c9a736085d99e22",
+        "reviewedAt": "2026-10-12T05:26:21.237Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-authorized-dispatch-en-dark-390.png",
+        "sha256": "71f8b39dfc606e22c860b0dae9c2624d51c1821b6d82de3ca2a9b6b74857b96d",
+        "reviewedAt": "2026-10-12T05:27:56.955Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-financial-hold-en-dark-390.png",
+        "sha256": "cca06fcdaf3a181a20d8c84898a8cd4a09e24c518c132d037ba5a7124dabc062",
+        "reviewedAt": "2026-10-12T05:27:56.955Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-authorized-dispatch-en-dark-768.png",
+        "sha256": "29eddadcca0d9ae75e32938c370015cd55a39ffe406fb090a6c028e14fd3cfd8",
+        "reviewedAt": "2026-10-12T05:27:56.955Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-financial-hold-en-dark-768.png",
+        "sha256": "b240e18563cf2d9df739d0e6a01b71eb656b7d212ed1f0d7ce7551f41197fd05",
+        "reviewedAt": "2026-10-12T05:27:56.955Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-authorized-dispatch-en-dark-1440.png",
+        "sha256": "9644fe82c9cf416359a57fa34d42d0c2f16e6996650332368ebe5b7c22f5ca26",
+        "reviewedAt": "2026-10-12T05:27:56.955Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-financial-hold-en-dark-1440.png",
+        "sha256": "3fcc465685e53b89bfe70ba40d3edbf4eb59f003d579074476e4c6e79f62efb4",
+        "reviewedAt": "2026-10-12T05:27:56.955Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-authorized-dispatch-ar-light-390.png",
+        "sha256": "3ba2e354245e202eb1d16b24473f488ee506812f0207ff913f5e387edee33623",
+        "reviewedAt": "2026-10-12T05:27:56.955Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-financial-hold-ar-light-390.png",
+        "sha256": "2446867987e4634feeb222647965b8bcff3a4623b9311739e25ba91693fa3d14",
+        "reviewedAt": "2026-10-12T05:27:56.955Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-authorized-dispatch-ar-light-768.png",
+        "sha256": "b64cde3f11f57f5ca516a373cb756e3559adc9e6ee5f617ac0883863eb9af5c5",
+        "reviewedAt": "2026-10-12T05:27:56.955Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-financial-hold-ar-light-768.png",
+        "sha256": "d57834b61570097fa25bb96c959d060df9d6b4f94ef1052ef58b7c4ce04a4c56",
+        "reviewedAt": "2026-10-12T05:27:56.955Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-authorized-dispatch-ar-light-1440.png",
+        "sha256": "fb841bd6f8dafd0a810d8786575a276a7eda1e935b41ef5ddc03acc26bb6b31e",
+        "reviewedAt": "2026-10-12T05:27:56.955Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-financial-hold-ar-light-1440.png",
+        "sha256": "1e6fa38cd57b381c5c4356e81406ce4ff2209811238fd8bfcb0de6b199b38241",
+        "reviewedAt": "2026-10-12T05:27:56.955Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-authorized-dispatch-ar-dark-390.png",
+        "sha256": "b15e08de505fce8f21c12ce4b49fc836aa188249daa6ddcce8c3bc120c570b43",
+        "reviewedAt": "2026-10-12T05:28:09.125Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-financial-hold-ar-dark-390.png",
+        "sha256": "5d1c564752375a986d1dfab7df4348a2f86ecd4775267e17a5acd1770cf8bd9c",
+        "reviewedAt": "2026-10-12T05:28:09.125Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-authorized-dispatch-ar-dark-768.png",
+        "sha256": "c3c07b1cf56c670b094125aba7967dd3e2bf34ec59efc75e5c78d0f146089317",
+        "reviewedAt": "2026-10-12T05:28:09.125Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-financial-hold-ar-dark-768.png",
+        "sha256": "6fa9463f03c928bb256f8e3123c3f5db807e7c99d015c0622639c0177c04a917",
+        "reviewedAt": "2026-10-12T05:28:09.125Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-authorized-dispatch-ar-dark-1440.png",
+        "sha256": "50a7dcccb314157dd3975f33ffc5790de9b107b384eda204ae37bb42611fa8b1",
+        "reviewedAt": "2026-10-12T05:28:09.125Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-financial-hold-ar-dark-1440.png",
+        "sha256": "c80238678d5093068c83fd1ac31d7d029b8274083fa2b87f061cb6ea0ba7c553",
+        "reviewedAt": "2026-10-12T05:28:09.125Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-authorized-dispatch-kn-light-390.png",
+        "sha256": "901506c31647b2a0150c9282e236dfc7978329d11fe6ff294c5cadb7feddbf33",
+        "reviewedAt": "2026-10-12T05:28:09.125Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-financial-hold-kn-light-390.png",
+        "sha256": "20a972a1e40fc02892abd76d9eb0cefd03b00f6831ce1115288143a4b5246e11",
+        "reviewedAt": "2026-10-12T05:28:09.125Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-authorized-dispatch-kn-light-768.png",
+        "sha256": "6c58ff2a7f7df4c7ff6091d80ac63860c301519b0ee45c6dcbe292bf59daa59e",
+        "reviewedAt": "2026-10-12T05:28:09.125Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-financial-hold-kn-light-768.png",
+        "sha256": "019beb1325bb0c4ec55ef9792bf2ee3325e795c341dfdadca26290a6a9dc3363",
+        "reviewedAt": "2026-10-12T05:28:09.125Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-authorized-dispatch-kn-light-1440.png",
+        "sha256": "f268c4a2f9d6bd4ea3ee7dc28bc45906fcbd43f8835737290c9c2956b4494e06",
+        "reviewedAt": "2026-10-12T05:28:09.125Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-financial-hold-kn-light-1440.png",
+        "sha256": "e30fae343f57c15456a0677f7ab8033982236c6df304ddef655b5a8e02dfead1",
+        "reviewedAt": "2026-10-12T05:28:09.125Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-authorized-dispatch-kn-dark-390.png",
+        "sha256": "cdae14f1cb493d0bfc1378b9f59af880ea65b7590ad3fafb46d2cc78dd5c162e",
+        "reviewedAt": "2026-10-12T05:28:20.396Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-financial-hold-kn-dark-390.png",
+        "sha256": "985d828881e68ea0b995aee877867e368dde560dea7c429434f63b6ef6613f80",
+        "reviewedAt": "2026-10-12T05:28:20.396Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-authorized-dispatch-kn-dark-768.png",
+        "sha256": "ee1aaf7591e55f02885df717d949a74b567a1a4220862d21ec210bdbfd7a04b2",
+        "reviewedAt": "2026-10-12T05:28:20.396Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-financial-hold-kn-dark-768.png",
+        "sha256": "584a6197684272b2c03848be309fc8b20976ccb932c497f805dadd89d3dc74d7",
+        "reviewedAt": "2026-10-12T05:28:20.396Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-authorized-dispatch-kn-dark-1440.png",
+        "sha256": "d1d3e54a30cfc29b84150777befdb7174290873c23493d0c66ebd55ccbefb41e",
+        "reviewedAt": "2026-10-12T05:28:20.396Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      },
+      {
+        "file": "docs/user-guide/screenshots/finance-fixture-financial-hold-kn-dark-1440.png",
+        "sha256": "cc9a5760cadd7da71e4278007bbd74ebe0ab228b46766491f0ed2534870a43ea",
+        "reviewedAt": "2026-10-12T05:28:20.396Z",
+        "layoutPassed": true,
+        "noSensitivePixels": true
+      }
+    ],
+    "note": "All original images inspected. Synthetic interface evidence only; no provider execution or account authorization proof."
   }
 }

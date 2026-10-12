@@ -1,5 +1,6 @@
 # Luma Green
 
+UI evidence refresh: 12 October 2026. The screenshots show the current layout. The business, legal and execution-plan sections retain their own dated evidence and limits. Read the delivery handoff for the current release state.
 Cleaner Tomorrow in Motion.
 
 **Product review and team test pack — 7 October 2026 refinement review**

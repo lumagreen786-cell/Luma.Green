@@ -20,7 +20,7 @@ export function NotificationsPage() {
   const common = useTranslations("common");
   return (
     <div className="mx-auto w-full max-w-3xl min-w-0">
-      <h1 className="font-display text-2xl leading-tight font-semibold tracking-tight sm:text-3xl">
+      <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
         {t("title")}
       </h1>
       <DeviceSettings />

@@ -96,7 +96,7 @@ function InvitationContent({ token }: { token: string }) {
   }
   return (
     <div className="mx-auto flex w-full max-w-xl min-w-0 flex-col gap-6">
-      <h1 className="font-display text-2xl leading-tight font-semibold tracking-tight sm:text-3xl">
+      <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
         {t("inviteTitle")}
       </h1>
       {isPending || (isReady && invitation === undefined) ? (

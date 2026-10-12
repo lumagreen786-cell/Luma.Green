@@ -110,7 +110,7 @@ export function WorkspacePage() {
   }
   return (
     <div className="flex min-w-0 flex-col gap-6">
-      <h1 className="font-display text-2xl leading-tight font-semibold tracking-tight sm:text-3xl">
+      <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
         {t("title")}
       </h1>
       {workspaces == null ? <ListSkeleton /> : null}
@@ -237,29 +237,33 @@ function MemberRow({
       </div>
       {member.canManage ? (
         <>
-          <div className="grid min-w-0 gap-2 sm:grid-cols-[minmax(8rem,1fr)_auto_auto]">
-            <RoleSelect
-              value={role}
-              onChange={setRole}
-              allowed={allowed}
-              label={`${t("role")}: ${member.name}`}
-            />
-            <Button
-              variant="outline"
-              disabled={busy || role === member.role}
-              onClick={() => void change(false)}
-            >
-              {common("save")}
-            </Button>
-            <Button
-              variant="outline"
-              disabled={busy}
-              onClick={() => {
-                setConfirming(true);
-              }}
-            >
-              {t("remove")}
-            </Button>
+          <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:items-center">
+            <div className="min-w-0 sm:min-w-40 sm:flex-1">
+              <RoleSelect
+                value={role}
+                onChange={setRole}
+                allowed={allowed}
+                label={`${t("role")}: ${member.name}`}
+              />
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <Button
+                variant="outline"
+                disabled={busy || role === member.role}
+                onClick={() => void change(false)}
+              >
+                {common("save")}
+              </Button>
+              <Button
+                variant="outline"
+                disabled={busy}
+                onClick={() => {
+                  setConfirming(true);
+                }}
+              >
+                {t("remove")}
+              </Button>
+            </div>
           </div>
           {confirming ? (
             <div className="flex flex-col gap-3 border-s-2 border-destructive ps-4 md:col-span-2">

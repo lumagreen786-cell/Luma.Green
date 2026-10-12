@@ -365,11 +365,15 @@ async function ready(page: Page, theme: Theme, locale: Locale) {
   progress.phase = "heading-readiness";
   // An open Radix select hides background semantics, while the page heading
   // remains physically visible. Keep that visual check for popup captures.
+  // Assertions have a separate timeout from page actions. Allow the same
+  // 30-second local data-loading budget while retaining the readiness checks.
   await expect(
     page.getByRole("heading", { level: 1, includeHidden: true }),
-  ).toBeVisible();
+  ).toBeVisible({ timeout: 30_000 });
   progress.phase = "skeleton-readiness";
-  await expect(page.locator('[data-slot="skeleton"]')).toHaveCount(0);
+  await expect(page.locator('[data-slot="skeleton"]')).toHaveCount(0, {
+    timeout: 30_000,
+  });
   progress.phase = "locale-readiness";
   await expect(page.locator("html")).toHaveAttribute(
     "lang",

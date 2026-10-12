@@ -36,7 +36,7 @@ export function ConsoleHome() {
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 lg:gap-8">
       <div className="flex flex-wrap items-end justify-between gap-4 border-b pb-6">
         <div className="flex min-w-0 flex-col gap-2">
-          <h1 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">
+          <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
             {firstName ? `Welcome, ${firstName}` : "Welcome"}
           </h1>
           <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">

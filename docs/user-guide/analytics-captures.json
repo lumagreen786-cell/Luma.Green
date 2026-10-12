@@ -7,7 +7,7 @@
         "src/components/providers/analytics-provider.tsx": "40fa6181daaf8db6fa965af05ae5d4ea1aa2d3da2b78f4a69df6b73f50b96791",
         "src/lib/analytics-runtime.ts": "055c4aee8a18f34ce569b46298978028952117f4eb56bccd0e4b2dd0e53477da",
         "src/lib/analytics.ts": "12d9dc95b7cf7a7901e7fc5f0d1f789c44918cdc09f83fba1ff288c9336e0b5c",
-        "src/components/site/home/hero.tsx": "a5c1d4709fef67a50103577e49c7785d35f5e9a7f9a421a84c33359bf86cccad",
+        "src/components/site/home/hero.tsx": "693cd20433cd29a7ba322d6cfa79104d3e6630cd610b66de725afc12c6f1b78a",
         "src/components/site/action-name.ts": "3e669342f3a69c8c7e2f71332d39f9c5d0a2eaf211994a456506e6ee91401ceb",
         "src/components/site/public-effects.module.css": "a1e2d678f59a1a0accc5c66fb36e5489ad88e52173b4eaa5ee62a1ecb988fc82",
         "src/components/site/site-header.tsx": "b6759891fafbb73fe5571b9bceecc9bdca96e2d2f64384e84bfac830fd743159",
@@ -27,10 +27,10 @@
       },
       "browserErrors": [],
       "path": "docs/user-guide/screenshots/analytics-choice.png",
-      "sha256": "92f9acf0741a0b7cac2ac3d231dfad217f6761e45dd53dac9c90098cba0281d8",
-      "sourceRevision": "9146ce6840b86e6b9c26a63ea67a48f28f0cfa2c",
+      "sha256": "f978bdb2f3b550186f6136e2e448435c9d4eb0017b74042cff46abad7d7f2c9b",
+      "sourceRevision": "4f704d44f47c83bb4d527a4eff2eb7ec5afd5c6d",
       "url": "http://localhost:3106/",
-      "capturedAt": "2026-10-06T23:41:23.467Z",
+      "capturedAt": "2026-10-12T05:51:09.505Z",
       "viewport": {
         "width": 1280,
         "height": 900
@@ -43,38 +43,7 @@
       "syntheticRecords": false,
       "externalRequestsIntercepted": true,
       "productionProviderExecutionTested": false,
-      "note": "Actual application UI. Fake analytics keys enable controls. Every external browser request is intercepted, including any monitoring request from a compiled fake Sentry DSN; no vendor receives data. Convex is disabled.",
-      "visualReview": {
-        "status": "passed",
-        "reviewedAt": "2026-10-06T23:42:04.194515+00:00",
-        "method": "original-png-at-readable-resolution",
-        "sha256": "92f9acf0741a0b7cac2ac3d231dfad217f6761e45dd53dac9c90098cba0281d8",
-        "sourceHashes": {
-          "src/components/providers/analytics-controls.tsx": "97f36f9e9745c2eb36b3e10b1e0101c3dad93c64213a76451d8c835311e6ab1f",
-          "src/components/providers/analytics-enabled.tsx": "99cc65c65b774e0850124ece590377dd790eecf936e0f50206c13aa31ab9111b",
-          "src/components/providers/analytics-provider.tsx": "40fa6181daaf8db6fa965af05ae5d4ea1aa2d3da2b78f4a69df6b73f50b96791",
-          "src/lib/analytics-runtime.ts": "055c4aee8a18f34ce569b46298978028952117f4eb56bccd0e4b2dd0e53477da",
-          "src/lib/analytics.ts": "12d9dc95b7cf7a7901e7fc5f0d1f789c44918cdc09f83fba1ff288c9336e0b5c",
-          "src/components/site/home/hero.tsx": "a5c1d4709fef67a50103577e49c7785d35f5e9a7f9a421a84c33359bf86cccad",
-          "src/components/site/action-name.ts": "3e669342f3a69c8c7e2f71332d39f9c5d0a2eaf211994a456506e6ee91401ceb",
-          "src/components/site/public-effects.module.css": "a1e2d678f59a1a0accc5c66fb36e5489ad88e52173b4eaa5ee62a1ecb988fc82",
-          "src/components/site/site-header.tsx": "b6759891fafbb73fe5571b9bceecc9bdca96e2d2f64384e84bfac830fd743159",
-          "src/components/site/mobile-nav.tsx": "340f3aca5d11ed680533a422d4c211d471980a08c1a3464ff8074052bd3609e3",
-          "src/components/site/site-nav.tsx": "b09049d530115e32336e6f3ba7e8020361b2759e1381755067fc15107694a4fc",
-          "src/components/site/language-switcher.tsx": "605c2aa7c55d4dafe0031fd72d36991c3a2cf854abc1b64126f674c66ade7224",
-          "src/components/brand/logo.tsx": "e25deb243618422e5a2f5991357fc9dd7f93addce899d12c7d6bac92249e6e9c",
-          "src/components/brand/logo.module.css": "4b2401a4e32f4554af2038cde2a6e4339b5e26f38a013969c04f5cbab6b61c34",
-          "src/components/theme/theme-toggle.tsx": "b2340a73c1abcdf0552ecd40f4d8d6e0a03e2bca9ae25d2c55deb6853ebd1684",
-          "src/components/ui/button.tsx": "541fcd6054a1dfa7fc114bc8c3468b8d408a347a55938107e74f93cc504cb367",
-          "src/components/site/container.tsx": "05f56df25279d4dc4c15d3940437c57b7271195803f5b4a70fcd27d2ce03b948",
-          "src/app/globals.css": "7d48913ef6ba79d423f69f34e21ee3fecf87242e5da8d70869806e02d38e2c09",
-          "src/lib/fonts.ts": "ffb4b8691eadcdf377fd3c0e2584c82683ffbbef7008fe1800f31dcba8e785db",
-          "public/images/materials-hall.webp": "3340f9e261c1daf2e5990af601f2a6f4e3b9b3b5991330cc594c7d687eebeb1f",
-          "messages/en.json": "c1318be00feb4378b7c68a4434a2f17b8e271cf7ed249e552c40a189a3cb2629",
-          "messages/ar.json": "1e0e8764d13f7c3dc779e52d8c1ab4a9c0f6f9c4925dc991d45ecc4743d0dbb9"
-        },
-        "scope": "Local fake-key build; provider requests intercepted. English desktop and Arabic phone consent controls fit and remain readable."
-      }
+      "note": "Actual application UI. Fake analytics keys enable controls. Every external browser request is intercepted, including any monitoring request from a compiled fake Sentry DSN; no vendor receives data. Convex is disabled."
     },
     {
       "sourceHashes": {
@@ -83,7 +52,7 @@
         "src/components/providers/analytics-provider.tsx": "40fa6181daaf8db6fa965af05ae5d4ea1aa2d3da2b78f4a69df6b73f50b96791",
         "src/lib/analytics-runtime.ts": "055c4aee8a18f34ce569b46298978028952117f4eb56bccd0e4b2dd0e53477da",
         "src/lib/analytics.ts": "12d9dc95b7cf7a7901e7fc5f0d1f789c44918cdc09f83fba1ff288c9336e0b5c",
-        "src/components/site/home/hero.tsx": "a5c1d4709fef67a50103577e49c7785d35f5e9a7f9a421a84c33359bf86cccad",
+        "src/components/site/home/hero.tsx": "693cd20433cd29a7ba322d6cfa79104d3e6630cd610b66de725afc12c6f1b78a",
         "src/components/site/action-name.ts": "3e669342f3a69c8c7e2f71332d39f9c5d0a2eaf211994a456506e6ee91401ceb",
         "src/components/site/public-effects.module.css": "a1e2d678f59a1a0accc5c66fb36e5489ad88e52173b4eaa5ee62a1ecb988fc82",
         "src/components/site/site-header.tsx": "b6759891fafbb73fe5571b9bceecc9bdca96e2d2f64384e84bfac830fd743159",
@@ -103,10 +72,10 @@
       },
       "browserErrors": [],
       "path": "docs/user-guide/screenshots/analytics-choice-arabic.png",
-      "sha256": "c30df1c65fad4b5e40628f9c139d15b361a99794315c24d73db4cfae36a35057",
-      "sourceRevision": "9146ce6840b86e6b9c26a63ea67a48f28f0cfa2c",
+      "sha256": "a4996444af5ed868563f68bd86206f2fc80688f9242581de80eeaed2459fa8be",
+      "sourceRevision": "4f704d44f47c83bb4d527a4eff2eb7ec5afd5c6d",
       "url": "http://localhost:3106/ar",
-      "capturedAt": "2026-10-06T23:41:28.444Z",
+      "capturedAt": "2026-10-12T05:51:14.344Z",
       "viewport": {
         "width": 390,
         "height": 844
@@ -119,38 +88,7 @@
       "syntheticRecords": false,
       "externalRequestsIntercepted": true,
       "productionProviderExecutionTested": false,
-      "note": "Actual application UI. Fake analytics keys enable controls. Every external browser request is intercepted, including any monitoring request from a compiled fake Sentry DSN; no vendor receives data. Convex is disabled.",
-      "visualReview": {
-        "status": "passed",
-        "reviewedAt": "2026-10-06T23:42:04.194515+00:00",
-        "method": "original-png-at-readable-resolution",
-        "sha256": "c30df1c65fad4b5e40628f9c139d15b361a99794315c24d73db4cfae36a35057",
-        "sourceHashes": {
-          "src/components/providers/analytics-controls.tsx": "97f36f9e9745c2eb36b3e10b1e0101c3dad93c64213a76451d8c835311e6ab1f",
-          "src/components/providers/analytics-enabled.tsx": "99cc65c65b774e0850124ece590377dd790eecf936e0f50206c13aa31ab9111b",
-          "src/components/providers/analytics-provider.tsx": "40fa6181daaf8db6fa965af05ae5d4ea1aa2d3da2b78f4a69df6b73f50b96791",
-          "src/lib/analytics-runtime.ts": "055c4aee8a18f34ce569b46298978028952117f4eb56bccd0e4b2dd0e53477da",
-          "src/lib/analytics.ts": "12d9dc95b7cf7a7901e7fc5f0d1f789c44918cdc09f83fba1ff288c9336e0b5c",
-          "src/components/site/home/hero.tsx": "a5c1d4709fef67a50103577e49c7785d35f5e9a7f9a421a84c33359bf86cccad",
-          "src/components/site/action-name.ts": "3e669342f3a69c8c7e2f71332d39f9c5d0a2eaf211994a456506e6ee91401ceb",
-          "src/components/site/public-effects.module.css": "a1e2d678f59a1a0accc5c66fb36e5489ad88e52173b4eaa5ee62a1ecb988fc82",
-          "src/components/site/site-header.tsx": "b6759891fafbb73fe5571b9bceecc9bdca96e2d2f64384e84bfac830fd743159",
-          "src/components/site/mobile-nav.tsx": "340f3aca5d11ed680533a422d4c211d471980a08c1a3464ff8074052bd3609e3",
-          "src/components/site/site-nav.tsx": "b09049d530115e32336e6f3ba7e8020361b2759e1381755067fc15107694a4fc",
-          "src/components/site/language-switcher.tsx": "605c2aa7c55d4dafe0031fd72d36991c3a2cf854abc1b64126f674c66ade7224",
-          "src/components/brand/logo.tsx": "e25deb243618422e5a2f5991357fc9dd7f93addce899d12c7d6bac92249e6e9c",
-          "src/components/brand/logo.module.css": "4b2401a4e32f4554af2038cde2a6e4339b5e26f38a013969c04f5cbab6b61c34",
-          "src/components/theme/theme-toggle.tsx": "b2340a73c1abcdf0552ecd40f4d8d6e0a03e2bca9ae25d2c55deb6853ebd1684",
-          "src/components/ui/button.tsx": "541fcd6054a1dfa7fc114bc8c3468b8d408a347a55938107e74f93cc504cb367",
-          "src/components/site/container.tsx": "05f56df25279d4dc4c15d3940437c57b7271195803f5b4a70fcd27d2ce03b948",
-          "src/app/globals.css": "7d48913ef6ba79d423f69f34e21ee3fecf87242e5da8d70869806e02d38e2c09",
-          "src/lib/fonts.ts": "ffb4b8691eadcdf377fd3c0e2584c82683ffbbef7008fe1800f31dcba8e785db",
-          "public/images/materials-hall.webp": "3340f9e261c1daf2e5990af601f2a6f4e3b9b3b5991330cc594c7d687eebeb1f",
-          "messages/en.json": "c1318be00feb4378b7c68a4434a2f17b8e271cf7ed249e552c40a189a3cb2629",
-          "messages/ar.json": "1e0e8764d13f7c3dc779e52d8c1ab4a9c0f6f9c4925dc991d45ecc4743d0dbb9"
-        },
-        "scope": "Local fake-key build; provider requests intercepted. English desktop and Arabic phone consent controls fit and remain readable."
-      }
+      "note": "Actual application UI. Fake analytics keys enable controls. Every external browser request is intercepted, including any monitoring request from a compiled fake Sentry DSN; no vendor receives data. Convex is disabled."
     }
   ]
 }

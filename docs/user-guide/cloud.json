@@ -1,12 +1,12 @@
 {
-  "status": "verified",
+  "status": "pending_connection",
   "document_id": "17B40PdN8IyvydXhAH4r2nsfgy9Nt15cyzW5WZw6ecFY",
   "document_url": "https://docs.google.com/document/d/17B40PdN8IyvydXhAH4r2nsfgy9Nt15cyzW5WZw6ecFY",
   "source_docx": "output/docx/luma-green-user-guide.docx",
   "folder_id": "1CutQzKyWZ1GslRFWF-mYx-IFI8h_UzdR",
-  "result": "The 7 October 2026 guide is published and verified in the existing native document. The reviewed Word has 167 pages; all 170 native PDF pages are covered by visual review and exact-byte comparison. Known native accessibility and minor formatting differences are recorded explicitly.",
-  "connection_gate": null,
-  "next_action": "Use this same document for future reviewed guide updates. Compare fresh native revision and reconcile human edits first. Provider, admin, domain and signed-native release gates remain separate; publication does not prove provider acceptance.",
+  "result": "The existing Google document retains the verified 7 October 2026 publication. The 12 October platform layout guide update is pending; no cloud content, sharing, folder or document identity was changed.",
+  "connection_gate": "No connected Codex document sessions were available on 12 October 2026. Publish the reviewed local DOCX to the existing document when the connection is restored.",
+  "next_action": "Connect the existing document, compare its native revision with last_verified_revision, reconcile human edits, apply the reviewed local guide changes in place, and inspect the exported native pages. Preserve sharing settings.",
   "last_verified_revision": {
     "source_application_commit": "f5c5b91",
     "source_docx_sha256": "92b01a7ce27edcb82d7b9d5ad545b898a4d82e3ec709b527cc39e8eb833120c0",

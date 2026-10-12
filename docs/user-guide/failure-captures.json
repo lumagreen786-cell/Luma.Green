@@ -1,6 +1,6 @@
 {
-  "capturedAt": "2026-10-06T22:36:42.454Z",
-  "sourceCommit": "9146ce6840b86e6b9c26a63ea67a48f28f0cfa2c",
+  "capturedAt": "2026-10-12T05:43:09.887Z",
+  "sourceCommit": "4f704d44f47c83bb4d527a4eff2eb7ec5afd5c6d",
   "sourceHashes": {
     "messages/en.json": "c1318be00feb4378b7c68a4434a2f17b8e271cf7ed249e552c40a189a3cb2629",
     "messages/ar.json": "1e0e8764d13f7c3dc779e52d8c1ab4a9c0f6f9c4925dc991d45ecc4743d0dbb9",
@@ -16,25 +16,25 @@
     "src/components/ui/input.tsx": "3417db3d25a5fbc95792c2f8d49cfce5190b51640da196f74246f5cae5c4f7ea",
     "src/components/ui/dialog.tsx": "9cee303ad5afb2d5b5e22c2219d972b54f656e66c4ac2157f9e1b6d126b53f12",
     "src/components/ui/sonner.tsx": "4256466d8850445be4b7da50702fdb3f0ca3931c54f391f8671c4142bf4e6a24",
-    "scripts/guide-preview/capture-failures.mjs": "870dd501663128d232b96e1b77a2b350e5e11d26f1046e049fafb19390ca9eef",
+    "scripts/guide-preview/capture-failures.mjs": "81b2682b47b8a6a7ed979147947880d03167c0d6ac78ccce0b7891c70b267c49",
     "src/components/admin/admin-login.tsx": "c7f4c1c3ed4566af7158056533fafc5e891f677bd54fd7d0e47f8d1270d6571e",
     "src/components/admin/admin-setup.tsx": "d0b37ccc6cc9bd9191acef7efb2bf5942bb8700be3662d2a5dc2a67fd244a22b",
     "src/components/admin/authenticator-step.tsx": "157e073701eebf0f38f3b5e9d7586b7b5bf7cc7773accb6c97c1399e8114bd41",
-    "src/components/admin/auth-shell.tsx": "c2c38c3e72ef50a7398c43943d4a2b52a4c860cff5bd7c0c60947a6207dd0771",
+    "src/components/admin/auth-shell.tsx": "67f87f34e2953d73cf303caa7f2a1521ecc044dc6dbe09dd36ed9de591fda46a",
     "src/components/account/use-sign-out.ts": "1553c45b5602ef9a1cb369fcc946d453e37bc3eeca8e88cae3f95b66dac5d455",
     "src/components/admin/use-admin-sign-out.ts": "f2caf07bfe67c46732c8a76ca14218df20eda0d0da3a054cad1e68eeaba90889",
     "src/lib/sign-out.ts": "9755828776420cc7019acb5db9efbfc8b12918b76936e2bae9b76ff93439e505",
-    "src/components/join/status-view.tsx": "282ddb16003f1f9fa3c9df97d2537365e09e5589205e57fe10e258dfd8e76bc3",
+    "src/components/join/status-view.tsx": "c4407d639b2fe3e0a235a5313a3007eca62b9c81326379cc0d70430d71adb1af",
     "src/components/join/file-slot.tsx": "589ad966f51293f545a4913cffb63132ea2a3de60ef329cfb94b4d99081e5bce",
-    "src/components/app/app-shell.tsx": "2824d37e4e16717be6cbc88079f66087c8356ec5a3a1fe2ee27430fbdb849f06",
+    "src/components/app/app-shell.tsx": "5140c054900afc2da4b3e84c26789fe3c4e1ef3b3ef8e9fb3d0b5be5074e98e5",
     "src/components/help/contact-form.tsx": "e34b0685226cd0fdcb06b70977c50af75a75ae7610e1170d6e0d901ab656554f",
     "src/components/help/contact-schema.ts": "b6ff7ad0260b769ff07720f4814a5407b93c8d49750252cbcdda319a999ed5d2",
-    "src/components/theme/theme-provider.tsx": "16099dee8a247ce40bb5d410fc0a6ae58de226e89071fea987cef5114e6842c0",
+    "src/components/theme/theme-provider.tsx": "b63770a104c7058b72a9086c14885c708feba4ebb9bf0d7dce9922ffe9af4c0f",
     "src/components/market/listing-card.tsx": "f4bb9f7a80a621eaa3423ebe91e6298b22e354b032bc49e0438d0f5a20671bbc",
     "src/components/market/buy-dialog.tsx": "24c06debe3041eac1fb86cc09c6d8ff78ee15beb0c6f7ed814b6feb1e73073d9",
     "convex/lib/chain.ts": "74c00e13e51625d2896a14808257b30c5d6022c3d32578ab0834a31c2e6df243",
     "src/components/market/logic.ts": "b4e38c79c30f7cc33d1842ed0d3c688f39e0ebedf0f22773aadd793f11f83368",
-    "scripts/guide-preview/failure.tsx": "c9d8915c2107ac33979c4784bba4d95dc4895939c36766d61e2ad964d0c61931",
+    "scripts/guide-preview/failure.tsx": "59676829ac1b348769847ae763b8880e5299f62499bcaf820800105412013269",
     "scripts/guide-preview/failure.html": "2d53b71eee3b6b01d5ca8394ae3f9b803211087c42c382545742ddde15948a9c",
     "src/components/account/account-links.tsx": "f2f13c7c4c48fbe492432529076b3ceeea9efabd73117bdc8e52c63bd74427f9",
     "src/components/notifications/device-provider.tsx": "c054c2f81074dec064c09d0b1b50545d42f3237f66971256a79e68401c4edbfd",
@@ -56,7 +56,7 @@
         "width": 390,
         "height": 844
       },
-      "sha256": "44c7decdcf10fdf276a8160ed2cd366e46eb7c59fe4c75da9a88f06dc4ef69be",
+      "sha256": "99b9275133c83f5827f1624ecab5c53b733de6813e5e9c1c84c2ff935d7c0e25",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -65,14 +65,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "44c7decdcf10fdf276a8160ed2cd366e46eb7c59fe4c75da9a88f06dc4ef69be",
-        "reviewedAt": "2026-10-06T22:32:45.467222+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-login-en-light-tablet.png",
@@ -84,7 +77,7 @@
         "width": 768,
         "height": 1024
       },
-      "sha256": "3085b1cdad7d9eb10abb9fbfcadaa7bceef7c9c560a49f2107cb0f125db561bf",
+      "sha256": "8b2705b00c1884071ec83a69681051e957b0406c1969dd41edba6134e7c21cf8",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -93,14 +86,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "3085b1cdad7d9eb10abb9fbfcadaa7bceef7c9c560a49f2107cb0f125db561bf",
-        "reviewedAt": "2026-10-06T22:32:45.467322+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-login-en-light-desktop.png",
@@ -112,7 +98,7 @@
         "width": 1440,
         "height": 1000
       },
-      "sha256": "b609377d671d0c35f31b688c558c0a338bc8858575e2dbb6af50e2186c15d466",
+      "sha256": "4d1f96f43adca1a5056e626b77d2f6efa7d1c81c10ab0e96617b0cf88aca7348",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -121,14 +107,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "b609377d671d0c35f31b688c558c0a338bc8858575e2dbb6af50e2186c15d466",
-        "reviewedAt": "2026-10-06T22:32:45.467367+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-login-en-dark-phone.png",
@@ -140,7 +119,7 @@
         "width": 390,
         "height": 844
       },
-      "sha256": "5cd30e3333011043c69424c0eae2342f9369abf4e4f72713a8f857ca451223ba",
+      "sha256": "2c65626fc69e970ea5a008d2def3e707d73e735ac1e814049520362171418ca5",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -149,14 +128,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "5cd30e3333011043c69424c0eae2342f9369abf4e4f72713a8f857ca451223ba",
-        "reviewedAt": "2026-10-06T22:32:45.467406+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-login-en-dark-tablet.png",
@@ -168,7 +140,7 @@
         "width": 768,
         "height": 1024
       },
-      "sha256": "18b14727f6598d2af64416837df015f134f1ffad076deccd6aec9d343948d716",
+      "sha256": "e38af1d853c9b6fdbe8efe6f66c6de3346f87bf346294b9c2364352c234dbe8a",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -177,14 +149,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "18b14727f6598d2af64416837df015f134f1ffad076deccd6aec9d343948d716",
-        "reviewedAt": "2026-10-06T22:32:45.467446+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-login-en-dark-desktop.png",
@@ -196,7 +161,7 @@
         "width": 1440,
         "height": 1000
       },
-      "sha256": "08a7c1373f4ba9833cf74d4d7c58b58168968de307b1e4a90e5bcce9e0ee5b99",
+      "sha256": "bd392f3f24e845626366e53187f178fd78e74d539b057580d438a7eed787993c",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -205,14 +170,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "08a7c1373f4ba9833cf74d4d7c58b58168968de307b1e4a90e5bcce9e0ee5b99",
-        "reviewedAt": "2026-10-06T22:32:45.467487+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-totp-en-light-phone.png",
@@ -224,7 +182,7 @@
         "width": 390,
         "height": 844
       },
-      "sha256": "447d46a1d1272f3b072e5ab51058462d676958be4f3d45227afd4faa9c29f104",
+      "sha256": "68eabf0469059976c0e161af94d0a0fcef23fe37991c31e31d7be5835371111f",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -233,14 +191,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "447d46a1d1272f3b072e5ab51058462d676958be4f3d45227afd4faa9c29f104",
-        "reviewedAt": "2026-10-06T22:32:59.269962+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-totp-en-light-tablet.png",
@@ -252,7 +203,7 @@
         "width": 768,
         "height": 1024
       },
-      "sha256": "1897ef9c78f70ff30525c11d80888f321c1253e63b7d5b10a6e7c8fdbbe7b94d",
+      "sha256": "308e4422f5ca20913221bee42ed3d686d7f2f9a797d7615c21595b0f6c1c19df",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -261,14 +212,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "1897ef9c78f70ff30525c11d80888f321c1253e63b7d5b10a6e7c8fdbbe7b94d",
-        "reviewedAt": "2026-10-06T22:32:59.270080+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-totp-en-light-desktop.png",
@@ -280,7 +224,7 @@
         "width": 1440,
         "height": 1000
       },
-      "sha256": "c06f84a7784e1b04a4f1e59e066719c3ff46c73051838ecde1c830ab049be1af",
+      "sha256": "6b3e3bd38fdbd7d8ad8c99c6981c67839832b5ebc7adff327a1e6578436aae3d",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -289,14 +233,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "c06f84a7784e1b04a4f1e59e066719c3ff46c73051838ecde1c830ab049be1af",
-        "reviewedAt": "2026-10-06T22:32:59.270134+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-totp-en-dark-phone.png",
@@ -308,7 +245,7 @@
         "width": 390,
         "height": 844
       },
-      "sha256": "f85c0d135631e26003ddf4d9ede574f8c5962fa3fbb79ece5fc51061fb247214",
+      "sha256": "faabfcd7fd192de902395cc5bf2f93c04bd36133e1d88d4821b5f3dddc3d4484",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -317,14 +254,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "f85c0d135631e26003ddf4d9ede574f8c5962fa3fbb79ece5fc51061fb247214",
-        "reviewedAt": "2026-10-06T22:32:59.270185+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-totp-en-dark-tablet.png",
@@ -336,7 +266,7 @@
         "width": 768,
         "height": 1024
       },
-      "sha256": "6ccb9c62a2ecf493b5d23bc4bcede38cbbc40265e38b9d01c94f29d71e9b46f6",
+      "sha256": "03ae823420aed376c40fdf0f438817b9466f825dbde38e1e92348098d550b818",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -345,14 +275,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "6ccb9c62a2ecf493b5d23bc4bcede38cbbc40265e38b9d01c94f29d71e9b46f6",
-        "reviewedAt": "2026-10-06T22:32:59.270231+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-totp-en-dark-desktop.png",
@@ -364,7 +287,7 @@
         "width": 1440,
         "height": 1000
       },
-      "sha256": "1a6b0ead978c5315199601c1111953ce50443a76e1eea5c3a0567bf1a9cb6485",
+      "sha256": "86b5bc76be723dfeefbd701b37d8082250c481ab3efaf59f36c1db15ddfc26b0",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -373,14 +296,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "1a6b0ead978c5315199601c1111953ce50443a76e1eea5c3a0567bf1a9cb6485",
-        "reviewedAt": "2026-10-06T22:32:59.270280+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-setup-en-light-phone.png",
@@ -392,7 +308,7 @@
         "width": 390,
         "height": 844
       },
-      "sha256": "8b9bb57c5deafca4a43fedccac6d24f44a4f32e9c80e34d1a7f1c12d0a334d1f",
+      "sha256": "7156085f5df903f4eb28948ac41239ff70e2ffa307b5ea357f4f046b45c7724c",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -401,14 +317,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "8b9bb57c5deafca4a43fedccac6d24f44a4f32e9c80e34d1a7f1c12d0a334d1f",
-        "reviewedAt": "2026-10-06T22:33:09.755659+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-setup-en-light-tablet.png",
@@ -420,7 +329,7 @@
         "width": 768,
         "height": 1024
       },
-      "sha256": "b27f743c2ee92b36db106817ce6ed4236b37c87ecf78ea1aa394d0f043589d34",
+      "sha256": "29fcb957bd224896a3a028e5c4e05f3fa392e3ab2b5f0b45a2c54af762e92b67",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -429,14 +338,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "b27f743c2ee92b36db106817ce6ed4236b37c87ecf78ea1aa394d0f043589d34",
-        "reviewedAt": "2026-10-06T22:33:09.755773+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-setup-en-light-desktop.png",
@@ -448,7 +350,7 @@
         "width": 1440,
         "height": 1000
       },
-      "sha256": "0e6e398eef2471c3662d1b162dc380d9e9079cde8c98b95cd3c7c14f410a4048",
+      "sha256": "2182dbea98de3fedaa98e8647366472848dba2ffce26fb6643b1da11d6a05213",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -457,14 +359,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "0e6e398eef2471c3662d1b162dc380d9e9079cde8c98b95cd3c7c14f410a4048",
-        "reviewedAt": "2026-10-06T22:33:09.755836+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-setup-en-dark-phone.png",
@@ -476,7 +371,7 @@
         "width": 390,
         "height": 844
       },
-      "sha256": "84916968c5534d39734b4d6bdb35bb52d8fc59efa10ae74aa02b275abad2bb2c",
+      "sha256": "20583a2277d7cf1d24436ffc3a3f5d69871465f1db1c1db7701ce60251f09326",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -485,14 +380,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "84916968c5534d39734b4d6bdb35bb52d8fc59efa10ae74aa02b275abad2bb2c",
-        "reviewedAt": "2026-10-06T22:33:09.755891+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-setup-en-dark-tablet.png",
@@ -504,7 +392,7 @@
         "width": 768,
         "height": 1024
       },
-      "sha256": "3176dda0cb59a057e3f10598bdbff7dcc323a0b15557cced81c5db3596e9232b",
+      "sha256": "a781796359e954eb830af1382d8f01a63724c83975e24798d45826e209b44367",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -513,14 +401,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "3176dda0cb59a057e3f10598bdbff7dcc323a0b15557cced81c5db3596e9232b",
-        "reviewedAt": "2026-10-06T22:33:09.755942+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-setup-en-dark-desktop.png",
@@ -532,7 +413,7 @@
         "width": 1440,
         "height": 1000
       },
-      "sha256": "49d22d96b52c402b84d77a07b1be5bfed859cacf1aac278684b033f9afc994ca",
+      "sha256": "661a8a76df81a8bbbbafdb718031aac6270be94aa855f168ddc5038693a2c9e0",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -541,14 +422,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "49d22d96b52c402b84d77a07b1be5bfed859cacf1aac278684b033f9afc994ca",
-        "reviewedAt": "2026-10-06T22:33:09.755994+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-file-en-light-phone.png",
@@ -569,14 +443,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "8b1c82fee0a701c1996fba19ef6a9299b51d2dc70f57ea4467e516fa3e0bb613",
-        "reviewedAt": "2026-10-06T22:33:22.685034+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-file-en-light-tablet.png",
@@ -597,14 +464,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "91378a31ecd74b9276a1bc517425122d7d971096c46b08f41d5cd7749e906bdc",
-        "reviewedAt": "2026-10-06T22:33:22.685129+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-file-en-light-desktop.png",
@@ -625,14 +485,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "1054b129de2cb08061afafa212f036fb8c1adf3f305dd8f3b4ed0a7b50546b85",
-        "reviewedAt": "2026-10-06T22:33:22.685164+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-file-en-dark-phone.png",
@@ -653,14 +506,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "d17781ab09d7d393651abbba6d45dbdd1f8785977068786f88d7f39324db3362",
-        "reviewedAt": "2026-10-06T22:33:22.685198+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-file-en-dark-tablet.png",
@@ -681,14 +527,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "5dca980567e36ab5301256730c49c6280843242b244c2030f8d3ef3f610903b5",
-        "reviewedAt": "2026-10-06T22:33:22.685229+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-file-en-dark-desktop.png",
@@ -709,14 +548,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "be3ee20b0d832c4aea07ba43edacaff63d89567356a5c80ad626868139f180c3",
-        "reviewedAt": "2026-10-06T22:33:22.685261+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-file-ar-light-phone.png",
@@ -728,7 +560,7 @@
         "width": 390,
         "height": 844
       },
-      "sha256": "800c531317ad0a9dd1b34b8b3f575446718e07a2597cb96904bb4ea06a759749",
+      "sha256": "7bdb7f34601b6deaa2738ebdc80a3e7708fed96b6a77dc791200da2e1819f6e4",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -737,14 +569,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "800c531317ad0a9dd1b34b8b3f575446718e07a2597cb96904bb4ea06a759749",
-        "reviewedAt": "2026-10-06T22:33:54.672664+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-file-ar-light-tablet.png",
@@ -756,7 +581,7 @@
         "width": 768,
         "height": 1024
       },
-      "sha256": "469350f7081511970b59f42f2dc20aaf0d5ef7f4ebadde037c06951d122c818c",
+      "sha256": "1fb409da0755a4c33c7bc6fb065ec4f7b73dd3bac79d2fbcfdd7374cb7c2014e",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -765,14 +590,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "469350f7081511970b59f42f2dc20aaf0d5ef7f4ebadde037c06951d122c818c",
-        "reviewedAt": "2026-10-06T22:33:54.672886+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-file-ar-light-desktop.png",
@@ -784,7 +602,7 @@
         "width": 1440,
         "height": 1000
       },
-      "sha256": "520b87aeece79819658253d3614e0e87409d0be36f73ef0e125b93eec6eea9a2",
+      "sha256": "d7c15f807ae420b14c89b76ce00204872be0b0c5914536c71db8dfed6ab7ed54",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -793,14 +611,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "520b87aeece79819658253d3614e0e87409d0be36f73ef0e125b93eec6eea9a2",
-        "reviewedAt": "2026-10-06T22:33:54.673007+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-file-ar-dark-phone.png",
@@ -812,7 +623,7 @@
         "width": 390,
         "height": 844
       },
-      "sha256": "45ec0af1511ec762fc3ce76265e3c506c05044f4e0b65c000508061b1d668c2f",
+      "sha256": "8822353f72a1ecb96c5feffca72a9257b3d691fd20739327a951fe7bd6c53d69",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -821,14 +632,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "45ec0af1511ec762fc3ce76265e3c506c05044f4e0b65c000508061b1d668c2f",
-        "reviewedAt": "2026-10-06T22:33:54.673083+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-file-ar-dark-tablet.png",
@@ -840,7 +644,7 @@
         "width": 768,
         "height": 1024
       },
-      "sha256": "1918808722020770cda80e84a17ab8ff07ce0bf0a296602edb2174827cb5f994",
+      "sha256": "82937dd67c1ad04d69bdc30f39ab1ecac1cc4222aad51c850feedae2c6175e38",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -849,14 +653,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "1918808722020770cda80e84a17ab8ff07ce0bf0a296602edb2174827cb5f994",
-        "reviewedAt": "2026-10-06T22:33:54.673139+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-file-ar-dark-desktop.png",
@@ -868,7 +665,7 @@
         "width": 1440,
         "height": 1000
       },
-      "sha256": "16a7877d0aaf18776d1422237dca38c5be75552da68ace762141200e76b50b7d",
+      "sha256": "02074cc8cf654dec5c01156e5f95aa3fd7911250a3e4dd49eaedf97334f3029a",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -877,14 +674,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "16a7877d0aaf18776d1422237dca38c5be75552da68ace762141200e76b50b7d",
-        "reviewedAt": "2026-10-06T22:33:54.673200+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-discard-en-light-phone.png",
@@ -905,14 +695,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "c392eb184f6011267117af9bf6445062069c58c30fcc7418f8188cd096f9d4b5",
-        "reviewedAt": "2026-10-06T22:34:04.180866+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-discard-en-light-tablet.png",
@@ -924,7 +707,7 @@
         "width": 768,
         "height": 1024
       },
-      "sha256": "7e9f0ec253e51e2696652fc68fae0c86ff4889a0ff59fd8645448b54767963e0",
+      "sha256": "3a837f0987fae4cd0e187d407cbc11a82bc5da98d602ceaf47f4fc9d01166907",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -933,14 +716,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "7e9f0ec253e51e2696652fc68fae0c86ff4889a0ff59fd8645448b54767963e0",
-        "reviewedAt": "2026-10-06T22:34:04.181160+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-discard-en-light-desktop.png",
@@ -952,7 +728,7 @@
         "width": 1440,
         "height": 1000
       },
-      "sha256": "edac624a42a4a5817577bac914105dfdf7942e590f98a4f9aa128b51f1863f23",
+      "sha256": "6613f77bd281785041bf86dbd73e1f5039c55c7a441b7f2e9ae9f784fb13d43c",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -961,14 +737,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "edac624a42a4a5817577bac914105dfdf7942e590f98a4f9aa128b51f1863f23",
-        "reviewedAt": "2026-10-06T22:34:04.181291+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-discard-en-dark-phone.png",
@@ -989,14 +758,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "c7289f82c49db98d5d7f16e3a9b1f33c3e1c01830fb948bdef41c529cd92a86d",
-        "reviewedAt": "2026-10-06T22:34:04.181383+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-discard-en-dark-tablet.png",
@@ -1008,7 +770,7 @@
         "width": 768,
         "height": 1024
       },
-      "sha256": "105393ed86c0a98521fd23c6c5365d8b8805965054e8b3d8bdb8f5159873fb95",
+      "sha256": "cea8b6a9aefeb2563142f5c4636ef9123995a563ffd6dc2039a3dbd6c660c117",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -1017,14 +779,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "105393ed86c0a98521fd23c6c5365d8b8805965054e8b3d8bdb8f5159873fb95",
-        "reviewedAt": "2026-10-06T22:34:04.181740+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-discard-en-dark-desktop.png",
@@ -1036,7 +791,7 @@
         "width": 1440,
         "height": 1000
       },
-      "sha256": "214c3c1f3ef49db57c4c739b65d02621b562b9456bb8616dbc0bf72a6ddd6f8f",
+      "sha256": "6570eff591a1e513c43a0575d407fe0c75baa6abf9b5be99cc90659747a62d55",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -1045,14 +800,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "214c3c1f3ef49db57c4c739b65d02621b562b9456bb8616dbc0bf72a6ddd6f8f",
-        "reviewedAt": "2026-10-06T22:34:04.181924+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-discard-ar-light-phone.png",
@@ -1064,7 +812,7 @@
         "width": 390,
         "height": 844
       },
-      "sha256": "674ad3b5c1989032027610b24172d64a172afe262bf09c77eddcbe5df7c3c795",
+      "sha256": "0eb6e5a76e9489eb478bcd9b32b1eb09d0c2c8875e5f9cad65e868028e9ce8fa",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -1073,14 +821,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "674ad3b5c1989032027610b24172d64a172afe262bf09c77eddcbe5df7c3c795",
-        "reviewedAt": "2026-10-06T22:34:13.355334+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-discard-ar-light-tablet.png",
@@ -1092,7 +833,7 @@
         "width": 768,
         "height": 1024
       },
-      "sha256": "ffbdf4be5942cde044a4a09cbce4fe2dc7fef3691085a150e32dd97ffc6e811b",
+      "sha256": "656e4034542ddd5e53e151aec181ea4ed362a289c27ef2fb071b4c05c303123a",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -1101,14 +842,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "ffbdf4be5942cde044a4a09cbce4fe2dc7fef3691085a150e32dd97ffc6e811b",
-        "reviewedAt": "2026-10-06T22:34:13.355453+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-discard-ar-light-desktop.png",
@@ -1120,7 +854,7 @@
         "width": 1440,
         "height": 1000
       },
-      "sha256": "bd9e325e2e418cbed0cdf7e4cf910ae56da39049422d0e00ab2aa75e19af25ba",
+      "sha256": "9b8422ec5193d0ddfdd208a50a6e44e2d8cf4515e5e9676eaf044bfd6ce66346",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -1129,14 +863,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "bd9e325e2e418cbed0cdf7e4cf910ae56da39049422d0e00ab2aa75e19af25ba",
-        "reviewedAt": "2026-10-06T22:34:13.355497+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-discard-ar-dark-phone.png",
@@ -1148,7 +875,7 @@
         "width": 390,
         "height": 844
       },
-      "sha256": "a1ee52e4d788b2cd464110e203e081e30d5d195e8a20b31fa1067d955d6800b5",
+      "sha256": "5b35b77e8951bb36f406888e2e97d5c9e65484fc88ae3d4a784d8d61819acaf3",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -1157,14 +884,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "a1ee52e4d788b2cd464110e203e081e30d5d195e8a20b31fa1067d955d6800b5",
-        "reviewedAt": "2026-10-06T22:34:13.355537+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-discard-ar-dark-tablet.png",
@@ -1176,7 +896,7 @@
         "width": 768,
         "height": 1024
       },
-      "sha256": "62543d053fb01b03d57f6f151d2d3e2b08a919ce55ac6317ac0bf2051f134c6c",
+      "sha256": "6595255d0fa18307c5b36b7e951147bba21cd67854692ff34d2b70c2dfe0b092",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -1185,14 +905,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "62543d053fb01b03d57f6f151d2d3e2b08a919ce55ac6317ac0bf2051f134c6c",
-        "reviewedAt": "2026-10-06T22:34:13.355580+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-discard-ar-dark-desktop.png",
@@ -1204,7 +917,7 @@
         "width": 1440,
         "height": 1000
       },
-      "sha256": "c72c1b4fe0cfc986ca98f35ccc808d45236aad22ed414dd68838afc0c6294872",
+      "sha256": "98051dd45724a25f4b1081d85ec1655f09c066ed1f7e9ff723065b1f8ca34014",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -1213,14 +926,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "c72c1b4fe0cfc986ca98f35ccc808d45236aad22ed414dd68838afc0c6294872",
-        "reviewedAt": "2026-10-06T22:34:13.355620+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-signout-en-light-phone.png",
@@ -1241,14 +947,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "86630c9a236cbab4dc729dd19e2bf3e73b2c49cc290bdde1c9f8a64edaf3a91e",
-        "reviewedAt": "2026-10-06T22:39:15.011335+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-signout-en-light-tablet.png",
@@ -1269,14 +968,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "cacc084845ebdc5a4e14efc15a3ff3383a6300843df5fa63cfaa96f09f1fe369",
-        "reviewedAt": "2026-10-06T22:39:15.011559+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-signout-en-light-desktop.png",
@@ -1288,7 +980,7 @@
         "width": 1440,
         "height": 1800
       },
-      "sha256": "9865f6fe927b45c96da6dbd7ee3bda8606aa01eca9add60dbbd20c51132bd7d8",
+      "sha256": "4c7a7403a296059503805671e709fed86f802a85826c058ddaf6528a42876497",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -1297,14 +989,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "9865f6fe927b45c96da6dbd7ee3bda8606aa01eca9add60dbbd20c51132bd7d8",
-        "reviewedAt": "2026-10-06T22:36:12.372517+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-signout-en-dark-phone.png",
@@ -1325,14 +1010,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "b8235d5bc960ae9de2c01a0e62d5fab1d1fd4998d5d79d390c4d2b66380a061e",
-        "reviewedAt": "2026-10-06T22:39:15.011718+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-signout-en-dark-tablet.png",
@@ -1344,7 +1022,7 @@
         "width": 768,
         "height": 1800
       },
-      "sha256": "80d0678fb89bdb8df7d5bbdfb751e36388acd6ef543258e1efd7041388cb4c04",
+      "sha256": "55791f099710256d6845d569c2bf7373455435a7d1313a78ae971c32611a86fd",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -1353,14 +1031,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "80d0678fb89bdb8df7d5bbdfb751e36388acd6ef543258e1efd7041388cb4c04",
-        "reviewedAt": "2026-10-06T22:39:15.011870+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-signout-en-dark-desktop.png",
@@ -1372,7 +1043,7 @@
         "width": 1440,
         "height": 1800
       },
-      "sha256": "68c2dafebcbc7e0402d572aefc1c681c5c1f10774d58375a7a3faa8f94139e24",
+      "sha256": "b1e7d49f3fd72e92896eb459f93086bc9c5c8469cf5bcc4dc988c0932a2e51ec",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -1381,14 +1052,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "68c2dafebcbc7e0402d572aefc1c681c5c1f10774d58375a7a3faa8f94139e24",
-        "reviewedAt": "2026-10-06T22:36:12.373018+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-signout-ar-light-phone.png",
@@ -1400,7 +1064,7 @@
         "width": 390,
         "height": 1800
       },
-      "sha256": "91c46c392a98059109fc5e329ccc11a3733e362f9a7a39a3baa7e09445a34c7b",
+      "sha256": "59d4792fb5a510dffeba1903448fe8144dfdea77b59f0a7e6c80210a0d1c5fb9",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -1409,14 +1073,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "91c46c392a98059109fc5e329ccc11a3733e362f9a7a39a3baa7e09445a34c7b",
-        "reviewedAt": "2026-10-06T22:39:20.096151+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-signout-ar-light-tablet.png",
@@ -1428,7 +1085,7 @@
         "width": 768,
         "height": 1800
       },
-      "sha256": "935b5d517748ad7720a646af3b836e78ef89d40a1d6d1934c6bd7782e8bcbca4",
+      "sha256": "2fa15eff588e746a0ce406988b5914f94e02d2cc30f2adc0f1425d5866d0bd51",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -1437,14 +1094,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "935b5d517748ad7720a646af3b836e78ef89d40a1d6d1934c6bd7782e8bcbca4",
-        "reviewedAt": "2026-10-06T22:39:20.096292+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-signout-ar-light-desktop.png",
@@ -1456,7 +1106,7 @@
         "width": 1440,
         "height": 1800
       },
-      "sha256": "a2af2f0fabafe7e62b43d3f0f1b98ee8155f2254bd02ff8192b5dc75a54b79e8",
+      "sha256": "b305219afef2320732f26e0141332de2f5e82db89ba26b06f96fa22e2a3704ea",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -1465,14 +1115,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "a2af2f0fabafe7e62b43d3f0f1b98ee8155f2254bd02ff8192b5dc75a54b79e8",
-        "reviewedAt": "2026-10-06T22:39:20.096355+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-signout-ar-dark-phone.png",
@@ -1484,7 +1127,7 @@
         "width": 390,
         "height": 1800
       },
-      "sha256": "38115f90400afc67accaf1b11611e80c47662c4fd584be36b90ee0958c11494b",
+      "sha256": "8cfd13930f47018c79a1550797f56940cb49a7d666aae26d4b91c9f839be7d98",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -1493,14 +1136,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "38115f90400afc67accaf1b11611e80c47662c4fd584be36b90ee0958c11494b",
-        "reviewedAt": "2026-10-06T22:39:28.762373+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-signout-ar-dark-tablet.png",
@@ -1512,7 +1148,7 @@
         "width": 768,
         "height": 1800
       },
-      "sha256": "c73fc0ccbd4cedf17fff5b75144583c8bfd0909ef2224bdf9d20d0193f691116",
+      "sha256": "e6163ec3f4a16bcbb56aae90e084c60fadc3ac6e3ed70a0b4a8d243109aed62c",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -1521,14 +1157,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "c73fc0ccbd4cedf17fff5b75144583c8bfd0909ef2224bdf9d20d0193f691116",
-        "reviewedAt": "2026-10-06T22:39:28.762485+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-signout-ar-dark-desktop.png",
@@ -1540,7 +1169,7 @@
         "width": 1440,
         "height": 1800
       },
-      "sha256": "4d6ecb438697006973eb7c09f2cf0398a535c48c6a2e945b323cee8fb7924725",
+      "sha256": "7dfedfaf99b6848fd691852bb810d4f57714a64012bf2a1ca1058d92b092ab53",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -1549,14 +1178,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "4d6ecb438697006973eb7c09f2cf0398a535c48c6a2e945b323cee8fb7924725",
-        "reviewedAt": "2026-10-06T22:39:28.762546+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-support-en-light-phone.png",
@@ -1577,14 +1199,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "855b4b779e09af5d407a262c73f74848ae7a0831f4fd443143a6337c193d48ce",
-        "reviewedAt": "2026-10-06T22:35:06.933042+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-support-en-light-tablet.png",
@@ -1605,14 +1220,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "738358bdc876f357013fcfc1dabf938369ef262af96f729fa4876a82746b1303",
-        "reviewedAt": "2026-10-06T22:39:37.672771+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-support-en-light-desktop.png",
@@ -1633,14 +1241,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "f2f1a13bb8cca0127a035b8e3fffed2fede875bb88a4fdcc927ec3bb4c9c4a66",
-        "reviewedAt": "2026-10-06T22:39:37.672887+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-support-en-dark-phone.png",
@@ -1661,14 +1262,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "292767fbad96a5a4d9f2c09b6612239149f21f1824b71baee4a4a174df8e07d2",
-        "reviewedAt": "2026-10-06T22:35:06.933431+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-support-en-dark-tablet.png",
@@ -1680,7 +1274,7 @@
         "width": 768,
         "height": 1024
       },
-      "sha256": "0ee9d1ca0fe4c6723508976b65a2871c5e1a6567011217b6ead925043d752256",
+      "sha256": "fbf2dd9e774095d80dda923b91c98d56c6a7667341aef0b2c02f515f7e7c8765",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -1689,14 +1283,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "0ee9d1ca0fe4c6723508976b65a2871c5e1a6567011217b6ead925043d752256",
-        "reviewedAt": "2026-10-06T22:35:06.933597+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-support-en-dark-desktop.png",
@@ -1717,14 +1304,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "35da280051db121882750702da00cb0606ab5d696f0d960031cf3f66afe0c4e0",
-        "reviewedAt": "2026-10-06T22:39:37.672935+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-support-ar-light-phone.png",
@@ -1745,14 +1325,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "16163c61feda2c9c78ae33c86beb4ff3beb746cc5b30c7e30bcebc8301fcf594",
-        "reviewedAt": "2026-10-06T22:35:21.048446+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-support-ar-light-tablet.png",
@@ -1764,7 +1337,7 @@
         "width": 768,
         "height": 1024
       },
-      "sha256": "406cdfe340f1a02478bb26db01d685dc27555771d44dfe1f39b93dcb1c675937",
+      "sha256": "36556e23d14aac1d4b23793907fee335f9e03036645cf9aa47789c2a5b3e47b9",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -1773,14 +1346,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "406cdfe340f1a02478bb26db01d685dc27555771d44dfe1f39b93dcb1c675937",
-        "reviewedAt": "2026-10-06T22:35:21.048557+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-support-ar-light-desktop.png",
@@ -1792,7 +1358,7 @@
         "width": 1440,
         "height": 1000
       },
-      "sha256": "70ac7f1b783447efb04d475a4775c1a4286a5c006fb120e0dbac14e3cf88d4b5",
+      "sha256": "29ae12eb5f5ceb0107d4f8f3fe43a5d6290ad9d4f8d4768e178aab5cb2d8f578",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -1801,14 +1367,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "70ac7f1b783447efb04d475a4775c1a4286a5c006fb120e0dbac14e3cf88d4b5",
-        "reviewedAt": "2026-10-06T22:39:46.857224+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-support-ar-dark-phone.png",
@@ -1829,14 +1388,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "814d09239b63553e94386fc0ab6c2f3f73c65654259300f29b21a65f848e202f",
-        "reviewedAt": "2026-10-06T22:35:21.048646+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-support-ar-dark-tablet.png",
@@ -1857,14 +1409,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "520792c3959cc7282e4f7685db87becc5c46069af7a103c1fce1bb8b44758008",
-        "reviewedAt": "2026-10-06T22:35:21.048687+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-support-ar-dark-desktop.png",
@@ -1885,14 +1430,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "cecf6d90bc56493c487c29ecb7a1c41c22505754829998e36a0777643bb4b038",
-        "reviewedAt": "2026-10-06T22:39:46.857354+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-market-en-light-phone.png",
@@ -1913,14 +1451,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "42bcca51a923e1e8f791b2860f729cb8df094abe58c095c32a2b7d0a6d7441d8",
-        "reviewedAt": "2026-10-06T22:35:34.777354+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-market-en-light-tablet.png",
@@ -1932,7 +1463,7 @@
         "width": 768,
         "height": 1024
       },
-      "sha256": "bbc392780b22a4806c882f9bd0e5a1a9966691f54f58b514f70cbe0d66cb1958",
+      "sha256": "72ba2c42e38f31dfb61f2a6b8075288b460760573386b080f2437a123596f481",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -1941,14 +1472,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "bbc392780b22a4806c882f9bd0e5a1a9966691f54f58b514f70cbe0d66cb1958",
-        "reviewedAt": "2026-10-06T22:39:46.857428+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-market-en-light-desktop.png",
@@ -1969,14 +1493,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "58bc2a5d28de5de288c1773676bec02ade6ada6c5e6c581e194a910820476eb0",
-        "reviewedAt": "2026-10-06T22:35:34.777528+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-market-en-dark-phone.png",
@@ -1988,7 +1505,7 @@
         "width": 390,
         "height": 844
       },
-      "sha256": "c37654649c960a60bd828cd95b273e492230e7772282f606152c46c0e3aed46d",
+      "sha256": "8bf181b1cec764f67910126d5d18507e1210145f9f1b9d5852873901c1d57ace",
       "provenance": "synthetic local failure fixture; actual components; no live authentication, writes or provider execution",
       "checks": [
         "failure feedback and retry or setup control",
@@ -1997,14 +1514,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "c37654649c960a60bd828cd95b273e492230e7772282f606152c46c0e3aed46d",
-        "reviewedAt": "2026-10-06T22:35:34.777576+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-market-en-dark-tablet.png",
@@ -2025,14 +1535,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "66ba1ef7e80b735a49c663165a1cfd4d32bb59694dcae486f3c5b8242f3aad3f",
-        "reviewedAt": "2026-10-06T22:35:34.777633+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-market-en-dark-desktop.png",
@@ -2053,14 +1556,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "2850cdd2119b1e38f9c3e2b7d09dcbf2f9256c7b83a8145e9165db9a582d4fdb",
-        "reviewedAt": "2026-10-06T22:35:34.777770+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-market-ar-light-phone.png",
@@ -2081,14 +1577,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "7355031586998cafe62382de570e9a766404a635d03ae6e17ae22000c229e88c",
-        "reviewedAt": "2026-10-06T22:35:48.083231+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-market-ar-light-tablet.png",
@@ -2109,14 +1598,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "cb3f4b4ffa6f832455dafeaa3d2e9b676752eb3d3e07c7c22c93d680a89b960b",
-        "reviewedAt": "2026-10-06T22:35:48.083540+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-market-ar-light-desktop.png",
@@ -2137,14 +1619,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "06d1281b472fcc28f02171e317383cf1522c6602564bd74951a49d66efdc7e87",
-        "reviewedAt": "2026-10-06T22:35:48.084283+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-market-ar-dark-phone.png",
@@ -2165,14 +1640,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "ef049cec7235df050d9243d3dfda5396a31ef8963f3dd3e772ba79f8e17fbf4a",
-        "reviewedAt": "2026-10-06T22:35:48.084495+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-market-ar-dark-tablet.png",
@@ -2193,14 +1661,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "a13c49e750f9d5b535389d2ee52fa95b3667278b40279f4b1a9ff62d0c9bc608",
-        "reviewedAt": "2026-10-06T22:35:48.084859+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     },
     {
       "file": "screenshots/failure-market-ar-dark-desktop.png",
@@ -2221,89 +1682,7 @@
         "empty password and token fields",
         "document direction",
         "loaded fonts"
-      ],
-      "visualReview": {
-        "sha256": "3de56ae7306128ba31f654d20e92aaa8472f540961fca060d6415f2f616659c2",
-        "reviewedAt": "2026-10-06T22:35:48.085796+00:00",
-        "method": "original-png-at-readable-resolution",
-        "noSensitivePixels": true,
-        "layoutPassed": true
-      }
+      ]
     }
-  ],
-  "visualReview": {
-    "status": "passed",
-    "reviewedAt": "2026-10-06T22:40:17.788263+00:00",
-    "reviewedCount": 78,
-    "method": "Every original PNG inspected at readable resolution; exact image and source hashes checked.",
-    "authenticated": false,
-    "providerExecutionTested": false,
-    "writesAttempted": false,
-    "note": "Synthetic interface evidence only. Sign-out uses an explicit 1800px tall documentation viewport; this does not prove fit at normal phone height."
-  },
-  "captureSourceSnapshot": {
-    "sourceHashes": {
-      "messages/en.json": "c1318be00feb4378b7c68a4434a2f17b8e271cf7ed249e552c40a189a3cb2629",
-      "messages/ar.json": "1e0e8764d13f7c3dc779e52d8c1ab4a9c0f6f9c4925dc991d45ecc4743d0dbb9",
-      "src/app/globals.css": "7d48913ef6ba79d423f69f34e21ee3fecf87242e5da8d70869806e02d38e2c09",
-      "src/lib/fonts.ts": "ffb4b8691eadcdf377fd3c0e2584c82683ffbbef7008fe1800f31dcba8e785db",
-      "src/components/admin/errors.ts": "1f03c871bd52ab67b1743c25b9249484ae8a8e4dfb715b78912aa5174399d5f4",
-      "src/components/admin/schemas.ts": "189983590a9c558bfdfd02fcb440544f01a7af040e7c1afda60eccf95c41745f",
-      "src/components/admin/code-input.tsx": "0bf7328272f132648b7d4976c48bebb69993d538d5fcde05ce544d6f5a195bae",
-      "src/components/app/format.ts": "efea09a9f734c886248bc51e6eecd18f38dc8163444b9afb9f6c3d755592d0fe",
-      "src/components/admin/format.ts": "84cc6603eb2d483603a8b816ee5d303cbacd846cf54151b90cd848f51c3feb02",
-      "src/lib/money-format.ts": "f3cf7e5ade380ef829757b8dced8419143f545372df6af1e7515f970242ee2f4",
-      "src/components/ui/button.tsx": "541fcd6054a1dfa7fc114bc8c3468b8d408a347a55938107e74f93cc504cb367",
-      "src/components/ui/input.tsx": "3417db3d25a5fbc95792c2f8d49cfce5190b51640da196f74246f5cae5c4f7ea",
-      "src/components/ui/dialog.tsx": "9cee303ad5afb2d5b5e22c2219d972b54f656e66c4ac2157f9e1b6d126b53f12",
-      "src/components/ui/sonner.tsx": "4256466d8850445be4b7da50702fdb3f0ca3931c54f391f8671c4142bf4e6a24",
-      "scripts/guide-preview/capture-failures.mjs": "870dd501663128d232b96e1b77a2b350e5e11d26f1046e049fafb19390ca9eef",
-      "src/components/admin/admin-login.tsx": "c7f4c1c3ed4566af7158056533fafc5e891f677bd54fd7d0e47f8d1270d6571e",
-      "src/components/admin/admin-setup.tsx": "d0b37ccc6cc9bd9191acef7efb2bf5942bb8700be3662d2a5dc2a67fd244a22b",
-      "src/components/admin/authenticator-step.tsx": "157e073701eebf0f38f3b5e9d7586b7b5bf7cc7773accb6c97c1399e8114bd41",
-      "src/components/admin/auth-shell.tsx": "c2c38c3e72ef50a7398c43943d4a2b52a4c860cff5bd7c0c60947a6207dd0771",
-      "src/components/account/use-sign-out.ts": "1553c45b5602ef9a1cb369fcc946d453e37bc3eeca8e88cae3f95b66dac5d455",
-      "src/components/admin/use-admin-sign-out.ts": "f2caf07bfe67c46732c8a76ca14218df20eda0d0da3a054cad1e68eeaba90889",
-      "src/lib/sign-out.ts": "a25761b573f68d12bd62a3c303016a1bccd6879a1188e51ab012abd3aca1b9aa",
-      "src/components/join/status-view.tsx": "282ddb16003f1f9fa3c9df97d2537365e09e5589205e57fe10e258dfd8e76bc3",
-      "src/components/join/file-slot.tsx": "589ad966f51293f545a4913cffb63132ea2a3de60ef329cfb94b4d99081e5bce",
-      "src/components/app/app-shell.tsx": "2824d37e4e16717be6cbc88079f66087c8356ec5a3a1fe2ee27430fbdb849f06",
-      "src/components/help/contact-form.tsx": "e34b0685226cd0fdcb06b70977c50af75a75ae7610e1170d6e0d901ab656554f",
-      "src/components/help/contact-schema.ts": "b6ff7ad0260b769ff07720f4814a5407b93c8d49750252cbcdda319a999ed5d2",
-      "src/components/theme/theme-provider.tsx": "16099dee8a247ce40bb5d410fc0a6ae58de226e89071fea987cef5114e6842c0",
-      "src/components/market/listing-card.tsx": "f4bb9f7a80a621eaa3423ebe91e6298b22e354b032bc49e0438d0f5a20671bbc",
-      "src/components/market/buy-dialog.tsx": "24c06debe3041eac1fb86cc09c6d8ff78ee15beb0c6f7ed814b6feb1e73073d9",
-      "convex/lib/chain.ts": "74c00e13e51625d2896a14808257b30c5d6022c3d32578ab0834a31c2e6df243",
-      "src/components/market/logic.ts": "b4e38c79c30f7cc33d1842ed0d3c688f39e0ebedf0f22773aadd793f11f83368",
-      "scripts/guide-preview/failure.tsx": "c9d8915c2107ac33979c4784bba4d95dc4895939c36766d61e2ad964d0c61931",
-      "scripts/guide-preview/failure.html": "2d53b71eee3b6b01d5ca8394ae3f9b803211087c42c382545742ddde15948a9c",
-      "src/components/account/account-links.tsx": "f2f13c7c4c48fbe492432529076b3ceeea9efabd73117bdc8e52c63bd74427f9",
-      "src/components/notifications/device-provider.tsx": "c054c2f81074dec064c09d0b1b50545d42f3237f66971256a79e68401c4edbfd",
-      "scripts/guide-preview/auth.ts": "b786f9598d483e7778b4de998d8fd7cc6d5318efc11a28f4cd998cafd653d13c",
-      "scripts/guide-preview/provider.tsx": "97187377a9ad4ac5ea2b320e937bb78a95ccdbc644520dfaf5b5cf6dae80f802",
-      "scripts/guide-preview/queries.ts": "bd38c2dc9f8511ca158e91f608c0c928d42f33c8a5a68cd6c9db2f1be756e7b2",
-      "scripts/guide-preview/finance-fixtures.ts": "40956f58e5b9e7af7dab78407c070305037d36f2f936e075e6684cda3c8096f6",
-      "scripts/guide-preview/vite.config.mts": "e86ddf095fb8c7da843e6295beffbaf8f37b26e48a43581919770dcc31e91c99"
-    },
-    "sourceCommit": "9146ce6840b86e6b9c26a63ea67a48f28f0cfa2c",
-    "capturedAt": "2026-10-06T22:36:42.454Z",
-    "manifestSha256": "51ab6c1272f641dabca10d46b5403f797b735689e9c2561bc8d9a159d68db177"
-  },
-  "sourceCompatibilityReview": {
-    "reviewedAt": "2026-10-10T11:01:14.029775+00:00",
-    "reviewer": "auth_release",
-    "method": "unchanged-static-state-source-review-and-original-image-hash-check",
-    "changes": [
-      {
-        "path": "src/lib/sign-out.ts",
-        "beforeSha256": "a25761b573f68d12bd62a3c303016a1bccd6879a1188e51ab012abd3aca1b9aa",
-        "afterSha256": "9755828776420cc7019acb5db9efbfc8b12918b76936e2bae9b76ff93439e505"
-      }
-    ],
-    "newBrowserCapture": false,
-    "originalImageCountChecked": 78,
-    "originalCaptureAndReviewTimesPreserved": true,
-    "reason": "The shared sign-out helper now records exact-session logout intent only after device revocation, then clears or completes it with the real auth result. No captured page layout, copy, style or field changed. The synthetic sign-out failure fixture still rejects account changes and keeps the same error/retry screen. These historical images remain static visual evidence, not proof of the repaired real sign-out transition.",
-    "behaviorVerification": "docs/user-guide/investor-source-compatibility.json#additionalBehaviorReview.actualPostFixBrowser"
-  }
+  ]
 }

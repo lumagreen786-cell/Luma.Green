@@ -313,6 +313,27 @@ try {
           })
           .every((image) => image.complete && image.naturalWidth > 0),
       );
+      // A completed network load can precede image decode and browser paint.
+      // Wait for both so a guide capture cannot retain a gray image frame.
+      await page.evaluate(async () => {
+        const visibleImages = [...document.images].filter((image) => {
+          const bounds = image.getBoundingClientRect();
+          return (
+            bounds.top < window.innerHeight &&
+            bounds.bottom > 0 &&
+            bounds.width > 0 &&
+            bounds.height > 0
+          );
+        });
+        await Promise.all(visibleImages.map((image) => image.decode()));
+        await new Promise<void>((resolve) => {
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              resolve();
+            });
+          });
+        });
+      });
       if (isLanguagePicker) {
         const list = await page
           .getByRole("radiogroup", { name: en.common.language, exact: true })

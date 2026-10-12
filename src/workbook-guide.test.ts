@@ -52,7 +52,14 @@ const evidenceSchema = z.object({
   sourceRevision: z.string().regex(/^[a-f0-9]{40}$/),
   sourceHashes: z.record(z.string(), digest),
   sourceDigest: digest,
-  origin: z.literal("http://localhost:3100"),
+  origin: z.url().refine((value) => {
+    const url = new URL(value);
+    return (
+      url.protocol === "http:" &&
+      ["localhost", "127.0.0.1", "[::1]"].includes(url.hostname) &&
+      url.origin === value
+    );
+  }, "Capture origin must be a loopback HTTP origin"),
   backendOrigins: z.array(z.string()),
   siteAgreement: z.literal(true),
   authentication: z.literal("actual-browser-email-password-and-admin-totp"),

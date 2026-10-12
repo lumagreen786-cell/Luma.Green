@@ -28,6 +28,8 @@ import tseslint from "typescript-eslint";
  */
 const eslintConfig = defineConfig([
   globalIgnores([
+    // Vendored upstream design tooling; not application source.
+    ".claude/skills/impeccable/**",
     ".next/**",
     "out/**",
     "build/**",

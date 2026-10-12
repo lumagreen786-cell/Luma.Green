@@ -145,7 +145,7 @@ function SecurityForm() {
   return (
     <div className="mx-auto flex w-full max-w-2xl min-w-0 flex-col gap-6">
       <header className="space-y-2">
-        <h1 className="font-display text-2xl leading-tight font-semibold tracking-tight sm:text-3xl">
+        <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
           {t("title")}
         </h1>
         <p className="text-sm leading-relaxed text-muted-foreground">

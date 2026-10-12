@@ -19,13 +19,9 @@ export async function HomeHero() {
   ]);
   return (
     <section aria-labelledby="hero-heading" className="border-b bg-background">
-      <Container className="pt-8 sm:pt-12 lg:pt-16">
-        <div className="grid min-w-0 gap-8 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-12">
-          <div className="flex min-w-0 flex-col items-start gap-6 lg:py-8">
-            <p className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-              <MapPinIcon aria-hidden className="size-4 text-primary" />
-              {t("eyebrow")}
-            </p>
+      <Container className="pt-8 sm:pt-10 lg:pt-12">
+        <div className="grid min-w-0 gap-8 lg:grid-cols-[1.15fr_1fr] lg:items-start lg:gap-12">
+          <div className="flex min-w-0 flex-col items-start gap-5 lg:py-4">
             <h1
               id="hero-heading"
               className="max-w-xl font-display text-[clamp(2.5rem,4.4vw,4.5rem)] leading-[1.08] font-semibold tracking-tight text-balance"
@@ -34,6 +30,10 @@ export async function HomeHero() {
             </h1>
             <p className="max-w-lg text-base leading-relaxed text-pretty text-muted-foreground sm:text-lg">
               {t("lead")}
+            </p>
+            <p className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+              <MapPinIcon aria-hidden className="size-4 text-primary" />
+              {t("eyebrow")}
             </p>
             <div className="flex w-full min-w-0 flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <Button asChild size="lg" className="max-w-full">
@@ -71,7 +71,7 @@ export async function HomeHero() {
               <ArrowRightIcon aria-hidden className="size-4 rtl:rotate-180" />
             </Link>
           </div>
-          <div className="relative aspect-[4/3] overflow-hidden bg-muted lg:aspect-[5/6]">
+          <div className="relative aspect-[4/3] overflow-hidden bg-muted lg:aspect-[5/4]">
             <Image
               src={preparation}
               alt=""
@@ -84,7 +84,7 @@ export async function HomeHero() {
         </div>
         <ol
           aria-label={steps("label")}
-          className="mt-8 grid grid-cols-2 gap-x-6 border-t py-5 sm:mt-10 sm:grid-cols-4 sm:gap-x-8 sm:py-6"
+          className="mt-8 grid grid-cols-2 gap-x-6 border-t py-3 sm:mt-10 sm:grid-cols-4 sm:gap-x-8 sm:py-4"
         >
           {(["basket", "shop", "when", "confirm"] as const).map(
             (step, index) => (

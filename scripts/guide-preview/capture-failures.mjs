@@ -270,6 +270,21 @@ try {
                   page.getByText(messages.common.error, { exact: true }),
                 ).toBeVisible();
                 await expect(page).toHaveURL(`${url.origin}${route}`);
+                if (viewport.width >= 1280) {
+                  const toast = await page
+                    .locator("[data-sonner-toast]")
+                    .first()
+                    .boundingBox();
+                  const navigation = await page.locator("aside").boundingBox();
+                  expect(toast).not.toBeNull();
+                  expect(navigation).not.toBeNull();
+                  if (toast && navigation) {
+                    expect(
+                      toast.x + toast.width <= navigation.x ||
+                        navigation.x + navigation.width <= toast.x,
+                    ).toBe(true);
+                  }
+                }
 
                 break;
               }

@@ -16,9 +16,9 @@ export function AppPageHeader({
   actions?: ReactNode;
 }) {
   return (
-    <div className="flex min-w-0 flex-col gap-3 border-b border-border pb-5 lg:flex-row lg:items-end lg:justify-between">
+    <header className="grid min-w-0 gap-4 border-b border-border pb-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start">
       <div className="flex min-w-0 flex-1 flex-col gap-2">
-        <h1 className="font-display text-2xl leading-tight font-semibold tracking-tight sm:text-3xl">
+        <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
           {title}
         </h1>
         {lead ? (
@@ -28,11 +28,11 @@ export function AppPageHeader({
         ) : null}
       </div>
       {actions ? (
-        <div className="flex min-w-0 flex-wrap items-center gap-2 lg:max-w-[50%]">
+        <div className="flex min-w-0 flex-wrap items-center gap-2 lg:max-w-md lg:justify-end">
           {actions}
         </div>
       ) : null}
-    </div>
+    </header>
   );
 }
 
@@ -50,7 +50,7 @@ export function StatCard({
   tone?: "neutral" | "good" | "warn";
 }) {
   return (
-    <div className="relative flex min-w-0 flex-col gap-2 border-s border-border py-1 ps-3 pe-1 sm:ps-4">
+    <div className="flex min-w-0 flex-col gap-2 border-t border-border pe-4 pt-4 pb-2">
       <div className="flex items-start justify-between gap-2">
         <p className="min-w-0 flex-1 text-sm font-medium wrap-anywhere text-muted-foreground">
           {label}
@@ -67,7 +67,7 @@ export function StatCard({
           />
         ) : null}
       </div>
-      <p className="font-display text-2xl font-semibold tracking-tight break-words tabular-nums">
+      <p className="text-2xl font-semibold tracking-tight break-words tabular-nums">
         {value}
       </p>
       {hint ? <p className="text-xs text-muted-foreground">{hint}</p> : null}
@@ -109,9 +109,9 @@ export function EmptyState({
   action?: ReactNode;
 }) {
   return (
-    <div className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-x-3 gap-y-2 border-y border-border py-6">
+    <div className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-x-4 gap-y-2 border-b border-border py-8">
       <span className="row-span-2 text-muted-foreground">
-        <Icon aria-hidden className="size-6" strokeWidth={1.25} />
+        <Icon aria-hidden className="size-6" strokeWidth={1.75} />
       </span>
       <p className="font-display text-lg font-semibold tracking-tight">
         {title}

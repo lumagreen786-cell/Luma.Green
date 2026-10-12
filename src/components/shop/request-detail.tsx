@@ -85,7 +85,7 @@ function RequestBody({ id }: { id: string }) {
   if (detail === null) {
     return (
       <>
-        <h1 className="font-display text-2xl leading-tight font-semibold tracking-tight sm:text-3xl">
+        <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
           {t("requests.title")}
         </h1>
         <EmptyState
@@ -113,7 +113,7 @@ function RequestView({ detail }: { detail: BookingDetail }) {
     <>
       <header className="flex flex-col gap-2 border-b border-border pb-6">
         <div className="flex flex-wrap items-center gap-3">
-          <h1 className="font-display text-2xl leading-tight font-semibold tracking-tight sm:text-3xl">
+          <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
             {booking.name ?? t("household")}
           </h1>
           <BookingStatusPill status={booking.status} />

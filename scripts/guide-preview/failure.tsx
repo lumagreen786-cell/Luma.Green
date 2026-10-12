@@ -11,7 +11,10 @@ import { StatusView } from "@/components/join/status-view";
 import { BuyButton } from "@/components/market/buy-dialog";
 import { ListingCard } from "@/components/market/listing-card";
 import type { ListingView } from "@/components/market/types";
-import { ThemeProvider, ThemeToaster } from "@/components/theme/theme-provider";
+import {
+  LocalizedThemeToaster,
+  ThemeProvider,
+} from "@/components/theme/theme-provider";
 import { WorkspacePermissions } from "@/components/workspace/permissions";
 
 import type { Id } from "../../convex/_generated/dataModel";
@@ -129,7 +132,7 @@ createRoot(root).render(
           {content}
         </main>
       )}
-      <ThemeToaster />
+      <LocalizedThemeToaster />
     </ThemeProvider>
   </NextIntlClientProvider>,
 );

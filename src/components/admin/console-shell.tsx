@@ -104,12 +104,12 @@ export function ConsoleShell({ children }: { children: ReactNode }) {
   if (me.kind !== "admin") return <NotAdmin />;
 
   return (
-    <div className="flex min-h-dvh flex-col bg-muted/20 lg:flex-row">
+    <div className="flex min-h-dvh flex-col bg-background lg:flex-row">
       <Sidebar name={me.adminName ?? "Admin"} />
       <main
         id="main"
         tabIndex={-1}
-        className="min-w-0 flex-1 bg-background px-4 py-6 sm:px-6 lg:my-6 lg:me-6 lg:border lg:border-border lg:px-8 lg:py-8"
+        className="mx-auto w-full max-w-7xl min-w-0 flex-1 px-4 py-6 sm:px-8 lg:px-10 lg:py-8"
       >
         <QueryProvider>{children}</QueryProvider>
       </main>
@@ -123,7 +123,7 @@ function Sidebar({ name }: { name: string }) {
   const { signOut, busy, error } = useAdminSignOut();
 
   return (
-    <aside className="flex flex-col gap-3 border-b border-sidebar-border bg-background px-3 pt-3 pb-2 text-sidebar-foreground lg:sticky lg:top-0 lg:h-dvh lg:w-60 lg:shrink-0 lg:gap-6 lg:overflow-y-auto lg:border-e lg:border-b-0 lg:p-5">
+    <aside className="flex flex-col gap-3 border-b border-sidebar-border bg-background px-3 pt-3 pb-2 text-sidebar-foreground lg:sticky lg:top-0 lg:h-dvh lg:w-64 lg:shrink-0 lg:gap-6 lg:overflow-y-auto lg:border-e lg:border-b-0 lg:p-5">
       <div className="flex items-center justify-between gap-2">
         <Link
           href="/admin"
@@ -270,7 +270,7 @@ function NotAdmin() {
 function ConsoleSkeleton() {
   return (
     <div
-      className="flex min-h-dvh flex-col bg-muted/20 lg:flex-row"
+      className="flex min-h-dvh flex-col bg-background lg:flex-row"
       aria-busy="true"
     >
       <div className="border-b bg-background p-4 lg:w-64 lg:border-e lg:border-b-0">

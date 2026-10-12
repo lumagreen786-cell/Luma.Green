@@ -42,7 +42,7 @@ export function VerifyPreview() {
     <div className="flex flex-col gap-6">
       <AuthProgress step="code" />
       <div className="flex flex-col gap-2">
-        <h1 className="font-display text-2xl leading-tight font-semibold tracking-tight sm:text-3xl">
+        <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
           {t("previewTitle")}
         </h1>
         <p className="text-muted-foreground">

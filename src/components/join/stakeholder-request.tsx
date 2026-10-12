@@ -67,7 +67,7 @@ export function StakeholderRequest() {
     }[account.status];
     return (
       <section className="flex flex-col gap-5 border-t border-border py-6">
-        <h1 className="font-display text-2xl leading-tight font-semibold tracking-tight sm:text-3xl">
+        <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
           {title}
         </h1>
         <p className="font-medium">{account.organizationName}</p>
@@ -122,7 +122,7 @@ export function StakeholderRequest() {
       }}
     >
       <header className="border-b border-border pb-5">
-        <h1 className="font-display text-2xl leading-tight font-semibold tracking-tight sm:text-3xl">
+        <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
           {t("title")}
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">{t("note")}</p>
