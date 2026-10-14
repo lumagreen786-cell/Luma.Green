@@ -46,3 +46,20 @@ References: [npm registry signature verification](https://docs.npmjs.com/about-r
 - `expo-notifications@57.0.22`
 - `expo-updates@57.0.25`
 - `expo@57.0.27`
+
+## Compatibility follow-up — 14 October 2026
+
+PR #56's hosted compatibility check now requires Expo 57.0.29,
+expo-constants 57.0.22, and expo-notifications 57.0.23. These patch updates
+also resolve five transitive Expo packages. All eight exact new versions have
+verified official npm registry signatures and lockfile SHA-512 integrity.
+The compatibility check passes. Required tests and hosted checks remain release
+gates. Existing global release-age policy, security overrides and install-script
+restrictions are unchanged. The package manager added only exact-version age
+exceptions for this cohort; no wildcard is authorized. These exceptions can be
+removed after the cohort satisfies the normal publication-age policy.
+
+The package/version, integrity and source-commit evidence is recorded in
+`expo-sdk-57-release-review-2026-10-14.json`. Registry verification does not prove
+reproducible builds or absence of malicious code. This update changes dependency
+versions only; it does not change the native shell workflow or guide content.

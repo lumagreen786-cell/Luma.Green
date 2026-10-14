@@ -1,0 +1,50 @@
+[
+  {
+    "package": "@expo/cli@57.0.30",
+    "integrity": "sha512-xyPD5pkNvEojk9oI3xs2kR3JHSrkOPcCmuLnHkw4fcU/zSuqcoY3y6z/t/IIUlTpnuTFeTpDIiIvafBTO/mtKA==",
+    "signaturesVerified": 2,
+    "gitHead": "0607af7a70d0ea3e58a6d55824aac5cfd3e78613"
+  },
+  {
+    "package": "@expo/prebuild-config@57.0.19",
+    "integrity": "sha512-trBpySOP8Pv/xtMSb5ASAL5y8h6kbZTinakZ5cUbu0lX5iDpiB3Cg3ANYc3coriH7jpl3cJecG4e0PzUMced8g==",
+    "signaturesVerified": 2,
+    "gitHead": "0607af7a70d0ea3e58a6d55824aac5cfd3e78613"
+  },
+  {
+    "package": "expo-asset@57.0.20",
+    "integrity": "sha512-xm1p3Squ/dCzipISO1TE5+kDsIFEUc6DxEtRe2rRgPMDLPi6AumLlrNorFxetiP6zrvxK23xzVlNng/g7o/+aA==",
+    "signaturesVerified": 2,
+    "gitHead": "0607af7a70d0ea3e58a6d55824aac5cfd3e78613"
+  },
+  {
+    "package": "expo-constants@57.0.22",
+    "integrity": "sha512-+mBjnzMWMKIrQa7BP7LTDRC0W7cI+q12/sZns4HzVQJGzgGoAdRJSTEKiObxIw/3EswKXlESkRob8upiL95Q4A==",
+    "signaturesVerified": 2,
+    "gitHead": "0607af7a70d0ea3e58a6d55824aac5cfd3e78613"
+  },
+  {
+    "package": "expo-modules-autolinking@57.0.16",
+    "integrity": "sha512-OJh6rMMIIZ/dfwOk2FufJjjsUSw5Boy1Y5Tl+zbBmua/FcD03eEg097dkYIf3iBHVkQ6q9eR08qT88qxvnelow==",
+    "signaturesVerified": 2,
+    "gitHead": "0607af7a70d0ea3e58a6d55824aac5cfd3e78613"
+  },
+  {
+    "package": "expo-modules-core@57.0.23",
+    "integrity": "sha512-vZQoSlhqU6me5K4KCl42yXB0x3zqAiG2FAjzHmbuez77CslJJQ+82cmJoHC3tN5X8o/KxRArJejKNQIeciyoXA==",
+    "signaturesVerified": 2,
+    "gitHead": "0607af7a70d0ea3e58a6d55824aac5cfd3e78613"
+  },
+  {
+    "package": "expo-notifications@57.0.23",
+    "integrity": "sha512-KdHROY5tvbzlDJImJKF91F8GRpV4hP+RLPC7NJgiFNyzb0clETpV0hJNdbFrfyubZf+cqx88+WuwFsH9Yl+kzg==",
+    "signaturesVerified": 2,
+    "gitHead": "0607af7a70d0ea3e58a6d55824aac5cfd3e78613"
+  },
+  {
+    "package": "expo@57.0.29",
+    "integrity": "sha512-pJeJKps+jS2Q8+f14B12T6pJccTdRqej395Cqh2+isGziOUDggs1qvT4R9/UkE8WuRW3HYNAD0x0Mmnfw56FEQ==",
+    "signaturesVerified": 2,
+    "gitHead": "0607af7a70d0ea3e58a6d55824aac5cfd3e78613"
+  }
+]

@@ -28,7 +28,7 @@ import {
 } from "../../../convex/lib/phone";
 
 const CODE_LENGTH = 6;
-const RESEND_AFTER_SECONDS = 30;
+const RESEND_AFTER_SECONDS = 300;
 
 /** Keeps a number reading left to right inside RTL sentences. */
 function ltr(text: string): string {

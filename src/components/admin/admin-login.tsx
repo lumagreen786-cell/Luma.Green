@@ -1,26 +1,24 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "convex/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
 
 import { isConvexConfigured } from "@/components/providers/convex-provider";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/auth-client";
+import { requestPhoneCode, verifyPhoneCode } from "@/lib/phone-auth";
 
 import { api } from "../../../convex/_generated/api";
+import { normalizeIndianMobile } from "../../../convex/lib/phone";
 import { AdminUnavailable } from "./admin-unavailable";
 import { CODE_LENGTH, CodeInput } from "./code-input";
-import { codeErrorMessage, signInErrorMessage } from "./errors";
-import { PasswordInput } from "./password-input";
-import { adminSignInSchema, type AdminSignInValues } from "./schemas";
+import { codeErrorMessage } from "./errors";
 
-/** `/admin/login`: email and password, then the authenticator code. */
+/** `/admin/login`: phone OTP, then the authenticator code. */
 export function AdminLogin() {
   return isConvexConfigured ? <LoginSteps /> : <AdminUnavailable />;
 }
@@ -29,7 +27,7 @@ function LoginSteps() {
   const router = useRouter();
   const me = useQuery(api.identity.me);
   const options = useQuery(api.identity.signInOptions);
-  const [step, setStep] = useState<"password" | "code">("password");
+  const [step, setStep] = useState<"phone" | "code">("phone");
   const [notice, setNotice] = useState<string | null>(null);
 
   // Already signed in? Straight to the console.
@@ -37,14 +35,14 @@ function LoginSteps() {
     if (me?.kind === "admin" && me.twoFactorEnabled) router.replace("/admin");
   }, [me, router]);
 
-  return step === "password" ? (
+  return step === "phone" ? (
     <div className="flex flex-col gap-6">
       {notice ? (
         <p role="status" className="text-sm text-destructive">
           {notice}
         </p>
       ) : null}
-      <PasswordStep
+      <PhoneStep
         onTwoFactor={() => {
           setNotice(null);
           setStep("code");
@@ -72,94 +70,145 @@ function LoginSteps() {
       }}
       onRestart={(message) => {
         setNotice(message ?? null);
-        setStep("password");
+        setStep("phone");
       }}
     />
   );
 }
 
-function PasswordStep({
+function PhoneStep({
   onTwoFactor,
   onNoAuthenticator,
 }: {
   onTwoFactor: () => void;
   onNoAuthenticator: () => void;
 }) {
-  const {
-    register,
-    handleSubmit,
-    setError,
-    formState: { errors, isSubmitting },
-  } = useForm<AdminSignInValues>({
-    resolver: zodResolver(adminSignInSchema),
-    defaultValues: { email: "", password: "" },
-  });
-
-  async function onSubmit(values: AdminSignInValues) {
-    try {
-      const { data, error } = await authClient.signIn.email(values);
-      if (error) {
-        setError("root", { message: signInErrorMessage(error) });
-        return;
-      }
-      if ("twoFactorRedirect" in data && data.twoFactorRedirect) onTwoFactor();
-      else onNoAuthenticator();
-    } catch {
-      setError("root", { message: signInErrorMessage({}) });
+  const [phone, setPhone] = useState("");
+  const [code, setCode] = useState("");
+  const [sent, setSent] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [retryAt, setRetryAt] = useState(0);
+  const [now, setNow] = useState(0);
+  const pending = useRef(false);
+  useEffect(() => {
+    if (!sent) return;
+    const timer = setInterval(() => {
+      setNow(Date.now());
+    }, 1000);
+    return () => {
+      clearInterval(timer);
+    };
+  }, [sent]);
+  async function send() {
+    if (pending.current || Date.now() < retryAt) return;
+    const normalized = normalizeIndianMobile(phone);
+    if (!normalized) {
+      setError("Enter a valid Indian mobile number.");
+      return;
+    }
+    pending.current = true;
+    setBusy(true);
+    setError(null);
+    const failure = await requestPhoneCode(normalized);
+    pending.current = false;
+    setBusy(false);
+    if (failure) {
+      setError(
+        failure === "sendRateLimited"
+          ? "Send limit reached. Wait before requesting another code. After five sends, wait 24 hours."
+          : "Could not send the code. Try again later.",
+      );
+      return;
+    }
+    setPhone(normalized);
+    setCode("");
+    setSent(true);
+    setNow(Date.now());
+    setRetryAt(Date.now() + 300_000);
+  }
+  async function verify() {
+    if (pending.current || code.length !== CODE_LENGTH) return;
+    pending.current = true;
+    setBusy(true);
+    setError(null);
+    const result = await verifyPhoneCode(phone, code);
+    pending.current = false;
+    setBusy(false);
+    if (result.kind === "second-factor") onTwoFactor();
+    else if (result.kind === "authenticated") onNoAuthenticator();
+    else {
+      setCode("");
+      setError(
+        "The code could not be verified. Check the code and its five-minute expiry.",
+      );
     }
   }
-
   return (
     <form
-      noValidate
       className="flex flex-col gap-5"
       onSubmit={(event) => {
-        void handleSubmit(onSubmit)(event);
+        event.preventDefault();
+        void (sent ? verify() : send());
       }}
     >
       <div className="flex flex-col gap-2">
-        <Label htmlFor="email">Email</Label>
+        <Label htmlFor="admin-phone">Mobile number</Label>
         <Input
-          id="email"
-          type="email"
-          autoComplete="username"
-          aria-invalid={errors.email ? true : undefined}
-          {...register("email")}
+          id="admin-phone"
+          type="tel"
+          autoComplete="tel"
+          value={phone}
+          disabled={busy || sent}
+          onChange={(event) => {
+            setPhone(event.target.value);
+          }}
         />
-        {errors.email ? (
-          <p role="alert" className="text-sm text-destructive">
-            {errors.email.message}
-          </p>
-        ) : null}
       </div>
-      <div className="flex flex-col gap-2">
-        <Label htmlFor="password">Password</Label>
-        <PasswordInput
-          id="password"
-          autoComplete="current-password"
-          aria-invalid={errors.password ? true : undefined}
-          {...register("password")}
-        />
-        {errors.password ? (
-          <p role="alert" className="text-sm text-destructive">
-            {errors.password.message}
+      {sent ? (
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="admin-sms-code">Code from your SMS</Label>
+          <CodeInput
+            id="admin-sms-code"
+            value={code}
+            onChange={setCode}
+            onComplete={setCode}
+            disabled={busy}
+            invalid={Boolean(error)}
+          />
+          <p className="text-sm text-muted-foreground">
+            The code is valid for five minutes.
           </p>
-        ) : null}
-      </div>
-      {errors.root ? (
+        </div>
+      ) : null}
+      {error ? (
         <p role="alert" className="text-sm text-destructive">
-          {errors.root.message}
+          {error}
         </p>
       ) : null}
-      <Button type="submit" size="lg" disabled={isSubmitting}>
-        {isSubmitting ? "Checking…" : "Continue"}
-      </Button>
-      <Link
-        href="/admin/forgot-password"
-        className="inline-flex min-h-11 items-center self-start text-sm font-medium text-primary underline underline-offset-4"
+      <Button
+        type="submit"
+        size="lg"
+        disabled={busy || (sent && code.length !== CODE_LENGTH)}
       >
-        Forgot password?
-      </Link>
+        {busy ? "Checking…" : null}
+        {!busy && sent ? "Verify phone" : null}
+        {!busy && !sent ? "Send code" : null}
+      </Button>
+      {sent ? (
+        <Button
+          type="button"
+          variant="ghost"
+          disabled={busy || now < retryAt}
+          onClick={() => {
+            void send();
+          }}
+        >
+          {now < retryAt
+            ? `Resend in ${String(Math.ceil((retryAt - now) / 1000))} seconds`
+            : "Resend code"}
+        </Button>
+      ) : null}
     </form>
   );
 }

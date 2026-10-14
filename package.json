@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "license": "UNLICENSED",
-  "description": "Luma.Green — Cleaner Tomorrow in Motion. Recycling inventory, sector trade and carbon credits in one place.",
+  "description": "Luma.Green \u2014 Cleaner Tomorrow in Motion. Recycling inventory, sector trade and carbon credits in one place.",
   "packageManager": "pnpm@11.24.0",
   "engines": {
     "node": ">=24.0.0",
@@ -36,7 +36,8 @@
     "mobile:export": "pnpm --filter @luma/mobile export",
     "desktop:dev": "pnpm --filter @luma/desktop dev",
     "desktop:pack": "pnpm --filter @luma/desktop run pack",
-    "apps:check": "pnpm --filter \"./apps/*\" check"
+    "apps:check": "pnpm --filter \"./apps/*\" check",
+    "guide:check": "vitest run --config vitest.guide.config.mts"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,mjs,cjs}": [

@@ -5,8 +5,8 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { internal } from "./_generated/api";
 import { convexModules } from "./lib/auth.testing";
 import {
+  SMS_COOLDOWN_MS,
   SMS_DAY_MS,
-  SMS_WINDOW_MS,
   smsAllowance,
   smsPhoneHash,
 } from "./lib/smsLimits";
@@ -21,32 +21,57 @@ afterEach(() => {
 });
 
 describe("SMS quotas", () => {
-  it("allows three codes per rolling 15 minutes with a server cooldown", () => {
+  it("requires five full minutes between sends", () => {
     const now = 1_000_000;
     expect(smsAllowance([], now).allowed).toBe(true);
-    expect(smsAllowance([now - 29_000], now)).toMatchObject({
+    expect(smsAllowance([now], now + SMS_COOLDOWN_MS - 1)).toMatchObject({
       allowed: false,
       retryAfterSeconds: 1,
     });
-    expect(smsAllowance([now - 60_000, now - 30_000], now).allowed).toBe(true);
-    expect(
-      smsAllowance([now - 60_000, now - 30_000, now], now + 30_000),
-    ).toMatchObject({ allowed: false, retryAfterSeconds: 810 });
-    expect(
-      smsAllowance([now - SMS_WINDOW_MS, now - 60_000, now - 30_000], now)
-        .allowed,
-    ).toBe(true);
+    expect(smsAllowance([now], now + SMS_COOLDOWN_MS).allowed).toBe(true);
   });
 
-  it("allows only ten codes in a rolling day, even across many short windows", () => {
-    const now = 2 * SMS_DAY_MS;
+  it("holds all five sends until a full day after the fifth, not the first", () => {
+    const start = 2 * SMS_DAY_MS;
     const sent = Array.from(
-      { length: 10 },
-      (_, i) => now - (i + 1) * 60 * 60_000,
+      { length: 5 },
+      (_, i) => start + i * SMS_COOLDOWN_MS,
     );
-    expect(smsAllowance(sent, now).allowed).toBe(false);
-    expect(smsAllowance(sent, now + 14 * 60 * 60_000).allowed).toBe(true);
-    expect(smsAllowance([now - SMS_DAY_MS], now).recent).toEqual([]);
+    const fifth = start + 4 * SMS_COOLDOWN_MS;
+    expect(smsAllowance(sent, fifth)).toMatchObject({
+      allowed: false,
+      retryAfterSeconds: 86_400,
+    });
+    expect(smsAllowance(sent, start + SMS_DAY_MS).allowed).toBe(false);
+    expect(smsAllowance(sent, fifth + SMS_DAY_MS - 1).allowed).toBe(false);
+    expect(smsAllowance(sent, fifth + SMS_DAY_MS)).toMatchObject({
+      allowed: true,
+      recent: [],
+    });
+  });
+
+  it("keeps the lock through database reservations and old cleanup timers", async () => {
+    vi.useFakeTimers();
+    const t = convexTest(schema, modules);
+    for (let i = 0; i < 5; i++) {
+      expect(
+        await t.mutation(internal.smsLimits.reserve, { phoneHash }),
+      ).toMatchObject({ allowed: true });
+      if (i < 4) await vi.advanceTimersByTimeAsync(SMS_COOLDOWN_MS);
+    }
+    expect(
+      await t.mutation(internal.smsLimits.reserve, { phoneHash }),
+    ).toMatchObject({ allowed: false, retryAfterSeconds: 86_400 });
+    await vi.advanceTimersByTimeAsync(SMS_DAY_MS - 1);
+    await t.finishInProgressScheduledFunctions();
+    expect(
+      await t.mutation(internal.smsLimits.reserve, { phoneHash }),
+    ).toMatchObject({ allowed: false, retryAfterSeconds: 1 });
+    await vi.advanceTimersByTimeAsync(1);
+    expect(
+      await t.mutation(internal.smsLimits.reserve, { phoneHash }),
+    ).toMatchObject({ allowed: true });
+    await t.finishAllScheduledFunctions(vi.runAllTimers);
   });
 
   it("uses a secret-keyed identifier, stable for one number and different after key rotation", async () => {
@@ -71,7 +96,7 @@ describe("SMS quotas", () => {
         phoneHash: "b".repeat(64),
       }),
     ).toMatchObject({ allowed: true });
-    await vi.advanceTimersByTimeAsync(30_000);
+    await vi.advanceTimersByTimeAsync(SMS_COOLDOWN_MS);
     expect(
       await t.mutation(internal.smsLimits.reserve, { phoneHash }),
     ).toMatchObject({ allowed: true });
@@ -141,6 +166,62 @@ describe("SMS provider response", () => {
         code: "654321",
       }),
     ).rejects.toThrow("timeout");
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+});
+
+function configure() {
+  vi.stubEnv("OSDIGITAL_API_KEY", "secret-key");
+  vi.stubEnv("OSDIGITAL_SENDER_ID", "ENVRIN");
+  vi.stubEnv("OSDIGITAL_ENTITY_ID", "1234567890123456789");
+  vi.stubEnv("OSDIGITAL_TEMPLATE_ID", "9876543210123456789");
+  vi.stubEnv("OSDIGITAL_OTP_MESSAGE", "Your OTP is {#var#}.");
+}
+
+describe("OS Digital delivery", () => {
+  it.each(["OK", "OSD02", "OSD10"])(
+    "checks provider status %s",
+    async (status) => {
+      configure();
+      const fetchMock = vi.fn().mockResolvedValue(
+        Response.json({
+          status,
+          data: [{ id: "32-1", mobile: "919876543210", status: "SUBMITTED" }],
+        }),
+      );
+      vi.stubGlobal("fetch", fetchMock);
+      const t = convexTest(schema, modules);
+      const sending = t.action(internal.sms.sendCode, {
+        phone: "+919876543210",
+        code: "654321",
+      });
+      if (status === "OK") await expect(sending).resolves.toBeNull();
+      else
+        await expect(sending).rejects.toThrow(
+          "OS Digital did not confirm SMS acceptance.",
+        );
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+      expect(fetchMock).toHaveBeenCalledWith(
+        "https://www.bulksmsindia.app/V2/http-api-post.php",
+        expect.objectContaining({
+          method: "POST",
+          redirect: "error",
+          signal: expect.any(AbortSignal),
+        }),
+      );
+    },
+  );
+  it("does not retry or expose secrets after a transport failure", async () => {
+    configure();
+    const fetchMock = vi.fn().mockRejectedValue(new Error("secret-key 654321"));
+    vi.stubGlobal("fetch", fetchMock);
+    const t = convexTest(schema, modules);
+    await expect(
+      t.action(internal.sms.sendCode, {
+        phone: "+919876543210",
+        code: "654321",
+      }),
+    ).rejects.toThrow("OS Digital did not confirm SMS acceptance.");
     expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 });

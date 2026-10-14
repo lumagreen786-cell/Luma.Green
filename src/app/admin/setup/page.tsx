@@ -10,7 +10,7 @@ export default function AdminSetupPage() {
   return (
     <AdminAuthShell
       title="Set up the admin account"
-      description="Once per deployment. Your details, a password, then an authenticator app."
+      description="Once per deployment. Verify your phone, add your details, then connect an authenticator app."
     >
       <AdminSetup />
     </AdminAuthShell>

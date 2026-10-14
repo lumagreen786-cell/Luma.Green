@@ -155,7 +155,7 @@ it("blocks code verification while a resend is in progress and restores it after
   const request = Promise.withResolvers<{ error: null }>();
   calls.sendOtp.mockReturnValueOnce(request.promise);
   render(form());
-  for (let second = 0; second < 30; second++) await tick(1000);
+  for (let second = 0; second < 300; second++) await tick(1000);
   const resend = screen.getByRole("button", { name: messages.auth.resend });
   fireEvent.click(resend);
   fireEvent.click(resend);
@@ -184,7 +184,7 @@ it("blocks resend and duplicate submission while verification is in progress", a
   }>();
   calls.verify.mockReturnValueOnce(request.promise);
   render(form());
-  for (let second = 0; second < 30; second++) await tick(1000);
+  for (let second = 0; second < 300; second++) await tick(1000);
   await enterCode();
   fireEvent.click(screen.getByRole("button", { name: messages.auth.resend }));
   fireEvent.click(

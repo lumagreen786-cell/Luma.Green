@@ -170,13 +170,6 @@ export function phoneTwoFactor() {
                 (isEnabled || ctx.path === "/two-factor/verify-backup-code"))
             )
               forbidden("UNSUPPORTED_SECURITY_CHANGE");
-            // Existing admin setup proves the password inside the plugin.
-            // This preserves safe resumption after a long setup session.
-            if (
-              ctx.path === "/two-factor/enable" &&
-              isAdminEmail(session.user.email)
-            )
-              return;
             const proof = await readAssurance(
               ctx,
               session.session.id,

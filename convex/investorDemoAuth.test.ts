@@ -130,17 +130,15 @@ it("imports one fictional credential atomically without phone proof, sessions or
   expect(fetch).not.toHaveBeenCalled();
 });
 
-it("signs in through the real Better Auth HTTP handler with no email provider or local mode", async () => {
+it("rejects legacy demo email credentials through the real HTTP handler", async () => {
   const t = setup();
-  const result = await provision(t);
+  await provision(t);
   vi.stubEnv("INVESTOR_DEMO_IMPORT_EXPIRES_AT", "");
   const response = await request(t, "/sign-in/email", { email, password });
-  expect(response.status).toBe(200);
-  const body = await response.json();
-  expect(body).toMatchObject({
-    user: { id: result.authUserId, email, emailVerified: true },
-  });
-  expect(response.headers.getSetCookie().length).toBeGreaterThan(0);
+  expect(response.status).toBe(403);
+  expect(response.headers.get("set-cookie")).toBeNull();
+  const sessions = await authRows(t, "session");
+  expect(sessions.page).toEqual([]);
   expect(fetch).not.toHaveBeenCalled();
 });
 
@@ -152,7 +150,7 @@ it("does not make ordinary signup or an unverified identity bypass email verific
     name: "Ordinary",
     password,
   });
-  expect(signup.status).toBe(503);
+  expect(signup.status).toBe(403);
   await t.run(async (ctx) => {
     const auth = await createAuth(ctx).$context;
     const user = await auth.internalAdapter.createUser({
@@ -286,7 +284,7 @@ it("does not accept a wrong password for an imported verified identity", async (
     email,
     password: "Incorrect-test-password-1024",
   });
-  expect(response.status).toBe(401);
+  expect(response.status).toBe(403);
   expect(response.headers.get("set-cookie")).toBeNull();
   const sessions = await authRows(t, "session");
   expect(sessions.page).toEqual([]);

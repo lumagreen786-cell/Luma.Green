@@ -1,3 +1,31 @@
+## Branch consolidation — 14 October 2026
+
+The owner requested one main branch and integration of open PRs. PR #56 was
+blocked by the old admin password-recovery browser expectation. Its approved
+phone-only contract redirects both retired recovery routes to `/admin/login`.
+The browser regression now verifies both redirects, absence of email/password
+inputs, and retained noindex metadata. All nine focused account/email-route
+browser tests pass. Required full and hosted checks must pass before merge.
+
+The primary checkout's unfinished prototype and SMS files were reviewed against
+current main and PR #56. The SMS delta is superseded by the newer guarded PR
+implementation; the older admin setup lacks the PR's session-change/unmount
+protection. The prototype route depends on the excluded public
+`demoWorkspace.prototype` function, while current main retains only the guarded
+preview. Later product interview decisions supersede the old interview state.
+Old screenshots and generated guide artifacts do not prove the current UI.
+Do not merge this stale checkout over the release.
+
+All pre-cleanup refs and unfinished tracked/untracked files are preserved in
+`.git/luma-cleanup-20261014/` with a verified Git bundle and checksums. This is
+local recovery material, not a deployment artifact. Old branch names may be
+removed without claiming their unique commits were merged.
+
+Guide impact: this consolidation changes tests and repository state only; no
+screen or workflow changes beyond the existing PR. No guide rebuild is needed
+for this regression correction. PR #56's previously deferred guide work remains
+deferred; historical captures are not current-release proof.
+
 # Agent handoff — updated 12 October 2026
 
 ## Impeccable platform UI release — 12 October 2026
@@ -1557,3 +1585,35 @@ No guide change is needed: no user screen, permission or workflow changed.
 Validation: Prettier YAML parsing/format checks and diff whitespace checks.
 Hosted Dependabot PR creation must be verified after this configuration lands
 on the default branch. No dependency versions, lockfile or merge policy changed.
+
+## ENVRIN phone-only login — 14 October 2026 (in progress)
+
+Task branch `feat/envrin-phone-login` starts from current release `4f704d4` in the
+managed `envrin-phone-login` worktree. The older dirty prototype checkout is
+preserved. Its schema failed validation before any backend deployment; no tables
+were deleted. Current release schema deployed successfully to development.
+
+OS Digital ENVRIN credentials and exact approved template are configured in Convex.
+The provider dashboard test delivered successfully. A real platform OTP was sent,
+and the owner entered it successfully and reached admin profile setup. The owner
+confirmed successful authenticator setup and admin login. No production
+OTP or deployment is claimed yet. The approved test number is the admin identity;
+its internal phone email is configured, not an email sign-in method.
+
+Release checks: `VITEST_MAX_WORKERS=2 pnpm check` passed: 274 web/backend files,
+2,313 tests, native checks, lint and types. Focused lifecycle tests cover late
+authenticator responses and identity/session changes. Local browser inspection
+covered phone login in Arabic light/dark and Urdu tablet layout. The owner
+confirmed the real dev admin flow. `pnpm build` and formatting passed. Production Convex deploy succeeded without
+schema/index deletion. Push and hosted frontend verification are in progress.
+A stale original-checkout process still owned port 3000 after WTS reported exited;
+it was stopped and the current worktree restarted. Earlier local UI captures
+therefore do not prove this branch, while the successful live SMS/TOTP test used
+the deployed development backend. Email redirect browser tests are rerun against
+the current worktree.
+Production ENVRIN settings and the approved admin phone identity are configured;
+production accounts are separate and require first-time authenticator enrollment.
+Guide and Word updates are explicitly deferred by the owner; AGENTS.md now makes
+them opt-in. Existing artifact tests remain available as `pnpm guide:check`; code
+and runtime fixture tests stay required. No Google Docs update was requested. No automatic SMS retries;
+five-minute spacing, five sends then a 24-hour lock from the fifth send.

@@ -8,6 +8,7 @@ import { AdminSetup } from "./admin-setup";
 import { AuthenticatorStep } from "./authenticator-step";
 
 const mocks = vi.hoisted(() => ({
+  send: vi.fn(),
   signIn: vi.fn(),
   signUp: vi.fn(),
   enable: vi.fn(),
@@ -53,6 +54,10 @@ vi.mock("@/lib/auth-client", () => ({
     },
   },
 }));
+vi.mock("@/lib/phone-auth", () => ({
+  requestPhoneCode: mocks.send,
+  verifyPhoneCode: mocks.signIn,
+}));
 vi.mock("qrcode", () => ({
   default: { toDataURL: () => Promise.resolve("") },
 }));
@@ -60,50 +65,44 @@ vi.mock("qrcode", () => ({
 beforeEach(() => {
   vi.resetAllMocks();
   mocks.me = null;
+  mocks.send.mockResolvedValue(null);
 });
-async function passwordStep() {
-  fireEvent.change(screen.getByLabelText("Email"), {
-    target: { value: "admin@example.test" },
+async function phoneStep() {
+  fireEvent.change(screen.getByLabelText("Mobile number"), {
+    target: { value: "9000000000" },
   });
-  fireEvent.change(screen.getByLabelText("Password"), {
-    target: { value: "example-only-password" },
+  await userEvent.click(screen.getByRole("button", { name: "Send code" }));
+  fireEvent.change(screen.getByLabelText("Code from your SMS"), {
+    target: { value: "123456" },
   });
-  await userEvent.click(screen.getByRole("button", { name: "Continue" }));
+  await userEvent.click(screen.getByRole("button", { name: "Verify phone" }));
 }
 
 describe("admin request failures", () => {
-  it("shows a safe password error on network failure and permits a second attempt", async () => {
-    mocks.signIn.mockRejectedValueOnce(new Error("Private server failure"));
-    mocks.signIn.mockResolvedValueOnce({
-      data: { twoFactorRedirect: true },
-      error: null,
-    });
+  it("permits a second send after a safe delivery error", async () => {
+    mocks.send.mockResolvedValueOnce("sendFailed");
     render(<AdminLogin />);
-    await passwordStep();
+    fireEvent.change(screen.getByLabelText("Mobile number"), {
+      target: { value: "9000000000" },
+    });
+    await userEvent.click(screen.getByRole("button", { name: "Send code" }));
     expect(await screen.findByRole("alert")).toHaveTextContent(
-      "Something went wrong. Try again.",
+      "Could not send",
     );
-    expect(screen.getByRole("button", { name: "Continue" })).toBeEnabled();
-    await userEvent.click(screen.getByRole("button", { name: "Continue" }));
-    expect(
-      await screen.findByLabelText("Code from your authenticator app"),
-    ).toBeEnabled();
-    expect(
-      screen.queryByText("Private server failure"),
-    ).not.toBeInTheDocument();
+    await userEvent.click(screen.getByRole("button", { name: "Send code" }));
+    expect(screen.getByLabelText("Code from your SMS")).toBeEnabled();
   });
 
   it.each(["totp", "backup"])(
     "releases %s controls after a rejected verification",
     async (mode) => {
       mocks.signIn.mockResolvedValue({
-        data: { twoFactorRedirect: true },
-        error: null,
+        kind: "second-factor",
       });
       mocks.verify.mockRejectedValueOnce(new Error("Offline"));
       mocks.backup.mockRejectedValueOnce(new Error("Offline"));
       render(<AdminLogin />);
-      await passwordStep();
+      await phoneStep();
       if (mode === "backup") {
         await userEvent.click(
           screen.getByRole("button", { name: "Use a backup code" }),
@@ -154,46 +153,13 @@ describe("admin request failures", () => {
     expect(onVerified).not.toHaveBeenCalled();
   });
 
-  it("sends the masked setup token only in the signup header and hides raw failures", async () => {
-    mocks.signUp.mockRejectedValueOnce(new Error("Private server failure"));
+  it("requires phone sign-in before setup and does not offer email signup", () => {
     render(<AdminSetup />);
-    const fields = {
-      "Full name": "Fixture Admin",
-      "Mobile number": "9000000000",
-      "Date of birth": "1990-01-01",
-      "Last four digits of your Aadhaar": "0000",
-      "Setup token": "fixture-setup-token-at-least-32-characters",
-      Email: "admin@example.test",
-      Password: "example-only-password",
-      "Password again": "example-only-password",
-    };
-    for (const [label, value] of Object.entries(fields))
-      fireEvent.change(screen.getByLabelText(label), { target: { value } });
-    expect(screen.getByLabelText("Setup token")).toHaveAttribute(
-      "type",
-      "password",
-    );
-    expect(screen.getByLabelText("Setup token")).toHaveAttribute(
-      "autocomplete",
-      "off",
-    );
-    await userEvent.click(
-      screen.getByRole("button", { name: "Create the admin account" }),
-    );
-    expect(await screen.findByRole("alert")).toHaveTextContent(
-      "Something went wrong. Try again.",
-    );
-    expect(mocks.signUp).toHaveBeenCalledExactlyOnceWith({
-      name: "Fixture Admin",
-      email: "admin@example.test",
-      password: "example-only-password",
-      fetchOptions: {
-        headers: { "x-luma-admin-setup-token": fields["Setup token"] },
-      },
-    });
     expect(
-      screen.getByRole("button", { name: "Create the admin account" }),
-    ).toBeEnabled();
+      screen.getByRole("link", { name: "Go to phone sign-in" }),
+    ).toHaveAttribute("href", "/admin/login");
+    expect(screen.queryByLabelText("Email")).not.toBeInTheDocument();
+    expect(screen.queryByLabelText("Setup token")).not.toBeInTheDocument();
   });
 
   it("allows retry when resuming authenticator enrolment fails", async () => {
@@ -204,15 +170,16 @@ describe("admin request failures", () => {
     };
     mocks.enable.mockRejectedValueOnce(new Error("Private server failure"));
     render(<AdminSetup />);
-    fireEvent.change(screen.getByLabelText("Password"), {
-      target: { value: "example-only-password" },
-    });
-    await userEvent.click(screen.getByRole("button", { name: "Continue" }));
+    await userEvent.click(
+      screen.getByRole("button", { name: "Connect authenticator" }),
+    );
     expect(await screen.findByRole("alert")).toHaveTextContent(
-      "Something went wrong. Try again.",
+      "Could not start authenticator setup. Try again.",
     );
     await waitFor(() => {
-      expect(screen.getByRole("button", { name: "Continue" })).toBeEnabled();
+      expect(
+        screen.getByRole("button", { name: "Connect authenticator" }),
+      ).toBeEnabled();
     });
   });
 });

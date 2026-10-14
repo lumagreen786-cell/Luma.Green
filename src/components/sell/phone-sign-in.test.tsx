@@ -41,7 +41,7 @@ async function openCodeForm() {
     );
     await Promise.resolve();
   });
-  for (let second = 0; second < 30; second++) {
+  for (let second = 0; second < 300; second++) {
     await act(async () => {
       await vi.advanceTimersByTimeAsync(1000);
     });

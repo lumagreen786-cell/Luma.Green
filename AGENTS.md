@@ -143,28 +143,21 @@ flow gets an e2e test. See `.claude/skills/testing`.
 **Always keep CI green.** `pnpm check` before you push. See
 `.claude/skills/ci-checks`.
 
-**The platform user guide is mandatory.** The editable source is
-`docs/user-guide/guide.md`; the maintained editable Word artifact is
-`output/docx/luma-green-user-guide.docx`. Read `docs/user-guide/README.md` before
-changing a user-facing route, screen, role, permission, workflow, account setup
-or native update behavior. Update the affected guide sections and recapture
-changed screens from the browser. Rebuild the Word document, render and inspect every page,
-and commit the source, screenshot evidence, build record and DOCX together.
-Google Docs copies are imported from the reviewed DOCX and must be updated with
-the same source. Read `docs/user-guide/cloud.json` for publication state. After
-the first verified import, reuse that document ID and preserve its sharing
-settings; record verified updates or an explicit pending connection gate.
-Earlier PDFs are archived snapshots, not maintained outputs.
-Record the guide impact in the delivery handoff even when no guide change is
-needed. This is a required completion step, not optional follow-up work.
+**The platform user guide is maintained on request.** Do not block code changes,
+commits or deployment on guide screenshots, a Word rebuild or Google Docs updates.
+The owner will request documentation work when ready. When a guide update is
+requested, use `docs/user-guide/guide.md`, follow `docs/user-guide/README.md`, and
+run `pnpm guide:check`. Preserve existing artifacts until then and record deferred
+guide impact in the delivery handoff. Never describe historical captures as proof
+of the current release.
 
 Screenshots must show the actual current UI with approved test data. Keep
 synthetic component fixtures and older seeded captures explicitly labelled;
 never claim they prove authenticated access or provider execution. Do not
 capture passwords, authenticator QR/keys, backup codes, live IDs or customer
 contact details. Never replace browser screenshots with generated interface
-images. `src/user-guide.test.ts` checks that the committed DOCX matches its
-source and screenshot inputs; fix stale documentation instead of bypassing it.
+images. The optional `pnpm guide:check` suite checks that the DOCX matches its
+source and screenshot inputs. Run it when updating the guide.
 
 ## 5. Commands
 
@@ -252,8 +245,8 @@ with `requireUser` / `requireAdmin` from `convex/lib/access.ts`, and run
 `pnpm auth:schema` after changing a Better Auth plugin. Read
 `docs/architecture/auth.md` before touching auth. Account security and inbox
 routes must work for households and applicants as well as approved operators.
-Keep phone-only users passwordless; admin email recovery must remain confined
-to the configured existing admin identity. Normal email verification, password
+Keep phone users passwordless; email/password login and recovery are disabled.
+The configured admin phone also requires an authenticator. Normal email verification, password
 recovery and invitations have separate delivery paths. An existing verified
 email user may bind an unused phone after recent full authentication; this must
 preserve the identity, session and TOTP and must not enable phone-only login for
@@ -266,7 +259,8 @@ Every field rule lives once in `convex/lib/onboarding.ts` — the forms validate
 with those schemas and `applications.submit` runs them again; change a rule
 there, never in a component.
 
-- **MSG91** — OTP sending and per-number limits are implemented. Status
+- **OS Digital ENVRIN** — primary OTP provider with five-minute codes/resend spacing,
+  five sends then a 24-hour phone lock. MSG91 remains optional when OS Digital is not configured. Status
   notifications use a separate outbox and approved Flow templates.
 - **OpenRouter or self-hosted vision** — optional transient photo estimates; server quotas and table
   prices. See `docs/architecture/ai-estimation.md`.

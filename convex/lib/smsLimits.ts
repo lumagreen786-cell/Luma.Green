@@ -1,24 +1,22 @@
-/** Bounded rolling windows for paid SMS requests. All times are milliseconds. */
-export const SMS_COOLDOWN_MS = 30_000;
-export const SMS_WINDOW_MS = 15 * 60_000;
+/** A phone quota survives browser sessions and IP changes. */
+export const SMS_COOLDOWN_MS = 5 * 60_000;
 export const SMS_DAY_MS = 24 * 60 * 60_000;
-export const SMS_WINDOW_LIMIT = 3;
-export const SMS_DAY_LIMIT = 10;
+export const SMS_DAY_LIMIT = 5;
 
 export function smsAllowance(sentAt: readonly number[], now: number) {
-  const recent = sentAt
-    .filter((at) => at > now - SMS_DAY_MS)
-    .toSorted((a, b) => a - b);
-  const window = recent.filter((at) => at > now - SMS_WINDOW_MS);
-  const last = recent.at(-1);
-  const retryAt = Math.max(
-    now,
-    last === undefined ? now : last + SMS_COOLDOWN_MS,
-    window.length >= SMS_WINDOW_LIMIT
-      ? (window[0] ?? now) + SMS_WINDOW_MS
-      : now,
-    recent.length >= SMS_DAY_LIMIT ? (recent[0] ?? now) + SMS_DAY_MS : now,
-  );
+  const ordered = sentAt.toSorted((a, b) => a - b);
+  const last = ordered.at(-1);
+  // Retain all five timestamps until a full day after the final send.
+  // Filtering each timestamp first would release the lock too early.
+  const isLocked =
+    ordered.length >= SMS_DAY_LIMIT &&
+    last !== undefined &&
+    last + SMS_DAY_MS > now;
+  const recent = isLocked
+    ? ordered
+    : ordered.filter((at) => at > now - SMS_DAY_MS);
+  const delay = isLocked ? SMS_DAY_MS : SMS_COOLDOWN_MS;
+  const retryAt = Math.max(now, last === undefined ? now : last + delay);
   return {
     allowed: retryAt <= now,
     retryAfterSeconds: Math.ceil((retryAt - now) / 1000),

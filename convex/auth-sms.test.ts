@@ -13,50 +13,71 @@ afterEach(() => {
   vi.unstubAllEnvs();
 });
 
-it("rejects a resend before storing another code, even with a different client IP", async () => {
-  vi.useFakeTimers();
-  vi.stubEnv("SITE_URL", "https://luma.test");
-  vi.stubEnv("CONVEX_SITE_URL", "https://test.convex.site");
-  vi.stubEnv("BETTER_AUTH_SECRET", "0123456789abcdef0123456789abcdef");
-  vi.stubEnv("MSG91_AUTH_KEY", "test-key");
-  vi.stubEnv("MSG91_OTP_TEMPLATE_ID", "test-template");
-  const t = convexTest(schema, modules);
-  registerAuth(t);
-  const send = (ip: string) =>
-    t.fetch("/api/auth/phone-number/send-otp", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Origin: "https://luma.test",
-        "X-Forwarded-For": ip,
-      },
-      body: JSON.stringify({ phoneNumber: "+919876543210" }),
-    });
-  const first = await send("192.0.2.1");
-  expect(first.status).toBe(200);
-  const second = await send("192.0.2.2");
-  expect(second.status).toBe(429);
-  expect(second.headers.get("Retry-After")).toBe("30");
-  const codes = await t.run((ctx) =>
-    ctx.runQuery(components.betterAuth.adapter.findMany, {
-      model: "verification",
-      where: [{ field: "identifier", value: "+919876543210" }],
-      paginationOpts: { cursor: null, numItems: 10 },
-    }),
-  );
-  expect(codes.page).toHaveLength(1);
-  vi.stubGlobal(
-    "fetch",
-    vi.fn().mockResolvedValue(Response.json({ type: "success" })),
-  );
-  await t.finishAllScheduledFunctions(vi.runAllTimers);
-});
+it.each(["msg91", "osdigital"])(
+  "%s rejects a resend before storing another code, even with a different client IP",
+  async (provider) => {
+    vi.useFakeTimers();
+    vi.stubEnv("SITE_URL", "https://luma.test");
+    vi.stubEnv("CONVEX_SITE_URL", "https://test.convex.site");
+    vi.stubEnv("BETTER_AUTH_SECRET", "0123456789abcdef0123456789abcdef");
+    vi.stubEnv("MSG91_AUTH_KEY", "test-key");
+    vi.stubEnv("MSG91_OTP_TEMPLATE_ID", "test-template");
+    if (provider === "osdigital") {
+      vi.stubEnv("OSDIGITAL_API_KEY", "test-key");
+      vi.stubEnv("OSDIGITAL_SENDER_ID", "ENVRIN");
+      vi.stubEnv("OSDIGITAL_ENTITY_ID", "1234567890123456789");
+      vi.stubEnv("OSDIGITAL_TEMPLATE_ID", "9876543210123456789");
+      vi.stubEnv("OSDIGITAL_OTP_MESSAGE", "Your OTP is {#var#}.");
+    }
+    const t = convexTest(schema, modules);
+    registerAuth(t);
+    const send = (ip: string) =>
+      t.fetch("/api/auth/phone-number/send-otp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Origin: "https://luma.test",
+          "X-Forwarded-For": ip,
+        },
+        body: JSON.stringify({ phoneNumber: "+919876543210" }),
+      });
+    const first = await send("192.0.2.1");
+    expect(first.status).toBe(200);
+    const second = await send("192.0.2.2");
+    expect(second.status).toBe(429);
+    expect(second.headers.get("Retry-After")).toBe("300");
+    const codes = await t.run((ctx) =>
+      ctx.runQuery(components.betterAuth.adapter.findMany, {
+        model: "verification",
+        where: [{ field: "identifier", value: "+919876543210" }],
+        paginationOpts: { cursor: null, numItems: 10 },
+      }),
+    );
+    expect(codes.page).toHaveLength(1);
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue(
+        Response.json(
+          provider === "osdigital"
+            ? {
+                status: "OK",
+                data: [
+                  { id: "32-1", mobile: "919876543210", status: "SUBMITTED" },
+                ],
+              }
+            : { type: "success" },
+        ),
+      ),
+    );
+    await t.finishAllScheduledFunctions(vi.runAllTimers);
+  },
+);
 
 it.each([
-  { email: "admin@luma.test", status: 403 },
-  { email: "919876543210@phone.luma.green", status: 200 },
+  { email: "admin@luma.test", status: 200 },
+  { email: "member@luma.test", status: 200 },
 ])(
-  "phone-code sign-in permits members but requires the admin route for $email",
+  "phone-code sign-in enforces the configured factor for $email",
   async ({ email, status }) => {
     vi.stubEnv("SITE_URL", "https://luma.test");
     vi.stubEnv("CONVEX_SITE_URL", "https://test.convex.site");
@@ -102,9 +123,8 @@ it.each([
     });
     expect(result.status).toBe(status);
     const after = await sessions();
-    if (status === 403) {
-      expect(await result.json()).not.toHaveProperty("token");
-      expect(result.headers.get("set-cookie")).toBeNull();
+    if (email === "admin@luma.test") {
+      expect(await result.json()).toMatchObject({ twoFactorRedirect: true });
       expect(after.page).toEqual(before.page);
     } else {
       expect(await result.json()).toHaveProperty("token");

@@ -144,42 +144,25 @@ function MemberApp() {
 it.each([false, true])(
   "handles profile completion without carrying pending admin enrollment into a different identity: %s",
   async (changeIdentity) => {
-    mocks.authenticated = false;
-    mocks.me = null;
-    mocks.session = { data: null };
+    mocks.me = {
+      kind: "admin",
+      hasProfile: false,
+      hasPassword: false,
+      twoFactorEnabled: false,
+    };
     const profile = Promise.withResolvers<null>();
     mocks.profile.mockReturnValue(profile.promise);
-    mocks.signup.mockImplementation(() => {
-      mocks.authenticated = true;
-      mocks.me = {
-        kind: "admin",
-        hasProfile: false,
-        hasPassword: true,
-        twoFactorEnabled: false,
-      };
-      mocks.session = {
-        data: {
-          session: { id: crypto.randomUUID() },
-          user: { id: "person-a" },
-        },
-      };
-      return Promise.resolve({ error: null });
-    });
     const view = render(<AdminApp />);
     const fields = {
       "Full name": "Fixture Admin",
       "Mobile number": "9000000000",
       "Date of birth": "1990-01-01",
       "Last four digits of your Aadhaar": "0000",
-      "Setup token": "fixture-setup-token-at-least-32-characters",
-      Email: "admin@example.test",
-      Password: password,
-      "Password again": password,
     };
     for (const [label, value] of Object.entries(fields))
       fireEvent.change(screen.getByLabelText(label), { target: { value } });
     await userEvent.click(
-      screen.getByRole("button", { name: "Create the admin account" }),
+      screen.getByRole("button", { name: "Save and continue" }),
     );
     await waitFor(() => {
       expect(mocks.profile).toHaveBeenCalledOnce();
@@ -218,7 +201,10 @@ it.each([false, true])(
       ).not.toBeInTheDocument();
       return;
     }
-    expect(mocks.enable).toHaveBeenCalledExactlyOnceWith({ password });
+    await userEvent.click(
+      screen.getByRole("button", { name: "Connect authenticator" }),
+    );
+    expect(mocks.enable).toHaveBeenCalledExactlyOnceWith({});
     expect(await screen.findByLabelText("Code from the app")).toBeVisible();
     expect(screen.queryByLabelText("Password")).not.toBeInTheDocument();
     expect(screen.queryByText(backup)).not.toBeInTheDocument();
@@ -229,8 +215,9 @@ it("keeps admin backup codes until acknowledged when first TOTP verification rot
   const verify = Promise.withResolvers<{ error: null }>();
   mocks.verify.mockReturnValue(verify.promise);
   const view = render(<AdminApp />);
-  await userEvent.type(screen.getByLabelText("Password"), password);
-  await userEvent.click(screen.getByRole("button", { name: "Continue" }));
+  await userEvent.click(
+    screen.getByRole("button", { name: "Connect authenticator" }),
+  );
   fireEvent.change(await screen.findByLabelText("Code from the app"), {
     target: { value: "123456" },
   });
@@ -422,8 +409,9 @@ it("does not publish a previous person's late enrollment response in the current
 
 it("clears admin enrollment when a different person signs in", async () => {
   const view = render(<AdminApp />);
-  await userEvent.type(screen.getByLabelText("Password"), password);
-  await userEvent.click(screen.getByRole("button", { name: "Continue" }));
+  await userEvent.click(
+    screen.getByRole("button", { name: "Connect authenticator" }),
+  );
   expect(screen.getByText("TEST ONLY")).toBeVisible();
   mocks.me = {
     kind: "member",
@@ -439,4 +427,32 @@ it("clears admin enrollment when a different person signs in", async () => {
   expect(screen.queryByText(backup)).not.toBeInTheDocument();
   expect(screen.queryByLabelText("Code from the app")).not.toBeInTheDocument();
   expect(screen.queryByText("TEST ONLY")).not.toBeInTheDocument();
+});
+
+it("discards a late admin enrollment response after the identity changes", async () => {
+  const pending = Promise.withResolvers<{
+    error: null;
+    data: { totpURI: string; backupCodes: string[] };
+  }>();
+  mocks.enable.mockReturnValue(pending.promise);
+  const view = render(<AdminApp />);
+  await userEvent.click(
+    screen.getByRole("button", { name: "Connect authenticator" }),
+  );
+  mocks.session = {
+    data: { session: { id: "other-session" }, user: { id: "person-b" } },
+  };
+  view.rerender(<AdminApp />);
+  await act(async () => {
+    pending.resolve({
+      error: null,
+      data: {
+        totpURI: "otpauth://totp/Fixture?secret=TESTONLY",
+        backupCodes: [backup],
+      },
+    });
+    await pending.promise;
+  });
+  expect(screen.queryByLabelText("Code from the app")).not.toBeInTheDocument();
+  expect(screen.queryByText(backup)).not.toBeInTheDocument();
 });

@@ -39,7 +39,7 @@ function ltr(text: string): string {
   return `\u{2066}${text}\u{2069}`;
 }
 
-const RESEND_AFTER_SECONDS = 30;
+const RESEND_AFTER_SECONDS = 300;
 const CODE_LENGTH = 6;
 const SESSION_WAIT_MS = 20_000;
 /**

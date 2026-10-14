@@ -54,7 +54,7 @@ export function AdminAuthShell({
         </div>
         <p className="mt-8 flex items-start gap-2 border-t pt-4 text-xs leading-relaxed text-muted-foreground">
           <ShieldCheckIcon aria-hidden className="mt-0.5 size-4 shrink-0" />
-          Password and authenticator required for console access.
+          Phone code and authenticator required for console access.
         </p>
       </main>
     </div>

@@ -314,62 +314,16 @@ const sessionShape = z.object({
 });
 
 async function adminAccount() {
-  const t = convexTest(schema, modules);
-  registerAuth(t);
-  const browser = client(t);
-  const password = "test-only original passphrase";
-  const signup = await browser.request(
-    "/sign-up/email",
-    {
-      email: "admin@luma.test",
-      password,
-      name: "Test admin",
-    },
-    { "x-luma-admin-setup-token": SETUP_TOKEN },
-  );
-  expect(signup.status).toBe(200);
-  // Bootstrap authorization is only for creation. Enrollment, sign-in and
-  // recovery must continue to work after the operator removes the token.
-  vi.stubEnv("ADMIN_SETUP_TOKEN", "");
-  const setupResponse = await browser.request("/two-factor/enable", {
-    password,
-  });
+  vi.stubEnv("ADMIN_EMAIL", `${PHONE.slice(1)}@phone.luma.green`);
+  const { t, browser } = await signedIn();
+  const setupResponse = await browser.request("/two-factor/enable", {});
   expect(setupResponse.status).toBe(200);
   const setup = setupSchema.parse(await setupResponse.json());
   const code = await codeFor(t, setup.totpURI);
   expect(
     await responseStatus(browser.request("/two-factor/verify-totp", { code })),
   ).toBe(200);
-  return { t, browser, password, setup };
-}
-
-function recoveryProvider() {
-  vi.stubEnv("RESEND_API_KEY", "test-only-resend-key");
-  vi.stubEnv("AUTH_FROM_EMAIL", "security@luma.test");
-  vi.stubEnv("ADMIN_RESET_FROM_EMAIL", "security@luma.test");
-  const delivery = vi
-    .fn()
-    .mockResolvedValue(Response.json({ id: "test-delivery" }));
-  vi.stubGlobal("fetch", delivery);
-  return delivery;
-}
-
-async function resetToken(t: Test) {
-  const record = z.object({ identifier: z.string() }).parse(
-    await t.run((ctx) =>
-      ctx.runQuery(components.betterAuth.adapter.findOne, {
-        model: "verification",
-        where: [
-          {
-            field: "identifier",
-            operator: "starts_with",
-            value: "reset-password:",
-          },
-        ],
-      }),
-    ),
-  );
-  return record.identifier.slice("reset-password:".length);
+  return { t, browser, setup };
 }
 
 describe("authenticator session boundaries", () => {
@@ -518,7 +472,7 @@ describe("authenticator session boundaries", () => {
       expect(serialized).not.toContain(secret);
   });
 
-  it("rejects admin phone-code sign-in before session or JWT creation", async () => {
+  it("requires the admin authenticator after SMS before session or JWT creation", async () => {
     const { t, browser } = await adminAccount();
     const session = sessionShape.parse(
       await responseBody(browser.request("/get-session")),
@@ -538,10 +492,8 @@ describe("authenticator session boundaries", () => {
       phoneNumber: PHONE,
       code: SMS_CODE,
     });
-    expect(response.status).toBe(403);
-    expect(await response.json()).toMatchObject({
-      code: "ADMIN_PASSWORD_REQUIRED",
-    });
+    expect(response.status).toBe(200);
+    expect(await response.json()).toMatchObject({ twoFactorRedirect: true });
     expect(await responseBody(phoneClient.request("/get-session"))).toBeNull();
     expect(await responseStatus(phoneClient.request("/convex/token"))).toBe(
       401,
@@ -549,128 +501,6 @@ describe("authenticator session boundaries", () => {
     expect(
       await responseStatus(browser.request("/two-factor/disable", {})),
     ).toBe(403);
-  });
-});
-
-describe("configured-admin password recovery", () => {
-  it("fails closed without optional delivery configuration", async () => {
-    const { browser } = await signedIn();
-    const result = await browser.request("/request-password-reset", {
-      email: "admin@luma.test",
-    });
-    expect(result.status).toBe(503);
-    expect(await result.json()).toMatchObject({
-      code: "ADMIN_RECOVERY_UNAVAILABLE",
-    });
-  });
-
-  it("returns the same neutral response for unknown and phone-only accounts without sending email", async () => {
-    const { browser } = await signedIn();
-    const delivery = recoveryProvider();
-    const unknown = await browser.request("/request-password-reset", {
-      email: "unknown@luma.test",
-    });
-    const phone = await browser.request("/request-password-reset", {
-      email: "919000000031@phone.luma.green",
-    });
-    expect(unknown.status).toBe(200);
-    expect(await unknown.json()).toEqual(await phone.json());
-    expect(delivery).not.toHaveBeenCalled();
-  });
-
-  it("sends a fixed-origin link, resets once, revokes sessions and preserves mandatory TOTP", async () => {
-    const { t, browser, setup } = await adminAccount();
-    const delivery = recoveryProvider();
-    const anonymous = client(t);
-    const request = await anonymous.request("/request-password-reset", {
-      email: "admin@luma.test",
-      redirectTo: `${ORIGIN}/admin/reset-password`,
-    });
-    expect(request.status).toBe(200);
-    expect(delivery).toHaveBeenCalledOnce();
-    const options = z
-      .object({ body: z.string() })
-      .parse(delivery.mock.calls[0]?.[1]);
-    const email = z
-      .object({ text: z.string() })
-      .parse(JSON.parse(options.body));
-    expect(email.text).toContain(`${ORIGIN}/admin/reset-password?token=`);
-    const token = await resetToken(t);
-    const newPassword = "test-only replacement passphrase";
-    expect(
-      await responseStatus(
-        anonymous.request("/reset-password", { token, newPassword }),
-      ),
-    ).toBe(200);
-    expect(
-      await responseStatus(
-        anonymous.request("/reset-password", { token, newPassword }),
-      ),
-    ).toBe(400);
-    expect(await responseBody(browser.request("/get-session"))).toBeNull();
-    const login = await anonymous.request("/sign-in/email", {
-      email: "admin@luma.test",
-      password: newPassword,
-    });
-    expect(await login.json()).toMatchObject({ twoFactorRedirect: true });
-    expect(await responseStatus(anonymous.request("/convex/token"))).toBe(401);
-    const code = await codeFor(t, setup.totpURI);
-    expect(
-      await responseStatus(
-        anonymous.request("/two-factor/verify-totp", { code }),
-      ),
-    ).toBe(200);
-    const result = await responseBody(anonymous.request("/get-session"));
-    expect(result).toMatchObject({ user: { twoFactorEnabled: true } });
-    const audit = await t.run((ctx) => ctx.db.query("auditLog").collect());
-    expect(audit.map((row) => row.action)).toContain("auth.password.changed");
-  });
-
-  it("rejects untrusted redirects and reports provider failure without claiming delivery", async () => {
-    const { browser } = await adminAccount();
-    const delivery = recoveryProvider();
-    expect(
-      await responseStatus(
-        browser.request("/request-password-reset", {
-          email: "admin@luma.test",
-          redirectTo: "https://untrusted.test/reset",
-        }),
-      ),
-    ).toBe(403);
-    expect(delivery).not.toHaveBeenCalled();
-    delivery.mockResolvedValue(
-      Response.json({ error: "fixture rejection" }, { status: 503 }),
-    );
-    const result = await browser.request("/request-password-reset", {
-      email: "admin@luma.test",
-    });
-    expect(result.status).toBe(503);
-    expect(await result.json()).toMatchObject({
-      code: "ADMIN_RECOVERY_DELIVERY_FAILED",
-    });
-  });
-
-  it("rejects an expired reset token", async () => {
-    const { t, browser } = await adminAccount();
-    recoveryProvider();
-    expect(
-      await responseStatus(
-        browser.request("/request-password-reset", {
-          email: "admin@luma.test",
-        }),
-      ),
-    ).toBe(200);
-    const token = await resetToken(t);
-    vi.useFakeTimers();
-    vi.setSystemTime(Date.now() + 901_000);
-    expect(
-      await responseStatus(
-        browser.request("/reset-password", {
-          token,
-          newPassword: "test-only replacement passphrase",
-        }),
-      ),
-    ).toBe(400);
   });
 });
 
@@ -708,44 +538,10 @@ describe("atomic authenticator redemption", () => {
       ),
     ).toHaveLength(1);
   });
-
-  it("invalidates a password sign-in challenge created before the reset", async () => {
-    const { t, browser, password, setup } = await adminAccount();
-    recoveryProvider();
-    const pending = client(t);
-    const login = await pending.request("/sign-in/email", {
-      email: "admin@luma.test",
-      password,
-    });
-    expect(await login.json()).toMatchObject({ twoFactorRedirect: true });
-    const success = await browser.request("/request-password-reset", {
-      email: "admin@luma.test",
-    });
-    const unknown = await browser.request("/request-password-reset", {
-      email: "unknown@luma.test",
-    });
-    expect(await success.json()).toEqual(await unknown.json());
-    const token = await resetToken(t);
-    expect(
-      await responseStatus(
-        browser.request("/reset-password", {
-          token,
-          newPassword: "test-only replacement passphrase",
-        }),
-      ),
-    ).toBe(200);
-    const code = await codeFor(t, setup.totpURI);
-    expect(
-      await responseStatus(
-        pending.request("/two-factor/verify-totp", { code }),
-      ),
-    ).toBe(401);
-  });
 });
 
 it("cannot mint a password credential for a phone identity with a reset token", async () => {
   const { t, browser } = await signedIn();
-  recoveryProvider();
   const session = sessionShape.parse(
     await responseBody(browser.request("/get-session")),
   );
@@ -771,7 +567,7 @@ it("cannot mint a password credential for a phone identity with a reset token", 
         newPassword: "test-only replacement passphrase",
       }),
     ),
-  ).toBe(400);
+  ).toBe(403);
   const credential = await t.run((ctx) =>
     ctx.runQuery(components.betterAuth.adapter.findOne, {
       model: "account",

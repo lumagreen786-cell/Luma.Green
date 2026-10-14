@@ -6,11 +6,7 @@ import { components } from "./_generated/api";
 import { mutation, query } from "./_generated/server";
 import { authComponent } from "./auth";
 import { requireAdmin, requireUser } from "./lib/access";
-import {
-  getAdminSetupToken,
-  isAdminEmail,
-  validateAdminProfile,
-} from "./lib/admin";
+import { isAdminEmail, validateAdminProfile } from "./lib/admin";
 import { codeDelivery } from "./lib/sms";
 
 /** What the sign-in screens can offer on this deployment. Public. */
@@ -24,6 +20,11 @@ export const signInOptions = query({
   handler: async (ctx) => {
     const isPhone =
       codeDelivery({
+        OSDIGITAL_API_KEY: process.env.OSDIGITAL_API_KEY,
+        OSDIGITAL_SENDER_ID: process.env.OSDIGITAL_SENDER_ID,
+        OSDIGITAL_ENTITY_ID: process.env.OSDIGITAL_ENTITY_ID,
+        OSDIGITAL_TEMPLATE_ID: process.env.OSDIGITAL_TEMPLATE_ID,
+        OSDIGITAL_OTP_MESSAGE: process.env.OSDIGITAL_OTP_MESSAGE,
         MSG91_AUTH_KEY: process.env.MSG91_AUTH_KEY,
         MSG91_OTP_TEMPLATE_ID: process.env.MSG91_OTP_TEMPLATE_ID,
         AUTH_DEV_MODE: process.env.AUTH_DEV_MODE,
@@ -32,11 +33,8 @@ export const signInOptions = query({
       (await ctx.db.query("adminProfiles").first()) !== null;
     return {
       phone: isPhone,
-      email: authEmailEnv() !== null,
-      adminSetup:
-        Boolean(process.env.ADMIN_EMAIL?.trim()) &&
-        Boolean(getAdminSetupToken()) &&
-        !isAdminExists,
+      email: false,
+      adminSetup: Boolean(process.env.ADMIN_EMAIL?.trim()) && !isAdminExists,
     };
   },
 });

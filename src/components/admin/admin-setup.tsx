@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useConvexAuth, useMutation, useQuery } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { type ComponentProps, useEffect, useRef, useState } from "react";
@@ -12,73 +12,29 @@ import {
 } from "react-hook-form";
 
 import { isConvexConfigured } from "@/components/providers/convex-provider";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
-import { Skeleton } from "@/components/ui/skeleton";
 import { authClient } from "@/lib/auth-client";
 
 import { api } from "../../../convex/_generated/api";
 import { AdminUnavailable } from "./admin-unavailable";
 import { AuthenticatorStep } from "./authenticator-step";
 import { BackupCodes } from "./backup-codes";
-import { passwordErrorMessage, signUpErrorMessage } from "./errors";
-import { PasswordInput } from "./password-input";
-import {
-  adminAccountSchema,
-  type AdminAccountValues,
-  adminProfileSchema,
-  type AdminProfileValues,
-} from "./schemas";
-import { useAdminSignOut } from "./use-admin-sign-out";
+import { adminProfileSchema, type AdminProfileValues } from "./schemas";
 
 interface Enrolment {
   totpURI: string;
   backupCodes: string[];
 }
-
-/**
- * `/admin/setup`, run once: create the admin account and identity record,
- * enrol an authenticator app, save the backup codes. Picks up where it left
- * off if the tab was closed half-way.
- */
 export function AdminSetup() {
   return isConvexConfigured ? <SetupIdentity /> : <AdminUnavailable />;
 }
-
-/** Preserve initial signup and same-user session rotation, clear an old identity. */
 function SetupIdentity() {
   const session = authClient.useSession();
-  const userId = session.data?.user.id;
-  const [identity, setIdentity] = useState({ userId, generation: 0 });
-  if (identity.userId !== userId) {
-    setIdentity({
-      userId,
-      generation: identity.generation + (identity.userId ? 1 : 0),
-    });
-  }
-  return <SetupSteps key={identity.generation} />;
+  return <SetupSteps key={session.data?.user.id ?? "signed-out"} />;
 }
-
 function SetupSteps() {
-  const router = useRouter();
-  const options = useQuery(api.identity.signInOptions);
-  const me = useQuery(api.identity.me);
-  const { isAuthenticated } = useConvexAuth();
-  const saveAdminProfile = useMutation(api.identity.saveAdminProfile);
-
-  // Account created, waiting for Convex to see the session before saving the
-  // profile. The password stays in memory only long enough to enrol.
-  const [pending, setPending] = useState<{
-    profile: AdminProfileValues;
-    password: string;
-  } | null>(null);
-  const [enrolment, setEnrolment] = useState<Enrolment | null>(null);
-  const [showCodes, setShowCodes] = useState(false);
-  const [failure, setFailure] = useState<string | null>(null);
-  const isEnrolling = useRef(false);
   const mounted = useRef(true);
   useEffect(() => {
     mounted.current = true;
@@ -86,37 +42,46 @@ function SetupSteps() {
       mounted.current = false;
     };
   }, []);
-
-  useEffect(() => {
-    if (!pending || !isAuthenticated || isEnrolling.current) return;
-    isEnrolling.current = true;
-    const { profile, password } = pending;
-    const isMounted = () => mounted.current;
-    void (async () => {
-      try {
-        await saveAdminProfile(profile);
-        if (!isMounted()) return;
-        const { data, error } = await authClient.twoFactor.enable({
-          password,
-        });
-        if (!isMounted()) return;
-        if (error) setFailure(passwordErrorMessage(error));
-        else setEnrolment(data);
-      } catch {
-        if (isMounted()) setFailure("Couldn't save your details.");
-      } finally {
-        if (isMounted()) setPending(null);
-      }
-    })();
-  }, [pending, isAuthenticated, saveAdminProfile]);
-
-  const isFinished =
-    me?.kind === "admin" && me.twoFactorEnabled && !enrolment && !showCodes;
+  const router = useRouter();
+  const me = useQuery(api.identity.me);
+  const saveProfile = useMutation(api.identity.saveAdminProfile);
+  const [enrolment, setEnrolment] = useState<Enrolment | null>(null);
+  const [showCodes, setShowCodes] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const isFinished = me?.kind === "admin" && me.twoFactorEnabled && !enrolment;
   useEffect(() => {
     if (isFinished) router.replace("/admin");
   }, [isFinished, router]);
-
-  if (enrolment && showCodes) {
+  async function enrol() {
+    setBusy(true);
+    setError(null);
+    try {
+      const result = await authClient.twoFactor.enable({});
+      if (!mounted.current) return;
+      if (result.error)
+        setError(
+          "Sign in with a new phone code, then try setup again within five minutes.",
+        );
+      else setEnrolment(result.data);
+    } catch {
+      if (mounted.current)
+        setError("Could not start authenticator setup. Try again.");
+    } finally {
+      if (mounted.current) setBusy(false);
+    }
+  }
+  if (me === undefined || isFinished) return <p role="status">Loading…</p>;
+  if (me?.kind !== "admin")
+    return (
+      <div className="flex flex-col gap-5">
+        <p>Sign in with the configured admin phone number to continue.</p>
+        <Button asChild>
+          <Link href="/admin/login">Go to phone sign-in</Link>
+        </Button>
+      </div>
+    );
+  if (enrolment && showCodes)
     return (
       <BackupCodes
         codes={enrolment.backupCodes}
@@ -125,8 +90,7 @@ function SetupSteps() {
         }}
       />
     );
-  }
-  if (enrolment) {
+  if (enrolment)
     return (
       <AuthenticatorStep
         totpURI={enrolment.totpURI}
@@ -135,155 +99,32 @@ function SetupSteps() {
         }}
       />
     );
-  }
-  if (failure) {
+  if (!me.adminName)
     return (
-      <Alert variant="destructive">
-        <AlertTitle>Setup stopped</AlertTitle>
-        <AlertDescription>
-          {failure} Reload the page to carry on from where you left off.
-        </AlertDescription>
-      </Alert>
-    );
-  }
-  if (pending || options === undefined || me === undefined || isFinished) {
-    return <SetupSkeleton />;
-  }
-  if (me?.kind === "member") return <SignedInAsMember />;
-  if (me?.kind === "admin") {
-    return me.adminName ? (
-      <PasswordToEnrol onEnrol={setEnrolment} />
-    ) : (
       <ProfileForm
         onSave={async (profile) => {
-          await saveAdminProfile(profile);
+          await saveProfile(profile);
         }}
       />
     );
-  }
-  return options.adminSetup ? (
-    <AccountForm onCreated={setPending} />
-  ) : (
-    <SetupClosed />
-  );
-}
-
-function AccountForm({
-  onCreated,
-}: {
-  onCreated: (next: { profile: AdminProfileValues; password: string }) => void;
-}) {
-  const {
-    register,
-    handleSubmit,
-    setError,
-    resetField,
-    formState: { errors, isSubmitting },
-  } = useForm<AdminAccountValues>({
-    resolver: zodResolver(adminAccountSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      setupToken: "",
-      phone: "",
-      dateOfBirth: "",
-      aadhaarLast4: "",
-    },
-  });
-
-  async function onSubmit(values: AdminAccountValues) {
-    try {
-      const { error } = await authClient.signUp.email({
-        email: values.email,
-        password: values.password,
-        name: values.name,
-        fetchOptions: {
-          headers: { "x-luma-admin-setup-token": values.setupToken },
-        },
-      });
-      if (error) {
-        setError("root", { message: signUpErrorMessage(error) });
-        return;
-      }
-      resetField("setupToken");
-      onCreated({
-        profile: {
-          name: values.name,
-          phone: values.phone,
-          dateOfBirth: values.dateOfBirth,
-          aadhaarLast4: values.aadhaarLast4,
-        },
-        password: values.password,
-      });
-    } catch {
-      setError("root", { message: signUpErrorMessage({}) });
-    }
-  }
-
   return (
-    <form
-      noValidate
-      className="flex flex-col gap-5"
-      onSubmit={(event) => {
-        void handleSubmit(onSubmit)(event);
-      }}
-    >
-      <ProfileFields
-        fields={{
-          name: register("name"),
-          phone: register("phone"),
-          dateOfBirth: register("dateOfBirth"),
-          aadhaarLast4: register("aadhaarLast4"),
-        }}
-        errors={errors}
-      />
-      <Separator />
-      <Field
-        id="setupToken"
-        label="Setup token"
-        hint="Enter the setup token from the deployment owner."
-        error={errors.setupToken}
-        type="password"
-        autoComplete="off"
-        {...register("setupToken")}
-      />
-      <Field
-        id="email"
-        label="Email"
-        hint="Must match ADMIN_EMAIL on this deployment."
-        error={errors.email}
-        type="email"
-        autoComplete="username"
-        {...register("email")}
-      />
-      <Field
-        id="password"
-        label="Password"
-        hint="At least 12 characters. A password manager helps."
-        error={errors.password}
-        type="password"
-        autoComplete="new-password"
-        {...register("password")}
-      />
-      <Field
-        id="confirmPassword"
-        label="Password again"
-        error={errors.confirmPassword}
-        type="password"
-        autoComplete="new-password"
-        {...register("confirmPassword")}
-      />
-      {errors.root ? (
-        <p role="alert" className="text-sm text-destructive">
-          {errors.root.message}
+    <div className="flex flex-col gap-5">
+      <p>Connect an authenticator app to finish admin setup.</p>
+      {error ? (
+        <p role="alert" className="text-destructive">
+          {error}
         </p>
       ) : null}
-      <Button type="submit" size="lg" disabled={isSubmitting}>
-        {isSubmitting ? "Creating the account…" : "Create the admin account"}
+      <Button
+        disabled={busy}
+        onClick={() => {
+          void enrol();
+        }}
+      >
+        {busy ? "Preparing…" : "Connect authenticator"}
       </Button>
-    </form>
+      <Link href="/admin/login">Verify phone again</Link>
+    </div>
   );
 }
 
@@ -393,58 +234,6 @@ function ProfileFields({
   );
 }
 
-function PasswordToEnrol({
-  onEnrol,
-}: {
-  onEnrol: (enrolment: Enrolment) => void;
-}) {
-  const {
-    register,
-    handleSubmit,
-    setError,
-    formState: { errors, isSubmitting },
-  } = useForm<{ password: string }>({ defaultValues: { password: "" } });
-
-  async function onSubmit({ password }: { password: string }) {
-    try {
-      const { data, error } = await authClient.twoFactor.enable({ password });
-      if (error) {
-        setError("password", { message: passwordErrorMessage(error) });
-        return;
-      }
-      onEnrol(data);
-    } catch {
-      setError("password", { message: passwordErrorMessage({}) });
-    }
-  }
-
-  return (
-    <form
-      noValidate
-      className="flex flex-col gap-5"
-      onSubmit={(event) => {
-        void handleSubmit(onSubmit)(event);
-      }}
-    >
-      <p className="text-sm text-muted-foreground">
-        One step left: connect an authenticator app. Enter your password to
-        start.
-      </p>
-      <Field
-        id="password"
-        label="Password"
-        error={errors.password}
-        type="password"
-        autoComplete="current-password"
-        {...register("password", { required: "Enter your password." })}
-      />
-      <Button type="submit" size="lg" disabled={isSubmitting}>
-        {isSubmitting ? "Checking…" : "Continue"}
-      </Button>
-    </form>
-  );
-}
-
 function Field({
   id,
   label,
@@ -461,7 +250,7 @@ function Field({
   let describedBy: string | undefined;
   if (error) describedBy = `${id}-error`;
   else if (hint) describedBy = `${id}-hint`;
-  const Control = input.type === "password" ? PasswordInput : Input;
+  const Control = Input;
   return (
     <div className="flex flex-col gap-2">
       <Label htmlFor={id}>{label}</Label>
@@ -470,11 +259,6 @@ function Field({
         aria-invalid={error ? true : undefined}
         aria-describedby={describedBy}
         className={className}
-        {...(id === "password" &&
-        input.type === "password" &&
-        input.autoComplete === "new-password"
-          ? { showStrength: true }
-          : {})}
         {...input}
       />
       {error ? (
@@ -487,57 +271,6 @@ function Field({
           {hint}
         </p>
       ) : null}
-    </div>
-  );
-}
-
-function SignedInAsMember() {
-  const { signOut, busy, error } = useAdminSignOut();
-  return (
-    <div className="flex flex-col gap-5">
-      <p className="text-sm text-muted-foreground">
-        You&apos;re signed in with a phone number. Sign out to set up the admin
-        account.
-      </p>
-      <Button
-        variant="outline"
-        disabled={busy}
-        onClick={() => {
-          void signOut();
-        }}
-      >
-        Sign out
-      </Button>
-      {error ? (
-        <p role="alert" className="text-sm text-destructive">
-          {error}
-        </p>
-      ) : null}
-    </div>
-  );
-}
-
-function SetupClosed() {
-  return (
-    <div className="flex flex-col gap-5">
-      <p className="text-sm text-muted-foreground">
-        Setup is closed: either the admin account already exists, or its email
-        and setup token are not configured on this deployment.
-      </p>
-      <Button asChild variant="outline">
-        <Link href="/admin/login">Go to sign-in</Link>
-      </Button>
-    </div>
-  );
-}
-
-function SetupSkeleton() {
-  return (
-    <div className="flex flex-col gap-5" aria-busy="true">
-      <Skeleton className="h-5 w-2/3" />
-      <Skeleton className="h-9 w-full" />
-      <Skeleton className="h-9 w-full" />
-      <Skeleton className="h-10 w-full" />
     </div>
   );
 }

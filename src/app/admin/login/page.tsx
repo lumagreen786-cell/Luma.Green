@@ -9,7 +9,7 @@ export default function AdminLoginPage() {
   return (
     <AdminAuthShell
       title="Admin sign-in"
-      description="Your email and password, then the code from your authenticator app."
+      description="Your phone code, then the code from your authenticator app."
     >
       <AdminLogin />
     </AdminAuthShell>

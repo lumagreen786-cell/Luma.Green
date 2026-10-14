@@ -1,8 +1,6 @@
 import { createClient, type GenericCtx } from "@convex-dev/better-auth";
 import { convex } from "@convex-dev/better-auth/plugins";
-import type { DBAdapter } from "better-auth";
 import { APIError, createAuthMiddleware } from "better-auth/api";
-import { constantTimeEqual } from "better-auth/crypto";
 import { betterAuth, type BetterAuthOptions } from "better-auth/minimal";
 import { phoneNumber } from "better-auth/plugins";
 
@@ -11,20 +9,8 @@ import { components, internal } from "./_generated/api";
 import type { DataModel } from "./_generated/dataModel";
 import authConfig from "./auth.config";
 import authSchema from "./betterAuth/schema";
-import {
-  adminSessionExpiry,
-  getAdminSetupToken,
-  isAdminEmail,
-} from "./lib/admin";
-import { clearPasswordResetProofs } from "./lib/adminRecovery";
+import { adminSessionExpiry, isAdminEmail } from "./lib/admin";
 import { sendLocalPhoneCode } from "./lib/authEmail";
-import {
-  guardEmailRecovery,
-  requireEmailDelivery,
-  sendEmailVerification,
-  sendPasswordReset,
-} from "./lib/emailAuth";
-import { PHONE_EMAIL_DOMAIN } from "./lib/phone";
 import { isIndianMobile, phoneEmail } from "./lib/phone";
 import { phoneTwoFactor } from "./lib/phoneTwoFactor";
 import { securityAudit } from "./lib/securityAudit";
@@ -34,9 +20,9 @@ import { smsPhoneHash } from "./lib/smsLimits";
 /**
  * Sign-in for Luma.Green — docs/architecture/auth.md.
  *
- * - Members: verified email + password, or phone number + 6-digit SMS code.
- * - The one admin: email + password, then an authenticator-app code. Email
- *   sign-up requires `ADMIN_EMAIL` and the operator's `ADMIN_SETUP_TOKEN`.
+ * - Everyone: phone number + 6-digit SMS code.
+ * - The configured admin must also verify an authenticator-app code.
+ *   ADMIN_EMAIL stores the internal phone identity, never an email login.
  */
 export const authComponent: ReturnType<
   typeof createClient<DataModel, typeof authSchema>
@@ -70,6 +56,11 @@ async function reserveCodeRequest(
   const phone = typeof body?.phoneNumber === "string" ? body.phoneNumber : "";
   if (!isIndianMobile(phone)) return; // The plugin supplies its validation error.
   const delivery = codeDelivery({
+    OSDIGITAL_API_KEY: process.env.OSDIGITAL_API_KEY,
+    OSDIGITAL_SENDER_ID: process.env.OSDIGITAL_SENDER_ID,
+    OSDIGITAL_ENTITY_ID: process.env.OSDIGITAL_ENTITY_ID,
+    OSDIGITAL_TEMPLATE_ID: process.env.OSDIGITAL_TEMPLATE_ID,
+    OSDIGITAL_OTP_MESSAGE: process.env.OSDIGITAL_OTP_MESSAGE,
     MSG91_AUTH_KEY: process.env.MSG91_AUTH_KEY,
     MSG91_OTP_TEMPLATE_ID: process.env.MSG91_OTP_TEMPLATE_ID,
     AUTH_DEV_MODE: process.env.AUTH_DEV_MODE,
@@ -100,42 +91,6 @@ async function reserveCodeRequest(
   }
 }
 
-/** Keep phone identities separate until there is a verified linking workflow. */
-async function guardPhoneIdentity(
-  path: string,
-  body: unknown,
-  adapter: DBAdapter,
-) {
-  if (body === null || typeof body !== "object") return;
-  if (
-    (path === "/sign-up/email" || path === "/update-user") &&
-    ("phoneNumber" in body || "phoneNumberVerified" in body)
-  )
-    throw new APIError("FORBIDDEN", {
-      code: "UNSUPPORTED_PHONE_ACCOUNT_CHANGE",
-      message: "Use phone sign-in.",
-    });
-  if (
-    path !== "/phone-number/verify" ||
-    !("phoneNumber" in body) ||
-    typeof body.phoneNumber !== "string"
-  )
-    return;
-  const existing = await adapter.findOne<{ email: string }>({
-    model: "user",
-    where: [{ field: "phoneNumber", value: body.phoneNumber }],
-  });
-  // Reject old/imported cross-method bindings before the phone plugin marks
-  // the number verified or creates any session.
-  if (existing && existing.email !== phoneEmail(body.phoneNumber))
-    throw new APIError("FORBIDDEN", {
-      code: isAdminEmail(existing.email)
-        ? "ADMIN_PASSWORD_REQUIRED"
-        : "UNSUPPORTED_PHONE_ACCOUNT_CHANGE",
-      message: "Use email sign-in.",
-    });
-}
-
 /**
  * The options on their own, so the component (convex/betterAuth/adapter.ts)
  * and the schema generator (scripts/generate-auth-schema.mts) share them.
@@ -148,24 +103,7 @@ export const createAuthOptions = (ctx: GenericCtx<DataModel>) =>
     // Keep the same origin/CSRF boundary in tests and production.
     advanced: { disableOriginCheck: false, disableCSRFCheck: false },
     database: authComponent.adapter(ctx),
-    emailAndPassword: {
-      enabled: true,
-      minPasswordLength: 12,
-      maxPasswordLength: 128,
-      requireEmailVerification: true,
-      sendResetPassword: sendPasswordReset,
-      onPasswordReset: async ({ user }) => {
-        await clearPasswordResetProofs(ctx, user.id);
-      },
-      resetPasswordTokenExpiresIn: 15 * 60,
-      revokeSessionsOnPasswordReset: true,
-    },
-    emailVerification: {
-      sendVerificationEmail: sendEmailVerification,
-      sendOnSignUp: true,
-      autoSignInAfterVerification: false,
-      expiresIn: 15 * 60,
-    },
+    emailAndPassword: { enabled: false },
     // Kept in the database: in memory, each Convex request could start with a
     // clean slate. The plugins set the limits (phone: 10 a minute; two-factor:
     // 3 per 10 seconds), per client IP.
@@ -173,11 +111,7 @@ export const createAuthOptions = (ctx: GenericCtx<DataModel>) =>
       enabled: true,
       storage: "database",
       customRules: {
-        // Public verification keys contain no credentials. Convex verifiers share
-        // an IP; limiting discovery can reject otherwise valid user sessions.
         "/convex/jwks": (request, rule) => request.method !== "GET" && rule,
-        "/sign-up/email": { window: 15 * 60, max: 5 },
-        "/send-verification-email": { window: 15 * 60, max: 3 },
         "/request-password-reset": { window: 15 * 60, max: 3 },
         "/reset-password": { window: 15 * 60, max: 5 },
       },
@@ -212,79 +146,42 @@ export const createAuthOptions = (ctx: GenericCtx<DataModel>) =>
     },
     hooks: {
       before: createAuthMiddleware(async (hookCtx) => {
-        await guardPhoneIdentity(
-          hookCtx.path,
-          hookCtx.body,
-          hookCtx.context.adapter,
-        );
+        if (
+          hookCtx.path === "/update-user" &&
+          hookCtx.body &&
+          ("phoneNumber" in hookCtx.body ||
+            "phoneNumberVerified" in hookCtx.body)
+        ) {
+          throw new APIError("FORBIDDEN", {
+            code: "UNSUPPORTED_PHONE_ACCOUNT_CHANGE",
+            message: "Use phone verification.",
+          });
+        }
         if (hookCtx.path === "/phone-number/send-otp") {
           await reserveCodeRequest(ctx, hookCtx.body);
           return;
         }
-        const body = hookCtx.body as { email?: unknown } | undefined;
-        const email = typeof body?.email === "string" ? body.email : "";
-        const isAdmin = isAdminEmail(email);
-        const context = hookCtx.context;
         if (
-          isAdmin &&
-          (hookCtx.path === "/sign-up/email" ||
-            hookCtx.path === "/sign-in/email")
-        ) {
-          // Options are created for this HTTP request. Admin bootstrap remains
-          // password + owner token, then mandatory authenticator enrollment.
-          context.options.emailAndPassword = {
-            ...context.options.emailAndPassword,
-            enabled: true,
-            requireEmailVerification: false,
-          };
-          context.options.emailVerification = {
-            ...context.options.emailVerification,
-            sendOnSignUp: false,
-          };
-        }
-        if (
-          hookCtx.path === "/send-verification-email" ||
-          (!isAdmin && hookCtx.path === "/sign-up/email")
-        ) {
-          if (email.toLowerCase().endsWith(`@${PHONE_EMAIL_DOMAIN}`))
-            throw new APIError("FORBIDDEN", {
-              code: "EMAIL_NOT_ALLOWED",
-              message: "Use phone sign-in.",
-            });
-          requireEmailDelivery();
-          context.runInBackgroundOrAwait = async (task) => {
-            await task;
-          };
-        }
-        if (!isAdmin || hookCtx.path !== "/sign-up/email") return;
-        const setupToken = getAdminSetupToken();
-        const provided = hookCtx.headers?.get("x-luma-admin-setup-token");
-        if (
-          !setupToken ||
-          !provided ||
-          !constantTimeEqual(setupToken, provided)
+          [
+            "/sign-in/email",
+            "/sign-up/email",
+            "/request-password-reset",
+            "/reset-password",
+            "/send-verification-email",
+            "/verify-email",
+            "/change-email",
+            "/set-password",
+            "/change-password",
+          ].includes(hookCtx.path)
         ) {
           throw new APIError("FORBIDDEN", {
-            code: "ADMIN_SETUP_REQUIRED",
-            message: "Admin setup requires a valid setup token.",
+            code: "PHONE_LOGIN_REQUIRED",
+            message: "Use phone verification to sign in.",
           });
         }
       }),
     },
     plugins: [
-      {
-        id: "admin-recovery-guard",
-        hooks: {
-          before: [
-            {
-              matcher: (hookCtx) =>
-                hookCtx.path === "/request-password-reset" ||
-                hookCtx.path === "/reset-password",
-              handler: guardEmailRecovery,
-            },
-          ],
-        },
-      },
       phoneTwoFactor(),
       convex({ authConfig }),
       phoneNumber({
@@ -292,16 +189,6 @@ export const createAuthOptions = (ctx: GenericCtx<DataModel>) =>
         expiresIn: CODE_TTL_MINUTES * 60,
         allowedAttempts: 5,
         phoneNumberValidator: isIndianMobile,
-        callbackOnVerification: ({ user }) => {
-          // Admin sessions require password sign-in followed by TOTP.
-          if (isAdminEmail(user.email)) {
-            throw new APIError("FORBIDDEN", {
-              code: "ADMIN_PASSWORD_REQUIRED",
-              message: "Use admin sign-in.",
-            });
-          }
-          return Promise.resolve();
-        },
         // Hand the code to an action through the scheduler: the request
         // returns at once, and nothing is left as a dangling promise that
         // Convex could drop.
