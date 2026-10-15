@@ -11,7 +11,33 @@ export const vBuyerQualityDecision = v.union(
   v.literal("rejected"),
   v.literal("conditional"),
 );
+export const vR2Reference = v.object({
+  accountId: v.string(),
+  bucket: v.string(),
+  key: v.string(),
+});
 export const qualityFileTables = {
+  qualityUploads: defineTable({
+    orgId: v.id("orgs"),
+    profileId: v.id("profiles"),
+    inspectionId: v.id("lotInspections"),
+    shareWithBuyer: v.boolean(),
+    r2: vR2Reference,
+    size: v.number(),
+    sha256: v.string(),
+    state: v.union(
+      v.literal("pending"),
+      v.literal("attached"),
+      v.literal("deleting"),
+    ),
+    fileId: v.optional(v.id("qualityAttachments")),
+    createdAt: v.number(),
+    cleanupAt: v.number(),
+    attempts: v.number(),
+  })
+    .index("by_profile_created", ["profileId", "createdAt"])
+    .index("by_inspection_state", ["inspectionId", "state"])
+    .index("by_state_cleanup", ["state", "cleanupAt"]),
   qualityAttachments: defineTable({
     orgId: v.id("orgs"),
     inspectionId: v.id("lotInspections"),
@@ -21,7 +47,8 @@ export const qualityFileTables = {
     contentType: v.string(),
     size: v.number(),
     sha256: v.string(),
-    storageId: v.id("_storage"),
+    storageId: v.optional(v.id("_storage")),
+    r2: v.optional(vR2Reference),
     createdBy: v.id("profiles"),
     createdAt: v.number(),
     withdrawnAt: v.optional(v.number()),

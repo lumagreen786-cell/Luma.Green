@@ -1,3 +1,148 @@
+## Technical release closeout — 15 October 2026
+
+Owner authorization now includes finishing backend work, tests, commit, push and
+production deployment. UI redesign and new organization/task screens remain on
+hold. Native work is still on hold. Earlier approved Turnstile native policy
+edits are preserved. The owner also approved only the Expo 57.0.30 patch and
+required dependency updates after hosted compatibility checks requested it.
+No native binaries are released.
+
+New-site requests now use separate application IDs, canonical validation and
+platform approval. Personal onboarding keeps its original no-argument reader.
+Identity files remain applicant/admin-only. Assignment/comment inbox notices and
+scheduled due reminders check current record access; stale timers and duplicate
+notices are ignored, and revoked access cancels pending push.
+
+Cloudflare setup is consolidated in `docs/operations/cloudflare-setup.md`, linked
+from the README. Production Convex has no R2/Turnstile settings at this check.
+Older R2 settings exist in Vercel, but the runtime needs `R2_BUCKET_NAME` and the
+credentials on Convex. Do not assume those old entries are valid credentials.
+The verified production alias is `lumagreen.vercel.app`; `luma.green` was not
+configured as an alias and did not resolve during the check. Public browser
+bundles confirm the `outstanding-buzzard-942` backend. An attempted full Vercel
+environment export was rejected by automatic approval review because it would
+download unrelated secrets; the public-bundle check avoided that export.
+Both optional services stay off. A public translated privacy notice remains a
+Turnstile activation gate. No Cloudflare account or paid service was created.
+
+The isolated local backend accepted the final schema/functions. The production
+Convex dry run passed, with no index deletions. It reported that the Convex team
+is above free-plan limits; billing was not changed. Final local `pnpm check` passed: 281 test files / 2,396 tests, web/Convex
+type checks, lint (31 existing warnings, no errors), and 73 native policy tests
+plus their type checks. Formatting and diff checks passed. Both isolated
+Turnstile browser tests passed. The production build passed with optional Convex/Turnstile settings empty.
+Its first attempt ran out of local disk space; deleting only this checkout's
+generated `.next` tree and rebuilding succeeded. All 753 standard local browser tests passed. Core commit `62c327c` passed the
+five required hosted web checks and produced a ready Vercel preview. Its native
+compatibility check required Expo 57.0.30; the approved patch now passes local
+compatibility and all 73 native policy tests/types. Remote checks for the patch
+and production deployment remain release gates.
+
+The first full unit run passed 2,393 tests and exposed a team-review capture hash
+change from a duplicated notification catalog key. Task notices now reuse the
+existing generic translated title. All catalogs and capture hashes remain
+unchanged, and the original freshness assertions remain enabled. The focused
+notification, collaboration and team-review suites passed 24 tests afterward.
+No guide or Word rebuild was performed.
+
+## Organization backend and UI hold — 15 October 2026
+
+The owner approved organization/workspace implementation, then explicitly put
+all UI redesign on hold for a later page-by-page pass. Expo/mobile and
+Electron/desktop work are also on hold. `AGENTS.md` records these priorities.
+Earlier native Turnstile changes remain intact; this increment did not edit
+native files or public web screens.
+
+Company governance now sits above existing approved sites. Site membership
+remains the operational authority. Verified-phone invitations support either
+scope without email/password enrollment or automatic SMS. Record tasks and
+versioned comments cover pickups, trades, inspections and assigned Saathi jobs;
+internal Luma tasks have a separate scope. Role changes protect the final owner,
+sensitive grants require a recent session, and state changes write audit events.
+
+Read `docs/architecture/organizations.md` for the actual API contract and limits.
+The larger proposal is a roadmap, not a completion claim: company/team screens,
+phone-invite pages and task controls remain UI work. The later closeout above
+adds inbox reminders and regulated-site requests. Existing support messaging is retained.
+No automatic parent-wide operational access, new legal recipient inheritance,
+cross-site stock transfer or migration framework was introduced.
+
+Core backend verification: all 280 unit-test files / 2,387 tests passed with
+one worker and a local 30-second test limit. The ordinary five-second limit
+hit timeouts under host load; the first full attempt was stopped and rerun
+without changing assertions or CI settings. The 17 initial new tests also passed
+at the normal limit; the final suite includes 20 new tests. The 88 related
+workspace/messaging/quality-file tests passed. Web and Convex type checks passed.
+Full lint passed with 31 existing warnings and no errors. Formatting and
+`git diff --check` passed. The isolated anonymous backend on ports 3290/3291
+accepted the new schema and functions after a retry: its first attempt exceeded
+the one-second auth-config execution limit under load. Cloud bindings were
+explicitly cleared. No hosted deployment was changed.
+
+No production release or provider account configuration is claimed. All changes remain local
+on `feat/otp-turnstile` with the prior Turnstile/R2 work. Guide impact is deferred:
+there are no new screens to capture and the owner did not request a guide update.
+
+## R2 quality storage implementation — 15 October 2026
+
+The owner approved R2 implementation and confirmed that this is an internal
+prototype with no real user data. `AGENTS.md` now records permission to change
+schemas/reset prototype data without migration until rollout is declared.
+No existing data was deleted. Organization/workspace runtime changes remain on
+hold as a plan; its migration notes now defer to the prototype policy.
+
+New quality attachments support private R2 through the existing validated byte
+action. The 2 MiB limit and private HTTP download contract remain. Application
+and identity documents still use Convex. Unconfigured quality uploads also use
+Convex. This is deliberate optional-service behavior, not an outage fallback.
+R2 uses a server-only aws4fetch signer, recorded account/bucket/key, SHA-256 read
+checks, quota reservations and a retryable cleanup cron. No browser signed URL
+or new native origin is required. No cloud resources or credentials were created.
+
+Verification: 278 unit-test files / 2,367 tests passed; the focused storage suite
+passed 48 tests. Type checks passed. Full lint passed with 31 existing warnings
+and no errors. Convex code generation succeeded. An isolated temporary anonymous
+backend on ports 3290/3291 accepted the schema/functions and ran cleanup with
+zero failures; it contained no cloud binding or R2 credentials. One retry was
+rejected by automatic review for not explicitly clearing inherited cloud bindings;
+the corrected command cleared them and succeeded. No cloud deployment was made.
+Live R2 upload/read/delete and native-device acceptance remain unverified until
+the owner configures a private bucket. See the README and R2 setup document.
+No UI layout changed and no user-guide rebuild was requested.
+
+## Storage and organization planning — 15 October 2026
+
+The owner requested a durable setup reminder and plans for R2 and collaboration.
+The root README now includes Turnstile configuration and activation steps.
+`docs/architecture/r2-storage-plan.md` and
+`docs/product/organization-workspaces-plan.md` are proposals only. No R2 or
+organization runtime changes, bucket provisioning or migration were made.
+Existing org/team access and private file routes informed the plans. The parent
+model, phone-bound invitations, site approval and parent access policy need review
+before implementation. Existing Turnstile changes remain local and uncommitted.
+No user-guide rebuild was requested; these documents do not change the UI.
+
+## OTP bot protection — 15 October 2026
+
+Owner approved invisible Turnstile for all phone-code sends/resends. Shared client
+and Convex HTTP-hook enforcement are implemented; deployment remains off until
+keys, hostnames and enforcement are configured. Native shell challenge-frame
+allowances need rebuilt binaries and real device acceptance. No external account,
+provider keys, production deployment or storage migration was created.
+See `docs/operations/turnstile.md` for rollout, test boundaries and pricing.
+Public privacy-notice publication (with Cloudflare's addendum link) remains an
+explicit activation gate. Guide impact is deferred per owner policy: background
+bot verification uses existing loading/error UI; no guide rebuild was requested.
+
+Local verification: 277 unit-test files / 2,336 tests passed; 73 native tests
+passed; the two isolated browser tests passed. Web, Convex, mobile and desktop
+type checks passed. Full lint passed with existing warnings and no errors.
+The production build passed with optional Convex and Turnstile public settings
+empty; the build required network access for fonts.
+These tests mock Cloudflare/SMS and do not establish live provider acceptance.
+Checks ran individually with pnpm dependency auto-verification disabled because
+the installed workspace otherwise attempted an interactive dependency reinstall.
+
 ## Branch consolidation — 14 October 2026
 
 The owner requested one main branch and integration of open PRs. PR #56 was

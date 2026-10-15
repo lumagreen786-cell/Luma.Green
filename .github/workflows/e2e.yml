@@ -10,11 +10,13 @@ on:
       - "src/**"
       - "e2e/**"
       - "e2e-analytics/**"
+      - "e2e-turnstile/**"
       - "messages/**"
       - "public/**"
       - "next.config.ts"
       - "playwright.config.ts"
       - "playwright.analytics.config.ts"
+      - "playwright.turnstile.config.ts"
       - "pnpm-lock.yaml"
       - ".github/workflows/e2e.yml"
 
@@ -60,6 +62,8 @@ jobs:
 
       - run: pnpm build
       - run: pnpm e2e
+      - name: OTP bot-check browser boundary (isolated providers)
+        run: pnpm exec playwright test --config playwright.turnstile.config.ts
       - name: Build configured analytics with test keys
         run: pnpm exec next build --webpack
         env:

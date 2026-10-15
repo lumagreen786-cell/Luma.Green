@@ -166,3 +166,17 @@ not on-hand inventory. Refund confirmation leaves a hold and does not restore
 stock or assert physical return. Exact order allocation and transfer evidence
 are required for settlement; reversals remain visible and cannot be overwritten
 by a later generic success. See [payments](payments.md) for the current boundary.
+
+## Parent organizations and collaboration (backend, October 2026)
+
+`organizations` groups existing approved `orgs` sites. Parent roles in
+`organizationMemberships` govern the company; existing `memberships` alone
+continue to grant operational site access. `phoneTeamInvitations` stores hashed,
+verified-phone-bound invitations for either scope. Existing email invitations
+retain their transport and identity checks.
+
+`recordTasks` attaches responsibility to a permitted business record, without
+changing its operational state. `recordComments` stores current plain text;
+`recordCommentRevisions` preserves non-public edit history. All access is checked
+against live memberships or the current assigned Saathi job. See the
+[organization backend contract](organizations.md) for limits and deferred work.

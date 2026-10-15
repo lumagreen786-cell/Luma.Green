@@ -8,6 +8,7 @@ import {
   type QueryCtx,
 } from "./_generated/server";
 import { requireAdmin } from "./lib/access";
+import { requireApplicationParent } from "./lib/applicationAccess";
 import { activeFiles, findProfile } from "./lib/applicationAccess";
 import {
   draftSections,
@@ -29,6 +30,7 @@ import {
   slaFor,
   slugify,
 } from "./lib/review";
+import { MAX_WORKSPACES } from "./lib/workspaceRoles";
 
 /**
  * The admin's verification queue — docs/product/onboarding.md. Every
@@ -437,6 +439,7 @@ async function openBusiness(
   actorProfileId: Id<"profiles"> | undefined,
   now: number,
 ): Promise<Id<"orgs">> {
+  await requireApplicationParent(ctx, application);
   const draft = orgDraftFrom(application);
   if (!draft) throw new ConvexError("INCOMPLETE_APPLICATION");
 
@@ -453,9 +456,24 @@ async function openBusiness(
     return existing._id;
   }
 
+  if (application.organizationId) {
+    const memberships = await ctx.db
+      .query("memberships")
+      .withIndex("by_profile", (q) => q.eq("profileId", application.profileId))
+      .take(MAX_WORKSPACES);
+    const sites = await ctx.db
+      .query("orgs")
+      .withIndex("by_organization", (q) =>
+        q.eq("organizationId", application.organizationId),
+      )
+      .take(100);
+    if (memberships.length >= MAX_WORKSPACES || sites.length >= 100)
+      throw new ConvexError("TEAM_LIMIT");
+  }
   const slug = await uniqueSlug(ctx, draft.name, draft.kind);
   const orgId = await ctx.db.insert("orgs", {
     ...draft,
+    organizationId: application.organizationId,
     slug,
     status: "active",
     ownerProfileId: application.profileId,

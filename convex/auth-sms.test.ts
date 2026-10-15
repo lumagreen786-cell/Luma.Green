@@ -20,6 +20,21 @@ it.each(["msg91", "osdigital"])(
     vi.stubEnv("SITE_URL", "https://luma.test");
     vi.stubEnv("CONVEX_SITE_URL", "https://test.convex.site");
     vi.stubEnv("BETTER_AUTH_SECRET", "0123456789abcdef0123456789abcdef");
+    vi.stubEnv("TURNSTILE_ENABLED", "true");
+    vi.stubEnv("TURNSTILE_SECRET_KEY", "test-private-key");
+    vi.stubEnv("TURNSTILE_HOSTNAMES", "luma.test");
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockImplementation(() =>
+        Promise.resolve(
+          Response.json({
+            success: true,
+            hostname: "luma.test",
+            action: "otp_send",
+          }),
+        ),
+      ),
+    );
     vi.stubEnv("MSG91_AUTH_KEY", "test-key");
     vi.stubEnv("MSG91_OTP_TEMPLATE_ID", "test-template");
     if (provider === "osdigital") {
@@ -38,6 +53,7 @@ it.each(["msg91", "osdigital"])(
           "Content-Type": "application/json",
           Origin: "https://luma.test",
           "X-Forwarded-For": ip,
+          "x-captcha-response": `fresh-proof-${ip}`,
         },
         body: JSON.stringify({ phoneNumber: "+919876543210" }),
       });

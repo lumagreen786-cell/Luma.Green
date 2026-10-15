@@ -13,6 +13,7 @@ import {
   activeFiles,
   removeFile,
   requireEditableApplication,
+  requireMember,
 } from "./lib/applicationAccess";
 import { vFileType } from "./lib/drafts";
 import {
@@ -22,6 +23,7 @@ import {
   fileTypesFor,
   sniffContentType,
 } from "./lib/onboarding";
+import { teamAudit } from "./lib/organizations";
 
 const MAX_NAME_LENGTH = 120;
 
@@ -30,10 +32,10 @@ type AttachResult =
 
 /** A one-time URL to upload a file to, for the caller's own application. */
 export const generateUploadUrl = mutation({
-  args: {},
+  args: { applicationId: v.optional(v.id("applications")) },
   returns: v.string(),
-  handler: async (ctx) => {
-    await requireEditableApplication(ctx);
+  handler: async (ctx, args) => {
+    await requireEditableApplication(ctx, args.applicationId);
     return ctx.storage.generateUploadUrl();
   },
 });
@@ -43,8 +45,9 @@ async function assertCanAttach(
   ctx: QueryCtx,
   storageId: Id<"_storage">,
   type: FileType,
+  applicationId?: Id<"applications">,
 ) {
-  const found = await requireEditableApplication(ctx);
+  const found = await requireEditableApplication(ctx, applicationId);
   if (!fileTypesFor(found.application.kind).includes(type)) {
     throw new ConvexError("WRONG_FILE_TYPE");
   }
@@ -58,10 +61,14 @@ async function assertCanAttach(
 }
 
 export const checkAttach = internalQuery({
-  args: { storageId: v.id("_storage"), type: vFileType },
+  args: {
+    storageId: v.id("_storage"),
+    type: vFileType,
+    applicationId: v.optional(v.id("applications")),
+  },
   returns: v.null(),
   handler: async (ctx, args) => {
-    await assertCanAttach(ctx, args.storageId, args.type);
+    await assertCanAttach(ctx, args.storageId, args.type, args.applicationId);
     return null;
   },
 });
@@ -82,6 +89,7 @@ export const discardUnattached = internalMutation({
 
 export const record = internalMutation({
   args: {
+    applicationId: v.optional(v.id("applications")),
     storageId: v.id("_storage"),
     type: vFileType,
     name: v.string(),
@@ -94,6 +102,7 @@ export const record = internalMutation({
       ctx,
       args.storageId,
       args.type,
+      args.applicationId,
     );
     // Cleanup may have won the race after checkAttach. Never save a missing file.
     const stored = await ctx.db.system.get("_storage", args.storageId);
@@ -107,7 +116,7 @@ export const record = internalMutation({
     } else if (sameType.length >= max) {
       throw new ConvexError("TOO_MANY_FILES");
     }
-    return ctx.db.insert("applicationFiles", {
+    const fileId = await ctx.db.insert("applicationFiles", {
       applicationId: application._id,
       profileId: profile._id,
       type: args.type,
@@ -117,6 +126,16 @@ export const record = internalMutation({
       size: args.size,
       createdAt: Date.now(),
     });
+    if (application.organizationId)
+      await teamAudit(
+        ctx,
+        profile._id,
+        { kind: "organization", id: application.organizationId },
+        "application.file_attached",
+        "applicationFiles",
+        fileId,
+      );
+    return fileId;
   },
 });
 
@@ -127,6 +146,7 @@ export const record = internalMutation({
  */
 export const attach = action({
   args: {
+    applicationId: v.optional(v.id("applications")),
     storageId: v.id("_storage"),
     type: vFileType,
     name: v.string(),
@@ -141,6 +161,7 @@ export const attach = action({
     await ctx.runQuery(internal.applicationFiles.checkAttach, {
       storageId: args.storageId,
       type: args.type,
+      applicationId: args.applicationId,
     });
 
     const blob = await ctx.storage.get(args.storageId);
@@ -160,6 +181,7 @@ export const attach = action({
         internal.applicationFiles.record,
         {
           storageId: args.storageId,
+          applicationId: args.applicationId,
           type: args.type,
           name: args.name,
           contentType,
@@ -181,15 +203,29 @@ export const remove = mutation({
   args: { fileId: v.id("applicationFiles") },
   returns: v.null(),
   handler: async (ctx, args) => {
-    const { application } = await requireEditableApplication(ctx);
+    const member = await requireMember(ctx);
     const file = await ctx.db.get("applicationFiles", args.fileId);
+    if (file?.profileId !== member._id) throw new ConvexError("FILE_NOT_FOUND");
+    const { profile, application } = await requireEditableApplication(
+      ctx,
+      file.applicationId,
+    );
     if (
-      file?.applicationId !== application._id ||
+      file.applicationId !== application._id ||
       file.removedAt !== undefined
     ) {
       throw new ConvexError("FILE_NOT_FOUND");
     }
     await removeFile(ctx, file);
+    if (application.organizationId)
+      await teamAudit(
+        ctx,
+        profile._id,
+        { kind: "organization", id: application.organizationId },
+        "application.file_removed",
+        "applicationFiles",
+        file._id,
+      );
     return null;
   },
 });

@@ -23,7 +23,17 @@ approved; test results and the final launch decision remain separate evidence.
 [Luma.Green Prototype](https://claude.ai/artifact/4hiq2r5tm5kWDBqTGEPD8C) —
 private until shared from its Share menu.
 
+For deployment setup, use the [Cloudflare activation checklist](operations/cloudflare-setup.md).
+
 ## Product — what and why
+
+- [Organization backend contract](architecture/organizations.md): implemented APIs and limits.
+- [Organization and workspace roadmap](product/organization-workspaces-plan.md):
+  parent companies, existing teams, scoped collaboration and decisions to review.
+- [R2 storage setup](architecture/r2-storage-plan.md): implemented quality-file storage,
+  upload lifecycle, migration, configuration and acceptance plan.
+- [Turnstile activation](operations/turnstile.md): exact OTP protection settings
+  and production rollout steps, also summarized in the root README.
 
 | Page                                                                           | What's in it                                                   |
 | ------------------------------------------------------------------------------ | -------------------------------------------------------------- |

@@ -3,7 +3,7 @@ import { v } from "convex/values";
 import { pushEnv } from "../src/lib/env";
 import { internal } from "./_generated/api";
 import { internalMutation } from "./_generated/server";
-import { hasActivePushSession, pushAudit } from "./lib/push";
+import { canReadInboxItem, hasActivePushSession, pushAudit } from "./lib/push";
 
 const sendTarget = v.object({
   deviceId: v.id("pushDevices"),
@@ -19,6 +19,8 @@ export const claim = internalMutation({
   handler: async (ctx, { id }) => {
     const delivery = await ctx.db.get("pushDeliveries", id);
     if (delivery?.status !== "pending") return null;
+    const inbox = await ctx.db.get("inbox", delivery.inboxId);
+    const canRead = inbox && (await canReadInboxItem(ctx, inbox));
     const device = await ctx.db.get("pushDevices", delivery.deviceId);
     const profile = device
       ? await ctx.db.get("profiles", device.profileId)
@@ -49,6 +51,7 @@ export const claim = internalMutation({
       )
       .take(30);
     if (
+      !canRead ||
       !hasSession ||
       device.profileId !== delivery.profileId ||
       device.expiresAt <= now ||

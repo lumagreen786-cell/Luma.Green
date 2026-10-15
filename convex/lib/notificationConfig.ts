@@ -12,6 +12,12 @@ export const vNotificationEvent = v.union(
   v.literal("application_rejected"),
 );
 export type NotificationEvent = typeof vNotificationEvent.type;
+/** Collaboration has no SMS template; keep it out of the notification outbox. */
+export const vInboxEvent = v.union(
+  vNotificationEvent,
+  v.literal("collaboration_updated"),
+);
+export type InboxEvent = typeof vInboxEvent.type;
 export const vNotificationStatus = v.union(
   v.literal("pending"),
   v.literal("sending"),

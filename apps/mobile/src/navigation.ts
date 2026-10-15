@@ -7,6 +7,27 @@ import {
 export type NavigationDecision =
   "internal" | "browser" | "external" | "blocked";
 
+/** This grants no top-level navigation, native bridge, or device permission. */
+export function isBotChallengeFrame(
+  value: string,
+  isTopFrame: boolean | undefined,
+): boolean {
+  if (isTopFrame !== false) return false;
+  // Turnstile creates local empty/srcdoc frames before the remote challenge.
+  if (value === "about:blank" || value === "about:srcdoc") return true;
+  try {
+    const url = new URL(value);
+    return (
+      url.origin === "https://challenges.cloudflare.com" &&
+      !url.username &&
+      !url.password &&
+      url.pathname.startsWith("/cdn-cgi/challenge-platform/")
+    );
+  } catch {
+    return false;
+  }
+}
+
 interface NavigationState {
   url: string;
   canGoBack: boolean;

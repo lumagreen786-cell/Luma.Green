@@ -17,6 +17,40 @@ how to do one job well.
 
 ## 1. What we are building
 
+### Current delivery priority: web only
+
+The owner placed Expo/mobile-app and Electron/desktop-app development on hold
+on 15 October 2026. Finish the web application's technical functionality first,
+including organizations, workspaces and collaboration. The owner subsequently
+deferred UI redesign: improve login, signup, the household recycling form and
+other pages one page at a time only when requested. Do not start a visual polish
+pass during backend implementation. Mobile browser usability
+is in scope; native app work is not. Do not change, package, release or deploy
+`apps/mobile` or `apps/desktop` until the owner explicitly resumes that work.
+Preserve existing native changes; this hold does not authorize discarding them.
+On 15 October 2026, the owner approved only the Expo 57.0.29 → 57.0.30 patch
+and its required dependency updates to pass compatibility checks. Test that
+patch, but do not use this exception to add native features or release binaries.
+Shared web/backend changes may later appear in hosted native screens, but do not
+claim native acceptance without a separate test after the hold is lifted.
+
+### Current lifecycle: internal prototype
+
+As confirmed by the owner on 15 October 2026, this platform has no real user
+data and has not been rolled out. It is used only for internal team demos.
+This remains the lifecycle state until the owner explicitly declares rollout
+and this section is updated.
+
+During this phase, agents may make substantial schema and storage changes,
+drop tables, and delete prototype records/files when needed for implementation
+or testing. Data migrations and backward compatibility for prototype data are
+not required. Do not add migration machinery solely to preserve demo records.
+This permission applies to this project's prototype data, not unrelated projects
+or accounts. Keep credentials private and retain authentication, authorization,
+exact-unit and audit rules. Do not treat this as authorization to buy services.
+After rollout, review data-preservation and migration requirements before making
+destructive changes; the prototype exception no longer applies.
+
 Luma.Green connects the whole recycling chain on one platform: **households**
 who sell scrap, **kabadiwalas** (local scrap shops) who collect it,
 **preprocessors** (yards) who sort it further, **recyclers** who turn it into raw
@@ -294,8 +328,12 @@ there, never in a component.
   it does not restore stock or cancel the trade automatically. Never add a manual
   paid override. A kabadiwala pays a household directly; Luma records that
   separate flow.
-- **R2 and Mapbox** — not required. Documents use Convex storage; location uses
-  the browser. Do not use image GPS metadata as a location authority.
+- **R2** — optional private storage for new quality attachments, off until
+  configured. Application/identity documents and unconfigured quality uploads
+  use Convex storage. Reads enforce existing record permissions. See
+  [R2 setup](docs/architecture/r2-storage-plan.md).
+- **Mapbox** — not required; location uses the browser. Do not use image GPS
+  metadata as a location authority.
 - **Expo / React Native and Electron** — native shells are in `apps/`. Signed
   builds, native device tests, store review and update delivery remain release
   gates. Follow [app releases](docs/operations/app-releases.md).

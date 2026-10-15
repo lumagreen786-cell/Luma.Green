@@ -28,6 +28,9 @@ import tseslint from "typescript-eslint";
  */
 const eslintConfig = defineConfig([
   globalIgnores([
+    // Local archived runtimes and dependency caches are not application source.
+    ".convex/**",
+    ".pnpm-store/**",
     // Vendored upstream design tooling; not application source.
     ".claude/skills/impeccable/**",
     ".next/**",

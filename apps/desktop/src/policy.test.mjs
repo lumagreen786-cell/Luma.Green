@@ -14,6 +14,35 @@ import {
 } from "./policy.mjs";
 const origin = "https://app.luma.green";
 
+test("Turnstile can load only in its exact challenge subframe", () => {
+  for (const url of ["about:blank", "about:srcdoc"]) {
+    assert.equal(isBotChallengeFrame(url, false), true);
+    assert.equal(isBotChallengeFrame(url, true), false);
+  }
+  const url =
+    "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/test";
+  assert.equal(isBotChallengeFrame(url, false), true);
+  assert.equal(isBotChallengeFrame(url, true), false);
+  assert.equal(
+    isBotChallengeFrame(
+      "https://challenges.cloudflare.com.evil.test/cdn-cgi/challenge-platform/test",
+      false,
+    ),
+    false,
+  );
+  assert.equal(
+    isBotChallengeFrame(
+      "https://user@challenges.cloudflare.com/cdn-cgi/challenge-platform/test",
+      false,
+    ),
+    false,
+  );
+  assert.equal(
+    isBotChallengeFrame("https://challenges.cloudflare.com/other", false),
+    false,
+  );
+});
+
 test("only exact configured HTTP(S) origin stays inside the main window", () => {
   for (const url of [`${origin}/ar/join`, `${origin}/admin`])
     assert.equal(isAppUrl(url, origin), true);
@@ -200,3 +229,4 @@ test("cancelled loads do not replace a newer navigation with the offline screen"
   ])
     assert.equal(isCancelledLoad(error), false);
 });
+import { isBotChallengeFrame } from "./policy.mjs";

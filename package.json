@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "license": "UNLICENSED",
-  "description": "Luma.Green \u2014 Cleaner Tomorrow in Motion. Recycling inventory, sector trade and carbon credits in one place.",
+  "description": "Luma.Green — Cleaner Tomorrow in Motion. Recycling inventory, sector trade and carbon credits in one place.",
   "packageManager": "pnpm@11.24.0",
   "engines": {
     "node": ">=24.0.0",
@@ -53,6 +53,7 @@
     "@hookform/resolvers": "^5.9.1",
     "@sentry/nextjs": "^10.74.0",
     "@tanstack/react-query": "^5.103.2",
+    "aws4fetch": "1.0.20",
     "better-auth": "~1.6.33",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

@@ -4,6 +4,7 @@ import { v } from "convex/values";
 import { auditShareTables } from "./lib/auditSharesSchema";
 import { lifecycleTables } from "./lib/cashfreeLifecycleSchema";
 import { cashfreeTables } from "./lib/cashfreeSchema";
+import { collaborationTables } from "./lib/collaborationSchema";
 import { vEvidenceIssuerKind, vEvidenceKind } from "./lib/commercialEvidence";
 import {
   draftSections,
@@ -28,10 +29,12 @@ import { vIntegrationScope } from "./lib/integrations";
 import { vMaterialOfferSpecification } from "./lib/materialOfferSpecification";
 import { vConversationKind, vConversationStatus } from "./lib/messaging";
 import {
+  vInboxEvent,
   vNotificationEvent,
   vNotificationStatus,
 } from "./lib/notificationConfig";
 import { operationalTables } from "./lib/operationalSchema";
+import { organizationTables } from "./lib/organizationsSchema";
 import { publicDataFields } from "./lib/publicData";
 import { qualityFileTables } from "./lib/qualityFilesSchema";
 import { routePlanningTables } from "./lib/routePlanningSchema";
@@ -90,6 +93,8 @@ export default defineSchema({
   ...sourcingTables,
   ...routePlanningTables,
   ...qualityFileTables,
+  ...organizationTables,
+  ...collaborationTables,
   ...auditShareTables,
   ...cashfreeTables,
   ...lifecycleTables,
@@ -111,7 +116,8 @@ export default defineSchema({
   inbox: defineTable({
     profileId: v.id("profiles"),
     dedupKey: v.string(),
-    event: vNotificationEvent,
+    event: vInboxEvent,
+    taskId: v.optional(v.id("recordTasks")),
     read: v.boolean(),
     createdAt: v.number(),
   })
@@ -220,6 +226,7 @@ export default defineSchema({
    * Saathi record itself is created when the admin approves.
    */
   applications: defineTable({
+    organizationId: v.optional(v.id("organizations")),
     profileId: v.id("profiles"),
     kind: vApplicationKind,
     status: vApplicationStatus,
@@ -237,6 +244,8 @@ export default defineSchema({
     ...timestamps,
   })
     .index("by_profile", ["profileId"])
+    .index("by_profile_organization", ["profileId", "organizationId"])
+    .index("by_organization_created", ["organizationId", "createdAt"])
     .index("by_status_submittedAt", ["status", "submittedAt"])
     .index("by_submittedAt", ["submittedAt"]),
 
@@ -352,6 +361,7 @@ export default defineSchema({
 
   /** An approved business: created when the admin approves its application. */
   orgs: defineTable({
+    organizationId: v.optional(v.id("organizations")),
     kind: vOrgKind,
     /** Optional for existing rows; a physical site is separate from org kind. */
     siteType: v.optional(vSiteType),
@@ -384,6 +394,7 @@ export default defineSchema({
     ),
     ...timestamps,
   })
+    .index("by_organization", ["organizationId"])
     .index("by_slug", ["slug"])
     .index("by_owner", ["ownerProfileId"])
     .index("by_kind_city", ["kind", "city", "status"])

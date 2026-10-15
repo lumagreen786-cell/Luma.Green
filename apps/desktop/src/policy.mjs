@@ -30,6 +30,20 @@ export function isAppUrl(value, origin) {
   );
 }
 
+/** @param {string} value @param {boolean} isMainFrame */
+export function isBotChallengeFrame(value, isMainFrame) {
+  if (isMainFrame !== false) return false;
+  if (value === "about:blank" || value === "about:srcdoc") return true;
+  const url = parseUrl(value);
+  return (
+    url !== null &&
+    url.origin === "https://challenges.cloudflare.com" &&
+    !url.username &&
+    !url.password &&
+    url.pathname.startsWith("/cdn-cgi/challenge-platform/")
+  );
+}
+
 /** Blobs inherit their creator's origin. Never pass them to the OS browser.
  * @param {string} value @param {string} origin */
 export function isAppBlob(value, origin) {

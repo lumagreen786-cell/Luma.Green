@@ -4,6 +4,7 @@ import { test } from "node:test";
 import {
   classifyNavigation,
   handleNavigationChange,
+  isBotChallengeFrame,
   localeFromLanguage,
   localeFromUrl,
 } from "../src/navigation.ts";
@@ -16,6 +17,43 @@ import {
 } from "../src/update-policy.ts";
 
 const origin = "https://app.luma.green";
+
+void test("only the Cloudflare challenge subframe is allowed", () => {
+  for (const url of ["about:blank", "about:srcdoc"]) {
+    assert.equal(isBotChallengeFrame(url, false), true);
+    assert.equal(isBotChallengeFrame(url, true), false);
+  }
+  assert.equal(
+    isBotChallengeFrame(
+      "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/test",
+      false,
+    ),
+    true,
+  );
+  for (const url of [
+    "https://challenges.cloudflare.com.evil.test/cdn-cgi/challenge-platform/test",
+    // eslint-disable-next-line unicorn/prefer-https, sonarjs/no-clear-text-protocols -- deliberately insecure challenge URL must be rejected
+    "http://challenges.cloudflare.com/cdn-cgi/challenge-platform/test",
+    "https://user@challenges.cloudflare.com/cdn-cgi/challenge-platform/test",
+    "https://challenges.cloudflare.com/other",
+  ]) {
+    assert.equal(isBotChallengeFrame(url, false), false);
+  }
+  assert.equal(
+    isBotChallengeFrame(
+      "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/test",
+      true,
+    ),
+    false,
+  );
+  assert.equal(
+    isBotChallengeFrame(
+      "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/test",
+      undefined,
+    ),
+    false,
+  );
+});
 
 void test("native startup and error documents do not trigger repeated WebView remounts", () => {
   for (const url of ["", "about:blank", "chrome-error://chromewebdata/"]) {

@@ -1,12 +1,14 @@
 import { ConvexError, v } from "convex/values";
 
-import { mutation, query } from "./_generated/server";
+import type { Id } from "./_generated/dataModel";
+import { mutation, query, type QueryCtx } from "./_generated/server";
 import { authComponent } from "./auth";
 import {
   activeFiles,
   countByType,
   findApplication,
   findProfile,
+  ownApplication,
   removeFile,
   requireEditableApplication,
   requireMember,
@@ -25,6 +27,11 @@ import {
   type Section,
   sectionsFor,
 } from "./lib/onboarding";
+import {
+  requireRecentSession,
+  requireScope,
+  teamAudit,
+} from "./lib/organizations";
 
 /** Drafts are small; anything bigger than this is not a form. */
 const MAX_DRAFT_CHARS = 20_000;
@@ -52,63 +59,77 @@ const vFileSummary = v.object({
  * The signed-in person's application, or null when signed out. Their own
  * only — there is no way to ask for anyone else's.
  */
+const vMine = v.union(
+  v.null(),
+  v.object({
+    loginPhone: v.optional(v.string()),
+    application: v.union(
+      v.null(),
+      v.object({
+        id: v.id("applications"),
+        kind: vApplicationKind,
+        status: vApplicationStatus,
+        version: v.number(),
+        submittedAt: v.optional(v.number()),
+        decidedAt: v.optional(v.number()),
+        note: v.optional(v.string()),
+        ...draftSections,
+        files: v.array(vFileSummary),
+      }),
+    ),
+  }),
+);
+
+async function readOwnApplication(
+  ctx: QueryCtx,
+  applicationId?: Id<"applications">,
+) {
+  const user = await authComponent.safeGetAuthUser(ctx);
+  if (!user) return null;
+  const loginPhone = user.phoneNumber ?? undefined;
+  const profile = await findProfile(ctx, user._id);
+  const application = profile
+    ? await ownApplication(ctx, profile._id, applicationId)
+    : null;
+  if (!application) return { loginPhone, application: null };
+
+  const files = await activeFiles(ctx, application._id);
+  return {
+    loginPhone,
+    application: {
+      id: application._id,
+      kind: application.kind,
+      status: application.status,
+      version: application.version,
+      submittedAt: application.submittedAt,
+      decidedAt: application.decidedAt,
+      note: application.note,
+      kabadiwala: application.kabadiwala,
+      business: application.business,
+      documents: application.documents,
+      saathi: application.saathi,
+      files: files.map((file) => ({
+        id: file._id,
+        type: file.type,
+        name: file.name,
+        contentType: file.contentType,
+        size: file.size,
+      })),
+    },
+  };
+}
+
 export const mine = query({
   args: {},
-  returns: v.union(
-    v.null(),
-    v.object({
-      loginPhone: v.optional(v.string()),
-      application: v.union(
-        v.null(),
-        v.object({
-          id: v.id("applications"),
-          kind: vApplicationKind,
-          status: vApplicationStatus,
-          version: v.number(),
-          submittedAt: v.optional(v.number()),
-          decidedAt: v.optional(v.number()),
-          note: v.optional(v.string()),
-          ...draftSections,
-          files: v.array(vFileSummary),
-        }),
-      ),
-    }),
-  ),
-  handler: async (ctx) => {
-    const user = await authComponent.safeGetAuthUser(ctx);
-    if (!user) return null;
-    const loginPhone = user.phoneNumber ?? undefined;
-    const profile = await findProfile(ctx, user._id);
-    const application = profile
-      ? await findApplication(ctx, profile._id)
-      : null;
-    if (!application) return { loginPhone, application: null };
+  returns: vMine,
+  handler: (ctx) => readOwnApplication(ctx),
+});
 
-    const files = await activeFiles(ctx, application._id);
-    return {
-      loginPhone,
-      application: {
-        id: application._id,
-        kind: application.kind,
-        status: application.status,
-        version: application.version,
-        submittedAt: application.submittedAt,
-        decidedAt: application.decidedAt,
-        note: application.note,
-        kabadiwala: application.kabadiwala,
-        business: application.business,
-        documents: application.documents,
-        saathi: application.saathi,
-        files: files.map((file) => ({
-          id: file._id,
-          type: file.type,
-          name: file.name,
-          contentType: file.contentType,
-          size: file.size,
-        })),
-      },
-    };
-  },
+/** Read a specific site application without exposing another applicant's files. */
+export const own = query({
+  args: { applicationId: v.id("applications") },
+  returns: vMine,
+  handler: (ctx, args) => readOwnApplication(ctx, args.applicationId),
 });
 
 /**
@@ -121,11 +142,32 @@ export const start = mutation({
     locale: v.string(),
     ageConfirmed: v.literal(true),
     privacyAccepted: v.literal(true),
+    organizationId: v.optional(v.id("organizations")),
   },
   returns: v.id("applications"),
   handler: async (ctx, args) => {
     const profile = await requireMember(ctx);
-    const existing = await findApplication(ctx, profile._id);
+    if (args.organizationId) {
+      await requireScope(
+        ctx,
+        { kind: "organization", id: args.organizationId },
+        "manage",
+      );
+      await requireRecentSession(ctx);
+      const parent = await ctx.db.get("organizations", args.organizationId);
+      if (parent?.kind !== "business" || args.kind === "saathi")
+        throw new ConvexError("INVALID_SCOPE");
+      const requests = await ctx.db
+        .query("applications")
+        .withIndex("by_organization_created", (q) =>
+          q.eq("organizationId", args.organizationId),
+        )
+        .take(100);
+      if (requests.length >= 100) throw new ConvexError("TEAM_LIMIT");
+    }
+    const existing = args.organizationId
+      ? null
+      : await findApplication(ctx, profile._id);
     if (existing) {
       if (existing.kind === args.kind) return existing._id;
       throw new ConvexError("ALREADY_APPLYING");
@@ -134,6 +176,7 @@ export const start = mutation({
     const now = Date.now();
     const applicationId = await ctx.db.insert("applications", {
       profileId: profile._id,
+      organizationId: args.organizationId,
       kind: args.kind,
       status: "draft",
       version: 0,
@@ -151,38 +194,60 @@ export const start = mutation({
       metadata: { kind: args.kind },
       createdAt: now,
     });
+    if (args.organizationId)
+      await teamAudit(
+        ctx,
+        profile._id,
+        { kind: "organization", id: args.organizationId },
+        "organization.site_requested",
+        "applications",
+        applicationId,
+      );
     return applicationId;
   },
 });
 
 /** Saves whatever is filled in so far. Only the sections this role uses. */
 export const saveDraft = mutation({
-  args: draftSections,
+  args: { ...draftSections, applicationId: v.optional(v.id("applications")) },
   returns: v.null(),
   handler: async (ctx, args) => {
-    const { application } = await requireEditableApplication(ctx);
-    if (JSON.stringify(args).length > MAX_DRAFT_CHARS) {
+    const { applicationId, ...draft } = args;
+    const { profile, application } = await requireEditableApplication(
+      ctx,
+      applicationId,
+    );
+    if (JSON.stringify(draft).length > MAX_DRAFT_CHARS) {
       throw new ConvexError("TOO_LARGE");
     }
     const allowed = sectionsFor(application.kind);
-    for (const section of Object.keys(args) as Section[]) {
+    for (const section of Object.keys(draft) as Section[]) {
       if (!allowed.includes(section)) throw new ConvexError("WRONG_SECTION");
     }
     // Repeat saves must still pass access and section checks. Skip unchanged
     // sections so they do not write data or invalidate live query caches.
     const changed = Object.fromEntries(
-      (Object.keys(args) as Section[])
+      (Object.keys(draft) as Section[])
         .filter(
           (section) =>
-            draftJson(args[section]) !== draftJson(application[section]),
+            draftJson(draft[section]) !== draftJson(application[section]),
         )
-        .map((section) => [section, args[section]]),
+        .map((section) => [section, draft[section]]),
     );
     if (Object.keys(changed).length === 0) return null;
     await ctx.db.patch("applications", application._id, {
       ...changed,
       updatedAt: Date.now(),
     });
+    if (application.organizationId)
+      await teamAudit(
+        ctx,
+        profile._id,
+        { kind: "organization", id: application.organizationId },
+        "application.draft_saved",
+        "applications",
+        application._id,
+      );
     return null;
   },
 });
@@ -192,10 +257,13 @@ export const saveDraft = mutation({
  * the form, keeps a copy of this version, and starts the 12–24 hour clock.
  */
 export const submit = mutation({
-  args: {},
+  args: { applicationId: v.optional(v.id("applications")) },
   returns: v.null(),
-  handler: async (ctx) => {
-    const { profile, application } = await requireEditableApplication(ctx);
+  handler: async (ctx, args) => {
+    const { profile, application } = await requireEditableApplication(
+      ctx,
+      args.applicationId,
+    );
     if (!canMove(application.status, "submitted")) {
       throw new ConvexError("NOT_EDITABLE");
     }
@@ -274,10 +342,13 @@ export const submit = mutation({
  * different role. Its uploads go with it.
  */
 export const discard = mutation({
-  args: {},
+  args: { applicationId: v.optional(v.id("applications")) },
   returns: v.null(),
-  handler: async (ctx) => {
-    const { profile, application } = await requireEditableApplication(ctx);
+  handler: async (ctx, args) => {
+    const { profile, application } = await requireEditableApplication(
+      ctx,
+      args.applicationId,
+    );
     if (application.status !== "draft" || application.version > 0) {
       throw new ConvexError("NOT_DISCARDABLE");
     }

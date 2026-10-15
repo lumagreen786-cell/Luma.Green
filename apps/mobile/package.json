@@ -18,7 +18,7 @@
     "demo:device": "node scripts/demo.cjs device"
   },
   "dependencies": {
-    "expo": "57.0.29",
+    "expo": "57.0.30",
     "expo-constants": "57.0.22",
     "expo-dev-client": "57.0.20",
     "expo-localization": "57.0.2",

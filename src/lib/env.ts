@@ -19,6 +19,7 @@ const optionalUrl = z
   .or(z.literal("").transform((): undefined => undefined));
 
 const clientSchema = z.object({
+  NEXT_PUBLIC_TURNSTILE_SITE_KEY: z.string().trim().optional(),
   NEXT_PUBLIC_SITE_URL: optionalUrl,
   NEXT_PUBLIC_CONVEX_URL: optionalUrl,
   NEXT_PUBLIC_CONVEX_SITE_URL: optionalUrl,
@@ -39,6 +40,7 @@ const clientSchema = z.object({
 });
 
 export const clientEnv = clientSchema.parse({
+  NEXT_PUBLIC_TURNSTILE_SITE_KEY: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
   NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
   NEXT_PUBLIC_CONVEX_URL: process.env.NEXT_PUBLIC_CONVEX_URL,
   NEXT_PUBLIC_CONVEX_SITE_URL: process.env.NEXT_PUBLIC_CONVEX_SITE_URL,
@@ -95,6 +97,28 @@ const serverSchema = z.object({
 });
 
 export type ServerEnv = z.infer<typeof serverSchema>;
+
+/** Convex-only gate. Partial or misspelled configuration must not bypass it. */
+export function turnstileEnv() {
+  const enabled = process.env.TURNSTILE_ENABLED?.trim();
+  if (!enabled || enabled === "false") return { kind: "off" as const };
+  const secret = process.env.TURNSTILE_SECRET_KEY?.trim();
+  const hostnames = (process.env.TURNSTILE_HOSTNAMES ?? "")
+    .split(",")
+    .map((hostname) => hostname.trim().toLowerCase());
+  return enabled !== "true" ||
+    !secret ||
+    secret.length > 512 ||
+    /\s/.test(secret) ||
+    /^[123]x0{10}/.test(secret) ||
+    hostnames.length === 0 ||
+    hostnames.some(
+      (hostname) =>
+        !/^(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,}$/.test(hostname),
+    )
+    ? { kind: "invalid" as const }
+    : { kind: "on" as const, secret, hostnames };
+}
 
 /** Optional Convex admin-recovery email settings, validated on each request. */
 export function adminRecoveryEnv() {
@@ -407,4 +431,26 @@ export function investorDemoImportEnv() {
     targetUrl: process.env.INVESTOR_DEMO_TARGET_URL,
     expiresAt: process.env.INVESTOR_DEMO_IMPORT_EXPIRES_AT,
   };
+}
+
+/** Server-only R2 settings. Reads remain configured when new writes are off. */
+export function r2Env() {
+  const enabled = process.env.R2_ENABLED?.trim();
+  const parsed = z
+    .object({
+      accountId: z.string().regex(/^[a-f0-9]{32}$/),
+      bucket: z.string().regex(/^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$/),
+      accessKeyId: z.string().min(1).max(256).regex(/^\S+$/),
+      secretAccessKey: z.string().min(1).max(256).regex(/^\S+$/),
+    })
+    .safeParse({
+      accountId: process.env.R2_ACCOUNT_ID?.trim(),
+      bucket: process.env.R2_BUCKET_NAME?.trim(),
+      accessKeyId: process.env.R2_ACCESS_KEY_ID?.trim(),
+      secretAccessKey: process.env.R2_SECRET_ACCESS_KEY?.trim(),
+    });
+  let writes: "off" | "on" | "invalid" = "invalid";
+  if (!enabled || enabled === "false") writes = "off";
+  else if (enabled === "true" && parsed.success) writes = "on";
+  return { writes, config: parsed.success ? parsed.data : null };
 }

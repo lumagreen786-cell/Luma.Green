@@ -3,10 +3,31 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { requestPhoneCode, verifyPhoneCode } from "./phone-auth";
 
 const calls = vi.hoisted(() => ({ sendOtp: vi.fn(), verify: vi.fn() }));
+const bot = vi.hoisted(() => vi.fn());
+vi.mock("./turnstile", () => ({ requestBotToken: bot }));
 vi.mock("@/lib/auth-client", () => ({ authClient: { phoneNumber: calls } }));
 beforeEach(() => vi.resetAllMocks());
 
 describe("phone authentication failures", () => {
+  it("adds a fresh proof to each send and never sends after bot-check failure", async () => {
+    bot
+      .mockResolvedValueOnce("proof-a")
+      .mockResolvedValueOnce("proof-b")
+      .mockRejectedValueOnce(new Error("blocked"));
+    calls.sendOtp.mockResolvedValue({ error: null });
+    expect(await requestPhoneCode("+919876543210")).toBeNull();
+    expect(await requestPhoneCode("+919876543210")).toBeNull();
+    expect(await requestPhoneCode("+919876543210")).toBe("sendFailed");
+    expect(calls.sendOtp).toHaveBeenCalledTimes(2);
+    expect(calls.sendOtp).toHaveBeenNthCalledWith(1, {
+      phoneNumber: "+919876543210",
+      fetchOptions: { headers: { "x-captcha-response": "proof-a" } },
+    });
+    expect(calls.sendOtp).toHaveBeenNthCalledWith(2, {
+      phoneNumber: "+919876543210",
+      fetchOptions: { headers: { "x-captcha-response": "proof-b" } },
+    });
+  });
   it("distinguishes an SMS quota from a provider or network failure", async () => {
     calls.sendOtp
       .mockResolvedValueOnce({ error: { status: 429 } })

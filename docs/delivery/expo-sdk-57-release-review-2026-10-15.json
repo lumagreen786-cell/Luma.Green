@@ -1,0 +1,26 @@
+[
+  {
+    "package": "expo@57.0.30",
+    "integrity": "sha512-dpNWbsqiAHkgInOBClv5PxKCSMAly1n0oBVoIjS/yv8LQtRgDqSkWAnJq16cExndKrgONxdItY+O3J8u6MNYlw==",
+    "signaturesVerified": 2,
+    "gitHead": "396da4641605bb19c1e6b3efff1cafaab8890a29"
+  },
+  {
+    "package": "@expo/cli@57.0.31",
+    "integrity": "sha512-NPTMPGQ9i3KzULyP1bzp8hMggoe3QlkfICw388zJuj0UhqfGHEZURkJFuHBksb/ndTjfrCrCBOO0HQz/9QzXIw==",
+    "signaturesVerified": 2,
+    "gitHead": "396da4641605bb19c1e6b3efff1cafaab8890a29"
+  },
+  {
+    "package": "@expo/router-server@57.0.13",
+    "integrity": "sha512-A25869lSp6916GiYjz1y1S/Kfi5qn7S1xepycFv8x8VOrulLBbv0byXl6o3BSLh5nLBx5RiMTjBFM2u+K7JsrA==",
+    "signaturesVerified": 2,
+    "gitHead": "396da4641605bb19c1e6b3efff1cafaab8890a29"
+  },
+  {
+    "package": "babel-preset-expo@57.0.16",
+    "integrity": "sha512-hGsVNbgxYchVyvBiFAVf+uHVMVIGObiWzAsnv8GsM/ZZRnrhGJLD8x/BLtNNycEYSIb23wPPlSqTGiw0iwwJvQ==",
+    "signaturesVerified": 2,
+    "gitHead": "396da4641605bb19c1e6b3efff1cafaab8890a29"
+  }
+]

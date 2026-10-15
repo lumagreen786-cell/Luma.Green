@@ -13,14 +13,16 @@ export async function findProfile(ctx: QueryCtx, authUserId: string) {
     .unique();
 }
 
-/** A person has at most one application in the pilot. */
+/** Personal onboarding remains separate from company site applications. */
 export async function findApplication(
   ctx: QueryCtx,
   profileId: Id<"profiles">,
 ) {
   return ctx.db
     .query("applications")
-    .withIndex("by_profile", (q) => q.eq("profileId", profileId))
+    .withIndex("by_profile_organization", (q) =>
+      q.eq("profileId", profileId).eq("organizationId", undefined),
+    )
     .unique();
 }
 
@@ -33,11 +35,51 @@ export async function requireMember(ctx: QueryCtx) {
   return profile;
 }
 
+/** Explicit IDs never authorize access to another applicant's identity documents. */
+export async function ownApplication(
+  ctx: QueryCtx,
+  profileId: Id<"profiles">,
+  applicationId?: Id<"applications">,
+) {
+  if (!applicationId) return findApplication(ctx, profileId);
+  const application = await ctx.db.get("applications", applicationId);
+  if (application?.profileId !== profileId)
+    throw new ConvexError("NO_APPLICATION");
+  return application;
+}
+
+export async function requireApplicationParent(
+  ctx: QueryCtx,
+  application: Doc<"applications">,
+) {
+  const organizationId = application.organizationId;
+  if (!organizationId) return;
+  const parent = await ctx.db.get("organizations", organizationId);
+  const member = await ctx.db
+    .query("organizationMemberships")
+    .withIndex("by_organization_profile", (q) =>
+      q
+        .eq("organizationId", organizationId)
+        .eq("profileId", application.profileId),
+    )
+    .unique();
+  if (
+    !member ||
+    parent?.kind !== "business" ||
+    (member.role !== "owner" && member.role !== "admin")
+  )
+    throw new ConvexError("TEAM_ACCESS_DENIED");
+}
+
 /** The caller's own application, while they're still allowed to change it. */
-export async function requireEditableApplication(ctx: QueryCtx) {
+export async function requireEditableApplication(
+  ctx: QueryCtx,
+  applicationId?: Id<"applications">,
+) {
   const profile = await requireMember(ctx);
-  const application = await findApplication(ctx, profile._id);
+  const application = await ownApplication(ctx, profile._id, applicationId);
   if (!application) throw new ConvexError("NO_APPLICATION");
+  await requireApplicationParent(ctx, application);
   if (!isEditable(application.status)) throw new ConvexError("NOT_EDITABLE");
   return { profile, application };
 }

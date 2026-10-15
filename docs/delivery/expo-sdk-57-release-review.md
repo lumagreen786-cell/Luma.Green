@@ -63,3 +63,18 @@ The package/version, integrity and source-commit evidence is recorded in
 `expo-sdk-57-release-review-2026-10-14.json`. Registry verification does not prove
 reproducible builds or absence of malicious code. This update changes dependency
 versions only; it does not change the native shell workflow or guide content.
+
+## Compatibility follow-up — 15 October 2026
+
+The owner explicitly approved the Expo 57.0.29 → 57.0.30 patch after PR #57's
+hosted compatibility check required it. The patch resolves three new transitive
+versions: `@expo/cli@57.0.31`, `@expo/router-server@57.0.13` and
+`babel-preset-expo@57.0.16`. All four lockfile SHA-512 integrity values match
+the official npm registry, and all eight registry signatures verify. Evidence
+is in `expo-sdk-57-release-review-2026-10-15.json`. This is registry verification,
+not a reproducible-build or code-safety claim.
+
+The compatibility check and all 73 native policy tests plus type checks pass.
+Only exact-version age exceptions were added; the global policy is unchanged.
+Native UI work and binary releases remain on hold. Required hosted checks remain
+merge gates.

@@ -240,3 +240,22 @@ it("hides the previous identity's pages and unread controls while the next ident
     screen.queryByRole("button", { name: en.notifications.markAllRead }),
   ).not.toBeInTheDocument();
 });
+
+it.each(["en", "ar"] as const)(
+  "renders a generic task notice in %s",
+  (locale) => {
+    state.results = [
+      {
+        id: "task-notice",
+        event: "collaboration_updated",
+        read: false,
+        createdAt: 1_790_896_800_000,
+      },
+    ];
+    render(page(locale));
+    const messages = locale === "en" ? en : ar;
+    expect(
+      screen.getByText(messages.notifications.lockscreenTitle),
+    ).toBeVisible();
+  },
+);

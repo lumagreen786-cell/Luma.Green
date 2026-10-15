@@ -8,6 +8,7 @@ import { offlineHtml, pageLocale, selectLocale } from "./localization.mjs";
 import {
   isAppBlob,
   isAppUrl,
+  isBotChallengeFrame,
   isCancelledLoad,
   isExternalUrl,
   isPdfViewerFrame,
@@ -93,12 +94,24 @@ function attachGuards(window, isDocumentViewer = false) {
       void loadApp(state.mainWindow, url);
     else if (isExternalUrl(url)) void openExternal(url);
   });
-  contents.on("will-redirect", (event, url) => {
+  contents.on("will-redirect", (event, url, _isInPlace, isMainFrame) => {
+    if (
+      !isDocumentViewer &&
+      isAppUrl(contents.getURL(), origin) &&
+      isBotChallengeFrame(url, isMainFrame)
+    )
+      return;
     if (!(isDocumentViewer ? isAppBlob(url, origin) : isAppUrl(url, origin)))
       event.preventDefault();
   });
   contents.on("will-frame-navigate", (event) => {
     if (event.isMainFrame) return;
+    if (
+      !isDocumentViewer &&
+      isAppUrl(contents.getURL(), origin) &&
+      isBotChallengeFrame(event.url, event.isMainFrame)
+    )
+      return;
     if (
       isDocumentViewer &&
       isPdfViewerFrame(event.url, contents.getURL(), origin)

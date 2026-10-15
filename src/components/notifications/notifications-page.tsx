@@ -210,7 +210,11 @@ function AuthenticatedInbox() {
               <p
                 className={item.read ? "text-muted-foreground" : "font-medium"}
               >
-                {t(`events.${item.event}`)}
+                {t(
+                  item.event === "collaboration_updated"
+                    ? "lockscreenTitle"
+                    : `events.${item.event}`,
+                )}
               </p>
               <time
                 dateTime={new Date(item.createdAt).toISOString()}

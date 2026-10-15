@@ -16,6 +16,7 @@ import { phoneTwoFactor } from "./lib/phoneTwoFactor";
 import { securityAudit } from "./lib/securityAudit";
 import { CODE_TTL_MINUTES, codeDelivery } from "./lib/sms";
 import { smsPhoneHash } from "./lib/smsLimits";
+import { verifyBotToken } from "./lib/turnstile";
 
 /**
  * Sign-in for Luma.Green — docs/architecture/auth.md.
@@ -158,6 +159,7 @@ export const createAuthOptions = (ctx: GenericCtx<DataModel>) =>
           });
         }
         if (hookCtx.path === "/phone-number/send-otp") {
+          await verifyBotToken(hookCtx.headers?.get("x-captcha-response"));
           await reserveCodeRequest(ctx, hookCtx.body);
           return;
         }

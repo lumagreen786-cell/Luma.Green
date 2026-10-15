@@ -1,6 +1,8 @@
 import { type CodeErrorKey, codeErrorKey } from "@/components/auth/errors";
 import { authClient } from "@/lib/auth-client";
 
+import { requestBotToken } from "./turnstile";
+
 export type SendCodeErrorKey = "sendFailed" | "sendRateLimited";
 export type VerifyPhoneResult =
   | { kind: "authenticated" }
@@ -12,8 +14,12 @@ export async function requestPhoneCode(
   phone: string,
 ): Promise<SendCodeErrorKey | null> {
   try {
+    const token = await requestBotToken();
     const { error } = await authClient.phoneNumber.sendOtp({
       phoneNumber: phone,
+      ...(token && {
+        fetchOptions: { headers: { "x-captcha-response": token } },
+      }),
     });
     if (!error) return null;
     return error.status === 429 ? "sendRateLimited" : "sendFailed";

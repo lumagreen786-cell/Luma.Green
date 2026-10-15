@@ -61,6 +61,12 @@ component. Built and tested on 29 Sep 2026.
 
 ### SMS codes
 
+- Optional invisible bot protection covers every send/resend at the Convex HTTP
+  boundary before phone quota reservation. See [Turnstile setup](../operations/turnstile.md).
+  Enabled deployments reject missing/invalid proofs and provider failures. The
+  default unconfigured clone retains existing behavior; deployment alone does not
+  enable protection.
+
 - Six random digits, valid five minutes, with five verification attempts per code.
 - Resend requires a user action after five minutes. The server reserves each send
   before generating a code, so a blocked resend does not invalidate the current code.

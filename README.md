@@ -220,6 +220,72 @@ pnpm e2e            # browser tests with their documented local setup
 pnpm build          # frontend production build, not a backend deployment
 ```
 
+## Enable OTP bot protection in production
+
+Turnstile protection for all phone OTP sends and resends is implemented locally
+and **off until configured and deployed**. Create a Cloudflare account, then an
+**Invisible Turnstile** widget with the exact domains that serve the app. No DNS
+or hosting migration is needed. The Turnstile free plan supports this setup.
+
+| Setting                          | Where to add it                 | Value                                                                                   |
+| -------------------------------- | ------------------------------- | --------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | Vercel frontend environment     | Public widget site key                                                                  |
+| `TURNSTILE_SECRET_KEY`           | Matching Convex deployment only | Private widget secret                                                                   |
+| `TURNSTILE_HOSTNAMES`            | Matching Convex deployment only | Exact domains separated by commas, such as `luma.green,www.luma.green` if both are used |
+| `TURNSTILE_ENABLED`              | Matching Convex deployment only | Set to `true` only after the checks below                                               |
+
+1. Publish a privacy notice that references Cloudflare's Turnstile Privacy
+   Addendum. Use the disclosure and links in the setup guide.
+2. Deploy the backend with enforcement off. Add its secret and hostname list.
+   Add the public site key to Vercel and rebuild/deploy the frontend.
+3. Rebuild native shells with the challenge-frame support. In staging, test
+   real member/admin login, sends/resends and native devices. Mock tests do not
+   prove that the provider works.
+4. Set production `TURNSTILE_ENABLED=true`, then test a consented real phone
+   login and confirm a request without a bot token is rejected before SMS work.
+5. If rollout fails, explicitly set `TURNSTILE_ENABLED=false` to disable bot
+   enforcement while investigating. Existing OTP limits and factors remain.
+
+Never put the secret in a `NEXT_PUBLIC_*` variable, Git or chat. Site-key changes
+require a frontend rebuild. Full instructions, test limits and privacy disclosure:
+[Turnstile setup](docs/operations/turnstile.md).
+
+For the complete dashboard steps and exact variables, use the
+[Cloudflare activation checklist](docs/operations/cloudflare-setup.md).
+
+## Enable R2 quality-file storage
+
+The first R2 stage is implemented locally and off by default. It covers new
+quality attachments; application and identity files still use Convex storage.
+Activate R2 in your Cloudflare account, create a **private Standard bucket**, and
+create an **Object Read & Write** credential scoped to that bucket.
+
+Add `R2_ACCOUNT_ID`, `R2_BUCKET_NAME`, `R2_ACCESS_KEY_ID` and
+`R2_SECRET_ACCESS_KEY` to the matching **Convex deployment**. Deploy the backend,
+then set `R2_ENABLED=true` in staging and test upload/private download first.
+No Vercel public key, bucket CORS or public bucket URL is needed. Keep public
+`r2.dev` access disabled. Never put R2 credentials in Git or chat.
+
+Set `R2_ENABLED=false` to stop new R2 writes. Keep the credentials configured
+so existing R2 attachments remain readable. See the
+[R2 setup and verification steps](docs/architecture/r2-storage-plan.md).
+
+## Storage and organization backend
+
+R2 needs account configuration. Organization and collaboration APIs are implemented
+locally; new screens are deferred for a later page-by-page pass:
+
+- [R2 storage](docs/architecture/r2-storage-plan.md): implemented quality-file
+  stage, private buckets, permissions, activation, recovery and costs.
+- [Organization backend contract](docs/architecture/organizations.md): company
+  grouping, independent site permissions, verified-phone invitations, record
+  tasks/comments and internal Luma team scope. Includes API limits and deferred
+  screens, reminders and new-site workflows.
+- [Broader organization roadmap](docs/product/organization-workspaces-plan.md).
+
+Expo/mobile and Electron/desktop work are on hold. Current work targets the web
+backend; UI redesign will proceed only when requested.
+
 ## Android, iOS, macOS and Windows
 
 The native apps reuse the hosted operational screens and the same Convex backend.

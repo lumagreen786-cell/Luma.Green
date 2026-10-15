@@ -2,12 +2,17 @@ import { paginationOptsValidator } from "convex/server";
 import { ConvexError, v } from "convex/values";
 
 import { mutation, query } from "./_generated/server";
-import { vNotificationEvent } from "./lib/notificationConfig";
-import { pushAudit, requireNotificationProfile } from "./lib/push";
+import { vInboxEvent } from "./lib/notificationConfig";
+import {
+  canReadInboxItem,
+  pushAudit,
+  requireNotificationProfile,
+} from "./lib/push";
 
 const item = v.object({
   id: v.id("inbox"),
-  event: vNotificationEvent,
+  event: vInboxEvent,
+  taskId: v.optional(v.id("recordTasks")),
   read: v.boolean(),
   createdAt: v.number(),
 });
@@ -29,15 +34,23 @@ export const list = query({
         ...args.paginationOpts,
         numItems: Math.max(1, Math.min(50, args.paginationOpts.numItems)),
       });
+    const permitted = await Promise.all(
+      result.page.map(async (row) =>
+        (await canReadInboxItem(ctx, row)) ? row : null,
+      ),
+    );
     return {
       isDone: result.isDone,
       continueCursor: result.continueCursor,
-      page: result.page.map((row) => ({
-        id: row._id,
-        event: row.event,
-        read: row.read,
-        createdAt: row.createdAt,
-      })),
+      page: permitted
+        .filter((row) => row !== null)
+        .map((row) => ({
+          id: row._id,
+          event: row.event,
+          ...(row.taskId && { taskId: row.taskId }),
+          read: row.read,
+          createdAt: row.createdAt,
+        })),
     };
   },
 });
@@ -53,7 +66,10 @@ export const unreadCount = query({
         q.eq("profileId", profile._id).eq("read", false),
       )
       .take(100);
-    return rows.length;
+    const readable = await Promise.all(
+      rows.map((row) => canReadInboxItem(ctx, row)),
+    );
+    return readable.filter(Boolean).length;
   },
 });
 
@@ -63,7 +79,8 @@ export const markRead = mutation({
   handler: async (ctx, { id }) => {
     const profile = await requireNotificationProfile(ctx);
     const row = await ctx.db.get("inbox", id);
-    if (row?.profileId !== profile._id) throw new ConvexError("NOT_FOUND");
+    if (row?.profileId !== profile._id || !(await canReadInboxItem(ctx, row)))
+      throw new ConvexError("NOT_FOUND");
     if (!row.read) {
       await ctx.db.patch(id, { read: true });
       await pushAudit(ctx, "inbox.read", "inbox", id, profile._id);

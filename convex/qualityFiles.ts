@@ -1,10 +1,12 @@
 import { ConvexError, v } from "convex/values";
 
+import { r2Env } from "../src/lib/env";
 import { internal } from "./_generated/api";
 import type { Doc, Id } from "./_generated/dataModel";
 import {
   action,
   httpAction,
+  internalAction,
   internalMutation,
   internalQuery,
   mutation,
@@ -19,7 +21,9 @@ import { qualityText, validateQualityContent } from "./lib/qualityContent";
 import {
   vBuyerQualityDecision,
   vQualityFileKind,
+  vR2Reference,
 } from "./lib/qualityFilesSchema";
+import { deleteR2, getR2, putR2 } from "./lib/r2";
 import { requireOrg, selectedMembership } from "./lib/workspace";
 
 export const vQualityFileView = v.object({
@@ -91,22 +95,50 @@ export const recordUpload = internalMutation({
     contentType: v.string(),
     size: v.number(),
     sha256: v.string(),
-    storageId: v.id("_storage"),
+    storageId: v.optional(v.id("_storage")),
+    uploadId: v.optional(v.id("qualityUploads")),
   },
   returns: v.id("qualityAttachments"),
   handler: async (ctx, args) => {
+    const reservation = args.uploadId
+      ? await ctx.db.get("qualityUploads", args.uploadId)
+      : null;
+    if (reservation?.state === "attached" && reservation.fileId) {
+      const scope = await requireOrg(ctx);
+      if (
+        scope.profile._id !== reservation.profileId ||
+        scope.org._id !== reservation.orgId
+      )
+        throw new ConvexError("FILE_NOT_FOUND");
+      return reservation.fileId;
+    }
     const { org, profile, inspection } = await uploadScope(
       ctx,
       args.inspectionId,
       args.shareWithBuyer,
     );
-    const metadata = await ctx.db.system.get("_storage", args.storageId);
-    if (metadata?.size !== args.size) throw new ConvexError("FILE_NOT_FOUND");
-    const used = await ctx.db
-      .query("qualityAttachments")
-      .withIndex("by_storage", (q) => q.eq("storageId", args.storageId))
-      .first();
-    if (used) throw new ConvexError("FILE_IN_USE");
+    if (Boolean(args.storageId) === Boolean(args.uploadId))
+      throw new ConvexError("INVALID_STORAGE");
+    if (args.storageId) {
+      const metadata = await ctx.db.system.get("_storage", args.storageId);
+      if (metadata?.size !== args.size) throw new ConvexError("FILE_NOT_FOUND");
+      const used = await ctx.db
+        .query("qualityAttachments")
+        .withIndex("by_storage", (q) => q.eq("storageId", args.storageId))
+        .first();
+      if (used) throw new ConvexError("FILE_IN_USE");
+    } else if (
+      reservation?.state !== "pending" ||
+      reservation.cleanupAt <= Date.now() ||
+      reservation.profileId !== profile._id ||
+      reservation.orgId !== org._id ||
+      reservation.inspectionId !== args.inspectionId ||
+      reservation.shareWithBuyer !== args.shareWithBuyer ||
+      reservation.size !== args.size ||
+      reservation.sha256 !== args.sha256
+    ) {
+      throw new ConvexError("INVALID_UPLOAD");
+    }
     const now = Date.now();
     const id = await ctx.db.insert("qualityAttachments", {
       orgId: org._id,
@@ -118,9 +150,15 @@ export const recordUpload = internalMutation({
       size: args.size,
       sha256: args.sha256,
       storageId: args.storageId,
+      r2: reservation?.r2,
       createdBy: profile._id,
       createdAt: now,
     });
+    if (reservation)
+      await ctx.db.patch("qualityUploads", reservation._id, {
+        state: "attached",
+        fileId: id,
+      });
     await ctx.db.insert("auditLog", {
       orgId: org._id,
       actorProfileId: profile._id,
@@ -173,6 +211,35 @@ export const upload = action({
     const sha256 = [...new Uint8Array(digest)]
       .map((n) => n.toString(16).padStart(2, "0"))
       .join("");
+    const settings = r2Env();
+    if (settings.writes === "invalid")
+      throw new ConvexError("STORAGE_UNAVAILABLE");
+    if (settings.writes === "on" && settings.config) {
+      const r2 = {
+        accountId: settings.config.accountId,
+        bucket: settings.config.bucket,
+        key: `quality/${crypto.randomUUID()}`,
+      };
+      const uploadId = await ctx.runMutation(internal.qualityFiles.reserveR2, {
+        inspectionId: args.inspectionId,
+        shareWithBuyer: args.shareWithBuyer,
+        r2,
+        size: args.bytes.byteLength,
+        sha256,
+      });
+      // Reservation survives action crashes and ambiguous provider responses.
+      await putR2(r2, args.bytes, contentType);
+      return ctx.runMutation(internal.qualityFiles.recordUpload, {
+        inspectionId: args.inspectionId,
+        shareWithBuyer: args.shareWithBuyer,
+        kind: args.kind,
+        name,
+        contentType,
+        size: args.bytes.byteLength,
+        sha256,
+        uploadId,
+      });
+    }
     const storageId = await ctx.storage.store(
       new Blob([args.bytes], { type: contentType }),
     );
@@ -353,7 +420,10 @@ export const readFile = internalQuery({
   returns: v.union(
     v.null(),
     v.object({
-      storageId: v.id("_storage"),
+      storageId: v.optional(v.id("_storage")),
+      r2: v.optional(vR2Reference),
+      size: v.number(),
+      sha256: v.string(),
       contentType: v.string(),
       name: v.string(),
     }),
@@ -388,6 +458,9 @@ export const readFile = internalQuery({
     return isAllowed && source?.status === "active"
       ? {
           storageId: file.storageId,
+          r2: file.r2,
+          size: file.size,
+          sha256: file.sha256,
           contentType: file.contentType,
           name: file.name,
         }
@@ -418,7 +491,16 @@ export const serve = httpAction(async (ctx, request) => {
     return new Response("UNAVAILABLE", { status: 403, headers });
   }
   if (!file) return new Response("UNAVAILABLE", { status: 404, headers });
-  const blob = await ctx.storage.get(file.storageId);
+  let blob: Blob | null;
+  try {
+    if (Boolean(file.r2) === Boolean(file.storageId))
+      throw new Error("Invalid storage reference");
+    blob = null;
+    if (file.r2) blob = await getR2(file.r2, file.size, file.sha256);
+    else if (file.storageId) blob = await ctx.storage.get(file.storageId);
+  } catch {
+    return new Response("UNAVAILABLE", { status: 503, headers });
+  }
   if (!blob) return new Response("UNAVAILABLE", { status: 404, headers });
   return new Response(blob, {
     headers: {
@@ -431,3 +513,131 @@ export const serve = httpAction(async (ctx, request) => {
 export const preflight = httpAction((_ctx, request) =>
   Promise.resolve(preflightResponse(request.headers.get("Origin"), origins())),
 );
+
+/** Reserve before external writes, so crashes cannot create untracked objects. */
+export const reserveR2 = internalMutation({
+  args: {
+    inspectionId: v.id("lotInspections"),
+    shareWithBuyer: v.boolean(),
+    r2: vR2Reference,
+    size: v.number(),
+    sha256: v.string(),
+  },
+  returns: v.id("qualityUploads"),
+  handler: async (ctx, args) => {
+    const { org, profile } = await uploadScope(
+      ctx,
+      args.inspectionId,
+      args.shareWithBuyer,
+    );
+    const now = Date.now();
+    const recent = await ctx.db
+      .query("qualityUploads")
+      .withIndex("by_profile_created", (q) =>
+        q.eq("profileId", profile._id).gt("createdAt", now - 3_600_000),
+      )
+      .take(60);
+    if (recent.length >= 60) throw new ConvexError("UPLOAD_RATE_LIMITED");
+    const pending = await ctx.db
+      .query("qualityUploads")
+      .withIndex("by_inspection_state", (q) =>
+        q.eq("inspectionId", args.inspectionId).eq("state", "pending"),
+      )
+      .take(20);
+    const attached = await ctx.db
+      .query("qualityAttachments")
+      .withIndex("by_inspection", (q) =>
+        q.eq("inspectionId", args.inspectionId),
+      )
+      .take(20);
+    if (pending.length + attached.length >= 20)
+      throw new ConvexError("FILE_LIMIT");
+    const id = await ctx.db.insert("qualityUploads", {
+      ...args,
+      orgId: org._id,
+      profileId: profile._id,
+      state: "pending",
+      createdAt: now,
+      cleanupAt: now + 3_600_000,
+      attempts: 0,
+    });
+    await ctx.db.insert("auditLog", {
+      orgId: org._id,
+      actorProfileId: profile._id,
+      action: "quality.upload_reserved",
+      entityTable: "qualityUploads",
+      entityId: id,
+      createdAt: now,
+    });
+    return id;
+  },
+});
+
+export const claimCleanup = internalMutation({
+  args: {},
+  returns: v.array(v.object({ id: v.id("qualityUploads"), r2: vR2Reference })),
+  handler: async (ctx) => {
+    const now = Date.now();
+    const pending = await ctx.db
+      .query("qualityUploads")
+      .withIndex("by_state_cleanup", (q) =>
+        q.eq("state", "pending").lte("cleanupAt", now),
+      )
+      .take(10);
+    const retry = await ctx.db
+      .query("qualityUploads")
+      .withIndex("by_state_cleanup", (q) =>
+        q.eq("state", "deleting").lte("cleanupAt", now),
+      )
+      .take(10);
+    const rows = [...pending, ...retry];
+    for (const row of rows)
+      await ctx.db.patch("qualityUploads", row._id, {
+        state: "deleting",
+        attempts: row.attempts + 1,
+        cleanupAt: now + 3_600_000,
+      });
+    return rows.map((row) => ({ id: row._id, r2: row.r2 }));
+  },
+});
+export const finishCleanup = internalMutation({
+  args: { id: v.id("qualityUploads") },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    const row = await ctx.db.get("qualityUploads", args.id);
+    if (row?.state === "deleting") {
+      await ctx.db.insert("auditLog", {
+        orgId: row.orgId,
+        actorProfileId: row.profileId,
+        action: "quality.upload_discarded",
+        entityTable: "qualityUploads",
+        entityId: row._id,
+        createdAt: Date.now(),
+      });
+      await ctx.db.delete("qualityUploads", row._id);
+    }
+    return null;
+  },
+});
+export const cleanupR2 = internalAction({
+  args: {},
+  returns: v.object({ deleted: v.number(), failed: v.number() }),
+  handler: async (ctx): Promise<{ deleted: number; failed: number }> => {
+    const rows = await ctx.runMutation(internal.qualityFiles.claimCleanup, {});
+    let deleted = 0;
+    let failed = 0;
+    for (const row of rows) {
+      try {
+        await deleteR2(row.r2);
+        await ctx.runMutation(internal.qualityFiles.finishCleanup, {
+          id: row.id,
+        });
+        deleted++;
+      } catch {
+        failed++;
+      }
+    }
+    if (failed > 0) console.error("R2 cleanup incomplete", { failed });
+    return { deleted, failed };
+  },
+});

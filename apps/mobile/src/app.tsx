@@ -21,6 +21,7 @@ import { LocaleProvider, useTranslations } from "./i18n";
 import {
   classifyNavigation,
   handleNavigationChange,
+  isBotChallengeFrame,
   localeFromLanguage,
   localeFromUrl,
 } from "./navigation";
@@ -278,6 +279,7 @@ function Shell({
           // All requests reach our handler; the library must not auto-open unknown schemes.
           originWhitelist={["*"]}
           onShouldStartLoadWithRequest={(request) =>
+            isBotChallengeFrame(request.url, request.isTopFrame) ||
             isNavigationAllowed(request.url)
           }
           onNavigationStateChange={trackNavigation}

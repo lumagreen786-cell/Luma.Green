@@ -98,6 +98,9 @@ it("locks verification during resend and recovers from a lost connection", async
     target: { value: "123456" },
   });
   expect(calls.verify).not.toHaveBeenCalled();
+  await act(async () => {
+    await Promise.resolve();
+  });
   expect(calls.sendOtp).toHaveBeenCalledTimes(2);
   await act(async () => {
     request.reject(new TypeError("offline"));
