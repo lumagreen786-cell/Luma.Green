@@ -5,7 +5,6 @@ import type { ReactNode } from "react";
 import { AccountMenu } from "@/components/account/account-menu";
 import { Logo } from "@/components/brand/logo";
 import { SignOutButton } from "@/components/join/sign-out-button";
-import { EntryStory } from "@/components/showcase/entry-story";
 import { LanguageSwitcher } from "@/components/site/language-switcher";
 import { SkipLink } from "@/components/site/skip-link";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
@@ -20,7 +19,7 @@ export const metadata: Metadata = {
 };
 
 /**
- * Shell for applicants: a form with desktop imagery and a way out.
+ * Shell for applicants: one focused form and a way out.
  * Every page here is private and checks the session itself.
  */
 export default async function JoinLayout({
@@ -29,7 +28,6 @@ export default async function JoinLayout({
   children: ReactNode;
 }) {
   const t = await getTranslations("nav");
-  const brand = await getTranslations("brand");
 
   return (
     <div className="flex min-h-dvh flex-col bg-background">
@@ -51,17 +49,13 @@ export default async function JoinLayout({
           <SignOutButton />
         </div>
       </header>
-      <div className="mx-auto grid w-full max-w-6xl flex-1 items-start gap-8 px-4 py-6 sm:px-8 sm:py-10 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.85fr)] lg:gap-16">
-        <main id="main" tabIndex={-1} className="min-w-0">
-          {children}
-        </main>
-        <EntryStory
-          scene="kabadiwala"
-          title={brand("tagline")}
-          caption={brand("name")}
-          className="hidden lg:sticky lg:top-24 lg:flex"
-        />
-      </div>
+      <main
+        id="main"
+        tabIndex={-1}
+        className="mx-auto w-full max-w-2xl min-w-0 flex-1 px-4 py-8 sm:px-8 sm:py-12"
+      >
+        {children}
+      </main>
     </div>
   );
 }

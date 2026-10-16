@@ -19,11 +19,6 @@ export function AccountLinks({
   const reports = useTranslations("auditReports");
   const pathname = usePathname();
   const items = [
-    {
-      href: "/account/reports",
-      label: reports("title"),
-      icon: ShieldCheckIcon,
-    },
     { href: "/account/workspaces", label: workspace("title"), icon: UsersIcon },
     {
       href: "/account/notifications",
@@ -33,6 +28,11 @@ export function AccountLinks({
     {
       href: "/account/security",
       label: security("title"),
+      icon: ShieldCheckIcon,
+    },
+    {
+      href: "/account/reports",
+      label: reports("title"),
       icon: ShieldCheckIcon,
     },
   ];

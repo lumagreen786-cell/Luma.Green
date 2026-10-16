@@ -7,6 +7,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 import { AppPageHeader, ListSkeleton } from "@/components/app/page-parts";
+import { RecordWorkspace } from "@/components/app/record-workspace";
 import { useWorkspace } from "@/components/app/use-workspace";
 import { EvidenceDialog, LotField, Mass } from "@/components/lots/form-parts";
 import { NotForYou } from "@/components/shop/guards";
@@ -64,55 +65,71 @@ function LogisticsWorkspace({
       {operate ? null : (
         <p className="text-sm text-muted-foreground">{lots("readOnly")}</p>
       )}
-      {status === "LoadingFirstPage" ? (
-        <ListSkeleton />
-      ) : (
-        <ul className="divide-y border-y">
-          {results.map((plan) => (
-            <li
-              key={plan._id}
-              className="flex flex-wrap items-center justify-between gap-3 py-4"
-            >
-              <div className="min-w-0">
-                <p className="font-medium break-words">{plan.title}</p>
-                <p className="text-sm break-words text-muted-foreground">
-                  {plan.reference} · {t("revision", { number: plan.revision })}
-                  {plan.status === "archived" ? ` · ${t("archived")}` : ""}
-                </p>
-              </div>
+      <RecordWorkspace
+        detailKey={selected ?? undefined}
+        onBack={() => {
+          setSelected(null);
+        }}
+        list={
+          <div className="space-y-5">
+            {" "}
+            {status === "LoadingFirstPage" ? (
+              <ListSkeleton />
+            ) : (
+              <ul className="divide-y border-y">
+                {results.map((plan) => (
+                  <li
+                    key={plan._id}
+                    className="flex flex-wrap items-center justify-between gap-3 py-4"
+                  >
+                    <div className="min-w-0">
+                      <p className="font-medium break-words">{plan.title}</p>
+                      <p className="text-sm break-words text-muted-foreground">
+                        {plan.reference} ·{" "}
+                        {t("revision", { number: plan.revision })}
+                        {plan.status === "archived"
+                          ? ` · ${t("archived")}`
+                          : ""}
+                      </p>
+                    </div>
+                    <Button
+                      variant="outline"
+                      onClick={() => {
+                        setSelected(plan._id);
+                      }}
+                    >
+                      {t("history")}
+                    </Button>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {status !== "LoadingFirstPage" && results.length === 0 ? (
+              <p>{t("empty")}</p>
+            ) : null}
+            {status === "CanLoadMore" ? (
               <Button
                 variant="outline"
                 onClick={() => {
-                  setSelected(plan._id);
+                  loadMore(20);
                 }}
               >
-                {t("history")}
+                {more("loadMore")}
               </Button>
-            </li>
-          ))}
-        </ul>
-      )}
-      {status !== "LoadingFirstPage" && results.length === 0 ? (
-        <p>{t("empty")}</p>
-      ) : null}
-      {status === "CanLoadMore" ? (
-        <Button
-          variant="outline"
-          onClick={() => {
-            loadMore(20);
-          }}
-        >
-          {more("loadMore")}
-        </Button>
-      ) : null}
-      {selected ? (
-        <PlanDetail
-          key={selected}
-          id={selected}
-          operate={operate}
-          manage={manage}
-        />
-      ) : null}
+            ) : null}
+          </div>
+        }
+        detail={
+          selected ? (
+            <PlanDetail
+              key={selected}
+              id={selected}
+              operate={operate}
+              manage={manage}
+            />
+          ) : null
+        }
+      />
     </div>
   );
 }

@@ -34,7 +34,7 @@
     "prices": "Ceny",
     "help": "Pomoc",
     "join": "Dołącz",
-    "sellScrap": "Zamów odbiór"
+    "sellScrap": "Oddaj do recyklingu"
   },
   "footer": {
     "about": "Indyjski łańcuch recyklingu na jednej platformie, od domu po fabrykę. Każde przekazanie jest ważone, wyceniane i zapisywane.",
@@ -79,9 +79,9 @@
     "metaDescription": "Luma.Green łączy indyjski łańcuch recyklingu na jednej platformie: gospodarstwa domowe, kabadiwalów, firmy przetwarzania wstępnego, recyklerów i producentów. Uczciwe ceny, zweryfikowane firmy i potwierdzenie na każdym etapie.",
     "hero": {
       "eyebrow": "Zaczynamy w Bengaluru",
-      "title": "Daj swoim surowcom nowy początek.",
-      "lead": "Zamów odbiór papieru, plastiku, metalu i innych surowców. Porównaj oferty i zachowaj przejrzystą dokumentację.",
-      "sell": "Zamów odbiór",
+      "title": "Oddaj surowce do recyklingu. Otrzymaj zapłatę.",
+      "lead": "Zdjęcia, odbiór lub dostawa i płatność po zważeniu.",
+      "sell": "Oddaj do recyklingu",
       "join": "Dla firm",
       "prices": "Zobacz ceny surowców"
     },
@@ -130,7 +130,7 @@
         "one": "Sprawdź wartość surowców przed rezerwacją.",
         "two": "Odbiór przy drzwiach lub dostawa do punktu.",
         "three": "Zapłata gotówką lub UPI, z potwierdzeniem.",
-        "cta": "Zamów odbiór"
+        "cta": "Oddaj do recyklingu"
       },
       "kabadiwala": {
         "title": "Kabadiwalowie",
@@ -211,7 +211,7 @@
     "closing": {
       "title": "Zacznij od tego, co masz",
       "body": "Torba gazet czy ciężarówka bel — na Luma.Green znajdzie się miejsce dla obu.",
-      "sell": "Zamów odbiór",
+      "sell": "Oddaj do recyklingu",
       "join": "Dołącz jako firma"
     },
     "expansion": {
@@ -1889,14 +1889,14 @@
     "mobileLabel": "Numer komórkowy",
     "mobileHint": "Wyślemy na ten numer 6-cyfrowy kod.",
     "mobileInvalid": "Podaj 10-cyfrowy indyjski numer komórkowy.",
-    "sendCode": "Wyślij kod",
+    "sendCode": "Wyślij OTP",
     "sending": "Wysyłanie…",
     "sendFailed": "Nie udało się wysłać kodu. Spróbuj ponownie za minutę.",
     "homeTitle": "Oddajesz surowce z domu?",
     "homeLink": "Zobacz, jak to działa",
     "privacy": "Używamy numeru tylko do logowania i wysyłania informacji o Twojej pracy w Luma.Green.",
     "unavailableTitle": "Logowanie telefonem będzie wkrótce dostępne",
-    "unavailableBody": "Kończymy konfigurację SMS-ów z kodami logowania. Sprawdź ponownie za chwilę.",
+    "unavailableBody": "Logowanie przez SMS jest niedostępne. Spróbuj ponownie później.",
     "verifyTitle": "Wpisz 6-cyfrowy kod",
     "sentTo": "Wysłano SMS-em na {phone}",
     "codeLabel": "Kod 6-cyfrowy",
@@ -1912,11 +1912,6 @@
     "errorGeneric": "Coś poszło nie tak. Spróbuj ponownie.",
     "signingIn": "Logowanie…",
     "sendRateLimited": "Zbyt wiele próśb o kod. Spróbuj ponownie później.",
-    "previewAction": "Podgląd ekranu kodu",
-    "previewTitle": "Podgląd kodu",
-    "previewNumber": "Numer telefonu: {phone}",
-    "previewBody": "SMS nie jest jeszcze podłączony. Nie wysłano kodu. Możesz obejrzeć ten ekran, ale nie możesz się zalogować.",
-    "previewPhoneHint": "Wpisz numer telefonu, aby zobaczyć kolejny krok. SMS nie zostanie wysłany.",
     "twoFactorTitle": "Sprawdź aplikację",
     "twoFactorDescription": "Wpisz 6-cyfrowy kod z aplikacji uwierzytelniającej, aby dokończyć logowanie.",
     "twoFactorUseBackup": "Kod odzyskiwania",
@@ -1925,7 +1920,8 @@
     "twoFactorBackupDescription": "Wpisz zapisany kod odzyskiwania. Każdy kod działa raz.",
     "twoFactorBackupLabel": "Kod odzyskiwania",
     "twoFactorExpired": "Logowanie wygasło. Zacznij ponownie z nowym kodem z telefonu.",
-    "twoFactorRestart": "Zacznij ponownie"
+    "twoFactorRestart": "Zacznij ponownie",
+    "resendCountdown": "Wyślij OTP ponownie za {time}"
   },
   "join": {
     "metaTitle": "Dołącz do Luma.Green",
@@ -2630,7 +2626,7 @@
       "label": "Numer komórkowy",
       "hint": "Wyślemy na ten numer 6-cyfrowy kod.",
       "invalid": "Podaj 10-cyfrowy indyjski numer komórkowy.",
-      "sendCode": "Wyślij kod",
+      "sendCode": "Wyślij OTP",
       "sending": "Wysyłanie…",
       "sendFailed": "Nie udało się wysłać kodu. Spróbuj ponownie za minutę.",
       "codeLabel": "Kod 6-cyfrowy",
@@ -2644,7 +2640,8 @@
       "errorExpired": "Kod wygasł. Poproś o nowy.",
       "errorTooMany": "Zbyt wiele prób. Poproś o nowy kod.",
       "errorGeneric": "Coś poszło nie tak. Spróbuj ponownie.",
-      "privacy": "Używamy numeru tylko do obsługi rezerwacji i informacji o nich."
+      "privacy": "Używamy numeru tylko do obsługi rezerwacji i informacji o nich.",
+      "resendCountdown": "Wyślij OTP ponownie za {time}"
     },
     "errors": {
       "generic": "Coś poszło nie tak. Spróbuj ponownie.",
@@ -2698,6 +2695,28 @@
       "retake": "Zdjęcie jest niewyraźne albo nie przedstawia surowców. Spróbuj innego lub wybierz materiały poniżej.",
       "empty": "Nie rozpoznano obsługiwanych materiałów. Spróbuj innego zdjęcia lub wybierz materiały poniżej.",
       "replace": "Wybierz inne zdjęcie"
+    },
+    "simple": {
+      "title": "Oddaj do recyklingu",
+      "photos": "Dodaj zdjęcia",
+      "photoHint": "Pokaż, co chcesz oddać do recyklingu.",
+      "details": "Twoje dane",
+      "next": "Znajdź pobliskie punkty",
+      "location": "Użyj mojej lokalizacji",
+      "pickup": "Odbiór z domu",
+      "dropoff": "Dostawa do punktu",
+      "chooseShop": "Wybierz pobliski punkt",
+      "schedule": "Wybierz termin",
+      "confirm": "Potwierdź recykling",
+      "uploadFailed": "Nie udało się przesłać zdjęć. Spróbuj ponownie.",
+      "photoRequired": "Dodaj co najmniej jedno zdjęcie.",
+      "photosTooMany": "Dodaj maksymalnie 5 zdjęć.",
+      "unavailable": "Zgłoszenia recyklingu są niedostępne. Spróbuj później.",
+      "estimateLater": "Punkt waży materiały i potwierdza kwotę.",
+      "nearest": "Najbliższe najpierw",
+      "replacePhotos": "Zmień zdjęcia",
+      "requested": "Recykling zaplanowany",
+      "attachedPhotos": "Zdjęcia"
     }
   },
   "track": {

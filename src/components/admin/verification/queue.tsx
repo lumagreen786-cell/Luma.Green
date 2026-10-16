@@ -45,11 +45,21 @@ function liveWait(item: QueueItem, now: number): { hours: number; sla: Sla } {
 export function VerificationQueue() {
   const queue = useQuery(api.review.queue);
   const now = useMinuteClock();
+  const next = queue?.find((item) => item.status === "submitted");
 
   const header = (
     <AppPageHeader
       title="Verification"
-      lead="Applications waiting for a decision, oldest first. The goal is a decision within 24 hours."
+      lead="Oldest first. Decide within 24 hours."
+      actions={
+        next ? (
+          <Button asChild>
+            <Link href={reviewHref(next.id)}>
+              Review next <ChevronRightIcon aria-hidden />
+            </Link>
+          </Button>
+        ) : undefined
+      }
     />
   );
   if (queue === undefined) {

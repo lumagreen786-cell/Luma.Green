@@ -251,13 +251,9 @@ try {
           .waitFor();
       }
       if (name === "public-login-otp-phone") {
-        await page
-          .getByLabel(en.auth.mobileLabel, { exact: true })
-          .fill("9000000000");
-        await page.getByRole("button", { name: en.auth.previewAction }).click();
-        await page
-          .getByRole("heading", { name: en.auth.previewTitle })
-          .waitFor();
+        throw new Error(
+          "OTP captures require a configured test runtime. Disconnected OTP previews are disabled.",
+        );
       }
       if (route === "/help/contact") {
         // Wait for the disconnected client state, not its Suspense skeleton.

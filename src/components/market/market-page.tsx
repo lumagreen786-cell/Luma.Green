@@ -80,24 +80,28 @@ function Lots({ org }: { org: OrgWorkspace }) {
   return (
     <>
       <DemoNote>{t("sampleData")}</DemoNote>
-      <MaterialFilter
-        options={options}
-        value={selected?.code ?? null}
-        onChange={setMaterial}
-      />
-      <Section title={t("browse.count", { count: shown.length })}>
-        <ul className="flex flex-col">
-          {shown.map((listing) => (
-            <li key={listing.id}>
-              <ListingCard
-                listing={listing}
-                isRecycled={recycled.has(listing.material.code)}
-                action={<BuyButton listing={listing} />}
-              />
-            </li>
-          ))}
-        </ul>
-      </Section>
+      <div className="grid items-start gap-8 lg:grid-cols-[13rem_minmax(0,1fr)]">
+        <div className="min-w-0 lg:sticky lg:top-6">
+          <MaterialFilter
+            options={options}
+            value={selected?.code ?? null}
+            onChange={setMaterial}
+          />
+        </div>
+        <Section title={t("browse.count", { count: shown.length })}>
+          <ul className="flex flex-col">
+            {shown.map((listing) => (
+              <li key={listing.id}>
+                <ListingCard
+                  listing={listing}
+                  isRecycled={recycled.has(listing.material.code)}
+                  action={<BuyButton listing={listing} />}
+                />
+              </li>
+            ))}
+          </ul>
+        </Section>
+      </div>
     </>
   );
 }

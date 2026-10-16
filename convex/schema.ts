@@ -487,6 +487,18 @@ export default defineSchema({
   // --- Household pickups ------------------------------------------------------
 
   /** A household's pickup or drop-off, tracked at /t/{token}. */
+  householdPhotos: defineTable({
+    profileId: v.id("profiles"),
+    bookingId: v.optional(v.id("bookings")),
+    storageId: v.optional(v.id("_storage")),
+    name: v.string(),
+    contentType: v.string(),
+    size: v.number(),
+    createdAt: v.number(),
+  })
+    .index("by_profile_createdAt", ["profileId", "createdAt"])
+    .index("by_booking", ["bookingId"]),
+
   bookings: defineTable({
     token: v.string(),
     householdProfileId: v.optional(v.id("profiles")),
@@ -494,7 +506,9 @@ export default defineSchema({
     name: v.optional(v.string()),
     mode: v.union(v.literal("pickup"), v.literal("dropoff")),
     items: v.array(v.object({ materialCode: v.string(), estKg: v.number() })),
-    estimatePaise: v.number(),
+    estimatePaise: v.optional(v.number()),
+    requestKind: v.optional(v.literal("photo_request")),
+    photoRequestKey: v.optional(v.string()),
     orgId: v.id("orgs"),
     slotDate: v.string(), // YYYY-MM-DD
     slotWindow: vSaathiTime,

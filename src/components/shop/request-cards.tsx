@@ -48,6 +48,7 @@ interface CardProps {
 
 export function NewRequestCard({ booking, today, city }: CardProps) {
   const t = useTranslations("shop");
+  const tSimple = useTranslations("sell.simple");
   const format = useFormat();
   return (
     <article
@@ -73,7 +74,9 @@ export function NewRequestCard({ booking, today, city }: CardProps) {
           {t("requests.estimate")}
         </span>
         <span className="text-xl font-semibold tabular-nums">
-          {t("about", { amount: format.money(booking.estimatePaise) })}
+          {booking.estimatePaise === undefined
+            ? tSimple("estimateLater")
+            : t("about", { amount: format.money(booking.estimatePaise) })}
         </span>
       </div>
       <AcceptDecline bookingId={booking.id} />

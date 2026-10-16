@@ -152,12 +152,14 @@ describe("ImpactPage for a business", () => {
     ]);
   });
 
-  it("explains why the record is credit-ready, and that the data is a sample", () => {
+  it("shows ledger details on request while keeping the sample notice visible", async () => {
     renderPage();
     expect(
       screen.getByRole("heading", { name: "A credit-ready ledger" }),
     ).toBeInTheDocument();
-    expect(screen.getByText("Who")).toBeInTheDocument();
+    expect(screen.getByText("Who")).not.toBeVisible();
+    await userEvent.click(screen.getByText("A credit-ready ledger"));
+    expect(screen.getByText("Who")).toBeVisible();
     expect(screen.getByText(/^Sample data/)).toBeInTheDocument();
   });
 

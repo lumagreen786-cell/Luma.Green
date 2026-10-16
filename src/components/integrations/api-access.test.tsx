@@ -247,12 +247,17 @@ describe("business API key controls", () => {
       screen.queryByRole("button", { name: "Create key" }),
     ).not.toBeInTheDocument();
   });
-  it("counts live keys only when enforcing the five-key limit", () => {
+  it("counts live keys only when enforcing the five-key limit", async () => {
     const active = Array.from({ length: 5 }, (_, index) => ({
       ...key,
       id: `key-${String(index)}` as Id<"integrationKeys">,
     }));
     const view = render(content({ canManage: true, keys: active }));
+    await userEvent.click(
+      screen.getByText(english.integrations.createTitle, {
+        selector: "summary",
+      }),
+    );
     expect(screen.getByRole("status")).toHaveTextContent(
       english.integrations.limit,
     );
@@ -295,4 +300,23 @@ describe("business API key controls", () => {
       screen.getByRole("button", { name: arabic.integrations.create }),
     ).toBeDisabled();
   });
+});
+
+it("keeps a key draft when its creation panel is closed and reopened", async () => {
+  const user = userEvent.setup();
+  render(content(empty));
+  await user.type(
+    screen.getByRole("textbox", { name: english.integrations.label }),
+    "ERP draft",
+  );
+  const summary = screen.getByText(english.integrations.createTitle, {
+    selector: "summary",
+  });
+  await user.click(summary);
+  expect(summary.closest("details")).not.toHaveAttribute("open");
+  await user.click(summary);
+  expect(
+    screen.getByRole("textbox", { name: english.integrations.label }),
+  ).toHaveValue("ERP draft");
+  expect(create).not.toHaveBeenCalled();
 });

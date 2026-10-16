@@ -30,6 +30,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 /** The public price board for Bengaluru — docs/product/pricing.md. */
 export default async function PricesPage() {
   const t = await getTranslations("prices");
+  const help = await getTranslations("help");
+  const sell = await getTranslations("sell");
+  const nav = await getTranslations("nav");
 
   return (
     <>
@@ -44,7 +47,16 @@ export default async function PricesPage() {
       <Container className="flex flex-col gap-8 py-8 lg:py-12">
         <PriceBoard />
 
-        <PriceGuide />
+        <p className="text-sm text-muted-foreground">{t("floorHelp")}</p>
+        <p className="text-sm text-muted-foreground">
+          {sell("basket.weighNote")}
+        </p>
+        <details className="border-t py-4">
+          <summary className="cursor-pointer py-2 font-semibold outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
+            {help("guides.weighingAtDoor.title")}
+          </summary>
+          <PriceGuide />
+        </details>
 
         <aside className="flex flex-col gap-4 border-y py-6 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-start gap-3">
@@ -59,7 +71,7 @@ export default async function PricesPage() {
           </div>
           <Button asChild size="lg" className="h-12 px-5 text-base">
             <Link href="/sell">
-              {t("sellCta.action")}
+              {nav("sellScrap")}
               <ArrowRightIcon aria-hidden className="rtl:rotate-180" />
             </Link>
           </Button>

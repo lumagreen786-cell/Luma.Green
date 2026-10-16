@@ -85,8 +85,11 @@ it("withdraws only the selected document", async () => {
   );
   expect(mocks.write).toHaveBeenCalledWith({ fileId: "file-a" });
 });
-it("requires an inspection and file before upload", () => {
+it("requires an inspection and file before upload", async () => {
   renderWithIntl(<QualityDocuments />);
+  await userEvent.click(
+    screen.getByRole("tab", { name: en.qualityDocuments.upload }),
+  );
   expect(
     screen.getByRole("button", { name: en.qualityDocuments.upload }),
   ).toBeDisabled();
@@ -95,6 +98,9 @@ it("requires an inspection and file before upload", () => {
 it("records a separate buyer decision with the document it reviewed", async () => {
   vi.mocked(useQuery).mockReturnValue({ ...board, own: [], incoming: [file] });
   renderWithIntl(<QualityDocuments />);
+  await userEvent.click(
+    screen.getByRole("tab", { name: en.qualityDocuments.incoming }),
+  );
   fireEvent.change(
     screen.getByRole("textbox", { name: en.qualityDocuments.note }),
     { target: { value: "Resample before acceptance" } },
@@ -113,6 +119,9 @@ it("retains the buyer reason when the server denies the decision", async () => {
   mocks.write.mockRejectedValue(new Error("DENIED"));
   vi.mocked(useQuery).mockReturnValue({ ...board, own: [], incoming: [file] });
   renderWithIntl(<QualityDocuments />);
+  await userEvent.click(
+    screen.getByRole("tab", { name: en.qualityDocuments.incoming }),
+  );
   fireEvent.change(
     screen.getByRole("textbox", { name: en.qualityDocuments.note }),
     { target: { value: "Measured result" } },
@@ -160,4 +169,38 @@ it("does not offer access to an expired report", () => {
     screen.queryByRole("button", { name: en.auditReports.open }),
   ).not.toBeInTheDocument();
   expect(screen.getByText(en.auditReports.unavailable)).toBeVisible();
+});
+
+it("keeps a report draft when switching tasks and shows sharing warnings before creation", async () => {
+  vi.mocked(useSignedInQuery).mockReturnValue({
+    canCreate: true,
+    orgId: "org-a",
+    own: [],
+    received: [],
+    recipients: [],
+    inspections: [],
+    files: [],
+  });
+  renderWithIntl(<AuditReports />);
+  expect(
+    screen.queryByRole("textbox", { name: en.auditReports.purpose }),
+  ).not.toBeInTheDocument();
+  await userEvent.click(
+    screen.getByRole("tab", { name: en.auditReports.create }),
+  );
+  await userEvent.type(
+    screen.getByRole("textbox", { name: en.auditReports.purpose }),
+    "Review batch quality",
+  );
+  expect(screen.getByText(en.auditReports.warning)).toBeVisible();
+  await userEvent.click(
+    screen.getByRole("tab", { name: en.auditReports.received }),
+  );
+  await userEvent.click(
+    screen.getByRole("tab", { name: en.auditReports.create }),
+  );
+  expect(
+    screen.getByRole("textbox", { name: en.auditReports.purpose }),
+  ).toHaveValue("Review batch quality");
+  expect(mocks.write).not.toHaveBeenCalled();
 });

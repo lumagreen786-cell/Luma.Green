@@ -27,23 +27,25 @@ for (const { locale, copy } of [
         const phone = page.getByLabel(copy.auth.mobileLabel, { exact: true });
         await expect(phone).toBeVisible();
         await page.evaluate(async () => document.fonts.ready);
-        const image = page.locator("aside img");
-        await expect(image).toBeVisible();
-        await expect
-          .poll(() =>
-            image.evaluate(
-              (element: HTMLImageElement) =>
-                element.complete && element.naturalWidth > 0,
-            ),
-          )
-          .toBe(true);
-        await phone.fill("123");
-        await phone.press("Enter");
-        await expect(page.getByRole("main").getByRole("alert")).toHaveText(
-          copy.auth.mobileInvalid,
-        );
-        await expect(phone).toHaveValue("123");
-        await expect(phone).toBeFocused();
+        await expect(page.getByRole("complementary")).toHaveCount(0);
+        const formBounds = await page.getByRole("main").boundingBox();
+        expect(formBounds).not.toBeNull();
+        if (formBounds)
+          expect(
+            Math.abs(formBounds.x + formBounds.width / 2 - width / 2),
+          ).toBeLessThanOrEqual(1);
+        await expect(
+          page.getByRole("button", { name: copy.auth.sendCode, exact: true }),
+        ).toBeDisabled();
+        await expect(
+          page.getByText(copy.auth.unavailableBody, { exact: true }),
+        ).toBeVisible();
+        const main = page.getByRole("main");
+        const box = await main.boundingBox();
+        if (!box) throw new Error("Centered login content is missing");
+        expect(
+          Math.abs(box.y + box.height / 2 - (900 + 80) / 2),
+        ).toBeLessThanOrEqual(2);
         expect(
           await page.evaluate(
             () => document.documentElement.scrollWidth <= innerWidth,
@@ -62,6 +64,7 @@ for (const { locale, copy } of [
           new RegExp("/join/kabadiwala$"),
         );
         // Load lazy role images before retaining a full-page visual artifact.
+        await expect(page.locator("main img")).toHaveCount(5);
         const roleImages = await page.locator("main img").all();
         for (const roleImage of roleImages) {
           await roleImage.scrollIntoViewIfNeeded();
@@ -86,9 +89,15 @@ for (const { locale, copy } of [
         });
         await page.goto(`/${locale}/sell`);
         await expect(
-          page.getByRole("heading", { name: copy.sell.title, exact: true }),
+          page.getByRole("heading", {
+            name: copy.sell.simple.title,
+            exact: true,
+          }),
         ).toBeVisible();
-        await expect(page.locator("main header img")).toBeVisible();
+        await expect(page.locator("main header img")).toHaveCount(1);
+        await expect(
+          page.getByRole("list", { name: copy.sell.promises.label }),
+        ).toHaveCount(0);
         expect(
           await page.evaluate(
             () => document.documentElement.scrollWidth <= innerWidth,
@@ -104,16 +113,17 @@ for (const { locale, copy } of [
           exact: true,
         });
         const heroImage = hero.locator("img");
-        await expect(heroImage).toBeVisible();
         await page.evaluate(async () => document.fonts.ready);
-        await expect
-          .poll(() =>
-            heroImage.evaluate(
-              (element: HTMLImageElement) =>
-                element.complete && element.naturalWidth > 0,
-            ),
-          )
-          .toBe(true);
+        const collection = hero.locator('a[href$="/sell"]');
+        await expect(collection).toBeInViewport();
+        await expect(heroImage).toBeVisible();
+        if (width < 1024) {
+          const previewBounds = await heroImage.boundingBox();
+          const actionBounds = await collection.boundingBox();
+          expect(previewBounds?.y).toBeGreaterThan(
+            (actionBounds?.y ?? 0) + (actionBounds?.height ?? 0),
+          );
+        }
         if (width === 1440) {
           const heading = await hero
             .getByRole("heading", { level: 1 })
@@ -123,9 +133,31 @@ for (const { locale, copy } of [
           expect(picture).not.toBeNull();
           if (heading && picture) {
             expect(
-              Math.min(heading.x + heading.width, picture.x + picture.width) -
-                Math.max(heading.x, picture.x),
+              Math.min(picture.y + picture.height, heading.y + heading.height) -
+                Math.max(picture.y, heading.y),
+              "The photo and title share the desktop row",
+            ).toBeGreaterThan(0);
+            // Desktop actions fit their labels and share one row.
+            const action = await hero.locator('a[href$="/sell"]').boundingBox();
+            expect(action).not.toBeNull();
+            if (!action) throw new Error("Collection action must render");
+            const prices = await hero
+              .locator('a[data-slot="button"][href$="/prices"]')
+              .boundingBox();
+            expect(prices).not.toBeNull();
+            if (!prices) throw new Error("Price action must render");
+            expect(Math.abs(prices.y - action.y)).toBeLessThanOrEqual(1);
+            expect(action.width).toBeLessThan(picture.width);
+            expect(action.y).toBeGreaterThanOrEqual(heading.y + heading.height);
+            expect(
+              Math.min(picture.x + picture.width, action.x + action.width) -
+                Math.max(picture.x, action.x),
             ).toBeLessThanOrEqual(0);
+            expect(
+              await page.evaluate(
+                () => document.documentElement.scrollWidth <= innerWidth,
+              ),
+            ).toBe(true);
           }
         }
         await page.screenshot({ path: testInfo.outputPath("home.png") });

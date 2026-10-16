@@ -12,6 +12,7 @@ vi.mock("./storage", () => ({
   isLanguageChosen: () => true,
   useStoredValue: () => true,
 }));
+vi.mock("./resume-session", () => ({ ResumeSession: () => null }));
 vi.mock("./phone-form", () => ({ PhoneForm: () => <p>Phone form</p> }));
 vi.mock("./email-form", () => ({ EmailForm: () => <p>Email form</p> }));
 vi.mock("./language-choice", () => ({ LanguageChoice: () => null }));

@@ -28,21 +28,20 @@ import { api } from "../../../convex/_generated/api";
 import { formatPhone, formatWhen } from "./format";
 
 export function ConsoleHome() {
-  const me = useQuery(api.identity.me);
   const overview = useQuery(api.admin.overview);
   const summary = useQuery(api.review.summary);
-  const firstName = me?.adminName?.split(" ", 1)[0];
+  const queue = useQuery(api.review.queue);
+  const nextReviews = queue
+    ?.filter((item) => item.status === "submitted")
+    .slice(0, 3);
 
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 lg:gap-8">
       <div className="flex flex-wrap items-end justify-between gap-4 border-b pb-6">
         <div className="flex min-w-0 flex-col gap-2">
-          <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
-            {firstName ? `Welcome, ${firstName}` : "Welcome"}
+          <h1 className="font-display text-[1.75rem] leading-tight font-semibold tracking-tight sm:text-[2rem]">
+            Work queue
           </h1>
-          <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
-            Review requests and track the pilot.
-          </p>
         </div>
         <Button asChild variant="outline">
           <Link href="/admin/pilot">
@@ -51,62 +50,96 @@ export function ConsoleHome() {
         </Button>
       </div>
 
-      <ul
-        className="grid divide-y border-b sm:grid-cols-3 sm:divide-x sm:divide-y-0"
-        aria-busy={!summary}
-      >
-        <li>
-          <StatLink
-            href="/admin/verification"
-            icon={ShieldCheckIcon}
-            label="Waiting for review"
-            value={summary?.waiting}
-            hint={
-              summary && summary.dueSoon > 0
-                ? `${String(summary.dueSoon)} due soon`
-                : "Decide within 24 hours"
-            }
-          />
-        </li>
-        <li>
-          <StatLink
-            href="/admin/verification"
-            icon={AlarmClockIcon}
-            label="Overdue"
-            value={summary?.overdue}
-            hint="Waiting more than 24 hours"
-            isUrgent={Boolean(summary?.overdue)}
-          />
-        </li>
-        <li>
+      <div className="grid min-w-0 gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(15rem,1fr)]">
+        <section aria-labelledby="next-reviews" className="min-w-0">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-4">
+            <h2
+              id="next-reviews"
+              className="font-display text-xl font-semibold"
+            >
+              Next reviews
+            </h2>
+            <Button asChild>
+              <Link href="/admin/verification">
+                Review applications <ArrowRightIcon aria-hidden />
+              </Link>
+            </Button>
+          </div>
+          {nextReviews === undefined ? (
+            <Skeleton className="mt-4 h-32 w-full" />
+          ) : null}
+          {nextReviews?.length === 0 ? (
+            <p className="py-8 text-muted-foreground">
+              No applications waiting for review.
+            </p>
+          ) : null}
+          <ol className="divide-y border-b">
+            {nextReviews?.map((item) => (
+              <li key={item.id}>
+                <Link
+                  href={`/admin/verification/${item.id}`}
+                  className="flex min-h-20 items-center justify-between gap-4 py-4 outline-none hover:text-primary focus-visible:ring-3 focus-visible:ring-ring/50"
+                >
+                  <span className="min-w-0">
+                    <span className="block font-semibold break-words">
+                      {item.name}
+                    </span>{" "}
+                    <span className="block text-sm text-muted-foreground">
+                      {item.area}
+                    </span>
+                  </span>
+                  <ArrowRightIcon aria-hidden className="size-5 shrink-0" />
+                </Link>
+              </li>
+            ))}
+          </ol>
+          <div className="grid grid-cols-2 gap-6 pt-4" aria-busy={!summary}>
+            <StatLink
+              href="/admin/verification"
+              icon={ShieldCheckIcon}
+              label="Waiting for review"
+              value={summary?.waiting}
+              hint="Decide within 24 hours"
+            />
+            <StatLink
+              href="/admin/verification"
+              icon={AlarmClockIcon}
+              label="Overdue"
+              value={summary?.overdue}
+              hint="Waiting more than 24 hours"
+              isUrgent={Boolean(summary?.overdue)}
+            />
+          </div>
+        </section>
+        <section
+          aria-label="Other tasks"
+          className="flex min-w-0 flex-col border-t lg:border-s lg:border-t-0 lg:ps-8"
+        >
           <StatLink
             href="/admin/support"
             icon={LifeBuoyIcon}
             label="Open support requests"
             value={summary?.openSupport}
-            hint="From the help centre and solar page"
+            hint="Open support inbox"
           />
-        </li>
-      </ul>
-
-      <Link
-        href="/admin/prices"
-        className="group flex items-center gap-4 py-2 transition-colors outline-none hover:text-primary focus-visible:ring-3 focus-visible:ring-ring/50"
-      >
-        <span className="flex size-10 shrink-0 items-center justify-center text-muted-foreground">
-          <IndianRupeeIcon aria-hidden className="size-5" />
-        </span>
-        <span className="flex min-w-0 flex-1 flex-col">
-          <span className="font-medium">Price tables</span>
-          <span className="text-sm text-muted-foreground">
-            Minimum and fallback prices per kilo.
-          </span>
-        </span>
-        <ArrowRightIcon
-          aria-hidden
-          className="size-4 text-muted-foreground transition-transform motion-safe:group-hover:translate-x-0.5"
-        />
-      </Link>
+          <Link
+            href="/admin/prices"
+            className="flex min-h-16 items-center gap-3 border-t py-4 font-medium outline-none hover:text-primary focus-visible:ring-3 focus-visible:ring-ring/50"
+          >
+            <IndianRupeeIcon aria-hidden className="size-5" />
+            Price tables
+            <ArrowRightIcon aria-hidden className="ms-auto size-4" />
+          </Link>
+          <Link
+            href="/admin/operations"
+            className="flex min-h-16 items-center gap-3 border-t py-4 font-medium outline-none hover:text-primary focus-visible:ring-3 focus-visible:ring-ring/50"
+          >
+            <ShieldCheckIcon aria-hidden className="size-5" />
+            Material review
+            <ArrowRightIcon aria-hidden className="ms-auto size-4" />
+          </Link>
+        </section>
+      </div>
 
       <section className="flex min-w-0 flex-col gap-4 border-t border-border pt-6">
         <header className="flex flex-col gap-1.5">
@@ -141,7 +174,7 @@ function StatLink({
   return (
     <Link
       href={href}
-      className="grid h-full grid-cols-[1fr_auto] items-center gap-x-4 gap-y-2 px-2 py-5 transition-colors outline-none hover:bg-accent/30 focus-visible:ring-3 focus-visible:ring-ring/50 sm:flex sm:flex-col sm:items-stretch sm:px-5"
+      className="flex h-full flex-col gap-2 py-4 transition-colors outline-none hover:text-primary focus-visible:ring-3 focus-visible:ring-ring/50"
     >
       <span className="flex items-center justify-between gap-2 text-sm text-muted-foreground">
         {label}

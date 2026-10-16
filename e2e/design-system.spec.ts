@@ -85,13 +85,6 @@ for (const { locale, copy } of [
           copy.home.hero.join,
         ],
       },
-      {
-        content: copy.home.closing,
-        labels: [
-          actionName(copy.nav.sellScrap, copy.home.closing.sell),
-          actionName(copy.nav.join, copy.home.closing.join),
-        ],
-      },
     ]) {
       const section = page.getByRole("region", {
         name: content.title,
@@ -110,35 +103,27 @@ for (const { locale, copy } of [
       .click();
     await page.evaluate(async () => document.fonts.ready);
     await expectActionTextToFit(
-      page.getByRole("button", { name: copy.auth.previewAction, exact: true }),
+      page.getByRole("button", { name: copy.auth.sendCode, exact: true }),
     );
   });
 }
 
-test("material motion can pause and respects reduced motion", async ({
+test("business choices remain static, readable and keyboard accessible", async ({
   page,
 }) => {
-  await page.emulateMedia({ reducedMotion: "no-preference" });
-  await page.goto("/");
-  const region = page.getByRole("region", { name: english.home.marquee.label });
-  const track = region.locator("[data-paused]");
-  await region.scrollIntoViewIfNeeded();
-  await region
-    .getByRole("button", { name: english.home.marquee.pause })
-    .click();
-  await expect(track).toHaveCSS("animation-play-state", "paused");
-  await region
-    .getByRole("button", { name: english.home.marquee.resume })
-    .click();
-  await expect(track).toHaveAttribute("data-paused", "false");
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await expect(track).toHaveCSS("animation-name", "none");
-  await expect(region.getByRole("button")).toBeHidden();
-  await expect(region.getByRole("listitem")).toHaveCount(6);
-  for (const material of Object.values(english.prices.families)) {
-    await expect(
-      region.getByRole("list").getByText(material, { exact: true }),
-    ).toBeVisible();
+  await page.goto("/");
+  const region = page.getByRole("region", {
+    name: english.home.hero.join,
+  });
+  const links = region.getByRole("link");
+  await expect(links).toHaveCount(5);
+  const materialLinks = await links.all();
+  for (const link of materialLinks) {
+    await expect(link).toHaveCSS("animation-name", "none");
+    await link.focus();
+    await expect(link).toBeFocused();
+    await expect(link).toHaveAttribute("href", /\/join\//);
   }
 });
 

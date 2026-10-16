@@ -7,6 +7,7 @@ import { findProfile } from "./lib/applicationAccess";
 import { bookingToken, canMoveBooking, kgToGrams } from "./lib/chain";
 import { beginDispatch } from "./lib/dispatch";
 import { vSaathiTime } from "./lib/drafts";
+import { preparePhotoRequest } from "./lib/householdPhotos";
 import {
   basketError,
   type BasketItem,
@@ -130,7 +131,7 @@ const vShopOffer = v.object({
   /** Only when the household shared where they are. */
   distanceKm: v.optional(v.number()),
   /** What this shop would pay for the basket, from its own rate card. */
-  estimatePaise: v.number(),
+  estimatePaise: v.optional(v.number()),
   /** Basket materials this shop has no price for: the city fallback is used. */
   fallbackCodes: v.array(v.string()),
 });
@@ -148,7 +149,7 @@ function sortShops(rows: ShopOffer[], isNearGiven: boolean): ShopOffer[] {
       const gap = (a.distanceKm ?? Infinity) - (b.distanceKm ?? Infinity);
       if (gap !== 0 && !Number.isNaN(gap)) return gap;
     }
-    return b.estimatePaise - a.estimatePaise || byName(a, b);
+    return (b.estimatePaise ?? 0) - (a.estimatePaise ?? 0) || byName(a, b);
   });
 }
 
@@ -185,7 +186,10 @@ export const shops = query({
 
     const rows: ShopOffer[] = [];
     for (const org of orgs) {
-      const rates = await rateCard(ctx, org._id);
+      const offer =
+        args.items.length === 0
+          ? { fallbackCodes: [] }
+          : offerFor(args.items, await rateCard(ctx, org._id), fallback);
       rows.push({
         id: org._id,
         name: org.name,
@@ -195,7 +199,7 @@ export const shops = query({
         hours: org.hours,
         distanceKm:
           near && org.location ? distanceKm(near, org.location) : undefined,
-        ...offerFor(args.items, rates, fallback),
+        ...offer,
       });
     }
     return sortShops(rows, near !== undefined);
@@ -227,8 +231,22 @@ function checkLocation(location: { lat: number; lng: number } | undefined) {
     throw new ConvexError("INVALID_LOCATION");
 }
 
+async function bookableShop(
+  ctx: QueryCtx,
+  orgId: Id<"orgs">,
+  mode: "pickup" | "dropoff",
+) {
+  const org = await ctx.db.get("orgs", orgId);
+  if (org?.kind !== "kabadiwala" || org.status !== "active")
+    throw new ConvexError("SHOP_NOT_FOUND");
+  if (mode === "pickup" && !org.offersPickup)
+    throw new ConvexError("SHOP_NO_PICKUP");
+  return org;
+}
+
 export const book = mutation({
   args: {
+    photoIds: v.optional(v.array(v.id("householdPhotos"))),
     orgId: v.id("orgs"),
     mode: vMode,
     items: v.array(vItem),
@@ -246,15 +264,12 @@ export const book = mutation({
     const phone = profile.phone;
     if (!phone) throw new ConvexError("NO_PHONE");
 
-    await checkedBasket(ctx, args.items);
+    const { photoIds, isPhotosOnly, photoRequestKey, existingToken } =
+      await preparePhotoRequest(ctx, profile._id, args);
+    if (existingToken) return existingToken;
+    await checkedBasket(ctx, args.items, { allowEmpty: isPhotosOnly });
     checkLocation(args.location);
-    const org = await ctx.db.get("orgs", args.orgId);
-    if (org?.kind !== "kabadiwala" || org.status !== "active") {
-      throw new ConvexError("SHOP_NOT_FOUND");
-    }
-    if (args.mode === "pickup" && !org.offersPickup) {
-      throw new ConvexError("SHOP_NO_PICKUP");
-    }
+    const org = await bookableShop(ctx, args.orgId, args.mode);
 
     const now = Date.now();
     const today = indiaToday(now);
@@ -292,14 +307,15 @@ export const book = mutation({
       org.city,
       args.items.map((item) => item.materialCode),
     );
-    const { estimatePaise } = offerFor(
-      args.items,
-      await rateCard(ctx, org._id),
-      fallback,
-    );
+    const estimatePaise = isPhotosOnly
+      ? undefined
+      : offerFor(args.items, await rateCard(ctx, org._id), fallback)
+          .estimatePaise;
     const token = await uniqueToken(ctx);
     const bookingId = await ctx.db.insert("bookings", {
       token,
+      requestKind: isPhotosOnly ? "photo_request" : undefined,
+      photoRequestKey,
       householdProfileId: profile._id,
       phone,
       name,
@@ -318,6 +334,8 @@ export const book = mutation({
       createdAt: now,
       updatedAt: now,
     });
+    for (const photoId of photoIds)
+      await ctx.db.patch("householdPhotos", photoId, { bookingId });
     await ctx.db.insert("auditLog", {
       orgId: org._id,
       actorProfileId: profile._id,
@@ -327,6 +345,7 @@ export const book = mutation({
       metadata: {
         mode: args.mode,
         items: args.items.length,
+        photoCount: photoIds.length,
         estimatePaise,
       },
       createdAt: now,
@@ -381,7 +400,7 @@ const vTrackView = v.object({
   slotWindow: vSaathiTime,
   timeline: v.array(v.object({ status: vBookingStatus, at: v.number() })),
   items: v.array(v.object({ material: vMaterialRef, estKg: v.number() })),
-  estimatePaise: v.number(),
+  estimatePaise: v.optional(v.number()),
   receipt: v.optional(vReceipt),
   points: v.optional(v.number()),
   shop: v.object({
@@ -477,7 +496,7 @@ const vMyBooking = v.object({
   itemCount: v.number(),
   /** The estimated weight of everything, in grams. */
   estGrams: v.number(),
-  estimatePaise: v.number(),
+  estimatePaise: v.optional(v.number()),
   /** What was actually paid, once the pickup is done. */
   paidPaise: v.optional(v.number()),
   createdAt: v.number(),

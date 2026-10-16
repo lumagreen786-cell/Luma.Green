@@ -34,9 +34,9 @@ export async function MaterialRecords() {
   return (
     <section
       aria-labelledby="material-records-heading"
-      className="overflow-hidden bg-foreground py-10 text-background sm:py-12 lg:py-24"
+      className="overflow-hidden bg-muted/30 py-10 text-foreground sm:py-12 lg:py-16"
     >
-      <Container className="space-y-10 lg:space-y-14">
+      <Container className="space-y-6 lg:space-y-8">
         <div className="grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-end lg:gap-16">
           <h2
             id="material-records-heading"
@@ -44,7 +44,7 @@ export async function MaterialRecords() {
           >
             {home("expansion.recordsTitle")}
           </h2>
-          <p className="text-base leading-relaxed text-background/75">
+          <p className="text-base leading-relaxed text-muted-foreground">
             {how("body")}
           </p>
         </div>
@@ -59,10 +59,10 @@ export async function MaterialRecords() {
               alt=""
               fill
               sizes="(min-width: 1024px) 600px, 100vw"
-              className="scale-110 object-cover"
+              className="object-cover"
             />
           </div>
-          <dl className="divide-y divide-background/20 border-y border-background/20">
+          <dl className="space-y-2">
             {facts.map(({ key, icon: Icon }) => (
               <div
                 key={key}
@@ -71,7 +71,7 @@ export async function MaterialRecords() {
               >
                 <Icon aria-hidden className="row-span-2 mt-1 size-5" />
                 <dt className="text-lg font-semibold">{ledger(key)}</dt>
-                <dd className="col-start-2 text-sm leading-relaxed text-background/70">
+                <dd className="col-start-2 text-sm leading-relaxed text-muted-foreground">
                   {ledger(`${key}Body`)}
                 </dd>
               </div>
@@ -83,13 +83,13 @@ export async function MaterialRecords() {
             <h3 className="text-xl font-semibold">
               {principles("frozen.title")}
             </h3>
-            <p className="text-sm leading-relaxed text-background/75">
+            <p className="text-sm leading-relaxed text-muted-foreground">
               {principles("frozen.body")}
             </p>
           </div>
           <div className="space-y-3">
             <h3 className="text-xl font-semibold">{help("carbonCredits.q")}</h3>
-            <p className="text-sm leading-relaxed text-background/75">
+            <p className="text-sm leading-relaxed text-muted-foreground">
               {help("carbonCredits.a")}
             </p>
           </div>
@@ -98,7 +98,7 @@ export async function MaterialRecords() {
           asChild
           variant="outline"
           size="lg"
-          className="min-h-12 max-w-full min-w-0 border-background/30 bg-transparent py-3 text-start whitespace-nowrap text-background hover:bg-background hover:text-foreground dark:bg-transparent dark:hover:bg-background"
+          className="min-h-12 max-w-full min-w-0 py-3 text-start whitespace-nowrap"
         >
           <Link href="/standards">
             <span className="min-w-0">{footer("standards")}</span>

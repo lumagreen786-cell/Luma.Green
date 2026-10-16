@@ -83,6 +83,23 @@ labelled fixtures. The delivery handoff owns verification and release status.
 
 ## Current UI contract
 
+### Astryx redesign — 16 October 2026
+
+The owner rejected the previous pass and authorized a substantial remake of all
+web surfaces using Astryx. This instruction supersedes older composition and
+corner-shape constraints below. Use Astryx components with Luma's original
+light/dark palette and Geist/Noto script coverage. The owner explicitly retained
+the original colours; Matcha's palette must not replace them. Forms are centered, with no decorative side panel.
+Role choices are large photo galleries with one short description; requirements
+belong in the chosen application. The owner subsequently rejected the animated preview. The homepage starts with
+a household recycling illustration and Recycle action, followed by image-led
+business sections. Demo testimonials are removed. Avoid repeated decorative
+underlines and keep every section within the active light/dark theme. Other public pages
+put their useful action before optional reading. Operational screens need clear
+navigation and working space. Keep content
+honest, localized and accessible. No gradients, nested decorative cards or filler.
+Keep native apps on hold and retain every auth, consent and authorization rule.
+
 ### Entry-form redesign — 15 October 2026
 
 Web UI work has resumed across public pages, login, signup/onboarding, household
@@ -171,8 +188,8 @@ contract. Make routine fixes within it without adding another approval step.
   Body text, field help, menu descriptions and headings may wrap naturally.
 - Every control has an accessible name and a real outcome. Do not use a dead
   “opens soon” page to hide an implemented interface. Unconfigured phone sign-in
-  may reach the labelled OTP preview, but it sends no SMS, verifies no code and
-  creates no session. Preview mode must not bypass a protected route.
+  shows an honest unavailable state. Send OTP must call the real configured
+  service; do not simulate a successful send or verification.
 
 ### Languages, fonts and exact entry
 
@@ -229,8 +246,8 @@ contract. Make routine fixes within it without adding another approval step.
 - Use recorded values for live charts, activity, balances and claims. Missing
   live prices show loading/unavailable placeholders, never sample quotes passed
   off as current prices. Owner-authorised seeded demo prices may appear with a
-  clear sample-price notice; they are not verified market quotes. Approved demo testimonials remain visibly illustrative,
-  use role descriptions and do not claim real customer identities or validation.
+  clear sample-price notice; they are not verified market quotes. Demo
+  testimonials are removed at the owner's request.
 - Offline demo records remain labelled and isolated. Approval to draft demo data
   does not approve database import, production identities, an OTP bypass or
   provider execution. Follow the demo seed plan and its explicit coverage gaps;

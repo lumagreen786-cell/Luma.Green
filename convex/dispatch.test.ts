@@ -200,7 +200,10 @@ describe("pickup dispatch", () => {
           row.revision === 2,
       ),
     ).toBe(true);
-    expect(next.estimatePaise).toBeGreaterThanOrEqual(original.estimatePaise);
+    expect(original.estimatePaise).toBeDefined();
+    expect(next.estimatePaise).toBeGreaterThanOrEqual(
+      original.estimatePaise ?? 0,
+    );
     expect(next.status).toBe("requested");
     expect(next.dispatch?.attempt).toBe(2);
     expect(next.dispatch?.attemptedOrgIds).toEqual([w.org._id, nearest]);
@@ -527,4 +530,27 @@ describe("shop dispatch preferences", () => {
       w.shop.mutation(api.shop.configureDispatch, args),
     ).rejects.toThrow(/OWNER_REQUIRED/);
   });
+});
+
+it("reassigns a photo request without inventing an estimate", async () => {
+  const w = await world();
+  const otherId = await candidate(w, "photo-replacement");
+  const photoId = await w.household.action(api.householdPhotos.upload, {
+    name: "scrap.jpg",
+    bytes: new Uint8Array([0xff, 0xd8, 0xff, 0xe0]).buffer,
+  });
+  const token = await w.household.mutation(api.households.book, {
+    ...w.args,
+    items: [],
+    photoIds: [photoId],
+  });
+  const initial = await read(w, token);
+  await w.shop.mutation(api.shop.respond, {
+    bookingId: initial._id,
+    accept: false,
+  });
+  const next = await read(w, token);
+  expect(next.orgId).toBe(otherId);
+  expect(next.estimatePaise).toBeUndefined();
+  expect(next.items).toEqual([]);
 });

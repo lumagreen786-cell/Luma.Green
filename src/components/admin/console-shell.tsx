@@ -109,7 +109,7 @@ export function ConsoleShell({ children }: { children: ReactNode }) {
       <main
         id="main"
         tabIndex={-1}
-        className="mx-auto w-full max-w-7xl min-w-0 flex-1 px-4 py-6 sm:px-8 lg:px-10 lg:py-8"
+        className="mx-auto w-full max-w-7xl min-w-0 flex-1 px-4 py-6 sm:px-8 lg:px-12 lg:py-10"
       >
         <QueryProvider>{children}</QueryProvider>
       </main>
@@ -123,7 +123,7 @@ function Sidebar({ name }: { name: string }) {
   const { signOut, busy, error } = useAdminSignOut();
 
   return (
-    <aside className="flex flex-col gap-3 border-b border-sidebar-border bg-background px-3 pt-3 pb-2 text-sidebar-foreground lg:sticky lg:top-0 lg:h-dvh lg:w-64 lg:shrink-0 lg:gap-6 lg:overflow-y-auto lg:border-e lg:border-b-0 lg:px-4 lg:py-5">
+    <aside className="flex flex-col gap-3 border-b border-sidebar-border bg-muted/35 px-3 pt-3 pb-2 text-sidebar-foreground lg:sticky lg:top-0 lg:h-dvh lg:w-72 lg:shrink-0 lg:gap-6 lg:overflow-y-auto lg:border-e lg:border-b-0 lg:px-5 lg:py-6">
       <div className="flex items-center justify-between gap-2">
         <Link
           href="/admin"
@@ -188,7 +188,7 @@ function Sidebar({ name }: { name: string }) {
                   className={cn(
                     "relative flex min-h-14 min-w-0 flex-col items-center justify-center gap-1 border-b-2 border-transparent px-1 py-2 text-xs transition-colors outline-none focus-visible:ring-3 focus-visible:ring-ring/50 lg:min-h-11 lg:flex-row lg:justify-start lg:gap-3 lg:border-s-2 lg:border-b-0 lg:px-3 lg:text-sm",
                     isActive
-                      ? "border-b-primary font-semibold text-primary lg:border-s-primary"
+                      ? "border-b-primary bg-background font-semibold text-primary lg:border-s-primary"
                       : "text-muted-foreground hover:bg-muted/50 hover:text-foreground",
                   )}
                 >
@@ -273,7 +273,7 @@ function ConsoleSkeleton() {
       className="flex min-h-dvh flex-col bg-background lg:flex-row"
       aria-busy="true"
     >
-      <div className="border-b bg-background p-4 lg:w-64 lg:border-e lg:border-b-0">
+      <div className="border-b bg-background p-4 lg:w-72 lg:border-e lg:border-b-0">
         <Skeleton className="h-8 w-40" />
       </div>
       <div className="flex flex-1 flex-col gap-4 p-6 lg:p-10">

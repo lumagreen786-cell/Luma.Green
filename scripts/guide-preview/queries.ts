@@ -18,6 +18,11 @@ import {
   workspaceFixture,
 } from "./fixtures";
 import {
+  operationalFixtures,
+  routeHistoryFixture,
+  routesFixture,
+} from "./operational-fixtures";
+import {
   workspaceListFixture,
   workspaceTeamFixture,
 } from "./workspace-fixtures";
@@ -64,6 +69,8 @@ export function useQuery(
       canCheckout: false,
       liveCanCheckout: false,
     };
+  if (name === "identity:me" && window.location.pathname.includes("/join/"))
+    return securityFixture("");
   if (name === "inbox:unreadCount")
     return inboxFixture(window.location.search).unreadCount;
   return name === "identity:me" &&
@@ -79,7 +86,12 @@ function impactScenario() {
     : impactFixture;
 }
 function readFixture(name: string): unknown {
+  if (Object.hasOwn(operationalFixtures, name))
+    return operationalFixtures[name];
   switch (name) {
+    case "householdPhotos:list": {
+      return [];
+    }
     case "workspace:mine": {
       return workspaceFixture();
     }
@@ -121,6 +133,17 @@ export function useConvexAuth() {
 }
 export function usePaginatedQuery(query: FunctionReference<"query">) {
   const name = getFunctionName(query);
+  if (name === "routePlans:mine" || name === "routePlans:history") {
+    const fixture =
+      name === "routePlans:mine" ? routesFixture : routeHistoryFixture;
+    return {
+      results: fixture.page,
+      status: "Exhausted",
+      loadMore: () => {
+        throw new Error("Documentation fixture: pagination is exhausted.");
+      },
+    };
+  }
   if (name !== "inbox:list")
     throw new Error(`Missing paginated documentation fixture: ${name}`);
   const fixture = inboxFixture(window.location.search);

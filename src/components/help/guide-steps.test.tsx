@@ -25,3 +25,20 @@ describe("guide instructions", () => {
     }
   });
 });
+
+it("opens the first instruction and keeps later instructions available on demand", () => {
+  const guide = guidesFor("household")[0];
+  const { container } = render(
+    <NextIntlClientProvider locale="en" messages={messages}>
+      <GuideSteps guide={guide} />
+    </NextIntlClientProvider>,
+  );
+  const disclosures = container.querySelectorAll("details");
+  expect(disclosures).toHaveLength(guide.steps.length);
+  expect(disclosures[0]).toHaveAttribute("open");
+  expect(disclosures[1]).not.toHaveAttribute("open");
+  for (const disclosure of disclosures) {
+    expect(disclosure.querySelector("summary")).toHaveTextContent(/\S/);
+    expect(disclosure.querySelector("p")).toHaveTextContent(/\S/);
+  }
+});

@@ -34,7 +34,7 @@
     "prices": "Giá",
     "help": "Trợ giúp",
     "join": "Tham gia",
-    "sellScrap": "Đặt lịch thu gom"
+    "sellScrap": "Tái chế"
   },
   "footer": {
     "about": "Mạng lưới tái chế của Ấn Độ trên một nền tảng, từ hộ gia đình đến nhà máy. Mỗi lần bàn giao đều được cân, định giá và ghi nhận.",
@@ -79,9 +79,9 @@
     "metaDescription": "Luma.Green kết nối mạng lưới tái chế của Ấn Độ trên một nền tảng: hộ gia đình, cửa hàng kabadiwala, đơn vị sơ chế, cơ sở tái chế và nhà sản xuất, với giá công bằng, doanh nghiệp đã xác minh và biên nhận ở mỗi bước.",
     "hero": {
       "eyebrow": "Bắt đầu tại Bengaluru",
-      "title": "Cho vật liệu của bạn một khởi đầu mới.",
-      "lead": "Đặt lịch thu gom giấy, nhựa, kim loại và nhiều loại khác. So sánh đề nghị và lưu hồ sơ rõ ràng.",
-      "sell": "Đặt lịch thu gom",
+      "title": "Dọn đồ tái chế. Nhận tiền.",
+      "lead": "Ảnh, lấy tận nơi hoặc mang đến cửa hàng, thanh toán sau khi cân.",
+      "sell": "Tái chế",
       "join": "Dành cho doanh nghiệp",
       "prices": "Xem giá vật liệu"
     },
@@ -130,7 +130,7 @@
         "one": "Xem giá trị vật liệu trước khi đặt lịch.",
         "two": "Thu gom tại cửa hoặc mang đến cửa hàng.",
         "three": "Nhận tiền mặt hoặc UPI, kèm biên nhận.",
-        "cta": "Đặt lịch thu gom"
+        "cta": "Tái chế"
       },
       "kabadiwala": {
         "title": "Cửa hàng kabadiwala",
@@ -211,7 +211,7 @@
     "closing": {
       "title": "Bắt đầu với những gì bạn có",
       "body": "Từ một túi báo cũ đến một xe tải chở kiện hàng: tất cả đều có chỗ trên Luma.Green.",
-      "sell": "Đặt lịch thu gom",
+      "sell": "Tái chế",
       "join": "Đăng ký doanh nghiệp"
     },
     "expansion": {
@@ -1889,14 +1889,14 @@
     "mobileLabel": "Số di động",
     "mobileHint": "Chúng tôi sẽ gửi mã 6 chữ số đến số này.",
     "mobileInvalid": "Nhập số di động Ấn Độ gồm 10 chữ số.",
-    "sendCode": "Gửi mã",
+    "sendCode": "Gửi OTP",
     "sending": "Đang gửi…",
     "sendFailed": "Không gửi được mã. Vui lòng thử lại sau một phút.",
     "homeTitle": "Tái chế tại nhà?",
     "homeLink": "Xem cách hoạt động",
     "privacy": "Chúng tôi chỉ dùng số để đăng nhập và gửi cập nhật về công việc trên Luma.Green.",
     "unavailableTitle": "Đăng nhập bằng điện thoại sắp mở",
-    "unavailableBody": "Chúng tôi đang hoàn tất thiết lập SMS cho mã đăng nhập. Vui lòng quay lại sau.",
+    "unavailableBody": "Không thể đăng nhập bằng SMS. Vui lòng thử lại sau.",
     "verifyTitle": "Nhập mã gồm 6 chữ số",
     "sentTo": "Đã gửi SMS đến {phone}",
     "codeLabel": "Mã 6 chữ số",
@@ -1912,11 +1912,6 @@
     "errorGeneric": "Đã xảy ra lỗi. Vui lòng thử lại.",
     "signingIn": "Đang đăng nhập…",
     "sendRateLimited": "Quá nhiều yêu cầu mã. Vui lòng thử lại sau.",
-    "previewAction": "Xem trước màn hình nhập mã",
-    "previewTitle": "Xem trước mã",
-    "previewNumber": "Số di động: {phone}",
-    "previewBody": "SMS chưa được kết nối. Không có mã nào được gửi. Bạn có thể xem màn hình này nhưng không thể đăng nhập.",
-    "previewPhoneHint": "Nhập số di động để xem trước bước tiếp theo. Không gửi SMS.",
     "twoFactorTitle": "Kiểm tra ứng dụng xác thực",
     "twoFactorDescription": "Nhập mã 6 chữ số trong ứng dụng xác thực để hoàn tất đăng nhập.",
     "twoFactorUseBackup": "Dùng mã khôi phục",
@@ -1925,7 +1920,8 @@
     "twoFactorBackupDescription": "Nhập một mã khôi phục đã lưu. Mỗi mã chỉ dùng một lần.",
     "twoFactorBackupLabel": "Mã khôi phục",
     "twoFactorExpired": "Lần đăng nhập đã hết hạn. Bắt đầu lại với mã điện thoại mới.",
-    "twoFactorRestart": "Bắt đầu lại"
+    "twoFactorRestart": "Bắt đầu lại",
+    "resendCountdown": "Gửi lại OTP sau {time}"
   },
   "join": {
     "metaTitle": "Tham gia Luma.Green",
@@ -2630,7 +2626,7 @@
       "label": "Số di động",
       "hint": "Chúng tôi sẽ gửi mã 6 chữ số đến số này.",
       "invalid": "Nhập số di động Ấn Độ gồm 10 chữ số.",
-      "sendCode": "Gửi mã",
+      "sendCode": "Gửi OTP",
       "sending": "Đang gửi…",
       "sendFailed": "Không gửi được mã. Vui lòng thử lại sau một phút.",
       "codeLabel": "Mã 6 chữ số",
@@ -2644,7 +2640,8 @@
       "errorExpired": "Mã đã hết hạn. Hãy xin mã mới.",
       "errorTooMany": "Thử quá nhiều lần. Hãy xin mã mới.",
       "errorGeneric": "Đã xảy ra lỗi. Vui lòng thử lại.",
-      "privacy": "Chúng tôi chỉ dùng số cho lịch đặt và các cập nhật liên quan."
+      "privacy": "Chúng tôi chỉ dùng số cho lịch đặt và các cập nhật liên quan.",
+      "resendCountdown": "Gửi lại OTP sau {time}"
     },
     "errors": {
       "generic": "Đã xảy ra lỗi. Vui lòng thử lại.",
@@ -2698,6 +2695,28 @@
       "retake": "Ảnh không rõ hoặc không có vật liệu. Thử ảnh khác hoặc chọn vật liệu bên dưới.",
       "empty": "Không tìm thấy vật liệu hỗ trợ. Thử ảnh khác hoặc chọn vật liệu bên dưới.",
       "replace": "Chọn ảnh khác"
+    },
+    "simple": {
+      "title": "Tái chế",
+      "photos": "Thêm ảnh",
+      "photoHint": "Cho chúng tôi xem những gì bạn muốn tái chế.",
+      "details": "Thông tin của bạn",
+      "next": "Tìm cửa hàng gần đây",
+      "location": "Dùng vị trí của tôi",
+      "pickup": "Đến lấy tận nơi",
+      "dropoff": "Mang đến cửa hàng",
+      "chooseShop": "Chọn cửa hàng gần đây",
+      "schedule": "Chọn thời gian",
+      "confirm": "Xác nhận tái chế",
+      "uploadFailed": "Không thể tải ảnh lên. Vui lòng thử lại.",
+      "photoRequired": "Thêm ít nhất một ảnh.",
+      "photosTooMany": "Thêm tối đa 5 ảnh.",
+      "unavailable": "Hiện không thể gửi yêu cầu tái chế. Vui lòng thử lại sau.",
+      "estimateLater": "Cửa hàng cân vật liệu và xác nhận số tiền.",
+      "nearest": "Gần nhất trước",
+      "replacePhotos": "Đổi ảnh",
+      "requested": "Đã lên lịch tái chế",
+      "attachedPhotos": "Ảnh"
     }
   },
   "track": {

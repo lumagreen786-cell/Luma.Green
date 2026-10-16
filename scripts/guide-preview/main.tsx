@@ -23,12 +23,16 @@ import { CompliancePage } from "@/components/insights/compliance-page";
 import { ImpactPage } from "@/components/insights/impact-page";
 import { BusinessJoin, KabadiwalaJoin } from "@/components/join/join-pages";
 import { StatusView } from "@/components/join/status-view";
+import { LogisticsPage } from "@/components/logistics/logistics-page";
+import { LotsPage } from "@/components/lots/lots-page";
 import { FinancialLifecycle } from "@/components/market/financial-lifecycle";
 import { InvoicePage } from "@/components/market/invoice-page";
 import { MarketPage } from "@/components/market/market-page";
 import { SellPage } from "@/components/market/sell-page";
 import { TradesPage } from "@/components/market/trades-page";
 import { NotificationsPage } from "@/components/notifications/notifications-page";
+import { AuditReports } from "@/components/quality/audit-reports";
+import { QualityDocuments } from "@/components/quality/quality-documents";
 import { RateCardPage } from "@/components/shop/rate-card-page";
 import { RequestDetail } from "@/components/shop/request-detail";
 import { RequestsPage } from "@/components/shop/requests-page";
@@ -86,6 +90,9 @@ const operationalPages: Record<string, ReactNode | undefined> = {
       <FinancialLifecycle tradeId={"guide-finance-example" as Id<"trades">} />
     </div>
   ),
+  "/en/app/lots": <LotsPage />,
+  "/en/app/logistics": <LogisticsPage />,
+  "/en/app/quality-documents": <QualityDocuments />,
   "/en/app/prices": <RateCardPage />,
   "/en/app/stock": <StockPage />,
   "/en/app/sell": <SellPage />,
@@ -119,6 +126,7 @@ const onboardingPage = onboardingContent
   ? await JoinLayout({ children: onboardingContent })
   : null;
 const accountPages: Record<string, ReactNode | undefined> = {
+  "/en/account/reports": <AuditReports />,
   "/en/account/workspaces": <WorkspacePage />,
   "/en/account/notifications": <NotificationsPage />,
   "/en/account/security": <AccountSecurity />,
@@ -129,7 +137,7 @@ const accountPage = accountContent
   : null;
 const challengePage =
   path === "/en/login/factor"
-    ? await AuthLayout({
+    ? AuthLayout({
         children: (
           <FactorChallenge
             onVerified={() => {

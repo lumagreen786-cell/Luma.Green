@@ -35,7 +35,9 @@ it("shows the current language and all supported choices without leaving the pag
   renderChoice();
   expect(screen.getAllByRole("radio")).toHaveLength(locales.length);
   expect(screen.getByRole("radio", { name: "English" })).toBeChecked();
-  expect(screen.getByRole("status")).toHaveTextContent("Language English");
+  expect(
+    screen.getByRole("status", { name: messages.common.language }),
+  ).toHaveTextContent("Language English");
   expect(calls.replace).not.toHaveBeenCalled();
   expect(calls.markLanguageChosen).not.toHaveBeenCalled();
 });
@@ -52,7 +54,9 @@ it("finds a language by its English name or native name and keeps the selection 
   await userEvent.type(search, "العربية");
   expect(screen.getAllByRole("radio")).toHaveLength(1);
   expect(screen.getByRole("radio", { name: "العربية Arabic" })).toBeVisible();
-  expect(screen.getByRole("status")).toHaveTextContent("English");
+  expect(
+    screen.getByRole("status", { name: messages.common.language }),
+  ).toHaveTextContent("English");
 });
 
 it("lets keyboard users choose before Continue changes the locale and preserves the destination", async () => {
@@ -93,7 +97,9 @@ it("keeps Continue available when a search has no matches", async () => {
 it("applies a pointer selection only after Continue", async () => {
   renderChoice();
   await userEvent.click(screen.getByRole("radio", { name: "हिन्दी Hindi" }));
-  expect(screen.getByRole("status")).toHaveTextContent("हिन्दी");
+  expect(
+    screen.getByRole("status", { name: messages.common.language }),
+  ).toHaveTextContent("हिन्दी");
   expect(calls.markLanguageChosen).not.toHaveBeenCalled();
   await userEvent.click(
     screen.getByRole("button", { name: messages.auth.continue }),

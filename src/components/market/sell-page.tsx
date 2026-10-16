@@ -8,6 +8,7 @@ import {
   DemoNote,
   EmptyState,
 } from "@/components/app/page-parts";
+import { WorkflowTabs } from "@/components/app/workflow-tabs";
 
 import { buyerKindFor } from "../../../convex/lib/chain";
 import { MyListings } from "./my-listings";
@@ -41,20 +42,24 @@ export function SellPage() {
     <>
       <AppPageHeader title={t("sell.title")} lead={t("sell.lead", { buyer })} />
       <DemoNote>{t("sampleData")}</DemoNote>
-      <div className="grid items-start gap-10 xl:grid-cols-[minmax(0,1fr)_24rem]">
-        <section
-          aria-labelledby="new-listing-title"
-          className="flex flex-col gap-5 border-t border-border pt-5 xl:order-2 xl:border-s xl:border-t-0 xl:ps-8 xl:pt-0"
-        >
-          <h2 id="new-listing-title" className="text-lg font-semibold">
-            {t("sell.form.title")}
-          </h2>
-          <NewListingForm sellerKind={org.kind} city={org.city} />
-        </section>
-        <div className="min-w-0 xl:order-1">
-          <MyListings />
-        </div>
-      </div>
+      <WorkflowTabs
+        items={[
+          {
+            value: "listings",
+            label: t("sell.mine.title"),
+            content: <MyListings />,
+          },
+          {
+            value: "create",
+            label: t("sell.form.title"),
+            content: (
+              <section className="max-w-xl">
+                <NewListingForm sellerKind={org.kind} city={org.city} />
+              </section>
+            ),
+          },
+        ]}
+      />
     </>
   );
 }

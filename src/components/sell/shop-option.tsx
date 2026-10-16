@@ -27,6 +27,7 @@ export function ShopOption({
   isBest: boolean;
   isNearest: boolean;
 }) {
+  const tSimple = useTranslations("sell.simple");
   const t = useTranslations("sell.shop");
   const format = useFormat();
   const time = useTimeFormat();
@@ -57,7 +58,9 @@ export function ShopOption({
           </span>
           <span className="flex shrink-0 flex-col items-end">
             <span className="text-xl leading-tight font-semibold tracking-tight text-foreground tabular-nums">
-              {format.money(shop.estimatePaise)}
+              {shop.estimatePaise === undefined
+                ? tSimple("estimateLater")
+                : format.money(shop.estimatePaise)}
             </span>
             <span className="text-xs text-muted-foreground">
               {t("offerFor")}

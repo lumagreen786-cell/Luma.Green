@@ -20,6 +20,7 @@ import { isCurrentSection } from "@/components/site/site-nav";
 import { SkipLink } from "@/components/site/skip-link";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Sheet,
   SheetClose,
@@ -62,6 +63,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   const navigation = useTranslations("nav");
   const locale = useLocale();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [navSearch, setNavSearch] = useState("");
   const menuOpener = useRef<HTMLButtonElement | null>(null);
   const workspace = useWorkspace();
   const router = useRouter();
@@ -176,6 +178,8 @@ export function AppShell({ children }: { children: ReactNode }) {
       ? evidence("title")
       : t(`nav.${item.label}`);
   };
+  const isSearchMatch = (item: NavItem) =>
+    itemLabel(item).toLowerCase().includes(navSearch.trim().toLowerCase());
   // Keep the two daily destinations visible. The menu holds the rest at
   // full text width, so translated labels never need ellipses or tiny type.
   const mobilePrimary = primary.slice(0, 2);
@@ -198,7 +202,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         className={cn(
           className,
           isCurrent &&
-            "border-s-primary bg-sidebar-accent font-semibold text-sidebar-accent-foreground",
+            "border-s-primary bg-background font-semibold text-primary",
         )}
       >
         <Icon aria-hidden className="size-5 shrink-0" />
@@ -214,37 +218,52 @@ export function AppShell({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-dvh flex-col bg-background xl:flex-row">
       <SkipLink />
-      <aside className="sticky top-0 hidden h-dvh w-64 shrink-0 flex-col gap-5 border-e border-sidebar-border bg-sidebar px-4 py-5 text-sidebar-foreground xl:flex">
+      <aside className="sticky top-0 hidden h-dvh w-72 shrink-0 flex-col gap-6 border-e border-sidebar-border bg-muted/35 px-5 py-6 text-sidebar-foreground xl:flex">
         <Link
           href="/"
           className="inline-flex min-h-11 items-center rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
         >
           <Logo />
         </Link>
-        <div className="shrink-0 border-b border-sidebar-border px-2 pb-4">
-          <p className="text-sm font-semibold break-words">{name}</p>
+        <div className="shrink-0 border-y border-sidebar-border px-2 py-5">
+          <p className="font-display text-lg leading-tight font-semibold break-words">
+            {name}
+          </p>
           <p className="mt-1 text-xs text-muted-foreground">
             {t(`roles.${role}`)}
           </p>
         </div>
+        <Input
+          type="search"
+          aria-label={common("search")}
+          placeholder={common("search")}
+          value={navSearch}
+          onChange={(event) => {
+            setNavSearch(event.target.value);
+          }}
+        />
         <nav
           aria-label={t("navLabel")}
           className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto overscroll-contain pe-1"
         >
-          {primary.map((item) =>
-            link(
-              item,
-              "flex min-h-11 items-center gap-3 border-s-2 border-transparent px-3 text-sm font-medium outline-none transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-3 focus-visible:ring-ring/50",
-            ),
-          )}
+          {primary
+            .filter((item) => isSearchMatch(item))
+            .map((item) =>
+              link(
+                item,
+                "flex min-h-11 items-center gap-3 border-s-2 border-transparent px-3 text-sm font-medium outline-none transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-3 focus-visible:ring-ring/50",
+              ),
+            )}
           {more.length > 0 ? (
             <div className="mt-2 flex flex-col gap-1 border-t border-sidebar-border pt-2">
-              {more.map((item) =>
-                link(
-                  item,
-                  "flex min-h-11 items-center gap-3 border-s-2 border-transparent px-3 text-sm text-muted-foreground outline-none transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-3 focus-visible:ring-ring/50",
-                ),
-              )}
+              {more
+                .filter((item) => isSearchMatch(item))
+                .map((item) =>
+                  link(
+                    item,
+                    "flex min-h-11 items-center gap-3 border-s-2 border-transparent px-3 text-sm text-muted-foreground outline-none transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-3 focus-visible:ring-ring/50",
+                  ),
+                )}
             </div>
           ) : null}
           <Link
@@ -325,7 +344,9 @@ export function AppShell({ children }: { children: ReactNode }) {
             </SheetClose>
           </SheetHeader>
           <div className="mx-5 border-b py-3">
-            <p className="text-sm font-semibold break-words">{name}</p>
+            <p className="font-display text-lg leading-tight font-semibold break-words">
+              {name}
+            </p>
             <p className="mt-1 text-xs text-muted-foreground">
               {t(`roles.${role}`)}
             </p>
@@ -423,7 +444,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       <main
         id="main"
         tabIndex={-1}
-        className="mx-auto flex w-full max-w-7xl min-w-0 flex-1 flex-col gap-8 px-4 pt-6 pb-28 sm:px-8 xl:px-10 xl:pt-8 xl:pb-12"
+        className="mx-auto flex w-full max-w-7xl min-w-0 flex-1 flex-col gap-8 px-4 pt-6 pb-28 sm:px-8 xl:px-12 xl:pt-10 xl:pb-16"
       >
         <WorkspacePermissions
           key={

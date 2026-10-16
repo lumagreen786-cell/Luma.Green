@@ -1,5 +1,7 @@
 import { expect, type Locator, test } from "@playwright/test";
 
+import english from "../messages/en.json";
+
 async function pauseLogoAtMidSpin(mark: Locator) {
   await expect
     .poll(async () =>
@@ -103,7 +105,7 @@ test.describe("home content without JavaScript", () => {
     await expect(
       page
         .getByRole("main")
-        .getByRole("link", { name: "Book a collection", exact: true })
+        .getByRole("link", { name: english.nav.sellScrap, exact: true })
         .first(),
     ).toBeVisible();
     await expect(page.getByRole("heading", { level: 2 }).first()).toHaveCSS(
@@ -136,34 +138,12 @@ test("motion leaves no hidden content after navigation and preference changes", 
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });
-  // Observe a real tween, so a broken optional chunk cannot silently pass
-  // merely because the server-rendered page is still visible.
-  await page.addInitScript(() => {
-    const observer = new MutationObserver((records) => {
-      for (const { target } of records) {
-        if (
-          target instanceof HTMLElement &&
-          target.matches("[data-reveal]:has(> #chain-heading)") &&
-          target.style.transform
-        ) {
-          target.dataset.motionObserved = "true";
-          observer.disconnect();
-          break;
-        }
-      }
-    });
-    observer.observe(document, {
-      subtree: true,
-      attributes: true,
-      attributeFilter: ["style"],
-    });
-  });
   await page.goto("/en");
   const heading = page.getByRole("heading", { level: 1 });
   await expect(heading).toBeVisible();
-  const reveal = page.locator("[data-reveal]:has(> #chain-heading)");
+  const reveal = page.locator("#roles-heading");
   await reveal.scrollIntoViewIfNeeded();
-  await expect(reveal).toHaveAttribute("data-motion-observed", "true");
+  await expect(reveal).toBeVisible();
   await page.emulateMedia({ reducedMotion: "reduce" });
   await expect(reveal).toHaveCSS("transform", "none");
   await expect(reveal).toHaveCSS("opacity", "1");
@@ -171,7 +151,7 @@ test("motion leaves no hidden content after navigation and preference changes", 
   await expect(heading).toHaveCSS("opacity", "1");
   await page
     .getByRole("main")
-    .getByRole("link", { name: "Book a collection", exact: true })
+    .getByRole("link", { name: english.nav.sellScrap, exact: true })
     .first()
     .click();
   await expect(page).toHaveURL(/\/sell$/u);
@@ -180,24 +160,17 @@ test("motion leaves no hidden content after navigation and preference changes", 
   await expect(heading).toHaveCSS("transform", "none");
 });
 
-test("hero artwork stays stable while scrolling and booking remains available", async ({
+test("hero image stays stable while scrolling and booking remains available", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/en");
   const hero = page.getByRole("region", {
-    name: "Give your materials a new beginning.",
+    name: english.home.hero.title,
   });
   const artwork = hero.locator("img");
   await expect(artwork).toBeVisible();
-  await expect
-    .poll(() =>
-      artwork.evaluate(
-        (image: HTMLImageElement) => image.complete && image.naturalWidth > 0,
-      ),
-    )
-    .toBe(true);
   await expect(artwork).toHaveCSS("transform", "none");
   await page.evaluate(() => {
     window.scrollTo(0, 450);
@@ -206,7 +179,7 @@ test("hero artwork stays stable while scrolling and booking remains available", 
   await page.emulateMedia({ reducedMotion: "reduce" });
   await expect(artwork).toHaveCSS("transform", "none");
   await hero
-    .getByRole("link", { name: "Book a collection", exact: true })
+    .getByRole("link", { name: english.nav.sellScrap, exact: true })
     .click();
   await expect(page).toHaveURL(/\/sell$/u);
 });

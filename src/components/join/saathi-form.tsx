@@ -29,6 +29,7 @@ import {
   WeekdayChips,
 } from "./fields";
 import { FileSlot } from "./file-slot";
+import { FormJourney } from "./form-journey";
 import { ChangesNote, FormHeader, SubmitBar } from "./form-parts";
 import { submitErrorKey } from "./submit-error";
 import { useAutosave, withoutUndefined } from "./use-autosave";
@@ -69,6 +70,8 @@ export function SaathiForm({ application }: { application: Application }) {
     control,
     register,
     handleSubmit,
+    trigger,
+    getFieldState,
     formState: { errors, isSubmitting },
   } = useForm<Values>({
     resolver: zodResolver(saathiSchema),
@@ -118,198 +121,233 @@ export function SaathiForm({ application }: { application: Application }) {
     showFileErrors && missing.includes(type) ? "fileMissing" : undefined;
 
   return (
-    <form
-      noValidate
-      className="flex flex-col gap-6"
-      onSubmit={(event) => {
-        void handleSubmit(onSubmit, () => {
+    <FormJourney
+      trigger={trigger}
+      getFieldState={getFieldState}
+      onFinish={(event) => {
+        return handleSubmit(onSubmit, () => {
           setShowFileErrors(true);
           setFailure("fixErrors");
         })(event);
       }}
-    >
-      <FormHeader
-        eyebrow={t("roles.saathi.title")}
-        title={t("saathi.title")}
-        saveState={saveState}
-      />
-      <ChangesNote note={application.note} />
+      header={
+        <>
+          <FormHeader
+            eyebrow={t("roles.saathi.title")}
+            title={t("saathi.title")}
+            saveState={saveState}
+          />
+          <ChangesNote note={application.note} />
+        </>
+      }
+      stages={[
+        {
+          title: t("saathi.area"),
+          fields: ["name", "area", "location", "radiusKm"],
+          content: (
+            <>
+              <FormField
+                id="name"
+                label={t("saathi.name")}
+                hint={t("saathi.nameHint")}
+                error={errors.name?.message}
+              >
+                <Input
+                  id="name"
+                  autoComplete="name"
+                  className="h-12 text-base"
+                  aria-invalid={errors.name ? true : undefined}
+                  aria-describedby={describedBy(
+                    "name",
+                    errors.name?.message,
+                    t("saathi.nameHint"),
+                  )}
+                  {...register("name")}
+                />
+              </FormField>
 
-      <FormField
-        id="name"
-        label={t("saathi.name")}
-        hint={t("saathi.nameHint")}
-        error={errors.name?.message}
-      >
-        <Input
-          id="name"
-          autoComplete="name"
-          className="h-12 text-base"
-          aria-invalid={errors.name ? true : undefined}
-          aria-describedby={describedBy(
-            "name",
-            errors.name?.message,
-            t("saathi.nameHint"),
-          )}
-          {...register("name")}
+              <FormField
+                id="area"
+                label={t("saathi.area")}
+                hint={t("saathi.areaHint")}
+                error={errors.area?.message}
+              >
+                <Input
+                  id="area"
+                  autoComplete="address-level3"
+                  className="h-12 text-base"
+                  aria-invalid={errors.area ? true : undefined}
+                  aria-describedby={describedBy(
+                    "area",
+                    errors.area?.message,
+                    t("saathi.areaHint"),
+                  )}
+                  {...register("area")}
+                />
+              </FormField>
+              <Controller
+                control={control}
+                name="location"
+                render={({ field }) => (
+                  <LocationButton
+                    value={field.value}
+                    onChange={field.onChange}
+                  />
+                )}
+              />
+
+              <FieldSet
+                id="radiusKm"
+                legend={t("saathi.radius")}
+                error={errors.radiusKm?.message}
+              >
+                <Controller
+                  control={control}
+                  name="radiusKm"
+                  render={({ field, fieldState }) => (
+                    <OptionCards
+                      name="radiusKm"
+                      columns={3}
+                      options={RADII_KM.map((km) => ({
+                        value: String(km),
+                        label: t("saathi.radiusOption", { km }),
+                      }))}
+                      // Unanswered until they tap one, whatever the type says.
+                      value={radiusChoice(field.value)}
+                      onChange={(next) => {
+                        field.onChange(Number(next));
+                      }}
+                      invalid={Boolean(fieldState.error)}
+                    />
+                  )}
+                />
+              </FieldSet>
+            </>
+          ),
+        },
+        {
+          title: t("saathi.workTypes"),
+          fields: ["workTypes", "vehicle", "times", "days"],
+          content: (
+            <>
+              <FieldSet
+                id="workTypes"
+                legend={t("saathi.workTypes")}
+                error={
+                  errors.workTypes?.message ?? errors.workTypes?.root?.message
+                }
+              >
+                <Controller
+                  control={control}
+                  name="workTypes"
+                  render={({ field }) => (
+                    <ToggleChips
+                      options={SAATHI_WORK.map((work) => ({
+                        value: work,
+                        label: t(`saathi.work.${work}`),
+                      }))}
+                      value={field.value}
+                      onChange={field.onChange}
+                    />
+                  )}
+                />
+              </FieldSet>
+
+              <FieldSet
+                id="vehicle"
+                legend={t("saathi.vehicle")}
+                error={errors.vehicle?.message}
+              >
+                <Controller
+                  control={control}
+                  name="vehicle"
+                  render={({ field, fieldState }) => (
+                    <OptionCards
+                      name="vehicle"
+                      options={SAATHI_VEHICLES.map((vehicle) => ({
+                        value: vehicle,
+                        label: t(`saathi.vehicles.${vehicle}`),
+                      }))}
+                      value={field.value}
+                      onChange={field.onChange}
+                      invalid={Boolean(fieldState.error)}
+                    />
+                  )}
+                />
+              </FieldSet>
+
+              <FieldSet
+                id="times"
+                legend={t("saathi.times")}
+                error={errors.times?.message ?? errors.times?.root?.message}
+              >
+                <Controller
+                  control={control}
+                  name="times"
+                  render={({ field }) => (
+                    <ToggleChips
+                      options={SAATHI_TIMES.map((time) => ({
+                        value: time,
+                        label: t(`saathi.timeNames.${time}`),
+                      }))}
+                      value={field.value}
+                      onChange={field.onChange}
+                    />
+                  )}
+                />
+              </FieldSet>
+
+              <FieldSet
+                id="days"
+                legend={t("saathi.days")}
+                error={errors.days?.message ?? errors.days?.root?.message}
+              >
+                <Controller
+                  control={control}
+                  name="days"
+                  render={({ field }) => (
+                    <WeekdayChips
+                      value={field.value}
+                      onChange={field.onChange}
+                    />
+                  )}
+                />
+              </FieldSet>
+            </>
+          ),
+        },
+        {
+          title: t("saathi.idProof"),
+          fields: [],
+          content: (
+            <>
+              <FileSlot
+                type="id_proof"
+                files={idProofs}
+                label={t("saathi.idProof")}
+                hint={t("saathi.idProofHint")}
+                error={fileError("id_proof")}
+              />
+              <FileSlot
+                type="selfie"
+                files={selfies}
+                label={t("saathi.selfie")}
+                hint={t("saathi.selfieHint")}
+                error={fileError("selfie")}
+                capture="user"
+              />
+            </>
+          ),
+        },
+      ]}
+      submit={
+        <SubmitBar
+          label={t("form.submit")}
+          busyLabel={t("form.submitting")}
+          isBusy={isSubmitting}
+          failure={failure}
         />
-      </FormField>
-
-      <FormField
-        id="area"
-        label={t("saathi.area")}
-        hint={t("saathi.areaHint")}
-        error={errors.area?.message}
-      >
-        <Input
-          id="area"
-          autoComplete="address-level3"
-          className="h-12 text-base"
-          aria-invalid={errors.area ? true : undefined}
-          aria-describedby={describedBy(
-            "area",
-            errors.area?.message,
-            t("saathi.areaHint"),
-          )}
-          {...register("area")}
-        />
-      </FormField>
-      <Controller
-        control={control}
-        name="location"
-        render={({ field }) => (
-          <LocationButton value={field.value} onChange={field.onChange} />
-        )}
-      />
-
-      <FieldSet
-        id="radiusKm"
-        legend={t("saathi.radius")}
-        error={errors.radiusKm?.message}
-      >
-        <Controller
-          control={control}
-          name="radiusKm"
-          render={({ field, fieldState }) => (
-            <OptionCards
-              name="radiusKm"
-              columns={3}
-              options={RADII_KM.map((km) => ({
-                value: String(km),
-                label: t("saathi.radiusOption", { km }),
-              }))}
-              // Unanswered until they tap one, whatever the type says.
-              value={radiusChoice(field.value)}
-              onChange={(next) => {
-                field.onChange(Number(next));
-              }}
-              invalid={Boolean(fieldState.error)}
-            />
-          )}
-        />
-      </FieldSet>
-
-      <FieldSet
-        id="workTypes"
-        legend={t("saathi.workTypes")}
-        error={errors.workTypes?.message ?? errors.workTypes?.root?.message}
-      >
-        <Controller
-          control={control}
-          name="workTypes"
-          render={({ field }) => (
-            <ToggleChips
-              options={SAATHI_WORK.map((work) => ({
-                value: work,
-                label: t(`saathi.work.${work}`),
-              }))}
-              value={field.value}
-              onChange={field.onChange}
-            />
-          )}
-        />
-      </FieldSet>
-
-      <FieldSet
-        id="vehicle"
-        legend={t("saathi.vehicle")}
-        error={errors.vehicle?.message}
-      >
-        <Controller
-          control={control}
-          name="vehicle"
-          render={({ field, fieldState }) => (
-            <OptionCards
-              name="vehicle"
-              options={SAATHI_VEHICLES.map((vehicle) => ({
-                value: vehicle,
-                label: t(`saathi.vehicles.${vehicle}`),
-              }))}
-              value={field.value}
-              onChange={field.onChange}
-              invalid={Boolean(fieldState.error)}
-            />
-          )}
-        />
-      </FieldSet>
-
-      <FieldSet
-        id="times"
-        legend={t("saathi.times")}
-        error={errors.times?.message ?? errors.times?.root?.message}
-      >
-        <Controller
-          control={control}
-          name="times"
-          render={({ field }) => (
-            <ToggleChips
-              options={SAATHI_TIMES.map((time) => ({
-                value: time,
-                label: t(`saathi.timeNames.${time}`),
-              }))}
-              value={field.value}
-              onChange={field.onChange}
-            />
-          )}
-        />
-      </FieldSet>
-
-      <FieldSet
-        id="days"
-        legend={t("saathi.days")}
-        error={errors.days?.message ?? errors.days?.root?.message}
-      >
-        <Controller
-          control={control}
-          name="days"
-          render={({ field }) => (
-            <WeekdayChips value={field.value} onChange={field.onChange} />
-          )}
-        />
-      </FieldSet>
-
-      <FileSlot
-        type="id_proof"
-        files={idProofs}
-        label={t("saathi.idProof")}
-        hint={t("saathi.idProofHint")}
-        error={fileError("id_proof")}
-      />
-      <FileSlot
-        type="selfie"
-        files={selfies}
-        label={t("saathi.selfie")}
-        hint={t("saathi.selfieHint")}
-        error={fileError("selfie")}
-        capture="user"
-      />
-
-      <SubmitBar
-        label={t("form.submit")}
-        busyLabel={t("form.submitting")}
-        isBusy={isSubmitting}
-        failure={failure}
-      />
-    </form>
+      }
+    />
   );
 }

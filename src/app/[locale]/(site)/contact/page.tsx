@@ -44,8 +44,8 @@ export default async function ContactPage() {
         scene={imageRole}
       />
 
-      <Container className="grid gap-8 py-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-12 lg:py-16">
-        <section className="space-y-5 border-t pt-6">
+      <Container className="grid gap-8 py-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-12 lg:py-8">
+        <section className="space-y-3 border-t pt-5">
           <div className="flex items-center gap-3">
             <MailIcon aria-hidden className="size-6 text-primary" />
 
@@ -57,7 +57,7 @@ export default async function ContactPage() {
             </a>
           </div>
         </section>
-        <section className="space-y-5 border-t pt-6">
+        <section className="space-y-3 border-t pt-5">
           <div className="flex items-center gap-3">
             <ShieldAlertIcon aria-hidden className="size-6 text-primary" />
 

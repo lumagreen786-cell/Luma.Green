@@ -22,7 +22,7 @@ vi.mock("@/i18n/navigation", () => ({
 }));
 
 describe("RoleCards", () => {
-  it("offers every role, each with what it needs and a way in", () => {
+  it("offers every role with a concise description and a way in", () => {
     render(
       <NextIntlClientProvider locale="en" messages={messages}>
         <RoleCards />
@@ -38,7 +38,7 @@ describe("RoleCards", () => {
       "/join/saathi",
     ]);
     expect(screen.getByRole("link", { name: /Saathi/ })).toHaveTextContent(
-      "A photo ID and a selfie.",
+      messages.join.roles.saathi.body,
     );
   });
 });

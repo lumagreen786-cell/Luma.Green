@@ -35,30 +35,26 @@ export function NormSection({
 }) {
   return (
     <section
-      id={id}
       aria-labelledby={`${id}-title`}
-      className="grid scroll-mt-24 gap-6 border-t pt-12 lg:grid-cols-[1fr_2fr] lg:gap-12"
+      className="scroll-mt-24 border-t py-5"
     >
-      <div className="flex flex-col gap-3">
-        <span className="flex size-8 items-center text-primary">
-          <Icon aria-hidden className="size-5" />
-        </span>
-        <h2
-          id={`${id}-title`}
-          className="font-display text-2xl font-semibold tracking-tight text-balance"
-        >
-          {title}
-        </h2>
-        <p className="text-muted-foreground">{body}</p>
-        {scene ? (
-          <RoleStoryImage
-            scene={scene}
-            frameClassName="aspect-[3/2]"
-            sizes="(min-width: 1280px) 360px, (min-width: 1024px) 30vw, 92vw"
-          />
-        ) : null}
-      </div>
-      <div className="min-w-0">{children}</div>
+      <details id={id} open={id === "codes"} className="group">
+        <summary className="flex min-h-12 cursor-pointer items-center gap-3 font-display text-xl font-semibold outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
+          <Icon aria-hidden className="size-5 shrink-0 text-primary" />
+          <h2 id={`${id}-title`}>{title}</h2>
+        </summary>
+        <div className="grid gap-6 pt-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-10">
+          {scene ? (
+            <RoleStoryImage
+              scene={scene}
+              frameClassName="aspect-[3/2]"
+              sizes="(min-width: 1024px) 30vw, 92vw"
+            />
+          ) : null}
+          <div className="min-w-0">{children}</div>
+        </div>
+      </details>
+      <p className="max-w-3xl pt-2 text-sm text-muted-foreground">{body}</p>
     </section>
   );
 }

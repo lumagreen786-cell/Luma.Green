@@ -34,7 +34,7 @@
     "prices": "Harga",
     "help": "Bantuan",
     "join": "Sertai",
-    "sellScrap": "Tempah kutipan"
+    "sellScrap": "Kitar semula"
   },
   "footer": {
     "about": "Rantaian bahan kitar semula India dalam satu platform, dari rumah ke kilang. Setiap serahan ditimbang, dinilai dan direkodkan.",
@@ -1582,7 +1582,7 @@
       "label": "Nombor telefon bimbit",
       "hint": "Kami akan menghantar kod 6 digit ke nombor ini.",
       "invalid": "Masukkan nombor telefon bimbit India 10 digit.",
-      "sendCode": "Hantar kod",
+      "sendCode": "Hantar OTP",
       "sending": "Menghantar…",
       "sendFailed": "Kod tidak dapat dihantar. Cuba lagi dalam seminit.",
       "codeLabel": "Kod 6 digit",
@@ -1596,7 +1596,8 @@
       "errorExpired": "Kod itu telah tamat tempoh. Minta kod baharu.",
       "errorTooMany": "Terlalu banyak percubaan. Minta kod baharu.",
       "errorGeneric": "Ralat berlaku. Sila cuba lagi.",
-      "privacy": "Kami menggunakan nombor anda hanya untuk tempahan dan perkembangan berkaitan."
+      "privacy": "Kami menggunakan nombor anda hanya untuk tempahan dan perkembangan berkaitan.",
+      "resendCountdown": "Hantar semula OTP dalam {time}"
     },
     "errors": {
       "generic": "Ralat berlaku. Sila cuba lagi.",
@@ -1784,6 +1785,28 @@
       "retake": "Foto tidak jelas atau tidak menunjukkan bahan kitar semula. Cuba foto lain atau pilih barang di bawah.",
       "empty": "Tiada bahan disokong ditemui. Cuba foto lain atau pilih barang di bawah.",
       "replace": "Pilih foto lain"
+    },
+    "simple": {
+      "title": "Kitar semula",
+      "photos": "Tambah foto",
+      "photoHint": "Tunjukkan bahan yang ingin anda kitar semula.",
+      "details": "Butiran anda",
+      "next": "Cari kedai berdekatan",
+      "location": "Gunakan lokasi saya",
+      "pickup": "Kutip di rumah",
+      "dropoff": "Hantar ke kedai",
+      "chooseShop": "Pilih kedai berdekatan",
+      "schedule": "Pilih masa",
+      "confirm": "Sahkan kitar semula",
+      "uploadFailed": "Foto tidak dapat dimuat naik. Sila cuba lagi.",
+      "photoRequired": "Tambah sekurang-kurangnya satu foto.",
+      "photosTooMany": "Tambah sehingga 5 foto.",
+      "unavailable": "Permintaan kitar semula tidak tersedia. Sila cuba lagi kemudian.",
+      "estimateLater": "Kedai menimbang bahan anda dan mengesahkan jumlah bayaran.",
+      "nearest": "Terdekat dahulu",
+      "replacePhotos": "Tukar foto",
+      "requested": "Kitar semula dijadualkan",
+      "attachedPhotos": "Foto"
     }
   },
   "track": {
@@ -2401,14 +2424,14 @@
     "mobileLabel": "Nombor telefon bimbit",
     "mobileHint": "Kami akan menghantar kod 6 digit ke nombor ini.",
     "mobileInvalid": "Masukkan nombor telefon bimbit India 10 digit.",
-    "sendCode": "Hantar kod",
+    "sendCode": "Hantar OTP",
     "sending": "Menghantar…",
     "sendFailed": "Kod tidak dapat dihantar. Cuba lagi dalam seminit.",
     "homeTitle": "Mengitar semula dari rumah?",
     "homeLink": "Lihat cara ia berfungsi",
     "privacy": "Kami menggunakan nombor anda hanya untuk log masuk dan menghantar perkembangan kerja anda di Luma.Green.",
     "unavailableTitle": "Log masuk telefon dibuka tidak lama lagi",
-    "unavailableBody": "Kami sedang melengkapkan persediaan SMS untuk kod log masuk. Sila semak semula sebentar lagi.",
+    "unavailableBody": "Log masuk melalui SMS tidak tersedia. Sila cuba lagi nanti.",
     "verifyTitle": "Masukkan kod 6 digit",
     "sentTo": "Dihantar melalui SMS ke {phone}",
     "codeLabel": "Kod 6 digit",
@@ -2424,11 +2447,6 @@
     "errorGeneric": "Ralat berlaku. Sila cuba lagi.",
     "signingIn": "Melog masuk…",
     "sendRateLimited": "Terlalu banyak permintaan kod. Cuba lagi kemudian.",
-    "previewAction": "Pratonton skrin kod",
-    "previewTitle": "Pratonton kod",
-    "previewNumber": "Nombor telefon bimbit: {phone}",
-    "previewBody": "SMS belum disambungkan. Tiada kod dihantar. Anda boleh menyemak skrin ini tetapi tidak boleh log masuk.",
-    "previewPhoneHint": "Masukkan nombor telefon bimbit untuk pratonton langkah seterusnya. Tiada SMS akan dihantar.",
     "twoFactorTitle": "Semak pengesah",
     "twoFactorDescription": "Masukkan kod 6 digit daripada aplikasi pengesah untuk melengkapkan log masuk.",
     "twoFactorUseBackup": "Kod pemulihan",
@@ -2437,7 +2455,8 @@
     "twoFactorBackupDescription": "Masukkan satu kod pemulihan yang disimpan. Setiap kod hanya boleh digunakan sekali.",
     "twoFactorBackupLabel": "Kod pemulihan",
     "twoFactorExpired": "Log masuk telah tamat tempoh. Mulakan semula dengan kod telefon baharu.",
-    "twoFactorRestart": "Mulakan semula"
+    "twoFactorRestart": "Mulakan semula",
+    "resendCountdown": "Hantar semula OTP dalam {time}"
   },
   "native": {
     "back": "Kembali",
@@ -3051,9 +3070,9 @@
     "metaDescription": "Luma.Green menyatukan rangkaian kitar semula India dalam satu platform: isi rumah, peniaga bahan kitar semula, pemproses awal, pengitar semula dan pengilang, dengan harga adil, perniagaan disahkan dan resit pada setiap langkah.",
     "hero": {
       "eyebrow": "Bermula di Bengaluru",
-      "title": "Beri bahan anda permulaan baharu.",
-      "lead": "Tempah kutipan kertas, plastik, logam dan banyak lagi. Bandingkan tawaran dan simpan rekod yang jelas.",
-      "sell": "Tempah kutipan",
+      "title": "Kosongkan bahan kitar semula. Terima bayaran.",
+      "lead": "Foto, kutipan atau penghantaran, dan bayaran selepas ditimbang.",
+      "sell": "Kitar semula",
       "join": "Untuk perniagaan",
       "prices": "Lihat harga bahan"
     },
@@ -3102,7 +3121,7 @@
         "one": "Lihat nilai bahan kitar semula sebelum membuat tempahan.",
         "two": "Dikutip di depan pintu atau dihantar ke kedai.",
         "three": "Dibayar tunai atau melalui UPI, berserta resit.",
-        "cta": "Tempah kutipan"
+        "cta": "Kitar semula"
       },
       "kabadiwala": {
         "title": "Peniaga barang lusuh",
@@ -3183,7 +3202,7 @@
     "closing": {
       "title": "Mulakan dengan apa yang anda ada",
       "body": "Sebeg surat khabar lama atau satu lori bal: semuanya mempunyai tempat di Luma.Green.",
-      "sell": "Tempah kutipan",
+      "sell": "Kitar semula",
       "join": "Sertai sebagai perniagaan"
     },
     "expansion": {

@@ -78,6 +78,10 @@ function BookingRow({ booking }: { booking: MyBooking }) {
   const tStatus = useTranslations("track.status");
   const format = useFormat();
   const time = useTimeFormat();
+  const estimateLabel =
+    booking.estimatePaise === undefined
+      ? t("simple.estimateLater")
+      : t("mine.estimate", { amount: format.money(booking.estimatePaise) });
   const ModeIcon = booking.mode === "pickup" ? TruckIcon : StoreIcon;
   const day = time.day(booking.slotDate, indiaToday(), {
     today: t("when.today"),
@@ -104,15 +108,15 @@ function BookingRow({ booking }: { booking: MyBooking }) {
         </span>
         <span className="text-sm text-muted-foreground tabular-nums">
           {booking.paidPaise === undefined
-            ? t("mine.estimate", {
-                amount: format.money(booking.estimatePaise),
-              })
+            ? estimateLabel
             : t("mine.paid", { amount: format.money(booking.paidPaise) })}
-          {" · "}
-          {t("mine.summary", {
-            items: booking.itemCount,
-            weight: format.weight(booking.estGrams),
-          })}
+          {booking.itemCount > 0 ? " · " : null}
+          {booking.itemCount > 0
+            ? t("mine.summary", {
+                items: booking.itemCount,
+                weight: format.weight(booking.estGrams),
+              })
+            : null}
         </span>
       </span>
       <ChevronRightIcon

@@ -83,7 +83,7 @@ beforeEach(() => {
 describe("extended homepage", () => {
   it("shows six supported scrap families with catalogue names and no factory output", async () => {
     await section(MaterialDirectory);
-    expect(screen.getAllByRole("heading", { level: 3 })).toHaveLength(7);
+    expect(screen.getAllByRole("heading", { level: 3 })).toHaveLength(6);
     expect(screen.getByText("Newspaper")).toBeInTheDocument();
     for (const item of CATALOGUE) {
       if (item.stage !== "recycled") continue;
@@ -157,14 +157,14 @@ describe("extended homepage", () => {
     expect(findGuide("household", "weighing-at-door")).toBeDefined();
   });
 
-  it("includes maintained answers about accounts, actual payment and planned escrow", async () => {
+  it("keeps first-pickup answers and a path to the full help library", async () => {
     await section(HomeQuestions);
     expect(
       screen.getByText(english.help.faqs.noAccount.q).closest("summary"),
     ).not.toBeNull();
     expect(screen.getByText(english.help.faqs.howPaid.a)).toBeInTheDocument();
     expect(
-      screen.getByText(english.help.faqs.whatIsEscrow.a),
+      screen.getByText(english.help.faqs.howPriceWorks.a),
     ).toBeInTheDocument();
     expect(
       screen.getByRole("link", { name: english.help.eyebrow }),

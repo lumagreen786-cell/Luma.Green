@@ -19,27 +19,33 @@ export function NotificationsPage() {
   const t = useTranslations("notifications");
   const common = useTranslations("common");
   return (
-    <div className="mx-auto w-full max-w-3xl min-w-0">
+    <div className="mx-auto w-full max-w-6xl min-w-0">
       <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
         {t("title")}
       </h1>
-      <DeviceSettings />
-      {isConvexConfigured ? (
-        <NotificationErrorBoundary
-          fallback={
-            <div className="space-y-4 py-6">
-              <p role="alert" className="text-muted-foreground">
-                {t("unavailable")}
-              </p>
-              <Button onClick={reloadCurrentPage}>{common("retry")}</Button>
-            </div>
-          }
-        >
-          <Inbox />
-        </NotificationErrorBoundary>
-      ) : (
-        <p className="py-6 text-muted-foreground">{t("unavailable")}</p>
-      )}
+      <div className="mt-6 grid min-w-0 gap-8 lg:grid-cols-[minmax(0,1fr)_18rem]">
+        <div className="min-w-0">
+          {isConvexConfigured ? (
+            <NotificationErrorBoundary
+              fallback={
+                <div className="space-y-4 py-6">
+                  <p role="alert" className="text-muted-foreground">
+                    {t("unavailable")}
+                  </p>
+                  <Button onClick={reloadCurrentPage}>{common("retry")}</Button>
+                </div>
+              }
+            >
+              <Inbox />
+            </NotificationErrorBoundary>
+          ) : (
+            <p className="py-6 text-muted-foreground">{t("unavailable")}</p>
+          )}
+        </div>
+        <aside className="min-w-0 lg:border-s lg:ps-6">
+          <DeviceSettings />
+        </aside>
+      </div>
     </div>
   );
 }
@@ -72,7 +78,7 @@ function DeviceSettings() {
   return (
     <section
       aria-labelledby="notification-device"
-      className="mt-6 flex flex-col gap-3 border-y border-border py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6"
+      className="flex flex-col gap-3 border-t border-border py-4 lg:border-t-0 lg:pt-0"
     >
       <div className="min-w-0">
         <h2 id="notification-device" className="font-semibold">

@@ -34,7 +34,7 @@
     "prices": "Prix",
     "help": "Aide",
     "join": "Nous rejoindre",
-    "sellScrap": "Réserver une collecte"
+    "sellScrap": "Recycler"
   },
   "footer": {
     "about": "La filière indienne du recyclage sur une plateforme, du foyer à l’usine. Chaque transfert est pesé, chiffré et enregistré.",
@@ -79,9 +79,9 @@
     "metaDescription": "Luma.Green réunit la filière indienne du recyclage sur une plateforme : ménages, kabadiwalas, opérateurs de prétraitement, recycleurs et fabricants, avec des prix justes, des entreprises vérifiées et un reçu à chaque étape.",
     "hero": {
       "eyebrow": "Lancement à Bengaluru",
-      "title": "Offrez un nouveau départ à vos matériaux.",
-      "lead": "Réservez une collecte de papier, plastique, métal et plus encore. Comparez les offres et gardez une trace claire.",
-      "sell": "Réserver une collecte",
+      "title": "Faites place nette. Vos recyclables vous rapportent.",
+      "lead": "Photos, collecte ou dépôt, puis paiement après la pesée.",
+      "sell": "Recycler",
       "join": "Pour les entreprises",
       "prices": "Voir les prix des matériaux"
     },
@@ -130,7 +130,7 @@
         "one": "Découvrez la valeur de vos matériaux avant de réserver.",
         "two": "Collecte à domicile ou dépôt en boutique.",
         "three": "Paiement en espèces ou par UPI, avec un reçu.",
-        "cta": "Réserver une collecte"
+        "cta": "Recycler"
       },
       "kabadiwala": {
         "title": "Collecteurs kabadiwalas",
@@ -211,7 +211,7 @@
     "closing": {
       "title": "Commencez avec ce que vous avez",
       "body": "Un sac de vieux journaux ou un camion de balles : tout a sa place sur Luma.Green.",
-      "sell": "Réserver une collecte",
+      "sell": "Recycler",
       "join": "Inscrire une entreprise"
     },
     "expansion": {
@@ -1896,7 +1896,7 @@
     "homeLink": "Découvrir le fonctionnement",
     "privacy": "Nous utilisons votre numéro uniquement pour vous connecter et vous informer de votre activité sur Luma.Green.",
     "unavailableTitle": "La connexion par téléphone sera bientôt disponible",
-    "unavailableBody": "Nous terminons la configuration SMS des codes de connexion. Revenez bientôt.",
+    "unavailableBody": "La connexion par SMS est indisponible. Réessayez plus tard.",
     "verifyTitle": "Saisissez le code à 6 chiffres",
     "sentTo": "Envoyé par SMS au {phone}",
     "codeLabel": "Code à 6 chiffres",
@@ -1912,11 +1912,6 @@
     "errorGeneric": "Une erreur est survenue. Réessayez.",
     "signingIn": "Connexion en cours…",
     "sendRateLimited": "Trop de demandes de code. Réessayez plus tard.",
-    "previewAction": "Aperçu de l’écran du code",
-    "previewTitle": "Aperçu du code",
-    "previewNumber": "Numéro de portable : {phone}",
-    "previewBody": "Le service SMS n’est pas encore connecté. Aucun code n’a été envoyé. Vous pouvez consulter cet écran, mais pas vous connecter.",
-    "previewPhoneHint": "Saisissez votre portable pour voir l’étape suivante. Aucun SMS ne sera envoyé.",
     "twoFactorTitle": "Consultez votre application",
     "twoFactorDescription": "Saisissez le code à 6 chiffres de votre application d’authentification pour terminer la connexion.",
     "twoFactorUseBackup": "Code de secours",
@@ -1925,7 +1920,8 @@
     "twoFactorBackupDescription": "Saisissez un code de secours enregistré. Chaque code ne fonctionne qu’une fois.",
     "twoFactorBackupLabel": "Code de secours",
     "twoFactorExpired": "Votre connexion a expiré. Recommencez avec un nouveau code du téléphone.",
-    "twoFactorRestart": "Recommencer"
+    "twoFactorRestart": "Recommencer",
+    "resendCountdown": "Renvoyer le code dans {time}"
   },
   "join": {
     "metaTitle": "Rejoindre Luma.Green",
@@ -2644,7 +2640,8 @@
       "errorExpired": "Ce code a expiré. Demandez-en un nouveau.",
       "errorTooMany": "Trop de tentatives. Demandez un nouveau code.",
       "errorGeneric": "Une erreur est survenue. Réessayez.",
-      "privacy": "Nous utilisons votre numéro uniquement pour vos réservations et leurs mises à jour."
+      "privacy": "Nous utilisons votre numéro uniquement pour vos réservations et leurs mises à jour.",
+      "resendCountdown": "Renvoyer le code dans {time}"
     },
     "errors": {
       "generic": "Une erreur est survenue. Réessayez.",
@@ -2698,6 +2695,28 @@
       "retake": "La photo est floue ou ne montre pas de matériaux recyclables. Essayez une autre photo ou choisissez vos articles ci-dessous.",
       "empty": "Aucun matériau pris en charge n’a été identifié. Essayez une autre photo ou choisissez vos articles ci-dessous.",
       "replace": "Choisir une autre photo"
+    },
+    "simple": {
+      "title": "Recycler",
+      "photos": "Ajouter des photos",
+      "photoHint": "Montrez-nous ce que vous souhaitez recycler.",
+      "details": "Vos coordonnées",
+      "next": "Trouver des boutiques proches",
+      "location": "Utiliser ma position",
+      "pickup": "Collecte à domicile",
+      "dropoff": "Dépôt en boutique",
+      "chooseShop": "Choisir une boutique proche",
+      "schedule": "Choisir un horaire",
+      "confirm": "Confirmer le recyclage",
+      "uploadFailed": "Les photos n’ont pas pu être envoyées. Réessayez.",
+      "photoRequired": "Ajoutez au moins une photo.",
+      "photosTooMany": "Ajoutez jusqu’à 5 photos.",
+      "unavailable": "Les demandes de recyclage sont indisponibles. Réessayez plus tard.",
+      "estimateLater": "La boutique pèse vos matériaux et confirme le montant.",
+      "nearest": "Les plus proches d’abord",
+      "replacePhotos": "Changer les photos",
+      "requested": "Recyclage programmé",
+      "attachedPhotos": "Photographies"
     }
   },
   "track": {

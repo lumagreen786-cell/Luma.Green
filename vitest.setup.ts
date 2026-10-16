@@ -32,6 +32,16 @@ vi.stubGlobal(
   },
 );
 
+// jsdom has no viewport intersections; individual motion tests supply entries.
+vi.stubGlobal(
+  "IntersectionObserver",
+  class {
+    observe = vi.fn();
+    unobserve = vi.fn();
+    disconnect = vi.fn();
+  },
+);
+
 // input-otp checks whether a password-manager badge covers the code field.
 // jsdom has no layout or hit testing.
 if (typeof document !== "undefined") {

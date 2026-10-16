@@ -34,7 +34,7 @@
     "prices": "Fiyatlar",
     "help": "Yardım",
     "join": "Katıl",
-    "sellScrap": "Toplama planla"
+    "sellScrap": "Geri dönüştür"
   },
   "footer": {
     "about": "Hindistan’ın geri dönüşüm ağı, evden fabrikaya tek platformda. Her teslimat tartılır, fiyatlandırılır ve kaydedilir.",
@@ -1614,7 +1614,7 @@
       "label": "Cep telefonu numarası",
       "hint": "Bu numaraya 6 haneli kod göndereceğiz.",
       "invalid": "10 haneli Hindistan cep telefonu numarası girin.",
-      "sendCode": "Kod gönder",
+      "sendCode": "OTP gönder",
       "sending": "Gönderiliyor…",
       "sendFailed": "Kod gönderilemedi. Bir dakika sonra tekrar deneyin.",
       "codeLabel": "6 haneli kod",
@@ -1628,7 +1628,8 @@
       "errorExpired": "Kodun süresi dolmuş. Yenisini isteyin.",
       "errorTooMany": "Çok fazla deneme. Yeni kod isteyin.",
       "errorGeneric": "Bir sorun oluştu. Tekrar deneyin.",
-      "privacy": "Numaranızı yalnızca rezervasyonlar ve ilgili bildirimler için kullanırız."
+      "privacy": "Numaranızı yalnızca rezervasyonlar ve ilgili bildirimler için kullanırız.",
+      "resendCountdown": "{time} sonra OTP’yi yeniden gönder"
     },
     "errors": {
       "generic": "Bir sorun oluştu. Tekrar deneyin.",
@@ -1784,6 +1785,28 @@
       "retake": "Fotoğraf net değil veya malzeme göstermiyor. Başkasını deneyin veya aşağıdan seçin.",
       "empty": "Desteklenen malzeme bulunamadı. Başka fotoğraf deneyin veya aşağıdan seçin.",
       "replace": "Başka fotoğraf seç"
+    },
+    "simple": {
+      "title": "Geri dönüştür",
+      "photos": "Fotoğraf ekle",
+      "photoHint": "Geri dönüştürmek istediklerini göster.",
+      "details": "Bilgilerin",
+      "next": "Yakındaki dükkânları bul",
+      "location": "Konumumu kullan",
+      "pickup": "Evden alım",
+      "dropoff": "Dükkâna teslim",
+      "chooseShop": "Yakındaki bir dükkânı seç",
+      "schedule": "Saat seç",
+      "confirm": "Geri dönüşümü onayla",
+      "uploadFailed": "Fotoğraflar yüklenemedi. Lütfen tekrar dene.",
+      "photoRequired": "En az bir fotoğraf ekle.",
+      "photosTooMany": "En fazla 5 fotoğraf ekle.",
+      "unavailable": "Geri dönüşüm talepleri şu an kullanılamıyor. Daha sonra tekrar dene.",
+      "estimateLater": "Dükkân malzemelerini tartar ve tutarı onaylar.",
+      "nearest": "Önce en yakın",
+      "replacePhotos": "Fotoğrafları değiştir",
+      "requested": "Geri dönüşüm planlandı",
+      "attachedPhotos": "Fotoğraflar"
     }
   },
   "track": {
@@ -2394,9 +2417,9 @@
     "metaDescription": "Luma.Green, Hindistan’ın geri dönüşüm ağını tek platformda birleştirir: haneler, toplama işletmeleri, ön işleme işletmeleri, geri dönüşümcüler ve üreticiler. Adil fiyatlar, doğrulanmış işletmeler ve her adımda makbuz.",
     "hero": {
       "eyebrow": "Bengaluru’da başlıyoruz",
-      "title": "Malzemelerinize yeni bir başlangıç verin.",
-      "lead": "Kâğıt, plastik, metal ve daha fazlası için toplama planlayın. Teklifleri karşılaştırın ve açık kayıtlar tutun.",
-      "sell": "Toplama planla",
+      "title": "Geri dönüştürülebilirleri çıkar. Para kazan.",
+      "lead": "Fotoğraflar, evden alım veya dükkâna teslim ve tartım sonrası ödeme.",
+      "sell": "Geri dönüştür",
       "join": "İşletmeler için",
       "prices": "Malzeme fiyatları"
     },
@@ -2445,7 +2468,7 @@
         "one": "Rezervasyondan önce malzemenizin değerini görün.",
         "two": "Kapıdan alım veya dükkâna teslim.",
         "three": "Makbuzla nakit veya UPI ödemesi.",
-        "cta": "Toplama planla"
+        "cta": "Geri dönüştür"
       },
       "kabadiwala": {
         "title": "Hurdacılar",
@@ -2526,7 +2549,7 @@
     "closing": {
       "title": "Elinizdekiyle başlayın",
       "body": "Bir torba eski gazete veya bir kamyon balya: Luma.Green’de hepsine yer var.",
-      "sell": "Toplama planla",
+      "sell": "Geri dönüştür",
       "join": "İşletme olarak katılın"
     },
     "expansion": {
@@ -3266,14 +3289,14 @@
     "mobileLabel": "Cep telefonu numarası",
     "mobileHint": "Bu numaraya 6 haneli kod göndereceğiz.",
     "mobileInvalid": "10 haneli Hindistan cep telefonu numarası girin.",
-    "sendCode": "Kod gönder",
+    "sendCode": "OTP gönder",
     "sending": "Gönderiliyor…",
     "sendFailed": "Kod gönderilemedi. Bir dakika sonra tekrar deneyin.",
     "homeTitle": "Evden geri dönüşüme mi veriyorsunuz?",
     "homeLink": "Nasıl çalıştığını görün",
     "privacy": "Numaranızı yalnızca giriş yapmanız ve Luma.Green’deki işiniz hakkında bilgi göndermek için kullanırız.",
     "unavailableTitle": "Telefonla giriş yakında açılacak",
-    "unavailableBody": "Giriş kodları için SMS kurulumunu tamamlıyoruz. Kısa süre sonra tekrar bakın.",
+    "unavailableBody": "SMS ile giriş kullanılamıyor. Lütfen daha sonra tekrar deneyin.",
     "verifyTitle": "6 haneli kodu girin",
     "sentTo": "{phone} numarasına SMS ile gönderildi",
     "codeLabel": "6 haneli kod",
@@ -3289,11 +3312,6 @@
     "errorGeneric": "Bir sorun oluştu. Tekrar deneyin.",
     "signingIn": "Giriş yapılıyor…",
     "sendRateLimited": "Çok fazla kod istendi. Daha sonra tekrar deneyin.",
-    "previewAction": "Kod ekranını önizle",
-    "previewTitle": "Kod önizlemesi",
-    "previewNumber": "Cep telefonu: {phone}",
-    "previewBody": "SMS henüz bağlı değil. Kod gönderilmedi. Bu ekranı inceleyebilirsiniz ancak giriş yapamazsınız.",
-    "previewPhoneHint": "Sonraki adımı önizlemek için numaranızı girin. SMS gönderilmeyecek.",
     "twoFactorTitle": "Doğrulayıcınızı kontrol edin",
     "twoFactorDescription": "Girişi tamamlamak için doğrulayıcı uygulamanızdaki 6 haneli kodu girin.",
     "twoFactorUseBackup": "Kurtarma kodu kullan",
@@ -3302,7 +3320,8 @@
     "twoFactorBackupDescription": "Kaydettiğiniz bir kurtarma kodunu girin. Her kod bir kez kullanılabilir.",
     "twoFactorBackupLabel": "Kurtarma kodu",
     "twoFactorExpired": "Giriş süresi doldu. Yeni bir telefon koduyla yeniden başlayın.",
-    "twoFactorRestart": "Yeniden başla"
+    "twoFactorRestart": "Yeniden başla",
+    "resendCountdown": "{time} sonra OTP’yi yeniden gönder"
   },
   "native": {
     "back": "Geri",

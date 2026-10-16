@@ -26,6 +26,7 @@ export default function AdminRootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       suppressHydrationWarning
+      data-astryx-theme="matcha"
       lang="en"
       dir="ltr"
       className={`${fontClassName("en")} h-full`}

@@ -34,7 +34,7 @@
     "prices": "Prijzen",
     "help": "Hulp",
     "join": "Aanmelden",
-    "sellScrap": "Inzameling boeken"
+    "sellScrap": "Recyclen"
   },
   "footer": {
     "about": "De Indiase recyclingnetwerk op één platform, van huis tot fabriek. Elke overdracht wordt gewogen, geprijsd en geregistreerd.",
@@ -79,9 +79,9 @@
     "metaDescription": "Luma.Green brengt de Indiase recyclingnetwerk samen op één platform: huishoudens, kabadiwala's, voorverwerkers, recyclers en fabrikanten, met eerlijke prijzen, geverifieerde bedrijven en een bon bij elke stap.",
     "hero": {
       "eyebrow": "We beginnen in Bengaluru",
-      "title": "Geef uw materialen een nieuw begin.",
-      "lead": "Boek een inzameling voor papier, kunststof, metaal en meer. Vergelijk aanbiedingen en houd een duidelijk overzicht.",
-      "sell": "Inzameling boeken",
+      "title": "Ruim recyclebare spullen op. Ontvang geld.",
+      "lead": "Foto’s, ophalen of afgeven en betaling na het wegen.",
+      "sell": "Recyclen",
       "join": "Voor bedrijven",
       "prices": "Materiaalprijzen bekijken"
     },
@@ -130,7 +130,7 @@
         "one": "Bekijk de waarde van uw recyclebare materiaal voordat u boekt.",
         "two": "Ophalen aan de deur of inleveren bij een winkel.",
         "three": "Contant of via UPI betaald, met een bon.",
-        "cta": "Inzameling boeken"
+        "cta": "Recyclen"
       },
       "kabadiwala": {
         "title": "Kabadiwala's",
@@ -211,7 +211,7 @@
     "closing": {
       "title": "Begin met wat u heeft",
       "body": "Een zak oude kranten of een vrachtwagen vol balen: er is plaats voor op Luma.Green.",
-      "sell": "Inzameling boeken",
+      "sell": "Recyclen",
       "join": "Aanmelden als bedrijf"
     },
     "expansion": {
@@ -1889,14 +1889,14 @@
     "mobileLabel": "Mobiel nummer",
     "mobileHint": "We sturen een code van 6 cijfers naar dit nummer.",
     "mobileInvalid": "Voer een Indiaas mobiel nummer van 10 cijfers in.",
-    "sendCode": "Code sturen",
+    "sendCode": "OTP versturen",
     "sending": "Versturen…",
     "sendFailed": "We konden de code niet sturen. Probeer het over een minuut opnieuw.",
     "homeTitle": "Recyclen vanuit huis?",
     "homeLink": "Bekijk hoe het werkt",
     "privacy": "We gebruiken uw nummer alleen om in te loggen en updates over uw werk op Luma.Green te sturen.",
     "unavailableTitle": "Inloggen via telefoon komt binnenkort",
-    "unavailableBody": "We ronden de sms-instellingen voor inlogcodes af. Kijk binnenkort opnieuw.",
+    "unavailableBody": "Inloggen via sms is niet beschikbaar. Probeer het later opnieuw.",
     "verifyTitle": "Voer de code van 6 cijfers in",
     "sentTo": "Per sms verstuurd naar {phone}",
     "codeLabel": "Code van 6 cijfers",
@@ -1912,11 +1912,6 @@
     "errorGeneric": "Er ging iets mis. Probeer het opnieuw.",
     "signingIn": "Inloggen…",
     "sendRateLimited": "Te veel codeverzoeken. Probeer het later opnieuw.",
-    "previewAction": "Codescherm bekijken",
-    "previewTitle": "Voorbeeld van codescherm",
-    "previewNumber": "Mobiel nummer: {phone}",
-    "previewBody": "Sms is nog niet aangesloten. Er is geen code verstuurd. U kunt dit scherm bekijken, maar niet inloggen.",
-    "previewPhoneHint": "Voer uw mobiele nummer in om de volgende stap te bekijken. Er wordt geen sms verstuurd.",
     "twoFactorTitle": "Controleer je authenticator",
     "twoFactorDescription": "Voer de 6-cijferige code uit je authenticator-app in om het inloggen af te ronden.",
     "twoFactorUseBackup": "Herstelcode gebruiken",
@@ -1925,7 +1920,8 @@
     "twoFactorBackupDescription": "Voer een bewaarde herstelcode in. Elke code werkt één keer.",
     "twoFactorBackupLabel": "Herstelcode",
     "twoFactorExpired": "Je aanmelding is verlopen. Begin opnieuw met een nieuwe telefooncode.",
-    "twoFactorRestart": "Opnieuw beginnen"
+    "twoFactorRestart": "Opnieuw beginnen",
+    "resendCountdown": "OTP opnieuw versturen over {time}"
   },
   "join": {
     "metaTitle": "Aanmelden bij Luma.Green",
@@ -2630,7 +2626,7 @@
       "label": "Mobiel nummer",
       "hint": "We sturen een code van 6 cijfers naar dit nummer.",
       "invalid": "Voer een Indiaas mobiel nummer van 10 cijfers in.",
-      "sendCode": "Code sturen",
+      "sendCode": "OTP versturen",
       "sending": "Versturen…",
       "sendFailed": "We konden de code niet sturen. Probeer het over een minuut opnieuw.",
       "codeLabel": "Code van 6 cijfers",
@@ -2644,7 +2640,8 @@
       "errorExpired": "Die code is verlopen. Vraag een nieuwe aan.",
       "errorTooMany": "Te veel pogingen. Vraag een nieuwe code aan.",
       "errorGeneric": "Er ging iets mis. Probeer het opnieuw.",
-      "privacy": "We gebruiken uw nummer alleen voor uw boekingen en updates daarover."
+      "privacy": "We gebruiken uw nummer alleen voor uw boekingen en updates daarover.",
+      "resendCountdown": "OTP opnieuw versturen over {time}"
     },
     "errors": {
       "generic": "Er ging iets mis. Probeer het opnieuw.",
@@ -2698,6 +2695,28 @@
       "retake": "De foto is onduidelijk of toont geen recyclebaar materiaal. Probeer een andere of kies uw artikelen hieronder.",
       "empty": "Geen ondersteunde materialen gevonden. Probeer een andere foto of kies uw artikelen hieronder.",
       "replace": "Andere foto kiezen"
+    },
+    "simple": {
+      "title": "Recyclen",
+      "photos": "Foto’s toevoegen",
+      "photoHint": "Laat zien wat je wilt recyclen.",
+      "details": "Je gegevens",
+      "next": "Vind winkels in de buurt",
+      "location": "Gebruik mijn locatie",
+      "pickup": "Laten ophalen",
+      "dropoff": "Zelf afgeven",
+      "chooseShop": "Kies een winkel in de buurt",
+      "schedule": "Kies een tijd",
+      "confirm": "Recycling bevestigen",
+      "uploadFailed": "De foto’s konden niet worden geüpload. Probeer het opnieuw.",
+      "photoRequired": "Voeg minstens één foto toe.",
+      "photosTooMany": "Voeg maximaal 5 foto’s toe.",
+      "unavailable": "Recyclingaanvragen zijn niet beschikbaar. Probeer het later opnieuw.",
+      "estimateLater": "De winkel weegt je materialen en bevestigt het bedrag.",
+      "nearest": "Dichtstbijzijnde eerst",
+      "replacePhotos": "Foto’s wijzigen",
+      "requested": "Recycling ingepland",
+      "attachedPhotos": "Foto’s"
     }
   },
   "track": {

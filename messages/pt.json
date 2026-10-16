@@ -34,7 +34,7 @@
     "prices": "Preços",
     "help": "Ajuda",
     "join": "Cadastre-se",
-    "sellScrap": "Agendar coleta"
+    "sellScrap": "Reciclar"
   },
   "footer": {
     "about": "A rede de reciclagem da Índia em uma plataforma, da casa à fábrica. Cada entrega é pesada, precificada e registrada.",
@@ -79,9 +79,9 @@
     "metaDescription": "A Luma.Green reúne a rede de reciclagem da Índia em uma plataforma: famílias, kabadiwalas, pré-processadores, recicladores e fabricantes, com preços justos, empresas verificadas e recibo em cada etapa.",
     "hero": {
       "eyebrow": "Começando em Bengaluru",
-      "title": "Dê um novo começo aos seus materiais.",
-      "lead": "Agende a coleta de papel, plástico, metal e mais. Compare ofertas e mantenha um registro claro.",
-      "sell": "Agendar coleta",
+      "title": "Liberte espaço com os recicláveis. Receba dinheiro.",
+      "lead": "Fotos, recolha ou entrega e pagamento após a pesagem.",
+      "sell": "Reciclar",
       "join": "Para empresas",
       "prices": "Ver preços de materiais"
     },
@@ -130,7 +130,7 @@
         "one": "Saiba quanto vale sua matéria reciclável antes de agendar.",
         "two": "Coleta na porta ou entrega na loja.",
         "three": "Pagamento em dinheiro ou UPI, com recibo.",
-        "cta": "Agendar coleta"
+        "cta": "Reciclar"
       },
       "kabadiwala": {
         "title": "Kabadiwalas",
@@ -211,7 +211,7 @@
     "closing": {
       "title": "Comece com o que você tem",
       "body": "Um saco de jornais velhos ou um caminhão de fardos: há lugar para isso na Luma.Green.",
-      "sell": "Agendar coleta",
+      "sell": "Reciclar",
       "join": "Cadastre sua empresa"
     },
     "expansion": {
@@ -1889,14 +1889,14 @@
     "mobileLabel": "Número de celular",
     "mobileHint": "Enviaremos um código de 6 dígitos para este número.",
     "mobileInvalid": "Informe um celular indiano de 10 dígitos.",
-    "sendCode": "Enviar código",
+    "sendCode": "Enviar OTP",
     "sending": "Enviando…",
     "sendFailed": "Não foi possível enviar o código. Tente novamente em um minuto.",
     "homeTitle": "Vai reciclar de casa?",
     "homeLink": "Veja como funciona",
     "privacy": "Usamos seu número só para entrar e enviar atualizações sobre seu trabalho na Luma.Green.",
     "unavailableTitle": "O acesso por telefone estará disponível em breve",
-    "unavailableBody": "Estamos concluindo a configuração dos SMS com códigos de acesso. Volte em breve.",
+    "unavailableBody": "O início de sessão por SMS está indisponível. Tente novamente mais tarde.",
     "verifyTitle": "Informe o código de 6 dígitos",
     "sentTo": "Enviado por SMS para {phone}",
     "codeLabel": "Código de 6 dígitos",
@@ -1912,11 +1912,6 @@
     "errorGeneric": "Algo deu errado. Tente novamente.",
     "signingIn": "Entrando…",
     "sendRateLimited": "Muitos pedidos de código. Tente mais tarde.",
-    "previewAction": "Prévia da tela de código",
-    "previewTitle": "Prévia do código",
-    "previewNumber": "Número de celular: {phone}",
-    "previewBody": "O SMS ainda não está conectado. Nenhum código foi enviado. Você pode conferir esta tela, mas não pode entrar.",
-    "previewPhoneHint": "Informe o celular para ver a próxima etapa. Nenhum SMS será enviado.",
     "twoFactorTitle": "Consulte o autenticador",
     "twoFactorDescription": "Introduza o código de 6 dígitos da aplicação de autenticação para concluir o início de sessão.",
     "twoFactorUseBackup": "Código de recuperação",
@@ -1925,7 +1920,8 @@
     "twoFactorBackupDescription": "Introduza um código de recuperação guardado. Cada código funciona uma vez.",
     "twoFactorBackupLabel": "Código de recuperação",
     "twoFactorExpired": "O início de sessão expirou. Comece de novo com outro código do telefone.",
-    "twoFactorRestart": "Recomeçar"
+    "twoFactorRestart": "Recomeçar",
+    "resendCountdown": "Reenviar OTP em {time}"
   },
   "join": {
     "metaTitle": "Cadastre-se na Luma.Green",
@@ -2630,7 +2626,7 @@
       "label": "Número de celular",
       "hint": "Enviaremos um código de 6 dígitos para este número.",
       "invalid": "Informe um celular indiano de 10 dígitos.",
-      "sendCode": "Enviar código",
+      "sendCode": "Enviar OTP",
       "sending": "Enviando…",
       "sendFailed": "Não foi possível enviar o código. Tente novamente em um minuto.",
       "codeLabel": "Código de 6 dígitos",
@@ -2644,7 +2640,8 @@
       "errorExpired": "O código expirou. Peça um novo.",
       "errorTooMany": "Muitas tentativas. Peça um novo código.",
       "errorGeneric": "Algo deu errado. Tente novamente.",
-      "privacy": "Usamos seu número só para agendamentos e atualizações sobre eles."
+      "privacy": "Usamos seu número só para agendamentos e atualizações sobre eles.",
+      "resendCountdown": "Reenviar OTP em {time}"
     },
     "errors": {
       "generic": "Algo deu errado. Tente novamente.",
@@ -2698,6 +2695,28 @@
       "retake": "A foto está pouco clara ou não mostra matéria reciclável. Tente outra ou escolha os itens abaixo.",
       "empty": "Nenhum material compatível foi encontrado. Tente outra foto ou escolha os itens abaixo.",
       "replace": "Escolher outra foto"
+    },
+    "simple": {
+      "title": "Reciclar",
+      "photos": "Adicionar fotos",
+      "photoHint": "Mostre o que pretende reciclar.",
+      "details": "Os seus dados",
+      "next": "Encontrar lojas próximas",
+      "location": "Usar a minha localização",
+      "pickup": "Recolha ao domicílio",
+      "dropoff": "Entrega na loja",
+      "chooseShop": "Escolher uma loja próxima",
+      "schedule": "Escolher um horário",
+      "confirm": "Confirmar reciclagem",
+      "uploadFailed": "Não foi possível carregar as fotos. Tente novamente.",
+      "photoRequired": "Adicione pelo menos uma foto.",
+      "photosTooMany": "Adicione até 5 fotos.",
+      "unavailable": "Os pedidos de reciclagem estão indisponíveis. Tente mais tarde.",
+      "estimateLater": "A loja pesa os materiais e confirma o valor.",
+      "nearest": "Mais próximas primeiro",
+      "replacePhotos": "Alterar fotos",
+      "requested": "Reciclagem agendada",
+      "attachedPhotos": "Fotos"
     }
   },
   "track": {

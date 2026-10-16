@@ -80,3 +80,25 @@ it("rejects an unbalanced recipe and retains a failed valid draft", async () => 
     "REC-TEST",
   );
 });
+
+it("keeps an unfinished recipe when switching production tasks", async () => {
+  const user = userEvent.setup();
+  renderWithIntl(<ProductionPage />);
+  await user.click(
+    screen.getByRole("button", { name: en.operations.newRecipe }),
+  );
+  await user.type(
+    screen.getByLabelText(en.operations.reference),
+    "RECIPE-DRAFT",
+  );
+  await user.keyboard("{Escape}");
+  await user.click(screen.getByRole("tab", { name: en.operations.batches }));
+  await user.click(screen.getByRole("tab", { name: en.operations.recipes }));
+  await user.click(
+    screen.getByRole("button", { name: en.operations.newRecipe }),
+  );
+  expect(screen.getByLabelText(en.operations.reference)).toHaveValue(
+    "RECIPE-DRAFT",
+  );
+  expect(mock.save).not.toHaveBeenCalled();
+});

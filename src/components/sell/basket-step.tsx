@@ -1,8 +1,10 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { useState } from "react";
 
 import { useFormat } from "@/components/app/format";
+import { Button } from "@/components/ui/button";
 
 import { kgToGrams, paiseFor } from "../../../convex/lib/chain";
 import {
@@ -49,39 +51,60 @@ export function BasketStep({
   const t = useTranslations("sell");
   const kgByCode = new Map(items.map((item) => [item.materialCode, item.kg]));
   const isFull = items.length >= BASKET_MAX_ITEMS;
+  const groups = byFamily(materials);
+  const [chosenFamily, setChosenFamily] = useState<string>();
+  const activeFamily = chosenFamily ?? groups[0]?.family;
 
   return (
     <div className="flex flex-col gap-6">
-      {byFamily(materials).map(({ family, materials: group }) => (
-        <section
-          key={family}
-          aria-labelledby={`family-${family}`}
-          className="flex flex-col gap-2"
-        >
-          <h3
-            id={`family-${family}`}
-            className="flex items-center gap-2 text-sm font-semibold text-muted-foreground"
+      <div className="flex flex-wrap gap-2" aria-label={t("steps.basket")}>
+        {groups.map(({ family }) => (
+          <Button
+            key={family}
+            type="button"
+            variant={activeFamily === family ? "default" : "outline"}
+            aria-pressed={activeFamily === family}
+            onClick={() => {
+              setChosenFamily(family);
+            }}
           >
             <FamilyIcon family={family} size="sm" />
             {t(`families.${family}`)}
-          </h3>
-          <ul className="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
-            {group.map((material) => (
-              <li key={material.code}>
-                <MaterialTile
-                  material={material}
-                  pricePaise={priceFor(prices, material.code)}
-                  kg={kgByCode.get(material.code)}
-                  isFull={isFull}
-                  onToggle={() => {
-                    onToggle(material);
-                  }}
-                />
-              </li>
-            ))}
-          </ul>
-        </section>
-      ))}
+          </Button>
+        ))}
+      </div>
+      {groups
+        .filter(({ family }) => family === activeFamily)
+        .map(({ family, materials: group }) => (
+          <section
+            key={family}
+            aria-labelledby={`family-${family}`}
+            className="flex flex-col gap-2"
+          >
+            <h3
+              id={`family-${family}`}
+              className="flex items-center gap-2 text-sm font-semibold text-muted-foreground"
+            >
+              <FamilyIcon family={family} size="sm" />
+              {t(`families.${family}`)}
+            </h3>
+            <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+              {group.map((material) => (
+                <li key={material.code}>
+                  <MaterialTile
+                    material={material}
+                    pricePaise={priceFor(prices, material.code)}
+                    kg={kgByCode.get(material.code)}
+                    isFull={isFull}
+                    onToggle={() => {
+                      onToggle(material);
+                    }}
+                  />
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
 
       {isFull ? (
         <p role="status" className="text-sm text-amber-800 dark:text-amber-200">

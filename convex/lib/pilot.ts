@@ -43,7 +43,8 @@ export function bookingMetrics(bookings: readonly Doc<"bookings">[]) {
     if (booking.status !== "completed" || !booking.receipt) continue;
     completedWithReceipt += 1;
     paidPaise += booking.receipt.totalPaise;
-    estimatedPaise += booking.estimatePaise;
+    if (booking.estimatePaise !== undefined)
+      estimatedPaise += booking.estimatePaise;
     for (const item of booking.items)
       material(item.materialCode).estimatedGrams += kgToGrams(item.estKg);
     for (const line of booking.receipt.lines) {

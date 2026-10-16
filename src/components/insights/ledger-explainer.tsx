@@ -27,11 +27,11 @@ export function LedgerExplainer() {
   const headingId = useId();
 
   return (
-    <section
+    <details
       aria-labelledby={headingId}
       className="flex flex-col gap-4 border-t border-border py-6"
     >
-      <div className="flex items-start gap-3">
+      <summary className="flex min-h-11 cursor-pointer items-start gap-3">
         <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-background text-primary">
           <BookCheckIcon aria-hidden className="size-5" />
         </span>
@@ -41,7 +41,7 @@ export function LedgerExplainer() {
           </h2>
           <p className="text-sm text-foreground">{t("lead")}</p>
         </div>
-      </div>
+      </summary>
       <dl className="grid gap-3 sm:grid-cols-2">
         {FACTS.map(({ key, icon: Icon }) => (
           <div key={key} className="flex gap-3 border-t border-border py-4">
@@ -55,6 +55,6 @@ export function LedgerExplainer() {
           </div>
         ))}
       </dl>
-    </section>
+    </details>
   );
 }

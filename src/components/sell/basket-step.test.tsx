@@ -62,12 +62,10 @@ function renderBasket(items: { materialCode: string; kg: number }[]) {
 }
 
 describe("BasketStep", () => {
-  it("groups materials by family, each with today's price", () => {
+  it("shows one material family at a time with its current prices", () => {
     renderBasket([]);
     expect(screen.getByRole("heading", { name: "Paper" })).toBeInTheDocument();
-    expect(
-      screen.getByRole("heading", { name: "Plastic" }),
-    ).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Plastic" })).toBeInTheDocument();
     const tile = screen.getByRole("button", { name: /Newspaper/ });
     expect(tile).toHaveAttribute("aria-pressed", "false");
     expect(tile).toHaveTextContent("₹14/kg");
@@ -76,16 +74,21 @@ describe("BasketStep", () => {
 
   it("adds a material with one tap", async () => {
     const { onToggle } = renderBasket([]);
+    await userEvent.click(screen.getByRole("button", { name: "Plastic" }));
+    expect(
+      screen.queryByRole("button", { name: /Newspaper/ }),
+    ).not.toBeInTheDocument();
     await userEvent.click(screen.getByRole("button", { name: /PET bottles/ }));
     expect(onToggle).toHaveBeenCalledWith(MATERIALS[1]);
   });
 
-  it("lists what's chosen with its kilos and what it's worth", () => {
+  it("keeps chosen kilos and value visible when changing material family", async () => {
     renderBasket([{ materialCode: "PAPER-NEWS", kg: 12 }]);
     expect(screen.getByRole("button", { name: /^Newspaper/ })).toHaveAttribute(
       "aria-pressed",
       "true",
     );
+    await userEvent.click(screen.getByRole("button", { name: "Plastic" }));
     const basket = screen.getByRole("region", { name: "Your materials" });
     // 12 kg at ₹14/kg.
     expect(within(basket).getByText("About ₹168")).toBeInTheDocument();

@@ -16,13 +16,13 @@ export async function ClosingCta() {
   return (
     <section
       aria-labelledby="closing-cta-heading"
-      className="border-t bg-background py-12 sm:py-16 lg:py-20"
+      className="border-t bg-background py-12 sm:py-20 lg:py-24"
     >
       <Container className="grid min-w-0 grid-cols-1 items-end gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,22rem)] lg:gap-16">
         <div data-reveal className="max-w-3xl min-w-0 space-y-5 wrap-anywhere">
           <h2
             id="closing-cta-heading"
-            className="font-display text-3xl leading-tight font-medium tracking-tight text-balance sm:text-4xl lg:text-5xl"
+            className="font-display text-4xl leading-[1.08] font-medium tracking-tight text-balance sm:text-5xl lg:text-6xl"
           >
             {t("title")}
           </h2>

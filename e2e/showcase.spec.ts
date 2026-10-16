@@ -20,7 +20,6 @@ const artworkRoutes = [
   "/en/prices",
   "/en/standards",
   "/en/solar",
-  "/en/join",
   "/en/contact",
   "/en/help",
   "/en/help/contact",
@@ -66,107 +65,33 @@ async function expectNoDevicePreviews(page: Page) {
   ).toBeLessThanOrEqual(1);
 }
 
-async function expectHeaderArtworkLayout(
-  page: Page,
-  banner: Locator,
-  width: number,
-  isCompact: boolean,
-) {
-  const bounds = await banner.evaluate((element) => {
-    const rect = element.getBoundingClientRect();
-    return {
-      width: rect.width,
-      height: rect.height,
-      left: rect.left,
-      right: rect.right,
-      top: rect.top,
-      bottom: rect.bottom,
-    };
-  });
-  if (isCompact) {
-    expect(bounds.height).toBeGreaterThanOrEqual(80);
-    expect(bounds.height).toBeLessThanOrEqual(width >= 1024 ? 176 : 112);
-  }
-  if (width >= 1024) {
-    if (isCompact) {
-      expect(bounds.width).toBeCloseTo(256, 0);
-    } else {
-      expect(bounds.width).toBeGreaterThanOrEqual(width * 0.3);
-      expect(bounds.width / bounds.height).toBeCloseTo(4 / 3, 1);
-    }
-    const headingBounds = await page
-      .getByRole("heading", { level: 1 })
-      .evaluate((element) => {
-        const rect = element.getBoundingClientRect();
-        return {
-          left: rect.left,
-          right: rect.right,
-          top: rect.top,
-          bottom: rect.bottom,
-        };
-      });
-    const isRtl = (await page.locator("html").getAttribute("dir")) === "rtl";
-    expect(
-      isRtl ? bounds.right : headingBounds.right,
-      "The image and heading must not overlap",
-    ).toBeLessThanOrEqual(isRtl ? headingBounds.left : bounds.left);
-    expect(
-      Math.min(bounds.bottom, headingBounds.bottom) -
-        Math.max(bounds.top, headingBounds.top),
-      "The image must sit beside the heading",
-    ).toBeGreaterThan(0);
-  } else {
-    expect(
-      bounds.width,
-      "The banner must span the main reading area",
-    ).toBeGreaterThanOrEqual(width * 0.7);
-    expect(
-      bounds.width / bounds.height,
-      "The page artwork must have a wide shape",
-    ).toBeGreaterThanOrEqual(1.6);
-    const heading = await page.getByRole("heading", { level: 1 }).boundingBox();
-    expect(heading).not.toBeNull();
-    expect(
-      bounds.top,
-      "Phone artwork follows the heading",
-    ).toBeGreaterThanOrEqual((heading?.y ?? 0) + (heading?.height ?? 0));
-  }
-  expect(bounds.left).toBeGreaterThanOrEqual(-1);
-  expect(bounds.right).toBeLessThanOrEqual(width + 1);
-}
-
 for (const width of [390, 1440]) {
   for (const route of artworkRoutes) {
-    // Task pages keep compact secondary artwork; story pages keep editorial art.
-    const isCompact =
+    const hasSecondaryArtwork =
       route.includes("/help") ||
-      ["/en/prices", "/en/solar", "/en/contact", "/en/join"].includes(route);
+      ["/en/prices", "/en/solar", "/en/contact"].includes(route);
 
-    test(`${route} keeps its page image loaded and aligned at ${String(width)}px`, async ({
+    test(`${route} keeps its task heading visible and fits at ${String(width)}px`, async ({
       page,
     }) => {
       await page.setViewportSize({ width, height: 900 });
       await page.emulateMedia({ reducedMotion: "reduce" });
       await page.goto(route);
-      await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+      await expect(page.getByRole("heading", { level: 1 })).toBeInViewport();
       const main = page.getByRole("main");
-      await expect(main.locator("[data-page-banner]")).toHaveCount(
-        isCompact ? 0 : 1,
-      );
-      const banner = main.locator("figure").first();
-      await expect(banner).toHaveCount(1);
-      await banner.scrollIntoViewIfNeeded();
-      await expect(banner).toBeInViewport();
-      await expectStoryImages(banner, 1);
-      await expect(banner.locator("img")).toBeVisible();
-      await page.evaluate(async () => document.fonts.ready);
-      await expectHeaderArtworkLayout(page, banner, width, isCompact);
-      expect(
-        await page.evaluate(
-          () => document.documentElement.scrollWidth - innerWidth,
-        ),
-        "The page must fit without horizontal scrolling",
-      ).toBeLessThanOrEqual(1);
+      await expect(main.locator("[data-page-banner]")).toHaveCount(0);
+      if (hasSecondaryArtwork) {
+        const artwork = main.locator("figure").first();
+        if (width < 1024) await expect(artwork).toBeHidden();
+        else {
+          await expectStoryImages(artwork, 1);
+          await expect(artwork).toBeVisible();
+          const bounds = await artwork.boundingBox();
+          expect(bounds?.height).toBeLessThanOrEqual(112);
+          expect(bounds?.width).toBeCloseTo(256, 0);
+        }
+      }
+      await expectNoDevicePreviews(page);
     });
   }
 }
@@ -191,24 +116,22 @@ test("participants show role photos without device mockups or illustration capti
   }
 });
 
-test("home role directory keeps its household action on a 360px phone", async ({
+test("home puts collection ahead of supporting content on a 360px phone", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.setViewportSize({ width: 360, height: 800 });
   await page.goto("/en");
-  const roleSection = page.getByRole("region", {
-    name: english.home.roles.heading,
+  const hero = page.getByRole("region", { name: english.home.hero.title });
+  await expect(hero.locator("img")).toBeVisible();
+  const action = hero.getByRole("link", {
+    name: english.home.hero.sell,
+    exact: true,
   });
-  await expectStoryImages(roleSection, 6);
-  expect(
-    await page.evaluate(
-      () => document.documentElement.scrollWidth - innerWidth,
-    ),
-  ).toBeLessThanOrEqual(1);
-  await roleSection
-    .getByRole("link", { name: english.home.roles.household.cta, exact: true })
-    .click();
+  await expect(action).toBeInViewport();
+  await expectNoDevicePreviews(page);
+  await action.focus();
+  await page.keyboard.press("Enter");
   await expect(page).toHaveURL(/\/sell$/u);
 });
 
@@ -269,28 +192,7 @@ test("each role help page keeps guides reachable without device previews", async
   }
 });
 
-test("public information scenes load without adding controls or overflowing a phone", async ({
-  page,
-}) => {
-  test.setTimeout(60_000);
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.setViewportSize({ width: 390, height: 844 });
-  for (const route of ["solar", "prices", "standards", "contact"]) {
-    await page.goto(`/en/${route}`);
-    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-    const scene = page.getByRole("main").locator("figure").first();
-    await expectStoryImages(scene, 1);
-    await expect(scene.locator("img")).toHaveAttribute("alt", "");
-    await expect(scene.locator("button, a, input, [tabindex]")).toHaveCount(0);
-    expect(
-      await page.evaluate(
-        () => document.documentElement.scrollWidth - innerWidth,
-      ),
-    ).toBeLessThanOrEqual(1);
-  }
-});
-
-test("Arabic sign-in and booking keep phone artwork compact and loaded", async ({
+test("Arabic sign-in and booking keep the task visible without decorative panels", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
@@ -299,16 +201,7 @@ test("Arabic sign-in and booking keep phone artwork compact and loaded", async (
     await page.goto(`/ar/${route}`);
     await expect(page.locator("html")).toHaveAttribute("dir", "rtl");
     await expect(page.getByRole("heading", { level: 1 })).toBeInViewport();
-    const artwork = page.locator("figure:visible");
-    await expect(artwork).toHaveCount(1);
-    await expectStoryImages(artwork, 1);
-    const imageBounds = await artwork.boundingBox();
-    expect(imageBounds).not.toBeNull();
-    expect(imageBounds?.width).toBeLessThanOrEqual(88);
-    expect(imageBounds?.height).toBeLessThanOrEqual(88);
-    await expect(artwork.locator("button, a, input, [tabindex]")).toHaveCount(
-      0,
-    );
+    await expect(page.locator("main figure, aside figure")).toHaveCount(0);
     expect(
       await page.evaluate(
         () => document.documentElement.scrollWidth - innerWidth,
@@ -317,17 +210,20 @@ test("Arabic sign-in and booking keep phone artwork compact and loaded", async (
   }
 });
 
-test("desktop role and sign-in scenes load with real task links", async ({
+test("desktop household image loads while sign-in stays focused on its task", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/en");
   await expectStoryImages(
-    page.getByRole("region", { name: english.home.roles.heading }),
-    6,
+    page.getByRole("region", { name: english.home.hero.title }),
+    1,
   );
   await page.goto("/en/login");
-  await expectStoryImages(page.getByRole("figure"), 1);
+  await expect(page.getByRole("figure")).toHaveCount(0);
+  await expect(
+    page.getByRole("button", { name: english.auth.continue, exact: true }),
+  ).toBeInViewport();
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
 });

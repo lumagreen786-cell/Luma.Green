@@ -34,7 +34,7 @@
     "prices": "Prices",
     "help": "Help",
     "join": "Join",
-    "sellScrap": "Book a collection"
+    "sellScrap": "Recycle"
   },
   "footer": {
     "about": "India's recycling network, from home to factory. Every hand-off weighed, priced and recorded.",
@@ -79,9 +79,9 @@
     "metaDescription": "Luma.Green connects India's recycling network: households, kabadiwalas, preprocessors, recyclers and manufacturers, with fair prices, verified businesses and a receipt at every step.",
     "hero": {
       "eyebrow": "Starting in Bengaluru",
-      "title": "Give your materials a new beginning.",
-      "lead": "Book a collection for paper, plastic, metal and more. Compare offers and keep a clear record.",
-      "sell": "Book a collection",
+      "title": "Clear out recyclables. Get paid.",
+      "lead": "Photos, pickup or drop-off, and payment after weighing.",
+      "sell": "Recycle",
       "join": "For businesses",
       "prices": "View material prices"
     },
@@ -130,7 +130,7 @@
         "one": "Compare offers for your materials before you book.",
         "two": "Pickup at your door, or drop it at a shop.",
         "three": "Paid in cash or UPI, with a receipt.",
-        "cta": "Book a collection"
+        "cta": "Recycle"
       },
       "kabadiwala": {
         "title": "Kabadiwalas",
@@ -211,7 +211,7 @@
     "closing": {
       "title": "Start with what you have",
       "body": "A bag of old newspapers or a truckload of bales: there is a place for it on Luma.Green.",
-      "sell": "Book a collection",
+      "sell": "Recycle",
       "join": "Join as a business"
     },
     "expansion": {
@@ -1889,14 +1889,14 @@
     "mobileLabel": "Mobile number",
     "mobileHint": "We'll send a 6-digit code to this number.",
     "mobileInvalid": "Enter a 10-digit Indian mobile number.",
-    "sendCode": "Send code",
+    "sendCode": "Send OTP",
     "sending": "Sending…",
     "sendFailed": "We couldn't send the code. Please try again in a minute.",
     "homeTitle": "Recycling from home?",
     "homeLink": "See how it works",
     "privacy": "We use your number only to sign you in and to send you updates about your work on Luma.Green.",
     "unavailableTitle": "Phone sign-in opens soon",
-    "unavailableBody": "We're finishing the SMS set-up for sign-in codes. Please check back shortly.",
+    "unavailableBody": "SMS sign-in is unavailable. Please try again later.",
     "verifyTitle": "Enter the 6-digit code",
     "sentTo": "Sent by SMS to {phone}",
     "codeLabel": "6-digit code",
@@ -1912,11 +1912,6 @@
     "errorGeneric": "Something went wrong. Please try again.",
     "signingIn": "Signing you in…",
     "sendRateLimited": "Too many code requests. Please try again later.",
-    "previewAction": "Preview code screen",
-    "previewTitle": "Code preview",
-    "previewNumber": "Mobile number: {phone}",
-    "previewBody": "SMS is not connected yet. No code was sent. You can check this screen, but you cannot sign in.",
-    "previewPhoneHint": "Enter your mobile number to preview the next step. No SMS will be sent.",
     "twoFactorTitle": "Check your authenticator",
     "twoFactorDescription": "Enter the 6-digit code from your authenticator app to finish signing in.",
     "twoFactorUseBackup": "Use a recovery code",
@@ -1925,7 +1920,8 @@
     "twoFactorBackupDescription": "Enter one saved recovery code. Each code works once.",
     "twoFactorBackupLabel": "Recovery code",
     "twoFactorExpired": "Your sign-in has expired. Start again with a new phone code.",
-    "twoFactorRestart": "Start again"
+    "twoFactorRestart": "Start again",
+    "resendCountdown": "Resend OTP in {time}"
   },
   "join": {
     "metaTitle": "Join Luma.Green",
@@ -2630,7 +2626,7 @@
       "label": "Mobile number",
       "hint": "We'll send a 6-digit code to this number.",
       "invalid": "Enter a 10-digit Indian mobile number.",
-      "sendCode": "Send code",
+      "sendCode": "Send OTP",
       "sending": "Sending…",
       "sendFailed": "We couldn't send the code. Please try again in a minute.",
       "codeLabel": "6-digit code",
@@ -2644,7 +2640,8 @@
       "errorExpired": "That code has expired. Ask for a new one.",
       "errorTooMany": "Too many tries. Ask for a new code.",
       "errorGeneric": "Something went wrong. Please try again.",
-      "privacy": "We use your number only for your bookings and updates about them."
+      "privacy": "We use your number only for your bookings and updates about them.",
+      "resendCountdown": "Resend OTP in {time}"
     },
     "errors": {
       "generic": "Something went wrong. Please try again.",
@@ -2698,6 +2695,28 @@
       "retake": "The photo is unclear or does not show recyclable materials. Try another photo or choose your items below.",
       "empty": "No supported materials were found. Try another photo or choose your items below.",
       "replace": "Choose another photo"
+    },
+    "simple": {
+      "title": "Recycle",
+      "photos": "Add photos",
+      "photoHint": "Show us what you want to recycle.",
+      "details": "Your details",
+      "next": "Find nearby shops",
+      "location": "Use my location",
+      "pickup": "Pick up",
+      "dropoff": "Drop off",
+      "chooseShop": "Choose a nearby shop",
+      "schedule": "Choose a time",
+      "confirm": "Confirm recycling",
+      "uploadFailed": "Photos could not be uploaded. Please try again.",
+      "photoRequired": "Add at least one photo.",
+      "photosTooMany": "Add up to 5 photos.",
+      "unavailable": "Recycling requests are unavailable. Please try again later.",
+      "estimateLater": "The shop weighs your materials and confirms the amount.",
+      "nearest": "Nearest first",
+      "replacePhotos": "Change photos",
+      "requested": "Recycling scheduled",
+      "attachedPhotos": "Photos"
     }
   },
   "track": {

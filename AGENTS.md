@@ -15,6 +15,36 @@ how to do one job well.
 
 ---
 
+## Current web redesign — 16 October 2026
+
+On 16 October, after local review, the owner authorized finishing the changes,
+testing, committing and pushing this branch. This supersedes the earlier
+no-commit/no-push instruction. A production merge still follows the PR checks.
+The latest request is a flow rebuild, not a colour refresh: reduce visible
+reading, put the next action first, and show supporting details on demand.
+Keep entered values when users move between form stages or work views.
+Do not hide required consent, permission limits or payment/evidence warnings.
+
+The owner rejected the previous visual pass and authorized a substantial web-only
+redesign using Astryx. Use the installed Astryx 0.7.1 library and Matcha theme,
+with Luma's original light/dark colours, script-aware Geist/Noto fonts and existing translations. Matcha supplies component geometry only; its palette must not replace Luma's colours. The owner
+allows new composition and control shapes; older radius and side-image rules do
+not constrain this redesign. Remove decorative side panels from login, signup
+and collection forms. Role choices need large useful photos and concise text.
+Keep open sections, no nested decorative cards, no gradients and no filler copy.
+Native apps remain on hold. Preserve authentication factors, member/admin
+separation, exact units and authorization. See
+[the Astryx setup](docs/design/astryx-agent-guide.md) and current UI contract.
+The owner then rejected the animated homepage preview. The first block is now
+for households: a generated recycling illustration and the Recycle action.
+Image-led business sections follow. Remove demo testimonials, avoid repeated
+underline/divider decoration, and make every section follow the active theme.
+Household requests use photos, address/location, pickup or drop-off, a time, name
+and verified phone. Do not require households to estimate materials or weights;
+the shop records those later. Photos are private and require record access.
+Use Astryx for new standalone actions; retain existing compound-control APIs
+where a blind replacement would break accessibility or form behavior.
+
 ## 1. What we are building
 
 ### Current delivery priority: web only
@@ -34,22 +64,20 @@ patch, but do not use this exception to add native features or release binaries.
 Shared web/backend changes may later appear in hosted native screens, but do not
 claim native acceptance without a separate test after the hold is lifted.
 
-### Current lifecycle: internal prototype
+### Current lifecycle: preparing production rollout
 
-As confirmed by the owner on 15 October 2026, this platform has no real user
-data and has not been rolled out. It is used only for internal team demos.
-This remains the lifecycle state until the owner explicitly declares rollout
-and this section is updated.
+On 16 October 2026, the owner said the platform is moving to production.
+Use real customer-facing actions; do not put simulated OTP or demo navigation
+in the sign-in path. Missing services must show an honest unavailable state.
+The owner authorized commit and push after testing this revision. Production
+merge and provider acceptance remain separate gates.
 
-During this phase, agents may make substantial schema and storage changes,
-drop tables, and delete prototype records/files when needed for implementation
-or testing. Data migrations and backward compatibility for prototype data are
-not required. Do not add migration machinery solely to preserve demo records.
-This permission applies to this project's prototype data, not unrelated projects
-or accounts. Keep credentials private and retain authentication, authorization,
-exact-unit and audit rules. Do not treat this as authorization to buy services.
-After rollout, review data-preservation and migration requirements before making
-destructive changes; the prototype exception no longer applies.
+The 15 October prototype state had no real users. Do not assume that remains
+true during rollout preparation. Preserve current records and files, and review
+migration needs before destructive changes. The earlier blanket prototype
+cleanup permission is no longer a safe default. Keep credentials private,
+authentication and authorization intact, exact units and audit records enforced.
+This does not authorize buying services or releasing native apps.
 
 Luma.Green connects the whole recycling chain on one platform: **households**
 who sell scrap, **kabadiwalas** (local scrap shops) who collect it,
@@ -150,7 +178,7 @@ Use shared Lucide icons and control sizes. Recharts is available through the
 vendored shadcn chart primitive; charts need recorded data and readable text/table
 equivalents. Installed design skills are guidance, not permission to change the
 brand, add cards, invent live statistics or present illustrations as app evidence.
-The approved demo testimonials must remain visibly illustrative. Unavailable
+Demo testimonials have been removed at the owner's request; do not restore them. Unavailable
 live prices show loading/unavailable placeholders, never synthetic live quotes.
 
 **UI completion requires visual inspection.** Inspect current browser captures

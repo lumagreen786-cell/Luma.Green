@@ -208,21 +208,24 @@ it("rejects invalid reference before any write", async () => {
   expect(mocks.save).not.toHaveBeenCalled();
 });
 it("offers an explicit date change for an overdue schedule while preserving its expected date", async () => {
-  mocks.paginated.mockReturnValue({
-    results: [
-      {
-        _id: "plan-a",
-        materialCode: "PAPER-NEWS",
-        quantityGrams: 1000,
-        status: "active",
-        everyDays: 7,
-        nextNeededBy: "2026-09-01",
-        specification: "Dry paper",
-      },
-    ],
+  mocks.paginated.mockImplementation((query) => ({
+    results:
+      getFunctionName(query) === "sourcing:plans"
+        ? [
+            {
+              _id: "plan-a",
+              materialCode: "PAPER-NEWS",
+              quantityGrams: 1000,
+              status: "active",
+              everyDays: 7,
+              nextNeededBy: "2026-09-01",
+              specification: "Dry paper",
+            },
+          ]
+        : [],
     status: "Exhausted",
     loadMore: mocks.loadMore,
-  });
+  }));
   const user = userEvent.setup();
   renderWithIntl(
     <WorkspacePermissions membershipRole="owner">
@@ -243,4 +246,26 @@ it("offers an explicit date change for an overdue schedule while preserving its 
     expectedDate: "2026-09-01",
     neededBy: "2026-10-01",
   });
+});
+
+it("retains a sourcing draft after closing its dialog and switching tasks", async () => {
+  const user = userEvent.setup();
+  renderWithIntl(
+    <WorkspacePermissions membershipRole="owner">
+      <SourcingPage />
+    </WorkspacePermissions>,
+  );
+  await user.click(screen.getByRole("button", { name: en.sourcing.post }));
+  await user.type(
+    screen.getByLabelText(en.sourcing.specification),
+    "Clean dry paper draft",
+  );
+  await user.keyboard("{Escape}");
+  await user.click(screen.getByRole("tab", { name: en.sourcing.plans }));
+  await user.click(screen.getByRole("tab", { name: en.sourcing.board }));
+  await user.click(screen.getByRole("button", { name: en.sourcing.post }));
+  expect(screen.getByLabelText(en.sourcing.specification)).toHaveValue(
+    "Clean dry paper draft",
+  );
+  expect(mocks.save).not.toHaveBeenCalled();
 });

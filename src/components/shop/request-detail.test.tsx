@@ -94,6 +94,7 @@ function renderDetail(result: BookingDetail | null | undefined) {
     fakeQueries({
       "workspace:mine": SHOP_WORKSPACE,
       "shop:get": result,
+      "householdPhotos:list": [],
       "shop:rateCard": RATE_CARD,
     }) as unknown as typeof useQuery,
   );

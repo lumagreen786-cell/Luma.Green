@@ -16,6 +16,7 @@ import {
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
+import { FaqHashOpener } from "@/components/help/faq-hash-opener";
 import { Container } from "@/components/site/container";
 import { PageHeader } from "@/components/site/page-header";
 import { MaterialCodes } from "@/components/standards/material-codes";
@@ -66,6 +67,7 @@ export default async function StandardsPage() {
 
   return (
     <>
+      <FaqHashOpener />
       <PageHeader
         eyebrow={t("eyebrow")}
         title={t("title")}

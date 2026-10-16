@@ -1,7 +1,7 @@
 "use client";
 import { useMutation, useQuery } from "convex/react";
 import { useLocale, useTranslations } from "next-intl";
-import { type ReactNode, useId, useState } from "react";
+import { type ReactNode, useId, useRef, useState } from "react";
 import { toast } from "sonner";
 
 import { EvidenceDialog, LotField } from "@/components/lots/form-parts";
@@ -93,6 +93,9 @@ export function SourcingForm({
   const [open, setOpen] = useState(false);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState(false);
+  // Dialog content unmounts on close; retain native text fields in memory.
+  // Select choices already live in the owning form component state.
+  const draft = useRef(new Map<string, string>());
   return (
     <EvidenceDialog
       title={title}
@@ -107,6 +110,29 @@ export function SourcingForm({
       }}
     >
       <form
+        ref={(form) => {
+          if (!form) return;
+          for (const field of form.elements) {
+            if (!(
+              (field instanceof HTMLInputElement && field.type !== "hidden") ||
+              field instanceof HTMLTextAreaElement
+            )) {
+              continue;
+            }
+
+            const value = draft.current.get(field.name);
+            if (value !== undefined) field.value = value;
+          }
+        }}
+        onInput={(event) => {
+          const field = event.target;
+          if (
+            (field instanceof HTMLInputElement && field.type !== "hidden") ||
+            field instanceof HTMLTextAreaElement
+          ) {
+            draft.current.set(field.name, field.value);
+          }
+        }}
         className="flex flex-col gap-5"
         onSubmit={(event) => {
           event.preventDefault();
@@ -117,6 +143,7 @@ export function SourcingForm({
           void Promise.try(() => onSave(data))
             .then(() => {
               toast.success(t("saved"));
+              draft.current.clear();
               setOpen(false);
             })
             .catch(() => {

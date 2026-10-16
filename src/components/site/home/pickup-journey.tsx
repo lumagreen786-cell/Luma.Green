@@ -33,7 +33,7 @@ export async function PickupJourney() {
   return (
     <section
       aria-labelledby="pickup-heading"
-      className="py-10 sm:py-12 lg:py-24"
+      className="py-10 sm:py-12 lg:py-16"
     >
       <Container className="grid min-w-0 grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
         <div className="flex min-w-0 flex-col gap-8">
@@ -47,16 +47,13 @@ export async function PickupJourney() {
               <li
                 key={step.title}
                 data-reveal
-                className="grid grid-cols-[2.5rem_minmax(0,1fr)] gap-5 py-6"
+                className="grid grid-cols-[2.5rem_minmax(0,1fr)] gap-5 py-4"
               >
                 <span className="pt-1 font-mono text-sm text-primary">
                   {format.number(index + 1, { minimumIntegerDigits: 2 })}
                 </span>
                 <div className="space-y-2">
                   <h3 className="text-lg font-semibold">{step.title}</h3>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    {step.body}
-                  </p>
                 </div>
               </li>
             ))}
@@ -99,7 +96,7 @@ export async function PickupJourney() {
               alt=""
               fill
               sizes="(min-width: 1024px) 560px, 100vw"
-              className="scale-105 object-cover"
+              className="object-cover"
             />
           </div>
           <ul className="flex min-w-0 flex-col gap-3">

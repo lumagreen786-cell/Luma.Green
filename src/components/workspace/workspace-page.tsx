@@ -3,7 +3,7 @@
 import { useAction, useMutation, useQuery } from "convex/react";
 import type { FunctionReturnType } from "convex/server";
 import { ConvexError } from "convex/values";
-import { ArrowRightIcon, CheckIcon } from "lucide-react";
+import { ArrowRightIcon } from "lucide-react";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -24,6 +24,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { isLocale, localeDirection } from "@/i18n/locales";
 import { Link } from "@/i18n/navigation";
 
@@ -97,6 +98,7 @@ function useWorkspaceError() {
 }
 
 export function WorkspacePage() {
+  const locale = useLocale();
   const t = useTranslations("workspace");
   const workspaces = useSignedInQuery(api.workspace.list);
   const select = useMutation(api.workspace.select);
@@ -114,49 +116,55 @@ export function WorkspacePage() {
     }
   }
   return (
-    <div className="flex min-w-0 flex-col gap-6">
-      <AppPageHeader title={t("title")} />
+    <div className="flex min-w-0 flex-col gap-8">
+      <AppPageHeader
+        title={t("title")}
+        actions={
+          selected ? (
+            <Button asChild variant="outline" className="max-w-full">
+              <Link href="/app">
+                <span className="min-w-0 truncate">{selected.org.name}</span>
+                <ArrowRightIcon
+                  aria-hidden
+                  className="shrink-0 rtl:rotate-180"
+                />
+              </Link>
+            </Button>
+          ) : undefined
+        }
+      />
       {workspaces == null ? <ListSkeleton /> : null}
       {workspaces?.length === 0 ? <p>{t("empty")}</p> : null}
       {workspaces && workspaces.length > 0 ? (
         <>
-          <SettingsSection id="choose-workspace" title={t("choose")}>
-            <ul className="divide-y border-b">
-              {workspaces.map(({ org, role, selected }) => (
-                <li
-                  key={org.id}
-                  className="flex flex-wrap items-center justify-between gap-3 py-4"
-                >
-                  <div className="min-w-0">
-                    <p className="font-semibold break-words">{org.name}</p>
-                    <p className="text-sm text-muted-foreground">{t(role)}</p>
-                  </div>
-                  <Button
-                    variant={selected ? "secondary" : "outline"}
-                    aria-pressed={selected}
-                    disabled={busy || selected}
-                    onClick={() => void choose(org.id)}
-                  >
-                    {selected ? <CheckIcon aria-hidden /> : null}
-                    {t("choose")}
-                  </Button>
-                </li>
-              ))}
-            </ul>
-          </SettingsSection>
+          <div className="flex min-w-0 flex-col gap-2 sm:max-w-lg">
+            <Label htmlFor="workspace-choice">{t("choose")}</Label>
+            <Select
+              dir={isLocale(locale) ? localeDirection(locale) : "ltr"}
+              value={selected?.org.id ?? ""}
+              disabled={busy}
+              onValueChange={(id) => {
+                const target = workspaces.find((entry) => entry.org.id === id);
+                if (target && !target.selected) void choose(target.org.id);
+              }}
+            >
+              <SelectTrigger id="workspace-choice" className="min-h-12 w-full">
+                <SelectValue placeholder={t("choose")} />
+              </SelectTrigger>
+              <SelectContent>
+                {workspaces.map(({ org, role }) => (
+                  <SelectItem key={org.id} value={org.id}>
+                    {org.name} · {t(role)}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
           {selected ? (
             <TeamSection
               key={`${selected.org.id}-${selected.role}`}
               orgId={selected.org.id}
             />
-          ) : null}
-          {selected ? (
-            <Button asChild variant="outline" className="self-start">
-              <Link href="/app">
-                {selected.org.name}
-                <ArrowRightIcon aria-hidden className="rtl:rotate-180" />
-              </Link>
-            </Button>
           ) : null}
         </>
       ) : null}
@@ -165,34 +173,51 @@ export function WorkspacePage() {
 }
 
 function TeamSection({ orgId }: { orgId: Id<"orgs"> }) {
+  const locale = useLocale();
   const t = useTranslations("workspace");
   const team = useQuery(api.workspace.team, { orgId });
   if (!team) return <ListSkeleton />;
   const canManage = team.role === "owner" || team.role === "admin";
   return (
-    <>
-      <SettingsSection id="workspace-team" title={t("team")}>
-        {team.role === "viewer" ? (
-          <p className="mb-3 text-muted-foreground">{t("readOnly")}</p>
+    <div className="flex min-w-0 flex-col gap-8">
+      {canManage ? <InviteForm orgId={orgId} actorRole={team.role} /> : null}
+      <Tabs
+        defaultValue="team"
+        dir={isLocale(locale) ? localeDirection(locale) : "ltr"}
+      >
+        <TabsList>
+          <TabsTrigger value="team">{t("team")}</TabsTrigger>
+          {canManage ? (
+            <TabsTrigger value="pending">{t("pending")}</TabsTrigger>
+          ) : null}
+        </TabsList>
+        <TabsContent value="team" className="pt-4">
+          <section aria-labelledby="workspace-team">
+            <h2 id="workspace-team" className="sr-only">
+              {t("team")}
+            </h2>
+            {team.role === "viewer" ? (
+              <p className="mb-3 text-muted-foreground">{t("readOnly")}</p>
+            ) : null}
+            <ul className="divide-y border-b">
+              {team.members.map((member) => (
+                <MemberRow
+                  key={`${member.id}-${member.role}`}
+                  member={member}
+                  orgId={orgId}
+                  actorRole={team.role}
+                />
+              ))}
+            </ul>
+          </section>
+        </TabsContent>
+        {canManage ? (
+          <TabsContent value="pending" className="pt-4">
+            <Invitations orgId={orgId} invitations={team.invitations} />
+          </TabsContent>
         ) : null}
-        <ul className="divide-y border-b">
-          {team.members.map((member) => (
-            <MemberRow
-              key={`${member.id}-${member.role}`}
-              member={member}
-              orgId={orgId}
-              actorRole={team.role}
-            />
-          ))}
-        </ul>
-      </SettingsSection>
-      {canManage ? (
-        <>
-          <InviteForm orgId={orgId} actorRole={team.role} />
-          <Invitations orgId={orgId} invitations={team.invitations} />
-        </>
-      ) : null}
-    </>
+      </Tabs>
+    </div>
   );
 }
 

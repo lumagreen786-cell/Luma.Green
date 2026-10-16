@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return pageMetadata({
     locale,
     path: "/sell",
-    title: t("metaTitle"),
+    title: t("simple.title"),
     description: t("metaDescription"),
   });
 }
@@ -30,11 +30,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default function SellPage() {
   return (
     <div className="flex flex-1 flex-col bg-background">
-      <Container className="grid max-w-6xl items-start gap-8 pt-6 pb-10 sm:pt-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.35fr)] lg:gap-16 lg:py-12">
+      <Container className="flex max-w-xl flex-col gap-5 pt-6 pb-12 sm:pt-8">
         <SellHero />
         <div className="flex min-w-0 flex-col gap-6">
-          <MyBookings />
           <SellFlow />
+          <MyBookings />
         </div>
       </Container>
     </div>

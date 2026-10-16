@@ -1,3 +1,119 @@
+## Latest household recycling and homepage direction — 16 October 2026
+
+The owner reviewed localhost and authorized commit and push after testing. This
+supersedes the earlier hold below. Do not infer authorization to merge this new
+revision from the earlier PR58 merge. Native apps remain on hold.
+
+The animated homepage is removed. A newly generated household recycling banner
+leads with Recycle; image-led business sections follow, including a generated
+recycling-chain illustration. Demo testimonials are removed. The shared public
+and login header, mobile menu and footer are redesigned. Material records now
+follow the active light/dark theme; repetitive divider decoration is reduced.
+
+The household form now asks for photos, name, pickup address/location, pickup or
+drop-off, a nearby shop and a time, then real phone OTP. It no longer asks for
+material categories, weights or an invented estimate. Private photos upload only
+after authentication. The shop later records actual material/weight/payment.
+See [the photo contract](../architecture/household-photos.md). Exact retries keep
+the original request arguments so a lost response cannot create a second booking.
+Existing item-based internal bookings remain supported. No data was deleted.
+
+Current verification: `pnpm check` passed with 2,480 web/backend tests and 73
+native compatibility tests, lint and web/backend/native types. The 17-case final
+visual run passed all four form cases and phone/navigation cases; eight tablet/
+desktop cases first hit an ambiguous price-link selector, then all eight passed
+with a selector for the actual button. Hero actions are side by side at tablet/
+desktop widths. Current local captures are in `captures/2026-10-16-recycling`.
+The clean webpack production build passed all 3,119 pages. The additive backend
+is deployed to verified production `outstanding-buzzard-942.eu-west-1.convex.cloud`
+with no index removals. Production function metadata confirms the new photo API.
+No SMS/provider acceptance is claimed. The matching development deployment
+`glorious-rooster-470` also passed. Source checkpoint `28111d0` contains the
+verified implementation; this documentation update does not change runtime code.
+Read current GitHub state for the final merge result. Recovery history and the
+pre-release working tree are saved under
+`/tmp/luma-20261016-release-recovery/`. Only `main` is to remain after cleanup. Earlier screenshots and
+2,435-test combined-run results below do not certify this latest revision. No SMS
+has been sent. Convex reports that the team is above Free-plan limits. This is an account
+usage warning; no service purchase or upgrade was performed.
+
+The owner now explicitly authorizes the protected-main PR merge, closing other
+PRs and removing non-main branches. Save recovery material first. Stop after the
+merge triggers Vercel; do not wait for or monitor Vercel's deployment build.
+
+## Astryx web redesign and application repair — 16 October 2026
+
+PR #58 was squash-merged as `c81aca9`. The owner requested a larger redesign
+using Astryx and reported four `applications:start` errors. Current work is on
+`feat/astryx-web-redesign`; it is not deployed yet. The owner requires local
+review before any commit, push or pull request. Do not perform those actions
+until the owner approves the local version.
+
+All four supplied production request IDs were `NOT_A_MEMBER`: the administrator
+account was shown member consent. The web gate now routes administrators to the
+admin console or required authenticator setup before showing consent. The server
+member-only rule remains intact. The login page now resumes a confirmed existing
+session, instead of showing the phone form again. The public header now shows the account action for a confirmed session.
+Session lifetime and required factors have not changed. A separate member account is required to test operator
+onboarding. Regression tests cover member consent, administrator routing, session
+loading and safe return paths; existing adapter tests retain server coverage.
+
+Astryx components now use the existing Luma light/dark palette. The owner explicitly rejected the Matcha colour change; original colours are restored. Luma keeps its Geist/Noto fonts,
+locale handling and existing permissions. Entry forms are centred without a side
+panel; role selection uses large photos and short descriptions. Public pages use
+new task-first compositions; the homepage now has a booking walkthrough with
+clearly labelled sample data, real UI controls, pause/replay and reduced motion. Shared controls, account navigation, operational
+layouts, workspaces and admin surfaces use the same theme. Native apps remain on
+hold. No new Cloudflare settings are required by this UI change.
+
+The owner then rejected the remaining old composition and requested shorter,
+task-first flows across the web. See [current rebuild coverage](ux-rebuild-2026-10-16.md).
+Login now has one compact action; applications use validated stages; booking
+shows one material family at a time. Public explanations are optional. Work
+screens separate tasks and retain visited drafts; record detail has keyboard
+focus and a close path. Admin review keeps approval checks visible.
+
+Sign-in now uses real Send OTP wording across all 33 locales. The five-minute
+resend display uses the successful-send time and survives refresh; server quota
+enforcement remains unchanged. Fake OTP preview navigation has been removed.
+The centred login passed 55 focused tests and 24 browser checks; no SMS was sent.
+
+Current checks: the clean webpack production build passed with all 3,119 pages,
+and web/backend type checks passed. After that build, only workspace spacing,
+a Malayalam button label, narrow-screen time-field layout and test-clock code changed; no new CSS utilities or
+server behavior were added. Full lint findings were repaired and the
+reported files passed the scoped lint check. The homepage preview passed 11
+unit tests, 14 browser checks (English/Arabic, light/dark, 390/768/1440px), and a
+final explicit-Play regression. Current captures are in
+`/tmp/luma-preview-split-results`; they use labelled sample data.
+
+The final full run passed 2,429 of 2,435 tests. Four files hit five-second
+timeouts under concurrent visual-check load; one long OTP test clock loop also
+caused two later assertions to fail. The OTP tests now advance the wall clock
+directly without changing server behavior. All four affected files passed in a
+quiet single-worker rerun (23/23), covering all six failures without increased
+timeouts. This is combined-run evidence, not a claim of a single green full run.
+
+Protected operational review passed 28 synthetic captures with no page errors
+or horizontal overflow; English/Arabic phone-light and desktop-dark views were
+inspected. A duplicate workspace divider was removed and separately recaptured.
+Signup/basket review passed 22 fixture visits across English/Arabic and a
+320px Malayalam check. One clipped Malayalam submit label was shortened and
+rechecked in both themes; basket family changes also passed. Native time inputs
+now stack below the small breakpoint; their full AM/PM values were visually
+confirmed at 320px in both themes (`/tmp/luma-entry-hours-fixed`). Saathi lacks a
+dedicated fixture capture and remains a visual coverage gap. These fixtures do
+not prove live authentication, provider delivery or mutation execution.
+The earlier 2,412-test check and old guide screenshots do not certify this pass.
+The build required network access for configured Google fonts; earlier disk-space
+failures were resolved by removing only this checkout's generated build output.
+Normal configured development is restored at `http://localhost:3000` (log
+`/tmp/luma-local-configured-review.log`); homepage and centred real Send OTP
+screen were inspected. No SMS was sent. All temporary fixture servers are stopped.
+No deployment or SMS/provider execution is claimed. Guide and Word updates remain
+deferred until requested. Do not monitor production after merge: the owner asked
+to perform their own deployed testing.
+
 ## Web platform redesign — 15 October 2026
 
 The prior technical release is merged as `c24ae79` (PR #57), with Convex deployed

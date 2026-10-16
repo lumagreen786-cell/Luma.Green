@@ -66,3 +66,13 @@ Lighting/mood: soft morning daylight, clean, quiet and trustworthy.
 Color palette: predominantly warm white, paper cream and muted leafy greens, subtle natural cardboard browns and silver metal, with very low saturation.
 Constraints: no written text, no letters, no numbers, no logos, no watermark, no arrows, no recycling symbols, no charts or metrics. No piles of mixed rubbish, no smoke, no factory stacks, no exaggerated wealth or poverty. Opaque warm white background.
 ```
+
+## Household and business illustrations — 16 October 2026
+
+Generated with the built-in image tool for the owner's requested homepage.
+`public/images/showcase/recycle-household-illustration.webp` shows a household
+sorting recyclables with a collector. `recycle-chain-illustration.webp` shows a
+possible shop-to-manufacturer chain. Both are 1536×1024 WebP illustrations with
+forest-green accents. They are editorial art, not proof of customers, operating
+facilities, transactions or partner relationships. Real headings/actions remain
+localized HTML outside the image.

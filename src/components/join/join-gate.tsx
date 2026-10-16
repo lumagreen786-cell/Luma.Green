@@ -2,10 +2,13 @@
 
 import { type ReactNode, useEffect } from "react";
 
+import { useSignedInQuery } from "@/components/providers/use-signed-in-query";
 import { RoleStoryImage } from "@/components/showcase/role-story-image";
 import { Skeleton } from "@/components/ui/skeleton";
 import { usePathname, useRouter } from "@/i18n/navigation";
+import { navigateToAdmin } from "@/lib/admin-navigation";
 
+import { api } from "../../../convex/_generated/api";
 import { isEditable } from "../../../convex/lib/lifecycle";
 import type { ApplicationKind } from "../../../convex/lib/onboarding";
 import { ConsentCard } from "./consent-card";
@@ -27,6 +30,8 @@ export function JoinGate({
   }) => ReactNode;
 }) {
   const mine = useMine();
+  const person = useSignedInQuery(api.identity.me);
+  const isAdmin = person?.kind === "admin";
   const router = useRouter();
   const pathname = usePathname();
   const application = mine?.application;
@@ -38,14 +43,22 @@ export function JoinGate({
     (application.kind !== kind || !isEditable(application.status));
 
   useEffect(() => {
-    if (isSignedOut) {
+    if (isAdmin) {
+      navigateToAdmin(person.twoFactorEnabled);
+    } else if (isSignedOut) {
       router.replace({ pathname: "/login", query: { next: pathname } });
     } else if (isElsewhere) {
       router.replace("/join/status");
     }
-  }, [isSignedOut, isElsewhere, pathname, router]);
+  }, [isAdmin, person, isSignedOut, isElsewhere, pathname, router]);
 
-  if (mine === undefined || mine === null || isElsewhere)
+  if (
+    person === undefined ||
+    isAdmin ||
+    mine === undefined ||
+    mine === null ||
+    isElsewhere
+  )
     return <FormSkeleton />;
   return (
     <div className="flex flex-col gap-6">

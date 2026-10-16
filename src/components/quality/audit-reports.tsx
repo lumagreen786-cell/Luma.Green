@@ -5,6 +5,8 @@ import { useFormatter, useNow, useTranslations } from "next-intl";
 import { useId, useState } from "react";
 
 import { AppPageHeader, ListSkeleton } from "@/components/app/page-parts";
+import { RecordWorkspace } from "@/components/app/record-workspace";
+import { WorkflowTabs } from "@/components/app/workflow-tabs";
 import { useSignedInQuery } from "@/components/providers/use-signed-in-query";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -33,10 +35,50 @@ function ReportsContent({ data }: { data: Board }) {
   return (
     <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 p-4 sm:p-8">
       <AppPageHeader title={t("title")} lead={t("lead")} />
-      {data.canCreate ? <CreateReport key={data.orgId} data={data} /> : null}
-      <ReportList rows={data.own} own onSelect={setSelected} />
-      <ReportList rows={data.received} own={false} onSelect={setSelected} />
-      {selected ? <ReportDetail key={selected} reportId={selected} /> : null}
+      <RecordWorkspace
+        detailKey={selected ?? undefined}
+        onBack={() => {
+          setSelected(null);
+        }}
+        list={
+          <WorkflowTabs
+            items={[
+              {
+                value: "received",
+                label: t("received"),
+                content: (
+                  <ReportList
+                    rows={data.received}
+                    own={false}
+                    onSelect={setSelected}
+                  />
+                ),
+              },
+              {
+                value: "sent",
+                label: t("sent"),
+                content: (
+                  <ReportList rows={data.own} own onSelect={setSelected} />
+                ),
+              },
+              ...(data.canCreate
+                ? [
+                    {
+                      value: "create",
+                      label: t("create"),
+                      content: <CreateReport key={data.orgId} data={data} />,
+                    },
+                  ]
+                : []),
+            ]}
+          />
+        }
+        detail={
+          selected ? (
+            <ReportDetail key={selected} reportId={selected} />
+          ) : undefined
+        }
+      />
       <p className="text-sm text-muted-foreground">{t("limit")}</p>
     </div>
   );

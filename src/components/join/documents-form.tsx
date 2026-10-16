@@ -145,7 +145,6 @@ export function DocumentsForm({
       <FormHeader
         eyebrow={t(`roles.${kind}.title`)}
         title={t("documents.title")}
-        step={t("business.step", { step: 2 })}
         saveState={saveState}
       />
       <p className="text-sm leading-relaxed text-muted-foreground">

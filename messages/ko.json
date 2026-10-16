@@ -34,7 +34,7 @@
     "prices": "가격",
     "help": "도움말",
     "join": "참여하기",
-    "sellScrap": "수거 예약"
+    "sellScrap": "재활용하기"
   },
   "footer": {
     "about": "가정에서 공장까지, 인도의 자원 회수망을 하나의 플랫폼으로 연결합니다. 모든 인계에서 무게와 가격을 확인하고 기록합니다.",
@@ -79,9 +79,9 @@
     "metaDescription": "Luma.Green은 인도의 자원 회수망을 하나의 플랫폼으로 연결합니다. 가정, 자원 수거점, 전처리업체, 재활용 업체, 제조업체가 공정한 가격, 확인된 사업자, 단계별 영수증을 공유합니다.",
     "hero": {
       "eyebrow": "벵갈루루에서 시작합니다",
-      "title": "자원에 새로운 시작을 선물하세요.",
-      "lead": "종이, 플라스틱, 금속 등의 수거를 예약하세요. 제안을 비교하고 거래 기록을 명확하게 남기세요.",
-      "sell": "수거 예약",
+      "title": "재활용품을 정리하고 돈을 받으세요.",
+      "lead": "사진, 방문 수거 또는 직접 전달, 계량 후 지급.",
+      "sell": "재활용하기",
       "join": "사업자 안내",
       "prices": "자원 가격 보기"
     },
@@ -130,7 +130,7 @@
         "one": "예약 전에 재활용품의 가치를 확인합니다.",
         "two": "문 앞에서 수거하거나 매장에 가져갑니다.",
         "three": "현금 또는 UPI로 받고 영수증을 확인합니다.",
-        "cta": "수거 예약"
+        "cta": "재활용하기"
       },
       "kabadiwala": {
         "title": "고물상",
@@ -211,7 +211,7 @@
     "closing": {
       "title": "가진 것부터 시작하세요",
       "body": "헌 신문 한 봉지부터 트럭 한 대 분량의 베일까지, Luma.Green에서 다음 단계로 보낼 수 있습니다.",
-      "sell": "수거 예약",
+      "sell": "재활용하기",
       "join": "사업자로 참여"
     },
     "expansion": {
@@ -1889,14 +1889,14 @@
     "mobileLabel": "휴대전화 번호",
     "mobileHint": "이 번호로 6자리 코드를 보냅니다.",
     "mobileInvalid": "인도의 10자리 휴대전화 번호를 입력하세요.",
-    "sendCode": "코드 보내기",
+    "sendCode": "인증 코드 전송",
     "sending": "보내는 중…",
     "sendFailed": "코드를 보내지 못했습니다. 1분 후 다시 시도하세요.",
     "homeTitle": "집에서 재활용하시나요?",
     "homeLink": "이용 방법 보기",
     "privacy": "전화번호는 로그인과 Luma.Green 업무 관련 알림에만 사용합니다.",
     "unavailableTitle": "전화번호 로그인 준비 중",
-    "unavailableBody": "로그인 코드용 SMS 설정을 마무리하고 있습니다. 잠시 후 다시 확인하세요.",
+    "unavailableBody": "SMS 로그인을 사용할 수 없습니다. 나중에 다시 시도해 주세요.",
     "verifyTitle": "6자리 코드 입력",
     "sentTo": "{phone}에 SMS로 보냈습니다",
     "codeLabel": "6자리 코드",
@@ -1912,11 +1912,6 @@
     "errorGeneric": "문제가 발생했습니다. 다시 시도하세요.",
     "signingIn": "로그인 중…",
     "sendRateLimited": "코드 요청이 너무 많습니다. 나중에 다시 시도하세요.",
-    "previewAction": "코드 화면 미리 보기",
-    "previewTitle": "코드 미리 보기",
-    "previewNumber": "휴대전화 번호: {phone}",
-    "previewBody": "아직 SMS가 연결되지 않았고 코드는 전송되지 않았습니다. 이 화면은 볼 수 있지만 로그인할 수는 없습니다.",
-    "previewPhoneHint": "다음 단계를 미리 보려면 휴대전화 번호를 입력하세요. SMS는 전송되지 않습니다.",
     "twoFactorTitle": "인증 앱 확인",
     "twoFactorDescription": "인증 앱의 6자리 코드를 입력해 로그인을 완료하세요.",
     "twoFactorUseBackup": "복구 코드 사용",
@@ -1925,7 +1920,8 @@
     "twoFactorBackupDescription": "저장한 복구 코드를 입력하세요. 각 코드는 한 번만 사용할 수 있습니다.",
     "twoFactorBackupLabel": "복구 코드",
     "twoFactorExpired": "로그인이 만료되었습니다. 새 휴대폰 코드로 다시 시작하세요.",
-    "twoFactorRestart": "다시 시작"
+    "twoFactorRestart": "다시 시작",
+    "resendCountdown": "{time} 후 코드 재전송"
   },
   "join": {
     "metaTitle": "Luma.Green 참여",
@@ -2630,7 +2626,7 @@
       "label": "휴대전화 번호",
       "hint": "이 번호로 6자리 코드를 보냅니다.",
       "invalid": "인도의 10자리 휴대전화 번호를 입력하세요.",
-      "sendCode": "코드 보내기",
+      "sendCode": "인증 코드 전송",
       "sending": "보내는 중…",
       "sendFailed": "코드를 보내지 못했습니다. 1분 후 다시 시도하세요.",
       "codeLabel": "6자리 코드",
@@ -2644,7 +2640,8 @@
       "errorExpired": "코드가 만료되었습니다. 새 코드를 요청하세요.",
       "errorTooMany": "시도 횟수가 너무 많습니다. 새 코드를 요청하세요.",
       "errorGeneric": "문제가 발생했습니다. 다시 시도하세요.",
-      "privacy": "전화번호는 예약과 관련 안내에만 사용합니다."
+      "privacy": "전화번호는 예약과 관련 안내에만 사용합니다.",
+      "resendCountdown": "{time} 후 코드 재전송"
     },
     "errors": {
       "generic": "문제가 발생했습니다. 다시 시도하세요.",
@@ -2698,6 +2695,28 @@
       "retake": "사진이 흐리거나 재활용품이 보이지 않습니다. 다른 사진을 쓰거나 아래에서 품목을 선택하세요.",
       "empty": "지원되는 자재를 찾지 못했습니다. 다른 사진을 쓰거나 아래에서 품목을 선택하세요.",
       "replace": "다른 사진 선택"
+    },
+    "simple": {
+      "title": "재활용하기",
+      "photos": "사진 추가",
+      "photoHint": "재활용할 물품을 보여 주세요.",
+      "details": "내 정보",
+      "next": "가까운 가게 찾기",
+      "location": "내 위치 사용",
+      "pickup": "방문 수거",
+      "dropoff": "가게에 직접 전달",
+      "chooseShop": "가까운 가게 선택",
+      "schedule": "시간 선택",
+      "confirm": "재활용 확정",
+      "uploadFailed": "사진을 업로드하지 못했습니다. 다시 시도해 주세요.",
+      "photoRequired": "사진을 한 장 이상 추가해 주세요.",
+      "photosTooMany": "사진은 최대 5장까지 추가할 수 있습니다.",
+      "unavailable": "지금은 재활용을 신청할 수 없습니다. 나중에 다시 시도해 주세요.",
+      "estimateLater": "가게에서 물품의 무게를 재고 금액을 확정합니다.",
+      "nearest": "가까운 순",
+      "replacePhotos": "사진 변경",
+      "requested": "재활용 일정이 예약되었습니다",
+      "attachedPhotos": "사진"
     }
   },
   "track": {

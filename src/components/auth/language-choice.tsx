@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { useState, useTransition } from "react";
 
-import { Button } from "@/components/ui/button";
+import { ActionButton } from "@/components/ui/action-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -75,7 +75,7 @@ export function LanguageChoice({ onDone }: { onDone: () => void }) {
       <div className="flex flex-col gap-1">
         <h1
           id="choose-language"
-          className="font-display text-2xl leading-[1.25] font-semibold tracking-tight"
+          className="font-display text-3xl leading-[1.2] font-semibold tracking-tight sm:text-4xl"
         >
           {t("chooseLanguage")}
         </h1>
@@ -158,6 +158,7 @@ export function LanguageChoice({ onDone }: { onDone: () => void }) {
       <div className="flex flex-col gap-3">
         <p
           role="status"
+          aria-label={common("language")}
           className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 text-sm"
         >
           <span className="text-muted-foreground">{common("language")}</span>{" "}
@@ -165,14 +166,12 @@ export function LanguageChoice({ onDone }: { onDone: () => void }) {
             {localeMeta[selected].label}
           </bdi>
         </p>
-        <Button
+        <ActionButton
           type="submit"
-          size="lg"
-          className="h-12 w-full text-base"
-          disabled={isPending}
-        >
-          {t("continue")}
-        </Button>
+          className="w-full"
+          isDisabled={isPending}
+          label={t("continue")}
+        />
       </div>
     </form>
   );

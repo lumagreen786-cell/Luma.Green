@@ -24,7 +24,10 @@ function highlights(shops: readonly ShopOffer[], mode: Mode) {
   const usable = shops.filter((shop) => canServe(shop, mode));
   const best = usable.reduce<ShopOffer | undefined>(
     (top, shop) =>
-      top === undefined || shop.estimatePaise > top.estimatePaise ? shop : top,
+      shop.estimatePaise !== undefined &&
+      (top === undefined || shop.estimatePaise > (top.estimatePaise ?? 0))
+        ? shop
+        : top,
     undefined,
   );
   const nearest = usable.reduce<ShopOffer | undefined>((top, shop) => {

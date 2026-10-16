@@ -1,4 +1,5 @@
 import { render, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 
 import messages from "../../../../messages/en.json";
@@ -15,6 +16,8 @@ describe("demo testimonials", () => {
     expect(
       within(section).getByText(messages.home.testimonials.note),
     ).toBeVisible();
+    expect(section.querySelector("details")).not.toHaveAttribute("open");
+    await userEvent.click(section.querySelector("summary") ?? section);
     expect(within(section).getAllByRole("figure")).toHaveLength(3);
     expect(
       within(section).getByText(messages.home.roles.household.title),

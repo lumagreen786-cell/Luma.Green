@@ -34,7 +34,7 @@
     "prices": "价格",
     "help": "帮助",
     "join": "加入",
-    "sellScrap": "预约回收"
+    "sellScrap": "回收"
   },
   "footer": {
     "about": "从家庭到工厂，将印度的资源回收网络连接在一个平台上。每次交接都称重、定价并记录。",
@@ -79,9 +79,9 @@
     "metaDescription": "Luma.Green将印度的资源回收网络连接在一个平台上：家庭、材料回收店、预处理商、再生企业和制造商，共享公平价格、经过核验的企业和每一步的收据。",
     "hero": {
       "eyebrow": "从班加罗尔开始",
-      "title": "让资源迎来新的开始。",
-      "lead": "预约回收纸张、塑料、金属等材料。比较报价，保留清晰记录。",
-      "sell": "预约回收",
+      "title": "清理可回收物，换取报酬。",
+      "lead": "拍照、上门取件或送到店内，称重后付款。",
+      "sell": "回收",
       "join": "面向商家",
       "prices": "查看材料价格"
     },
@@ -130,7 +130,7 @@
         "one": "预约前先了解可回收材料价值。",
         "two": "上门收取，或送到回收店。",
         "three": "通过现金或UPI收款，并获得收据。",
-        "cta": "预约回收"
+        "cta": "回收"
       },
       "kabadiwala": {
         "title": "废品回收店",
@@ -211,7 +211,7 @@
     "closing": {
       "title": "从手头的材料开始",
       "body": "一袋旧报纸，或一卡车包块，都能在Luma.Green找到去处。",
-      "sell": "预约回收",
+      "sell": "回收",
       "join": "以企业身份加入"
     },
     "expansion": {
@@ -1896,7 +1896,7 @@
     "homeLink": "了解使用流程",
     "privacy": "手机号码仅用于登录及发送Luma.Green工作相关通知。",
     "unavailableTitle": "手机号登录即将开放",
-    "unavailableBody": "我们正在完成登录验证码的短信设置，请稍后查看。",
+    "unavailableBody": "暂时无法通过短信登录，请稍后重试。",
     "verifyTitle": "输入6位验证码",
     "sentTo": "已通过短信发送至{phone}",
     "codeLabel": "6位验证码",
@@ -1912,11 +1912,6 @@
     "errorGeneric": "出了点问题，请重试。",
     "signingIn": "正在登录…",
     "sendRateLimited": "验证码请求过多，请稍后重试。",
-    "previewAction": "预览验证码页面",
-    "previewTitle": "验证码预览",
-    "previewNumber": "手机号码：{phone}",
-    "previewBody": "短信尚未连接，未发送验证码。你可以查看此页面，但无法登录。",
-    "previewPhoneHint": "输入手机号以预览下一步，不会发送短信。",
     "twoFactorTitle": "查看身份验证器",
     "twoFactorDescription": "输入身份验证器应用中的6位验证码，完成登录。",
     "twoFactorUseBackup": "使用恢复代码",
@@ -1925,7 +1920,8 @@
     "twoFactorBackupDescription": "输入一个已保存的恢复代码。每个代码仅可使用一次。",
     "twoFactorBackupLabel": "恢复代码",
     "twoFactorExpired": "登录已过期。请使用新的手机验证码重新开始。",
-    "twoFactorRestart": "重新开始"
+    "twoFactorRestart": "重新开始",
+    "resendCountdown": "{time}后重新发送验证码"
   },
   "join": {
     "metaTitle": "加入Luma.Green",
@@ -2644,7 +2640,8 @@
       "errorExpired": "验证码已过期，请请求新的验证码。",
       "errorTooMany": "尝试次数过多，请请求新验证码。",
       "errorGeneric": "出了点问题，请重试。",
-      "privacy": "手机号码仅用于预约及其相关通知。"
+      "privacy": "手机号码仅用于预约及其相关通知。",
+      "resendCountdown": "{time}后重新发送验证码"
     },
     "errors": {
       "generic": "出了点问题，请重试。",
@@ -2698,6 +2695,28 @@
       "retake": "照片不清晰或未显示可回收材料。请换张照片或在下方选择物品。",
       "empty": "未找到支持的材料。请换张照片或在下方选择物品。",
       "replace": "选择另一张照片"
+    },
+    "simple": {
+      "title": "回收",
+      "photos": "添加照片",
+      "photoHint": "让我们看看您想回收的物品。",
+      "details": "您的信息",
+      "next": "查找附近商店",
+      "location": "使用我的位置",
+      "pickup": "上门取件",
+      "dropoff": "送到店内",
+      "chooseShop": "选择附近商店",
+      "schedule": "选择时间",
+      "confirm": "确认回收",
+      "uploadFailed": "照片上传失败，请重试。",
+      "photoRequired": "请至少添加一张照片。",
+      "photosTooMany": "最多添加5张照片。",
+      "unavailable": "暂时无法提交回收请求，请稍后重试。",
+      "estimateLater": "商店会称重并确认金额。",
+      "nearest": "距离最近优先",
+      "replacePhotos": "更换照片",
+      "requested": "回收已预约",
+      "attachedPhotos": "照片"
     }
   },
   "track": {

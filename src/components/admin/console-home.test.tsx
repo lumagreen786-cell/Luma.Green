@@ -4,15 +4,21 @@ import { beforeEach, expect, it, vi } from "vitest";
 
 import { ConsoleHome } from "./console-home";
 
-const queries = vi.hoisted(() => ({ people: vi.fn() }));
+const queries = vi.hoisted(() => ({
+  people: vi.fn(),
+  queue: vi.fn<() => unknown[]>(),
+}));
 vi.mock("convex/react", () => ({
-  useQuery: (query: FunctionReference<"query">) => {
+  useQuery: (query: FunctionReference<"query">): unknown => {
     switch (getFunctionName(query)) {
       case "identity:me": {
         return { adminName: "Test admin" };
       }
       case "admin:overview": {
         return { recentSignIns: queries.people() };
+      }
+      case "review:queue": {
+        return queries.queue();
       }
       case "review:summary": {
         return { waiting: 0, overdue: 0, dueSoon: 0, openSupport: 0 };
@@ -26,6 +32,7 @@ vi.mock("convex/react", () => ({
 
 beforeEach(() => {
   queries.people.mockReturnValue([]);
+  queries.queue.mockReturnValue([]);
 });
 
 it("describes new profiles without claiming phone verification or sign-in activity", () => {
@@ -55,4 +62,26 @@ it("explains an empty account list without requiring a phone identity", () => {
       "New accounts appear here after their profile is created.",
     ),
   ).toBeVisible();
+});
+
+it("puts the next submitted applications before supporting account data", () => {
+  queries.queue.mockReturnValue([
+    { id: "returned", name: "Returned demo", status: "changes_requested" },
+    ...[1, 2, 3, 4].map((number) => ({
+      id: `demo-${String(number)}`,
+      name: `Demo ${String(number)}`,
+      area: "Demo area",
+      status: "submitted",
+    })),
+  ]);
+  render(<ConsoleHome />);
+  expect(screen.getByRole("heading", { name: "Work queue" })).toBeVisible();
+  expect(
+    screen.getByRole("link", { name: "Review applications" }),
+  ).toHaveAttribute("href", "/admin/verification");
+  expect(
+    screen.getByRole("link", { name: "Demo 1 Demo area" }),
+  ).toHaveAttribute("href", "/admin/verification/demo-1");
+  expect(screen.queryByText("Returned demo")).not.toBeInTheDocument();
+  expect(screen.queryByText("Demo 4")).not.toBeInTheDocument();
 });

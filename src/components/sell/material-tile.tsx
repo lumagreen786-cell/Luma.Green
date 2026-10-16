@@ -43,7 +43,7 @@ export function MaterialTile({
       disabled={!isAdded && isFull}
       onClick={onToggle}
       className={cn(
-        "group flex min-h-20 w-full items-center gap-3 border-b px-3 py-4 text-start transition-colors duration-150 outline-none focus-visible:ring-3 focus-visible:ring-ring/50 disabled:opacity-50 motion-reduce:transition-none",
+        "group flex min-h-16 w-full items-center gap-3 rounded-md border px-3 py-3 text-start transition-colors duration-150 outline-none focus-visible:ring-3 focus-visible:ring-ring/50 disabled:opacity-50 motion-reduce:transition-none",
         isAdded
           ? "border-primary bg-accent"
           : "border-border hover:bg-muted/40",

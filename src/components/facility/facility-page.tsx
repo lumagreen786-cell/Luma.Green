@@ -12,6 +12,7 @@ import { z } from "zod";
 
 import { AppPageHeader, ListSkeleton } from "@/components/app/page-parts";
 import { useWorkspace } from "@/components/app/use-workspace";
+import { WorkflowTabs } from "@/components/app/workflow-tabs";
 import { EvidenceDialog, LotField } from "@/components/lots/form-parts";
 import { NotForYou } from "@/components/shop/guards";
 import { Button } from "@/components/ui/button";
@@ -52,6 +53,7 @@ export function FacilityPage() {
 
 function FacilityWorkspace({ canManage }: { canManage: boolean }) {
   const t = useTranslations("facility");
+  const industry = useTranslations("industry");
   const rows = useQuery(api.industrialProfiles.mine, {});
   return (
     <div className="flex min-w-0 flex-col gap-6">
@@ -63,40 +65,68 @@ function FacilityWorkspace({ canManage }: { canManage: boolean }) {
       {canManage ? null : (
         <p className="text-sm text-muted-foreground">{t("readOnly")}</p>
       )}
-      {rows === undefined ? (
-        <ListSkeleton />
-      ) : (
-        <ul className="divide-y border-y">
-          {rows.map((facility) => (
-            <li key={facility._id} className="flex min-w-0 flex-col gap-3 py-5">
-              <div className="min-w-0 space-y-2">
-                <h2 className="font-medium break-words">{facility.name}</h2>
-                <p className="text-sm break-words">{facility.siteReference}</p>
-                {facility.sector ? (
-                  <p lang="en" dir="ltr" className="text-sm break-words">
-                    {facility.sector.name}
-                  </p>
+      <WorkflowTabs
+        items={[
+          {
+            value: "facilities",
+            label: t("title"),
+            content: (
+              <div className="space-y-5">
+                {" "}
+                {rows === undefined ? (
+                  <ListSkeleton />
+                ) : (
+                  <ul className="divide-y border-y">
+                    {rows.map((facility) => (
+                      <li
+                        key={facility._id}
+                        className="flex min-w-0 flex-col gap-3 py-5"
+                      >
+                        <div className="min-w-0 space-y-2">
+                          <h2 className="font-medium break-words">
+                            {facility.name}
+                          </h2>
+                          <p className="text-sm break-words">
+                            {facility.siteReference}
+                          </p>
+                          {facility.sector ? (
+                            <p
+                              lang="en"
+                              dir="ltr"
+                              className="text-sm break-words"
+                            >
+                              {facility.sector.name}
+                            </p>
+                          ) : null}
+                          <ul className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground">
+                            {facility.capabilities.map((kind) => (
+                              <li key={kind}>{t(`processKinds.${kind}`)}</li>
+                            ))}
+                          </ul>
+                        </div>
+                        {canManage ? (
+                          <div className="shrink-0">
+                            <FacilityForm facility={facility} />
+                          </div>
+                        ) : null}
+                        <FacilityRegistrations facilityId={facility._id} />
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {rows?.length === 0 ? (
+                  <p className="text-muted-foreground">{t("empty")}</p>
                 ) : null}
-                <ul className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground">
-                  {facility.capabilities.map((kind) => (
-                    <li key={kind}>{t(`processKinds.${kind}`)}</li>
-                  ))}
-                </ul>
               </div>
-              {canManage ? (
-                <div className="shrink-0">
-                  <FacilityForm facility={facility} />
-                </div>
-              ) : null}
-              <FacilityRegistrations facilityId={facility._id} />
-            </li>
-          ))}
-        </ul>
-      )}
-      {rows?.length === 0 ? (
-        <p className="text-muted-foreground">{t("empty")}</p>
-      ) : null}
-      <IndustryExplorer />
+            ),
+          },
+          {
+            value: "industry",
+            label: industry("title"),
+            content: <IndustryExplorer />,
+          },
+        ]}
+      />
     </div>
   );
 }

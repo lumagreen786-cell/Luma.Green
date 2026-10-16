@@ -27,7 +27,7 @@ for (const { locale, copy } of [
     { width: 320, height: 700 },
     { width: 768, height: 1024 },
   ]) {
-    test(`${locale} menu keeps settings and account actions together at ${String(viewport.width)}px`, async ({
+    test(`${locale} menu puts account actions before navigation and settings at ${String(viewport.width)}px`, async ({
       page,
     }) => {
       await page.setViewportSize(viewport);
@@ -89,17 +89,25 @@ for (const { locale, copy } of [
         ).toBeLessThanOrEqual(2);
       }
       const appearanceBox = await bounds(appearance);
+      const languageBox = await bounds(language);
       const loginBox = await bounds(login);
+      const sellBox = await bounds(sell);
       const firstLinkBox = await bounds(navigation.getByRole("link").first());
+      const lastLinkBox = await bounds(navigation.getByRole("link").last());
       const markBox = await bounds(
         menu.getByRole("img", { name: "Luma.Green", exact: true }),
       );
-      // Account actions should follow settings, rather than stick to the
-      // viewport bottom and leave a large gap on tall phones and tablets.
-      const settingsToAccount =
-        loginBox.y - appearanceBox.y - appearanceBox.height;
-      expect(settingsToAccount).toBeGreaterThanOrEqual(0);
-      expect(settingsToAccount).toBeLessThanOrEqual(32);
+      // Primary actions come first; navigation and settings follow without
+      // overlapping controls or large empty gaps.
+      for (const gap of [
+        sellBox.y - loginBox.y - loginBox.height,
+        firstLinkBox.y - sellBox.y - sellBox.height,
+        languageBox.y - lastLinkBox.y - lastLinkBox.height,
+        appearanceBox.y - languageBox.y - languageBox.height,
+      ]) {
+        expect(gap).toBeGreaterThanOrEqual(0);
+        expect(gap).toBeLessThanOrEqual(32);
+      }
       expect(Math.abs(loginBox.x - firstLinkBox.x)).toBeLessThanOrEqual(1);
       expect(Math.abs(loginBox.width - firstLinkBox.width)).toBeLessThanOrEqual(
         1,

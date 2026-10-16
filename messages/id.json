@@ -34,7 +34,7 @@
     "prices": "Harga",
     "help": "Bantuan",
     "join": "Gabung",
-    "sellScrap": "Pesan penjemputan"
+    "sellScrap": "Daur ulang"
   },
   "footer": {
     "about": "Jaringan daur ulang India dalam satu platform, dari rumah hingga pabrik. Setiap serah terima ditimbang, dihargai, dan dicatat.",
@@ -1614,7 +1614,7 @@
       "label": "Nomor ponsel",
       "hint": "Kami akan mengirim kode 6 digit ke nomor ini.",
       "invalid": "Masukkan nomor ponsel India 10 digit.",
-      "sendCode": "Kirim kode",
+      "sendCode": "Kirim OTP",
       "sending": "Mengirim…",
       "sendFailed": "Kode gagal dikirim. Coba lagi dalam satu menit.",
       "codeLabel": "Kode 6 digit",
@@ -1628,7 +1628,8 @@
       "errorExpired": "Kode itu kedaluwarsa. Minta kode baru.",
       "errorTooMany": "Terlalu banyak percobaan. Minta kode baru.",
       "errorGeneric": "Terjadi kesalahan. Coba lagi.",
-      "privacy": "Kami hanya menggunakan nomor Anda untuk pemesanan dan kabar terkait."
+      "privacy": "Kami hanya menggunakan nomor Anda untuk pemesanan dan kabar terkait.",
+      "resendCountdown": "Kirim ulang OTP dalam {time}"
     },
     "errors": {
       "generic": "Terjadi kesalahan. Coba lagi.",
@@ -1784,6 +1785,28 @@
       "retake": "Foto kurang jelas atau tidak menampilkan bahan daur ulang. Coba foto lain atau pilih barang di bawah.",
       "empty": "Tidak ditemukan bahan yang didukung. Coba foto lain atau pilih barang di bawah.",
       "replace": "Pilih foto lain"
+    },
+    "simple": {
+      "title": "Daur ulang",
+      "photos": "Tambah foto",
+      "photoHint": "Tunjukkan barang yang ingin Anda daur ulang.",
+      "details": "Data Anda",
+      "next": "Cari toko terdekat",
+      "location": "Gunakan lokasi saya",
+      "pickup": "Dijemput",
+      "dropoff": "Antar ke toko",
+      "chooseShop": "Pilih toko terdekat",
+      "schedule": "Pilih waktu",
+      "confirm": "Konfirmasi daur ulang",
+      "uploadFailed": "Foto tidak dapat diunggah. Silakan coba lagi.",
+      "photoRequired": "Tambahkan setidaknya satu foto.",
+      "photosTooMany": "Tambahkan hingga 5 foto.",
+      "unavailable": "Permintaan daur ulang tidak tersedia. Coba lagi nanti.",
+      "estimateLater": "Toko menimbang barang Anda dan mengonfirmasi jumlah pembayaran.",
+      "nearest": "Terdekat dahulu",
+      "replacePhotos": "Ganti foto",
+      "requested": "Daur ulang dijadwalkan",
+      "attachedPhotos": "Foto"
     }
   },
   "track": {
@@ -2394,9 +2417,9 @@
     "metaDescription": "Luma.Green menyatukan jaringan daur ulang India dalam satu platform: rumah tangga, pengepul, pengolah awal, pendaur ulang, dan produsen, dengan harga adil, usaha terverifikasi, dan tanda terima di setiap tahap.",
     "hero": {
       "eyebrow": "Dimulai di Bengaluru",
-      "title": "Beri bahan Anda awal yang baru.",
-      "lead": "Pesan penjemputan kertas, plastik, logam, dan lainnya. Bandingkan penawaran dan simpan catatan yang jelas.",
-      "sell": "Pesan penjemputan",
+      "title": "Singkirkan barang daur ulang. Terima pembayaran.",
+      "lead": "Foto, penjemputan atau pengantaran, dan pembayaran setelah ditimbang.",
+      "sell": "Daur ulang",
       "join": "Untuk usaha",
       "prices": "Lihat harga bahan"
     },
@@ -2445,7 +2468,7 @@
         "one": "Lihat nilai bahan daur ulang sebelum memesan.",
         "two": "Dijemput di depan pintu atau diantar ke toko.",
         "three": "Dibayar tunai atau melalui UPI, disertai tanda terima.",
-        "cta": "Pesan penjemputan"
+        "cta": "Daur ulang"
       },
       "kabadiwala": {
         "title": "Pengepul",
@@ -2526,7 +2549,7 @@
     "closing": {
       "title": "Mulai dari yang Anda miliki",
       "body": "Sekantong koran lama atau satu truk bal: semuanya punya tempat di Luma.Green.",
-      "sell": "Pesan penjemputan",
+      "sell": "Daur ulang",
       "join": "Gabung sebagai usaha"
     },
     "expansion": {
@@ -3266,14 +3289,14 @@
     "mobileLabel": "Nomor ponsel",
     "mobileHint": "Kami akan mengirim kode 6 digit ke nomor ini.",
     "mobileInvalid": "Masukkan nomor ponsel India 10 digit.",
-    "sendCode": "Kirim kode",
+    "sendCode": "Kirim OTP",
     "sending": "Mengirim…",
     "sendFailed": "Kode gagal dikirim. Coba lagi dalam satu menit.",
     "homeTitle": "Mendaur ulang dari rumah?",
     "homeLink": "Lihat cara kerjanya",
     "privacy": "Kami hanya menggunakan nomor Anda untuk masuk dan mengirim kabar tentang pekerjaan Anda di Luma.Green.",
     "unavailableTitle": "Masuk melalui ponsel segera tersedia",
-    "unavailableBody": "Kami sedang menyelesaikan pengaturan SMS untuk kode masuk. Periksa kembali sebentar lagi.",
+    "unavailableBody": "Login melalui SMS tidak tersedia. Coba lagi nanti.",
     "verifyTitle": "Masukkan kode 6 digit",
     "sentTo": "Dikirim melalui SMS ke {phone}",
     "codeLabel": "Kode 6 digit",
@@ -3289,11 +3312,6 @@
     "errorGeneric": "Terjadi kesalahan. Coba lagi.",
     "signingIn": "Sedang masuk…",
     "sendRateLimited": "Terlalu banyak permintaan kode. Coba lagi nanti.",
-    "previewAction": "Pratinjau layar kode",
-    "previewTitle": "Pratinjau kode",
-    "previewNumber": "Nomor ponsel: {phone}",
-    "previewBody": "SMS belum terhubung. Tidak ada kode yang dikirim. Anda dapat memeriksa layar ini, tetapi tidak dapat masuk.",
-    "previewPhoneHint": "Masukkan nomor ponsel untuk melihat pratinjau tahap berikutnya. SMS tidak akan dikirim.",
     "twoFactorTitle": "Periksa autentikator",
     "twoFactorDescription": "Masukkan kode 6 digit dari aplikasi autentikator untuk menyelesaikan proses masuk.",
     "twoFactorUseBackup": "Kode pemulihan",
@@ -3302,7 +3320,8 @@
     "twoFactorBackupDescription": "Masukkan satu kode pemulihan yang disimpan. Tiap kode hanya berlaku sekali.",
     "twoFactorBackupLabel": "Kode pemulihan",
     "twoFactorExpired": "Proses masuk telah kedaluwarsa. Mulai lagi dengan kode telepon baru.",
-    "twoFactorRestart": "Mulai lagi"
+    "twoFactorRestart": "Mulai lagi",
+    "resendCountdown": "Kirim ulang OTP dalam {time}"
   },
   "native": {
     "back": "Kembali",

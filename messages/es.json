@@ -34,7 +34,7 @@
     "prices": "Precios",
     "help": "Ayuda",
     "join": "Registrarse",
-    "sellScrap": "Reservar recogida"
+    "sellScrap": "Reciclar"
   },
   "footer": {
     "about": "La cadena de reciclaje de la India en una plataforma, del hogar a la fábrica. Cada entrega se pesa, se valora y se registra.",
@@ -79,9 +79,9 @@
     "metaDescription": "Luma.Green reúne la cadena de reciclaje de la India en una plataforma: hogares, kabadiwalas, preprocesadores, recicladores y fabricantes, con precios justos, empresas verificadas y un recibo en cada paso.",
     "hero": {
       "eyebrow": "Comenzamos en Bengaluru",
-      "title": "Dales un nuevo comienzo a tus materiales.",
-      "lead": "Reserva la recogida de papel, plástico, metal y más. Compara ofertas y lleva un registro claro.",
-      "sell": "Reservar recogida",
+      "title": "Despeja tus reciclables. Recibe dinero.",
+      "lead": "Fotos, recogida o entrega y pago después del pesaje.",
+      "sell": "Reciclar",
       "join": "Para empresas",
       "prices": "Ver precios de materiales"
     },
@@ -130,7 +130,7 @@
         "one": "Consulta el valor de tus materiales antes de reservar.",
         "two": "Recogida en tu puerta o entrega en una tienda.",
         "three": "Pago en efectivo o por UPI, con recibo.",
-        "cta": "Reservar recogida"
+        "cta": "Reciclar"
       },
       "kabadiwala": {
         "title": "Tiendas kabadiwala",
@@ -211,7 +211,7 @@
     "closing": {
       "title": "Empieza con lo que tienes",
       "body": "Desde una bolsa de periódicos hasta un camión de balas: todo tiene su lugar en Luma.Green.",
-      "sell": "Reservar recogida",
+      "sell": "Reciclar",
       "join": "Registra tu empresa"
     },
     "expansion": {
@@ -1889,14 +1889,14 @@
     "mobileLabel": "Número de móvil",
     "mobileHint": "Enviaremos un código de 6 dígitos a este número.",
     "mobileInvalid": "Introduce un número de móvil de la India de 10 dígitos.",
-    "sendCode": "Enviar código",
+    "sendCode": "Enviar OTP",
     "sending": "Enviando…",
     "sendFailed": "No hemos podido enviar el código. Vuelve a intentarlo dentro de un minuto.",
     "homeTitle": "¿Reciclas desde casa?",
     "homeLink": "Ver cómo funciona",
     "privacy": "Solo usamos tu número para iniciar sesión y enviarte novedades sobre tu trabajo en Luma.Green.",
     "unavailableTitle": "El inicio de sesión por teléfono estará disponible pronto",
-    "unavailableBody": "Estamos terminando la configuración de los códigos SMS. Vuelve a consultarlo pronto.",
+    "unavailableBody": "El inicio de sesión por SMS no está disponible. Inténtalo más tarde.",
     "verifyTitle": "Introduce el código de 6 dígitos",
     "sentTo": "Enviado por SMS a {phone}",
     "codeLabel": "Código de 6 dígitos",
@@ -1912,11 +1912,6 @@
     "errorGeneric": "Algo ha fallado. Vuelve a intentarlo.",
     "signingIn": "Iniciando sesión…",
     "sendRateLimited": "Demasiadas solicitudes de código. Inténtalo más tarde.",
-    "previewAction": "Vista previa de la pantalla del código",
-    "previewTitle": "Vista previa del código",
-    "previewNumber": "Número de móvil: {phone}",
-    "previewBody": "El SMS todavía no está conectado. No se ha enviado ningún código. Puedes revisar esta pantalla, pero no iniciar sesión.",
-    "previewPhoneHint": "Introduce tu móvil para ver el siguiente paso. No se enviará ningún SMS.",
     "twoFactorTitle": "Revisa tu autenticador",
     "twoFactorDescription": "Introduce el código de 6 dígitos de tu app de autenticación para terminar de iniciar sesión.",
     "twoFactorUseBackup": "Usar recuperación",
@@ -1925,7 +1920,8 @@
     "twoFactorBackupDescription": "Introduce un código de recuperación guardado. Cada código sirve una vez.",
     "twoFactorBackupLabel": "Código de recuperación",
     "twoFactorExpired": "El inicio de sesión ha caducado. Empieza de nuevo con otro código del móvil.",
-    "twoFactorRestart": "Empezar de nuevo"
+    "twoFactorRestart": "Empezar de nuevo",
+    "resendCountdown": "Reenviar OTP en {time}"
   },
   "join": {
     "metaTitle": "Únete a Luma.Green",
@@ -2630,7 +2626,7 @@
       "label": "Número de móvil",
       "hint": "Enviaremos un código de 6 dígitos a este número.",
       "invalid": "Introduce un número de móvil de la India de 10 dígitos.",
-      "sendCode": "Enviar código",
+      "sendCode": "Enviar OTP",
       "sending": "Enviando…",
       "sendFailed": "No hemos podido enviar el código. Vuelve a intentarlo dentro de un minuto.",
       "codeLabel": "Código de 6 dígitos",
@@ -2644,7 +2640,8 @@
       "errorExpired": "El código ha vencido. Solicita otro.",
       "errorTooMany": "Demasiados intentos. Solicita otro código.",
       "errorGeneric": "Algo ha fallado. Vuelve a intentarlo.",
-      "privacy": "Solo usamos tu número para tus reservas y sus actualizaciones."
+      "privacy": "Solo usamos tu número para tus reservas y sus actualizaciones.",
+      "resendCountdown": "Reenviar OTP en {time}"
     },
     "errors": {
       "generic": "Algo ha fallado. Vuelve a intentarlo.",
@@ -2698,6 +2695,28 @@
       "retake": "La foto no es clara o no muestra materiales reciclables. Prueba otra o elige los artículos abajo.",
       "empty": "No se han detectado materiales admitidos. Prueba otra foto o elige los artículos abajo.",
       "replace": "Elegir otra foto"
+    },
+    "simple": {
+      "title": "Reciclar",
+      "photos": "Añadir fotos",
+      "photoHint": "Muéstranos lo que quieres reciclar.",
+      "details": "Tus datos",
+      "next": "Buscar tiendas cercanas",
+      "location": "Usar mi ubicación",
+      "pickup": "Recogida",
+      "dropoff": "Entrega en tienda",
+      "chooseShop": "Elige una tienda cercana",
+      "schedule": "Elige una hora",
+      "confirm": "Confirmar reciclaje",
+      "uploadFailed": "No se pudieron subir las fotos. Inténtalo de nuevo.",
+      "photoRequired": "Añade al menos una foto.",
+      "photosTooMany": "Añade hasta 5 fotos.",
+      "unavailable": "Las solicitudes de reciclaje no están disponibles. Inténtalo más tarde.",
+      "estimateLater": "La tienda pesa tus materiales y confirma el importe.",
+      "nearest": "Más cercanas primero",
+      "replacePhotos": "Cambiar fotos",
+      "requested": "Reciclaje programado",
+      "attachedPhotos": "Fotos"
     }
   },
   "track": {

@@ -302,7 +302,7 @@ export function HoursInputs({
 }) {
   const t = useTranslations("join.form");
   return (
-    <div className="grid grid-cols-2 gap-3" dir="ltr">
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2" dir="ltr">
       <div className="flex flex-col gap-1">
         <Label
           htmlFor={`${id}-opens`}

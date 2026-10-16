@@ -42,7 +42,16 @@ export default async function SolarPage() {
         scene={imageRole}
       />
       <Container className="py-8 lg:py-12">
-        <SolarPlanner between={<SubsidyExplainer />} />
+        <SolarPlanner
+          between={
+            <details className="border-y py-4">
+              <summary className="cursor-pointer py-2 font-semibold outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
+                {t("subsidy.title")}
+              </summary>
+              <SubsidyExplainer />
+            </details>
+          }
+        />
       </Container>
     </>
   );

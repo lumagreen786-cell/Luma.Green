@@ -34,7 +34,7 @@
     "prices": "Preise",
     "help": "Hilfe",
     "join": "Mitmachen",
-    "sellScrap": "Abholung buchen"
+    "sellScrap": "Recyceln"
   },
   "footer": {
     "about": "Indiens Recyclingkette auf einer Plattform, vom Haushalt bis zur Fabrik. Jede Übergabe wird gewogen, bewertet und erfasst.",
@@ -79,9 +79,9 @@
     "metaDescription": "Luma.Green verbindet Indiens Recyclingkette auf einer Plattform: Haushalte, Kabadiwalas, Vorverarbeiter, Recycler und Hersteller. Mit fairen Preisen, geprüften Betrieben und einem Beleg bei jedem Schritt.",
     "hero": {
       "eyebrow": "Start in Bengaluru",
-      "title": "Geben Sie Ihren Wertstoffen einen neuen Anfang.",
-      "lead": "Buchen Sie eine Abholung für Papier, Kunststoff, Metall und mehr. Vergleichen Sie Angebote und behalten Sie den Überblick.",
-      "sell": "Abholung buchen",
+      "title": "Recyclingmaterial abgeben. Geld erhalten.",
+      "lead": "Fotos, Abholung oder Abgabe und Bezahlung nach dem Wiegen.",
+      "sell": "Recyceln",
       "join": "Für Unternehmen",
       "prices": "Materialpreise ansehen"
     },
@@ -130,7 +130,7 @@
         "one": "Sehen Sie vor der Buchung, was Ihr Recyclingmaterial wert ist.",
         "two": "Abholung an der Haustür oder Abgabe im Laden.",
         "three": "Bezahlung bar oder per UPI, mit Beleg.",
-        "cta": "Abholung buchen"
+        "cta": "Recyceln"
       },
       "kabadiwala": {
         "title": "Kabadiwala-Betriebe",
@@ -211,7 +211,7 @@
     "closing": {
       "title": "Beginnen Sie mit dem, was Sie haben",
       "body": "Eine Tüte alter Zeitungen oder eine Lkw-Ladung Ballen: Auf Luma.Green findet beides seinen Platz.",
-      "sell": "Abholung buchen",
+      "sell": "Recyceln",
       "join": "Als Betrieb registrieren"
     },
     "expansion": {
@@ -1889,14 +1889,14 @@
     "mobileLabel": "Mobilnummer",
     "mobileHint": "Wir senden einen sechsstelligen Code an diese Nummer.",
     "mobileInvalid": "Geben Sie eine zehnstellige indische Mobilnummer ein.",
-    "sendCode": "Code senden",
+    "sendCode": "OTP senden",
     "sending": "Wird gesendet…",
     "sendFailed": "Der Code konnte nicht gesendet werden. Bitte versuchen Sie es in einer Minute erneut.",
     "homeTitle": "Recycling von zu Hause?",
     "homeLink": "So funktioniert es ansehen",
     "privacy": "Wir verwenden Ihre Nummer nur zur Anmeldung und für Mitteilungen zu Ihrer Arbeit auf Luma.Green.",
     "unavailableTitle": "Anmeldung per Handy folgt bald",
-    "unavailableBody": "Wir schließen die Einrichtung der SMS-Anmeldecodes ab. Bitte sehen Sie in Kürze wieder nach.",
+    "unavailableBody": "Die SMS-Anmeldung ist nicht verfügbar. Bitte versuche es später erneut.",
     "verifyTitle": "Sechsstelligen Code eingeben",
     "sentTo": "Per SMS an {phone} gesendet",
     "codeLabel": "Sechsstelliger Code",
@@ -1912,11 +1912,6 @@
     "errorGeneric": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
     "signingIn": "Anmeldung läuft…",
     "sendRateLimited": "Zu viele Code-Anfragen. Bitte versuchen Sie es später erneut.",
-    "previewAction": "Code-Bildschirm ansehen",
-    "previewTitle": "Code-Vorschau",
-    "previewNumber": "Mobilnummer: {phone}",
-    "previewBody": "SMS ist noch nicht angebunden. Es wurde kein Code gesendet. Sie können diesen Bildschirm ansehen, sich aber nicht anmelden.",
-    "previewPhoneHint": "Geben Sie Ihre Mobilnummer ein, um den nächsten Schritt anzusehen. Es wird keine SMS gesendet.",
     "twoFactorTitle": "Authenticator prüfen",
     "twoFactorDescription": "Gib den 6-stelligen Code aus deiner Authenticator-App ein, um die Anmeldung abzuschließen.",
     "twoFactorUseBackup": "Wiederherstellung",
@@ -1925,7 +1920,8 @@
     "twoFactorBackupDescription": "Gib einen gespeicherten Wiederherstellungscode ein. Jeder Code funktioniert einmal.",
     "twoFactorBackupLabel": "Wiederherstellungscode",
     "twoFactorExpired": "Deine Anmeldung ist abgelaufen. Beginne mit einem neuen Telefoncode.",
-    "twoFactorRestart": "Neu beginnen"
+    "twoFactorRestart": "Neu beginnen",
+    "resendCountdown": "OTP erneut senden in {time}"
   },
   "join": {
     "metaTitle": "Bei Luma.Green mitmachen",
@@ -2630,7 +2626,7 @@
       "label": "Mobilnummer",
       "hint": "Wir senden einen sechsstelligen Code an diese Nummer.",
       "invalid": "Geben Sie eine zehnstellige indische Mobilnummer ein.",
-      "sendCode": "Code senden",
+      "sendCode": "OTP senden",
       "sending": "Wird gesendet…",
       "sendFailed": "Der Code konnte nicht gesendet werden. Bitte versuchen Sie es in einer Minute erneut.",
       "codeLabel": "Sechsstelliger Code",
@@ -2644,7 +2640,8 @@
       "errorExpired": "Dieser Code ist abgelaufen. Fordern Sie einen neuen an.",
       "errorTooMany": "Zu viele Versuche. Fordern Sie einen neuen Code an.",
       "errorGeneric": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
-      "privacy": "Wir verwenden Ihre Nummer nur für Buchungen und zugehörige Mitteilungen."
+      "privacy": "Wir verwenden Ihre Nummer nur für Buchungen und zugehörige Mitteilungen.",
+      "resendCountdown": "OTP erneut senden in {time}"
     },
     "errors": {
       "generic": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
@@ -2698,6 +2695,28 @@
       "retake": "Das Foto ist unklar oder zeigt kein Recyclingmaterial. Versuchen Sie ein anderes oder wählen Sie unten Ihre Materialien.",
       "empty": "Keine unterstützten Materialien erkannt. Versuchen Sie ein anderes Foto oder wählen Sie unten Ihre Materialien.",
       "replace": "Anderes Foto wählen"
+    },
+    "simple": {
+      "title": "Recyceln",
+      "photos": "Fotos hinzufügen",
+      "photoHint": "Zeig uns, was du recyceln möchtest.",
+      "details": "Deine Angaben",
+      "next": "Geschäfte in der Nähe finden",
+      "location": "Meinen Standort nutzen",
+      "pickup": "Abholen lassen",
+      "dropoff": "Selbst abgeben",
+      "chooseShop": "Geschäft in der Nähe wählen",
+      "schedule": "Zeit wählen",
+      "confirm": "Recycling bestätigen",
+      "uploadFailed": "Fotos konnten nicht hochgeladen werden. Bitte erneut versuchen.",
+      "photoRequired": "Füge mindestens ein Foto hinzu.",
+      "photosTooMany": "Füge bis zu 5 Fotos hinzu.",
+      "unavailable": "Recycling-Anfragen sind derzeit nicht verfügbar. Bitte später erneut versuchen.",
+      "estimateLater": "Das Geschäft wiegt deine Materialien und bestätigt den Betrag.",
+      "nearest": "Nächste zuerst",
+      "replacePhotos": "Fotos ändern",
+      "requested": "Recycling-Termin vereinbart",
+      "attachedPhotos": "Fotos"
     }
   },
   "track": {

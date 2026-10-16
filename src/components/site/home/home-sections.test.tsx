@@ -7,6 +7,7 @@ import { locales } from "@/i18n/locales";
 
 import messages from "../../../../messages/en.json";
 import { ClosingCta } from "../closing-cta";
+import { BusinessTrade } from "./business-trade";
 import { ChainDiagram } from "./chain-diagram";
 import { HomeHero } from "./hero";
 import { RoleBenefits } from "./role-benefits";
@@ -48,10 +49,10 @@ describe("home page", () => {
     await renderSection(HomeHero());
 
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-      "Give your materials a new beginning.",
+      messages.home.hero.title,
     );
     expect(
-      screen.getByRole("link", { name: "Book a collection" }),
+      screen.getByRole("link", { name: messages.home.hero.sell }),
     ).toHaveAttribute("href", "/sell");
     expect(
       screen.getByRole("link", { name: "For businesses" }),
@@ -59,7 +60,12 @@ describe("home page", () => {
     expect(
       screen.getByRole("link", { name: "View material prices" }),
     ).toHaveAttribute("href", "/prices");
-    // Without Convex the price card still stands, and says why it's empty.
+    expect(
+      screen
+        .getByRole("region", { name: messages.home.hero.title })
+        .querySelector("img"),
+    ).toHaveAttribute("alt", "");
+    // Live prices still show an honest unavailable state without configuration.
     expect(
       screen.getByText("Today's prices will show here soon."),
     ).toBeInTheDocument();
@@ -105,6 +111,25 @@ describe("home page", () => {
     ).toBeVisible();
   });
 
+  it("offers five business paths without repeating household booking", async () => {
+    await renderSection(RoleBenefits({ businessOnly: true }));
+    expect(screen.getAllByRole("link")).toHaveLength(5);
+    for (const link of screen.getAllByRole("link")) {
+      expect(link).toHaveAttribute("href", expect.stringMatching(/^\/join\//));
+    }
+  });
+
+  it("keeps trade boundaries visible beside the manufacturer path", async () => {
+    await renderSection(BusinessTrade());
+    expect(screen.getAllByRole("listitem")).toHaveLength(3);
+    expect(screen.getByText(messages.howItWorks.trade.body)).toBeVisible();
+    const action = screen.getByRole("link", {
+      name: `${messages.join.start}: ${messages.home.roles.manufacturer.cta}`,
+    });
+    expect(action).toHaveTextContent(messages.join.start);
+    expect(action).toHaveAttribute("href", "/join/manufacturer");
+  });
+
   it("counts the languages from the locale registry", async () => {
     await renderSection(TrustPoints());
 
@@ -128,7 +153,7 @@ describe("home page", () => {
     await renderSection(ClosingCta());
 
     expect(
-      screen.getByRole("link", { name: "Book a collection" }),
+      screen.getByRole("link", { name: messages.home.hero.sell }),
     ).toHaveAttribute("href", "/sell");
     expect(
       screen.getByRole("link", { name: "Join: Join as a business" }),

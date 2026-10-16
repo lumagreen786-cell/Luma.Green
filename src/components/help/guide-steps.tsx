@@ -13,7 +13,7 @@ export function GuideSteps({ guide }: { guide: Guide }) {
       {guide.steps.map((step, index) => {
         const base = `guides.${guide.key}.steps.${step.key}`;
         return (
-          <li key={step.key} className="flex gap-4 py-7 sm:gap-6">
+          <li key={step.key} className="flex gap-4 py-3 sm:gap-6">
             <span
               aria-hidden
               className="w-9 shrink-0 pt-1 font-mono text-xl text-muted-foreground tabular-nums"
@@ -24,10 +24,16 @@ export function GuideSteps({ guide }: { guide: Guide }) {
               <p className="sr-only">
                 {t("guide.stepLabel", { number: index + 1, total })}
               </p>
-              <h3 className="text-lg font-semibold">{t(`${base}.title`)}</h3>
-              <p className="leading-relaxed text-pretty text-muted-foreground">
-                {t(`${base}.body`)}
-              </p>
+              <details open={index === 0}>
+                <summary className="min-h-11 cursor-pointer py-2 outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
+                  <h3 className="inline text-lg font-semibold">
+                    {t(`${base}.title`)}
+                  </h3>
+                </summary>
+                <p className="py-3 leading-relaxed text-pretty text-muted-foreground">
+                  {t(`${base}.body`)}
+                </p>
+              </details>
             </div>
             <IconTile icon={step.icon} size="sm" className="hidden sm:flex" />
           </li>

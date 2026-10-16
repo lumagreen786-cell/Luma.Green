@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "license": "UNLICENSED",
-  "description": "Luma.Green — Cleaner Tomorrow in Motion. Recycling inventory, sector trade and carbon credits in one place.",
+  "description": "Luma.Green \u2014 Cleaner Tomorrow in Motion. Recycling inventory, sector trade and carbon credits in one place.",
   "packageManager": "pnpm@11.24.0",
   "engines": {
     "node": ">=24.0.0",
@@ -37,7 +37,8 @@
     "desktop:dev": "pnpm --filter @luma/desktop dev",
     "desktop:pack": "pnpm --filter @luma/desktop run pack",
     "apps:check": "pnpm --filter \"./apps/*\" check",
-    "guide:check": "vitest run --config vitest.guide.config.mts"
+    "guide:check": "vitest run --config vitest.guide.config.mts",
+    "astryx": "node node_modules/@astryxdesign/cli/clients/cli/bin/astryx.mjs"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,mjs,cjs}": [
@@ -49,9 +50,12 @@
     ]
   },
   "dependencies": {
+    "@astryxdesign/core": "0.7.1",
+    "@astryxdesign/theme-matcha": "0.7.1",
     "@convex-dev/better-auth": "0.12.5",
     "@hookform/resolvers": "^5.9.1",
     "@sentry/nextjs": "^10.74.0",
+    "@stylexjs/stylex": "^0.19.1",
     "@tanstack/react-query": "^5.103.2",
     "aws4fetch": "1.0.20",
     "better-auth": "~1.6.33",
@@ -79,6 +83,7 @@
     "zod": "^4.6.5"
   },
   "devDependencies": {
+    "@astryxdesign/cli": "0.7.1",
     "@commitlint/cli": "^21.2.3",
     "@commitlint/config-conventional": "^21.2.3",
     "@edge-runtime/vm": "^5.0.0",

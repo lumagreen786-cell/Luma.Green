@@ -16,9 +16,9 @@ export function AppPageHeader({
   actions?: ReactNode;
 }) {
   return (
-    <header className="grid min-w-0 gap-4 border-b border-border pb-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+    <header className="grid min-w-0 gap-5 border-b border-border pb-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
       <div className="flex min-w-0 flex-1 flex-col gap-2">
-        <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
+        <h1 className="font-display text-[1.75rem] leading-tight font-semibold tracking-tight sm:text-[2rem]">
           {title}
         </h1>
         {lead ? (
@@ -50,7 +50,7 @@ export function StatCard({
   tone?: "neutral" | "good" | "warn";
 }) {
   return (
-    <div className="flex min-w-0 flex-col gap-2 border-s-2 border-border py-1 ps-4">
+    <div className="flex min-w-0 flex-col gap-3 border-t border-border pt-5 pb-3">
       <div className="flex items-start justify-between gap-2">
         <p className="min-w-0 flex-1 text-sm font-medium wrap-anywhere text-muted-foreground">
           {label}
@@ -67,7 +67,7 @@ export function StatCard({
           />
         ) : null}
       </div>
-      <p className="text-2xl font-semibold tracking-tight break-words tabular-nums">
+      <p className="font-display text-3xl font-semibold tracking-tight break-words tabular-nums sm:text-4xl">
         {value}
       </p>
       {hint ? <p className="text-xs text-muted-foreground">{hint}</p> : null}
@@ -85,8 +85,8 @@ export function Section({
   children: ReactNode;
 }) {
   return (
-    <section className="flex min-w-0 flex-col gap-4">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border pb-3">
+    <section className="flex min-w-0 flex-col gap-5">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border pb-4">
         <h2 className="font-display text-lg font-semibold tracking-tight">
           {title}
         </h2>
@@ -149,7 +149,7 @@ export function SettingsSection({
   return (
     <section
       aria-labelledby={id}
-      className="grid min-w-0 gap-4 border-t border-border pt-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,3fr)] lg:gap-8"
+      className="grid min-w-0 gap-5 border-t border-border pt-8 xl:grid-cols-[minmax(0,1fr)_minmax(0,3fr)] xl:gap-12"
     >
       <h2 id={id} className="font-display text-lg font-semibold tracking-tight">
         {title}

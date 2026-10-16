@@ -46,8 +46,8 @@ export function HelpHero({
             !banner && art && "md:grid-cols-[1fr_auto]",
           )}
         >
-          <div className="flex min-w-0 flex-col gap-4">
-            {eyebrow ? (
+          <div className="flex min-w-0 flex-col gap-3">
+            {eyebrow && !children ? (
               <p className="border-s-2 border-primary ps-3 text-sm font-medium text-muted-foreground">
                 {eyebrow}
               </p>
@@ -55,7 +55,7 @@ export function HelpHero({
             <h1 className="max-w-3xl font-display text-3xl leading-[1.1] font-semibold tracking-tight text-balance sm:text-4xl">
               {title}
             </h1>
-            <p className="max-w-2xl text-base leading-relaxed text-pretty text-muted-foreground sm:text-lg">
+            <p className="max-w-2xl text-sm leading-relaxed text-pretty text-muted-foreground">
               {lead}
             </p>
             {children}
@@ -63,7 +63,8 @@ export function HelpHero({
           {banner ? (
             <RoleStoryImage
               scene={banner}
-              frameClassName="h-20 aspect-auto sm:h-24 lg:h-44"
+              className="hidden lg:block"
+              frameClassName="h-28 aspect-auto"
               sizes="(min-width: 1024px) 256px, 100vw"
             />
           ) : null}

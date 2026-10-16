@@ -82,9 +82,10 @@ it("switches workspace through the guarded mutation", async () => {
       <WorkspacePage />
     </NextIntlClientProvider>,
   );
-  const choices = screen.getAllByRole("button", { name: en.workspace.choose });
-  expect(choices[0]).toBeDisabled();
-  await userEvent.click(choices[1]);
+  const choice = screen.getByRole("combobox", { name: en.workspace.choose });
+  expect(choice).toHaveTextContent("Test yard");
+  await userEvent.click(choice);
+  await userEvent.click(screen.getByRole("option", { name: /Test factory/ }));
   expect(state.choose).toHaveBeenCalledWith({ orgId: "org-b" });
 });
 
@@ -122,7 +123,9 @@ it.each(["viewer", "member"] as const)(
     expect(
       screen.queryByRole("button", { name: en.workspace.invite }),
     ).not.toBeInTheDocument();
-    expect(screen.queryByRole("combobox")).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("combobox", { name: new RegExp(en.workspace.role) }),
+    ).not.toBeInTheDocument();
     expect(screen.getByText("Test colleague")).toBeVisible();
   },
 );
@@ -239,4 +242,22 @@ it("requires confirmation before removing a teammate and supports cancel", async
     orgId: "org-a",
     membershipId: "member-b",
   });
+});
+
+it("separates pending invitations from the active team without changing permissions", async () => {
+  render(
+    <NextIntlClientProvider locale="en" messages={en}>
+      <WorkspacePage />
+    </NextIntlClientProvider>,
+  );
+  expect(screen.getByText("Test colleague")).toBeVisible();
+  await userEvent.click(
+    screen.getByRole("tab", { name: en.workspace.pending }),
+  );
+  expect(screen.queryByText("Test colleague")).not.toBeInTheDocument();
+  expect(
+    screen.getByRole("region", { name: en.workspace.pending }),
+  ).toBeVisible();
+  await userEvent.click(screen.getByRole("tab", { name: en.workspace.team }));
+  expect(screen.getByText("Test colleague")).toBeVisible();
 });

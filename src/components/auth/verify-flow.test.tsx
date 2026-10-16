@@ -3,7 +3,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 
 import messages from "../../../messages/en.json";
-import { rememberPhone, rememberPreviewPhone } from "./storage";
+import { rememberPhone } from "./storage";
 import { VerifyFlow } from "./verify-flow";
 
 const calls = vi.hoisted(() => ({
@@ -34,6 +34,7 @@ vi.mock("sonner", () => ({ toast: { success: vi.fn() } }));
 beforeEach(() => {
   vi.resetAllMocks();
   vi.useFakeTimers();
+  vi.setSystemTime(new Date("2026-10-16T08:00:00Z"));
   calls.auth.isAuthenticated = false;
   calls.verify.mockResolvedValue({
     error: null,
@@ -69,6 +70,12 @@ async function tick(milliseconds: number) {
   await act(async () => {
     await vi.advanceTimersByTimeAsync(milliseconds);
   });
+}
+
+/** Resend uses a persisted wall-clock deadline, not 300 separate renders. */
+async function elapseResend(milliseconds: number) {
+  vi.setSystemTime(Date.now() + milliseconds - 1000);
+  await tick(1000);
 }
 
 it("bounds each session wait and retries without submitting the accepted code", async () => {
@@ -155,7 +162,7 @@ it("blocks code verification while a resend is in progress and restores it after
   const request = Promise.withResolvers<{ error: null }>();
   calls.sendOtp.mockReturnValueOnce(request.promise);
   render(form());
-  for (let second = 0; second < 300; second++) await tick(1000);
+  await elapseResend(300_000);
   const resend = screen.getByRole("button", { name: messages.auth.resend });
   fireEvent.click(resend);
   fireEvent.click(resend);
@@ -184,7 +191,7 @@ it("blocks resend and duplicate submission while verification is in progress", a
   }>();
   calls.verify.mockReturnValueOnce(request.promise);
   render(form());
-  for (let second = 0; second < 300; second++) await tick(1000);
+  await elapseResend(300_000);
   await enterCode();
   fireEvent.click(screen.getByRole("button", { name: messages.auth.resend }));
   fireEvent.click(
@@ -201,25 +208,35 @@ it("blocks resend and duplicate submission while verification is in progress", a
   ).toBeDisabled();
 });
 
-it("keeps a preview inert even when the deployment has Convex", async () => {
-  rememberPreviewPhone("+919876543210");
+it("ignores obsolete preview storage and returns to phone entry", () => {
+  sessionStorage.removeItem("lg.signInPhone");
+  sessionStorage.setItem("lg.signInPreview", "+919876543210");
   render(form());
-  expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-    messages.auth.previewTitle,
-  );
-  expect(screen.getByRole("status")).toHaveTextContent(
-    messages.auth.previewBody,
-  );
-  await enterCode();
-  expect(screen.getByLabelText(messages.auth.codeLabel)).toHaveValue("123456");
-  expect(
-    screen.getByRole("button", { name: messages.auth.verify }),
-  ).toBeDisabled();
-  expect(
-    screen.getByRole("button", { name: messages.auth.resend }),
-  ).toBeDisabled();
+  expect(calls.replace).toHaveBeenCalledWith("/login");
   expect(calls.verify).not.toHaveBeenCalled();
   expect(calls.sendOtp).not.toHaveBeenCalled();
   expect(calls.ensureProfile).not.toHaveBeenCalled();
-  expect(calls.replace).not.toHaveBeenCalled();
+});
+
+it("counts down five minutes and retains the remaining wait after remount", async () => {
+  const view = render(form());
+  expect(screen.getByText(/5:00/)).toBeVisible();
+  expect(
+    screen.queryByRole("button", { name: messages.auth.resend }),
+  ).not.toBeInTheDocument();
+  await elapseResend(60_000);
+  expect(screen.getByText(/4:00/)).toBeVisible();
+  view.unmount();
+  render(form());
+  expect(screen.getByText(/4:00/)).toBeVisible();
+  await elapseResend(239_000);
+  expect(screen.getByText(/0:01/)).toBeVisible();
+  expect(
+    screen.queryByRole("button", { name: messages.auth.resend }),
+  ).not.toBeInTheDocument();
+  await tick(1000);
+  fireEvent.click(screen.getByRole("button", { name: messages.auth.resend }));
+  await tick(0);
+  expect(calls.sendOtp).toHaveBeenCalledOnce();
+  expect(screen.getByText(/5:00/)).toBeVisible();
 });

@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { getFunctionName } from "convex/server";
 import type { ReactNode } from "react";
 import { beforeEach, expect, it, vi } from "vitest";
@@ -48,14 +49,17 @@ beforeEach(() => {
   state.canOperate = true;
 });
 
-it("lets a manufacturer choose server-approved byproducts and manage its offers", () => {
+it("lets a manufacturer choose server-approved byproducts and manage its offers", async () => {
   render(
     <WithIntl>
       <SellPage />
     </WithIntl>,
   );
+  expect(screen.getByRole("heading", { name: "Newspaper" })).toBeVisible();
+  await userEvent.click(screen.getByRole("tab", { name: "New listing" }));
   expect(screen.getByRole("radio", { name: /Paper offcuts/ })).toBeVisible();
   expect(screen.getByRole("button", { name: "Put on sale" })).toBeVisible();
+  await userEvent.click(screen.getByRole("tab", { name: "On sale now" }));
   expect(screen.getByRole("heading", { name: "Newspaper" })).toBeVisible();
   expect(screen.queryByText("Manufacturers buy here")).not.toBeInTheDocument();
 });

@@ -18,6 +18,7 @@ import {
 import { isLocale, localeDirection } from "@/i18n/locales";
 import { Link } from "@/i18n/navigation";
 
+import { HeaderAuthAction } from "./header-auth-action";
 import { LanguageSwitcher } from "./language-switcher";
 import { SiteNav } from "./site-nav";
 
@@ -28,7 +29,6 @@ const subscribeToHydration = () => unsubscribeFromHydration;
 
 export function MobileNav({ className }: { className?: string }) {
   const t = useTranslations("nav");
-  const auth = useTranslations("auth");
   const common = useTranslations("common");
   const theme = useTranslations("theme");
   const locale = useLocale();
@@ -90,11 +90,27 @@ export function MobileNav({ className }: { className?: string }) {
             </Button>
           </SheetClose>
         </SheetHeader>
+        <div className="mx-5 grid shrink-0 gap-2 py-4">
+          <HeaderAuthAction
+            variant="outline"
+            onNavigate={close}
+            className="h-auto min-h-12 w-full py-3 text-base whitespace-normal"
+          />
+          <Button
+            asChild
+            size="lg"
+            className="h-auto min-h-12 w-full py-3 text-base whitespace-normal"
+          >
+            <Link href="/sell" onClick={close}>
+              {t("sellScrap")}
+            </Link>
+          </Button>
+        </div>
         <SiteNav
-          className="flex shrink-0 flex-col gap-0 divide-y px-5 py-1 [&>a]:min-h-12 [&>a]:rounded-none [&>a]:px-0 [&>a]:py-3 [&>a]:text-base [&>a]:whitespace-nowrap"
+          className="flex shrink-0 flex-col gap-0 px-5 py-1 [&>a]:min-h-12 [&>a]:rounded-none [&>a]:px-0 [&>a]:py-3 [&>a]:text-base [&>a]:whitespace-nowrap"
           onNavigate={close}
         />
-        <div className="mx-5 grid shrink-0 border-t py-2">
+        <div className="mx-5 grid shrink-0 py-2">
           <div className="flex min-h-11 items-center justify-between gap-3">
             <span className="text-sm text-muted-foreground">
               {common("language")}
@@ -107,27 +123,6 @@ export function MobileNav({ className }: { className?: string }) {
             </span>
             <ThemeToggle />
           </div>
-        </div>
-        <div className="mx-5 grid shrink-0 gap-2 border-t py-4">
-          <Button
-            asChild
-            variant="outline"
-            size="lg"
-            className="h-auto min-h-12 w-full py-3 text-base whitespace-normal"
-          >
-            <Link href="/login" onClick={close}>
-              {auth("metaTitle")}
-            </Link>
-          </Button>
-          <Button
-            asChild
-            size="lg"
-            className="h-auto min-h-12 w-full py-3 text-base whitespace-normal"
-          >
-            <Link href="/sell" onClick={close}>
-              {t("sellScrap")}
-            </Link>
-          </Button>
         </div>
       </SheetContent>
     </Sheet>

@@ -43,50 +43,37 @@ const pages = [
   title: string | RegExp;
 }[];
 
-test("home tells the chain's story, with a way in for everyone", async ({
+test("home offers collection, business signup and material guidance", async ({
   page,
 }) => {
   await page.goto("/");
   const main = page.getByRole("main");
 
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "Give your materials a new beginning.",
+    en.home.hero.title,
   );
   await expect(
-    main.getByRole("link", { name: "Book a collection" }).first(),
+    main.getByRole("link", { name: en.nav.sellScrap }).first(),
   ).toHaveAttribute("href", "/sell");
   await expect(
-    main.getByRole("link", { name: "Join as a business" }).first(),
+    main.getByRole("link", { name: en.home.hero.join }).first(),
   ).toHaveAttribute("href", "/join");
   await expect(
     main.getByRole("link", { name: "View material prices" }),
   ).toHaveAttribute("href", "/prices");
   await expect(page).toHaveTitle("Luma.Green — Cleaner Tomorrow in Motion");
 
-  const materials = main.getByRole("region", {
-    name: "What would you like to recycle?",
-  });
-  const materialLinks = materials.getByRole("list").first().getByRole("link");
-  await expect(materialLinks).toHaveCount(6);
-  const links = await materialLinks.all();
-  for (const link of links) {
-    await expect(link).toHaveAttribute("href", "/sell");
+  const businesses = main.getByRole("region", { name: en.home.hero.join });
+  await expect(businesses.getByRole("link")).toHaveCount(5);
+  const businessLinks = await businesses.getByRole("link").all();
+  for (const link of businessLinks) {
+    await expect(link).toHaveAttribute("href", /\/join\//);
   }
-
-  const chain = main.getByRole("region", { name: "How materials move" });
-  await expect(chain.getByRole("heading", { level: 3 })).toHaveText([
-    "Households",
-    "Kabadiwalas",
-    "Preprocessors",
-    "Recyclers",
-    "Manufacturers",
-  ]);
-  await expect(
-    main.getByRole("heading", {
-      name: en.home.expansion.questionsTitle,
-      level: 2,
-    }),
-  ).toBeVisible();
+  await expect(main.locator("#shop-workday-heading")).toBeVisible();
+  await expect(main.locator("#business-trade-heading")).toBeVisible();
+  await expect(main.locator("#material-records-heading")).toBeVisible();
+  await expect(main.locator("[data-product-preview]")).toHaveCount(0);
+  await expect(main.locator("#demo-testimonials-heading")).toHaveCount(0);
 });
 
 test("the home price card still points to the board without live data", async ({
@@ -123,7 +110,7 @@ test("the header's main button starts a collection", async ({ page }) => {
   await page.goto("/prices");
 
   await expect(
-    page.getByRole("banner").getByRole("link", { name: "Book a collection" }),
+    page.getByRole("banner").getByRole("link", { name: en.nav.sellScrap }),
   ).toHaveAttribute("href", "/sell");
 });
 
@@ -152,7 +139,7 @@ test("the price board explains itself when prices can't load", async ({
     page.getByText("Prices aren't available right now"),
   ).toBeVisible();
   await expect(
-    page.getByRole("main").getByRole("link", { name: "Book a collection" }),
+    page.getByRole("main").getByRole("link", { name: en.nav.sellScrap }),
   ).toHaveAttribute("href", "/sell");
 });
 
@@ -181,7 +168,10 @@ test("the standard lays out every norm, with a jump list", async ({ page }) => {
     .getByRole("link", { name: en.standards.escrow.nav, exact: true })
     .click();
   await expect(page).toHaveURL(/#escrow$/);
-  await expect(page.locator("#escrow")).toContainText(en.standards.escrow.body);
+  await expect(page.locator("details#escrow")).toHaveAttribute("open", "");
+  await expect(
+    page.getByText(en.standards.escrow.body, { exact: true }),
+  ).toBeVisible();
   await expect(page.locator("#escrow")).not.toContainText("simulated escrow");
 });
 
@@ -201,6 +191,10 @@ test("the solar calculator estimates a home system and cites the scheme", async 
   await expect(page.getByText("3.5 kW", { exact: true })).toBeVisible();
   await expect(page.getByText("− ₹78,000")).toBeVisible();
   await expect(page.getByText("3.2–4.2 years")).toBeVisible();
+  await page
+    .locator("summary")
+    .filter({ hasText: en.solar.subsidy.title })
+    .click();
   await expect(
     page.getByRole("link", { name: /pmsuryaghar\.gov\.in/ }),
   ).toHaveAttribute("href", "https://pmsuryaghar.gov.in");
@@ -274,7 +268,7 @@ test("mobile menu opens, navigates and closes", async ({ page }) => {
   const menu = page.getByRole("dialog");
   await expect(menu).toBeVisible();
   await expect(
-    menu.getByRole("link", { name: "Book a collection" }),
+    menu.getByRole("link", { name: en.nav.sellScrap }),
   ).toHaveAttribute("href", "/sell");
 
   await menu.getByRole("link", { name: "Prices" }).click();

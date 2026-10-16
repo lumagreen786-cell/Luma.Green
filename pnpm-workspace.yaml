@@ -25,6 +25,10 @@ allowBuilds:
   "@parcel/watcher": false
   # Prints a funding message. That's all.
   core-js: false
+  # Official postinstall only prints an agent-doc setup reminder.
+  "@astryxdesign/core": false
+  # Official CLI postinstall only prints the same setup reminder.
+  "@astryxdesign/cli": false
 
 # pnpm 11 will not install a package version younger than its default cooldown
 # (a supply-chain guard: most malicious releases are caught within days). These
@@ -66,6 +70,9 @@ minimumReleaseAgeExclude:
   - expo-notifications@57.0.22 || 57.0.23
   - "expo-updates@57.0.25"
   - expo@57.0.27 || 57.0.29 || 57.0.30
+  - "@astryxdesign/core@0.7.1"
+  - "@astryxdesign/theme-matcha@0.7.1"
+  - "@astryxdesign/cli@0.7.1"
 
 # Security fixes for transitive packages. xcode only uses the CommonJS v4 API.
 overrides:

@@ -25,17 +25,13 @@ for (const { locale, messages } of [
       ).toBe(true);
       if (width >= 1024) {
         const form = await page.getByRole("main").boundingBox();
-        const supporting = await page.getByRole("complementary").boundingBox();
+        await expect(page.getByRole("complementary")).toHaveCount(0);
         expect(form).not.toBeNull();
-        expect(supporting).not.toBeNull();
-        if (form && supporting) {
+        if (form) {
           expect(form.width).toBeGreaterThanOrEqual(400);
-          expect(supporting.width).toBeGreaterThanOrEqual(320);
-          // The new editorial split uses equal reading widths in either direction.
           expect(
-            Math.min(form.x + form.width, supporting.x + supporting.width) -
-              Math.max(form.x, supporting.x),
-          ).toBeLessThanOrEqual(0);
+            Math.abs(form.x + form.width / 2 - width / 2),
+          ).toBeLessThanOrEqual(1);
         }
       }
       await page.goto(`/${locale}/prices`);

@@ -196,7 +196,8 @@ async function candidateQuote(
       return null;
     totalPaise += paiseFor(kgToGrams(item.estKg), price);
   }
-  return Number.isSafeInteger(totalPaise) && totalPaise >= booking.estimatePaise
+  return Number.isSafeInteger(totalPaise) &&
+    totalPaise >= (booking.estimatePaise ?? 0)
     ? totalPaise
     : null;
 }
@@ -204,7 +205,7 @@ async function candidateQuote(
 async function nextShop(
   ctx: QueryCtx,
   booking: Booking,
-): Promise<{ org: Org; estimatePaise: number } | null> {
+): Promise<{ org: Org; estimatePaise: number | undefined } | null> {
   const dispatch = booking.dispatch;
   const current = await ctx.db.get("orgs", booking.orgId);
   const origin = dispatch?.origin;
@@ -239,6 +240,8 @@ async function nextShop(
       (a, b) => a.distance - b.distance || a.org._id.localeCompare(b.org._id),
     );
   for (const { org } of candidates) {
+    if (booking.requestKind === "photo_request")
+      return { org, estimatePaise: undefined };
     const estimatePaise = await candidateQuote(ctx, booking, org);
     if (estimatePaise !== null) return { org, estimatePaise };
   }

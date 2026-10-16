@@ -259,3 +259,17 @@ it.each(["en", "ar"] as const)(
     ).toBeVisible();
   },
 );
+
+it("places inbox messages before device settings while keeping permission status available", () => {
+  render(page());
+  const inbox = document.querySelector("#notification-inbox");
+  const device = document.querySelector("#notification-device");
+  expect(inbox).not.toBeNull();
+  expect(device).not.toBeNull();
+  expect(inbox?.compareDocumentPosition(device as Node)).toBe(
+    Node.DOCUMENT_POSITION_FOLLOWING,
+  );
+  expect(
+    screen.getByRole("region", { name: en.notifications.deviceTitle }),
+  ).toBeVisible();
+});

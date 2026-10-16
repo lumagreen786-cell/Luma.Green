@@ -1,4 +1,10 @@
-@import "tailwindcss";
+@import "./layers.css";
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "@astryxdesign/core/reset.css";
+@import "@astryxdesign/core/astryx.css";
+@import "@astryxdesign/theme-matcha/theme.css";
+@import "tailwindcss/utilities.css" layer(utilities);
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
@@ -292,4 +298,36 @@ html:is(
 /* One icon weight keeps controls consistent across every route. */
 .lucide {
   stroke-width: 1.75;
+}
+
+/* Astryx components use Luma's original light/dark palette. The existing
+   semantic tokens above remain the colour owner for both component systems. */
+[data-astryx-theme="matcha"] {
+  --font-family-body: var(--font-sans);
+  --font-family-heading: var(--font-display);
+  --font-family-code: var(--font-mono);
+  --color-background-body: var(--background);
+  --color-background-surface: var(--card);
+  --color-background-elevated: var(--popover);
+  --color-background-muted: var(--muted);
+  --color-background-inverted: var(--foreground);
+  --color-text-primary: var(--foreground);
+  --color-text-secondary: var(--muted-foreground);
+  --color-text-disabled: var(--muted-foreground);
+  --color-text-accent: var(--primary);
+  --color-accent: var(--primary);
+  --color-on-accent: var(--primary-foreground);
+  --color-neutral: var(--secondary);
+  --color-border: var(--border);
+  --color-border-emphasized: var(--input);
+  --color-skeleton: var(--muted);
+  --color-error: var(--destructive);
+  --focus-outline-color: var(--ring);
+  --radius: 0.75rem;
+}
+html.dark [data-astryx-theme] {
+  color-scheme: dark;
+}
+html:not(.dark) [data-astryx-theme] {
+  color-scheme: light;
 }

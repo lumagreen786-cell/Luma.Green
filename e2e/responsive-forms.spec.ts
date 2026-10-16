@@ -14,8 +14,8 @@ const languages = locales.map((locale) => ({
   direction: localeMeta[locale].dir,
 }));
 
-for (const width of [640, 768, 1024, 1440]) {
-  test(`join role requirements stay beside the image at ${String(width)}px`, async ({
+for (const width of [390, 768, 1024, 1440]) {
+  test(`join role gallery keeps large images above readable choices at ${String(width)}px`, async ({
     page,
   }) => {
     await page.setViewportSize({ width, height: 900 });
@@ -25,36 +25,18 @@ for (const width of [640, 768, 1024, 1440]) {
     });
     await expect(recycler).toBeVisible();
     await page.evaluate(async () => document.fonts.ready);
-    const description = await recycler
-      .getByText(en.join.roles.recycler.body, { exact: true })
-      .evaluate(
-        (element) =>
-          element.getBoundingClientRect().toJSON() as {
-            x: number;
-            y: number;
-            height: number;
-          },
-      );
-    const requirements = await recycler
-      .getByText(`${en.join.youNeed}: ${en.join.roles.recycler.needs}`, {
-        exact: true,
-      })
-      .evaluate(
-        (element) =>
-          element.getBoundingClientRect().toJSON() as {
-            x: number;
-            y: number;
-            height: number;
-          },
-      );
-    expect(
-      requirements.y - description.y - description.height,
-      "Requirements must follow the description without an image-height gap",
-    ).toBeLessThanOrEqual(12);
-    expect(
-      Math.abs(requirements.x - description.x),
-      "Role details must share the same text column",
-    ).toBeLessThanOrEqual(1);
+    const image = await recycler.locator("figure").boundingBox();
+    const title = await recycler
+      .getByText(en.join.roles.recycler.title, { exact: true })
+      .boundingBox();
+    expect(image).not.toBeNull();
+    expect(title).not.toBeNull();
+    if (!image || !title) throw new Error("Role image and title must render");
+    expect(image.width).toBeGreaterThan(200);
+    expect(title.y).toBeGreaterThanOrEqual(image.y + image.height);
+    await expect(recycler).toHaveAttribute("href", /\/join\/recycler$/);
+    await expect(recycler).toContainText(en.join.roles.recycler.body);
+    await expectFormToFit(page);
   });
 }
 
@@ -95,6 +77,16 @@ async function expectFormToFit(page: Page) {
         failures.push(`Outside viewport: ${label}`);
       }
       if (!textFits(element, bounds)) failures.push(`Clipped text: ${label}`);
+      for (const child of element.querySelectorAll("*")) {
+        const childStyle = getComputedStyle(child);
+        if (
+          childStyle.textOverflow === "ellipsis" &&
+          child.clientWidth > 0 &&
+          child.scrollWidth > child.clientWidth + 1
+        ) {
+          failures.push(`Truncated inner label: ${child.textContent.trim()}`);
+        }
+      }
     }
     return {
       horizontalOverflow: document.documentElement.scrollWidth - innerWidth,
@@ -116,7 +108,7 @@ async function expectFormToFit(page: Page) {
 // coverage. The isolated documentation harness covers those actual components.
 for (const { locale, copy, direction } of languages) {
   for (const width of widths) {
-    test(`${locale} phone and code preview fit at ${String(width)}px without SMS`, async ({
+    test(`${locale} unavailable OTP sign-in fits at ${String(width)}px without SMS`, async ({
       page,
     }) => {
       await page.setViewportSize({ width, height: 900 });
@@ -136,41 +128,32 @@ for (const { locale, copy, direction } of languages) {
         .getByRole("button", { name: copy.auth.continue, exact: true })
         .click();
       await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-        copy.auth.title,
+        copy.auth.metaTitle,
       );
       await expectFormToFit(page);
       await page
         .getByLabel(copy.auth.mobileLabel, { exact: true })
         .fill("9000000000");
-      await page
-        .getByRole("button", { name: copy.auth.previewAction, exact: true })
-        .click();
-      await expect(page).toHaveURL(/\/login\/verify\?next=%2Fjoin%2Fsaathi$/);
-      await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-        copy.auth.previewTitle,
-      );
       await expect(
-        page.getByText(copy.auth.previewBody, { exact: true }),
+        page.getByRole("button", { name: copy.auth.sendCode, exact: true }),
+      ).toBeDisabled();
+      await expect(
+        page.getByText(copy.auth.unavailableBody, { exact: true }),
       ).toBeVisible();
-      await page
-        .getByLabel(copy.auth.codeLabel, { exact: true })
-        .fill("123456");
-      await expect(
-        page.getByRole("button", { name: copy.auth.verify, exact: true }),
-      ).toBeDisabled();
-      await expect(
-        page.getByRole("button", { name: copy.auth.resend, exact: true }),
-      ).toBeDisabled();
       await expectFormToFit(page);
       expect(
         authRequests,
-        "Preview must not request or verify a real SMS code",
+        "Unavailable SMS must never make an authentication request",
       ).toEqual([]);
       expect(page.url()).not.toContain("9000000000");
-      await page
-        .getByRole("link", { name: copy.auth.changeNumber, exact: true })
-        .click();
-      await expect(page).toHaveURL(/\/login\?next=%2Fjoin%2Fsaathi$/);
+      await page.goto(`/${locale}/login/verify`);
+      await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+        copy.auth.metaTitle,
+      );
+      await expect(
+        page.getByRole("button", { name: copy.auth.sendCode, exact: true }),
+      ).toBeDisabled();
+      await expectFormToFit(page);
     });
 
     test(`${locale} household setup states and join guards fit at ${String(width)}px`, async ({

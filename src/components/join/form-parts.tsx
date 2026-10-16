@@ -4,8 +4,8 @@ import { ArrowRightIcon, MessageSquareWarningIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 
+import { ActionButton } from "@/components/ui/action-button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Button } from "@/components/ui/button";
 
 import { normalizeIndianMobile } from "../../../convex/lib/phone";
 import { SaveIndicator } from "./fields";
@@ -76,15 +76,15 @@ export function SubmitBar({
           {t(failure === "fixErrors" ? "form.fixErrors" : "errors.generic")}
         </p>
       ) : null}
-      <Button
+      <ActionButton
         type="submit"
-        size="lg"
-        className="w-full justify-between"
-        disabled={isBusy}
-      >
-        {isBusy ? busyLabel : label}
-        <ArrowRightIcon aria-hidden className="shrink-0 rtl:rotate-180" />
-      </Button>
+        className="w-full"
+        label={isBusy ? busyLabel : label}
+        isDisabled={isBusy}
+        endContent={
+          <ArrowRightIcon aria-hidden className="size-4 rtl:rotate-180" />
+        }
+      />
       {secondary}
     </div>
   );

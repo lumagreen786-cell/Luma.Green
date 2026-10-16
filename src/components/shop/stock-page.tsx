@@ -20,6 +20,7 @@ import {
   Section,
   StatCard,
 } from "@/components/app/page-parts";
+import { WorkflowTabs } from "@/components/app/workflow-tabs";
 import { Button } from "@/components/ui/button";
 import { useCanOperate } from "@/components/workspace/permissions";
 import { Link } from "@/i18n/navigation";
@@ -66,6 +67,7 @@ export function StockPage() {
 function StockBody() {
   const t = useTranslations("shop.stock");
   const market = useTranslations("market.home");
+  const intake = useTranslations("stockIntake");
   const canOperate = useCanOperate();
   const format = useFormat();
   const stock = useQuery(api.stock.mine);
@@ -98,8 +100,24 @@ function StockBody() {
           </Link>
         </Button>
       ) : null}
-      <StockList stock={stock} />
-      {stock.kind === "manufacturer" ? <StockIntake /> : null}
+      {stock.kind === "manufacturer" ? (
+        <WorkflowTabs
+          items={[
+            {
+              value: "stock",
+              label: t("title"),
+              content: <StockList stock={stock} />,
+            },
+            {
+              value: "intake",
+              label: intake("title"),
+              content: <StockIntake />,
+            },
+          ]}
+        />
+      ) : (
+        <StockList stock={stock} />
+      )}
     </>
   );
 }

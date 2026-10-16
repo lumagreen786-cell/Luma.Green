@@ -5,6 +5,7 @@ import { useFormatter, useTranslations } from "next-intl";
 import { useId, useRef, useState } from "react";
 
 import { AppPageHeader, ListSkeleton } from "@/components/app/page-parts";
+import { WorkflowTabs } from "@/components/app/workflow-tabs";
 import { useBusiness } from "@/components/shop/use-shop";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -47,49 +48,80 @@ function QualityBoard() {
       <Link href="/app/lots" className="w-fit underline">
         {t("inspections")}
       </Link>
-      {data.canOperate ? <Upload data={data} /> : <p>{t("readOnly")}</p>}
-      <section className="space-y-4 border-t pt-6">
-        <h2 className="text-lg font-semibold">{t("own")}</h2>
-        {data.own.length === 0 ? (
-          <p>{t("empty")}</p>
-        ) : (
-          data.own.map((file) => (
-            <FileItem
-              key={file.id}
-              file={file}
-              canWithdraw={data.canWithdraw}
-            />
-          ))
-        )}
-      </section>
-      <section className="space-y-4 border-t pt-6">
-        <h2 className="text-lg font-semibold">{t("incoming")}</h2>
-        {data.incoming.length === 0 ? (
-          <p>{t("empty")}</p>
-        ) : (
-          data.incoming.map((file) => (
-            <div className="space-y-4 border-b pb-4" key={file.id}>
-              <FileItem file={file} canWithdraw={false} />
-              {data.canOperate ? <BuyerDecision file={file} /> : null}
-            </div>
-          ))
-        )}
-      </section>
-      <section className="space-y-3 border-t pt-6">
-        <h2 className="text-lg font-semibold">{t("decisions")}</h2>
-        {data.decisions.map((d) => (
-          <div className="border-b pb-3" key={d.id}>
-            <p>
-              {t(d.decision)} ·{" "}
-              {format.dateTime(d.createdAt, {
-                dateStyle: "medium",
-                timeStyle: "short",
-              })}
-            </p>
-            <p className="break-words">{d.note}</p>
-          </div>
-        ))}
-      </section>
+      {data.canOperate ? null : <p>{t("readOnly")}</p>}
+      <WorkflowTabs
+        items={[
+          {
+            value: "own",
+            label: t("own"),
+            content: (
+              <section className="space-y-4">
+                <h2 className="text-lg font-semibold">{t("own")}</h2>
+                {data.own.length === 0 ? (
+                  <p>{t("empty")}</p>
+                ) : (
+                  data.own.map((file) => (
+                    <FileItem
+                      key={file.id}
+                      file={file}
+                      canWithdraw={data.canWithdraw}
+                    />
+                  ))
+                )}
+              </section>
+            ),
+          },
+          {
+            value: "incoming",
+            label: t("incoming"),
+            content: (
+              <section className="space-y-4">
+                <h2 className="text-lg font-semibold">{t("incoming")}</h2>
+                {data.incoming.length === 0 ? (
+                  <p>{t("empty")}</p>
+                ) : (
+                  data.incoming.map((file) => (
+                    <div className="space-y-4 border-b pb-4" key={file.id}>
+                      <FileItem file={file} canWithdraw={false} />
+                      {data.canOperate ? <BuyerDecision file={file} /> : null}
+                    </div>
+                  ))
+                )}
+              </section>
+            ),
+          },
+          {
+            value: "decisions",
+            label: t("decisions"),
+            content: (
+              <section className="space-y-3">
+                <h2 className="text-lg font-semibold">{t("decisions")}</h2>
+                {data.decisions.map((d) => (
+                  <div className="border-b pb-3" key={d.id}>
+                    <p>
+                      {t(d.decision)} ·{" "}
+                      {format.dateTime(d.createdAt, {
+                        dateStyle: "medium",
+                        timeStyle: "short",
+                      })}
+                    </p>
+                    <p className="break-words">{d.note}</p>
+                  </div>
+                ))}
+              </section>
+            ),
+          },
+          ...(data.canOperate
+            ? [
+                {
+                  value: "upload",
+                  label: t("upload"),
+                  content: <Upload data={data} />,
+                },
+              ]
+            : []),
+        ]}
+      />
       <p className="text-sm text-muted-foreground">{t("limit")}</p>
     </div>
   );

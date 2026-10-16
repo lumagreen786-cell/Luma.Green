@@ -2,7 +2,7 @@
 
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { LockIcon } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import { type SyntheticEvent, useEffect, useId, useRef, useState } from "react";
 import { toast } from "sonner";
 
@@ -157,6 +157,7 @@ function CodeForm({
   onVerified: () => void;
 }) {
   const t = useTranslations("sell.phone");
+  const format = useFormatter();
   const auth = useTranslations("auth");
   const id = useId();
   const [code, setCode] = useState("");
@@ -226,6 +227,15 @@ function CodeForm({
     return (
       <FactorChallenge onVerified={onVerified} onRestart={onChangeNumber} />
     );
+
+  const minutes = format.number(Math.floor(secondsLeft / 60), {
+    useGrouping: false,
+  });
+  const seconds = format.number(secondsLeft % 60, {
+    minimumIntegerDigits: 2,
+    useGrouping: false,
+  });
+  const countdown = ltr(`${minutes}:${seconds}`);
 
   return (
     <div className="flex flex-col gap-4">
@@ -305,7 +315,9 @@ function CodeForm({
       <div className="flex justify-center" aria-live="polite">
         {secondsLeft > 0 ? (
           <p className="text-sm text-muted-foreground">
-            {t("resendIn", { seconds: secondsLeft })}
+            {t("resendCountdown", {
+              time: countdown,
+            })}
           </p>
         ) : (
           <Button

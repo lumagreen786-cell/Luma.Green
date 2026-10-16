@@ -10,6 +10,7 @@ import { redirect } from "../scripts/guide-preview/navigation";
 import {
   useAction,
   useMutation,
+  usePaginatedQuery,
   useQuery,
 } from "../scripts/guide-preview/queries";
 import {
@@ -129,5 +130,54 @@ describe("isolated workspace documentation fixtures", () => {
       before,
     );
     window.history.replaceState(null, "", "/");
+  });
+});
+
+it("uses a synthetic member for onboarding instead of the admin console identity", () => {
+  window.history.replaceState(null, "", "/ar/join/kabadiwala");
+  expect(useQuery(api.identity.me)).toMatchObject({
+    kind: "member",
+    hasProfile: true,
+  });
+  window.history.replaceState(null, "", "/admin");
+  expect(useQuery(api.identity.me)).toMatchObject({ kind: "admin" });
+  window.history.replaceState(null, "", "/");
+});
+
+describe("isolated operational documentation fixtures", () => {
+  it("returns synthetic records for each newly previewed workflow", () => {
+    expect(useQuery(api.traceability.mine)).toMatchObject({
+      rows: [{ id: "guide-operations-lot", availableGrams: 125_000 }],
+    });
+    expect(useQuery(api.qualityFiles.board)).toMatchObject({
+      own: [{ name: "synthetic-quality-example.pdf" }],
+    });
+    expect(useQuery(api.auditShares.board)).toMatchObject({
+      received: [{ id: "guide-operations-report" }],
+    });
+    expect(useQuery(api.auditShares.read)).toMatchObject({
+      files: [{ available: false }],
+    });
+    expect(usePaginatedQuery(api.routePlans.mine)).toMatchObject({
+      results: [{ _id: "guide-operations-route" }],
+      status: "Exhausted",
+    });
+    expect(useQuery(api.routePlans.detail)).toMatchObject({
+      plan: { title: "Synthetic collection route" },
+    });
+    expect(usePaginatedQuery(api.routePlans.history)).toMatchObject({
+      results: [{ revision: 1 }],
+      status: "Exhausted",
+    });
+  });
+  it("never executes writes or provider actions for operational previews", async () => {
+    window.history.replaceState(null, "", "/en/app/logistics");
+    const before = JSON.stringify(useQuery(api.routePlans.detail));
+    await expect(useMutation()()).rejects.toThrow("writes are disabled");
+    await expect(useAction()()).rejects.toThrow("writes are disabled");
+    expect(JSON.stringify(useQuery(api.routePlans.detail))).toBe(before);
+    expect(() => usePaginatedQuery(api.routePlans.history).loadMore()).toThrow(
+      "pagination is exhausted",
+    );
   });
 });

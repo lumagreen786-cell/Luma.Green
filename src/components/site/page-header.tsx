@@ -7,14 +7,12 @@ import {
 import { cn } from "@/lib/utils";
 
 import { Container } from "./container";
-import { PageBanner } from "./page-banner";
 import effects from "./public-effects.module.css";
 
 const headerLayout = cva("grid min-w-0 lg:items-center", {
   variants: {
     variant: {
-      editorial:
-        "gap-8 py-8 sm:py-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:gap-16",
+      editorial: "gap-4 py-6 sm:py-8",
       task: "gap-5 py-6 sm:py-8 lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-12",
     },
   },
@@ -26,7 +24,7 @@ const headerTitle = cva(
   {
     variants: {
       variant: {
-        editorial: "text-4xl sm:text-5xl lg:text-6xl",
+        editorial: "text-3xl sm:text-4xl",
         task: "text-2xl leading-tight sm:text-3xl",
       },
     },
@@ -53,7 +51,13 @@ export function PageHeader({
   return (
     <div className="border-b bg-background">
       <Container className={headerLayout({ variant })}>
-        <div className="min-w-0 space-y-4">
+        <div
+          className={cn(
+            "min-w-0 space-y-4",
+            variant === "editorial" &&
+              "lg:grid lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:items-end lg:space-y-0 lg:gap-x-16",
+          )}
+        >
           <h1
             data-text-entrance={atmosphere || undefined}
             className={cn(
@@ -75,12 +79,11 @@ export function PageHeader({
         {variant === "task" ? (
           <RoleStoryImage
             scene={scene}
-            frameClassName="h-24 aspect-auto sm:h-28 lg:h-32"
-            sizes="(min-width: 1024px) 256px, 100vw"
+            className="hidden lg:block"
+            frameClassName="h-24 aspect-auto"
+            sizes="256px"
           />
-        ) : (
-          <PageBanner scene={scene} split />
-        )}
+        ) : null}
       </Container>
     </div>
   );

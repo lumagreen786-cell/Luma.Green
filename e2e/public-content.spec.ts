@@ -1,5 +1,10 @@
 import { expect, test } from "@playwright/test";
 
+import ar from "../messages/ar.json";
+import en from "../messages/en.json";
+import ml from "../messages/ml.json";
+import ta from "../messages/ta.json";
+
 test("the chain page leads from preparation details to the complete guide", async ({
   page,
 }) => {
@@ -22,6 +27,10 @@ test("the price explanation stays usable when live prices cannot load", async ({
   await expect(
     page.getByText("Prices aren't available right now"),
   ).toBeVisible();
+  await page
+    .locator("summary")
+    .filter({ hasText: en.help.guides.weighingAtDoor.title })
+    .click();
   const guide = page.getByRole("region", {
     name: "Weighing and payment at your door",
   });
@@ -33,6 +42,7 @@ test("Arabic help topics preserve the locale on phones", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/ar/help");
   await expect(page.locator("html")).toHaveAttribute("dir", "rtl");
+  await page.getByRole("searchbox").fill(ar.help.guides.verifyBusiness.title);
   const guide = page.locator('main a[href="/ar/help/yard/verify-business"]');
   await guide.click();
   await expect(page).toHaveURL("/ar/help/yard/verify-business");
@@ -45,7 +55,7 @@ test("Arabic help topics preserve the locale on phones", async ({ page }) => {
 for (const [route, selector] of [
   ["/how-it-works", 'section[aria-labelledby="sorting-guide-heading"] img'],
   ["/prices", 'section[aria-labelledby="price-guide-heading"] img'],
-  ["/join", 'section[aria-labelledby="join-preparation-heading"] img'],
+  ["/join", 'main a[href="/join/yard"] img'],
   ["/participants", 'section[aria-labelledby="participant-yard"] img'],
 ] as const) {
   test(`tablet detail artwork has enough pixels at ${route}`, async ({
@@ -53,6 +63,11 @@ for (const [route, selector] of [
   }) => {
     await page.setViewportSize({ width: 768, height: 1024 });
     await page.goto(route);
+    if (route === "/prices")
+      await page
+        .locator("summary")
+        .filter({ hasText: en.help.guides.weighingAtDoor.title })
+        .click();
     const image = page.locator(selector);
     await image.scrollIntoViewIfNeeded();
     await expect
@@ -75,23 +90,33 @@ for (const [route, selector] of [
   });
 }
 
-for (const [locale, width, prefix] of [
-  ["en", 768, ""],
-  ["ta", 320, "/ta"],
-  ["ml", 320, "/ml"],
+for (const [locale, width, prefix, copy] of [
+  ["en", 768, "", en],
+  ["ta", 320, "/ta", ta],
+  ["ml", 320, "/ml", ml],
 ] as const) {
   test(`the join action fits one line in ${locale} at ${String(width)}px`, async ({
     page,
   }) => {
     await page.setViewportSize({ width, height: 1024 });
     await page.goto(`${prefix}/join`);
-    const link = page.locator(`aside a[href="${prefix}/how-it-works"]`);
+    const link = page.locator(`aside a[href="${prefix}/sell"]`);
+    await expect(link).toHaveAccessibleName(copy.nav.sellScrap);
     await link.scrollIntoViewIfNeeded();
     await page.evaluate(() => document.fonts.ready);
-    const lines = await link.locator("span:visible").evaluate((element) => {
-      const range = document.createRange();
-      range.selectNodeContents(element);
-      return range.getClientRects().length;
+    const lines = await link.evaluate((element) => {
+      const tops: number[] = [];
+      const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+      for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+        if (!node.textContent?.trim()) continue;
+        const range = document.createRange();
+        range.selectNodeContents(node);
+        for (const rect of range.getClientRects()) {
+          if (tops.every((top) => Math.abs(top - rect.top) > 2))
+            tops.push(rect.top);
+        }
+      }
+      return tops.length;
     });
     expect(lines).toBe(1);
     expect(
@@ -102,5 +127,9 @@ for (const [locale, width, prefix] of [
     expect((bounds?.x ?? width) + (bounds?.width ?? width)).toBeLessThanOrEqual(
       width,
     );
+    await link.focus();
+    await expect(link).toBeFocused();
+    await page.keyboard.press("Enter");
+    await expect(page).toHaveURL(new RegExp(`${prefix}/sell$`));
   });
 }

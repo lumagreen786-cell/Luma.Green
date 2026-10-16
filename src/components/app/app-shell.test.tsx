@@ -281,3 +281,22 @@ describe("workspace navigation", () => {
     });
   });
 });
+
+it("finds secondary operational destinations without hiding current page content", async () => {
+  view();
+  const search = screen.getByRole("searchbox", {
+    name: messages.common.search,
+  });
+  await userEvent.type(search, messages.lots.title);
+  expect(screen.getByRole("link", { name: messages.lots.title })).toBeVisible();
+  expect(
+    screen.queryByRole("link", { name: messages.app.nav.buy }),
+  ).not.toBeInTheDocument();
+  expect(
+    screen.getByRole("heading", { name: "Workspace content" }),
+  ).toBeVisible();
+  await userEvent.clear(search);
+  expect(
+    screen.getByRole("link", { name: messages.app.nav.buy }),
+  ).toBeVisible();
+});

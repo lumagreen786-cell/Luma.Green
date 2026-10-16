@@ -38,7 +38,7 @@ for (const { locale, messages } of languages) {
         }
 
         await page.goto(`/${locale}`);
-        for (const content of [messages.home.hero, messages.home.closing]) {
+        for (const content of [messages.home.hero]) {
           const region = page.getByRole("region", { name: content.title });
           await expect(region).toHaveCSS("background-image", "none");
           const action = region.getByRole("link", {
@@ -53,21 +53,6 @@ for (const { locale, messages } of languages) {
               (element) => getComputedStyle(element, "::before").animationName,
             ),
           ).toBe("none");
-        }
-
-        const testimonials = page.getByRole("region", {
-          name: messages.home.testimonials.title,
-        });
-        await expect(testimonials).toHaveCSS("background-image", "none");
-        await testimonials.scrollIntoViewIfNeeded();
-        await expect(
-          testimonials.getByText(messages.home.testimonials.note),
-        ).toBeVisible();
-        const quotes = await testimonials.locator("blockquote").all();
-        for (const quote of quotes) {
-          await expect(quote).toHaveCSS("opacity", "1");
-          await expect(quote).toHaveCSS("transform", "none");
-          await expect(quote).toHaveCSS("animation-name", "none");
         }
       });
     }
@@ -101,23 +86,6 @@ test("public motion keeps headings readable and collection actions usable", asyn
   await expect(action).toBeFocused();
   expect(
     await action.evaluate(
-      (element) => getComputedStyle(element, "::before").animationName,
-    ),
-  ).toBe("none");
-  await page.keyboard.press("Enter");
-  await expect(page).toHaveURL(/\/sell$/);
-
-  await page.goto("/");
-  const closingAction = page
-    .getByRole("region", { name: english.home.closing.title })
-    .getByRole("link", {
-      name: actionName(english.nav.sellScrap, english.home.closing.sell),
-      exact: true,
-    });
-  await closingAction.focus();
-  await expect(closingAction).toBeFocused();
-  expect(
-    await closingAction.evaluate(
       (element) => getComputedStyle(element, "::before").animationName,
     ),
   ).toBe("none");

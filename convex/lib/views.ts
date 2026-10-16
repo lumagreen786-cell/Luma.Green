@@ -50,7 +50,7 @@ export const vBookingView = v.object({
   address: v.optional(v.string()),
   mode: v.union(v.literal("pickup"), v.literal("dropoff")),
   items: v.array(v.object({ material: vMaterialRef, estKg: v.number() })),
-  estimatePaise: v.number(),
+  estimatePaise: v.optional(v.number()),
   slotDate: v.string(),
   slotWindow: vSaathiTime,
   status: vBookingStatus,

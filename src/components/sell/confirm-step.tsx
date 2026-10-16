@@ -296,10 +296,18 @@ export function ConfirmStep({
       </dl>
 
       <MoneyCard
-        amount={t("confirm.youGet", {
-          amount: format.money(shop.estimatePaise),
-        })}
-        points={t("basket.points", { points: pointsFor(shop.estimatePaise) })}
+        amount={
+          shop.estimatePaise === undefined
+            ? t("simple.estimateLater")
+            : t("confirm.youGet", {
+                amount: format.money(shop.estimatePaise),
+              })
+        }
+        points={
+          shop.estimatePaise === undefined
+            ? undefined
+            : t("basket.points", { points: pointsFor(shop.estimatePaise) })
+        }
         note={t("confirm.payNote")}
       />
       {location && draft.mode === "pickup" ? (

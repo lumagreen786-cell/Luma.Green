@@ -28,6 +28,7 @@ import { api } from "../../../convex/_generated/api";
 import { type BookingStatus, kgToGrams } from "../../../convex/lib/chain";
 import { formatIndianMobile } from "../../../convex/lib/phone";
 import { BookingStatusPill, SlotLabel } from "./booking-parts";
+import { BookingPhotos } from "./booking-photos";
 import { NotForShop, QueryBoundary } from "./guards";
 import { MaterialIcon } from "./material-icon";
 import { effectivePaise } from "./prices";
@@ -135,27 +136,37 @@ function RequestView({ detail }: { detail: BookingDetail }) {
         />
       ) : null}
 
-      <BookingFacts
-        booking={booking}
-        rates={detail.rates}
-        isRevealed={isRevealed}
-      />
-
-      {booking.status === "requested" ? (
-        <AcceptDecline bookingId={booking.id} />
-      ) : null}
-      {canStartTrip ? (
-        <StartTripButton
-          bookingId={booking.id}
-          className="h-12 w-full text-base"
-        />
-      ) : null}
-      {canWeigh ? (
-        <WeighSection booking={booking} rates={detail.rates} />
-      ) : null}
-      <ClosedNote status={booking.status} />
-
-      <History timeline={timeline} />
+      <div className="grid items-start gap-8 xl:grid-cols-[minmax(16rem,1fr)_minmax(0,2fr)]">
+        <div className="min-w-0 space-y-6">
+          <BookingFacts
+            booking={booking}
+            rates={detail.rates}
+            isRevealed={isRevealed}
+          />
+          <BookingPhotos bookingId={booking.id} />
+        </div>
+        <div className="min-w-0 space-y-6">
+          {booking.status === "requested" ? (
+            <AcceptDecline bookingId={booking.id} />
+          ) : null}
+          {canStartTrip ? (
+            <StartTripButton
+              bookingId={booking.id}
+              className="h-12 w-full text-base"
+            />
+          ) : null}
+          {canWeigh ? (
+            <WeighSection booking={booking} rates={detail.rates} />
+          ) : null}
+          <ClosedNote status={booking.status} />
+        </div>
+      </div>
+      <details className="border-t py-4">
+        <summary className="min-h-11 cursor-pointer py-2 font-medium">
+          {t("request.history")}
+        </summary>
+        <History timeline={timeline} />
+      </details>
       <DemoNote>{t("sampleNote")}</DemoNote>
     </>
   );
@@ -222,6 +233,7 @@ function BookingFacts({
   isRevealed: boolean;
 }) {
   const t = useTranslations("shop");
+  const tSimple = useTranslations("sell.simple");
   const format = useFormat();
   const address = booking.mode === "pickup" ? booking.address : undefined;
   const rateOf = new Map(rates.map((rate) => [rate.materialCode, rate]));
@@ -319,7 +331,9 @@ function BookingFacts({
             {t("request.estimate")}
           </span>
           <span className="text-xl font-semibold tabular-nums">
-            {t("about", { amount: format.money(booking.estimatePaise) })}
+            {booking.estimatePaise === undefined
+              ? tSimple("estimateLater")
+              : t("about", { amount: format.money(booking.estimatePaise) })}
           </span>
         </div>
       </div>

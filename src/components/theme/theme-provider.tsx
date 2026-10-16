@@ -1,5 +1,7 @@
 "use client";
 
+import { Theme as AstryxTheme } from "@astryxdesign/core/theme";
+import { matchaTheme } from "@astryxdesign/theme-matcha/built";
 import { useLocale } from "next-intl";
 import {
   createContext,
@@ -103,7 +105,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   return (
     <ThemeContext value={{ preference, resolvedTheme, setPreference }}>
-      {children}
+      <AstryxTheme theme={matchaTheme} mode={preference}>
+        {children}
+      </AstryxTheme>
     </ThemeContext>
   );
 }

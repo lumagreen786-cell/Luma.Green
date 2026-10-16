@@ -153,20 +153,30 @@ export function MoneySection({ booking }: { booking: TrackedBooking }) {
                 date: format.dateTime(receipt.paidAt),
               })}
               <br />
-              {t("estimateWas", {
-                amount: format.money(booking.estimatePaise),
-              })}
+              {booking.estimatePaise === undefined
+                ? null
+                : t("estimateWas", {
+                    amount: format.money(booking.estimatePaise),
+                  })}
             </>
           }
         />
       ) : (
         <MoneyCard
-          amount={t("estimate", {
-            amount: format.money(booking.estimatePaise),
-          })}
-          points={t("pointsAfter", {
-            points: pointsFor(booking.estimatePaise),
-          })}
+          amount={
+            booking.estimatePaise === undefined
+              ? tSell("simple.estimateLater")
+              : t("estimate", {
+                  amount: format.money(booking.estimatePaise),
+                })
+          }
+          points={
+            booking.estimatePaise === undefined
+              ? undefined
+              : t("pointsAfter", {
+                  points: pointsFor(booking.estimatePaise),
+                })
+          }
           note={t("estimateNote")}
         />
       )}

@@ -24,24 +24,22 @@ const families = [
 
 /** Examples come from the product catalogue, never from an invented price list. */
 export async function MaterialDirectory() {
-  const [home, prices, help, locale] = await Promise.all([
+  const [home, prices, locale] = await Promise.all([
     getTranslations("home"),
     getTranslations("prices.families"),
-    getTranslations("help.modules.sortOnce"),
     getLocale(),
   ]);
 
   return (
     <section
       aria-labelledby="materials-heading"
-      className="border-b py-10 sm:py-12 lg:py-24"
+      className="border-b py-6 sm:py-8"
     >
-      <Container className="space-y-10">
+      <Container className="space-y-5">
         <div className="flex min-w-0 flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <SectionHeading
             id="materials-heading"
             title={home("expansion.materialsTitle")}
-            intro={home("closing.body")}
           />
           <Button
             asChild
@@ -91,12 +89,6 @@ export async function MaterialDirectory() {
             );
           })}
         </ul>
-        <div className="flex min-w-0 flex-col gap-3 border-s-2 border-primary ps-5 sm:flex-row sm:items-baseline sm:gap-8">
-          <h3 className="shrink-0 font-semibold">{help("title")}</h3>
-          <p className="text-sm leading-relaxed text-muted-foreground">
-            {help("p1")} {help("p2")}
-          </p>
-        </div>
       </Container>
     </section>
   );

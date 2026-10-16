@@ -51,7 +51,7 @@ export default async function HelpContactPage() {
         <QuickContact />
       </HelpHero>
 
-      <Container className="grid gap-10 py-10 lg:grid-cols-[minmax(0,1fr)_20rem] lg:py-16">
+      <Container className="grid gap-8 py-6 lg:grid-cols-[minmax(0,1fr)_18rem] lg:py-8">
         <section
           aria-labelledby="contact-form-heading"
           className="flex flex-col gap-5"

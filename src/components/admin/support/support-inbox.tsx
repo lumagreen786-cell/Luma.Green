@@ -52,10 +52,7 @@ export function SupportInbox() {
 
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 lg:gap-8">
-      <AppPageHeader
-        title="Support"
-        lead="Messages from the help centre and the solar page, newest first. Call back, then mark them answered."
-      />
+      <AppPageHeader title="Support" lead="Call back, then mark answered." />
       <Tabs
         value={filter}
         onValueChange={(value) => {

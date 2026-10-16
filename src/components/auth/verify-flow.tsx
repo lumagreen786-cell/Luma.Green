@@ -3,7 +3,7 @@
 import { useConvexAuth, useMutation } from "convex/react";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { useSearchParams } from "next/navigation";
-import { useLocale, useTranslations } from "next-intl";
+import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 
@@ -28,8 +28,13 @@ import { AuthProgress } from "./auth-progress";
 import type { CodeErrorKey } from "./errors";
 import { FactorChallenge } from "./factor-challenge";
 import { LoginSkeleton } from "./login-flow";
-import { isPhonePreview, readPhone, useStoredValue } from "./storage";
-import { VerifyPreview } from "./verify-preview";
+import { PhoneForm } from "./phone-form";
+import {
+  readPhone,
+  readPhoneSentAt,
+  rememberPhone,
+  useStoredValue,
+} from "./storage";
 
 /**
  * Keeps a number reading left to right inside Urdu and Arabic sentences
@@ -50,15 +55,14 @@ const AFTER_SIGN_IN = "/app";
 
 /** `/login/verify`: the 6-digit code, then into the app. */
 export function VerifyFlow() {
-  const isPreview = useStoredValue(isPhonePreview);
-  if (isPreview === undefined) return <LoginSkeleton />;
-  return !isConvexConfigured || isPreview ? <VerifyPreview /> : <VerifyForm />;
+  return isConvexConfigured ? <VerifyForm /> : <PhoneForm canSend={false} />;
 }
 
 function VerifyForm() {
   const t = useTranslations("auth");
   const common = useTranslations("common");
   const locale = useLocale();
+  const format = useFormatter();
   const router = useRouter();
   const searchParams = useSearchParams();
   const next = safeNextPath(searchParams.get("next"), AFTER_SIGN_IN);
@@ -79,7 +83,12 @@ function VerifyForm() {
   const [error, setError] = useState<CodeErrorKey | SendCodeErrorKey | null>(
     null,
   );
-  const [secondsLeft, setSecondsLeft] = useState(RESEND_AFTER_SECONDS);
+  const [resendAt, setResendAt] = useState(
+    () => (readPhoneSentAt() ?? Date.now()) + RESEND_AFTER_SECONDS * 1000,
+  );
+  const [secondsLeft, setSecondsLeft] = useState(() =>
+    Math.max(0, Math.ceil((resendAt - Date.now()) / 1000)),
+  );
   const isFinishing = useRef(false);
   const requestPending = useRef(false);
   const [isResending, setResending] = useState(false);
@@ -96,14 +105,16 @@ function VerifyForm() {
   }, [phone, status, router]);
 
   useEffect(() => {
-    if (secondsLeft <= 0) return;
-    const timer = setTimeout(() => {
-      setSecondsLeft((seconds) => seconds - 1);
-    }, 1000);
-    return () => {
-      clearTimeout(timer);
+    const update = () => {
+      const remainingSeconds = Math.ceil((resendAt - Date.now()) / 1000);
+      setSecondsLeft(Math.max(0, remainingSeconds));
     };
-  }, [secondsLeft]);
+    update();
+    const timer = setInterval(update, 1000);
+    return () => {
+      clearInterval(timer);
+    };
+  }, [resendAt]);
 
   // An accepted code must never be submitted again. If the session takes too
   // long, offer another bounded wait and still accept a late session.
@@ -166,7 +177,13 @@ function VerifyForm() {
   }
 
   async function resend() {
-    if (!phone || status !== "idle" || requestPending.current) return;
+    if (
+      !phone ||
+      status !== "idle" ||
+      requestPending.current ||
+      Date.now() < resendAt
+    )
+      return;
     requestPending.current = true;
     setResending(true);
     setError(null);
@@ -177,6 +194,8 @@ function VerifyForm() {
       setError(sendError);
       return;
     }
+    rememberPhone(phone);
+    setResendAt(Date.now() + RESEND_AFTER_SECONDS * 1000);
     setSecondsLeft(RESEND_AFTER_SECONDS);
     toast.success(t("resent"));
   }
@@ -193,6 +212,15 @@ function VerifyForm() {
         }}
       />
     );
+
+  const minutes = format.number(Math.floor(secondsLeft / 60), {
+    useGrouping: false,
+  });
+  const seconds = format.number(secondsLeft % 60, {
+    minimumIntegerDigits: 2,
+    useGrouping: false,
+  });
+  const countdown = ltr(`${minutes}:${seconds}`);
 
   const isBusy = status !== "idle" || isResending;
   const canRetry = status === "session-timeout" || status === "profile-error";
@@ -280,7 +308,9 @@ function VerifyForm() {
       <div className="flex justify-center" aria-live="polite">
         {secondsLeft > 0 ? (
           <p className="text-sm text-muted-foreground">
-            {t("resendIn", { seconds: secondsLeft })}
+            {t("resendCountdown", {
+              time: countdown,
+            })}
           </p>
         ) : (
           <Button

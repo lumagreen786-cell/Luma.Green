@@ -125,7 +125,7 @@ for (const { locale, messages, width } of [
   { locale: "ta", messages: ta, width: 320 },
   { locale: "ml", messages: ml, width: 320 },
 ]) {
-  test(`${locale} mobile sign-in reaches the code preview without sending SMS`, async ({
+  test(`${locale} unavailable mobile sign-in never sends SMS`, async ({
     page,
   }) => {
     await page.setViewportSize({ width, height: 800 });
@@ -139,52 +139,37 @@ for (const { locale, messages, width } of [
     });
     await page.goto(`/${locale}/login?next=%2Fjoin%2Fsaathi`);
     const phone = page.getByLabel(messages.auth.mobileLabel, { exact: true });
-    const previewAction = page.getByRole("button", {
-      name: messages.auth.previewAction,
+    const action = page.getByRole("button", {
+      name: messages.auth.sendCode,
+      exact: true,
     });
-    await expect(previewAction).toBeVisible();
+    await expect(action).toBeVisible();
+    await expect(action).toBeDisabled();
+    await expect(
+      page.getByText(messages.auth.unavailableBody, { exact: true }),
+    ).toBeVisible();
     expect(
-      await previewAction.evaluate(
+      await action.evaluate(
         (button) => button.scrollWidth <= button.clientWidth,
       ),
     ).toBe(true);
-    await expect(
-      page.getByText(messages.auth.mobileHint, { exact: true }),
-    ).toHaveCount(0);
-    await phone.fill("123");
-    await page
-      .getByRole("button", { name: messages.auth.previewAction })
-      .click();
-    await expect(page.getByRole("main").getByRole("alert")).toHaveText(
-      messages.auth.mobileInvalid,
-    );
     await phone.fill("9876543210");
-    await page
-      .getByRole("button", { name: messages.auth.previewAction })
-      .click();
-    await expect(page).toHaveURL(/\/login\/verify\?next=%2Fjoin%2Fsaathi$/);
-    expect(page.url()).not.toContain("9876543210");
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-      messages.auth.previewTitle,
-    );
-    await expect(page.getByText(messages.auth.previewBody)).toBeVisible();
-    await page
-      .getByLabel(messages.auth.codeLabel, { exact: true })
-      .fill("123456");
-    await expect(
-      page.getByRole("button", { name: messages.auth.verify, exact: true }),
-    ).toBeDisabled();
-    await expect(
-      page.getByRole("button", { name: messages.auth.resend, exact: true }),
-    ).toBeDisabled();
+    await phone.press("Enter");
+    await expect(page).toHaveURL(/\/login\?next=%2Fjoin%2Fsaathi$/);
     expect(authRequests).toEqual([]);
     expect(
       await page.evaluate(
         () => document.documentElement.scrollWidth <= innerWidth,
       ),
     ).toBe(true);
-    await page.getByRole("link", { name: messages.auth.changeNumber }).click();
-    await expect(page).toHaveURL(/\/login\?next=%2Fjoin%2Fsaathi$/);
+    await page.goto(`/${locale}/login/verify`);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+      messages.auth.metaTitle,
+    );
+    await expect(
+      page.getByRole("button", { name: messages.auth.sendCode, exact: true }),
+    ).toBeDisabled();
+    expect(authRequests).toEqual([]);
   });
 }
 
@@ -212,3 +197,59 @@ test("/admin stays outside the locale segment", async ({ page }) => {
     "Admin console",
   );
 });
+
+for (const { locale, messages } of [
+  { locale: "en", messages: en },
+  { locale: "ar", messages: ar },
+]) {
+  for (const width of [390, 1440]) {
+    for (const theme of ["light", "dark"] as const) {
+      test(`${locale} centered OTP entry ${String(width)} ${theme}`, async ({
+        page,
+      }, testInfo) => {
+        await page.setViewportSize({ width, height: 900 });
+        await page.emulateMedia({
+          colorScheme: theme,
+          reducedMotion: "reduce",
+        });
+        await page.addInitScript(() => {
+          localStorage.setItem("lg.languageChosen", "1");
+        });
+        await page.goto(`/${locale}/login`);
+        await expect(
+          page.getByRole("heading", {
+            name: messages.auth.metaTitle,
+            exact: true,
+          }),
+        ).toBeVisible();
+        await page.evaluate(async () => document.fonts.ready);
+        const main = await page.getByRole("main").boundingBox();
+        const header = await page.getByRole("banner").boundingBox();
+        if (!main || !header) throw new Error("Sign-in layout is missing");
+        expect(
+          Math.abs(main.x + main.width / 2 - width / 2),
+        ).toBeLessThanOrEqual(1);
+        expect(
+          Math.abs(main.y + main.height / 2 - (900 + header.height) / 2),
+        ).toBeLessThanOrEqual(2);
+        await expect(
+          page.getByRole("button", {
+            name: messages.auth.sendCode,
+            exact: true,
+          }),
+        ).toBeDisabled();
+        await expect(
+          page.getByText(messages.auth.unavailableBody, { exact: true }),
+        ).toBeVisible();
+        expect(
+          await page.evaluate(
+            () => document.documentElement.scrollWidth <= innerWidth,
+          ),
+        ).toBe(true);
+        await page.screenshot({
+          path: testInfo.outputPath("login-centered.png"),
+        });
+      });
+    }
+  }
+}

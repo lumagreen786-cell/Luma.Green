@@ -3,7 +3,7 @@
 import { convexTest } from "convex-test";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { api } from "./_generated/api";
+import { api, internal } from "./_generated/api";
 import type { Id } from "./_generated/dataModel";
 import {
   convexModules,
@@ -149,7 +149,7 @@ describe("households.shops", () => {
     expect(names).not.toContain("Sri Lakshmi Scrap");
     expect(names).not.toContain("Peenya Paper & Plastic Yard");
     const offers = shops.map((shop) => shop.estimatePaise);
-    expect(offers).toEqual(offers.toSorted((a, b) => b - a));
+    expect(offers).toEqual(offers.toSorted((a, b) => (b ?? 0) - (a ?? 0)));
     expect(shops.every((shop) => shop.distanceKm === undefined)).toBe(true);
   });
 
@@ -312,7 +312,7 @@ describe("households.book", () => {
     const attempt = (changes: Partial<typeof booking>) =>
       arjun.mutation(api.households.book, { ...booking, ...changes });
 
-    await expect(attempt({ items: [] })).rejects.toThrow(/EMPTY_BASKET/);
+    await expect(attempt({ items: [] })).rejects.toThrow(/PHOTOS_REQUIRED/);
     await expect(
       attempt({ items: [{ materialCode: "PAPER-NEWS", kg: 0 }] }),
     ).rejects.toThrow(/INVALID_KG/);
@@ -537,3 +537,194 @@ describe("households.cancel", () => {
     expect(await statusOf(t, "priyademo1")).toBe("requested");
   });
 });
+
+const imageBytes = () =>
+  new Uint8Array([0xff, 0xd8, 0xff, 0xe0, 0, 16, 1, 2, 3]).buffer;
+
+describe("photo-only household requests", () => {
+  it("stores owned photos without invented quantities or estimates and keeps bytes private", async () => {
+    const t = await demoWorld();
+    const as = await newHousehold(t);
+    const photoId = await as.action(api.householdPhotos.upload, {
+      name: "scrap.jpg",
+      bytes: imageBytes(),
+    });
+    const token = await as.mutation(api.households.book, {
+      ...(await pickupAt(t)),
+      items: [],
+      photoIds: [photoId],
+    });
+    const booking = await bookingByToken(t, token);
+    expect(booking).toMatchObject({ items: [], requestKind: "photo_request" });
+    expect(booking?.estimatePaise).toBeUndefined();
+    await t.run((ctx) =>
+      ctx.db.patch("householdPhotos", photoId, {
+        createdAt: Date.now() - 25 * 60 * 60 * 1000,
+      }),
+    );
+    await t.mutation(internal.householdPhotos.expire, { photoId });
+    expect(
+      await t.run((ctx) => ctx.db.get("householdPhotos", photoId)),
+    ).not.toBeNull();
+    const tracked = await t.query(api.households.track, { token });
+    expect(tracked?.estimatePaise).toBeUndefined();
+    expect(
+      await as.action(api.householdPhotos.read, { photoId }),
+    ).toMatchObject({ bytes: imageBytes(), contentType: "image/jpeg" });
+    await expect(
+      t.action(api.householdPhotos.read, { photoId }),
+    ).rejects.toThrow("NOT_SIGNED_IN");
+    const other = await newHousehold(t, "+919876500002");
+    await expect(
+      other.action(api.householdPhotos.read, { photoId }),
+    ).rejects.toThrow();
+    expect(
+      await as.mutation(api.households.book, {
+        ...(await pickupAt(t)),
+        items: [],
+        photoIds: [photoId],
+      }),
+    ).toBe(token);
+    await expect(
+      as.mutation(api.households.book, {
+        ...(await pickupAt(t)),
+        items: [],
+        photoIds: [photoId],
+        name: "Changed name",
+      }),
+    ).rejects.toThrow("PHOTO_NOT_AVAILABLE");
+    const attached = await t.run((ctx) =>
+      ctx.db.get("householdPhotos", photoId),
+    );
+    expect(attached?.bookingId).toBe(booking?._id);
+    if (!attached?.storageId) throw new Error("Missing photo storage");
+    await t.mutation(internal.householdPhotos.discardUnattached, {
+      photoId,
+      storageId: attached.storageId,
+    });
+    expect(
+      await as.action(api.householdPhotos.read, { photoId }),
+    ).toMatchObject({ bytes: imageBytes() });
+    if (!booking) throw new Error("Missing booking");
+    const shop = await signInAs(t, "+919000000101");
+    expect(
+      await shop.query(api.householdPhotos.list, { bookingId: booking._id }),
+    ).toHaveLength(1);
+    await t.run(async (ctx) => {
+      const membership = await ctx.db
+        .query("memberships")
+        .withIndex("by_org", (q) => q.eq("orgId", booking.orgId))
+        .first();
+      if (!membership) throw new Error("Missing membership");
+      await ctx.db.patch("memberships", membership._id, { role: "viewer" });
+    });
+    const shopPhoto = await shop.action(api.householdPhotos.read, { photoId });
+    expect(shopPhoto.contentType).toBe("image/jpeg");
+    const requestOtherOrg = await orgId(t, "jayanagar-raddi-centre");
+    await t.run((ctx) =>
+      ctx.db.patch("bookings", booking._id, { orgId: requestOtherOrg }),
+    );
+    await expect(
+      shop.action(api.householdPhotos.read, { photoId }),
+    ).rejects.toThrow("FORBIDDEN");
+  });
+  it("rejects foreign, duplicate, missing and excessive photos", async () => {
+    const t = await demoWorld();
+    const as = await newHousehold(t);
+    const other = await newHousehold(t, "+919876500002");
+    const photoId = await as.action(api.householdPhotos.upload, {
+      name: "scrap.jpg",
+      bytes: imageBytes(),
+    });
+    const request = { ...(await pickupAt(t)), items: [] };
+    await expect(as.mutation(api.households.book, request)).rejects.toThrow(
+      "PHOTOS_REQUIRED",
+    );
+    await expect(
+      other.mutation(api.households.book, { ...request, photoIds: [photoId] }),
+    ).rejects.toThrow("PHOTO_NOT_AVAILABLE");
+    await expect(
+      as.mutation(api.households.book, {
+        ...request,
+        photoIds: [photoId, photoId],
+      }),
+    ).rejects.toThrow("INVALID_PHOTOS");
+    await expect(
+      as.mutation(api.households.book, {
+        ...request,
+        photoIds: Array.from({ length: 6 }, () => photoId),
+      }),
+    ).rejects.toThrow("INVALID_PHOTOS");
+  });
+  it("rejects untrusted types and oversized uploads before storage, and expires only unattached photos", async () => {
+    const t = await demoWorld();
+    const as = await newHousehold(t);
+    await expect(
+      as.action(api.householdPhotos.upload, {
+        name: "fake.jpg",
+        bytes: new TextEncoder().encode("<svg/>").buffer,
+      }),
+    ).rejects.toThrow("PHOTO_TYPE");
+    await expect(
+      as.action(api.householdPhotos.upload, {
+        name: "big.jpg",
+        bytes: new Uint8Array(2 * 1024 * 1024 + 1).buffer,
+      }),
+    ).rejects.toThrow("PHOTO_SIZE");
+    const photoId = await as.action(api.householdPhotos.upload, {
+      name: "scrap.jpg",
+      bytes: imageBytes(),
+    });
+    await t.run((ctx) =>
+      ctx.db.patch("householdPhotos", photoId, {
+        createdAt: Date.now() - 25 * 60 * 60 * 1000,
+      }),
+    );
+    await t.mutation(internal.householdPhotos.expire, { photoId });
+    expect(
+      await t.run((ctx) => ctx.db.get("householdPhotos", photoId)),
+    ).toBeNull();
+  });
+});
+
+it("limits photo upload reservations atomically per phone profile", async () => {
+  const t = await demoWorld();
+  const as = await newHousehold(t);
+  for (let index = 0; index < 20; index++) {
+    await as.mutation(internal.householdPhotos.reserve, {
+      name: "scrap.jpg",
+      contentType: "image/jpeg",
+      size: 10,
+    });
+  }
+  await expect(
+    as.action(api.householdPhotos.upload, {
+      name: "scrap.jpg",
+      bytes: new Uint8Array([0xff, 0xd8, 0xff]).buffer,
+    }),
+  ).rejects.toThrow("PHOTO_UPLOAD_LIMIT");
+  expect(
+    await t.run((ctx) => ctx.db.query("householdPhotos").collect()),
+  ).toHaveLength(20);
+});
+
+it.each([false, true])(
+  "requires the administrator's second factor to read photos (%s)",
+  async (twoFactorEnabled) => {
+    const t = await demoWorld();
+    vi.stubEnv("ADMIN_EMAIL", "photo-admin@example.test");
+    const as = await newHousehold(t);
+    const photoId = await as.action(api.householdPhotos.upload, {
+      name: "scrap.jpg",
+      bytes: imageBytes(),
+    });
+    const admin = await signIn(t, {
+      email: "photo-admin@example.test",
+      twoFactorEnabled,
+    });
+    const read = admin.action(api.householdPhotos.read, { photoId });
+    if (twoFactorEnabled)
+      await expect(read).resolves.toMatchObject({ contentType: "image/jpeg" });
+    else await expect(read).rejects.toThrow("TWO_FACTOR_REQUIRED");
+  },
+);

@@ -170,116 +170,6 @@ function OwnerAccess({
 
   return (
     <>
-      {created ? (
-        <NewKey
-          created={created}
-          onDismiss={() => {
-            setCreated(null);
-          }}
-        />
-      ) : (
-        <form
-          onSubmit={(event) => {
-            event.preventDefault();
-            void create();
-          }}
-          className="flex flex-col gap-4 border-b border-border pb-6"
-          aria-labelledby="api-create-title"
-        >
-          <h2 id="api-create-title" className="text-lg font-semibold">
-            {t("createTitle")}
-          </h2>
-          <p className="max-w-2xl text-sm text-muted-foreground">
-            {t("keyHint")}
-          </p>
-          <div className="grid max-w-2xl gap-4 sm:grid-cols-2">
-            <div className="flex min-w-0 flex-col gap-2">
-              <Label htmlFor="api-key-label">{t("label")}</Label>
-              <Input
-                id="api-key-label"
-                value={label}
-                onChange={(event) => {
-                  setLabel(event.target.value);
-                }}
-                maxLength={80}
-                autoComplete="off"
-                disabled={!canCreate}
-                required
-              />
-            </div>
-            <div className="flex min-w-0 flex-col gap-2">
-              <Label htmlFor="api-key-expiry">{t("expiry")}</Label>
-              <Select
-                dir={localeMeta[isLocale(locale) ? locale : "en"].dir}
-                value={String(expiresInDays)}
-                onValueChange={(value) => {
-                  setExpiresInDays(Number(value));
-                }}
-                disabled={!canCreate}
-              >
-                <SelectTrigger id="api-key-expiry" className="w-full">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {[1, 7, 30, 90].map((days) => (
-                    <SelectItem key={days} value={String(days)}>
-                      {t("days", { count: days })}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-          <p className="max-w-2xl text-sm text-muted-foreground">
-            {t("newsHint")}
-          </p>
-          <fieldset disabled={!canCreate} className="flex flex-col gap-2">
-            <legend className="mb-2 text-sm font-medium">
-              {t("permissions")}
-            </legend>
-            {scopeOptions.map(({ scope, label: scopeLabel }) => (
-              <div key={scope} className="flex min-h-11 items-center gap-3">
-                <Checkbox
-                  id={`api-scope-${scopeLabel}`}
-                  checked={scopes.includes(scope)}
-                  disabled={!canCreate}
-                  onCheckedChange={(checked) => {
-                    setScopes((current) =>
-                      checked === true
-                        ? [...current, scope]
-                        : current.filter((value) => value !== scope),
-                    );
-                  }}
-                />
-                <Label
-                  htmlFor={`api-scope-${scopeLabel}`}
-                  className="min-h-11 flex-1 leading-relaxed"
-                >
-                  {t(`scopes.${scopeLabel}`)}
-                </Label>
-              </div>
-            ))}
-          </fieldset>
-          {liveKeys >= 5 ? (
-            <p role="status" className="text-sm text-muted-foreground">
-              {t("limit")}
-            </p>
-          ) : null}
-          {hasCreateError ? (
-            <p role="alert" className="text-sm text-destructive">
-              {t("createError")}
-            </p>
-          ) : null}
-          <Button
-            type="submit"
-            disabled={!canCreate || !isValidInput}
-            className="self-start"
-          >
-            <KeyRoundIcon aria-hidden />
-            {t(isCreating ? "creating" : "create")}
-          </Button>
-        </form>
-      )}
       <KeyList
         keys={data.keys}
         onRevokeRequest={(key, trigger) => {
@@ -288,6 +178,121 @@ function OwnerAccess({
           setRevokeError(false);
         }}
       />
+      {created ? (
+        <NewKey
+          created={created}
+          onDismiss={() => {
+            setCreated(null);
+          }}
+        />
+      ) : (
+        <details open={data.keys.length === 0} className="border-y py-4">
+          <summary className="cursor-pointer py-2 font-semibold outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
+            {t("createTitle")}
+          </summary>
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              void create();
+            }}
+            className="flex flex-col gap-4 border-b border-border pb-6"
+            aria-labelledby="api-create-title"
+          >
+            <h2 id="api-create-title" className="sr-only">
+              {t("createTitle")}
+            </h2>
+            <p className="max-w-2xl text-sm text-muted-foreground">
+              {t("keyHint")}
+            </p>
+            <div className="grid max-w-2xl gap-4 sm:grid-cols-2">
+              <div className="flex min-w-0 flex-col gap-2">
+                <Label htmlFor="api-key-label">{t("label")}</Label>
+                <Input
+                  id="api-key-label"
+                  value={label}
+                  onChange={(event) => {
+                    setLabel(event.target.value);
+                  }}
+                  maxLength={80}
+                  autoComplete="off"
+                  disabled={!canCreate}
+                  required
+                />
+              </div>
+              <div className="flex min-w-0 flex-col gap-2">
+                <Label htmlFor="api-key-expiry">{t("expiry")}</Label>
+                <Select
+                  dir={localeMeta[isLocale(locale) ? locale : "en"].dir}
+                  value={String(expiresInDays)}
+                  onValueChange={(value) => {
+                    setExpiresInDays(Number(value));
+                  }}
+                  disabled={!canCreate}
+                >
+                  <SelectTrigger id="api-key-expiry" className="w-full">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {[1, 7, 30, 90].map((days) => (
+                      <SelectItem key={days} value={String(days)}>
+                        {t("days", { count: days })}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+            <p className="max-w-2xl text-sm text-muted-foreground">
+              {t("newsHint")}
+            </p>
+            <fieldset disabled={!canCreate} className="flex flex-col gap-2">
+              <legend className="mb-2 text-sm font-medium">
+                {t("permissions")}
+              </legend>
+              {scopeOptions.map(({ scope, label: scopeLabel }) => (
+                <div key={scope} className="flex min-h-11 items-center gap-3">
+                  <Checkbox
+                    id={`api-scope-${scopeLabel}`}
+                    checked={scopes.includes(scope)}
+                    disabled={!canCreate}
+                    onCheckedChange={(checked) => {
+                      setScopes((current) =>
+                        checked === true
+                          ? [...current, scope]
+                          : current.filter((value) => value !== scope),
+                      );
+                    }}
+                  />
+                  <Label
+                    htmlFor={`api-scope-${scopeLabel}`}
+                    className="min-h-11 flex-1 leading-relaxed"
+                  >
+                    {t(`scopes.${scopeLabel}`)}
+                  </Label>
+                </div>
+              ))}
+            </fieldset>
+            {liveKeys >= 5 ? (
+              <p role="status" className="text-sm text-muted-foreground">
+                {t("limit")}
+              </p>
+            ) : null}
+            {hasCreateError ? (
+              <p role="alert" className="text-sm text-destructive">
+                {t("createError")}
+              </p>
+            ) : null}
+            <Button
+              type="submit"
+              disabled={!canCreate || !isValidInput}
+              className="self-start"
+            >
+              <KeyRoundIcon aria-hidden />
+              {t(isCreating ? "creating" : "create")}
+            </Button>
+          </form>
+        </details>
+      )}
       <Dialog
         open={pendingRevoke !== null}
         onOpenChange={(open) => {

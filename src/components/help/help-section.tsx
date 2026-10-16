@@ -16,6 +16,20 @@ export function HelpSection({
   className?: string;
   children: ReactNode;
 }) {
+  if (["videos", "training", "other-roles"].includes(id))
+    return (
+      <details id={id} className={cn("scroll-mt-20 border-t py-3", className)}>
+        <summary className="min-h-11 cursor-pointer py-2 outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
+          <h2 className="inline font-display text-xl font-semibold">{title}</h2>
+        </summary>
+        <div className="flex flex-col gap-5 pt-4">
+          {lead ? (
+            <p className="text-sm text-muted-foreground">{lead}</p>
+          ) : null}
+          {children}
+        </div>
+      </details>
+    );
   return (
     <section
       id={id}

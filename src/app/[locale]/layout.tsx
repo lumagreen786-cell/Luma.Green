@@ -72,6 +72,7 @@ export default async function LocaleLayout({
   return (
     <html
       suppressHydrationWarning
+      data-astryx-theme="matcha"
       lang={localeMeta[locale].hreflang}
       dir={localeMeta[locale].dir}
       className={`${fontClassName(locale)} h-full`}

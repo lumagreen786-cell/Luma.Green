@@ -7,6 +7,7 @@ import { useFormatter, useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 
 import { AppPageHeader, ListSkeleton } from "@/components/app/page-parts";
+import { WorkflowTabs } from "@/components/app/workflow-tabs";
 import { NotForYou } from "@/components/shop/guards";
 import { useBusiness } from "@/components/shop/use-shop";
 import { Badge } from "@/components/ui/badge";
@@ -64,9 +65,18 @@ function LotLists() {
         {t("evidenceNote")}
       </p>
       {canOperate ? null : <p className="text-sm">{t("readOnly")}</p>}
-      <IncomingLots />
-      <HeldLots />
-      <SentLots />
+      <WorkflowTabs
+        defaultValue="held"
+        items={[
+          {
+            value: "incoming",
+            label: t("incoming"),
+            content: <IncomingLots />,
+          },
+          { value: "held", label: t("held"), content: <HeldLots /> },
+          { value: "sent", label: t("sent"), content: <SentLots /> },
+        ]}
+      />
     </div>
   );
 }

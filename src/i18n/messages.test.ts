@@ -72,6 +72,20 @@ describe.each(locales)("messages/%s.json", (locale) => {
     }
   });
 
+  it("uses one recycling action label across public entry points", () => {
+    const flattened = flattenMessages(messages);
+    for (const key of [
+      "nav.sellScrap",
+      "home.hero.sell",
+      "home.closing.sell",
+      "home.roles.household.cta",
+    ]) {
+      expect(flattened[key], `${locale}.${key}`).toBe(
+        flattened["sell.simple.title"],
+      );
+    }
+  });
+
   it("keeps the brand name untranslated", () => {
     expect((messages.brand as Record<string, string>).name).toBe("Luma.Green");
   });

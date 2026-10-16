@@ -1,17 +1,11 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
-import { HomeMotion } from "@/components/motion/home-motion";
-import { ClosingCta } from "@/components/site/closing-cta";
-import { ChainDiagram } from "@/components/site/home/chain-diagram";
-import { DemoTestimonials } from "@/components/site/home/demo-testimonials";
+import { BusinessTrade } from "@/components/site/home/business-trade";
 import { HomeHero } from "@/components/site/home/hero";
-import { HomeQuestions } from "@/components/site/home/home-questions";
-import { MaterialDirectory } from "@/components/site/home/material-directory";
-import { MaterialMarquee } from "@/components/site/home/material-marquee";
-import { PickupJourney } from "@/components/site/home/pickup-journey";
+import { MaterialRecords } from "@/components/site/home/material-records";
 import { RoleBenefits } from "@/components/site/home/role-benefits";
-import { TrustPoints } from "@/components/site/home/trust-points";
+import { ShopWorkday } from "@/components/site/home/shop-workday";
 import { localeFromParams } from "@/i18n/paths";
 import { pageMetadata, serializeJsonLd } from "@/lib/seo";
 import { site } from "@/lib/site";
@@ -61,18 +55,13 @@ export default async function HomePage() {
         // JSON-LD must be raw; serializeJsonLd escapes `<`.
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(organization) }}
       />
-      <HomeMotion>
+      <div>
         <HomeHero />
-        <MaterialMarquee />
-        <MaterialDirectory />
-        <PickupJourney />
-        <ChainDiagram />
-        <RoleBenefits />
-        <TrustPoints />
-        <DemoTestimonials />
-        <HomeQuestions />
-        <ClosingCta />
-      </HomeMotion>
+        <RoleBenefits businessOnly />
+        <ShopWorkday />
+        <BusinessTrade />
+        <MaterialRecords />
+      </div>
     </>
   );
 }

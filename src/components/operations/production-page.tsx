@@ -10,6 +10,7 @@ import { z } from "zod";
 
 import { AppPageHeader, ListSkeleton } from "@/components/app/page-parts";
 import { useWorkspace } from "@/components/app/use-workspace";
+import { WorkflowTabs } from "@/components/app/workflow-tabs";
 import { EvidenceDialog, LotField, Mass } from "@/components/lots/form-parts";
 import { formIndex, parseGrams } from "@/components/lots/logic";
 import { NotForYou } from "@/components/shop/guards";
@@ -23,7 +24,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { isLocale, localeDirection } from "@/i18n/locales";
 
 import { api } from "../../../convex/_generated/api";
@@ -79,120 +79,141 @@ export function ProductionPage() {
   );
 }
 function ProductionWorkspace({ canOperate }: { canOperate: boolean }) {
-  const locale = useLocale();
   const t = useTranslations("operations");
   const fmt = useFormatter();
   const data = useQuery(api.production.mine, {});
   return (
     <div className="flex min-w-0 flex-col gap-6">
       <AppPageHeader title={t("production")} lead={t("productionHint")} />
-      <Tabs
-        dir={isLocale(locale) ? localeDirection(locale) : "ltr"}
-        defaultValue="recipes"
-      >
-        <TabsList className="h-auto flex-wrap">
-          <TabsTrigger value="recipes">{t("recipes")}</TabsTrigger>
-          <TabsTrigger value="batches">{t("batches")}</TabsTrigger>
-        </TabsList>
-        <TabsContent value="recipes" className="space-y-5">
-          {canOperate ? <RecipeForm /> : null}
-          {data === undefined ? (
-            <ListSkeleton />
-          ) : (
-            <ul className="divide-y border-y">
-              {data.recipes.map((r) => (
-                <li key={r.id} className="space-y-3 py-4">
-                  <h2 className="font-display text-lg font-semibold">
-                    {r.name} · {r.version}
-                  </h2>
-                  <p className="break-words">{r.reference}</p>
-                  <ul className="space-y-2">
-                    {r.ingredients.map((i) => (
-                      <li key={i.name}>
-                        {i.name} ·{" "}
-                        {fmt.number(i.basisPoints / 10_000, {
-                          style: "percent",
-                          maximumFractionDigits: 2,
-                        })}
-                        {i.additive ? ` · ${t("additive")}` : ""}
+      <WorkflowTabs
+        items={[
+          {
+            value: "recipes",
+            label: t("recipes"),
+            content: (
+              <div className="space-y-5">
+                {canOperate ? <RecipeForm /> : null}
+                {data === undefined ? (
+                  <ListSkeleton />
+                ) : (
+                  <ul className="divide-y border-y">
+                    {data.recipes.map((r) => (
+                      <li key={r.id} className="space-y-3 py-4">
+                        <h2 className="font-display text-lg font-semibold">
+                          {r.name} · {r.version}
+                        </h2>
+                        <p className="break-words">{r.reference}</p>
+                        <details className="border-s-2 ps-4">
+                          <summary className="cursor-pointer py-2 font-medium">
+                            {t("ingredients")}
+                          </summary>
+                          <ul className="space-y-2">
+                            {r.ingredients.map((i) => (
+                              <li key={i.name}>
+                                {i.name} ·{" "}
+                                {fmt.number(i.basisPoints / 10_000, {
+                                  style: "percent",
+                                  maximumFractionDigits: 2,
+                                })}
+                                {i.additive ? ` · ${t("additive")}` : ""}
+                              </li>
+                            ))}
+                          </ul>
+                          <p className="text-sm break-words whitespace-pre-wrap">
+                            {r.instructions}
+                          </p>
+                        </details>
                       </li>
                     ))}
                   </ul>
-                  <p className="text-sm break-words whitespace-pre-wrap">
-                    {r.instructions}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          )}
-          {data?.recipes.length === 0 ? <p>{t("empty")}</p> : null}
-        </TabsContent>
-        <TabsContent value="batches" className="space-y-5">
-          {canOperate && data ? <BatchForm data={data} /> : null}
-          {data === undefined ? (
-            <ListSkeleton />
-          ) : (
-            <ul className="divide-y border-y">
-              {data.batches.map((b) => (
-                <li key={b.id} className="space-y-3 py-4">
-                  <h2 className="font-display text-lg font-semibold">
-                    {b.reference}
-                  </h2>
-                  <dl className="space-y-2 text-sm">
-                    <div>
-                      <dt className="text-muted-foreground">{t("recipe")}</dt>
-                      <dd>
-                        {b.recipeName ?? t("empty")} · {b.recipeVersion}
-                      </dd>
-                    </div>
-                    <div>
-                      <dt className="text-muted-foreground">
-                        {t("transformation")}
-                      </dt>
-                      <dd>
-                        {b.transformationCreatedAt === null
-                          ? t("empty")
-                          : fmt.dateTime(b.transformationCreatedAt, {
-                              dateStyle: "medium",
-                              timeStyle: "short",
-                            })}
-                      </dd>
-                    </div>
-                    <div>
-                      <dt className="text-muted-foreground">
-                        {t("inspection")}
-                      </dt>
-                      <dd>{b.inspectionReference ?? t("empty")}</dd>
-                    </div>
-                  </dl>
-                  <p>
-                    {t("inputTotal")}: <Mass grams={b.inputGrams} /> ·{" "}
-                    {t("outputTotal")}: <Mass grams={b.outputGrams} />
-                  </p>
-                  <p>
-                    {t("inputFraction")}:{" "}
-                    {fmt.number(b.recycledInputBasisPoints / 10_000, {
-                      style: "percent",
-                      maximumFractionDigits: 2,
-                    })}
-                  </p>
-                  <p className="text-sm break-words">{b.evidenceReference}</p>
-                  <ul className="space-y-2">
-                    {b.inputs.map((i) => (
-                      <li key={i.lotId} className="text-sm break-words">
-                        {t("recycledGrams")}: {fmt.number(i.recycledGrams)} /{" "}
-                        {fmt.number(i.grams)} · {i.evidenceReference}
-                        {i.additive ? ` · ${t("additive")}` : ""}
+                )}
+                {data?.recipes.length === 0 ? <p>{t("empty")}</p> : null}
+              </div>
+            ),
+          },
+          {
+            value: "batches",
+            label: t("batches"),
+            content: (
+              <div className="space-y-5">
+                {canOperate && data ? <BatchForm data={data} /> : null}
+                {data === undefined ? (
+                  <ListSkeleton />
+                ) : (
+                  <ul className="divide-y border-y">
+                    {data.batches.map((b) => (
+                      <li key={b.id} className="space-y-3 py-4">
+                        <h2 className="font-display text-lg font-semibold">
+                          {b.reference}
+                        </h2>
+                        <dl className="space-y-2 text-sm">
+                          <div>
+                            <dt className="text-muted-foreground">
+                              {t("recipe")}
+                            </dt>
+                            <dd>
+                              {b.recipeName ?? t("empty")} · {b.recipeVersion}
+                            </dd>
+                          </div>
+                          <div>
+                            <dt className="text-muted-foreground">
+                              {t("transformation")}
+                            </dt>
+                            <dd>
+                              {b.transformationCreatedAt === null
+                                ? t("empty")
+                                : fmt.dateTime(b.transformationCreatedAt, {
+                                    dateStyle: "medium",
+                                    timeStyle: "short",
+                                  })}
+                            </dd>
+                          </div>
+                          <div>
+                            <dt className="text-muted-foreground">
+                              {t("inspection")}
+                            </dt>
+                            <dd>{b.inspectionReference ?? t("empty")}</dd>
+                          </div>
+                        </dl>
+                        <p>
+                          {t("inputTotal")}: <Mass grams={b.inputGrams} /> ·{" "}
+                          {t("outputTotal")}: <Mass grams={b.outputGrams} />
+                        </p>
+                        <p>
+                          {t("inputFraction")}:{" "}
+                          {fmt.number(b.recycledInputBasisPoints / 10_000, {
+                            style: "percent",
+                            maximumFractionDigits: 2,
+                          })}
+                        </p>
+                        <p className="text-sm break-words">
+                          {b.evidenceReference}
+                        </p>
+                        <details className="border-s-2 ps-4">
+                          <summary className="cursor-pointer py-2 font-medium">
+                            {t("inputEvidence")}
+                          </summary>
+                          <ul className="space-y-2">
+                            {b.inputs.map((i) => (
+                              <li key={i.lotId} className="text-sm break-words">
+                                {t("recycledGrams")}:{" "}
+                                {fmt.number(i.recycledGrams)} /{" "}
+                                {fmt.number(i.grams)} · {i.evidenceReference}
+                                {i.additive ? ` · ${t("additive")}` : ""}
+                              </li>
+                            ))}
+                          </ul>
+                        </details>
                       </li>
                     ))}
                   </ul>
-                </li>
-              ))}
-            </ul>
-          )}
-          {data?.batches.length === 0 ? <p>{t("empty")}</p> : null}
-        </TabsContent>
-      </Tabs>
+                )}
+                {data?.batches.length === 0 ? <p>{t("empty")}</p> : null}
+              </div>
+            ),
+          },
+        ]}
+      />
       {data?.truncated ? <p>{t("truncated")}</p> : null}
     </div>
   );

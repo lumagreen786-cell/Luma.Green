@@ -182,30 +182,37 @@ test("phone household pickup produces an exact receipt and adds measured stock o
       before.rows.find((row) => row.material.code === materialCode)?.grams ?? 0;
     await household.setExtraHTTPHeaders({ "X-Forwarded-For": "192.0.2.205" });
     await household.goto("/sell");
-    await household.getByRole("button", { name: /^Newspaper/ }).click();
+    // An actual local image file exercises the browser's photo preparation path.
+    // The illustration is synthetic test content, not household evidence.
     await household
-      .getByRole("textbox", { name: `Kilos of ${material}`, exact: true })
-      .fill("10");
-    await household.getByRole("button", { name: en.sell.basket.next }).click();
+      .getByLabel(en.sell.simple.photos, { exact: true })
+      .setInputFiles("public/images/showcase/household-sorting.webp");
     await household
-      .getByRole("radio", { name: new RegExp(shopAccount.name) })
+      .getByRole("radio", { name: en.sell.simple.pickup, exact: true })
       .check();
-    await household.getByRole("button", { name: en.sell.shop.next }).click();
-    await household
-      .getByRole("radiogroup", { name: en.sell.when.dayLabel })
-      .getByText(en.sell.when.tomorrow, { exact: true })
-      .click();
-    await expect(
-      household.getByRole("radio", { name: /^Tomorrow/ }),
-    ).toBeChecked();
-    await household.getByRole("radio", { name: /^Morning/ }).check();
     await household
       .getByRole("textbox", { name: en.sell.when.addressLabel })
       .fill("Synthetic test flat 7, Local test area, Bengaluru");
     await household
       .getByRole("textbox", { name: en.sell.when.nameLabel })
       .fill(name);
-    await household.getByRole("button", { name: en.sell.when.next }).click();
+    await household
+      .getByRole("button", { name: en.sell.simple.next, exact: true })
+      .click();
+    await household
+      .getByRole("radio", { name: new RegExp(shopAccount.name) })
+      .check();
+    const day = household.getByRole("combobox", {
+      name: en.sell.when.dayLabel,
+      exact: true,
+    });
+    await day.click();
+    await household.getByRole("option", { name: /^Tomorrow/ }).click();
+    await expect(day).toContainText(en.sell.when.tomorrow);
+    await household
+      .getByRole("combobox", { name: en.sell.when.windowLabel, exact: true })
+      .click();
+    await household.getByRole("option", { name: /^Morning/ }).click();
     await household
       .getByRole("textbox", { name: en.sell.phone.label, exact: true })
       .fill(phone.slice(3));
@@ -242,7 +249,8 @@ test("phone household pickup produces an exact receipt and adds measured stock o
     });
     expect(requested?.status).toBe("requested");
     expect(requested?.mode).toBe("pickup");
-    expect(requested?.estimatePaise).toBe(14_000);
+    expect(requested?.estimatePaise).toBeUndefined();
+    expect(requested?.items).toEqual([]);
     expect(requested?.isMine).toBe(true);
     await shop.getByRole("link", { name, exact: true }).click();
     await expect(shop.getByText(en.shop.request.hidden)).toBeVisible();
@@ -272,6 +280,19 @@ test("phone household pickup produces an exact receipt and adds measured stock o
       await shopClient.query(api.shop.get, { bookingId }),
       "Shop could not read its own booking",
     );
+    const photos = await shopClient.query(api.householdPhotos.list, {
+      bookingId: detail.booking.id,
+    });
+    expect(photos).toHaveLength(1);
+    // Photo-only requests have no guessed material rows. The shop identifies
+    // the material, then records the measured weight used by the ledger.
+    await shop
+      .getByRole("combobox", { name: en.shop.weigh.add, exact: true })
+      .click();
+    await shop.getByRole("option", { name: material, exact: true }).click();
+    await shop
+      .getByRole("textbox", { name: `${material}, in kg`, exact: true })
+      .fill("10");
     await shop
       .getByRole("textbox", { name: `${material}, in kg`, exact: true })
       .fill("1.25");

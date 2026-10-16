@@ -7,6 +7,7 @@ import { useSyncExternalStore } from "react";
  */
 
 const PHONE_KEY = "lg.signInPhone";
+const SENT_AT_KEY = "lg.signInSentAt";
 const PREVIEW_KEY = "lg.signInPreview";
 const LANGUAGE_KEY = "lg.languageChosen";
 
@@ -14,35 +15,28 @@ const LANGUAGE_KEY = "lg.languageChosen";
 export function rememberPhone(e164: string): void {
   try {
     sessionStorage.setItem(PHONE_KEY, e164);
+    sessionStorage.setItem(SENT_AT_KEY, String(Date.now()));
     sessionStorage.removeItem(PREVIEW_KEY);
   } catch {
     // Without storage the verify screen sends the user back to enter it again.
   }
 }
 
-/** A preview never means a code was sent or a session was created. */
-export function rememberPreviewPhone(e164: string): void {
-  try {
-    sessionStorage.removeItem(PHONE_KEY);
-    sessionStorage.setItem(PREVIEW_KEY, e164);
-  } catch {
-    // With blocked storage the next screen returns to phone entry.
-  }
-}
-
-export function isPhonePreview(): boolean {
-  try {
-    return sessionStorage.getItem(PREVIEW_KEY) !== null;
-  } catch {
-    return false;
-  }
-}
-
 export function readPhone(): string | null {
   try {
-    return (
-      sessionStorage.getItem(PREVIEW_KEY) ?? sessionStorage.getItem(PHONE_KEY)
-    );
+    return sessionStorage.getItem(PHONE_KEY);
+  } catch {
+    return null;
+  }
+}
+
+/** Successful-send time only; the server remains the resend authority. */
+export function readPhoneSentAt(): number | null {
+  try {
+    const value = sessionStorage.getItem(SENT_AT_KEY);
+    if (value === null) return null;
+    const timestamp = Number(value);
+    return Number.isFinite(timestamp) && timestamp > 0 ? timestamp : null;
   } catch {
     return null;
   }

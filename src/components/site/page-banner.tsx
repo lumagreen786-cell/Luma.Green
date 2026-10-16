@@ -18,7 +18,7 @@ export function PageBanner({
         frameClassName={
           split
             ? "aspect-[16/9] lg:aspect-[4/3]"
-            : "aspect-[16/7] sm:aspect-[3/1] lg:aspect-[4/1]"
+            : "aspect-[3/2] sm:aspect-[2/1] lg:aspect-[3/1]"
         }
         sizes={
           split

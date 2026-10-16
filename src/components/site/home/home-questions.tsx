@@ -18,8 +18,6 @@ const questions = [
   "howPriceWorks",
   "howPaid",
   "kabadiwalasChecked",
-  "whatIsEscrow",
-  "carbonCredits",
 ] as const;
 const guides = [
   { role: "household", icon: HouseIcon },
@@ -36,14 +34,13 @@ export async function HomeQuestions() {
   return (
     <section
       aria-labelledby="home-questions-heading"
-      className="border-t bg-muted/30 py-10 sm:py-12 lg:py-24"
+      className="border-t bg-muted/30 py-8 sm:py-10"
     >
       <Container className="grid min-w-0 grid-cols-1 gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16">
         <div className="flex min-w-0 flex-col gap-8">
           <SectionHeading
             id="home-questions-heading"
             title={home("expansion.questionsTitle")}
-            intro={help("lead")}
           />
           <nav
             aria-label={help("rolesHeading")}

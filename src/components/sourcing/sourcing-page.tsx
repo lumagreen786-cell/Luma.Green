@@ -8,13 +8,12 @@ import { toast } from "sonner";
 
 import { AppPageHeader, ListSkeleton } from "@/components/app/page-parts";
 import { useWorkspace } from "@/components/app/use-workspace";
+import { WorkflowTabs } from "@/components/app/workflow-tabs";
 import { Mass } from "@/components/lots/form-parts";
 import { NotForYou } from "@/components/shop/guards";
 import { useIndiaToday } from "@/components/shop/use-shop";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useCanOperate } from "@/components/workspace/permissions";
-import { isLocale, localeDirection } from "@/i18n/locales";
 
 import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
@@ -43,39 +42,28 @@ export function SourcingPage() {
 }
 function SourcingWorkspace() {
   const t = useTranslations("sourcing");
-  const locale = useLocale();
   const isCan = useCanOperate();
   return (
     <div className="flex min-w-0 flex-col gap-6">
       <AppPageHeader title={t("title")} lead={t("lead")} />
       <p className="text-sm text-muted-foreground">{t("boundary")}</p>
       {isCan ? null : <p>{t("readOnly")}</p>}
-      <Tabs
-        defaultValue="board"
-        dir={isLocale(locale) ? localeDirection(locale) : "ltr"}
-      >
-        <TabsList className="h-auto flex-wrap">
-          {(["board", "plans", "qualifications", "agreements"] as const).map(
-            (k) => (
-              <TabsTrigger key={k} value={k}>
-                {t(k)}
-              </TabsTrigger>
-            ),
-          )}
-        </TabsList>
-        <TabsContent value="board">
-          <DemandBoard />
-        </TabsContent>
-        <TabsContent value="plans">
-          <Plans />
-        </TabsContent>
-        <TabsContent value="qualifications">
-          <Qualifications />
-        </TabsContent>
-        <TabsContent value="agreements">
-          <Agreements />
-        </TabsContent>
-      </Tabs>
+      <WorkflowTabs
+        items={[
+          { value: "board", label: t("board"), content: <DemandBoard /> },
+          { value: "plans", label: t("plans"), content: <Plans /> },
+          {
+            value: "qualifications",
+            label: t("qualifications"),
+            content: <Qualifications />,
+          },
+          {
+            value: "agreements",
+            label: t("agreements"),
+            content: <Agreements />,
+          },
+        ]}
+      />
     </div>
   );
 }
@@ -292,23 +280,17 @@ function Qualifications() {
 }
 function Agreements() {
   const t = useTranslations("sourcing");
-  const [side, setSide] = useState<"buying" | "supplying">("buying");
   const isCan = useCanOperate();
   return (
     <div className="space-y-5 py-4">
       {isCan ? <NewRecord kind="agreement" /> : null}
-      <Tabs
-        value={side}
-        onValueChange={(value) => {
-          if (value === "buying" || value === "supplying") setSide(value);
-        }}
-      >
-        <TabsList>
-          <TabsTrigger value="buying">{t("buying")}</TabsTrigger>
-          <TabsTrigger value="supplying">{t("supplying")}</TabsTrigger>
-        </TabsList>
-      </Tabs>
-      <AgreementList key={side} side={side} />
+      <WorkflowTabs
+        items={(["buying", "supplying"] as const).map((side) => ({
+          value: side,
+          label: t(side),
+          content: <AgreementList side={side} />,
+        }))}
+      />
     </div>
   );
 }

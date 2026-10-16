@@ -9,6 +9,7 @@ import { StatusPill } from "@/components/app/page-parts";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { isLocale, localeMeta } from "@/i18n/locales";
 
 import { api } from "../../../../convex/_generated/api";
@@ -71,23 +72,35 @@ export function ApplicationReview({
       <ReviewHeader application={application} now={now} />
       <ResubmissionNote application={application} />
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_22rem]">
-        <div className="flex min-w-0 flex-col gap-6">
-          <ApplicationDetails
-            application={application}
-            today={indiaToday(now)}
-          />
-          <FileGallery
-            files={application.files}
-            emptyText={
-              application.kind === "kabadiwala"
-                ? "Kabadiwalas don't upload documents: the checks are the map and a phone call."
-                : "No files attached."
-            }
-          />
-        </div>
+        <Tabs defaultValue="application" className="min-w-0">
+          <TabsList className="h-auto flex-wrap justify-start gap-2">
+            <TabsTrigger value="application">Application</TabsTrigger>
+            <TabsTrigger value="documents">Documents</TabsTrigger>
+            <TabsTrigger value="history">History</TabsTrigger>
+          </TabsList>
+          <TabsContent value="application" className="pt-4">
+            <ApplicationDetails
+              application={application}
+              today={indiaToday(now)}
+            />
+          </TabsContent>
+          <TabsContent value="documents" className="pt-4">
+            <FileGallery
+              files={application.files}
+              emptyText={
+                application.kind === "kabadiwala"
+                  ? "Kabadiwalas don't upload documents: the checks are the map and a phone call."
+                  : "No files attached."
+              }
+            />
+          </TabsContent>
+          <TabsContent value="history" className="pt-4">
+            <AuditTrail entries={application.audit} />
+          </TabsContent>
+        </Tabs>
         <aside
           aria-label="Checks and decision"
-          className="flex min-w-0 flex-col gap-6 xl:row-span-2 xl:self-start xl:border-s xl:ps-6"
+          className="flex min-w-0 flex-col gap-6 xl:sticky xl:top-6 xl:self-start xl:border-s xl:ps-6"
         >
           {application.status === "submitted" ? (
             <>
@@ -109,9 +122,6 @@ export function ApplicationReview({
             <DecisionStatus application={application} />
           )}
         </aside>
-        <div className="min-w-0 xl:col-start-1">
-          <AuditTrail entries={application.audit} />
-        </div>
       </div>
     </div>
   );
