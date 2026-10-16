@@ -45,4 +45,8 @@ export function usePathname() {
 export function useSearchParams() {
   return new URLSearchParams(window.location.search);
 }
+/** Server redirects must never simulate successful access in a fixture. */
+export function redirect(): never {
+  throw new Error("Server redirects are unavailable in the isolated preview.");
+}
 export default Link;

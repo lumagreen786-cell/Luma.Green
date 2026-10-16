@@ -17,6 +17,10 @@ import {
   unknownFactorImpactFixture,
   workspaceFixture,
 } from "./fixtures";
+import {
+  workspaceListFixture,
+  workspaceTeamFixture,
+} from "./workspace-fixtures";
 
 function failureQuery(name: string): { matched: boolean; value?: unknown } {
   if (window.location.pathname.endsWith("/failure.html")) {
@@ -75,7 +79,20 @@ function impactScenario() {
     : impactFixture;
 }
 function readFixture(name: string): unknown {
-  if (name === "workspace:mine") return workspaceFixture();
+  switch (name) {
+    case "workspace:mine": {
+      return workspaceFixture();
+    }
+    case "workspace:list": {
+      return workspaceListFixture;
+    }
+    case "workspace:team": {
+      return workspaceTeamFixture;
+    }
+    default: {
+      break;
+    }
+  }
   if (name === "market:browse") return offersFixture();
   if (
     name === "market:trades" &&

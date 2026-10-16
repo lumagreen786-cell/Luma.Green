@@ -39,12 +39,12 @@ for (const { locale, messages } of languages) {
 
         await page.goto(`/${locale}`);
         for (const content of [messages.home.hero, messages.home.closing]) {
-          const action = page
-            .getByRole("region", { name: content.title })
-            .getByRole("link", {
-              name: actionName(messages.nav.sellScrap, content.sell),
-              exact: true,
-            });
+          const region = page.getByRole("region", { name: content.title });
+          await expect(region).toHaveCSS("background-image", "none");
+          const action = region.getByRole("link", {
+            name: actionName(messages.nav.sellScrap, content.sell),
+            exact: true,
+          });
           await action.focus();
           await expect(action).toBeFocused();
           await expect(action).toHaveAttribute("href", /\/sell$/);
@@ -58,6 +58,7 @@ for (const { locale, messages } of languages) {
         const testimonials = page.getByRole("region", {
           name: messages.home.testimonials.title,
         });
+        await expect(testimonials).toHaveCSS("background-image", "none");
         await testimonials.scrollIntoViewIfNeeded();
         await expect(
           testimonials.getByText(messages.home.testimonials.note),
@@ -119,7 +120,7 @@ test("public motion keeps headings readable and collection actions usable", asyn
     await closingAction.evaluate(
       (element) => getComputedStyle(element, "::before").animationName,
     ),
-  ).toMatch(/action-sheen/);
+  ).toBe("none");
   await page.keyboard.press("Enter");
   await expect(page).toHaveURL(/\/sell$/);
 });
@@ -191,7 +192,7 @@ for (const locale of locales) {
                   : "",
             })),
           );
-        const expectedActions = { "": 7, "/help": 0, "/help/contact": 2 };
+        const expectedActions = { "": 4, "/help": 0, "/help/contact": 2 };
         expect(namedActions).toHaveLength(
           expectedActions[route as keyof typeof expectedActions],
         );

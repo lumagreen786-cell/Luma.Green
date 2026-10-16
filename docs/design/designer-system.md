@@ -83,6 +83,17 @@ labelled fixtures. The delivery handoff owns verification and release status.
 
 ## Current UI contract
 
+### Entry-form redesign — 15 October 2026
+
+Web UI work has resumed across public pages, login, signup/onboarding, household
+recycling, operational workspaces, account settings and admin. Avoid nested cards,
+decorative gradients and repeated explanations. Use open sections and short copy.
+Use the adapted IMAI design/form skills. Keep the approved identity while giving
+entry pages stronger image-led composition and clearer field/action structure.
+On narrow screens, images must not push the primary form far below the fold.
+Impeccable is removed from the repo and is not used for this pass. Native apps
+remain on hold. The historical installation notes below are not current routing.
+
 ### Platform UI pass — 6 October 2026
 
 The founder requested a platform-wide UI pass after reviewing the phone/email

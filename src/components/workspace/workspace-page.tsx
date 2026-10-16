@@ -3,11 +3,16 @@
 import { useAction, useMutation, useQuery } from "convex/react";
 import type { FunctionReturnType } from "convex/server";
 import { ConvexError } from "convex/values";
+import { ArrowRightIcon, CheckIcon } from "lucide-react";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
 
-import { ListSkeleton } from "@/components/app/page-parts";
+import {
+  AppPageHeader,
+  ListSkeleton,
+  SettingsSection,
+} from "@/components/app/page-parts";
 import { useSignedInQuery } from "@/components/providers/use-signed-in-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -110,18 +115,13 @@ export function WorkspacePage() {
   }
   return (
     <div className="flex min-w-0 flex-col gap-6">
-      <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
-        {t("title")}
-      </h1>
+      <AppPageHeader title={t("title")} />
       {workspaces == null ? <ListSkeleton /> : null}
       {workspaces?.length === 0 ? <p>{t("empty")}</p> : null}
       {workspaces && workspaces.length > 0 ? (
         <>
-          <section aria-labelledby="choose-workspace">
-            <h2 id="choose-workspace" className="mb-3 text-lg font-semibold">
-              {t("choose")}
-            </h2>
-            <ul className="divide-y border-y">
+          <SettingsSection id="choose-workspace" title={t("choose")}>
+            <ul className="divide-y border-b">
               {workspaces.map(({ org, role, selected }) => (
                 <li
                   key={org.id}
@@ -137,12 +137,13 @@ export function WorkspacePage() {
                     disabled={busy || selected}
                     onClick={() => void choose(org.id)}
                   >
+                    {selected ? <CheckIcon aria-hidden /> : null}
                     {t("choose")}
                   </Button>
                 </li>
               ))}
             </ul>
-          </section>
+          </SettingsSection>
           {selected ? (
             <TeamSection
               key={`${selected.org.id}-${selected.role}`}
@@ -151,7 +152,10 @@ export function WorkspacePage() {
           ) : null}
           {selected ? (
             <Button asChild variant="outline" className="self-start">
-              <Link href="/app">{selected.org.name}</Link>
+              <Link href="/app">
+                {selected.org.name}
+                <ArrowRightIcon aria-hidden className="rtl:rotate-180" />
+              </Link>
             </Button>
           ) : null}
         </>
@@ -167,14 +171,11 @@ function TeamSection({ orgId }: { orgId: Id<"orgs"> }) {
   const canManage = team.role === "owner" || team.role === "admin";
   return (
     <>
-      <section aria-labelledby="workspace-team">
-        <h2 id="workspace-team" className="mb-3 text-lg font-semibold">
-          {t("team")}
-        </h2>
+      <SettingsSection id="workspace-team" title={t("team")}>
         {team.role === "viewer" ? (
           <p className="mb-3 text-muted-foreground">{t("readOnly")}</p>
         ) : null}
-        <ul className="divide-y border-y">
+        <ul className="divide-y border-b">
           {team.members.map((member) => (
             <MemberRow
               key={`${member.id}-${member.role}`}
@@ -184,7 +185,7 @@ function TeamSection({ orgId }: { orgId: Id<"orgs"> }) {
             />
           ))}
         </ul>
-      </section>
+      </SettingsSection>
       {canManage ? (
         <>
           <InviteForm orgId={orgId} actorRole={team.role} />
@@ -321,10 +322,7 @@ function InviteForm({
     }
   }
   return (
-    <section aria-labelledby="workspace-invite">
-      <h2 id="workspace-invite" className="mb-4 text-lg font-semibold">
-        {t("invite")}
-      </h2>
+    <SettingsSection id="workspace-invite" title={t("invite")}>
       <form
         onSubmit={(event) => {
           event.preventDefault();
@@ -367,7 +365,7 @@ function InviteForm({
           {t("invite")}
         </Button>
       </form>
-    </section>
+    </SettingsSection>
   );
 }
 
@@ -399,11 +397,8 @@ function Invitations({
     failed: "deliveryFailed",
   } as const;
   return (
-    <section aria-labelledby="pending-invites">
-      <h2 id="pending-invites" className="mb-3 text-lg font-semibold">
-        {t("pending")}
-      </h2>
-      <ul className="divide-y border-y">
+    <SettingsSection id="pending-invites" title={t("pending")}>
+      <ul className="divide-y border-b">
         {invitations.map((invitation) => (
           <li
             key={invitation.id}
@@ -437,6 +432,6 @@ function Invitations({
           </li>
         ))}
       </ul>
-    </section>
+    </SettingsSection>
   );
 }

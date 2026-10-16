@@ -186,8 +186,11 @@ function LiveContactForm({
         <Label htmlFor="solar-contact-phone" className="text-base">
           {t("phone")}
         </Label>
-        <div className="flex gap-2" dir="ltr">
-          <span className="flex h-12 items-center rounded-md border bg-muted px-3 text-lg font-medium">
+        <div
+          className="flex rounded-md border border-input bg-background focus-within:border-ring focus-within:ring-3 focus-within:ring-ring/20"
+          dir="ltr"
+        >
+          <span className="flex h-12 items-center border-e border-input px-4 text-base font-medium text-muted-foreground">
             +91
           </span>
           <Input
@@ -198,7 +201,7 @@ function LiveContactForm({
             placeholder="98765 43210"
             aria-invalid={errorKey("phone") ? true : undefined}
             aria-describedby="solar-contact-phone-note"
-            className="h-12 min-w-0 text-lg tracking-wide"
+            className="h-12 min-w-0 rounded-s-none border-0 bg-transparent text-base tracking-wide shadow-none focus-visible:ring-0 dark:bg-transparent"
             {...register("phone")}
           />
         </div>

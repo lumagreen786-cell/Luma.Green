@@ -123,7 +123,7 @@ function Sidebar({ name }: { name: string }) {
   const { signOut, busy, error } = useAdminSignOut();
 
   return (
-    <aside className="flex flex-col gap-3 border-b border-sidebar-border bg-background px-3 pt-3 pb-2 text-sidebar-foreground lg:sticky lg:top-0 lg:h-dvh lg:w-64 lg:shrink-0 lg:gap-6 lg:overflow-y-auto lg:border-e lg:border-b-0 lg:p-5">
+    <aside className="flex flex-col gap-3 border-b border-sidebar-border bg-background px-3 pt-3 pb-2 text-sidebar-foreground lg:sticky lg:top-0 lg:h-dvh lg:w-64 lg:shrink-0 lg:gap-6 lg:overflow-y-auto lg:border-e lg:border-b-0 lg:px-4 lg:py-5">
       <div className="flex items-center justify-between gap-2">
         <Link
           href="/admin"
@@ -176,7 +176,7 @@ function Sidebar({ name }: { name: string }) {
         />
       </div>
       <nav aria-label="Admin">
-        <ul className="grid grid-cols-3 gap-1 sm:grid-cols-6 lg:flex lg:flex-col">
+        <ul className="grid grid-cols-3 gap-x-2 sm:grid-cols-4 lg:flex lg:flex-col lg:gap-1">
           {nav.map((item) => {
             const isActive = isCurrent(pathname, item.href);
             const count = item.count ? summary?.[item.count.key] : undefined;
@@ -186,10 +186,10 @@ function Sidebar({ name }: { name: string }) {
                   href={item.href}
                   aria-current={isActive ? "page" : undefined}
                   className={cn(
-                    "relative flex min-h-14 min-w-0 flex-col items-center justify-center gap-1 rounded-md border-s-2 border-transparent px-1 py-2 text-xs transition-colors outline-none focus-visible:ring-3 focus-visible:ring-ring/50 lg:min-h-11 lg:flex-row lg:justify-start lg:gap-3 lg:px-3 lg:text-sm",
+                    "relative flex min-h-14 min-w-0 flex-col items-center justify-center gap-1 border-b-2 border-transparent px-1 py-2 text-xs transition-colors outline-none focus-visible:ring-3 focus-visible:ring-ring/50 lg:min-h-11 lg:flex-row lg:justify-start lg:gap-3 lg:border-s-2 lg:border-b-0 lg:px-3 lg:text-sm",
                     isActive
-                      ? "border-s-primary bg-sidebar-accent font-semibold text-sidebar-accent-foreground"
-                      : "text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+                      ? "border-b-primary font-semibold text-primary lg:border-s-primary"
+                      : "text-muted-foreground hover:bg-muted/50 hover:text-foreground",
                   )}
                 >
                   <item.icon

@@ -214,7 +214,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-dvh flex-col bg-background xl:flex-row">
       <SkipLink />
-      <aside className="sticky top-0 hidden h-dvh w-64 shrink-0 flex-col gap-4 border-e border-sidebar-border bg-sidebar p-4 text-sidebar-foreground xl:flex">
+      <aside className="sticky top-0 hidden h-dvh w-64 shrink-0 flex-col gap-5 border-e border-sidebar-border bg-sidebar px-4 py-5 text-sidebar-foreground xl:flex">
         <Link
           href="/"
           className="inline-flex min-h-11 items-center rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
@@ -234,7 +234,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           {primary.map((item) =>
             link(
               item,
-              "flex min-h-11 items-center gap-3 rounded-md border-s-2 border-transparent px-3 text-sm font-medium outline-none transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-3 focus-visible:ring-ring/50",
+              "flex min-h-11 items-center gap-3 border-s-2 border-transparent px-3 text-sm font-medium outline-none transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-3 focus-visible:ring-ring/50",
             ),
           )}
           {more.length > 0 ? (
@@ -242,19 +242,19 @@ export function AppShell({ children }: { children: ReactNode }) {
               {more.map((item) =>
                 link(
                   item,
-                  "flex min-h-11 items-center gap-3 rounded-md border-s-2 border-transparent px-3 text-sm text-muted-foreground outline-none transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-3 focus-visible:ring-ring/50",
+                  "flex min-h-11 items-center gap-3 border-s-2 border-transparent px-3 text-sm text-muted-foreground outline-none transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-3 focus-visible:ring-ring/50",
                 ),
               )}
             </div>
           ) : null}
           <Link
             href={help}
-            className="mt-2 flex min-h-11 items-center gap-3 rounded-md border-s-2 border-transparent px-3 text-sm font-medium transition-colors outline-none hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
+            className="mt-2 flex min-h-11 items-center gap-3 border-s-2 border-transparent px-3 text-sm font-medium transition-colors outline-none hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
           >
             <LifeBuoyIcon aria-hidden className="size-5" />
             {t("nav.help")}
           </Link>
-          <AccountLinks className="rounded-lg px-3 hover:bg-sidebar-accent" />
+          <AccountLinks className="border-s-2 border-transparent px-3 hover:bg-sidebar-accent" />
         </nav>
         <div className="flex shrink-0 flex-col gap-2 border-t border-sidebar-border pt-4">
           <div className="flex items-center justify-between gap-2">
@@ -275,7 +275,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       </aside>
 
       <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
-        <header className="sticky top-0 z-30 flex h-14 items-center justify-between gap-2 border-b border-border bg-card/95 px-4 backdrop-blur xl:hidden">
+        <header className="sticky top-0 z-30 flex h-14 items-center justify-between gap-2 border-b border-border bg-background px-4 xl:hidden">
           <Link
             href="/"
             aria-label={t("homeLink")}
@@ -389,7 +389,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         </SheetContent>
         <nav
           aria-label={t("navLabel")}
-          className="fixed inset-x-0 bottom-0 z-30 grid border-t border-border bg-card/95 px-2 pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] backdrop-blur xl:hidden"
+          className="fixed inset-x-0 bottom-0 z-30 grid border-t border-border bg-background px-2 pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] xl:hidden"
           style={{
             gridTemplateColumns: `repeat(${String(mobilePrimary.length + 1)}, minmax(max-content, 1fr))`,
           }}
@@ -423,7 +423,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       <main
         id="main"
         tabIndex={-1}
-        className="mx-auto flex w-full max-w-7xl min-w-0 flex-1 flex-col gap-6 px-4 pt-6 pb-28 sm:px-8 xl:px-10 xl:pt-8 xl:pb-12"
+        className="mx-auto flex w-full max-w-7xl min-w-0 flex-1 flex-col gap-8 px-4 pt-6 pb-28 sm:px-8 xl:px-10 xl:pt-8 xl:pb-12"
       >
         <WorkspacePermissions
           key={

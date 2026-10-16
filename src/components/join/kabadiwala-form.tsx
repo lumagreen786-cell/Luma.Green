@@ -136,35 +136,40 @@ export function KabadiwalaForm({
       />
       <ChangesNote note={application.note} />
 
-      <FormField
-        id="ownerName"
-        label={t("kabadiwala.ownerName")}
-        error={errors.ownerName?.message}
-      >
-        <Input
+      <div className="grid gap-6 sm:grid-cols-2">
+        <FormField
           id="ownerName"
-          autoComplete="name"
-          className="h-12 text-base"
-          aria-invalid={errors.ownerName ? true : undefined}
-          aria-describedby={describedBy("ownerName", errors.ownerName?.message)}
-          {...register("ownerName")}
-        />
-      </FormField>
+          label={t("kabadiwala.ownerName")}
+          error={errors.ownerName?.message}
+        >
+          <Input
+            id="ownerName"
+            autoComplete="name"
+            className="h-12 text-base"
+            aria-invalid={errors.ownerName ? true : undefined}
+            aria-describedby={describedBy(
+              "ownerName",
+              errors.ownerName?.message,
+            )}
+            {...register("ownerName")}
+          />
+        </FormField>
 
-      <FormField
-        id="shopName"
-        label={t("kabadiwala.shopName")}
-        error={errors.shopName?.message}
-      >
-        <Input
+        <FormField
           id="shopName"
-          autoComplete="organization"
-          className="h-12 text-base"
-          aria-invalid={errors.shopName ? true : undefined}
-          aria-describedby={describedBy("shopName", errors.shopName?.message)}
-          {...register("shopName")}
-        />
-      </FormField>
+          label={t("kabadiwala.shopName")}
+          error={errors.shopName?.message}
+        >
+          <Input
+            id="shopName"
+            autoComplete="organization"
+            className="h-12 text-base"
+            aria-invalid={errors.shopName ? true : undefined}
+            aria-describedby={describedBy("shopName", errors.shopName?.message)}
+            {...register("shopName")}
+          />
+        </FormField>
+      </div>
 
       <FieldSet
         id="gstRegistered"

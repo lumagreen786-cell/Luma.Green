@@ -19,14 +19,14 @@ how to do one job well.
 
 ### Current delivery priority: web only
 
-The owner placed Expo/mobile-app and Electron/desktop-app development on hold
-on 15 October 2026. Finish the web application's technical functionality first,
-including organizations, workspaces and collaboration. The owner subsequently
-deferred UI redesign: improve login, signup, the household recycling form and
-other pages one page at a time only when requested. Do not start a visual polish
-pass during backend implementation. Mobile browser usability
-is in scope; native app work is not. Do not change, package, release or deploy
-`apps/mobile` or `apps/desktop` until the owner explicitly resumes that work.
+On 15 October 2026, the owner resumed and expanded UI work across the whole web
+platform: public pages, login, signup, household recycling, workspaces and admin.
+Use the adapted IMAI skills below. Use open sections and dividers, no nested
+cards or decorative gradients, and short useful copy. Impeccable was removed from
+this repository at the owner's request; do not use it for this work.
+Mobile browser usability is in scope. Expo/mobile and Electron/desktop work
+remain on hold: do not change, package, release or deploy `apps/mobile` or
+`apps/desktop` until the owner explicitly resumes them.
 Preserve existing native changes; this hold does not authorize discarding them.
 On 15 October 2026, the owner approved only the Expo 57.0.29 → 57.0.30 patch
 and its required dependency updates to pass compatibility checks. Test that
@@ -373,16 +373,34 @@ where `String.raw` would break Next's static analysis of the matcher.
 
 ## 11. Skills
 
-| Skill                          | Use it when                                                                                 |
-| ------------------------------ | ------------------------------------------------------------------------------------------- |
-| `.claude/skills/testing`       | Writing or changing any code — what to test and how                                         |
-| `.claude/skills/ci-checks`     | A check is red, or you're adding a new one                                                  |
-| `.claude/skills/i18n`          | Any user-facing string, or adding a locale                                                  |
-| `.claude/skills/design-system` | Building UI — tokens, shadcn, light/dark themes, RTL                                        |
-| `.claude/skills/impeccable`    | Platform UI design, layout, critique and visual review; apply the current UI contract first |
-| `.claude/skills/seo`           | Adding a route, metadata, sitemap or structured data                                        |
-| `.claude/skills/convex-data`   | Schema changes, queries, mutations, migrations                                              |
-| `.claude/skills/ship-pr`       | Opening a PR or preparing a deployment                                                      |
+| Skill                          | Use it when                                          |
+| ------------------------------ | ---------------------------------------------------- |
+| `.claude/skills/testing`       | Writing or changing any code — what to test and how  |
+| `.claude/skills/ci-checks`     | A check is red, or you're adding a new one           |
+| `.claude/skills/i18n`          | Any user-facing string, or adding a locale           |
+| `.claude/skills/design-system` | Building UI — tokens, shadcn, light/dark themes, RTL |
+| `.claude/skills/seo`           | Adding a route, metadata, sitemap or structured data |
+| `.claude/skills/convex-data`   | Schema changes, queries, mutations, migrations       |
+| `.claude/skills/ship-pr`       | Opening a PR or preparing a deployment               |
+
+### Adapted IMAI skills
+
+The canonical copies live in `.claude/skills`; `.agents/skills` links make them
+discoverable by Codex. These are Luma adaptations with source provenance, not
+IMAI runtime packages. They support the current UI contract and never override
+authentication, translation, native holds or release rules.
+
+- `luma-imai-design`: composition, density, imagery and visual review.
+- `luma-imai-forms`: field grouping, choices, validation and progress.
+- `luma-imai-app-building`: complete workflows with real data and permissions.
+- `luma-imai-interface-details`: typography, alignment and control feedback.
+- `luma-imai-i18n-review`: static copy, translated fit and RTL.
+- `luma-imai-journey-review`: end-to-end evidence and honest provider limits.
+- `luma-imai-motion-performance`: stable layouts and restrained transitions.
+- `luma-imai-web-rendering`: server/client boundaries, hydration and route loading.
+- `luma-imai-convex-performance`: measured query, subscription and contention fixes.
+- `luma-imai-workspace-access`: scoped membership, invitations and record permissions.
+- `luma-imai-root-cause-repair`: defect tracing, safe recovery and regression evidence.
 
 <!-- BEGIN:nextjs-agent-rules -->
 

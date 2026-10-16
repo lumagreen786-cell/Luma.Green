@@ -40,7 +40,7 @@ export default async function JoinPage() {
         title={t("title")}
         lead={t("lead")}
         scene="dispatch"
-        atmosphere
+        variant="task"
       />
       <Container className="flex flex-col gap-8 py-8 lg:py-12">
         <RoleCards />

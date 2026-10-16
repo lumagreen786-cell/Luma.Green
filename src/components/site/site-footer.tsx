@@ -17,12 +17,11 @@ export async function SiteFooter() {
   ]);
 
   return (
-    <footer className="mt-auto border-t border-border bg-card">
-      <Container className="grid gap-12 py-16 lg:grid-cols-[1fr_1fr]">
+    <footer className="mt-auto border-t border-border bg-background">
+      <Container className="grid gap-10 py-10 sm:py-14 lg:grid-cols-[1fr_1fr] lg:gap-20">
         <div className="space-y-4">
           <Logo />
           <p className="text-sm font-medium">{brand("tagline")}</p>
-          <p className="max-w-sm text-sm text-muted-foreground">{t("about")}</p>
         </div>
         <nav aria-label={t("navLabel")} className="grid grid-cols-2 gap-8">
           {footerGroups.map((group) => (

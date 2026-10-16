@@ -34,9 +34,9 @@ export default async function AccountLayout({
       <div className="mx-auto grid w-full max-w-7xl flex-1 content-start gap-6 px-4 py-6 sm:px-8 lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-10 lg:py-8">
         <nav
           aria-label={account("title")}
-          className="hidden self-start border-e border-border pe-6 lg:grid"
+          className="hidden self-start border-e border-border pe-6 lg:grid lg:gap-1"
         >
-          <AccountLinks className="rounded-md px-2 hover:bg-muted" />
+          <AccountLinks className="border-s-2 border-transparent px-3 hover:bg-muted" />
         </nav>
         <main id="main" tabIndex={-1} className="flex min-w-0 flex-col">
           {children}

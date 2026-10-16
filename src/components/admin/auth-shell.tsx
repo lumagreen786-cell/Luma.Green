@@ -21,7 +21,7 @@ export function AdminAuthShell({
         <Link
           href="/"
           aria-label="Luma.Green home"
-          className="inline-flex min-h-11 items-center rounded-lg outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+          className="inline-flex min-h-11 items-center rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
         >
           <Logo />
         </Link>
@@ -40,7 +40,7 @@ export function AdminAuthShell({
         className="mx-auto flex w-full max-w-lg flex-1 flex-col px-5 py-8 sm:px-8 sm:py-16"
       >
         <div>
-          <div className="mb-7 flex flex-col gap-3">
+          <div className="mb-6 flex flex-col gap-3 border-b border-border pb-6">
             <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
               {title}
             </h1>

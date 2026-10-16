@@ -9,13 +9,9 @@ import { HomeHero } from "@/components/site/home/hero";
 import { HomeQuestions } from "@/components/site/home/home-questions";
 import { MaterialDirectory } from "@/components/site/home/material-directory";
 import { MaterialMarquee } from "@/components/site/home/material-marquee";
-import { MaterialRecords } from "@/components/site/home/material-records";
 import { PickupJourney } from "@/components/site/home/pickup-journey";
 import { RoleBenefits } from "@/components/site/home/role-benefits";
-import { ShopWorkday } from "@/components/site/home/shop-workday";
 import { TrustPoints } from "@/components/site/home/trust-points";
-import { WeightPayment } from "@/components/site/home/weight-payment";
-import { WhyNow } from "@/components/site/home/why-now";
 import { localeFromParams } from "@/i18n/paths";
 import { pageMetadata, serializeJsonLd } from "@/lib/seo";
 import { site } from "@/lib/site";
@@ -41,8 +37,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 /**
- * The story: India's scrap chain on one platform — who is in it, what each
- * gets, why it can be trusted and why now.
+ * A direct public path: book a pickup, choose materials, understand the process
+ * and find the right role. Detailed stories stay on their dedicated pages.
  */
 export default async function HomePage() {
   const t = await getTranslations("home");
@@ -71,13 +67,9 @@ export default async function HomePage() {
         <MaterialDirectory />
         <PickupJourney />
         <ChainDiagram />
-        <ShopWorkday />
-        <WeightPayment />
         <RoleBenefits />
-        <MaterialRecords />
         <TrustPoints />
         <DemoTestimonials />
-        <WhyNow />
         <HomeQuestions />
         <ClosingCta />
       </HomeMotion>

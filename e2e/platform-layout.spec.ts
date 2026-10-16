@@ -29,8 +29,13 @@ for (const { locale, messages } of [
         expect(form).not.toBeNull();
         expect(supporting).not.toBeNull();
         if (form && supporting) {
-          expect(form.width).toBeGreaterThan(supporting.width);
-          expect(form.y).toBeLessThanOrEqual(supporting.y + 1);
+          expect(form.width).toBeGreaterThanOrEqual(400);
+          expect(supporting.width).toBeGreaterThanOrEqual(320);
+          // The new editorial split uses equal reading widths in either direction.
+          expect(
+            Math.min(form.x + form.width, supporting.x + supporting.width) -
+              Math.max(form.x, supporting.x),
+          ).toBeLessThanOrEqual(0);
         }
       }
       await page.goto(`/${locale}/prices`);

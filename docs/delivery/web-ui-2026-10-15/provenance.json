@@ -1,0 +1,64 @@
+{
+  "capturedFor": "Web UI release, 15 October 2026",
+  "sourceBaseCommit": "c24ae791441e6e511f9bd09224463ca4fa80d2b0",
+  "sourceState": "Working tree UI changes on feat/imai-web-forms; base commit alone does not contain these changes.",
+  "stylesheet": "50ac1a9ba7b31cc2.css",
+  "stylesheetSha256": "c1dd275f5b5d55a2b4afa654e9e4892ee74d6f83ee4932862a13667f7cbae950",
+  "boundary": "Public captures use an unconfigured production build. Protected and basket captures use labelled synthetic fixtures with writes disabled. No provider or authenticated production acceptance is claimed.",
+  "files": [
+    {
+      "file": "admin-home-light-1440.png",
+      "sha256": "9d9b5c769c5772fc279e621f9a8250724953ba60485247a55fd00fd7ac824316"
+    },
+    {
+      "file": "basket-en-light-390.png",
+      "sha256": "808dc52481cb2191f5efaab490e8684e7608e014c1fb9fbfd13cbf1b247da94d"
+    },
+    {
+      "file": "home-en-light-1440.png",
+      "sha256": "caeb950942deca35ece6b82dd002476d69fd77238dae092ad9590bc70978f976"
+    },
+    {
+      "file": "join-en-dark-1440.png",
+      "sha256": "20297aeaf4e17c133c33d38814321cd7e83e19b04254aa75043c55cddf162b34"
+    },
+    {
+      "file": "login-ar-dark-390.png",
+      "sha256": "9a0ca75b91a3c8c7c513cc94d1567fd60027ed0842a9827a2e03422eb9153606"
+    },
+    {
+      "file": "workspaces-ar-dark-390.png",
+      "sha256": "b365ea0fe7ddd202b8e29a632cbba573819da99875cf8167ed64220ef3a2253e"
+    },
+    {
+      "file": "workspaces-en-light-1440.png",
+      "sha256": "deae507d4ce401bc61394c9aabcfe149c75f8f42574a812c214cecdf2f08f2cc"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "file": "src/app/globals.css",
+      "sha256": "526f52e8a6aa94e5b1359ebf6dabd5fd1814fa02f6e6afce2377894cc8c845f7"
+    },
+    {
+      "file": "src/components/site/home/hero.tsx",
+      "sha256": "8536924b35ad196f87af6f2e9ac2d318f9125e567882d670d7529c6dd667fce3"
+    },
+    {
+      "file": "src/components/auth/phone-form.tsx",
+      "sha256": "7b20cacbd5e1ae71f7a7b40717e68ebdaab016d07a3b4ecad7404a211b738e8a"
+    },
+    {
+      "file": "src/components/sell/material-tile.tsx",
+      "sha256": "a4669c5e6d7b02e60d93a6b900b8f9ee5041cdc9e07630581da3365cbcc6e5ba"
+    },
+    {
+      "file": "src/components/workspace/workspace-page.tsx",
+      "sha256": "c3af6eeeb4cf06fd08d7b7826944442135ea945d44bf51d8e223a298d5adcda8"
+    },
+    {
+      "file": "src/components/admin/console-home.tsx",
+      "sha256": "1a0b4242968aac9716531e875a882d9546f32f15694a009e39eea245d0c02ce0"
+    }
+  ]
+}

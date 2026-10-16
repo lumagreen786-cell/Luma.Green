@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import QRCode from "qrcode";
 import { useEffect, useRef, useState } from "react";
 
+import { AppPageHeader } from "@/components/app/page-parts";
 import { useSignedInQuery } from "@/components/providers/use-signed-in-query";
 import { Button } from "@/components/ui/button";
 import {
@@ -144,15 +145,11 @@ function SecurityForm() {
 
   return (
     <div className="mx-auto flex w-full max-w-2xl min-w-0 flex-col gap-6">
-      <header className="space-y-2">
-        <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
-          {t("title")}
-        </h1>
-        <p className="text-sm leading-relaxed text-muted-foreground">
-          <SecurityHelp hasPassword={person.hasPassword} />
-        </p>
-      </header>
-      <div className="flex items-start gap-3 border-y py-4">
+      <AppPageHeader
+        title={t("title")}
+        lead={<SecurityHelp hasPassword={person.hasPassword} />}
+      />
+      <div className="flex flex-wrap items-center gap-3 py-2">
         <StatusIcon
           aria-hidden
           className="mt-0.5 size-5 shrink-0 text-primary"

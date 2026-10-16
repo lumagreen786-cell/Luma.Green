@@ -65,7 +65,7 @@ export function BasketStep({
             <FamilyIcon family={family} size="sm" />
             {t(`families.${family}`)}
           </h3>
-          <ul className="grid grid-cols-1 gap-x-6 sm:grid-cols-2">
+          <ul className="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
             {group.map((material) => (
               <li key={material.code}>
                 <MaterialTile
@@ -121,7 +121,7 @@ function BasketList({
   return (
     <section
       aria-labelledby="basket-title"
-      className="flex flex-col border-y border-border"
+      className="flex flex-col border-y border-border bg-muted/30"
     >
       <h3 id="basket-title" className="px-4 pt-4 text-lg font-semibold">
         {t("basket.yours")}

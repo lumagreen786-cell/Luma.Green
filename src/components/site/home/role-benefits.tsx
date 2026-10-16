@@ -34,26 +34,26 @@ export async function RoleBenefits() {
   return (
     <section
       aria-labelledby="roles-heading"
-      className="border-y bg-muted/30 py-10 sm:py-12 lg:py-24"
+      className="border-y bg-background py-10 sm:py-12 lg:py-16"
     >
-      <Container className="space-y-12">
+      <Container className="space-y-8">
         <SectionHeading
           id="roles-heading"
           title={t("heading")}
           intro={t("intro")}
         />
-        <ul className="divide-y border-y">
+        <ul className="grid gap-x-12 md:grid-cols-2">
           {roles.map(({ key, icon: Icon, href }) => (
             <li
               key={key}
               data-reveal
-              className="group grid min-w-0 grid-cols-1 items-center gap-4 py-6 md:grid-cols-2 xl:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)_minmax(0,11rem)] xl:gap-10"
+              className="group grid min-w-0 grid-cols-1 content-start gap-5 border-t py-6"
             >
               <div className="flex min-w-0 items-center gap-4">
                 <RoleStoryImage
                   scene={key}
                   compact
-                  className="w-16 shrink-0 sm:w-20"
+                  className="w-20 shrink-0 sm:w-24"
                   frameClassName="aspect-square"
                 />
                 <div className="min-w-0 space-y-2 wrap-anywhere">
@@ -78,7 +78,7 @@ export async function RoleBenefits() {
               </ul>
               <Link
                 href={href}
-                className="inline-flex min-h-11 max-w-full min-w-0 items-center justify-between gap-4 rounded-lg py-2 text-sm font-semibold wrap-anywhere underline-offset-4 outline-none hover:text-primary hover:underline focus-visible:ring-3 focus-visible:ring-ring/50 md:col-start-2 xl:col-start-auto"
+                className="inline-flex min-h-11 max-w-full min-w-0 items-center justify-between gap-4 py-2 text-sm font-semibold wrap-anywhere underline-offset-4 outline-none hover:text-primary hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
               >
                 <span className="min-w-0">{t(`${key}.cta`)}</span>
                 <ArrowRightIcon

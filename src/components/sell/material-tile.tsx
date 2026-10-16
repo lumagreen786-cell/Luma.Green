@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckIcon } from "lucide-react";
+import { CheckIcon, PlusIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { useFormat } from "@/components/app/format";
@@ -43,9 +43,9 @@ export function MaterialTile({
       disabled={!isAdded && isFull}
       onClick={onToggle}
       className={cn(
-        "group flex min-h-16 w-full items-center gap-3 border-b px-2 py-3 text-start transition-colors duration-150 outline-none focus-visible:ring-3 focus-visible:ring-ring/50 disabled:opacity-50 motion-reduce:transition-none",
+        "group flex min-h-20 w-full items-center gap-3 border-b px-3 py-4 text-start transition-colors duration-150 outline-none focus-visible:ring-3 focus-visible:ring-ring/50 disabled:opacity-50 motion-reduce:transition-none",
         isAdded
-          ? "border-primary bg-accent/50"
+          ? "border-primary bg-accent"
           : "border-border hover:bg-muted/40",
       )}
     >
@@ -71,13 +71,17 @@ export function MaterialTile({
       <span
         aria-hidden
         className={cn(
-          "flex size-5 shrink-0 items-center justify-center rounded border",
+          "flex size-6 shrink-0 items-center justify-center rounded border",
           isAdded
             ? "border-primary bg-primary text-primary-foreground"
             : "border-input text-muted-foreground",
         )}
       >
-        {isAdded ? <CheckIcon className="size-4" /> : null}
+        {isAdded ? (
+          <CheckIcon className="size-4" />
+        ) : (
+          <PlusIcon className="size-4" />
+        )}
       </span>
     </button>
   );

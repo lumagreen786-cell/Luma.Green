@@ -1,3 +1,32 @@
+## Web platform redesign — 15 October 2026
+
+The prior technical release is merged as `c24ae79` (PR #57), with Convex deployed
+and Vercel production verified in the release turn. The owner has now resumed
+web UI work and approved adapted IMAI skills, explicitly removing Impeccable.
+Current branch: `feat/imai-web-forms`. See
+[web UI scope and verification](entry-forms-2026-10-15.md).
+
+Native apps remain on hold. Repo-local Impeccable is removed; eleven adapted
+IMAI skills have Codex discovery links. The owner expanded this pass to the whole
+web platform: public pages, login/signup, household recycling, shared operational
+layouts, accounts, workspaces and admin. Use open sections and solid surfaces;
+avoid nested cards, decorative gradients and repeated explanations. Existing
+authentication, provider controls, server validation and application permissions
+remain the owners of behavior.
+
+Old guide/team-review captures are historical after the redesign. The unchanged
+team-review artifact freshness tests now join the optional `pnpm guide:check`
+suite, consistent with documentation maintenance on request. New UI tests and
+current browser captures provide this release's evidence.
+
+Local `pnpm check` passed: 2,396 web/backend tests and 73 native policy tests,
+lint and type checks. The clean production build and formatting passed. The
+771-case browser run exposed three outdated image assertions and three host-load
+retries; the corrected showcase/Spanish rerun passed all 52 cases. All 48 isolated
+fixture cases passed against fresh CSS. See the linked scope document for current
+screenshots and verification limits. PR checks, preview and production verification
+remain release gates.
+
 ## Technical release closeout — 15 October 2026
 
 Owner authorization now includes finishing backend work, tests, commit, push and

@@ -20,8 +20,12 @@ export async function HomeHero() {
   return (
     <section aria-labelledby="hero-heading" className="border-b bg-background">
       <Container className="pt-8 sm:pt-10 lg:pt-12">
-        <div className="grid min-w-0 gap-8 lg:grid-cols-[1.15fr_1fr] lg:items-start lg:gap-12">
-          <div className="flex min-w-0 flex-col items-start gap-5 lg:py-4">
+        <div className="grid min-w-0 gap-8 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:gap-16">
+          <div className="flex min-w-0 flex-col items-start gap-5 lg:py-8">
+            <p className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+              <MapPinIcon aria-hidden className="size-4 text-primary" />
+              {t("eyebrow")}
+            </p>
             <h1
               id="hero-heading"
               className="max-w-xl font-display text-[clamp(2.5rem,4.4vw,4.5rem)] leading-[1.08] font-semibold tracking-tight text-balance"
@@ -31,12 +35,12 @@ export async function HomeHero() {
             <p className="max-w-lg text-base leading-relaxed text-pretty text-muted-foreground sm:text-lg">
               {t("lead")}
             </p>
-            <p className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-              <MapPinIcon aria-hidden className="size-4 text-primary" />
-              {t("eyebrow")}
-            </p>
             <div className="flex w-full min-w-0 flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-              <Button asChild size="lg" className="max-w-full">
+              <Button
+                asChild
+                size="lg"
+                className="w-full max-w-full justify-between sm:w-auto sm:gap-8"
+              >
                 <Link
                   href="/sell"
                   aria-label={actionName(nav("sellScrap"), t("sell"))}
@@ -71,7 +75,7 @@ export async function HomeHero() {
               <ArrowRightIcon aria-hidden className="size-4 rtl:rotate-180" />
             </Link>
           </div>
-          <div className="relative aspect-[4/3] overflow-hidden bg-muted lg:aspect-[5/4]">
+          <div className="relative aspect-[16/10] overflow-hidden bg-muted lg:aspect-[4/5]">
             <Image
               src={preparation}
               alt=""

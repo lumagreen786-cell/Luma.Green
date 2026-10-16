@@ -12,11 +12,11 @@ export function AppPageHeader({
   actions,
 }: {
   title: string;
-  lead?: string;
+  lead?: ReactNode;
   actions?: ReactNode;
 }) {
   return (
-    <header className="grid min-w-0 gap-4 border-b border-border pb-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start">
+    <header className="grid min-w-0 gap-4 border-b border-border pb-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
       <div className="flex min-w-0 flex-1 flex-col gap-2">
         <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
           {title}
@@ -50,7 +50,7 @@ export function StatCard({
   tone?: "neutral" | "good" | "warn";
 }) {
   return (
-    <div className="flex min-w-0 flex-col gap-2 border-t border-border pe-4 pt-4 pb-2">
+    <div className="flex min-w-0 flex-col gap-2 border-s-2 border-border py-1 ps-4">
       <div className="flex items-start justify-between gap-2">
         <p className="min-w-0 flex-1 text-sm font-medium wrap-anywhere text-muted-foreground">
           {label}
@@ -86,7 +86,7 @@ export function Section({
 }) {
   return (
     <section className="flex min-w-0 flex-col gap-4">
-      <div className="flex flex-wrap items-center justify-between gap-2">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border pb-3">
         <h2 className="font-display text-lg font-semibold tracking-tight">
           {title}
         </h2>
@@ -133,6 +133,29 @@ export function ListSkeleton({ rows = 3 }: { rows?: number }) {
         <Skeleton key={index} className="h-16 w-full rounded-none" />
       ))}
     </div>
+  );
+}
+
+/** An open settings row: purpose on the reading rail, controls beside it. */
+export function SettingsSection({
+  id,
+  title,
+  children,
+}: {
+  id: string;
+  title: string;
+  children: ReactNode;
+}) {
+  return (
+    <section
+      aria-labelledby={id}
+      className="grid min-w-0 gap-4 border-t border-border pt-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,3fr)] lg:gap-8"
+    >
+      <h2 id={id} className="font-display text-lg font-semibold tracking-tight">
+        {title}
+      </h2>
+      <div className="min-w-0">{children}</div>
+    </section>
   );
 }
 

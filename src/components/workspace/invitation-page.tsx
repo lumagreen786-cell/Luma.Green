@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 
 import { useSignOut } from "@/components/account/use-sign-out";
+import { AppPageHeader } from "@/components/app/page-parts";
 import { useVerifiedSession } from "@/components/providers/use-signed-in-query";
 import { ErrorBoundary } from "@/components/sell/states";
 import { Button } from "@/components/ui/button";
@@ -96,9 +97,7 @@ function InvitationContent({ token }: { token: string }) {
   }
   return (
     <div className="mx-auto flex w-full max-w-xl min-w-0 flex-col gap-6">
-      <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
-        {t("inviteTitle")}
-      </h1>
+      <AppPageHeader title={t("inviteTitle")} />
       {isPending || (isReady && invitation === undefined) ? (
         <p>{common("loading")}</p>
       ) : null}

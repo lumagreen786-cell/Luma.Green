@@ -13,23 +13,23 @@ import { APPLICATION_KINDS } from "../../../convex/lib/onboarding";
 export function RoleCards() {
   const t = useTranslations("join");
   return (
-    <ul className="divide-y divide-border border-y border-border">
+    <ul className="grid gap-x-8 border-t border-border lg:grid-cols-2">
       {APPLICATION_KINDS.map((kind) => {
         return (
-          <li key={kind}>
+          <li key={kind} className="border-b border-border">
             <Link
               href={`/join/${kind}`}
-              className="group grid grid-cols-[5rem_minmax(0,1fr)] items-start gap-x-4 gap-y-2 py-5 outline-none focus-visible:ring-3 focus-visible:ring-ring/50 sm:grid-cols-[11rem_minmax(0,1fr)] sm:gap-x-6 sm:py-6"
+              className="group grid grid-cols-[5rem_minmax(0,1fr)] items-start gap-x-4 gap-y-2 py-6 outline-none focus-visible:ring-3 focus-visible:ring-ring/50 sm:grid-cols-[7rem_minmax(0,1fr)] sm:gap-x-5"
             >
               <RoleStoryImage
                 scene={roleProcessScenes[kind]}
                 compact
-                frameClassName="aspect-square rounded-none sm:aspect-4/3"
+                frameClassName="aspect-square rounded-md"
               />
               <span className="contents sm:flex sm:min-w-0 sm:flex-col sm:gap-2">
                 <span className="flex min-w-0 flex-col gap-1">
                   <span className="flex items-start justify-between gap-3">
-                    <span className="min-w-0 font-display text-xl font-semibold tracking-tight wrap-anywhere group-hover:text-primary sm:text-2xl">
+                    <span className="min-w-0 font-display text-xl font-semibold tracking-tight wrap-anywhere transition-colors group-hover:text-primary motion-reduce:transition-none">
                       {t(`roles.${kind}.title`)}
                     </span>
                     <ArrowRightIcon

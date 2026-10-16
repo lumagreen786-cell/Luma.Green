@@ -154,7 +154,7 @@ function ReviewHeader({
           <StatusPill tone="info">Version {application.version}</StatusPill>
         ) : null}
       </div>
-      <h1 className="font-display text-3xl font-semibold tracking-tight break-words">
+      <h1 className="font-display text-2xl leading-tight font-semibold tracking-tight break-words">
         {application.name}
       </h1>
       <dl className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">

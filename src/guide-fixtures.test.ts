@@ -1,13 +1,27 @@
 import { describe, expect, it } from "vitest";
 
+import { api } from "../convex/_generated/api";
 import {
   inboxFixture,
   securityFixture,
 } from "../scripts/guide-preview/account-fixtures";
 import { authClient } from "../scripts/guide-preview/auth";
+import { redirect } from "../scripts/guide-preview/navigation";
+import {
+  useAction,
+  useMutation,
+  useQuery,
+} from "../scripts/guide-preview/queries";
+import {
+  workspaceListFixture,
+  workspaceTeamFixture,
+} from "../scripts/guide-preview/workspace-fixtures";
 
 describe("isolated account documentation fixtures", () => {
   it("never authenticates, changes protection or returns a secret", async () => {
+    expect(() => redirect()).toThrow(
+      "Server redirects are unavailable in the isolated preview.",
+    );
     expect(authClient.useSession().data).toEqual({
       fixture: true,
       user: {
@@ -79,5 +93,41 @@ describe("isolated account documentation fixtures", () => {
       status: "LoadingFirstPage",
       unreadCount: 0,
     });
+  });
+});
+
+describe("isolated workspace documentation fixtures", () => {
+  it("renders synthetic membership and pending invitation records without tokens", () => {
+    expect(useQuery(api.workspace.list)).toEqual(workspaceListFixture);
+    expect(useQuery(api.workspace.team)).toEqual(workspaceTeamFixture);
+    expect(workspaceListFixture.filter((item) => item.selected)).toHaveLength(
+      1,
+    );
+    for (const item of workspaceListFixture) {
+      expect(item.org.id).toMatch(/^guide-workspace-/);
+      expect(item.org.name).toMatch(/^Demo /);
+      expect(item.org.gstin).toBeUndefined();
+    }
+    for (const member of workspaceTeamFixture.members) {
+      expect(member.name).toMatch(/^Demo /);
+      expect(member.id).toMatch(/^guide-membership-/);
+    }
+    for (const invitation of workspaceTeamFixture.invitations) {
+      expect(invitation.email).toMatch(/@example\.test$/);
+      expect(invitation.delivery).toBe("pending");
+      expect(invitation).not.toHaveProperty("token");
+    }
+    expect(useQuery(api.workspace.team, "skip")).toBeUndefined();
+  });
+
+  it("rejects workspace mutations and invitation actions without changing fixtures", async () => {
+    window.history.replaceState(null, "", "/ar/account/workspaces");
+    const before = JSON.stringify([workspaceListFixture, workspaceTeamFixture]);
+    await expect(useMutation()()).rejects.toThrow("writes are disabled");
+    await expect(useAction()()).rejects.toThrow("writes are disabled");
+    expect(JSON.stringify([workspaceListFixture, workspaceTeamFixture])).toBe(
+      before,
+    );
+    window.history.replaceState(null, "", "/");
   });
 });

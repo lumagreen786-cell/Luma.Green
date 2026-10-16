@@ -35,6 +35,7 @@ import { RequestsPage } from "@/components/shop/requests-page";
 import { StockPage } from "@/components/shop/stock-page";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { TrackView } from "@/components/track/track-view";
+import { WorkspacePage } from "@/components/workspace/workspace-page";
 import { localeMeta } from "@/i18n/locales";
 
 import type { Id } from "../../convex/_generated/dataModel";
@@ -118,6 +119,7 @@ const onboardingPage = onboardingContent
   ? await JoinLayout({ children: onboardingContent })
   : null;
 const accountPages: Record<string, ReactNode | undefined> = {
+  "/en/account/workspaces": <WorkspacePage />,
   "/en/account/notifications": <NotificationsPage />,
   "/en/account/security": <AccountSecurity />,
 };

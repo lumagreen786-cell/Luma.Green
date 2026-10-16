@@ -65,8 +65,11 @@ export function FormField({
 }) {
   const t = useTranslations("join.form");
   return (
-    <div className="flex flex-col gap-2">
-      <Label htmlFor={id} className="text-sm font-medium">
+    <div className="flex min-w-0 flex-col gap-2">
+      <Label
+        htmlFor={id}
+        className="flex flex-wrap items-baseline gap-x-2 gap-y-1 text-sm font-medium"
+      >
         {label}
         {optional ? (
           <span className="font-normal text-muted-foreground">
@@ -496,17 +499,17 @@ export function LocationButton({
       <Button
         type="button"
         variant="outline"
-        className="h-11 self-start"
+        className="h-11 self-start px-3 sm:px-4"
         disabled={state === "locating"}
         onClick={locate}
       >
         {state === "locating" ? (
           <LoaderIcon
             aria-hidden
-            className="animate-spin motion-reduce:animate-none"
+            className="hidden animate-spin motion-reduce:animate-none sm:block"
           />
         ) : (
-          <LocateFixedIcon aria-hidden />
+          <LocateFixedIcon aria-hidden className="hidden sm:block" />
         )}
         {t(state === "locating" ? "locating" : "useLocation")}
       </Button>

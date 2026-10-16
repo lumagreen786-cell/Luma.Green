@@ -4,10 +4,8 @@ import { getTranslations } from "next-intl/server";
 import { actionName } from "@/components/site/action-name";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
-import { cn } from "@/lib/utils";
 
 import { Container } from "./container";
-import effects from "./public-effects.module.css";
 
 /** Two clear next actions at the end of the public material story. */
 export async function ClosingCta() {
@@ -18,10 +16,7 @@ export async function ClosingCta() {
   return (
     <section
       aria-labelledby="closing-cta-heading"
-      className={cn(
-        "border-t bg-muted/50 py-10 sm:py-12 lg:py-24",
-        effects.mesh,
-      )}
+      className="border-t bg-background py-12 sm:py-16 lg:py-20"
     >
       <Container className="grid min-w-0 grid-cols-1 items-end gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,22rem)] lg:gap-16">
         <div data-reveal className="max-w-3xl min-w-0 space-y-5 wrap-anywhere">
@@ -31,18 +26,12 @@ export async function ClosingCta() {
           >
             {t("title")}
           </h2>
-          <p className="max-w-xl leading-relaxed text-muted-foreground">
-            {t("body")}
-          </p>
         </div>
         <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:flex-wrap lg:flex-col">
           <Button
             asChild
             size="lg"
-            className={cn(
-              "min-h-12 max-w-full min-w-0 py-3 text-start whitespace-nowrap",
-              effects.action,
-            )}
+            className="min-h-12 max-w-full min-w-0 justify-between py-3 text-start whitespace-nowrap"
           >
             <Link
               href="/sell"

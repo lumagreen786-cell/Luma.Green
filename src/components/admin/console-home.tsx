@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
+import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   Table,
@@ -40,15 +41,14 @@ export function ConsoleHome() {
             {firstName ? `Welcome, ${firstName}` : "Welcome"}
           </h1>
           <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
-            What needs you today, and the latest people to join the pilot.
+            Review requests and track the pilot.
           </p>
         </div>
-        <Link
-          href="/admin/pilot"
-          className="inline-flex min-h-11 items-center gap-2 rounded-lg border bg-card px-4 text-sm font-medium outline-none hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50"
-        >
-          View pilot report <ArrowRightIcon aria-hidden className="size-4" />
-        </Link>
+        <Button asChild variant="outline">
+          <Link href="/admin/pilot">
+            View pilot report <ArrowRightIcon aria-hidden className="size-4" />
+          </Link>
+        </Button>
       </div>
 
       <ul
@@ -99,7 +99,7 @@ export function ConsoleHome() {
         <span className="flex min-w-0 flex-1 flex-col">
           <span className="font-medium">Price tables</span>
           <span className="text-sm text-muted-foreground">
-            The minimum and fallback price per kilo, for every material.
+            Minimum and fallback prices per kilo.
           </span>
         </span>
         <ArrowRightIcon
@@ -113,9 +113,6 @@ export function ConsoleHome() {
           <h2 className="font-display text-lg font-semibold tracking-tight">
             Recent accounts
           </h2>
-          <p className="text-sm leading-relaxed text-muted-foreground">
-            New account profiles, newest first.
-          </p>
         </header>
         <div>
           <RecentSignIns people={overview?.recentSignIns} />

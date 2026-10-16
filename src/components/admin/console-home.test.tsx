@@ -36,7 +36,9 @@ it("describes new profiles without claiming phone verification or sign-in activi
   expect(
     screen.getByRole("heading", { name: "Recent accounts" }),
   ).toBeVisible();
-  expect(screen.getByText("New account profiles, newest first.")).toBeVisible();
+  expect(
+    screen.getByRole("link", { name: "View pilot report" }),
+  ).toHaveAttribute("href", "/admin/pilot");
   expect(
     screen.getByRole("columnheader", { name: "Profile created" }),
   ).toBeVisible();

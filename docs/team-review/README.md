@@ -127,3 +127,11 @@ they complement the mandatory pixel review and cannot replace it.
 Commit the current Markdown, screenshots, manifest, builder, build record and
 reviewed Word output together. Record the exact test evidence separately in the
 delivery handoff. This pack does not replace the mandatory platform user guide.
+
+## UI redesign checkpoint — 15 October 2026
+
+The entry-form redesign changes the signup page shown in the older captures.
+The existing Word pack and images are retained as historical evidence, not
+current UI proof. Its unchanged freshness assertions now run with the other
+artifact checks in `pnpm guide:check`, when the owner requests a guide update.
+Runtime and browser tests remain in the normal check suite.

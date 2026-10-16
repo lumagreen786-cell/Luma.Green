@@ -231,21 +231,6 @@
   }
 }
 
-/* Editorial surfaces use the existing palette; no image or filter work on scroll. */
-.surface-grid {
-  background-image:
-    linear-gradient(
-      to right,
-      color-mix(in oklch, var(--border), transparent 55%) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      to bottom,
-      color-mix(in oklch, var(--border), transparent 55%) 1px,
-      transparent 1px
-    );
-  background-size: 4rem 4rem;
-}
 .eyebrow {
   font-size: 0.6875rem;
   font-weight: 600;

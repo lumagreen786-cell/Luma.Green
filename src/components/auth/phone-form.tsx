@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { HomeIcon, LockIcon } from "lucide-react";
+import { ArrowRightIcon, HomeIcon, LockIcon } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
@@ -87,8 +87,11 @@ export function PhoneForm({ canSend = true }: { canSend?: boolean }) {
           <Label htmlFor="phone" className="text-sm">
             {t("mobileLabel")}
           </Label>
-          <div className="flex gap-2" dir="ltr">
-            <span className="flex h-11 items-center rounded-md border border-input bg-muted px-3 text-base font-medium tabular-nums">
+          <div
+            className="flex rounded-md border border-input bg-background transition-colors focus-within:border-ring focus-within:ring-3 focus-within:ring-ring/20"
+            dir="ltr"
+          >
+            <span className="flex h-12 items-center border-e border-input px-4 text-base font-medium text-muted-foreground tabular-nums">
               +91
             </span>
             <Input
@@ -99,7 +102,7 @@ export function PhoneForm({ canSend = true }: { canSend?: boolean }) {
               placeholder="98765 43210"
               aria-invalid={fieldError ? true : undefined}
               aria-describedby={hasHint ? "phone-hint" : undefined}
-              className="text-base tracking-wide"
+              className="h-12 min-w-0 rounded-s-none border-0 bg-transparent text-base tracking-wide shadow-none focus-visible:ring-0 dark:bg-transparent"
               {...register("phone")}
             />
           </div>
@@ -127,10 +130,14 @@ export function PhoneForm({ canSend = true }: { canSend?: boolean }) {
         <Button
           type="submit"
           size="lg"
-          className="w-full"
+          className="w-full justify-between"
           disabled={isSubmitting}
         >
           {t(isSubmitting ? "sending" : readyLabel)}
+          <ArrowRightIcon
+            aria-hidden
+            className="ms-auto hidden sm:block rtl:rotate-180"
+          />
         </Button>
       </form>
 

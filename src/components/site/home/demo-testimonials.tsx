@@ -18,7 +18,7 @@ export async function DemoTestimonials() {
   return (
     <section
       aria-labelledby="demo-testimonials-heading"
-      className={cn("border-y bg-muted/25 py-12 lg:py-16", effects.mesh)}
+      className="border-y bg-muted/25 py-12 lg:py-16"
     >
       <Container className="grid gap-8 lg:grid-cols-[minmax(0,0.65fr)_minmax(0,1.35fr)] lg:gap-16">
         <div className="space-y-3">

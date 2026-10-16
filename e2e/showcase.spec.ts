@@ -140,7 +140,7 @@ for (const width of [390, 1440]) {
     // Task pages keep compact secondary artwork; story pages keep editorial art.
     const isCompact =
       route.includes("/help") ||
-      ["/en/prices", "/en/solar", "/en/contact"].includes(route);
+      ["/en/prices", "/en/solar", "/en/contact", "/en/join"].includes(route);
 
     test(`${route} keeps its page image loaded and aligned at ${String(width)}px`, async ({
       page,
@@ -290,7 +290,7 @@ test("public information scenes load without adding controls or overflowing a ph
   }
 });
 
-test("Arabic sign-in and booking keep phone tasks free of decorative photos", async ({
+test("Arabic sign-in and booking keep phone artwork compact and loaded", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
@@ -299,7 +299,16 @@ test("Arabic sign-in and booking keep phone tasks free of decorative photos", as
     await page.goto(`/ar/${route}`);
     await expect(page.locator("html")).toHaveAttribute("dir", "rtl");
     await expect(page.getByRole("heading", { level: 1 })).toBeInViewport();
-    await expect(page.locator("figure:visible")).toHaveCount(0);
+    const artwork = page.locator("figure:visible");
+    await expect(artwork).toHaveCount(1);
+    await expectStoryImages(artwork, 1);
+    const imageBounds = await artwork.boundingBox();
+    expect(imageBounds).not.toBeNull();
+    expect(imageBounds?.width).toBeLessThanOrEqual(88);
+    expect(imageBounds?.height).toBeLessThanOrEqual(88);
+    await expect(artwork.locator("button, a, input, [tabindex]")).toHaveCount(
+      0,
+    );
     expect(
       await page.evaluate(
         () => document.documentElement.scrollWidth - innerWidth,

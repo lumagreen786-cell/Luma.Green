@@ -82,7 +82,10 @@ test("home tells the chain's story, with a way in for everyone", async ({
     "Manufacturers",
   ]);
   await expect(
-    main.getByRole("heading", { name: "Why now", level: 2 }),
+    main.getByRole("heading", {
+      name: en.home.expansion.questionsTitle,
+      level: 2,
+    }),
   ).toBeVisible();
 });
 

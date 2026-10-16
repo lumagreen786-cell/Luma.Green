@@ -8,6 +8,7 @@ export const guideTests = [
   "src/finance-guide-artifact.test.ts",
   "src/workbook-guide.test.ts",
   "src/lots-guide.test.ts",
+  "src/team-review.test.ts",
 ];
 
 export default defineConfig({

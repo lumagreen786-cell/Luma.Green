@@ -1,15 +1,13 @@
-import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
 
 import { AccountMenu } from "@/components/account/account-menu";
 import { Logo } from "@/components/brand/logo";
+import { EntryStory } from "@/components/showcase/entry-story";
 import { LanguageSwitcher } from "@/components/site/language-switcher";
 import { SkipLink } from "@/components/site/skip-link";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { Link } from "@/i18n/navigation";
-
-import collectionPartners from "../../../../public/images/showcase/collection-partners.webp";
 
 /**
  * Shell for signing in: a focused form and a quiet brand panel. Pages
@@ -42,32 +40,20 @@ export default async function AuthLayout({
           <LanguageSwitcher />
         </div>
       </header>
-      <div className="mx-auto grid w-full max-w-5xl flex-1 content-start gap-10 px-4 py-8 sm:px-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:gap-16 lg:py-16">
+      <div className="mx-auto grid w-full max-w-6xl flex-1 content-start gap-8 px-4 py-6 sm:px-8 sm:py-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-20 lg:py-12">
         <main
           id="main"
           tabIndex={-1}
-          className="mx-auto flex w-full max-w-md min-w-0 flex-col justify-start lg:justify-start"
+          className="order-2 mx-auto flex w-full max-w-md min-w-0 flex-col justify-start lg:order-1 lg:py-8"
         >
           {children}
         </main>
-        <aside className="hidden min-w-0 flex-col gap-6 border-s border-border ps-10 text-foreground lg:flex">
-          <p className="max-w-md font-display text-2xl leading-tight font-semibold tracking-tight text-balance">
-            {brand("tagline")}
-          </p>
-          <figure className="m-0">
-            <div className="overflow-hidden">
-              <Image
-                src={collectionPartners}
-                alt=""
-                sizes="(min-width: 1024px) 320px, 92vw"
-                className="aspect-[3/2] w-full object-cover"
-              />
-            </div>
-          </figure>
-          <p className="hidden text-sm font-medium text-muted-foreground lg:block">
-            {brand("name")}
-          </p>
-        </aside>
+        <EntryStory
+          scene="saathi"
+          title={brand("tagline")}
+          caption={brand("name")}
+          className="order-1 mx-auto w-full max-w-md lg:order-2"
+        />
       </div>
     </div>
   );

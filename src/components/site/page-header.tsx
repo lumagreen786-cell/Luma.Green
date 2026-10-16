@@ -14,7 +14,7 @@ const headerLayout = cva("grid min-w-0 lg:items-center", {
   variants: {
     variant: {
       editorial:
-        "gap-8 py-8 sm:py-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:gap-12",
+        "gap-8 py-8 sm:py-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:gap-16",
       task: "gap-5 py-6 sm:py-8 lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-12",
     },
   },
@@ -51,12 +51,7 @@ export function PageHeader({
   variant?: "editorial" | "task";
 }) {
   return (
-    <div
-      className={cn(
-        "overflow-hidden border-b bg-background",
-        atmosphere && effects.mesh,
-      )}
-    >
+    <div className="border-b bg-background">
       <Container className={headerLayout({ variant })}>
         <div className="min-w-0 space-y-4">
           <h1
@@ -68,7 +63,7 @@ export function PageHeader({
           >
             {title}
           </h1>
-          <p className="max-w-2xl text-base leading-relaxed text-pretty text-muted-foreground sm:text-lg">
+          <p className="max-w-xl text-base leading-relaxed text-pretty text-muted-foreground sm:text-lg">
             {lead}
           </p>
           {eyebrow ? (

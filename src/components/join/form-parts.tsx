@@ -1,6 +1,6 @@
 "use client";
 
-import { MessageSquareWarningIcon } from "lucide-react";
+import { ArrowRightIcon, MessageSquareWarningIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 
@@ -70,14 +70,20 @@ export function SubmitBar({
 }) {
   const t = useTranslations("join");
   return (
-    <div className="flex flex-col gap-4 border-t border-border pt-6">
+    <div className="flex flex-col gap-4 border-t border-border bg-background pt-6">
       {failure ? (
         <p role="alert" className="text-sm text-destructive">
           {t(failure === "fixErrors" ? "form.fixErrors" : "errors.generic")}
         </p>
       ) : null}
-      <Button type="submit" size="lg" className="w-full" disabled={isBusy}>
+      <Button
+        type="submit"
+        size="lg"
+        className="w-full justify-between"
+        disabled={isBusy}
+      >
         {isBusy ? busyLabel : label}
+        <ArrowRightIcon aria-hidden className="shrink-0 rtl:rotate-180" />
       </Button>
       {secondary}
     </div>

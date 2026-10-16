@@ -28,7 +28,7 @@ function Figure({
   extra?: ReactNode;
 }) {
   return (
-    <div className="flex min-w-0 flex-col gap-2 rounded-lg border border-border bg-muted/40 p-3">
+    <div className="flex min-w-0 flex-col gap-2 border-b border-border py-4">
       <dt className="text-xs text-muted-foreground">{label}</dt>
       <dd className="flex flex-wrap items-center gap-x-2 gap-y-1 text-lg font-semibold">
         {value}
@@ -72,7 +72,7 @@ export function PriceDetail({ row }: { row: PriceRow }) {
         </Button>
       </DialogClose>
 
-      <dl className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+      <dl className="grid grid-cols-2 gap-x-6 sm:grid-cols-4">
         <Figure
           label={t("detail.today")}
           value={perKg(row.todayPaise)}

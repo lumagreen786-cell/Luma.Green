@@ -214,8 +214,11 @@ export function ContactMessageForm() {
         hint={t("phoneHint")}
         error={errors.phone?.message}
       >
-        <div className="flex gap-2" dir="ltr">
-          <span className="flex h-12 items-center rounded-lg border bg-muted px-3 text-base font-medium">
+        <div
+          className="flex rounded-md border border-input bg-background focus-within:border-ring focus-within:ring-3 focus-within:ring-ring/20"
+          dir="ltr"
+        >
+          <span className="flex h-12 items-center border-e border-input px-4 text-base font-medium text-muted-foreground">
             +91
           </span>
           <Input
@@ -224,7 +227,7 @@ export function ContactMessageForm() {
             inputMode="numeric"
             autoComplete="tel-national"
             placeholder="98765 43210"
-            className="h-12 text-base tracking-wide md:text-base"
+            className="h-12 min-w-0 rounded-s-none border-0 bg-transparent text-base tracking-wide shadow-none focus-visible:ring-0 md:text-base dark:bg-transparent"
             aria-invalid={errors.phone ? true : undefined}
             aria-describedby={describedBy(
               "contact-phone",
