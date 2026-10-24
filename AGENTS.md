@@ -250,6 +250,15 @@ PR with the five required checks green. Never try to push to `main` directly; it
 will be rejected. The author merges their own PR (solo team, zero approvals), and
 merged branches delete themselves.
 
+**Production deployments only — 25 October 2026.** The owner requires releases
+to the Vercel Production environment for `luma.green`. Do not create, request or
+promote Preview deployments. Disable automatic Git deployments for branches
+other than `main`; keep `main` as the Production branch. Use local tests and
+browser checks before the checked PR merge. For a manual deployment, explicitly
+select Production (`vercel --prod` when using the CLI). This rule supersedes
+older playbooks that require a Vercel preview. It does not bypass PR checks,
+backend-before-frontend deployment, or production verification.
+
 **Server vs client**: components are server components unless they need state,
 effects or browser APIs. Push `"use client"` as far down the tree as possible —
 a client boundary adds its imports to the browser bundle. Passing rendered

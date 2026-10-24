@@ -88,8 +88,10 @@ must follow Conventional Commits too.
 
 ## Deploy
 
-- **Vercel** builds every PR into a preview URL and `main` into production.
-  Check the preview before merging — it is the real environment.
+- **Vercel** deploys only `main` to Production (`https://luma.green`). The owner
+  prohibited Preview deployments on 25 October 2026. Test locally before merging;
+  do not create or require a hosted preview. Select Production explicitly for
+  manual releases (`vercel --prod` with the CLI).
 - **Convex** deploys separately (`pnpm convex:deploy`, wired into the Vercel
   build command once the project is linked). A schema change deploys _before_
   the frontend that depends on it, never after.
