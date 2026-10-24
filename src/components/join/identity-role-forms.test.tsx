@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { NextIntlClientProvider } from "next-intl";
 import { beforeEach, expect, it, vi } from "vitest";
 
@@ -9,35 +9,36 @@ import { SaathiForm } from "./saathi-form";
 import type * as AutosaveModule from "./use-autosave";
 import type { Application } from "./use-mine";
 
-const { save, verify } = vi.hoisted(() => ({ save: vi.fn(), verify: vi.fn() }));
+const { save, lookup } = vi.hoisted(() => ({ save: vi.fn(), lookup: vi.fn() }));
 vi.mock("convex/react", () => ({
   useMutation: () => save,
-  useAction: () => verify,
+  useAction: () => lookup,
+  useQuery: () => null,
 }));
 vi.mock("@/i18n/navigation", () => ({ useRouter: () => ({ push: vi.fn() }) }));
 vi.mock("./use-autosave", async (original) => ({
   ...(await original<typeof AutosaveModule>()),
   useAutosave: () => "saved",
 }));
+const details = {
+  gstin: "29ABCDE1234F1Z5",
+  businessName: "Example recycling",
+  legalName: "Example recycling limited",
+  address: "Example registered street",
+};
 beforeEach(() => {
   vi.clearAllMocks();
   save.mockResolvedValue(null);
-  verify.mockResolvedValue(null);
+  lookup.mockResolvedValue(details);
 });
 
 it.each(["yard", "recycler", "manufacturer"] as const)(
-  "always displays required GST for %s even on an old unregistered draft",
+  "unlocks %s only after GST lookup and explicit confirmation",
   async (kind) => {
     const application = {
       id: "example-app" as Id<"applications">,
       kind,
-      business: {
-        gstRegistered: false,
-        businessName: "Demo business",
-        materials: ["paper"],
-        address: "Demo street",
-        collectsFromSuppliers: true,
-      },
+      business: { gstRegistered: false },
       files: [],
     } as unknown as Application;
     render(
@@ -50,62 +51,67 @@ it.each(["yard", "recycler", "manufacturer"] as const)(
       </NextIntlClientProvider>,
     );
     expect(
-      screen.getByRole("textbox", {
-        name: messages.join.form.gstin,
+      screen.queryByRole("textbox", {
+        name: messages.join.business.businessName,
       }),
-    ).toBeVisible();
-    fireEvent.click(
-      screen.getByRole("button", { name: messages.auth.continue }),
-    );
-    await waitFor(() => {
-      expect(
-        screen.getByRole("textbox", {
-          name: messages.join.form.gstin,
-        }),
-      ).toHaveAttribute("aria-invalid", "true");
-    });
+    ).not.toBeInTheDocument();
     expect(
       screen.queryByText(messages.join.form.gstQuestion),
     ).not.toBeInTheDocument();
+    expect(
+      screen.queryByLabelText(messages.join.identity.pan),
+    ).not.toBeInTheDocument();
+    fireEvent.change(
+      screen.getByRole("textbox", {
+        name: messages.join.form.gstin,
+      }),
+      { target: { value: details.gstin } },
+    );
+    fireEvent.click(
+      screen.getByRole("button", { name: messages.join.identity.check }),
+    );
+    expect(await screen.findByText(details.businessName)).toBeVisible();
+    expect(
+      screen.queryByRole("textbox", {
+        name: messages.join.business.businessName,
+      }),
+    ).not.toBeInTheDocument();
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: messages.join.identity.confirm,
+      }),
+    );
+    const name = await screen.findByRole("textbox", {
+      name: messages.join.business.businessName,
+    });
+    expect(name).toHaveValue(details.businessName);
+    expect(name).toHaveAttribute("readonly");
   },
 );
 
-it("lets a Saathi omit PAN and checks a supplied normalized PAN only after explicit consent", async () => {
+it("keeps Saathi uploads and work fields while removing PAN and all paid identity checks", () => {
   const application = {
     id: "example-app" as Id<"applications">,
     kind: "saathi",
     saathi: {},
     files: [],
   } as unknown as Application;
-  render(
+  const { container } = render(
     <NextIntlClientProvider locale="en" messages={messages}>
       <SaathiForm application={application} />
     </NextIntlClientProvider>,
   );
   expect(
-    screen.queryByRole("button", { name: messages.join.identity.check }),
+    screen.queryByLabelText(messages.join.identity.pan),
   ).not.toBeInTheDocument();
-  const pan = screen.getByRole("textbox", { name: messages.join.identity.pan });
-  fireEvent.change(pan, { target: { value: "abcde1234f" } });
-  expect(verify).not.toHaveBeenCalled();
-  fireEvent.click(
-    screen.getByRole("button", { name: messages.join.identity.check }),
-  );
-  await waitFor(() => {
-    expect(save).toHaveBeenCalledWith({
-      saathi: expect.objectContaining({ pan: "ABCDE1234F" }),
-    });
-  });
-  expect(verify).toHaveBeenCalledExactlyOnceWith({
-    applicationId: application.id,
-    consent: true,
-  });
+  expect(container.querySelectorAll('input[type="file"]')).toHaveLength(2);
   expect(
-    await screen.findByText(messages.join.identity.verified),
+    screen.getByRole("textbox", {
+      name: messages.join.saathi.name,
+    }),
   ).toBeVisible();
   expect(
-    screen.queryByRole("textbox", {
-      name: messages.join.form.gstin,
-    }),
+    screen.queryByRole("button", { name: messages.join.identity.check }),
   ).not.toBeInTheDocument();
+  expect(lookup).not.toHaveBeenCalled();
 });

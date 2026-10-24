@@ -7,58 +7,89 @@ import type { Id } from "../../../convex/_generated/dataModel";
 import messages from "../../../messages/en.json";
 import { IdentityCheck } from "./identity-check";
 
-const { verify } = vi.hoisted(() => ({ verify: vi.fn() }));
-vi.mock("convex/react", () => ({ useAction: () => verify }));
-
+const { lookup, confirm, cache } = vi.hoisted(() => ({
+  lookup: vi.fn(),
+  confirm: vi.fn(),
+  cache: {
+    current: null as null | {
+      gstin: string;
+      businessName: string;
+      legalName: string;
+      address: string;
+      confirmed: boolean;
+    },
+  },
+}));
+vi.mock("convex/react", () => ({
+  useAction: () => lookup,
+  useMutation: () => confirm,
+  useQuery: () => cache.current,
+}));
 const applicationId = "application-fixture" as Id<"applications">;
+const details = {
+  gstin: "29ABCDE1234F1Z5",
+  businessName: "Example recycling",
+  legalName: "Example recycling limited",
+  address: "Example registered street",
+};
 function fixture(
   save: () => Promise<unknown>,
-  pan = "ABCDE1234F",
-  gstin?: string,
+  gstin = details.gstin,
+  onConfirmed = vi.fn(),
 ) {
   return (
     <NextIntlClientProvider locale="en" messages={messages}>
       <IdentityCheck
         applicationId={applicationId}
-        pan={pan}
         gstin={gstin}
         save={save}
+        onConfirmed={onConfirmed}
       />
     </NextIntlClientProvider>
   );
 }
 beforeEach(() => {
   vi.clearAllMocks();
-  verify.mockResolvedValue(null);
+  cache.current = null;
+  lookup.mockResolvedValue(details);
+  confirm.mockResolvedValue(null);
 });
 
-describe("explicit identity checks", () => {
-  it("sends no paid request until consent and successful draft save", async () => {
+describe("GST lookup and business confirmation", () => {
+  it("requires a saved draft, lookup consent and a separate explicit business confirmation", async () => {
     const pending = Promise.withResolvers<null>();
     const save = vi.fn(() => pending.promise);
-    render(fixture(save));
-    expect(verify).not.toHaveBeenCalled();
-    expect(screen.getByText(messages.join.identity.disclosure)).toBeVisible();
+    const accepted = vi.fn();
+    render(fixture(save, details.gstin, accepted));
+    expect(lookup).not.toHaveBeenCalled();
     fireEvent.click(
       screen.getByRole("button", { name: messages.join.identity.check }),
     );
-    expect(
-      screen.getByRole("button", { name: messages.join.identity.checking }),
-    ).toBeDisabled();
-    expect(verify).not.toHaveBeenCalled();
+    expect(lookup).not.toHaveBeenCalled();
     pending.resolve(null);
-    await waitFor(() => {
-      expect(verify).toHaveBeenCalledExactlyOnceWith({
-        applicationId,
-        consent: true,
-      });
-    });
+    expect(await screen.findByText(details.businessName)).toBeVisible();
+    expect(screen.getByText(details.address)).toBeVisible();
+    expect(confirm).not.toHaveBeenCalled();
+    expect(accepted).not.toHaveBeenCalled();
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: messages.join.identity.confirm,
+      }),
+    );
     expect(
       await screen.findByText(messages.join.identity.verified),
     ).toBeVisible();
+    expect(lookup).toHaveBeenCalledExactlyOnceWith({
+      applicationId,
+      consent: true,
+    });
+    expect(confirm).toHaveBeenCalledExactlyOnceWith({
+      applicationId,
+      gstin: details.gstin,
+    });
+    expect(accepted).toHaveBeenCalledWith(details);
   });
-
-  it("does not send a paid request when saving fails", async () => {
+  it("does not call a paid lookup if draft saving fails", async () => {
     const save = vi.fn().mockRejectedValue(new Error("Save failed"));
     render(fixture(save));
     fireEvent.click(
@@ -67,63 +98,47 @@ describe("explicit identity checks", () => {
     expect(
       await screen.findByText(messages.join.identity.saveFailed),
     ).toBeVisible();
-    expect(verify).not.toHaveBeenCalled();
+    expect(lookup).not.toHaveBeenCalled();
   });
-
-  it("shows the shared daily limit and leaves retry explicit", async () => {
-    verify.mockRejectedValue(new ConvexError({ code: "CHECK_LIMIT" }));
+  it("shows account limit and never invents business data or retries", async () => {
+    lookup.mockRejectedValue(new ConvexError("CHECK_LIMIT"));
     render(fixture(vi.fn().mockResolvedValue(null)));
     fireEvent.click(
       screen.getByRole("button", { name: messages.join.identity.check }),
     );
     expect(await screen.findByText(messages.join.identity.limit)).toBeVisible();
-    expect(verify).toHaveBeenCalledTimes(1);
-    expect(
-      screen.getByRole("button", { name: messages.join.identity.check }),
-    ).toBeEnabled();
+    expect(screen.queryByText(details.businessName)).not.toBeInTheDocument();
+    expect(lookup).toHaveBeenCalledTimes(1);
+    expect(confirm).not.toHaveBeenCalled();
   });
-
-  it("removes verified status when PAN or GST changes", async () => {
+  it("invalidates preview and confirmation when the GST input changes", async () => {
     const save = vi.fn().mockResolvedValue(null);
     const { rerender } = render(fixture(save));
     fireEvent.click(
       screen.getByRole("button", { name: messages.join.identity.check }),
     );
+    expect(await screen.findByText(details.businessName)).toBeVisible();
+    rerender(fixture(save, "27ABCDE1234F1Z5"));
+    expect(screen.queryByText(details.businessName)).not.toBeInTheDocument();
     expect(
-      await screen.findByText(messages.join.identity.verified),
-    ).toBeVisible();
-    rerender(fixture(save, "ABCDE1234G"));
-    expect(
-      screen.queryByText(messages.join.identity.verified),
+      screen.queryByRole("button", {
+        name: messages.join.identity.confirm,
+      }),
     ).not.toBeInTheDocument();
-    expect(verify).toHaveBeenCalledTimes(1);
   });
-
-  it("needs no check when no identifier applies", () => {
+  it("restores confirmed current proof on reload without another paid lookup", async () => {
+    const accepted = vi.fn();
+    cache.current = { ...details, confirmed: true };
+    render(fixture(vi.fn(), details.gstin, accepted));
+    await waitFor(() => {
+      expect(accepted).toHaveBeenCalledWith(cache.current, true);
+    });
+    expect(screen.getByText(messages.join.identity.verified)).toBeVisible();
+    expect(lookup).not.toHaveBeenCalled();
+  });
+  it("needs no check when no GST identifier applies", () => {
     render(fixture(vi.fn(), ""));
     expect(screen.queryByRole("button")).not.toBeInTheDocument();
-    expect(verify).not.toHaveBeenCalled();
+    expect(lookup).not.toHaveBeenCalled();
   });
-});
-
-it("clears a translated verification message safely when PAN changes", async () => {
-  const save = vi.fn().mockResolvedValue(null);
-  const { rerender } = render(fixture(save));
-  fireEvent.click(
-    screen.getByRole("button", { name: messages.join.identity.check }),
-  );
-  const status = await screen.findByText(messages.join.identity.verified);
-  const node = [...status.childNodes].find(
-    (child) => child.nodeType === Node.TEXT_NODE,
-  );
-  if (!node) throw new Error("Missing status text");
-  const translated = document.createElement("span");
-  translated.textContent = node.textContent;
-  node.replaceWith(translated);
-  expect(() => {
-    rerender(fixture(save, "ABCDE1234G"));
-  }).not.toThrow();
-  expect(
-    screen.queryByText(messages.join.identity.verified),
-  ).not.toBeInTheDocument();
 });

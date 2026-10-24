@@ -89,6 +89,11 @@ export default defineSchema({
     ),
     createdAt: v.number(),
     expiresAt: v.number(),
+    provider: v.optional(v.literal("gstin")),
+    businessName: v.optional(v.string()),
+    legalName: v.optional(v.string()),
+    address: v.optional(v.string()),
+    confirmedAt: v.optional(v.number()),
   }).index("by_application_kind", ["applicationId", "kind"]),
   /** Operator-imported synthetic demo identities; no passwords or sessions. */
   investorDemoAccounts: defineTable({

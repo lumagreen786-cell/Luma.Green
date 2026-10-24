@@ -185,7 +185,7 @@
       }
     },
     "verification": {
-      "body": "Ticarete başlamadan önce her işletmeyi ve Saathi çalışanını bir kişi inceler.",
+      "body": "Rolünüzü seçin ve kaydı tamamlayın.",
       "title": "Doğrulama",
       "nav": "Doğrulama",
       "business": "İşletmeler: varsa GST numarası, dükkân veya tesis fotoğrafları ve telefon görüşmesi.",
@@ -516,8 +516,8 @@
             "body": "Ana makineler ve sahanın en az iki fotoğrafı veya kısa videosu."
           },
           "review": {
-            "title": "12–24 saatte kontrol ederiz",
-            "body": "Her belgeyi bir kişi inceler. Eksik varsa ne düzeltileceğini açıkça söyleriz."
+            "title": "Kaydı tamamla",
+            "body": "Çalışma alanınız hazır."
           },
           "live": {
             "title": "Ticarete başlayın",
@@ -786,8 +786,8 @@
             "body": "Varsa GST numarasını ekleyin. Yoksa belirtin."
           },
           "review": {
-            "title": "12–24 saatte kontrol ederiz",
-            "body": "Bir kişi bilgileri kontrol eder. Onaylanınca panel açılır."
+            "title": "Kaydı tamamla",
+            "body": "Çalışma alanınız hazır."
           }
         }
       },
@@ -1022,8 +1022,8 @@
             "body": "Seçmen kimliği, sürücü belgesi, PAN veya maskelenmiş Aadhaar. Asla tam Aadhaar numarası eklemeyin."
           },
           "review": {
-            "title": "12–24 saat içinde kontrol ederiz",
-            "body": "Bir görevli özçekiminizi kimliğinizle karşılaştırır. Ardından iş alabilirsiniz."
+            "title": "Kaydı tamamla",
+            "body": "Çalışma alanınız hazır."
           }
         }
       },
@@ -2511,7 +2511,7 @@
       "intro": "Açık fiyatlar, ölçülen ağırlıklar ve kayıtlar herkesin bir toplama işlemini kontrol etmesine yardımcı olur.",
       "verified": {
         "title": "Doğrulanmış işletmeler",
-        "body": "Ticarete başlamadan önce her işletmeyi ve Saathi çalışanını bir kişi inceler."
+        "body": "Rolünüzü seçin ve kaydı tamamlayın."
       },
       "floor": {
         "title": "Taban fiyatla adil ücret",
@@ -2748,9 +2748,9 @@
       "title": "Başlamadan önce",
       "lead": "Neleri, neden isteyeceğiz.",
       "why": {
-        "kabadiwala": "Dükkân bilgileri yakındaki evlerin rezervasyon yapmasını ve gerçek bir dükkân olduğunu doğrulamamızı sağlar. Teyit için bir kez ararız.",
-        "business": "İzin belgesi ve makine fotoğrafları, alıcı ve satıcılara lisanslı ve faal olduğunuzu gösterir. Kirlilik kontrol kurulunun açık sicilinden kontrol ederiz.",
-        "saathi": "Fotoğraflı kimlik ve özçekim, biri sizi evine veya sahasına almadan önce kimliğinizi doğrulamamızı sağlar."
+        "kabadiwala": "Dükkân adresi ve çalışma saatleri. Varsa GST numaranız.",
+        "business": "GST numaranız, çevre koruma belgeleri ve makine fotoğrafları.",
+        "saathi": "Fotoğraflı kimlik ve özçekim."
       },
       "privacy": "Bilgileri ve dosyaları yalnızca siz ve Luma.Green ekibi görür. Doğrulamak ve platformdakilerle bağlantı kurmak için kullanırız, asla satmayız. Silinmesini isteyebilirsiniz.",
       "age": "18 yaşındayım veya daha büyüğüm",
@@ -2827,17 +2827,17 @@
       "yard": {
         "title": "Ön işleme işletmesi",
         "body": "Malzemeyi toplu ayrıştırıp balyalıyor, ardından satıyorsunuz.",
-        "needs": "Varsa GST numarası, kirlilik kontrol izni (PDF) ve makine fotoğrafları."
+        "needs": "GST numaranız, çevre koruma belgeleri ve makine fotoğrafları."
       },
       "recycler": {
         "title": "Geri dönüşümcü",
         "body": "Malzemeyi tekrar ham maddeye dönüştürüyorsunuz.",
-        "needs": "Varsa GST numarası, kirlilik kontrol izni (PDF) ve makine fotoğrafları."
+        "needs": "GST numaranız, çevre koruma belgeleri ve makine fotoğrafları."
       },
       "manufacturer": {
         "title": "Üretici",
         "body": "Fabrikanız için geri dönüştürülmüş malzeme alıyorsunuz.",
-        "needs": "Varsa GST numarası, kirlilik kontrol izni (PDF) ve makine fotoğrafları."
+        "needs": "GST numaranız, çevre koruma belgeleri ve makine fotoğrafları."
       },
       "saathi": {
         "title": "Saathi",
@@ -2855,7 +2855,7 @@
       "saving": "Kaydediliyor…",
       "saved": "Kaydedildi",
       "notSaved": "Kaydedilmedi. Bağlantınızı kontrol edin.",
-      "submit": "Doğrulamaya gönder",
+      "submit": "Kaydı tamamla",
       "next": "Sonraki: belgeler",
       "fixErrors": "Bazı yanıtları kontrol edin. Aşağıda işaretlendiler.",
       "yes": "Evet",
@@ -2917,7 +2917,7 @@
       },
       "submitted": {
         "title": "İnceleniyor",
-        "lead": "Genellikle 12–24 saat. Bitince SMS göndeririz.",
+        "lead": "Kaydedildi",
         "sentAt": "Gönderildi: {when}",
         "whatWeCheck": "Kontrol ettiklerimiz"
       },
@@ -2927,8 +2927,8 @@
         "fix": "Düzelt ve yeniden gönder"
       },
       "approved": {
-        "title": "Doğrulandınız",
-        "lead": "İşletmeniz Luma.Green’de yayında.",
+        "title": "Kayıt tamamlandı",
+        "lead": "Çalışma alanınız hazır.",
         "open": "Panelinizi açın"
       },
       "roleLabel": "Başvuru rolü: {role}",
@@ -2967,9 +2967,9 @@
       }
     },
     "metaTitle": "Luma.Green’e katılın",
-    "metaDescription": "Bengaluru’daki hurdacılar, ön işleme işletmeleri, geri dönüşümcüler, üreticiler ve Saathi çalışanları: Luma.Green’e başvurun. Her başvuruyu bir kişi genellikle 12–24 saatte inceler.",
+    "metaDescription": "Rolünüzü seçin ve kaydı tamamlayın.",
     "title": "Luma.Green’e katılın",
-    "lead": "Ne yaptığınızı anlatın. Her başvuruyu bir kişi genellikle 12–24 saatte inceler.",
+    "lead": "Rolünüzü seçin ve kaydı tamamlayın.",
     "start": "Başla",
     "youNeed": "Gerekenler",
     "homeTitle": "Evden geri dönüşüme mi veriyorsunuz?",
@@ -2978,7 +2978,7 @@
       "title": "Belgeler ve fotoğraflar",
       "lead": "İzninizi kirlilik kontrol kurulunun açık sicilinden kontrol ederiz.",
       "notRequired": "Tesisimizin izne ihtiyacı yok",
-      "notRequiredHint": "Yalnızca kâğıt balyalayanlar gibi bazı tesisler muaftır. Nedenini yazın, kontrol edelim.",
+      "notRequiredHint": "Biraz daha anlatın",
       "reason": "Neden gerekmiyor",
       "board": "Hangi kurul verdi?",
       "boards": {
@@ -3026,19 +3026,22 @@
       "fileTooBig": "Dosya çok büyük",
       "uploadFailed": "Yükleme başarısız. Tekrar deneyin.",
       "generic": "Bir sorun oluştu. Tekrar deneyin.",
-      "pan": "PAN ve GST bilgilerini kontrol edip yeniden deneyin."
+      "pan": "GST numaranızı arayıp işletmenizi onaylayın."
     },
     "identity": {
       "pan": "PAN (isteğe bağlı)",
       "disclosure": "Kabul et ve kontrol et seçeneğiyle, bu kimlik numaralarının doğrulama için Surepass’e gönderilmesine izin verirsiniz.",
       "check": "Kabul et ve kontrol et",
       "checking": "Kontrol ediliyor…",
-      "verified": "Kimlik numaraları doğrulandı. Yönetici onayı hâlâ gereklidir.",
+      "verified": "İşletme onaylandı.",
       "limit": "Hesabınız günlük kontrol sınırına ulaştı. Yarın deneyin.",
       "unavailable": "Kontrol kullanılamıyor. Yanıtlarınız kaydedildi.",
-      "required": "PAN ve GST bilgilerini kontrol edip yeniden deneyin.",
+      "required": "GST numaranızı arayıp işletmenizi onaylayın.",
       "pending": "Zaten bekleyen bir kontrol var. Lütfen bekleyin.",
-      "saveFailed": "Kaydedilmedi. Bağlantınızı kontrol edin."
+      "saveFailed": "Kaydedilmedi. Bağlantınızı kontrol edin.",
+      "previewTitle": "İşletme bilgilerini onaylayın",
+      "confirm": "İşletmeyi onayla",
+      "confirming": "Onaylanıyor…"
     }
   },
   "saathi": {

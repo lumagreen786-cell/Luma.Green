@@ -173,7 +173,7 @@
       "intro": "Prezzi chiari, pesi misurati e registri aiutano tutti a verificare un ritiro.",
       "verified": {
         "title": "Imprese verificate",
-        "body": "Una persona controlla ogni impresa e ogni Saathi prima che possano operare."
+        "body": "Scegli il tuo ruolo e completa la registrazione."
       },
       "floor": {
         "title": "Prezzi equi, con un minimo",
@@ -392,7 +392,7 @@
     "verification": {
       "title": "Verifica",
       "nav": "Verifica",
-      "body": "Una persona controlla ogni impresa e ogni Saathi prima che possano operare.",
+      "body": "Scegli il tuo ruolo e completa la registrazione.",
       "business": "Imprese: numero GST se disponibile, foto del negozio o dell'impianto e una telefonata.",
       "consent": "Pretrattatori, riciclatori e fabbriche: autorizzazione valida dell'ente statale per il controllo dell'inquinamento.",
       "saathi": "Saathi: documento d'identità con foto e un selfie corrispondente."
@@ -868,8 +868,8 @@
             "body": "Almeno due foto o brevi video dei macchinari principali e della sede."
           },
           "review": {
-            "title": "Verifichiamo entro 12–24 ore",
-            "body": "Una persona controlla ogni documento. Se manca qualcosa, indichiamo esattamente cosa correggere."
+            "title": "Completa registrazione",
+            "body": "Il tuo spazio di lavoro è pronto."
           },
           "live": {
             "title": "Inizia a commerciare",
@@ -1164,8 +1164,8 @@
             "body": "Aggiungi il numero GST se lo hai. Altrimenti indicalo."
           },
           "review": {
-            "title": "Verifichiamo entro 12–24 ore",
-            "body": "Una persona controlla i dati. Dopo l'approvazione si apre il pannello."
+            "title": "Completa registrazione",
+            "body": "Il tuo spazio di lavoro è pronto."
           }
         }
       },
@@ -1452,8 +1452,8 @@
             "body": "Tessera elettorale, patente, PAN o Aadhaar oscurato. Mai il numero Aadhaar completo."
           },
           "review": {
-            "title": "Verifichiamo entro 12–24 ore",
-            "body": "Una persona confronta selfie e documento. Poi puoi accettare lavori."
+            "title": "Completa registrazione",
+            "body": "Il tuo spazio di lavoro è pronto."
           }
         }
       },
@@ -1925,9 +1925,9 @@
   },
   "join": {
     "metaTitle": "Iscriviti a Luma.Green",
-    "metaDescription": "Kabadiwala, pretrattatori, riciclatori, produttori e Saathi di Bengaluru: richiedete l'iscrizione a Luma.Green. Una persona esamina ogni domanda, di norma entro 12–24 ore.",
+    "metaDescription": "Scegli il tuo ruolo e completa la registrazione.",
     "title": "Iscriviti a Luma.Green",
-    "lead": "Dicci cosa fai. Una persona esamina ogni domanda, di norma entro 12–24 ore.",
+    "lead": "Scegli il tuo ruolo e completa la registrazione.",
     "start": "Inizia",
     "youNeed": "Ti serviranno",
     "homeTitle": "Ricicli da casa?",
@@ -1942,17 +1942,17 @@
       "yard": {
         "title": "Pretrattatore",
         "body": "Selezioni e pressi materiali sfusi, poi li rivendi.",
-        "needs": "Numero GST, se disponibile, autorizzazione ambientale in PDF e foto dei macchinari."
+        "needs": "Il tuo numero GST, i documenti antinquinamento e le foto dei macchinari."
       },
       "recycler": {
         "title": "Riciclatore",
         "body": "Trasformi materiali di recupero in materie prime.",
-        "needs": "Numero GST, se disponibile, autorizzazione ambientale in PDF e foto dei macchinari."
+        "needs": "Il tuo numero GST, i documenti antinquinamento e le foto dei macchinari."
       },
       "manufacturer": {
         "title": "Produttore",
         "body": "Acquisti materiale riciclato per la tua fabbrica.",
-        "needs": "Numero GST, se disponibile, autorizzazione ambientale in PDF e foto dei macchinari."
+        "needs": "Il tuo numero GST, i documenti antinquinamento e le foto dei macchinari."
       },
       "saathi": {
         "title": "Saathi",
@@ -1967,9 +1967,9 @@
       "title": "Prima di iniziare",
       "lead": "Cosa chiediamo e perché.",
       "why": {
-        "kabadiwala": "I dati del negozio consentono alle famiglie vicine di prenotarti e a noi di verificare che esista. Ti chiamiamo una volta per conferma.",
-        "business": "Il certificato di autorizzazione e le foto dei macchinari mostrano ad acquirenti e venditori che sei autorizzato e operativo. Li confrontiamo con il registro pubblico dell'ente ambientale.",
-        "saathi": "Documento e selfie ci permettono di verificare chi sei prima che qualcuno ti faccia entrare in casa o al piazzale."
+        "kabadiwala": "Indirizzo e orari del negozio. Numero GST, se ne hai uno.",
+        "business": "Il tuo numero GST, i documenti antinquinamento e le foto dei macchinari.",
+        "saathi": "Un documento d'identità con foto e un selfie."
       },
       "privacy": "Solo tu e il team Luma.Green potete vedere i tuoi dati e file. Li usiamo per verificarti e metterti in contatto con altri su Luma.Green, mai per venderli. Puoi chiederci di eliminarli.",
       "age": "Ho almeno 18 anni",
@@ -1981,7 +1981,7 @@
       "saving": "Salvataggio…",
       "saved": "Salvato",
       "notSaved": "Non salvato. Controlla la connessione.",
-      "submit": "Invia per la verifica",
+      "submit": "Completa registrazione",
       "submitting": "Invio…",
       "next": "Avanti: documenti",
       "back": "Indietro",
@@ -2066,7 +2066,7 @@
       "title": "Documenti e foto",
       "lead": "Controlliamo l'autorizzazione nel registro pubblico dell'ente per il controllo dell'inquinamento.",
       "notRequired": "Il nostro impianto non richiede un'autorizzazione",
-      "notRequiredHint": "Alcuni impianti, come quelli che pressano solo carta, sono esenti. Spiega il motivo e verificheremo.",
+      "notRequiredHint": "Aggiungi qualche dettaglio",
       "reason": "Perché non serve",
       "board": "Quale ente l'ha rilasciata?",
       "boards": {
@@ -2141,7 +2141,7 @@
       },
       "submitted": {
         "title": "In esame",
-        "lead": "Di norma 12–24 ore. Ti invieremo un SMS al termine.",
+        "lead": "Salvato",
         "sentAt": "Inviata {when}",
         "whatWeCheck": "Cosa controlliamo"
       },
@@ -2151,8 +2151,8 @@
         "fix": "Correggi e reinvia"
       },
       "approved": {
-        "title": "La verifica è completata",
-        "lead": "La tua impresa è attiva su Luma.Green.",
+        "title": "Registrazione completata",
+        "lead": "Il tuo spazio di lavoro è pronto.",
         "open": "Apri il pannello"
       },
       "rejected": {
@@ -2206,19 +2206,22 @@
       "fileTooBig": "Il file è troppo grande",
       "uploadFailed": "Caricamento non riuscito. Riprova.",
       "generic": "Si è verificato un errore. Riprova.",
-      "pan": "Controlla i dati PAN e GST e riprova."
+      "pan": "Cerca il tuo numero GST e conferma l’attività."
     },
     "identity": {
       "pan": "PAN (facoltativo)",
       "disclosure": "Scegliendo Accetta e verifica, autorizzi l’invio di questi identificativi a Surepass per la convalida.",
       "check": "Accetta e verifica",
       "checking": "Verifica in corso…",
-      "verified": "Identificativi verificati. Serve ancora l’approvazione dell’amministratore.",
+      "verified": "Attività confermata.",
       "limit": "Il tuo account ha raggiunto il limite giornaliero di verifiche. Riprova domani.",
       "unavailable": "Verifica non disponibile. Le risposte sono salvate.",
-      "required": "Controlla i dati PAN e GST e riprova.",
+      "required": "Cerca il tuo numero GST e conferma l’attività.",
       "pending": "Una verifica è già in corso. Attendi.",
-      "saveFailed": "Non salvato. Controlla la connessione."
+      "saveFailed": "Non salvato. Controlla la connessione.",
+      "previewTitle": "Conferma i dati dell’attività",
+      "confirm": "Conferma attività",
+      "confirming": "Conferma in corso…"
     }
   },
   "app": {

@@ -15,6 +15,7 @@ const calls = vi.hoisted(() => ({
 vi.mock("convex/react", () => ({
   useMutation: () => calls.mutate,
   useAction: () => calls.mutate,
+  useQuery: () => null,
 }));
 vi.mock("@/i18n/navigation", () => ({
   useRouter: () => ({ push: calls.push }),
@@ -53,7 +54,7 @@ it("validates each shop stage and sends the complete retained application only a
   await userEvent.click(screen.getByRole("button", { name: "Continue" }));
   await userEvent.click(screen.getByRole("radio", { name: "No" }));
   await userEvent.click(
-    screen.getByRole("button", { name: "Send for verification" }),
+    screen.getByRole("button", { name: messages.join.form.submit }),
   );
   expect(calls.mutate).toHaveBeenNthCalledWith(1, {
     kabadiwala: expect.objectContaining({

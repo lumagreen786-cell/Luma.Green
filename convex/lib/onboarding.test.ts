@@ -414,7 +414,7 @@ it("requires GST for business applicants even when an old draft opts out", () =>
     }).success,
   ).toBe(false);
 });
-it("keeps Saathi PAN optional but rejects malformed supplied PAN", () => {
+it("strips retired PAN from Saathi forms without adding a validation requirement", () => {
   const person = {
     name: "Test Helper",
     area: "Bengaluru",
@@ -425,8 +425,8 @@ it("keeps Saathi PAN optional but rejects malformed supplied PAN", () => {
     days: ["mon"],
   };
   expect(saathiSchema.safeParse(person).success).toBe(true);
-  expect(saathiSchema.safeParse({ ...person, pan: "invalid" }).success).toBe(
-    false,
+  expect(saathiSchema.parse({ ...person, pan: "invalid" })).not.toHaveProperty(
+    "pan",
   );
   expect(saathiSchema.safeParse({ ...person, pan: "ABCDE1234F" }).success).toBe(
     true,

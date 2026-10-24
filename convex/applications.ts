@@ -3,6 +3,7 @@ import { ConvexError, v } from "convex/values";
 import type { Id } from "./_generated/dataModel";
 import { mutation, query, type QueryCtx } from "./_generated/server";
 import { authComponent } from "./auth";
+import { requireUser } from "./lib/access";
 import {
   activeFiles,
   countByType,
@@ -13,6 +14,7 @@ import {
   requireEditableApplication,
   requireMember,
 } from "./lib/applicationAccess";
+import { activateApplication } from "./lib/applicationActivation";
 import {
   draftSections,
   vApplicationKind,
@@ -214,6 +216,11 @@ export const saveDraft = mutation({
   returns: v.null(),
   handler: async (ctx, args) => {
     const { applicationId, ...draft } = args;
+    // Keep legacy fields readable in historical records, but never collect new PAN.
+    for (const section of ["kabadiwala", "business", "saathi"] as const) {
+      const value = draft[section];
+      if (value) delete value.pan;
+    }
     const { profile, application } = await requireEditableApplication(
       ctx,
       applicationId,
@@ -254,8 +261,7 @@ export const saveDraft = mutation({
 });
 
 /**
- * Sends the application for verification. Checks it with the same rules as
- * the form, keeps a copy of this version, and starts the 12–24 hour clock.
+ * Validates, snapshots and activates a new registration in one transaction.
  */
 export const submit = mutation({
   args: { applicationId: v.optional(v.id("applications")) },
@@ -269,6 +275,9 @@ export const submit = mutation({
       throw new ConvexError("NOT_EDITABLE");
     }
 
+    const user = await requireUser(ctx);
+    if (!user.phoneNumber || !user.phoneNumberVerified)
+      throw new ConvexError("PHONE_REQUIRED");
     const files = await activeFiles(ctx, application._id);
     const issues = applicationIssues(
       application.kind,
@@ -305,15 +314,25 @@ export const submit = mutation({
       if (
         proof?.status !== "verified" ||
         proof.input !== check.input ||
-        proof.expiresAt <= Date.now()
+        proof.expiresAt <= Date.now() ||
+        proof.provider !== "gstin" ||
+        proof.confirmedAt === undefined ||
+        !proof.businessName ||
+        (application.kabadiwala
+          ? application.kabadiwala.shopName !== proof.businessName.slice(0, 80)
+          : application.business?.businessName !==
+            proof.businessName.slice(0, 120))
       )
         throw new ConvexError("VALIDATION_REQUIRED");
     }
 
     const now = Date.now();
     const version = application.version + 1;
+    const created = await activateApplication(ctx, application, undefined, now);
     await ctx.db.patch("applications", application._id, {
-      status: "submitted",
+      status: "approved",
+      decidedAt: now,
+      decidedBy: undefined,
       version,
       submittedAt: now,
       note: undefined,
@@ -344,9 +363,27 @@ export const submit = mutation({
       metadata: { from: application.status, to: "submitted", version },
       createdAt: now,
     });
+    await ctx.db.insert("auditLog", {
+      action: "application.approved",
+      entityTable: "applications",
+      entityId: application._id,
+      orgId: created.orgId,
+      metadata: {
+        from: "submitted",
+        to: "approved",
+        version,
+        automatic: true,
+        basis:
+          identityRequirements.length > 0
+            ? "confirmed_gstin"
+            : "phone_and_required_form",
+        ...created,
+      },
+      createdAt: now,
+    });
     await queueNotification(ctx, {
-      event: "application_received",
-      dedupKey: `application_received:${application._id}:${String(version)}`,
+      event: "application_approved",
+      dedupKey: `application_approved:${application._id}:${String(version)}`,
       profileId: profile._id,
       applicationId: application._id,
       locale: application.locale,

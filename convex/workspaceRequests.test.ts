@@ -43,7 +43,7 @@ async function world() {
   return { ...w, organizationId, personalId, applicationId };
 }
 describe("new company site applications", () => {
-  it("keeps personal onboarding separate and requires the normal complete application and admin approval", async () => {
+  it("keeps personal onboarding separate and activates a complete owned site automatically", async () => {
     const w = await world();
     expect(await w.owner.query(api.applications.mine, {})).toMatchObject({
       application: { id: w.personalId, status: "draft" },
@@ -64,23 +64,13 @@ describe("new company site applications", () => {
       await w.owner.query(api.organizations.workspaces, {
         organizationId: w.organizationId,
       }),
-    ).toHaveLength(1);
+    ).toHaveLength(2);
     await expect(
       w.owner.mutation(api.review.decide, {
         applicationId: w.applicationId,
         decision: "approve",
       }),
     ).rejects.toThrow("NOT_ADMIN");
-    vi.stubEnv("ADMIN_EMAIL", "reviewer@example.test");
-    const admin = await signIn(w.t, {
-      email: "reviewer@example.test",
-      twoFactorEnabled: true,
-    });
-    await admin.mutation(api.identity.ensureProfile, { locale: "en" });
-    await admin.mutation(api.review.decide, {
-      applicationId: w.applicationId,
-      decision: "approve",
-    });
     const sites = await w.owner.query(api.organizations.workspaces, {
       organizationId: w.organizationId,
     });
@@ -114,9 +104,6 @@ describe("new company site applications", () => {
       applicationId: w.applicationId,
       kabadiwala: shop,
     });
-    await w.owner.mutation(api.applications.submit, {
-      applicationId: w.applicationId,
-    });
     await w.t.run(async (ctx) => {
       const member = await ctx.db
         .query("organizationMemberships")
@@ -134,6 +121,14 @@ describe("new company site applications", () => {
         applicationId: w.applicationId,
       }),
     ).rejects.toThrow("TEAM_ACCESS_DENIED");
+    await expect(
+      w.owner.mutation(api.applications.submit, {
+        applicationId: w.applicationId,
+      }),
+    ).rejects.toThrow("TEAM_ACCESS_DENIED");
+    await w.t.run((ctx) =>
+      ctx.db.patch("applications", w.applicationId, { status: "submitted" }),
+    );
     vi.stubEnv("ADMIN_EMAIL", "reviewer@example.test");
     const admin = await signIn(w.t, {
       email: "reviewer@example.test",

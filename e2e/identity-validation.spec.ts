@@ -4,22 +4,27 @@ import ar from "../messages/ar.json";
 import en from "../messages/en.json";
 import kn from "../messages/kn.json";
 
-async function fillRequiredGst(page: Page, label: string) {
-  const inputs = await page
-    .getByRole("textbox", { name: label, exact: true })
+async function openRegisteredForm(
+  page: Page,
+  origin: string,
+  locale: string,
+  kind: string,
+  yes: string,
+  suffix = "",
+) {
+  await page.goto(`${origin}/${locale}/join/${kind}${suffix}`);
+  await expect(page.getByText(/Synthetic interface fixture/u)).toBeVisible();
+  await expect(page.locator("input").first()).toHaveCSS("height", "48px");
+  const choices = await page
+    .getByRole("radio", { name: yes, exact: true })
     .all();
-  for (const input of inputs) {
-    await input.fill("29ABCDE1234F1Z5");
-  }
+  for (const choice of choices) await choice.check();
 }
 
-/** Run only with isolated loopback component adapters; no account/provider claims. */
+/** Isolated current components, synthetic metadata, no provider/auth acceptance. */
 const origin = process.env.IDENTITY_FIXTURE_ORIGIN;
 if (!origin || !/^http:\/\/127\.0\.0\.1:\d+$/u.test(origin))
-  throw new Error(
-    "Use a loopback fixture origin with the dedicated test config",
-  );
-// Separate loopback fixture config owns these tests; production config excludes them.
+  throw new Error("Use a loopback fixture origin");
 for (const { locale, copy } of [
   { locale: "en", copy: en },
   { locale: "ar", copy: ar },
@@ -27,7 +32,7 @@ for (const { locale, copy } of [
 ]) {
   for (const width of [390, 768, 1440]) {
     for (const theme of ["light", "dark"] as const) {
-      test(`${locale} identity control ${String(width)}px ${theme}`, async ({
+      test(`${locale} GST confirmation ${String(width)}px ${theme}`, async ({
         page,
       }, testInfo) => {
         await page.setViewportSize({ width, height: 1100 });
@@ -35,17 +40,38 @@ for (const { locale, copy } of [
           colorScheme: theme,
           reducedMotion: "reduce",
         });
-        for (const kind of ["kabadiwala", "yard", "saathi"]) {
-          await page.goto(`${origin}/${locale}/join/${kind}`);
+        await page.goto(`${origin}/${locale}/join/saathi`);
+        await expect(
+          page.getByRole("textbox", {
+            name: copy.join.saathi.name,
+            exact: true,
+          }),
+        ).toBeVisible();
+        await expect(page.getByLabel(copy.join.identity.pan)).toHaveCount(0);
+        await expect(
+          page.getByRole("button", { name: copy.join.identity.check }),
+        ).toHaveCount(0);
+        await page.screenshot({
+          path: testInfo.outputPath("saathi-no-pan.png"),
+          fullPage: true,
+        });
+        for (const kind of ["kabadiwala", "yard"]) {
+          await openRegisteredForm(
+            page,
+            origin,
+            locale,
+            kind,
+            copy.join.form.yes,
+          );
           await expect(
             page.getByText(/Synthetic interface fixture/u),
           ).toBeVisible();
-          await fillRequiredGst(page, copy.join.form.gstin);
-          const pan = page.getByRole("textbox", {
-            name: copy.join.identity.pan,
+          const gst = page.getByRole("textbox", {
+            name: copy.join.form.gstin,
             exact: true,
           });
-          await pan.fill("ABCDE1234F");
+          await gst.fill("29ABCDE1234F1Z5");
+          await expect(page.getByLabel(copy.join.identity.pan)).toHaveCount(0);
           await page
             .getByRole("button", {
               name: copy.join.identity.check,
@@ -53,14 +79,13 @@ for (const { locale, copy } of [
             })
             .click();
           await expect(
-            page
-              .getByText(copy.join.identity.verified, { exact: true })
-              .first(),
+            page.getByText("Synthetic Recycling Works", { exact: true }),
           ).toBeVisible();
-          await pan.fill("ABCDE1234G");
           await expect(
-            page.getByText(copy.join.identity.verified, { exact: true }),
-          ).toHaveCount(0);
+            page.getByText("Sample registered address, Bengaluru", {
+              exact: true,
+            }),
+          ).toBeVisible();
           await page.evaluate(async () => document.fonts.ready);
           expect(
             await page.evaluate(
@@ -68,14 +93,39 @@ for (const { locale, copy } of [
             ),
           ).toBe(true);
           await page.screenshot({
-            path: testInfo.outputPath(`${kind}.png`),
+            path: testInfo.outputPath(`${kind}-preview.png`),
             fullPage: true,
           });
-          await page.goto(`${origin}/${locale}/join/${kind}?scenario=limit`);
-          await fillRequiredGst(page, copy.join.form.gstin);
           await page
-            .getByRole("textbox", { name: copy.join.identity.pan, exact: true })
-            .fill("ABCDE1234F");
+            .getByRole("button", {
+              name: copy.join.identity.confirm,
+              exact: true,
+            })
+            .click();
+          await expect(
+            page.getByRole("button", { name: copy.auth.continue, exact: true }),
+          ).toBeVisible();
+          await expect(
+            page.getByRole("textbox", {
+              name: copy.join.form.gstin,
+              exact: true,
+            }),
+          ).toHaveValue("29ABCDE1234F1Z5");
+          await page.screenshot({
+            path: testInfo.outputPath(`${kind}-confirmed.png`),
+            fullPage: true,
+          });
+          await openRegisteredForm(
+            page,
+            origin,
+            locale,
+            kind,
+            copy.join.form.yes,
+            "?scenario=limit",
+          );
+          await page
+            .getByRole("textbox", { name: copy.join.form.gstin, exact: true })
+            .fill("29ABCDE1234F1Z5");
           await page
             .getByRole("button", {
               name: copy.join.identity.check,
@@ -83,51 +133,16 @@ for (const { locale, copy } of [
             })
             .click();
           await expect(
-            page.getByText(copy.join.identity.limit, { exact: true }).first(),
+            page.getByText(copy.join.identity.limit, { exact: true }),
           ).toBeVisible();
           await expect(
             page.getByRole("textbox", {
-              name: copy.join.identity.pan,
+              name: copy.join.form.gstin,
               exact: true,
             }),
-          ).toHaveValue("ABCDE1234F");
+          ).toHaveValue("29ABCDE1234F1Z5");
         }
       });
     }
   }
 }
-
-// Page translators replace React-owned text with their own element wrappers.
-test("typing survives translated autosave status updates", async ({ page }) => {
-  const errors: string[] = [];
-  page.on("pageerror", (error) => {
-    errors.push(error.message);
-  });
-  await page.goto(`${origin}/en/join/saathi?scenario=delayed-save`);
-  const pan = page.getByRole("textbox", {
-    name: en.join.identity.pan,
-    exact: true,
-  });
-  await pan.fill("ABCDE1234F");
-  const saving = page.getByText(en.join.form.saving, { exact: true });
-  await expect(saving).toBeVisible();
-  await saving.evaluate((element) => {
-    const node = [...element.childNodes].find(
-      (child) => child.nodeType === Node.TEXT_NODE,
-    );
-    if (!node) throw new Error("Missing saving text");
-    const replacement = document.createElement("span");
-    replacement.textContent = node.textContent;
-    node.replaceWith(replacement);
-  });
-  await expect(
-    page.getByText(en.join.form.saved, { exact: true }),
-  ).toBeVisible();
-  await pan.fill("ABCDE1234G");
-  await expect(saving).toBeVisible();
-  await expect(
-    page.getByText(en.join.form.saved, { exact: true }),
-  ).toBeVisible();
-  await expect(pan).toHaveValue("ABCDE1234G");
-  expect(errors).toEqual([]);
-});

@@ -173,7 +173,7 @@
       "intro": "Giá rõ ràng, trọng lượng đã cân và hồ sơ giúp mọi người kiểm tra một lần thu gom.",
       "verified": {
         "title": "Doanh nghiệp đã xác minh",
-        "body": "Nhân viên kiểm tra từng doanh nghiệp và từng Saathi trước khi họ được giao dịch."
+        "body": "Chọn vai trò và hoàn tất đăng ký."
       },
       "floor": {
         "title": "Giá công bằng, có giá sàn",
@@ -392,7 +392,7 @@
     "verification": {
       "title": "Xác minh",
       "nav": "Xác minh",
-      "body": "Nhân viên kiểm tra từng doanh nghiệp và từng Saathi trước khi họ được giao dịch.",
+      "body": "Chọn vai trò và hoàn tất đăng ký.",
       "business": "Doanh nghiệp: số GST nếu có, ảnh cửa hàng hoặc cơ sở và một cuộc gọi xác nhận.",
       "consent": "Đơn vị sơ chế, cơ sở tái chế và nhà máy: giấy chấp thuận còn hiệu lực của hội đồng kiểm soát ô nhiễm cấp bang.",
       "saathi": "Saathi: giấy tờ có ảnh và ảnh tự chụp trùng khớp."
@@ -868,8 +868,8 @@
             "body": "Ít nhất hai ảnh hoặc video ngắn về máy chính và cơ sở."
           },
           "review": {
-            "title": "Chúng tôi kiểm tra trong 12–24 giờ",
-            "body": "Nhân viên kiểm tra từng giấy tờ. Nếu thiếu thông tin, chúng tôi nói rõ cần sửa gì."
+            "title": "Hoàn tất đăng ký",
+            "body": "Không gian làm việc của bạn đã sẵn sàng."
           },
           "live": {
             "title": "Bắt đầu giao dịch",
@@ -1164,8 +1164,8 @@
             "body": "Thêm số GST nếu có. Nếu không, chỉ cần cho biết."
           },
           "review": {
-            "title": "Chúng tôi kiểm tra trong 12–24 giờ",
-            "body": "Nhân viên kiểm tra thông tin của bạn. Bảng điều khiển mở sau khi được duyệt."
+            "title": "Hoàn tất đăng ký",
+            "body": "Không gian làm việc của bạn đã sẵn sàng."
           }
         }
       },
@@ -1452,8 +1452,8 @@
             "body": "Thẻ cử tri, bằng lái, PAN hoặc Aadhaar đã che bớt. Không dùng đầy đủ số Aadhaar."
           },
           "review": {
-            "title": "Chúng tôi kiểm tra trong 12–24 giờ",
-            "body": "Nhân viên đối chiếu ảnh tự chụp với giấy tờ. Sau đó bạn có thể nhận việc."
+            "title": "Hoàn tất đăng ký",
+            "body": "Không gian làm việc của bạn đã sẵn sàng."
           }
         }
       },
@@ -1925,9 +1925,9 @@
   },
   "join": {
     "metaTitle": "Tham gia Luma.Green",
-    "metaDescription": "Kabadiwala, đơn vị sơ chế, cơ sở tái chế, nhà sản xuất và Saathi tại Bengaluru: đăng ký tham gia Luma.Green. Nhân viên kiểm tra từng hồ sơ, thường trong 12–24 giờ.",
+    "metaDescription": "Chọn vai trò và hoàn tất đăng ký.",
     "title": "Tham gia Luma.Green",
-    "lead": "Cho biết công việc của bạn. Nhân viên kiểm tra từng hồ sơ, thường trong 12–24 giờ.",
+    "lead": "Chọn vai trò và hoàn tất đăng ký.",
     "start": "Bắt đầu",
     "youNeed": "Bạn cần chuẩn bị",
     "homeTitle": "Tái chế tại nhà?",
@@ -1942,17 +1942,17 @@
       "yard": {
         "title": "Đơn vị sơ chế",
         "body": "Bạn phân loại và ép kiện số lượng lớn rồi bán tiếp.",
-        "needs": "Số GST nếu có, giấy chấp thuận môi trường dạng PDF và ảnh máy móc."
+        "needs": "Mã GST, tài liệu kiểm soát ô nhiễm và ảnh máy móc."
       },
       "recycler": {
         "title": "Đơn vị tái chế",
         "body": "Bạn biến vật liệu trở lại thành nguyên liệu.",
-        "needs": "Số GST nếu có, giấy chấp thuận môi trường dạng PDF và ảnh máy móc."
+        "needs": "Mã GST, tài liệu kiểm soát ô nhiễm và ảnh máy móc."
       },
       "manufacturer": {
         "title": "Đơn vị sản xuất",
         "body": "Bạn mua vật liệu tái chế cho nhà máy.",
-        "needs": "Số GST nếu có, giấy chấp thuận môi trường dạng PDF và ảnh máy móc."
+        "needs": "Mã GST, tài liệu kiểm soát ô nhiễm và ảnh máy móc."
       },
       "saathi": {
         "title": "Nhân viên Saathi",
@@ -1967,9 +1967,9 @@
       "title": "Trước khi bắt đầu",
       "lead": "Chúng tôi hỏi gì và vì sao.",
       "why": {
-        "kabadiwala": "Thông tin cửa hàng giúp hộ gần bạn đặt lịch và giúp chúng tôi xác thực cửa hàng. Chúng tôi gọi một lần để xác nhận.",
-        "business": "Giấy chấp thuận và ảnh máy chứng minh cơ sở được cấp phép và đang hoạt động. Chúng tôi đối chiếu với sổ đăng ký công khai của hội đồng kiểm soát ô nhiễm.",
-        "saathi": "Giấy tờ có ảnh và ảnh tự chụp giúp xác nhận danh tính trước khi ai đó cho bạn vào nhà hoặc bãi."
+        "kabadiwala": "Địa chỉ, giờ mở cửa và số GST của cửa hàng nếu có.",
+        "business": "Mã GST, tài liệu kiểm soát ô nhiễm và ảnh máy móc.",
+        "saathi": "Giấy tờ có ảnh và ảnh tự chụp."
       },
       "privacy": "Chỉ bạn và đội ngũ Luma.Green thấy thông tin và tệp của bạn. Chúng tôi dùng để xác minh và kết nối bạn với người khác trên Luma.Green, không bán dữ liệu. Bạn có thể yêu cầu xóa.",
       "age": "Tôi đủ 18 tuổi",
@@ -1981,7 +1981,7 @@
       "saving": "Đang lưu…",
       "saved": "Đã lưu",
       "notSaved": "Chưa lưu được. Kiểm tra kết nối.",
-      "submit": "Gửi để xác minh",
+      "submit": "Hoàn tất đăng ký",
       "submitting": "Đang gửi…",
       "next": "Tiếp theo: giấy tờ",
       "back": "Quay lại",
@@ -2066,7 +2066,7 @@
       "title": "Giấy tờ và ảnh",
       "lead": "Chúng tôi kiểm tra giấy chấp thuận trong sổ đăng ký công khai của hội đồng kiểm soát ô nhiễm.",
       "notRequired": "Cơ sở của chúng tôi không cần giấy chấp thuận",
-      "notRequiredHint": "Một số cơ sở như chỉ ép kiện giấy được miễn. Nêu lý do để chúng tôi kiểm tra.",
+      "notRequiredHint": "Cho biết thêm một chút",
       "reason": "Lý do không cần",
       "board": "Hội đồng nào cấp giấy?",
       "boards": {
@@ -2141,7 +2141,7 @@
       },
       "submitted": {
         "title": "Đang xét duyệt",
-        "lead": "Thường 12–24 giờ. Chúng tôi gửi SMS khi hoàn tất.",
+        "lead": "Đã lưu",
         "sentAt": "Đã gửi {when}",
         "whatWeCheck": "Chúng tôi kiểm tra gì"
       },
@@ -2151,8 +2151,8 @@
         "fix": "Sửa và gửi lại"
       },
       "approved": {
-        "title": "Bạn đã được xác minh",
-        "lead": "Doanh nghiệp đang hoạt động trên Luma.Green.",
+        "title": "Đã hoàn tất đăng ký",
+        "lead": "Không gian làm việc của bạn đã sẵn sàng.",
         "open": "Mở bảng điều khiển"
       },
       "rejected": {
@@ -2206,19 +2206,22 @@
       "fileTooBig": "Tệp quá lớn",
       "uploadFailed": "Tải lên thất bại. Thử lại.",
       "generic": "Đã xảy ra lỗi. Thử lại.",
-      "pan": "Kiểm tra thông tin PAN và GST rồi thử lại."
+      "pan": "Tra cứu mã GST và xác nhận doanh nghiệp."
     },
     "identity": {
       "pan": "PAN (không bắt buộc)",
       "disclosure": "Khi chọn Đồng ý và kiểm tra, bạn cho phép gửi các mã định danh này đến Surepass để xác thực.",
       "check": "Đồng ý và kiểm tra",
       "checking": "Đang kiểm tra…",
-      "verified": "Đã xác thực mã định danh. Vẫn cần quản trị viên phê duyệt.",
+      "verified": "Đã xác nhận doanh nghiệp.",
       "limit": "Tài khoản của bạn đã đạt giới hạn kiểm tra hằng ngày. Hãy thử lại ngày mai.",
       "unavailable": "Không thể kiểm tra. Câu trả lời đã được lưu.",
-      "required": "Kiểm tra thông tin PAN và GST rồi thử lại.",
+      "required": "Tra cứu mã GST và xác nhận doanh nghiệp.",
       "pending": "Đã có yêu cầu kiểm tra đang chờ. Vui lòng đợi.",
-      "saveFailed": "Chưa lưu được. Kiểm tra kết nối."
+      "saveFailed": "Chưa lưu được. Kiểm tra kết nối.",
+      "previewTitle": "Xác nhận thông tin doanh nghiệp",
+      "confirm": "Xác nhận doanh nghiệp",
+      "confirming": "Đang xác nhận…"
     }
   },
   "app": {

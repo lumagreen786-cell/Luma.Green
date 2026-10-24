@@ -1,3 +1,46 @@
+## GST-only registration and automatic activation — 25 October 2026
+
+This owner correction supersedes optional PAN and manual onboarding approval
+requirements in earlier entries. All applicant PAN fields are removed. Mandatory
+GSTIN for yard/preprocessor, recycler and manufacturer, and conditional GST for
+registered kabadiwalas, now uses Corporate GSTIN lookup. The applicant sees the
+provider name/address, explicitly confirms the business, then completes the
+remaining form. Household booking stays unchanged; Saathi keeps ID/selfie uploads.
+
+New valid submissions activate in one transaction through the same provisioning
+owner used by existing administrative recovery. Snapshot, file-version and audit
+history remain intact. Existing admin authentication, workspace permissions,
+moderation, payment/evidence reviews and historical records remain unchanged.
+Old GSTIN-by-PAN proof cannot satisfy the new confirmation requirement. Optional
+proof metadata is additive; no database records are deleted or backfilled.
+
+The shared 20 attempts per authenticated account per India day, no paid retries,
+24-hour proof cache and duplicate/cooldown guards remain enforced. Provider
+secrets stay only on the new Convex deployments. Development paid calls stay off.
+A read-only bounded production check found one draft and no submitted applications;
+no existing pending records require a review-state migration.
+
+Surepass's Corporate GSTIN product is **not subscribed**. At the owner's request,
+the console activation was attempted; Surepass returned **forbidden** and the
+product remained inactive. The provider must enable `merchant/corporate-gstin`.
+No successful live business-name lookup is established. UI fixtures and mocked
+provider tests do not establish live provider acceptance. Do not spend repeated
+applicant attempts while access is unavailable.
+
+The typing-crash repair and production-only policy merged separately as
+`faf4d26`. AGENTS.md and the shipping playbook prohibit Vercel previews;
+`vercel.json` permits automatic Git deployments only for `main`. Main deploys
+Production at `https://luma.green`; manual releases must explicitly use Production.
+Guide/Word updates remain deferred at the owner's request.
+
+Verification: `pnpm check` passed lint (65 existing warnings), both type checks,
+2,507 web/backend tests and 73 native compatibility tests. The webpack production
+build passed all 3,119 pages after clearing generated cache to recover disk space.
+The 18-case browser matrix passed across three forms, English/Arabic/Kannada,
+three widths and both themes. Development and production Convex schema/functions
+were deployed to the new Sydney targets with no deleted indexes. Paid development
+calls remain disabled. Website release status must be checked separately.
+
 ## Form typing crash repair — 25 October 2026
 
 Production revision `36b441d` was reported to throw React `removeChild`
