@@ -15,12 +15,16 @@ historical records; do not deploy to the old targets during routine work.
   `.convex.site` address. The existing schema, indexes, functions and Better Auth
   component deployed to both new environments without a data import or seed.
 - Vercel: team `luma-0f95`, project `luma-green`; website
-  `https://luma-green-ten.vercel.app`. The new project imports the new GitHub
-  repository. The ignored local Vercel link selects the new team/project.
+  `https://luma.green` (production). `www.luma.green` redirects to the root
+  domain with HTTP 308. `https://luma-green-ten.vercel.app` remains a production
+  alias. The new project imports the new GitHub repository. The ignored local
+  Vercel link selects the new team/project.
 - Production frontend variables select only the new production Convex URLs and
-  website address. Production Convex `SITE_URL` uses that website address;
+  website address. Production Convex `SITE_URL=https://luma.green`;
   development uses `http://localhost:3000`. Both environments have distinct fresh
-  authentication secrets. Existing administrator identity and OS Digital OTP
+  authentication secrets. Production `EXTRA_TRUSTED_ORIGINS` retains the
+  existing Vercel alias during the domain transition. Existing administrator
+  identity and OS Digital OTP
   settings are migrated privately; no credential values belong in this file.
 - `PUBLIC_DATA_ENABLED=false` keeps automatic data imports off, as requested.
   Do not enable imports, seed records, or send an OTP as part of migration checks.
@@ -36,10 +40,39 @@ login and Arabic routes returned HTTP 200. Public browser bundles contain only
 URL uses the new website address. A current desktop capture was visually checked;
 no browser errors were reported. Local `pnpm check` passed all 2,480 web/backend
 and 73 native compatibility tests, lint and types. No live OTP
-or authenticator acceptance is established. The owner will configure Cloudflare
-and the custom domain separately. PAN/GST APIs and provider-specific IP
-allowlisting are next steps; they are not configured by this migration. The old repository, hosting and accounts have
-not been deleted. Keep them until migration verification and cleanup review.
+or authenticator acceptance is established.
+
+The custom domain uses Spaceship nameservers. The root A record is
+`@ → 216.198.79.1`; the www CNAME is
+`www → 59238d9ed9b5298a.vercel-dns-017.com`, both with a 30-minute TTL.
+Authoritative and public DNS checks matched these values. Validated HTTPS checks
+returned 200 for the root homepage/login and 308 from www to `https://luma.green/`.
+The same-origin auth proxy returned 200 with no session. Vercel
+`NEXT_PUBLIC_SITE_URL=https://luma.green` is saved. Production rebuild
+`dpl_B5jY6KZeZ9c3nmnST1EEjT6NGTK3` completed and is ready. The root homepage
+publishes `https://luma.green` as its canonical URL. The login page returns 200
+and does not publish a canonical tag. The owner
+reported that live OTP login works on `luma.green` on 24 October. This is owner
+acceptance evidence; no agent-observed SMS/TOTP execution or native acceptance
+is claimed.
+
+The owner requested deletion of only the old Luma Vercel and Convex projects
+after successful login on the new domain. Keep all other projects and both new
+environments. Private old-development/production exports, including Better Auth
+and file storage, are saved under the ignored local directory
+`.convex/account-migration-backups/2026-10-24/`. Both ZIP integrity checks passed.
+Old Convex environment recovery files and non-secret old Vercel project settings
+are also saved there. Do not print or commit those recovery files. The owner reported the live login test passed. Old Vercel project
+`thehelds-projects/luma_green` (`prj_ceMcCzKReKt06pJ3fIYcSexsoLd1`) was then
+deleted successfully. Its only assigned domain was `lumagreen.vercel.app`; the
+new root/www domain mappings are on the new project. The owner then reported
+that they deleted the old Convex project themselves. No agent-executed or
+independent verification of that deletion is claimed. Never delete the new
+Convex project or either of its deployments.
+Cloudflare, PAN/GST APIs and provider-specific IP allowlisting are next steps;
+they are not configured by this migration. The old GitHub repository and
+accounts have not been deleted by this task. Old Vercel deletion is verified;
+old Convex deletion is owner-reported as described above.
 
 Guide/Word changes remain deferred; no user-guide update was requested. Native
 apps remain on hold. This migration changes no application flow or native code.
