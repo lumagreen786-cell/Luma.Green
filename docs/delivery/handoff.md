@@ -7,9 +7,11 @@ off. Production `SUREPASS_ENABLED=true`; the operator example switch is false af
 [implementation plan](surepass-plan.md).
 
 The optional PAN field and explicit consent/check action are shared by shop,
-yard, recycler and manufacturer applications. GST is checked when registration
-is declared; its embedded PAN supplies the PAN lookup input. Household and
-Saathi flows have no PAN/GST fields. Checks require verified phone access to an
+yard, recycler, manufacturer and Saathi applications. GSTIN is mandatory for
+yards/preprocessors, recyclers and manufacturers; kabadiwalas need it only when
+they declare registration. Its embedded PAN supplies the lookup input. Household
+flows have no PAN/GST fields. Saathi ID and selfie uploads remain required by
+explicit owner confirmation; PAN remains optional. Checks require verified phone access to an
 editable owned application. Submission requires current successful proof for
 supplied identifiers. Proof expires after 24 hours and cannot validate changed
 input. Provider checks do not replace admin application approval.

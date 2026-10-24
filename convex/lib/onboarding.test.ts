@@ -404,3 +404,31 @@ describe("indiaToday", () => {
     expect(indiaToday(Date.UTC(2026, 8, 29, 18, 31))).toBe("2026-09-30");
   });
 });
+
+it("requires GST for business applicants even when an old draft opts out", () => {
+  expect(
+    businessSchema.safeParse({
+      ...business,
+      gstRegistered: false,
+      gstin: undefined,
+    }).success,
+  ).toBe(false);
+});
+it("keeps Saathi PAN optional but rejects malformed supplied PAN", () => {
+  const person = {
+    name: "Test Helper",
+    area: "Bengaluru",
+    radiusKm: 2,
+    workTypes: ["home_pickups"],
+    vehicle: "none",
+    times: ["morning"],
+    days: ["mon"],
+  };
+  expect(saathiSchema.safeParse(person).success).toBe(true);
+  expect(saathiSchema.safeParse({ ...person, pan: "invalid" }).success).toBe(
+    false,
+  );
+  expect(saathiSchema.safeParse({ ...person, pan: "ABCDE1234F" }).success).toBe(
+    true,
+  );
+});

@@ -31,6 +31,7 @@ import {
 import { FileSlot } from "./file-slot";
 import { FormJourney } from "./form-journey";
 import { ChangesNote, FormHeader, SubmitBar } from "./form-parts";
+import { IdentityCheck } from "./identity-check";
 import { submitErrorKey, type SubmitFailure } from "./submit-error";
 import { useAutosave, withoutUndefined } from "./use-autosave";
 import type { Application } from "./use-mine";
@@ -42,6 +43,7 @@ function toDraft(values: Partial<Values>): Draft {
   const radius = RADII_KM.find((km) => km === values.radiusKm);
   return withoutUndefined({
     name: values.name,
+    pan: values.pan?.trim().toUpperCase() ?? "",
     area: values.area,
     location: values.location,
     radiusKm: radius,
@@ -77,6 +79,7 @@ export function SaathiForm({ application }: { application: Application }) {
     resolver: zodResolver(saathiSchema),
     defaultValues: {
       name: draft.name ?? "",
+      pan: draft.pan ?? "",
       area: draft.area ?? "",
       location: draft.location,
       radiusKm: draft.radiusKm,
@@ -143,7 +146,7 @@ export function SaathiForm({ application }: { application: Application }) {
       stages={[
         {
           title: t("saathi.area"),
-          fields: ["name", "area", "location", "radiusKm"],
+          fields: ["name", "pan", "area", "location", "radiusKm"],
           content: (
             <>
               <FormField
@@ -165,6 +168,31 @@ export function SaathiForm({ application }: { application: Application }) {
                   {...register("name")}
                 />
               </FormField>
+
+              <FormField
+                id="pan"
+                label={t("identity.pan")}
+                error={errors.pan?.message}
+              >
+                <Input
+                  id="pan"
+                  dir="ltr"
+                  autoCapitalize="characters"
+                  maxLength={10}
+                  className="h-12 font-mono text-base uppercase"
+                  aria-invalid={errors.pan ? true : undefined}
+                  aria-describedby={describedBy("pan", errors.pan?.message)}
+                  {...register("pan")}
+                />
+              </FormField>
+              <IdentityCheck
+                applicationId={application.id}
+                pan={values.pan}
+                gstin={undefined}
+                save={async () => {
+                  await saveDraft({ saathi: toDraft(values) });
+                }}
+              />
 
               <FormField
                 id="area"
@@ -346,6 +374,16 @@ export function SaathiForm({ application }: { application: Application }) {
           busyLabel={t("form.submitting")}
           isBusy={isSubmitting}
           failure={failure}
+          secondary={
+            <IdentityCheck
+              applicationId={application.id}
+              pan={values.pan}
+              gstin={undefined}
+              save={async () => {
+                await saveDraft({ saathi: toDraft(values) });
+              }}
+            />
+          }
         />
       }
     />

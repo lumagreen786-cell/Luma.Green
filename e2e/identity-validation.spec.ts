@@ -1,8 +1,17 @@
-import { expect, test } from "@playwright/test";
+import { expect, type Page, test } from "@playwright/test";
 
 import ar from "../messages/ar.json";
 import en from "../messages/en.json";
 import kn from "../messages/kn.json";
+
+async function fillRequiredGst(page: Page, label: string) {
+  const inputs = await page
+    .getByRole("textbox", { name: label, exact: true })
+    .all();
+  for (const input of inputs) {
+    await input.fill("29ABCDE1234F1Z5");
+  }
+}
 
 /** Run only with isolated loopback component adapters; no account/provider claims. */
 const origin = process.env.IDENTITY_FIXTURE_ORIGIN;
@@ -26,11 +35,12 @@ for (const { locale, copy } of [
           colorScheme: theme,
           reducedMotion: "reduce",
         });
-        for (const kind of ["kabadiwala", "yard"]) {
+        for (const kind of ["kabadiwala", "yard", "saathi"]) {
           await page.goto(`${origin}/${locale}/join/${kind}`);
           await expect(
             page.getByText(/Synthetic interface fixture/u),
           ).toBeVisible();
+          await fillRequiredGst(page, copy.join.form.gstin);
           const pan = page.getByRole("textbox", {
             name: copy.join.identity.pan,
             exact: true,
@@ -62,6 +72,7 @@ for (const { locale, copy } of [
             fullPage: true,
           });
           await page.goto(`${origin}/${locale}/join/${kind}?scenario=limit`);
+          await fillRequiredGst(page, copy.join.form.gstin);
           await page
             .getByRole("textbox", { name: copy.join.identity.pan, exact: true })
             .fill("ABCDE1234F");

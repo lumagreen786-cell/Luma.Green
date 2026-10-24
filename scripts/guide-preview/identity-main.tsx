@@ -3,13 +3,24 @@ import { createRoot } from "react-dom/client";
 
 import { BusinessForm } from "@/components/join/business-form";
 import { KabadiwalaForm } from "@/components/join/kabadiwala-form";
+import { SaathiForm } from "@/components/join/saathi-form";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { localeMeta } from "@/i18n/locales";
 
 import { onboardingFixture } from "./fixtures";
 import { locale, messages } from "./locale";
 
-const application = onboardingFixture()?.application;
+const baseApplication = onboardingFixture()?.application;
+const application =
+  baseApplication && window.location.pathname.endsWith("/saathi")
+    ? {
+        ...baseApplication,
+        kind: "saathi" as const,
+        kabadiwala: undefined,
+        business: undefined,
+        saathi: { name: "Demo worker", area: "Sample neighbourhood" },
+      }
+    : baseApplication;
 if (!application) throw new Error("Synthetic application fixture missing");
 document.documentElement.lang = locale;
 document.documentElement.dir = localeMeta[locale].dir;
@@ -19,6 +30,17 @@ const fonts = JSON.parse(
 document.documentElement.className = fonts[locale] ?? "";
 const root = document.querySelector("#root");
 if (!root) throw new Error("Fixture root missing");
+let form = <KabadiwalaForm application={application} loginPhone={undefined} />;
+if (application.kind === "saathi")
+  form = <SaathiForm application={application} />;
+else if (application.kind === "yard")
+  form = (
+    <BusinessForm
+      kind="yard"
+      application={application}
+      loginPhone={undefined}
+    />
+  );
 createRoot(root).render(
   <NextIntlClientProvider locale={locale} messages={messages}>
     <ThemeProvider>
@@ -26,17 +48,7 @@ createRoot(root).render(
         Synthetic interface fixture. No login, paid request or provider
         verification.
       </p>
-      <main className="mx-auto w-full max-w-2xl px-4 py-6">
-        {application.kind === "yard" ? (
-          <BusinessForm
-            kind="yard"
-            application={application}
-            loginPhone={undefined}
-          />
-        ) : (
-          <KabadiwalaForm application={application} loginPhone={undefined} />
-        )}
-      </main>
+      <main className="mx-auto w-full max-w-2xl px-4 py-6">{form}</main>
     </ThemeProvider>
   </NextIntlClientProvider>,
 );

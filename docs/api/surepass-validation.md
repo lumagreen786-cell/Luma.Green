@@ -1,6 +1,8 @@
 # PAN and GST validation contract
 
-Approved owner requirements: optional PAN; GST when registered; verified phone
+Approved owner requirements: optional PAN for Saathi and business/shop applicants;
+GST mandatory for yard/preprocessor, recycler and manufacturer, conditional on
+registration only for kabadiwala; no PAN/GST for households; verified phone
 before checks; check before submission; 20 paid attempts per verified account per
 India calendar day, combined across PAN and GST and all its applications. This
 25 October owner correction supersedes the earlier platform-wide cap. Total
@@ -46,7 +48,10 @@ validation. Existing unexpired successful proofs remain valid.
 UI: one explicit check action after a short Surepass disclosure. PAN remains
 optional. Forms retain values on quota/provider errors. Shared business form
 covers yards, recyclers and manufacturers; kabadiwala uses the same check.
-Households and Saathis have no PAN/GST field and need no paid checks.
+Saathi has optional PAN only and no GST requirement. Households have no PAN/GST
+field and need no paid checks. Business roles have no GST-registration opt-out.
+These owner-approved role rules on 25 October supersede earlier conditional-GST
+business rules and the earlier exclusion of Saathi from optional PAN validation.
 
 ## Owner-authorized operator smoke check — 25 October 2026
 

@@ -15,9 +15,11 @@ required when neither PAN nor GST applies. No scope expansion to other APIs.
    platform-wide counter for aggregate usage tracking, with no applicant cap. No automatic retries. Bind successful
    proofs to current inputs, owning application and expiry. Enforce at submission.
 2. Frontend: optional PAN on kabadiwala and shared business form (yard, recycler,
-   manufacturer). Show the Surepass disclosure and an explicit consent/check
+   manufacturer), plus optional PAN on Saathi. Business roles always require GSTIN;
+   remove their GST registration opt-out. Keep kabadiwala GST conditional.
+   Show the Surepass disclosure and an explicit consent/check
    action. Save current draft before checking. Keep all values on errors. Clear
-   visible success when identifiers change. Household/Saathi flows stay unchanged.
+   visible success when identifiers change. Households stay unchanged. Preserve all non-identity Saathi fields and uploads.
 3. Verify: test quota concurrency, mixed PAN/GST attempts, failures, retries,
    duplicate checks, changed inputs, ownership and optional flows without real
    provider requests. Test check-control success/error/input-change behavior and
@@ -56,3 +58,14 @@ usage-only counter, and a separate tightly bounded operator example allowance.
 Tests must prove account A’s exhausted allowance does not block account B, while
 multiple applications for account A still share its one allowance. No auth
 changes are part of this correction.
+
+## Owner-approved role correction — 25 October 2026
+
+Saathi applicants may supply PAN; supplied PAN must be checked before submission.
+Saathi has no GST requirement. Yard/preprocessor, recycler and manufacturer
+applications must always provide and verify GSTIN; remove registration opt-out
+from their shared form and enforce the rule on the server. Kabadiwala GST remains
+conditional on declared registration, with optional PAN. Households have neither
+identity field. No changes to Saathi work choices, location or uploads are in scope.
+Review accepted; retain existing phone verification, proof binding, per-account
+20/day cap and role/access checks. Reuse translated verification controls.

@@ -131,6 +131,7 @@ export const documentsDraft = v.object({
 });
 
 export const saathiDraft = v.object({
+  pan: v.optional(v.string()),
   name: v.optional(v.string()),
   area: v.optional(v.string()),
   location: v.optional(vLocation),

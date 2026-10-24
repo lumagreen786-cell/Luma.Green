@@ -382,3 +382,31 @@ it("asks the applicant to correct identifiers rejected with 422 without retrying
   );
   expect(quota?.used).toBe(1);
 });
+it("requires proof for supplied Saathi PAN and spends nothing when PAN is absent", async () => {
+  const { t, as, applicationId } = await setup();
+  await t.run((ctx) =>
+    ctx.db.patch("applications", applicationId, {
+      kind: "saathi",
+      kabadiwala: undefined,
+      saathi: { pan },
+    }),
+  );
+  const proof = await as.mutation(internal.identityChecks.reserve, {
+    applicationId,
+    kind: "pan",
+  });
+  expect(proof).not.toBeNull();
+  await t.run((ctx) =>
+    ctx.db.patch("applications", applicationId, { saathi: {} }),
+  );
+  expect(
+    await as.mutation(internal.identityChecks.reserve, {
+      applicationId,
+      kind: "pan",
+    }),
+  ).toBeNull();
+  const quota = await t.run((ctx) =>
+    ctx.db.query("identityCheckDays").unique(),
+  );
+  expect(quota?.used).toBe(1);
+});

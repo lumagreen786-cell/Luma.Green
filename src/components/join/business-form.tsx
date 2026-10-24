@@ -51,8 +51,8 @@ function toDraft(values: Partial<Values>): Draft {
     siteType: values.siteType,
     materialOrigins: values.materialOrigins,
     pan: values.pan?.trim().toUpperCase() ?? "",
-    gstRegistered: values.gstRegistered,
-    gstin: cleanGstin(values.gstRegistered, values.gstin),
+    gstRegistered: true,
+    gstin: cleanGstin(true, values.gstin),
     materials: values.materials,
     address: values.address,
     location: values.location,
@@ -98,7 +98,7 @@ export function BusinessForm({
       siteType: draft.siteType,
       materialOrigins: draft.materialOrigins,
       pan: draft.pan ?? "",
-      gstRegistered: draft.gstRegistered,
+      gstRegistered: true,
       gstin: draft.gstin ?? "",
       materials: draft.materials ?? [],
       address: draft.address ?? "",
@@ -202,51 +202,31 @@ export function BusinessForm({
                 />
               </FormField>
 
-              <FieldSet
-                id="gstRegistered"
-                legend={t("form.gstQuestion")}
-                error={errors.gstRegistered?.message}
+              <FormField
+                id="gstin"
+                label={t("form.gstin")}
+                hint={t("form.gstinHint")}
+                error={errors.gstin?.message}
               >
-                <Controller
-                  control={control}
-                  name="gstRegistered"
-                  render={({ field, fieldState }) => (
-                    <YesNo
-                      name="gstRegistered"
-                      isYes={field.value}
-                      onChange={field.onChange}
-                      invalid={Boolean(fieldState.error)}
-                    />
-                  )}
-                />
-              </FieldSet>
-              {values.gstRegistered ? (
-                <FormField
+                <Input
                   id="gstin"
-                  label={t("form.gstin")}
-                  hint={t("form.gstinHint")}
-                  error={errors.gstin?.message}
-                >
-                  <Input
-                    id="gstin"
-                    dir="ltr"
-                    autoCapitalize="characters"
-                    maxLength={15}
-                    className="h-12 font-mono text-base tracking-wider uppercase"
-                    aria-invalid={errors.gstin ? true : undefined}
-                    aria-describedby={describedBy(
-                      "gstin",
-                      errors.gstin?.message,
-                      t("form.gstinHint"),
-                    )}
-                    {...register("gstin")}
-                  />
-                </FormField>
-              ) : null}
+                  dir="ltr"
+                  autoCapitalize="characters"
+                  maxLength={15}
+                  className="h-12 font-mono text-base tracking-wider uppercase"
+                  aria-invalid={errors.gstin ? true : undefined}
+                  aria-describedby={describedBy(
+                    "gstin",
+                    errors.gstin?.message,
+                    t("form.gstinHint"),
+                  )}
+                  {...register("gstin")}
+                />
+              </FormField>
               <IdentityCheck
                 applicationId={application.id}
                 pan={values.pan}
-                gstin={values.gstRegistered ? values.gstin : undefined}
+                gstin={values.gstin}
                 save={async () => {
                   await saveDraft({ business: toDraft(values) });
                 }}
