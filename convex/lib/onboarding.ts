@@ -118,9 +118,24 @@ const weekdays = z.array(z.enum(WEEKDAYS));
 
 /** Shared by every form with a GST question: yes needs a valid GSTIN. */
 function checkGst(
-  form: { gstRegistered: boolean; gstin?: string },
+  form: { pan?: string; gstRegistered: boolean; gstin?: string },
   ctx: z.RefinementCtx,
 ) {
+  if (
+    form.pan?.trim() &&
+    !/^[A-Z]{5}\d{4}[A-Z]$/.test(form.pan.trim().toUpperCase())
+  ) {
+    ctx.addIssue({ code: "custom", path: ["pan"], message: "pan" });
+  }
+  if (
+    form.pan?.trim() &&
+    form.gstRegistered &&
+    isGstin(form.gstin) &&
+    form.gstin?.trim().toUpperCase().slice(2, 12) !==
+      form.pan.trim().toUpperCase()
+  ) {
+    ctx.addIssue({ code: "custom", path: ["gstin"], message: "gstin" });
+  }
   if (form.gstRegistered && !isGstin(form.gstin)) {
     ctx.addIssue({ code: "custom", path: ["gstin"], message: "gstin" });
   }
@@ -143,6 +158,7 @@ export const kabadiwalaSchema = z
   .object({
     ownerName: text(2, 80),
     shopName: text(2, 80),
+    pan: z.string().max(10, "pan").optional(),
     gstRegistered: yesNo,
     gstin: z.string().optional(),
     address: text(5, 200),
@@ -169,6 +185,7 @@ export const businessSchema = z
     businessName: text(2, 120),
     siteType: z.enum(SITE_TYPES).optional(),
     materialOrigins: z.array(z.enum(MATERIAL_ORIGINS)).max(2).optional(),
+    pan: z.string().max(10, "pan").optional(),
     gstRegistered: yesNo,
     gstin: z.string().optional(),
     materials: z.array(z.enum(MATERIAL_FAMILIES)).min(1, "pickAtLeastOne"),

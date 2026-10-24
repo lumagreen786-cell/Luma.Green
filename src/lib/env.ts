@@ -86,6 +86,8 @@ const serverSchema = z.object({
   OSDIGITAL_ENTITY_ID: z.string().optional(),
   OSDIGITAL_TEMPLATE_ID: z.string().optional(),
   OSDIGITAL_OTP_MESSAGE: z.string().optional(),
+  SUREPASS_API_TOKEN: z.string().optional(),
+  SUREPASS_ENABLED: z.string().optional(),
   MSG91_AUTH_KEY: z.string().optional(),
   PUBLIC_DATA_ENABLED: z.string().optional(),
   MET_NORWAY_USER_AGENT: z.string().optional(),
@@ -453,4 +455,14 @@ export function r2Env() {
   if (!enabled || enabled === "false") writes = "off";
   else if (enabled === "true" && parsed.success) writes = "on";
   return { writes, config: parsed.success ? parsed.data : null };
+}
+
+/** Convex-only paid identity provider configuration; read on every action. */
+export function surepassEnv() {
+  const token = process.env.SUREPASS_API_TOKEN?.trim();
+  return token &&
+    process.env.SUREPASS_ENABLED === "true" &&
+    /^[A-Za-z0-9_.-]+$/.test(token)
+    ? { token }
+    : null;
 }

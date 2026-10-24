@@ -12,7 +12,10 @@ const calls = vi.hoisted(() => ({
   mutate: vi.fn().mockResolvedValue(undefined),
   push: vi.fn(),
 }));
-vi.mock("convex/react", () => ({ useMutation: () => calls.mutate }));
+vi.mock("convex/react", () => ({
+  useMutation: () => calls.mutate,
+  useAction: () => calls.mutate,
+}));
 vi.mock("@/i18n/navigation", () => ({
   useRouter: () => ({ push: calls.push }),
 }));

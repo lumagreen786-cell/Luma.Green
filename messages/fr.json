@@ -2205,7 +2205,20 @@
       "fileType": "Ce type de fichier n’est pas accepté ici",
       "fileTooBig": "Ce fichier est trop volumineux",
       "uploadFailed": "Échec de l’importation. Réessayez.",
-      "generic": "Une erreur est survenue. Réessayez."
+      "generic": "Une erreur est survenue. Réessayez.",
+      "pan": "Vérifiez les données PAN et GST, puis réessayez."
+    },
+    "identity": {
+      "pan": "PAN (facultatif)",
+      "disclosure": "En choisissant Accepter et vérifier, vous autorisez l’envoi de ces identifiants à Surepass pour validation.",
+      "check": "Accepter et vérifier",
+      "checking": "Vérification…",
+      "verified": "Identifiants vérifiés. L’approbation de l’administrateur reste nécessaire.",
+      "limit": "Limite quotidienne atteinte. Réessayez demain.",
+      "unavailable": "Vérification indisponible. Vos réponses sont enregistrées.",
+      "required": "Vérifiez les données PAN et GST, puis réessayez.",
+      "pending": "Une vérification est déjà en cours. Patientez.",
+      "saveFailed": "Non enregistré. Vérifiez votre connexion."
     }
   },
   "app": {

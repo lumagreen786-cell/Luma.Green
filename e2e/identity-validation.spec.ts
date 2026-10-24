@@ -1,0 +1,87 @@
+import { expect, test } from "@playwright/test";
+
+import ar from "../messages/ar.json";
+import en from "../messages/en.json";
+import kn from "../messages/kn.json";
+
+/** Run only with isolated loopback component adapters; no account/provider claims. */
+const origin = process.env.IDENTITY_FIXTURE_ORIGIN;
+if (!origin || !/^http:\/\/127\.0\.0\.1:\d+$/u.test(origin))
+  throw new Error(
+    "Use a loopback fixture origin with the dedicated test config",
+  );
+// Separate loopback fixture config owns these tests; production config excludes them.
+for (const { locale, copy } of [
+  { locale: "en", copy: en },
+  { locale: "ar", copy: ar },
+  { locale: "kn", copy: kn },
+]) {
+  for (const width of [390, 768, 1440]) {
+    for (const theme of ["light", "dark"] as const) {
+      test(`${locale} identity control ${String(width)}px ${theme}`, async ({
+        page,
+      }, testInfo) => {
+        await page.setViewportSize({ width, height: 1100 });
+        await page.emulateMedia({
+          colorScheme: theme,
+          reducedMotion: "reduce",
+        });
+        for (const kind of ["kabadiwala", "yard"]) {
+          await page.goto(`${origin}/${locale}/join/${kind}`);
+          await expect(
+            page.getByText(/Synthetic interface fixture/u),
+          ).toBeVisible();
+          const pan = page.getByRole("textbox", {
+            name: copy.join.identity.pan,
+            exact: true,
+          });
+          await pan.fill("ABCDE1234F");
+          await page
+            .getByRole("button", {
+              name: copy.join.identity.check,
+              exact: true,
+            })
+            .click();
+          await expect(
+            page
+              .getByText(copy.join.identity.verified, { exact: true })
+              .first(),
+          ).toBeVisible();
+          await pan.fill("ABCDE1234G");
+          await expect(
+            page.getByText(copy.join.identity.verified, { exact: true }),
+          ).toHaveCount(0);
+          await page.evaluate(async () => document.fonts.ready);
+          expect(
+            await page.evaluate(
+              () => document.documentElement.scrollWidth <= innerWidth,
+            ),
+          ).toBe(true);
+          await page.screenshot({
+            path: testInfo.outputPath(`${kind}.png`),
+            fullPage: true,
+          });
+          await page.goto(`${origin}/${locale}/join/${kind}?scenario=limit`);
+          await page
+            .getByRole("textbox", { name: copy.join.identity.pan, exact: true })
+            .fill("ABCDE1234F");
+          await page
+            .getByRole("button", {
+              name: copy.join.identity.check,
+              exact: true,
+            })
+            .click();
+          await expect(
+            page.getByText(copy.join.identity.limit, { exact: true }).first(),
+          ).toBeVisible();
+          await expect(
+            page.getByRole("textbox", {
+              name: copy.join.identity.pan,
+              exact: true,
+            }),
+          ).toHaveValue("ABCDE1234F");
+        }
+      });
+    }
+  }
+}

@@ -88,6 +88,7 @@ const vExtraPhone = v.object({ number: v.string(), label: v.string() });
 export const kabadiwalaDraft = v.object({
   ownerName: v.optional(v.string()),
   shopName: v.optional(v.string()),
+  pan: v.optional(v.string()),
   gstRegistered: v.optional(v.boolean()),
   gstin: v.optional(v.string()),
   address: v.optional(v.string()),
@@ -105,6 +106,7 @@ export const businessDraft = v.object({
   /** Primary site and sources are declarations for admin review, not permits. */
   siteType: v.optional(vSiteType),
   materialOrigins: v.optional(v.array(vMaterialOrigin)),
+  pan: v.optional(v.string()),
   gstRegistered: v.optional(v.boolean()),
   gstin: v.optional(v.string()),
   materials: v.optional(v.array(vMaterialFamily)),

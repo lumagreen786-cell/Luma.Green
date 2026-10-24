@@ -112,7 +112,7 @@ Three properties follow from that and are non-negotiable:
 | Framework   | Next.js 16 (App Router, Turbopack)   | RSC by default; `"use client"` is opt-in                                                   |
 | Language    | TypeScript, `strict`                 | No `any`, no `@ts-ignore` without a reason comment                                         |
 | UI          | Tailwind v4 + shadcn/ui (Radix)      | Components are vendored in `src/components/ui`                                             |
-| Data        | Convex                               | Dev `glorious-rooster-470` + prod, EU West 1                                               |
+| Data        | Convex                               | Dev `proper-caterpillar-111`; prod `astute-peccary-795`, Sydney                            |
 | i18n        | next-intl, 33 locales, RTL-ready     | `messages/*.json`                                                                          |
 | Forms       | React Hook Form + Zod                | Zod schema is the contract, shared client↔server                                           |
 | Server sync | TanStack Query                       | For non-Convex async work                                                                  |
@@ -293,6 +293,26 @@ then keep amounts in integer grams/paise. Follow `.claude/skills/i18n` for copy,
 ICU arguments and script coverage.
 
 ## 9. Integration boundaries
+
+### Provider API ownership — 24 October 2026
+
+Server-to-server operational API calls run in Convex actions, never in Vercel
+routes or browser code. Store provider credentials, including Surepass PAN/GST
+tokens, only in Convex environment variables. Configure the new development and
+production deployments separately; a local `.env.local` does not configure
+deployed functions. Never put provider secrets in `NEXT_PUBLIC_*` variables.
+Vercel may keep public frontend URLs/flags and documented build-only credentials
+that its build requires. Do not copy operational API secrets into Vercel.
+
+Paid integrations need server-enforced request limits before provider calls,
+duplicate-request protection, bounded timeouts, and no automatic paid retries.
+For Surepass, the owner approved 20 paid attempts per day shared across PAN and
+GST, with applicant checks after phone verification and before application
+submission. PAN is validated only when supplied; GSTIN applies to applicants who
+declare GST registration. Keep paid development calls disabled while testing
+unless a separate approved allowance prevents doubling the production budget.
+Never activate another API from the provider catalogue merely because the token
+has access to it. Keep tokens and identity numbers out of logs and audit payloads.
 
 Optional services must remain disabled without configuration. Local mock tests
 do not prove account approval, provider execution or production deployment.

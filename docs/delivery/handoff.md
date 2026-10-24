@@ -1,3 +1,34 @@
+## PAN/GST validation — 25 October 2026
+
+The new Convex project owns Surepass PAN and GST calls. Both deployments have
+`SUREPASS_API_TOKEN` saved and privately verified; development paid requests stay
+off. No credential values belong in source or Vercel. See
+[the reviewed contract](../api/surepass-validation.md) and
+[implementation plan](surepass-plan.md).
+
+The optional PAN field and explicit consent/check action are shared by shop,
+yard, recycler and manufacturer applications. GST is checked when registration
+is declared; its embedded PAN supplies the PAN lookup input. Household and
+Saathi flows have no PAN/GST fields. Checks require verified phone access to an
+editable owned application. Submission requires current successful proof for
+supplied identifiers. Proof expires after 24 hours and cannot validate changed
+input. Provider checks do not replace admin application approval.
+
+One transactional counter reserves at most 20 total PAN/GST attempts per India
+calendar day before transport. Errors/timeouts consume attempts. There are no
+paid retries. Pending requests are blocked for 24 hours if their result is
+unknown; failed requests have a one-minute cooldown. Successful proof reuse does
+not spend another attempt. Production and development counters are separate,
+so paid development calls must stay disabled to preserve the total allowance.
+
+Surepass saved all six official Sydney IPv4 egress addresses. Its console did
+not persist either documented IPv6 CIDR range after repeated saves and reload.
+Do not describe IPv6 allowlisting as complete or remove the IPv4 restriction.
+Local `pnpm check` passed: lint, types, 2,495 web/backend tests and 73 native compatibility tests. Formatting and the 3,119-page webpack production build passed. Eighteen isolated browser cases covered both business forms at three widths, in English/Arabic/Kannada and both themes. No live identity numbers or paid provider acceptance request were used in tests.
+A real applicant check is still required to establish provider acceptance.
+Guide/Word updates remain deferred. Browser UI checks use explicitly labelled
+synthetic adapters and do not prove authentication or Surepass execution.
+
 ## Account migration — 24 October 2026
 
 The owner requested migration to new GitHub, Convex and Vercel accounts. This
@@ -6,7 +37,7 @@ historical records; do not deploy to the old targets during routine work.
 
 - GitHub: `lumagreen786-cell/Luma.Green`. All six source branch heads matched
   the old repository after copying. `origin` points to the new repository;
-  `legacy-personal` retains the old repository for recovery. The new repository
+  the old personal remote has been removed at the owner’s request. The new repository
   still needs owner-level branch protection configuration.
 - Convex team/project: `muhammad-saif-ulla-c-m-252fb:luma-green`.
 - Development: `proper-caterpillar-111.ap-southeast-2.convex.cloud` and the

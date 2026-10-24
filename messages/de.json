@@ -2205,7 +2205,20 @@
       "fileType": "Dieser Dateityp ist hier nicht zulässig",
       "fileTooBig": "Diese Datei ist zu groß",
       "uploadFailed": "Hochladen fehlgeschlagen. Erneut versuchen.",
-      "generic": "Etwas ist schiefgelaufen. Erneut versuchen."
+      "generic": "Etwas ist schiefgelaufen. Erneut versuchen.",
+      "pan": "Prüfen Sie die PAN- und GST-Angaben und versuchen Sie es erneut."
+    },
+    "identity": {
+      "pan": "PAN (freiwillig)",
+      "disclosure": "Mit Zustimmen und prüfen erlauben Sie, diese Kennungen zur Prüfung an Surepass zu senden.",
+      "check": "Zustimmen und prüfen",
+      "checking": "Prüfung läuft…",
+      "verified": "Kennungen geprüft. Die Freigabe durch die Verwaltung ist weiter erforderlich.",
+      "limit": "Das Tageslimit ist erreicht. Versuchen Sie es morgen.",
+      "unavailable": "Prüfung nicht verfügbar. Ihre Antworten sind gespeichert.",
+      "required": "Prüfen Sie die PAN- und GST-Angaben und versuchen Sie es erneut.",
+      "pending": "Eine Prüfung läuft bereits. Bitte warten.",
+      "saveFailed": "Nicht gespeichert. Prüfen Sie Ihre Verbindung."
     }
   },
   "app": {

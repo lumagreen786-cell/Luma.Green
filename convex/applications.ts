@@ -19,6 +19,7 @@ import {
   vApplicationStatus,
   vFileType,
 } from "./lib/drafts";
+import { identityInputs } from "./lib/identityChecks";
 import { canMove } from "./lib/lifecycle";
 import { queueNotification } from "./lib/notifications";
 import {
@@ -289,6 +290,24 @@ export const submit = mutation({
           message,
         })),
       });
+    }
+
+    const identityRequirements = identityInputs(
+      application.kabadiwala ?? application.business,
+    );
+    for (const check of identityRequirements) {
+      const proof = await ctx.db
+        .query("identityChecks")
+        .withIndex("by_application_kind", (q) =>
+          q.eq("applicationId", application._id).eq("kind", check.kind),
+        )
+        .unique();
+      if (
+        proof?.status !== "verified" ||
+        proof.input !== check.input ||
+        proof.expiresAt <= Date.now()
+      )
+        throw new ConvexError("VALIDATION_REQUIRED");
     }
 
     const now = Date.now();
