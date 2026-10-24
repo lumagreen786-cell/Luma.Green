@@ -96,3 +96,38 @@ for (const { locale, copy } of [
     }
   }
 }
+
+// Page translators replace React-owned text with their own element wrappers.
+test("typing survives translated autosave status updates", async ({ page }) => {
+  const errors: string[] = [];
+  page.on("pageerror", (error) => {
+    errors.push(error.message);
+  });
+  await page.goto(`${origin}/en/join/saathi?scenario=delayed-save`);
+  const pan = page.getByRole("textbox", {
+    name: en.join.identity.pan,
+    exact: true,
+  });
+  await pan.fill("ABCDE1234F");
+  const saving = page.getByText(en.join.form.saving, { exact: true });
+  await expect(saving).toBeVisible();
+  await saving.evaluate((element) => {
+    const node = [...element.childNodes].find(
+      (child) => child.nodeType === Node.TEXT_NODE,
+    );
+    if (!node) throw new Error("Missing saving text");
+    const replacement = document.createElement("span");
+    replacement.textContent = node.textContent;
+    node.replaceWith(replacement);
+  });
+  await expect(
+    page.getByText(en.join.form.saved, { exact: true }),
+  ).toBeVisible();
+  await pan.fill("ABCDE1234G");
+  await expect(saving).toBeVisible();
+  await expect(
+    page.getByText(en.join.form.saved, { exact: true }),
+  ).toBeVisible();
+  await expect(pan).toHaveValue("ABCDE1234G");
+  expect(errors).toEqual([]);
+});

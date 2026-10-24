@@ -105,3 +105,25 @@ describe("explicit identity checks", () => {
     expect(verify).not.toHaveBeenCalled();
   });
 });
+
+it("clears a translated verification message safely when PAN changes", async () => {
+  const save = vi.fn().mockResolvedValue(null);
+  const { rerender } = render(fixture(save));
+  fireEvent.click(
+    screen.getByRole("button", { name: messages.join.identity.check }),
+  );
+  const status = await screen.findByText(messages.join.identity.verified);
+  const node = [...status.childNodes].find(
+    (child) => child.nodeType === Node.TEXT_NODE,
+  );
+  if (!node) throw new Error("Missing status text");
+  const translated = document.createElement("span");
+  translated.textContent = node.textContent;
+  node.replaceWith(translated);
+  expect(() => {
+    rerender(fixture(save, "ABCDE1234G"));
+  }).not.toThrow();
+  expect(
+    screen.queryByText(messages.join.identity.verified),
+  ).not.toBeInTheDocument();
+});

@@ -1,3 +1,15 @@
+## Form typing crash repair — 25 October 2026
+
+Production revision `36b441d` was reported to throw React `removeChild`
+`NotFoundError` while typing. A regression reproduced that exact exception when
+an external translator replaced the autosave indicator's conditional text node.
+The shared SaveIndicator now keeps a stable text element across saving, saved
+and failed states. No auth, paid-call, quota or draft persistence rules change.
+A neighboring translated PAN/GST result clears safely without a code change.
+The reported GST trace was VALIDATION_REQUIRED in reservation, before provider
+transport; invalid format or a PAN/GST mismatch must be corrected, not retried as
+a provider outage. No paid call was sent during this diagnosis.
+
 ## PAN/GST validation — 25 October 2026
 
 The new Convex project owns Surepass PAN and GST calls. Both deployments have
