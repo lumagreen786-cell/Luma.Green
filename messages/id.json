@@ -3025,7 +3025,20 @@
       "fileType": "Jenis berkas ini tidak dapat digunakan di sini",
       "fileTooBig": "Berkas ini terlalu besar",
       "uploadFailed": "Unggahan gagal. Coba lagi.",
-      "generic": "Terjadi kesalahan. Coba lagi."
+      "generic": "Terjadi kesalahan. Coba lagi.",
+      "pan": "Periksa data PAN dan GST lalu coba lagi."
+    },
+    "identity": {
+      "pan": "PAN (opsional)",
+      "disclosure": "Dengan memilih Setuju dan periksa, Anda mengizinkan pengiriman nomor identitas ini ke Surepass untuk validasi.",
+      "check": "Setuju dan periksa",
+      "checking": "Memeriksa…",
+      "verified": "Nomor identitas terverifikasi. Persetujuan admin tetap diperlukan.",
+      "limit": "Akun Anda mencapai batas pemeriksaan harian. Coba besok.",
+      "unavailable": "Pemeriksaan tidak tersedia. Jawaban Anda tersimpan.",
+      "required": "Periksa data PAN dan GST lalu coba lagi.",
+      "pending": "Pemeriksaan sudah berlangsung. Harap tunggu.",
+      "saveFailed": "Belum tersimpan. Periksa koneksi Anda."
     }
   },
   "saathi": {

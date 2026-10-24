@@ -3025,7 +3025,20 @@
       "fileType": "Bu dosya türü burada kullanılamaz",
       "fileTooBig": "Dosya çok büyük",
       "uploadFailed": "Yükleme başarısız. Tekrar deneyin.",
-      "generic": "Bir sorun oluştu. Tekrar deneyin."
+      "generic": "Bir sorun oluştu. Tekrar deneyin.",
+      "pan": "PAN ve GST bilgilerini kontrol edip yeniden deneyin."
+    },
+    "identity": {
+      "pan": "PAN (isteğe bağlı)",
+      "disclosure": "Kabul et ve kontrol et seçeneğiyle, bu kimlik numaralarının doğrulama için Surepass’e gönderilmesine izin verirsiniz.",
+      "check": "Kabul et ve kontrol et",
+      "checking": "Kontrol ediliyor…",
+      "verified": "Kimlik numaraları doğrulandı. Yönetici onayı hâlâ gereklidir.",
+      "limit": "Hesabınız günlük kontrol sınırına ulaştı. Yarın deneyin.",
+      "unavailable": "Kontrol kullanılamıyor. Yanıtlarınız kaydedildi.",
+      "required": "PAN ve GST bilgilerini kontrol edip yeniden deneyin.",
+      "pending": "Zaten bekleyen bir kontrol var. Lütfen bekleyin.",
+      "saveFailed": "Kaydedilmedi. Bağlantınızı kontrol edin."
     }
   },
   "saathi": {

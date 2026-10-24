@@ -2205,7 +2205,20 @@
       "fileType": "Dit bestandstype kan hier niet worden gebruikt",
       "fileTooBig": "Dit bestand is te groot",
       "uploadFailed": "Upload mislukt. Probeer het opnieuw.",
-      "generic": "Er ging iets mis. Probeer het opnieuw."
+      "generic": "Er ging iets mis. Probeer het opnieuw.",
+      "pan": "Controleer de PAN- en GST-gegevens en probeer opnieuw."
+    },
+    "identity": {
+      "pan": "PAN (optioneel)",
+      "disclosure": "Met Akkoord en controleren geeft u toestemming om deze identificatienummers ter controle naar Surepass te sturen.",
+      "check": "Akkoord en controleren",
+      "checking": "Controleren…",
+      "verified": "Identificatienummers gecontroleerd. Goedkeuring van de beheerder blijft nodig.",
+      "limit": "Uw account heeft de dagelijkse controlelimiet bereikt. Probeer het morgen.",
+      "unavailable": "Controle niet beschikbaar. Uw antwoorden zijn opgeslagen.",
+      "required": "Controleer de PAN- en GST-gegevens en probeer opnieuw.",
+      "pending": "Er loopt al een controle. Even geduld.",
+      "saveFailed": "Niet opgeslagen. Controleer uw verbinding."
     }
   },
   "app": {

@@ -5,11 +5,15 @@ import { ConvexError } from "convex/values";
  * or `fixErrors` (under `join.form`) when the server found gaps the form
  * missed.
  */
-export function submitErrorKey(error: unknown): "fixErrors" | "generic" {
-  return error instanceof ConvexError &&
-    typeof error.data === "object" &&
-    error.data !== null &&
-    (error.data as { code?: unknown }).code === "INCOMPLETE"
-    ? "fixErrors"
-    : "generic";
+export type SubmitFailure = "fixErrors" | "generic" | "identity";
+
+export function submitErrorKey(error: unknown): SubmitFailure {
+  if (!(error instanceof ConvexError)) return "generic";
+  const data: unknown = error.data;
+  const code =
+    typeof data === "object" && data !== null && "code" in data
+      ? data.code
+      : data;
+  if (code === "VALIDATION_REQUIRED") return "identity";
+  return code === "INCOMPLETE" ? "fixErrors" : "generic";
 }

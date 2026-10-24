@@ -2953,7 +2953,20 @@
       "fileType": "Jenis fail ini tidak boleh digunakan di sini",
       "fileTooBig": "Fail ini terlalu besar",
       "uploadFailed": "Muat naik gagal. Cuba lagi.",
-      "generic": "Ralat berlaku. Cuba lagi."
+      "generic": "Ralat berlaku. Cuba lagi.",
+      "pan": "Semak maklumat PAN dan GST, kemudian cuba lagi."
+    },
+    "identity": {
+      "pan": "PAN (pilihan)",
+      "disclosure": "Dengan memilih Setuju dan semak, anda membenarkan nombor pengenalan ini dihantar kepada Surepass untuk pengesahan.",
+      "check": "Setuju dan semak",
+      "checking": "Menyemak…",
+      "verified": "Nombor pengenalan disahkan. Kelulusan pentadbir masih diperlukan.",
+      "limit": "Akaun anda telah mencapai had semakan harian. Cuba esok.",
+      "unavailable": "Semakan tidak tersedia. Jawapan anda disimpan.",
+      "required": "Semak maklumat PAN dan GST, kemudian cuba lagi.",
+      "pending": "Semakan sedang berjalan. Sila tunggu.",
+      "saveFailed": "Tidak disimpan. Semak sambungan anda."
     }
   },
   "compliance": {

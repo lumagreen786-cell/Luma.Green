@@ -66,6 +66,30 @@ const timestamps = {
 };
 
 export default defineSchema({
+  identityCheckDays: defineTable({
+    day: v.string(),
+    used: v.number(),
+    operatorUsed: v.optional(v.number()),
+    examplePan: v.optional(v.boolean()),
+    exampleGst: v.optional(v.boolean()),
+  }).index("by_day", ["day"]),
+  identityPersonCheckDays: defineTable({
+    profileId: v.id("profiles"),
+    day: v.string(),
+    used: v.number(),
+  }).index("by_profile_day", ["profileId", "day"]),
+  identityChecks: defineTable({
+    applicationId: v.id("applications"),
+    kind: v.union(v.literal("pan"), v.literal("gst")),
+    input: v.string(),
+    status: v.union(
+      v.literal("pending"),
+      v.literal("verified"),
+      v.literal("failed"),
+    ),
+    createdAt: v.number(),
+    expiresAt: v.number(),
+  }).index("by_application_kind", ["applicationId", "kind"]),
   /** Operator-imported synthetic demo identities; no passwords or sessions. */
   investorDemoAccounts: defineTable({
     batchKey: v.string(),

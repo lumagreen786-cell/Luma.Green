@@ -9,6 +9,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 import { normalizeIndianMobile } from "../../../convex/lib/phone";
 import { SaveIndicator } from "./fields";
+import type { SubmitFailure } from "./submit-error";
 import type { SaveState } from "./use-autosave";
 
 /** Role, title, step and the save state, at the top of every form. */
@@ -65,15 +66,20 @@ export function SubmitBar({
   label: string;
   busyLabel: string;
   isBusy: boolean;
-  failure: "fixErrors" | "generic" | null;
+  failure: SubmitFailure | null;
   secondary?: ReactNode;
 }) {
   const t = useTranslations("join");
+  const failureKeys = {
+    identity: "identity.required",
+    fixErrors: "form.fixErrors",
+    generic: "errors.generic",
+  } as const;
   return (
     <div className="flex flex-col gap-4 border-t border-border bg-background pt-6">
       {failure ? (
         <p role="alert" className="text-sm text-destructive">
-          {t(failure === "fixErrors" ? "form.fixErrors" : "errors.generic")}
+          {t(failureKeys[failure])}
         </p>
       ) : null}
       <ActionButton

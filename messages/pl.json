@@ -2205,7 +2205,20 @@
       "fileType": "Nie można tu użyć tego typu pliku",
       "fileTooBig": "Plik jest za duży",
       "uploadFailed": "Przesyłanie nie powiodło się. Spróbuj ponownie.",
-      "generic": "Wystąpił błąd. Spróbuj ponownie."
+      "generic": "Wystąpił błąd. Spróbuj ponownie.",
+      "pan": "Sprawdź dane PAN i GST i spróbuj ponownie."
+    },
+    "identity": {
+      "pan": "PAN (opcjonalnie)",
+      "disclosure": "Wybierając Zgadzam się i sprawdzam, zezwalasz na przesłanie tych identyfikatorów do Surepass w celu weryfikacji.",
+      "check": "Zgadzam się i sprawdzam",
+      "checking": "Sprawdzanie…",
+      "verified": "Identyfikatory zweryfikowane. Zgoda administratora jest nadal wymagana.",
+      "limit": "Twoje konto osiągnęło dzienny limit weryfikacji. Spróbuj jutro.",
+      "unavailable": "Weryfikacja niedostępna. Odpowiedzi zapisano.",
+      "required": "Sprawdź dane PAN i GST i spróbuj ponownie.",
+      "pending": "Weryfikacja już trwa. Poczekaj.",
+      "saveFailed": "Nie zapisano. Sprawdź połączenie."
     }
   },
   "app": {

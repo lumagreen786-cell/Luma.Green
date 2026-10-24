@@ -31,7 +31,7 @@ import {
 import { FileSlot } from "./file-slot";
 import { FormJourney } from "./form-journey";
 import { ChangesNote, FormHeader, SubmitBar } from "./form-parts";
-import { submitErrorKey } from "./submit-error";
+import { submitErrorKey, type SubmitFailure } from "./submit-error";
 import { useAutosave, withoutUndefined } from "./use-autosave";
 import type { Application } from "./use-mine";
 
@@ -62,7 +62,7 @@ export function SaathiForm({ application }: { application: Application }) {
   const router = useRouter();
   const saveDraft = useMutation(api.applications.saveDraft);
   const submit = useMutation(api.applications.submit);
-  const [failure, setFailure] = useState<"fixErrors" | "generic" | null>(null);
+  const [failure, setFailure] = useState<SubmitFailure | null>(null);
   const [showFileErrors, setShowFileErrors] = useState(false);
   const draft = application.saathi ?? {};
 

@@ -2205,7 +2205,20 @@
       "fileType": "此处不支持这种文件类型",
       "fileTooBig": "文件过大",
       "uploadFailed": "上传失败，请重试。",
-      "generic": "发生问题，请重试。"
+      "generic": "发生问题，请重试。",
+      "pan": "请核对 PAN 和 GST 信息后重试。"
+    },
+    "identity": {
+      "pan": "PAN（可选）",
+      "disclosure": "选择“同意并验证”即表示您允许将这些身份识别号码发送至 Surepass 进行验证。",
+      "check": "同意并验证",
+      "checking": "验证中…",
+      "verified": "身份识别号码已验证。仍需管理员批准。",
+      "limit": "您的账户已达到每日验证上限。请明天再试。",
+      "unavailable": "验证暂不可用。您的回答已保存。",
+      "required": "请核对 PAN 和 GST 信息后重试。",
+      "pending": "验证正在处理中。请稍候。",
+      "saveFailed": "未保存，请检查连接。"
     }
   },
   "app": {

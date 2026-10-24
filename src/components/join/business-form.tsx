@@ -38,6 +38,7 @@ import {
   FormHeader,
   SubmitBar,
 } from "./form-parts";
+import { IdentityCheck } from "./identity-check";
 import { useAutosave, withoutUndefined } from "./use-autosave";
 import type { Application } from "./use-mine";
 
@@ -49,6 +50,7 @@ function toDraft(values: Partial<Values>): Draft {
     businessName: values.businessName,
     siteType: values.siteType,
     materialOrigins: values.materialOrigins,
+    pan: values.pan?.trim().toUpperCase() ?? "",
     gstRegistered: values.gstRegistered,
     gstin: cleanGstin(values.gstRegistered, values.gstin),
     materials: values.materials,
@@ -95,6 +97,7 @@ export function BusinessForm({
       businessName: draft.businessName ?? "",
       siteType: draft.siteType,
       materialOrigins: draft.materialOrigins,
+      pan: draft.pan ?? "",
       gstRegistered: draft.gstRegistered,
       gstin: draft.gstin ?? "",
       materials: draft.materials ?? [],
@@ -155,7 +158,13 @@ export function BusinessForm({
       stages={[
         {
           title: t("business.businessName"),
-          fields: ["businessName", "gstRegistered", "gstin", "materials"],
+          fields: [
+            "businessName",
+            "pan",
+            "gstRegistered",
+            "gstin",
+            "materials",
+          ],
           content: (
             <>
               <FormField
@@ -173,6 +182,23 @@ export function BusinessForm({
                     errors.businessName?.message,
                   )}
                   {...register("businessName")}
+                />
+              </FormField>
+
+              <FormField
+                id="pan"
+                label={t("identity.pan")}
+                error={errors.pan?.message}
+              >
+                <Input
+                  id="pan"
+                  dir="ltr"
+                  autoCapitalize="characters"
+                  maxLength={10}
+                  className="h-12 font-mono text-base uppercase"
+                  aria-invalid={errors.pan ? true : undefined}
+                  aria-describedby={describedBy("pan", errors.pan?.message)}
+                  {...register("pan")}
                 />
               </FormField>
 
@@ -217,6 +243,14 @@ export function BusinessForm({
                   />
                 </FormField>
               ) : null}
+              <IdentityCheck
+                applicationId={application.id}
+                pan={values.pan}
+                gstin={values.gstRegistered ? values.gstin : undefined}
+                save={async () => {
+                  await saveDraft({ business: toDraft(values) });
+                }}
+              />
 
               <FieldSet
                 id="materials"

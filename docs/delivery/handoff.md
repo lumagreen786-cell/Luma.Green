@@ -1,3 +1,119 @@
+## PAN/GST validation — 25 October 2026
+
+The new Convex project owns Surepass PAN and GST calls. Both deployments have
+`SUREPASS_API_TOKEN` saved and privately verified; development paid requests stay
+off. Production `SUREPASS_ENABLED=true`; the operator example switch is false after the live test. No credential values belong in source or Vercel. See
+[the reviewed contract](../api/surepass-validation.md) and
+[implementation plan](surepass-plan.md).
+
+The optional PAN field and explicit consent/check action are shared by shop,
+yard, recycler and manufacturer applications. GST is checked when registration
+is declared; its embedded PAN supplies the PAN lookup input. Household and
+Saathi flows have no PAN/GST fields. Checks require verified phone access to an
+editable owned application. Submission requires current successful proof for
+supplied identifiers. Proof expires after 24 hours and cannot validate changed
+input. Provider checks do not replace admin application approval.
+
+The owner corrected the earlier global allowance on 25 October: one
+transactional profile/day counter reserves at most 20 combined PAN/GST attempts
+per verified account per India calendar day, across all its applications.
+The authenticated application access check supplies the profile ID. Another
+account has its own allowance; total platform usage can exceed 20 with higher
+provider charges. `identityCheckDays` tracks aggregate usage without imposing an
+applicant cap. Operator example checks have a separate 20/day allowance and at
+most one attempt per kind/day; they never spend an applicant allowance. Errors/timeouts consume attempts. There are no
+paid retries. Pending requests are blocked for 24 hours if their result is
+unknown; failed requests have a one-minute cooldown. Successful proof reuse does
+not spend another attempt. Production and development counters are separate,
+so paid development calls must stay disabled to preserve the total allowance.
+
+Surepass saved all six official Sydney IPv4 egress addresses. Its console did
+not persist either documented IPv6 CIDR range after repeated saves and reload.
+Do not describe IPv6 allowlisting as complete or remove the IPv4 restriction.
+Local `pnpm check` passed: lint, types, 2,498 web/backend tests and 73 native compatibility tests. Formatting and the 3,119-page webpack production build passed. Eighteen isolated browser cases covered both business forms at three widths, in English/Arabic/Kannada and both themes. At the owner’s later request, two production operator example calls ran from Convex using Surepass’s documented sample: PAN and GST each returned HTTP 422. Both attempts were counted, no applicant proof or application was created, and the temporary operator switch was disabled again. These are transport/rejection observations, not successful identity verification.
+A valid owner-supplied PAN/GST check is still required to establish successful verification.
+Guide/Word updates remain deferred. Browser UI checks use explicitly labelled
+synthetic adapters and do not prove authentication or Surepass execution.
+
+## Account migration — 24 October 2026
+
+The owner requested migration to new GitHub, Convex and Vercel accounts. This
+section supersedes historical account and deployment targets below. Preserve
+historical records; do not deploy to the old targets during routine work.
+
+- GitHub: `lumagreen786-cell/Luma.Green`. All six source branch heads matched
+  the old repository after copying. `origin` points to the new repository;
+  the old personal remote has been removed at the owner’s request. The new repository
+  still needs owner-level branch protection configuration.
+- Convex team/project: `muhammad-saif-ulla-c-m-252fb:luma-green`.
+- Development: `proper-caterpillar-111.ap-southeast-2.convex.cloud` and the
+  matching `.convex.site` HTTP actions address. Local `.env.local` selects it.
+- Production: `astute-peccary-795.ap-southeast-2.convex.cloud` and the matching
+  `.convex.site` address. The existing schema, indexes, functions and Better Auth
+  component deployed to both new environments without a data import or seed.
+- Vercel: team `luma-0f95`, project `luma-green`; website
+  `https://luma.green` (production). `www.luma.green` redirects to the root
+  domain with HTTP 308. `https://luma-green-ten.vercel.app` remains a production
+  alias. The new project imports the new GitHub repository. The ignored local
+  Vercel link selects the new team/project.
+- Production frontend variables select only the new production Convex URLs and
+  website address. Production Convex `SITE_URL=https://luma.green`;
+  development uses `http://localhost:3000`. Both environments have distinct fresh
+  authentication secrets. Production `EXTRA_TRUSTED_ORIGINS` retains the
+  existing Vercel alias during the domain transition. Existing administrator
+  identity and OS Digital OTP
+  settings are migrated privately; no credential values belong in this file.
+- `PUBLIC_DATA_ENABLED=false` keeps automatic data imports off, as requested.
+  Do not enable imports, seed records, or send an OTP as part of migration checks.
+  Unused old Vercel keys do not establish a configured backend service. Email,
+  payments, R2, telemetry and push remain subject to their existing setup gates.
+
+Before the website build, read-only verification found all 86 application and
+seven Better Auth tables empty in each new deployment, with no stored files.
+Vercel production deployment `dpl_24uj14htiSYzL5vbwve82mkR8LYD` published
+commit `8dde08d2e0338292b74c926bc0d6c3f70eaa4aa2`. Homepage, member/admin
+login and Arabic routes returned HTTP 200. Public browser bundles contain only
+`astute-peccary-795`, with no old or development deployment names. The canonical
+URL uses the new website address. A current desktop capture was visually checked;
+no browser errors were reported. Local `pnpm check` passed all 2,480 web/backend
+and 73 native compatibility tests, lint and types. No live OTP
+or authenticator acceptance is established.
+
+The custom domain uses Spaceship nameservers. The root A record is
+`@ → 216.198.79.1`; the www CNAME is
+`www → 59238d9ed9b5298a.vercel-dns-017.com`, both with a 30-minute TTL.
+Authoritative and public DNS checks matched these values. Validated HTTPS checks
+returned 200 for the root homepage/login and 308 from www to `https://luma.green/`.
+The same-origin auth proxy returned 200 with no session. Vercel
+`NEXT_PUBLIC_SITE_URL=https://luma.green` is saved. Production rebuild
+`dpl_B5jY6KZeZ9c3nmnST1EEjT6NGTK3` completed and is ready. The root homepage
+publishes `https://luma.green` as its canonical URL. The login page returns 200
+and does not publish a canonical tag. The owner
+reported that live OTP login works on `luma.green` on 24 October. This is owner
+acceptance evidence; no agent-observed SMS/TOTP execution or native acceptance
+is claimed.
+
+The owner requested deletion of only the old Luma Vercel and Convex projects
+after successful login on the new domain. Keep all other projects and both new
+environments. Private old-development/production exports, including Better Auth
+and file storage, are saved under the ignored local directory
+`.convex/account-migration-backups/2026-10-24/`. Both ZIP integrity checks passed.
+Old Convex environment recovery files and non-secret old Vercel project settings
+are also saved there. Do not print or commit those recovery files. The owner reported the live login test passed. Old Vercel project
+`thehelds-projects/luma_green` (`prj_ceMcCzKReKt06pJ3fIYcSexsoLd1`) was then
+deleted successfully. Its only assigned domain was `lumagreen.vercel.app`; the
+new root/www domain mappings are on the new project. The owner then reported
+that they deleted the old Convex project themselves. No agent-executed or
+independent verification of that deletion is claimed. Never delete the new
+Convex project or either of its deployments.
+Cloudflare, PAN/GST APIs and provider-specific IP allowlisting are next steps;
+they are not configured by this migration. The old GitHub repository and
+accounts have not been deleted by this task. Old Vercel deletion is verified;
+old Convex deletion is owner-reported as described above.
+
+Guide/Word changes remain deferred; no user-guide update was requested. Native
+apps remain on hold. This migration changes no application flow or native code.
+
 ## Latest household recycling and homepage direction — 16 October 2026
 
 The owner reviewed localhost and authorized commit and push after testing. This

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "identityChecks.verify Convex action contract",
+  "type": "object",
+  "required": ["applicationId", "consent"],
+  "properties": {
+    "applicationId": { "type": "string", "minLength": 1 },
+    "consent": { "const": true }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "success": { "type": "null" },
+    "errorCode": {
+      "enum": [
+        "VALIDATION_REQUIRED",
+        "CHECK_UNAVAILABLE",
+        "CHECK_LIMIT",
+        "CHECK_PENDING"
+      ]
+    }
+  }
+}

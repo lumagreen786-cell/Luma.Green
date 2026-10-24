@@ -2205,7 +2205,20 @@
       "fileType": "This kind of file can't be used here",
       "fileTooBig": "This file is too big",
       "uploadFailed": "Upload failed. Try again.",
-      "generic": "Something went wrong. Try again."
+      "generic": "Something went wrong. Try again.",
+      "pan": "Check your PAN and GST details, then try again."
+    },
+    "identity": {
+      "pan": "PAN (optional)",
+      "disclosure": "By selecting Agree and check, you allow Luma.Green to send these identifiers to Surepass for validation.",
+      "check": "Agree and check",
+      "checking": "Checking…",
+      "verified": "Identifiers verified. Admin approval is still required.",
+      "limit": "Your account’s daily check limit is reached. Try tomorrow.",
+      "unavailable": "Checks are unavailable. Your answers are saved.",
+      "required": "Check your PAN and GST details, then try again.",
+      "pending": "A check is already pending. Please wait.",
+      "saveFailed": "Not saved. Check your connection."
     }
   },
   "app": {
