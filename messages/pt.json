@@ -2214,7 +2214,7 @@
       "check": "Concordar e verificar",
       "checking": "A verificar…",
       "verified": "Identificadores verificados. A aprovação do administrador continua necessária.",
-      "limit": "O limite diário foi atingido. Tente amanhã.",
+      "limit": "A sua conta atingiu o limite diário de verificações. Tente amanhã.",
       "unavailable": "Verificação indisponível. As respostas foram guardadas.",
       "required": "Confira os dados PAN e GST e tente novamente.",
       "pending": "Já existe uma verificação pendente. Aguarde.",

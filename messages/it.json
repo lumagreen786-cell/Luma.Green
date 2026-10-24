@@ -2214,7 +2214,7 @@
       "check": "Accetta e verifica",
       "checking": "Verifica in corso…",
       "verified": "Identificativi verificati. Serve ancora l’approvazione dell’amministratore.",
-      "limit": "Limite giornaliero raggiunto. Riprova domani.",
+      "limit": "Il tuo account ha raggiunto il limite giornaliero di verifiche. Riprova domani.",
       "unavailable": "Verifica non disponibile. Le risposte sono salvate.",
       "required": "Controlla i dati PAN e GST e riprova.",
       "pending": "Una verifica è già in corso. Attendi.",

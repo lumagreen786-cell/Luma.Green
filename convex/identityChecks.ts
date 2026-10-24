@@ -5,13 +5,12 @@ import { internal } from "./_generated/api";
 import { action, internalMutation } from "./_generated/server";
 import { requireUser } from "./lib/access";
 import { requireEditableApplication } from "./lib/applicationAccess";
+import { spendIdentityAttempt } from "./lib/identityCheckQuota";
 import {
   CHECK_TTL,
-  DAILY_CHECK_LIMIT,
   identityInputs,
   providerVerified,
 } from "./lib/identityChecks";
-import { indiaToday } from "./lib/onboarding";
 
 const endpoints = {
   pan: "pan/pan-comprehensive",
@@ -61,23 +60,7 @@ export const reserve = internalMutation({
       return null;
     const env = surepassEnv();
     if (!env) throw new ConvexError("CHECK_UNAVAILABLE");
-    const day = indiaToday();
-    const quota = await ctx.db
-      .query("identityCheckDays")
-      .withIndex("by_day", (q) => q.eq("day", day))
-      .unique();
-    if (
-      quota &&
-      (!Number.isSafeInteger(quota.used) ||
-        quota.used < 0 ||
-        quota.used >= DAILY_CHECK_LIMIT)
-    )
-      throw new ConvexError("CHECK_LIMIT");
-    if (quota)
-      await ctx.db.patch("identityCheckDays", quota._id, {
-        used: quota.used + 1,
-      });
-    else await ctx.db.insert("identityCheckDays", { day, used: 1 });
+    await spendIdentityAttempt(ctx, profile._id);
     const value = {
       applicationId: application._id,
       kind: args.kind,
@@ -160,7 +143,7 @@ export const verify = action({
             signal: AbortSignal.timeout(15_000),
           },
         );
-        isAvailable = response.ok;
+        isAvailable = [200, 400, 422].includes(response.status);
         if (response.ok)
           isVerified = providerVerified(
             await response.json(),

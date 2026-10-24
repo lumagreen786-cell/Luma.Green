@@ -2214,7 +2214,7 @@
       "check": "Agree and check",
       "checking": "Checking…",
       "verified": "Identifiers verified. Admin approval is still required.",
-      "limit": "The daily check limit is reached. Try tomorrow.",
+      "limit": "Your account’s daily check limit is reached. Try tomorrow.",
       "unavailable": "Checks are unavailable. Your answers are saved.",
       "required": "Check your PAN and GST details, then try again.",
       "pending": "A check is already pending. Please wait.",

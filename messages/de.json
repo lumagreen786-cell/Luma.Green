@@ -2214,7 +2214,7 @@
       "check": "Zustimmen und prüfen",
       "checking": "Prüfung läuft…",
       "verified": "Kennungen geprüft. Die Freigabe durch die Verwaltung ist weiter erforderlich.",
-      "limit": "Das Tageslimit ist erreicht. Versuchen Sie es morgen.",
+      "limit": "Ihr Konto hat das tägliche Prüflimit erreicht. Versuchen Sie es morgen.",
       "unavailable": "Prüfung nicht verfügbar. Ihre Antworten sind gespeichert.",
       "required": "Prüfen Sie die PAN- und GST-Angaben und versuchen Sie es erneut.",
       "pending": "Eine Prüfung läuft bereits. Bitte warten.",

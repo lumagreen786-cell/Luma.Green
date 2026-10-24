@@ -2,7 +2,7 @@
 
 The new Convex project owns Surepass PAN and GST calls. Both deployments have
 `SUREPASS_API_TOKEN` saved and privately verified; development paid requests stay
-off. No credential values belong in source or Vercel. See
+off. Production `SUREPASS_ENABLED=true`; the operator example switch is false after the live test. No credential values belong in source or Vercel. See
 [the reviewed contract](../api/surepass-validation.md) and
 [implementation plan](surepass-plan.md).
 
@@ -14,8 +14,14 @@ editable owned application. Submission requires current successful proof for
 supplied identifiers. Proof expires after 24 hours and cannot validate changed
 input. Provider checks do not replace admin application approval.
 
-One transactional counter reserves at most 20 total PAN/GST attempts per India
-calendar day before transport. Errors/timeouts consume attempts. There are no
+The owner corrected the earlier global allowance on 25 October: one
+transactional profile/day counter reserves at most 20 combined PAN/GST attempts
+per verified account per India calendar day, across all its applications.
+The authenticated application access check supplies the profile ID. Another
+account has its own allowance; total platform usage can exceed 20 with higher
+provider charges. `identityCheckDays` tracks aggregate usage without imposing an
+applicant cap. Operator example checks have a separate 20/day allowance and at
+most one attempt per kind/day; they never spend an applicant allowance. Errors/timeouts consume attempts. There are no
 paid retries. Pending requests are blocked for 24 hours if their result is
 unknown; failed requests have a one-minute cooldown. Successful proof reuse does
 not spend another attempt. Production and development counters are separate,
@@ -24,8 +30,8 @@ so paid development calls must stay disabled to preserve the total allowance.
 Surepass saved all six official Sydney IPv4 egress addresses. Its console did
 not persist either documented IPv6 CIDR range after repeated saves and reload.
 Do not describe IPv6 allowlisting as complete or remove the IPv4 restriction.
-Local `pnpm check` passed: lint, types, 2,495 web/backend tests and 73 native compatibility tests. Formatting and the 3,119-page webpack production build passed. Eighteen isolated browser cases covered both business forms at three widths, in English/Arabic/Kannada and both themes. No live identity numbers or paid provider acceptance request were used in tests.
-A real applicant check is still required to establish provider acceptance.
+Local `pnpm check` passed: lint, types, 2,498 web/backend tests and 73 native compatibility tests. Formatting and the 3,119-page webpack production build passed. Eighteen isolated browser cases covered both business forms at three widths, in English/Arabic/Kannada and both themes. At the owner’s later request, two production operator example calls ran from Convex using Surepass’s documented sample: PAN and GST each returned HTTP 422. Both attempts were counted, no applicant proof or application was created, and the temporary operator switch was disabled again. These are transport/rejection observations, not successful identity verification.
+A valid owner-supplied PAN/GST check is still required to establish successful verification.
 Guide/Word updates remain deferred. Browser UI checks use explicitly labelled
 synthetic adapters and do not prove authentication or Surepass execution.
 

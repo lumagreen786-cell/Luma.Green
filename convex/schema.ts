@@ -66,10 +66,18 @@ const timestamps = {
 };
 
 export default defineSchema({
-  identityCheckDays: defineTable({ day: v.string(), used: v.number() }).index(
-    "by_day",
-    ["day"],
-  ),
+  identityCheckDays: defineTable({
+    day: v.string(),
+    used: v.number(),
+    operatorUsed: v.optional(v.number()),
+    examplePan: v.optional(v.boolean()),
+    exampleGst: v.optional(v.boolean()),
+  }).index("by_day", ["day"]),
+  identityPersonCheckDays: defineTable({
+    profileId: v.id("profiles"),
+    day: v.string(),
+    used: v.number(),
+  }).index("by_profile_day", ["profileId", "day"]),
   identityChecks: defineTable({
     applicationId: v.id("applications"),
     kind: v.union(v.literal("pan"), v.literal("gst")),

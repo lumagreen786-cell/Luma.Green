@@ -3034,7 +3034,7 @@
       "check": "Kabul et ve kontrol et",
       "checking": "Kontrol ediliyor…",
       "verified": "Kimlik numaraları doğrulandı. Yönetici onayı hâlâ gereklidir.",
-      "limit": "Günlük sınıra ulaşıldı. Yarın deneyin.",
+      "limit": "Hesabınız günlük kontrol sınırına ulaştı. Yarın deneyin.",
       "unavailable": "Kontrol kullanılamıyor. Yanıtlarınız kaydedildi.",
       "required": "PAN ve GST bilgilerini kontrol edip yeniden deneyin.",
       "pending": "Zaten bekleyen bir kontrol var. Lütfen bekleyin.",

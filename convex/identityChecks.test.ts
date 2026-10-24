@@ -36,7 +36,7 @@ async function setup() {
   });
   return { t, as, applicationId };
 }
-it("shares exactly 20 attempts across PAN/GST and stops concurrent overflow", async () => {
+it("shares exactly 20 attempts per account across PAN/GST and stops concurrent overflow", async () => {
   const { t, as, applicationId } = await setup();
   // Distinct applications model independent applicants while retaining real auth.
   const ids = await t.run(async (ctx) => {
@@ -297,4 +297,88 @@ it("requires phone verification before spending and rejects expired proof", asyn
     ctx.db.query("identityCheckDays").unique(),
   );
   expect(quota?.used).toBe(2);
+});
+it("operator examples share the cap, require the temporary switch and run once per kind", async () => {
+  const { t } = await setup();
+  vi.stubEnv("SUREPASS_EXAMPLE_TEST_ENABLED", "false");
+  await expect(
+    t.mutation(internal.identityExample.reserve, { kind: "pan" }),
+  ).rejects.toThrow("CHECK_UNAVAILABLE");
+  vi.stubEnv("SUREPASS_EXAMPLE_TEST_ENABLED", "true");
+  await t.mutation(internal.identityExample.reserve, { kind: "pan" });
+  await expect(
+    t.mutation(internal.identityExample.reserve, { kind: "pan" }),
+  ).rejects.toThrow("CHECK_LIMIT");
+  await t.mutation(internal.identityExample.reserve, { kind: "gst" });
+  const row = await t.run((ctx) => ctx.db.query("identityCheckDays").unique());
+  expect(row?.used).toBe(2);
+  if (!row) throw new Error("missing quota");
+  await t.run((ctx) =>
+    ctx.db.patch("identityCheckDays", row._id, {
+      used: 20,
+      operatorUsed: 20,
+      examplePan: false,
+    }),
+  );
+  await expect(
+    t.mutation(internal.identityExample.reserve, { kind: "pan" }),
+  ).rejects.toThrow("CHECK_LIMIT");
+});
+it("gives another verified account its own allowance after the first account uses 20", async () => {
+  const { t, as, applicationId } = await setup();
+  const firstProfile = await t.run((ctx) =>
+    ctx.db.get("applications", applicationId),
+  );
+  if (!firstProfile) throw new Error("missing profile");
+  await t.run((ctx) =>
+    ctx.db.insert("identityPersonCheckDays", {
+      profileId: firstProfile.profileId,
+      day: new Date(Date.now() + 19_800_000).toISOString().slice(0, 10),
+      used: 20,
+    }),
+  );
+  await expect(
+    as.mutation(internal.identityChecks.reserve, {
+      applicationId,
+      kind: "pan",
+    }),
+  ).rejects.toThrow("CHECK_LIMIT");
+  const other = await signIn(t, {
+    email: "second@phone.luma.green",
+    phoneNumber: "+919000000003",
+  });
+  await other.mutation(api.identity.ensureProfile, { locale: "en" });
+  const second = await other.mutation(api.applications.start, {
+    kind: "kabadiwala",
+    locale: "en",
+    ageConfirmed: true,
+    privacyAccepted: true,
+  });
+  await other.mutation(api.applications.saveDraft, {
+    applicationId: second,
+    kabadiwala: { pan },
+  });
+  expect(
+    await other.mutation(internal.identityChecks.reserve, {
+      applicationId: second,
+      kind: "pan",
+    }),
+  ).not.toBeNull();
+});
+it("asks the applicant to correct identifiers rejected with 422 without retrying", async () => {
+  const { t, as, applicationId } = await setup();
+  const fetcher = vi
+    .fn()
+    .mockResolvedValue(
+      Response.json({ success: false, status_code: 422 }, { status: 422 }),
+    );
+  vi.stubGlobal("fetch", fetcher);
+  await expect(
+    as.action(api.identityChecks.verify, { applicationId, consent: true }),
+  ).rejects.toThrow("VALIDATION_REQUIRED");
+  expect(fetcher).toHaveBeenCalledTimes(1);
+  const quota = await t.run((ctx) =>
+    ctx.db.query("identityCheckDays").unique(),
+  );
+  expect(quota?.used).toBe(1);
 });

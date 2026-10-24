@@ -466,3 +466,10 @@ export function surepassEnv() {
     ? { token }
     : null;
 }
+
+/** Temporary operator switch, never needed for applicant checks. */
+export function surepassExampleEnv() {
+  return process.env.SUREPASS_EXAMPLE_TEST_ENABLED === "true"
+    ? surepassEnv()
+    : null;
+}

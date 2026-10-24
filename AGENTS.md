@@ -306,9 +306,12 @@ that its build requires. Do not copy operational API secrets into Vercel.
 
 Paid integrations need server-enforced request limits before provider calls,
 duplicate-request protection, bounded timeouts, and no automatic paid retries.
-For Surepass, the owner approved 20 paid attempts per day shared across PAN and
-GST, with applicant checks after phone verification and before application
-submission. PAN is validated only when supplied; GSTIN applies to applicants who
+For Surepass, the owner corrected the limit on 25 October: 20 paid attempts per
+verified person/account per India calendar day, combined across PAN and GST and
+all applications owned by that account. This supersedes the earlier platform-wide
+cap. Total platform usage may exceed 20 calls and incur corresponding charges.
+Derive the quota identity from authenticated profile access, never caller input.
+Applicant checks run after phone verification and before application submission. PAN is validated only when supplied; GSTIN applies to applicants who
 declare GST registration. Keep paid development calls disabled while testing
 unless a separate approved allowance prevents doubling the production budget.
 Never activate another API from the provider catalogue merely because the token
