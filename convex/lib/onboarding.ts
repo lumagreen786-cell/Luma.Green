@@ -116,17 +116,21 @@ const phones = z
 
 const weekdays = z.array(z.enum(WEEKDAYS));
 
-/** Shared by every form with a GST question: yes needs a valid GSTIN. */
-function checkGst(
-  form: { pan?: string; gstRegistered: boolean; gstin?: string },
-  ctx: z.RefinementCtx,
-) {
+function checkPan(form: { pan?: string }, ctx: z.RefinementCtx) {
   if (
     form.pan?.trim() &&
     !/^[A-Z]{5}\d{4}[A-Z]$/.test(form.pan.trim().toUpperCase())
   ) {
     ctx.addIssue({ code: "custom", path: ["pan"], message: "pan" });
   }
+}
+
+/** Shared by every form with a GST question: yes needs a valid GSTIN. */
+function checkGst(
+  form: { pan?: string; gstRegistered: boolean; gstin?: string },
+  ctx: z.RefinementCtx,
+) {
+  checkPan(form, ctx);
   if (
     form.pan?.trim() &&
     form.gstRegistered &&
@@ -200,6 +204,8 @@ export const businessSchema = z
   })
   .superRefine((form, ctx) => {
     checkGst(form, ctx);
+    if (!form.gstRegistered)
+      ctx.addIssue({ code: "custom", path: ["gstin"], message: "gstin" });
     checkHours(form, ctx);
   });
 
@@ -246,18 +252,21 @@ export function documentsSchema(today: string) {
 
 export type DocumentsForm = z.infer<ReturnType<typeof documentsSchema>>;
 
-export const saathiSchema = z.object({
-  name: text(2, 80),
-  area: text(2, 120),
-  location: locationSchema.optional(),
-  radiusKm: z.union([z.literal(2), z.literal(5), z.literal(10)], {
-    error: "chooseOne",
-  }),
-  workTypes: z.array(z.enum(SAATHI_WORK)).min(1, "pickAtLeastOne"),
-  vehicle: z.enum(SAATHI_VEHICLES, { error: "chooseOne" }),
-  times: z.array(z.enum(SAATHI_TIMES)).min(1, "pickAtLeastOne"),
-  days: weekdays.min(1, "pickAtLeastOne"),
-});
+export const saathiSchema = z
+  .object({
+    pan: z.string().max(10, "pan").optional(),
+    name: text(2, 80),
+    area: text(2, 120),
+    location: locationSchema.optional(),
+    radiusKm: z.union([z.literal(2), z.literal(5), z.literal(10)], {
+      error: "chooseOne",
+    }),
+    workTypes: z.array(z.enum(SAATHI_WORK)).min(1, "pickAtLeastOne"),
+    vehicle: z.enum(SAATHI_VEHICLES, { error: "chooseOne" }),
+    times: z.array(z.enum(SAATHI_TIMES)).min(1, "pickAtLeastOne"),
+    days: weekdays.min(1, "pickAtLeastOne"),
+  })
+  .superRefine(checkPan);
 
 export type SaathiForm = z.infer<typeof saathiSchema>;
 

@@ -355,14 +355,15 @@ describe("uploads", () => {
   it("lets a complete business submit, and keeps sent files for the record", async () => {
     const t = setup();
     const yard = await applicant(t);
-    await yard.mutation(api.applications.start, {
+    const applicationId = await yard.mutation(api.applications.start, {
       kind: "recycler",
       ...consent,
     });
     await yard.mutation(api.applications.saveDraft, {
       business: {
         businessName: "Peenya Plastics",
-        gstRegistered: false,
+        gstRegistered: true,
+        gstin: "29ABCDE1234F1Z5",
         materials: ["plastic"],
         address: "Plot 7, Peenya Industrial Area, Bengaluru",
         locationTags: [],
@@ -399,6 +400,19 @@ describe("uploads", () => {
         "shredder.jpg",
       ),
       await attach(yard, await upload(t, "mp4"), "machine_media", "line.mp4"),
+    );
+    await expect(yard.mutation(api.applications.submit, {})).rejects.toThrow(
+      "VALIDATION_REQUIRED",
+    );
+    await t.run((ctx) =>
+      ctx.db.insert("identityChecks", {
+        applicationId,
+        kind: "gst",
+        input: "29ABCDE1234F1Z5",
+        status: "verified",
+        createdAt: Date.now(),
+        expiresAt: Date.now() + 86_400_000,
+      }),
     );
     await yard.mutation(api.applications.submit, {});
 
@@ -467,4 +481,44 @@ describe("attachment cleanup races", () => {
       await t.run((ctx) => ctx.db.query("applicationFiles").collect()),
     ).toEqual([]);
   });
+});
+
+it("requires verification for a supplied Saathi PAN while retaining ID and selfie checks", async () => {
+  const t = setup();
+  const person = await applicant(t);
+  const applicationId = await person.mutation(api.applications.start, {
+    kind: "saathi",
+    ...consent,
+  });
+  await person.mutation(api.applications.saveDraft, {
+    saathi: {
+      name: "Test Helper",
+      area: "Bengaluru",
+      radiusKm: 2,
+      workTypes: ["home_pickups"],
+      vehicle: "none",
+      times: ["morning"],
+      days: ["mon"],
+      pan: "ABCDE1234F",
+    },
+  });
+  await expect(person.mutation(api.applications.submit, {})).rejects.toThrow(
+    "INCOMPLETE",
+  );
+  await attach(person, await upload(t, "pdf"), "id_proof", "identity.pdf");
+  await attach(person, await upload(t, "jpeg"), "selfie", "selfie.jpg");
+  await expect(person.mutation(api.applications.submit, {})).rejects.toThrow(
+    "VALIDATION_REQUIRED",
+  );
+  await t.run((ctx) =>
+    ctx.db.insert("identityChecks", {
+      applicationId,
+      kind: "pan",
+      input: "ABCDE1234F",
+      status: "verified",
+      createdAt: Date.now(),
+      expiresAt: Date.now() + 86_400_000,
+    }),
+  );
+  await person.mutation(api.applications.submit, {});
 });

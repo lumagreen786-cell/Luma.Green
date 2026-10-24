@@ -33,7 +33,7 @@ export const reserve = internalMutation({
       args.applicationId,
     );
     const checks = identityInputs(
-      application.kabadiwala ?? application.business,
+      application.kabadiwala ?? application.business ?? application.saathi,
     );
     const check = checks.find((entry) => entry.kind === args.kind);
     if (!check) return null;

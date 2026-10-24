@@ -311,8 +311,10 @@ verified person/account per India calendar day, combined across PAN and GST and
 all applications owned by that account. This supersedes the earlier platform-wide
 cap. Total platform usage may exceed 20 calls and incur corresponding charges.
 Derive the quota identity from authenticated profile access, never caller input.
-Applicant checks run after phone verification and before application submission. PAN is validated only when supplied; GSTIN applies to applicants who
-declare GST registration. Keep paid development calls disabled while testing
+Applicant checks run after phone verification and before application submission. PAN is optional for kabadiwalas, business applicants and Saathis; validate it
+when supplied. GSTIN is required for preprocessors, recyclers and manufacturers.
+Kabadiwalas need GST verification only when they declare registration. Households
+have no PAN/GST checks. Keep existing Saathi ID and selfie uploads. Keep paid development calls disabled while testing
 unless a separate approved allowance prevents doubling the production budget.
 Never activate another API from the provider catalogue merely because the token
 has access to it. Keep tokens and identity numbers out of logs and audit payloads.

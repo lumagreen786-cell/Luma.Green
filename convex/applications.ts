@@ -293,7 +293,7 @@ export const submit = mutation({
     }
 
     const identityRequirements = identityInputs(
-      application.kabadiwala ?? application.business,
+      application.kabadiwala ?? application.business ?? application.saathi,
     );
     for (const check of identityRequirements) {
       const proof = await ctx.db
