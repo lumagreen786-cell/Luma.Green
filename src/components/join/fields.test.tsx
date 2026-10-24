@@ -5,7 +5,13 @@ import type { ReactNode } from "react";
 import { describe, expect, it, vi } from "vitest";
 
 import messages from "../../../messages/en.json";
-import { FieldSet, ToggleChips, WeekdayChips, YesNo } from "./fields";
+import {
+  FieldSet,
+  SaveIndicator,
+  ToggleChips,
+  WeekdayChips,
+  YesNo,
+} from "./fields";
 
 function withIntl(children: ReactNode) {
   return (
@@ -95,4 +101,21 @@ describe("WeekdayChips", () => {
     expect(screen.getAllByRole("checkbox")).toHaveLength(7);
     expect(screen.getByRole("checkbox", { name: "Sun" })).toBeChecked();
   });
+});
+
+// Emulate the DOM rewrite performed by page translators on visible text.
+it("keeps autosave updates safe after a translator replaces the status text", () => {
+  const { rerender } = render(withIntl(<SaveIndicator state="saving" />));
+  const text = screen.getByText(messages.join.form.saving);
+  const node = [...text.childNodes].find(
+    (child) => child.nodeType === Node.TEXT_NODE,
+  );
+  if (!node) throw new Error("Missing status text");
+  const translated = document.createElement("span");
+  translated.textContent = node.textContent;
+  node.replaceWith(translated);
+  expect(() => {
+    rerender(withIntl(<SaveIndicator state="saved" />));
+  }).not.toThrow();
+  expect(screen.getByText(messages.join.form.saved)).toBeVisible();
 });

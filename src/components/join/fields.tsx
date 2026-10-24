@@ -631,9 +631,8 @@ export function SaveIndicator({ state }: { state: SaveState }) {
       {state === "error" ? (
         <CloudOffIcon aria-hidden className="size-4" />
       ) : null}
-      {state === "saving" ? t("saving") : null}
-      {state === "saved" ? t("saved") : null}
-      {state === "error" ? t("notSaved") : null}
+      {/* Keep a stable element around text that browser translators may replace. */}
+      <span>{t(state === "error" ? "notSaved" : state)}</span>
     </p>
   );
 }

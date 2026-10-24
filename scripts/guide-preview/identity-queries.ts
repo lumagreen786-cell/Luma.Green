@@ -1,6 +1,16 @@
 import { ConvexError } from "convex/values";
 
 function saveFixture() {
+  if (
+    new URLSearchParams(window.location.search).get("scenario") ===
+    "delayed-save"
+  ) {
+    return new Promise<null>((resolve) => {
+      setTimeout(() => {
+        resolve(null);
+      }, 1000);
+    });
+  }
   return Promise.resolve(null);
 }
 function checkFixture() {
