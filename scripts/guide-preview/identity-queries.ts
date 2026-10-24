@@ -1,5 +1,7 @@
 import { ConvexError } from "convex/values";
 
+export { useConvexAuth, usePaginatedQuery, useQuery } from "./queries";
+
 function saveFixture() {
   if (
     new URLSearchParams(window.location.search).get("scenario") ===
