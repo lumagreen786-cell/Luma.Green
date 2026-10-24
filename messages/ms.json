@@ -185,7 +185,7 @@
       }
     },
     "verification": {
-      "body": "Petugas memeriksa setiap perniagaan dan Saathi sebelum mereka boleh berniaga.",
+      "body": "Pilih peranan dan lengkapkan pendaftaran.",
       "title": "Pengesahan",
       "nav": "Pengesahan",
       "business": "Perniagaan: nombor GST jika ada, foto kedai atau unit dan panggilan telefon.",
@@ -544,8 +544,8 @@
             "body": "Sekurang-kurangnya dua foto atau video pendek mesin utama dan tapak anda."
           },
           "review": {
-            "title": "Kami menyemak dalam 12–24 jam",
-            "body": "Petugas menyemak setiap dokumen. Jika ada yang kurang, kami nyatakan perkara yang perlu diperbaiki."
+            "title": "Lengkapkan pendaftaran",
+            "body": "Ruang kerja anda sedia."
           },
           "live": {
             "title": "Mula berdagang",
@@ -840,8 +840,8 @@
             "body": "Tambah nombor GST jika ada. Jika tiada, nyatakan sahaja."
           },
           "review": {
-            "title": "Kami menyemak dalam 12–24 jam",
-            "body": "Petugas menyemak butiran anda. Papan pemuka dibuka selepas diluluskan."
+            "title": "Lengkapkan pendaftaran",
+            "body": "Ruang kerja anda sedia."
           }
         }
       },
@@ -1128,8 +1128,8 @@
             "body": "Kad pengundi, lesen memandu, PAN atau Aadhaar terlindung. Jangan berikan nombor Aadhaar penuh."
           },
           "review": {
-            "title": "Kami menyemak dalam 12–24 jam",
-            "body": "Petugas memadankan swafoto dengan pengenalan anda. Kemudian anda boleh mengambil kerja."
+            "title": "Lengkapkan pendaftaran",
+            "body": "Ruang kerja anda sedia."
           }
         }
       },
@@ -2682,17 +2682,17 @@
       "yard": {
         "title": "Pemproses awal",
         "body": "Anda mengasing dan memampatkan bahan kitar semula secara pukal, kemudian menjualnya.",
-        "needs": "Nombor GST jika ada, kebenaran kawalan pencemaran (PDF) dan foto mesin anda."
+        "needs": "Nombor GST, dokumen kawalan pencemaran dan foto mesin anda."
       },
       "recycler": {
         "title": "Pengitar semula",
         "body": "Anda mengubah bahan kitar semula kembali menjadi bahan mentah.",
-        "needs": "Nombor GST jika ada, kebenaran kawalan pencemaran (PDF) dan foto mesin anda."
+        "needs": "Nombor GST, dokumen kawalan pencemaran dan foto mesin anda."
       },
       "manufacturer": {
         "title": "Pengilang",
         "body": "Anda membeli bahan kitar semula untuk kilang.",
-        "needs": "Nombor GST jika ada, kebenaran kawalan pencemaran (PDF) dan foto mesin anda."
+        "needs": "Nombor GST, dokumen kawalan pencemaran dan foto mesin anda."
       },
       "saathi": {
         "title": "Pekerja Saathi",
@@ -2710,7 +2710,7 @@
       "saving": "Menyimpan…",
       "saved": "Disimpan",
       "notSaved": "Tidak disimpan. Semak sambungan anda.",
-      "submit": "Hantar untuk pengesahan",
+      "submit": "Lengkapkan pendaftaran",
       "next": "Seterusnya: dokumen",
       "fixErrors": "Beberapa jawapan perlu disemak. Ia ditandakan di bawah.",
       "yes": "Ya",
@@ -2772,7 +2772,7 @@
       },
       "submitted": {
         "title": "Sedang disemak",
-        "lead": "Biasanya 12–24 jam. Kami menghantar SMS selepas selesai.",
+        "lead": "Disimpan",
         "sentAt": "Dihantar {when}",
         "whatWeCheck": "Perkara yang kami semak"
       },
@@ -2782,8 +2782,8 @@
         "fix": "Baiki dan hantar semula"
       },
       "approved": {
-        "title": "Anda telah disahkan",
-        "lead": "Perniagaan anda kini aktif di Luma.Green.",
+        "title": "Pendaftaran selesai",
+        "lead": "Ruang kerja anda sedia.",
         "open": "Buka papan pemuka"
       },
       "roleLabel": "Memohon sebagai: {role}",
@@ -2809,9 +2809,9 @@
       "title": "Sebelum anda bermula",
       "lead": "Perkara yang kami minta dan sebabnya.",
       "why": {
-        "kabadiwala": "Butiran kedai membolehkan rumah berhampiran menempah anda dan membantu kami menyemak kedai itu benar-benar wujud. Kami menelefon sekali untuk mengesahkan.",
-        "business": "Sijil kebenaran dan foto mesin menunjukkan kepada pembeli dan penjual bahawa anda berlesen dan beroperasi. Kami menyemaknya dengan daftar awam lembaga kawalan pencemaran.",
-        "saathi": "Pengenalan bergambar dan swafoto membolehkan kami mengesahkan identiti anda sebelum sesiapa membenarkan anda masuk rumah atau kawasan mereka."
+        "kabadiwala": "Alamat dan waktu operasi kedai. Nombor GST jika ada.",
+        "business": "Nombor GST, dokumen kawalan pencemaran dan foto mesin anda.",
+        "saathi": "Pengenalan bergambar dan swafoto."
       },
       "privacy": "Hanya anda dan pasukan Luma.Green boleh melihat butiran dan fail anda. Kami menggunakannya untuk pengesahan dan menghubungkan anda dengan pengguna Luma.Green, tidak pernah menjualnya. Anda boleh meminta kami memadamkannya.",
       "age": "Saya berumur 18 tahun atau lebih",
@@ -2895,9 +2895,9 @@
       }
     },
     "metaTitle": "Sertai Luma.Green",
-    "metaDescription": "Peniaga barang lusuh, pemproses awal, pengitar semula, pengilang dan Saathi di Bengaluru: mohon menyertai Luma.Green. Petugas menyemak setiap permohonan, biasanya dalam 12–24 jam.",
+    "metaDescription": "Pilih peranan dan lengkapkan pendaftaran.",
     "title": "Sertai Luma.Green",
-    "lead": "Beritahu pekerjaan anda. Petugas menyemak setiap permohonan, biasanya dalam 12–24 jam.",
+    "lead": "Pilih peranan dan lengkapkan pendaftaran.",
     "start": "Mula",
     "youNeed": "Anda perlukan",
     "homeTitle": "Mengitar semula dari rumah?",
@@ -2906,7 +2906,7 @@
       "title": "Dokumen dan foto",
       "lead": "Kami menyemak kebenaran anda dalam daftar awam lembaga kawalan pencemaran.",
       "notRequired": "Unit kami tidak memerlukan kebenaran",
-      "notRequiredHint": "Sesetengah unit, seperti pemampatan kertas sahaja, dikecualikan. Beritahu sebabnya dan kami akan menyemak.",
+      "notRequiredHint": "Beritahu sedikit lagi",
       "reason": "Sebab tidak diperlukan",
       "board": "Lembaga mana yang mengeluarkannya?",
       "boards": {
@@ -2954,19 +2954,22 @@
       "fileTooBig": "Fail ini terlalu besar",
       "uploadFailed": "Muat naik gagal. Cuba lagi.",
       "generic": "Ralat berlaku. Cuba lagi.",
-      "pan": "Semak maklumat PAN dan GST, kemudian cuba lagi."
+      "pan": "Cari nombor GST dan sahkan perniagaan anda."
     },
     "identity": {
       "pan": "PAN (pilihan)",
       "disclosure": "Dengan memilih Setuju dan semak, anda membenarkan nombor pengenalan ini dihantar kepada Surepass untuk pengesahan.",
       "check": "Setuju dan semak",
       "checking": "Menyemak…",
-      "verified": "Nombor pengenalan disahkan. Kelulusan pentadbir masih diperlukan.",
+      "verified": "Perniagaan disahkan.",
       "limit": "Akaun anda telah mencapai had semakan harian. Cuba esok.",
       "unavailable": "Semakan tidak tersedia. Jawapan anda disimpan.",
-      "required": "Semak maklumat PAN dan GST, kemudian cuba lagi.",
+      "required": "Cari nombor GST dan sahkan perniagaan anda.",
       "pending": "Semakan sedang berjalan. Sila tunggu.",
-      "saveFailed": "Tidak disimpan. Semak sambungan anda."
+      "saveFailed": "Tidak disimpan. Semak sambungan anda.",
+      "previewTitle": "Sahkan maklumat perniagaan",
+      "confirm": "Sahkan perniagaan",
+      "confirming": "Mengesahkan…"
     }
   },
   "compliance": {
@@ -3177,7 +3180,7 @@
       "intro": "Harga yang jelas, berat yang ditimbang dan rekod membantu semua pihak menyemak kutipan.",
       "verified": {
         "title": "Perniagaan disahkan",
-        "body": "Petugas memeriksa setiap perniagaan dan Saathi sebelum mereka boleh berniaga."
+        "body": "Pilih peranan dan lengkapkan pendaftaran."
       },
       "floor": {
         "title": "Harga adil dengan had minimum",

@@ -148,9 +148,7 @@ export function DocumentsForm({
         title={t("documents.title")}
         saveState={saveState}
       />
-      <p className="text-sm leading-relaxed text-muted-foreground">
-        {t("documents.lead")}
-      </p>
+
       <ChangesNote note={application.note} />
       {isStepOneDone ? null : (
         <p role="alert" className="rounded-lg bg-destructive/10 p-3 text-sm">
@@ -333,7 +331,6 @@ export function DocumentsForm({
 
       <IdentityCheck
         applicationId={application.id}
-        pan={application.business?.pan}
         gstin={
           application.business?.gstRegistered
             ? application.business.gstin

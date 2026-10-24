@@ -68,8 +68,8 @@ export const MAX_EXTRA_PHONES = 2;
 export const MAX_LOCATION_TAGS = 5;
 
 /**
- * GSTIN shape: state code, PAN, entity number, `Z`, check character. A typo
- * check only — the admin confirms the number on the GST portal.
+ * GSTIN shape: state code, PAN, entity number, `Z`, check character. A format
+ * check only — Surepass checks the registration before submission.
  */
 const GSTIN = /^\d{2}[A-Z]{5}\d{4}[A-Z][1-9A-Z]Z[0-9A-Z]$/;
 
@@ -116,30 +116,11 @@ const phones = z
 
 const weekdays = z.array(z.enum(WEEKDAYS));
 
-function checkPan(form: { pan?: string }, ctx: z.RefinementCtx) {
-  if (
-    form.pan?.trim() &&
-    !/^[A-Z]{5}\d{4}[A-Z]$/.test(form.pan.trim().toUpperCase())
-  ) {
-    ctx.addIssue({ code: "custom", path: ["pan"], message: "pan" });
-  }
-}
-
 /** Shared by every form with a GST question: yes needs a valid GSTIN. */
 function checkGst(
-  form: { pan?: string; gstRegistered: boolean; gstin?: string },
+  form: { gstRegistered: boolean; gstin?: string },
   ctx: z.RefinementCtx,
 ) {
-  checkPan(form, ctx);
-  if (
-    form.pan?.trim() &&
-    form.gstRegistered &&
-    isGstin(form.gstin) &&
-    form.gstin?.trim().toUpperCase().slice(2, 12) !==
-      form.pan.trim().toUpperCase()
-  ) {
-    ctx.addIssue({ code: "custom", path: ["gstin"], message: "gstin" });
-  }
   if (form.gstRegistered && !isGstin(form.gstin)) {
     ctx.addIssue({ code: "custom", path: ["gstin"], message: "gstin" });
   }
@@ -162,7 +143,6 @@ export const kabadiwalaSchema = z
   .object({
     ownerName: text(2, 80),
     shopName: text(2, 80),
-    pan: z.string().max(10, "pan").optional(),
     gstRegistered: yesNo,
     gstin: z.string().optional(),
     address: text(5, 200),
@@ -189,7 +169,6 @@ export const businessSchema = z
     businessName: text(2, 120),
     siteType: z.enum(SITE_TYPES).optional(),
     materialOrigins: z.array(z.enum(MATERIAL_ORIGINS)).max(2).optional(),
-    pan: z.string().max(10, "pan").optional(),
     gstRegistered: yesNo,
     gstin: z.string().optional(),
     materials: z.array(z.enum(MATERIAL_FAMILIES)).min(1, "pickAtLeastOne"),
@@ -213,7 +192,8 @@ export type BusinessForm = z.infer<typeof businessSchema>;
 
 /**
  * The pollution-control papers. A unit that needs no consent (white category,
- * such as paper baling only) says so and explains; the admin checks the claim.
+ * such as paper baling only) says so and explains. This remains a declaration,
+ * not an automated permit verification.
  */
 export function documentsSchema(today: string) {
   return z
@@ -252,21 +232,18 @@ export function documentsSchema(today: string) {
 
 export type DocumentsForm = z.infer<ReturnType<typeof documentsSchema>>;
 
-export const saathiSchema = z
-  .object({
-    pan: z.string().max(10, "pan").optional(),
-    name: text(2, 80),
-    area: text(2, 120),
-    location: locationSchema.optional(),
-    radiusKm: z.union([z.literal(2), z.literal(5), z.literal(10)], {
-      error: "chooseOne",
-    }),
-    workTypes: z.array(z.enum(SAATHI_WORK)).min(1, "pickAtLeastOne"),
-    vehicle: z.enum(SAATHI_VEHICLES, { error: "chooseOne" }),
-    times: z.array(z.enum(SAATHI_TIMES)).min(1, "pickAtLeastOne"),
-    days: weekdays.min(1, "pickAtLeastOne"),
-  })
-  .superRefine(checkPan);
+export const saathiSchema = z.object({
+  name: text(2, 80),
+  area: text(2, 120),
+  location: locationSchema.optional(),
+  radiusKm: z.union([z.literal(2), z.literal(5), z.literal(10)], {
+    error: "chooseOne",
+  }),
+  workTypes: z.array(z.enum(SAATHI_WORK)).min(1, "pickAtLeastOne"),
+  vehicle: z.enum(SAATHI_VEHICLES, { error: "chooseOne" }),
+  times: z.array(z.enum(SAATHI_TIMES)).min(1, "pickAtLeastOne"),
+  days: weekdays.min(1, "pickAtLeastOne"),
+});
 
 export type SaathiForm = z.infer<typeof saathiSchema>;
 

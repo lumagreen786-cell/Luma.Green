@@ -11,7 +11,10 @@ export default mergeConfig(base, {
     {
       name: "identity-fixture-entry",
       transformIndexHtml(html: string) {
-        return html.replace('src="/main.tsx"', 'src="/identity-main.tsx"');
+        return html.replace(
+          /src="\/main\.tsx(?:\?[^"]*)?"/u,
+          'src="/identity-main.tsx"',
+        );
       },
     },
   ],

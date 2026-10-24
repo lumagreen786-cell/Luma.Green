@@ -173,7 +173,7 @@
       "intro": "Duidelijke prijzen, gemeten gewichten en registraties helpen iedereen een inzameling te controleren.",
       "verified": {
         "title": "Geverifieerde bedrijven",
-        "body": "Een persoon controleert elk bedrijf en elke Saathi voordat zij kunnen handelen."
+        "body": "Kies uw rol en rond de registratie af."
       },
       "floor": {
         "title": "Eerlijke prijzen, met een minimum",
@@ -392,7 +392,7 @@
     "verification": {
       "title": "Verificatie",
       "nav": "Verificatie",
-      "body": "Een persoon controleert elk bedrijf en elke Saathi voordat zij kunnen handelen.",
+      "body": "Kies uw rol en rond de registratie af.",
       "business": "Bedrijven: het GST-nummer indien aanwezig, foto's van de winkel of installatie en een telefoongesprek.",
       "consent": "Voorverwerkers, recyclers en fabrieken: een geldige vergunning van de milieuraad van de deelstaat.",
       "saathi": "Saathi's: een identiteitsbewijs met foto en een bijpassende selfie."
@@ -868,8 +868,8 @@
             "body": "Minstens twee foto's of korte video's van uw belangrijkste machines en locatie."
           },
           "review": {
-            "title": "We controleren binnen 12–24 uur",
-            "body": "Een persoon controleert elk document. Als iets ontbreekt, vertellen we precies wat u moet aanpassen."
+            "title": "Registratie afronden",
+            "body": "Uw werkruimte is gereed."
           },
           "live": {
             "title": "Begin met handelen",
@@ -1164,8 +1164,8 @@
             "body": "Voeg uw GST-nummer toe als u er een heeft. Geef anders aan dat u geen nummer heeft."
           },
           "review": {
-            "title": "We controleren binnen 12–24 uur",
-            "body": "Een persoon controleert uw gegevens. Na goedkeuring opent uw overzicht."
+            "title": "Registratie afronden",
+            "body": "Uw werkruimte is gereed."
           }
         }
       },
@@ -1452,8 +1452,8 @@
             "body": "Kiezerspas, rijbewijs, PAN of afgeschermde Aadhaar. Nooit een volledig Aadhaar-nummer."
           },
           "review": {
-            "title": "We controleren binnen 12–24 uur",
-            "body": "Een persoon vergelijkt uw selfie met uw identiteitsbewijs. Daarna kunt u klussen aannemen."
+            "title": "Registratie afronden",
+            "body": "Uw werkruimte is gereed."
           }
         }
       },
@@ -1925,9 +1925,9 @@
   },
   "join": {
     "metaTitle": "Aanmelden bij Luma.Green",
-    "metaDescription": "Kabadiwala's, voorverwerkers, recyclers, fabrikanten en Saathi's in Bengaluru: meld u aan bij Luma.Green. Een persoon beoordeelt elke aanvraag, meestal binnen 12–24 uur.",
+    "metaDescription": "Kies uw rol en rond de registratie af.",
     "title": "Aanmelden bij Luma.Green",
-    "lead": "Vertel wat u doet. Een persoon beoordeelt elke aanvraag, meestal binnen 12–24 uur.",
+    "lead": "Kies uw rol en rond de registratie af.",
     "start": "Beginnen",
     "youNeed": "U heeft nodig",
     "homeTitle": "Recyclen vanuit huis?",
@@ -1942,17 +1942,17 @@
       "yard": {
         "title": "Voorverwerker",
         "body": "U sorteert en perst grote hoeveelheden recyclebaar materiaal tot balen en verkoopt deze door.",
-        "needs": "Uw GST-nummer indien aanwezig, milieuvergunning als PDF en foto's van uw machines."
+        "needs": "Uw GST-nummer, milieudocumenten en foto’s van machines."
       },
       "recycler": {
         "title": "Recycler",
         "body": "U maakt van recyclebaar materiaal weer grondstoffen.",
-        "needs": "Uw GST-nummer indien aanwezig, milieuvergunning als PDF en foto's van uw machines."
+        "needs": "Uw GST-nummer, milieudocumenten en foto’s van machines."
       },
       "manufacturer": {
         "title": "Fabrikant",
         "body": "U koopt gerecycled materiaal voor uw fabriek.",
-        "needs": "Uw GST-nummer indien aanwezig, milieuvergunning als PDF en foto's van uw machines."
+        "needs": "Uw GST-nummer, milieudocumenten en foto’s van machines."
       },
       "saathi": {
         "title": "Saathi",
@@ -1967,9 +1967,9 @@
       "title": "Voordat u begint",
       "lead": "Wat we vragen en waarom.",
       "why": {
-        "kabadiwala": "Met uw winkelgegevens kunnen huishoudens in de buurt boeken en kunnen we controleren of de winkel echt bestaat. We bellen eenmaal ter bevestiging.",
-        "business": "Uw vergunning en machinefoto's tonen kopers en verkopers dat u vergund en actief bent. We controleren ze in het openbare register van de milieuraad.",
-        "saathi": "Met uw identiteitsbewijs en selfie bevestigen we wie u bent voordat iemand u in huis of op het terrein laat."
+        "kabadiwala": "Het adres en de openingstijden van uw winkel. Uw GST-nummer indien aanwezig.",
+        "business": "Uw GST-nummer, milieudocumenten en foto’s van machines.",
+        "saathi": "Een identiteitsbewijs met foto en een selfie."
       },
       "privacy": "Alleen u en het Luma.Green-team kunnen uw gegevens en bestanden zien. We gebruiken ze om u te verifiëren en te verbinden met anderen op Luma.Green, nooit om te verkopen. U kunt om verwijdering vragen.",
       "age": "Ik ben 18 jaar of ouder",
@@ -1981,7 +1981,7 @@
       "saving": "Opslaan…",
       "saved": "Opgeslagen",
       "notSaved": "Niet opgeslagen. Controleer uw verbinding.",
-      "submit": "Versturen voor verificatie",
+      "submit": "Registratie afronden",
       "submitting": "Versturen…",
       "next": "Volgende: documenten",
       "back": "Terug",
@@ -2066,7 +2066,7 @@
       "title": "Documenten en foto's",
       "lead": "We controleren uw vergunning in het openbare register van de milieuraad.",
       "notRequired": "Onze installatie heeft geen vergunning nodig",
-      "notRequiredHint": "Sommige installaties, zoals alleen papier persen, zijn vrijgesteld. Vertel waarom en we controleren het.",
+      "notRequiredHint": "Vertel iets meer",
       "reason": "Waarom deze niet nodig is",
       "board": "Welke raad heeft de vergunning afgegeven?",
       "boards": {
@@ -2141,7 +2141,7 @@
       },
       "submitted": {
         "title": "In beoordeling",
-        "lead": "Meestal 12–24 uur. We sturen een sms zodra het klaar is.",
+        "lead": "Opgeslagen",
         "sentAt": "Verstuurd {when}",
         "whatWeCheck": "Wat we controleren"
       },
@@ -2151,8 +2151,8 @@
         "fix": "Aanpassen en opnieuw versturen"
       },
       "approved": {
-        "title": "U bent geverifieerd",
-        "lead": "Uw bedrijf is actief op Luma.Green.",
+        "title": "Registratie voltooid",
+        "lead": "Uw werkruimte is gereed.",
         "open": "Uw overzicht openen"
       },
       "rejected": {
@@ -2206,19 +2206,22 @@
       "fileTooBig": "Dit bestand is te groot",
       "uploadFailed": "Upload mislukt. Probeer het opnieuw.",
       "generic": "Er ging iets mis. Probeer het opnieuw.",
-      "pan": "Controleer de PAN- en GST-gegevens en probeer opnieuw."
+      "pan": "Zoek uw GST-nummer op en bevestig uw bedrijf."
     },
     "identity": {
       "pan": "PAN (optioneel)",
       "disclosure": "Met Akkoord en controleren geeft u toestemming om deze identificatienummers ter controle naar Surepass te sturen.",
       "check": "Akkoord en controleren",
       "checking": "Controleren…",
-      "verified": "Identificatienummers gecontroleerd. Goedkeuring van de beheerder blijft nodig.",
+      "verified": "Bedrijf bevestigd.",
       "limit": "Uw account heeft de dagelijkse controlelimiet bereikt. Probeer het morgen.",
       "unavailable": "Controle niet beschikbaar. Uw antwoorden zijn opgeslagen.",
-      "required": "Controleer de PAN- en GST-gegevens en probeer opnieuw.",
+      "required": "Zoek uw GST-nummer op en bevestig uw bedrijf.",
       "pending": "Er loopt al een controle. Even geduld.",
-      "saveFailed": "Niet opgeslagen. Controleer uw verbinding."
+      "saveFailed": "Niet opgeslagen. Controleer uw verbinding.",
+      "previewTitle": "Bevestig de bedrijfsgegevens",
+      "confirm": "Bedrijf bevestigen",
+      "confirming": "Bevestigen…"
     }
   },
   "app": {

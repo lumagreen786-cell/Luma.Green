@@ -173,7 +173,7 @@
       "intro": "Clear prices, measured weights and records help everyone check a collection.",
       "verified": {
         "title": "Verified businesses",
-        "body": "A person checks every business and every Saathi before they can trade."
+        "body": "Choose your role and complete signup."
       },
       "floor": {
         "title": "Fair prices, with a floor",
@@ -392,7 +392,7 @@
     "verification": {
       "title": "Verification",
       "nav": "Verification",
-      "body": "A person checks every business and every Saathi before they can trade.",
+      "body": "Choose your role and complete signup.",
       "business": "Businesses: the GST number if they have one, photos of the shop or unit, and a phone call.",
       "consent": "Preprocessors, recyclers and factories: a valid consent from the state pollution control board.",
       "saathi": "Saathis: a photo ID and a selfie that matches it."
@@ -868,8 +868,8 @@
             "body": "At least two photos or short videos of your main machines and your site."
           },
           "review": {
-            "title": "We check within 12–24 hours",
-            "body": "A person checks every document. If something is missing, we tell you exactly what to fix."
+            "title": "Complete signup",
+            "body": "Your workspace is ready."
           },
           "live": {
             "title": "Start trading",
@@ -1164,8 +1164,8 @@
             "body": "Add your GST number if you have one. If not, just say so."
           },
           "review": {
-            "title": "We check within 12–24 hours",
-            "body": "A person checks your details. When you're approved, your dashboard opens."
+            "title": "Complete signup",
+            "body": "Your workspace is ready."
           }
         }
       },
@@ -1452,8 +1452,8 @@
             "body": "Voter ID, driving licence, PAN or a masked Aadhaar. Never a full Aadhaar number."
           },
           "review": {
-            "title": "We check within 12–24 hours",
-            "body": "A person matches your selfie to your ID. Then you can take jobs."
+            "title": "Complete signup",
+            "body": "Your workspace is ready."
           }
         }
       },
@@ -1925,9 +1925,9 @@
   },
   "join": {
     "metaTitle": "Join Luma.Green",
-    "metaDescription": "Kabadiwalas, preprocessors, recyclers, manufacturers and Saathis in Bengaluru: apply to join Luma.Green. A person checks every application, usually within 12–24 hours.",
+    "metaDescription": "Choose your role and complete signup.",
     "title": "Join Luma.Green",
-    "lead": "Tell us what you do. A person checks every application, usually within 12–24 hours.",
+    "lead": "Choose your role and complete signup.",
     "start": "Start",
     "youNeed": "You'll need",
     "homeTitle": "Recycling from home?",
@@ -1942,17 +1942,17 @@
       "yard": {
         "title": "Preprocessor",
         "body": "You sort and bale materials in bulk, then sell them on.",
-        "needs": "Your GST number if you have one, your pollution-control consent (a PDF) and photos of your machines."
+        "needs": "Your GST number, pollution-control documents and machine photos."
       },
       "recycler": {
         "title": "Recycler",
         "body": "You turn collected materials back into raw material.",
-        "needs": "Your GST number if you have one, your pollution-control consent (a PDF) and photos of your machines."
+        "needs": "Your GST number, pollution-control documents and machine photos."
       },
       "manufacturer": {
         "title": "Manufacturer",
         "body": "You buy recycled material for your factory.",
-        "needs": "Your GST number if you have one, your pollution-control consent (a PDF) and photos of your machines."
+        "needs": "Your GST number, pollution-control documents and machine photos."
       },
       "saathi": {
         "title": "Saathi",
@@ -1967,9 +1967,9 @@
       "title": "Before you start",
       "lead": "What we'll ask for, and why.",
       "why": {
-        "kabadiwala": "Your shop's details let nearby homes book you, and let us check that the shop is real. We call your number once to confirm.",
-        "business": "Your consent certificate and machine photos show buyers and sellers that you're licensed and working. We check them against the pollution control board's public register.",
-        "saathi": "Your photo ID and selfie let us confirm who you are before anyone lets you into their home or yard."
+        "kabadiwala": "Your shop's address and opening hours. Your GST number if you have one.",
+        "business": "Your GST number, pollution-control documents and machine photos.",
+        "saathi": "A photo ID and a selfie."
       },
       "privacy": "Only you and the Luma.Green team can see your details and files. We use them to verify you and to connect you with others on Luma.Green, never to sell. You can ask us to delete them.",
       "age": "I am 18 or older",
@@ -1981,7 +1981,7 @@
       "saving": "Saving…",
       "saved": "Saved",
       "notSaved": "Not saved. Check your connection.",
-      "submit": "Send for verification",
+      "submit": "Complete signup",
       "submitting": "Sending…",
       "next": "Next: documents",
       "back": "Back",
@@ -2066,7 +2066,7 @@
       "title": "Documents and photos",
       "lead": "We check your consent on the pollution control board's public register.",
       "notRequired": "Our unit doesn't need a consent",
-      "notRequiredHint": "Some units, like paper baling only, are exempt. Tell us why and we'll check.",
+      "notRequiredHint": "Tell us a little more",
       "reason": "Why it isn't needed",
       "board": "Which board issued it?",
       "boards": {
@@ -2141,7 +2141,7 @@
       },
       "submitted": {
         "title": "Under review",
-        "lead": "Usually 12–24 hours. We'll send you an SMS when it's done.",
+        "lead": "Saved",
         "sentAt": "Sent {when}",
         "whatWeCheck": "What we check"
       },
@@ -2151,8 +2151,8 @@
         "fix": "Fix and resend"
       },
       "approved": {
-        "title": "You're verified",
-        "lead": "Your business is live on Luma.Green.",
+        "title": "Signup complete",
+        "lead": "Your workspace is ready.",
         "open": "Open your dashboard"
       },
       "rejected": {
@@ -2206,19 +2206,22 @@
       "fileTooBig": "This file is too big",
       "uploadFailed": "Upload failed. Try again.",
       "generic": "Something went wrong. Try again.",
-      "pan": "Check your PAN and GST details, then try again."
+      "pan": "Look up your GST number and confirm your business."
     },
     "identity": {
       "pan": "PAN (optional)",
       "disclosure": "By selecting Agree and check, you allow Luma.Green to send these identifiers to Surepass for validation.",
       "check": "Agree and check",
       "checking": "Checking…",
-      "verified": "Identifiers verified. Admin approval is still required.",
+      "verified": "Business confirmed.",
       "limit": "Your account’s daily check limit is reached. Try tomorrow.",
       "unavailable": "Checks are unavailable. Your answers are saved.",
-      "required": "Check your PAN and GST details, then try again.",
+      "required": "Look up your GST number and confirm your business.",
       "pending": "A check is already pending. Please wait.",
-      "saveFailed": "Not saved. Check your connection."
+      "saveFailed": "Not saved. Check your connection.",
+      "previewTitle": "Confirm business details",
+      "confirm": "Confirm business",
+      "confirming": "Confirming…"
     }
   },
   "app": {

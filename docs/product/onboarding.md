@@ -1,38 +1,28 @@
 # Onboarding and verification
 
-> **Status:** built, 29 Sep 2026 — the forms, uploads and status screen. The
-> admin's verification queue comes next. Clickable screens:
-> [Luma.Green Prototype](https://claude.ai/artifact/4hiq2r5tm5kWDBqTGEPD8C)
-> (private until shared). URLs: [architecture/urls.md](../architecture/urls.md).
-> Data: [architecture/data-model.md](../architecture/data-model.md).
+The owner changed registration on 25 October 2026. New applications complete
+through server checks and activate without manual onboarding approval. Existing
+records, files, audit history and other administrator permissions remain intact.
+The historical review rules below apply only to older records and recovery.
 
-Every business role and every Saathi goes through the same door, then fills in
-the form for their role, then waits for a person to check it. Households never
-register.
+## Current flow
 
-## The flow
+1. Choose a language and verify the phone number with the real SMS code.
+2. Choose a role and complete its existing consent.
+3. Preprocessors, recyclers and manufacturers enter GSTIN. Registered kabadiwalas
+   also enter GSTIN. Surepass Corporate GSTIN returns the registered business
+   name and address. Show those details and ask the applicant to confirm them.
+4. Complete the remaining role fields and required uploads. Saathis retain the
+   ID and selfie uploads. Households and Saathis have no PAN or GST entry.
+5. The server checks completeness and current confirmed GST proof where required,
+   saves the submitted version, creates the business/member or Saathi profile and
+   activates the registration in one transaction. No manual approval is needed.
 
-```
-Language ─► Phone ─► SMS code ─► What do you do? ─► Form for that role ─► Submitted
-                                                                              │
-                                  Admin checks by hand, target 12–24 hours ◄──┘
-                                                   │
-                     ┌──────────────┬──────────────┼──────────────┐
-                  Approved   Changes requested   Rejected     (still in review)
-                     │              │
-            Dashboard opens   Fix and resubmit ─► back to review
-```
-
-1. **Language.** A grid of all 33 languages in their own script, shown until the
-   user picks one. Kannada, Hindi and English appear first for Bengaluru.
-2. **Phone.** A 10-digit Indian mobile number.
-3. **SMS code.** Six digits sent through MSG91 on a DLT-registered template.
-   Resend after 30 seconds. See [architecture/auth.md](../architecture/auth.md).
-4. **What do you do?** Kabadiwala · Preprocessor (yard) · Recycler ·
-   Manufacturer · Saathi. Households are pointed to the photo flow instead.
-5. **The form for that role** — below.
-6. **Submitted.** The status screen shows "Under review — usually 12–24 hours"
-   and what we check.
+All applicant PAN inputs are retired. GST lookup has no automatic paid retries
+and allows at most 20 paid attempts per verified account per India calendar day.
+Names come from the provider; failed or unavailable lookup cannot invent a name
+or bypass the proof requirement. See [the service contract](../api/surepass-validation.md).
+GST registration alone is not verification of an operating permit or ownership.
 
 A user can leave at any point and continue later: the form saves itself as a
 draft a moment after every change. After signing in, everyone lands on

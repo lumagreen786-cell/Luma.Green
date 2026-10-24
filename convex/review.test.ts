@@ -315,7 +315,30 @@ describe("one application", () => {
       privacyAccepted: true,
     });
     await ramesh.mutation(api.applications.saveDraft, { kabadiwala: shop });
-    await ramesh.mutation(api.applications.submit, {});
+    // A historical application submitted before automatic activation remains reviewable.
+    await t.run(async (ctx) => {
+      await ctx.db.patch("applications", id, {
+        status: "submitted",
+        version: 1,
+        submittedAt: Date.now(),
+      });
+      await ctx.db.insert("applicationSnapshots", {
+        applicationId: id,
+        version: 1,
+        kabadiwala: shop,
+        fileIds: [],
+        submittedAt: Date.now(),
+      });
+      const historical = await ctx.db.get("applications", id);
+      const profileId = historical?.profileId;
+      await ctx.db.insert("auditLog", {
+        action: "application.submitted",
+        entityTable: "applications",
+        entityId: id,
+        actorProfileId: profileId,
+        createdAt: Date.now(),
+      });
+    });
 
     const admin = await signInAdmin(t);
     const first = await admin.query(api.review.get, { applicationId: id });
@@ -349,7 +372,7 @@ describe("one application", () => {
 
     const second = await admin.query(api.review.get, { applicationId: id });
     expect(second).toMatchObject({
-      status: "submitted",
+      status: "approved",
       version: 2,
       earlierVersions: 1,
       changes: ["kabadiwala.shopName"],

@@ -129,7 +129,7 @@ describe("a kabadiwala's application", () => {
     });
   });
 
-  it("goes from draft to submitted, keeping a copy of what was sent", async () => {
+  it("activates a complete application and keeps a snapshot without manual review", async () => {
     const t = setup();
     const ramesh = await applicant(t);
 
@@ -155,7 +155,7 @@ describe("a kabadiwala's application", () => {
     const mine = await ramesh.query(api.applications.mine, {});
     expect(mine).toMatchObject({
       loginPhone: "+919000000001",
-      application: { id, status: "submitted", version: 1, kabadiwala: shop },
+      application: { id, status: "approved", version: 1, kabadiwala: shop },
     });
 
     const trail = await t.run(async (ctx) => ({
@@ -167,7 +167,9 @@ describe("a kabadiwala's application", () => {
     expect(trail.audit.map((row) => row.action)).toEqual([
       "profile.created",
       "application.started",
+      "org.created",
       "application.submitted",
+      "application.approved",
       "inbox.created",
       "notification.disabled",
     ]);
@@ -176,7 +178,7 @@ describe("a kabadiwala's application", () => {
     });
     expect(inbox.page).toHaveLength(1);
     expect(inbox.page[0]).toMatchObject({
-      event: "application_received",
+      event: "application_approved",
       read: false,
     });
     expect(
@@ -187,7 +189,7 @@ describe("a kabadiwala's application", () => {
     });
   });
 
-  it("is locked while in review", async () => {
+  it("locks the activated application against duplicate submission", async () => {
     const t = setup();
     const ramesh = await applicant(t);
     await ramesh.mutation(api.applications.start, {
@@ -410,6 +412,11 @@ describe("uploads", () => {
         kind: "gst",
         input: "29ABCDE1234F1Z5",
         status: "verified",
+        provider: "gstin",
+        businessName: "Peenya Plastics",
+        legalName: "Peenya Plastics",
+        address: "Plot 7, Peenya Industrial Area, Bengaluru",
+        confirmedAt: Date.now(),
         createdAt: Date.now(),
         expiresAt: Date.now() + 86_400_000,
       }),
@@ -483,7 +490,7 @@ describe("attachment cleanup races", () => {
   });
 });
 
-it("requires verification for a supplied Saathi PAN while retaining ID and selfie checks", async () => {
+it("activates Saathis after required ID and selfie uploads without PAN checks", async () => {
   const t = setup();
   const person = await applicant(t);
   const applicationId = await person.mutation(api.applications.start, {
@@ -507,18 +514,14 @@ it("requires verification for a supplied Saathi PAN while retaining ID and selfi
   );
   await attach(person, await upload(t, "pdf"), "id_proof", "identity.pdf");
   await attach(person, await upload(t, "jpeg"), "selfie", "selfie.jpg");
-  await expect(person.mutation(api.applications.submit, {})).rejects.toThrow(
-    "VALIDATION_REQUIRED",
-  );
-  await t.run((ctx) =>
-    ctx.db.insert("identityChecks", {
-      applicationId,
-      kind: "pan",
-      input: "ABCDE1234F",
-      status: "verified",
-      createdAt: Date.now(),
-      expiresAt: Date.now() + 86_400_000,
-    }),
-  );
   await person.mutation(api.applications.submit, {});
+  expect(
+    await t.run((ctx) => ctx.db.get("applications", applicationId)),
+  ).toMatchObject({ status: "approved" });
+  expect(
+    await t.run((ctx) => ctx.db.query("saathiProfiles").unique()),
+  ).toMatchObject({ applicationId, status: "active" });
+  expect(
+    await t.run((ctx) => ctx.db.query("identityCheckDays").unique()),
+  ).toBeNull();
 });

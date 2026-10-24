@@ -10,19 +10,40 @@ export function identityInputs(draft?: {
   gstRegistered?: boolean;
   gstin?: string;
 }) {
-  const pan = normalizeId(draft?.pan);
   const gst = draft?.gstRegistered ? normalizeId(draft.gstin) : "";
   if (
-    (pan && !/^[A-Z]{5}\d{4}[A-Z]$/.test(pan)) ||
-    (draft?.gstRegistered &&
-      !/^\d{2}[A-Z]{5}\d{4}[A-Z][1-9A-Z]Z[0-9A-Z]$/.test(gst)) ||
-    (pan && gst && gst.slice(2, 12) !== pan)
+    draft?.gstRegistered &&
+    !/^\d{2}[A-Z]{5}\d{4}[A-Z][1-9A-Z]Z[0-9A-Z]$/.test(gst)
   )
     throw new ConvexError("VALIDATION_REQUIRED");
-  return [
-    ...(pan ? [{ kind: "pan" as const, input: pan }] : []),
-    ...(gst ? [{ kind: "gst" as const, input: gst }] : []),
-  ];
+  return [...(gst ? [{ kind: "gst" as const, input: gst }] : [])];
+}
+
+const gstEnvelope = z.object({
+  success: z.literal(true),
+  status_code: z.literal(200),
+  data: z.object({
+    gstin: z.string(),
+    gstin_status: z.literal("Active"),
+    business_name: z.string().trim().max(500),
+    legal_name: z.string().trim().min(1).max(500),
+    address: z.string().trim().min(1).max(2000),
+  }),
+});
+
+/** Retain only the registration details the applicant must confirm. */
+export function gstBusiness(payload: unknown, input: string) {
+  const parsed = gstEnvelope.safeParse(payload);
+  if (!parsed.success || parsed.data.data.gstin !== input) return null;
+  const data = parsed.data.data;
+  const name = data.business_name || data.legal_name;
+  if (!name) return null;
+  return {
+    gstin: input,
+    businessName: name,
+    legalName: data.legal_name,
+    address: data.address,
+  };
 }
 const envelope = z.object({
   success: z.literal(true),

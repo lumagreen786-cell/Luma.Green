@@ -173,7 +173,7 @@
       "intro": "Klare Preise, gemessene Gewichte und Belege helfen allen, eine Abholung zu prüfen.",
       "verified": {
         "title": "Geprüfte Betriebe",
-        "body": "Ein Mensch prüft jeden Betrieb und jeden Saathi vor der Teilnahme."
+        "body": "Wählen Sie Ihre Rolle und schließen Sie die Registrierung ab."
       },
       "floor": {
         "title": "Faire Preise mit einer Untergrenze",
@@ -392,7 +392,7 @@
     "verification": {
       "title": "Prüfung",
       "nav": "Prüfung",
-      "body": "Ein Mensch prüft jeden Betrieb und jeden Saathi vor der Teilnahme.",
+      "body": "Wählen Sie Ihre Rolle und schließen Sie die Registrierung ab.",
       "business": "Betriebe: GST-Nummer, falls vorhanden, Fotos des Ladens oder Standorts und ein Telefongespräch.",
       "consent": "Vorverarbeiter, Recycler und Fabriken: eine gültige Genehmigung der staatlichen Umweltschutzbehörde.",
       "saathi": "Saathis: ein Lichtbildausweis und ein dazu passendes Selfie."
@@ -868,8 +868,8 @@
             "body": "Mindestens zwei Fotos oder kurze Videos Ihrer wichtigsten Maschinen und Ihres Standorts."
           },
           "review": {
-            "title": "Wir prüfen innerhalb von 12–24 Stunden",
-            "body": "Ein Mensch prüft jedes Dokument. Falls etwas fehlt, sagen wir genau, was Sie ändern müssen."
+            "title": "Registrierung abschließen",
+            "body": "Ihr Arbeitsbereich ist bereit."
           },
           "live": {
             "title": "Mit dem Handel beginnen",
@@ -1164,8 +1164,8 @@
             "body": "Tragen Sie Ihre GST-Nummer ein, falls vorhanden. Andernfalls geben Sie dies an."
           },
           "review": {
-            "title": "Wir prüfen innerhalb von 12–24 Stunden",
-            "body": "Ein Mensch prüft Ihre Angaben. Nach der Freigabe öffnet sich Ihre Übersicht."
+            "title": "Registrierung abschließen",
+            "body": "Ihr Arbeitsbereich ist bereit."
           }
         }
       },
@@ -1452,8 +1452,8 @@
             "body": "Wählerausweis, Führerschein, PAN oder maskierter Aadhaar. Niemals die vollständige Aadhaar-Nummer."
           },
           "review": {
-            "title": "Wir prüfen innerhalb von 12–24 Stunden",
-            "body": "Ein Mensch gleicht Ihr Selfie mit dem Ausweis ab. Danach können Sie Arbeit übernehmen."
+            "title": "Registrierung abschließen",
+            "body": "Ihr Arbeitsbereich ist bereit."
           }
         }
       },
@@ -1925,9 +1925,9 @@
   },
   "join": {
     "metaTitle": "Bei Luma.Green mitmachen",
-    "metaDescription": "Kabadiwalas, Vorverarbeiter, Recycler, Hersteller und Saathis in Bengaluru: Bewerben Sie sich bei Luma.Green. Ein Mensch prüft jeden Antrag, meist innerhalb von 12–24 Stunden.",
+    "metaDescription": "Wählen Sie Ihre Rolle und schließen Sie die Registrierung ab.",
     "title": "Bei Luma.Green mitmachen",
-    "lead": "Sagen Sie uns, was Sie tun. Ein Mensch prüft jeden Antrag, meist innerhalb von 12–24 Stunden.",
+    "lead": "Wählen Sie Ihre Rolle und schließen Sie die Registrierung ab.",
     "start": "Beginnen",
     "youNeed": "Das benötigen Sie",
     "homeTitle": "Recycling von zu Hause?",
@@ -1942,17 +1942,17 @@
       "yard": {
         "title": "Vorverarbeiter",
         "body": "Sie sortieren und pressen größere Materialmengen und verkaufen sie weiter.",
-        "needs": "Ihre GST-Nummer, falls vorhanden, die Umweltgenehmigung als PDF und Fotos Ihrer Maschinen."
+        "needs": "Ihre GST-Nummer, Umweltschutzunterlagen und Maschinenfotos."
       },
       "recycler": {
         "title": "Recyclingbetrieb",
         "body": "Sie verarbeiten Recyclingmaterial wieder zu Rohstoffen.",
-        "needs": "Ihre GST-Nummer, falls vorhanden, die Umweltgenehmigung als PDF und Fotos Ihrer Maschinen."
+        "needs": "Ihre GST-Nummer, Umweltschutzunterlagen und Maschinenfotos."
       },
       "manufacturer": {
         "title": "Herstellungsbetrieb",
         "body": "Sie kaufen recyceltes Material für Ihre Fabrik.",
-        "needs": "Ihre GST-Nummer, falls vorhanden, die Umweltgenehmigung als PDF und Fotos Ihrer Maschinen."
+        "needs": "Ihre GST-Nummer, Umweltschutzunterlagen und Maschinenfotos."
       },
       "saathi": {
         "title": "Saathi-Arbeitskraft",
@@ -1967,9 +1967,9 @@
       "title": "Bevor Sie beginnen",
       "lead": "Welche Angaben wir benötigen und warum.",
       "why": {
-        "kabadiwala": "Ihre Ladendaten helfen Haushalten bei der Buchung und uns bei der Prüfung des Standorts. Wir rufen einmal zur Bestätigung an.",
-        "business": "Genehmigung und Maschinenfotos zeigen Käufern und Verkäufern, dass Sie zugelassen und tätig sind. Wir gleichen sie mit dem öffentlichen Register der Umweltschutzbehörde ab.",
-        "saathi": "Lichtbildausweis und Selfie ermöglichen Ihre Identitätsprüfung, bevor Sie Haushalte oder Höfe betreten."
+        "kabadiwala": "Adresse und Öffnungszeiten Ihres Ladens. Ihre GST-Nummer, falls vorhanden.",
+        "business": "Ihre GST-Nummer, Umweltschutzunterlagen und Maschinenfotos.",
+        "saathi": "Ein Lichtbildausweis und ein Selfie."
       },
       "privacy": "Nur Sie und das Luma.Green-Team sehen Ihre Angaben und Dateien. Wir verwenden sie zur Prüfung und zur Vermittlung auf Luma.Green, niemals zum Verkauf. Sie können die Löschung verlangen.",
       "age": "Ich bin mindestens 18 Jahre alt",
@@ -1981,7 +1981,7 @@
       "saving": "Wird gespeichert…",
       "saved": "Gespeichert",
       "notSaved": "Nicht gespeichert. Prüfen Sie Ihre Verbindung.",
-      "submit": "Zur Prüfung senden",
+      "submit": "Registrierung abschließen",
       "submitting": "Wird gesendet…",
       "next": "Weiter: Dokumente",
       "back": "Zurück",
@@ -2066,7 +2066,7 @@
       "title": "Dokumente und Fotos",
       "lead": "Wir prüfen Ihre Genehmigung im öffentlichen Register der Umweltschutzbehörde.",
       "notRequired": "Unser Betrieb benötigt keine Genehmigung",
-      "notRequiredHint": "Manche Betriebe, etwa reine Papierpressbetriebe, sind ausgenommen. Begründen Sie dies, wir prüfen es.",
+      "notRequiredHint": "Bitte etwas genauer beschreiben",
       "reason": "Warum keine Genehmigung erforderlich ist",
       "board": "Welche Behörde hat sie ausgestellt?",
       "boards": {
@@ -2141,7 +2141,7 @@
       },
       "submitted": {
         "title": "Wird geprüft",
-        "lead": "Meist 12–24 Stunden. Nach Abschluss senden wir Ihnen eine SMS.",
+        "lead": "Gespeichert",
         "sentAt": "Gesendet {when}",
         "whatWeCheck": "Was wir prüfen"
       },
@@ -2151,8 +2151,8 @@
         "fix": "Ändern und erneut senden"
       },
       "approved": {
-        "title": "Sie sind verifiziert",
-        "lead": "Ihr Betrieb ist auf Luma.Green freigeschaltet.",
+        "title": "Registrierung abgeschlossen",
+        "lead": "Ihr Arbeitsbereich ist bereit.",
         "open": "Ihre Übersicht öffnen"
       },
       "rejected": {
@@ -2206,19 +2206,22 @@
       "fileTooBig": "Diese Datei ist zu groß",
       "uploadFailed": "Hochladen fehlgeschlagen. Erneut versuchen.",
       "generic": "Etwas ist schiefgelaufen. Erneut versuchen.",
-      "pan": "Prüfen Sie die PAN- und GST-Angaben und versuchen Sie es erneut."
+      "pan": "Suchen Sie Ihre GST-Nummer und bestätigen Sie Ihr Unternehmen."
     },
     "identity": {
       "pan": "PAN (freiwillig)",
       "disclosure": "Mit Zustimmen und prüfen erlauben Sie, diese Kennungen zur Prüfung an Surepass zu senden.",
       "check": "Zustimmen und prüfen",
       "checking": "Prüfung läuft…",
-      "verified": "Kennungen geprüft. Die Freigabe durch die Verwaltung ist weiter erforderlich.",
+      "verified": "Unternehmen bestätigt.",
       "limit": "Ihr Konto hat das tägliche Prüflimit erreicht. Versuchen Sie es morgen.",
       "unavailable": "Prüfung nicht verfügbar. Ihre Antworten sind gespeichert.",
-      "required": "Prüfen Sie die PAN- und GST-Angaben und versuchen Sie es erneut.",
+      "required": "Suchen Sie Ihre GST-Nummer und bestätigen Sie Ihr Unternehmen.",
       "pending": "Eine Prüfung läuft bereits. Bitte warten.",
-      "saveFailed": "Nicht gespeichert. Prüfen Sie Ihre Verbindung."
+      "saveFailed": "Nicht gespeichert. Prüfen Sie Ihre Verbindung.",
+      "previewTitle": "Geschäftsdaten bestätigen",
+      "confirm": "Unternehmen bestätigen",
+      "confirming": "Bestätigung läuft…"
     }
   },
   "app": {

@@ -69,3 +69,28 @@ conditional on declared registration, with optional PAN. Households have neither
 identity field. No changes to Saathi work choices, location or uploads are in scope.
 Review accepted; retain existing phone verification, proof binding, per-account
 20/day cap and role/access checks. Reuse translated verification controls.
+
+## Superseding GST business-confirmation flow — 25 October 2026
+
+Reviewed and accepted [the revised contract](../api/surepass-validation.md) and
+[JSON schemas](../api/surepass-validation.schema.json) before implementation.
+
+1. Remove PAN from every applicant form. Saathi keeps ID/selfie and all work
+   fields. Household fields stay unchanged. Business GST remains mandatory;
+   shop GST remains conditional on registration.
+2. Add owned-draft `lookupGst` with consent and strict active exact-GSTIN provider
+   details validation; persist bounded metadata in additive `provider:"gstin"`
+   proof. Keep per-account20/day reservations, dedup/cache, timeout and no retries.
+3. Add `confirmGst` rechecking owned current input/proof, recording confirmedAt,
+   persisting canonical bounded name/address. Legacy proofs cannot pass. Old
+   verify is compatibility only and ignoresPAN; it cannot auto-confirm.
+4. Frontend: GSTIN entry → explicit lookup → provider name/address preview →
+   explicit business confirmation → remaining form. Mirror confirmed metadata;
+   retain entered values and honest errors. Translate new controls in all locales.
+5. New canonical submissions activate on the server without manual onboarding
+   approval. Preserve existing records, review controls and all other admin/auth
+   security. Remove applicant-facing promises of manual approval for new signup.
+6. Test exact result parsing, invalid/inactive/malformed metadata, auth/quota,
+   cache vs legacy proof, stale confirm and changed input, successful activation,
+   role requirements and retained Saathi uploads. Inspect new browser flow across
+   themes, widths and scripts. Do not represent fixtures as paid provider proof.

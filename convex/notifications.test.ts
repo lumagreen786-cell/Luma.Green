@@ -304,7 +304,7 @@ it("requires an explicit English fallback and disables invalid settings", () => 
   }
 });
 
-it("writes received and decision events from actual application mutations", async () => {
+it("notifies automatic activation once and rejects duplicate submissions", async () => {
   const w = await world();
   const user = await signIn(w.t, {
     email: "applicant@phone.luma.green",
@@ -331,34 +331,14 @@ it("writes received and decision events from actual application mutations", asyn
     },
   });
   await user.mutation(api.applications.submit, {});
-  vi.stubEnv("ADMIN_EMAIL", "admin@luma.test");
-  const admin = await signIn(w.t, {
-    email: "admin@luma.test",
-    twoFactorEnabled: true,
-  });
-  await admin.mutation(api.identity.ensureProfile, { locale: "en" });
-  await admin.mutation(api.review.decide, {
-    applicationId,
-    decision: "changes",
-    note: "Please confirm your opening hours.",
-  });
   const rows = await w.forApplication(applicationId);
   expect(rows.map((row) => [row.event, row.locale, row.revision])).toEqual([
-    ["application_received", "kn", 1],
-    ["application_changes_requested", "kn", 1],
+    ["application_approved", "kn", 1],
   ]);
-  await user.mutation(api.applications.submit, {});
-  await admin.mutation(api.review.decide, {
-    applicationId,
-    decision: "approve",
-  });
-  const finalRows = await w.forApplication(applicationId);
-  expect(finalRows.map((row) => row.event)).toEqual([
-    "application_received",
-    "application_changes_requested",
-    "application_received",
-    "application_approved",
-  ]);
+  await expect(user.mutation(api.applications.submit, {})).rejects.toThrow(
+    "NOT_EDITABLE",
+  );
+  expect(await w.forApplication(applicationId)).toHaveLength(1);
 });
 
 it("limits a recipient to 20 attempts per rolling day, including unknown outcomes", async () => {

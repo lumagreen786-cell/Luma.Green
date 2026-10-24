@@ -35,7 +35,7 @@ import {
   FormHeader,
   SubmitBar,
 } from "./form-parts";
-import { IdentityCheck } from "./identity-check";
+import { type GstDetails, IdentityCheck } from "./identity-check";
 import { submitErrorKey, type SubmitFailure } from "./submit-error";
 import { useAutosave, withoutUndefined } from "./use-autosave";
 import type { Application } from "./use-mine";
@@ -47,7 +47,6 @@ function toDraft(values: Partial<Values>): Draft {
   return withoutUndefined({
     ownerName: values.ownerName,
     shopName: values.shopName,
-    pan: values.pan?.trim().toUpperCase() ?? "",
     gstRegistered: values.gstRegistered,
     gstin: cleanGstin(values.gstRegistered, values.gstin),
     address: values.address,
@@ -75,6 +74,7 @@ export function KabadiwalaForm({
   const submit = useMutation(api.applications.submit);
   const [failure, setFailure] = useState<SubmitFailure | null>(null);
   const draft = application.kabadiwala ?? {};
+  const [confirmedGstin, setConfirmedGstin] = useState<string | null>(null);
 
   const {
     control,
@@ -82,13 +82,14 @@ export function KabadiwalaForm({
     handleSubmit,
     trigger,
     getFieldState,
+    getValues,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<Values>({
     resolver: zodResolver(kabadiwalaSchema),
     defaultValues: {
       ownerName: draft.ownerName ?? "",
       shopName: draft.shopName ?? "",
-      pan: draft.pan ?? "",
       gstRegistered: draft.gstRegistered,
       gstin: draft.gstin ?? "",
       address: draft.address ?? "",
@@ -119,6 +120,70 @@ export function KabadiwalaForm({
     }
   }
 
+  function acceptBusiness(details: GstDetails, isRestored = false) {
+    setValue("shopName", details.businessName.slice(0, 80), {
+      shouldValidate: true,
+    });
+    if (
+      details.address.length >= 5 &&
+      details.address.length <= 200 &&
+      (!isRestored || !getValues("address"))
+    )
+      setValue("address", details.address, { shouldValidate: true });
+    setConfirmedGstin(details.gstin);
+  }
+  const currentGstin = values.gstin?.trim().toUpperCase() ?? "";
+
+  if (
+    values.gstRegistered &&
+    (confirmedGstin !== currentGstin || !currentGstin)
+  )
+    return (
+      <div className="space-y-6">
+        <FormHeader
+          eyebrow={t("roles.kabadiwala.title")}
+          title={t("form.gstin")}
+          saveState={saveState}
+        />
+        <FieldSet id="gstRegistered" legend={t("form.gstQuestion")}>
+          <Controller
+            control={control}
+            name="gstRegistered"
+            render={({ field }) => (
+              <YesNo
+                name="gstRegistered"
+                isYes={field.value}
+                onChange={field.onChange}
+              />
+            )}
+          />
+        </FieldSet>
+        <FormField
+          id="gstin"
+          label={t("form.gstin")}
+          hint={t("form.gstinHint")}
+          error={errors.gstin?.message}
+        >
+          <Input
+            id="gstin"
+            dir="ltr"
+            autoCapitalize="characters"
+            maxLength={15}
+            className="h-12 font-mono text-base uppercase"
+            {...register("gstin")}
+          />
+        </FormField>
+        <IdentityCheck
+          applicationId={application.id}
+          gstin={values.gstin}
+          onConfirmed={acceptBusiness}
+          save={async () => {
+            await saveDraft({ kabadiwala: toDraft(getValues()) });
+          }}
+        />
+      </div>
+    );
+
   const phoneErrors = errors.phones?.map?.((phone) => ({
     number: phone?.number?.message,
     label: phone?.label?.message,
@@ -147,7 +212,7 @@ export function KabadiwalaForm({
       stages={[
         {
           title: t("kabadiwala.ownerName"),
-          fields: ["ownerName", "shopName", "pan", "gstRegistered", "gstin"],
+          fields: ["ownerName", "shopName", "gstRegistered", "gstin"],
           content: (
             <>
               <div className="grid gap-6 sm:grid-cols-2">
@@ -176,6 +241,7 @@ export function KabadiwalaForm({
                 >
                   <Input
                     id="shopName"
+                    readOnly={values.gstRegistered}
                     autoComplete="organization"
                     className="h-12 text-base"
                     aria-invalid={errors.shopName ? true : undefined}
@@ -187,23 +253,6 @@ export function KabadiwalaForm({
                   />
                 </FormField>
               </div>
-
-              <FormField
-                id="pan"
-                label={t("identity.pan")}
-                error={errors.pan?.message}
-              >
-                <Input
-                  id="pan"
-                  dir="ltr"
-                  autoCapitalize="characters"
-                  maxLength={10}
-                  className="h-12 font-mono text-base uppercase"
-                  aria-invalid={errors.pan ? true : undefined}
-                  aria-describedby={describedBy("pan", errors.pan?.message)}
-                  {...register("pan")}
-                />
-              </FormField>
 
               <FieldSet
                 id="gstRegistered"
@@ -247,8 +296,8 @@ export function KabadiwalaForm({
                 </FormField>
               ) : null}
               <IdentityCheck
+                onConfirmed={acceptBusiness}
                 applicationId={application.id}
-                pan={values.pan}
                 gstin={values.gstRegistered ? values.gstin : undefined}
                 save={async () => {
                   await saveDraft({ kabadiwala: toDraft(values) });
@@ -433,7 +482,6 @@ export function KabadiwalaForm({
           secondary={
             <IdentityCheck
               applicationId={application.id}
-              pan={values.pan}
               gstin={values.gstRegistered ? values.gstin : undefined}
               save={async () => {
                 await saveDraft({ kabadiwala: toDraft(values) });
