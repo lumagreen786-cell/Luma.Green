@@ -1,8 +1,8 @@
 # Every PR needs a review from the owner. Add teammates here as they join.
-*                       @ungaaaabungaaa
+*                       @lumagreen786-cell
 
 # Extra care: these define money, carbon and the deployment gate.
-/convex/                @ungaaaabungaaa
-/.github/workflows/     @ungaaaabungaaa
-/AGENTS.md              @ungaaaabungaaa
-/.claude/skills/        @ungaaaabungaaa
+/convex/                @lumagreen786-cell
+/.github/workflows/     @lumagreen786-cell
+/AGENTS.md              @lumagreen786-cell
+/.claude/skills/        @lumagreen786-cell

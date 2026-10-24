@@ -1,3 +1,49 @@
+## Account migration — 24 October 2026
+
+The owner requested migration to new GitHub, Convex and Vercel accounts. This
+section supersedes historical account and deployment targets below. Preserve
+historical records; do not deploy to the old targets during routine work.
+
+- GitHub: `lumagreen786-cell/Luma.Green`. All six source branch heads matched
+  the old repository after copying. `origin` points to the new repository;
+  `legacy-personal` retains the old repository for recovery. The new repository
+  still needs owner-level branch protection configuration.
+- Convex team/project: `muhammad-saif-ulla-c-m-252fb:luma-green`.
+- Development: `proper-caterpillar-111.ap-southeast-2.convex.cloud` and the
+  matching `.convex.site` HTTP actions address. Local `.env.local` selects it.
+- Production: `astute-peccary-795.ap-southeast-2.convex.cloud` and the matching
+  `.convex.site` address. The existing schema, indexes, functions and Better Auth
+  component deployed to both new environments without a data import or seed.
+- Vercel: team `luma-0f95`, project `luma-green`; website
+  `https://luma-green-ten.vercel.app`. The new project imports the new GitHub
+  repository. The ignored local Vercel link selects the new team/project.
+- Production frontend variables select only the new production Convex URLs and
+  website address. Production Convex `SITE_URL` uses that website address;
+  development uses `http://localhost:3000`. Both environments have distinct fresh
+  authentication secrets. Existing administrator identity and OS Digital OTP
+  settings are migrated privately; no credential values belong in this file.
+- `PUBLIC_DATA_ENABLED=false` keeps automatic data imports off, as requested.
+  Do not enable imports, seed records, or send an OTP as part of migration checks.
+  Unused old Vercel keys do not establish a configured backend service. Email,
+  payments, R2, telemetry and push remain subject to their existing setup gates.
+
+Before the website build, read-only verification found all 86 application and
+seven Better Auth tables empty in each new deployment, with no stored files.
+Vercel production deployment `dpl_24uj14htiSYzL5vbwve82mkR8LYD` published
+commit `8dde08d2e0338292b74c926bc0d6c3f70eaa4aa2`. Homepage, member/admin
+login and Arabic routes returned HTTP 200. Public browser bundles contain only
+`astute-peccary-795`, with no old or development deployment names. The canonical
+URL uses the new website address. A current desktop capture was visually checked;
+no browser errors were reported. Local `pnpm check` passed all 2,480 web/backend
+and 73 native compatibility tests, lint and types. No live OTP
+or authenticator acceptance is established. The owner will configure Cloudflare
+and the custom domain separately. PAN/GST APIs and provider-specific IP
+allowlisting are next steps; they are not configured by this migration. The old repository, hosting and accounts have
+not been deleted. Keep them until migration verification and cleanup review.
+
+Guide/Word changes remain deferred; no user-guide update was requested. Native
+apps remain on hold. This migration changes no application flow or native code.
+
 ## Latest household recycling and homepage direction — 16 October 2026
 
 The owner reviewed localhost and authorized commit and push after testing. This
