@@ -53,10 +53,12 @@ vi.mock("@/i18n/navigation", () => ({
     href: string | { pathname: string; query?: Record<string, string> };
     children: ReactNode;
   }) => {
-    const url =
+    const query =
       typeof href === "string"
-        ? href
-        : `${href.pathname}?${new URLSearchParams(href.query).toString()}`;
+        ? ""
+        : new URLSearchParams(href.query).toString();
+    const suffix = query ? `?${query}` : "";
+    const url = typeof href === "string" ? href : `${href.pathname}${suffix}`;
     return (
       <a href={url} {...props}>
         {children}
@@ -112,10 +114,19 @@ describe("/help", () => {
         screen.getByRole("link", { name: t(`roles.${role}.name`) }),
       ).toHaveAttribute("href", `/help/${role}`);
     }
-    expect(screen.getByRole("link", { name: /Call/ })).toHaveAttribute(
+    expect(
+      screen.queryByRole("link", { name: /Call/ }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("link", { name: /WhatsApp/ }),
+    ).not.toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Write to us/ })).toHaveAttribute(
       "href",
-      "tel:+918000000000",
+      "/help/contact",
     );
+    expect(
+      screen.getByText("Phone and WhatsApp support are not available."),
+    ).toBeInTheDocument();
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
   });
 });
@@ -225,14 +236,23 @@ describe("/help/contact", () => {
     expect(meta.alternates?.canonical).toBe("/help/contact");
   });
 
-  it("offers a call, WhatsApp, the hours and how soon we reply", async () => {
+  it("keeps the message form and marks unconfigured phone contacts unavailable", async () => {
     show(await HelpContactPage());
     expect(
       screen.getByRole("heading", { level: 1, name: "Contact us" }),
     ).toBeInTheDocument();
     expect(
-      screen.getAllByRole("link", { name: /WhatsApp us/ })[0],
-    ).toHaveAttribute("href", "https://wa.me/918000000000");
+      screen.queryByRole("link", { name: /Call/ }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("link", { name: /WhatsApp/ }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "Send a message" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("Phone and WhatsApp support are not available."),
+    ).toBeInTheDocument();
     expect(
       screen.getByText("Monday to Saturday, 9 am to 7 pm"),
     ).toBeInTheDocument();
@@ -240,7 +260,11 @@ describe("/help/contact", () => {
       screen.getByText("We reply within one working day."),
     ).toBeInTheDocument();
     expect(
-      screen.getAllByText("Prototype: these are sample numbers."),
-    ).toHaveLength(2);
+      screen.queryByText("Prototype: these are sample numbers."),
+    ).not.toBeInTheDocument();
+    expect(screen.getByText("Please try again later.")).toBeInTheDocument();
+    expect(
+      screen.queryByText("Call or WhatsApp us instead. We're happy to help."),
+    ).not.toBeInTheDocument();
   });
 });

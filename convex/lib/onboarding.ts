@@ -80,6 +80,15 @@ export function isGstin(value: string | undefined): boolean {
 const TIME = /^([01]\d|2[0-3]):[0-5]\d$/;
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 
+function isCalendarDate(value: string): boolean {
+  if (!ISO_DATE.test(value)) return false;
+  const parsed = new Date(`${value}T00:00:00.000Z`);
+  return (
+    Number.isFinite(parsed.getTime()) &&
+    parsed.toISOString().slice(0, 10) === value
+  );
+}
+
 const text = (min: number, max: number) =>
   z
     .string({ error: "required" })
@@ -222,7 +231,7 @@ export function documentsSchema(today: string) {
       if ((form.consentNumber?.trim().length ?? 0) < 3) {
         issue("consentNumber", "required");
       }
-      if (!form.validUntil || !ISO_DATE.test(form.validUntil)) {
+      if (!form.validUntil || !isCalendarDate(form.validUntil)) {
         issue("validUntil", "date");
       } else if (form.validUntil <= today) {
         issue("validUntil", "expired");

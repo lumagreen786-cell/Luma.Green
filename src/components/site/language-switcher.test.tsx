@@ -12,6 +12,14 @@ vi.mock("@/i18n/navigation", () => ({
   useRouter: () => ({ replace }),
 }));
 
+function languageContent(locale: "pt" | "en") {
+  return (
+    <NextIntlClientProvider locale={locale} messages={messages}>
+      <LanguageSwitcher />
+    </NextIntlClientProvider>
+  );
+}
+
 afterEach(() => {
   window.history.replaceState(null, "", "/");
   replace.mockReset();
@@ -61,5 +69,28 @@ describe("LanguageSwitcher", () => {
     await userEvent.keyboard("{Escape}");
     expect(trigger).toHaveFocus();
     expect(replace).not.toHaveBeenCalled();
+  });
+
+  it("switches to English after an external translator replaces visible language text", async () => {
+    const view = render(languageContent("pt"));
+    const trigger = screen.getByRole("button", { name: "Language: Português" });
+    const label = trigger.querySelector("span[lang]");
+    const text = label?.firstChild;
+    if (!text) throw new Error("Missing language text");
+    const translated = document.createElement("span");
+    translated.textContent = "Portuguese";
+    text.replaceWith(translated);
+
+    await userEvent.click(trigger);
+    await userEvent.click(
+      screen.getByRole("menuitemradio", { name: "English" }),
+    );
+    expect(replace).toHaveBeenCalledWith("/help", { locale: "en" });
+    expect(() => {
+      view.rerender(languageContent("en"));
+    }).not.toThrow();
+    expect(
+      screen.getByRole("button", { name: "Language: English" }),
+    ).toHaveTextContent("English");
   });
 });

@@ -41,7 +41,7 @@ import {
   SUPPORT_TOPICS,
 } from "./support-api";
 
-/** The contact form, or a note to call instead when there's no backend. */
+/** The contact form, or an unavailable state when there's no backend. */
 export function ContactForm() {
   return isConvexConfigured ? <ContactMessageForm /> : <ContactUnavailable />;
 }

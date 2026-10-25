@@ -6,7 +6,7 @@ import {
   ContactForm,
   ContactFormSkeleton,
 } from "@/components/help/contact-form";
-import { ContactPanel, QuickContact } from "@/components/help/contact-panel";
+import { ContactPanel } from "@/components/help/contact-panel";
 import { HelpBreadcrumbs } from "@/components/help/help-breadcrumbs";
 import { HelpHero } from "@/components/help/help-hero";
 import { Container } from "@/components/site/container";
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 }
 
-/** `/help/contact`: call, WhatsApp, or send the team a message. */
+/** `/help/contact`: send the team a message and check support availability. */
 export default async function HelpContactPage() {
   const t = await getTranslations("help");
 
@@ -47,9 +47,7 @@ export default async function HelpContactPage() {
         }
         title={t("contact.title")}
         lead={t("contact.lead")}
-      >
-        <QuickContact />
-      </HelpHero>
+      />
 
       <Container className="grid gap-8 py-6 lg:grid-cols-[minmax(0,1fr)_18rem] lg:py-8">
         <section

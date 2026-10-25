@@ -8,5 +8,8 @@ export const routing = defineRouting({
   // `/` serves English, `/ta` serves Tamil. Keeps the canonical URL clean for SEO
   // while every other locale gets a stable, indexable prefix.
   localePrefix: "as-needed",
-  localeDetection: true,
+  // The URL owns each tab's language. A shared locale cookie or browser
+  // preference must not redirect an English tab after another tab changes.
+  localeDetection: false,
+  localeCookie: false,
 });

@@ -705,6 +705,75 @@ describe("approving", () => {
       admin.mutation(api.review.decide, { applicationId, decision: "approve" }),
     ).rejects.toThrow(/INCOMPLETE_APPLICATION/);
   });
+
+  it("restores the original business after ownership transfer without granting access to its former owner", async () => {
+    const t = await demoWorld();
+    const application = await applicationOf(t, SHOP_APPLICANT);
+    const admin = await signInAdmin(t);
+    await admin.mutation(api.review.decide, {
+      applicationId: application._id,
+      decision: "approve",
+    });
+    const { orgId, successorId } = await t.run(async (ctx) => {
+      const org = await ctx.db
+        .query("orgs")
+        .withIndex("by_owner", (q) =>
+          q.eq("ownerProfileId", application.profileId),
+        )
+        .unique();
+      if (!org) throw new Error("Missing approved business");
+      const successorId = await ctx.db.insert("profiles", {
+        authUserId: "successor-owner",
+        kind: "member",
+        locale: "en",
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+      });
+      const formerMembership = await ctx.db
+        .query("memberships")
+        .withIndex("by_profile_org", (q) =>
+          q.eq("profileId", application.profileId).eq("orgId", org._id),
+        )
+        .unique();
+      if (!formerMembership) throw new Error("Missing former owner");
+      await ctx.db.delete("memberships", formerMembership._id);
+      await ctx.db.insert("memberships", {
+        orgId: org._id,
+        profileId: successorId,
+        role: "owner",
+        createdAt: Date.now(),
+      });
+      await ctx.db.patch("orgs", org._id, {
+        ownerProfileId: successorId,
+        status: "suspended",
+      });
+      await ctx.db.patch("applications", application._id, {
+        status: "suspended",
+      });
+      return { orgId: org._id, successorId };
+    });
+    await admin.mutation(api.review.decide, {
+      applicationId: application._id,
+      decision: "approve",
+    });
+    const businesses = await t.run(async (ctx) => {
+      const orgs = await ctx.db.query("orgs").collect();
+      return orgs.filter((org) => org.applicationId === application._id);
+    });
+    expect(businesses).toMatchObject([
+      { _id: orgId, ownerProfileId: successorId, status: "active" },
+    ]);
+    expect(
+      await t.run((ctx) =>
+        ctx.db
+          .query("memberships")
+          .withIndex("by_profile", (q) =>
+            q.eq("profileId", application.profileId),
+          )
+          .collect(),
+      ),
+    ).toEqual([]);
+  });
 });
 
 describe("asking for changes and rejecting", () => {

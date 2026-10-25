@@ -736,7 +736,7 @@
     },
     "contact": {
       "metaTitle": "联系支持",
-      "metaDescription": "通过电话、WhatsApp或简短消息向Luma.Green团队咨询。我们会在一个工作日内回复。",
+      "metaDescription": "向Luma.Green团队发送消息。我们会在一个工作日内回复。",
       "title": "联系我们",
       "lead": "工作人员会阅读每条消息。请用自己的话说明问题。",
       "formHeading": "发送消息",
@@ -786,13 +786,13 @@
         "rateLimited": "此号码发送的消息过多。请一小时后重试。"
       },
       "unavailableTitle": "此处暂不支持发送消息",
-      "unavailableBody": "请改用电话或WhatsApp联系我们，我们会提供帮助。",
+      "unavailableBody": "请稍后重试。",
       "otherWays": "其他联系方式",
       "callTitle": "致电我们",
       "whatsappTitle": "通过WhatsApp联系",
       "hoursTitle": "服务时间",
       "replyTitle": "回复时间",
-      "sampleNumbers": "原型演示：这些是示例号码。"
+      "phoneUnavailable": "电话和WhatsApp支持暂不可用。"
     },
     "guides": {
       "signIn": {

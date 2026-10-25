@@ -6,6 +6,7 @@ import {
   maskPhone,
   normalizeIndianMobile,
   phoneEmail,
+  verifiedIndianMobile,
 } from "./phone";
 
 describe("normalizeIndianMobile", () => {
@@ -37,6 +38,20 @@ describe("isIndianMobile", () => {
     expect(isIndianMobile("+919876543210")).toBe(true);
     expect(isIndianMobile("9876543210")).toBe(false);
     expect(isIndianMobile("+915876543210")).toBe(false);
+  });
+});
+
+describe("verifiedIndianMobile", () => {
+  it.each([false, undefined, null])(
+    "rejects a phone with verification %s",
+    (verified) => {
+      expect(verifiedIndianMobile("+919876543210", verified)).toBeNull();
+    },
+  );
+  it("normalizes only a verified valid phone", () => {
+    expect(verifiedIndianMobile("98765 43210", true)).toBe("+919876543210");
+    expect(verifiedIndianMobile("invalid", true)).toBeNull();
+    expect(verifiedIndianMobile(undefined, true)).toBeNull();
   });
 });
 

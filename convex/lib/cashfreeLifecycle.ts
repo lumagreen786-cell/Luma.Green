@@ -155,6 +155,8 @@ export async function terminalUnpaid(
 ) {
   if (order.mode !== "live") return;
   const row = await financial(ctx, order.tradeId);
+  // Terminal order evidence cannot resolve an independent refund or review hold.
+  if (row?.state === "hold") return;
   if (
     order.successPaymentId ||
     order.collection !== "pending" ||

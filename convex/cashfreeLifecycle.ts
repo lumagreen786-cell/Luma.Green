@@ -32,6 +32,7 @@ import {
   vRefund,
   vSettlement,
 } from "./lib/cashfreeLifecycleSchema";
+import { stockGramsAfter } from "./lib/inventory";
 import { requireCurrentTradeMaterial } from "./lib/marketEligibility";
 import { requireOrg } from "./lib/workspace";
 const policyView = v.object({ ...policyFields, createdAt: v.number() });
@@ -248,14 +249,9 @@ export const act = mutation({
       )
       .unique();
     const delta = args.action === "dispatch" ? -trade.grams : trade.grams;
-    const grams = (inventory?.grams ?? 0) + delta;
-    if (
-      !Number.isSafeInteger(trade.grams) ||
-      trade.grams <= 0 ||
-      !Number.isSafeInteger(grams) ||
-      grams < 0
-    )
+    if (!Number.isSafeInteger(trade.grams) || trade.grams <= 0)
       throw new ConvexError("INVALID_WEIGHT");
+    const grams = stockGramsAfter(inventory?.grams ?? 0, delta);
     if (inventory)
       await ctx.db.patch("inventory", inventory._id, {
         grams,
@@ -302,7 +298,11 @@ export const requestCancellation = mutation({
     const row = await financial(ctx, trade._id);
     if (row?.state === "cancelled" || row?.state === "cancellation_pending")
       return null;
-    if (trade.status !== "accepted" || row?.collection === "live_confirmed")
+    if (
+      trade.status !== "accepted" ||
+      row?.collection === "live_confirmed" ||
+      row?.state === "hold"
+    )
       throw new ConvexError("REVIEW_REQUIRED");
     const orders = await ctx.db
       .query("cashfreeOrders")

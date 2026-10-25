@@ -6,7 +6,6 @@ import { requireApplicationParent } from "./applicationAccess";
 import { orgDraftFrom, PILOT_CITY, saathiDraftFrom, slugify } from "./review";
 import { MAX_WORKSPACES } from "./workspaceRoles";
 
-const MAX_LISTED = 200;
 const MAX_SLUG_TRIES = 50;
 const MAX_MATERIALS = 200;
 
@@ -82,11 +81,11 @@ async function openBusiness(
   const draft = orgDraftFrom(application);
   if (!draft) throw new ConvexError("INCOMPLETE_APPLICATION");
 
-  const owned = await ctx.db
+  // The application identifies the business even after its owner changes.
+  const existing = await ctx.db
     .query("orgs")
-    .withIndex("by_owner", (q) => q.eq("ownerProfileId", application.profileId))
-    .take(MAX_LISTED);
-  const existing = owned.find((org) => org.applicationId === application._id);
+    .withIndex("by_application", (q) => q.eq("applicationId", application._id))
+    .unique();
   if (existing) {
     await ctx.db.patch("orgs", existing._id, {
       status: "active",
@@ -95,19 +94,19 @@ async function openBusiness(
     return existing._id;
   }
 
+  const memberships = await ctx.db
+    .query("memberships")
+    .withIndex("by_profile", (q) => q.eq("profileId", application.profileId))
+    .take(MAX_WORKSPACES);
+  if (memberships.length >= MAX_WORKSPACES) throw new ConvexError("TEAM_LIMIT");
   if (application.organizationId) {
-    const memberships = await ctx.db
-      .query("memberships")
-      .withIndex("by_profile", (q) => q.eq("profileId", application.profileId))
-      .take(MAX_WORKSPACES);
     const sites = await ctx.db
       .query("orgs")
       .withIndex("by_organization", (q) =>
         q.eq("organizationId", application.organizationId),
       )
       .take(100);
-    if (memberships.length >= MAX_WORKSPACES || sites.length >= 100)
-      throw new ConvexError("TEAM_LIMIT");
+    if (sites.length >= 100) throw new ConvexError("TEAM_LIMIT");
   }
   const slug = await uniqueSlug(ctx, draft.name, draft.kind);
   const orgId = await ctx.db.insert("orgs", {

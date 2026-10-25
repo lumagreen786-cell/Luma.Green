@@ -948,16 +948,6 @@ export function faqAnchor(key: FaqKey): string {
 
 // --- Contact ------------------------------------------------------------------------
 
-/**
- * Placeholder numbers until the support line is live. One place to change
- * them; `tel` and `whatsapp` are what the links dial.
- */
-export const SUPPORT_CONTACT = {
-  display: "+91 80 0000 0000",
-  tel: "+918000000000",
-  whatsapp: "https://wa.me/918000000000",
-} as const;
-
 /** The contact form's topic when someone arrives from a guide or question. */
 const SUPPORT_TOPIC_FOR: Record<HelpTopic, SupportTopic> = {
   start: "account",

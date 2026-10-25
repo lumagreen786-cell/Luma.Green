@@ -1,0 +1,1141 @@
+{
+  "note": "Current public UI from the local production build on port 3107. Backend intentionally unconfigured. Screens show support availability and unavailable message-form state. No provider execution, authenticated support submission, live deployment, or customer data is proved. Contact-strip crops retain 12px of the real surrounding page gutter to show Arabic glyph overhang.",
+  "captures": [
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 390,
+      "area": "strip",
+      "path": "strip-en-light-390.png",
+      "url": "http://localhost:3107/help",
+      "capturedAt": "2026-10-25T12:53:15.109Z",
+      "sha256": "002a269dacc71730e4b83aa7793cebeabf3e3e08027b880cd7519f691f48088b",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 49
+        }
+      ],
+      "measurements": {
+        "elementWidth": 350,
+        "elementHeight": 306,
+        "documentWidth": 390,
+        "viewportWidth": 390,
+        "direction": "ltr",
+        "theme": "light",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 390,
+      "area": "form",
+      "path": "form-en-light-390.png",
+      "url": "http://localhost:3107/help/contact",
+      "capturedAt": "2026-10-25T12:53:15.301Z",
+      "sha256": "cabbd7e8dc67c70cd66e33f6889cd6e0ad99493cef8879171d9b01a83d924b66",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 23
+        }
+      ],
+      "measurements": {
+        "elementWidth": 390,
+        "elementHeight": 563.78125,
+        "documentWidth": 390,
+        "viewportWidth": 390,
+        "direction": "ltr",
+        "theme": "light",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 768,
+      "area": "strip",
+      "path": "strip-en-light-768.png",
+      "url": "http://localhost:3107/help",
+      "capturedAt": "2026-10-25T12:53:15.510Z",
+      "sha256": "71027a05d1d0a9f54194967af2420d5b097bc70a7c23185c594680bde5c4c755",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 50
+        }
+      ],
+      "measurements": {
+        "elementWidth": 704,
+        "elementHeight": 280,
+        "documentWidth": 768,
+        "viewportWidth": 768,
+        "direction": "ltr",
+        "theme": "light",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 768,
+      "area": "form",
+      "path": "form-en-light-768.png",
+      "url": "http://localhost:3107/help/contact",
+      "capturedAt": "2026-10-25T12:53:15.699Z",
+      "sha256": "90b3786443a1ed43bdbf94e183de66516cae234695045af8723e069cc3f4bb2b",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 23
+        }
+      ],
+      "measurements": {
+        "elementWidth": 768,
+        "elementHeight": 514.78125,
+        "documentWidth": 768,
+        "viewportWidth": 768,
+        "direction": "ltr",
+        "theme": "light",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "area": "strip",
+      "path": "strip-en-light-1440.png",
+      "url": "http://localhost:3107/help",
+      "capturedAt": "2026-10-25T12:53:15.942Z",
+      "sha256": "adb70e6fab7af35e9839640fa750d6f949214c12caa9ab975996ecc9fa142b67",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 50
+        }
+      ],
+      "measurements": {
+        "elementWidth": 1184,
+        "elementHeight": 172,
+        "documentWidth": 1440,
+        "viewportWidth": 1440,
+        "direction": "ltr",
+        "theme": "light",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "area": "form",
+      "path": "form-en-light-1440.png",
+      "url": "http://localhost:3107/help/contact",
+      "capturedAt": "2026-10-25T12:53:16.142Z",
+      "sha256": "476e355c077b338a7122ada1561e7f1d35ebe1615014edf2f5a924df7ecd55e8",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 23
+        }
+      ],
+      "measurements": {
+        "elementWidth": 1280,
+        "elementHeight": 312.78125,
+        "documentWidth": 1440,
+        "viewportWidth": 1440,
+        "direction": "ltr",
+        "theme": "light",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 390,
+      "area": "strip",
+      "path": "strip-en-dark-390.png",
+      "url": "http://localhost:3107/help",
+      "capturedAt": "2026-10-25T12:53:16.368Z",
+      "sha256": "d3d545fe93a1165ff9b05b78a5971dc5595f25561a961c11b4351af0c5dc2d8e",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 49
+        }
+      ],
+      "measurements": {
+        "elementWidth": 350,
+        "elementHeight": 306,
+        "documentWidth": 390,
+        "viewportWidth": 390,
+        "direction": "ltr",
+        "theme": "dark",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 390,
+      "area": "form",
+      "path": "form-en-dark-390.png",
+      "url": "http://localhost:3107/help/contact",
+      "capturedAt": "2026-10-25T12:53:16.546Z",
+      "sha256": "a0650933dd0811ca60104b3a500347dff7b4aeaf1f450d700a343e911ad47bc7",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 23
+        }
+      ],
+      "measurements": {
+        "elementWidth": 390,
+        "elementHeight": 563.78125,
+        "documentWidth": 390,
+        "viewportWidth": 390,
+        "direction": "ltr",
+        "theme": "dark",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 768,
+      "area": "strip",
+      "path": "strip-en-dark-768.png",
+      "url": "http://localhost:3107/help",
+      "capturedAt": "2026-10-25T12:53:16.758Z",
+      "sha256": "1e5e0434ea56c71ad6e61f42bff952c4913628c2a8da3aaf8e9ddf23a4d99737",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 50
+        }
+      ],
+      "measurements": {
+        "elementWidth": 704,
+        "elementHeight": 280,
+        "documentWidth": 768,
+        "viewportWidth": 768,
+        "direction": "ltr",
+        "theme": "dark",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 768,
+      "area": "form",
+      "path": "form-en-dark-768.png",
+      "url": "http://localhost:3107/help/contact",
+      "capturedAt": "2026-10-25T12:53:16.948Z",
+      "sha256": "b45845f8120d759afe326ecb84fa0154a83308a93f2f43b3f949a644758e154e",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 23
+        }
+      ],
+      "measurements": {
+        "elementWidth": 768,
+        "elementHeight": 514.78125,
+        "documentWidth": 768,
+        "viewportWidth": 768,
+        "direction": "ltr",
+        "theme": "dark",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 1440,
+      "area": "strip",
+      "path": "strip-en-dark-1440.png",
+      "url": "http://localhost:3107/help",
+      "capturedAt": "2026-10-25T12:53:17.194Z",
+      "sha256": "a0747b6bfaee2ebd6b97f1f063f0be48fe305474667976af4a40991dffd9ee9b",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 50
+        }
+      ],
+      "measurements": {
+        "elementWidth": 1184,
+        "elementHeight": 172,
+        "documentWidth": 1440,
+        "viewportWidth": 1440,
+        "direction": "ltr",
+        "theme": "dark",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 1440,
+      "area": "form",
+      "path": "form-en-dark-1440.png",
+      "url": "http://localhost:3107/help/contact",
+      "capturedAt": "2026-10-25T12:53:17.394Z",
+      "sha256": "a48a53197560510ff2a34f62eef1e6b30c4034ffc18f411ce3bdf46bd26c40ed",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 23
+        }
+      ],
+      "measurements": {
+        "elementWidth": 1280,
+        "elementHeight": 312.78125,
+        "documentWidth": 1440,
+        "viewportWidth": 1440,
+        "direction": "ltr",
+        "theme": "dark",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    },
+    {
+      "locale": "pt",
+      "theme": "light",
+      "width": 390,
+      "area": "strip",
+      "path": "strip-pt-light-390.png",
+      "url": "http://localhost:3107/pt/help",
+      "capturedAt": "2026-10-25T12:53:17.609Z",
+      "sha256": "64ef37108aba384e16b3344957d69773cf90fa99e52000768f30fd01630b0ccd",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 51
+        }
+      ],
+      "measurements": {
+        "elementWidth": 350,
+        "elementHeight": 326,
+        "documentWidth": 390,
+        "viewportWidth": 390,
+        "direction": "ltr",
+        "theme": "light",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    },
+    {
+      "locale": "pt",
+      "theme": "light",
+      "width": 390,
+      "area": "form",
+      "path": "form-pt-light-390.png",
+      "url": "http://localhost:3107/pt/help/contact",
+      "capturedAt": "2026-10-25T12:53:17.779Z",
+      "sha256": "9479e74a39d28838f40508e58e1040d594436122a7e7431293dee07ef129dbaf",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 27
+        }
+      ],
+      "measurements": {
+        "elementWidth": 390,
+        "elementHeight": 583.78125,
+        "documentWidth": 390,
+        "viewportWidth": 390,
+        "direction": "ltr",
+        "theme": "light",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    },
+    {
+      "locale": "pt",
+      "theme": "light",
+      "width": 768,
+      "area": "strip",
+      "path": "strip-pt-light-768.png",
+      "url": "http://localhost:3107/pt/help",
+      "capturedAt": "2026-10-25T12:53:17.993Z",
+      "sha256": "97675488ceb772bd9590e6f481b77226d83b6ff33b2e1d6e2cadad69ba3060a5",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 52
+        }
+      ],
+      "measurements": {
+        "elementWidth": 704,
+        "elementHeight": 280,
+        "documentWidth": 768,
+        "viewportWidth": 768,
+        "direction": "ltr",
+        "theme": "light",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    },
+    {
+      "locale": "pt",
+      "theme": "light",
+      "width": 768,
+      "area": "form",
+      "path": "form-pt-light-768.png",
+      "url": "http://localhost:3107/pt/help/contact",
+      "capturedAt": "2026-10-25T12:53:18.176Z",
+      "sha256": "4746951f30796c8cabd080b404afa24b19da42d419f15edb9e45e1ae6338ca15",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 27
+        }
+      ],
+      "measurements": {
+        "elementWidth": 768,
+        "elementHeight": 514.78125,
+        "documentWidth": 768,
+        "viewportWidth": 768,
+        "direction": "ltr",
+        "theme": "light",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    },
+    {
+      "locale": "pt",
+      "theme": "light",
+      "width": 1440,
+      "area": "strip",
+      "path": "strip-pt-light-1440.png",
+      "url": "http://localhost:3107/pt/help",
+      "capturedAt": "2026-10-25T12:53:18.424Z",
+      "sha256": "a9bd47a6b17d9ac04f4fbd2f1acfe0e470183963153fd82cbbde343ba147199a",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 52
+        }
+      ],
+      "measurements": {
+        "elementWidth": 1184,
+        "elementHeight": 172,
+        "documentWidth": 1440,
+        "viewportWidth": 1440,
+        "direction": "ltr",
+        "theme": "light",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    },
+    {
+      "locale": "pt",
+      "theme": "light",
+      "width": 1440,
+      "area": "form",
+      "path": "form-pt-light-1440.png",
+      "url": "http://localhost:3107/pt/help/contact",
+      "capturedAt": "2026-10-25T12:53:18.624Z",
+      "sha256": "8b78b5b6f0b33e5d1aaffc212965167eda280aab3a32b8c31675b45a2a1830bc",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 27
+        }
+      ],
+      "measurements": {
+        "elementWidth": 1280,
+        "elementHeight": 332.78125,
+        "documentWidth": 1440,
+        "viewportWidth": 1440,
+        "direction": "ltr",
+        "theme": "light",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    },
+    {
+      "locale": "pt",
+      "theme": "dark",
+      "width": 390,
+      "area": "strip",
+      "path": "strip-pt-dark-390.png",
+      "url": "http://localhost:3107/pt/help",
+      "capturedAt": "2026-10-25T12:53:18.854Z",
+      "sha256": "c227dd30302a901ab7205612b4429b7fb635de754a6483c977476db8c12b0eca",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 51
+        }
+      ],
+      "measurements": {
+        "elementWidth": 350,
+        "elementHeight": 326,
+        "documentWidth": 390,
+        "viewportWidth": 390,
+        "direction": "ltr",
+        "theme": "dark",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    },
+    {
+      "locale": "pt",
+      "theme": "dark",
+      "width": 390,
+      "area": "form",
+      "path": "form-pt-dark-390.png",
+      "url": "http://localhost:3107/pt/help/contact",
+      "capturedAt": "2026-10-25T12:53:19.026Z",
+      "sha256": "8f69f92ef3b4abfc2f4af067707f43a632ff6a75bec94079a9d3b777febd4713",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 27
+        }
+      ],
+      "measurements": {
+        "elementWidth": 390,
+        "elementHeight": 583.78125,
+        "documentWidth": 390,
+        "viewportWidth": 390,
+        "direction": "ltr",
+        "theme": "dark",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    },
+    {
+      "locale": "pt",
+      "theme": "dark",
+      "width": 768,
+      "area": "strip",
+      "path": "strip-pt-dark-768.png",
+      "url": "http://localhost:3107/pt/help",
+      "capturedAt": "2026-10-25T12:53:19.260Z",
+      "sha256": "2c2533c3ec9eb16928f27e499e9e5dbaca171a8b5df280b78df1bad4ffdba34b",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 52
+        }
+      ],
+      "measurements": {
+        "elementWidth": 704,
+        "elementHeight": 280,
+        "documentWidth": 768,
+        "viewportWidth": 768,
+        "direction": "ltr",
+        "theme": "dark",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    },
+    {
+      "locale": "pt",
+      "theme": "dark",
+      "width": 768,
+      "area": "form",
+      "path": "form-pt-dark-768.png",
+      "url": "http://localhost:3107/pt/help/contact",
+      "capturedAt": "2026-10-25T12:53:19.448Z",
+      "sha256": "81bba8bf7c65a4bdb7387f465ef67c4e73363eae7c67348371831164023f7829",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 27
+        }
+      ],
+      "measurements": {
+        "elementWidth": 768,
+        "elementHeight": 514.78125,
+        "documentWidth": 768,
+        "viewportWidth": 768,
+        "direction": "ltr",
+        "theme": "dark",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    },
+    {
+      "locale": "pt",
+      "theme": "dark",
+      "width": 1440,
+      "area": "strip",
+      "path": "strip-pt-dark-1440.png",
+      "url": "http://localhost:3107/pt/help",
+      "capturedAt": "2026-10-25T12:53:19.692Z",
+      "sha256": "602e65d979125dfbbf92bc16e4c2117da4a016866fee832ea89613274d1c82bc",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 52
+        }
+      ],
+      "measurements": {
+        "elementWidth": 1184,
+        "elementHeight": 172,
+        "documentWidth": 1440,
+        "viewportWidth": 1440,
+        "direction": "ltr",
+        "theme": "dark",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    },
+    {
+      "locale": "pt",
+      "theme": "dark",
+      "width": 1440,
+      "area": "form",
+      "path": "form-pt-dark-1440.png",
+      "url": "http://localhost:3107/pt/help/contact",
+      "capturedAt": "2026-10-25T12:53:19.895Z",
+      "sha256": "8c3c30dd8bb173e5bb6596f4b37ddac9c8a0376fe6e05127a161b3bc9ff94f80",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 27
+        }
+      ],
+      "measurements": {
+        "elementWidth": 1280,
+        "elementHeight": 332.78125,
+        "documentWidth": 1440,
+        "viewportWidth": 1440,
+        "direction": "ltr",
+        "theme": "dark",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    },
+    {
+      "locale": "ar",
+      "theme": "light",
+      "width": 390,
+      "area": "strip",
+      "path": "strip-ar-light-390.png",
+      "url": "http://localhost:3107/ar/help",
+      "capturedAt": "2026-10-25T12:53:20.126Z",
+      "sha256": "db410f7d3da8e1a5f246013567a2f8335d7921f508e211645ef576784094e10a",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 10
+        },
+        {
+          "familyName": "Noto Sans Arabic",
+          "postScriptName": "NotoSansArabic-Regular",
+          "isCustomFont": true,
+          "glyphCount": 44
+        }
+      ],
+      "measurements": {
+        "elementWidth": 350,
+        "elementHeight": 322,
+        "documentWidth": 390,
+        "viewportWidth": 390,
+        "direction": "rtl",
+        "theme": "light",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    },
+    {
+      "locale": "ar",
+      "theme": "light",
+      "width": 390,
+      "area": "form",
+      "path": "form-ar-light-390.png",
+      "url": "http://localhost:3107/ar/help/contact",
+      "capturedAt": "2026-10-25T12:53:20.332Z",
+      "sha256": "b22f9a7d55a6db5479ea0ed04853909d81b1fe17a90e727de50fb71146d1b176",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 5
+        },
+        {
+          "familyName": "Noto Sans Arabic",
+          "postScriptName": "NotoSansArabic-Regular",
+          "isCustomFont": true,
+          "glyphCount": 32
+        }
+      ],
+      "measurements": {
+        "elementWidth": 390,
+        "elementHeight": 562.96875,
+        "documentWidth": 390,
+        "viewportWidth": 390,
+        "direction": "rtl",
+        "theme": "light",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    },
+    {
+      "locale": "ar",
+      "theme": "dark",
+      "width": 1440,
+      "area": "strip",
+      "path": "strip-ar-dark-1440.png",
+      "url": "http://localhost:3107/ar/help",
+      "capturedAt": "2026-10-25T12:53:20.592Z",
+      "sha256": "4f121ee3fdf0f8a0dcc5a1487beaadfce4a4d9fc12c0f9660c2b320a2c96e5ee",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 10
+        },
+        {
+          "familyName": "Noto Sans Arabic",
+          "postScriptName": "NotoSansArabic-Regular",
+          "isCustomFont": true,
+          "glyphCount": 44
+        }
+      ],
+      "measurements": {
+        "elementWidth": 1184,
+        "elementHeight": 175,
+        "documentWidth": 1440,
+        "viewportWidth": 1440,
+        "direction": "rtl",
+        "theme": "dark",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    },
+    {
+      "locale": "ar",
+      "theme": "dark",
+      "width": 1440,
+      "area": "form",
+      "path": "form-ar-dark-1440.png",
+      "url": "http://localhost:3107/ar/help/contact",
+      "capturedAt": "2026-10-25T12:53:20.795Z",
+      "sha256": "471f08f66880ecb5879593dfa78ecbac9dc42621de6b7b1ff8ae927fb602997a",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 5
+        },
+        {
+          "familyName": "Noto Sans Arabic",
+          "postScriptName": "NotoSansArabic-Regular",
+          "isCustomFont": true,
+          "glyphCount": 32
+        }
+      ],
+      "measurements": {
+        "elementWidth": 1280,
+        "elementHeight": 292.78125,
+        "documentWidth": 1440,
+        "viewportWidth": 1440,
+        "direction": "rtl",
+        "theme": "dark",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    },
+    {
+      "locale": "kn",
+      "theme": "light",
+      "width": 390,
+      "area": "strip",
+      "path": "strip-kn-light-390.png",
+      "url": "http://localhost:3107/kn/help",
+      "capturedAt": "2026-10-25T12:53:21.059Z",
+      "sha256": "78fc4b9577726da0d0a542bfec916f2f2856d88fda1dc6ad96b79aaeaec2a54f",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans Kannada",
+          "postScriptName": "NotoSansKannada-Regular",
+          "isCustomFont": true,
+          "glyphCount": 44
+        },
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 9
+        }
+      ],
+      "measurements": {
+        "elementWidth": 350,
+        "elementHeight": 309,
+        "documentWidth": 390,
+        "viewportWidth": 390,
+        "direction": "ltr",
+        "theme": "light",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    },
+    {
+      "locale": "kn",
+      "theme": "light",
+      "width": 390,
+      "area": "form",
+      "path": "form-kn-light-390.png",
+      "url": "http://localhost:3107/kn/help/contact",
+      "capturedAt": "2026-10-25T12:53:21.249Z",
+      "sha256": "c8b805835fef7c403547ca45e1fc15eb122e73b847d0bd1d01867774cc19e92e",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans Kannada",
+          "postScriptName": "NotoSansKannada-Regular",
+          "isCustomFont": true,
+          "glyphCount": 19
+        },
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 4
+        }
+      ],
+      "measurements": {
+        "elementWidth": 390,
+        "elementHeight": 610.96875,
+        "documentWidth": 390,
+        "viewportWidth": 390,
+        "direction": "ltr",
+        "theme": "light",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    },
+    {
+      "locale": "kn",
+      "theme": "dark",
+      "width": 1440,
+      "area": "strip",
+      "path": "strip-kn-dark-1440.png",
+      "url": "http://localhost:3107/kn/help",
+      "capturedAt": "2026-10-25T12:53:21.526Z",
+      "sha256": "1fea6bda087959563b7aaf7f0bf05e43b1b39067f713d7c8c81699b07d5af236",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans Kannada",
+          "postScriptName": "NotoSansKannada-Regular",
+          "isCustomFont": true,
+          "glyphCount": 44
+        },
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 9
+        }
+      ],
+      "measurements": {
+        "elementWidth": 1184,
+        "elementHeight": 201,
+        "documentWidth": 1440,
+        "viewportWidth": 1440,
+        "direction": "ltr",
+        "theme": "dark",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    },
+    {
+      "locale": "kn",
+      "theme": "dark",
+      "width": 1440,
+      "area": "form",
+      "path": "form-kn-dark-1440.png",
+      "url": "http://localhost:3107/kn/help/contact",
+      "capturedAt": "2026-10-25T12:53:21.730Z",
+      "sha256": "420ee673aa18b1f4d52500591d84518f19bf75e1b1749d13dd094c0d2e42caad",
+      "actualBrowserUI": true,
+      "runtime": "local production build",
+      "backendConfigured": false,
+      "providerExecutionVerified": false,
+      "browserErrors": [],
+      "externalRequestsBlocked": [],
+      "fonts": [
+        {
+          "familyName": "Noto Sans Kannada",
+          "postScriptName": "NotoSansKannada-Regular",
+          "isCustomFont": true,
+          "glyphCount": 19
+        },
+        {
+          "familyName": "Noto Sans",
+          "postScriptName": "NotoSans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 4
+        }
+      ],
+      "measurements": {
+        "elementWidth": 1280,
+        "elementHeight": 340.78125,
+        "documentWidth": 1440,
+        "viewportWidth": 1440,
+        "direction": "ltr",
+        "theme": "dark",
+        "fontStatus": "loaded",
+        "horizontalOverflow": []
+      }
+    }
+  ]
+}

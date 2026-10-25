@@ -31,7 +31,9 @@ export default defineConfig({
       ".next/**",
       ...guideTests,
     ],
-    server: { deps: { inline: ["convex-test"] } },
+    // next-intl imports extensionless Next modules; transform it so the real
+    // navigation hooks use the test's native-router boundary instead of Node ESM.
+    server: { deps: { inline: ["convex-test", "next-intl"] } },
     coverage: {
       provider: "v8",
       reporter: ["text-summary", "lcov"],

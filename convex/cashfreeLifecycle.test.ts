@@ -320,6 +320,138 @@ it("expiry without terminal proof does not release reservation; terminal unpaid 
   });
   expect(observed8?.state).toBe("cancelled");
 });
+it.each(["request", "terminal"])(
+  "preserves an external-refund review hold during %s cancellation",
+  async (kind) => {
+    const w = await world();
+    const order = await prepare(w);
+    await w.t.mutation(internal.cashfreeRefunds.notify, {
+      mode: "live",
+      providerOrderId: order.providerOrderId,
+      providerRefundId: "unknown-provider-refund",
+      bodyHash: "external-refund",
+    });
+    if (kind === "request") {
+      await expect(
+        w.buyer.mutation(api.cashfreeLifecycle.requestCancellation, {
+          tradeId: w.tradeId,
+          reason: "Cancel this accepted purchase",
+        }),
+      ).rejects.toThrow("REVIEW_REQUIRED");
+    } else {
+      const claimed = await w.t.mutation(internal.cashfreePayments.claim, {
+        orderId: order._id,
+      });
+      if (!claimed) throw new Error("Missing claim");
+      await w.t.mutation(internal.cashfreePayments.finish, {
+        orderId: order._id,
+        lease: claimed.lease,
+        outcome: "closed",
+        unpaidTerminal: true,
+      });
+    }
+    expect(
+      await w.buyer.query(api.cashfreeLifecycle.status, { tradeId: w.tradeId }),
+    ).toMatchObject({
+      state: "hold",
+      holdReason: "external_refund_requires_review",
+      actions: [],
+    });
+    expect(
+      await w.t.run((ctx) => ctx.db.get("trades", w.tradeId)),
+    ).toMatchObject({
+      status: "accepted",
+    });
+  },
+);
+it("holds verified funds when a later signed payment conflicts, before stock can move", async () => {
+  const w = await world();
+  const order = await collect(w);
+  const before = await w.t.run((ctx) => ctx.db.query("inventory").collect());
+  await w.t.mutation(internal.cashfreePayments.observe, {
+    mode: "live",
+    providerOrderId: order.providerOrderId,
+    providerPaymentId: "789",
+    status: "SUCCESS",
+    orderPaise: order.totalPaise,
+    paymentPaise: order.totalPaise - 1,
+    currency: "INR",
+    orderCurrency: "INR",
+    customerId: order.customerId,
+    timestamp: Date.now(),
+    bodyHash: "conflicting-success",
+  });
+  expect(
+    await w.seller.query(api.cashfreeLifecycle.status, { tradeId: w.tradeId }),
+  ).toMatchObject({ state: "hold", collection: "live_confirmed", actions: [] });
+  await expect(
+    w.seller.mutation(api.cashfreeLifecycle.act, {
+      tradeId: w.tradeId,
+      action: "dispatch",
+      reference: "LOAD-CONFLICT",
+    }),
+  ).rejects.toThrow("GATEWAY_REQUIRED");
+  expect(await w.t.run((ctx) => ctx.db.query("inventory").collect())).toEqual(
+    before,
+  );
+});
+it.each([
+  { action: "dispatch" as const, stockGrams: Number.MAX_SAFE_INTEGER + 1 },
+  { action: "receive" as const, stockGrams: -1 },
+])(
+  "rejects an invalid existing stock balance before $action",
+  async ({ action, stockGrams }) => {
+    const w = await world();
+    await collect(w);
+    if (action === "receive")
+      await w.seller.mutation(api.cashfreeLifecycle.act, {
+        tradeId: w.tradeId,
+        action: "dispatch",
+        reference: "LOAD-001",
+      });
+    const operator = action === "dispatch" ? w.seller : w.buyer;
+    const inventoryId = await w.t.run(async (ctx) => {
+      const trade = await ctx.db.get("trades", w.tradeId);
+      if (!trade) throw new Error("Missing trade");
+      const inventory = await ctx.db
+        .query("inventory")
+        .withIndex("by_org_material", (q) =>
+          q
+            .eq(
+              "orgId",
+              action === "dispatch" ? trade.sellerOrgId : trade.buyerOrgId,
+            )
+            .eq("materialCode", trade.materialCode),
+        )
+        .unique();
+      if (!inventory) throw new Error("Missing stock");
+      await ctx.db.patch("inventory", inventory._id, { grams: stockGrams });
+      return inventory._id;
+    });
+    await expect(
+      operator.mutation(api.cashfreeLifecycle.act, {
+        tradeId: w.tradeId,
+        action,
+        reference: "MOVEMENT-INVALID-STOCK",
+      }),
+    ).rejects.toThrow("INVALID_WEIGHT");
+    expect(
+      await w.t.run((ctx) => ctx.db.get("inventory", inventoryId)),
+    ).toMatchObject({
+      grams: stockGrams,
+    });
+    expect(
+      await w.t.run((ctx) =>
+        ctx.db
+          .query("financialMovements")
+          .withIndex("by_trade_kind", (q) =>
+            q.eq("tradeId", w.tradeId).eq("kind", action),
+          )
+          .unique(),
+      ),
+    ).toBeNull();
+  },
+);
 it("persists one full refund identity and never creates a second refund or returns physical stock", async () => {
   const w = await world();
   await collect(w);

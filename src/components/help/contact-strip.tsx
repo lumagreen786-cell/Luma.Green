@@ -1,16 +1,14 @@
-import { MessageCircleIcon, PencilLineIcon, PhoneIcon } from "lucide-react";
+import { PencilLineIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import { DemoNote } from "@/components/app/page-parts";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 
-import { contactHref, SUPPORT_CONTACT } from "./content";
+import { contactHref } from "./content";
 import type { SupportRole, SupportTopic } from "./support-api";
 
 /**
- * "Still need help?": call, WhatsApp or write, with the hours and how soon we
- * reply. `role` and `topic` pre-fill the contact form.
+ * "Still need help?": write to support. `role` and `topic` pre-fill the form.
  */
 export function ContactStrip({
   role,
@@ -43,28 +41,6 @@ export function ContactStrip({
           <Button
             asChild
             size="lg"
-            variant="secondary"
-            className="min-h-12 rounded-lg px-5 py-3 whitespace-nowrap"
-          >
-            <a href={`tel:${SUPPORT_CONTACT.tel}`}>
-              <PhoneIcon aria-hidden />
-              {t("contactStrip.call")}
-            </a>
-          </Button>
-          <Button
-            asChild
-            size="lg"
-            variant="secondary"
-            className="min-h-12 rounded-lg px-5 py-3 whitespace-nowrap"
-          >
-            <a href={SUPPORT_CONTACT.whatsapp} target="_blank" rel="noreferrer">
-              <MessageCircleIcon aria-hidden />
-              {t("contactStrip.whatsapp")}
-            </a>
-          </Button>
-          <Button
-            asChild
-            size="lg"
             variant="outline"
             className="min-h-12 rounded-lg border-border bg-transparent px-5 py-3 whitespace-nowrap text-foreground hover:bg-accent hover:text-accent-foreground"
           >
@@ -74,10 +50,9 @@ export function ContactStrip({
             </Link>
           </Button>
         </div>
-        <p dir="ltr" className="w-fit text-sm font-medium tabular-nums">
-          {SUPPORT_CONTACT.display}
+        <p className="text-sm text-muted-foreground">
+          {t("contact.phoneUnavailable")}
         </p>
-        <DemoNote>{t("contact.sampleNumbers")}</DemoNote>
       </div>
     </section>
   );

@@ -5,6 +5,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { api } from "./_generated/api";
 import { convexModules, signIn } from "./lib/auth.testing";
 import { teamWorld } from "./lib/teams.testing";
+import { MAX_WORKSPACES } from "./lib/workspaceRoles";
 
 const modules = convexModules(import.meta.glob("./**/*.*s"));
 const consent = {
@@ -43,6 +44,45 @@ async function world() {
   return { ...w, organizationId, personalId, applicationId };
 }
 describe("new company site applications", () => {
+  it("enforces the workspace limit for personal registrations as well as company sites", async () => {
+    const w = await world();
+    await w.t.run(async (ctx) => {
+      const site = await ctx.db.get("orgs", w.orgId);
+      if (!site) throw new Error("Missing fixture site");
+      const { _id, _creationTime, ...data } = site;
+      for (let index = 1; index < MAX_WORKSPACES; index += 1) {
+        const orgId = await ctx.db.insert("orgs", {
+          ...data,
+          slug: `limit-${String(index)}`,
+        });
+        await ctx.db.insert("memberships", {
+          orgId,
+          profileId: w.ownerId,
+          role: "owner",
+          createdAt: Date.now(),
+        });
+      }
+    });
+    await w.owner.mutation(api.applications.saveDraft, {
+      applicationId: w.personalId,
+      kabadiwala: shop,
+    });
+    await expect(
+      w.owner.mutation(api.applications.submit, {
+        applicationId: w.personalId,
+      }),
+    ).rejects.toThrow("TEAM_LIMIT");
+    expect(await w.owner.query(api.workspace.list, {})).toHaveLength(
+      MAX_WORKSPACES,
+    );
+    expect(
+      await w.owner.query(api.applications.own, {
+        applicationId: w.personalId,
+      }),
+    ).toMatchObject({
+      application: { status: "draft", version: 0 },
+    });
+  });
   it("keeps personal onboarding separate and activates a complete owned site automatically", async () => {
     const w = await world();
     expect(await w.owner.query(api.applications.mine, {})).toMatchObject({

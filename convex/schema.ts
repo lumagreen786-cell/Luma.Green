@@ -157,6 +157,7 @@ export default defineSchema({
   /** Secrets are only returned to an internal delivery action, never a client. */
   pushDevices: defineTable({
     profileId: v.id("profiles"),
+    version: v.optional(v.number()),
     // Legacy unbound registrations stay inactive until authenticated renewal.
     sessionId: v.optional(v.string()),
     installationId: v.string(),
@@ -182,6 +183,7 @@ export default defineSchema({
   pushDeliveries: defineTable({
     inboxId: v.id("inbox"),
     deviceId: v.id("pushDevices"),
+    deviceVersion: v.optional(v.number()),
     profileId: v.id("profiles"),
     status: v.union(
       v.literal("pending"),
@@ -424,6 +426,7 @@ export default defineSchema({
     ...timestamps,
   })
     .index("by_organization", ["organizationId"])
+    .index("by_application", ["applicationId"])
     .index("by_slug", ["slug"])
     .index("by_owner", ["ownerProfileId"])
     .index("by_kind_city", ["kind", "city", "status"])
@@ -526,6 +529,7 @@ export default defineSchema({
     createdAt: v.number(),
   })
     .index("by_profile_createdAt", ["profileId", "createdAt"])
+    .index("by_storage", ["storageId"])
     .index("by_booking", ["bookingId"]),
 
   bookings: defineTable({

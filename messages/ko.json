@@ -736,7 +736,7 @@
     },
     "contact": {
       "metaTitle": "지원팀 문의",
-      "metaDescription": "전화, WhatsApp 또는 짧은 메시지로 Luma.Green 팀에 문의하세요. 1영업일 이내에 답변합니다.",
+      "metaDescription": "Luma.Green 팀에 메시지를 보내세요. 영업일 기준 1일 이내에 답변합니다.",
       "title": "문의하기",
       "lead": "담당자가 모든 메시지를 읽습니다. 편하게 질문해 주세요.",
       "formHeading": "메시지 작성",
@@ -786,13 +786,13 @@
         "rateLimited": "이 번호에서 너무 많은 메시지를 보냈습니다. 한 시간 후에 다시 시도해 주세요."
       },
       "unavailableTitle": "여기서는 메시지를 보낼 수 없습니다",
-      "unavailableBody": "전화 또는 WhatsApp으로 문의해 주세요. 도와드리겠습니다.",
+      "unavailableBody": "나중에 다시 시도해 주세요.",
       "otherWays": "다른 연락 방법",
       "callTitle": "전화로 문의",
       "whatsappTitle": "WhatsApp으로 문의",
       "hoursTitle": "운영 시간",
       "replyTitle": "답변 시간",
-      "sampleNumbers": "시제품: 예시 번호입니다."
+      "phoneUnavailable": "전화 및 WhatsApp 지원을 이용할 수 없습니다."
     },
     "guides": {
       "signIn": {

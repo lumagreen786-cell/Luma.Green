@@ -220,6 +220,22 @@ describe("pollution-control documents", () => {
     expect(schema.safeParse(documents).success).toBe(true);
   });
 
+  it("rejects impossible consent expiry dates before automatic activation", () => {
+    for (const validUntil of [
+      "2027-02-29",
+      "2027-04-31",
+      "2027-13-01",
+      "2027-00-10",
+    ]) {
+      expect(
+        errors(schema.safeParse({ ...documents, validUntil })),
+      ).toMatchObject({ validUntil: "date" });
+    }
+    expect(
+      schema.safeParse({ ...documents, validUntil: "2028-02-29" }).success,
+    ).toBe(true);
+  });
+
   it("wants every consent detail, in date, from the right board", () => {
     expect(
       errors(

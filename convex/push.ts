@@ -151,6 +151,7 @@ async function register(
     fingerprint: hash,
     profileId: profile._id,
     sessionId,
+    version: (current?.version ?? 0) + 1,
     expiresAt: now + 30 * 24 * 60 * 60 * 1000,
     updatedAt: now,
   };

@@ -21,6 +21,9 @@ export function trainingStorageKey(role: HelpRole): string {
 
 function readRaw(role: HelpRole): string {
   const key = trainingStorageKey(role);
+  // A failed write is newer than the value still readable in full storage.
+  const pending = unsaved.get(key);
+  if (pending !== undefined) return pending;
   try {
     const stored = window.localStorage.getItem(key);
     if (stored !== null) return stored;

@@ -137,6 +137,11 @@ test("buyer sourcing decisions, supplier acknowledgements, releases and recurrin
     await dialog
       .getByLabel(t.reason)
       .fill("Synthetic buyer decision; no regulatory approval");
+    await buyer.keyboard.press("Escape");
+    dialog = await form(buyer, t.qualify);
+    await expect(
+      dialog.getByRole("combobox", { name: t.decision, exact: true }),
+    ).toContainText(t.approved);
     await save(dialog);
     await expect(buyer.getByText(spec, { exact: true })).toBeVisible();
     await buyer.getByRole("tab", { name: t.agreements, exact: true }).click();
@@ -203,6 +208,13 @@ test("buyer sourcing decisions, supplier acknowledgements, releases and recurrin
     await dialog.getByLabel(t.area).fill("Local test Peenya");
     await dialog.getByLabel(t.neededBy).fill(dateAfter(3));
     await choose(buyer, dialog, t.cadence, t.weekly);
+    await buyer.keyboard.press("Escape");
+    await buyer.getByRole("tab", { name: t.agreements, exact: true }).click();
+    await buyer.getByRole("tab", { name: t.plans, exact: true }).click();
+    dialog = await form(buyer, t.createPlan);
+    await expect(
+      dialog.getByRole("combobox", { name: t.cadence, exact: true }),
+    ).toContainText(t.weekly);
     await save(dialog);
     const plan = buyer.getByRole("listitem").filter({ hasText: spec }).first();
     await plan.getByRole("button", { name: t.publish, exact: true }).click();

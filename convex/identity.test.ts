@@ -3,8 +3,8 @@
 import { convexTest } from "convex-test";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { api } from "./_generated/api";
-import { convexModules } from "./lib/auth.testing";
+import { api, components } from "./_generated/api";
+import { convexModules, registerAuth, signIn } from "./lib/auth.testing";
 import schema from "./schema";
 
 const modules = convexModules(import.meta.glob("./**/*.*s"));
@@ -114,5 +114,95 @@ describe("signed out", () => {
       adminProfiles: await ctx.db.query("adminProfiles").collect(),
     }));
     expect(rows).toEqual({ profiles: [], adminProfiles: [] });
+  });
+});
+
+describe("verified profile phone", () => {
+  it("does not copy an unverified authentication phone into a new profile", async () => {
+    const t = convexTest(schema, modules);
+    registerAuth(t);
+    const as = await signIn(t, {
+      email: "unverified@example.test",
+      phoneNumber: "+919000000007",
+    });
+    await t.run((ctx) =>
+      ctx.runMutation(components.betterAuth.adapter.updateOne, {
+        input: {
+          model: "user",
+          where: [{ field: "email", value: "unverified@example.test" }],
+          update: { phoneNumberVerified: false },
+        },
+      }),
+    );
+    const id = await as.mutation(api.identity.ensureProfile, { locale: "en" });
+    const profile = await t.run((ctx) => ctx.db.get("profiles", id));
+    expect(profile?.phone).toBeUndefined();
+  });
+
+  it("syncs a newly verified phone on the existing profile without changing authentication state", async () => {
+    const t = convexTest(schema, modules);
+    registerAuth(t);
+    const as = await signIn(t, {
+      email: "existing@example.test",
+      twoFactorEnabled: true,
+    });
+    const profileId = await as.mutation(api.identity.ensureProfile, {
+      locale: "en",
+    });
+    const profile = await t.run((ctx) => ctx.db.get("profiles", profileId));
+    if (!profile) throw new Error("Missing existing profile");
+    const sessionsBefore = await t.run((ctx) =>
+      ctx.runQuery(components.betterAuth.adapter.findMany, {
+        model: "session",
+        where: [{ field: "userId", value: profile.authUserId }],
+        paginationOpts: { numItems: 10, cursor: null },
+      }),
+    );
+    await t.run((ctx) =>
+      ctx.runMutation(components.betterAuth.adapter.updateOne, {
+        input: {
+          model: "user",
+          where: [{ field: "_id", value: profile.authUserId }],
+          update: { phoneNumber: "+919000000008", phoneNumberVerified: true },
+        },
+      }),
+    );
+    const userBefore = await t.run((ctx) =>
+      ctx.runQuery(components.betterAuth.adapter.findOne, {
+        model: "user",
+        where: [{ field: "_id", value: profile.authUserId }],
+      }),
+    );
+    expect(
+      await as.mutation(api.identity.ensureProfile, { locale: "en" }),
+    ).toBe(profileId);
+    expect(
+      await t.run((ctx) => ctx.db.get("profiles", profileId)),
+    ).toMatchObject({
+      _id: profileId,
+      authUserId: profile.authUserId,
+      phone: "+919000000008",
+      kind: "member",
+    });
+    expect(await as.query(api.identity.me, {})).toMatchObject({
+      twoFactorEnabled: true,
+    });
+    expect(
+      await t.run((ctx) =>
+        ctx.runQuery(components.betterAuth.adapter.findOne, {
+          model: "user",
+          where: [{ field: "_id", value: profile.authUserId }],
+        }),
+      ),
+    ).toEqual(userBefore);
+    expect(
+      await t.run((ctx) =>
+        ctx.runQuery(components.betterAuth.adapter.findMany, {
+          model: "session",
+          where: [{ field: "userId", value: profile.authUserId }],
+          paginationOpts: { numItems: 10, cursor: null },
+        }),
+      ),
+    ).toEqual(sessionsBefore);
   });
 });

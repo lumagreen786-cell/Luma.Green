@@ -736,7 +736,7 @@
     },
     "contact": {
       "metaTitle": "Contactar con soporte",
-      "metaDescription": "Haz tus consultas al equipo de Luma.Green por teléfono, WhatsApp o un mensaje breve. Respondemos en un día laborable.",
+      "metaDescription": "Envía un mensaje al equipo de Luma.Green. Respondemos en un día laborable.",
       "title": "Contacta con nosotros",
       "lead": "Una persona lee cada mensaje. Explícalo con tus palabras.",
       "formHeading": "Enviar un mensaje",
@@ -786,13 +786,13 @@
         "rateLimited": "Se han enviado demasiados mensajes desde este número. Inténtalo de nuevo en una hora."
       },
       "unavailableTitle": "Los mensajes están desactivados aquí",
-      "unavailableBody": "Llámanos o escríbenos por WhatsApp. Te ayudaremos con gusto.",
+      "unavailableBody": "Vuelve a intentarlo más tarde.",
       "otherWays": "Otras formas de contactar",
       "callTitle": "Llámanos",
       "whatsappTitle": "Escríbenos por WhatsApp",
       "hoursTitle": "Horario de atención",
       "replyTitle": "Cuándo respondemos",
-      "sampleNumbers": "Prototipo: estos números son de ejemplo."
+      "phoneUnavailable": "La atención por teléfono y WhatsApp no está disponible."
     },
     "guides": {
       "signIn": {

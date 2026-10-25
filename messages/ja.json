@@ -736,7 +736,7 @@
     },
     "contact": {
       "metaTitle": "サポートに連絡",
-      "metaDescription": "電話、WhatsApp、短いメッセージでLuma.Greenチームにご相談ください。1営業日以内に返信します。",
+      "metaDescription": "Luma.Greenチームにメッセージを送信してください。1営業日以内に返信します。",
       "title": "お問い合わせ",
       "lead": "すべてのメッセージを担当者が読みます。ご自身の言葉でお書きください。",
       "formHeading": "メッセージを送信",
@@ -786,13 +786,13 @@
         "rateLimited": "この電話番号からのメッセージが多すぎます。1時間後にもう一度お試しください。"
       },
       "unavailableTitle": "ここではメッセージを送信できません",
-      "unavailableBody": "電話またはWhatsAppでご連絡ください。担当者が対応します。",
+      "unavailableBody": "後でもう一度お試しください。",
       "otherWays": "その他の連絡方法",
       "callTitle": "電話で連絡",
       "whatsappTitle": "WhatsAppで連絡",
       "hoursTitle": "営業時間",
       "replyTitle": "返信までの時間",
-      "sampleNumbers": "試作版：これらはサンプルの番号です。"
+      "phoneUnavailable": "電話とWhatsAppによるサポートは利用できません。"
     },
     "guides": {
       "signIn": {

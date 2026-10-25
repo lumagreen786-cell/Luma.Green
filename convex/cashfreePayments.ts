@@ -937,6 +937,8 @@ export const observe = internalMutation({
           "payment.order.mismatch",
           order.buyerOrgId,
         );
+        if (order.mode === "live")
+          await hold(ctx, order.tradeId, "provider_evidence_mismatch");
       }
       return false;
     }

@@ -736,7 +736,7 @@
     },
     "contact": {
       "metaTitle": "সহায় দলৰ সৈতে যোগাযোগ",
-      "metaDescription": "ফোন, WhatsApp বা চমু বাৰ্তাৰে Luma.Green দলক যিকোনো কথা সোধক। এটা কৰ্মদিনৰ ভিতৰত উত্তৰ দিওঁ।",
+      "metaDescription": "Luma.Green দললৈ এটা বাৰ্তা পঠিয়াওক। আমি এটা কৰ্মদিনৰ ভিতৰত উত্তৰ দিওঁ।",
       "title": "যোগাযোগ কৰক",
       "lead": "প্ৰতিটো বাৰ্তা এজন ব্যক্তিয়ে পঢ়ে। নিজৰ ভাষাত সোধক।",
       "formHeading": "বাৰ্তা পঠাওক",
@@ -786,13 +786,13 @@
         "rateLimited": "এই নম্বৰৰ পৰা বহুতো বাৰ্তা আহিছে। অনুগ্ৰহ কৰি এঘণ্টাৰ পিছত পুনৰ চেষ্টা কৰক।"
       },
       "unavailableTitle": "ইয়াত বাৰ্তা বন্ধ আছে",
-      "unavailableBody": "তাৰ সলনি ফোন বা WhatsApp কৰক। সহায় কৰি ভাল পাম।",
+      "unavailableBody": "অনুগ্ৰহ কৰি পিছত আকৌ চেষ্টা কৰক।",
       "otherWays": "যোগাযোগৰ আন উপায়",
       "callTitle": "আমাক ফোন কৰক",
       "whatsappTitle": "আমাক WhatsApp কৰক",
       "hoursTitle": "খোলা সময়",
       "replyTitle": "আমি কেতিয়া উত্তৰ দিওঁ",
-      "sampleNumbers": "নমুনা সংস্কৰণ: এইবোৰ উদাহৰণমূলক নম্বৰ।"
+      "phoneUnavailable": "ফোন আৰু WhatsApp সহায় উপলব্ধ নহয়।"
     },
     "guides": {
       "signIn": {

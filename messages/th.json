@@ -736,7 +736,7 @@
     },
     "contact": {
       "metaTitle": "ติดต่อฝ่ายช่วยเหลือ",
-      "metaDescription": "ถามทีม Luma.Green ทางโทรศัพท์ WhatsApp หรือข้อความสั้น เราตอบภายในหนึ่งวันทำการ",
+      "metaDescription": "ส่งข้อความถึงทีม Luma.Green เราจะตอบกลับภายในหนึ่งวันทำการ",
       "title": "ติดต่อเรา",
       "lead": "เจ้าหน้าที่อ่านทุกข้อความ ถามด้วยคำพูดของคุณได้เลย",
       "formHeading": "ส่งข้อความ",
@@ -786,13 +786,13 @@
         "rateLimited": "มีการส่งข้อความจากหมายเลขนี้มากเกินไป โปรดลองอีกครั้งในอีกหนึ่งชั่วโมง"
       },
       "unavailableTitle": "ปิดการส่งข้อความไว้ที่นี่",
-      "unavailableBody": "โทรหรือส่ง WhatsApp แทนได้ เรายินดีช่วย",
+      "unavailableBody": "โปรดลองอีกครั้งในภายหลัง",
       "otherWays": "ช่องทางติดต่ออื่น",
       "callTitle": "โทรหาเรา",
       "whatsappTitle": "ส่ง WhatsApp ถึงเรา",
       "hoursTitle": "เวลาทำการ",
       "replyTitle": "เวลาที่เราตอบ",
-      "sampleNumbers": "ต้นแบบ: เป็นเบอร์ตัวอย่าง"
+      "phoneUnavailable": "ยังไม่มีบริการช่วยเหลือทางโทรศัพท์และ WhatsApp"
     },
     "guides": {
       "signIn": {
