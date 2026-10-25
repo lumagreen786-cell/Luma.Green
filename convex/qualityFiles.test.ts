@@ -116,6 +116,52 @@ async function reportWorld() {
   return { ...w, recipient, recipientId, fileId, args };
 }
 
+describe("application upload isolation", () => {
+  it.each(["attach", "cleanup"] as const)(
+    "does not let application %s claim or delete a quality attachment",
+    async (operation) => {
+      const w = await world();
+      const fileId = await w.owner.action(
+        api.qualityFiles.upload,
+        w.uploadArgs,
+      );
+      const file = await w.t.run((ctx) =>
+        ctx.db.get("qualityAttachments", fileId),
+      );
+      if (!file?.storageId) throw new Error("Missing storage fixture");
+      const storageId = file.storageId;
+      const applicant = await signIn(w.t, {
+        email: "applicant@luma.test",
+        phoneNumber: "+919000000307",
+      });
+      await applicant.mutation(api.identity.ensureProfile, { locale: "en" });
+      await applicant.mutation(api.applications.start, {
+        kind: "yard",
+        locale: "en",
+        ageConfirmed: true,
+        privacyAccepted: true,
+      });
+      if (operation === "attach")
+        await expect(
+          applicant.action(api.applicationFiles.attach, {
+            storageId,
+            type: "pcb_certificate",
+            name: "claimed.pdf",
+          }),
+        ).rejects.toThrow("FILE_IN_USE");
+      else
+        await applicant.mutation(internal.applicationFiles.discardUnattached, {
+          storageId,
+        });
+      expect(
+        await w.t.run(
+          async (ctx) => (await ctx.storage.get(storageId)) !== null,
+        ),
+      ).toBe(true);
+    },
+  );
+});
+
 describe.each(["convex", "r2"])("quality storage: %s", (provider) => {
   beforeEach(() => {
     if (provider === "r2") mockR2();

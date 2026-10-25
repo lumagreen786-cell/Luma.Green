@@ -27,6 +27,7 @@ import {
 } from "./lib/households";
 import { queueBookingNotification } from "./lib/notifications";
 import { indiaToday } from "./lib/onboarding";
+import { verifiedIndianMobile } from "./lib/phone";
 import { vBookingStatus } from "./lib/validators";
 import { vMaterialRef, vReceipt } from "./lib/views";
 import { currentProfile, materialIndex } from "./lib/workspace";
@@ -261,7 +262,10 @@ export const book = mutation({
     const user = await requireUser(ctx);
     const profile = await findProfile(ctx, user._id);
     if (!profile) throw new ConvexError("NO_PROFILE");
-    const phone = profile.phone;
+    const phone = verifiedIndianMobile(
+      user.phoneNumber,
+      user.phoneNumberVerified,
+    );
     if (!phone) throw new ConvexError("NO_PHONE");
 
     const { photoIds, isPhotosOnly, photoRequestKey, existingToken } =

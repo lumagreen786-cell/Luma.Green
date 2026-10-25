@@ -8,7 +8,7 @@ import { fakeQueries, renderWithIntl } from "@/components/shop/test-helpers";
 import { WorkspacePermissions } from "@/components/workspace/permissions";
 
 import en from "../../../messages/en.json";
-import { ReferenceAction, whole } from "./forms";
+import { NewRecord, ReferenceAction, whole } from "./forms";
 import { SourcingPage } from "./sourcing-page";
 vi.mock("@/i18n/navigation", () => ({
   Link: ({ children }: { children: ReactNode }) => <span>{children}</span>,
@@ -269,3 +269,33 @@ it("retains a sourcing draft after closing its dialog and switching tasks", asyn
   );
   expect(mocks.save).not.toHaveBeenCalled();
 });
+
+it.each([
+  {
+    kind: "plan" as const,
+    title: en.sourcing.createPlan,
+    label: en.sourcing.cadence,
+    option: en.sourcing.monthly,
+  },
+  {
+    kind: "qualification" as const,
+    title: en.sourcing.qualify,
+    label: en.sourcing.decision,
+    option: en.sourcing.approved,
+  },
+])(
+  "retains the $kind choice when its dialog is dismissed",
+  async ({ kind, title, label, option }) => {
+    const user = userEvent.setup();
+    renderWithIntl(<NewRecord kind={kind} />);
+    await user.click(screen.getByRole("button", { name: title }));
+    await user.click(screen.getByRole("combobox", { name: label }));
+    await user.click(screen.getByRole("option", { name: option }));
+    await user.keyboard("{Escape}");
+    await user.click(screen.getByRole("button", { name: title }));
+    expect(screen.getByRole("combobox", { name: label })).toHaveTextContent(
+      option,
+    );
+    expect(mocks.save).not.toHaveBeenCalled();
+  },
+);

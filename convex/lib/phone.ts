@@ -21,6 +21,14 @@ export function normalizeIndianMobile(input: string): string | null {
   return INDIAN_MOBILE.test(e164) ? e164 : null;
 }
 
+/** A profile cache is not evidence that Better Auth verified this phone. */
+export function verifiedIndianMobile(
+  phone: string | null | undefined,
+  isVerified: boolean | null | undefined,
+): string | null {
+  return isVerified === true && phone ? normalizeIndianMobile(phone) : null;
+}
+
 export function isIndianMobile(e164: string): boolean {
   return INDIAN_MOBILE.test(e164);
 }

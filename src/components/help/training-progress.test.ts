@@ -99,6 +99,34 @@ describe("useTrainingProgress", () => {
       result.current.reset();
     });
   });
+
+  it("keeps new progress when full storage can read an older saved value", () => {
+    const key = trainingStorageKey("manufacturer");
+    window.localStorage.setItem(key, JSON.stringify(["eprBasics"]));
+    const write = vi
+      .spyOn(Storage.prototype, "setItem")
+      .mockImplementation(() => {
+        throw new DOMException("full", "QuotaExceededError");
+      });
+    const { result } = renderHook(() => useTrainingProgress("manufacturer"));
+
+    act(() => {
+      result.current.setDone("eprBasics", false);
+    });
+    expect(result.current.done).toEqual([]);
+
+    act(() => {
+      result.current.setDone("eprBasics", true);
+    });
+    expect(result.current.done).toEqual(["eprBasics"]);
+
+    write.mockRestore();
+    act(() => {
+      result.current.reset();
+    });
+    expect(window.localStorage.getItem(key)).toBe("[]");
+    expect(result.current.done).toEqual([]);
+  });
 });
 
 describe("parseDone", () => {

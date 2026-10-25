@@ -18,6 +18,11 @@ function ConnectedAccess() {
   const revokeKey = useMutation(api.integrations.revokeKey);
   return (
     <ApiAccess
+      key={
+        workspace?.kind === "org"
+          ? `${workspace.org.id}:${workspace.role}`
+          : workspace?.kind
+      }
       data={
         workspace?.kind === "saathi" ? { canManage: false, keys: [] } : data
       }

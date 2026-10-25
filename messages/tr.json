@@ -332,7 +332,7 @@
       "choose": "Birini seçin",
       "hoursTitle": "Açılış saatleri",
       "metaTitle": "Desteğe ulaşın",
-      "metaDescription": "Luma.Green ekibine telefon, WhatsApp veya kısa mesajla sorun. Bir iş günü içinde yanıtlarız.",
+      "metaDescription": "Luma.Green ekibine mesaj gönderin. Bir iş günü içinde yanıt veririz.",
       "title": "Bize ulaşın",
       "lead": "Her mesajı gerçek bir kişi okur. Kendi sözlerinizle sorun.",
       "formHeading": "Mesaj gönder",
@@ -357,12 +357,12 @@
       "sentBody": "Teşekkürler. Bir iş günü içinde arar veya SMS göndeririz.",
       "backToHelp": "Yardıma dön",
       "unavailableTitle": "Burada mesajlar kapalı",
-      "unavailableBody": "Telefon veya WhatsApp ile ulaşın. Yardımcı olmaktan mutluyuz.",
+      "unavailableBody": "Lütfen daha sonra tekrar deneyin.",
       "otherWays": "Diğer iletişim yolları",
       "callTitle": "Bizi arayın",
       "whatsappTitle": "WhatsApp’tan yazın",
       "replyTitle": "Yanıt süremiz",
-      "sampleNumbers": "Prototip: bunlar örnek numaralardır."
+      "phoneUnavailable": "Telefon ve WhatsApp desteği kullanılamıyor."
     },
     "guides": {
       "escrow": {

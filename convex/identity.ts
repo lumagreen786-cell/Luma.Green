@@ -7,6 +7,7 @@ import { mutation, query } from "./_generated/server";
 import { authComponent } from "./auth";
 import { requireAdmin, requireUser } from "./lib/access";
 import { isAdminEmail, validateAdminProfile } from "./lib/admin";
+import { verifiedIndianMobile } from "./lib/phone";
 import { codeDelivery } from "./lib/sms";
 
 /** What the sign-in screens can offer on this deployment. Public. */
@@ -99,6 +100,9 @@ export const ensureProfile = mutation({
   handler: async (ctx, args) => {
     const user = await requireUser(ctx);
     const locale = isLocale(args.locale) ? args.locale : "en";
+    const phone =
+      verifiedIndianMobile(user.phoneNumber, user.phoneNumberVerified) ??
+      undefined;
     const now = Date.now();
 
     const existing = await ctx.db
@@ -106,15 +110,28 @@ export const ensureProfile = mutation({
       .withIndex("by_authUserId", (q) => q.eq("authUserId", user._id))
       .unique();
     if (existing) {
-      if (existing.locale !== locale) {
-        await ctx.db.patch(existing._id, { locale, updatedAt: now });
+      const isPhoneChanged = phone !== undefined && phone !== existing.phone;
+      if (isPhoneChanged || existing.locale !== locale) {
+        await ctx.db.patch(existing._id, {
+          locale,
+          ...(isPhoneChanged && { phone }),
+          updatedAt: now,
+        });
       }
+      if (isPhoneChanged)
+        await ctx.db.insert("auditLog", {
+          action: "profile.phone_verified",
+          entityTable: "profiles",
+          entityId: existing._id,
+          actorProfileId: existing._id,
+          createdAt: now,
+        });
       return existing._id;
     }
 
     const profileId = await ctx.db.insert("profiles", {
       authUserId: user._id,
-      phone: user.phoneNumber ?? undefined,
+      phone,
       kind: isAdminEmail(user.email) ? "admin" : "member",
       locale,
       createdAt: now,

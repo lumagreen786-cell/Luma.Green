@@ -412,7 +412,7 @@
     },
     "contact": {
       "metaTitle": "Hubungi sokongan",
-      "metaDescription": "Tanya pasukan Luma.Green melalui telefon, WhatsApp atau mesej ringkas. Kami membalas dalam satu hari bekerja.",
+      "metaDescription": "Hantar mesej kepada pasukan Luma.Green. Kami membalas dalam satu hari bekerja.",
       "title": "Hubungi kami",
       "lead": "Petugas membaca setiap mesej. Tanya dengan kata-kata anda sendiri.",
       "formHeading": "Hantar mesej",
@@ -462,13 +462,13 @@
         "rateLimited": "Terlalu banyak mesej daripada nombor ini. Sila cuba lagi dalam masa satu jam."
       },
       "unavailableTitle": "Mesej dinyahaktifkan di sini",
-      "unavailableBody": "Telefon atau WhatsApp kami. Kami sedia membantu.",
+      "unavailableBody": "Sila cuba lagi kemudian.",
       "otherWays": "Cara lain untuk menghubungi kami",
       "callTitle": "Telefon kami",
       "whatsappTitle": "WhatsApp kami",
       "hoursTitle": "Waktu operasi",
       "replyTitle": "Masa balasan",
-      "sampleNumbers": "Prototaip: ini ialah nombor contoh."
+      "phoneUnavailable": "Sokongan telefon dan WhatsApp tidak tersedia."
     },
     "guides": {
       "signIn": {

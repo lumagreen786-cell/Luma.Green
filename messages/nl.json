@@ -736,7 +736,7 @@
     },
     "contact": {
       "metaTitle": "Contact met ondersteuning",
-      "metaDescription": "Stel het Luma.Green-team uw vragen via telefoon, WhatsApp of een kort bericht. We antwoorden binnen één werkdag.",
+      "metaDescription": "Stuur het team van Luma.Green een bericht. We reageren binnen één werkdag.",
       "title": "Neem contact op",
       "lead": "Een echte persoon leest elk bericht. Vraag in uw eigen woorden.",
       "formHeading": "Bericht sturen",
@@ -786,13 +786,13 @@
         "rateLimited": "Er zijn te veel berichten vanaf dit nummer verzonden. Probeer het over een uur opnieuw."
       },
       "unavailableTitle": "Berichten zijn hier uitgeschakeld",
-      "unavailableBody": "Bel of WhatsApp ons. We helpen u graag.",
+      "unavailableBody": "Probeer het later opnieuw.",
       "otherWays": "Andere contactmogelijkheden",
       "callTitle": "Bel ons",
       "whatsappTitle": "WhatsApp ons",
       "hoursTitle": "Openingstijden",
       "replyTitle": "Wanneer we antwoorden",
-      "sampleNumbers": "Prototype: dit zijn voorbeeldnummers."
+      "phoneUnavailable": "Ondersteuning per telefoon en WhatsApp is niet beschikbaar."
     },
     "guides": {
       "signIn": {

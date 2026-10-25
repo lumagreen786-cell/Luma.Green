@@ -27,6 +27,25 @@ import { teamAudit } from "./lib/organizations";
 
 const MAX_NAME_LENGTH = 120;
 
+/** Storage IDs are shared across domains; every saved reference protects bytes. */
+async function isAttached(ctx: QueryCtx, storageId: Id<"_storage">) {
+  const references = await Promise.all([
+    ctx.db
+      .query("applicationFiles")
+      .withIndex("by_storageId", (q) => q.eq("storageId", storageId))
+      .first(),
+    ctx.db
+      .query("householdPhotos")
+      .withIndex("by_storage", (q) => q.eq("storageId", storageId))
+      .first(),
+    ctx.db
+      .query("qualityAttachments")
+      .withIndex("by_storage", (q) => q.eq("storageId", storageId))
+      .first(),
+  ]);
+  return references.some((reference) => reference !== null);
+}
+
 type AttachResult =
   { ok: true; fileId: Id<"applicationFiles"> } | { ok: false; error: string };
 
@@ -52,11 +71,7 @@ async function assertCanAttach(
     throw new ConvexError("WRONG_FILE_TYPE");
   }
   // An upload already attached anywhere is never touched again.
-  const inUse = await ctx.db
-    .query("applicationFiles")
-    .withIndex("by_storageId", (q) => q.eq("storageId", storageId))
-    .first();
-  if (inUse) throw new ConvexError("FILE_IN_USE");
+  if (await isAttached(ctx, storageId)) throw new ConvexError("FILE_IN_USE");
   return found;
 }
 
@@ -78,11 +93,8 @@ export const discardUnattached = internalMutation({
   args: { storageId: v.id("_storage") },
   returns: v.null(),
   handler: async (ctx, args) => {
-    const attached = await ctx.db
-      .query("applicationFiles")
-      .withIndex("by_storageId", (q) => q.eq("storageId", args.storageId))
-      .first();
-    if (!attached) await ctx.storage.delete(args.storageId);
+    if (!(await isAttached(ctx, args.storageId)))
+      await ctx.storage.delete(args.storageId);
     return null;
   },
 });

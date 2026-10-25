@@ -11,23 +11,29 @@ import { Label } from "@/components/ui/label";
 
 function Photo({ file, onRemove }: { file: File; onRemove: () => void }) {
   const common = useTranslations("join.form");
-  const [url] = useState(() => URL.createObjectURL(file));
-  useEffect(
-    () => () => {
-      URL.revokeObjectURL(url);
-    },
-    [url],
-  );
+  const [url, setUrl] = useState<string>();
+  useEffect(() => {
+    const nextUrl = URL.createObjectURL(file);
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- Publish this external browser resource only after its create/revoke lifecycle starts.
+    setUrl(nextUrl);
+    return () => {
+      URL.revokeObjectURL(nextUrl);
+    };
+  }, [file]);
   return (
     <div className="relative overflow-hidden rounded-lg bg-muted">
-      <Image
-        src={url}
-        alt={file.name}
-        width={160}
-        height={120}
-        unoptimized
-        className="aspect-[4/3] w-full object-cover"
-      />
+      {url ? (
+        <Image
+          src={url}
+          alt={file.name}
+          width={160}
+          height={120}
+          unoptimized
+          className="aspect-[4/3] w-full object-cover"
+        />
+      ) : (
+        <div className="aspect-[4/3] w-full" />
+      )}
       <Button
         type="button"
         variant="secondary"

@@ -3,7 +3,7 @@
 import { convexTest } from "convex-test";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { api, internal } from "./_generated/api";
+import { api, components, internal } from "./_generated/api";
 import type { Id } from "./_generated/dataModel";
 import {
   convexModules,
@@ -240,6 +240,50 @@ describe("households.book", () => {
     await expect(
       t.mutation(api.households.book, await pickupAt(t)),
     ).rejects.toThrow(/NOT_SIGNED_IN/);
+  });
+
+  it("does not accept a profile phone after its authentication verification is removed", async () => {
+    const t = await demoWorld();
+    const arjun = await newHousehold(t);
+    await t.run(async (ctx) => {
+      const profile = await ctx.db
+        .query("profiles")
+        .withIndex("by_phone", (q) => q.eq("phone", "+919876500001"))
+        .unique();
+      if (!profile) throw new Error("Missing household fixture");
+      await ctx.runMutation(components.betterAuth.adapter.updateOne, {
+        input: {
+          model: "user",
+          where: [{ field: "_id", value: profile.authUserId }],
+          update: { phoneNumberVerified: false },
+        },
+      });
+    });
+    await expect(
+      arjun.mutation(api.households.book, await pickupAt(t)),
+    ).rejects.toThrow("NO_PHONE");
+  });
+
+  it("books with the currently verified phone when the profile cache is stale", async () => {
+    const t = await demoWorld();
+    const arjun = await newHousehold(t);
+    await t.run(async (ctx) => {
+      const profile = await ctx.db
+        .query("profiles")
+        .withIndex("by_phone", (q) => q.eq("phone", "+919876500001"))
+        .unique();
+      if (!profile) throw new Error("Missing household fixture");
+      await ctx.runMutation(components.betterAuth.adapter.updateOne, {
+        input: {
+          model: "user",
+          where: [{ field: "_id", value: profile.authUserId }],
+          update: { phoneNumber: "+919876500003", phoneNumberVerified: true },
+        },
+      });
+    });
+    const token = await arjun.mutation(api.households.book, await pickupAt(t));
+    const booking = await bookingByToken(t, token);
+    expect(booking?.phone).toBe("+919876500003");
   });
 
   it("needs an address for a pickup", async () => {

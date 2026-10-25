@@ -178,6 +178,8 @@ export function NewRecord({
   const locale = useLocale();
   const [code, setCode] = useState("");
   const [supplier, setSupplier] = useState<Id<"orgs">>();
+  const [decision, setDecision] = useState("");
+  const [everyDays, setEveryDays] = useState("");
   const options = useQuery(api.sourcing.options, {
     materialCode: code || undefined,
   });
@@ -289,6 +291,8 @@ export function NewRecord({
           />
           <Choice
             name="decision"
+            value={decision}
+            onChange={setDecision}
             label={t("decision")}
             items={(["pending", "approved", "rejected"] as const).map(
               (value) => ({ value, label: t(value) }),
@@ -362,6 +366,8 @@ export function NewRecord({
               {kind === "plan" ? (
                 <Choice
                   name="everyDays"
+                  value={everyDays}
+                  onChange={setEveryDays}
                   label={t("cadence")}
                   items={[
                     { value: "7", label: t("weekly") },

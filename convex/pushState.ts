@@ -2,6 +2,7 @@ import { v } from "convex/values";
 
 import { pushEnv } from "../src/lib/env";
 import { internal } from "./_generated/api";
+import type { Doc } from "./_generated/dataModel";
 import { internalMutation } from "./_generated/server";
 import { canReadInboxItem, hasActivePushSession, pushAudit } from "./lib/push";
 
@@ -70,6 +71,7 @@ export const claim = internalMutation({
     }
     await ctx.db.patch(id, {
       status: "sending",
+      deviceVersion: device.version ?? 0,
       attemptedAt: now,
       updatedAt: now,
     });
@@ -90,6 +92,17 @@ export const claim = internalMutation({
     };
   },
 });
+
+/** A late provider result can retire only the binding that sent the request. */
+function isDeliveryBinding(
+  device: Doc<"pushDevices"> | null,
+  delivery: Doc<"pushDeliveries">,
+): device is Doc<"pushDevices"> {
+  return (
+    device?.profileId === delivery.profileId &&
+    (device.version ?? 0) === (delivery.deviceVersion ?? 0)
+  );
+}
 
 export const finish = internalMutation({
   args: {
@@ -119,7 +132,7 @@ export const finish = internalMutation({
         delivery.profileId,
       );
       const device = await ctx.db.get("pushDevices", delivery.deviceId);
-      if (args.removeDevice && device?.profileId === delivery.profileId) {
+      if (args.removeDevice && isDeliveryBinding(device, delivery)) {
         await ctx.db.delete(device._id);
         await pushAudit(
           ctx,
@@ -190,7 +203,7 @@ export const receipt = internalMutation({
         );
       }
       const device = await ctx.db.get("pushDevices", delivery.deviceId);
-      if (args.removeDevice && device?.profileId === delivery.profileId) {
+      if (args.removeDevice && isDeliveryBinding(device, delivery)) {
         await ctx.db.delete(device._id);
         await pushAudit(
           ctx,

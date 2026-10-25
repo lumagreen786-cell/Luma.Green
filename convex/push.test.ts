@@ -660,6 +660,54 @@ describe("push devices and delivery claims", () => {
       expo: true,
     });
   });
+  it.each(["send", "receipt"] as const)(
+    "preserves a renewed binding after a late %s rejection",
+    async (stage) => {
+      const { t, alice, queue } = await world();
+      const registration = { token, locale: "en", installationId };
+      const id = await alice.mutation(api.push.registerExpo, registration);
+      await queue();
+      const delivery = await t.run((ctx) =>
+        ctx.db.query("pushDeliveries").first(),
+      );
+      if (!delivery) throw new Error("Missing delivery fixture");
+      expect(
+        await t.mutation(internal.pushState.claim, { id: delivery._id }),
+      ).toMatchObject({ deviceId: id });
+      if (stage === "receipt")
+        await t.mutation(internal.pushState.finish, {
+          id: delivery._id,
+          status: "accepted",
+          removeDevice: false,
+          receiptId: "old-receipt",
+        });
+
+      // A new session can restore the same token before an old response arrives.
+      const active = await signInAs(t, "+919000000101");
+      expect(await active.mutation(api.push.registerExpo, registration)).toBe(
+        id,
+      );
+      const renewed = await t.run((ctx) => ctx.db.get("pushDevices", id));
+      if (stage === "send")
+        await t.mutation(internal.pushState.finish, {
+          id: delivery._id,
+          status: "failed",
+          removeDevice: true,
+        });
+      else
+        await t.mutation(internal.pushState.receipt, {
+          id: delivery._id,
+          receiptId: "old-receipt",
+          rejected: true,
+          removeDevice: true,
+        });
+
+      expect(await t.run((ctx) => ctx.db.get("pushDevices", id))).toEqual(
+        renewed,
+      );
+      expect(await deliveryStatus(t, delivery._id)).toBe("failed");
+    },
+  );
   it("removes invalid subscriptions without removing another device", async () => {
     const { t, alice, queue } = await world();
     const id = await alice.mutation(api.push.registerExpo, {

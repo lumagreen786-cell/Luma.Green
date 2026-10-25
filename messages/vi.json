@@ -736,7 +736,7 @@
     },
     "contact": {
       "metaTitle": "Liên hệ hỗ trợ",
-      "metaDescription": "Hỏi đội ngũ Luma.Green qua điện thoại, WhatsApp hoặc tin nhắn ngắn. Chúng tôi trả lời trong một ngày làm việc.",
+      "metaDescription": "Gửi tin nhắn cho nhóm Luma.Green. Chúng tôi phản hồi trong một ngày làm việc.",
       "title": "Liên hệ với chúng tôi",
       "lead": "Nhân viên đọc từng tin nhắn. Hãy diễn đạt bằng lời của bạn.",
       "formHeading": "Gửi tin nhắn",
@@ -786,13 +786,13 @@
         "rateLimited": "Số điện thoại này đã gửi quá nhiều tin nhắn. Vui lòng thử lại sau một giờ."
       },
       "unavailableTitle": "Tin nhắn đang tắt tại đây",
-      "unavailableBody": "Hãy gọi hoặc nhắn WhatsApp. Chúng tôi sẵn lòng hỗ trợ.",
+      "unavailableBody": "Vui lòng thử lại sau.",
       "otherWays": "Cách liên hệ khác",
       "callTitle": "Gọi cho chúng tôi",
       "whatsappTitle": "Nhắn WhatsApp cho chúng tôi",
       "hoursTitle": "Giờ mở cửa",
       "replyTitle": "Thời gian trả lời",
-      "sampleNumbers": "Nguyên mẫu: đây là số điện thoại mẫu."
+      "phoneUnavailable": "Hỗ trợ qua điện thoại và WhatsApp hiện không khả dụng."
     },
     "guides": {
       "signIn": {

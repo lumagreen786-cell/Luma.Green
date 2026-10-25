@@ -433,6 +433,39 @@ describe("uploads", () => {
 });
 
 describe("attachment cleanup races", () => {
+  it.each(["attach", "cleanup"] as const)(
+    "does not let application %s claim or delete a household photo",
+    async (operation) => {
+      const t = setup();
+      const yard = await applicant(t);
+      await yard.mutation(api.applications.start, { kind: "yard", ...consent });
+      const storageId = await upload(t, "jpeg");
+      await t.run(async (ctx) => {
+        const profile = await ctx.db.query("profiles").first();
+        if (!profile) throw new Error("Missing profile fixture");
+        await ctx.db.insert("householdPhotos", {
+          profileId: profile._id,
+          storageId,
+          name: "private-household.jpg",
+          contentType: "image/jpeg",
+          size: SIGNATURES.jpeg.length + 1024,
+          createdAt: Date.now(),
+        });
+      });
+      if (operation === "attach")
+        await expect(
+          attach(yard, storageId, "machine_media", "claimed.jpg"),
+        ).rejects.toThrow("FILE_IN_USE");
+      else
+        await yard.mutation(internal.applicationFiles.discardUnattached, {
+          storageId,
+        });
+      expect(
+        await t.run(async (ctx) => (await ctx.storage.get(storageId)) !== null),
+      ).toBe(true);
+    },
+  );
+
   it("keeps a stored file when another request attached it before cleanup", async () => {
     const t = setup();
     const yard = await applicant(t);

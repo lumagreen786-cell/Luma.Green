@@ -332,7 +332,7 @@
       "choose": "Pilih satu",
       "hoursTitle": "Jam buka",
       "metaTitle": "Hubungi dukungan",
-      "metaDescription": "Tanyakan apa saja kepada tim Luma.Green melalui telepon, WhatsApp, atau pesan singkat. Kami membalas dalam satu hari kerja.",
+      "metaDescription": "Kirim pesan kepada tim Luma.Green. Kami membalas dalam satu hari kerja.",
       "title": "Hubungi kami",
       "lead": "Setiap pesan dibaca petugas. Tanyakan dengan kata-kata Anda sendiri.",
       "formHeading": "Kirim pesan",
@@ -357,12 +357,12 @@
       "sentBody": "Terima kasih. Kami menelepon atau mengirim SMS dalam satu hari kerja.",
       "backToHelp": "Kembali ke bantuan",
       "unavailableTitle": "Pesan dinonaktifkan di sini",
-      "unavailableBody": "Telepon atau hubungi kami melalui WhatsApp. Kami siap membantu.",
+      "unavailableBody": "Silakan coba lagi nanti.",
       "otherWays": "Cara lain menghubungi kami",
       "callTitle": "Telepon kami",
       "whatsappTitle": "Hubungi melalui WhatsApp",
       "replyTitle": "Waktu balasan",
-      "sampleNumbers": "Prototipe: nomor ini adalah contoh."
+      "phoneUnavailable": "Dukungan melalui telepon dan WhatsApp tidak tersedia."
     },
     "guides": {
       "escrow": {
