@@ -1,3 +1,8 @@
+> 26 October: Production GSTIN Advanced is now active and a browser smoke test
+> returned matching active business details. Use Advanced without optional flags.
+> Standard GSTIN remains unsubscribed. Business-only PAN discovery is additive;
+> see [its contract](pan-gstin-discovery.md). Saathi/household/admin are excluded.
+
 # GST lookup and confirmation contract — 25 October 2026
 
 This owner-approved contract supersedes earlier optional-PAN onboarding rules.
@@ -47,10 +52,10 @@ uses the GST lookup path only and cannot auto-confirm for the applicant.
 
 ## Provider and spending controls
 
-POST `https://kyc-api.surepass.app/api/v1/corporate/gstin` with Convex-held Bearer
+POST `https://kyc-api.surepass.app/api/v1/corporate/gstin-advanced` with Convex-held Bearer
 `SUREPASS_API_TOKEN` and JSON `{id_number:GSTIN}`. Accept only `success:true`,
 `status_code:200`, exact matching `data.gstin`, and `data.gstin_status:"Active"`.
-Required metadata: `business_name`, `legal_name`, `address`. Reject missing,
+Required metadata: `business_name`, `legal_name`, and nonempty `address` or, when null/missing, `contact_details.principal.address`. Any returned `pan_number` must match the GSTIN embedded PAN. Reject missing,
 inactive, malformed or mismatched results. Discard unrelated returned data.
 Read-only provider documentation:
 https://app.surepass.app/docs/kyc/gstin-16301821e0

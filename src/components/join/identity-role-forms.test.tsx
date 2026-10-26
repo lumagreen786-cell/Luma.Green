@@ -58,9 +58,11 @@ it.each(["yard", "recycler", "manufacturer"] as const)(
     expect(
       screen.queryByText(messages.join.form.gstQuestion),
     ).not.toBeInTheDocument();
+    expect(screen.getByLabelText(messages.join.identity.pan)).toBeVisible();
     expect(
-      screen.queryByLabelText(messages.join.identity.pan),
-    ).not.toBeInTheDocument();
+      screen.getByRole("button", { name: messages.join.discovery.find }),
+    ).toBeDisabled();
+    expect(lookup).not.toHaveBeenCalled();
     fireEvent.change(
       screen.getByRole("textbox", {
         name: messages.join.form.gstin,

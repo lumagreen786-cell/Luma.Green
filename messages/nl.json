@@ -2222,6 +2222,16 @@
       "previewTitle": "Bevestig de bedrijfsgegevens",
       "confirm": "Bedrijf bevestigen",
       "confirming": "Bevestigen…"
+    },
+    "discovery": {
+      "title": "GST-registraties",
+      "consent": "Met Akkoord en zoeken staat u Luma.Green toe uw PAN naar Surepass te sturen om GST-registraties te zoeken.",
+      "find": "Akkoord en zoeken",
+      "detailsHint": "Kies een actieve registratie. Controleer en bevestig daarna de bedrijfsnaam en het adres.",
+      "empty": "Geen GST-registraties gevonden voor deze PAN.",
+      "select": "Selecteren",
+      "selected": "Geselecteerd",
+      "inactive": "Inactief"
     }
   },
   "app": {

@@ -2222,6 +2222,16 @@
       "previewTitle": "事業情報を確認してください",
       "confirm": "事業を確認",
       "confirming": "確認処理中…"
+    },
+    "discovery": {
+      "title": "GST登録",
+      "consent": "「同意して検索」を選ぶと、GST登録を検索するためにLuma.GreenがPANをSurepassへ送信することに同意します。",
+      "find": "同意して検索",
+      "detailsHint": "有効な登録を選択してください。その後、事業名と住所を確認して確定してください。",
+      "empty": "このPANのGST登録は見つかりませんでした。",
+      "select": "選択",
+      "selected": "選択済み",
+      "inactive": "無効"
     }
   },
   "app": {

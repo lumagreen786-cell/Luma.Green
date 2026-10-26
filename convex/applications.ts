@@ -22,6 +22,7 @@ import {
   vFileType,
 } from "./lib/drafts";
 import { identityInputs } from "./lib/identityChecks";
+import { requirePanSelection } from "./lib/identityDiscovery";
 import { canMove } from "./lib/lifecycle";
 import { queueNotification } from "./lib/notifications";
 import {
@@ -210,17 +211,28 @@ export const start = mutation({
   },
 });
 
+function sanitizeDraftPan(draft: {
+  kabadiwala?: { pan?: string; gstRegistered?: boolean };
+  business?: { pan?: string; gstRegistered?: boolean };
+  saathi?: { pan?: string };
+}) {
+  const saathi = draft.saathi;
+  if (saathi) delete saathi.pan;
+  for (const value of [draft.kabadiwala, draft.business]) {
+    if (!value) continue;
+    if (!value.gstRegistered) delete value.pan;
+    else if (value.pan !== undefined)
+      value.pan = value.pan.trim().toUpperCase();
+  }
+}
+
 /** Saves whatever is filled in so far. Only the sections this role uses. */
 export const saveDraft = mutation({
   args: { ...draftSections, applicationId: v.optional(v.id("applications")) },
   returns: v.null(),
   handler: async (ctx, args) => {
     const { applicationId, ...draft } = args;
-    // Keep legacy fields readable in historical records, but never collect new PAN.
-    for (const section of ["kabadiwala", "business", "saathi"] as const) {
-      const value = draft[section];
-      if (value) delete value.pan;
-    }
+    sanitizeDraftPan(draft);
     const { profile, application } = await requireEditableApplication(
       ctx,
       applicationId,
@@ -243,8 +255,27 @@ export const saveDraft = mutation({
         .map((section) => [section, draft[section]]),
     );
     if (Object.keys(changed).length === 0) return null;
+    const before = application.kabadiwala ?? application.business;
+    const after = draft.kabadiwala ?? draft.business;
+    if (after && before?.pan !== after.pan) {
+      const detail = await ctx.db
+        .query("identityChecks")
+        .withIndex("by_application_kind", (q) =>
+          q.eq("applicationId", application._id).eq("kind", "gst"),
+        )
+        .unique();
+      if (detail)
+        await ctx.db.patch("identityChecks", detail._id, {
+          confirmedAt: undefined,
+        });
+    }
+
     await ctx.db.patch("applications", application._id, {
       ...changed,
+      ...(after?.pan &&
+        before?.pan?.trim().toUpperCase() !== after.pan && {
+          panDiscoveryRequired: true,
+        }),
       updatedAt: Date.now(),
     });
     if (application.organizationId)
@@ -301,6 +332,7 @@ export const submit = mutation({
       });
     }
 
+    await requirePanSelection(ctx, application);
     const identityRequirements = identityInputs(
       application.kabadiwala ?? application.business ?? application.saathi,
     );

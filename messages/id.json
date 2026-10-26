@@ -3042,6 +3042,16 @@
       "previewTitle": "Konfirmasi data usaha",
       "confirm": "Konfirmasi usaha",
       "confirming": "Mengonfirmasi…"
+    },
+    "discovery": {
+      "title": "Pendaftaran GST",
+      "consent": "Dengan memilih Setuju dan cari, Anda mengizinkan Luma.Green mengirim PAN Anda ke Surepass untuk mencari pendaftaran GST.",
+      "find": "Setuju dan cari",
+      "detailsHint": "Pilih pendaftaran aktif. Lalu periksa dan konfirmasi nama serta alamat usaha.",
+      "empty": "Tidak ditemukan pendaftaran GST untuk PAN ini.",
+      "select": "Pilih",
+      "selected": "Dipilih",
+      "inactive": "Tidak aktif"
     }
   },
   "saathi": {

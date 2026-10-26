@@ -70,8 +70,29 @@ for (const { locale, copy } of [
             name: copy.join.form.gstin,
             exact: true,
           });
-          await gst.fill("29ABCDE1234F1Z5");
-          await expect(page.getByLabel(copy.join.identity.pan)).toHaveCount(0);
+          await page.getByLabel(copy.join.identity.pan).fill("ABCDE1234F");
+          await page
+            .getByRole("button", {
+              name: copy.join.discovery.find,
+              exact: true,
+            })
+            .click();
+          await expect(
+            page.getByText("29ABCDE1234F1Z5", { exact: true }),
+          ).toBeVisible();
+          await expect(
+            page.getByRole("button", {
+              name: copy.join.discovery.inactive,
+              exact: true,
+            }),
+          ).toBeDisabled();
+          await page
+            .getByRole("button", {
+              name: copy.join.discovery.select,
+              exact: true,
+            })
+            .click();
+          await expect(gst).toHaveValue("29ABCDE1234F1Z5");
           await page
             .getByRole("button", {
               name: copy.join.identity.check,
@@ -123,24 +144,19 @@ for (const { locale, copy } of [
             copy.join.form.yes,
             "?scenario=limit",
           );
-          await page
-            .getByRole("textbox", { name: copy.join.form.gstin, exact: true })
-            .fill("29ABCDE1234F1Z5");
+          await page.getByLabel(copy.join.identity.pan).fill("ABCDE1234F");
           await page
             .getByRole("button", {
-              name: copy.join.identity.check,
+              name: copy.join.discovery.find,
               exact: true,
             })
             .click();
           await expect(
             page.getByText(copy.join.identity.limit, { exact: true }),
           ).toBeVisible();
-          await expect(
-            page.getByRole("textbox", {
-              name: copy.join.form.gstin,
-              exact: true,
-            }),
-          ).toHaveValue("29ABCDE1234F1Z5");
+          await expect(page.getByLabel(copy.join.identity.pan)).toHaveValue(
+            "ABCDE1234F",
+          );
         }
       });
     }

@@ -1,3 +1,38 @@
+## PAN discovery and GST Advanced — 26 October 2026 (in progress)
+
+Owner scope: registered shop, preprocessor, recycler and manufacturer onboarding
+now accepts PAN, lists associated GSTINs and allows active-registration selection.
+Saathi, household and admin flows stay excluded. Development work is isolated on
+`feat/pan-gstin-onboarding`; primary checkout native changes belong to other work.
+The implementation plan and verification ledger are
+[pan-gstin-onboarding-plan.md](pan-gstin-onboarding-plan.md); the public contract is
+[pan-gstin-discovery.md](../api/pan-gstin-discovery.md).
+
+Surepass Production GSTIN Advanced became active during this task. A single
+browser request using its published sample returned matching active registration
+and business details. Its nested principal address supplies the required address
+when the top-level field is null. Existing detail lookup now uses this fixed
+Advanced endpoint without extra flags or automatic fallback. Standard GSTIN, IRN
+and other requested PAN variants still showed unsubscribed at the latest check.
+Earlier permission requests did not grant Production access. Total observed
+operator spend across three sample calls: INR9.44 of the authorized INR100.
+No retries or applicant records were created by those browser checks.
+
+The PAN path reuses verified-phone application access, shared20/account/India-day
+quota, duplicate/cooldown guards, 24-hour positive-proof reuse and safe audits.
+Selection alone cannot satisfy GST business confirmation or activate a business.
+New proof fields and a server-owned optional application marker are additive;
+see the migration note. Clearing optional PAN restores direct GST confirmation.
+Raw Advanced payloads, DOB enrichment, IRN and unrelated PAN APIs are outside
+this bounded change. Guide/Word updates remain deferred at the owner's request.
+Final local suite passed 2,566 tests; 18 synthetic browser cases passed, and
+current captures were visually inspected. Web/backend types and production webpack
+build passed. Development Convex schema/functions deployed successfully to
+proper-caterpillar-111; SUREPASS_ENABLED remains false. Hosted CI and Production
+website/backend rollout and real-applicant acceptance remain separate gates.
+Full isolated native lint is blocked by missing native dependency links; primary
+native changes are unrelated and preserved. No Vercel Preview is authorized.
+
 ## GST-only registration and automatic activation — 25 October 2026
 
 This owner correction supersedes optional PAN and manual onboarding approval

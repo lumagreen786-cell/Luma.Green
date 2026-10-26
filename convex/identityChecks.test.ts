@@ -110,7 +110,7 @@ it("returns the strict documented lookup response, caches it and requires explic
     ),
   );
   expect(fetcher).toHaveBeenCalledWith(
-    "https://kyc-api.surepass.app/api/v1/corporate/gstin",
+    "https://kyc-api.surepass.app/api/v1/corporate/gstin-advanced",
     expect.objectContaining({ body: JSON.stringify({ id_number: gstin }) }),
   );
   expect(await as.query(api.identityChecks.gst, { applicationId })).toEqual({
@@ -455,4 +455,52 @@ it("rejects malformed GSTIN before a paid reservation", async () => {
   expect(
     await t.run((ctx) => ctx.db.query("identityCheckDays").unique()),
   ).toBeNull();
+});
+
+it("accepts the Advanced principal address when top-level address is null and rejects missing or mismatched details", () => {
+  const principal = { principal: { address: details.address } };
+  expect(
+    gstBusiness(
+      payload({
+        address: null,
+        pan_number: gstin.slice(2, 12),
+        contact_details: principal,
+      }),
+      gstin,
+    ),
+  ).toEqual(details);
+  expect(gstBusiness(payload({ address: null }), gstin)).toBeNull();
+  expect(
+    gstBusiness(
+      payload({
+        address: null,
+        contact_details: { principal: { address: "" } },
+      }),
+      gstin,
+    ),
+  ).toBeNull();
+  expect(
+    gstBusiness(
+      payload({
+        address: null,
+        pan_number: "AAAAA1111A",
+        contact_details: principal,
+      }),
+      gstin,
+    ),
+  ).toBeNull();
+});
+
+it("accepts an omitted Advanced top-level address only when a valid principal address exists", () => {
+  const { address, ...data } = payload().data;
+  expect(
+    gstBusiness(
+      {
+        ...payload(),
+        data: { ...data, contact_details: { principal: { address } } },
+      },
+      gstin,
+    ),
+  ).toEqual(details);
+  expect(gstBusiness({ ...payload(), data }, gstin)).toBeNull();
 });
