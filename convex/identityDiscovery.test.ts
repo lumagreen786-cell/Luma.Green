@@ -51,6 +51,49 @@ async function setup() {
   });
   return { t, as, applicationId };
 }
+it.each(["kabadiwala", "yard", "recycler", "manufacturer"] as const)(
+  "loads a new %s draft before any GST details are saved without a provider call",
+  async (kind) => {
+    const { t, as, applicationId } = await setup();
+    const fetcher = vi.fn();
+    vi.stubGlobal("fetch", fetcher);
+    await t.run((ctx) =>
+      ctx.db.patch("applications", applicationId, {
+        kind,
+        kabadiwala: undefined,
+        business: undefined,
+      }),
+    );
+    expect(
+      await as.query(api.identityDiscovery.current, { applicationId }),
+    ).toBeNull();
+    await expect(
+      as.action(api.identityDiscovery.lookup, { applicationId, consent: true }),
+    ).rejects.toThrow("VALIDATION_REQUIRED");
+    expect(fetcher).not.toHaveBeenCalled();
+    expect(
+      await t.run((ctx) => ctx.db.query("identityPersonCheckDays").take(1)),
+    ).toEqual([]);
+  },
+);
+it("clears saved discovery when GST registration is removed without crashing the query", async () => {
+  const { as, applicationId } = await setup();
+  vi.stubGlobal("fetch", vi.fn().mockResolvedValue(Response.json(payload())));
+  await as.action(api.identityDiscovery.lookup, {
+    applicationId,
+    consent: true,
+  });
+  await as.mutation(api.applications.saveDraft, {
+    applicationId,
+    kabadiwala: { gstRegistered: false },
+  });
+  expect(
+    await as.query(api.identityDiscovery.current, { applicationId }),
+  ).toBeNull();
+  await expect(
+    as.mutation(api.identityDiscovery.select, { applicationId, gstin }),
+  ).rejects.toThrow("VALIDATION_REQUIRED");
+});
 it("rejects mismatched PAN and ambiguous duplicates and retains only bounded registration data", () => {
   expect(registrationsFrom(payload(), pan)).toEqual([registration]);
   expect(registrationsFrom(payload(), "AAAAA1111A")).toBeNull();

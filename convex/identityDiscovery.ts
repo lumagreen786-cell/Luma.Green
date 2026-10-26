@@ -21,7 +21,7 @@ import {
   registrationValidator,
 } from "./lib/identityDiscovery";
 import { isEditable } from "./lib/lifecycle";
-async function eligible(
+async function ownedBusiness(
   ctx: QueryCtx,
   applicationId: Doc<"applications">["_id"],
 ) {
@@ -31,13 +31,17 @@ async function eligible(
   const owned = await requireEditableApplication(ctx, applicationId);
   const app = owned.application;
   const draft = app.kabadiwala ?? app.business;
-  if (
-    !["kabadiwala", "yard", "recycler", "manufacturer"].includes(app.kind) ||
-    !draft?.gstRegistered
-  )
+  if (!["kabadiwala", "yard", "recycler", "manufacturer"].includes(app.kind))
     throw new ConvexError("VALIDATION_REQUIRED");
-  const input = normalizeId(draft.pan);
-  return { ...owned, draft, input };
+  return { ...owned, draft };
+}
+async function eligible(
+  ctx: QueryCtx,
+  applicationId: Doc<"applications">["_id"],
+) {
+  const owned = await ownedBusiness(ctx, applicationId);
+  if (!owned.draft?.gstRegistered) throw new ConvexError("VALIDATION_REQUIRED");
+  return { ...owned, draft: owned.draft, input: normalizeId(owned.draft.pan) };
 }
 function proof(row: Doc<"identityChecks"> | null, pan: string) {
   return row?.provider === "gstin_by_pan" &&
@@ -63,8 +67,11 @@ export const current = query({
   args: { applicationId: v.id("applications") },
   returns: v.union(v.null(), discoveryValidator),
   handler: async (ctx, args) => {
-    const { input } = await eligible(ctx, args.applicationId);
-    return proof(await rowFor(ctx, args.applicationId), input);
+    const { draft } = await ownedBusiness(ctx, args.applicationId);
+    // The form subscribes before its first autosave. An empty draft has no proof.
+    return draft?.gstRegistered
+      ? proof(await rowFor(ctx, args.applicationId), normalizeId(draft.pan))
+      : null;
   },
 });
 export const reserve = internalMutation({

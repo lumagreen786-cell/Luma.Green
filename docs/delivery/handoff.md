@@ -1,3 +1,23 @@
+## PAN discovery empty-draft repair — 26 October 2026
+
+Production request `c549689970622512` failed in
+`identityDiscovery.current` with `VALIDATION_REQUIRED`. The form subscribes
+before its first autosave, while `applications.start` creates no business
+section. Reusing paid-lookup eligibility for this read made that normal empty
+state throw and activated the page error boundary.
+
+The read now returns null when the owned business draft has no GST section or
+is not GST registered. Phone verification, application ownership, business role,
+parent-workspace access and editability remain required. Paid lookup and
+selection still require GST registration and valid saved input. No migration,
+quota reset or provider retry is needed. Regression tests cover all four fresh
+business roles, removal of GST registration, and the unchanged paid-call gate.
+Verification: all 2,571 web/backend tests and the type checks passed; the
+Production build generated all 3,119 pages. The aggregate local check stopped
+on missing native dependencies in this isolated checkout (155 native lint
+errors); the repair does not change native code. Hosted CI must pass before
+merge. Guide/Word updates remain deferred. Release status is recorded in the PR.
+
 ## PAN discovery and GST Advanced — 26 October 2026 (in progress)
 
 Owner scope: registered shop, preprocessor, recycler and manufacturer onboarding
