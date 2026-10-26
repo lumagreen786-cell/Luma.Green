@@ -2222,6 +2222,16 @@
       "previewTitle": "사업 정보를 확인하세요",
       "confirm": "사업 확인",
       "confirming": "확인 처리 중…"
+    },
+    "discovery": {
+      "title": "GST 등록",
+      "consent": "동의하고 찾기를 선택하면 GST 등록을 찾기 위해 Luma.Green이 귀하의 PAN을 Surepass로 보내는 데 동의합니다.",
+      "find": "동의하고 찾기",
+      "detailsHint": "활성 등록을 선택하세요. 그런 다음 사업체 이름과 주소를 확인하고 확정하세요.",
+      "empty": "이 PAN에 해당하는 GST 등록을 찾지 못했습니다.",
+      "select": "선택",
+      "selected": "선택됨",
+      "inactive": "비활성"
     }
   },
   "app": {

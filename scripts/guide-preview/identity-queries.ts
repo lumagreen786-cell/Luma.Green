@@ -20,17 +20,46 @@ function checkFixture() {
     ? Promise.reject(new ConvexError({ code: "CHECK_LIMIT" }))
     : Promise.resolve(fixture);
 }
+function discoveryFixture() {
+  const scenario = new URLSearchParams(window.location.search).get("scenario");
+  if (scenario === "limit")
+    return Promise.reject(new ConvexError("CHECK_LIMIT"));
+  return Promise.resolve({
+    pan: "ABCDE1234F",
+    registrations:
+      scenario === "empty"
+        ? []
+        : [
+            {
+              gstin: fixture.gstin,
+              state: "Karnataka",
+              stateCode: "29",
+              status: "Active",
+            },
+            {
+              gstin: "08ABCDE1234F1Z5",
+              state: "Rajasthan",
+              stateCode: "08",
+              status: "Cancelled",
+            },
+          ],
+  });
+}
 /** Loopback adapters only: no account, provider request or saved proof. */
 export function useMutation(mutation: FunctionReference<"mutation">) {
-  return ["applications:saveDraft", "identityChecks:confirmGst"].includes(
-    getFunctionName(mutation),
-  )
+  return [
+    "applications:saveDraft",
+    "identityChecks:confirmGst",
+    "identityDiscovery:select",
+  ].includes(getFunctionName(mutation))
     ? saveFixture
     : rejectWrite;
 }
 export function useAction(action: FunctionReference<"action">) {
-  return getFunctionName(action) === "identityChecks:lookupGst"
-    ? checkFixture
+  if (getFunctionName(action) === "identityChecks:lookupGst")
+    return checkFixture;
+  return getFunctionName(action) === "identityDiscovery:lookup"
+    ? discoveryFixture
     : rejectWrite;
 }
 export function useQuery() {

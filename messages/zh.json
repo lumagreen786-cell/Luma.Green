@@ -2222,6 +2222,16 @@
       "previewTitle": "请确认企业信息",
       "confirm": "确认企业",
       "confirming": "正在确认…"
+    },
+    "discovery": {
+      "title": "GST登记",
+      "consent": "选择“同意并查找”，即表示您允许Luma.Green将您的PAN发送给Surepass，以查找GST登记。",
+      "find": "同意并查找",
+      "detailsHint": "选择有效的登记，然后核对并确认企业名称和地址。",
+      "empty": "未找到此PAN对应的GST登记。",
+      "select": "选择",
+      "selected": "已选择",
+      "inactive": "无效"
     }
   },
   "app": {

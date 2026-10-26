@@ -25,6 +25,7 @@ import {
   identityInputs,
   normalizeId,
 } from "./lib/identityChecks";
+import { requirePanSelection } from "./lib/identityDiscovery";
 
 const fields = {
   gstin: v.string(),
@@ -114,6 +115,7 @@ export const reserve = internalMutation({
       ctx,
       args.applicationId,
     );
+    await requirePanSelection(ctx, application);
     // Old clients may still request PAN. Never send or spend for this retired field.
     if (args.kind === "pan") return null;
     const check = identityInputs(
@@ -224,7 +226,7 @@ async function lookup(
   let isAvailable = false;
   try {
     const response = await fetch(
-      "https://kyc-api.surepass.app/api/v1/corporate/gstin",
+      "https://kyc-api.surepass.app/api/v1/corporate/gstin-advanced",
       {
         method: "POST",
         redirect: "error",
@@ -274,6 +276,7 @@ export const confirmGst = mutation({
       ctx,
       args.applicationId,
     );
+    await requirePanSelection(ctx, application);
     const input = identityInputs(
       application.kabadiwala ?? application.business,
     )[0]?.input;

@@ -36,6 +36,7 @@ import {
   SubmitBar,
 } from "./form-parts";
 import { type GstDetails, IdentityCheck } from "./identity-check";
+import { PanDiscovery } from "./pan-discovery";
 import { submitErrorKey, type SubmitFailure } from "./submit-error";
 import { useAutosave, withoutUndefined } from "./use-autosave";
 import type { Application } from "./use-mine";
@@ -48,6 +49,7 @@ function toDraft(values: Partial<Values>): Draft {
     ownerName: values.ownerName,
     shopName: values.shopName,
     gstRegistered: values.gstRegistered,
+    pan: values.gstRegistered === false ? undefined : values.pan,
     gstin: cleanGstin(values.gstRegistered, values.gstin),
     address: values.address,
     location: values.location,
@@ -92,6 +94,7 @@ export function KabadiwalaForm({
       shopName: draft.shopName ?? "",
       gstRegistered: draft.gstRegistered,
       gstin: draft.gstin ?? "",
+      pan: draft.pan ?? "",
       address: draft.address ?? "",
       location: draft.location,
       offersPickup: draft.offersPickup,
@@ -158,6 +161,29 @@ export function KabadiwalaForm({
             )}
           />
         </FieldSet>
+        <PanDiscovery
+          applicationId={application.id}
+          pan={values.pan}
+          gstin={values.gstin}
+          onPan={(value) => {
+            setValue("pan", value, { shouldDirty: true });
+            setValue("gstin", "", { shouldDirty: true });
+            setConfirmedGstin(null);
+          }}
+          onSelected={(value) => {
+            setValue("gstin", value, {
+              shouldDirty: true,
+              shouldValidate: true,
+            });
+            setConfirmedGstin(null);
+          }}
+          save={async () => {
+            await saveDraft({
+              applicationId: application.id,
+              kabadiwala: toDraft(getValues()),
+            });
+          }}
+        />
         <FormField
           id="gstin"
           label={t("form.gstin")}
@@ -166,6 +192,7 @@ export function KabadiwalaForm({
         >
           <Input
             id="gstin"
+            readOnly={Boolean(values.pan)}
             dir="ltr"
             autoCapitalize="characters"
             maxLength={15}
@@ -273,27 +300,53 @@ export function KabadiwalaForm({
                 />
               </FieldSet>
               {values.gstRegistered ? (
-                <FormField
-                  id="gstin"
-                  label={t("form.gstin")}
-                  hint={t("form.gstinHint")}
-                  error={errors.gstin?.message}
-                >
-                  <Input
-                    id="gstin"
-                    dir="ltr"
-                    autoCapitalize="characters"
-                    maxLength={15}
-                    className="h-12 font-mono text-base tracking-wider uppercase"
-                    aria-invalid={errors.gstin ? true : undefined}
-                    aria-describedby={describedBy(
-                      "gstin",
-                      errors.gstin?.message,
-                      t("form.gstinHint"),
-                    )}
-                    {...register("gstin")}
+                <>
+                  <PanDiscovery
+                    applicationId={application.id}
+                    pan={values.pan}
+                    gstin={values.gstin}
+                    onPan={(value) => {
+                      setValue("pan", value, { shouldDirty: true });
+                      setValue("gstin", "", { shouldDirty: true });
+                      setConfirmedGstin(null);
+                    }}
+                    onSelected={(value) => {
+                      setValue("gstin", value, {
+                        shouldDirty: true,
+                        shouldValidate: true,
+                      });
+                      setConfirmedGstin(null);
+                    }}
+                    save={async () => {
+                      await saveDraft({
+                        applicationId: application.id,
+                        kabadiwala: toDraft(getValues()),
+                      });
+                    }}
                   />
-                </FormField>
+                  <FormField
+                    id="gstin"
+                    label={t("form.gstin")}
+                    hint={t("form.gstinHint")}
+                    error={errors.gstin?.message}
+                  >
+                    <Input
+                      id="gstin"
+                      readOnly={Boolean(values.pan)}
+                      dir="ltr"
+                      autoCapitalize="characters"
+                      maxLength={15}
+                      className="h-12 font-mono text-base tracking-wider uppercase"
+                      aria-invalid={errors.gstin ? true : undefined}
+                      aria-describedby={describedBy(
+                        "gstin",
+                        errors.gstin?.message,
+                        t("form.gstinHint"),
+                      )}
+                      {...register("gstin")}
+                    />
+                  </FormField>
+                </>
               ) : null}
               <IdentityCheck
                 onConfirmed={acceptBusiness}

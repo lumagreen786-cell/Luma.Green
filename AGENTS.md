@@ -303,6 +303,22 @@ ICU arguments and script coverage.
 
 ## 9. Integration boundaries
 
+### PAN business discovery — 26 October 2026
+
+The owner resumed PAN entry for registered kabadiwalas, preprocessors, recyclers
+and manufacturers only. Use PAN to list linked GSTINs, then let the applicant
+select an active registration. Saathis, households and admin have no PAN/GST
+onboarding requirement. Unregistered kabadiwalas keep their existing path.
+This supersedes the 25 October removal of PAN only for these business flows.
+GSTIN-by-PAN returns registration identifiers, state and status, not verified
+business names or addresses. Show only returned data. Use the existing selected
+GSTIN detail lookup and explicit business confirmation for those details; a
+service that is unavailable must not be bypassed to activate an application.
+Retain verified-phone access, the shared 20 paid attempts/account/India day,
+duplicate protection, 24-hour proof reuse and no automatic paid retries. Keep
+PAN and result lists private. This bounded request does not authorize adding
+PAN Comprehensive, DOB enrichment, all raw provider data or IRN checks to onboarding.
+
 ### Provider API ownership — 24 October 2026
 
 Server-to-server operational API calls run in Convex actions, never in Vercel

@@ -89,7 +89,20 @@ export default defineSchema({
     ),
     createdAt: v.number(),
     expiresAt: v.number(),
-    provider: v.optional(v.literal("gstin")),
+    provider: v.optional(
+      v.union(v.literal("gstin"), v.literal("gstin_by_pan")),
+    ),
+    selectedGstin: v.optional(v.string()),
+    registrations: v.optional(
+      v.array(
+        v.object({
+          gstin: v.string(),
+          state: v.string(),
+          stateCode: v.string(),
+          status: v.string(),
+        }),
+      ),
+    ),
     businessName: v.optional(v.string()),
     legalName: v.optional(v.string()),
     address: v.optional(v.string()),
@@ -257,6 +270,7 @@ export default defineSchema({
    * Saathi record itself is created when the admin approves.
    */
   applications: defineTable({
+    panDiscoveryRequired: v.optional(v.boolean()),
     organizationId: v.optional(v.id("organizations")),
     profileId: v.id("profiles"),
     kind: vApplicationKind,

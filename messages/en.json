@@ -2222,6 +2222,16 @@
       "previewTitle": "Confirm business details",
       "confirm": "Confirm business",
       "confirming": "Confirming…"
+    },
+    "discovery": {
+      "title": "GST registrations",
+      "consent": "By selecting Agree and find, you allow Luma.Green to send your PAN to Surepass to find GST registrations.",
+      "find": "Agree and find",
+      "detailsHint": "Select an active registration. Then check and confirm its business name and address.",
+      "empty": "No GST registrations were found for this PAN.",
+      "select": "Select",
+      "selected": "Selected",
+      "inactive": "Inactive"
     }
   },
   "app": {

@@ -2222,6 +2222,16 @@
       "previewTitle": "Confirmez les informations de l’entreprise",
       "confirm": "Confirmer l’entreprise",
       "confirming": "Confirmation…"
+    },
+    "discovery": {
+      "title": "Immatriculations GST",
+      "consent": "En sélectionnant Accepter et rechercher, vous autorisez Luma.Green à envoyer votre PAN à Surepass pour rechercher les immatriculations GST.",
+      "find": "Accepter et rechercher",
+      "detailsHint": "Sélectionnez une immatriculation active. Vérifiez puis confirmez le nom et l’adresse de l’entreprise.",
+      "empty": "Aucune immatriculation GST trouvée pour ce PAN.",
+      "select": "Sélectionner",
+      "selected": "Sélectionné",
+      "inactive": "Inactif"
     }
   },
   "app": {

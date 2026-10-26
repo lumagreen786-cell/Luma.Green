@@ -2222,6 +2222,16 @@
       "previewTitle": "Xác nhận thông tin doanh nghiệp",
       "confirm": "Xác nhận doanh nghiệp",
       "confirming": "Đang xác nhận…"
+    },
+    "discovery": {
+      "title": "Đăng ký GST",
+      "consent": "Khi chọn Đồng ý và tìm, bạn cho phép Luma.Green gửi PAN của bạn đến Surepass để tìm các đăng ký GST.",
+      "find": "Đồng ý và tìm",
+      "detailsHint": "Chọn đăng ký đang hoạt động. Sau đó kiểm tra và xác nhận tên cùng địa chỉ doanh nghiệp.",
+      "empty": "Không tìm thấy đăng ký GST cho PAN này.",
+      "select": "Chọn",
+      "selected": "Đã chọn",
+      "inactive": "Không hoạt động"
     }
   },
   "app": {

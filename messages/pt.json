@@ -2222,6 +2222,16 @@
       "previewTitle": "Confirme os dados da empresa",
       "confirm": "Confirmar empresa",
       "confirming": "A confirmar…"
+    },
+    "discovery": {
+      "title": "Registos GST",
+      "consent": "Ao selecionar Aceitar e pesquisar, autoriza a Luma.Green a enviar o seu PAN à Surepass para procurar registos GST.",
+      "find": "Aceitar e pesquisar",
+      "detailsHint": "Selecione um registo ativo. Depois verifique e confirme o nome e o endereço da empresa.",
+      "empty": "Não foram encontrados registos GST para este PAN.",
+      "select": "Selecionar",
+      "selected": "Selecionado",
+      "inactive": "Inativo"
     }
   },
   "app": {

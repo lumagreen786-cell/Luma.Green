@@ -3042,6 +3042,16 @@
       "previewTitle": "İşletme bilgilerini onaylayın",
       "confirm": "İşletmeyi onayla",
       "confirming": "Onaylanıyor…"
+    },
+    "discovery": {
+      "title": "GST kayıtları",
+      "consent": "Kabul et ve bul seçeneğiyle, GST kayıtlarını bulmak için Luma.Green’in PAN bilginizi Surepass’e göndermesine izin verirsiniz.",
+      "find": "Kabul et ve bul",
+      "detailsHint": "Etkin bir kayıt seçin. Ardından işletme adını ve adresini kontrol edip onaylayın.",
+      "empty": "Bu PAN için GST kaydı bulunamadı.",
+      "select": "Seç",
+      "selected": "Seçildi",
+      "inactive": "Etkin değil"
     }
   },
   "saathi": {

@@ -2970,6 +2970,16 @@
       "previewTitle": "Sahkan maklumat perniagaan",
       "confirm": "Sahkan perniagaan",
       "confirming": "Mengesahkan…"
+    },
+    "discovery": {
+      "title": "Pendaftaran GST",
+      "consent": "Dengan memilih Setuju dan cari, anda membenarkan Luma.Green menghantar PAN anda kepada Surepass untuk mencari pendaftaran GST.",
+      "find": "Setuju dan cari",
+      "detailsHint": "Pilih pendaftaran aktif. Kemudian semak dan sahkan nama serta alamat perniagaan.",
+      "empty": "Tiada pendaftaran GST ditemui untuk PAN ini.",
+      "select": "Pilih",
+      "selected": "Dipilih",
+      "inactive": "Tidak aktif"
     }
   },
   "compliance": {

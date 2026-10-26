@@ -27,7 +27,17 @@ const gstEnvelope = z.object({
     gstin_status: z.literal("Active"),
     business_name: z.string().trim().max(500),
     legal_name: z.string().trim().min(1).max(500),
-    address: z.string().trim().min(1).max(2000),
+    pan_number: z.string().optional(),
+    address: z.string().trim().min(1).max(2000).nullable().optional(),
+    contact_details: z
+      .object({
+        principal: z
+          .object({
+            address: z.string().trim().min(1).max(2000).nullable().optional(),
+          })
+          .optional(),
+      })
+      .optional(),
   }),
 });
 
@@ -37,12 +47,18 @@ export function gstBusiness(payload: unknown, input: string) {
   if (!parsed.success || parsed.data.data.gstin !== input) return null;
   const data = parsed.data.data;
   const name = data.business_name || data.legal_name;
-  if (!name) return null;
+  const address = data.address ?? data.contact_details?.principal?.address;
+  if (
+    !name ||
+    !address ||
+    (data.pan_number !== undefined && data.pan_number !== input.slice(2, 12))
+  )
+    return null;
   return {
     gstin: input,
     businessName: name,
     legalName: data.legal_name,
-    address: data.address,
+    address,
   };
 }
 const envelope = z.object({
