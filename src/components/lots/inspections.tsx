@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/select";
 import { useCanOperate } from "@/components/workspace/permissions";
 import { isLocale, localeDirection } from "@/i18n/locales";
+import { Link } from "@/i18n/navigation";
 
 import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
@@ -339,6 +340,8 @@ export function Inspections({
 }) {
   const t = useTranslations("lots");
   const format = useFormatter();
+  const files = useTranslations("qualityDocuments");
+  const reports = useTranslations("auditReports");
   const data = useQuery(api.quality.forLot, { lotId });
   return (
     <section
@@ -440,6 +443,24 @@ export function Inspections({
                     </a>
                   ) : null}
                   <div className="flex flex-wrap gap-3">
+                    <Link
+                      href={{
+                        pathname: "/app/quality-documents",
+                        query: { inspection: row.id },
+                      }}
+                      className="inline-flex min-h-11 items-center py-2 text-sm font-medium text-primary underline underline-offset-4"
+                    >
+                      {files("title")}
+                    </Link>
+                    <Link
+                      href={{
+                        pathname: "/account/reports",
+                        query: { inspection: row.id },
+                      }}
+                      className="inline-flex min-h-11 items-center py-2 text-sm font-medium text-primary underline underline-offset-4"
+                    >
+                      {reports("title")}
+                    </Link>
                     <InspectionForm lotId={lotId} city={city} previous={row} />
                     <ApproveCorrection inspection={row} />
                   </div>

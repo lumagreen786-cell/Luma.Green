@@ -16,7 +16,7 @@ for (const { locale, messages } of [
       await page.evaluate(async () => document.fonts.ready);
       await expect(page.getByRole("heading", { level: 1 })).toBeInViewport();
       await expect(
-        page.getByRole("button", { name: messages.auth.continue, exact: true }),
+        page.getByRole("button", { name: messages.auth.sendCode, exact: true }),
       ).toBeInViewport();
       expect(
         await page.evaluate(

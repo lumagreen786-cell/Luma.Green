@@ -975,23 +975,23 @@
       },
       "firstPickup": {
         "title": "Đặt lịch thu gom đầu tiên",
-        "summary": "Chọn vật liệu, so sánh cửa hàng và xác minh số điện thoại di động để đặt lịch thu gom.",
+        "summary": "Thêm ảnh · Chọn cửa hàng gần đây · Chọn thời gian",
         "steps": {
           "photo": {
             "title": "Chụp ảnh vật liệu",
-            "body": "Tùy chọn: thêm một ảnh vật liệu rồi kiểm tra vật liệu đề xuất."
+            "body": "Thêm ít nhất một ảnh."
           },
           "estimate": {
-            "title": "Kiểm tra ước tính",
-            "body": "Chúng tôi hiển thị vật liệu nhận diện và số kg gần đúng. Điều chỉnh số kg nếu chưa đúng."
+            "title": "Thông tin của bạn",
+            "body": "Tên của bạn · Địa chỉ thu gom"
           },
           "choose": {
             "title": "Chọn thu gom hoặc mang đến",
-            "body": "Xem kabadiwala đã xác minh gần bạn, xếp theo khoảng cách, kèm giờ mở cửa."
+            "body": "Chọn cửa hàng gần đây · Gần nhất trước"
           },
           "slot": {
             "title": "Chọn giờ",
-            "body": "Chọn khung giờ rồi kiểm tra địa chỉ và ghim bản đồ."
+            "body": "Ngày hẹn · Giờ"
           },
           "code": {
             "title": "Xác nhận số điện thoại",
@@ -999,7 +999,7 @@
           },
           "track": {
             "title": "Nhận liên kết theo dõi",
-            "body": "Chúng tôi gửi SMS chứa liên kết theo dõi lần thu gom."
+            "body": "Chúng tôi đã gửi yêu cầu. Trang cập nhật ngay khi họ trả lời."
           }
         }
       },
@@ -1175,11 +1175,11 @@
         "steps": {
           "see": {
             "title": "Xem yêu cầu mới",
-            "body": "Mỗi yêu cầu hiển thị khu vực, khung giờ, vật liệu, số kg ước tính và số tiền bạn sẽ trả."
+            "body": "Hộ gần bạn muốn bán vật liệu."
           },
           "answer": {
             "title": "Chấp nhận hoặc từ chối",
-            "body": "Chấp nhận để nhận việc. Nếu từ chối, yêu cầu chuyển đến kabadiwala gần nhất tiếp theo và hộ gia đình không được báo ai đã từ chối."
+            "body": "Hộ gia đình có thể chọn cửa hàng khác và gửi yêu cầu mới."
           },
           "auto": {
             "title": "Bật tự động chấp nhận",
@@ -1531,7 +1531,7 @@
     "faqs": {
       "noCode": {
         "q": "Tôi chưa nhận được mã SMS",
-        "a": "Đợi 30 giây rồi chạm Gửi lại. Kiểm tra đúng số và điện thoại có sóng. Mã có hiệu lực 5 phút."
+        "a": "Kiểm tra số điện thoại và tín hiệu. Chờ bộ đếm gửi lại kết thúc rồi yêu cầu mã mới. Mã hết hạn sau 5 phút."
       },
       "newPhone": {
         "q": "Tôi có điện thoại hoặc số mới",
@@ -1551,7 +1551,7 @@
       },
       "whatCanISell": {
         "q": "Tôi có thể bán gì?",
-        "a": "Giấy và bìa carton, chai và hộp nhựa, kim loại, thủy tinh và thiết bị điện tử cũ. Chưa chắc? Chụp ảnh để xem ước tính."
+        "a": "Giấy và bìa carton, chai và hộp nhựa, kim loại, thủy tinh và thiết bị điện tử cũ."
       },
       "howPriceWorks": {
         "q": "Tiền của tôi được tính thế nào?",
@@ -1583,7 +1583,7 @@
       },
       "photosKept": {
         "q": "Ảnh của tôi được xử lý thế nào?",
-        "a": "Không chụp mặt, giấy tờ hoặc biển số. Ảnh được gửi đến nhà cung cấp AI để ước tính. Luma.Green không lưu ảnh."
+        "a": "Ảnh được lưu riêng tư cùng với yêu cầu của bạn. Chỉ những người có quyền truy cập yêu cầu mới có thể xem ảnh. Tránh chụp khuôn mặt, giấy tờ và biển số xe."
       },
       "whyVerify": {
         "q": "Vì sao tôi phải được xác minh?",
@@ -1607,7 +1607,7 @@
       },
       "rejectRequest": {
         "q": "Nếu tôi từ chối yêu cầu thì sao?",
-        "a": "Yêu cầu chuyển đến kabadiwala gần nhất tiếp theo. Hộ gia đình không biết ai đã từ chối."
+        "a": "Hộ gia đình có thể chọn cửa hàng khác và gửi yêu cầu mới."
       },
       "payHousehold": {
         "q": "Luma.Green có trả tiền cho hộ thay tôi không?",
@@ -2771,7 +2771,7 @@
       "completed": "Xong! Bạn nhận {amount}",
       "completedBody": "Cảm ơn bạn đã tái chế. Điểm đã cộng vào số của bạn.",
       "declined": "{shop} không nhận được lịch này",
-      "declinedBody": "Chưa thu gom gì. Thử cửa hàng khác: danh sách của bạn đã lưu.",
+      "declinedBody": "Thêm ảnh và kiểm tra lại thông tin của bạn. Chọn cửa hàng khác để gửi yêu cầu mới.",
       "cancelled": "Lịch đặt này đã hủy",
       "cancelledBody": "Chưa thu gom gì. Bạn có thể đặt lại bất cứ lúc nào."
     },
@@ -2842,7 +2842,8 @@
     "saved": "Không cần tài khoản. Giữ liên kết để xem lịch trên mọi điện thoại.",
     "sellMore": "Đặt lịch thu gom lần nữa",
     "tryAnother": "Thử cửa hàng khác",
-    "dispatchChanged": "Yêu cầu đã chuyển sang cửa hàng gần bạn khác. Cửa hàng hiện tại hiển thị bên dưới."
+    "dispatchChanged": "Yêu cầu đã chuyển sang cửa hàng gần bạn khác. Cửa hàng hiện tại hiển thị bên dưới.",
+    "retryDetails": "Thêm ảnh và kiểm tra lại thông tin của bạn. Chọn cửa hàng khác để gửi yêu cầu mới."
   },
   "market": {
     "sampleData": "Giá và số tiền trên màn hình này là dữ liệu mẫu cho nguyên mẫu.",

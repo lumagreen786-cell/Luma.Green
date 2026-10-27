@@ -1,8 +1,9 @@
 "use client";
 import { useMutation, useQuery } from "convex/react";
 import type { FunctionReturnType } from "convex/server";
+import { useSearchParams } from "next/navigation";
 import { useFormatter, useNow, useTranslations } from "next-intl";
-import { useId, useState } from "react";
+import { Suspense, useId, useState } from "react";
 
 import { AppPageHeader, ListSkeleton } from "@/components/app/page-parts";
 import { RecordWorkspace } from "@/components/app/record-workspace";
@@ -23,15 +24,19 @@ export function AuditReports() {
   if (data === undefined) return <ListSkeleton />;
   if (!data) return null;
   return (
-    <ReportsContent
-      key={`${data.orgId ?? "recipient"}:${String(data.canCreate)}`}
-      data={data}
-    />
+    <Suspense fallback={<ListSkeleton />}>
+      <ReportsContent
+        key={`${data.orgId ?? "recipient"}:${String(data.canCreate)}`}
+        data={data}
+      />
+    </Suspense>
   );
 }
 function ReportsContent({ data }: { data: Board }) {
   const t = useTranslations("auditReports");
   const [selected, setSelected] = useState<Id<"auditReports"> | null>(null);
+  const requested = useSearchParams().get("inspection");
+  const inspection = data.inspections.find((row) => row.id === requested);
   return (
     <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 p-4 sm:p-8">
       <AppPageHeader title={t("title")} lead={t("lead")} />
@@ -42,6 +47,8 @@ function ReportsContent({ data }: { data: Board }) {
         }}
         list={
           <WorkflowTabs
+            key={inspection?.id ?? "all"}
+            defaultValue={inspection && data.canCreate ? "create" : undefined}
             items={[
               {
                 value: "received",
@@ -66,7 +73,13 @@ function ReportsContent({ data }: { data: Board }) {
                     {
                       value: "create",
                       label: t("create"),
-                      content: <CreateReport key={data.orgId} data={data} />,
+                      content: (
+                        <CreateReport
+                          key={data.orgId}
+                          data={data}
+                          inspectionId={inspection?.id}
+                        />
+                      ),
                     },
                   ]
                 : []),
@@ -83,12 +96,18 @@ function ReportsContent({ data }: { data: Board }) {
     </div>
   );
 }
-function CreateReport({ data }: { data: Board }) {
+function CreateReport({
+  data,
+  inspectionId,
+}: {
+  data: Board;
+  inspectionId?: string;
+}) {
   const t = useTranslations("auditReports");
   const create = useMutation(api.auditShares.create);
   const action = useQualityAction();
   const id = useId();
-  const [inspection, setInspection] = useState("");
+  const [inspection, setInspection] = useState(inspectionId ?? "");
   const [recipient, setRecipient] = useState("");
   const [purpose, setPurpose] = useState("");
   const [expiry, setExpiry] = useState("");

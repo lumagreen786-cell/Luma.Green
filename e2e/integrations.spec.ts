@@ -13,7 +13,7 @@ for (const { locale, messages } of [
     await page.goto(`/${locale}/app/integrations`);
     await expect(page).toHaveURL(/\/login\?next=%2Fapp$/);
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-      messages.auth.chooseLanguage,
+      messages.auth.metaTitle,
     );
     await expect(
       page.getByRole("textbox", { name: messages.integrations.tokenLabel }),

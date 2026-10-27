@@ -40,6 +40,7 @@ import {
 } from "./form-parts";
 import { type GstDetails, IdentityCheck } from "./identity-check";
 import { PanDiscovery } from "./pan-discovery";
+import { resumeStage } from "./resume-stage";
 import { useAutosave, withoutUndefined } from "./use-autosave";
 import type { Application } from "./use-mine";
 
@@ -74,10 +75,12 @@ export function BusinessForm({
   kind,
   application,
   loginPhone,
+  onContinue,
 }: {
   kind: BusinessKind;
   application: Application;
   loginPhone: string | undefined;
+  onContinue?: (business: Draft) => void;
 }) {
   const t = useTranslations("join");
   const router = useRouter();
@@ -116,6 +119,18 @@ export function BusinessForm({
     },
   });
 
+  const [initialStage] = useState(() => {
+    const parsed = businessSchema.safeParse(getValues());
+    return resumeStage(
+      [
+        ["businessName", "gstRegistered", "gstin", "materials"],
+        ["address", "location", "locationTags"],
+        ["collectsFromSuppliers", "phones", "opens", "closes", "weeklyOff"],
+      ],
+      parsed.success ? [] : parsed.error.issues,
+    );
+  });
+
   // Partial on purpose: a question stays unanswered until they tap it.
   const values = useWatch({ control }) as Partial<Values>;
   const saveState = useAutosave(values, async (current) => {
@@ -126,7 +141,8 @@ export function BusinessForm({
     setFailure(null);
     try {
       await saveDraft({ business: toDraft(valid) });
-      router.push(`/join/${kind}/documents`);
+      if (onContinue) onContinue(toDraft(valid));
+      else router.push(`/join/${kind}/documents`);
     } catch {
       setFailure("generic");
     }
@@ -214,6 +230,7 @@ export function BusinessForm({
 
   return (
     <FormJourney
+      initialStage={initialStage}
       trigger={trigger}
       getFieldState={getFieldState}
       onFinish={(event) => {

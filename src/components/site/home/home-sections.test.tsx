@@ -111,6 +111,16 @@ describe("home page", () => {
     ).toBeVisible();
   });
 
+  it("opens a role from its image, title or action through one link", async () => {
+    await renderSection(RoleBenefits({ businessOnly: true }));
+    for (const item of screen.getAllByRole("listitem")) {
+      const link = within(item).getByRole("link");
+      expect(within(item).getByRole("heading").closest("a")).toBe(link);
+      expect(item.querySelector("img")?.closest("a")).toBe(link);
+      expect(within(item).getAllByRole("link")).toHaveLength(1);
+    }
+  });
+
   it("offers five business paths without repeating household booking", async () => {
     await renderSection(RoleBenefits({ businessOnly: true }));
     expect(screen.getAllByRole("link")).toHaveLength(5);

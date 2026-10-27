@@ -45,8 +45,12 @@ const STATUS_TONES: Record<
  */
 export function ApplicationReview({
   applicationId,
+  onBack,
+  onDecided,
 }: {
   applicationId: string;
+  onBack?: () => void;
+  onDecided?: () => void;
 }) {
   const application = useQuery(api.review.get, { applicationId });
   const now = useMinuteClock();
@@ -68,10 +72,16 @@ export function ApplicationReview({
 
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-6">
-      <BackLink />
+      <BackLink onBack={onBack} />
       <ReviewHeader application={application} now={now} />
       <ResubmissionNote application={application} />
-      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_22rem]">
+      <div
+        className={
+          onBack
+            ? "grid gap-6"
+            : "grid gap-6 xl:grid-cols-[minmax(0,1fr)_22rem]"
+        }
+      >
         <Tabs defaultValue="application" className="min-w-0">
           <TabsList className="h-auto flex-wrap justify-start gap-2">
             <TabsTrigger value="application">Application</TabsTrigger>
@@ -100,7 +110,11 @@ export function ApplicationReview({
         </Tabs>
         <aside
           aria-label="Checks and decision"
-          className="flex min-w-0 flex-col gap-6 xl:sticky xl:top-6 xl:self-start xl:border-s xl:ps-6"
+          className={
+            onBack
+              ? "flex min-w-0 flex-col gap-6 border-t pt-6"
+              : "flex min-w-0 flex-col gap-6 xl:sticky xl:top-6 xl:self-start xl:border-s xl:ps-6"
+          }
         >
           {application.status === "submitted" ? (
             <>
@@ -116,6 +130,7 @@ export function ApplicationReview({
                   kind: application.kind,
                 }}
                 canApprove={canApprove}
+                onDecided={onDecided}
               />
             </>
           ) : (
@@ -127,7 +142,14 @@ export function ApplicationReview({
   );
 }
 
-function BackLink() {
+function BackLink({ onBack }: { onBack?: () => void } = {}) {
+  if (onBack)
+    return (
+      <Button variant="ghost" className="self-start" onClick={onBack}>
+        <ArrowLeftIcon aria-hidden className="size-4" />
+        Verification queue
+      </Button>
+    );
   return (
     <Link
       href="/admin/verification"

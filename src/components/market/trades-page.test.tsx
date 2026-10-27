@@ -74,6 +74,7 @@ const sold = aTrade({
 });
 
 beforeEach(() => {
+  sessionStorage.clear();
   data.kind = "yard";
   data.tab = null;
   data.trades = { buying: [bought], selling: [sold] };
@@ -175,3 +176,23 @@ vi.mock("@/lib/auth-client", () => ({
     }),
   },
 }));
+
+it("follows a new explicit trade tab on the same mounted page", async () => {
+  const user = userEvent.setup();
+  const page = render(
+    <WithIntl>
+      <TradesPage />
+    </WithIntl>,
+  );
+  await user.click(screen.getByRole("tab", { name: /Selling/ }));
+  data.tab = "buying";
+  page.rerender(
+    <WithIntl>
+      <TradesPage />
+    </WithIntl>,
+  );
+  expect(screen.getByRole("tab", { name: /Buying/ })).toHaveAttribute(
+    "aria-selected",
+    "true",
+  );
+});

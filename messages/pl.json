@@ -975,23 +975,23 @@
       },
       "firstPickup": {
         "title": "Zarezerwuj pierwszy odbiór",
-        "summary": "Wybierz materiały, porównaj punkty skupu i zweryfikuj numer telefonu komórkowego, aby zamówić odbiór.",
+        "summary": "Dodaj zdjęcia · Wybierz pobliski punkt · Wybierz termin",
         "steps": {
           "photo": {
             "title": "Zrób zdjęcie surowców",
-            "body": "Opcjonalnie: dodaj jedno zdjęcie surowców, a potem sprawdź proponowane pozycje."
+            "body": "Dodaj co najmniej jedno zdjęcie."
           },
           "estimate": {
-            "title": "Sprawdź szacunek",
-            "body": "Pokazujemy rozpoznane materiały i przybliżoną masę. Popraw liczbę kilogramów, jeśli jest błędna."
+            "title": "Twoje dane",
+            "body": "Twoje imię i nazwisko · Adres odbioru"
           },
           "choose": {
             "title": "Wybierz odbiór lub dostarczenie",
-            "body": "Zobacz zweryfikowane punkty skupu w pobliżu, od najbliższego, wraz z godzinami pracy."
+            "body": "Wybierz pobliski punkt · Najbliższe najpierw"
           },
           "slot": {
             "title": "Wybierz termin",
-            "body": "Wybierz przedział godzinowy, a potem sprawdź adres i punkt na mapie."
+            "body": "Dzień · Godzina"
           },
           "code": {
             "title": "Potwierdź numer telefonu",
@@ -999,7 +999,7 @@
           },
           "track": {
             "title": "Otrzymaj link do śledzenia",
-            "body": "Wyślemy SMS-em link do śledzenia odbioru."
+            "body": "Wysłaliśmy prośbę. Strona zaktualizuje się po otrzymaniu odpowiedzi."
           }
         }
       },
@@ -1175,11 +1175,11 @@
         "steps": {
           "see": {
             "title": "Zobacz nowe zlecenia",
-            "body": "Każde pokazuje okolicę, przedział godzinowy, materiały, przybliżoną masę i kwotę do zapłaty."
+            "body": "Pobliskie gospodarstwa domowe chcące sprzedać surowce."
           },
           "answer": {
             "title": "Przyjmij lub odrzuć",
-            "body": "Przyjmij, aby zrealizować odbiór. Odrzucone zlecenie trafia do kolejnego najbliższego punktu, bez ujawniania mieszkańcowi, kto je odrzucił."
+            "body": "Gospodarstwo domowe może wybrać inny punkt i wysłać nowe zgłoszenie."
           },
           "auto": {
             "title": "Włącz automatyczne przyjmowanie",
@@ -1531,7 +1531,7 @@
     "faqs": {
       "noCode": {
         "q": "Nie otrzymano kodu SMS",
-        "a": "Poczekaj 30 sekund i naciśnij Wyślij ponownie. Sprawdź numer i zasięg telefonu. Kod jest ważny przez 5 minut."
+        "a": "Sprawdź numer i zasięg telefonu. Poczekaj na koniec odliczania i poproś o nowy kod. Kody wygasają po 5 minutach."
       },
       "newPhone": {
         "q": "Mam nowy telefon lub numer",
@@ -1551,7 +1551,7 @@
       },
       "whatCanISell": {
         "q": "Co mogę sprzedać?",
-        "a": "Papier i tekturę, plastikowe butelki i pojemniki, metal, szkło oraz starą elektronikę. Nie masz pewności? Zrób zdjęcie, a szacunek pomoże rozpoznać materiały."
+        "a": "Papier i tekturę, plastikowe butelki i pojemniki, metal, szkło oraz starą elektronikę."
       },
       "howPriceWorks": {
         "q": "Jak obliczana jest moja zapłata?",
@@ -1583,7 +1583,7 @@
       },
       "photosKept": {
         "q": "Co dzieje się z moimi zdjęciami?",
-        "a": "Nie fotografuj twarzy, dokumentów ani tablic rejestracyjnych. Zdjęcie jest wysyłane do dostawcy AI na potrzeby tego szacunku. Luma.Green go nie zapisuje."
+        "a": "Zdjęcia są przechowywane prywatnie wraz ze zgłoszeniem. Mogą je oglądać tylko osoby mające dostęp do zgłoszenia. Nie umieszczaj na zdjęciach twarzy, dokumentów ani tablic rejestracyjnych."
       },
       "whyVerify": {
         "q": "Dlaczego muszę przejść weryfikację?",
@@ -1607,7 +1607,7 @@
       },
       "rejectRequest": {
         "q": "Co się stanie, jeśli odrzucę zlecenie?",
-        "a": "Trafi do kolejnego najbliższego punktu. Mieszkaniec nie dowie się, kto odmówił."
+        "a": "Gospodarstwo domowe może wybrać inny punkt i wysłać nowe zgłoszenie."
       },
       "payHousehold": {
         "q": "Czy Luma.Green płaci mieszkańcowi za mnie?",
@@ -2771,7 +2771,7 @@
       "completed": "Gotowe! Otrzymano {amount}",
       "completedBody": "Dziękujemy za recykling. Punkty zostały dodane do Twojego numeru.",
       "declined": "{shop} nie mógł przyjąć tej rezerwacji",
-      "declinedBody": "Nic nie odebrano. Wybierz inny punkt — lista surowców jest zapisana.",
+      "declinedBody": "Dodaj zdjęcia i ponownie sprawdź swoje dane. Wybierz inny punkt, aby wysłać nowe zgłoszenie.",
       "cancelled": "Rezerwacja została anulowana",
       "cancelledBody": "Nic nie odebrano. Możesz zarezerwować ponownie w dowolnej chwili."
     },
@@ -2842,7 +2842,8 @@
     "saved": "Konto nie jest potrzebne. Zachowaj link, aby sprawdzać rezerwację na dowolnym telefonie.",
     "sellMore": "Zamów kolejny odbiór",
     "tryAnother": "Wybierz inny punkt",
-    "dispatchChanged": "Zlecenie przeniesiono do innego pobliskiego punktu. Aktualny punkt jest widoczny poniżej."
+    "dispatchChanged": "Zlecenie przeniesiono do innego pobliskiego punktu. Aktualny punkt jest widoczny poniżej.",
+    "retryDetails": "Dodaj zdjęcia i ponownie sprawdź swoje dane. Wybierz inny punkt, aby wysłać nowe zgłoszenie."
   },
   "market": {
     "sampleData": "Ceny i kwoty na tym ekranie to przykładowe dane prototypu.",

@@ -1,8 +1,7 @@
 "use client";
 
 import type { BusinessKind } from "../../../convex/lib/onboarding";
-import { BusinessForm } from "./business-form";
-import { DocumentsForm } from "./documents-form";
+import { BusinessJourney } from "./business-journey";
 import { JoinGate } from "./join-gate";
 import { KabadiwalaForm } from "./kabadiwala-form";
 import { SaathiForm } from "./saathi-form";
@@ -24,7 +23,7 @@ export function BusinessJoin({ kind }: { kind: BusinessKind }) {
   return (
     <JoinGate kind={kind}>
       {({ application, loginPhone }) => (
-        <BusinessForm
+        <BusinessJourney
           kind={kind}
           application={application}
           loginPhone={loginPhone}
@@ -34,14 +33,9 @@ export function BusinessJoin({ kind }: { kind: BusinessKind }) {
   );
 }
 
+/** Keep old document links working inside the combined registration journey. */
 export function DocumentsJoin({ kind }: { kind: BusinessKind }) {
-  return (
-    <JoinGate kind={kind}>
-      {({ application }) => (
-        <DocumentsForm kind={kind} application={application} />
-      )}
-    </JoinGate>
-  );
+  return <BusinessJoin kind={kind} />;
 }
 
 export function SaathiJoin() {

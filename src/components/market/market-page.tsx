@@ -13,6 +13,8 @@ import {
   ListSkeleton,
   Section,
 } from "@/components/app/page-parts";
+import { useListScroll } from "@/components/app/use-list-scroll";
+import { useViewPreference } from "@/components/app/use-view-preference";
 import type { OrgWorkspace } from "@/components/app/use-workspace";
 
 import { api } from "../../../convex/_generated/api";
@@ -48,8 +50,19 @@ function Lots({ org }: { org: OrgWorkspace }) {
   const format = useFormat();
   const listings = useQuery(api.market.browse, {});
   const recycled = useRecycledCodes();
-  const [material, setMaterial] = useState<string | null>(null);
+  const [savedMaterial, saveMaterial] = useViewPreference(
+    `market.${org.id}`,
+    "",
+  );
+  const [chosenMaterial, chooseMaterial] = useState<string | null>();
+  const material =
+    chosenMaterial === undefined ? savedMaterial || null : chosenMaterial;
+  const setMaterial = (value: string | null) => {
+    chooseMaterial(value);
+    saveMaterial(value ?? "");
+  };
 
+  useListScroll(`market.${org.id}`, listings !== undefined);
   const ordered = useMemo(() => {
     if (!listings) return [];
     return org.kind === "manufacturer"

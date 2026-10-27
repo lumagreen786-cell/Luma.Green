@@ -16,6 +16,7 @@ const calls = vi.hoisted(() => ({
   push: vi.fn(),
   locate: vi.fn(),
   authenticated: true,
+  hasPhone: true,
 }));
 vi.mock("@/components/providers/convex-provider", () => ({
   isConvexConfigured: true,
@@ -54,7 +55,7 @@ vi.mock("convex/react", () => ({
   useQuery: (reference: never, args: unknown) => {
     if (args === "skip") return;
     return getFunctionName(reference) === "identity:me"
-      ? { phone: "+919000000109" }
+      ? { phone: calls.hasPhone ? "+919000000109" : undefined }
       : [
           {
             id: "shop-fixture",
@@ -71,6 +72,7 @@ beforeEach(() => {
   vi.clearAllMocks();
   sessionStorage.clear();
   calls.authenticated = true;
+  calls.hasPhone = true;
   calls.ready.mockResolvedValue(undefined);
   calls.upload.mockResolvedValue("photo-fixture");
   calls.profile.mockResolvedValue(null);
@@ -210,4 +212,48 @@ it("retains the details and uploaded photo for retry after booking fails", async
   });
   expect(calls.book.mock.calls[1]).toEqual(calls.book.mock.calls[0]);
   expect(calls.upload).toHaveBeenCalledOnce();
+});
+
+it("shows two-stage progress and explains the next missing schedule choice", async () => {
+  show();
+  expect(screen.getByText("Step 1 of 2")).toBeVisible();
+  const user = await details();
+  expect(screen.getByText("Step 2 of 2")).toBeVisible();
+  expect(screen.getByRole("status")).toHaveTextContent(
+    messages.sell.simple.chooseShop,
+  );
+  await user.click(screen.getByRole("radio", { name: /Neighbourhood shop/ }));
+  expect(screen.getByRole("status")).toHaveTextContent(
+    messages.sell.when.errors.day,
+  );
+  await schedule(user);
+  expect(
+    screen.getByRole("heading", { name: messages.sell.confirm.title }),
+  ).toBeVisible();
+  expect(screen.getByText("Test person")).toBeVisible();
+  expect(screen.getByText("12 Test Street, Bengaluru")).toBeVisible();
+});
+it("retains photos and entered details when moving back from scheduling", async () => {
+  show();
+  const user = await details();
+  await user.click(screen.getByRole("button", { name: messages.sell.back }));
+  expect(screen.getByLabelText(messages.sell.when.nameLabel)).toHaveValue(
+    "Test person",
+  );
+  expect(screen.getByLabelText(messages.sell.when.addressLabel)).toHaveValue(
+    "12 Test Street, Bengaluru",
+  );
+  expect(screen.getByRole("img", { name: "paper.jpg" })).toBeVisible();
+});
+it("explains why a signed-in account without a phone cannot book", async () => {
+  calls.hasPhone = false;
+  show();
+  const user = await details();
+  await schedule(user);
+  expect(screen.getByRole("status")).toHaveTextContent(
+    messages.sell.errors.NO_PHONE,
+  );
+  expect(
+    screen.getByRole("button", { name: messages.sell.simple.confirm }),
+  ).toBeDisabled();
 });

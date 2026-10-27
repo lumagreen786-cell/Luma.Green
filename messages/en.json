@@ -975,23 +975,23 @@
       },
       "firstPickup": {
         "title": "Book your first pickup",
-        "summary": "Choose materials, compare shops and verify your mobile number to book a pickup.",
+        "summary": "Add photos · Choose a nearby shop · Choose a time",
         "steps": {
           "photo": {
             "title": "Take a photo of your materials",
-            "body": "Optional: add one photo of your materials, then check the suggested items."
+            "body": "Add at least one photo."
           },
           "estimate": {
-            "title": "Check the estimate",
-            "body": "We show what we see and roughly how many kilos. Change the kilos if they look wrong."
+            "title": "Your details",
+            "body": "Your name · Pickup address"
           },
           "choose": {
             "title": "Choose pickup or drop-off",
-            "body": "See verified kabadiwalas near you, nearest first, with their hours."
+            "body": "Choose a nearby shop · Nearest first"
           },
           "slot": {
             "title": "Pick a time",
-            "body": "Choose a time slot, then check your address and map pin."
+            "body": "Day · Time"
           },
           "code": {
             "title": "Confirm your number",
@@ -999,7 +999,7 @@
           },
           "track": {
             "title": "Get your tracking link",
-            "body": "We SMS you a link to follow your pickup."
+            "body": "We've sent your request. This page updates as soon as they answer."
           }
         }
       },
@@ -1175,11 +1175,11 @@
         "steps": {
           "see": {
             "title": "See new requests",
-            "body": "Each shows the area, time slot, materials, rough kilos and what you'd pay."
+            "body": "Households near you with materials ready for collection."
           },
           "answer": {
             "title": "Accept or reject",
-            "body": "Accept to take it. If you reject, it goes to the next nearest kabadiwala, and the household isn't told who."
+            "body": "The household can choose another shop and send a new request."
           },
           "auto": {
             "title": "Turn on auto-accept",
@@ -1531,7 +1531,7 @@
     "faqs": {
       "noCode": {
         "q": "I didn't get the SMS code",
-        "a": "Wait 30 seconds and tap Resend. Check the number is right and your phone has signal. A code works for 5 minutes."
+        "a": "Check your number and phone signal. Wait for the resend timer to finish, then request a new code. Codes expire after 5 minutes."
       },
       "newPhone": {
         "q": "I have a new phone or a new number",
@@ -1551,7 +1551,7 @@
       },
       "whatCanISell": {
         "q": "What can I sell?",
-        "a": "Paper and cardboard, plastic bottles and containers, metal, glass and old electronics. Not sure? Take a photo and the estimate will tell you."
+        "a": "Paper and cardboard, plastic bottles and containers, metal, glass and old electronics."
       },
       "howPriceWorks": {
         "q": "How is my money worked out?",
@@ -1583,7 +1583,7 @@
       },
       "photosKept": {
         "q": "What happens to my photos?",
-        "a": "Do not include faces, documents, or number plates. The photo is sent to an AI provider for this estimate. Luma.Green does not save it."
+        "a": "Photos are saved privately with your request. Only people with access to the request can view them. Keep faces, documents and number plates out of photos."
       },
       "whyVerify": {
         "q": "Why do I have to be verified?",
@@ -1607,7 +1607,7 @@
       },
       "rejectRequest": {
         "q": "What happens if I reject a request?",
-        "a": "It goes to the next nearest kabadiwala. The household isn't told who said no."
+        "a": "The household can choose another shop and send a new request."
       },
       "payHousehold": {
         "q": "Does Luma.Green pay the household for me?",
@@ -2771,7 +2771,7 @@
       "completed": "Done! You got {amount}",
       "completedBody": "Thank you for recycling. Your points are added to your number.",
       "declined": "{shop} couldn't take this booking",
-      "declinedBody": "Nothing was collected. Try another shop — your material list is saved.",
+      "declinedBody": "Add photos and check your details again. Choose another shop to send a new request.",
       "cancelled": "This booking was cancelled",
       "cancelledBody": "Nothing was collected. You can book again any time."
     },
@@ -2842,7 +2842,8 @@
     "saved": "No account needed. Keep this link to check your booking on any phone.",
     "sellMore": "Book another collection",
     "tryAnother": "Try another shop",
-    "dispatchChanged": "Your request has moved to another nearby shop. The current shop is shown below."
+    "dispatchChanged": "Your request has moved to another nearby shop. The current shop is shown below.",
+    "retryDetails": "Add photos and check your details again. Choose another shop to send a new request."
   },
   "market": {
     "sampleData": "Prices and amounts on this screen are sample data for the prototype.",

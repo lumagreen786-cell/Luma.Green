@@ -70,8 +70,8 @@ function Home({ org }: { org: OrgWorkspace }) {
           actions={<QuickActions />}
         />
       </div>
-      <Stats trades={trades} listings={mine} />
       <WaitingForYou trades={trades} showSide />
+      <Stats trades={trades} listings={mine} />
       <LatestOffers offers={offers} recycled={recycled} isMaker={isMaker} />
     </>
   );

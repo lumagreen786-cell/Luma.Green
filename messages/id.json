@@ -597,23 +597,23 @@
       },
       "firstPickup": {
         "title": "Pesan penjemputan pertama",
-        "summary": "Pilih bahan, bandingkan toko, dan verifikasi nomor ponsel Anda untuk memesan penjemputan.",
+        "summary": "Tambah foto · Pilih toko terdekat · Pilih waktu",
         "steps": {
           "photo": {
             "title": "Ambil foto bahan daur ulang",
-            "body": "Opsional: tambahkan satu foto bahan daur ulang, lalu periksa saran barangnya."
+            "body": "Tambahkan setidaknya satu foto."
           },
           "estimate": {
-            "title": "Periksa perkiraan",
-            "body": "Kami menampilkan bahan yang terlihat dan perkiraan kilogram. Ubah kilogram jika tampak salah."
+            "title": "Data Anda",
+            "body": "Nama Anda · Alamat penjemputan"
           },
           "choose": {
             "title": "Pilih penjemputan atau pengantaran",
-            "body": "Lihat pengepul terverifikasi sekitar, terdekat lebih dahulu, beserta jam buka."
+            "body": "Pilih toko terdekat · Terdekat dahulu"
           },
           "slot": {
             "title": "Pilih waktu",
-            "body": "Pilih slot waktu, lalu periksa alamat dan pin peta."
+            "body": "Hari · Waktu"
           },
           "code": {
             "title": "Konfirmasi nomor",
@@ -621,7 +621,7 @@
           },
           "track": {
             "title": "Dapatkan tautan pelacakan",
-            "body": "Kami mengirim tautan pelacakan penjemputan melalui SMS."
+            "body": "Permintaan Anda telah dikirim. Halaman ini diperbarui segera setelah mereka menjawab."
           }
         }
       },
@@ -797,11 +797,11 @@
         "steps": {
           "see": {
             "title": "Lihat permintaan baru",
-            "body": "Setiap permintaan menampilkan wilayah, slot waktu, bahan, perkiraan kilo, dan pembayaran Anda."
+            "body": "Rumah tangga sekitar yang ingin menjual bahan daur ulang."
           },
           "answer": {
             "title": "Terima atau tolak",
-            "body": "Terima untuk mengambilnya. Jika ditolak, permintaan dialihkan ke pengepul terdekat berikutnya tanpa memberi tahu rumah tangga siapa yang menolak."
+            "body": "Rumah tangga dapat memilih toko lain dan mengirim permintaan baru."
           },
           "auto": {
             "title": "Aktifkan penerimaan otomatis",
@@ -1207,7 +1207,7 @@
     "faqs": {
       "noCode": {
         "q": "Saya tidak menerima kode SMS",
-        "a": "Tunggu 30 detik lalu ketuk Kirim Ulang. Pastikan nomor benar dan ponsel mendapat sinyal. Kode berlaku 5 menit."
+        "a": "Periksa nomor dan sinyal ponsel Anda. Tunggu hingga penghitung kirim ulang selesai, lalu minta kode baru. Kode kedaluwarsa setelah 5 menit."
       },
       "newPhone": {
         "q": "Ponsel atau nomor saya baru",
@@ -1227,7 +1227,7 @@
       },
       "whatCanISell": {
         "q": "Apa yang bisa dijual?",
-        "a": "Kertas dan karton, botol dan wadah plastik, logam, kaca, serta elektronik lama. Tidak yakin? Ambil foto dan perkiraan akan memberi tahu."
+        "a": "Kertas dan karton, botol dan wadah plastik, logam, kaca, serta elektronik lama."
       },
       "howPriceWorks": {
         "q": "Bagaimana pembayaran dihitung?",
@@ -1259,7 +1259,7 @@
       },
       "photosKept": {
         "q": "Apa yang terjadi pada foto saya?",
-        "a": "Jangan sertakan wajah, dokumen, atau pelat nomor. Foto dikirim ke penyedia AI untuk perkiraan ini. Luma.Green tidak menyimpannya."
+        "a": "Foto disimpan secara pribadi bersama permintaan Anda. Hanya orang yang memiliki akses ke permintaan yang dapat melihatnya. Hindari wajah, dokumen, dan pelat nomor dalam foto."
       },
       "whyVerify": {
         "q": "Mengapa saya perlu diverifikasi?",
@@ -1283,7 +1283,7 @@
       },
       "rejectRequest": {
         "q": "Apa yang terjadi jika saya menolak?",
-        "a": "Permintaan dialihkan ke pengepul terdekat berikutnya. Rumah tangga tidak diberi tahu siapa yang menolak."
+        "a": "Rumah tangga dapat memilih toko lain dan mengirim permintaan baru."
       },
       "payHousehold": {
         "q": "Apakah Luma.Green membayar rumah tangga untuk saya?",
@@ -1861,7 +1861,7 @@
       "completed": "Selesai! Anda menerima {amount}",
       "completedBody": "Terima kasih telah mendaur ulang. Poin ditambahkan ke nomor Anda.",
       "declined": "{shop} tidak dapat mengambil pemesanan ini",
-      "declinedBody": "Tidak ada barang yang diambil. Coba toko lain — daftar barang Anda tersimpan.",
+      "declinedBody": "Tambahkan foto dan periksa kembali detail Anda. Pilih toko lain untuk mengirim permintaan baru.",
       "cancelled": "Pemesanan ini dibatalkan",
       "cancelledBody": "Tidak ada barang yang diambil. Anda dapat memesan lagi kapan saja."
     },
@@ -1906,7 +1906,8 @@
     "saved": "Tidak perlu akun. Simpan tautan ini untuk memeriksa pemesanan dari ponsel mana pun.",
     "sellMore": "Pesan penjemputan lagi",
     "tryAnother": "Coba toko lain",
-    "dispatchChanged": "Permintaan Anda dialihkan ke toko terdekat lainnya. Toko saat ini ditampilkan di bawah."
+    "dispatchChanged": "Permintaan Anda dialihkan ke toko terdekat lainnya. Toko saat ini ditampilkan di bawah.",
+    "retryDetails": "Tambahkan foto dan periksa kembali detail Anda. Pilih toko lain untuk mengirim permintaan baru."
   },
   "market": {
     "buy": {

@@ -975,23 +975,23 @@
       },
       "firstPickup": {
         "title": "Boek uw eerste inzameling",
-        "summary": "Kies materialen, vergelijk inzamelbedrijven en verifieer je mobiele nummer om een ophaling te boeken.",
+        "summary": "Foto’s toevoegen · Kies een winkel in de buurt · Kies een tijd",
         "steps": {
           "photo": {
             "title": "Maak een foto van uw recyclebare materiaal",
-            "body": "Optioneel: voeg één foto van uw recyclebare materiaal toe en controleer de voorgestelde artikelen."
+            "body": "Voeg minstens één foto toe."
           },
           "estimate": {
-            "title": "Controleer de schatting",
-            "body": "We tonen wat we zien en ongeveer hoeveel kilo's. Pas het gewicht aan als het niet lijkt te kloppen."
+            "title": "Je gegevens",
+            "body": "Uw naam · Ophaaladres"
           },
           "choose": {
             "title": "Kies ophalen of inleveren",
-            "body": "Bekijk geverifieerde kabadiwala's in de buurt, dichtbij eerst, met openingstijden."
+            "body": "Kies een winkel in de buurt · Dichtstbijzijnde eerst"
           },
           "slot": {
             "title": "Kies een tijd",
-            "body": "Kies een tijdvak en controleer uw adres en kaartlocatie."
+            "body": "Dag · Tijd"
           },
           "code": {
             "title": "Bevestig uw nummer",
@@ -999,7 +999,7 @@
           },
           "track": {
             "title": "Ontvang uw volglink",
-            "body": "We sms'en een link om uw inzameling te volgen."
+            "body": "Uw verzoek is verstuurd. Deze pagina wordt bijgewerkt zodra de winkel antwoordt."
           }
         }
       },
@@ -1175,11 +1175,11 @@
         "steps": {
           "see": {
             "title": "Bekijk nieuwe verzoeken",
-            "body": "Elk verzoek toont gebied, tijdvak, materialen, geschat gewicht en uw betaling."
+            "body": "Huishoudens in de buurt die hun recyclebaar materiaal willen verkopen."
           },
           "answer": {
             "title": "Accepteer of wijs af",
-            "body": "Accepteer om het aan te nemen. Bij afwijzing gaat het naar de volgende dichtstbijzijnde kabadiwala zonder het huishouden te vertellen wie afwees."
+            "body": "Het huishouden kan een andere winkel kiezen en een nieuw verzoek sturen."
           },
           "auto": {
             "title": "Zet automatisch accepteren aan",
@@ -1531,7 +1531,7 @@
     "faqs": {
       "noCode": {
         "q": "Ik heb de sms-code niet ontvangen",
-        "a": "Wacht 30 seconden en tik op Opnieuw sturen. Controleer het nummer en uw telefoonsignaal. Een code is 5 minuten geldig."
+        "a": "Controleer je nummer en het bereik van je telefoon. Wacht tot de afteltimer afloopt en vraag dan een nieuwe code aan. Codes verlopen na 5 minuten."
       },
       "newPhone": {
         "q": "Ik heb een nieuwe telefoon of een nieuw nummer",
@@ -1551,7 +1551,7 @@
       },
       "whatCanISell": {
         "q": "Wat kan ik verkopen?",
-        "a": "Papier en karton, plastic flessen en bakken, metaal, glas en oude elektronica. Twijfelt u? Maak een foto en de schatting helpt u."
+        "a": "Papier en karton, plastic flessen en bakken, metaal, glas en oude elektronica."
       },
       "howPriceWorks": {
         "q": "Hoe wordt mijn bedrag berekend?",
@@ -1583,7 +1583,7 @@
       },
       "photosKept": {
         "q": "Wat gebeurt er met mijn foto's?",
-        "a": "Neem geen gezichten, documenten of kentekens op. De foto wordt voor deze schatting naar een AI-aanbieder gestuurd. Luma.Green slaat hem niet op."
+        "a": "Foto's worden privé bij je verzoek opgeslagen. Alleen mensen met toegang tot het verzoek kunnen ze bekijken. Zorg dat er geen gezichten, documenten of kentekens op de foto's staan."
       },
       "whyVerify": {
         "q": "Waarom moet ik worden geverifieerd?",
@@ -1607,7 +1607,7 @@
       },
       "rejectRequest": {
         "q": "Wat gebeurt er als ik een verzoek afwijs?",
-        "a": "Het gaat naar de volgende dichtstbijzijnde kabadiwala. Het huishouden hoort niet wie heeft afgewezen."
+        "a": "Het huishouden kan een andere winkel kiezen en een nieuw verzoek sturen."
       },
       "payHousehold": {
         "q": "Betaalt Luma.Green het huishouden voor mij?",
@@ -2771,7 +2771,7 @@
       "completed": "Klaar! U ontving {amount}",
       "completedBody": "Bedankt voor het recyclen. Uw punten zijn aan uw nummer toegevoegd.",
       "declined": "{shop} kon deze boeking niet aannemen",
-      "declinedBody": "Er is niets ingezameld. Probeer een andere winkel: uw materiaallijst is opgeslagen.",
+      "declinedBody": "Voeg foto's toe en controleer je gegevens opnieuw. Kies een andere winkel om een nieuw verzoek te sturen.",
       "cancelled": "Deze boeking is geannuleerd",
       "cancelledBody": "Er is niets ingezameld. U kunt altijd opnieuw boeken."
     },
@@ -2842,7 +2842,8 @@
     "saved": "Geen account nodig. Bewaar deze link om uw boeking op elke telefoon te bekijken.",
     "sellMore": "Nog een inzameling boeken",
     "tryAnother": "Andere winkel proberen",
-    "dispatchChanged": "Uw verzoek is naar een andere winkel in de buurt gegaan. De huidige winkel staat hieronder."
+    "dispatchChanged": "Uw verzoek is naar een andere winkel in de buurt gegaan. De huidige winkel staat hieronder.",
+    "retryDetails": "Voeg foto's toe en controleer je gegevens opnieuw. Kies een andere winkel om een nieuw verzoek te sturen."
   },
   "market": {
     "sampleData": "Prijzen en bedragen op dit scherm zijn voorbeeldgegevens voor het prototype.",

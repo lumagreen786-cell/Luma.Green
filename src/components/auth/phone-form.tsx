@@ -25,7 +25,15 @@ const schema = z.object({
 type Values = z.infer<typeof schema>;
 
 /** Step one of signing in: a mobile number, then an SMS code is sent. */
-export function PhoneForm({ canSend = true }: { canSend?: boolean }) {
+export function PhoneForm({
+  canSend = true,
+  initialPhone = "",
+  onSent,
+}: {
+  canSend?: boolean;
+  initialPhone?: string;
+  onSent?: (phone: string) => void;
+}) {
   const t = useTranslations("auth");
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -36,7 +44,7 @@ export function PhoneForm({ canSend = true }: { canSend?: boolean }) {
     formState: { errors, isSubmitting },
   } = useForm<Values>({
     resolver: zodResolver(schema),
-    defaultValues: { phone: "" },
+    defaultValues: { phone: initialPhone },
   });
 
   async function onSubmit(values: Values) {
@@ -48,6 +56,10 @@ export function PhoneForm({ canSend = true }: { canSend?: boolean }) {
       return;
     }
     rememberPhone(phone);
+    if (onSent) {
+      onSent(phone);
+      return;
+    }
     const next = searchParams.get("next");
     router.push({
       pathname: "/login/verify",

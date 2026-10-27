@@ -49,6 +49,7 @@ function lot(id: string, code: string, name: string): ListingView {
 }
 
 beforeEach(() => {
+  sessionStorage.clear();
   data.kind = "yard";
   data.canOperate = true;
   data.listings = [
@@ -188,3 +189,26 @@ vi.mock("@/lib/auth-client", () => ({
     }),
   },
 }));
+
+it("restores the material filter after returning to the market", async () => {
+  const user = userEvent.setup();
+  const page = render(
+    <WithIntl>
+      <MarketPage />
+    </WithIntl>,
+  );
+  await user.click(screen.getByRole("button", { name: /^Newspaper/ }));
+  page.unmount();
+  render(
+    <WithIntl>
+      <MarketPage />
+    </WithIntl>,
+  );
+  expect(screen.getByRole("button", { name: /^Newspaper/ })).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  expect(
+    screen.queryByRole("heading", { name: "Iron and steel" }),
+  ).not.toBeInTheDocument();
+});

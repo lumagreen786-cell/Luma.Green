@@ -10,8 +10,8 @@ import {
   LocateFixedIcon,
   MapPinIcon,
 } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
-import { useRef, useState } from "react";
+import { useFormatter, useLocale, useTranslations } from "next-intl";
+import { type RefObject, useEffect, useRef, useState } from "react";
 import { useForm, type UseFormReturn, useWatch } from "react-hook-form";
 import { z } from "zod";
 
@@ -27,6 +27,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { isLocale, localeDirection } from "@/i18n/locales";
 import { useRouter } from "@/i18n/navigation";
 import { prepareUpload } from "@/lib/upload-image";
 
@@ -152,6 +153,10 @@ function RecyclingFlow({
   );
 
   const isLocked = status !== "idle" || retryRequest !== null;
+  const heading = useRef<HTMLHeadingElement>(null);
+  useEffect(() => {
+    heading.current?.focus();
+  }, [stage]);
 
   function next(values: Details) {
     if (files.length === 0) {
@@ -208,7 +213,8 @@ function RecyclingFlow({
     }
   }
   return (
-    <div className="space-y-7">
+    <div className="space-y-6">
+      <RecyclingProgress stage={stage} heading={heading} />
       {stage === "details" ? (
         <DetailsForm
           form={form}
@@ -236,8 +242,7 @@ function RecyclingFlow({
             <ArrowLeftIcon aria-hidden className="rtl:rotate-180" />
             {t("back")}
           </Button>
-          <section className="space-y-3">
-            <h2 className="text-lg font-semibold">{simple("chooseShop")}</h2>
+          <section className="space-y-3" aria-labelledby="recycling-step-title">
             <ShopSelection
               shops={available}
               shopId={shopId}
@@ -259,16 +264,33 @@ function RecyclingFlow({
               isDisabled={isLocked}
             />
           ) : null}
+          <MissingSchedule
+            hasShop={Boolean(selectedShop)}
+            slotDate={slotDate}
+            hasSlot={hasSlot}
+          />
           {error ? (
             <p role="alert" className="text-sm text-destructive">
               {error}
             </p>
           ) : null}
           {canBook ? (
-            <section className="space-y-3">
+            <section className="space-y-4">
+              <BookingReview
+                details={form.getValues()}
+                files={files}
+                shop={selectedShop}
+                slotDate={slotDate}
+                slotWindow={slotWindow}
+                today={today}
+              />
               <p className="text-sm text-muted-foreground">
                 {simple("estimateLater")}
               </p>
+              <LocationNotice
+                mode={mode}
+                hasLocation={Boolean(location.point)}
+              />
               <PhoneAction
                 status={status}
                 isLoading={
@@ -286,6 +308,139 @@ function RecyclingFlow({
         </div>
       )}
     </div>
+  );
+}
+
+function RecyclingProgress({
+  stage,
+  heading,
+}: {
+  stage: "details" | "schedule";
+  heading: RefObject<HTMLHeadingElement | null>;
+}) {
+  const t = useTranslations("sell");
+  const simple = useTranslations("sell.simple");
+  return (
+    <div className="space-y-2">
+      <p className="text-sm text-muted-foreground">
+        {t("steps.progress", {
+          current: stage === "details" ? 1 : 2,
+          total: 2,
+        })}
+      </p>
+      <h2
+        id="recycling-step-title"
+        ref={heading}
+        tabIndex={-1}
+        className="text-lg font-semibold outline-none"
+      >
+        {simple(stage === "details" ? "details" : "chooseShop")}
+      </h2>
+    </div>
+  );
+}
+function MissingSchedule({
+  hasShop,
+  slotDate,
+  hasSlot,
+}: {
+  hasShop: boolean;
+  slotDate: string;
+  hasSlot: boolean;
+}) {
+  const t = useTranslations("sell");
+  let key:
+    "simple.chooseShop" | "when.errors.day" | "when.errors.window" | null =
+    null;
+  if (!hasShop) key = "simple.chooseShop";
+  else if (!slotDate) key = "when.errors.day";
+  else if (!hasSlot) key = "when.errors.window";
+  return key ? (
+    <p role="status" className="text-sm text-muted-foreground">
+      {t(key)}
+    </p>
+  ) : null;
+}
+function LocationNotice({
+  mode,
+  hasLocation,
+}: {
+  mode: Details["mode"];
+  hasLocation: boolean;
+}) {
+  const t = useTranslations("sell");
+  return mode === "pickup" && hasLocation ? (
+    <p className="text-sm text-muted-foreground">{t("confirm.locationNote")}</p>
+  ) : null;
+}
+
+function BookingReview({
+  details,
+  files,
+  shop,
+  slotDate,
+  slotWindow,
+  today,
+}: {
+  details: Details;
+  files: File[];
+  shop: Shop | undefined;
+  slotDate: string;
+  slotWindow: SlotWindow | undefined;
+  today: string;
+}) {
+  const t = useTranslations("sell");
+  const format = useFormatter();
+  const time = useTimeFormat();
+  return (
+    <section
+      className="space-y-3 border-y py-4"
+      aria-labelledby="booking-review-title"
+    >
+      <h2 id="booking-review-title" className="text-lg font-semibold">
+        {t("confirm.title")}
+      </h2>
+      <dl className="grid gap-3 text-sm sm:grid-cols-2 [&_dd]:break-words [&>div]:min-w-0">
+        <div>
+          <dt className="text-muted-foreground">{t("when.nameLabel")}</dt>
+          <dd className="font-medium">{details.name}</dd>
+        </div>
+        <div>
+          <dt className="text-muted-foreground">
+            {t("simple.attachedPhotos")}
+          </dt>
+          <dd>{format.number(files.length)}</dd>
+        </div>
+        <div>
+          <dt className="text-muted-foreground">{t("confirm.who")}</dt>
+          <dd>{shop?.name}</dd>
+        </div>
+        <div>
+          <dt className="text-muted-foreground">{t("confirm.where")}</dt>
+          <dd>
+            <span className="block">{t(`confirm.${details.mode}`)}</span>
+            <span className="block">
+              {details.mode === "pickup" ? details.address : shop?.address}
+            </span>
+          </dd>
+        </div>
+        {slotWindow ? (
+          <div>
+            <dt className="text-muted-foreground">{t("confirm.when")}</dt>
+            <dd>
+              {t("confirm.whenValue", {
+                day: time.day(slotDate, today, {
+                  today: t("when.today"),
+                  tomorrow: t("when.tomorrow"),
+                }),
+                window: t(`windows.${slotWindow}`),
+                time: time.window(slotWindow),
+              })}
+            </dd>
+          </div>
+        ) : null}
+      </dl>
+    </section>
   );
 }
 
@@ -347,11 +502,13 @@ function DetailsForm({
   const simple = useTranslations("sell.simple");
   const fields = useTranslations("join.form");
   const locationError = fields("locationFailed");
+  const locale = useLocale();
   return (
     <form
       noValidate
       className="space-y-7"
       onSubmit={(event) => {
+        if (files.length === 0) setPhotoError(simple("photoRequired"));
         void form.handleSubmit(next)(event);
       }}
     >
@@ -364,6 +521,7 @@ function DetailsForm({
         error={photoError}
       />
       <RadioGroup
+        dir={isLocale(locale) ? localeDirection(locale) : "ltr"}
         value={mode}
         onValueChange={(value) => {
           if (!(value === "pickup" || value === "dropoff")) {
@@ -395,10 +553,13 @@ function DetailsForm({
           className="h-12"
           {...form.register("name")}
           aria-invalid={Boolean(form.formState.errors.name)}
+          aria-describedby={
+            form.formState.errors.name ? "recycle-name-error" : undefined
+          }
         />
         {form.formState.errors.name ? (
           <p role="alert" className="text-sm text-destructive">
-            {t("when.errors.name")}
+            <span id="recycle-name-error">{t("when.errors.name")}</span>
           </p>
         ) : null}
       </div>
@@ -423,11 +584,16 @@ function DetailsForm({
             className="h-12"
             {...form.register("address")}
             aria-invalid={Boolean(form.formState.errors.address)}
+            aria-describedby={
+              form.formState.errors.address
+                ? "recycle-address-error"
+                : undefined
+            }
             placeholder={t("when.addressHint")}
           />
           {form.formState.errors.address ? (
             <p role="alert" className="text-sm text-destructive">
-              {t("when.errors.address")}
+              <span id="recycle-address-error">{t("when.errors.address")}</span>
             </p>
           ) : null}
           {location.state.status === "on" ? (
@@ -469,6 +635,7 @@ function ShopSelection({
 }) {
   const t = useTranslations("sell");
   const common = useTranslations("common");
+  const locale = useLocale();
   if (!shops) return <p role="status">{common("loading")}</p>;
   if (shops.length === 0)
     return (
@@ -478,6 +645,7 @@ function ShopSelection({
     );
   return (
     <RadioGroup
+      dir={isLocale(locale) ? localeDirection(locale) : "ltr"}
       value={shopId ?? ""}
       disabled={isDisabled}
       onValueChange={setShopId}
@@ -528,11 +696,14 @@ function ScheduleFields({
   const t = useTranslations("sell");
   const simple = useTranslations("sell.simple");
   const time = useTimeFormat();
+  const locale = useLocale();
+  const direction = isLocale(locale) ? localeDirection(locale) : "ltr";
   return (
     <section className="space-y-3">
       <h2 className="text-lg font-semibold">{simple("schedule")}</h2>
       <div className="grid gap-3 sm:grid-cols-2">
         <Select
+          dir={direction}
           value={slotDate}
           disabled={isDisabled}
           onValueChange={(day) => {
@@ -558,6 +729,7 @@ function ScheduleFields({
           </SelectContent>
         </Select>
         <Select
+          dir={direction}
           value={slotWindow ?? ""}
           disabled={!slotDate || isDisabled}
           onValueChange={(window) => {
@@ -619,14 +791,21 @@ function PhoneAction({
   if (!isAuthenticated)
     return <PhoneSignIn verifyLabel={label} onVerified={onSubmit} />;
   return (
-    <Button
-      className="w-full"
-      size="lg"
-      disabled={!hasPhone}
-      onClick={onSubmit}
-    >
-      {label}
-    </Button>
+    <div className="space-y-3">
+      {hasPhone ? null : (
+        <p role="status" className="text-sm text-muted-foreground">
+          {t("errors.NO_PHONE")}
+        </p>
+      )}
+      <Button
+        className="w-full"
+        size="lg"
+        disabled={!hasPhone}
+        onClick={onSubmit}
+      >
+        {label}
+      </Button>
+    </div>
   );
 }
 

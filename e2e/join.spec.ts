@@ -1,5 +1,7 @@
 import { expect, test } from "@playwright/test";
 
+import en from "../messages/en.json";
+
 /**
  * Joining: `/join` is a public, indexed page; everything under it is private
  * and needs a sign-in (builds without Convex allow a labelled OTP preview).
@@ -62,7 +64,7 @@ for (const path of [
 
     await expect(page).toHaveURL(`/login?next=${encodeURIComponent(path)}`);
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-      "Choose your language",
+      en.auth.metaTitle,
     );
   });
 }
@@ -71,3 +73,21 @@ test("an unknown business kind is a 404, not a form", async ({ page }) => {
   const response = await page.goto("/join/warehouse");
   expect(response?.status()).toBe(404);
 });
+
+for (const locale of ["en", "ar"]) {
+  test(`${locale} mobile registration opens from its role image`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(`/${locale}/join`);
+    const firstRole = page
+      .getByRole("main")
+      .getByRole("list")
+      .first()
+      .getByRole("link")
+      .first();
+    await firstRole.locator("img").click();
+    await expect(page).toHaveURL(new RegExp(String.raw`/login\?next=`));
+    await expect(page.getByRole("main").getByRole("textbox")).toBeVisible();
+  });
+}

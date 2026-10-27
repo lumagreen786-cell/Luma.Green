@@ -5,15 +5,16 @@ import { useState } from "react";
 
 import { isConvexConfigured } from "@/components/providers/convex-provider";
 import { useVerifiedSession } from "@/components/providers/use-signed-in-query";
+import { LanguageSwitcher } from "@/components/site/language-switcher";
 import { Skeleton } from "@/components/ui/skeleton";
 
 import { api } from "../../../convex/_generated/api";
-import { LanguageChoice } from "./language-choice";
 import { PhoneForm } from "./phone-form";
 import { ResumeSession } from "./resume-session";
-import { isLanguageChosen, useStoredValue } from "./storage";
+import { readActivePhone, useStoredValue } from "./storage";
+import { VerifyForm } from "./verify-flow";
 
-/** `/login`: language first (once per browser), then the phone number. */
+/** Phone and code share one screen; language remains an optional control. */
 export function LoginFlow() {
   return isConvexConfigured ? (
     <ConfiguredLogin />
@@ -35,22 +36,40 @@ function ConfiguredLogin() {
 }
 
 function LoginSteps({ canSend }: { canSend: boolean }) {
-  const storedChoice = useStoredValue(isLanguageChosen);
-  const [choseJustNow, setChoseJustNow] = useState(false);
+  const [phone, setPhone] = useState<string | null>(null);
+  const [lastPhone, setLastPhone] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
+  const activePhone = useStoredValue(readActivePhone);
+  const codePhone = phone ?? (canSend && !isEditing ? activePhone : null);
 
-  if (storedChoice === undefined) {
-    return <LoginSkeleton />;
-  }
-  if (!storedChoice && !choseJustNow) {
-    return (
-      <LanguageChoice
-        onDone={() => {
-          setChoseJustNow(true);
-        }}
-      />
-    );
-  }
-  return <PhoneForm canSend={canSend} />;
+  if (codePhone === undefined) return <LoginSkeleton />;
+
+  return (
+    <div className="flex flex-col gap-3">
+      <div className="flex justify-end">
+        <LanguageSwitcher />
+      </div>
+      {codePhone === null ? (
+        <PhoneForm
+          canSend={canSend}
+          initialPhone={lastPhone || (activePhone?.slice(3) ?? "")}
+          onSent={(number) => {
+            setLastPhone(number.slice(3));
+            setPhone(number);
+            setIsEditing(false);
+          }}
+        />
+      ) : (
+        <VerifyForm
+          phoneNumber={codePhone}
+          onChangeNumber={() => {
+            setPhone(null);
+            setIsEditing(true);
+          }}
+        />
+      )}
+    </div>
+  );
 }
 
 export function LoginSkeleton() {

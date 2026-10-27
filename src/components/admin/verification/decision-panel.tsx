@@ -117,9 +117,11 @@ export function decisionCopy(
 export function DecisionPanel({
   subject,
   canApprove,
+  onDecided,
 }: {
   subject: DecisionSubject;
   canApprove: boolean;
+  onDecided?: () => void;
 }) {
   const [decision, setDecision] = useState<Decision | null>(null);
   return (
@@ -177,6 +179,7 @@ export function DecisionPanel({
           key={decision}
           decision={decision}
           subject={subject}
+          onDecided={onDecided}
           onClose={() => {
             setDecision(null);
           }}
@@ -190,10 +193,12 @@ function DecisionDialog({
   decision,
   subject,
   onClose,
+  onDecided,
 }: {
   decision: Decision;
   subject: DecisionSubject;
   onClose: () => void;
+  onDecided?: () => void;
 }) {
   const decide = useMutation(api.review.decide);
   const router = useRouter();
@@ -217,7 +222,10 @@ function DecisionDialog({
         note: checked.note,
       });
       toast.success(copy.done);
-      router.push("/admin/verification");
+      if (onDecided) {
+        onClose();
+        onDecided();
+      } else router.push("/admin/verification");
     } catch (error_) {
       setError(adminErrorMessage(error_, DECISION_ERRORS));
       setIsBusy(false);

@@ -11,6 +11,8 @@ import {
   EmptyState,
   ListSkeleton,
 } from "@/components/app/page-parts";
+import { useListScroll } from "@/components/app/use-list-scroll";
+import { useViewPreference } from "@/components/app/use-view-preference";
 import type { OrgWorkspace } from "@/components/app/use-workspace";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -60,10 +62,13 @@ function Trades({ org }: { org: OrgWorkspace }) {
   const t = useTranslations("market");
   const trades = useQuery(api.market.trades);
   const asked = useSearchParams().get("tab");
-  const [chosen, setChosen] = useState<Tab | null>(
-    asked === "buying" || asked === "selling" ? asked : null,
-  );
+  const [savedTab, saveTab] = useViewPreference(`trades.${org.id}`, "");
+  const [chosen, setChosen] = useState<{
+    tab: Tab;
+    asked: string | null;
+  } | null>(null);
 
+  useListScroll(`trades.${org.id}`, trades !== undefined);
   if (trades === undefined) return <ListSkeleton />;
 
   const waiting = {
@@ -79,13 +84,28 @@ function Trades({ org }: { org: OrgWorkspace }) {
     org.kind === "kabadiwala" || (waiting.selling > 0 && waiting.buying === 0)
       ? "selling"
       : "buying";
-  const tab = chosen ?? fallback;
+  const linked = asked === "buying" || asked === "selling" ? asked : null;
+  const remembered =
+    savedTab === "buying" || savedTab === "selling" ? savedTab : null;
+  const tab =
+    (chosen?.asked === asked ? chosen.tab : null) ??
+    linked ??
+    remembered ??
+    fallback;
   return (
     <Tabs
       dir={localeDirection(isLocale(locale) ? locale : defaultLocale)}
       value={tab}
       onValueChange={(value) => {
-        if (value === "buying" || value === "selling") setChosen(value);
+        if (!(value === "buying" || value === "selling")) {
+          return;
+        }
+
+        setChosen({ tab: value, asked });
+        saveTab(value);
+        const params = new URLSearchParams(window.location.search);
+        params.set("tab", value);
+        window.history.replaceState(null, "", `?${params.toString()}`);
       }}
       className="gap-4"
     >

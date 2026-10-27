@@ -18,15 +18,12 @@ for (const { locale, messages } of [
         new RegExp(String.raw`/login\?next=%2Faccount%2F${section}$`),
       );
       await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-        messages.auth.chooseLanguage,
+        messages.auth.metaTitle,
       );
       await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
         "content",
         "noindex, nofollow",
       );
-      await page
-        .getByRole("button", { name: messages.auth.continue, exact: true })
-        .click();
       await expect(
         page.getByLabel(messages.auth.mobileLabel, { exact: true }),
       ).toBeVisible();

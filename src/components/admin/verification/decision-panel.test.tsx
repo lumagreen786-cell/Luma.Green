@@ -124,3 +124,19 @@ describe("DecisionPanel", () => {
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
 });
+
+it("keeps an embedded review open after the server saves a decision", async () => {
+  decide.mockResolvedValue(null);
+  const onDecided = vi.fn();
+  const user = userEvent.setup();
+  render(<DecisionPanel subject={shop} canApprove onDecided={onDecided} />);
+  await user.click(screen.getByRole("button", { name: "Approve" }));
+  await user.click(
+    within(screen.getByRole("dialog")).getByRole("button", {
+      name: "Approve",
+    }),
+  );
+  expect(onDecided).toHaveBeenCalledOnce();
+  expect(push).not.toHaveBeenCalled();
+  expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+});

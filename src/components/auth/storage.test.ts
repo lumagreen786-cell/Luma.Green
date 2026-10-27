@@ -1,6 +1,12 @@
 import { afterEach, expect, it, vi } from "vitest";
 
-import { readPhone, readPhoneSentAt, rememberPhone } from "./storage";
+import {
+  clearPhoneChallenge,
+  readActivePhone,
+  readPhone,
+  readPhoneSentAt,
+  rememberPhone,
+} from "./storage";
 afterEach(() => {
   sessionStorage.clear();
   vi.useRealTimers();
@@ -19,4 +25,14 @@ it("stores only a successfully sent phone and its timestamp in this tab", () => 
 it("rejects an invalid stored send timestamp", () => {
   sessionStorage.setItem("lg.signInSentAt", "invalid");
   expect(readPhoneSentAt()).toBeNull();
+});
+
+it("does not resume a consumed or expired code challenge", () => {
+  rememberPhone("+919876543211");
+  expect(readActivePhone()).toBe("+919876543211");
+  clearPhoneChallenge();
+  expect(readActivePhone()).toBeNull();
+  sessionStorage.setItem("lg.signInSentAt", String(Date.now() - 300_001));
+  sessionStorage.setItem("lg.signInPhone", "+919876543211");
+  expect(readActivePhone()).toBeNull();
 });

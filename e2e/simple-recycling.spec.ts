@@ -27,6 +27,12 @@ for (const [locale, copy] of [
         await expect(unavailable).toBeVisible();
         return;
       }
+      await expect(
+        page.getByRole("heading", {
+          name: copy.sell.simple.details,
+          exact: true,
+        }),
+      ).toBeVisible();
       await expect(page.getByLabel(copy.sell.when.nameLabel)).toBeVisible();
       await expect(
         page.getByRole("button", {
@@ -47,10 +53,22 @@ for (const [locale, copy] of [
       await expect(page.getByRole("main").getByRole("alert")).toContainText(
         copy.sell.simple.photoRequired,
       );
+      await expect(page.getByLabel(copy.sell.when.nameLabel)).toHaveValue(
+        "Local layout test",
+      );
+      await expect(page.getByLabel(copy.sell.when.addressLabel)).toHaveValue(
+        "12 Test Street, Bengaluru",
+      );
       await page
         .getByRole("radio", { name: copy.sell.simple.dropoff, exact: true })
         .click();
       await expect(page.getByLabel(copy.sell.when.addressLabel)).toHaveCount(0);
+      await page
+        .getByRole("radio", { name: copy.sell.simple.pickup, exact: true })
+        .click();
+      await expect(page.getByLabel(copy.sell.when.addressLabel)).toHaveValue(
+        "12 Test Street, Bengaluru",
+      );
       await page.evaluate(async () => document.fonts.ready);
       expect(
         await page.evaluate(() => document.documentElement.scrollWidth),

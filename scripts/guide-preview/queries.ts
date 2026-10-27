@@ -50,6 +50,39 @@ function failureQuery(name: string): { matched: boolean; value?: unknown } {
   return { matched: false };
 }
 
+function recyclingQuery(name: string): { matched: boolean; value?: unknown } {
+  if (
+    name === "applications:mine" &&
+    new URLSearchParams(window.location.search).has("entry")
+  )
+    return {
+      matched: true,
+      value: { loginPhone: undefined, application: null },
+    };
+  if (
+    !window.location.pathname.endsWith("/sell") ||
+    window.location.pathname.includes("/app/")
+  )
+    return { matched: false };
+  if (name === "identity:me")
+    return { matched: true, value: { kind: "member", phone: "+919000000109" } };
+  return name === "households:shops"
+    ? {
+        matched: true,
+        value: [
+          {
+            id: "guide-shop",
+            name: "Synthetic neighbourhood shop",
+            area: "Bengaluru",
+            address: "Sample shop address",
+            offersPickup: true,
+            fallbackCodes: [],
+          },
+        ],
+      }
+    : { matched: false };
+}
+
 /** No Convex client or connection is created in this documentation-only process. */
 export function useQuery(
   query: FunctionReference<"query">,
@@ -69,6 +102,8 @@ export function useQuery(
       canCheckout: false,
       liveCanCheckout: false,
     };
+  const recycling = recyclingQuery(name);
+  if (recycling.matched) return recycling.value;
   if (name === "identity:me" && window.location.pathname.includes("/join/"))
     return securityFixture("");
   if (name === "inbox:unreadCount")

@@ -10,7 +10,17 @@ import { renderWithIntl } from "@/components/shop/test-helpers";
 import en from "../../../messages/en.json";
 import { AuditReports } from "./audit-reports";
 import { QualityDocuments } from "./quality-documents";
-const mocks = vi.hoisted(() => ({ write: vi.fn(), upload: vi.fn() }));
+const mocks = vi.hoisted(() => ({
+  write: vi.fn(),
+  upload: vi.fn(),
+  inspection: "",
+}));
+vi.mock("next/navigation", () => ({
+  useSearchParams: () =>
+    new URLSearchParams(
+      mocks.inspection ? `inspection=${mocks.inspection}` : "",
+    ),
+}));
 vi.mock("convex/react", () => ({
   useQuery: vi.fn(),
   useMutation: vi.fn(),
@@ -51,6 +61,7 @@ const board = {
   decisions: [],
 };
 beforeEach(() => {
+  mocks.inspection = "";
   mocks.write.mockReset();
   mocks.upload.mockReset();
   mocks.write.mockResolvedValue("saved");
@@ -203,4 +214,22 @@ it("keeps a report draft when switching tasks and shows sharing warnings before 
     screen.getByRole("textbox", { name: en.auditReports.purpose }),
   ).toHaveValue("Review batch quality");
   expect(mocks.write).not.toHaveBeenCalled();
+});
+
+it("opens upload with the permitted inspection selected from its lot", () => {
+  mocks.inspection = "inspection-a";
+  renderWithIntl(<QualityDocuments />);
+  expect(
+    screen.getByRole("tab", { name: en.qualityDocuments.upload }),
+  ).toHaveAttribute("aria-selected", "true");
+  expect(
+    screen.getByRole("combobox", { name: en.qualityDocuments.inspection }),
+  ).toHaveTextContent("PET v1");
+});
+it("ignores an inspection link outside the permitted board", () => {
+  mocks.inspection = "other-org-inspection";
+  renderWithIntl(<QualityDocuments />);
+  expect(
+    screen.getByRole("tab", { name: en.qualityDocuments.own }),
+  ).toHaveAttribute("aria-selected", "true");
 });

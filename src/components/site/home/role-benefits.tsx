@@ -48,34 +48,36 @@ export async function RoleBenefits({
           {roles
             .filter((role) => !businessOnly || role.key !== "household")
             .map(({ key, icon: Icon, href }) => (
-              <li
-                key={key}
-                data-reveal
-                className="group grid min-w-0 grid-cols-1 content-start gap-4"
-              >
-                <RoleStoryImage
-                  scene={key}
-                  frameClassName="aspect-[4/3]"
-                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                />
-                <div className="flex min-w-0 items-center gap-3">
-                  <Icon aria-hidden className="size-5 shrink-0 text-primary" />
-                  <h3 className="font-display text-2xl font-semibold tracking-tight">
-                    {t(`${key}.title`)}
-                  </h3>
-                </div>
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  {t(`${key}.one`)}
-                </p>
+              <li key={key} data-reveal className="min-w-0">
                 <Link
                   href={href}
-                  className="inline-flex min-h-11 max-w-full min-w-0 items-center justify-between gap-4 py-2 text-sm font-semibold wrap-anywhere underline-offset-4 outline-none hover:text-primary hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
+                  aria-label={t(`${key}.cta`)}
+                  className="group grid h-full min-w-0 content-start gap-4 outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
                 >
-                  <span className="min-w-0">{t(`${key}.cta`)}</span>
-                  <ArrowRightIcon
-                    aria-hidden
-                    className="size-5 shrink-0 transition-transform group-hover:translate-x-1 motion-reduce:transition-none rtl:rotate-180 rtl:group-hover:-translate-x-1"
+                  <RoleStoryImage
+                    scene={key}
+                    frameClassName="aspect-[4/3]"
+                    sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                   />
+                  <div className="flex min-w-0 items-center gap-3">
+                    <Icon
+                      aria-hidden
+                      className="size-5 shrink-0 text-primary"
+                    />
+                    <h3 className="font-display text-2xl font-semibold tracking-tight">
+                      {t(`${key}.title`)}
+                    </h3>
+                  </div>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {t(`${key}.one`)}
+                  </p>
+                  <span className="inline-flex min-h-11 max-w-full min-w-0 items-center justify-between gap-4 py-2 text-sm font-semibold wrap-anywhere underline-offset-4 outline-none hover:text-primary hover:underline focus-visible:ring-3 focus-visible:ring-ring/50">
+                    <span className="min-w-0">{t(`${key}.cta`)}</span>
+                    <ArrowRightIcon
+                      aria-hidden
+                      className="size-5 shrink-0 transition-transform group-hover:translate-x-1 motion-reduce:transition-none rtl:rotate-180 rtl:group-hover:-translate-x-1"
+                    />
+                  </span>
                 </Link>
               </li>
             ))}

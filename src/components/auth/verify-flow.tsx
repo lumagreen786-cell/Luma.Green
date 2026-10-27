@@ -30,6 +30,7 @@ import { FactorChallenge } from "./factor-challenge";
 import { LoginSkeleton } from "./login-flow";
 import { PhoneForm } from "./phone-form";
 import {
+  clearPhoneChallenge,
   readPhone,
   readPhoneSentAt,
   rememberPhone,
@@ -55,10 +56,32 @@ const AFTER_SIGN_IN = "/app";
 
 /** `/login/verify`: the 6-digit code, then into the app. */
 export function VerifyFlow() {
-  return isConvexConfigured ? <VerifyForm /> : <PhoneForm canSend={false} />;
+  const phone = useStoredValue(readPhone);
+  const [editing, setEditing] = useState(false);
+  if (!isConvexConfigured) return <PhoneForm canSend={false} />;
+  return editing ? (
+    <PhoneForm
+      initialPhone={phone?.slice(3)}
+      onSent={() => {
+        setEditing(false);
+      }}
+    />
+  ) : (
+    <VerifyForm
+      onChangeNumber={() => {
+        setEditing(true);
+      }}
+    />
+  );
 }
 
-function VerifyForm() {
+export function VerifyForm({
+  phoneNumber,
+  onChangeNumber,
+}: {
+  phoneNumber?: string;
+  onChangeNumber?: () => void;
+} = {}) {
   const t = useTranslations("auth");
   const common = useTranslations("common");
   const locale = useLocale();
@@ -70,7 +93,8 @@ function VerifyForm() {
   const ensureProfile = useMutation(api.identity.ensureProfile);
 
   // The number lives in this tab's session storage, never in the URL.
-  const phone = useStoredValue(readPhone);
+  const storedPhone = useStoredValue(readPhone);
+  const phone = phoneNumber ?? storedPhone;
   const [code, setCode] = useState("");
   const [status, setStatus] = useState<
     | "idle"
@@ -145,6 +169,7 @@ function VerifyForm() {
     void (async () => {
       try {
         await ensureProfile({ locale });
+        clearPhoneChallenge();
         router.replace(next);
       } catch {
         isFinishing.current = false;
@@ -208,7 +233,8 @@ function VerifyForm() {
           setStatus("verified");
         }}
         onRestart={() => {
-          router.replace({ pathname: "/login", query: { next } });
+          if (onChangeNumber) onChangeNumber();
+          else router.replace({ pathname: "/login", query: { next } });
         }}
       />
     );
@@ -235,12 +261,24 @@ function VerifyForm() {
         <p className="text-muted-foreground">
           {t("sentTo", { phone: ltr(formatIndianMobile(phone)) })}
         </p>
-        <Link
-          href={{ pathname: "/login", query: { next } }}
-          className="inline-flex min-h-11 max-w-full items-center self-start py-2 text-sm font-medium text-primary underline-offset-4 hover:underline"
-        >
-          {t("changeNumber")}
-        </Link>
+        {onChangeNumber ? (
+          <Button
+            type="button"
+            variant="link"
+            className="min-h-11 self-start px-0"
+            disabled={status !== "idle" || isResending}
+            onClick={onChangeNumber}
+          >
+            {t("changeNumber")}
+          </Button>
+        ) : (
+          <Link
+            href={{ pathname: "/login", query: { next } }}
+            className="inline-flex min-h-11 max-w-full items-center self-start py-2 text-sm font-medium text-primary underline-offset-4 hover:underline"
+          >
+            {t("changeNumber")}
+          </Link>
+        )}
       </div>
 
       <form

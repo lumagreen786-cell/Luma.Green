@@ -223,7 +223,7 @@ test("desktop household image loads while sign-in stays focused on its task", as
   await page.goto("/en/login");
   await expect(page.getByRole("figure")).toHaveCount(0);
   await expect(
-    page.getByRole("button", { name: english.auth.continue, exact: true }),
+    page.getByRole("button", { name: english.auth.sendCode, exact: true }),
   ).toBeInViewport();
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
 });

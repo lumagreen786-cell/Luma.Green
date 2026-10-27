@@ -8,14 +8,12 @@ import ta from "../messages/ta.json" with { type: "json" };
 
 /**
  * Sign-in as it ships before a Convex deployment is connected (see the
- * webServer env in playwright.config.ts): a labelled code preview with no
+ * webServer env in playwright.config.ts): an unavailable phone form with no
  * provider requests or authenticated access. The signed-in flows need a deployment and are
  * checked against the dev one — docs/architecture/auth.md#testing.
  */
 
-test("/login is private and starts with a language choice", async ({
-  page,
-}) => {
+test("/login is private and starts with phone entry", async ({ page }) => {
   await page.goto("/login");
 
   await expect(page).toHaveTitle("Log in · Luma.Green");
@@ -25,7 +23,7 @@ test("/login is private and starts with a language choice", async ({
   );
   await expect(page.locator('link[rel="canonical"]')).toHaveCount(0);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    en.auth.chooseLanguage,
+    en.auth.metaTitle,
   );
 });
 
@@ -34,7 +32,7 @@ test("sign-in speaks the visitor's language", async ({ page }) => {
 
   await expect(page.locator("html")).toHaveAttribute("lang", "kn-IN");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    kn.auth.chooseLanguage,
+    kn.auth.metaTitle,
   );
 });
 
@@ -43,75 +41,50 @@ for (const { locale, messages } of [
   { locale: "ar", messages: ar },
 ]) {
   for (const width of [320, 768, 1440]) {
-    test(`${locale} language picker is searchable and keeps Continue reachable at ${String(width)}px`, async ({
+    test(`${locale} phone entry and optional language control fit at ${String(width)}px`, async ({
       page,
     }) => {
       await page.setViewportSize({ width, height: 900 });
       await page.goto(`/${locale}/login?next=%2Fjoin%2Fsaathi`);
-      const group = page.getByRole("radiogroup", {
-        name: messages.common.language,
-      });
-      const search = page.getByRole("searchbox", {
-        name: messages.common.search,
-      });
-      const continueButton = page.getByRole("button", {
-        name: messages.auth.continue,
-        exact: true,
-      });
-      await expect(group).toBeVisible();
-      await page.evaluate(async () => document.fonts.ready);
-      const bounds = await group.evaluate((element) => ({
-        height: element.getBoundingClientRect().height,
-        scrollHeight: element.scrollHeight,
-        width: element.getBoundingClientRect().width,
-        scrollWidth: element.scrollWidth,
-      }));
-      expect(bounds.height).toBeLessThanOrEqual(225);
-      expect(bounds.scrollHeight).toBeGreaterThan(bounds.height);
-      expect(bounds.scrollWidth).toBeLessThanOrEqual(bounds.width + 1);
-      await expect(continueButton).toBeInViewport();
+      await expect(
+        page.getByLabel(messages.auth.mobileLabel, { exact: true }),
+      ).toBeVisible();
+      await expect(
+        page.getByRole("heading", { name: messages.auth.chooseLanguage }),
+      ).toHaveCount(0);
+      const language = page
+        .getByRole("main")
+        .getByRole("button", { name: new RegExp(messages.common.language) });
+      await expect(language).toBeInViewport();
+      await language.click();
+      await expect(
+        page.getByRole("menuitemradio", { name: "മലയാളം", exact: true }),
+      ).toBeVisible();
+      await expect(
+        page.getByRole("menuitemradio", { name: "العربية", exact: true }),
+      ).toBeVisible();
+      await page.keyboard.press("Escape");
+      await expect(language).toBeFocused();
       expect(
         await page.evaluate(
           () => document.documentElement.scrollWidth <= innerWidth,
         ),
       ).toBe(true);
-
-      await search.fill("malayalam");
-      await expect(group.getByRole("radio")).toHaveCount(1);
-      await expect(group.getByRole("radio", { name: /മലയാളം/ })).toBeVisible();
-      await search.fill("العربية");
-      await expect(group.getByRole("radio")).toHaveCount(1);
-      await expect(group.getByRole("radio", { name: /العربية/ })).toBeVisible();
-      await search.fill("no-such-language");
-      await expect(
-        page.getByText(messages.help.search.emptyTitle),
-      ).toBeVisible();
-      await expect(continueButton).toBeEnabled();
-      await continueButton.click();
-      await expect(
-        page.getByLabel(messages.auth.mobileLabel, { exact: true }),
-      ).toBeVisible();
       await expect(page).toHaveURL(/\/login\?next=%2Fjoin%2Fsaathi$/);
     });
   }
 }
 
-test("language picker keyboard selection changes locale only after Continue", async ({
+test("optional language selection preserves the sign-in destination", async ({
   page,
 }) => {
   await page.goto("/login?next=%2Fjoin%2Fsaathi");
-  const search = page.getByRole("searchbox", { name: en.common.search });
-  await search.fill("Arabic");
-  await search.press("Tab");
-  const arabic = page.getByRole("radio", { name: /العربية/ });
-  await expect(arabic).toBeFocused();
-  await arabic.press("Space");
-  await expect(arabic).toBeChecked();
-  expect(
-    await page.evaluate(() => localStorage.getItem("lg.languageChosen")),
-  ).toBeNull();
   await page
-    .getByRole("button", { name: en.auth.continue, exact: true })
+    .getByRole("main")
+    .getByRole("button", { name: "Language: English" })
+    .click();
+  await page
+    .getByRole("menuitemradio", { name: "العربية", exact: true })
     .click();
   await expect(page).toHaveURL(/\/ar\/login\?next=%2Fjoin%2Fsaathi$/);
   await expect(

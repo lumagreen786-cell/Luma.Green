@@ -31,6 +31,7 @@ import {
 import { FileSlot } from "./file-slot";
 import { FormJourney } from "./form-journey";
 import { ChangesNote, FormHeader, SubmitBar } from "./form-parts";
+import { resumeStage } from "./resume-stage";
 import { submitErrorKey, type SubmitFailure } from "./submit-error";
 import { useAutosave, withoutUndefined } from "./use-autosave";
 import type { Application } from "./use-mine";
@@ -72,6 +73,7 @@ export function SaathiForm({ application }: { application: Application }) {
     handleSubmit,
     trigger,
     getFieldState,
+    getValues,
     formState: { errors, isSubmitting },
   } = useForm<Values>({
     resolver: zodResolver(saathiSchema),
@@ -85,6 +87,18 @@ export function SaathiForm({ application }: { application: Application }) {
       times: draft.times ?? [],
       days: draft.days ?? [],
     },
+  });
+
+  const [initialStage] = useState(() => {
+    const parsed = saathiSchema.safeParse(getValues());
+    return resumeStage(
+      [
+        ["name", "area", "location", "radiusKm"],
+        ["workTypes", "vehicle", "times", "days"],
+        [],
+      ],
+      parsed.success ? [] : parsed.error.issues,
+    );
   });
 
   // Partial on purpose: a question stays unanswered until they tap it.
@@ -111,7 +125,7 @@ export function SaathiForm({ application }: { application: Application }) {
     try {
       await saveDraft({ saathi: toDraft(valid) });
       await submit({});
-      router.push("/join/status");
+      router.push("/app");
     } catch (error) {
       setFailure(submitErrorKey(error));
     }
@@ -122,6 +136,7 @@ export function SaathiForm({ application }: { application: Application }) {
 
   return (
     <FormJourney
+      initialStage={initialStage}
       trigger={trigger}
       getFieldState={getFieldState}
       onFinish={(event) => {
