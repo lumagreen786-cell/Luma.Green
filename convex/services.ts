@@ -11,6 +11,7 @@ import {
   type QueryCtx,
 } from "./_generated/server";
 import { requireUser } from "./lib/access";
+import { isProfileOpen, openStakeholders } from "./lib/accountClosure";
 import { isAdminEmail } from "./lib/admin";
 import { findProfile } from "./lib/applicationAccess";
 import {
@@ -136,7 +137,11 @@ async function canOwn(
   profileId: Id<"profiles">,
   row: { requesterProfileId: Id<"profiles">; orgId?: Id<"orgs"> },
 ) {
-  if (row.requesterProfileId !== profileId) return false;
+  if (
+    row.requesterProfileId !== profileId ||
+    !(await isProfileOpen(ctx, profileId))
+  )
+    return false;
   if (!row.orgId) return true;
   const membership = await membershipFor(ctx, profileId, row.orgId),
     org = await ctx.db.get("orgs", row.orgId);
@@ -165,7 +170,10 @@ async function recipient(
 ) {
   if (!id) return;
   const row = await ctx.db.get("stakeholderAccounts", id);
-  if (row?.status !== "approved")
+  if (
+    row?.status !== "approved" ||
+    !(await isProfileOpen(ctx, row.ownerProfileId))
+  )
     throw new ConvexError("RECIPIENT_UNAVAILABLE");
   return row;
 }
@@ -175,9 +183,17 @@ async function canReceive(
   row: {
     recipientId?: Id<"stakeholderAccounts">;
     recipientProfileId?: Id<"profiles">;
+    requesterProfileId?: Id<"profiles">;
   },
 ) {
-  if (!row.recipientId || row.recipientProfileId !== profileId) return false;
+  if (
+    !row.recipientId ||
+    row.recipientProfileId !== profileId ||
+    !(await isProfileOpen(ctx, profileId)) ||
+    (row.requesterProfileId &&
+      !(await isProfileOpen(ctx, row.requesterProfileId)))
+  )
+    return false;
   const target = await ctx.db.get("stakeholderAccounts", row.recipientId);
   return target?.status === "approved" && target.ownerProfileId === profileId;
 }
@@ -347,6 +363,7 @@ export const board = query({
       .query("stakeholderAccounts")
       .withIndex("by_status_createdAt", (q) => q.eq("status", "approved"))
       .take(PAGE);
+    const openAccounts = await openStakeholders(ctx, accounts);
     const materialLots =
       orgId && canCreate
         ? await ctx.db
@@ -366,7 +383,7 @@ export const board = query({
       received,
       programmes,
       reports,
-      recipients: accounts.map((row) => ({
+      recipients: openAccounts.map((row) => ({
         id: row._id,
         name: row.organizationName,
       })),
@@ -748,7 +765,8 @@ export async function canReadProgrammeReport(
   isOwner: boolean,
 ) {
   const source = await ctx.db.get("programmeRecords", row.programmeId);
-  if (!source) return false;
+  if (!source || !(await isProfileOpen(ctx, source.requesterProfileId)))
+    return false;
   if (isOwner) return canOwn(ctx, profileId, source);
   if (row.revokedAt !== undefined || row.expiresAt <= Date.now()) return false;
   if (source.orgId) {

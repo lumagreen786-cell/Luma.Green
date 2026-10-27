@@ -3,6 +3,7 @@ import { ConvexError, v } from "convex/values";
 import type { Doc, Id } from "./_generated/dataModel";
 import { mutation, query, type QueryCtx } from "./_generated/server";
 import { requireUser } from "./lib/access";
+import { isProfileOpen, openStakeholders } from "./lib/accountClosure";
 import { findProfile } from "./lib/applicationAccess";
 import { vAuditSnapshot } from "./lib/auditSharesSchema";
 import { qualityText } from "./lib/qualityContent";
@@ -14,7 +15,13 @@ export async function canReadAuditReport(
   report: Doc<"auditReports">,
   profileId: Id<"profiles">,
 ) {
-  if (report.revokedAt || report.expiresAt <= Date.now()) return false;
+  if (
+    report.revokedAt ||
+    report.expiresAt <= Date.now() ||
+    !(await isProfileOpen(ctx, report.createdBy)) ||
+    !(await isProfileOpen(ctx, profileId))
+  )
+    return false;
   const source = await ctx.db.get("orgs", report.orgId);
   if (source?.status !== "active") return false;
   const selected = await selectedMembership(ctx, profileId);
@@ -117,6 +124,7 @@ export const board = query({
           .withIndex("by_status_createdAt", (q) => q.eq("status", "approved"))
           .take(100)
       : [];
+    const openAccounts = await openStakeholders(ctx, accounts);
     const rows = orgId
       ? await ctx.db
           .query("lotInspections")
@@ -149,7 +157,7 @@ export const board = query({
       orgId,
       own: own.map((row) => summary(row)),
       received,
-      recipients: accounts.map((a) => ({
+      recipients: openAccounts.map((a) => ({
         id: a._id,
         name: a.organizationName,
       })),
@@ -185,7 +193,10 @@ export const create = mutation({
       throw new ConvexError("INVALID_EXPIRY");
     const purpose = qualityText(args.purpose, 200);
     const recipient = await ctx.db.get("stakeholderAccounts", args.recipientId);
-    if (recipient?.status !== "approved")
+    if (
+      recipient?.status !== "approved" ||
+      !(await isProfileOpen(ctx, recipient.ownerProfileId))
+    )
       throw new ConvexError("RECIPIENT_NOT_APPROVED");
     const inspection = await ctx.db.get("lotInspections", args.inspectionId);
     const lot = inspection

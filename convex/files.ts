@@ -2,7 +2,7 @@ import { v } from "convex/values";
 
 import { internal } from "./_generated/api";
 import { httpAction, internalQuery } from "./_generated/server";
-import { authComponent } from "./auth";
+import { openAuthUser } from "./lib/access";
 import { isAdminEmail } from "./lib/admin";
 
 /**
@@ -177,7 +177,7 @@ export const serve = httpAction(async (ctx, request) => {
 
   let caller: FileCaller | null = null;
   try {
-    const user = await authComponent.safeGetAuthUser(ctx);
+    const user = await openAuthUser(ctx);
     caller = user
       ? {
           id: user._id,

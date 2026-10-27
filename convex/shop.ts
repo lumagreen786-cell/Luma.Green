@@ -21,6 +21,7 @@ import {
   dispatchSettings as settingsFor,
 } from "./lib/dispatch";
 import { recordInventoryMovement } from "./lib/inventoryLedger";
+import { isOrdinaryMaterial } from "./lib/materialEligibility";
 import { queueBookingNotification } from "./lib/notifications";
 import { indiaToday } from "./lib/onboarding";
 import { maskPhone } from "./lib/phone";
@@ -147,7 +148,7 @@ function isShopMaterial(
   material: Doc<"materials"> | null | undefined,
 ): boolean {
   return (
-    material?.active === true &&
+    isOrdinaryMaterial(material) &&
     material.stage === "scrap" &&
     org.families.includes(material.family)
   );
@@ -518,7 +519,7 @@ export const complete = mutation({
     const lines = [];
     for (const line of weighedLines(args.lines)) {
       const material = materials.get(line.materialCode);
-      if (!material?.active || material.stage !== "scrap") {
+      if (!isOrdinaryMaterial(material) || material.stage !== "scrap") {
         throw new ConvexError("INVALID_MATERIAL");
       }
       const rate = await rateFor(ctx, org, line.materialCode);

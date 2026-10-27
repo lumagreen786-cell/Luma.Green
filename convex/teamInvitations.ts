@@ -9,6 +9,7 @@ import {
   query,
   type QueryCtx,
 } from "./_generated/server";
+import { isPhoneGrantCurrent } from "./lib/accountClosure";
 import { hashToken } from "./lib/integrations";
 import {
   actor,
@@ -129,7 +130,8 @@ async function available(ctx: QueryCtx, token: string) {
     invite?.phone !== user.phoneNumber ||
     invite.acceptedAt !== undefined ||
     invite.revokedAt !== undefined ||
-    invite.expiresAt <= Date.now()
+    invite.expiresAt <= Date.now() ||
+    !(await isPhoneGrantCurrent(ctx, user.phoneNumber, invite.createdAt))
   )
     throw new ConvexError("INVITATION_UNAVAILABLE");
   const inviterRole = await scopeRole(ctx, invite.scope, invite.invitedBy);

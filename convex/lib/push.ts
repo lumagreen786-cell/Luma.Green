@@ -81,7 +81,7 @@ export async function hasActivePushSession(
   sessionId: string | undefined,
   profile: Doc<"profiles">,
 ): Promise<boolean> {
-  if (!sessionId) return false;
+  if (!sessionId || profile.closedAt !== undefined) return false;
   const stored: unknown = await ctx.runQuery(
     components.betterAuth.adapter.findOne,
     {

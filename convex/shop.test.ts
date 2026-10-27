@@ -490,9 +490,9 @@ describe("the rate card", () => {
     const card = await shop.query(api.shop.rateCard, {});
 
     const families = new Set(card.rows.map((row) => row.material.family));
-    // Ramesh handles paper, plastic, metal and e-waste — no glass, no clothes.
-    expect([...families]).toEqual(["paper", "plastic", "metal", "ewaste"]);
-    expect(card.rows).toHaveLength(20);
+    // Declared e-waste scope does not grant an ordinary specialist route.
+    expect([...families]).toEqual(["paper", "plastic", "metal"]);
+    expect(card.rows).toHaveLength(16);
     for (const row of card.rows) {
       expect(row.myPaise).toBeGreaterThanOrEqual(row.floorPaise ?? 0);
       expect(row.fallbackPaise).toBeGreaterThan(0);

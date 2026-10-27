@@ -2,6 +2,7 @@ import { ConvexError, v } from "convex/values";
 
 import { mutation, query } from "./_generated/server";
 import { recordInventoryMovement } from "./lib/inventoryLedger";
+import { isOrdinaryMaterial } from "./lib/materialEligibility";
 import { indiaToday } from "./lib/onboarding";
 import { vClosingLine } from "./lib/stockClosingSchema";
 import { closingSnapshot } from "./lib/stockClosingSnapshot";
@@ -187,7 +188,10 @@ export const adjust = mutation({
       .query("materials")
       .withIndex("by_code", (q) => q.eq("code", args.materialCode))
       .unique();
-    if (!material?.active || !org.families.includes(material.family))
+    if (
+      !isOrdinaryMaterial(material) ||
+      !org.families.includes(material.family)
+    )
       throw new ConvexError("MATERIAL_NOT_ELIGIBLE");
     if (args.deltaGrams < 0) {
       const inventory = await ctx.db
@@ -327,7 +331,10 @@ export const configure = mutation({
       .query("materials")
       .withIndex("by_code", (q) => q.eq("code", args.materialCode))
       .unique();
-    if (!material?.active || !org.families.includes(material.family))
+    if (
+      !isOrdinaryMaterial(material) ||
+      !org.families.includes(material.family)
+    )
       throw new ConvexError("MATERIAL_NOT_ELIGIBLE");
     const rules = await ctx.db
       .query("stockThresholds")

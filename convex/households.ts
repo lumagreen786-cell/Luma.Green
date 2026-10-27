@@ -31,6 +31,7 @@ import {
   OPEN_BOOKING_STATUSES,
   PILOT_CITY,
 } from "./lib/households";
+import { isOrdinaryMaterial } from "./lib/materialEligibility";
 import { queueBookingNotification } from "./lib/notifications";
 import { indiaToday } from "./lib/onboarding";
 import { verifiedIndianMobile } from "./lib/phone";
@@ -70,7 +71,7 @@ async function checkedBasket(
   const materials = await materialIndex(ctx);
   for (const item of items) {
     const material = materials.get(item.materialCode);
-    if (!material?.active || material.stage !== "scrap") {
+    if (!isOrdinaryMaterial(material) || material.stage !== "scrap") {
       throw new ConvexError("UNKNOWN_MATERIAL");
     }
   }

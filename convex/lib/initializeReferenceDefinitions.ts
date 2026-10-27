@@ -3,6 +3,7 @@ import { ConvexError, v } from "convex/values";
 import type { Id } from "../_generated/dataModel";
 import type { MutationCtx } from "../_generated/server";
 import {
+  FOUNDATION_REFERENCE_DEFINITIONS,
   foundationMaterials,
   PET_REFERENCE_DEFINITIONS,
   PET_REFERENCE_SOURCE,
@@ -23,6 +24,25 @@ interface ReferenceActor {
     | { operatorReference: string; source: "deployment_operator" };
 }
 
+interface MaterialShape {
+  family: string;
+  stage: string;
+  specialistReference?: { category: string };
+}
+function isMatchingMaterialReference(
+  existing: MaterialShape,
+  entry: MaterialShape,
+) {
+  return (
+    existing.family === entry.family &&
+    existing.stage === entry.stage &&
+    (!existing.specialistReference ||
+      !entry.specialistReference ||
+      existing.specialistReference.category ===
+        entry.specialistReference.category)
+  );
+}
+
 /** Static references only. Both entry points use this same transactional owner. */
 export async function initializeReferenceDefinitions(
   ctx: MutationCtx,
@@ -39,7 +59,7 @@ export async function initializeReferenceDefinitions(
       .withIndex("by_code", (q) => q.eq("code", entry.code))
       .unique();
     if (existing) {
-      if (existing.family !== entry.family || existing.stage !== entry.stage)
+      if (!isMatchingMaterialReference(existing, entry))
         throw new ConvexError("MATERIAL_DEFINITION_CONFLICT");
       continue;
     }
@@ -52,6 +72,9 @@ export async function initializeReferenceDefinitions(
       names: entry.names,
       sortOrder,
       active: entry.active,
+      ...(entry.specialistReference && {
+        specialistReference: entry.specialistReference,
+      }),
     };
     const id = await ctx.db.insert("materials", definition);
     await ctx.db.insert("auditLog", {
@@ -63,18 +86,20 @@ export async function initializeReferenceDefinitions(
         ...actor.metadata,
         definition,
         factorStatus: "unknown",
-        sourceReference: PET_REFERENCE_DEFINITIONS.some(
-          ({ materialCode }) => materialCode === entry.code,
-        )
-          ? PET_REFERENCE_SOURCE
-          : "convex/lib/catalogue.ts: canonical material labels only",
+        sourceReference:
+          entry.specialistReference?.sourceReference ??
+          (PET_REFERENCE_DEFINITIONS.some(
+            ({ materialCode }) => materialCode === entry.code,
+          )
+            ? PET_REFERENCE_SOURCE
+            : "convex/lib/catalogue.ts: canonical material labels only"),
         hazardApprovalGranted: false,
       },
       createdAt: now,
     });
     inserted += 1;
   }
-  for (const definition of PET_REFERENCE_DEFINITIONS) {
+  for (const definition of FOUNDATION_REFERENCE_DEFINITIONS) {
     const existing = await ctx.db
       .query("operationalDefinitions")
       .withIndex("by_material_version", (q) =>
@@ -117,6 +142,7 @@ export async function initializeReferenceDefinitions(
     inserted,
     definitionsInserted,
     materialsSkipped: materials.length - inserted,
-    definitionsSkipped: PET_REFERENCE_DEFINITIONS.length - definitionsInserted,
+    definitionsSkipped:
+      FOUNDATION_REFERENCE_DEFINITIONS.length - definitionsInserted,
   };
 }

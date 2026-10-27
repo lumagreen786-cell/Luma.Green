@@ -9,6 +9,7 @@ import {
   requireCollectionCapacity,
 } from "./collectionScheduling";
 import { distanceKm, isWindowOpen } from "./households";
+import { isOrdinaryMaterial } from "./materialEligibility";
 import { queueBookingNotification } from "./notifications";
 import { indiaToday } from "./onboarding";
 
@@ -214,7 +215,7 @@ async function candidateQuote(
       .withIndex("by_code", (q) => q.eq("code", item.materialCode))
       .first();
     if (
-      !material?.active ||
+      !isOrdinaryMaterial(material) ||
       material.stage !== "scrap" ||
       !org.families.includes(material.family)
     )

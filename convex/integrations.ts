@@ -405,7 +405,7 @@ export const read = internalMutation({
       return failure(401, "INVALID_API_KEY");
     const org = await ctx.db.get("orgs", key.orgId);
     const issuer = await ctx.db.get("profiles", key.issuerProfileId);
-    if (!issuer || org?.status !== "active")
+    if (!issuer || issuer.closedAt !== undefined || org?.status !== "active")
       return failure(403, "ACCESS_DENIED");
     if (!(await isOwner(ctx, org._id, issuer._id)))
       return failure(403, "ACCESS_DENIED");

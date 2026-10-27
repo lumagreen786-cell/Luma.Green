@@ -7,6 +7,7 @@ import { expect, it } from "vitest";
 import coverage from "../docs/product/foundation-seed-coverage.json";
 import { LOCAL_ACCEPTANCE_PERSONAS } from "./lib/localAcceptance";
 import { PET_REFERENCE_DEFINITIONS } from "./lib/referenceDefinitions";
+import { SPECIALIST_LABELS } from "./lib/specialistReferences";
 
 function readProjectFile(relative: string) {
   expect(path.isAbsolute(relative)).toBe(false);
@@ -45,7 +46,14 @@ it("keeps all participant and PET-state fixtures linked to their actual acceptan
   expect(
     coverage.materialStates.map(({ materialCode }) => materialCode),
   ).toEqual(PET_REFERENCE_DEFINITIONS.map(({ materialCode }) => materialCode));
+  expect(
+    coverage.specialistReferences.map(({ materialCode }) => materialCode),
+  ).toEqual(SPECIALIST_LABELS.map(({ code }) => code));
+  expect(
+    coverage.productionReferenceInitialization.emptyDatabaseCounts,
+  ).toEqual({ materials: 51, operationalDefinitions: 32 });
   for (const entry of [
+    ...coverage.specialistReferences,
     ...coverage.linkedScenarios,
     ...coverage.participants,
     ...coverage.materialStates,

@@ -5,6 +5,7 @@ import { components } from "../_generated/api";
 import type { Id } from "../_generated/dataModel";
 import type { MutationCtx, QueryCtx } from "../_generated/server";
 import { requireUser } from "./access";
+import { isProfileOpen } from "./accountClosure";
 import { findProfile } from "./applicationAccess";
 import type { vTeamScope } from "./organizationsSchema";
 import { membershipFor } from "./workspace";
@@ -26,12 +27,14 @@ export async function organizationMember(
   organizationId: Id<"organizations">,
   profileId: Id<"profiles">,
 ) {
-  return ctx.db
-    .query("organizationMemberships")
-    .withIndex("by_organization_profile", (q) =>
-      q.eq("organizationId", organizationId).eq("profileId", profileId),
-    )
-    .unique();
+  return (await isProfileOpen(ctx, profileId))
+    ? ctx.db
+        .query("organizationMemberships")
+        .withIndex("by_organization_profile", (q) =>
+          q.eq("organizationId", organizationId).eq("profileId", profileId),
+        )
+        .unique()
+    : null;
 }
 export async function scopeRole(
   ctx: QueryCtx,

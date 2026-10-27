@@ -2,7 +2,7 @@ import { ConvexError, v } from "convex/values";
 
 import type { Id } from "./_generated/dataModel";
 import { mutation, query, type QueryCtx } from "./_generated/server";
-import { authComponent } from "./auth";
+import { openAuthUser } from "./lib/access";
 import { requireUser } from "./lib/access";
 import {
   activeFiles,
@@ -88,7 +88,7 @@ async function readOwnApplication(
   ctx: QueryCtx,
   applicationId?: Id<"applications">,
 ) {
-  const user = await authComponent.safeGetAuthUser(ctx);
+  const user = await openAuthUser(ctx);
   if (!user) return null;
   const loginPhone = user.phoneNumber ?? undefined;
   const profile = await findProfile(ctx, user._id);

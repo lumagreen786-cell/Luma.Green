@@ -1,6 +1,10 @@
 import { ConvexError } from "convex/values";
 
 import { CATALOGUE, type Family } from "./catalogue";
+import {
+  SPECIALIST_REFERENCE_DEFINITIONS,
+  specialistReference,
+} from "./specialistReferences";
 
 /**
  * Reference labels from the founder's PET example, not approved process recipes.
@@ -199,12 +203,18 @@ export const PET_REFERENCE_DEFINITIONS: readonly ReferenceDefinition[] = [
   ),
 ];
 
+export const FOUNDATION_REFERENCE_DEFINITIONS = [
+  ...PET_REFERENCE_DEFINITIONS,
+  ...SPECIALIST_REFERENCE_DEFINITIONS,
+];
+
 interface FoundationMaterial {
   code: string;
   family: Family;
   stage: "scrap" | "recycled";
   names: Record<string, string>;
   active: boolean;
+  specialistReference?: NonNullable<ReturnType<typeof specialistReference>>;
 }
 
 /** Bound and validate the fixed reference list before starting any writes. */
@@ -215,12 +225,15 @@ export function foundationMaterials(): FoundationMaterial[] {
       family,
       stage,
       names: { ...names },
-      active: true,
+      active: specialistReference(code) === undefined,
+      ...(specialistReference(code) && {
+        specialistReference: specialistReference(code),
+      }),
     }),
   );
   const codes = new Set(materials.map(({ code }) => code));
   const versions = new Set<string>();
-  for (const definition of PET_REFERENCE_DEFINITIONS) {
+  for (const definition of FOUNDATION_REFERENCE_DEFINITIONS) {
     const key = `${definition.materialCode}:${definition.version}`;
     if (versions.has(key)) throw new ConvexError("REFERENCE_SEED_COLLISION");
     versions.add(key);
@@ -231,12 +244,15 @@ export function foundationMaterials(): FoundationMaterial[] {
       stage: definition.stage,
       names: { en: definition.name },
       active: false,
+      ...(specialistReference(definition.materialCode) && {
+        specialistReference: specialistReference(definition.materialCode),
+      }),
     });
     codes.add(definition.materialCode);
   }
   if (
     materials.length > MAX_FOUNDATION_DEFINITIONS ||
-    PET_REFERENCE_DEFINITIONS.length > MAX_FOUNDATION_DEFINITIONS ||
+    FOUNDATION_REFERENCE_DEFINITIONS.length > MAX_FOUNDATION_DEFINITIONS ||
     codes.size !== materials.length
   )
     throw new ConvexError("INVALID_REFERENCE_SEED");

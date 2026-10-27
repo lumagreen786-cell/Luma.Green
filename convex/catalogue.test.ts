@@ -8,7 +8,8 @@ import { convexModules, registerAuth, signIn } from "./lib/auth.testing";
 import { CATALOGUE, catalogueEntry } from "./lib/catalogue";
 import { shiftDate } from "./lib/dates";
 import { indiaToday } from "./lib/onboarding";
-import { PET_REFERENCE_DEFINITIONS } from "./lib/referenceDefinitions";
+import { FOUNDATION_REFERENCE_DEFINITIONS } from "./lib/referenceDefinitions";
+import { specialistReference } from "./lib/specialistReferences";
 import schema from "./schema";
 
 const modules = convexModules(import.meta.glob("./**/*.*s"));
@@ -61,8 +62,8 @@ describe("production catalogue definitions", () => {
     expect(
       await admin.mutation(api.catalogue.initializeDefinitions, {}),
     ).toEqual({
-      inserted: 45,
-      definitionsInserted: 21,
+      inserted: 51,
+      definitionsInserted: 32,
       materialsSkipped: 0,
       definitionsSkipped: 0,
     });
@@ -87,15 +88,15 @@ describe("production catalogue definitions", () => {
         stage,
         names,
         sortOrder,
-        active: true,
+        active: !specialistReference(code),
       })),
     );
     for (const material of materials) {
       expect(material.co2eFactor).toBeUndefined();
       expect(material.byproductEligibility).toBeUndefined();
     }
-    expect(materials).toHaveLength(45);
-    expect(new Set(materials.map(({ code }) => code)).size).toBe(45);
+    expect(materials).toHaveLength(51);
+    expect(new Set(materials.map(({ code }) => code)).size).toBe(51);
     expect(
       materials.slice(CATALOGUE.length).every(({ active }) => !active),
     ).toBe(true);
@@ -103,7 +104,7 @@ describe("production catalogue definitions", () => {
       api.operationalCatalogue.adminList,
       {},
     );
-    expect(definitions).toHaveLength(21);
+    expect(definitions).toHaveLength(32);
     for (const definition of definitions) {
       expect(definition.status).toBe("draft");
       expect(definition.sourceReference).toContain("workbook_unverified");
@@ -120,22 +121,22 @@ describe("production catalogue definitions", () => {
         .map(({ materialCode }) => materialCode)
         .toSorted((a, b) => a.localeCompare(b)),
     ).toEqual(
-      PET_REFERENCE_DEFINITIONS.map(
+      FOUNDATION_REFERENCE_DEFINITIONS.map(
         ({ materialCode }) => materialCode,
       ).toSorted((a, b) => a.localeCompare(b)),
     );
     const publicRows = await t.query(api.catalogue.materials, {});
-    expect(publicRows).toHaveLength(26);
+    expect(publicRows).toHaveLength(21);
     expect(publicRows.every((material) => material.co2eFactor === null)).toBe(
       true,
     );
     const audit = await t.run((ctx) => ctx.db.query("auditLog").collect());
     expect(
       audit.filter(({ action }) => action === "material.definitionInitialized"),
-    ).toHaveLength(45);
+    ).toHaveLength(51);
     expect(
       audit.filter(({ action }) => action === "catalogue.definitionDrafted"),
-    ).toHaveLength(21);
+    ).toHaveLength(32);
     const rows = await t.run(async (ctx) => ({
       references: await ctx.db.query("referencePrices").collect(),
       history: await ctx.db.query("marketPrices").collect(),
@@ -153,8 +154,8 @@ describe("production catalogue definitions", () => {
     ).toEqual({
       inserted: 0,
       definitionsInserted: 0,
-      materialsSkipped: 45,
-      definitionsSkipped: 21,
+      materialsSkipped: 51,
+      definitionsSkipped: 32,
     });
     expect(
       await t.run((ctx) =>
@@ -200,8 +201,8 @@ describe("production catalogue definitions", () => {
     expect(
       await admin.mutation(api.catalogue.initializeDefinitions, {}),
     ).toEqual({
-      inserted: 44,
-      definitionsInserted: 21,
+      inserted: 50,
+      definitionsInserted: 32,
       materialsSkipped: 1,
       definitionsSkipped: 0,
     });
@@ -245,7 +246,7 @@ describe("production catalogue definitions", () => {
       email: ADMIN_EMAIL,
       twoFactorEnabled: true,
     });
-    const reference = PET_REFERENCE_DEFINITIONS[0];
+    const reference = FOUNDATION_REFERENCE_DEFINITIONS[0];
     await admin.mutation(api.operationalCatalogue.draft, {
       ...reference,
       family: "paper",
@@ -294,8 +295,8 @@ describe("production catalogue definitions", () => {
     expect(
       await admin.mutation(api.catalogue.initializeDefinitions, {}),
     ).toEqual({
-      inserted: 45,
-      definitionsInserted: 21,
+      inserted: 51,
+      definitionsInserted: 32,
       materialsSkipped: 0,
       definitionsSkipped: 0,
     });
@@ -304,8 +305,8 @@ describe("production catalogue definitions", () => {
     ).toEqual({
       inserted: 0,
       definitionsInserted: 0,
-      materialsSkipped: 45,
-      definitionsSkipped: 21,
+      materialsSkipped: 51,
+      definitionsSkipped: 32,
     });
     const custom = await t.run((ctx) =>
       ctx.db
@@ -325,8 +326,8 @@ describe("production catalogue definitions", () => {
     expect(
       await t.mutation(internal.catalogue.initializeReferenceDefinitions, args),
     ).toEqual({
-      inserted: 45,
-      definitionsInserted: 21,
+      inserted: 51,
+      definitionsInserted: 32,
       materialsSkipped: 0,
       definitionsSkipped: 0,
     });
@@ -344,7 +345,7 @@ describe("production catalogue definitions", () => {
     expect(
       snapshot.materials.every(({ co2eFactor }) => co2eFactor === undefined),
     ).toBe(true);
-    expect(snapshot.audit).toHaveLength(66);
+    expect(snapshot.audit).toHaveLength(83);
     for (const entry of snapshot.audit) {
       expect(entry.actorProfileId).toBeUndefined();
       expect(entry.metadata).toMatchObject({
@@ -358,8 +359,8 @@ describe("production catalogue definitions", () => {
     ).toEqual({
       inserted: 0,
       definitionsInserted: 0,
-      materialsSkipped: 45,
-      definitionsSkipped: 21,
+      materialsSkipped: 51,
+      definitionsSkipped: 32,
     });
     expect(await t.run((ctx) => ctx.db.query("auditLog").collect())).toEqual(
       snapshot.audit,

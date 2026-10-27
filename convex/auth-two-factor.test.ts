@@ -715,3 +715,33 @@ it("cancels push recreated by a second tab before real HTTP logout", async () =>
   });
   expect(await t.run((ctx) => ctx.db.get("pushDevices", recreated))).toBeNull();
 });
+
+it("uses the real full-auth assurance for removal and denies old HTTP sessions immediately", async () => {
+  vi.useFakeTimers();
+  const { t, browser } = await signedIn();
+  const session = sessionShape.parse(
+    await responseBody(browser.request("/get-session")),
+  );
+  const account = t.withIdentity({
+    subject: session.user.id,
+    sessionId: session.session.id,
+  });
+  await account.mutation(api.identity.ensureProfile, { locale: "en" });
+  expect(await account.query(api.accountRemoval.status, {})).toMatchObject({
+    recentAuth: true,
+    state: "open",
+  });
+  expect(await responseStatus(browser.request("/delete-user", {}))).toBe(403);
+  expect(
+    await account.mutation(api.accountRemoval.close, {
+      operationKey: "handler-removal-0001",
+      confirm: true,
+    }),
+  ).toEqual({ state: "access_closed", reasons: [] });
+  expect(await responseStatus(browser.request("/convex/token"))).toBe(401);
+  expect(await responseStatus(browser.request("/get-session"))).toBe(401);
+  expect(await responseStatus(browser.request("/two-factor/enable", {}))).toBe(
+    401,
+  );
+  expect(await responseStatus(browser.request("/sign-out", {}))).toBe(200);
+});

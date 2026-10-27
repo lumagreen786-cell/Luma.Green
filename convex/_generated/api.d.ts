@@ -8,6 +8,7 @@
  * @module
  */
 
+import type * as accountRemoval from "../accountRemoval.js";
 import type * as admin from "../admin.js";
 import type * as adminCollections from "../adminCollections.js";
 import type * as adminPrices from "../adminPrices.js";
@@ -57,6 +58,8 @@ import type * as integrations from "../integrations.js";
 import type * as investorDemo from "../investorDemo.js";
 import type * as investorDemoAuth from "../investorDemoAuth.js";
 import type * as lib_access from "../lib/access.js";
+import type * as lib_accountClosure from "../lib/accountClosure.js";
+import type * as lib_accountRemovalSchema from "../lib/accountRemovalSchema.js";
 import type * as lib_admin from "../lib/admin.js";
 import type * as lib_adminRecovery from "../lib/adminRecovery.js";
 import type * as lib_applicationAccess from "../lib/applicationAccess.js";
@@ -150,6 +153,8 @@ import type * as lib_sms from "../lib/sms.js";
 import type * as lib_smsLimits from "../lib/smsLimits.js";
 import type * as lib_sourcing from "../lib/sourcing.js";
 import type * as lib_sourcingSchema from "../lib/sourcingSchema.js";
+import type * as lib_specialistMaterialSchema from "../lib/specialistMaterialSchema.js";
+import type * as lib_specialistReferences from "../lib/specialistReferences.js";
 import type * as lib_stakeholderKinds from "../lib/stakeholderKinds.js";
 import type * as lib_stockClosingSchema from "../lib/stockClosingSchema.js";
 import type * as lib_stockClosingSnapshot from "../lib/stockClosingSnapshot.js";
@@ -157,6 +162,7 @@ import type * as lib_stockThresholds from "../lib/stockThresholds.js";
 import type * as lib_turnstile from "../lib/turnstile.js";
 import type * as lib_validators from "../lib/validators.js";
 import type * as lib_views from "../lib/views.js";
+import type * as lib_workerHandoverSchema from "../lib/workerHandoverSchema.js";
 import type * as lib_workspace from "../lib/workspace.js";
 import type * as lib_workspaceEmailCopy from "../lib/workspaceEmailCopy.js";
 import type * as lib_workspaceRoles from "../lib/workspaceRoles.js";
@@ -194,6 +200,7 @@ import type * as stockIntake from "../stockIntake.js";
 import type * as support from "../support.js";
 import type * as teamInvitations from "../teamInvitations.js";
 import type * as traceability from "../traceability.js";
+import type * as workerHandovers from "../workerHandovers.js";
 import type * as workforce from "../workforce.js";
 import type * as workspace from "../workspace.js";
 import type * as workspaceEmail from "../workspaceEmail.js";
@@ -205,6 +212,7 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  accountRemoval: typeof accountRemoval;
   admin: typeof admin;
   adminCollections: typeof adminCollections;
   adminPrices: typeof adminPrices;
@@ -254,6 +262,8 @@ declare const fullApi: ApiFromModules<{
   investorDemo: typeof investorDemo;
   investorDemoAuth: typeof investorDemoAuth;
   "lib/access": typeof lib_access;
+  "lib/accountClosure": typeof lib_accountClosure;
+  "lib/accountRemovalSchema": typeof lib_accountRemovalSchema;
   "lib/admin": typeof lib_admin;
   "lib/adminRecovery": typeof lib_adminRecovery;
   "lib/applicationAccess": typeof lib_applicationAccess;
@@ -347,6 +357,8 @@ declare const fullApi: ApiFromModules<{
   "lib/smsLimits": typeof lib_smsLimits;
   "lib/sourcing": typeof lib_sourcing;
   "lib/sourcingSchema": typeof lib_sourcingSchema;
+  "lib/specialistMaterialSchema": typeof lib_specialistMaterialSchema;
+  "lib/specialistReferences": typeof lib_specialistReferences;
   "lib/stakeholderKinds": typeof lib_stakeholderKinds;
   "lib/stockClosingSchema": typeof lib_stockClosingSchema;
   "lib/stockClosingSnapshot": typeof lib_stockClosingSnapshot;
@@ -354,6 +366,7 @@ declare const fullApi: ApiFromModules<{
   "lib/turnstile": typeof lib_turnstile;
   "lib/validators": typeof lib_validators;
   "lib/views": typeof lib_views;
+  "lib/workerHandoverSchema": typeof lib_workerHandoverSchema;
   "lib/workspace": typeof lib_workspace;
   "lib/workspaceEmailCopy": typeof lib_workspaceEmailCopy;
   "lib/workspaceRoles": typeof lib_workspaceRoles;
@@ -391,6 +404,7 @@ declare const fullApi: ApiFromModules<{
   support: typeof support;
   teamInvitations: typeof teamInvitations;
   traceability: typeof traceability;
+  workerHandovers: typeof workerHandovers;
   workforce: typeof workforce;
   workspace: typeof workspace;
   workspaceEmail: typeof workspaceEmail;

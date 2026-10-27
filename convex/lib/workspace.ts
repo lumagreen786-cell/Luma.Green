@@ -2,8 +2,7 @@ import { ConvexError } from "convex/values";
 
 import type { Doc, Id } from "../_generated/dataModel";
 import type { QueryCtx } from "../_generated/server";
-import { authComponent } from "../auth";
-import { requireUser } from "./access";
+import { openAuthUser, requireUser } from "./access";
 import { findProfile } from "./applicationAccess";
 import type { OrgKind } from "./chain";
 import {
@@ -19,12 +18,15 @@ export async function membershipFor(
   profileId: Id<"profiles">,
   orgId: Id<"orgs">,
 ) {
-  return ctx.db
-    .query("memberships")
-    .withIndex("by_profile_org", (q) =>
-      q.eq("profileId", profileId).eq("orgId", orgId),
-    )
-    .unique();
+  const profile = await ctx.db.get("profiles", profileId);
+  return !profile || profile.closedAt !== undefined
+    ? null
+    : ctx.db
+        .query("memberships")
+        .withIndex("by_profile_org", (q) =>
+          q.eq("profileId", profileId).eq("orgId", orgId),
+        )
+        .unique();
 }
 function isWorkspaceReadable(org: Doc<"orgs">, canReadSuspended: boolean) {
   switch (org.status) {
@@ -42,7 +44,7 @@ export async function selectedMembership(
   canReadSuspended = false,
 ) {
   const profile = await ctx.db.get("profiles", profileId);
-  if (!profile) return null;
+  if (!profile || profile.closedAt !== undefined) return null;
   if (profile.activeOrgId) {
     const membership = await membershipFor(ctx, profileId, profile.activeOrgId);
     if (!membership) return null;
@@ -87,7 +89,7 @@ export async function findSaathiFor(
 export async function currentProfile(
   ctx: QueryCtx,
 ): Promise<Doc<"profiles"> | null> {
-  const user = await authComponent.safeGetAuthUser(ctx);
+  const user = await openAuthUser(ctx);
   return user ? findProfile(ctx, user._id) : null;
 }
 

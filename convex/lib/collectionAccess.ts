@@ -3,6 +3,7 @@ import { ConvexError } from "convex/values";
 import type { Doc } from "../_generated/dataModel";
 import type { QueryCtx } from "../_generated/server";
 import { requireUser } from "./access";
+import { isPhoneGrantCurrent, isProfileOpen } from "./accountClosure";
 import { findProfile } from "./applicationAccess";
 import { verifiedIndianMobile } from "./phone";
 
@@ -34,10 +35,28 @@ export async function collectionGrants(
   ctx: QueryCtx,
   booking: Doc<"bookings">,
 ) {
-  return ctx.db
+  const grants = await ctx.db
     .query("collectionInvitations")
     .withIndex("by_booking", (q) => q.eq("bookingId", booking._id))
     .take(21);
+  if (
+    !booking.householdProfileId ||
+    !(await isProfileOpen(ctx, booking.householdProfileId))
+  )
+    return [];
+  const allowed = await Promise.all(
+    grants.map(async (grant) => {
+      if (
+        grant.helperProfileId &&
+        !(await isProfileOpen(ctx, grant.helperProfileId))
+      )
+        return null;
+      return (await isPhoneGrantCurrent(ctx, grant.phone, grant.createdAt))
+        ? grant
+        : null;
+    }),
+  );
+  return allowed.filter((grant) => grant !== null);
 }
 
 export function isGrantActive(

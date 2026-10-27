@@ -1,6 +1,7 @@
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 
+import { accountRemovalTables } from "./lib/accountRemovalSchema";
 import { auditShareTables } from "./lib/auditSharesSchema";
 import { lifecycleTables } from "./lib/cashfreeLifecycleSchema";
 import { cashfreeTables } from "./lib/cashfreeSchema";
@@ -55,6 +56,7 @@ import { routePlanningTables } from "./lib/routePlanningSchema";
 import { serviceRecordsTables } from "./lib/serviceRecordsSchema";
 import { vMaterialOrigin, vSiteType } from "./lib/siteClassification";
 import { sourcingTables } from "./lib/sourcingSchema";
+import { specialistMaterialFields } from "./lib/specialistMaterialSchema";
 import { vStakeholderKind, vStakeholderStatus } from "./lib/stakeholderKinds";
 import { stockClosingTables } from "./lib/stockClosingSchema";
 import {
@@ -63,6 +65,7 @@ import {
   vOrgKind,
   vTradeStatus,
 } from "./lib/validators";
+import { workerHandoverTables } from "./lib/workerHandoverSchema";
 import { vInvitationRole, vMembershipRole } from "./lib/workspaceRoles";
 
 /**
@@ -85,6 +88,8 @@ export default defineSchema({
   ...returnClaimsTables,
   ...geocodingTables,
   ...stockClosingTables,
+  ...accountRemovalTables,
+  ...workerHandoverTables,
   ...serviceRecordsTables,
   ...collectionOperationsTables,
   identityCheckDays: defineTable({
@@ -261,6 +266,8 @@ export default defineSchema({
    * everyone else — see docs/architecture/auth.md.
    */
   profiles: defineTable({
+    closedAt: v.optional(v.number()),
+    removalRequestId: v.optional(v.id("accountRemovals")),
     authUserId: v.string(),
     /** Selection only. Every request must still verify the current membership. */
     activeOrgId: v.optional(v.id("orgs")),
@@ -374,6 +381,7 @@ export default defineSchema({
    * rates and reviewed factors are separate operational inputs.
    */
   materials: defineTable({
+    ...specialistMaterialFields,
     code: v.string(), // e.g. "PAPER-NEWS"
     family: vFamily,
     stage: v.union(v.literal("scrap"), v.literal("recycled")),
@@ -507,7 +515,9 @@ export default defineSchema({
   })
     .index("by_hash", ["tokenHash"])
     .index("by_org_created", ["orgId", "createdAt"])
-    .index("by_org_email", ["orgId", "email"]),
+    .index("by_org_email", ["orgId", "email"])
+    .index("by_inviter", ["invitedBy"])
+    .index("by_email", ["email"]),
 
   /** Machine credentials. Plain tokens are returned once and never stored. */
   integrationKeys: defineTable({
@@ -526,7 +536,8 @@ export default defineSchema({
   })
     .index("by_hash", ["keyHash"])
     .index("by_org_created", ["orgId", "createdAt"])
-    .index("by_org_revoked_expires", ["orgId", "revokedAt", "expiresAt"]),
+    .index("by_org_revoked_expires", ["orgId", "revokedAt", "expiresAt"])
+    .index("by_issuer", ["issuerProfileId"]),
 
   /** One fixed-window request counter per business, shared by all its keys. */
   integrationUsage: defineTable({
@@ -584,7 +595,11 @@ export default defineSchema({
     handoverNote: v.optional(v.string()),
     handoverAt: v.optional(v.number()),
     createdAt: v.number(),
-  }).index("by_booking", ["bookingId"]),
+  })
+    .index("by_booking", ["bookingId"])
+    .index("by_owner", ["ownerProfileId"])
+    .index("by_helper", ["helperProfileId"])
+    .index("by_phone", ["phone"]),
 
   householdReceiptEvents: defineTable({
     bookingId: v.id("bookings"),
@@ -675,6 +690,7 @@ export default defineSchema({
     .index("by_org_status", ["orgId", "status"])
     .index("by_status_createdAt", ["status", "createdAt"])
     .index("by_household", ["householdProfileId"])
+    .index("by_household_status", ["householdProfileId", "status"])
     .index("by_createdAt", ["createdAt"]),
 
   /** Immutable offer events; a booking can pass through several shops. */
@@ -1070,7 +1086,8 @@ export default defineSchema({
       "cancelledAt",
       "date",
     ])
-    .index("by_saathi", ["saathiProfileId"]),
+    .index("by_saathi", ["saathiProfileId"])
+    .index("by_saathi_status", ["saathiProfileId", "status", "cancelledAt"]),
 
   // --- Help -----------------------------------------------------------------------
 

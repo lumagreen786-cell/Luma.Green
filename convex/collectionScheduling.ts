@@ -4,6 +4,7 @@ import { z } from "zod";
 import type { Doc, Id } from "./_generated/dataModel";
 import type { MutationCtx } from "./_generated/server";
 import { internalMutation, mutation, query } from "./_generated/server";
+import { isProfileOpen } from "./lib/accountClosure";
 import {
   availableCapacity,
   canServeCollection,
@@ -275,6 +276,18 @@ export const stopRepeating = mutation({
   },
 });
 /** One scheduler owner; cursor and operation key commit with each dated request. */
+async function openRecurrences(
+  ctx: MutationCtx,
+  rows: Doc<"recurringCollections">[],
+  now: number,
+) {
+  const active: Doc<"recurringCollections">[] = [];
+  for (const row of rows) {
+    if (await isProfileOpen(ctx, row.householdProfileId)) active.push(row);
+    else await ctx.db.patch(row._id, { active: false, updatedAt: now });
+  }
+  return active;
+}
 export const generate = internalMutation({
   args: {},
   returns: v.null(),
@@ -288,7 +301,8 @@ export const generate = internalMutation({
         q.eq("active", true).lte("nextDate", horizon),
       )
       .take(50);
-    for (const row of rows) {
+    const openRows = await openRecurrences(ctx, rows, now);
+    for (const row of openRows) {
       const template = await ctx.db.get("bookings", row.bookingId);
       const org = template ? await ctx.db.get("orgs", template.orgId) : null;
       let date = row.nextDate;

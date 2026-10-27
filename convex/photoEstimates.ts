@@ -8,7 +8,7 @@ import {
   internalQuery,
   query,
 } from "./_generated/server";
-import { authComponent } from "./auth";
+import { openAuthUser } from "./lib/access";
 import {
   isPhotoDataUrl,
   PHOTO_DAY_MS,
@@ -71,7 +71,7 @@ export const estimate = action({
         {},
       );
       if (catalogue.length === 0) return { status: "unavailable" };
-      const user = await authComponent.safeGetAuthUser(ctx);
+      const user = await openAuthUser(ctx);
       const hash = async (text: string) => {
         const bytes = await crypto.subtle.digest(
           "SHA-256",

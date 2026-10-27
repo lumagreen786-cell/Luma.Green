@@ -13,6 +13,7 @@ import {
 } from "./_generated/server";
 import { authComponent } from "./auth";
 import { requireUser } from "./lib/access";
+import { isPhoneGrantCurrent } from "./lib/accountClosure";
 import { findApplication, findProfile } from "./lib/applicationAccess";
 import { vApplicationKind, vApplicationStatus } from "./lib/drafts";
 import { hashToken } from "./lib/integrations";
@@ -557,6 +558,11 @@ export const invitation = query({
       const user = await requireUser(ctx);
       if (!user.emailVerified) return { status: "verifyEmail" as const };
       const { invite, org } = await activeInvitation(ctx, token);
+      if (
+        user.phoneNumber &&
+        !(await isPhoneGrantCurrent(ctx, user.phoneNumber, invite.createdAt))
+      )
+        throw new ConvexError("INVITATION_UNAVAILABLE");
       return invitationEmail(user.email) === invite.email
         ? { status: "ready" as const, orgName: org.name, role: invite.role }
         : { status: "unavailable" as const };
@@ -577,6 +583,11 @@ export const acceptInvitation = mutation({
     const profile = await findProfile(ctx, user._id);
     if (profile?.kind !== "member") throw new ConvexError("NO_PROFILE");
     const { invite, org } = await activeInvitation(ctx, token);
+    if (
+      user.phoneNumber &&
+      !(await isPhoneGrantCurrent(ctx, user.phoneNumber, invite.createdAt))
+    )
+      throw new ConvexError("INVITATION_UNAVAILABLE");
     if (invitationEmail(user.email) !== invite.email)
       throw new ConvexError("INVITATION_UNAVAILABLE");
     let membership = await membershipFor(ctx, profile._id, org._id);

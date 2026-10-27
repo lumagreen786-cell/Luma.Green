@@ -526,7 +526,7 @@ function matchesBuyerScope(
   const isByproduct =
     listing.sellerKind === "manufacturer" &&
     listing.origin === "manufacturer_byproduct" &&
-    material.active &&
+    isOrdinaryMaterial(material) &&
     material.stage === "scrap" &&
     material.byproductEligibility?.hazardStatus === "non_hazardous" &&
     org.families.includes(material.family);

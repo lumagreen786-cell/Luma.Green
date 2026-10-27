@@ -12,6 +12,7 @@ import {
   positiveGrams,
   requiredLabel,
 } from "./lib/lotEvidence";
+import { isOrdinaryMaterial } from "./lib/materialEligibility";
 import { indiaToday } from "./lib/onboarding";
 import { recordedCost, recordedCostReference } from "./lib/processingCosts";
 import { intakeCostFields, vRecordedCost } from "./lib/processingCostSchema";
@@ -20,7 +21,7 @@ import { materialIndex, requireOrg } from "./lib/workspace";
 
 function isEligible(material: Doc<"materials">, org: Doc<"orgs">) {
   return (
-    material.active &&
+    isOrdinaryMaterial(material) &&
     material.stage === "scrap" &&
     material.byproductEligibility?.hazardStatus === "non_hazardous" &&
     org.families.includes(material.family)

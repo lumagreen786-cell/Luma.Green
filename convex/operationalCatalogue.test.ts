@@ -103,9 +103,9 @@ it("initialization preserves reviewed and retired records and review audits mate
     ctx.db.query("materials").collect(),
   );
   const result = await admin.mutation(api.catalogue.initializeDefinitions, {});
-  expect(result.inserted + result.materialsSkipped).toBe(45);
+  expect(result.inserted + result.materialsSkipped).toBe(51);
   expect(result.materialsSkipped).toBe(initialMaterials.length);
-  expect(result.definitionsInserted).toBe(21);
+  expect(result.definitionsInserted).toBe(32);
   const definitions = await admin.query(api.operationalCatalogue.adminList, {});
   const hotFlake = definitions.find(
     ({ materialCode }) => materialCode === "RECYCLED-PET-HOT-FLAKE",
@@ -155,8 +155,8 @@ it("initialization preserves reviewed and retired records and review audits mate
     {
       inserted: 0,
       definitionsInserted: 0,
-      materialsSkipped: 45,
-      definitionsSkipped: 21,
+      materialsSkipped: 51,
+      definitionsSkipped: 32,
     },
   );
   expect(
