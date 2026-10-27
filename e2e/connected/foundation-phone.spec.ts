@@ -46,13 +46,16 @@ async function actor(browser: Browser, key: string) {
   const saved = artifact.accounts.find((entry) => entry.key === key);
   if (!saved)
     throw new Error("A required private local phone session is missing.");
-  return browser.newContext({
+  const context = await browser.newContext({
     baseURL: artifact.site,
     storageState: saved.storageState,
     extraHTTPHeaders: {
       "X-Forwarded-For": `192.0.2.${String(160 + artifact.accounts.indexOf(saved))}`,
     },
   });
+  context.setDefaultTimeout(20_000);
+  context.setDefaultNavigationTimeout(30_000);
+  return context;
 }
 async function dialog(page: Page, name: string) {
   await page.getByRole("button", { name, exact: true }).click();
@@ -235,7 +238,11 @@ test("real manufacturer phone session records an empty stock closing and shows n
   const context = await actor(browser, "manufacturer");
   try {
     const page = await context.newPage();
-    await page.goto("/app/stock");
+
+    await test.step("Open the manufacturer stock page", async () => {
+      await page.goto("/app/stock", { timeout: 30_000 });
+    });
+
     const closing = page
       .locator("details")
       .filter({
@@ -276,7 +283,7 @@ test("real manufacturer phone session records an empty stock closing and shows n
       }),
     ).toHaveCount(0);
   } finally {
-    await context.close();
+    if (context.pages().length > 0) await context.close();
   }
 });
 

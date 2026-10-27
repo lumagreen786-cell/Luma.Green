@@ -16,7 +16,11 @@ const artifact = z
   );
 export default defineConfig({
   testDir: "./e2e/connected",
-  testMatch: "foundation-phone.spec.ts",
+  testMatch: [
+    "foundation-phone.spec.ts",
+    "foundation-handover-phone.spec.ts",
+    "foundation-removal-phone.spec.ts",
+  ],
   fullyParallel: false,
   workers: 1,
   retries: 0,

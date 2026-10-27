@@ -76,6 +76,7 @@ const requiredKeys = [
   "manufacturer",
   "csr-sponsor",
   "applicant",
+  "saathi",
 ];
 const privateDir = path.resolve(".convex/local-acceptance");
 const artifactPath = path.join(privateDir, "phone-sessions.json");

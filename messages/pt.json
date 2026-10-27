@@ -4364,5 +4364,40 @@
     "corrected": "Correção registrada",
     "evidence": "Referência da evidência física",
     "recentCorrections": "Correções recentes (até 20)"
+  },
+  "workerHandover": {
+    "title": "Entrega da coleta",
+    "hint": "Somente evidências. Estoque e pagamentos mantêm registros separados.",
+    "limit": "Últimos 100 vínculos. As opções de origem são limitadas.",
+    "job": "Trabalho de coleta atribuído",
+    "collection": "Coleta",
+    "collected": "Coletado (g)",
+    "received": "Recebido (g)",
+    "variance": "Recebido − coletado (g)",
+    "record": "Registrar peso coletado",
+    "acknowledge": "Confirmar entrega",
+    "revoke": "Revogar vínculo",
+    "acknowledged": "Entrega confirmada",
+    "link": "Vincular coleta",
+    "reason": "Motivo",
+    "evidence": "Referência da evidência física"
+  },
+  "accountRemoval": {
+    "title": "Fechar conta",
+    "intro": "O seu início de sessão e acesso terminarão.",
+    "retained": "Os registos necessários de negócios, pagamentos, materiais e auditoria ficam para revisão. Nem todos os dados são apagados.",
+    "confirm": "Compreendo e quero fechar a minha conta.",
+    "action": "Fechar conta",
+    "held": "A sua conta não está fechada.",
+    "reauth": "Inicie sessão novamente para continuar.",
+    "unavailable": "O fecho está indisponível. Tente mais tarde.",
+    "retry": "O resultado não está confirmado. Tente novamente para verificar o mesmo pedido.",
+    "closed": "O acesso à conta está fechado.",
+    "adminReplacement": "É preciso organizar separadamente a substituição do administrador.",
+    "businessOwner": "Transfira a propriedade do negócio antes de fechar a conta.",
+    "activeCollection": "Resolva primeiro a recolha em curso.",
+    "assignedWork": "Resolva primeiro o trabalho atribuído ou a entrega.",
+    "reviewLimit": "É necessário rever mais registos antes do fecho.",
+    "checkLimit": "Fechar e voltar a registar-se não repõe o limite de verificações empresariais de hoje. As verificações podem ficar suspensas até ao dia seguinte na Índia."
   }
 }

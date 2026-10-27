@@ -4364,5 +4364,40 @@
     "corrected": "Correction recorded",
     "evidence": "Physical evidence reference",
     "recentCorrections": "Recent corrections (up to 20)"
+  },
+  "workerHandover": {
+    "title": "Collection handover",
+    "hint": "Evidence only. Stock and pay keep separate records.",
+    "limit": "Latest 100 links. Source choices are limited.",
+    "job": "Assigned pickup job",
+    "collection": "Collection",
+    "collected": "Collected (g)",
+    "received": "Received (g)",
+    "variance": "Received − collected (g)",
+    "record": "Record collected weight",
+    "acknowledge": "Acknowledge handover",
+    "revoke": "Revoke link",
+    "acknowledged": "Handover acknowledged",
+    "link": "Link collection",
+    "reason": "Reason",
+    "evidence": "Physical evidence reference"
+  },
+  "accountRemoval": {
+    "title": "Close account",
+    "intro": "Your sign-in access will end.",
+    "retained": "Required business, payment, material and audit records stay for review. This does not erase all data.",
+    "confirm": "I understand and want to close my account.",
+    "action": "Close account",
+    "held": "Your account is not closed.",
+    "reauth": "Sign in again to continue.",
+    "unavailable": "Account closure is unavailable. Try again later.",
+    "retry": "The result is not confirmed. Retry to check the same request.",
+    "closed": "Account access is closed.",
+    "adminReplacement": "An administrator replacement must be arranged separately.",
+    "businessOwner": "Transfer business ownership before closing this account.",
+    "activeCollection": "Resolve the active collection before closing this account.",
+    "assignedWork": "Resolve your assigned work or handover first.",
+    "reviewLimit": "More records need review before this account can close.",
+    "checkLimit": "Closing and rejoining does not reset today’s business-check limit. Checks may stay on hold until the next day in India."
   }
 }

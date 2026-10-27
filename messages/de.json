@@ -4364,5 +4364,40 @@
     "corrected": "Korrektur erfasst",
     "evidence": "Referenz des physischen Nachweises",
     "recentCorrections": "Letzte Korrekturen (bis zu 20)"
+  },
+  "workerHandover": {
+    "title": "Übergabe der Sammlung",
+    "hint": "Nur Nachweise. Bestand und Bezahlung behalten getrennte Aufzeichnungen.",
+    "limit": "Letzte 100 Verknüpfungen. Die Quellauswahl ist begrenzt.",
+    "job": "Zugewiesener Abholauftrag",
+    "collection": "Sammlung",
+    "collected": "Gesammelt (g)",
+    "received": "Empfangen (g)",
+    "variance": "Empfangen − gesammelt (g)",
+    "record": "Gesammeltes Gewicht erfassen",
+    "acknowledge": "Übergabe bestätigen",
+    "revoke": "Verknüpfung widerrufen",
+    "acknowledged": "Übergabe bestätigt",
+    "link": "Sammlung verknüpfen",
+    "reason": "Grund",
+    "evidence": "Referenz des physischen Nachweises"
+  },
+  "accountRemoval": {
+    "title": "Konto schließen",
+    "intro": "Ihre Anmeldung und Ihr Zugriff enden.",
+    "retained": "Erforderliche Geschäfts-, Zahlungs-, Material- und Prüfunterlagen bleiben zur Prüfung erhalten. Nicht alle Daten werden gelöscht.",
+    "confirm": "Ich verstehe dies und möchte mein Konto schließen.",
+    "action": "Konto schließen",
+    "held": "Ihr Konto ist nicht geschlossen.",
+    "reauth": "Melden Sie sich erneut an, um fortzufahren.",
+    "unavailable": "Die Kontoschließung ist nicht verfügbar. Versuchen Sie es später erneut.",
+    "retry": "Das Ergebnis ist unbestätigt. Prüfen Sie dieselbe Anfrage durch erneutes Versuchen.",
+    "closed": "Der Kontozugriff ist geschlossen.",
+    "adminReplacement": "Eine andere Person muss gesondert als Administration eingesetzt werden.",
+    "businessOwner": "Übertragen Sie vor der Schließung das Geschäftseigentum.",
+    "activeCollection": "Klären Sie zuerst die laufende Abholung.",
+    "assignedWork": "Klären Sie zuerst zugewiesene Arbeit oder Übergaben.",
+    "reviewLimit": "Vor der Schließung müssen weitere Unterlagen geprüft werden.",
+    "checkLimit": "Schließen und erneutes Registrieren setzen das heutige Limit für Geschäftsprüfungen nicht zurück. Prüfungen können bis zum nächsten Tag nach indischer Zeit gesperrt bleiben."
   }
 }

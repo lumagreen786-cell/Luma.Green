@@ -4364,5 +4364,40 @@
     "corrected": "Correzione registrata",
     "evidence": "Riferimento della prova fisica",
     "recentCorrections": "Correzioni recenti (fino a 20)"
+  },
+  "workerHandover": {
+    "title": "Consegna della raccolta",
+    "hint": "Solo prove. Scorte e pagamenti mantengono registri separati.",
+    "limit": "Ultimi 100 collegamenti. Le scelte della fonte sono limitate.",
+    "job": "Lavoro di ritiro assegnato",
+    "collection": "Raccolta",
+    "collected": "Raccolto (g)",
+    "received": "Ricevuto (g)",
+    "variance": "Ricevuto − raccolto (g)",
+    "record": "Registra il peso raccolto",
+    "acknowledge": "Conferma consegna",
+    "revoke": "Revoca collegamento",
+    "acknowledged": "Consegna confermata",
+    "link": "Collega raccolta",
+    "reason": "Motivo",
+    "evidence": "Riferimento della prova fisica"
+  },
+  "accountRemoval": {
+    "title": "Chiudi account",
+    "intro": "Il tuo accesso terminerà.",
+    "retained": "I registri necessari di attività, pagamenti, materiali e controlli restano disponibili per la revisione. Non vengono cancellati tutti i dati.",
+    "confirm": "Ho capito e voglio chiudere il mio account.",
+    "action": "Chiudi account",
+    "held": "Il tuo account non è chiuso.",
+    "reauth": "Accedi di nuovo per continuare.",
+    "unavailable": "La chiusura non è disponibile. Riprova più tardi.",
+    "retry": "Il risultato non è confermato. Riprova per verificare la stessa richiesta.",
+    "closed": "L’accesso all’account è chiuso.",
+    "adminReplacement": "La sostituzione dell’amministratore va organizzata separatamente.",
+    "businessOwner": "Trasferisci la proprietà dell’attività prima di chiudere l’account.",
+    "activeCollection": "Risolvi prima la raccolta in corso.",
+    "assignedWork": "Risolvi prima il lavoro assegnato o la consegna.",
+    "reviewLimit": "Occorre esaminare altri registri prima della chiusura.",
+    "checkLimit": "Chiudere e iscriversi di nuovo non azzera il limite odierno delle verifiche aziendali. Le verifiche possono restare sospese fino al giorno successivo in India."
   }
 }

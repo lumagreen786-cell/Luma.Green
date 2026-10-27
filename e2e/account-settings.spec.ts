@@ -9,7 +9,7 @@ for (const { locale, messages } of [
   { locale: "en", messages: en },
   { locale: "ar", messages: ar },
 ]) {
-  for (const section of ["security", "notifications"]) {
+  for (const section of ["security", "notifications", "removal"]) {
     test(`${locale} ${section} settings require sign-in and preserve the return destination`, async ({
       page,
     }) => {
@@ -46,3 +46,13 @@ for (const route of ["forgot-password", "reset-password"]) {
     );
   });
 }
+
+test("account-removal review queue requires an admin session", async ({
+  page,
+}) => {
+  await page.goto("/admin/account-removals");
+  await expect(page).toHaveURL(/\/admin\/login$/);
+  await expect(
+    page.getByRole("heading", { name: "Account access and evidence review" }),
+  ).toHaveCount(0);
+});

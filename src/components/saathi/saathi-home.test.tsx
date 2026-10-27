@@ -15,6 +15,9 @@ import { SaathiHome } from "./saathi-home";
 const board = vi.hoisted((): { current: unknown } => ({ current: undefined }));
 const take = vi.hoisted(() => vi.fn());
 const finish = vi.hoisted(() => vi.fn());
+vi.mock("@/components/collection/worker-handovers", () => ({
+  WorkerHandovers: () => null,
+}));
 
 vi.mock("convex/react", () => ({
   useConvexAuth: () => ({ isLoading: false, isAuthenticated: true }),

@@ -4364,5 +4364,40 @@
     "corrected": "Pembetulan dicatat",
     "evidence": "Rujukan bukti fizikal",
     "recentCorrections": "Pembetulan terkini (sehingga 20)"
+  },
+  "workerHandover": {
+    "title": "Serahan kutipan",
+    "hint": "Bukti sahaja. Rekod stok dan bayaran kekal berasingan.",
+    "limit": "100 pautan terkini. Pilihan sumber terhad.",
+    "job": "Kerja kutipan yang ditugaskan",
+    "collection": "Kutipan",
+    "collected": "Dikutip (g)",
+    "received": "Diterima (g)",
+    "variance": "Diterima − dikutip (g)",
+    "record": "Catat berat kutipan",
+    "acknowledge": "Sahkan serahan",
+    "revoke": "Batalkan pautan",
+    "acknowledged": "Serahan disahkan",
+    "link": "Pautkan kutipan",
+    "reason": "Sebab",
+    "evidence": "Rujukan bukti fizikal"
+  },
+  "accountRemoval": {
+    "title": "Tutup akaun",
+    "intro": "Akses log masuk dan akaun anda akan tamat.",
+    "retained": "Rekod perniagaan, bayaran, bahan dan audit yang diperlukan disimpan untuk semakan. Bukan semua data dipadamkan.",
+    "confirm": "Saya faham dan mahu menutup akaun saya.",
+    "action": "Tutup akaun",
+    "held": "Akaun anda belum ditutup.",
+    "reauth": "Log masuk semula untuk meneruskan.",
+    "unavailable": "Penutupan akaun tidak tersedia. Cuba lagi kemudian.",
+    "retry": "Hasil belum disahkan. Cuba lagi untuk menyemak permintaan yang sama.",
+    "closed": "Akses akaun telah ditutup.",
+    "adminReplacement": "Pentadbir pengganti perlu diatur secara berasingan.",
+    "businessOwner": "Pindahkan pemilikan perniagaan sebelum menutup akaun.",
+    "activeCollection": "Selesaikan pengumpulan aktif dahulu.",
+    "assignedWork": "Selesaikan kerja atau serahan yang ditugaskan dahulu.",
+    "reviewLimit": "Lebih banyak rekod perlu disemak sebelum akaun boleh ditutup.",
+    "checkLimit": "Menutup akaun dan menyertai semula tidak menetapkan semula had semakan perniagaan hari ini. Semakan mungkin ditahan sehingga hari berikutnya di India."
   }
 }

@@ -4364,5 +4364,40 @@
     "corrected": "Đã ghi nhận điều chỉnh",
     "evidence": "Tham chiếu bằng chứng thực tế",
     "recentCorrections": "Điều chỉnh gần đây (tối đa 20)"
+  },
+  "workerHandover": {
+    "title": "Bàn giao vật liệu thu gom",
+    "hint": "Chỉ là bằng chứng. Hồ sơ tồn kho và tiền công vẫn riêng biệt.",
+    "limit": "100 liên kết gần nhất. Lựa chọn nguồn có giới hạn.",
+    "job": "Công việc thu gom được giao",
+    "collection": "Thu gom",
+    "collected": "Đã thu gom (g)",
+    "received": "Đã nhận (g)",
+    "variance": "Đã nhận − đã thu gom (g)",
+    "record": "Ghi nhận khối lượng thu gom",
+    "acknowledge": "Xác nhận bàn giao",
+    "revoke": "Thu hồi liên kết",
+    "acknowledged": "Đã xác nhận bàn giao",
+    "link": "Liên kết thu gom",
+    "reason": "Lý do",
+    "evidence": "Tham chiếu bằng chứng thực tế"
+  },
+  "accountRemoval": {
+    "title": "Đóng tài khoản",
+    "intro": "Quyền đăng nhập và truy cập của bạn sẽ chấm dứt.",
+    "retained": "Các hồ sơ cần thiết về kinh doanh, thanh toán, vật liệu và kiểm toán được giữ để xem xét. Không phải mọi dữ liệu đều bị xóa.",
+    "confirm": "Tôi hiểu và muốn đóng tài khoản.",
+    "action": "Đóng tài khoản",
+    "held": "Tài khoản của bạn chưa đóng.",
+    "reauth": "Đăng nhập lại để tiếp tục.",
+    "unavailable": "Hiện không thể đóng tài khoản. Hãy thử lại sau.",
+    "retry": "Kết quả chưa được xác nhận. Thử lại để kiểm tra cùng yêu cầu này.",
+    "closed": "Quyền truy cập tài khoản đã đóng.",
+    "adminReplacement": "Cần bố trí quản trị viên thay thế riêng.",
+    "businessOwner": "Chuyển quyền sở hữu doanh nghiệp trước khi đóng.",
+    "activeCollection": "Giải quyết lượt thu gom đang hoạt động trước.",
+    "assignedWork": "Giải quyết công việc được giao hoặc bàn giao trước.",
+    "reviewLimit": "Cần xem xét thêm hồ sơ trước khi đóng.",
+    "checkLimit": "Đóng tài khoản rồi đăng ký lại không đặt lại giới hạn kiểm tra doanh nghiệp hôm nay. Kiểm tra có thể bị giữ đến ngày tiếp theo tại Ấn Độ."
   }
 }

@@ -4364,5 +4364,40 @@
     "corrected": "Koreksi dicatat",
     "evidence": "Referensi bukti fisik",
     "recentCorrections": "Koreksi terbaru (maksimal 20)"
+  },
+  "workerHandover": {
+    "title": "Serah terima pengumpulan",
+    "hint": "Hanya bukti. Catatan stok dan pembayaran tetap terpisah.",
+    "limit": "100 tautan terbaru. Pilihan sumber terbatas.",
+    "job": "Pekerjaan penjemputan yang ditugaskan",
+    "collection": "Pengumpulan",
+    "collected": "Dikumpulkan (g)",
+    "received": "Diterima (g)",
+    "variance": "Diterima − dikumpulkan (g)",
+    "record": "Catat berat yang dikumpulkan",
+    "acknowledge": "Konfirmasi serah terima",
+    "revoke": "Cabut tautan",
+    "acknowledged": "Serah terima dikonfirmasi",
+    "link": "Tautkan pengumpulan",
+    "reason": "Alasan",
+    "evidence": "Referensi bukti fisik"
+  },
+  "accountRemoval": {
+    "title": "Tutup akun",
+    "intro": "Akses masuk dan akses akun Anda akan berakhir.",
+    "retained": "Catatan bisnis, pembayaran, material, dan audit yang diperlukan disimpan untuk ditinjau. Tidak semua data dihapus.",
+    "confirm": "Saya memahami dan ingin menutup akun.",
+    "action": "Tutup akun",
+    "held": "Akun Anda belum ditutup.",
+    "reauth": "Masuk kembali untuk melanjutkan.",
+    "unavailable": "Penutupan akun tidak tersedia. Coba lagi nanti.",
+    "retry": "Hasil belum dikonfirmasi. Coba lagi untuk memeriksa permintaan yang sama.",
+    "closed": "Akses akun telah ditutup.",
+    "adminReplacement": "Pengganti administrator harus diatur secara terpisah.",
+    "businessOwner": "Alihkan kepemilikan bisnis sebelum menutup akun.",
+    "activeCollection": "Selesaikan pengumpulan yang aktif terlebih dahulu.",
+    "assignedWork": "Selesaikan pekerjaan atau serah terima yang ditugaskan dahulu.",
+    "reviewLimit": "Catatan lain perlu ditinjau sebelum akun dapat ditutup.",
+    "checkLimit": "Menutup akun dan bergabung lagi tidak mengatur ulang batas pemeriksaan bisnis hari ini. Pemeriksaan dapat ditahan hingga hari berikutnya di India."
   }
 }

@@ -21,6 +21,7 @@ import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
 import { SLOT_WINDOWS, type SlotWindow } from "../../../convex/lib/households";
 import { useTimeFormat } from "../sell/time";
+import { EmployerHandovers } from "./worker-handovers";
 
 export function CollectionAvailabilityControls() {
   const canOperate = useCanOperate();
@@ -212,52 +213,55 @@ export function EmployerPaymentControls() {
     common = useTranslations("common");
   if (!board) return null;
   return (
-    <section className="flex flex-col gap-3 border-t border-border py-6">
-      <h2 className="text-lg font-semibold">{t("declarePayment")}</h2>
-      <p className="text-sm text-muted-foreground">{t("fixedFee")}</p>
-      {board.jobs
-        .filter((job) => job.status === "done")
-        .map((job) => (
-          <form
-            key={job.id}
-            className="flex flex-wrap items-end gap-3 border-b border-border py-3"
-            onSubmit={(event) => {
-              event.preventDefault();
-              const form = new FormData(event.currentTarget);
-              void declare({
-                jobId: job.id,
-                dueDate: formText(form, "dueDate"),
-              }).catch(() => toast.error(common("error")));
-            }}
-          >
-            <p>
-              {job.title} · {money.money(job.payPaise)}
-            </p>
-            <Label className="flex flex-col gap-1">
-              {t("due", { date: "" })}
-              <Input
-                type="date"
-                name="dueDate"
-                required
-                min={job.date}
-                defaultValue={job.paymentDueDate ?? job.date}
-                disabled={job.employerPaidAt !== undefined}
-              />
-            </Label>
-            {job.workerAcknowledgedAt ? <p>{t("acknowledged")}</p> : null}
-            {job.employerPaidAt && !job.workerAcknowledgedAt ? (
-              <p>{t("paymentDeclared")}</p>
-            ) : null}
-            {job.employerPaidAt ? null : (
-              <ActionButton
-                type="submit"
-                isDisabled={!canOperate}
-                label={t("declarePayment")}
-              />
-            )}
-          </form>
-        ))}
-    </section>
+    <>
+      <section className="flex flex-col gap-3 border-t border-border py-6">
+        <h2 className="text-lg font-semibold">{t("declarePayment")}</h2>
+        <p className="text-sm text-muted-foreground">{t("fixedFee")}</p>
+        {board.jobs
+          .filter((job) => job.status === "done")
+          .map((job) => (
+            <form
+              key={job.id}
+              className="flex flex-wrap items-end gap-3 border-b border-border py-3"
+              onSubmit={(event) => {
+                event.preventDefault();
+                const form = new FormData(event.currentTarget);
+                void declare({
+                  jobId: job.id,
+                  dueDate: formText(form, "dueDate"),
+                }).catch(() => toast.error(common("error")));
+              }}
+            >
+              <p>
+                {job.title} · {money.money(job.payPaise)}
+              </p>
+              <Label className="flex flex-col gap-1">
+                {t("due", { date: "" })}
+                <Input
+                  type="date"
+                  name="dueDate"
+                  required
+                  min={job.date}
+                  defaultValue={job.paymentDueDate ?? job.date}
+                  disabled={job.employerPaidAt !== undefined}
+                />
+              </Label>
+              {job.workerAcknowledgedAt ? <p>{t("acknowledged")}</p> : null}
+              {job.employerPaidAt && !job.workerAcknowledgedAt ? (
+                <p>{t("paymentDeclared")}</p>
+              ) : null}
+              {job.employerPaidAt ? null : (
+                <ActionButton
+                  type="submit"
+                  isDisabled={!canOperate}
+                  label={t("declarePayment")}
+                />
+              )}
+            </form>
+          ))}
+      </section>
+      <EmployerHandovers />
+    </>
   );
 }
 

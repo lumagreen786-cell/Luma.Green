@@ -4364,5 +4364,40 @@
     "corrected": "Correctie vastgelegd",
     "evidence": "Verwijzing naar fysiek bewijs",
     "recentCorrections": "Recente correcties (maximaal 20)"
+  },
+  "workerHandover": {
+    "title": "Overdracht van inzameling",
+    "hint": "Alleen bewijs. Voorraad en betaling houden aparte registraties.",
+    "limit": "Laatste 100 koppelingen. Bronkeuzes zijn beperkt.",
+    "job": "Toegewezen ophaaltaak",
+    "collection": "Inzameling",
+    "collected": "Ingezameld (g)",
+    "received": "Ontvangen (g)",
+    "variance": "Ontvangen − ingezameld (g)",
+    "record": "Ingezameld gewicht vastleggen",
+    "acknowledge": "Overdracht bevestigen",
+    "revoke": "Koppeling intrekken",
+    "acknowledged": "Overdracht bevestigd",
+    "link": "Inzameling koppelen",
+    "reason": "Reden",
+    "evidence": "Verwijzing naar fysiek bewijs"
+  },
+  "accountRemoval": {
+    "title": "Account sluiten",
+    "intro": "Uw aanmelding en toegang eindigen.",
+    "retained": "Noodzakelijke bedrijfs-, betaal-, materiaal- en auditgegevens blijven bewaard voor beoordeling. Niet alle gegevens worden gewist.",
+    "confirm": "Ik begrijp dit en wil mijn account sluiten.",
+    "action": "Account sluiten",
+    "held": "Uw account is niet gesloten.",
+    "reauth": "Meld u opnieuw aan om verder te gaan.",
+    "unavailable": "Sluiten is niet beschikbaar. Probeer het later opnieuw.",
+    "retry": "Het resultaat is niet bevestigd. Probeer opnieuw om hetzelfde verzoek te controleren.",
+    "closed": "De accounttoegang is gesloten.",
+    "adminReplacement": "Een vervangende beheerder moet apart worden geregeld.",
+    "businessOwner": "Draag eerst het bedrijfseigendom over.",
+    "activeCollection": "Rond eerst de actieve inzameling af.",
+    "assignedWork": "Rond eerst uw toegewezen werk of overdracht af.",
+    "reviewLimit": "Er moeten meer gegevens worden beoordeeld voordat het account kan sluiten.",
+    "checkLimit": "Sluiten en opnieuw registreren herstellen het daglimiet voor bedrijfscontroles niet. Controles kunnen tot de volgende dag in India geblokkeerd blijven."
   }
 }

@@ -4364,5 +4364,40 @@
     "corrected": "Correction enregistrée",
     "evidence": "Référence de preuve physique",
     "recentCorrections": "Corrections récentes (20 maximum)"
+  },
+  "workerHandover": {
+    "title": "Remise de la collecte",
+    "hint": "Preuves uniquement. Les stocks et les paiements gardent des registres séparés.",
+    "limit": "100 derniers liens. Les choix de source sont limités.",
+    "job": "Mission de collecte attribuée",
+    "collection": "Collecte",
+    "collected": "Collecté (g)",
+    "received": "Reçu (g)",
+    "variance": "Reçu − collecté (g)",
+    "record": "Enregistrer le poids collecté",
+    "acknowledge": "Confirmer la remise",
+    "revoke": "Révoquer le lien",
+    "acknowledged": "Remise confirmée",
+    "link": "Lier la collecte",
+    "reason": "Motif",
+    "evidence": "Référence de preuve physique"
+  },
+  "accountRemoval": {
+    "title": "Fermer le compte",
+    "intro": "Votre connexion et votre accès prendront fin.",
+    "retained": "Les dossiers nécessaires concernant les activités, paiements, matières et audits sont conservés pour examen. Toutes les données ne sont pas effacées.",
+    "confirm": "Je comprends et je veux fermer mon compte.",
+    "action": "Fermer le compte",
+    "held": "Votre compte n’est pas fermé.",
+    "reauth": "Reconnectez-vous pour continuer.",
+    "unavailable": "La fermeture est indisponible. Réessayez plus tard.",
+    "retry": "Le résultat n’est pas confirmé. Réessayez pour vérifier la même demande.",
+    "closed": "L’accès au compte est fermé.",
+    "adminReplacement": "Un administrateur remplaçant doit être désigné séparément.",
+    "businessOwner": "Transférez la propriété de l’activité avant de fermer le compte.",
+    "activeCollection": "Réglez d’abord la collecte en cours.",
+    "assignedWork": "Réglez d’abord votre travail attribué ou la remise.",
+    "reviewLimit": "D’autres dossiers doivent être examinés avant la fermeture.",
+    "checkLimit": "Fermer le compte puis se réinscrire ne réinitialise pas la limite de vérifications professionnelles du jour. Elles peuvent rester bloquées jusqu’au lendemain en Inde."
   }
 }

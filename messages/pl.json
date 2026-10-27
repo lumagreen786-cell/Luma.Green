@@ -4364,5 +4364,40 @@
     "corrected": "Korekta zapisana",
     "evidence": "Odniesienie do dowodu fizycznego",
     "recentCorrections": "Ostatnie korekty (do 20)"
+  },
+  "workerHandover": {
+    "title": "Przekazanie zbiórki",
+    "hint": "Tylko dowody. Zapasy i płatności zachowują osobne rejestry.",
+    "limit": "Ostatnie 100 powiązań. Wybór źródeł jest ograniczony.",
+    "job": "Przydzielone zadanie odbioru",
+    "collection": "Zbiórka",
+    "collected": "Zebrano (g)",
+    "received": "Odebrano (g)",
+    "variance": "Odebrano − zebrano (g)",
+    "record": "Zapisz zebraną masę",
+    "acknowledge": "Potwierdź przekazanie",
+    "revoke": "Cofnij powiązanie",
+    "acknowledged": "Przekazanie potwierdzone",
+    "link": "Powiąż zbiórkę",
+    "reason": "Powód",
+    "evidence": "Odniesienie do dowodu fizycznego"
+  },
+  "accountRemoval": {
+    "title": "Zamknij konto",
+    "intro": "Logowanie i dostęp do konta zostaną zakończone.",
+    "retained": "Wymagane dane biznesowe, płatności, materiałów i audytu pozostają do przeglądu. Nie wszystkie dane zostaną usunięte.",
+    "confirm": "Rozumiem i chcę zamknąć konto.",
+    "action": "Zamknij konto",
+    "held": "Twoje konto nie jest zamknięte.",
+    "reauth": "Zaloguj się ponownie, aby kontynuować.",
+    "unavailable": "Zamknięcie jest niedostępne. Spróbuj później.",
+    "retry": "Wynik nie jest potwierdzony. Ponów próbę sprawdzenia tego samego wniosku.",
+    "closed": "Dostęp do konta jest zamknięty.",
+    "adminReplacement": "Zastępstwo administratora trzeba zorganizować osobno.",
+    "businessOwner": "Przed zamknięciem przekaż własność firmy.",
+    "activeCollection": "Najpierw rozwiąż sprawę aktywnego odbioru.",
+    "assignedWork": "Najpierw zakończ przydzieloną pracę lub przekazanie.",
+    "reviewLimit": "Przed zamknięciem trzeba sprawdzić więcej danych.",
+    "checkLimit": "Zamknięcie i ponowna rejestracja nie resetują dzisiejszego limitu kontroli firmy. Kontrole mogą być wstrzymane do następnego dnia w Indiach."
   }
 }

@@ -4364,5 +4364,40 @@
     "corrected": "更正已记录",
     "evidence": "实物凭证编号",
     "recentCorrections": "最近更正（最多20条）"
+  },
+  "workerHandover": {
+    "title": "收集交接",
+    "hint": "仅记录凭证，库存与报酬使用各自记录。",
+    "limit": "最近100条关联，来源选项有限。",
+    "job": "已分配的上门收集任务",
+    "collection": "收集记录",
+    "collected": "已收集（g）",
+    "received": "已接收（g）",
+    "variance": "已接收 − 已收集（g）",
+    "record": "记录收集重量",
+    "acknowledge": "确认交接",
+    "revoke": "撤销关联",
+    "acknowledged": "交接已确认",
+    "link": "关联收集记录",
+    "reason": "原因",
+    "evidence": "实物凭证编号"
+  },
+  "accountRemoval": {
+    "title": "关闭账户",
+    "intro": "您的登录和访问权限将终止。",
+    "retained": "必要的业务、付款、材料和审计记录将保留以供审核。并非所有数据都会删除。",
+    "confirm": "我已了解，并希望关闭我的账户。",
+    "action": "关闭账户",
+    "held": "您的账户尚未关闭。",
+    "reauth": "请重新登录以继续。",
+    "unavailable": "暂时无法关闭账户，请稍后重试。",
+    "retry": "结果尚未确认。请重试以查询同一请求。",
+    "closed": "账户访问权限已关闭。",
+    "adminReplacement": "需要另行安排替代管理员。",
+    "businessOwner": "关闭账户前，请先移交企业所有权。",
+    "activeCollection": "请先解决正在进行的收集。",
+    "assignedWork": "请先完成分配的工作或交接。",
+    "reviewLimit": "关闭账户前还需审核更多记录。",
+    "checkLimit": "关闭账户后重新注册不会重置今天的企业核查额度。核查可能暂停至印度时间的次日。"
   }
 }

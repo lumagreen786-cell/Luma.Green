@@ -31,6 +31,15 @@ Private browser storage is saved with mode 0600 under the ignored
 only in memory. Browser traces, video and screenshots are disabled for these
 session-bearing checks. Do not print or copy the private session artifact.
 
+The phone runner also provisions the existing reserved Saathi persona for
+`foundation-handover-phone.spec.ts`. That loopback-only case uses the real phone
+sessions for the shop, worker and household. It creates a photo-only booking and
+assigned job through authenticated APIs, then uses the actual employer and worker
+screens with reload checks. Collected 1,001 g versus received 1,000 g requires a
+reason and employer acknowledgement. Stock and payment projections are compared
+before and after the handover actions. The cash receipt is an explicit synthetic
+local declaration; no real payment or live provider is involved.
+
 The remaining instructions describe the deprecated email-based runner. It is
 retained as historical setup guidance. Current auth correctly rejects that
 runner; do not re-enable email/password access to make it pass.

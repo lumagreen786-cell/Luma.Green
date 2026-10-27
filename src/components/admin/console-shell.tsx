@@ -47,6 +47,12 @@ const nav: readonly NavItem[] = [
   },
   { href: "/admin/prices", label: "Prices", icon: IndianRupeeIcon },
   {
+    href: "/admin/account-removals",
+    label: "Account removal",
+    mobileLabel: "Accounts",
+    icon: ShieldCheckIcon,
+  },
+  {
     href: "/admin/operations",
     label: "Material review",
     mobileLabel: "Materials",

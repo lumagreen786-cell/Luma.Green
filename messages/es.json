@@ -4364,5 +4364,40 @@
     "corrected": "Corrección registrada",
     "evidence": "Referencia de evidencia física",
     "recentCorrections": "Correcciones recientes (hasta 20)"
+  },
+  "workerHandover": {
+    "title": "Entrega de la recogida",
+    "hint": "Solo evidencia. Las existencias y los pagos conservan registros separados.",
+    "limit": "Últimos 100 enlaces. Las opciones de origen son limitadas.",
+    "job": "Trabajo de recogida asignado",
+    "collection": "Recogida",
+    "collected": "Recogido (g)",
+    "received": "Recibido (g)",
+    "variance": "Recibido − recogido (g)",
+    "record": "Registrar peso recogido",
+    "acknowledge": "Confirmar entrega",
+    "revoke": "Revocar enlace",
+    "acknowledged": "Entrega confirmada",
+    "link": "Vincular recogida",
+    "reason": "Motivo",
+    "evidence": "Referencia de evidencia física"
+  },
+  "accountRemoval": {
+    "title": "Cerrar cuenta",
+    "intro": "Tu acceso y tu inicio de sesión terminarán.",
+    "retained": "Los registros necesarios de negocio, pagos, materiales y auditoría se conservan para revisión. No se borran todos los datos.",
+    "confirm": "Lo entiendo y quiero cerrar mi cuenta.",
+    "action": "Cerrar cuenta",
+    "held": "Tu cuenta no está cerrada.",
+    "reauth": "Vuelve a iniciar sesión para continuar.",
+    "unavailable": "El cierre no está disponible. Inténtalo más tarde.",
+    "retry": "El resultado no está confirmado. Reintenta para comprobar la misma solicitud.",
+    "closed": "El acceso a la cuenta está cerrado.",
+    "adminReplacement": "Se debe gestionar por separado un administrador sustituto.",
+    "businessOwner": "Transfiere la propiedad del negocio antes de cerrar la cuenta.",
+    "activeCollection": "Resuelve primero la recogida activa.",
+    "assignedWork": "Resuelve primero el trabajo asignado o la entrega.",
+    "reviewLimit": "Se deben revisar más registros antes del cierre.",
+    "checkLimit": "Cerrar la cuenta y volver a registrarse no reinicia el límite de verificaciones empresariales de hoy. Pueden quedar en espera hasta el día siguiente en India."
   }
 }

@@ -4364,5 +4364,40 @@
     "corrected": "Düzeltme kaydedildi",
     "evidence": "Fiziksel kanıt referansı",
     "recentCorrections": "Son düzeltmeler (en fazla 20)"
+  },
+  "workerHandover": {
+    "title": "Toplanan malzeme teslimi",
+    "hint": "Yalnızca kanıt. Stok ve ödeme kayıtları ayrı kalır.",
+    "limit": "Son 100 bağlantı. Kaynak seçenekleri sınırlıdır.",
+    "job": "Atanan toplama işi",
+    "collection": "Toplama",
+    "collected": "Toplanan (g)",
+    "received": "Teslim alınan (g)",
+    "variance": "Teslim alınan − toplanan (g)",
+    "record": "Toplanan ağırlığı kaydet",
+    "acknowledge": "Teslimi onayla",
+    "revoke": "Bağlantıyı iptal et",
+    "acknowledged": "Teslim onaylandı",
+    "link": "Toplamayı bağla",
+    "reason": "Neden",
+    "evidence": "Fiziksel kanıt referansı"
+  },
+  "accountRemoval": {
+    "title": "Hesabı kapat",
+    "intro": "Oturum açma ve erişim hakkınız sona erecek.",
+    "retained": "Gerekli iş, ödeme, malzeme ve denetim kayıtları inceleme için saklanır. Tüm veriler silinmez.",
+    "confirm": "Anladım ve hesabımı kapatmak istiyorum.",
+    "action": "Hesabı kapat",
+    "held": "Hesabınız kapatılmadı.",
+    "reauth": "Devam etmek için yeniden oturum açın.",
+    "unavailable": "Hesap kapatma kullanılamıyor. Daha sonra deneyin.",
+    "retry": "Sonuç doğrulanmadı. Aynı isteği kontrol etmek için yeniden deneyin.",
+    "closed": "Hesap erişimi kapatıldı.",
+    "adminReplacement": "Yeni yönetici ayrıca belirlenmelidir.",
+    "businessOwner": "Hesabı kapatmadan önce işletme sahipliğini devredin.",
+    "activeCollection": "Önce etkin toplama işlemini çözün.",
+    "assignedWork": "Önce atanmış işinizi veya teslimi çözün.",
+    "reviewLimit": "Kapatmadan önce daha fazla kayıt incelenmelidir.",
+    "checkLimit": "Hesabı kapatıp yeniden katılmak bugünkü işletme kontrolü sınırını sıfırlamaz. Kontroller Hindistan saatine göre ertesi güne kadar bekletilebilir."
   }
 }

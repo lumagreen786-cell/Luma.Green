@@ -13,6 +13,7 @@ import {
   Section,
 } from "@/components/app/page-parts";
 import { useWorkspace } from "@/components/app/use-workspace";
+import { WorkerHandovers } from "@/components/collection/worker-handovers";
 import { QueryBoundary } from "@/components/insights/query-boundary";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -110,6 +111,7 @@ function SaathiBoard() {
       </Section>
 
       <WeekEarnings earnings={board.earnings} />
+      <WorkerHandovers />
       <DemoNote>{t("demoNote")}</DemoNote>
     </>
   );
