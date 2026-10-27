@@ -161,7 +161,7 @@ describe("workspace navigation", () => {
     ).toHaveAttribute("aria-current", "page");
   });
 
-  it("keeps two daily destinations visible and puts remaining routes and settings in More", async () => {
+  it("keeps daily work directly visible and puts remaining routes and settings in More", async () => {
     state.workspace = {
       kind: "org",
       org: { kind: "manufacturer", name: "Test manufacturer" },
@@ -174,7 +174,12 @@ describe("workspace navigation", () => {
       within(mobile)
         .getAllByRole("link")
         .map((link) => link.textContent),
-    ).toEqual([messages.app.nav.home, messages.app.nav.buy]);
+    ).toEqual([
+      messages.app.nav.home,
+      messages.app.nav.buy,
+      messages.app.nav.trades,
+      messages.app.nav.compliance,
+    ]);
     expect(
       within(desktop).getByRole("link", {
         name: messages.app.nav.compliance,
@@ -197,7 +202,7 @@ describe("workspace navigation", () => {
       }),
     );
     const menu = within(screen.getByRole("dialog"));
-    for (const label of ["trades", "compliance", "impact", "stock"] as const) {
+    for (const label of ["impact", "stock"] as const) {
       expect(
         menu.getByRole("link", { name: messages.app.nav[label] }),
       ).toBeInTheDocument();
@@ -224,7 +229,7 @@ describe("workspace navigation", () => {
     );
     await userEvent.click(
       within(screen.getByRole("dialog")).getByRole("link", {
-        name: messages.app.nav.stock,
+        name: messages.app.nav.buy,
       }),
     );
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();

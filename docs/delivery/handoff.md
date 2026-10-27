@@ -1,3 +1,26 @@
+## Web UX simplification — 27 October 2026
+
+The owner approved the full UX review and authorised commit, push, checked PR
+merge and Production release. Work is isolated on `feat/web-ux-simplification`;
+the primary Android checkout and its uncommitted changes remain intact.
+
+Phone/code sign-in is one journey with reload/edit recovery and required factors.
+Registration keeps explicit saved consent, PAN/GST discovery and confirmation,
+combines business/documents, resumes drafts and opens activated workspaces.
+Booking has two stages, review, missing-choice guidance and safe declined retry.
+Role images are full links; daily work precedes totals; mobile navigation adapts
+to translated labels. View/list state, contextual documents/reports and an admin
+queue/detail view reduce return navigation.
+
+The initial full unit run passed 2,601 tests; the Production build generated all
+3,119 pages; 593 public/browser checks passed. The subsequent measured resize
+regression passed 462 language/theme/width views, and 84 protected fixture captures
+were retained, with representative layouts visually reviewed. Final check/build and PR/Production state
+are recorded in [the delivery record](web-ux-simplification-2026-10-27.md).
+Fixtures prove UI behavior only. No live SMS, paid lookup, booking or payment was
+sent. Provider and native acceptance remain separate. Guide/Word/cloud updates
+remain deferred at the owner's request; existing guide artifacts are preserved.
+
 ## PAN discovery empty-draft repair — 26 October 2026
 
 Production request `c549689970622512` failed in

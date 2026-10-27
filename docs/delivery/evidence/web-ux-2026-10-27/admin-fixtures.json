@@ -1,0 +1,101 @@
+{
+  "provenance": "Synthetic fixtures; real current components. All writes disabled. No provider acceptance.",
+  "records": [
+    {
+      "locale": "en",
+      "width": 390,
+      "colorScheme": "light",
+      "name": "admin-queue",
+      "file": "en-390-light-admin-queue.png",
+      "errors": []
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "colorScheme": "light",
+      "name": "admin-review",
+      "file": "en-390-light-admin-review.png",
+      "errors": []
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "colorScheme": "dark",
+      "name": "admin-queue",
+      "file": "en-390-dark-admin-queue.png",
+      "errors": []
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "colorScheme": "dark",
+      "name": "admin-review",
+      "file": "en-390-dark-admin-review.png",
+      "errors": []
+    },
+    {
+      "locale": "en",
+      "width": 768,
+      "colorScheme": "light",
+      "name": "admin-queue",
+      "file": "en-768-light-admin-queue.png",
+      "errors": []
+    },
+    {
+      "locale": "en",
+      "width": 768,
+      "colorScheme": "light",
+      "name": "admin-review",
+      "file": "en-768-light-admin-review.png",
+      "errors": []
+    },
+    {
+      "locale": "en",
+      "width": 768,
+      "colorScheme": "dark",
+      "name": "admin-queue",
+      "file": "en-768-dark-admin-queue.png",
+      "errors": []
+    },
+    {
+      "locale": "en",
+      "width": 768,
+      "colorScheme": "dark",
+      "name": "admin-review",
+      "file": "en-768-dark-admin-review.png",
+      "errors": []
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "colorScheme": "light",
+      "name": "admin-queue",
+      "file": "en-1440-light-admin-queue.png",
+      "errors": []
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "colorScheme": "light",
+      "name": "admin-review",
+      "file": "en-1440-light-admin-review.png",
+      "errors": []
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "colorScheme": "dark",
+      "name": "admin-queue",
+      "file": "en-1440-dark-admin-queue.png",
+      "errors": []
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "colorScheme": "dark",
+      "name": "admin-review",
+      "file": "en-1440-dark-admin-review.png",
+      "errors": []
+    }
+  ]
+}

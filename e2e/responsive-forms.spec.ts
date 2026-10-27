@@ -121,12 +121,9 @@ for (const { locale, copy, direction } of languages) {
       await page.goto(`/${locale}/login?next=%2Fjoin%2Fsaathi`);
       await expect(page.locator("html")).toHaveAttribute("dir", direction);
       await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-        copy.auth.chooseLanguage,
+        copy.auth.metaTitle,
       );
       await expectFormToFit(page);
-      await page
-        .getByRole("button", { name: copy.auth.continue, exact: true })
-        .click();
       await expect(page.getByRole("heading", { level: 1 })).toHaveText(
         copy.auth.metaTitle,
       );
@@ -193,7 +190,7 @@ for (const { locale, copy, direction } of languages) {
             new RegExp(String.raw`/login\?next=${encodeURIComponent(route)}$`),
           );
           await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-            copy.auth.chooseLanguage,
+            copy.auth.metaTitle,
           );
           await expectFormToFit(page);
         });

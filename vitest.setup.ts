@@ -45,6 +45,14 @@ vi.stubGlobal(
 // input-otp checks whether a password-manager badge covers the code field.
 // jsdom has no layout or hit testing.
 if (typeof document !== "undefined") {
+  Object.defineProperty(document, "fonts", {
+    configurable: true,
+    value: { ready: Promise.resolve() },
+  });
+  Object.defineProperty(window, "scrollTo", {
+    configurable: true,
+    value: vi.fn(),
+  });
   Object.defineProperty(document, "elementFromPoint", {
     configurable: true,
     value: () => null,

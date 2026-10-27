@@ -11,6 +11,7 @@ import { navigateToAdmin } from "@/lib/admin-navigation";
 import { safeNextPath } from "@/lib/safe-next";
 
 import { api } from "../../../convex/_generated/api";
+import { clearPhoneChallenge } from "./storage";
 
 /** Mounted only after Better Auth and Convex both confirm the existing session. */
 export function ResumeSession() {
@@ -37,6 +38,7 @@ export function ResumeSession() {
     void ensureProfile({ locale })
       .then(() => {
         if (!isMounted.current) return;
+        clearPhoneChallenge();
         if (person?.kind === "admin") navigateToAdmin(person.twoFactorEnabled);
         else router.replace(next);
       })

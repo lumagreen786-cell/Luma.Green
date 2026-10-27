@@ -32,11 +32,14 @@ vi.mock("next/navigation", () => ({
   useSearchParams: () => new URLSearchParams({ next: state.next }),
 }));
 vi.mock("./storage", () => ({
-  isLanguageChosen: () => true,
-  useStoredValue: () => true,
+  clearPhoneChallenge: vi.fn(),
+  readActivePhone: () => null,
+  useStoredValue: () => null,
 }));
 vi.mock("./phone-form", () => ({ PhoneForm: () => <p>Phone form</p> }));
-vi.mock("./language-choice", () => ({ LanguageChoice: () => null }));
+vi.mock("@/components/site/language-switcher", () => ({
+  LanguageSwitcher: () => null,
+}));
 
 beforeEach(() => {
   vi.clearAllMocks();

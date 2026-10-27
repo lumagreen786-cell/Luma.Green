@@ -42,24 +42,48 @@ function liveWait(item: QueueItem, now: number): { hours: number; sla: Sla } {
 }
 
 /** `/admin/verification`: everything waiting on a decision, oldest first. */
-export function VerificationQueue() {
+export function VerificationQueue({
+  onSelect,
+  compact = false,
+}: {
+  onSelect?: (id: string) => void;
+  compact?: boolean;
+}) {
   const queue = useQuery(api.review.queue);
   const now = useMinuteClock();
   const next = queue?.find((item) => item.status === "submitted");
 
-  const header = (
+  let nextAction;
+  if (next) {
+    nextAction = onSelect ? (
+      <Button
+        onClick={() => {
+          onSelect(next.id);
+        }}
+      >
+        Review next <ChevronRightIcon aria-hidden />
+      </Button>
+    ) : (
+      <Button asChild>
+        <Link href={reviewHref(next.id)}>
+          Review next <ChevronRightIcon aria-hidden />
+        </Link>
+      </Button>
+    );
+  }
+  const header = compact ? (
+    <header className="space-y-3 border-b pb-4">
+      <h2 className="font-display text-xl font-semibold">Verification</h2>
+      <p className="text-sm text-muted-foreground">
+        Oldest first. Decide within 24 hours.
+      </p>
+      {nextAction}
+    </header>
+  ) : (
     <AppPageHeader
       title="Verification"
       lead="Oldest first. Decide within 24 hours."
-      actions={
-        next ? (
-          <Button asChild>
-            <Link href={reviewHref(next.id)}>
-              Review next <ChevronRightIcon aria-hidden />
-            </Link>
-          </Button>
-        ) : undefined
-      }
+      actions={nextAction}
     />
   );
   if (queue === undefined) {
@@ -95,7 +119,12 @@ export function VerificationQueue() {
             body="New applications appear here as soon as they're sent."
           />
         ) : (
-          <QueueList items={inReview} now={now} />
+          <QueueList
+            items={inReview}
+            now={now}
+            onSelect={onSelect}
+            compact={compact}
+          />
         )}
       </section>
       {withApplicant.length > 0 ? (
@@ -114,7 +143,12 @@ export function VerificationQueue() {
               Sent back for changes. They come back to review when resubmitted.
             </p>
           </div>
-          <QueueList items={withApplicant} now={now} />
+          <QueueList
+            items={withApplicant}
+            now={now}
+            onSelect={onSelect}
+            compact={compact}
+          />
         </section>
       ) : null}
     </div>
@@ -167,10 +201,26 @@ function details(item: QueueItem): string {
 function ReviewLink({
   item,
   isWide = false,
+  onSelect,
 }: {
   item: QueueItem;
   isWide?: boolean;
+  onSelect?: (id: string) => void;
 }) {
+  if (onSelect)
+    return (
+      <Button
+        variant="outline"
+        size={isWide ? "lg" : "sm"}
+        className={isWide ? "w-full" : undefined}
+        aria-label={`Review ${item.name}`}
+        onClick={() => {
+          onSelect(item.id);
+        }}
+      >
+        Review <ChevronRightIcon aria-hidden />
+      </Button>
+    );
   return (
     <Button
       asChild
@@ -190,13 +240,17 @@ function ReviewLink({
 function QueueList({
   items,
   now,
+  onSelect,
+  compact,
 }: {
   items: readonly QueueItem[];
   now: number;
+  onSelect?: (id: string) => void;
+  compact?: boolean;
 }) {
   return (
     <>
-      <div className="hidden border-y md:block">
+      <div className={compact ? "hidden" : "hidden border-y md:block"}>
         <Table>
           <TableHeader>
             <TableRow className="hover:bg-transparent">
@@ -233,14 +287,20 @@ function QueueList({
                 </TableCell>
                 <TableCell className="tabular-nums">{item.fileCount}</TableCell>
                 <TableCell className="pe-4 text-end">
-                  <ReviewLink item={item} />
+                  <ReviewLink item={item} onSelect={onSelect} />
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </div>
-      <ul className="flex flex-col divide-y border-y md:hidden">
+      <ul
+        className={
+          compact
+            ? "flex flex-col divide-y border-y"
+            : "flex flex-col divide-y border-y md:hidden"
+        }
+      >
         {items.map((item) => (
           <li key={item.id} className="flex min-w-0 flex-col gap-3 py-5">
             <div className="flex flex-wrap items-center justify-between gap-2 text-sm font-medium text-foreground">
@@ -259,7 +319,7 @@ function QueueList({
                   : `${String(item.fileCount)} files`}
               </p>
             </div>
-            <ReviewLink item={item} isWide />
+            <ReviewLink item={item} isWide onSelect={onSelect} />
           </li>
         ))}
       </ul>

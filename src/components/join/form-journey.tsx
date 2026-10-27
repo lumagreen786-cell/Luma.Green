@@ -26,6 +26,7 @@ export function FormJourney<T extends FieldValues>({
   getFieldState,
   onFinish,
   submit,
+  initialStage = 0,
 }: {
   header: ReactNode;
   stages: { title: string; fields: FieldPath<T>[]; content: ReactNode }[];
@@ -33,11 +34,12 @@ export function FormJourney<T extends FieldValues>({
   getFieldState: UseFormGetFieldState<T>;
   onFinish: (event: SubmitEvent<HTMLFormElement>) => Promise<void>;
   submit: ReactNode;
+  initialStage?: number;
 }) {
   const t = useTranslations("auth");
   const join = useTranslations("join.form");
   const progress = useTranslations("sell.steps");
-  const [stage, setStage] = useState(0);
+  const [stage, setStage] = useState(Math.min(initialStage, stages.length - 1));
   const [busy, setBusy] = useState(false);
   const heading = useRef<HTMLHeadingElement>(null);
   const isLast = stage === stages.length - 1;

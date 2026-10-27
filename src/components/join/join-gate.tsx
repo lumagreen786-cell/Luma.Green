@@ -1,9 +1,8 @@
 "use client";
 
-import { type ReactNode, useEffect } from "react";
+import { type ReactNode, useEffect, useState } from "react";
 
 import { useSignedInQuery } from "@/components/providers/use-signed-in-query";
-import { RoleStoryImage } from "@/components/showcase/role-story-image";
 import { Skeleton } from "@/components/ui/skeleton";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { navigateToAdmin } from "@/lib/admin-navigation";
@@ -30,6 +29,10 @@ export function JoinGate({
   }) => ReactNode;
 }) {
   const mine = useMine();
+  const [entryPending, setEntryPending] = useState(false);
+  const [entryDraft, setEntryDraft] = useState<Partial<
+    Pick<Application, "business" | "kabadiwala" | "saathi">
+  > | null>(null);
   const person = useSignedInQuery(api.identity.me);
   const isAdmin = person?.kind === "admin";
   const router = useRouter();
@@ -62,16 +65,35 @@ export function JoinGate({
     return <FormSkeleton />;
   return (
     <div className="flex flex-col gap-6">
-      {application ? (
-        children({ application, loginPhone: mine.loginPhone })
+      {application && !entryPending ? (
+        children({
+          application: {
+            ...application,
+            ...(entryDraft?.business && {
+              business: { ...entryDraft.business, ...application.business },
+            }),
+            ...(entryDraft?.kabadiwala && {
+              kabadiwala: {
+                ...entryDraft.kabadiwala,
+                ...application.kabadiwala,
+              },
+            }),
+            ...(entryDraft?.saathi && {
+              saathi: { ...entryDraft.saathi, ...application.saathi },
+            }),
+          },
+          loginPhone: mine.loginPhone,
+        })
       ) : (
-        <ConsentCard kind={kind} />
-      )}
-      {application ? null : (
-        <RoleStoryImage
-          scene={kind}
-          compact
-          frameClassName="aspect-16/9 rounded-none"
+        <ConsentCard
+          kind={kind}
+          onStarting={() => {
+            setEntryPending(true);
+          }}
+          onComplete={(draft) => {
+            setEntryDraft(draft);
+            setEntryPending(false);
+          }}
         />
       )}
     </div>

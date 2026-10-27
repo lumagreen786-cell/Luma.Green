@@ -212,7 +212,7 @@ describe("TrackView", () => {
     ).not.toBeInTheDocument();
   });
 
-  it("sends a declined booking to another shop with the same scrap", async () => {
+  it("restarts a declined request in the photo-first flow without copying private files", async () => {
     render(
       withIntl(
         <TrackView
@@ -230,11 +230,13 @@ describe("TrackView", () => {
     await userEvent.click(
       screen.getByRole("button", { name: "Try another shop" }),
     );
-    expect(push).toHaveBeenCalledWith("/sell?step=shop");
+    expect(push).toHaveBeenCalledWith("/sell");
     expect(JSON.parse(sessionStorage.getItem("lg.sellDraft") ?? "{}")).toEqual(
       expect.objectContaining({
         mode: "pickup",
-        items: [{ materialCode: "PAPER-NEWS", kg: 12 }],
+        items: [],
+        address: "",
+        name: "",
       }),
     );
   });

@@ -975,23 +975,23 @@
       },
       "firstPickup": {
         "title": "Prenota il primo ritiro",
-        "summary": "Scegli i materiali, confronta i negozi e verifica il tuo numero di cellulare per prenotare un ritiro.",
+        "summary": "Aggiungi foto · Scegli un negozio vicino · Scegli un orario",
         "steps": {
           "photo": {
             "title": "Fotografa i materiali",
-            "body": "Facoltativo: aggiungi una foto dei materiali, poi controlla gli articoli suggeriti."
+            "body": "Aggiungi almeno una foto."
           },
           "estimate": {
-            "title": "Controlla la stima",
-            "body": "Mostriamo i materiali individuati e i chili approssimativi. Correggi i chili se sembrano sbagliati."
+            "title": "I tuoi dati",
+            "body": "Il tuo nome · Indirizzo del ritiro"
           },
           "choose": {
             "title": "Scegli ritiro o consegna",
-            "body": "Vedi i kabadiwala verificati vicini, dal più vicino, con i loro orari."
+            "body": "Scegli un negozio vicino · Prima i più vicini"
           },
           "slot": {
             "title": "Scegli un orario",
-            "body": "Scegli una fascia, poi controlla indirizzo e posizione sulla mappa."
+            "body": "Giorno · Orario"
           },
           "code": {
             "title": "Conferma il numero",
@@ -999,7 +999,7 @@
           },
           "track": {
             "title": "Ricevi il link di tracciamento",
-            "body": "Ti inviamo via SMS un link per seguire il ritiro."
+            "body": "Abbiamo inviato la richiesta. La pagina si aggiorna appena arriva una risposta."
           }
         }
       },
@@ -1175,11 +1175,11 @@
         "steps": {
           "see": {
             "title": "Vedi le nuove richieste",
-            "body": "Ognuna mostra zona, fascia oraria, materiali, chili approssimativi e quanto pagheresti."
+            "body": "Famiglie vicine che vogliono vendere materiali di recupero."
           },
           "answer": {
             "title": "Accetta o rifiuta",
-            "body": "Accetta per occupartene. Se rifiuti, passa al kabadiwala più vicino successivo, senza dire alla famiglia chi ha rifiutato."
+            "body": "La famiglia può scegliere un altro negozio e inviare una nuova richiesta."
           },
           "auto": {
             "title": "Attiva l'accettazione automatica",
@@ -1531,7 +1531,7 @@
     "faqs": {
       "noCode": {
         "q": "Non ho ricevuto il codice SMS",
-        "a": "Attendi 30 secondi e tocca Reinvia. Controlla che il numero sia corretto e che il telefono abbia segnale. Un codice è valido per 5 minuti."
+        "a": "Controlla il numero e il segnale del telefono. Attendi la fine del conto alla rovescia e richiedi un nuovo codice. I codici scadono dopo 5 minuti."
       },
       "newPhone": {
         "q": "Ho un nuovo telefono o numero",
@@ -1551,7 +1551,7 @@
       },
       "whatCanISell": {
         "q": "Cosa posso vendere?",
-        "a": "Carta e cartone, bottiglie e contenitori di plastica, metallo, vetro ed elettronica usata. Hai dubbi? Scatta una foto e la stima ti aiuterà."
+        "a": "Carta e cartone, bottiglie e contenitori di plastica, metallo, vetro ed elettronica usata."
       },
       "howPriceWorks": {
         "q": "Come viene calcolato l'importo?",
@@ -1583,7 +1583,7 @@
       },
       "photosKept": {
         "q": "Cosa succede alle mie foto?",
-        "a": "Non includere volti, documenti o targhe. La foto viene inviata a un fornitore di IA per questa stima. Luma.Green non la salva."
+        "a": "Le foto vengono conservate in modo privato con la tua richiesta. Solo le persone autorizzate ad accedere alla richiesta possono vederle. Evita di includere volti, documenti e targhe nelle foto."
       },
       "whyVerify": {
         "q": "Perché devo essere verificato?",
@@ -1607,7 +1607,7 @@
       },
       "rejectRequest": {
         "q": "Cosa succede se rifiuto una richiesta?",
-        "a": "Passa al kabadiwala più vicino successivo. Alla famiglia non viene detto chi ha rifiutato."
+        "a": "La famiglia può scegliere un altro negozio e inviare una nuova richiesta."
       },
       "payHousehold": {
         "q": "Luma.Green paga la famiglia al posto mio?",
@@ -2771,7 +2771,7 @@
       "completed": "Fatto! Hai ricevuto {amount}",
       "completedBody": "Grazie per aver riciclato. I punti sono aggiunti al tuo numero.",
       "declined": "{shop} non ha potuto accettare la prenotazione",
-      "declinedBody": "Non è stato raccolto nulla. Prova un altro negozio: l'elenco dei materiali è salvato.",
+      "declinedBody": "Aggiungi foto e controlla di nuovo i tuoi dati. Scegli un altro negozio per inviare una nuova richiesta.",
       "cancelled": "Questa prenotazione è stata annullata",
       "cancelledBody": "Non è stato raccolto nulla. Puoi prenotare di nuovo quando vuoi."
     },
@@ -2842,7 +2842,8 @@
     "saved": "Non serve un account. Conserva questo link per controllare la prenotazione da qualsiasi telefono.",
     "sellMore": "Prenota un altro ritiro",
     "tryAnother": "Prova un altro negozio",
-    "dispatchChanged": "La richiesta è passata a un altro negozio vicino. Il negozio attuale è indicato qui sotto."
+    "dispatchChanged": "La richiesta è passata a un altro negozio vicino. Il negozio attuale è indicato qui sotto.",
+    "retryDetails": "Aggiungi foto e controlla di nuovo i tuoi dati. Scegli un altro negozio per inviare una nuova richiesta."
   },
   "market": {
     "sampleData": "Prezzi e importi in questa schermata sono dati di esempio per il prototipo.",

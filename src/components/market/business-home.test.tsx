@@ -111,6 +111,15 @@ describe("BusinessHome", () => {
     expect(within(stats).queryByText("₹76,000")).not.toBeInTheDocument();
   });
 
+  it("places work waiting for a decision before summary figures", () => {
+    renderHome();
+    const waiting = screen.getByRole("heading", { name: "Waiting for you" });
+    const stats = screen.getByRole("region", { name: "At a glance" });
+    expect(
+      waiting.compareDocumentPosition(stats) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+  });
+
   it("offers only order decisions and no simulated payment action", () => {
     renderHome();
     expect(

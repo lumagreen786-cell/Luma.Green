@@ -50,8 +50,15 @@ export function PhoneSignIn({
   onVerified: () => void;
 }) {
   const [phone, setPhone] = useState<string | null>(null);
+  const [lastNumber, setLastNumber] = useState("");
   return phone === null ? (
-    <NumberForm onSent={setPhone} />
+    <NumberForm
+      initialNumber={lastNumber}
+      onSent={(number) => {
+        setLastNumber(number.startsWith("+91") ? number.slice(3) : number);
+        setPhone(number);
+      }}
+    />
   ) : (
     <CodeForm
       phone={phone}
@@ -64,11 +71,17 @@ export function PhoneSignIn({
   );
 }
 
-function NumberForm({ onSent }: { onSent: (phone: string) => void }) {
+function NumberForm({
+  initialNumber,
+  onSent,
+}: {
+  initialNumber: string;
+  onSent: (phone: string) => void;
+}) {
   const t = useTranslations("sell.phone");
   const auth = useTranslations("auth");
   const id = useId();
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(initialNumber);
   const [error, setError] = useState<"invalid" | SendCodeErrorKey | null>(null);
   const [isSending, setSending] = useState(false);
 
@@ -166,6 +179,9 @@ function CodeForm({
   const [error, setError] = useState<CodeErrorKey | SendCodeErrorKey | null>(
     null,
   );
+  const [resendAt, setResendAt] = useState(
+    () => Date.now() + RESEND_AFTER_SECONDS * 1000,
+  );
   const [secondsLeft, setSecondsLeft] = useState(RESEND_AFTER_SECONDS);
   const codeInput = useRef<HTMLInputElement>(null);
   const requestPending = useRef(false);
@@ -177,14 +193,16 @@ function CodeForm({
   }, [error]);
 
   useEffect(() => {
-    if (secondsLeft <= 0) return;
-    const timer = setTimeout(() => {
-      setSecondsLeft((seconds) => seconds - 1);
-    }, 1000);
-    return () => {
-      clearTimeout(timer);
+    const update = () => {
+      const remaining = Math.ceil((resendAt - Date.now()) / 1000);
+      setSecondsLeft(Math.max(0, remaining));
     };
-  }, [secondsLeft]);
+    update();
+    const timer = setInterval(update, 1000);
+    return () => {
+      clearInterval(timer);
+    };
+  }, [resendAt]);
 
   async function verify(value: string) {
     if (isChecking || requestPending.current || value.length !== CODE_LENGTH)
@@ -208,7 +226,7 @@ function CodeForm({
   }
 
   async function resend() {
-    if (isChecking || requestPending.current) return;
+    if (isChecking || requestPending.current || Date.now() < resendAt) return;
     requestPending.current = true;
     setResending(true);
     setError(null);
@@ -219,6 +237,7 @@ function CodeForm({
       setError(failure);
       return;
     }
+    setResendAt(Date.now() + RESEND_AFTER_SECONDS * 1000);
     setSecondsLeft(RESEND_AFTER_SECONDS);
     toast.success(t("resent"));
   }
@@ -288,7 +307,7 @@ function CodeForm({
                 <InputOTPSlot
                   key={index}
                   index={index}
-                  className="size-12 text-xl"
+                  className="h-12 w-10 text-xl sm:w-12"
                 />
               ))}
             </InputOTPGroup>

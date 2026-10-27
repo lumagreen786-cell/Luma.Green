@@ -42,6 +42,22 @@ export function readPhoneSentAt(): number | null {
   }
 }
 
+/** A reload may resume code entry, never an authenticated session. */
+export function readActivePhone(): string | null {
+  const sentAt = readPhoneSentAt();
+  return sentAt === null || Date.now() - sentAt >= 300_000 ? null : readPhone();
+}
+
+/** Remove a consumed challenge after the full sign-in succeeds. */
+export function clearPhoneChallenge(): void {
+  try {
+    sessionStorage.removeItem(PHONE_KEY);
+    sessionStorage.removeItem(SENT_AT_KEY);
+  } catch {
+    /* Browser storage is optional. */
+  }
+}
+
 /** Whether this browser has already picked a language on the sign-in screen. */
 export function isLanguageChosen(): boolean {
   try {

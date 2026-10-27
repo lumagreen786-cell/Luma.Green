@@ -1,8 +1,9 @@
 "use client";
 import { useAction, useMutation, useQuery } from "convex/react";
 import type { FunctionReturnType } from "convex/server";
+import { useSearchParams } from "next/navigation";
 import { useFormatter, useTranslations } from "next-intl";
-import { useId, useRef, useState } from "react";
+import { Suspense, useId, useRef, useState } from "react";
 
 import { AppPageHeader, ListSkeleton } from "@/components/app/page-parts";
 import { WorkflowTabs } from "@/components/app/workflow-tabs";
@@ -32,7 +33,9 @@ export function QualityDocuments() {
   const t = useTranslations("qualityDocuments");
   if (business === undefined) return <ListSkeleton />;
   return business ? (
-    <QualityBoard key={business.id} />
+    <Suspense fallback={<ListSkeleton />}>
+      <QualityBoard key={business.id} />
+    </Suspense>
   ) : (
     <p>{t("businessRequired")}</p>
   );
@@ -41,6 +44,8 @@ function QualityBoard() {
   const data = useQuery(api.qualityFiles.board, {});
   const t = useTranslations("qualityDocuments");
   const format = useFormatter();
+  const requested = useSearchParams().get("inspection");
+  const selected = data?.inspections.find((row) => row.id === requested);
   if (!data) return <ListSkeleton />;
   return (
     <div className="flex flex-col gap-6">
@@ -50,6 +55,8 @@ function QualityBoard() {
       </Link>
       {data.canOperate ? null : <p>{t("readOnly")}</p>}
       <WorkflowTabs
+        key={selected?.id ?? "all"}
+        defaultValue={selected && data.canOperate ? "upload" : undefined}
         items={[
           {
             value: "own",
@@ -116,7 +123,7 @@ function QualityBoard() {
                 {
                   value: "upload",
                   label: t("upload"),
-                  content: <Upload data={data} />,
+                  content: <Upload data={data} inspectionId={selected?.id} />,
                 },
               ]
             : []),
@@ -126,13 +133,19 @@ function QualityBoard() {
     </div>
   );
 }
-function Upload({ data }: { data: Board }) {
+function Upload({
+  data,
+  inspectionId,
+}: {
+  data: Board;
+  inspectionId?: string;
+}) {
   const t = useTranslations("qualityDocuments");
   const upload = useAction(api.qualityFiles.upload);
   const action = useQualityAction();
   const id = useId();
   const input = useRef<HTMLInputElement>(null);
-  const [inspection, setInspection] = useState("");
+  const [inspection, setInspection] = useState(inspectionId ?? "");
   const [kind, setKind] = useState<"coa" | "photo" | "sample_report">("coa");
   const [file, setFile] = useState<File | null>(null);
   const [share, setShare] = useState(false);

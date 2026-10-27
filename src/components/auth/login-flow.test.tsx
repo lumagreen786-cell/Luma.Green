@@ -9,13 +9,16 @@ vi.mock("@/components/providers/convex-provider", () => ({
   isConvexConfigured: false,
 }));
 vi.mock("./storage", () => ({
-  isLanguageChosen: () => true,
-  useStoredValue: () => true,
+  clearPhoneChallenge: vi.fn(),
+  readActivePhone: () => null,
+  useStoredValue: () => null,
 }));
 vi.mock("./resume-session", () => ({ ResumeSession: () => null }));
 vi.mock("./phone-form", () => ({ PhoneForm: () => <p>Phone form</p> }));
 vi.mock("./email-form", () => ({ EmailForm: () => <p>Email form</p> }));
-vi.mock("./language-choice", () => ({ LanguageChoice: () => null }));
+vi.mock("@/components/site/language-switcher", () => ({
+  LanguageSwitcher: () => null,
+}));
 
 it.each(["en", "ar", "ur"])("offers only the phone form in %s", (locale) => {
   render(

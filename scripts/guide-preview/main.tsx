@@ -15,7 +15,7 @@ import { PilotNumbers } from "@/components/admin/pilot/pilot-numbers";
 import { PriceTables } from "@/components/admin/prices/price-tables";
 import { SupportInbox } from "@/components/admin/support/support-inbox";
 import { ApplicationReview } from "@/components/admin/verification/application-review";
-import { VerificationQueue } from "@/components/admin/verification/queue";
+import { VerificationWorkspace } from "@/components/admin/verification/verification-workspace";
 import { AppShell } from "@/components/app/app-shell";
 import { RoleHome } from "@/components/app/role-home";
 import { FactorChallenge } from "@/components/auth/factor-challenge";
@@ -33,6 +33,7 @@ import { TradesPage } from "@/components/market/trades-page";
 import { NotificationsPage } from "@/components/notifications/notifications-page";
 import { AuditReports } from "@/components/quality/audit-reports";
 import { QualityDocuments } from "@/components/quality/quality-documents";
+import { SellFlow } from "@/components/sell/sell-flow";
 import { RateCardPage } from "@/components/shop/rate-card-page";
 import { RequestDetail } from "@/components/shop/request-detail";
 import { RequestsPage } from "@/components/shop/requests-page";
@@ -62,7 +63,7 @@ const adminPages: Record<string, ReactNode | undefined> = {
   "/admin/verification/guide-shop": (
     <ApplicationReview applicationId="guide-shop" />
   ),
-  "/admin/verification": <VerificationQueue />,
+  "/admin/verification": <VerificationWorkspace />,
   "/admin/prices": <PriceTables />,
   "/admin/pilot": <PilotNumbers />,
 };
@@ -107,6 +108,10 @@ const appPage = operationalPages[path] ?? defaultAppPage;
 const trackingPage = path.startsWith("/en/t/")
   ? await HouseholdLayout({ children: <TrackView booking={trackedBooking} /> })
   : null;
+const sellPage =
+  path === "/en/sell"
+    ? await HouseholdLayout({ children: <SellFlow /> })
+    : null;
 const sellSelectionPages: Record<string, ReactNode | undefined> = {
   "/en/sell/basket": <SellSelectionFixture step="basket" />,
   "/en/sell/shop": <SellSelectionFixture step="shop" />,
@@ -186,6 +191,7 @@ createRoot(root).render(
         accountPage ??
         challengePage ??
         trackingPage ??
+        sellPage ??
         sellSelectionPage ??
         onboardingPage ??
         content}

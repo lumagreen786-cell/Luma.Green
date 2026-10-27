@@ -240,3 +240,14 @@ it("counts down five minutes and retains the remaining wait after remount", asyn
   expect(calls.sendOtp).toHaveBeenCalledOnce();
   expect(screen.getByText(/5:00/)).toBeVisible();
 });
+
+it("keeps the phone number when editing from the compatibility code route", () => {
+  render(form());
+  fireEvent.click(
+    screen.getByRole("button", { name: messages.auth.changeNumber }),
+  );
+  expect(screen.getByLabelText(messages.auth.mobileLabel)).toHaveValue(
+    "9876543210",
+  );
+  expect(calls.replace).not.toHaveBeenCalled();
+});

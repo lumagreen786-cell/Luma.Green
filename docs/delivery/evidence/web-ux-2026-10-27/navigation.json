@@ -1,0 +1,2312 @@
+[
+  {
+    "locale": "en",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "en",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "en",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "en",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "en",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "en",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "en",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "en",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "en",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "en",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "hi",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "hi",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "hi",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "hi",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "hi",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "hi",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "hi",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "hi",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "hi",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "hi",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "hi",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "hi",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "hi",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "hi",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "bn",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "bn",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "bn",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "bn",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "bn",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "bn",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "bn",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "bn",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "bn",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "bn",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "bn",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "bn",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "bn",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "bn",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "mr",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "mr",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "mr",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "mr",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "mr",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "mr",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "mr",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "mr",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "mr",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "mr",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "mr",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "mr",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "mr",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "mr",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ta",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ta",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ta",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ta",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ta",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ta",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ta",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ta",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ta",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ta",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ta",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ta",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ta",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ta",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "te",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "te",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "te",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "te",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "te",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "te",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "te",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "te",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "te",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "te",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "te",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "te",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "te",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "te",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "kn",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "kn",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "kn",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "kn",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "kn",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "kn",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "kn",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "kn",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "kn",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "kn",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "kn",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "kn",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "kn",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "kn",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ml",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ml",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ml",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ml",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ml",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ml",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ml",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ml",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ml",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ml",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ml",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ml",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ml",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ml",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "gu",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "gu",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "gu",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "gu",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "gu",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "gu",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "gu",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "gu",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "gu",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "gu",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "gu",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "gu",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "gu",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "gu",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "pa",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "pa",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "pa",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "pa",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "pa",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "pa",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "pa",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "pa",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "pa",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "pa",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "pa",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "pa",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "pa",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "pa",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ur",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ur",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ur",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ur",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ur",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ur",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ur",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ur",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ur",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ur",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ur",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ur",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ur",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ur",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ar",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ar",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ar",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ar",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ar",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ar",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ar",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ar",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ar",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ar",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ar",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ar",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ar",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ar",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "as",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "as",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "as",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "as",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "as",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "as",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "as",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "as",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "as",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "as",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "as",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "as",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "as",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "as",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ne",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ne",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ne",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ne",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ne",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ne",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ne",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ne",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ne",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ne",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ne",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ne",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ne",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ne",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "es",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "es",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "es",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "es",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "es",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "es",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "es",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "es",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "es",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "es",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "es",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "es",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "es",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "es",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "fr",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "fr",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "fr",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "fr",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "fr",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "fr",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "fr",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "fr",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "fr",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "fr",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "fr",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "fr",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "fr",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "fr",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "vi",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "vi",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "vi",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "vi",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "vi",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "vi",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "vi",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "vi",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "vi",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "vi",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "vi",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "vi",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "vi",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "vi",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "si",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "si",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "si",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "si",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "si",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "si",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "si",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "si",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "si",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "si",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "si",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "si",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "si",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "si",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "th",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "th",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "th",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "th",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "th",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "th",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "th",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "th",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "th",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "th",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "th",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "th",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "th",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "th",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ru",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ru",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ru",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ru",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ru",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ru",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ru",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ru",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ru",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ru",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ru",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ru",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ru",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ru",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "de",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "de",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "de",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "de",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "de",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "de",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "de",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "de",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "de",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "de",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "de",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "de",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "de",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "de",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "or",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "or",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "or",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "or",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "or",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "or",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "or",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "or",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "or",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "or",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "or",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "or",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "or",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "or",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ja",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ja",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ja",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ja",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ja",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ja",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ja",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ja",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ja",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ja",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ja",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ja",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ja",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ja",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "uk",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "uk",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "uk",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "uk",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "uk",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "uk",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "uk",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "uk",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "uk",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "uk",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "uk",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "uk",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "uk",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "uk",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ko",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ko",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ko",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ko",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ko",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ko",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ko",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ko",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ko",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ko",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ko",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ko",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ko",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ko",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "it",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "it",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "it",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "it",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "it",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "it",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "it",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "it",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "it",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "it",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "it",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "it",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "it",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "it",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "pl",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "pl",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "pl",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "pl",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "pl",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "pl",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "pl",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "pl",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "pl",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "pl",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "pl",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "pl",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "pl",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "pl",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "tr",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "tr",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "tr",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "tr",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "tr",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "tr",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "tr",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "tr",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "tr",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "tr",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "tr",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "tr",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "tr",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "tr",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "zh",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "zh",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "zh",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "zh",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "zh",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "zh",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "zh",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "zh",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "zh",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "zh",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "zh",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "zh",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "zh",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "zh",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "pt",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "pt",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "pt",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "pt",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "pt",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "pt",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "pt",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "pt",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "pt",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "pt",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "pt",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "pt",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "pt",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "pt",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "id",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "id",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "id",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "id",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "id",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "id",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "id",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "id",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "id",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "id",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "id",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "id",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "id",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "id",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "nl",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "nl",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "nl",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "nl",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "nl",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "nl",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "nl",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "nl",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "nl",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "nl",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "nl",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "nl",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "nl",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "nl",
+    "width": 1440,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ms",
+    "width": 320,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ms",
+    "width": 390,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ms",
+    "width": 640,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ms",
+    "width": 768,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ms",
+    "width": 1024,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ms",
+    "width": 1280,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ms",
+    "width": 1440,
+    "colorScheme": "light"
+  },
+  {
+    "locale": "ms",
+    "width": 320,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ms",
+    "width": 390,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ms",
+    "width": 640,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ms",
+    "width": 768,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ms",
+    "width": 1024,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ms",
+    "width": 1280,
+    "colorScheme": "dark"
+  },
+  {
+    "locale": "ms",
+    "width": 1440,
+    "colorScheme": "dark"
+  }
+]

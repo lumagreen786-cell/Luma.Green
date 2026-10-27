@@ -24,6 +24,7 @@ export function RecordWorkspace({
   const detailRegion = useRef<HTMLElement>(null);
   const hasDetail = Boolean(detail);
   const opener = useRef<HTMLElement | null>(null);
+  const listScroll = useRef(0);
   useEffect(() => {
     if (hasDetail) {
       const trigger = document.activeElement;
@@ -32,10 +33,15 @@ export function RecordWorkspace({
         !detailRegion.current?.contains(trigger)
       ) {
         opener.current = trigger;
+        if (!opener.current.closest("[data-record-detail]"))
+          listScroll.current = window.scrollY;
       }
       detailRegion.current?.focus();
     } else {
-      if (opener.current?.isConnected) opener.current.focus();
+      if (opener.current?.isConnected) {
+        opener.current.focus({ preventScroll: true });
+        window.scrollTo({ top: listScroll.current });
+      }
       opener.current = null;
     }
   }, [hasDetail, detailKey]);
@@ -50,6 +56,7 @@ export function RecordWorkspace({
       {detail ? (
         <section
           ref={detailRegion}
+          data-record-detail
           tabIndex={-1}
           className="min-w-0 space-y-5 lg:border-s lg:ps-8"
         >

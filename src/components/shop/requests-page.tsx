@@ -12,6 +12,8 @@ import {
   EmptyState,
   ListSkeleton,
 } from "@/components/app/page-parts";
+import { useListScroll } from "@/components/app/use-list-scroll";
+import { useViewPreference } from "@/components/app/use-view-preference";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { defaultLocale, isLocale, localeDirection } from "@/i18n/locales";
 
@@ -45,7 +47,7 @@ export function RequestsPage() {
         <QueryBoundary>
           {/* The tab lives in the address (?tab=today), read on the client. */}
           <Suspense fallback={<ListSkeleton />}>
-            <RequestTabs city={shop.city} />
+            <RequestTabs city={shop.city} scope={shop.id} />
           </Suspense>
         </QueryBoundary>
       ) : (
@@ -56,12 +58,15 @@ export function RequestsPage() {
   );
 }
 
-function RequestTabs({ city }: { city: string }) {
+function RequestTabs({ city, scope }: { city: string; scope: string }) {
   const locale = useLocale();
   const t = useTranslations("shop.requests");
   const requests = useQuery(api.shop.requests);
   const today = useIndiaToday();
-  const tab = tabFrom(useSearchParams().get("tab"));
+  const requested = useSearchParams().get("tab");
+  const [saved, saveTab] = useViewPreference(`requests.${scope}`, "new");
+  const tab = tabFrom(requested ?? saved);
+  useListScroll(`requests.${scope}.${tab}`, requests !== undefined);
 
   // Next keeps useSearchParams in step with history.replaceState, so the tab
   // switches without a server request. Pass null: reusing Next internal
@@ -69,6 +74,7 @@ function RequestTabs({ city }: { city: string }) {
   const showTab = (next: string) => {
     const params = new URLSearchParams(window.location.search);
     const chosen = tabFrom(next);
+    saveTab(chosen);
     if (chosen === "new") params.delete("tab");
     else params.set("tab", chosen);
     const query = params.toString();

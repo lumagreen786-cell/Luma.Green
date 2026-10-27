@@ -98,9 +98,6 @@ for (const { locale, copy } of [
     }
 
     await page.goto(`/${locale}/login`);
-    await page
-      .getByRole("button", { name: copy.auth.continue, exact: true })
-      .click();
     await page.evaluate(async () => document.fonts.ready);
     await expectActionTextToFit(
       page.getByRole("button", { name: copy.auth.sendCode, exact: true }),

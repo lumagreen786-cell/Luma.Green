@@ -56,9 +56,11 @@ function toDraft(values: Partial<Draft>): Draft {
 export function DocumentsForm({
   kind,
   application,
+  onBack,
 }: {
   kind: BusinessKind;
   application: Application;
+  onBack?: () => void;
 }) {
   const t = useTranslations("join");
   const router = useRouter();
@@ -123,7 +125,7 @@ export function DocumentsForm({
     try {
       await saveDraft({ documents: toDraft(valid) });
       await submit({});
-      router.push("/join/status");
+      router.push("/app");
     } catch (error) {
       setFailure(submitErrorKey(error));
     }
@@ -343,12 +345,27 @@ export function DocumentsForm({
         busyLabel={t("form.submitting")}
         isBusy={isSubmitting}
         failure={failure}
-        secondary={
-          <Button asChild variant="ghost">
-            <Link href={`/join/${kind}`}>{t("form.back")}</Link>
-          </Button>
-        }
+        secondary={<DocumentsBack kind={kind} onBack={onBack} />}
       />
     </form>
+  );
+}
+
+function DocumentsBack({
+  kind,
+  onBack,
+}: {
+  kind: BusinessKind;
+  onBack?: () => void;
+}) {
+  const t = useTranslations("join.form");
+  return onBack ? (
+    <Button type="button" variant="ghost" onClick={onBack}>
+      {t("back")}
+    </Button>
+  ) : (
+    <Button asChild variant="ghost">
+      <Link href={`/join/${kind}`}>{t("back")}</Link>
+    </Button>
   );
 }

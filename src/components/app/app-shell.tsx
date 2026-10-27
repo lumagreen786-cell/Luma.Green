@@ -36,6 +36,7 @@ import { cn } from "@/lib/utils";
 
 import { type AppRole, NAV, type NavItem } from "./nav";
 import { ListSkeleton } from "./page-parts";
+import { useMobileNavCapacity } from "./use-mobile-nav-capacity";
 import { useWorkspace } from "./use-workspace";
 
 function isActive(pathname: string, href: string) {
@@ -62,10 +63,16 @@ export function AppShell({ children }: { children: ReactNode }) {
   const theme = useTranslations("theme");
   const navigation = useTranslations("nav");
   const locale = useLocale();
+  const mobileNavRef = useRef<HTMLElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [navSearch, setNavSearch] = useState("");
   const menuOpener = useRef<HTMLButtonElement | null>(null);
   const workspace = useWorkspace();
+  const mobileCapacity = useMobileNavCapacity(
+    mobileNavRef,
+    locale,
+    workspace?.kind === "org" || workspace?.kind === "saathi",
+  );
   const router = useRouter();
   const pathname = usePathname();
   const { signOut, busy: signingOut } = useSignOut(() => {
@@ -180,10 +187,10 @@ export function AppShell({ children }: { children: ReactNode }) {
   };
   const isSearchMatch = (item: NavItem) =>
     itemLabel(item).toLowerCase().includes(navSearch.trim().toLowerCase());
-  // Keep the two daily destinations visible. The menu holds the rest at
-  // full text width, so translated labels never need ellipses or tiny type.
-  const mobilePrimary = primary.slice(0, 2);
-  const mobileMore = [...primary.slice(2), ...more];
+  // Daily tasks stay one tap away. Long translated labels scroll within the
+  // bar rather than overflow the page or shrink below a readable size.
+  const mobilePrimary = primary.slice(0, mobileCapacity);
+  const mobileMore = [...primary.slice(mobileCapacity), ...more];
   const side =
     isLocale(locale) && localeDirection(locale) === "rtl" ? "left" : "right";
   const closeMenu = () => {
@@ -409,8 +416,9 @@ export function AppShell({ children }: { children: ReactNode }) {
           </div>
         </SheetContent>
         <nav
+          ref={mobileNavRef}
           aria-label={t("navLabel")}
-          className="fixed inset-x-0 bottom-0 z-30 grid border-t border-border bg-background px-2 pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] xl:hidden"
+          className="fixed inset-x-0 bottom-0 z-30 grid overflow-x-auto overscroll-x-contain border-t border-border bg-background px-2 pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] xl:hidden"
           style={{
             gridTemplateColumns: `repeat(${String(mobilePrimary.length + 1)}, minmax(max-content, 1fr))`,
           }}
@@ -418,7 +426,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           {mobilePrimary.map((item) =>
             link(
               item,
-              "flex min-h-14 flex-col items-center justify-center gap-1 rounded-lg px-1 py-2 text-center text-sm font-medium text-muted-foreground outline-none focus-visible:bg-muted",
+              "flex min-h-14 flex-col items-center justify-center gap-1 rounded-lg px-3 py-2 text-center text-sm font-medium text-muted-foreground outline-none focus-visible:bg-muted",
               true,
             ),
           )}

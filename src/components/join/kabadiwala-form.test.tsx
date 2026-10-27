@@ -66,5 +66,33 @@ it("validates each shop stage and sends the complete retained application only a
     }),
   });
   expect(calls.mutate).toHaveBeenNthCalledWith(2, {});
-  expect(calls.push).toHaveBeenCalledWith("/join/status");
+  expect(calls.push).toHaveBeenCalledWith("/app");
+});
+
+it("resumes at the incomplete address and keeps saved identity on Back", async () => {
+  const application = {
+    kabadiwala: {
+      ownerName: "Saved owner",
+      shopName: "Saved shop",
+      gstRegistered: false,
+    },
+    files: [],
+  } as unknown as Application;
+  render(
+    <NextIntlClientProvider locale="en" messages={messages}>
+      <KabadiwalaForm application={application} loginPhone={undefined} />
+    </NextIntlClientProvider>,
+  );
+  expect(
+    screen.getByRole("heading", { name: messages.join.kabadiwala.address }),
+  ).toBeVisible();
+  await userEvent.click(
+    screen.getByRole("button", { name: messages.join.form.back }),
+  );
+  expect(screen.getByLabelText(messages.join.kabadiwala.ownerName)).toHaveValue(
+    "Saved owner",
+  );
+  expect(screen.getByLabelText(messages.join.kabadiwala.shopName)).toHaveValue(
+    "Saved shop",
+  );
 });

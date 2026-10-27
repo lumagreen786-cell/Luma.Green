@@ -975,23 +975,23 @@
       },
       "firstPickup": {
         "title": "Agende a primeira coleta",
-        "summary": "Escolha os materiais, compare as lojas e verifique seu número de celular para agendar uma coleta.",
+        "summary": "Adicionar fotos · Escolher uma loja próxima · Escolher um horário",
         "steps": {
           "photo": {
             "title": "Tire uma foto da matéria reciclável",
-            "body": "Opcional: adicione uma foto da matéria reciclável e confira os itens sugeridos."
+            "body": "Adicione pelo menos uma foto."
           },
           "estimate": {
-            "title": "Confira a estimativa",
-            "body": "Mostramos o que identificamos e os quilos aproximados. Corrija os quilos se parecerem errados."
+            "title": "Os seus dados",
+            "body": "Seu nome · Endereço da coleta"
           },
           "choose": {
             "title": "Escolha coleta ou entrega",
-            "body": "Veja kabadiwalas verificados próximos, dos mais próximos, com seus horários."
+            "body": "Escolher uma loja próxima · Mais próximas primeiro"
           },
           "slot": {
             "title": "Escolha um horário",
-            "body": "Escolha uma faixa e confira o endereço e o ponto no mapa."
+            "body": "Dia · Horário"
           },
           "code": {
             "title": "Confirme seu número",
@@ -999,7 +999,7 @@
           },
           "track": {
             "title": "Receba o link de acompanhamento",
-            "body": "Enviamos por SMS um link para acompanhar a coleta."
+            "body": "Enviamos seu pedido. Esta página atualiza assim que responderem."
           }
         }
       },
@@ -1175,11 +1175,11 @@
         "steps": {
           "see": {
             "title": "Veja novos pedidos",
-            "body": "Cada um mostra área, horário, materiais, quilos aproximados e quanto você pagaria."
+            "body": "Famílias próximas que querem vender matéria reciclável."
           },
           "answer": {
             "title": "Aceite ou recuse",
-            "body": "Aceite para atender. Se recusar, vai para o próximo kabadiwala mais próximo, sem informar à família quem recusou."
+            "body": "A família pode escolher outra loja e enviar um novo pedido."
           },
           "auto": {
             "title": "Ative a aceitação automática",
@@ -1531,7 +1531,7 @@
     "faqs": {
       "noCode": {
         "q": "Não recebi o código SMS",
-        "a": "Espere 30 segundos e toque em Reenviar. Confira o número e o sinal do telefone. O código vale por 5 minutos."
+        "a": "Confira o seu número e o sinal do telefone. Aguarde o fim do temporizador de reenvio e peça um novo código. Os códigos expiram após 5 minutos."
       },
       "newPhone": {
         "q": "Tenho um telefone ou número novo",
@@ -1551,7 +1551,7 @@
       },
       "whatCanISell": {
         "q": "O que posso vender?",
-        "a": "Papel e papelão, garrafas e recipientes plásticos, metal, vidro e eletrônicos usados. Em dúvida? Tire uma foto e a estimativa ajudará."
+        "a": "Papel e papelão, garrafas e recipientes plásticos, metal, vidro e eletrônicos usados."
       },
       "howPriceWorks": {
         "q": "Como meu pagamento é calculado?",
@@ -1583,7 +1583,7 @@
       },
       "photosKept": {
         "q": "O que acontece com minhas fotos?",
-        "a": "Não inclua rostos, documentos ou placas. A foto é enviada a um provedor de IA para esta estimativa. A Luma.Green não a salva."
+        "a": "As fotos são guardadas de forma privada com o seu pedido. Apenas as pessoas com acesso ao pedido podem vê-las. Evite incluir rostos, documentos e matrículas nas fotos."
       },
       "whyVerify": {
         "q": "Por que preciso de verificação?",
@@ -1607,7 +1607,7 @@
       },
       "rejectRequest": {
         "q": "O que acontece se eu recusar um pedido?",
-        "a": "Ele vai para o próximo kabadiwala mais próximo. A família não é informada de quem recusou."
+        "a": "A família pode escolher outra loja e enviar um novo pedido."
       },
       "payHousehold": {
         "q": "A Luma.Green paga a família por mim?",
@@ -2771,7 +2771,7 @@
       "completed": "Pronto! Você recebeu {amount}",
       "completedBody": "Obrigado por reciclar. Seus pontos foram adicionados ao seu número.",
       "declined": "{shop} não pôde aceitar este agendamento",
-      "declinedBody": "Nada foi coletado. Tente outra loja: sua lista de matéria reciclável está salva.",
+      "declinedBody": "Adicione fotos e confira os seus dados novamente. Escolha outra loja para enviar um novo pedido.",
       "cancelled": "Este agendamento foi cancelado",
       "cancelledBody": "Nada foi coletado. Você pode agendar novamente a qualquer momento."
     },
@@ -2842,7 +2842,8 @@
     "saved": "Não precisa de conta. Guarde este link para conferir o agendamento em qualquer telefone.",
     "sellMore": "Agendar outra coleta",
     "tryAnother": "Tentar outra loja",
-    "dispatchChanged": "Seu pedido foi transferido para outra loja próxima. A loja atual aparece abaixo."
+    "dispatchChanged": "Seu pedido foi transferido para outra loja próxima. A loja atual aparece abaixo.",
+    "retryDetails": "Adicione fotos e confira os seus dados novamente. Escolha outra loja para enviar um novo pedido."
   },
   "market": {
     "sampleData": "Preços e valores nesta tela são dados de exemplo para o protótipo.",

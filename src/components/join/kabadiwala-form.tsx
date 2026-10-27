@@ -37,6 +37,7 @@ import {
 } from "./form-parts";
 import { type GstDetails, IdentityCheck } from "./identity-check";
 import { PanDiscovery } from "./pan-discovery";
+import { resumeStage } from "./resume-stage";
 import { submitErrorKey, type SubmitFailure } from "./submit-error";
 import { useAutosave, withoutUndefined } from "./use-autosave";
 import type { Application } from "./use-mine";
@@ -106,6 +107,18 @@ export function KabadiwalaForm({
     },
   });
 
+  const [initialStage] = useState(() => {
+    const parsed = kabadiwalaSchema.safeParse(getValues());
+    return resumeStage(
+      [
+        ["ownerName", "shopName", "gstRegistered", "gstin"],
+        ["address", "location"],
+        ["offersPickup", "vehicle", "phones", "opens", "closes", "weeklyOff"],
+      ],
+      parsed.success ? [] : parsed.error.issues,
+    );
+  });
+
   // Partial on purpose: a question stays unanswered until they tap it.
   const values = useWatch({ control }) as Partial<Values>;
   const saveState = useAutosave(values, async (current) => {
@@ -117,7 +130,7 @@ export function KabadiwalaForm({
     try {
       await saveDraft({ kabadiwala: toDraft(valid) });
       await submit({});
-      router.push("/join/status");
+      router.push("/app");
     } catch (error) {
       setFailure(submitErrorKey(error));
     }
@@ -219,6 +232,7 @@ export function KabadiwalaForm({
 
   return (
     <FormJourney
+      initialStage={initialStage}
       trigger={trigger}
       getFieldState={getFieldState}
       onFinish={(event) => {

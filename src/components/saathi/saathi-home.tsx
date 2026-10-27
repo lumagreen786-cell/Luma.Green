@@ -43,8 +43,6 @@ function SaathiBoard() {
   const { now, later } = splitByDay(board.mine, board.today);
   return (
     <>
-      <WeekEarnings earnings={board.earnings} />
-
       <Section title={t("today.title")}>
         {now.length > 0 ? (
           <JobGrid>
@@ -111,6 +109,7 @@ function SaathiBoard() {
         )}
       </Section>
 
+      <WeekEarnings earnings={board.earnings} />
       <DemoNote>{t("demoNote")}</DemoNote>
     </>
   );

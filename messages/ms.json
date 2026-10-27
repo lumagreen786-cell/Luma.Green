@@ -651,23 +651,23 @@
       },
       "firstPickup": {
         "title": "Tempah kutipan pertama anda",
-        "summary": "Pilih bahan, bandingkan kedai dan sahkan nombor telefon bimbit anda untuk menempah pengambilan.",
+        "summary": "Tambah foto · Pilih kedai berdekatan · Pilih masa",
         "steps": {
           "photo": {
             "title": "Ambil foto bahan kitar semula",
-            "body": "Pilihan: tambah satu foto bahan kitar semula, kemudian semak barang yang dicadangkan."
+            "body": "Tambah sekurang-kurangnya satu foto."
           },
           "estimate": {
-            "title": "Periksa anggaran",
-            "body": "Kami menunjukkan bahan yang dilihat dan anggaran berat. Ubah berat jika tidak tepat."
+            "title": "Butiran anda",
+            "body": "Nama anda · Alamat kutipan"
           },
           "choose": {
             "title": "Pilih kutipan atau penghantaran sendiri",
-            "body": "Lihat kabadiwala disahkan berdekatan, yang terdekat dahulu, bersama waktu operasi."
+            "body": "Pilih kedai berdekatan · Terdekat dahulu"
           },
           "slot": {
             "title": "Pilih masa",
-            "body": "Pilih slot masa, kemudian periksa alamat dan pin peta."
+            "body": "Hari · Masa"
           },
           "code": {
             "title": "Sahkan nombor anda",
@@ -675,7 +675,7 @@
           },
           "track": {
             "title": "Dapatkan pautan penjejakan",
-            "body": "Kami menghantar pautan melalui SMS untuk menjejaki kutipan."
+            "body": "Permintaan anda telah dihantar. Halaman ini dikemas kini sebaik sahaja mereka menjawab."
           }
         }
       },
@@ -851,11 +851,11 @@
         "steps": {
           "see": {
             "title": "Lihat permintaan baharu",
-            "body": "Setiap permintaan menunjukkan kawasan, slot masa, bahan, anggaran berat dan bayaran."
+            "body": "Isi rumah berhampiran yang mahu menjual bahan kitar semula."
           },
           "answer": {
             "title": "Terima atau tolak",
-            "body": "Terima untuk mengambil tugas. Jika ditolak, permintaan pergi kepada kabadiwala terdekat seterusnya dan identiti penolak tidak diberitahu kepada isi rumah."
+            "body": "Isi rumah boleh memilih kedai lain dan menghantar permintaan baharu."
           },
           "auto": {
             "title": "Aktifkan penerimaan automatik",
@@ -1207,7 +1207,7 @@
     "faqs": {
       "noCode": {
         "q": "Saya tidak menerima kod SMS",
-        "a": "Tunggu 30 saat dan ketik Hantar Semula. Semak nombor betul dan telefon mempunyai isyarat. Kod sah selama 5 minit."
+        "a": "Semak nombor dan isyarat telefon anda. Tunggu pemasa penghantaran semula tamat, kemudian minta kod baharu. Kod tamat tempoh selepas 5 minit."
       },
       "newPhone": {
         "q": "Saya mempunyai telefon atau nombor baharu",
@@ -1227,7 +1227,7 @@
       },
       "whatCanISell": {
         "q": "Apa yang boleh saya jual?",
-        "a": "Kertas dan kadbod, botol dan bekas plastik, logam, kaca serta elektronik lama. Tidak pasti? Ambil foto dan anggaran akan memberitahu anda."
+        "a": "Kertas dan kadbod, botol dan bekas plastik, logam, kaca serta elektronik lama."
       },
       "howPriceWorks": {
         "q": "Bagaimana bayaran saya dikira?",
@@ -1259,7 +1259,7 @@
       },
       "photosKept": {
         "q": "Apa yang berlaku kepada foto saya?",
-        "a": "Jangan sertakan wajah, dokumen atau nombor plat. Foto dihantar kepada penyedia AI untuk anggaran ini. Luma.Green tidak menyimpannya."
+        "a": "Foto disimpan secara peribadi bersama permintaan anda. Hanya orang yang mempunyai akses kepada permintaan boleh melihatnya. Elakkan wajah, dokumen dan nombor plat kenderaan dalam foto."
       },
       "whyVerify": {
         "q": "Mengapa saya perlu disahkan?",
@@ -1283,7 +1283,7 @@
       },
       "rejectRequest": {
         "q": "Apa berlaku jika saya menolak permintaan?",
-        "a": "Ia dihantar kepada peniaga terdekat seterusnya. Isi rumah tidak diberitahu siapa yang menolak."
+        "a": "Isi rumah boleh memilih kedai lain dan menghantar permintaan baharu."
       },
       "payHousehold": {
         "q": "Adakah Luma.Green membayar isi rumah bagi pihak saya?",
@@ -1861,7 +1861,7 @@
       "completed": "Selesai! Anda menerima {amount}",
       "completedBody": "Terima kasih kerana mengitar semula. Mata ditambah pada nombor anda.",
       "declined": "{shop} tidak dapat menerima tempahan ini",
-      "declinedBody": "Tiada barang dikutip. Cuba kedai lain — senarai bahan kitar semula anda disimpan.",
+      "declinedBody": "Tambah foto dan semak butiran anda sekali lagi. Pilih kedai lain untuk menghantar permintaan baharu.",
       "cancelled": "Tempahan ini dibatalkan",
       "cancelledBody": "Tiada barang dikutip. Anda boleh menempah lagi bila-bila masa."
     },
@@ -1906,7 +1906,8 @@
     "saved": "Tiada akaun diperlukan. Simpan pautan ini untuk menyemak tempahan pada mana-mana telefon.",
     "sellMore": "Tempah kutipan lagi",
     "tryAnother": "Cuba kedai lain",
-    "dispatchChanged": "Permintaan anda dialihkan ke kedai berhampiran lain. Kedai semasa ditunjukkan di bawah."
+    "dispatchChanged": "Permintaan anda dialihkan ke kedai berhampiran lain. Kedai semasa ditunjukkan di bawah.",
+    "retryDetails": "Tambah foto dan semak butiran anda sekali lagi. Pilih kedai lain untuk menghantar permintaan baharu."
   },
   "market": {
     "buy": {

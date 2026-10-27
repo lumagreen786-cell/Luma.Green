@@ -597,23 +597,23 @@
       },
       "firstPickup": {
         "title": "İlk alımınızı ayarlayın",
-        "summary": "Toplama rezervasyonu için malzemeleri seçin, dükkânları karşılaştırın ve cep telefonu numaranızı doğrulayın.",
+        "summary": "Fotoğraf ekle · Yakındaki bir dükkânı seç · Saat seç",
         "steps": {
           "photo": {
             "title": "Malzemenin fotoğrafını çekin",
-            "body": "İsteğe bağlı: malzemenizin bir fotoğrafını ekleyin, önerilen kalemleri kontrol edin."
+            "body": "En az bir fotoğraf ekle."
           },
           "estimate": {
-            "title": "Tahmini kontrol edin",
-            "body": "Gördüklerimizi ve yaklaşık kiloyu gösteririz. Yanlış görünüyorsa kiloyu değiştirin."
+            "title": "Bilgilerin",
+            "body": "Adınız · Alım adresi"
           },
           "choose": {
             "title": "Alım veya teslim seçin",
-            "body": "Yakındaki doğrulanmış hurdacıları saatleriyle görün, en yakını önce."
+            "body": "Yakındaki bir dükkânı seç · Önce en yakın"
           },
           "slot": {
             "title": "Saat seçin",
-            "body": "Zaman aralığı seçip adres ve harita noktasını kontrol edin."
+            "body": "Gün · Saat"
           },
           "code": {
             "title": "Numaranızı doğrulayın",
@@ -621,7 +621,7 @@
           },
           "track": {
             "title": "Takip bağlantınızı alın",
-            "body": "Alımı izlemek için SMS bağlantısı göndeririz."
+            "body": "Talebiniz gönderildi. Yanıt verdiklerinde sayfa güncellenir."
           }
         }
       },
@@ -797,11 +797,11 @@
         "steps": {
           "see": {
             "title": "Yeni talepleri görün",
-            "body": "Bölge, saat, malzeme, yaklaşık kilo ve ödeyeceğiniz tutar görünür."
+            "body": "Malzeme satmak isteyen yakındaki haneler."
           },
           "answer": {
             "title": "Kabul veya reddet",
-            "body": "Almak için kabul edin. Reddederseniz sonraki en yakın hurdacıya gider; haneye kimin reddettiği söylenmez."
+            "body": "Hane başka bir dükkân seçip yeni bir talep gönderebilir."
           },
           "auto": {
             "title": "Otomatik kabulü açın",
@@ -1207,7 +1207,7 @@
     "faqs": {
       "noCode": {
         "q": "SMS kodunu almadım",
-        "a": "30 saniye bekleyip Yeniden Gönder’e dokunun. Numaranın doğru olduğundan ve telefonunuzun çektiğinden emin olun. Kod 5 dakika geçerlidir."
+        "a": "Numaranızı ve telefon sinyalini kontrol edin. Yeniden gönderme sayacı bitince yeni bir kod isteyin. Kodların süresi 5 dakika sonra dolar."
       },
       "newPhone": {
         "q": "Yeni bir telefonum veya numaram var",
@@ -1227,7 +1227,7 @@
       },
       "whatCanISell": {
         "q": "Neler satabilirim?",
-        "a": "Kâğıt ve karton, plastik şişe ve kaplar, metal, cam ve eski elektronik eşyalar. Emin değil misiniz? Fotoğraf çekin; tahmin size bilgi verir."
+        "a": "Kâğıt ve karton, plastik şişe ve kaplar, metal, cam ve eski elektronik eşyalar."
       },
       "howPriceWorks": {
         "q": "Alacağım tutar nasıl hesaplanır?",
@@ -1259,7 +1259,7 @@
       },
       "photosKept": {
         "q": "Fotoğraflarıma ne olur?",
-        "a": "Yüz, belge veya plaka eklemeyin. Fotoğraf bu tahmin için yapay zekâ sağlayıcısına gönderilir. Luma.Green kaydetmez."
+        "a": "Fotoğraflar talebinizle birlikte gizli olarak saklanır. Yalnızca talebe erişim izni olan kişiler bunları görebilir. Fotoğraflarda yüzlere, belgelere ve araç plakalarına yer vermeyin."
       },
       "whyVerify": {
         "q": "Neden doğrulanmam gerekiyor?",
@@ -1283,7 +1283,7 @@
       },
       "rejectRequest": {
         "q": "Bir talebi reddedersem ne olur?",
-        "a": "Sıradaki en yakın hurdacıya gider. Haneye kimin reddettiği söylenmez."
+        "a": "Hane başka bir dükkân seçip yeni bir talep gönderebilir."
       },
       "payHousehold": {
         "q": "Luma.Green haneye benim yerime ödeme yapar mı?",
@@ -1861,7 +1861,7 @@
       "completed": "Tamamlandı! {amount} aldınız",
       "completedBody": "Geri dönüştürdüğünüz için teşekkürler. Puanlar numaranıza eklendi.",
       "declined": "{shop} bu rezervasyonu alamadı",
-      "declinedBody": "Hiçbir şey alınmadı. Başka dükkân deneyin; malzeme listeniz kayıtlı.",
+      "declinedBody": "Fotoğraf ekleyin ve bilgilerinizi yeniden kontrol edin. Yeni bir talep göndermek için başka bir dükkân seçin.",
       "cancelled": "Bu rezervasyon iptal edildi",
       "cancelledBody": "Hiçbir şey alınmadı. İstediğiniz zaman yeniden ayarlayabilirsiniz."
     },
@@ -1906,7 +1906,8 @@
     "saved": "Hesap gerekmez. Herhangi bir telefondan kontrol için bu bağlantıyı saklayın.",
     "sellMore": "Yeniden toplama planla",
     "tryAnother": "Başka dükkân dene",
-    "dispatchChanged": "Talebiniz yakındaki başka dükkâna geçti. Güncel dükkân aşağıda gösteriliyor."
+    "dispatchChanged": "Talebiniz yakındaki başka dükkâna geçti. Güncel dükkân aşağıda gösteriliyor.",
+    "retryDetails": "Fotoğraf ekleyin ve bilgilerinizi yeniden kontrol edin. Yeni bir talep göndermek için başka bir dükkân seçin."
   },
   "market": {
     "buy": {

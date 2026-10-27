@@ -26,7 +26,7 @@ beforeEach(() => {
 });
 afterEach(() => vi.useRealTimers());
 
-async function openCodeForm() {
+async function openCodeForm(shouldWaitForResend = true) {
   render(
     <NextIntlClientProvider locale="en" messages={messages}>
       <PhoneSignIn verifyLabel="Confirm" onVerified={calls.onVerified} />
@@ -41,11 +41,14 @@ async function openCodeForm() {
     );
     await Promise.resolve();
   });
-  for (let second = 0; second < 300; second++) {
-    await act(async () => {
-      await vi.advanceTimersByTimeAsync(1000);
-    });
+  if (!shouldWaitForResend) {
+    return;
   }
+
+  vi.setSystemTime(Date.now() + 299_000);
+  await act(async () => {
+    await vi.advanceTimersByTimeAsync(1000);
+  });
 }
 
 it.each([
@@ -117,4 +120,26 @@ it("locks verification during resend and recovers from a lost connection", async
   });
   expect(calls.verify).toHaveBeenCalledTimes(1);
   expect(calls.onVerified).toHaveBeenCalledTimes(1);
+});
+
+it("keeps the phone number when the user chooses to change it", async () => {
+  await openCodeForm(false);
+  fireEvent.click(
+    screen.getByRole("button", { name: messages.sell.phone.changeNumber }),
+  );
+  expect(screen.getByLabelText(messages.sell.phone.label)).toHaveValue(
+    "9876543210",
+  );
+  expect(calls.sendOtp).toHaveBeenCalledOnce();
+});
+
+it("uses elapsed time for resend when the browser resumes from the background", async () => {
+  await openCodeForm(false);
+  vi.setSystemTime(Date.now() + 300_000);
+  await act(async () => {
+    await vi.advanceTimersByTimeAsync(1000);
+  });
+  expect(
+    screen.getByRole("button", { name: messages.sell.phone.resend }),
+  ).toBeVisible();
 });
