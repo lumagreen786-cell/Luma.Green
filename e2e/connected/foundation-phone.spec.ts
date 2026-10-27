@@ -383,3 +383,21 @@ test("real business phone session shares only reported programme aggregates and 
     await recipient.close();
   }
 });
+
+// The separate disconnected suite proves the no-backend unavailable state.
+// This configured app must reject anonymous access before rendering review data.
+test("configured account-removal review queue requires admin sign-in", async ({
+  browser,
+}) => {
+  const context = await browser.newContext({ baseURL: artifact.site });
+  try {
+    const page = await context.newPage();
+    await page.goto("/admin/account-removals");
+    await expect(page).toHaveURL((url) => url.pathname === "/admin/login");
+    await expect(
+      page.getByRole("heading", { name: "Account access and evidence review" }),
+    ).toHaveCount(0);
+  } finally {
+    await context.close();
+  }
+});

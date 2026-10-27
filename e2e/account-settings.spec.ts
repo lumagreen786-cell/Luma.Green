@@ -47,11 +47,14 @@ for (const route of ["forgot-password", "reset-password"]) {
   });
 }
 
-test("account-removal review queue requires an admin session", async ({
+test("disconnected account-removal review queue stays unavailable", async ({
   page,
 }) => {
   await page.goto("/admin/account-removals");
-  await expect(page).toHaveURL(/\/admin\/login$/);
+  await expect(page).toHaveURL(/\/admin\/account-removals$/);
+  await expect(
+    page.getByText("The admin console isn't switched on here", { exact: true }),
+  ).toBeVisible();
   await expect(
     page.getByRole("heading", { name: "Account access and evidence review" }),
   ).toHaveCount(0);
