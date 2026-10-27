@@ -1,16 +1,15 @@
 import { ConvexError, v } from "convex/values";
 
-import { mutation, query } from "./_generated/server";
+import { internalMutation, mutation, query } from "./_generated/server";
 import { requireAdmin } from "./lib/access";
 import { findProfile } from "./lib/applicationAccess";
 import { CATALOGUE } from "./lib/catalogue";
 import { shiftDate } from "./lib/dates";
-import { indiaToday } from "./lib/onboarding";
 import {
-  foundationMaterials,
-  PET_REFERENCE_DEFINITIONS,
-  PET_REFERENCE_SOURCE,
-} from "./lib/referenceDefinitions";
+  initializeReferenceDefinitions as initializeReferenceDefinitionsInMutation,
+  referenceInitializationCounts,
+} from "./lib/initializeReferenceDefinitions";
+import { indiaToday } from "./lib/onboarding";
 import { vFamily } from "./lib/validators";
 import { vNames } from "./lib/views";
 
@@ -46,107 +45,30 @@ export const materials = query({
 /** Add canonical definitions only. Existing materials and all operational data stay intact. */
 export const initializeDefinitions = mutation({
   args: {},
-  returns: v.object({
-    inserted: v.number(),
-    definitionsInserted: v.number(),
-    materialsSkipped: v.number(),
-    definitionsSkipped: v.number(),
-  }),
+  returns: referenceInitializationCounts,
   handler: async (ctx) => {
     const admin = await requireAdmin(ctx);
     const profile = await findProfile(ctx, admin._id);
-    // Static, bounded input; never scan or replace the live catalogue.
-    const materials = foundationMaterials();
-    let inserted = 0;
-    let definitionsInserted = 0;
-    const now = Date.now();
-    for (const [sortOrder, entry] of materials.entries()) {
-      const existing = await ctx.db
-        .query("materials")
-        .withIndex("by_code", (q) => q.eq("code", entry.code))
-        .unique();
-      if (existing) {
-        if (existing.family !== entry.family || existing.stage !== entry.stage)
-          throw new ConvexError("MATERIAL_DEFINITION_CONFLICT");
-        continue;
-      }
-      // Deliberately select fields: the source also contains prototype prices
-      // and indicative factors, neither of which is a production input.
-      const definition = {
-        code: entry.code,
-        family: entry.family,
-        stage: entry.stage,
-        names: entry.names,
-        sortOrder,
-        active: entry.active,
-      };
-      const id = await ctx.db.insert("materials", definition);
-      await ctx.db.insert("auditLog", {
-        actorProfileId: profile?._id,
-        action: "material.definitionInitialized",
-        entityTable: "materials",
-        entityId: id,
-        metadata: {
-          adminUserId: admin._id,
-          definition,
-          factorStatus: "unknown",
-          sourceReference: PET_REFERENCE_DEFINITIONS.some(
-            ({ materialCode }) => materialCode === entry.code,
-          )
-            ? PET_REFERENCE_SOURCE
-            : "convex/lib/catalogue.ts: canonical material labels only",
-          hazardApprovalGranted: false,
-        },
-        createdAt: now,
-      });
-      inserted += 1;
-    }
-    for (const definition of PET_REFERENCE_DEFINITIONS) {
-      const existing = await ctx.db
-        .query("operationalDefinitions")
-        .withIndex("by_material_version", (q) =>
-          q
-            .eq("materialCode", definition.materialCode)
-            .eq("version", definition.version),
-        )
-        .unique();
-      if (existing) {
-        if (
-          existing.family !== definition.family ||
-          existing.stage !== definition.stage
-        )
-          throw new ConvexError("MATERIAL_DEFINITION_CONFLICT");
-        // Preserve drafts and all later reviewed or retired content exactly.
-        continue;
-      }
-      const id = await ctx.db.insert("operationalDefinitions", {
-        ...definition,
-        status: "draft",
-        createdBy: admin._id,
-        createdAt: now,
-      });
-      await ctx.db.insert("auditLog", {
-        actorProfileId: profile?._id,
-        action: "catalogue.definitionDrafted",
-        entityTable: "operationalDefinitions",
-        entityId: id,
-        metadata: {
-          adminUserId: admin._id,
-          ...definition,
-          initialization: true,
-          hazardApprovalGranted: false,
-        },
-        createdAt: now,
-      });
-      definitionsInserted += 1;
-    }
-    return {
-      inserted,
-      definitionsInserted,
-      materialsSkipped: materials.length - inserted,
-      definitionsSkipped:
-        PET_REFERENCE_DEFINITIONS.length - definitionsInserted,
-    };
+    return initializeReferenceDefinitionsInMutation(ctx, {
+      createdBy: admin._id,
+      actorProfileId: profile?._id,
+      metadata: { adminUserId: admin._id },
+    });
+  },
+});
+
+/** Deployment credentials are required to invoke internal functions through the CLI. */
+export const initializeReferenceDefinitions = internalMutation({
+  args: { operatorReference: v.string() },
+  returns: referenceInitializationCounts,
+  handler: async (ctx, args) => {
+    const operatorReference = args.operatorReference.trim();
+    if (!operatorReference || operatorReference.length > 120)
+      throw new ConvexError("INVALID_REFERENCE");
+    return initializeReferenceDefinitionsInMutation(ctx, {
+      createdBy: "operator:reference-bootstrap",
+      metadata: { operatorReference, source: "deployment_operator" },
+    });
   },
 });
 

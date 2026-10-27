@@ -5,6 +5,8 @@ import { afterEach, expect, it, vi } from "vitest";
 
 import { components, internal } from "./_generated/api";
 import { convexModules, registerAuth } from "./lib/auth.testing";
+import { LOCAL_ACCEPTANCE_PERSONAS } from "./lib/localAcceptance";
+import { phoneEmail } from "./lib/phone";
 import schema from "./schema";
 
 const modules = convexModules(import.meta.glob("./**/*.*s"));
@@ -238,3 +240,105 @@ it("refuses byproduct seeding in cloud mode or over an unrelated material", asyn
   );
   expect(preservedMaterial?.names.en).toBe("Preserved unrelated record");
 });
+
+it("accepts only the exact verified phone and internal phone identity for its fixed local persona", async () => {
+  const t = world();
+  const persona = LOCAL_ACCEPTANCE_PERSONAS.find(
+    ({ key }) => key === "kabadiwala",
+  );
+  if (!persona) throw new Error("Missing persona");
+  const authUserId = await t.run(async (ctx) => {
+    const now = Date.now();
+    const user = (await ctx.runMutation(components.betterAuth.adapter.create, {
+      input: {
+        model: "user",
+        data: {
+          name: "Synthetic phone persona",
+          email: phoneEmail(persona.phone),
+          emailVerified: false,
+          phoneNumber: persona.phone,
+          phoneNumberVerified: true,
+          createdAt: now,
+          updatedAt: now,
+        },
+      },
+    })) as { _id: string };
+    await ctx.db.insert("profiles", {
+      authUserId: user._id,
+      kind: "member",
+      locale: "en",
+      createdAt: now,
+      updatedAt: now,
+    });
+    return user._id;
+  });
+  await expect(
+    t.mutation(internal.localAcceptance.seed, {
+      accounts: [{ key: "manufacturer", authUserId }],
+    }),
+  ).rejects.toThrow("ACCEPTANCE_IDENTITY_NOT_VERIFIED");
+  vi.stubEnv("CONVEX_SITE_URL", "https://cloud-test.convex.site");
+  await expect(
+    t.mutation(internal.localAcceptance.seed, {
+      accounts: [{ key: persona.key, authUserId }],
+    }),
+  ).rejects.toThrow("LOCAL_ACCEPTANCE_ONLY");
+  vi.stubEnv("CONVEX_SITE_URL", "http://127.0.0.1:3211");
+  expect(
+    await t.mutation(internal.localAcceptance.seed, {
+      accounts: [{ key: persona.key, authUserId }],
+    }),
+  ).toEqual({ created: 1, existing: 0 });
+  expect(
+    await t.mutation(internal.localAcceptance.seed, {
+      accounts: [{ key: persona.key, authUserId }],
+    }),
+  ).toEqual({ created: 0, existing: 1 });
+});
+
+it.each([false, true])(
+  "rejects a phone persona with an unverified phone or a different internal identity (%s)",
+  async (phoneNumberVerified) => {
+    const t = world();
+    const persona = LOCAL_ACCEPTANCE_PERSONAS.find(
+      ({ key }) => key === "manufacturer",
+    );
+    if (!persona) throw new Error("Missing persona");
+    const authUserId = await t.run(async (ctx) => {
+      const now = Date.now();
+      const user = (await ctx.runMutation(
+        components.betterAuth.adapter.create,
+        {
+          input: {
+            model: "user",
+            data: {
+              name: "Synthetic rejected phone persona",
+              email: phoneNumberVerified
+                ? "different@phone.luma.green"
+                : phoneEmail(persona.phone),
+              emailVerified: false,
+              phoneNumber: persona.phone,
+              phoneNumberVerified,
+              createdAt: now,
+              updatedAt: now,
+            },
+          },
+        },
+      )) as { _id: string };
+      await ctx.db.insert("profiles", {
+        authUserId: user._id,
+        kind: "member",
+        locale: "en",
+        createdAt: now,
+        updatedAt: now,
+      });
+      return user._id;
+    });
+    await expect(
+      t.mutation(internal.localAcceptance.seed, {
+        accounts: [{ key: persona.key, authUserId }],
+      }),
+    ).rejects.toThrow("ACCEPTANCE_IDENTITY_NOT_VERIFIED");
+    expect(await t.run((ctx) => ctx.db.query("orgs").first())).toBeNull();
+  },
+);

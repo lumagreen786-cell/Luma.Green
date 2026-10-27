@@ -16,6 +16,16 @@ import {
   requiredLabel,
 } from "./lib/lotEvidence";
 import { indiaToday } from "./lib/onboarding";
+import {
+  allocateRecordedCost,
+  canRecordAcquisitionCost,
+  consumeRecordedCost,
+  recordedCost,
+  recordedCostReference,
+  totalRecordedCost,
+} from "./lib/processingCosts";
+import { vRecordedCost } from "./lib/processingCostSchema";
+import { hasQualityRelease, requireQualityRelease } from "./lib/qualityRelease";
 import { vOrgKind } from "./lib/validators";
 import { requireOrg } from "./lib/workspace";
 
@@ -53,6 +63,8 @@ export const declareLot = mutation({
     state: v.string(),
     grams: v.number(),
     sourceReference: v.optional(v.string()),
+    acquisitionCostPaise: v.optional(vRecordedCost),
+    costReference: v.optional(v.string()),
     streamClass: v.optional(vStreamClass),
     handlingClass: v.optional(vHandlingClass),
   },
@@ -60,6 +72,8 @@ export const declareLot = mutation({
   handler: async (ctx, args) => {
     const { org, profile } = await requireOrg(ctx);
     const now = Date.now();
+    const costPaise = recordedCost(args.acquisitionCostPaise);
+    const costReference = recordedCostReference(costPaise, args.costReference);
     const id = await ctx.db.insert("materialLots", {
       orgId: org._id,
       declaredByOrgId: org._id,
@@ -71,6 +85,11 @@ export const declareLot = mutation({
       sourceReference: optionalReference(args.sourceReference),
       initialGrams: positiveGrams(args.grams),
       availableGrams: args.grams,
+      costBasisGrams: args.grams,
+      isAcquisitionCostRecordable: true,
+      initialCostPaise: costPaise,
+      costPaise,
+      costReference,
       status: "available",
       createdByProfileId: profile._id,
       createdAt: now,
@@ -85,12 +104,60 @@ export const declareLot = mutation({
       metadata: {
         sourceKind: "self_declared",
         grams: args.grams,
+        costPaise,
+        costReference,
         streamClass: args.streamClass ?? "unspecified",
         handlingClass: args.handlingClass ?? "unassessed",
       },
       createdAt: now,
     });
     return id;
+  },
+});
+
+/** First recorded acquisition only; consumed costs can never be restated. */
+export const recordAcquisitionCost = mutation({
+  args: {
+    lotId: v.id("materialLots"),
+    acquisitionCostPaise: v.number(),
+    costReference: v.string(),
+  },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    const { org, profile } = await requireOrg(ctx);
+    const lot = await ctx.db.get("materialLots", args.lotId);
+    if (lot?.orgId !== org._id) throw new ConvexError("LOT_NOT_FOUND");
+    const cost = recordedCost(args.acquisitionCostPaise);
+    const costReference = recordedCostReference(cost, args.costReference);
+    if (lot.initialCostPaise !== undefined && lot.initialCostPaise !== null) {
+      if (lot.initialCostPaise === cost && lot.costReference === costReference)
+        return null;
+      throw new ConvexError("COST_ALREADY_RECORDED");
+    }
+    if (!canRecordAcquisitionCost(lot))
+      throw new ConvexError("COST_BASIS_ALREADY_CONSUMED");
+    const now = Date.now();
+    await ctx.db.patch("materialLots", lot._id, {
+      initialCostPaise: cost,
+      costPaise: cost,
+      costReference,
+      costBasisGrams: lot.availableGrams,
+      updatedAt: now,
+    });
+    await ctx.db.insert("auditLog", {
+      orgId: org._id,
+      actorProfileId: profile._id,
+      action: "material_lot.acquisition_cost_recorded",
+      entityTable: "materialLots",
+      entityId: lot._id,
+      metadata: {
+        costPaise: cost,
+        costReference,
+        costBasisGrams: lot.availableGrams,
+      },
+      createdAt: now,
+    });
+    return null;
   },
 });
 
@@ -106,6 +173,7 @@ export const dispatch = mutation({
       throw new ConvexError("LOT_NOT_AVAILABLE");
     }
     assertOrdinaryRoute(lot);
+    await requireQualityRelease(ctx, lot);
     if (org._id === args.receiverOrgId) throw new ConvexError("SAME_CUSTODIAN");
     const receiver = await ctx.db.get("orgs", args.receiverOrgId);
     if (receiver?.status !== "active") {
@@ -137,6 +205,7 @@ export const dispatch = mutation({
         dispatchId,
         receiverOrgId: receiver._id,
         grams: lot.availableGrams,
+        dispatchedRecordedCostPaise: lot.costPaise ?? null,
       },
       createdAt: now,
     });
@@ -174,6 +243,11 @@ export const receive = mutation({
       status: "available",
       pendingReceiverOrgId: undefined,
       pendingDispatchId: undefined,
+      costBasisGrams: args.receivedGrams,
+      isAcquisitionCostRecordable: true,
+      initialCostPaise: null,
+      costPaise: null,
+      costReference: undefined,
       updatedAt: now,
     });
     await ctx.db.insert("auditLog", {
@@ -216,6 +290,7 @@ async function readTransformationInputs(
     if (lot.status !== "available" || grams > lot.availableGrams)
       throw new ConvexError("NOT_ENOUGH_LOT_GRAMS");
     assertOrdinaryRoute(lot);
+    await requireQualityRelease(ctx, lot);
     totalGrams += grams;
     if (!Number.isSafeInteger(totalGrams))
       throw new ConvexError("INVALID_WEIGHT");
@@ -300,6 +375,25 @@ async function transformationInputView(
   );
 }
 
+async function previousProcessOperation(
+  ctx: QueryCtx,
+  orgId: Id<"orgs">,
+  operationReference: string | undefined,
+  requestFingerprint: string,
+) {
+  if (!operationReference) return null;
+  const prior = await ctx.db
+    .query("lotTransformations")
+    .withIndex("by_org_operation", (q) =>
+      q.eq("orgId", orgId).eq("operationReference", operationReference),
+    )
+    .unique();
+  if (!prior) return null;
+  if (prior.requestFingerprint !== requestFingerprint)
+    throw new ConvexError("PROCESS_OPERATION_CONFLICT");
+  return prior._id;
+}
+
 /** Convert measured grams to child lots, with exact integer mass balance. */
 export const transform = mutation({
   args: {
@@ -312,11 +406,50 @@ export const transform = mutation({
     inputGrams: v.number(),
     contaminationGrams: v.number(),
     processLossGrams: v.number(),
+    processingCostPaise: v.optional(vRecordedCost),
+    costReference: v.optional(v.string()),
+    operationReference: v.optional(v.string()),
     outputs: v.array(outputValidator),
   },
   returns: v.id("lotTransformations"),
   handler: async (ctx, args) => {
     const { org, profile } = await requireOrg(ctx);
+    const processingCostPaise = recordedCost(args.processingCostPaise);
+    const costReference = recordedCostReference(
+      processingCostPaise,
+      args.costReference,
+    );
+    const operationReference =
+      args.operationReference === undefined
+        ? undefined
+        : requiredLabel(args.operationReference);
+    const requestFingerprint = JSON.stringify({
+      inputLotId: args.inputLotId,
+      inputGrams: args.inputGrams,
+      additionalInputs: (args.additionalInputs ?? []).map(
+        ({ lotId, grams }) => ({ lotId, grams }),
+      ),
+      contaminationGrams: args.contaminationGrams,
+      processLossGrams: args.processLossGrams,
+      facilityId: args.facilityId ?? null,
+      processKind: args.processKind ?? null,
+      processingCostPaise,
+      costReference: costReference ?? null,
+      outputs: args.outputs.map((output) => ({
+        materialCode: output.materialCode.trim(),
+        state: output.state.trim(),
+        grams: output.grams,
+        streamClass: output.streamClass ?? "unspecified",
+        handlingClass: output.handlingClass ?? "unassessed",
+      })),
+    });
+    const prior = await previousProcessOperation(
+      ctx,
+      org._id,
+      operationReference,
+      requestFingerprint,
+    );
+    if (prior) return prior;
     const { inputs, totalGrams } = await readTransformationInputs(
       ctx,
       org._id,
@@ -347,6 +480,20 @@ export const transform = mutation({
       streamClass: output.streamClass ?? "unspecified",
       handlingClass: output.handlingClass ?? "unassessed",
     }));
+    const inputCosts = inputs.map(({ lot, grams }) =>
+      consumeRecordedCost(lot.availableGrams, lot.costPaise, grams),
+    );
+    const consumedInputCostPaise = totalRecordedCost(
+      inputCosts.map(({ consumed }) => consumed),
+    );
+    const totalOutputCostPaise = totalRecordedCost([
+      consumedInputCostPaise,
+      processingCostPaise,
+    ]);
+    const outputCosts = allocateRecordedCost(
+      totalOutputCostPaise,
+      outputs.map(({ grams }) => grams),
+    );
     const now = Date.now();
     const transformationId = await ctx.db.insert("lotTransformations", {
       orgId: org._id,
@@ -358,10 +505,16 @@ export const transform = mutation({
       contaminationGrams: args.contaminationGrams,
       processLossGrams: args.processLossGrams,
       actorProfileId: profile._id,
+      processingCostPaise,
+      consumedInputCostPaise,
+      totalOutputCostPaise,
+      costReference,
+      operationReference,
+      requestFingerprint,
       createdAt: now,
     });
     const outputLotIds = [];
-    for (const output of outputs) {
+    for (const [index, output] of outputs.entries()) {
       outputLotIds.push(
         await ctx.db.insert("materialLots", {
           orgId: org._id,
@@ -374,6 +527,11 @@ export const transform = mutation({
           parentTransformationId: transformationId,
           initialGrams: output.grams,
           availableGrams: output.grams,
+          costBasisGrams: output.grams,
+          isAcquisitionCostRecordable: false,
+          initialCostPaise: outputCosts[index] ?? null,
+          costPaise: outputCosts[index] ?? null,
+          costReference,
           status: "available",
           createdByProfileId: profile._id,
           createdAt: now,
@@ -381,18 +539,21 @@ export const transform = mutation({
         }),
       );
     }
-    for (const { lot, grams } of inputs) {
+    for (const [index, { lot, grams }] of inputs.entries()) {
+      const cost = inputCosts[index];
       await ctx.db.insert("lotTransformationInputs", {
         transformationId,
         lotId: lot._id,
         materialCode: lot.materialCode,
         state: lot.state,
         grams,
+        consumedCostPaise: cost.consumed,
         createdAt: now,
       });
       const availableGrams = lot.availableGrams - grams;
       await ctx.db.patch("materialLots", lot._id, {
         availableGrams,
+        costPaise: cost.remaining,
         status: availableGrams === 0 ? "exhausted" : "available",
         updatedAt: now,
       });
@@ -410,6 +571,13 @@ export const transform = mutation({
         contaminationGrams: args.contaminationGrams,
         processLossGrams: args.processLossGrams,
         outputLotIds,
+        processingCostPaise,
+        consumedInputCostPaise,
+        totalOutputCostPaise,
+        costReference,
+        operationReference,
+        outputCosts,
+        lossCostPolicy: "absorbed_by_measured_outputs",
         facilityId: facility?._id,
         processKind: args.processKind,
       },
@@ -435,6 +603,8 @@ export const mine = query({
           v.literal("transformed"),
         ),
         initialGrams: v.number(),
+        initialCostPaise: vRecordedCost,
+        costPaise: vRecordedCost,
         availableGrams: v.number(),
         status: v.union(
           v.literal("available"),
@@ -462,6 +632,8 @@ export const mine = query({
         handlingClass: lot.handlingClass ?? "unassessed",
         sourceKind: lot.sourceKind,
         initialGrams: lot.initialGrams,
+        initialCostPaise: lot.initialCostPaise ?? null,
+        costPaise: lot.costPaise ?? null,
         availableGrams: lot.availableGrams,
         status: lot.status,
         createdAt: lot.createdAt,
@@ -487,7 +659,13 @@ export const history = query({
         v.union(v.literal("self_declared"), v.literal("transformed")),
       ),
       sourceReference: v.optional(v.string()),
+      qualityReleased: v.optional(v.boolean()),
       initialGrams: v.optional(v.number()),
+      initialCostPaise: v.optional(vRecordedCost),
+      costPaise: v.optional(vRecordedCost),
+      costReference: v.optional(v.string()),
+      costBasisGrams: v.optional(v.number()),
+      canRecordAcquisitionCost: v.optional(v.boolean()),
       availableGrams: v.number(),
       status: v.union(
         v.literal("available"),
@@ -525,6 +703,10 @@ export const history = query({
         ),
         contaminationGrams: v.number(),
         processLossGrams: v.number(),
+        processingCostPaise: vRecordedCost,
+        consumedInputCostPaise: vRecordedCost,
+        totalOutputCostPaise: vRecordedCost,
+        costReference: v.optional(v.string()),
         createdAt: v.number(),
         outputs: v.array(
           v.object({
@@ -586,10 +768,16 @@ export const history = query({
       : [];
     const declaration = isHolder
       ? {
+          qualityReleased: await hasQualityRelease(ctx, lot),
           declaredByOrgId: lot.declaredByOrgId,
           sourceKind: lot.sourceKind,
           sourceReference: lot.sourceReference,
           initialGrams: lot.initialGrams,
+          initialCostPaise: lot.initialCostPaise ?? null,
+          costPaise: lot.costPaise ?? null,
+          costReference: lot.costReference,
+          costBasisGrams: lot.costBasisGrams ?? lot.initialGrams,
+          canRecordAcquisitionCost: canRecordAcquisitionCost(lot),
         }
       : {};
     return {
@@ -633,6 +821,10 @@ export const history = query({
             inputs: await transformationInputView(ctx, event, org._id),
             contaminationGrams: event.contaminationGrams,
             processLossGrams: event.processLossGrams,
+            processingCostPaise: event.processingCostPaise ?? null,
+            consumedInputCostPaise: event.consumedInputCostPaise ?? null,
+            totalOutputCostPaise: event.totalOutputCostPaise ?? null,
+            costReference: event.costReference,
             createdAt: event.createdAt,
             outputs: outputs.map((output) => ({
               id: output._id,
@@ -861,8 +1053,14 @@ export const recordControlledDisposition = mutation({
       createdAt: now,
     });
     const availableGrams = lot.availableGrams - grams;
+    const disposedCost = consumeRecordedCost(
+      lot.availableGrams,
+      lot.costPaise,
+      grams,
+    );
     await ctx.db.patch("materialLots", lot._id, {
       availableGrams,
+      costPaise: disposedCost.remaining,
       status: availableGrams === 0 ? "exhausted" : "available",
       updatedAt: now,
     });
@@ -874,6 +1072,8 @@ export const recordControlledDisposition = mutation({
       entityId: lot._id,
       metadata: {
         dispositionId: id,
+        disposedCostPaise: disposedCost.consumed,
+        remainingCostPaise: disposedCost.remaining,
         grams,
         previousGrams: lot.availableGrams,
         availableGrams,

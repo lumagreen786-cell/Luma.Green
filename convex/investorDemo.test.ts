@@ -273,13 +273,17 @@ it("covers every workbook row in bounded batches without claiming approval or ex
     batchKey: INVESTOR_DEMO_BATCH,
   });
   expect(summary.accountCount).toBe(140);
-  expect(summary.markerCount).toBe(3903);
+  // Each cohort adds 48 stock movements and their 48 audit markers.
+  expect(summary.markerCount).toBe(3903 + 5 * 96);
+  expect(
+    summary.recordCounts.find((row) => row.table === "inventoryMovements"),
+  ).toEqual({ table: "inventoryMovements", count: 5 * 48 });
   expect(
     summary.recordCounts.find((row) => row.table === "industrialFacilities"),
   ).toEqual({ table: "industrialFacilities", count: 558 });
   expect(summary.recordCounts.find((row) => row.table === "auditLog")).toEqual({
     table: "auditLog",
-    count: 1979,
+    count: 1979 + 5 * 48,
   });
   expect(summary.cohorts).toEqual(
     [1, 2, 3, 4, 5].map((cohort) => ({
@@ -354,7 +358,10 @@ it("returns only stable batch counts after the import gate is closed", async () 
     batchKey: INVESTOR_DEMO_BATCH,
   });
   expect(before.accountCount).toBe(28);
-  expect(before.markerCount).toBe(583);
+  expect(before.markerCount).toBe(583 + 96);
+  expect(
+    before.recordCounts.find((row) => row.table === "inventoryMovements"),
+  ).toEqual({ table: "inventoryMovements", count: 48 });
   expect(before.truncated).toBe(false);
   expect(before.invalidAccountCount).toBe(0);
   expect(before.unexpectedTableMarkers).toBe(0);

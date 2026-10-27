@@ -330,7 +330,7 @@ describe("households.book", () => {
     ).rejects.toThrow(/SHOP_NOT_FOUND/);
   });
 
-  it("books from today up to seven days ahead", async () => {
+  it("books from today up to six days ahead", async () => {
     const t = await demoWorld();
     const arjun = await newHousehold(t);
     const today = indiaToday();
@@ -343,7 +343,7 @@ describe("households.book", () => {
     await expect(
       arjun.mutation(api.households.book, {
         ...booking,
-        slotDate: shiftDate(today, 7),
+        slotDate: shiftDate(today, 6),
         slotWindow: "evening",
       }),
     ).resolves.toMatch(/^[2-9a-z]{10}$/);
@@ -417,19 +417,19 @@ describe("households.book", () => {
 });
 
 describe("households.track", () => {
-  it("shows the booking to anyone with the link, without the household's phone or address", async () => {
+  it("shows the booking only to its owner, without household contact data", async () => {
     const t = await demoWorld();
     const arjun = await newHousehold(t, "+919876512345");
     const token = await arjun.mutation(api.households.book, await pickupAt(t));
 
-    const view = await t.query(api.households.track, { token });
+    const view = await arjun.query(api.households.track, { token });
     expect(view).toMatchObject({
       token,
       status: "requested",
       mode: "pickup",
       slotDate: tomorrow(),
       slotWindow: "morning",
-      isMine: false,
+      isMine: true,
       canCancel: true,
       shop: {
         name: "Ramesh Kabadi Store",
@@ -451,7 +451,10 @@ describe("households.track", () => {
 
   it("shows the receipt and points of a finished pickup", async () => {
     const t = await demoWorld();
-    const view = await t.query(api.households.track, { token: "priyademo2" });
+    const priya = await signInAs(t, PRIYA);
+    const view = await priya.query(api.households.track, {
+      token: "priyademo2",
+    });
     expect(view?.status).toBe("completed");
     expect(view?.canCancel).toBe(false);
     expect(view?.receipt?.lines.map((line) => line.material.names.en)).toEqual([
@@ -474,8 +477,8 @@ describe("households.track", () => {
     const asStranger = await stranger.query(api.households.track, { token });
     const signedOut = await t.query(api.households.track, { token });
     expect(asPriya?.isMine).toBe(true);
-    expect(asStranger?.isMine).toBe(false);
-    expect(signedOut?.isMine).toBe(false);
+    expect(asStranger).toBeNull();
+    expect(signedOut).toBeNull();
   });
 
   it("finds nothing for an unknown link", async () => {
@@ -508,7 +511,7 @@ describe("households.mine", () => {
       itemCount: 2,
       estGrams: 15_000,
     });
-    expect(mine?.[2]?.paidPaise).toBeGreaterThan(0);
+    expect(mine?.[2]?.paidPaise).toBeUndefined();
   });
 
   it("shows nobody else's bookings, and nothing when signed out", async () => {
@@ -772,3 +775,275 @@ it.each([false, true])(
     else await expect(read).rejects.toThrow("TWO_FACTOR_REQUIRED");
   },
 );
+
+describe("private collection invitations and receipts", () => {
+  it("binds helper access to a verified account, redacts money, and honors leave, revoke, expiry and completion", async () => {
+    const t = await demoWorld();
+    const owner = await signInAs(t, PRIYA);
+    const helper = await newHousehold(t, "+919876500051");
+    const stranger = await newHousehold(t, "+919876500052");
+    const token = "priyademo1";
+    const id = await owner.mutation(api.householdReceipts.invite, {
+      token,
+      phone: "9876500051",
+      adultConfirmed: true,
+    });
+    expect(
+      await owner.mutation(api.householdReceipts.invite, {
+        token,
+        phone: "+919876500051",
+        adultConfirmed: true,
+      }),
+    ).toBe(id);
+    expect(await helper.query(api.households.track, { token })).toBeNull();
+    await expect(
+      stranger.mutation(api.householdReceipts.acceptInvitation, {
+        token,
+        adultConfirmed: true,
+      }),
+    ).rejects.toThrow("INVITATION_UNAVAILABLE");
+    await expect(
+      helper.mutation(api.householdReceipts.acceptInvitation, {
+        token,
+        adultConfirmed: false,
+      }),
+    ).rejects.toThrow("INVITATION_UNAVAILABLE");
+    await helper.mutation(api.householdReceipts.acceptInvitation, {
+      token,
+      adultConfirmed: true,
+    });
+    await helper.mutation(api.householdReceipts.acceptInvitation, {
+      token,
+      adultConfirmed: true,
+    });
+    expect(await helper.query(api.households.track, { token })).toMatchObject({
+      isMine: false,
+      canCancel: false,
+    });
+    const view = await helper.query(api.households.track, { token });
+    expect(view?.estimatePaise).toBeUndefined();
+    expect(view?.receipt).toBeUndefined();
+    expect(view?.points).toBeUndefined();
+    await expect(
+      helper.mutation(api.households.cancel, { token }),
+    ).rejects.toThrow("NOT_YOURS");
+    await helper.mutation(api.householdReceipts.handover, {
+      token,
+      note: "Bags handed to the assigned collector.",
+    });
+    await helper.mutation(api.householdReceipts.handover, {
+      token,
+      note: "Bags handed to the assigned collector.",
+    });
+    await expect(
+      helper.mutation(api.householdReceipts.handover, {
+        token,
+        note: "Different note",
+      }),
+    ).rejects.toThrow("HANDOVER_ALREADY_RECORDED");
+    await helper.mutation(api.householdReceipts.endInvitation, {
+      invitationId: id,
+    });
+    expect(await helper.query(api.households.track, { token })).toBeNull();
+    const next = await owner.mutation(api.householdReceipts.invite, {
+      token,
+      phone: "9876500051",
+      adultConfirmed: true,
+    });
+    await helper.mutation(api.householdReceipts.acceptInvitation, {
+      token,
+      adultConfirmed: true,
+    });
+    await owner.mutation(api.householdReceipts.endInvitation, {
+      invitationId: next,
+    });
+    expect(await helper.query(api.households.track, { token })).toBeNull();
+    const expiring = await owner.mutation(api.householdReceipts.invite, {
+      token,
+      phone: "9876500051",
+      adultConfirmed: true,
+    });
+    await helper.mutation(api.householdReceipts.acceptInvitation, {
+      token,
+      adultConfirmed: true,
+    });
+    await t.run((ctx) =>
+      ctx.db.patch("collectionInvitations", expiring, {
+        expiresAt: Date.now() - 1,
+      }),
+    );
+    expect(await helper.query(api.households.track, { token })).toBeNull();
+    const final = await owner.mutation(api.householdReceipts.invite, {
+      token,
+      phone: "9876500051",
+      adultConfirmed: true,
+    });
+    await helper.mutation(api.householdReceipts.acceptInvitation, {
+      token,
+      adultConfirmed: true,
+    });
+    const booking = await bookingByToken(t, token);
+    if (!booking) throw new Error("Missing booking");
+    await t.run((ctx) =>
+      ctx.db.patch("bookings", booking._id, { status: "completed" }),
+    );
+    expect(await helper.query(api.households.track, { token })).toBeNull();
+    await expect(
+      helper.mutation(api.householdReceipts.handover, { token, note: "Late" }),
+    ).rejects.toThrow("INVALID_HANDOVER");
+    const finalGrants = await owner.query(api.householdReceipts.sharing, {
+      token,
+    });
+    expect(finalGrants.find((g) => g.id === final)?.active).toBe(false);
+    const audit = await t.run((ctx) => ctx.db.query("auditLog").take(200));
+    expect(JSON.stringify(audit)).not.toContain("Bags handed");
+    expect(JSON.stringify(audit)).not.toContain("9876500051");
+  });
+
+  it("requires owner acceptance before payment acknowledgement and keeps repeated calls idempotent", async () => {
+    const t = await demoWorld();
+    const owner = await signInAs(t, PRIYA);
+    const other = await newHousehold(t);
+    const token = "priyademo2";
+    const before = await bookingByToken(t, token);
+    const receiptVersion = before?.receipt?.paidAt;
+    if (receiptVersion === undefined) throw new Error("Missing receipt");
+    await expect(
+      owner.mutation(api.householdReceipts.acknowledgePayment, {
+        token,
+        receiptVersion,
+      }),
+    ).rejects.toThrow("ACCEPT_RECEIPT_FIRST");
+    await expect(
+      other.mutation(api.householdReceipts.review, {
+        token,
+        receiptVersion,
+        decision: "accepted",
+        rejectedLineIndexes: [],
+      }),
+    ).rejects.toThrow("NOT_YOURS");
+    await expect(
+      owner.mutation(api.householdReceipts.review, {
+        token,
+        receiptVersion: receiptVersion + 1,
+        decision: "accepted",
+        rejectedLineIndexes: [],
+      }),
+    ).rejects.toThrow("RECEIPT_CHANGED");
+    const decision = {
+      token,
+      receiptVersion,
+      decision: "accepted" as const,
+      rejectedLineIndexes: [],
+    };
+    await owner.mutation(api.householdReceipts.review, decision);
+    await owner.mutation(api.householdReceipts.review, decision);
+    await owner.mutation(api.householdReceipts.acknowledgePayment, {
+      token,
+      receiptVersion,
+    });
+    await owner.mutation(api.householdReceipts.acknowledgePayment, {
+      token,
+      receiptVersion,
+    });
+    const after = await bookingByToken(t, token);
+    expect(after?.receiptReview?.paymentAcknowledgedAt).toBeGreaterThan(0);
+    expect(after?.receipt).toEqual(before?.receipt);
+    expect(
+      await t.run((ctx) => ctx.db.query("householdReceiptEvents").take(10)),
+    ).toHaveLength(2);
+  });
+
+  it("holds disputed receipts, retains rejected lines and sends one private support request without rewriting stock", async () => {
+    const t = await demoWorld();
+    const owner = await signInAs(t, PRIYA);
+    const token = "priyademo2";
+    const before = await bookingByToken(t, token);
+    const receipt = before?.receipt;
+    if (!receipt) throw new Error("Missing receipt");
+    const stockBefore = await t.run((ctx) =>
+      ctx.db.query("inventory").take(200),
+    );
+    const args = {
+      token,
+      receiptVersion: receipt.paidAt,
+      decision: "disputed" as const,
+      rejectedLineIndexes: [0],
+      note: "The first weight is incorrect.",
+    };
+    await owner.mutation(api.householdReceipts.review, args);
+    await owner.mutation(api.householdReceipts.review, args);
+    const after = await bookingByToken(t, token);
+    expect(after?.receipt).toEqual(receipt);
+    expect(after?.receiptReview?.acceptedGrams).toBe(
+      receipt.lines.slice(1).reduce((sum, l) => sum + l.grams, 0),
+    );
+    expect(after?.receiptReview?.acceptedPaise).toBe(
+      receipt.lines.slice(1).reduce((sum, l) => sum + l.paise, 0),
+    );
+    expect(after?.receiptReview?.decision).toBe("disputed");
+    await expect(
+      owner.mutation(api.householdReceipts.acknowledgePayment, {
+        token,
+        receiptVersion: receipt.paidAt,
+      }),
+    ).rejects.toThrow("ACCEPT_RECEIPT_FIRST");
+    await expect(
+      owner.mutation(api.householdReceipts.review, {
+        ...args,
+        decision: "accepted",
+        rejectedLineIndexes: [],
+      }),
+    ).rejects.toThrow("RECEIPT_REVIEW_HELD");
+    expect(await t.run((ctx) => ctx.db.query("inventory").take(200))).toEqual(
+      stockBefore,
+    );
+    expect(
+      await t.run((ctx) => ctx.db.query("householdReceiptEvents").take(10)),
+    ).toHaveLength(1);
+    const support = await t.run((ctx) =>
+      ctx.db.query("supportRequests").take(10),
+    );
+    expect(
+      support.filter((row) =>
+        row.message.includes("The first weight is incorrect."),
+      ),
+    ).toHaveLength(1);
+    const paymentCase = support.find((row) =>
+      row.message.includes("The first weight is incorrect."),
+    );
+    expect(paymentCase).toMatchObject({
+      source: { kind: "booking", id: before._id },
+      team: "accounts",
+      escalatedAt: expect.any(Number),
+    });
+    expect(
+      support.find((row) =>
+        row.message.includes("The first weight is incorrect."),
+      )?.status,
+    ).toBe("open");
+  });
+});
+
+it("does not present expired offers or reference prices as a current household estimate", async () => {
+  const t = await demoWorld();
+  const id = await orgId(t, "ramesh-kabadi-store");
+  await t.run(async (ctx) => {
+    const rates = await ctx.db
+      .query("rateCards")
+      .withIndex("by_org_material", (q) => q.eq("orgId", id))
+      .take(50);
+    for (const row of rates)
+      await ctx.db.patch("rateCards", row._id, { expiresAt: Date.now() - 1 });
+    const references = await ctx.db
+      .query("referencePrices")
+      .withIndex("by_city_material", (q) => q.eq("city", "Bengaluru"))
+      .take(100);
+    for (const row of references)
+      await ctx.db.patch("referencePrices", row._id, {
+        expiresAt: Date.now() - 1,
+      });
+  });
+  const rows = await t.query(api.households.shops, { items: basket });
+  expect(rows.find((row) => row.id === id)?.estimatePaise).toBeUndefined();
+});

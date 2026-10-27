@@ -5,6 +5,7 @@ import type { Id } from "./_generated/dataModel";
 import { internalMutation, type MutationCtx } from "./_generated/server";
 import { authComponent } from "./auth";
 import { LOCAL_ACCEPTANCE_PERSONAS } from "./lib/localAcceptance";
+import { phoneEmail } from "./lib/phone";
 import { primarySiteType } from "./lib/siteClassification";
 
 /**
@@ -37,7 +38,7 @@ export const seed = internalMutation({
       const profile = await requireAcceptanceProfile(
         ctx,
         account.authUserId,
-        persona.email,
+        persona,
       );
       const previous = await ctx.db
         .query("auditLog")
@@ -116,11 +117,11 @@ export const seedByproducts = internalMutation({
       throw new ConvexError("ACCEPTANCE_MANUFACTURER_REQUIRED");
     const profile = await ctx.db.get("profiles", org.ownerProfileId);
     if (!profile) throw new ConvexError("ACCEPTANCE_PROFILE_REQUIRED");
-    await requireAcceptanceProfile(
-      ctx,
-      profile.authUserId,
-      "manufacturer@luma.test",
+    const manufacturer = LOCAL_ACCEPTANCE_PERSONAS.find(
+      ({ key }) => key === "manufacturer",
     );
+    if (!manufacturer) throw new ConvexError("INVALID_ACCEPTANCE_ROSTER");
+    await requireAcceptanceProfile(ctx, profile.authUserId, manufacturer);
     const ownerSeed = await ctx.db
       .query("auditLog")
       .withIndex("by_entity", (q) =>
@@ -182,9 +183,19 @@ export const seedByproducts = internalMutation({
         grams: 1_000_000,
         updatedAt: now,
       });
+      const movementId = await ctx.db.insert("inventoryMovements", {
+        orgId: org._id,
+        actorProfileId: profile._id,
+        materialCode: fixture.code,
+        deltaGrams: 1_000_000,
+        costDeltaPaise: null,
+        sourceKey: `local-acceptance:${fixture.code}`,
+        createdAt: now,
+      });
       inserted.push(
         { table: "materials", id: materialId },
         { table: "inventory", id: inventoryId },
+        { table: "inventoryMovements", id: movementId },
       );
     }
     await ctx.db.insert("auditLog", {
@@ -303,10 +314,15 @@ async function createDomainFixture(
 async function requireAcceptanceProfile(
   ctx: MutationCtx,
   authUserId: string,
-  email: string,
+  persona: (typeof LOCAL_ACCEPTANCE_PERSONAS)[number],
 ) {
   const user = await authComponent.getAnyUserById(ctx, authUserId);
-  if (user?.email !== email || !user.emailVerified) {
+  const isEmailVerified = user?.email === persona.email && user.emailVerified;
+  const isPhoneVerified =
+    user?.phoneNumber === persona.phone &&
+    user.phoneNumberVerified === true &&
+    user.email === phoneEmail(persona.phone);
+  if (!isEmailVerified && !isPhoneVerified) {
     throw new ConvexError("ACCEPTANCE_IDENTITY_NOT_VERIFIED");
   }
   const profile = await ctx.db

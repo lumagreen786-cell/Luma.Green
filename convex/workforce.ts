@@ -1,6 +1,8 @@
 import { ConvexError, v } from "convex/values";
+import { z } from "zod";
 
 import { internalMutation, mutation, query } from "./_generated/server";
+import { shiftDate } from "./lib/dates";
 import { vSaathiTime, vSaathiWork } from "./lib/drafts";
 import {
   ECOSYSTEM_PAGE,
@@ -17,6 +19,9 @@ const vJob = v.object({
   date: v.string(),
   window: vSaathiTime,
   payPaise: v.number(),
+  paymentDueDate: v.optional(v.string()),
+  employerPaidAt: v.optional(v.number()),
+  workerAcknowledgedAt: v.optional(v.number()),
   status: v.union(v.literal("open"), v.literal("assigned"), v.literal("done")),
   cancelledAt: v.optional(v.number()),
 });
@@ -49,6 +54,9 @@ export const board = query({
       date: job.date,
       window: job.window,
       payPaise: job.payPaise,
+      paymentDueDate: job.paymentDueDate,
+      employerPaidAt: job.employerPaidAt,
+      workerAcknowledgedAt: job.workerAcknowledgedAt,
       status: job.status,
       cancelledAt: job.cancelledAt,
     }));
@@ -96,6 +104,7 @@ export const post = mutation({
       throw new ConvexError("TRY_LATER");
     const id = await ctx.db.insert("jobs", {
       ...parsed.data,
+      paymentDueDate: shiftDate(parsed.data.date, 7),
       orgId: org._id,
       city: org.city,
       createdBy: profile._id,
@@ -179,5 +188,37 @@ export const backfillJobCities = internalMutation({
       updated,
       unresolved,
     };
+  },
+});
+
+export const declarePayment = mutation({
+  args: { jobId: v.id("jobs"), dueDate: v.string() },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    const { org, profile } = await requireOrg(ctx);
+    const job = await ctx.db.get("jobs", args.jobId);
+    if (job?.orgId !== org._id) throw new ConvexError("JOB_NOT_FOUND");
+    if (job.status !== "done") throw new ConvexError("WRONG_STATUS");
+    if (
+      !z.iso.date().safeParse(args.dueDate).success ||
+      args.dueDate < job.date
+    )
+      throw new ConvexError("INVALID_DATE");
+    if (job.employerPaidAt !== undefined) return null;
+    const now = Date.now();
+    await ctx.db.patch("jobs", job._id, {
+      paymentDueDate: args.dueDate,
+      employerPaidAt: now,
+      updatedAt: now,
+    });
+    await ctx.db.insert("auditLog", {
+      orgId: org._id,
+      actorProfileId: profile._id,
+      action: "job.payment_declared",
+      entityTable: "jobs",
+      entityId: job._id,
+      createdAt: now,
+    });
+    return null;
   },
 });

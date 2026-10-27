@@ -1,5 +1,36 @@
 import type { Doc } from "../_generated/dataModel";
 
+export const LOCAL_ACCEPTANCE_PHONE_NUMBERS = {
+  household: "+919000008001",
+  "household-coordinator": "+919000008002",
+  applicant: "+919000008003",
+  kabadiwala: "+919000008004",
+  preprocessor: "+919000008005",
+  recycler: "+919000008006",
+  manufacturer: "+919000008007",
+  "fibre-maker": "+919000008008",
+  "textile-maker": "+919000008009",
+  "garment-maker": "+919000008010",
+  saathi: "+919000008011",
+  apartment: "+919000008012",
+  office: "+919000008013",
+  hotel: "+919000008014",
+  resort: "+919000008015",
+  "other-generator": "+919000008016",
+  "city-official": "+919000008017",
+  "csr-sponsor": "+919000008018",
+  lender: "+919000008019",
+  auditor: "+919000008020",
+  union: "+919000008021",
+  "apparel-brand": "+919000008022",
+  "packaging-brand": "+919000008023",
+  "team-admin": "+919000008024",
+  "team-member": "+919000008025",
+  "team-viewer": "+919000008026",
+  "invite-recipient": "+919000008027",
+  "unrelated-owner": "+919000008028",
+} as const;
+
 type Access =
   | { kind: "personal" }
   | { kind: "saathi" }
@@ -14,13 +45,19 @@ interface Persona {
   key: string;
   name: string;
   email: string;
+  phone: string;
   access: Access;
 }
 
-const persona = (key: string, name: string, access: Access): Persona => ({
+const persona = (
+  key: keyof typeof LOCAL_ACCEPTANCE_PHONE_NUMBERS,
+  name: string,
+  access: Access,
+): Persona => ({
   key,
   name: `Local test ${name}`,
   email: `${key}@luma.test`,
+  phone: LOCAL_ACCEPTANCE_PHONE_NUMBERS[key],
   access,
 });
 

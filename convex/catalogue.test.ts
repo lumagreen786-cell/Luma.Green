@@ -3,7 +3,7 @@
 import { convexTest } from "convex-test";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { api } from "./_generated/api";
+import { api, internal } from "./_generated/api";
 import { convexModules, registerAuth, signIn } from "./lib/auth.testing";
 import { CATALOGUE, catalogueEntry } from "./lib/catalogue";
 import { shiftDate } from "./lib/dates";
@@ -317,6 +317,61 @@ describe("production catalogue definitions", () => {
       active: false,
       names: { en: "Custom material 199" },
     });
+  });
+
+  it("lets the deployment operator initialize references internally without fabricating an admin identity", async () => {
+    const t = world();
+    const args = { operatorReference: "offline-test-release" };
+    expect(
+      await t.mutation(internal.catalogue.initializeReferenceDefinitions, args),
+    ).toEqual({
+      inserted: 45,
+      definitionsInserted: 21,
+      materialsSkipped: 0,
+      definitionsSkipped: 0,
+    });
+    const snapshot = await t.run(async (ctx) => ({
+      materials: await ctx.db.query("materials").collect(),
+      definitions: await ctx.db.query("operationalDefinitions").collect(),
+      audit: await ctx.db.query("auditLog").collect(),
+      prices: await ctx.db.query("referencePrices").collect(),
+      market: await ctx.db.query("marketPrices").collect(),
+      profiles: await ctx.db.query("profiles").collect(),
+    }));
+    expect(snapshot.prices).toEqual([]);
+    expect(snapshot.market).toEqual([]);
+    expect(snapshot.profiles).toEqual([]);
+    expect(
+      snapshot.materials.every(({ co2eFactor }) => co2eFactor === undefined),
+    ).toBe(true);
+    expect(snapshot.audit).toHaveLength(66);
+    for (const entry of snapshot.audit) {
+      expect(entry.actorProfileId).toBeUndefined();
+      expect(entry.metadata).toMatchObject({
+        source: "deployment_operator",
+        operatorReference: "offline-test-release",
+      });
+      expect(entry.metadata).not.toHaveProperty("adminUserId");
+    }
+    expect(
+      await t.mutation(internal.catalogue.initializeReferenceDefinitions, args),
+    ).toEqual({
+      inserted: 0,
+      definitionsInserted: 0,
+      materialsSkipped: 45,
+      definitionsSkipped: 21,
+    });
+    expect(await t.run((ctx) => ctx.db.query("auditLog").collect())).toEqual(
+      snapshot.audit,
+    );
+    await expect(
+      t.mutation(internal.catalogue.initializeReferenceDefinitions, {
+        operatorReference: " ",
+      }),
+    ).rejects.toThrow("INVALID_REFERENCE");
+    await expect(
+      t.mutation(api.catalogue.initializeDefinitions, {}),
+    ).rejects.toThrow("NOT_SIGNED_IN");
   });
 });
 

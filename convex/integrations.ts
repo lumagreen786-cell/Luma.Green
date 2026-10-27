@@ -127,7 +127,7 @@ export const listKeys = query({
         revokedAt: key.revokedAt,
         lastUsedAt: key.lastUsedAt,
       }));
-    return { canManage: true, keys };
+    return { canManage: org.status === "active", keys };
   },
 });
 

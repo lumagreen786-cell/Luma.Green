@@ -6,12 +6,15 @@ import { ConvexError, v } from "convex/values";
 
 import type { Doc } from "./_generated/dataModel";
 import { mutation, query } from "./_generated/server";
+import { recordInventoryMovement } from "./lib/inventoryLedger";
 import {
   optionalReference,
   positiveGrams,
   requiredLabel,
 } from "./lib/lotEvidence";
 import { indiaToday } from "./lib/onboarding";
+import { recordedCost, recordedCostReference } from "./lib/processingCosts";
+import { intakeCostFields, vRecordedCost } from "./lib/processingCostSchema";
 import { vMaterialRef } from "./lib/views";
 import { materialIndex, requireOrg } from "./lib/workspace";
 
@@ -62,10 +65,16 @@ export const record = mutation({
     sourceReference: v.string(),
     weighingReference: v.string(),
     ownProductionConfirmed: v.literal(true),
+    ...intakeCostFields,
   },
   returns: v.id("manufacturerStockIntakes"),
   handler: async (ctx, args) => {
     const { org, profile } = await requireOrg(ctx, ["manufacturer"]);
+    const recordedCostPaise = recordedCost(args.recordedCostPaise);
+    const costReference = recordedCostReference(
+      recordedCostPaise,
+      args.costReference,
+    );
     const values = {
       intakeReference: requiredLabel(args.intakeReference),
       materialCode: requiredLabel(args.materialCode),
@@ -74,6 +83,8 @@ export const record = mutation({
       sourceReference: requiredReference(args.sourceReference),
       weighingReference: requiredReference(args.weighingReference),
       ownProductionConfirmed: args.ownProductionConfirmed,
+      recordedCostPaise,
+      costReference,
     };
     const material = await ctx.db
       .query("materials")
@@ -93,25 +104,13 @@ export const record = mutation({
         existing.grams !== values.grams ||
         existing.producedOn !== values.producedOn ||
         existing.sourceReference !== values.sourceReference ||
-        existing.weighingReference !== values.weighingReference
+        existing.weighingReference !== values.weighingReference ||
+        (existing.recordedCostPaise ?? null) !== values.recordedCostPaise ||
+        existing.costReference !== values.costReference
       )
         throw new ConvexError("INTAKE_REFERENCE_CONFLICT");
       return existing._id;
     }
-    const stock = await ctx.db
-      .query("inventory")
-      .withIndex("by_org_material", (q) =>
-        q.eq("orgId", org._id).eq("materialCode", values.materialCode),
-      )
-      .unique();
-    const previousGrams = stock?.grams ?? 0;
-    const grams = previousGrams + values.grams;
-    if (
-      !Number.isSafeInteger(previousGrams) ||
-      previousGrams < 0 ||
-      !Number.isSafeInteger(grams)
-    )
-      throw new ConvexError("INVALID_WEIGHT");
     const now = Date.now();
     const id = await ctx.db.insert("manufacturerStockIntakes", {
       ...values,
@@ -119,15 +118,15 @@ export const record = mutation({
       actorProfileId: profile._id,
       createdAt: now,
     });
-    if (stock)
-      await ctx.db.patch("inventory", stock._id, { grams, updatedAt: now });
-    else
-      await ctx.db.insert("inventory", {
-        orgId: org._id,
-        materialCode: values.materialCode,
-        grams,
-        updatedAt: now,
-      });
+    await recordInventoryMovement(ctx, {
+      orgId: org._id,
+      actorProfileId: profile._id,
+      materialCode: values.materialCode,
+      deltaGrams: values.grams,
+      addedCostPaise: values.recordedCostPaise,
+      sourceKey: `manufacturer:${id}`,
+      createdAt: now,
+    });
     await ctx.db.insert("auditLog", {
       orgId: org._id,
       actorProfileId: profile._id,
@@ -137,8 +136,8 @@ export const record = mutation({
       metadata: {
         materialCode: values.materialCode,
         intakeGrams: values.grams,
-        previousGrams,
-        grams,
+        recordedCostPaise: values.recordedCostPaise,
+        costReference: values.costReference,
         evidenceScope: "manufacturer_declared_own_production",
       },
       createdAt: now,
@@ -155,6 +154,8 @@ const view = v.object({
   producedOn: v.string(),
   sourceReference: v.string(),
   weighingReference: v.string(),
+  recordedCostPaise: vRecordedCost,
+  costReference: v.optional(v.string()),
   createdAt: v.number(),
 });
 export const mine = query({
@@ -182,6 +183,8 @@ export const mine = query({
           producedOn,
           sourceReference,
           weighingReference,
+          recordedCostPaise,
+          costReference,
           createdAt,
         }) => ({
           id: _id,
@@ -191,6 +194,8 @@ export const mine = query({
           producedOn,
           sourceReference,
           weighingReference,
+          recordedCostPaise: recordedCostPaise ?? null,
+          costReference,
           createdAt,
         }),
       ),

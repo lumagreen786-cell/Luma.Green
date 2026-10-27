@@ -26,9 +26,20 @@ export async function membershipFor(
     )
     .unique();
 }
+function isWorkspaceReadable(org: Doc<"orgs">, canReadSuspended: boolean) {
+  switch (org.status) {
+    case "active": {
+      return true;
+    }
+    case "suspended": {
+      return canReadSuspended;
+    }
+  }
+}
 export async function selectedMembership(
   ctx: QueryCtx,
   profileId: Id<"profiles">,
+  canReadSuspended = false,
 ) {
   const profile = await ctx.db.get("profiles", profileId);
   if (!profile) return null;
@@ -36,7 +47,9 @@ export async function selectedMembership(
     const membership = await membershipFor(ctx, profileId, profile.activeOrgId);
     if (!membership) return null;
     const org = await ctx.db.get("orgs", membership.orgId);
-    return org?.status === "active" ? { org, membership } : null;
+    return org && isWorkspaceReadable(org, canReadSuspended)
+      ? { org, membership }
+      : null;
   }
   const memberships = await ctx.db
     .query("memberships")
@@ -46,7 +59,8 @@ export async function selectedMembership(
     throw new ConvexError("TOO_MANY_WORKSPACES");
   for (const membership of memberships) {
     const org = await ctx.db.get("orgs", membership.orgId);
-    if (org?.status === "active") return { org, membership };
+    if (org && isWorkspaceReadable(org, canReadSuspended))
+      return { org, membership };
   }
   return null;
 }
@@ -89,7 +103,11 @@ export async function requireOrg(
   const user = await requireUser(ctx);
   const profile = await findProfile(ctx, user._id);
   if (!profile) throw new ConvexError("NO_PROFILE");
-  const selected = await selectedMembership(ctx, profile._id);
+  const selected = await selectedMembership(
+    ctx,
+    profile._id,
+    permission === "read",
+  );
   if (!selected) throw new ConvexError("NO_BUSINESS");
   const { org, membership } = selected;
   const role = workspaceRole(membership.role);

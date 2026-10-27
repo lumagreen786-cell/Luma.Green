@@ -71,12 +71,15 @@ export const mine = query({
   handler: async (ctx) => {
     const profile = await currentProfile(ctx);
     if (!profile) return null;
-    const selected = await selectedMembership(ctx, profile._id);
+    const selected = await selectedMembership(ctx, profile._id, true);
     if (selected) {
       const { org, membership } = selected;
       return {
         kind: "org" as const,
-        role: workspaceRole(membership.role),
+        role:
+          org.status === "suspended"
+            ? ("viewer" as const)
+            : workspaceRole(membership.role),
         org: {
           id: org._id,
           kind: org.kind,

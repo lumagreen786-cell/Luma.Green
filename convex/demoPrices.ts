@@ -97,6 +97,8 @@ export const seed = internalMutation({
           materialCode: entry.code,
           date,
           paisePerKg: demoPricePaise(entry.code, date),
+          sourceLabel: "Synthetic demo reference — not a live market benchmark",
+          observedAt: Date.parse(`${date}T00:00:00+05:30`),
         };
         inserted.marketPrices.push({
           id: await ctx.db.insert("marketPrices", value),

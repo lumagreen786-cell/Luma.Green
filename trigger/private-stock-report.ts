@@ -20,7 +20,7 @@ export async function runPrivateStockReport(payload: unknown) {
   if (
     url.protocol !== "https:" ||
     Boolean(url.port) ||
-    !/^[a-z0-9-]+\.convex\.cloud$/.test(url.hostname) ||
+    !/^[a-z0-9-]+(?:\.[a-z0-9-]+)?\.convex\.cloud$/.test(url.hostname) ||
     url.pathname !== "/" ||
     url.search ||
     url.hash ||

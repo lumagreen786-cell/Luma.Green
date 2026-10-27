@@ -5,6 +5,11 @@ import { auditShareTables } from "./lib/auditSharesSchema";
 import { lifecycleTables } from "./lib/cashfreeLifecycleSchema";
 import { cashfreeTables } from "./lib/cashfreeSchema";
 import { collaborationTables } from "./lib/collaborationSchema";
+import {
+  collectionOperationsTables,
+  vSupportSource,
+  vSupportTeam,
+} from "./lib/collectionOperationsSchema";
 import { vEvidenceIssuerKind, vEvidenceKind } from "./lib/commercialEvidence";
 import {
   draftSections,
@@ -18,6 +23,7 @@ import {
   vShopVehicle,
   vWeekday,
 } from "./lib/drafts";
+import { geocodingTables } from "./lib/geocodingSchema";
 import {
   vHandlingClass,
   vProcessKind,
@@ -35,13 +41,22 @@ import {
 } from "./lib/notificationConfig";
 import { operationalTables } from "./lib/operationalSchema";
 import { organizationTables } from "./lib/organizationsSchema";
+import {
+  intakeCostFields,
+  lotCostFields,
+  transformationCostFields,
+  transformationInputCostFields,
+} from "./lib/processingCostSchema";
 import { publicDataFields } from "./lib/publicData";
 import { qualityFileTables } from "./lib/qualityFilesSchema";
 import { vReportStatus, vStockRow } from "./lib/reportJobs";
+import { returnClaimsTables } from "./lib/returnClaimsSchema";
 import { routePlanningTables } from "./lib/routePlanningSchema";
+import { serviceRecordsTables } from "./lib/serviceRecordsSchema";
 import { vMaterialOrigin, vSiteType } from "./lib/siteClassification";
 import { sourcingTables } from "./lib/sourcingSchema";
 import { vStakeholderKind, vStakeholderStatus } from "./lib/stakeholderKinds";
+import { stockClosingTables } from "./lib/stockClosingSchema";
 import {
   vBookingStatus,
   vFamily,
@@ -67,6 +82,11 @@ const timestamps = {
 };
 
 export default defineSchema({
+  ...returnClaimsTables,
+  ...geocodingTables,
+  ...stockClosingTables,
+  ...serviceRecordsTables,
+  ...collectionOperationsTables,
   identityCheckDays: defineTable({
     day: v.string(),
     used: v.number(),
@@ -161,6 +181,7 @@ export default defineSchema({
     dedupKey: v.string(),
     event: vInboxEvent,
     taskId: v.optional(v.id("recordTasks")),
+    stockAlertId: v.optional(v.id("stockLowAlerts")),
     read: v.boolean(),
     createdAt: v.number(),
   })
@@ -293,6 +314,7 @@ export default defineSchema({
     .index("by_profile_organization", ["profileId", "organizationId"])
     .index("by_organization_created", ["organizationId", "createdAt"])
     .index("by_status_submittedAt", ["status", "submittedAt"])
+    .index("by_status_updatedAt", ["status", "updatedAt"])
     .index("by_submittedAt", ["submittedAt"]),
 
   /** Default-deny stakeholder identities, separate from trading orgs. */
@@ -383,6 +405,7 @@ export default defineSchema({
     floorPaise: v.number(), // per kg; a kabadiwala can't offer less
     fallbackPaise: v.number(), // per kg; used when a shop hasn't set a price
     updatedAt: v.number(),
+    expiresAt: v.optional(v.number()),
   }).index("by_city_material", ["city", "materialCode"]),
 
   /** The daily market price per material per city, for the price board. */
@@ -391,6 +414,9 @@ export default defineSchema({
     materialCode: v.string(),
     date: v.string(), // YYYY-MM-DD, India time
     paisePerKg: v.number(),
+    sourceLabel: v.optional(v.string()),
+    observedAt: v.optional(v.number()),
+    expiresAt: v.optional(v.number()),
   }).index("by_city_material_date", ["city", "materialCode", "date"]),
 
   /** What one shop pays households, per material. */
@@ -399,6 +425,7 @@ export default defineSchema({
     materialCode: v.string(),
     paisePerKg: v.number(),
     updatedAt: v.number(),
+    expiresAt: v.optional(v.number()),
   })
     .index("by_org_material", ["orgId", "materialCode"])
     .index("by_material", ["materialCode"]),
@@ -547,7 +574,43 @@ export default defineSchema({
     .index("by_storage", ["storageId"])
     .index("by_booking", ["bookingId"]),
 
+  collectionInvitations: defineTable({
+    bookingId: v.id("bookings"),
+    ownerProfileId: v.id("profiles"),
+    phone: v.string(),
+    helperProfileId: v.optional(v.id("profiles")),
+    expiresAt: v.number(),
+    endedAt: v.optional(v.number()),
+    handoverNote: v.optional(v.string()),
+    handoverAt: v.optional(v.number()),
+    createdAt: v.number(),
+  }).index("by_booking", ["bookingId"]),
+
+  householdReceiptEvents: defineTable({
+    bookingId: v.id("bookings"),
+    actorProfileId: v.id("profiles"),
+    receiptVersion: v.number(),
+    decision: v.union(
+      v.literal("accepted"),
+      v.literal("disputed"),
+      v.literal("payment_acknowledged"),
+    ),
+    rejectedLineIndexes: v.array(v.number()),
+    note: v.optional(v.string()),
+    createdAt: v.number(),
+  }).index("by_booking", ["bookingId"]),
+
   bookings: defineTable({
+    recurringCollectionId: v.optional(v.id("recurringCollections")),
+    recurringDateKey: v.optional(v.string()),
+    rescheduleRequest: v.optional(
+      v.object({
+        slotDate: v.string(),
+        slotWindow: vSaathiTime,
+        requestedAt: v.number(),
+      }),
+    ),
+    failedVisitReason: v.optional(v.string()),
     token: v.string(),
     householdProfileId: v.optional(v.id("profiles")),
     phone: v.string(),
@@ -563,6 +626,7 @@ export default defineSchema({
     address: v.optional(v.string()),
     dispatch: v.optional(
       v.object({
+        deadlineAt: v.optional(v.number()),
         attempt: v.number(),
         offeredAt: v.number(),
         expiresAt: v.optional(v.number()),
@@ -585,14 +649,31 @@ export default defineSchema({
         ),
         totalPaise: v.number(),
         method: v.union(v.literal("cash"), v.literal("upi")),
+        // paidAt is the shop's declared payment date, not household acknowledgement.
         paidAt: v.number(),
+        declaredByProfileId: v.optional(v.id("profiles")),
+        recipientProfileId: v.optional(v.id("profiles")),
+      }),
+    ),
+    receiptReview: v.optional(
+      v.object({
+        receiptVersion: v.number(),
+        decision: v.union(v.literal("accepted"), v.literal("disputed")),
+        rejectedLineIndexes: v.array(v.number()),
+        acceptedGrams: v.number(),
+        acceptedPaise: v.number(),
+        reviewedAt: v.number(),
+        paymentAcknowledgedAt: v.optional(v.number()),
       }),
     ),
     points: v.optional(v.number()),
     ...timestamps,
   })
     .index("by_token", ["token"])
+    .index("by_recurring_date", ["recurringDateKey"])
+    .index("by_org_date_window", ["orgId", "slotDate", "slotWindow"])
     .index("by_org_status", ["orgId", "status"])
+    .index("by_status_createdAt", ["status", "createdAt"])
     .index("by_household", ["householdProfileId"])
     .index("by_createdAt", ["createdAt"]),
 
@@ -634,6 +715,7 @@ export default defineSchema({
   /** Stock of one material at one business. */
   /** Immutable own-production intake. This is separate from evidence-only lots. */
   manufacturerStockIntakes: defineTable({
+    ...intakeCostFields,
     orgId: v.id("orgs"),
     actorProfileId: v.id("profiles"),
     intakeReference: v.string(),
@@ -668,10 +750,24 @@ export default defineSchema({
     orgId: v.id("orgs"),
     materialCode: v.string(),
     grams: v.number(),
+    costPaise: v.optional(v.union(v.number(), v.null())),
     updatedAt: v.number(),
   })
     .index("by_org", ["orgId"])
     .index("by_org_material", ["orgId", "materialCode"]),
+
+  /** Append-only stock authority; inventory is its transactional projection. */
+  inventoryMovements: defineTable({
+    orgId: v.id("orgs"),
+    materialCode: v.string(),
+    deltaGrams: v.number(),
+    costDeltaPaise: v.union(v.number(), v.null()),
+    sourceKey: v.string(),
+    actorProfileId: v.id("profiles"),
+    createdAt: v.number(),
+  })
+    .index("by_org_material", ["orgId", "materialCode"])
+    .index("by_org_source", ["orgId", "sourceKey"]),
 
   /** Reported document references only. No regulatory approval or trade rights. */
   facilityRegistrations: defineTable({
@@ -720,6 +816,7 @@ export default defineSchema({
 
   /** Physical evidence only. A declared lot is not verified stock or title. */
   materialLots: defineTable({
+    ...lotCostFields,
     orgId: v.id("orgs"),
     declaredByOrgId: v.id("orgs"),
     materialCode: v.string(),
@@ -764,6 +861,7 @@ export default defineSchema({
 
   /** Every consumed input is an immutable edge of one transformation. */
   lotTransformationInputs: defineTable({
+    ...transformationInputCostFields,
     transformationId: v.id("lotTransformations"),
     lotId: v.id("materialLots"),
     materialCode: v.string(),
@@ -776,6 +874,7 @@ export default defineSchema({
 
   /** Primary input anchors legacy history; edges record all consumed input lots. */
   lotTransformations: defineTable({
+    ...transformationCostFields,
     facilityId: v.optional(v.id("industrialFacilities")),
     facilityName: v.optional(v.string()),
     processKind: v.optional(vProcessKind),
@@ -788,6 +887,7 @@ export default defineSchema({
     createdAt: v.number(),
   })
     .index("by_input_lot_created", ["inputLotId", "createdAt"])
+    .index("by_org_operation", ["orgId", "operationReference"])
     .index("by_org_created", ["orgId", "createdAt"]),
 
   /** Inspection results stay immutable, including proposed corrections. */
@@ -830,6 +930,9 @@ export default defineSchema({
 
   /** A lot offered to the next business up the chain. */
   listings: defineTable({
+    freightPaisePerKg: v.optional(v.number()),
+    deliveryAvailableAt: v.optional(v.number()),
+    expiresAt: v.optional(v.number()),
     specification: v.optional(vMaterialOfferSpecification),
     orgId: v.id("orgs"),
     sellerKind: vOrgKind,
@@ -856,6 +959,8 @@ export default defineSchema({
    * New trades stop at acceptance until a verified gateway is integrated.
    */
   trades: defineTable({
+    freightPaisePerKg: v.optional(v.number()),
+    deliveryAvailableAt: v.optional(v.number()),
     specification: v.optional(vMaterialOfferSpecification),
     listingId: v.id("listings"),
     sellerOrgId: v.id("orgs"),
@@ -928,6 +1033,9 @@ export default defineSchema({
 
   /** Paid work a business posts for Saathis. */
   jobs: defineTable({
+    paymentDueDate: v.optional(v.string()),
+    employerPaidAt: v.optional(v.number()),
+    workerAcknowledgedAt: v.optional(v.number()),
     orgId: v.optional(v.id("orgs")),
     // Optional while workforce.backfillJobCities migrates existing business jobs.
     city: v.optional(v.string()),
@@ -997,6 +1105,10 @@ export default defineSchema({
 
   /** Messages from the help centre and the solar page, for the team to answer. */
   supportRequests: defineTable({
+    source: v.optional(vSupportSource),
+    team: v.optional(vSupportTeam),
+    acknowledgedAt: v.optional(v.number()),
+    escalatedAt: v.optional(v.number()),
     profileId: v.optional(v.id("profiles")),
     name: v.string(),
     phone: v.string(),
@@ -1007,7 +1119,8 @@ export default defineSchema({
     createdAt: v.number(),
   })
     .index("by_status", ["status"])
-    .index("by_phone_createdAt", ["phone", "createdAt"]),
+    .index("by_phone_createdAt", ["phone", "createdAt"])
+    .index("by_source", ["source"]),
 
   /** Immutable audit trail. Anything a regulator could ask about lands here. */
   auditLog: defineTable({

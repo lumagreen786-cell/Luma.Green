@@ -11,7 +11,6 @@ import {
   signInAs,
 } from "./lib/auth.testing";
 import { paiseFor } from "./lib/chain";
-import { indiaToday } from "./lib/onboarding";
 import schema from "./schema";
 
 const modules = convexModules(import.meta.glob("./**/*.*s"));
@@ -29,7 +28,7 @@ afterEach(() => {
 });
 
 describe("stock.mine", () => {
-  it("values a shop's stock at today's market price, and adds it up", async () => {
+  it("separates recorded stock cost from the shop's current offer value", async () => {
     const t = await demoWorld();
     const shop = await signInAs(t, "+919000000101");
 
@@ -48,14 +47,21 @@ describe("stock.mine", () => {
       "METAL-IRON": 260_000,
       "METAL-ALU-CAN": 12_000,
     });
-    const today = indiaToday();
-    const todays = await t.run(async (ctx) => {
-      const rows = await ctx.db.query("marketPrices").collect();
-      return rows
-        .filter((row) => row.date === today && row.city === "Bengaluru")
-        .map((row) => ({ code: row.materialCode, paise: row.paisePerKg }));
+    const offers = await t.run(async (ctx) => {
+      const org = await ctx.db
+        .query("orgs")
+        .withIndex("by_slug", (q) => q.eq("slug", "ramesh-kabadi-store"))
+        .unique();
+      if (!org) throw new Error("Missing shop");
+      return ctx.db
+        .query("rateCards")
+        .withIndex("by_org_material", (q) => q.eq("orgId", org._id))
+        .collect();
     });
-    const prices = new Map(todays.map((price) => [price.code, price.paise]));
+    const prices = new Map(
+      offers.map((offer) => [offer.materialCode, offer.paisePerKg]),
+    );
+    expect(stock.totalCostPaise).toBeNull();
     for (const row of stock.rows) {
       expect(row.marketPaise).toBe(prices.get(row.material.code));
       expect(row.valuePaise).toBe(
@@ -72,15 +78,23 @@ describe("stock.mine", () => {
   });
 
   it.each(["one", "all"])(
-    "does not report a complete value when %s market prices are missing",
+    "does not report a complete offer value when %s own offers are missing",
     async (scope) => {
       const t = await demoWorld();
       const shop = await signInAs(t, "+919000000101");
       await t.run(async (ctx) => {
-        const prices = await ctx.db.query("marketPrices").collect();
+        const org = await ctx.db
+          .query("orgs")
+          .withIndex("by_slug", (q) => q.eq("slug", "ramesh-kabadi-store"))
+          .unique();
+        if (!org) throw new Error("Missing shop");
+        const prices = await ctx.db
+          .query("rateCards")
+          .withIndex("by_org_material", (q) => q.eq("orgId", org._id))
+          .collect();
         for (const price of prices) {
           if (scope === "all" || price.materialCode === "PAPER-NEWS")
-            await ctx.db.delete("marketPrices", price._id);
+            await ctx.db.delete("rateCards", price._id);
         }
       });
       const stock = await shop.query(api.stock.mine, {});

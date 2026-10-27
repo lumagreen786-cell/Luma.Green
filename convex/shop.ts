@@ -13,16 +13,18 @@ import {
   paiseFor,
   pointsFor,
 } from "./lib/chain";
+import { requireCollectionCapacity } from "./lib/collectionScheduling";
 import { shiftDate } from "./lib/dates";
 import {
   acceptOffer,
   advanceOffer,
   dispatchSettings as settingsFor,
 } from "./lib/dispatch";
-import { stockGramsAfter } from "./lib/inventory";
+import { recordInventoryMovement } from "./lib/inventoryLedger";
 import { queueBookingNotification } from "./lib/notifications";
 import { indiaToday } from "./lib/onboarding";
 import { maskPhone } from "./lib/phone";
+import { isRateCurrent } from "./lib/rateValidity";
 import { vBookingStatus } from "./lib/validators";
 import { vBookingView, vMaterialRef } from "./lib/views";
 import { materialIndex, requireOrg } from "./lib/workspace";
@@ -180,10 +182,8 @@ async function rateFor(
   materialCode: string,
 ): Promise<{ paisePerKg: number; source: "mine" | "city" } | null> {
   const mine = await myRate(ctx, org._id, materialCode);
-  if (mine) return { paisePerKg: mine.paisePerKg, source: "mine" };
-  const reference = await referencePrice(ctx, org.city, materialCode);
-  return reference
-    ? { paisePerKg: reference.fallbackPaise, source: "city" }
+  return mine && isRateCurrent(mine)
+    ? { paisePerKg: mine.paisePerKg, source: "mine" }
     : null;
 }
 
@@ -252,34 +252,6 @@ function weighedLines(
     materialCode,
     grams,
   }));
-}
-
-async function addStock(
-  ctx: MutationCtx,
-  orgId: Id<"orgs">,
-  line: { materialCode: string; grams: number },
-  now: number,
-) {
-  const row = await ctx.db
-    .query("inventory")
-    .withIndex("by_org_material", (q) =>
-      q.eq("orgId", orgId).eq("materialCode", line.materialCode),
-    )
-    .first();
-  const grams = stockGramsAfter(row?.grams ?? 0, line.grams);
-  if (row) {
-    await ctx.db.patch("inventory", row._id, {
-      grams,
-      updatedAt: now,
-    });
-  } else {
-    await ctx.db.insert("inventory", {
-      orgId,
-      materialCode: line.materialCode,
-      grams,
-      updatedAt: now,
-    });
-  }
 }
 
 // --- Queries ---------------------------------------------------------------------
@@ -388,10 +360,13 @@ export const rateCard = query({
         material: vMaterialRef,
         /** Null when the shop hasn't set one: households get the fallback. */
         myPaise: v.union(v.number(), v.null()),
+        offerUpdatedAt: v.optional(v.number()),
+        offerExpiresAt: v.optional(v.number()),
         floorPaise: v.union(v.number(), v.null()),
         fallbackPaise: v.union(v.number(), v.null()),
         marketPaise: v.union(v.number(), v.null()),
         marketDate: v.union(v.string(), v.null()),
+        marketSource: v.optional(v.string()),
       }),
     ),
   }),
@@ -414,11 +389,16 @@ export const rateCard = query({
           names: material.names,
           family: material.family,
         },
-        myPaise: mine?.paisePerKg ?? null,
+        myPaise: mine && isRateCurrent(mine) ? mine.paisePerKg : null,
+        ...(mine && {
+          offerUpdatedAt: mine.updatedAt,
+          offerExpiresAt: mine.expiresAt ?? mine.updatedAt + 86_400_000,
+        }),
         floorPaise: reference?.floorPaise ?? null,
         fallbackPaise: reference?.fallbackPaise ?? null,
         marketPaise: market?.paisePerKg ?? null,
         marketDate: market?.date ?? null,
+        ...(market && { marketSource: market.sourceLabel }),
       });
     }
     return { city: org.city, rows };
@@ -470,6 +450,14 @@ export const respond = mutation({
   handler: async (ctx, args) => {
     const { profile, org } = await requireOrg(ctx, SHOP);
     const booking = await myBooking(ctx, org, args.bookingId);
+    if (args.accept)
+      await requireCollectionCapacity(
+        ctx,
+        org,
+        booking.slotDate,
+        booking.slotWindow,
+        booking._id,
+      );
     if (booking.dispatch) {
       if (args.accept) await acceptOffer(ctx, booking, Date.now(), profile._id);
       else
@@ -552,7 +540,14 @@ export const complete = mutation({
       actorProfileId: profile._id,
       now,
       patch: {
-        receipt: { lines, totalPaise, method: args.method, paidAt: now },
+        receipt: {
+          lines,
+          totalPaise,
+          method: args.method,
+          paidAt: now,
+          declaredByProfileId: profile._id,
+          recipientProfileId: booking.householdProfileId,
+        },
         points,
       },
       metadata: {
@@ -566,15 +561,28 @@ export const complete = mutation({
         })),
       },
     });
-    for (const line of lines) await addStock(ctx, org._id, line, now);
+    for (const line of lines)
+      await recordInventoryMovement(ctx, {
+        orgId: org._id,
+        actorProfileId: profile._id,
+        materialCode: line.materialCode,
+        deltaGrams: line.grams,
+        addedCostPaise: line.paise,
+        sourceKey: `booking:${booking._id}:${line.materialCode}`,
+        createdAt: now,
+      });
     return { totalPaise, points };
   },
 });
 
-/** Set what the shop pays per kg for one material — never below the floor. */
+/** Set what the shop pays per kg for one material — with no compulsory platform minimum. */
 // eslint-disable-next-line unicorn/no-non-function-verb-prefix -- a Convex mutation, which clients call as a function; its name is the API contract
 export const setRate = mutation({
-  args: { materialCode: v.string(), paisePerKg: v.number() },
+  args: {
+    materialCode: v.string(),
+    paisePerKg: v.number(),
+    expiresAt: v.optional(v.number()),
+  },
   returns: v.null(),
   handler: async (ctx, args) => {
     const { profile, org } = await requireOrg(ctx, SHOP);
@@ -593,18 +601,19 @@ export const setRate = mutation({
     if (!isShopMaterial(org, material)) {
       throw new ConvexError("NOT_MY_MATERIAL");
     }
-    const reference = await referencePrice(ctx, org.city, materialCode);
-    if (reference && paisePerKg < reference.floorPaise) {
-      throw new ConvexError("BELOW_FLOOR");
-    }
-
     const now = Date.now();
+    if (
+      args.expiresAt !== undefined &&
+      (!Number.isSafeInteger(args.expiresAt) || args.expiresAt <= now)
+    )
+      throw new ConvexError("INVALID_PRICE");
     const existing = await myRate(ctx, org._id, materialCode);
     let rateCardId: Id<"rateCards">;
     if (existing) {
       rateCardId = existing._id;
       await ctx.db.patch("rateCards", rateCardId, {
         paisePerKg,
+        expiresAt: args.expiresAt,
         updatedAt: now,
       });
     } else {
@@ -612,6 +621,7 @@ export const setRate = mutation({
         orgId: org._id,
         materialCode,
         paisePerKg,
+        expiresAt: args.expiresAt,
         updatedAt: now,
       });
     }

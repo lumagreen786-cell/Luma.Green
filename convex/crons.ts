@@ -6,6 +6,27 @@ import { PUBLIC_DATA_CITIES } from "./lib/publicData";
 const crons = cronJobs();
 // eslint-disable-next-line unicorn/no-top-level-side-effects -- Convex registers cron definitions at module load.
 crons.interval(
+  "recurring-household-collections",
+  { hours: 1 },
+  internal.collectionScheduling.generate,
+  {},
+);
+// eslint-disable-next-line unicorn/no-top-level-side-effects -- Convex registers cron definitions at module load.
+crons.daily(
+  "abandoned-application-drafts",
+  { hourUTC: 2, minuteUTC: 30 },
+  internal.draftRetention.expire,
+  {},
+);
+// eslint-disable-next-line unicorn/no-top-level-side-effects -- Convex registers cron definitions at module load.
+crons.daily(
+  "abandoned-service-drafts",
+  { hourUTC: 3, minuteUTC: 0 },
+  internal.services.expireDrafts,
+  {},
+);
+// eslint-disable-next-line unicorn/no-top-level-side-effects -- Convex registers cron definitions at module load.
+crons.interval(
   "quality-r2-cleanup",
   { minutes: 15 },
   internal.qualityFiles.cleanupR2,

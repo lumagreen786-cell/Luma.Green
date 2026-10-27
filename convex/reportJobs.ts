@@ -77,6 +77,7 @@ export const reserve = internalMutation({
   returns: v.id("reportJobs"),
   handler: async (ctx, args) => {
     const { org, profile } = await requireOrg(ctx, undefined, "read");
+    if (org.status !== "active") throw new ConvexError("NO_BUSINESS");
     if (!/^[\w-]{8,80}$/.test(args.operationKey))
       throw new ConvexError("INVALID_OPERATION_KEY");
     const existing = await ctx.db

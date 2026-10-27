@@ -888,6 +888,29 @@ it("does not disclose a producer's private parent process to a later custodian",
     lotId: input,
   });
   const output = sourceHistory.transformations[0].outputs[0].id;
+  await expect(
+    shop.mutation(api.traceability.dispatch, {
+      lotId: output,
+      receiverOrgId: orgs.yard,
+    }),
+  ).rejects.toThrow(/QUALITY_RELEASE_REQUIRED/);
+  await expect(
+    shop.mutation(api.traceability.transform, {
+      inputLotId: output,
+      inputGrams: 1000,
+      contaminationGrams: 0,
+      processLossGrams: 0,
+      outputs: [{ materialCode: "PET", state: "Next process", grams: 1000 }],
+    }),
+  ).rejects.toThrow(/QUALITY_RELEASE_REQUIRED/);
+  await shop.mutation(api.quality.recordInspection, {
+    lotId: output,
+    specificationReference: "Buyer PET specification",
+    specificationVersion: "1",
+    sampleMethod: "Batch sample",
+    results: [{ parameter: "Moisture", unit: "%", value: "1" }],
+    decision: "accepted",
+  });
   await shop.mutation(api.traceability.dispatch, {
     lotId: output,
     receiverOrgId: orgs.yard,

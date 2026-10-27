@@ -53,3 +53,9 @@ it("covers the stakeholder groups with unique reserved-domain identities", () =>
     [...STAKEHOLDER_KINDS].toSorted((a, b) => a.localeCompare(b)),
   );
 });
+
+it("binds every persona to one distinct fixed Indian phone instead of caller-supplied privilege", () => {
+  const phones = LOCAL_ACCEPTANCE_PERSONAS.map(({ phone }) => phone);
+  expect(new Set(phones).size).toBe(LOCAL_ACCEPTANCE_PERSONAS.length);
+  expect(phones.every((phone) => /^\+919000008\d{3}$/.test(phone))).toBe(true);
+});

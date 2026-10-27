@@ -18,6 +18,13 @@ afterEach(() => {
   vi.resetAllMocks();
 });
 const payload = { jobId: "job-fixture", capability: "a".repeat(64) };
+it("supports the regional Sydney deployment address", async () => {
+  const url = "https://test-project.ap-southeast-2.convex.cloud";
+  vi.stubEnv("TRIGGER_CONVEX_URL", url);
+  spies.mutation.mockResolvedValueOnce([]).mockResolvedValueOnce(null);
+  expect(await runPrivateStockReport(payload)).toEqual({ completed: true });
+  expect(spies.connect).toHaveBeenCalledWith(url);
+});
 it("prepares actual CSV from fetched private rows and returns no private output", async () => {
   vi.stubEnv("TRIGGER_CONVEX_URL", "https://test-project.convex.cloud");
   spies.mutation

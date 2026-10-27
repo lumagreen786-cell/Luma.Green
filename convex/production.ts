@@ -8,6 +8,11 @@ import {
   requiredLabel,
 } from "./lib/lotEvidence";
 import { vProductionInput, vRecipeIngredient } from "./lib/operationalSchema";
+import { vRecordedCost } from "./lib/processingCostSchema";
+import {
+  isCurrentAcceptedInspection,
+  requireQualityRelease,
+} from "./lib/qualityRelease";
 import { requireOrg } from "./lib/workspace";
 
 export function recipeTotal(
@@ -55,6 +60,9 @@ const batchView = v.object({
   recipeName: v.union(v.string(), v.null()),
   recipeVersion: v.union(v.string(), v.null()),
   transformationCreatedAt: v.union(v.number(), v.null()),
+  processingCostPaise: vRecordedCost,
+  consumedInputCostPaise: vRecordedCost,
+  totalOutputCostPaise: vRecordedCost,
   inspectionReference: v.union(v.string(), v.null()),
   id: v.id("productionDeclarations"),
   reference: v.string(),
@@ -108,7 +116,7 @@ async function transformationChoice(
       .order("desc")
       .take(10);
     for (const r of records)
-      if (r.orgId === row.orgId)
+      if (r.orgId === row.orgId && (await isCurrentAcceptedInspection(ctx, r)))
         inspections.push({
           id: r._id,
           reference: r.specificationReference,
@@ -117,6 +125,9 @@ async function transformationChoice(
   }
   return {
     id: row._id,
+    processingCostPaise: row.processingCostPaise ?? null,
+    consumedInputCostPaise: row.consumedInputCostPaise ?? null,
+    totalOutputCostPaise: row.totalOutputCostPaise ?? null,
     inputGrams: row.inputGrams,
     createdAt: row.createdAt,
     inputs,
@@ -150,6 +161,18 @@ async function batchSummary(
     recipeVersion: recipe?.orgId === batch.orgId ? recipe.version : null,
     transformationCreatedAt:
       transformation?.orgId === batch.orgId ? transformation.createdAt : null,
+    processingCostPaise:
+      transformation?.orgId === batch.orgId
+        ? (transformation.processingCostPaise ?? null)
+        : null,
+    consumedInputCostPaise:
+      transformation?.orgId === batch.orgId
+        ? (transformation.consumedInputCostPaise ?? null)
+        : null,
+    totalOutputCostPaise:
+      transformation?.orgId === batch.orgId
+        ? (transformation.totalOutputCostPaise ?? null)
+        : null,
     inspectionReference:
       inspection?.orgId === batch.orgId
         ? inspection.specificationReference
@@ -164,6 +187,9 @@ export const mine = query({
     transformations: v.array(
       v.object({
         id: v.id("lotTransformations"),
+        processingCostPaise: vRecordedCost,
+        consumedInputCostPaise: vRecordedCost,
+        totalOutputCostPaise: vRecordedCost,
         inputGrams: v.number(),
         createdAt: v.number(),
         inputs: v.array(
@@ -324,6 +350,7 @@ export const declareBatch = mutation({
     const inspectedLot = await ctx.db.get("materialLots", inspection.lotId);
     if (inspectedLot?.parentTransformationId !== transformation._id)
       throw new ConvexError("INSPECTION_OUTPUT_MISMATCH");
+    await requireQualityRelease(ctx, inspectedLot, inspection._id);
     const edges = await ctx.db
       .query("lotTransformationInputs")
       .withIndex("by_transformation", (q) =>
