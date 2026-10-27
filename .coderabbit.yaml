@@ -1,5 +1,7 @@
 # CodeRabbit configuration — https://docs.coderabbit.ai
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
 # The house rules live in AGENTS.md; this tells the reviewer to enforce them.
+# Review suggestions do not authorize a merge, deployment or provider call.
 language: en
 
 early_access: false
@@ -16,7 +18,7 @@ reviews:
     enabled: true
     drafts: false
     base_branches:
-      - main
+      - "^main$"
 
   path_filters:
     - "!**/package-lock.json"
@@ -28,20 +30,55 @@ reviews:
   path_instructions:
     - path: "src/**/*.{ts,tsx}"
       instructions: >
-        Enforce AGENTS.md. Flag: user-facing strings not read from
-        messages/*.json; imports of next/link or next/navigation instead of
-        @/i18n/navigation; raw hex colours or inline styles instead of design
-        tokens; physical CSS properties (ml-, pl-, text-left) instead of logical
-        ones, which break RTL locales; `any` or non-null assertions; client
-        components that could be server components.
+        Enforce current AGENTS.md and the accepted UI contract. Respect the
+        English-only admin navigation/copy exception. Flag other user-facing
+        strings outside messages/*.json, locale-dropping navigation, raw colours,
+        physical RTL layout properties, unsafe type widening, and unnecessary
+        client boundaries. Check saved input on back/reload, unavailable states,
+        keyboard names/focus, all locale scripts and phone layouts. Fixtures
+        prove UI behavior only, not real authentication or provider acceptance.
     - path: "convex/**/*.ts"
       instructions: >
-        Money must be integer paise and mass integer grams — flag any float
-        arithmetic on either. Every query must go through an index and be
-        bounded with .take() or .paginate(); flag .filter() over a table. Every
-        mutation that changes auditable state must write an auditLog row and
-        must authorise the caller against the org before reading or writing.
-        Issued carbon credits must never be restated by a factor change.
+        Check authenticated caller and record/workspace permission before
+        private reads and writes; never trust a caller-provided owner or quota
+        identity. Review public and internal boundaries, not just UI guards.
+        Money is integer paise, mass integer grams; reject unsafe integers and
+        use safePaiseFor for untrusted totals. Preserve auditable transitions,
+        stock reservation/receipt/refund idempotency and frozen carbon factors.
+        Prefer indexed bounded queries; flag unbounded scans or filter-before-
+        authorization. Paid provider calls belong in Convex actions with shared
+        account/day limits, duplicate guards, bounded timeouts and no automatic
+        paid retry. Require explicit business confirmation and real provider
+        evidence. Never add activation fallback, manual paid override or raw
+        identity/provider payloads in logs, audit rows or error messages.
+    - path: "convex/auth*.ts"
+      instructions: >
+        Preserve all authentication factors through Better Auth's real HTTP
+        handler and Convex adapter. Phone accounts stay passwordless; configured
+        admin phone requires TOTP. No restored session before the full challenge,
+        public fixture login, simulated OTP or missing-service bypass. Binding a
+        phone to an existing email identity must preserve session and TOTP.
+        Require boundary tests and no credentials or raw phone/email in output.
+    - path: "convex/lib/access*.ts"
+      instructions: >
+        Check household/applicant and operator access separately. Never infer
+        membership from a selected UI workspace or caller-supplied identifiers.
+        Check removed memberships, unrelated organizations and private documents.
+    - path: "src/lib/{analytics*,monitoring*}"
+      instructions: >
+        Analytics needs the operator switch, visitor consent and public-route
+        allowlist at send time. Permit only the approved manual pageview fields.
+        No private funnels, replay, autocapture, identify, contact, precise
+        location or booking tokens. Sentry is separate error-only reporting:
+        keep its allowlist scrubber, no raw message/request/body/breadcrumbs,
+        and zero tracing/profiling/replay. Account setup is not live receipt.
+    - path: "{.gitleaks.toml,patches/**,pnpm-workspace.yaml}"
+      instructions: >
+        Treat scanner exceptions and dependency patches as security-sensitive.
+        Require exact synthetic values plus narrow paths, or documented
+        advisory-specific evidence and a regression test. Do not exclude whole
+        test/doc directories, disable generic-key detection or bypass install
+        integrity checks. Never quote a detected live secret in review output.
     - path: "messages/*.json"
       instructions: >
         Keys must match messages/en.json exactly. Flag empty strings, English
@@ -49,13 +86,33 @@ reviews:
         should use ICU plural or select syntax.
     - path: ".github/workflows/**"
       instructions: >
-        Every job needs timeout-minutes and the workflow needs a concurrency
-        group with cancel-in-progress — this repo runs on GitHub's free plan.
-        Flag any application secret used in a check (not deploy) workflow.
+        Preserve the five required CI jobs without path filters or ignored
+        failures. Require timeouts, concurrency cancellation, least token
+        permissions and immutable action/tool pins for new security jobs.
+        Reject pull_request_target with untrusted code, application secrets in
+        checks, bot write/merge grants and unconditional private paid scanners.
+        Review every scanner allowlist change; do not suppress directories or
+        advisories to obtain a green result. A patched dependency needs a
+        reviewed patch and regression evidence, not only a version exemption.
+        Production is the only permitted deployment target; no Preview jobs.
     - path: "e2e/**/*.ts"
       instructions: >
         Flag waitForTimeout and CSS/class-based selectors; require role-based
         queries and web-first assertions.
+
+  finishing_touches:
+    docstrings:
+      enabled: false
+    unit_tests:
+      enabled: false
+    simplify:
+      enabled: false
+    autofix:
+      enabled: false
+    fix_ci:
+      enabled: false
+    resolve_merge_conflict:
+      enabled: false
 
   tools:
     eslint:
@@ -65,3 +122,22 @@ reviews:
 
 chat:
   auto_reply: true
+
+# Keep private repository context inside this repository's review scope.
+knowledge_base:
+  automatic_linking_mode: disabled
+  linked_repositories: []
+  learnings:
+    scope: local
+  issues:
+    scope: local
+  pull_requests:
+    scope: local
+  jira:
+    usage: disabled
+  linear:
+    usage: disabled
+  mcp:
+    usage: disabled
+  web_search:
+    enabled: false

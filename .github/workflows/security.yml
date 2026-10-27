@@ -1,0 +1,128 @@
+name: Security
+
+# These checks supplement the five required CI jobs. Paid checks stay skipped
+# until the owner completes the account steps in the security runbook.
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  schedule:
+    - cron: "23 4 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: security-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  secrets:
+    name: Secret scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      # Use the MIT CLI directly. The separate Gitleaks organization Action has
+      # different licence terms and is not needed here. Verify before execution.
+      - name: Install pinned Gitleaks CLI
+        env:
+          TOOL_DIR: ${{ runner.temp }}/luma-security-tools
+        run: |
+          mkdir -p "$TOOL_DIR"
+          curl --fail --silent --show-error --location --proto '=https' --tlsv1.2 \
+            --output "$TOOL_DIR/gitleaks.tar.gz" \
+            https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz
+          echo "551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb  $TOOL_DIR/gitleaks.tar.gz" | sha256sum --check --status
+          tar -xzf "$TOOL_DIR/gitleaks.tar.gz" -C "$TOOL_DIR" gitleaks
+      - name: Verify the scanner rejects a new key in an allowed fixture path
+        env:
+          TOOL_DIR: ${{ runner.temp }}/luma-security-tools
+        run: |
+          probe=$(mktemp -d)
+          trap 'rm -rf "$probe"' EXIT
+          mkdir -p "$probe/convex"
+          cd "$probe"
+          fixture=0123456789abcdef
+          printf 'vi.stubEnv("BETTER_AUTH_SECRET", "%s%s");\n' "$fixture" "$fixture" > convex/auth-sms.test.ts
+          "$TOOL_DIR/gitleaks" dir . --config "$GITHUB_WORKSPACE/.gitleaks.toml" \
+            --ignore-gitleaks-allow --gitleaks-ignore-path /dev/null \
+            --redact=100 --no-banner --log-level fatal --timeout 30
+          printf 'api_key = "%s"\n' "$(openssl rand -hex 24)" > convex/auth-sms.test.ts
+          set +e
+          "$TOOL_DIR/gitleaks" dir . --config "$GITHUB_WORKSPACE/.gitleaks.toml" \
+            --ignore-gitleaks-allow --gitleaks-ignore-path /dev/null \
+            --redact=100 --no-banner --log-level fatal --timeout 30
+          result=$?
+          set -e
+          test "$result" -eq 1
+      - name: Scan repository history with redacted output
+        env:
+          TOOL_DIR: ${{ runner.temp }}/luma-security-tools
+        run: |
+          "$TOOL_DIR/gitleaks" git . --config .gitleaks.toml --log-opts HEAD \
+            --ignore-gitleaks-allow --gitleaks-ignore-path /dev/null \
+            --redact=100 --no-banner --log-level error --timeout 120
+
+  workflow-policy:
+    name: Workflow validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Validate workflow syntax and expressions
+        env:
+          TOOL_DIR: ${{ runner.temp }}/luma-workflow-tools
+        run: |
+          mkdir -p "$TOOL_DIR"
+          curl --fail --silent --show-error --location --proto '=https' --tlsv1.2 \
+            --output "$TOOL_DIR/actionlint.tar.gz" \
+            https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_1.7.12_linux_amd64.tar.gz
+          echo "8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8  $TOOL_DIR/actionlint.tar.gz" | sha256sum --check --status
+          tar -xzf "$TOOL_DIR/actionlint.tar.gz" -C "$TOOL_DIR" actionlint
+          "$TOOL_DIR/actionlint" -color
+
+  codeql:
+    name: CodeQL (account setup required)
+    # Private repositories require an eligible organization plan plus Code
+    # Security. A personal GitHub Pro subscription is not sufficient.
+    if: vars.LUMA_CODEQL_ENABLED == 'true' && github.event.repository.owner.type == 'Organization'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      actions: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: github/codeql-action/init@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4
+        with:
+          languages: javascript-typescript
+          build-mode: none
+          queries: security-extended
+      - uses: github/codeql-action/analyze@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4
+        with:
+          category: /language:javascript-typescript
+
+  dependency-review:
+    name: Dependency review (account setup required)
+    if: github.event_name == 'pull_request' && vars.LUMA_DEPENDENCY_REVIEW_ENABLED == 'true' && github.event.repository.owner.type == 'Organization'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/dependency-review-action@2031cfc080254a8a887f58cffee85186f0e49e48 # v4
+        with:
+          fail-on-severity: high
+          comment-summary-in-pr: never
