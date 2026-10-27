@@ -15,6 +15,7 @@ import { type RefObject, useEffect, useRef, useState } from "react";
 import { useForm, type UseFormReturn, useWatch } from "react-hook-form";
 import { z } from "zod";
 
+import { ReverseAddress } from "@/components/location/reverse-address";
 import { isConvexConfigured } from "@/components/providers/convex-provider";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -502,6 +503,7 @@ function DetailsForm({
   const simple = useTranslations("sell.simple");
   const fields = useTranslations("join.form");
   const locationError = fields("locationFailed");
+  const address = useWatch({ control: form.control, name: "address" });
   const locale = useLocale();
   return (
     <form
@@ -601,6 +603,16 @@ function DetailsForm({
               {fields("locationSaved")}
             </p>
           ) : null}
+          <ReverseAddress
+            point={location.point}
+            address={address}
+            onUse={(address) => {
+              form.setValue("address", address, {
+                shouldDirty: true,
+                shouldValidate: true,
+              });
+            }}
+          />
           {location.state.status === "failed" ? (
             <p role="status" className="text-sm text-muted-foreground">
               {locationError}
@@ -698,6 +710,10 @@ function ScheduleFields({
   const time = useTimeFormat();
   const locale = useLocale();
   const direction = isLocale(locale) ? localeDirection(locale) : "ltr";
+  const availability = useQuery(
+    api.collectionScheduling.availability,
+    slotDate ? { orgId: selectedShop.id, date: slotDate } : "skip",
+  );
   return (
     <section className="space-y-3">
       <h2 className="text-lg font-semibold">{simple("schedule")}</h2>
@@ -748,7 +764,11 @@ function ScheduleFields({
           <SelectContent>
             {SLOT_WINDOWS.filter(
               (window) =>
-                slotDate && isWindowOpen(slotDate, window, today, now),
+                slotDate &&
+                isWindowOpen(slotDate, window, today, now) &&
+                availability?.some(
+                  (slot) => slot.window === window && slot.remaining > 0,
+                ),
             ).map((window) => (
               <SelectItem key={window} value={window}>
                 {t(`windows.${window}`)} · {time.window(window)}

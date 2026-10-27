@@ -11,7 +11,7 @@ export function effectivePaise(row: {
   myPaise: number | null;
   fallbackPaise: number | null;
 }): number | null {
-  return row.myPaise ?? row.fallbackPaise;
+  return row.myPaise;
 }
 
 /**

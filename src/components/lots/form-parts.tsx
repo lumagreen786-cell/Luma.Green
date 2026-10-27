@@ -115,8 +115,10 @@ export function FormStatus({
   busy,
   invalid,
   failure,
+  invalidMessage,
 }: {
   busy: boolean;
+  invalidMessage?: string;
   invalid?: boolean;
   failure?: ReturnType<typeof lotError> | null;
 }) {
@@ -132,7 +134,7 @@ export function FormStatus({
       </Button>
       {invalid || failure ? (
         <p role="alert" className="text-sm text-destructive">
-          {t(failure ?? "invalidInput")}
+          {failure ? t(failure) : (invalidMessage ?? t("invalidInput"))}
         </p>
       ) : null}
     </>

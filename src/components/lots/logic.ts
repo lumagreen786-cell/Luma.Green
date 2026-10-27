@@ -17,19 +17,39 @@ export function parseGrams(value: string): number | null {
 }
 const label = z.string().trim().min(1).max(120);
 const reference = z.string().trim().max(500);
+const optionalCost = z
+  .string()
+  .refine((value) => value.trim() === "" || parseGrams(value) !== null)
+  .optional();
+const costReference = reference
+  .refine((value) => value === "" || value.length >= 3)
+  .optional();
+export const acquisitionCostSchema = z.object({
+  costPaise: z.string().refine((value) => parseGrams(value) !== null),
+  costReference: reference.min(3),
+});
 const grams = (isZeroAllowed = false) =>
   z.string().refine((value) => {
     const parsed = parseGrams(value);
     return parsed !== null && parsed >= (isZeroAllowed ? 0 : 1);
   });
-export const declareSchema = z.object({
-  materialCode: label,
-  state: label,
-  grams: grams(),
-  sourceReference: reference,
-  streamClass: z.enum(STREAM_CLASSES).optional(),
-  handlingClass: z.enum(HANDLING_CLASSES).optional(),
-});
+export const declareSchema = z
+  .object({
+    materialCode: label,
+    state: label,
+    grams: grams(),
+    sourceReference: reference,
+    acquisitionCostPaise: optionalCost,
+    costReference,
+    streamClass: z.enum(STREAM_CLASSES).optional(),
+    handlingClass: z.enum(HANDLING_CLASSES).optional(),
+  })
+  .refine(
+    (value) =>
+      !value.acquisitionCostPaise?.trim() ||
+      Boolean(value.costReference && value.costReference.length >= 3),
+    { path: ["costReference"] },
+  );
 const outputSchema = z.object({
   materialCode: label,
   state: label,
@@ -41,13 +61,22 @@ const inputAllocationSchema = z.object({
   lotId: z.string().min(1),
   grams: grams(),
 });
-export const transformSchema = z.object({
-  inputGrams: grams(),
-  additionalInputs: z.array(inputAllocationSchema).max(19).optional(),
-  contaminationGrams: grams(true),
-  processLossGrams: grams(true),
-  outputs: z.array(outputSchema).min(1).max(10),
-});
+export const transformSchema = z
+  .object({
+    inputGrams: grams(),
+    additionalInputs: z.array(inputAllocationSchema).max(19).optional(),
+    contaminationGrams: grams(true),
+    processLossGrams: grams(true),
+    processingCostPaise: optionalCost,
+    costReference,
+    outputs: z.array(outputSchema).min(1).max(10),
+  })
+  .refine(
+    (value) =>
+      !value.processingCostPaise?.trim() ||
+      Boolean(value.costReference && value.costReference.length >= 3),
+    { path: ["costReference"] },
+  );
 export const dispositionSchema = z.object({
   grams: grams(),
   destinationReference: reference.min(1),

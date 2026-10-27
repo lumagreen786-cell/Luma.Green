@@ -64,7 +64,8 @@
         "application_received": "Application received",
         "application_approved": "Application approved",
         "application_changes_requested": "Application needs changes",
-        "application_rejected": "Application not approved"
+        "application_rejected": "Application not approved",
+        "stock_low": "Low stock alert"
       }
     }
   },
@@ -133,7 +134,8 @@
         "application_received": "आवेदन मिला",
         "application_approved": "आवेदन स्वीकृत",
         "application_changes_requested": "आवेदन में बदलाव चाहिए",
-        "application_rejected": "आवेदन स्वीकृत नहीं हुआ"
+        "application_rejected": "आवेदन स्वीकृत नहीं हुआ",
+        "stock_low": "कम स्टॉक की सूचना"
       }
     }
   },
@@ -202,7 +204,8 @@
         "application_received": "আবেদন পাওয়া গেছে",
         "application_approved": "আবেদন অনুমোদিত",
         "application_changes_requested": "আবেদনে পরিবর্তন দরকার",
-        "application_rejected": "আবেদন অনুমোদিত হয়নি"
+        "application_rejected": "আবেদন অনুমোদিত হয়নি",
+        "stock_low": "কম মজুতের সতর্কতা"
       }
     }
   },
@@ -271,7 +274,8 @@
         "application_received": "अर्ज मिळाला",
         "application_approved": "अर्ज मंजूर",
         "application_changes_requested": "अर्जात बदल आवश्यक",
-        "application_rejected": "अर्ज मंजूर झाला नाही"
+        "application_rejected": "अर्ज मंजूर झाला नाही",
+        "stock_low": "कमी साठ्याची सूचना"
       }
     }
   },
@@ -340,7 +344,8 @@
         "application_received": "விண்ணப்பம் பெறப்பட்டது",
         "application_approved": "விண்ணப்பம் அங்கீகரிக்கப்பட்டது",
         "application_changes_requested": "விண்ணப்பத்தில் மாற்றங்கள் தேவை",
-        "application_rejected": "விண்ணப்பம் அங்கீகரிக்கப்படவில்லை"
+        "application_rejected": "விண்ணப்பம் அங்கீகரிக்கப்படவில்லை",
+        "stock_low": "குறைந்த இருப்பு எச்சரிக்கை"
       }
     }
   },
@@ -409,7 +414,8 @@
         "application_received": "దరఖాస్తు అందింది",
         "application_approved": "దరఖాస్తు ఆమోదించబడింది",
         "application_changes_requested": "దరఖాస్తులో మార్పులు అవసరం",
-        "application_rejected": "దరఖాస్తు ఆమోదించబడలేదు"
+        "application_rejected": "దరఖాస్తు ఆమోదించబడలేదు",
+        "stock_low": "తక్కువ నిల్వ హెచ్చరిక"
       }
     }
   },
@@ -478,7 +484,8 @@
         "application_received": "ಅರ್ಜಿ ಸ್ವೀಕರಿಸಲಾಗಿದೆ",
         "application_approved": "ಅರ್ಜಿ ಅನುಮೋದಿಸಲಾಗಿದೆ",
         "application_changes_requested": "ಅರ್ಜಿಯಲ್ಲಿ ಬದಲಾವಣೆ ಬೇಕು",
-        "application_rejected": "ಅರ್ಜಿ ಅನುಮೋದನೆಯಾಗಿಲ್ಲ"
+        "application_rejected": "ಅರ್ಜಿ ಅನುಮೋದನೆಯಾಗಿಲ್ಲ",
+        "stock_low": "ಕಡಿಮೆ ದಾಸ್ತಾನು ಎಚ್ಚರಿಕೆ"
       }
     }
   },
@@ -547,7 +554,8 @@
         "application_received": "അപേക്ഷ ലഭിച്ചു",
         "application_approved": "അപേക്ഷ അംഗീകരിച്ചു",
         "application_changes_requested": "അപേക്ഷയിൽ മാറ്റങ്ങൾ വേണം",
-        "application_rejected": "അപേക്ഷ അംഗീകരിച്ചില്ല"
+        "application_rejected": "അപേക്ഷ അംഗീകരിച്ചില്ല",
+        "stock_low": "കുറഞ്ഞ സ്റ്റോക്ക് മുന്നറിയിപ്പ്"
       }
     }
   },
@@ -616,7 +624,8 @@
         "application_received": "અરજી મળી",
         "application_approved": "અરજી મંજૂર થઈ",
         "application_changes_requested": "અરજીમાં ફેરફાર જરૂરી",
-        "application_rejected": "અરજી મંજૂર થઈ નથી"
+        "application_rejected": "અરજી મંજૂર થઈ નથી",
+        "stock_low": "ઓછા જથ્થાની સૂચના"
       }
     }
   },
@@ -685,7 +694,8 @@
         "application_received": "ਅਰਜ਼ੀ ਮਿਲੀ",
         "application_approved": "ਅਰਜ਼ੀ ਮਨਜ਼ੂਰ ਹੋਈ",
         "application_changes_requested": "ਅਰਜ਼ੀ ਵਿੱਚ ਬਦਲਾਅ ਚਾਹੀਦੇ ਹਨ",
-        "application_rejected": "ਅਰਜ਼ੀ ਮਨਜ਼ੂਰ ਨਹੀਂ ਹੋਈ"
+        "application_rejected": "ਅਰਜ਼ੀ ਮਨਜ਼ੂਰ ਨਹੀਂ ਹੋਈ",
+        "stock_low": "ਘੱਟ ਸਟਾਕ ਦੀ ਸੂਚਨਾ"
       }
     }
   },
@@ -754,7 +764,8 @@
         "application_received": "درخواست موصول ہوگئی",
         "application_approved": "درخواست منظور ہوگئی",
         "application_changes_requested": "درخواست میں تبدیلی درکار ہے",
-        "application_rejected": "درخواست منظور نہیں ہوئی"
+        "application_rejected": "درخواست منظور نہیں ہوئی",
+        "stock_low": "کم ذخیرے کی اطلاع"
       }
     }
   },
@@ -823,7 +834,8 @@
         "application_received": "تم استلام الطلب",
         "application_approved": "تمت الموافقة على الطلب",
         "application_changes_requested": "الطلب يحتاج إلى تعديلات",
-        "application_rejected": "لم تتم الموافقة على الطلب"
+        "application_rejected": "لم تتم الموافقة على الطلب",
+        "stock_low": "تنبيه انخفاض المخزون"
       }
     }
   },
@@ -892,7 +904,8 @@
         "application_received": "আবেদন পোৱা গৈছে",
         "application_approved": "আবেদন অনুমোদিত হৈছে",
         "application_changes_requested": "আবেদনত সালসলনি লাগে",
-        "application_rejected": "আবেদন অনুমোদিত হোৱা নাই"
+        "application_rejected": "আবেদন অনুমোদিত হোৱা নাই",
+        "stock_low": "কম মজুতৰ সতৰ্কতা"
       }
     }
   },
@@ -961,7 +974,8 @@
         "application_received": "आवेदन प्राप्त भयो",
         "application_approved": "आवेदन स्वीकृत भयो",
         "application_changes_requested": "आवेदनमा परिवर्तन चाहिन्छ",
-        "application_rejected": "आवेदन स्वीकृत भएन"
+        "application_rejected": "आवेदन स्वीकृत भएन",
+        "stock_low": "कम मौज्दातको सूचना"
       }
     }
   },
@@ -1030,7 +1044,8 @@
         "application_received": "Solicitud recibida",
         "application_approved": "Solicitud aprobada",
         "application_changes_requested": "La solicitud necesita cambios",
-        "application_rejected": "Solicitud no aprobada"
+        "application_rejected": "Solicitud no aprobada",
+        "stock_low": "Aviso de existencias bajas"
       }
     }
   },
@@ -1099,7 +1114,8 @@
         "application_received": "Candidature reçue",
         "application_approved": "Candidature approuvée",
         "application_changes_requested": "Candidature à modifier",
-        "application_rejected": "Candidature non approuvée"
+        "application_rejected": "Candidature non approuvée",
+        "stock_low": "Alerte de stock faible"
       }
     }
   },
@@ -1168,7 +1184,8 @@
         "application_received": "Đã nhận đơn",
         "application_approved": "Đơn đã được duyệt",
         "application_changes_requested": "Đơn cần chỉnh sửa",
-        "application_rejected": "Đơn chưa được duyệt"
+        "application_rejected": "Đơn chưa được duyệt",
+        "stock_low": "Cảnh báo tồn kho thấp"
       }
     }
   },
@@ -1237,7 +1254,8 @@
         "application_received": "අයදුම්පත ලැබුණි",
         "application_approved": "අයදුම්පත අනුමත විය",
         "application_changes_requested": "අයදුම්පතේ වෙනස්කම් අවශ්‍යයි",
-        "application_rejected": "අයදුම්පත අනුමත නොවීය"
+        "application_rejected": "අයදුම්පත අනුමත නොවීය",
+        "stock_low": "අඩු තොග අනතුරු ඇඟවීම"
       }
     }
   },
@@ -1306,7 +1324,8 @@
         "application_received": "ได้รับใบสมัครแล้ว",
         "application_approved": "อนุมัติใบสมัครแล้ว",
         "application_changes_requested": "ใบสมัครต้องแก้ไข",
-        "application_rejected": "ใบสมัครไม่ได้รับอนุมัติ"
+        "application_rejected": "ใบสมัครไม่ได้รับอนุมัติ",
+        "stock_low": "แจ้งเตือนสต็อกต่ำ"
       }
     }
   },
@@ -1375,7 +1394,8 @@
         "application_received": "Заявка получена",
         "application_approved": "Заявка одобрена",
         "application_changes_requested": "Заявка требует изменений",
-        "application_rejected": "Заявка не одобрена"
+        "application_rejected": "Заявка не одобрена",
+        "stock_low": "Оповещение о низком запасе"
       }
     }
   },
@@ -1444,7 +1464,8 @@
         "application_received": "Antrag eingegangen",
         "application_approved": "Antrag genehmigt",
         "application_changes_requested": "Antrag muss geändert werden",
-        "application_rejected": "Antrag nicht genehmigt"
+        "application_rejected": "Antrag nicht genehmigt",
+        "stock_low": "Warnung bei niedrigem Bestand"
       }
     }
   },
@@ -1513,7 +1534,8 @@
         "application_received": "ଆବେଦନ ମିଳିଛି",
         "application_approved": "ଆବେଦନ ଅନୁମୋଦିତ",
         "application_changes_requested": "ଆବେଦନରେ ପରିବର୍ତ୍ତନ ଆବଶ୍ୟକ",
-        "application_rejected": "ଆବେଦନ ଅନୁମୋଦିତ ହୋଇନାହିଁ"
+        "application_rejected": "ଆବେଦନ ଅନୁମୋଦିତ ହୋଇନାହିଁ",
+        "stock_low": "କମ୍ ମହଜୁଦ ସୂଚନା"
       }
     }
   },
@@ -1582,7 +1604,8 @@
         "application_received": "申請を受け付けました",
         "application_approved": "申請が承認されました",
         "application_changes_requested": "申請の修正が必要です",
-        "application_rejected": "申請は承認されませんでした"
+        "application_rejected": "申請は承認されませんでした",
+        "stock_low": "在庫不足の通知"
       }
     }
   },
@@ -1651,7 +1674,8 @@
         "application_received": "Заявку отримано",
         "application_approved": "Заявку схвалено",
         "application_changes_requested": "Заявка потребує змін",
-        "application_rejected": "Заявку не схвалено"
+        "application_rejected": "Заявку не схвалено",
+        "stock_low": "Сповіщення про низький запас"
       }
     }
   },
@@ -1720,7 +1744,8 @@
         "application_received": "신청 접수",
         "application_approved": "신청 승인",
         "application_changes_requested": "신청 수정 필요",
-        "application_rejected": "신청 미승인"
+        "application_rejected": "신청 미승인",
+        "stock_low": "재고 부족 알림"
       }
     }
   },
@@ -1789,7 +1814,8 @@
         "application_received": "Domanda ricevuta",
         "application_approved": "Domanda approvata",
         "application_changes_requested": "Domanda da modificare",
-        "application_rejected": "Domanda non approvata"
+        "application_rejected": "Domanda non approvata",
+        "stock_low": "Avviso scorte basse"
       }
     }
   },
@@ -1858,7 +1884,8 @@
         "application_received": "Wniosek otrzymany",
         "application_approved": "Wniosek zatwierdzony",
         "application_changes_requested": "Wniosek wymaga zmian",
-        "application_rejected": "Wniosek niezatwierdzony"
+        "application_rejected": "Wniosek niezatwierdzony",
+        "stock_low": "Alert niskiego zapasu"
       }
     }
   },
@@ -1927,7 +1954,8 @@
         "application_received": "Başvuru alındı",
         "application_approved": "Başvuru onaylandı",
         "application_changes_requested": "Başvuruda değişiklik gerekiyor",
-        "application_rejected": "Başvuru onaylanmadı"
+        "application_rejected": "Başvuru onaylanmadı",
+        "stock_low": "Düşük stok uyarısı"
       }
     }
   },
@@ -1996,7 +2024,8 @@
         "application_received": "申请已收到",
         "application_approved": "申请已批准",
         "application_changes_requested": "申请需要修改",
-        "application_rejected": "申请未获批准"
+        "application_rejected": "申请未获批准",
+        "stock_low": "低库存提醒"
       }
     }
   },
@@ -2065,7 +2094,8 @@
         "application_received": "Candidatura recebida",
         "application_approved": "Candidatura aprovada",
         "application_changes_requested": "Candidatura precisa de alterações",
-        "application_rejected": "Candidatura não aprovada"
+        "application_rejected": "Candidatura não aprovada",
+        "stock_low": "Alerta de estoque baixo"
       }
     }
   },
@@ -2134,7 +2164,8 @@
         "application_received": "Pendaftaran diterima",
         "application_approved": "Pendaftaran disetujui",
         "application_changes_requested": "Pendaftaran perlu diperbaiki",
-        "application_rejected": "Pendaftaran tidak disetujui"
+        "application_rejected": "Pendaftaran tidak disetujui",
+        "stock_low": "Peringatan stok rendah"
       }
     }
   },
@@ -2203,7 +2234,8 @@
         "application_received": "Aanvraag ontvangen",
         "application_approved": "Aanvraag goedgekeurd",
         "application_changes_requested": "Aanvraag moet worden aangepast",
-        "application_rejected": "Aanvraag niet goedgekeurd"
+        "application_rejected": "Aanvraag niet goedgekeurd",
+        "stock_low": "Waarschuwing voor lage voorraad"
       }
     }
   },
@@ -2272,7 +2304,8 @@
         "application_received": "Permohonan diterima",
         "application_approved": "Permohonan diluluskan",
         "application_changes_requested": "Permohonan perlu diubah",
-        "application_rejected": "Permohonan tidak diluluskan"
+        "application_rejected": "Permohonan tidak diluluskan",
+        "stock_low": "Amaran stok rendah"
       }
     }
   }

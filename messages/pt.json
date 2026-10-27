@@ -1,4 +1,14 @@
 {
+  "stockReports": {
+    "prepare": "Preparar relatório de stock",
+    "download": "Transferir relatório de stock",
+    "preparing": "A preparar o seu relatório…",
+    "complete": "Relatório pronto",
+    "failed": "Não foi possível preparar o relatório. Tente novamente.",
+    "unavailable": "Os relatórios estão indisponíveis até as tarefas em segundo plano serem configuradas.",
+    "expired": "Este relatório expirou. Prepare um novo.",
+    "notice": "Resumo privado do stock num dado momento. Disponível durante 30 minutos. Não é um certificado."
+  },
   "brand": {
     "name": "Luma.Green",
     "tagline": "Um amanhã mais limpo em movimento"
@@ -135,7 +145,7 @@
       "kabadiwala": {
         "title": "Kabadiwalas",
         "one": "Pedidos de coleta de casas próximas.",
-        "two": "Defina seus preços, nunca abaixo do mínimo.",
+        "two": "Defina as suas ofertas para cada material.",
         "three": "Venda o estoque separado para pré-processadores.",
         "cta": "Cadastre-se como kabadiwala"
       },
@@ -176,8 +186,8 @@
         "body": "Escolha a sua função e conclua o registo."
       },
       "floor": {
-        "title": "Preços justos, com um mínimo",
-        "body": "As lojas definem seus preços, mas nunca abaixo do mínimo publicado para cada material."
+        "title": "Ofertas independentes das lojas",
+        "body": "As lojas definem as suas ofertas. Os preços de referência datados são informação, não um mínimo obrigatório."
       },
       "escrow": {
         "title": "A aguardar o gateway",
@@ -237,22 +247,22 @@
   },
   "prices": {
     "metaTitle": "Preços da matéria reciclável em Bengaluru hoje",
-    "metaDescription": "Preços da matéria reciclável em Bengaluru hoje, por kg: papel, plástico, metal, vidro e eletrônicos, com variação semanal, gráfico de 30 dias e o mínimo que uma loja pode pagar.",
+    "metaDescription": "Preços de referência datados por kg de materiais recicláveis em Bengaluru. Cada empresa define as suas ofertas.",
     "eyebrow": "Bengaluru",
     "title": "Preços de materiais",
-    "lead": "O valor da matéria reciclável hoje, por quilo. As lojas definem seus preços, nunca abaixo do mínimo. Toque em um material para ver os últimos 30 dias.",
+    "lead": "Preços de referência datados por quilograma. Cada empresa define as suas ofertas. Escolha um material para ver o histórico disponível.",
     "demoNote": "Preços de exemplo do protótipo, não cotações de mercado ao vivo.",
     "date": "Preços de {date}",
-    "floorHelp": "Mínimo: o menor valor que uma loja verificada pode pagar por um quilo.",
+    "floorHelp": "Preço de referência: informação datada, não um mínimo obrigatório nem uma oferta de uma loja.",
     "perKg": "{price}/kg",
-    "floor": "Mínimo {price}",
+    "floor": "Referência {price}",
     "noPrice": "Ainda sem preço",
     "columns": {
       "material": "Material",
       "today": "Hoje",
       "week": "Esta semana",
       "month": "30 dias",
-      "floor": "Mínimo"
+      "floor": "Referência"
     },
     "families": {
       "paper": "Papel",
@@ -277,7 +287,7 @@
       "today": "Hoje",
       "low": "Mínima de 30 dias",
       "high": "Máxima de 30 dias",
-      "floor": "Mínimo",
+      "floor": "Referência",
       "noFloor": "Nenhum",
       "close": "Fechar",
       "noHistory": "Ainda não há histórico de preços."
@@ -285,7 +295,7 @@
     "chart": {
       "label": "{material}: preço por quilo, dia a dia. Use as setas para mudar de dia.",
       "point": "{date}: {price}",
-      "floor": "Mínimo {price}",
+      "floor": "Referência {price}",
       "table": "Mostrar os números",
       "tableCaption": "{material}, preço por quilo em cada dia",
       "date": "Data",
@@ -557,10 +567,10 @@
     "lead": "Os materiais passam das casas às lojas de coleta, aos pré-processadores e aos recicladores antes de se tornarem algo novo. A Luma.Green registra cada entrega.",
     "stepLabel": "Etapa {number}",
     "sell": {
-      "body": "Uma família escolhe o que tem, vê a oferta de cada loja próxima e agenda coleta ou entrega. O kabadiwala pesa cada material e paga em dinheiro ou UPI. Ambos recebem um recibo.",
-      "point1": "Cada loja define seus preços, nunca abaixo do mínimo publicado",
+      "body": "A família adiciona fotografias e detalhes da recolha e reserva uma recolha ou entrega. Não são necessários pesos estimados. A loja pesa os materiais e regista a sua declaração de pagamento e o recibo.",
+      "point1": "Cada loja define as suas ofertas",
       "point2": "Pesos registrados em gramas na balança da loja",
-      "point3": "Um link de acompanhamento, sem precisar de conta"
+      "point3": "Inicie sessão com acesso ao registo para ver os detalhes privados da recolha"
     },
     "trade": {
       "body": "Pagamentos entre empresas usam o gateway de pagamento. Confira no pedido o estado atual do pagamento.",
@@ -1079,19 +1089,19 @@
       },
       "howPricesWork": {
         "title": "Como os preços são definidos",
-        "summary": "Por que a estimativa é uma faixa e como o valor final é calculado.",
+        "summary": "Como as ofertas independentes da loja e os pesos medidos determinam o valor.",
         "steps": {
           "estimate": {
-            "title": "Estimativas usam preços da cidade",
-            "body": "Antes de escolher um kabadiwala, usamos os preços padrão de Bengaluru e mostramos uma faixa."
+            "title": "Os preços de referência são informação datada",
+            "body": "Os preços de referência dão contexto. Não definem uma oferta de uma loja nem um mínimo obrigatório."
           },
           "own": {
             "title": "Cada kabadiwala define seu preço",
             "body": "Depois de escolher, você vê o preço próprio de cada material."
           },
           "floor": {
-            "title": "Nunca abaixo do mínimo",
-            "body": "A Luma.Green define um mínimo por material. Nenhum kabadiwala pode pagar menos."
+            "title": "Ofertas independentes",
+            "body": "Cada empresa define as suas ofertas. A Luma.Green não impõe um mínimo com base nos preços de referência."
           },
           "final": {
             "title": "O peso determina o valor",
@@ -1219,23 +1229,23 @@
       },
       "setPrices": {
         "title": "Defina seus preços",
-        "summary": "Você escolhe quanto paga, acima do mínimo.",
+        "summary": "Escolha quanto oferece por cada material.",
         "steps": {
           "open": {
             "title": "Abra Meus preços",
-            "body": "Cada material aparece com o preço mínimo ao lado."
+            "body": "Veja os materiais e a informação de preços de referência disponível."
           },
           "enter": {
             "title": "Informe seu preço por kg",
             "body": "Digite quanto quer pagar às famílias por cada material."
           },
           "floor": {
-            "title": "Fique acima do mínimo",
-            "body": "Um preço abaixo do mínimo não é salvo. Se o mínimo subir, seu preço também sobe e avisamos."
+            "title": "Definir uma oferta independente",
+            "body": "Os preços de referência não definem nem alteram automaticamente a sua oferta."
           },
           "blank": {
             "title": "Deixe um material em branco",
-            "body": "Se não definir preço, será usado o padrão da cidade."
+            "body": "Se deixar um material em branco, não é definida uma oferta para ele."
           },
           "history": {
             "title": "Recibos antigos não mudam",
@@ -1555,7 +1565,7 @@
       },
       "howPriceWorks": {
         "q": "Como meu pagamento é calculado?",
-        "a": "O peso de cada material multiplicado pelo preço por kg do kabadiwala. O preço nunca pode ficar abaixo do mínimo da Luma.Green."
+        "a": "O peso medido de cada material multiplicado pelo preço por kg acordado com a loja. Os preços de referência são apenas informação."
       },
       "howPaid": {
         "q": "Como recebo?",
@@ -1595,7 +1605,7 @@
       },
       "ownPrices": {
         "q": "Posso definir meus preços?",
-        "a": "Sim, para cada material, desde que não fiquem abaixo do mínimo definido pela Luma.Green."
+        "a": "Sim. Cada empresa define as suas ofertas para cada material. Os preços de referência não são um mínimo obrigatório."
       },
       "noVehicle": {
         "q": "Não tenho veículo. Posso me cadastrar?",
@@ -2746,6 +2756,33 @@
     }
   },
   "track": {
+    "review": {
+      "title": "Rever o recibo",
+      "declaration": "A loja declarou o pagamento. Ainda não confirmou que o recebeu.",
+      "accepted": "Recibo aceite. Confirme o pagamento apenas depois de o receber.",
+      "disputed": "Recibo contestado. A resolução está pendente.",
+      "acknowledged": "Confirmou a receção do pagamento.",
+      "accept": "Aceitar",
+      "dispute": "Contestar recibo",
+      "acknowledge": "Confirmar pagamento recebido",
+      "rejectLine": "Rejeitar {material}",
+      "note": "Motivo da contestação",
+      "sharing": "Ajudantes da recolha",
+      "phone": "Número de telefone do ajudante",
+      "adult": "Confirmo que sou maior de idade e que o ajudante convidado também é.",
+      "invite": "Convidar ajudante",
+      "shareNote": "Partilhe este link da recolha com o ajudante. Tem de iniciar sessão com este número de telefone verificado e aceitar no prazo de 48 horas. Não é enviada qualquer mensagem.",
+      "active": "Ativo",
+      "pending": "A aguardar aceitação",
+      "ended": "Acesso terminado",
+      "revoke": "Revogar acesso",
+      "leave": "Sair da recolha",
+      "handover": "Nota de entrega",
+      "save": "Guardar nota",
+      "error": "Não foi possível guardar a alteração. Verifique o seu acesso e tente novamente.",
+      "signIn": "Inicie sessão para ver esta recolha",
+      "acceptedTotal": "Aceite: {weight} · {amount}"
+    },
     "metaTitle": "Seu agendamento",
     "notFound": {
       "title": "Não encontramos este agendamento",
@@ -2839,7 +2876,7 @@
       "close": "Fechar",
       "otherNumber": "Usar outro número"
     },
-    "saved": "Não precisa de conta. Guarde este link para conferir o agendamento em qualquer telefone.",
+    "saved": "Guarde este link. Para ver os detalhes privados, inicie sessão e tenha permissão para esta recolha.",
     "sellMore": "Agendar outra coleta",
     "tryAnother": "Tentar outra loja",
     "dispatchChanged": "Seu pedido foi transferido para outra loja próxima. A loja atual aparece abaixo.",
@@ -3291,12 +3328,12 @@
       "title": "Estoque",
       "lead": "O que você tem agora e quanto vale hoje.",
       "totalWeight": "Peso total",
-      "worth": "Valor hoje",
-      "worthHint": "Aos preços de mercado de hoje",
+      "worth": "Valor da oferta atual",
+      "worthHint": "Valor da oferta atual",
       "scrap": "Materiais coletados",
       "recycled": "Material reciclado",
-      "atPrice": "Mercado {price}/kg",
-      "noPrice": "Sem preço de mercado hoje",
+      "atPrice": "Valor da oferta atual: {price}/kg",
+      "noPrice": "Sem oferta atual",
       "sellTo": {
         "yard": "Vender a um pré-processador",
         "recycler": "Vender a um reciclador",
@@ -3307,23 +3344,24 @@
       "emptyBusiness": "Compre no mercado, e aparece aqui.",
       "buy": "Comprar material",
       "notBusinessTitle": "Só para empresas",
-      "notBusinessBody": "Lojas, pré-processadores, recicladores e fábricas mantêm estoque."
+      "notBusinessBody": "Lojas, pré-processadores, recicladores e fábricas mantêm estoque.",
+      "recordedCost": "Custo registado"
     },
     "prices": {
       "title": "Meus preços",
-      "lead": "Quanto você paga às famílias por kg. Nunca abaixo do mínimo.",
+      "lead": "As suas ofertas às famílias por kg. Define-as de forma independente.",
       "label": "Seu preço para {material}, em rupias por kg",
       "prefix": "₹",
       "suffix": "/kg",
-      "minimum": "Mínimo {price}/kg",
+      "minimum": "Referência {price}/kg",
       "market": "Mercado {price}/kg",
-      "notSet": "Ainda não definido. As famílias recebem o preço da cidade, {price}/kg.",
+      "notSet": "Nenhuma oferta definida. Referência: {price}/kg.",
       "save": "Salvar",
       "saving": "Salvando…",
       "saved": "{material}: {price}/kg salvo.",
       "invalid": "Informe um preço, como 14 ou 14,50.",
-      "belowFloor": "Muito baixo. O mínimo é {price}/kg.",
-      "belowFloorUnknown": "Muito baixo. Está abaixo do preço mínimo.",
+      "belowFloor": "Introduza um preço válido. Referência: {price}/kg.",
+      "belowFloorUnknown": "Introduza um preço válido.",
       "emptyTitle": "Ainda não há materiais",
       "emptyBody": "Os materiais que você compra são definidos na aprovação da loja."
     },
@@ -3477,7 +3515,8 @@
       "application_received": "Candidatura recebida",
       "application_approved": "Candidatura aprovada",
       "application_changes_requested": "Candidatura precisa de alterações",
-      "application_rejected": "Candidatura não aprovada"
+      "application_rejected": "Candidatura não aprovada",
+      "stock_low": "Alerta de estoque baixo"
     }
   },
   "integrations": {
@@ -3751,7 +3790,8 @@
     "addInput": "Adicionar lote de entrada",
     "chooseInput": "Escolher lote de entrada",
     "combinedInput": "Massa total de entrada",
-    "multiInputHint": "Combine apenas material medido sob sua custódia. Cada quantidade é consumida do próprio lote. Isto registra evidência de processamento e não adiciona estoque."
+    "multiInputHint": "Combine apenas material medido sob sua custódia. Cada quantidade é consumida do próprio lote. Isto registra evidência de processamento e não adiciona estoque.",
+    "qualityReleaseRequired": "São necessários testes aceites"
   },
   "evidence": {
     "title": "Referências documentais",
@@ -4166,5 +4206,163 @@
     "lead": "Leia uma cópia fixa das evidências para a finalidade indicada. A aprovação do destinatário não dá acesso a outros registros empresariais.",
     "warning": "Compartilhe apenas a inspeção escolhida e os arquivos marcados. Remova dados pessoais primeiro. Acesso por até 90 dias, revogável; cópias baixadas não podem ser recuperadas.",
     "snapshot": "Cópia fixa da declaração da empresa inspetora. Não é certificado nem verificação independente."
+  },
+  "collectionOperations": {
+    "availability": "Disponibilidade de recolha",
+    "capacity": "Capacidade por horário",
+    "holidays": "Dias fechados (YYYY-MM-DD, separados por vírgulas)",
+    "schedule": "Calendário de recolha",
+    "unassigned": "Ainda sem atribuição. Altere o horário ou cancele.",
+    "repeat": "Repetir a cada {days} dias",
+    "stop": "Parar próximas visitas",
+    "reschedule": "Alterar horário de recolha",
+    "requested": "Alteração enviada ao operador",
+    "saved": "Guardado",
+    "acknowledge": "Confirmar pagamento recebido",
+    "acknowledged": "Pagamento confirmado",
+    "fixedFee": "Valor fixo por trabalho. A empresa contratante paga; a Luma não garante salários.",
+    "due": "Pagamento devido: {date}",
+    "declarePayment": "Declarar pagamento ao trabalhador",
+    "failedVisit": "Registar visita falhada",
+    "paymentDeclared": "Pagamento declarado; aguarda confirmação do trabalhador"
+  },
+  "geocoding": {
+    "consent": "Envie este ponto ao Google Maps para encontrar um endereço.",
+    "find": "Encontrar endereço",
+    "loading": "A procurar endereço…",
+    "manual": "Pode introduzir o endereço manualmente.",
+    "unavailable": "A pesquisa não está disponível. Introduza o endereço manualmente.",
+    "use": "Usar este endereço",
+    "confirm": "Verifiquei este endereço e quero substituir o campo de endereço.",
+    "preview": "Apenas pré-visualização. Guardar endereços exige uma revisão da política do serviço.",
+    "attribution": "Google Maps"
+  },
+  "serviceRecords": {
+    "title": "Serviços e programas",
+    "unavailable": "Execução do prestador e resgate indisponíveis. Os registos não aprovam empréstimos, seguros, apoios ou pagamentos.",
+    "enquiries": "Pedidos de serviços",
+    "programmes": "Registos de programas",
+    "edit": "Editar",
+    "reported": "Valores declarados e provas não verificadas. Não implicam acordo municipal nem prémio financiado.",
+    "area": "Área",
+    "startsOn": "Data inicial",
+    "endsOn": "Data final",
+    "coverageCount": "Cobertura",
+    "trips": "Viagens",
+    "centreHandovers": "Entregas ao centro",
+    "groupIncomePaise": "Rendimento do grupo (paise)",
+    "share": "Partilhar relatório agregado",
+    "principal": "Dono do material / contratante",
+    "materialReference": "Referência do material",
+    "explicitReference": "Partilhar apenas código do material e gramas registados com o destinatário escolhido.",
+    "commercialModel": "Modelo comercial",
+    "draft": "Rascunho",
+    "enquiry": "Pedido",
+    "closed": "Fechado",
+    "kinds": {
+      "equipment": "Equipamentos",
+      "staffing": "Pessoal",
+      "transport": "Transporte",
+      "environment": "Ambiente",
+      "accounting": "Contabilidade",
+      "solar": "Energia solar",
+      "scales": "Balanças",
+      "voice": "Serviços de voz",
+      "society": "Serviços comunitários",
+      "welfare": "Apoio social",
+      "donation": "Doação",
+      "reward": "Recompensa",
+      "finance": "Finanças",
+      "insurance": "Seguros",
+      "attendance": "Presenças",
+      "wet_service": "Serviço de resíduos húmidos",
+      "other": "Outros"
+    },
+    "models": {
+      "partner_service": "Pedido ao parceiro",
+      "materials_sale_reference": "Referência de venda de material",
+      "toll_jobwork": "Trabalho com propriedade do contratante",
+      "paid_collection": "Recolha paga",
+      "generator_paid_treatment": "Tratamento pago pelo produtor"
+    },
+    "directions": {
+      "not_applicable": "Sem execução de pagamentos",
+      "buyer_to_seller": "Comprador → vendedor",
+      "principal_to_processor": "Contratante → processador",
+      "customer_to_service": "Cliente → serviço",
+      "generator_to_handler": "Produtor → gestor"
+    },
+    "received": "Recebido",
+    "sharedReports": "Relatórios de auditoria compartilhados",
+    "revoke": "Revogar acesso",
+    "quantityGrams": "Quantidade (g)",
+    "recordName": "Nome do registo"
+  },
+  "returnClaims": {
+    "title": "Devoluções e provas do programa",
+    "returnTitle": "Devolução completa",
+    "scheme": "Referência do programa",
+    "issuer": "Referência do emissor externo",
+    "freight": "Pagador do transporte de devolução",
+    "reconcile": "Reconciliar",
+    "validate": "Verificar origem",
+    "notice": "Apenas provas declaradas. Não é um certificado oficial nem uma aprovação de pagamento.",
+    "waiting": "Aguarde a receção física, o reembolso integral do prestador e a reversão da liquidação."
+  },
+  "marketComparison": {
+    "quote": "É necessária cotação de transporte",
+    "freight": "Transporte separado: {price}/kg",
+    "notice": "O pagamento cobre apenas o material. Acorde e pague o transporte separadamente.",
+    "available": "Disponível a partir de {date}",
+    "delivered": "Material e transporte: {price}/kg",
+    "freightInput": "Transporte por kg (opcional)",
+    "availableInput": "Disponível a partir de (opcional)",
+    "validityInput": "Validade da oferta (opcional)"
+  },
+  "recordedCosts": {
+    "acquisition": "Custo de aquisição (paise)",
+    "processing": "Custo de processamento (paise)",
+    "reference": "Referência do comprovativo do custo",
+    "hint": "Vazio significa desconhecido. Introduza 0 apenas para um custo zero registado.",
+    "remaining": "Custo registado restante",
+    "input": "Custo dos insumos consumidos",
+    "total": "Custo atribuído às saídas",
+    "unknown": "Desconhecido",
+    "loss": "As saídas medidas absorvem os custos de contaminação e perdas do processo.",
+    "record": "Registar custo de aquisição",
+    "processingTotal": "Custo de processamento"
+  },
+  "stockClosing": {
+    "title": "Revisão diária do estoque",
+    "notice": "O fechamento salva o estoque atual. Alterações posteriores continuam permitidas.",
+    "note": "Nota de revisão",
+    "record": "Registrar fechamento de hoje",
+    "last": "Último fechamento",
+    "none": "Ainda não há fechamento",
+    "gramsUnit": "g",
+    "unknown": "Custo desconhecido",
+    "balances": "Saldos de fechamento",
+    "threshold": "Alerta de estoque baixo",
+    "thresholdHint": "Somente na caixa da conta. Os alertas ficam desativados até serem ativados.",
+    "disabled": "Desativado",
+    "below": "Abaixo do nível de alerta",
+    "recent": "Alertas recentes (até 20)",
+    "noAlerts": "Ainda não há alertas",
+    "material": "Tipo de material",
+    "grams": "Nível de alerta (gramas)",
+    "enabled": "Ativar alerta",
+    "save": "Salvar ajuste de alerta",
+    "closed": "Fechamento salvo",
+    "saved": "Ajuste de alerta salvo",
+    "dateChanged": "A data mudou. Revise e tente novamente.",
+    "alreadyRecorded": "O fechamento de hoje já foi registrado.",
+    "limit": "O histórico ultrapassa o limite desta ferramenta. Peça ajuda ao administrador.",
+    "mismatch": "O estoque e os movimentos diferem. Peça uma revisão ao administrador.",
+    "correction": "Correção de estoque",
+    "add": "Adicionar estoque",
+    "remove": "Reduzir estoque",
+    "corrected": "Correção registrada",
+    "evidence": "Referência da evidência física",
+    "recentCorrections": "Correções recentes (até 20)"
   }
 }

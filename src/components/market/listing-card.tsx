@@ -1,14 +1,16 @@
 "use client";
 
 import { MapPinIcon } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useFormatter, useNow, useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 
 import { useFormat } from "@/components/app/format";
 import { StatusPill } from "@/components/app/page-parts";
 
 import { safePaiseFor } from "../../../convex/lib/chain";
+import { isListingOfferCurrent } from "../../../convex/lib/rateValidity";
 import { MaterialIcon } from "./material-icon";
+import { OfferComparison } from "./offer-comparison";
 import { OfferSpecification } from "./offer-specification";
 import type { ListingView } from "./types";
 
@@ -32,7 +34,16 @@ export function ListingCard({
 }) {
   const t = useTranslations("market");
   const format = useFormat();
+  const dates = useFormatter();
+  const workspace = useTranslations("workspace");
+  const unavailable = useTranslations("shop.stock");
+  const now = useNow({ updateInterval: 60_000 });
+  const isCurrent =
+    listing.status === "open" && isListingOfferCurrent(listing, now.getTime());
+  const expiresAt =
+    listing.expiresAt ?? listing.createdAt + 24 * 60 * 60 * 1000;
   const total = safePaiseFor(listing.grams, listing.askPaisePerKg);
+  const totalLabel = total === null ? t("totalInvalid") : format.money(total);
   const name = format.material(listing.material.names, listing.material.code);
 
   return (
@@ -45,7 +56,11 @@ export function ListingCard({
             {isRecycled ? (
               <StatusPill tone="good">{t("recycled")}</StatusPill>
             ) : null}
-            {badge}
+            {isCurrent ? (
+              badge
+            ) : (
+              <StatusPill tone="neutral">{unavailable("noPrice")}</StatusPill>
+            )}
           </div>
           {meta ?? (
             <p className="flex items-start gap-1 text-sm text-muted-foreground">
@@ -60,7 +75,9 @@ export function ListingCard({
           )}
         </div>
         <p className="shrink-0 text-lg font-semibold whitespace-nowrap tabular-nums">
-          {t("perKg", { price: format.perKg(listing.askPaisePerKg) })}
+          {isCurrent
+            ? t("perKg", { price: format.perKg(listing.askPaisePerKg) })
+            : unavailable("noPrice")}
         </p>
       </div>
 
@@ -75,19 +92,33 @@ export function ListingCard({
           <div className="flex flex-col gap-0.5">
             <dt className="text-muted-foreground">{t("listing.lotValue")}</dt>
             <dd className="font-medium tabular-nums">
-              {total === null ? t("totalInvalid") : format.money(total)}
+              {isCurrent ? totalLabel : "—"}
             </dd>
           </div>
         </dl>
-        {action ? <div className="flex flex-col">{action}</div> : null}
+        {action && (isCurrent || listing.isMine) ? (
+          <div className="flex flex-col">{action}</div>
+        ) : null}
       </div>
 
+      <time
+        className="text-sm text-muted-foreground"
+        dateTime={new Date(expiresAt).toISOString()}
+      >
+        {workspace("expires", {
+          date: dates.dateTime(expiresAt, {
+            dateStyle: "medium",
+            timeStyle: "short",
+          }),
+        })}
+      </time>
       {listing.note ? (
         <p className="text-sm break-words text-muted-foreground">
           {listing.note}
         </p>
       ) : null}
       <OfferSpecification value={listing.specification} />
+      {isCurrent ? <OfferComparison listing={listing} /> : null}
     </article>
   );
 }

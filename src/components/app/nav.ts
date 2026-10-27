@@ -29,7 +29,9 @@ export interface NavItem {
     | "sourcing"
     | "logistics"
     | "qualityDocuments"
-    | "operations";
+    | "operations"
+    | "serviceRecords"
+    | "returnClaims";
   icon: LucideIcon;
 }
 

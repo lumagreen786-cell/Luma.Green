@@ -1,4 +1,14 @@
 {
+  "stockReports": {
+    "prepare": "Sediakan laporan stok",
+    "download": "Muat turun laporan stok",
+    "preparing": "Menyediakan laporan anda…",
+    "complete": "Laporan sedia",
+    "failed": "Laporan tidak dapat disediakan. Cuba lagi.",
+    "unavailable": "Laporan tidak tersedia sehingga tugasan latar belakang dikonfigurasi.",
+    "expired": "Laporan ini telah tamat tempoh. Sediakan yang baharu.",
+    "notice": "Gambaran stok peribadi pada satu masa. Tersedia selama 30 minit. Ini bukan sijil."
+  },
   "brand": {
     "name": "Luma.Green",
     "tagline": "Bergerak ke Arah Hari Esok yang Lebih Bersih"
@@ -82,7 +92,7 @@
       "today": "Hari ini",
       "low": "Terendah 30 hari",
       "high": "Tertinggi 30 hari",
-      "floor": "Had minimum",
+      "floor": "Rujukan",
       "noFloor": "Tiada",
       "noHistory": "Belum ada sejarah harga."
     },
@@ -92,22 +102,22 @@
       "body": "Semak sambungan anda dan cuba lagi."
     },
     "metaTitle": "Harga bahan kitar semula Bengaluru hari ini",
-    "metaDescription": "Harga bahan kitar semula Bengaluru hari ini per kg: kertas, plastik, logam, kaca dan e-sisa, dengan perubahan minggu ini, carta 30 hari dan bayaran minimum kedai.",
+    "metaDescription": "Harga rujukan bertarikh bagi setiap kg bahan kitar semula di Bengaluru. Setiap perniagaan menetapkan tawaran sendiri.",
     "eyebrow": "Bengaluru",
     "title": "Harga bahan",
-    "lead": "Harga jual bahan kitar semula hari ini sekilo. Kedai menetapkan harga sendiri, tetapi tidak di bawah had minimum. Ketik bahan untuk melihat 30 hari lalu.",
+    "lead": "Harga rujukan bertarikh bagi setiap kilogram. Setiap perniagaan menetapkan tawaran sendiri. Pilih bahan untuk melihat sejarah yang tersedia.",
     "demoNote": "Harga contoh untuk prototaip, bukan kadar pasaran langsung.",
     "date": "Harga untuk {date}",
-    "floorHelp": "Had minimum: bayaran terendah sekilo yang dibenarkan bagi kedai disahkan.",
+    "floorHelp": "Harga rujukan: maklumat bertarikh, bukan minimum wajib atau tawaran kedai.",
     "perKg": "{price}/kg",
-    "floor": "Had minimum {price}",
+    "floor": "Rujukan {price}",
     "noPrice": "Belum ada harga",
     "columns": {
       "material": "Bahan",
       "today": "Hari ini",
       "week": "Minggu ini",
       "month": "30 hari",
-      "floor": "Had minimum"
+      "floor": "Rujukan"
     },
     "families": {
       "paper": "Kertas",
@@ -130,7 +140,7 @@
     "chart": {
       "label": "{material}: harga sekilo mengikut hari. Gunakan kekunci anak panah untuk beralih antara hari.",
       "point": "{date}: {price}",
-      "floor": "Had minimum {price}",
+      "floor": "Rujukan {price}",
       "table": "Tunjukkan angka",
       "tableCaption": "{material}, harga sekilo mengikut hari",
       "date": "Tarikh",
@@ -261,10 +271,10 @@
     "lead": "Bahan bergerak dari rumah ke kedai kutipan, pemproses awal dan pengitar semula sebelum menjadi sesuatu yang baharu. Luma.Green merekodkan setiap serahan.",
     "stepLabel": "Langkah {number}",
     "sell": {
-      "body": "Isi rumah memilih bahan, melihat tawaran setiap kedai berhampiran dan menempah kutipan atau penghantaran sendiri. Peniaga menimbang setiap bahan dan membayar tunai atau UPI; kedua-duanya mendapat resit.",
-      "point1": "Setiap kedai menetapkan harga sendiri, tidak di bawah had minimum diterbitkan",
+      "body": "Isi rumah menambah foto dan butiran kutipan, kemudian menempah pengambilan atau penghantaran. Anggaran berat tidak diperlukan. Kedai menimbang bahan dan merekodkan pengisytiharan bayaran serta resit.",
+      "point1": "Setiap kedai menetapkan tawaran sendiri",
       "point2": "Berat direkodkan dalam gram daripada penimbang kedai",
-      "point3": "Pautan penjejakan tanpa memerlukan akaun"
+      "point3": "Log masuk dengan kebenaran rekod untuk melihat butiran kutipan peribadi"
     },
     "trade": {
       "body": "Bayaran perniagaan menggunakan gerbang pembayaran. Semak pesanan untuk status bayaran semasa.",
@@ -755,19 +765,19 @@
       },
       "howPricesWork": {
         "title": "Cara harga ditetapkan",
-        "summary": "Mengapa anggaran berupa julat dan cara jumlah akhir dikira.",
+        "summary": "Cara tawaran bebas kedai dan berat yang diukur menentukan jumlah.",
         "steps": {
           "estimate": {
-            "title": "Anggaran menggunakan harga bandar",
-            "body": "Sebelum anda memilih kabadiwala, kami menggunakan harga standard Bengaluru untuk menunjukkan julat."
+            "title": "Harga rujukan ialah maklumat bertarikh",
+            "body": "Harga rujukan memberi konteks. Harga ini tidak menetapkan tawaran kedai atau minimum wajib."
           },
           "own": {
             "title": "Setiap kabadiwala menetapkan harga",
             "body": "Selepas memilih kabadiwala, anda melihat harga mereka bagi setiap bahan."
           },
           "floor": {
-            "title": "Tidak boleh kurang daripada harga minimum",
-            "body": "Luma.Green menetapkan harga minimum bagi setiap bahan. Kabadiwala tidak boleh membayar kurang daripada itu."
+            "title": "Tawaran bebas",
+            "body": "Setiap perniagaan menetapkan tawaran sendiri. Luma.Green tidak menguatkuasakan minimum berdasarkan harga rujukan."
           },
           "final": {
             "title": "Berat menentukan jumlah",
@@ -895,23 +905,23 @@
       },
       "setPrices": {
         "title": "Tetapkan harga anda",
-        "summary": "Anda memilih bayaran yang melebihi harga minimum.",
+        "summary": "Pilih tawaran anda untuk setiap bahan.",
         "steps": {
           "open": {
             "title": "Buka Harga saya",
-            "body": "Anda melihat setiap bahan bersama harga minimum."
+            "body": "Lihat bahan dan maklumat harga rujukan yang tersedia."
           },
           "enter": {
             "title": "Masukkan harga setiap kg",
             "body": "Taip harga yang mahu dibayar kepada isi rumah bagi setiap bahan."
           },
           "floor": {
-            "title": "Kekalkan harga melebihi minimum",
-            "body": "Harga di bawah minimum tidak disimpan. Jika minimum meningkat, harga anda juga meningkat dan kami memaklumkan anda."
+            "title": "Tetapkan tawaran bebas",
+            "body": "Harga rujukan tidak menetapkan atau mengubah tawaran anda secara automatik."
           },
           "blank": {
             "title": "Biarkan harga bahan kosong",
-            "body": "Jika tiada harga ditetapkan, harga standard bandar digunakan."
+            "body": "Jika bahan dibiarkan kosong, tiada tawaran ditetapkan untuknya."
           },
           "history": {
             "title": "Resit lama tidak berubah",
@@ -1231,7 +1241,7 @@
       },
       "howPriceWorks": {
         "q": "Bagaimana bayaran saya dikira?",
-        "a": "Berat setiap bahan didarab harga per kg peniaga. Harga mereka tidak boleh di bawah minimum Luma.Green."
+        "a": "Berat setiap bahan yang diukur didarab dengan harga kedai per kg yang dipersetujui. Harga rujukan untuk maklumat sahaja."
       },
       "howPaid": {
         "q": "Bagaimana saya dibayar?",
@@ -1271,7 +1281,7 @@
       },
       "ownPrices": {
         "q": "Bolehkah saya menetapkan harga sendiri?",
-        "a": "Ya, bagi setiap bahan, selagi tidak di bawah harga minimum Luma.Green."
+        "a": "Ya. Setiap perniagaan menetapkan tawaran sendiri untuk setiap bahan. Harga rujukan bukan minimum wajib."
       },
       "noVehicle": {
         "q": "Saya tidak mempunyai kenderaan. Masih boleh menyertai?",
@@ -1810,6 +1820,33 @@
     }
   },
   "track": {
+    "review": {
+      "title": "Semak resit",
+      "declaration": "Kedai telah mengisytiharkan pembayaran. Anda belum mengesahkan penerimaan bayaran.",
+      "accepted": "Resit diterima. Sahkan bayaran hanya selepas anda menerimanya.",
+      "disputed": "Resit dipertikaikan. Penyelesaian masih belum selesai.",
+      "acknowledged": "Anda telah mengesahkan penerimaan bayaran.",
+      "accept": "Terima",
+      "dispute": "Pertikaikan resit",
+      "acknowledge": "Sahkan bayaran diterima",
+      "rejectLine": "Tolak {material}",
+      "note": "Sebab pertikaian",
+      "sharing": "Pembantu kutipan",
+      "phone": "Nombor telefon pembantu",
+      "adult": "Saya mengesahkan bahawa saya dan pembantu yang dijemput ialah orang dewasa.",
+      "invite": "Jemput pembantu",
+      "shareNote": "Kongsi pautan kutipan ini dengan pembantu. Mereka mesti log masuk dengan nombor telefon yang disahkan ini dan menerima dalam masa 48 jam. Tiada mesej dihantar.",
+      "active": "Aktif",
+      "pending": "Menunggu penerimaan",
+      "ended": "Akses tamat",
+      "revoke": "Batalkan akses",
+      "leave": "Tinggalkan kutipan",
+      "handover": "Nota serahan",
+      "save": "Simpan nota",
+      "error": "Perubahan tidak dapat disimpan. Semak akses anda dan cuba lagi.",
+      "signIn": "Log masuk untuk melihat kutipan ini",
+      "acceptedTotal": "Diterima: {weight} · {amount}"
+    },
     "notFound": {
       "sell": "Tempah kutipan",
       "title": "Tempahan ini tidak ditemui",
@@ -1903,7 +1940,7 @@
       "declined": "Ditolak oleh kedai",
       "cancelled": "Dibatalkan"
     },
-    "saved": "Tiada akaun diperlukan. Simpan pautan ini untuk menyemak tempahan pada mana-mana telefon.",
+    "saved": "Simpan pautan ini. Untuk melihat butiran peribadi, log masuk dan anda mesti mempunyai kebenaran untuk kutipan ini.",
     "sellMore": "Tempah kutipan lagi",
     "tryAnother": "Cuba kedai lain",
     "dispatchChanged": "Permintaan anda dialihkan ke kedai berhampiran lain. Kedai semasa ditunjukkan di bawah.",
@@ -2193,16 +2230,16 @@
       "title": "Harga saya",
       "saving": "Menyimpan…",
       "prefix": "₹",
-      "lead": "Bayaran anda kepada isi rumah bagi setiap kg. Tidak boleh di bawah minimum.",
+      "lead": "Tawaran anda kepada isi rumah bagi setiap kg. Anda menetapkannya secara bebas.",
       "label": "Harga anda untuk {material}, dalam rupee per kg",
       "suffix": "/kg",
-      "minimum": "Had minimum {price}/kg",
+      "minimum": "Rujukan {price}/kg",
       "market": "Pasaran {price}/kg",
-      "notSet": "Belum ditetapkan. Isi rumah mendapat harga bandar, {price}/kg.",
+      "notSet": "Tiada tawaran ditetapkan. Rujukan: {price}/kg.",
       "saved": "{material}: {price}/kg disimpan.",
       "invalid": "Masukkan harga, seperti 14 atau 14.50.",
-      "belowFloor": "Terlalu rendah. Minimum ialah {price}/kg.",
-      "belowFloorUnknown": "Terlalu rendah. Ini di bawah harga minimum.",
+      "belowFloor": "Masukkan harga yang sah. Rujukan: {price}/kg.",
+      "belowFloorUnknown": "Masukkan harga yang sah.",
       "emptyTitle": "Belum ada bahan",
       "emptyBody": "Bahan yang anda beli ditetapkan apabila kedai diluluskan."
     },
@@ -2273,11 +2310,11 @@
       "buy": "Beli bahan",
       "lead": "Stok anda sekarang dan nilainya hari ini.",
       "totalWeight": "Jumlah berat",
-      "worth": "Nilai hari ini",
-      "worthHint": "Pada harga pasaran hari ini",
+      "worth": "Nilai tawaran semasa",
+      "worthHint": "Nilai tawaran semasa",
       "recycled": "Bahan kitar semula",
-      "atPrice": "Pasaran {price}/kg",
-      "noPrice": "Tiada harga pasaran hari ini",
+      "atPrice": "Nilai tawaran semasa: {price}/kg",
+      "noPrice": "Tiada tawaran semasa",
       "sellTo": {
         "yard": "Jual ke pemproses awal",
         "recycler": "Jual kepada pengitar semula",
@@ -2287,7 +2324,8 @@
       "emptyShop": "Timbang dan bayar kutipan, kemudian stok muncul di sini.",
       "emptyBusiness": "Beli di pasaran, kemudian stok muncul di sini.",
       "notBusinessTitle": "Hanya untuk perniagaan",
-      "notBusinessBody": "Stok disimpan oleh kedai, pemproses awal, pengitar semula dan kilang."
+      "notBusinessBody": "Stok disimpan oleh kedai, pemproses awal, pengitar semula dan kilang.",
+      "recordedCost": "Kos direkodkan"
     },
     "perKg": "{price}/kg",
     "days": {
@@ -3153,7 +3191,7 @@
       "kabadiwala": {
         "title": "Peniaga barang lusuh",
         "one": "Permintaan kutipan daripada rumah berhampiran.",
-        "two": "Tetapkan harga sendiri, tidak di bawah harga minimum.",
+        "two": "Tetapkan tawaran anda untuk setiap bahan.",
         "three": "Jual stok yang diasingkan ke pemproses awal.",
         "cta": "Sertai sebagai peniaga barang lusuh"
       },
@@ -3194,8 +3232,8 @@
         "body": "Pilih peranan dan lengkapkan pendaftaran."
       },
       "floor": {
-        "title": "Harga adil dengan had minimum",
-        "body": "Kedai menetapkan harga sendiri, tetapi tidak di bawah harga minimum yang kami terbitkan bagi setiap bahan."
+        "title": "Tawaran kedai yang bebas",
+        "body": "Kedai menetapkan tawaran sendiri. Harga rujukan bertarikh ialah maklumat, bukan minimum wajib."
       },
       "escrow": {
         "title": "Menunggu gerbang pembayaran",
@@ -3477,7 +3515,8 @@
       "application_received": "Permohonan diterima",
       "application_approved": "Permohonan diluluskan",
       "application_changes_requested": "Permohonan perlu diubah",
-      "application_rejected": "Permohonan tidak diluluskan"
+      "application_rejected": "Permohonan tidak diluluskan",
+      "stock_low": "Amaran stok rendah"
     }
   },
   "integrations": {
@@ -3751,7 +3790,8 @@
     "addInput": "Tambah lot input",
     "chooseInput": "Pilih lot input",
     "combinedInput": "Jumlah jisim input",
-    "multiInputHint": "Gabungkan hanya bahan terukur dalam jagaan anda. Setiap kuantiti digunakan daripada lotnya sendiri. Ini merekod bukti pemprosesan dan tidak menambah stok."
+    "multiInputHint": "Gabungkan hanya bahan terukur dalam jagaan anda. Setiap kuantiti digunakan daripada lotnya sendiri. Ini merekod bukti pemprosesan dan tidak menambah stok.",
+    "qualityReleaseRequired": "Keputusan ujian diterima diperlukan"
   },
   "evidence": {
     "title": "Rujukan dokumen",
@@ -4166,5 +4206,163 @@
     "lead": "Baca salinan bukti tetap untuk tujuan dinyatakan. Kelulusan penerima tidak memberi akses kepada rekod perniagaan lain.",
     "warning": "Kongsi hanya pemeriksaan dipilih dan fail ditanda. Buang maklumat peribadi dahulu. Akses hingga 90 hari dan boleh dibatalkan; salinan dimuat turun tidak dapat ditarik balik.",
     "snapshot": "Salinan tetap pengisytiharan perniagaan pemeriksa. Bukan sijil atau pengesahan bebas."
+  },
+  "collectionOperations": {
+    "availability": "Ketersediaan kutipan",
+    "capacity": "Kapasiti setiap masa",
+    "holidays": "Tarikh tutup (YYYY-MM-DD, pisahkan dengan koma)",
+    "schedule": "Jadual kutipan",
+    "unassigned": "Belum ditugaskan. Ubah masa atau batalkan.",
+    "repeat": "Ulang setiap {days} hari",
+    "stop": "Hentikan lawatan akan datang",
+    "reschedule": "Ubah masa kutipan",
+    "requested": "Perubahan dihantar kepada pengendali",
+    "saved": "Disimpan",
+    "acknowledge": "Sahkan bayaran diterima",
+    "acknowledged": "Bayaran disahkan",
+    "fixedFee": "Upah kerja tetap. Perniagaan pemberi tugas membayar; Luma tidak menjamin upah.",
+    "due": "Tarikh bayaran: {date}",
+    "declarePayment": "Rekod bayaran pekerja",
+    "failedVisit": "Rekod lawatan gagal",
+    "paymentDeclared": "Bayaran direkodkan; menunggu pengesahan pekerja"
+  },
+  "geocoding": {
+    "consent": "Hantar lokasi ini ke Google Maps untuk mencari alamat.",
+    "find": "Cari alamat",
+    "loading": "Mencari alamat…",
+    "manual": "Anda boleh memasukkan alamat secara manual.",
+    "unavailable": "Carian tidak tersedia. Masukkan alamat secara manual.",
+    "use": "Gunakan alamat ini",
+    "confirm": "Saya telah menyemak alamat ini dan mahu menggantikan medan alamat.",
+    "preview": "Pratonton sahaja. Penyimpanan memerlukan semakan dasar perkhidmatan.",
+    "attribution": "Google Maps"
+  },
+  "serviceRecords": {
+    "title": "Perkhidmatan dan program",
+    "unavailable": "Pelaksanaan penyedia dan penebusan tidak tersedia. Rekod tidak meluluskan pinjaman, insurans, bantuan atau bayaran.",
+    "enquiries": "Pertanyaan perkhidmatan",
+    "programmes": "Rekod program",
+    "edit": "Sunting",
+    "reported": "Angka dilaporkan dan bukti belum disahkan. Tiada perjanjian perbandaran atau ganjaran dibiayai tersirat.",
+    "area": "Kawasan",
+    "startsOn": "Tarikh mula",
+    "endsOn": "Tarikh tamat",
+    "coverageCount": "Bilangan liputan",
+    "trips": "Perjalanan",
+    "centreHandovers": "Serahan pusat",
+    "groupIncomePaise": "Pendapatan kumpulan (paise)",
+    "share": "Kongsi laporan agregat",
+    "principal": "Pemilik bahan / pemberi kerja",
+    "materialReference": "Rujukan bahan",
+    "explicitReference": "Kongsi hanya kod bahan dan gram direkodkan dengan penerima terpilih.",
+    "commercialModel": "Model komersial",
+    "draft": "Draf",
+    "enquiry": "Pertanyaan",
+    "closed": "Ditutup",
+    "kinds": {
+      "equipment": "Peralatan",
+      "staffing": "Kakitangan",
+      "transport": "Pengangkutan",
+      "environment": "Alam sekitar",
+      "accounting": "Perakaunan",
+      "solar": "Tenaga suria",
+      "scales": "Penimbang",
+      "voice": "Perkhidmatan suara",
+      "society": "Perkhidmatan komuniti",
+      "welfare": "Kebajikan",
+      "donation": "Derma",
+      "reward": "Ganjaran",
+      "finance": "Kewangan",
+      "insurance": "Insurans",
+      "attendance": "Kehadiran",
+      "wet_service": "Perkhidmatan sisa basah",
+      "other": "Lain-lain"
+    },
+    "models": {
+      "partner_service": "Pertanyaan rakan kongsi",
+      "materials_sale_reference": "Rujukan jualan bahan",
+      "toll_jobwork": "Kerja proses dengan bahan milik pemberi kerja",
+      "paid_collection": "Perkhidmatan kutipan berbayar",
+      "generator_paid_treatment": "Rawatan dibayar pengeluar"
+    },
+    "directions": {
+      "not_applicable": "Tiada pelaksanaan bayaran",
+      "buyer_to_seller": "Pembeli → penjual",
+      "principal_to_processor": "Pemberi kerja → pemproses",
+      "customer_to_service": "Pelanggan → perkhidmatan",
+      "generator_to_handler": "Pengeluar → pengendali"
+    },
+    "received": "Diterima",
+    "sharedReports": "Laporan audit dikongsi",
+    "revoke": "Batalkan akses",
+    "quantityGrams": "Kuantiti (g)",
+    "recordName": "Nama rekod"
+  },
+  "returnClaims": {
+    "title": "Pemulangan dan bukti skim",
+    "returnTitle": "Pemulangan penuh",
+    "scheme": "Rujukan skim",
+    "issuer": "Rujukan pengeluar luar",
+    "freight": "Pembayar pengangkutan pulangan",
+    "reconcile": "Selaraskan",
+    "validate": "Semak sumber",
+    "notice": "Bukti dilaporkan sahaja. Ini bukan sijil rasmi atau kelulusan bayaran.",
+    "waiting": "Tunggu penerimaan fizikal, bayaran balik penuh penyedia dan pembalikan penyelesaian."
+  },
+  "marketComparison": {
+    "quote": "Sebut harga pengangkutan diperlukan",
+    "freight": "Pengangkutan berasingan: {price}/kg",
+    "notice": "Bayaran hanya meliputi bahan. Persetujui dan bayar pengangkutan secara berasingan.",
+    "available": "Tersedia mulai {date}",
+    "delivered": "Bahan dan pengangkutan: {price}/kg",
+    "freightInput": "Pengangkutan setiap kg (pilihan)",
+    "availableInput": "Tersedia mulai (pilihan)",
+    "validityInput": "Tamat tawaran (pilihan)"
+  },
+  "recordedCosts": {
+    "acquisition": "Kos pemerolehan (paise)",
+    "processing": "Kos pemprosesan (paise)",
+    "reference": "Rujukan bukti kos",
+    "hint": "Kosong bermaksud tidak diketahui. Masukkan 0 hanya untuk kos sifar yang direkodkan.",
+    "remaining": "Baki kos yang direkodkan",
+    "input": "Kos input yang digunakan",
+    "total": "Kos yang diperuntukkan kepada output",
+    "unknown": "Tidak diketahui",
+    "loss": "Output yang diukur menanggung kos pencemaran dan kehilangan proses.",
+    "record": "Rekod kos pemerolehan",
+    "processingTotal": "Kos pemprosesan"
+  },
+  "stockClosing": {
+    "title": "Semakan stok harian",
+    "notice": "Penutupan menyimpan stok semasa. Perubahan kemudian masih dibenarkan.",
+    "note": "Nota semakan",
+    "record": "Catat penutupan hari ini",
+    "last": "Penutupan terakhir",
+    "none": "Belum ada penutupan",
+    "gramsUnit": "g",
+    "unknown": "Kos tidak diketahui",
+    "balances": "Baki penutupan",
+    "threshold": "Amaran stok rendah",
+    "thresholdHint": "Dalam peti masuk akaun sahaja. Amaran dimatikan sehingga diaktifkan.",
+    "disabled": "Dimatikan",
+    "below": "Di bawah paras amaran",
+    "recent": "Amaran terkini (sehingga 20)",
+    "noAlerts": "Belum ada amaran",
+    "material": "Bahan",
+    "grams": "Paras amaran (gram)",
+    "enabled": "Aktifkan amaran",
+    "save": "Simpan tetapan amaran",
+    "closed": "Penutupan disimpan",
+    "saved": "Tetapan amaran disimpan",
+    "dateChanged": "Tarikh telah berubah. Semak dan cuba lagi.",
+    "alreadyRecorded": "Penutupan hari ini sudah dicatat.",
+    "limit": "Sejarah stok melebihi had alat ini. Minta bantuan pentadbir.",
+    "mismatch": "Rekod stok dan pergerakan berbeza. Minta pentadbir menyemaknya.",
+    "correction": "Pembetulan stok",
+    "add": "Tambah stok",
+    "remove": "Kurangkan stok",
+    "corrected": "Pembetulan dicatat",
+    "evidence": "Rujukan bukti fizikal",
+    "recentCorrections": "Pembetulan terkini (sehingga 20)"
   }
 }

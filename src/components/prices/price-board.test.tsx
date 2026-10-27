@@ -65,13 +65,13 @@ describe("PriceBoard", () => {
     ).toBeInTheDocument();
   });
 
-  it("reads each row out with its price, the week's change and the floor", () => {
+  it("reads each row out with its price and week change without a mandatory floor", () => {
     renderBoard();
 
     const newspaper = screen.getByRole("button", { name: /Newspaper/ });
     expect(newspaper).toHaveTextContent("₹14/kg");
     expect(newspaper).toHaveTextContent("Up 2.1% this week");
-    expect(newspaper).toHaveTextContent("Floor ₹12");
+    expect(newspaper).not.toHaveTextContent("Floor");
     expect(screen.getByRole("button", { name: /Cardboard/ })).toHaveTextContent(
       "Down 1.3% this week",
     );

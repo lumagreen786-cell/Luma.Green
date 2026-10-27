@@ -1,4 +1,14 @@
 {
+  "stockReports": {
+    "prepare": "Przygotuj raport zapasów",
+    "download": "Pobierz raport zapasów",
+    "preparing": "Przygotowywanie raportu…",
+    "complete": "Raport gotowy",
+    "failed": "Nie udało się przygotować raportu. Spróbuj ponownie.",
+    "unavailable": "Raporty są niedostępne do czasu skonfigurowania zadań w tle.",
+    "expired": "Ten raport wygasł. Przygotuj nowy.",
+    "notice": "Prywatny obraz stanu zapasów. Dostępny przez 30 minut. To nie jest certyfikat."
+  },
   "brand": {
     "name": "Luma.Green",
     "tagline": "Czystsze jutro w ruchu"
@@ -135,7 +145,7 @@
       "kabadiwala": {
         "title": "Kabadiwalowie",
         "one": "Zlecenia odbioru od pobliskich gospodarstw.",
-        "two": "Ustalaj własne ceny, nie niższe od minimum.",
+        "two": "Ustalaj własne oferty dla każdego materiału.",
         "three": "Sprzedawaj posortowane zapasy firmom przetwarzania wstępnego.",
         "cta": "Dołącz jako kabadiwala"
       },
@@ -176,8 +186,8 @@
         "body": "Wybierz rolę i dokończ rejestrację."
       },
       "floor": {
-        "title": "Uczciwe ceny z minimum",
-        "body": "Punkty ustalają własne ceny, lecz nie mogą zejść poniżej minimum publikowanego dla każdego materiału."
+        "title": "Niezależne oferty sklepów",
+        "body": "Sklepy ustalają własne oferty. Ceny referencyjne z datą są informacją, a nie obowiązkowym minimum."
       },
       "escrow": {
         "title": "Oczekiwanie na bramkę",
@@ -237,22 +247,22 @@
   },
   "prices": {
     "metaTitle": "Dzisiejsze ceny surowców w Bengaluru",
-    "metaDescription": "Dzisiejsze ceny surowców w Bengaluru za kg: papier, plastik, metal, szkło i elektroodpady. Z tygodniową zmianą, wykresem 30 dni i minimalną ceną skupu.",
+    "metaDescription": "Ceny referencyjne z datą za kg materiałów do recyklingu w Bengaluru. Każda firma ustala własne oferty.",
     "eyebrow": "Bengaluru",
     "title": "Ceny surowców",
-    "lead": "Dzisiejsze ceny za kilogram. Punkty ustalają własne stawki, nie niższe od minimum. Wybierz materiał, aby zobaczyć ostatnie 30 dni.",
+    "lead": "Ceny referencyjne z datą za kilogram. Każda firma ustala własne oferty. Wybierz materiał, aby zobaczyć dostępną historię.",
     "demoNote": "Przykładowe ceny w prototypie, nie bieżące stawki rynkowe.",
     "date": "Ceny z dnia {date}",
-    "floorHelp": "Minimum: najniższa cena za kilogram, jaką może zapłacić zweryfikowany punkt.",
+    "floorHelp": "Cena referencyjna: informacja z datą, a nie obowiązkowe minimum ani oferta sklepu.",
     "perKg": "{price}/kg",
-    "floor": "Minimum {price}",
+    "floor": "Referencyjna {price}",
     "noPrice": "Jeszcze brak ceny",
     "columns": {
       "material": "Materiał",
       "today": "Dzisiaj",
       "week": "Ten tydzień",
       "month": "30 dni",
-      "floor": "Cena minimalna"
+      "floor": "Referencyjna"
     },
     "families": {
       "paper": "Papier",
@@ -277,7 +287,7 @@
       "today": "Dzisiaj",
       "low": "Minimum z 30 dni",
       "high": "Maksimum z 30 dni",
-      "floor": "Cena minimalna",
+      "floor": "Referencyjna",
       "noFloor": "Brak",
       "close": "Zamknij",
       "noHistory": "Jeszcze brak historii cen."
@@ -285,7 +295,7 @@
     "chart": {
       "label": "{material}: cena za kilogram dzień po dniu. Użyj strzałek, aby zmieniać dni.",
       "point": "{date}: {price}",
-      "floor": "Minimum {price}",
+      "floor": "Referencyjna {price}",
       "table": "Pokaż wartości",
       "tableCaption": "{material}, cena za kilogram według dni",
       "date": "Data",
@@ -557,10 +567,10 @@
     "lead": "Surowce trafiają z domów do punktów zbiórki, firm przetwarzania wstępnego i zakładów recyklingu, zanim powstanie z nich coś nowego. Luma.Green zapisuje każde przekazanie.",
     "stepLabel": "Krok {number}",
     "sell": {
-      "body": "Gospodarstwo wybiera materiały, porównuje oferty pobliskich punktów i rezerwuje odbiór lub dostawę. Kabadiwala waży każdy materiał i płaci gotówką lub UPI. Obie strony otrzymują potwierdzenie.",
-      "point1": "Każdy punkt ustala własne ceny, nie niższe od opublikowanego minimum",
+      "body": "Gospodarstwo domowe dodaje zdjęcia i szczegóły zbiórki, a następnie rezerwuje odbiór lub dostawę. Szacowana waga nie jest wymagana. Sklep waży materiały i zapisuje deklarację płatności oraz paragon.",
+      "point1": "Każdy sklep ustala własne oferty",
       "point2": "Wyniki z wagi punktu są zapisywane w gramach",
-      "point3": "Link do śledzenia, bez konta"
+      "point3": "Zaloguj się z uprawnieniem do rekordu, aby zobaczyć prywatne szczegóły zbiórki"
     },
     "trade": {
       "body": "Płatności firmowe odbywają się przez bramkę płatniczą. Sprawdź zamówienie, aby poznać aktualny stan płatności.",
@@ -1079,19 +1089,19 @@
       },
       "howPricesWork": {
         "title": "Jak ustalane są ceny",
-        "summary": "Dlaczego szacunek jest przedziałem i jak oblicza się ostateczną kwotę.",
+        "summary": "Jak niezależne oferty sklepu i zmierzone wagi określają kwotę.",
         "steps": {
           "estimate": {
-            "title": "Szacunki korzystają z cen miejskich",
-            "body": "Przed wyborem punktu skupu korzystamy ze standardowych cen w Bengaluru, dlatego pokazujemy przedział."
+            "title": "Ceny referencyjne to informacje z datą",
+            "body": "Ceny referencyjne zapewniają kontekst. Nie ustalają oferty sklepu ani obowiązkowego minimum."
           },
           "own": {
             "title": "Każdy punkt ustala swoją cenę",
             "body": "Po wybraniu punktu zobaczysz jego ceny dla poszczególnych materiałów."
           },
           "floor": {
-            "title": "Nigdy poniżej minimum",
-            "body": "Luma.Green ustala cenę minimalną dla każdego materiału. Żaden punkt nie może płacić mniej."
+            "title": "Niezależne oferty",
+            "body": "Każda firma ustala własne oferty. Luma.Green nie wymusza minimum opartego na cenie referencyjnej."
           },
           "final": {
             "title": "Masa decyduje o kwocie",
@@ -1219,23 +1229,23 @@
       },
       "setPrices": {
         "title": "Ustal swoje ceny",
-        "summary": "Wybierasz, ile płacisz, powyżej minimum.",
+        "summary": "Wybierz swoją ofertę dla każdego materiału.",
         "steps": {
           "open": {
             "title": "Otwórz Moje ceny",
-            "body": "Zobaczysz każdy materiał wraz z ceną minimalną."
+            "body": "Zobacz materiały i dostępne informacje o cenach referencyjnych."
           },
           "enter": {
             "title": "Wpisz cenę za kg",
             "body": "Wpisz kwotę, którą chcesz płacić mieszkańcom za każdy materiał."
           },
           "floor": {
-            "title": "Nie schodź poniżej minimum",
-            "body": "Cena poniżej minimum nie zostanie zapisana. Jeśli minimum wzrośnie, Twoja cena też wzrośnie i powiadomimy Cię o tym."
+            "title": "Ustal niezależną ofertę",
+            "body": "Ceny referencyjne nie ustalają ani automatycznie nie zmieniają Twojej oferty."
           },
           "blank": {
             "title": "Pozostaw cenę pustą",
-            "body": "Jeśli nie ustalisz ceny, zostanie użyta standardowa cena miejska."
+            "body": "Jeśli pozostawisz materiał pusty, nie zostanie dla niego ustalona oferta."
           },
           "history": {
             "title": "Stare potwierdzenia się nie zmienią",
@@ -1555,7 +1565,7 @@
       },
       "howPriceWorks": {
         "q": "Jak obliczana jest moja zapłata?",
-        "a": "Masa każdego materiału razy cena punktu skupu za kg. Cena nie może być niższa od minimum ustalonego przez Luma.Green."
+        "a": "Zmierzona waga każdego materiału pomnożona przez uzgodnioną cenę sklepu za kg. Ceny referencyjne są wyłącznie informacją."
       },
       "howPaid": {
         "q": "Jak otrzymam zapłatę?",
@@ -1595,7 +1605,7 @@
       },
       "ownPrices": {
         "q": "Czy mogę ustalać własne ceny?",
-        "a": "Tak, dla każdego materiału, o ile cena nie jest niższa od minimum ustalonego przez Luma.Green."
+        "a": "Tak. Każda firma ustala własne oferty dla każdego materiału. Ceny referencyjne nie są obowiązkowym minimum."
       },
       "noVehicle": {
         "q": "Nie mam pojazdu. Czy mogę dołączyć?",
@@ -2746,6 +2756,33 @@
     }
   },
   "track": {
+    "review": {
+      "title": "Sprawdź paragon",
+      "declaration": "Sklep zadeklarował płatność. Nie potwierdzono jeszcze jej otrzymania.",
+      "accepted": "Paragon zaakceptowany. Potwierdź płatność dopiero po jej otrzymaniu.",
+      "disputed": "Paragon zakwestionowany. Sprawa oczekuje na rozstrzygnięcie.",
+      "acknowledged": "Potwierdzono otrzymanie płatności.",
+      "accept": "Akceptuj",
+      "dispute": "Zakwestionuj paragon",
+      "acknowledge": "Potwierdź otrzymanie płatności",
+      "rejectLine": "Odrzuć {material}",
+      "note": "Powód sporu",
+      "sharing": "Pomocnicy przy odbiorze",
+      "phone": "Numer telefonu pomocnika",
+      "adult": "Potwierdzam, że ja i zaproszony pomocnik jesteśmy osobami pełnoletnimi.",
+      "invite": "Zaproś pomocnika",
+      "shareNote": "Udostępnij pomocnikowi ten link do odbioru. Musi zalogować się przy użyciu tego zweryfikowanego numeru telefonu i zaakceptować zaproszenie w ciągu 48 godzin. Żadna wiadomość nie zostanie wysłana.",
+      "active": "Aktywny",
+      "pending": "Oczekuje na akceptację",
+      "ended": "Dostęp zakończony",
+      "revoke": "Cofnij dostęp",
+      "leave": "Opuść odbiór",
+      "handover": "Notatka o przekazaniu",
+      "save": "Zapisz notatkę",
+      "error": "Nie udało się zapisać zmiany. Sprawdź swój dostęp i spróbuj ponownie.",
+      "signIn": "Zaloguj się, aby zobaczyć ten odbiór",
+      "acceptedTotal": "Zaakceptowano: {weight} · {amount}"
+    },
     "metaTitle": "Twoja rezerwacja",
     "notFound": {
       "title": "Nie znaleziono tej rezerwacji",
@@ -2839,7 +2876,7 @@
       "close": "Zamknij",
       "otherNumber": "Użyj innego numeru"
     },
-    "saved": "Konto nie jest potrzebne. Zachowaj link, aby sprawdzać rezerwację na dowolnym telefonie.",
+    "saved": "Zachowaj ten link. Aby zobaczyć prywatne szczegóły, zaloguj się i musisz mieć uprawnienie do tej zbiórki.",
     "sellMore": "Zamów kolejny odbiór",
     "tryAnother": "Wybierz inny punkt",
     "dispatchChanged": "Zlecenie przeniesiono do innego pobliskiego punktu. Aktualny punkt jest widoczny poniżej.",
@@ -3291,12 +3328,12 @@
       "title": "Zapasy",
       "lead": "Twoje aktualne zapasy i ich dzisiejsza wartość.",
       "totalWeight": "Łączna masa",
-      "worth": "Dzisiejsza wartość",
-      "worthHint": "Według dzisiejszych cen rynkowych",
+      "worth": "Wartość bieżącej oferty",
+      "worthHint": "Wartość bieżącej oferty",
       "scrap": "Zebrane surowce",
       "recycled": "Surowiec wtórny",
-      "atPrice": "Cena rynkowa {price}/kg",
-      "noPrice": "Brak dzisiejszej ceny rynkowej",
+      "atPrice": "Wartość bieżącej oferty: {price}/kg",
+      "noPrice": "Brak bieżącej oferty",
       "sellTo": {
         "yard": "Sprzedaj firmie przetwarzania wstępnego",
         "recycler": "Sprzedaj zakładowi recyklingu",
@@ -3307,23 +3344,24 @@
       "emptyBusiness": "Kup na rynku, a materiał pojawi się tutaj.",
       "buy": "Kup materiał",
       "notBusinessTitle": "Tylko dla firm",
-      "notBusinessBody": "Zapasy prowadzą punkty, firmy przetwarzania wstępnego, zakłady recyklingu i fabryki."
+      "notBusinessBody": "Zapasy prowadzą punkty, firmy przetwarzania wstępnego, zakłady recyklingu i fabryki.",
+      "recordedCost": "Zapisany koszt"
     },
     "prices": {
       "title": "Moje ceny",
-      "lead": "Kwota płacona mieszkańcom za kg. Nigdy poniżej minimum.",
+      "lead": "Twoje oferty dla gospodarstw domowych za kg. Ustalasz je niezależnie.",
       "label": "Twoja cena za {material}, w rupiach za kg",
       "prefix": "₹",
       "suffix": "/kg",
-      "minimum": "Cena minimalna {price}/kg",
+      "minimum": "Referencyjna {price}/kg",
       "market": "Cena rynkowa {price}/kg",
-      "notSet": "Cena nieustalona. Mieszkańcy otrzymują cenę miejską: {price}/kg.",
+      "notSet": "Nie ustalono oferty. Referencyjna: {price}/kg.",
       "save": "Zapisz",
       "saving": "Zapisywanie…",
       "saved": "{material}: zapisano {price}/kg.",
       "invalid": "Wpisz cenę, np. 14 lub 14,50.",
-      "belowFloor": "Za nisko. Minimum wynosi {price}/kg.",
-      "belowFloorUnknown": "Za nisko. To poniżej ceny minimalnej.",
+      "belowFloor": "Podaj prawidłową cenę. Referencyjna: {price}/kg.",
+      "belowFloorUnknown": "Podaj prawidłową cenę.",
       "emptyTitle": "Brak materiałów",
       "emptyBody": "Kupowane materiały są ustalane podczas zatwierdzania punktu."
     },
@@ -3477,7 +3515,8 @@
       "application_received": "Wniosek otrzymany",
       "application_approved": "Wniosek zatwierdzony",
       "application_changes_requested": "Wniosek wymaga zmian",
-      "application_rejected": "Wniosek niezatwierdzony"
+      "application_rejected": "Wniosek niezatwierdzony",
+      "stock_low": "Alert niskiego zapasu"
     }
   },
   "integrations": {
@@ -3751,7 +3790,8 @@
     "addInput": "Dodaj partię wejściową",
     "chooseInput": "Wybierz partię wejściową",
     "combinedInput": "Łączna masa wejściowa",
-    "multiInputHint": "Łącz tylko zmierzony materiał pod swoją opieką. Każda ilość jest zużywana z własnej partii. To zapis dowodu przetwarzania, który nie dodaje zapasu."
+    "multiInputHint": "Łącz tylko zmierzony materiał pod swoją opieką. Każda ilość jest zużywana z własnej partii. To zapis dowodu przetwarzania, który nie dodaje zapasu.",
+    "qualityReleaseRequired": "Wymagane zaakceptowane testy"
   },
   "evidence": {
     "title": "Odwołania do dokumentów",
@@ -4166,5 +4206,163 @@
     "lead": "Czytaj stałą kopię dowodów dla wskazanego celu. Zatwierdzenie odbiorcy nie daje dostępu do innych danych firmowych.",
     "warning": "Udostępniaj tylko wybraną kontrolę i zaznaczone pliki. Najpierw usuń dane osobowe. Dostęp do 90 dni, z możliwością odwołania; pobranych kopii nie można odebrać.",
     "snapshot": "Stała kopia deklaracji firmy kontrolującej. To nie certyfikat ani niezależna weryfikacja."
+  },
+  "collectionOperations": {
+    "availability": "Dostępność odbioru",
+    "capacity": "Liczba miejsc w przedziale",
+    "holidays": "Dni zamknięcia (YYYY-MM-DD, oddzielone przecinkami)",
+    "schedule": "Harmonogram odbioru",
+    "unassigned": "Jeszcze nie przypisano. Zmień termin lub anuluj.",
+    "repeat": "Powtarzaj co {days} dni",
+    "stop": "Zatrzymaj przyszłe wizyty",
+    "reschedule": "Zmień godzinę odbioru",
+    "requested": "Zmiana wysłana do operatora",
+    "saved": "Zapisano",
+    "acknowledge": "Potwierdź otrzymanie płatności",
+    "acknowledged": "Płatność potwierdzona",
+    "fixedFee": "Stała opłata za pracę. Płaci zlecająca firma; Luma nie gwarantuje wynagrodzenia.",
+    "due": "Termin płatności: {date}",
+    "declarePayment": "Zgłoś płatność pracownikowi",
+    "failedVisit": "Zapisz nieudaną wizytę",
+    "paymentDeclared": "Płatność zgłoszona; oczekiwanie na potwierdzenie pracownika"
+  },
+  "geocoding": {
+    "consent": "Wyślij ten punkt do Google Maps, aby znaleźć adres.",
+    "find": "Znajdź adres",
+    "loading": "Wyszukiwanie adresu…",
+    "manual": "Możesz wpisać adres ręcznie.",
+    "unavailable": "Wyszukiwanie jest niedostępne. Wpisz adres ręcznie.",
+    "use": "Użyj tego adresu",
+    "confirm": "Sprawdziłem ten adres i chcę zastąpić pole adresu.",
+    "preview": "Tylko podgląd. Zapis wymaga przeglądu zasad usługi.",
+    "attribution": "Google Maps"
+  },
+  "serviceRecords": {
+    "title": "Usługi i programy",
+    "unavailable": "Realizacja usługodawcy i wymiana nagród są niedostępne. Rejestry nie zatwierdzają pożyczek, ubezpieczeń, świadczeń ani płatności.",
+    "enquiries": "Zapytania o usługi",
+    "programmes": "Rejestry programów",
+    "edit": "Edytuj",
+    "reported": "Zgłoszone liczby i niezweryfikowane dowody. Nie oznaczają umowy miejskiej ani finansowanej nagrody.",
+    "area": "Obszar",
+    "startsOn": "Data początkowa",
+    "endsOn": "Data końcowa",
+    "coverageCount": "Zasięg",
+    "trips": "Przejazdy",
+    "centreHandovers": "Przekazania do centrum",
+    "groupIncomePaise": "Dochód grupy (paise)",
+    "share": "Udostępnij raport zbiorczy",
+    "principal": "Właściciel materiału / zleceniodawca",
+    "materialReference": "Odniesienie do materiału",
+    "explicitReference": "Udostępnij tylko kod materiału i zapisane gramy wybranemu odbiorcy.",
+    "commercialModel": "Model handlowy",
+    "draft": "Szkic",
+    "enquiry": "Zapytanie",
+    "closed": "Zamknięte",
+    "kinds": {
+      "equipment": "Sprzęt",
+      "staffing": "Personel",
+      "transport": "Usługi transportowe",
+      "environment": "Środowisko",
+      "accounting": "Księgowość",
+      "solar": "Energia słoneczna",
+      "scales": "Wagi",
+      "voice": "Usługi głosowe",
+      "society": "Usługi wspólnotowe",
+      "welfare": "Pomoc społeczna",
+      "donation": "Darowizna",
+      "reward": "Nagroda",
+      "finance": "Finansowanie",
+      "insurance": "Ubezpieczenie",
+      "attendance": "Obecność",
+      "wet_service": "Usługa odpadów mokrych",
+      "other": "Inne"
+    },
+    "models": {
+      "partner_service": "Zapytanie do partnera",
+      "materials_sale_reference": "Odniesienie do sprzedaży materiału",
+      "toll_jobwork": "Przerób z własnością zleceniodawcy",
+      "paid_collection": "Płatna usługa odbioru",
+      "generator_paid_treatment": "Przetwarzanie opłacane przez wytwórcę"
+    },
+    "directions": {
+      "not_applicable": "Brak realizacji płatności",
+      "buyer_to_seller": "Kupujący → sprzedawca",
+      "principal_to_processor": "Zleceniodawca → przetwórca",
+      "customer_to_service": "Klient → usługa",
+      "generator_to_handler": "Wytwórca → operator"
+    },
+    "received": "Odebrana",
+    "sharedReports": "Udostępnione raporty audytu",
+    "revoke": "Odwołaj dostęp",
+    "quantityGrams": "Ilość (g)",
+    "recordName": "Nazwa rekordu"
+  },
+  "returnClaims": {
+    "title": "Zwroty i dowody programu",
+    "returnTitle": "Pełny zwrot",
+    "scheme": "Numer programu",
+    "issuer": "Numer zewnętrznego wystawcy",
+    "freight": "Płatnik transportu zwrotnego",
+    "reconcile": "Uzgodnij",
+    "validate": "Sprawdź źródło",
+    "notice": "Tylko zgłoszone dowody. To nie jest oficjalny certyfikat ani zatwierdzenie płatności.",
+    "waiting": "Poczekaj na odbiór fizyczny, pełny zwrot od dostawcy i odwrócenie rozliczenia."
+  },
+  "marketComparison": {
+    "quote": "Wymagana wycena transportu",
+    "freight": "Oddzielny transport: {price}/kg",
+    "notice": "Płatność obejmuje tylko materiał. Transport uzgodnij i opłać osobno.",
+    "available": "Dostępne od {date}",
+    "delivered": "Materiał i transport: {price}/kg",
+    "freightInput": "Transport za kg (opcjonalnie)",
+    "availableInput": "Dostępne od (opcjonalnie)",
+    "validityInput": "Ważność oferty (opcjonalnie)"
+  },
+  "recordedCosts": {
+    "acquisition": "Koszt nabycia (paise)",
+    "processing": "Koszt przetwarzania (paise)",
+    "reference": "Odnośnik do dowodu kosztu",
+    "hint": "Puste oznacza nieznane. Wpisz 0 tylko dla zapisanego kosztu zerowego.",
+    "remaining": "Pozostały zapisany koszt",
+    "input": "Koszt zużytych materiałów",
+    "total": "Koszt przypisany do wyjść",
+    "unknown": "Nieznany",
+    "loss": "Zmierzone wyjścia pokrywają koszty zanieczyszczeń i strat procesu.",
+    "record": "Zapisz koszt nabycia",
+    "processingTotal": "Koszt przetwarzania"
+  },
+  "stockClosing": {
+    "title": "Dzienny przegląd zapasów",
+    "notice": "Zamknięcie zapisuje bieżący zapas. Późniejsze zmiany są dozwolone.",
+    "note": "Notatka z przeglądu",
+    "record": "Zapisz dzisiejsze zamknięcie",
+    "last": "Ostatnie zamknięcie",
+    "none": "Brak zamknięcia",
+    "gramsUnit": "g",
+    "unknown": "Koszt nieznany",
+    "balances": "Salda zamknięcia",
+    "threshold": "Alert niskiego zapasu",
+    "thresholdHint": "Tylko w skrzynce konta. Alerty są wyłączone do czasu aktywacji.",
+    "disabled": "Wyłączony",
+    "below": "Poniżej progu alertu",
+    "recent": "Ostatnie alerty (do 20)",
+    "noAlerts": "Brak alertów",
+    "material": "Materiał",
+    "grams": "Próg alertu (gramy)",
+    "enabled": "Włącz alert",
+    "save": "Zapisz ustawienie alertu",
+    "closed": "Zamknięcie zapisane",
+    "saved": "Ustawienie alertu zapisane",
+    "dateChanged": "Data się zmieniła. Sprawdź i spróbuj ponownie.",
+    "alreadyRecorded": "Dzisiejsze zamknięcie jest już zapisane.",
+    "limit": "Historia zapasów przekracza limit narzędzia. Poproś administratora o pomoc.",
+    "mismatch": "Zapasy i ruchy magazynowe różnią się. Poproś administratora o sprawdzenie.",
+    "correction": "Korekta zapasów",
+    "add": "Dodaj zapas",
+    "remove": "Zmniejsz zapas",
+    "corrected": "Korekta zapisana",
+    "evidence": "Odniesienie do dowodu fizycznego",
+    "recentCorrections": "Ostatnie korekty (do 20)"
   }
 }

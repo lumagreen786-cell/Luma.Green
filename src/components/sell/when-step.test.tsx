@@ -25,7 +25,7 @@ function withIntl(children: ReactNode) {
 
 const TODAY = "2026-09-29";
 /** 5 pm in Bengaluru: morning and afternoon are over for today. */
-const FIVE_PM = Date.UTC(2026, 8, 29, 17) - 5.5 * 60 * 60 * 1000;
+const FIVE_PM = Date.UTC(2026, 8, 29, 16, 30) - 5.5 * 60 * 60 * 1000;
 
 function renderWhen(
   draft: Partial<SellDraft>,
@@ -56,7 +56,7 @@ describe("WhenStep", () => {
     expect(screen.getByText("Tomorrow")).toBeInTheDocument();
   });
 
-  it("drops today once every time has passed, and still offers seven days", () => {
+  it("drops today once every time has passed, and stays inside the seven-date horizon", () => {
     const onChange = vi.fn();
     render(
       withIntl(
@@ -82,7 +82,6 @@ describe("WhenStep", () => {
       "day-2026-10-03",
       "day-2026-10-04",
       "day-2026-10-05",
-      "day-2026-10-06",
     ]);
   });
 

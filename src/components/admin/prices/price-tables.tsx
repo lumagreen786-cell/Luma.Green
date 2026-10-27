@@ -39,7 +39,7 @@ export function PriceTables() {
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 lg:gap-8">
       <AppPageHeader
         title="Prices"
-        lead={`The minimum and fallback price per kilo in ${PILOT_CITY}, for every material.`}
+        lead={`The indicative reference prices per kilo in ${PILOT_CITY}, for every material.`}
       />
       <DemoNote>Sample prices for the prototype, not market rates.</DemoNote>
       <PriceRules />
@@ -55,13 +55,13 @@ function PriceRules() {
   const rules = [
     {
       icon: ShieldIcon,
-      title: "Minimum",
-      body: "A kabadiwala can't pay households less. Raising it lifts every shop price that's below it.",
+      title: "Reference low",
+      body: "A dated indication only. Each business sets its own offer. Reference changes do not change offers or agreed orders.",
     },
     {
       icon: ArrowDownToLineIcon,
-      title: "Fallback",
-      body: "Used where a shop hasn't set its own price, and for a household's first estimate.",
+      title: "Reference price",
+      body: "Reference guidance for estimates. It does not replace a current business offer.",
     },
   ];
   return (
@@ -119,8 +119,8 @@ function PriceGroups({ rows }: { rows: readonly PriceRowData[] | undefined }) {
             )}
           >
             <span>Material</span>
-            <span>Minimum ₹/kg</span>
-            <span>Fallback ₹/kg</span>
+            <span>Reference low ₹/kg</span>
+            <span>Reference price ₹/kg</span>
             <span>Last changed</span>
             <span />
           </div>

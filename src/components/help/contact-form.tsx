@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "convex/react";
+import { useConvexAuth, useMutation, useQuery } from "convex/react";
 import { CircleCheckIcon, MessageSquareOffIcon, SendIcon } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
@@ -124,6 +124,12 @@ export function ContactMessageForm() {
   const direction = localeDirection(isLocale(locale) ? locale : defaultLocale);
   const searchParams = useSearchParams();
   const send = useMutation(api.support.send);
+  const { isAuthenticated } = useConvexAuth();
+  const sources = useQuery(
+    api.support.linkedSources,
+    isAuthenticated ? {} : "skip",
+  );
+  const [linkedIndex, setLinkedIndex] = useState<string>("none");
   const [isSent, setIsSent] = useState(false);
   const [failure, setFailure] = useState<ContactErrorKey | null>(null);
 
@@ -158,6 +164,10 @@ export function ContactMessageForm() {
         role: values.role,
         topic: values.topic,
         message: values.message,
+        source:
+          linkedIndex === "none"
+            ? undefined
+            : sources?.[Number(linkedIndex)]?.source,
       });
       setIsSent(true);
     } catch (error) {
@@ -197,6 +207,32 @@ export function ContactMessageForm() {
         void handleSubmit(onSubmit)(event);
       }}
     >
+      {sources && sources.length > 0 ? (
+        <section className="flex flex-col gap-2">
+          <Label htmlFor="support-source">{t("topic")}</Label>
+          <Select
+            value={linkedIndex}
+            onValueChange={(value) => {
+              setLinkedIndex(value);
+            }}
+          >
+            <SelectTrigger id="support-source">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="none">{t("topics.other")}</SelectItem>
+              {sources.map((row, index) => (
+                <SelectItem
+                  key={`${row.source.kind}-${row.source.id}`}
+                  value={String(index)}
+                >
+                  {t(`topics.${sourceTopic(row.source.kind)}`)} · {row.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </section>
+      ) : null}
       <Field id="contact-name" label={t("name")} error={errors.name?.message}>
         <Input
           id="contact-name"
@@ -436,4 +472,12 @@ function ContactUnavailable() {
       <p className="text-muted-foreground">{t("unavailableBody")}</p>
     </div>
   );
+}
+
+function sourceTopic(kind: string): "pickup" | "documents" | "trade" | "other" {
+  if (kind === "booking") return "pickup";
+  if (["application", "inspection"].includes(kind)) return "documents";
+  return ["trade", "materialLot", "materialDemand"].includes(kind)
+    ? "trade"
+    : "other";
 }

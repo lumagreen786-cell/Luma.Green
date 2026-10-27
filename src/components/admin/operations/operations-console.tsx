@@ -1,6 +1,7 @@
 "use client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
+import { CollectionReassignment } from "./collection-reassignment";
 import {
   DestinationConsole,
   FacilityReviewConsole,
@@ -34,6 +35,7 @@ export function OperationsConsole() {
           <DestinationConsole />
         </TabsContent>
       </Tabs>
+      <CollectionReassignment />
     </div>
   );
 }

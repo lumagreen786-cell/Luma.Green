@@ -140,3 +140,14 @@ describe("message validation", () => {
     ).toBe(true);
   });
 });
+
+it("keeps required Google Maps attribution exact without allowing copied paragraphs", () => {
+  expect(hasUntranslatedCopy("Google Maps", "Google Maps", "ar")).toBe(false);
+  expect(
+    hasUntranslatedCopy(
+      "Google Maps provides this address",
+      "Google Maps provides this address",
+      "ar",
+    ),
+  ).toBe(true);
+});

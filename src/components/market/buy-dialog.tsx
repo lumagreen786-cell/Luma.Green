@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "convex/react";
 import { FileTextIcon, InfoIcon, ShoppingCartIcon } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale, useNow, useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { toast } from "sonner";
@@ -28,8 +28,10 @@ import { cn } from "@/lib/utils";
 
 import { api } from "../../../convex/_generated/api";
 import { requiresEwayBill, safePaiseFor } from "../../../convex/lib/chain";
+import { isListingOfferCurrent } from "../../../convex/lib/rateValidity";
 import { type MarketErrorKey, marketErrorKey } from "./errors";
 import { kgFieldValue, parseKg } from "./logic";
+import { OfferComparison } from "./offer-comparison";
 import type { ListingView } from "./types";
 
 /** "Buy" on a lot: opens a short form for how much, with the total. */
@@ -41,11 +43,13 @@ export function BuyButton({
   className?: string;
 }) {
   const canOperate = useCanOperate();
+  const now = useNow({ updateInterval: 60_000 });
   const t = useTranslations("market.buy");
   const common = useTranslations("common");
   const format = useFormat();
   const [isOpen, setIsOpen] = useState(false);
-  if (!canOperate) return null;
+  if (!canOperate || !isListingOfferCurrent(listing, now.getTime()))
+    return null;
   const material = format.material(
     listing.material.names,
     listing.material.code,
@@ -271,6 +275,7 @@ function BuyForm({
         </span>
       </div>
 
+      <OfferComparison listing={listing} />
       <p className="flex gap-2 text-sm text-muted-foreground">
         <InfoIcon aria-hidden className="mt-0.5 size-4 shrink-0 text-primary" />
         {t("trades.gatewayPending")}

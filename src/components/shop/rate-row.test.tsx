@@ -1,11 +1,11 @@
-import { screen, waitFor } from "@testing-library/react";
+import { act, fireEvent, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useMutation } from "convex/react";
 import { ConvexError } from "convex/values";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { priceProblem, RateRow } from "./rate-row";
-import { NEWSPAPER, renderWithIntl } from "./test-helpers";
+import { NEWSPAPER, NOW, renderWithIntl } from "./test-helpers";
 import type { RateCardRow } from "./types";
 
 vi.mock("convex/react", () => ({
@@ -15,6 +15,9 @@ vi.mock("convex/react", () => ({
 vi.mock("sonner", () => ({ toast: { success: vi.fn(), error: vi.fn() } }));
 
 const setRate = vi.fn();
+afterEach(() => {
+  vi.useRealTimers();
+});
 
 beforeEach(() => {
   setRate.mockReset();
@@ -45,22 +48,41 @@ function renderRow(row: RateCardRow = NEWSPAPER_ROW) {
 }
 
 describe("priceProblem", () => {
-  it("refuses what isn't a price, and anything under the floor", () => {
+  it("refuses invalid prices and permits independent offers", () => {
     expect(priceProblem("", 1200)).toBeNull();
     expect(priceProblem("abc", 1200)).toBe("invalid");
     expect(priceProblem("0", 1200)).toBe("invalid");
-    expect(priceProblem("11.99", 1200)).toBe("belowFloor");
+    expect(priceProblem("11.99", 1200)).toBeNull();
     expect(priceProblem("12", 1200)).toBeNull();
     expect(priceProblem("3", null)).toBeNull();
   });
 });
 
 describe("RateRow", () => {
+  it("renews an unchanged offer after an open screen crosses its expiry", async () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(NOW);
+    renderRow({ ...NEWSPAPER_ROW, offerExpiresAt: NOW.getTime() + 1000 });
+    expect(
+      screen.queryByRole("button", { name: "Save" }),
+    ).not.toBeInTheDocument();
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(1100);
+    });
+    await act(async () => {
+      fireEvent.click(screen.getByRole("button", { name: "Save" }));
+      await Promise.resolve();
+    });
+    expect(setRate).toHaveBeenCalledWith({
+      materialCode: "PAPER-NEWS",
+      paisePerKg: 1450,
+    });
+  });
   it("shows the price next to the minimum and today's market", () => {
     const input = renderRow();
     expect(input).toHaveValue("14.50");
-    expect(screen.getByText("Minimum ₹12/kg")).toBeInTheDocument();
-    expect(screen.getByText("Market ₹15/kg")).toBeInTheDocument();
+    expect(screen.queryByText("Minimum ₹12/kg")).not.toBeInTheDocument();
+    expect(screen.getByText(/Market ₹15\/kg/)).toBeInTheDocument();
     expect(screen.getByText("Below market")).toBeInTheDocument();
     // Nothing changed yet, so nothing to save.
     expect(
@@ -68,19 +90,16 @@ describe("RateRow", () => {
     ).not.toBeInTheDocument();
   });
 
-  it("explains a price below the minimum and won't save it", async () => {
+  it("saves an own offer below the old reference minimum", async () => {
     const user = userEvent.setup();
     const input = renderRow();
-
     await user.clear(input);
     await user.type(input, "11");
-
-    expect(screen.getByRole("alert")).toHaveTextContent(
-      "Too low. The minimum is ₹12/kg.",
-    );
-    expect(screen.getByRole("button", { name: "Save" })).toBeDisabled();
-    await user.keyboard("{Enter}");
-    expect(setRate).not.toHaveBeenCalled();
+    await user.click(screen.getByRole("button", { name: "Save" }));
+    expect(setRate).toHaveBeenCalledWith({
+      materialCode: "PAPER-NEWS",
+      paisePerKg: 1100,
+    });
   });
 
   it("saves a new price in paise", async () => {
@@ -108,18 +127,18 @@ describe("RateRow", () => {
 
     await waitFor(() => {
       expect(screen.getByRole("alert")).toHaveTextContent(
-        "Too low. This is under the minimum price.",
+        "Enter a valid price.",
       );
     });
   });
 
-  it("tells the shop when households get the city price instead", () => {
+  it("keeps reference guidance separate from a missing own offer", () => {
     const input = renderRow({ ...NEWSPAPER_ROW, myPaise: null });
     expect(input).toHaveValue("");
     expect(input).toHaveAttribute("placeholder", "14");
     expect(
-      screen.getByText("Not set yet. Households get the city price, ₹14/kg."),
-    ).toBeInTheDocument();
+      screen.queryByText("Not set yet. Households get the city price, ₹14/kg."),
+    ).not.toBeInTheDocument();
   });
 });
 

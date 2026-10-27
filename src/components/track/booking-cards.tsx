@@ -126,6 +126,7 @@ export function ItemsCard({ booking }: { booking: TrackedBooking }) {
 export function MoneySection({ booking }: { booking: TrackedBooking }) {
   const t = useTranslations("track.money");
   const tSell = useTranslations("sell");
+  const tReview = useTranslations("track.review");
   const format = useFormat();
 
   if (booking.status === "declined" || booking.status === "cancelled") {
@@ -140,7 +141,7 @@ export function MoneySection({ booking }: { booking: TrackedBooking }) {
       </h2>
       {receipt ? (
         <MoneyCard
-          amount={t("paid", { amount: format.money(receipt.totalPaise) })}
+          amount={format.money(receipt.totalPaise)}
           points={
             booking.points === undefined
               ? undefined
@@ -148,10 +149,15 @@ export function MoneySection({ booking }: { booking: TrackedBooking }) {
           }
           note={
             <>
-              {t("paidBy", {
-                method: receipt.method,
-                date: format.dateTime(receipt.paidAt),
-              })}
+              {tReview(
+                booking.receiptReview?.paymentAcknowledgedAt
+                  ? "acknowledged"
+                  : "declaration",
+              )}
+              {" · "}
+              {receipt.method}
+              {" · "}
+              {format.dateTime(receipt.paidAt)}
               <br />
               {booking.estimatePaise === undefined
                 ? null

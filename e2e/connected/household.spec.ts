@@ -315,13 +315,45 @@ test("phone household pickup produces an exact receipt and adds measured stock o
     ).toBeVisible();
     await expect(receipt.getByText(en.shop.receipt.stock)).toBeVisible();
     await expect(household.getByRole("heading", { level: 1 })).toHaveText(
-      `Done! You got ${expectedMoney}`,
+      en.track.review.title,
     );
     const completed = await householdClient.query(api.households.track, {
       token,
     });
     expect(completed?.receipt?.totalPaise).toBe(expectedPaise);
     expect(completed?.receipt?.method).toBe("cash");
+    await expect(
+      household.getByRole("button", {
+        name: en.track.review.acknowledge,
+        exact: true,
+      }),
+    ).toHaveCount(0);
+    await household
+      .getByRole("button", { name: en.track.review.accept, exact: true })
+      .click();
+    await expect(
+      household.getByRole("button", {
+        name: en.track.review.acknowledge,
+        exact: true,
+      }),
+    ).toBeVisible();
+    await household
+      .getByRole("button", { name: en.track.review.acknowledge, exact: true })
+      .click();
+    await expect(
+      household.getByRole("button", {
+        name: en.track.review.acknowledge,
+        exact: true,
+      }),
+    ).toHaveCount(0);
+    const acknowledged = await householdClient.query(api.households.track, {
+      token,
+    });
+    expect(acknowledged?.receiptReview?.paymentAcknowledgedAt).toBeGreaterThan(
+      0,
+    );
+    const anonymous = new ConvexHttpClient(backendUrl, { logger: false });
+    expect(await anonymous.query(api.households.track, { token })).toBeNull();
     expect(
       completed?.receipt?.lines.map((line) => ({
         grams: line.grams,

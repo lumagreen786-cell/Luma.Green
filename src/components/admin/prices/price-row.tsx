@@ -109,7 +109,7 @@ export function PriceRow({ row, city }: { row: PriceRowData; city: string }) {
     }
     setIsSaving(true);
     try {
-      const { lifted } = await setPrices({
+      await setPrices({
         city,
         materialCode: row.code,
         floorPaise,
@@ -118,12 +118,7 @@ export function PriceRow({ row, city }: { row: PriceRowData; city: string }) {
       setFloor(rupeesInput(floorPaise));
       setFallback(rupeesInput(fallbackPaise));
       toast.success(
-        `${name}: minimum ${formatRupees(floorPaise)}, fallback ${formatRupees(fallbackPaise)} a kilo.`,
-        lifted > 0
-          ? {
-              description: `${String(lifted)} shop ${lifted === 1 ? "price was" : "prices were"} below the new minimum and ${lifted === 1 ? "has" : "have"} been raised to it.`,
-            }
-          : undefined,
+        `${name}: reference low ${formatRupees(floorPaise)}, reference price ${formatRupees(fallbackPaise)} a kilo.`,
       );
     } catch (error) {
       toast.error(adminErrorMessage(error, SAVE_ERRORS));
@@ -156,7 +151,7 @@ export function PriceRow({ row, city }: { row: PriceRowData; city: string }) {
       <div className="grid grid-cols-2 gap-3 xl:contents">
         <PriceField
           id={`${id}-floor`}
-          label="Minimum"
+          label="Reference low"
           material={name}
           value={floor}
           onChange={setFloor}
@@ -165,7 +160,7 @@ export function PriceRow({ row, city }: { row: PriceRowData; city: string }) {
         />
         <PriceField
           id={`${id}-fallback`}
-          label="Fallback"
+          label="Reference price"
           material={name}
           value={fallback}
           onChange={setFallback}

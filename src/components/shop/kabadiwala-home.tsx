@@ -13,6 +13,11 @@ import { DemoNote } from "@/components/app/page-parts";
 import { Link } from "@/i18n/navigation";
 
 import { api } from "../../../convex/_generated/api";
+import {
+  CollectionAvailabilityControls,
+  CollectionVisitControls,
+  EmployerPaymentControls,
+} from "../collection/operations-controls";
 import { DispatchSettings } from "./dispatch-settings";
 import { QueryBoundary } from "./guards";
 import { MoneyStats, NewRequestsCard, TodayCard } from "./home-cards";
@@ -35,6 +40,9 @@ export function KabadiwalaHome() {
       <QueryBoundary>
         <HomeBody city={shop.city} />
         <DispatchSettings />
+        <CollectionAvailabilityControls />
+        <CollectionVisitControls />
+        <EmployerPaymentControls />
       </QueryBoundary>
       <QuickLinks />
       <DemoNote>{t("sampleNote")}</DemoNote>

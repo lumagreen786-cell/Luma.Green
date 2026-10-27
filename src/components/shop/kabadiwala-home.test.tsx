@@ -86,9 +86,11 @@ const STOCK: Stock = {
       grams: 260_000,
       marketPaise: 2700,
       valuePaise: 702_000,
+      costPaise: null,
       updatedAt: 0,
     },
   ],
+  totalCostPaise: null,
   totalGrams: 260_000,
   totalValuePaise: 702_000,
 };
@@ -132,7 +134,7 @@ describe("KabadiwalaHome", () => {
         valuePaise: null,
       })),
     });
-    expect(screen.getByText("No market price today")).toBeInTheDocument();
+    expect(screen.getByText("No current offer")).toBeInTheDocument();
     expect(screen.queryByText("₹7,020")).not.toBeInTheDocument();
     expect(screen.queryByText("₹0")).not.toBeInTheDocument();
   });

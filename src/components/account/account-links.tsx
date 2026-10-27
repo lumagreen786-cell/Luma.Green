@@ -17,8 +17,10 @@ export function AccountLinks({
   const security = useTranslations("accountSecurity");
   const notifications = useTranslations("notifications");
   const reports = useTranslations("auditReports");
+  const services = useTranslations("serviceRecords");
   const pathname = usePathname();
   const items = [
+    { href: "/account/services", label: services("title"), icon: UsersIcon },
     { href: "/account/workspaces", label: workspace("title"), icon: UsersIcon },
     {
       href: "/account/notifications",

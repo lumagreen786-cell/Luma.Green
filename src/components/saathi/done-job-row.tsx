@@ -1,15 +1,22 @@
 "use client";
 
+import { useMutation } from "convex/react";
 import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 
 import { useFormat } from "@/components/app/format";
+import { ActionButton } from "@/components/ui/action-button";
 
+import { api } from "../../../convex/_generated/api";
 import { type Job, WORK_ICONS } from "./job-meta";
 import { useJobWhen } from "./use-job-when";
 
 /** A finished job in a list of earnings: what, when, where, for whom, pay. */
 export function DoneJobRow({ job }: { job: Job }) {
   const t = useTranslations("saathi");
+  const payment = useTranslations("collectionOperations");
+  const common = useTranslations("common");
+  const acknowledge = useMutation(api.saathi.acknowledgePayment);
   const format = useFormat();
   const when = useJobWhen();
   const Icon = WORK_ICONS[job.kind];
@@ -34,6 +41,17 @@ export function DoneJobRow({ job }: { job: Job }) {
         <span className="sr-only">{t("pay")} </span>
         {format.money(job.payPaise)}
       </p>
+      {job.employerPaidAt && !job.workerAcknowledgedAt ? (
+        <ActionButton
+          onClick={() => {
+            void acknowledge({ jobId: job.id }).catch(() =>
+              toast.error(common("error")),
+            );
+          }}
+          label={payment("acknowledge")}
+        />
+      ) : null}
+      {job.workerAcknowledgedAt ? <p>{payment("acknowledged")}</p> : null}
     </li>
   );
 }

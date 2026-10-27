@@ -1,4 +1,14 @@
 {
+  "stockReports": {
+    "prepare": "Chuẩn bị báo cáo tồn kho",
+    "download": "Tải báo cáo tồn kho",
+    "preparing": "Đang chuẩn bị báo cáo của bạn…",
+    "complete": "Báo cáo đã sẵn sàng",
+    "failed": "Không thể chuẩn bị báo cáo. Hãy thử lại.",
+    "unavailable": "Báo cáo chưa khả dụng cho đến khi các tác vụ nền được cấu hình.",
+    "expired": "Báo cáo này đã hết hạn. Hãy chuẩn bị báo cáo mới.",
+    "notice": "Bản ghi riêng tư về tồn kho tại một thời điểm. Khả dụng trong 30 phút. Đây không phải là chứng nhận."
+  },
   "brand": {
     "name": "Luma.Green",
     "tagline": "Cùng hướng tới ngày mai xanh sạch hơn"
@@ -135,7 +145,7 @@
       "kabadiwala": {
         "title": "Cửa hàng kabadiwala",
         "one": "Nhận yêu cầu thu gom từ hộ gia đình gần bạn.",
-        "two": "Tự đặt giá nhưng không thấp hơn giá sàn.",
+        "two": "Tự đặt giá chào cho từng vật liệu.",
         "three": "Bán hàng đã phân loại cho đơn vị sơ chế.",
         "cta": "Đăng ký làm kabadiwala"
       },
@@ -176,8 +186,8 @@
         "body": "Chọn vai trò và hoàn tất đăng ký."
       },
       "floor": {
-        "title": "Giá công bằng, có giá sàn",
-        "body": "Cửa hàng tự đặt giá nhưng không thấp hơn mức tối thiểu chúng tôi công bố cho từng vật liệu."
+        "title": "Giá chào độc lập của cửa hàng",
+        "body": "Cửa hàng tự đặt giá chào. Giá tham chiếu có ngày chỉ là thông tin, không phải mức tối thiểu bắt buộc."
       },
       "escrow": {
         "title": "Đang chờ cổng thanh toán",
@@ -237,22 +247,22 @@
   },
   "prices": {
     "metaTitle": "Giá vật liệu tại Bengaluru hôm nay",
-    "metaDescription": "Giá vật liệu hôm nay tại Bengaluru theo kg: giấy, nhựa, kim loại, thủy tinh và rác thải điện tử, kèm biến động tuần, biểu đồ 30 ngày và mức tối thiểu cửa hàng được trả.",
+    "metaDescription": "Giá tham chiếu có ngày theo kg cho vật liệu tái chế ở Bengaluru. Mỗi doanh nghiệp tự đặt giá chào.",
     "eyebrow": "Bengaluru",
     "title": "Giá vật liệu",
-    "lead": "Giá bán vật liệu hôm nay theo kg. Cửa hàng tự đặt giá nhưng không thấp hơn giá sàn. Chạm vào vật liệu để xem 30 ngày gần nhất.",
+    "lead": "Giá tham chiếu có ngày theo kilôgam. Mỗi doanh nghiệp tự đặt giá chào. Chọn vật liệu để xem lịch sử hiện có.",
     "demoNote": "Giá mẫu cho nguyên mẫu, không phải giá thị trường trực tiếp.",
     "date": "Giá ngày {date}",
-    "floorHelp": "Giá sàn: mức thấp nhất cửa hàng đã xác minh được trả cho một kg.",
+    "floorHelp": "Giá tham chiếu: thông tin có ngày, không phải mức tối thiểu bắt buộc hay giá chào của cửa hàng.",
     "perKg": "{price}/kg",
-    "floor": "Giá sàn {price}",
+    "floor": "Tham chiếu {price}",
     "noPrice": "Chưa có giá",
     "columns": {
       "material": "Vật liệu",
       "today": "Hôm nay",
       "week": "Tuần này",
       "month": "30 ngày",
-      "floor": "Giá sàn"
+      "floor": "Tham chiếu"
     },
     "families": {
       "paper": "Giấy",
@@ -277,7 +287,7 @@
       "today": "Hôm nay",
       "low": "Thấp nhất trong 30 ngày",
       "high": "Cao nhất trong 30 ngày",
-      "floor": "Giá sàn",
+      "floor": "Tham chiếu",
       "noFloor": "Không có",
       "close": "Đóng",
       "noHistory": "Chưa có lịch sử giá."
@@ -285,7 +295,7 @@
     "chart": {
       "label": "{material}: giá theo kg từng ngày. Dùng phím mũi tên để chuyển ngày.",
       "point": "{date}: {price}",
-      "floor": "Giá sàn {price}",
+      "floor": "Tham chiếu {price}",
       "table": "Hiện số liệu",
       "tableCaption": "{material}, giá theo kg từng ngày",
       "date": "Ngày",
@@ -557,10 +567,10 @@
     "lead": "Vật liệu đi từ các hộ gia đình đến cửa hàng thu gom, đơn vị sơ chế và cơ sở tái chế trước khi trở thành sản phẩm mới. Luma.Green ghi lại mỗi lần bàn giao.",
     "stepLabel": "Bước {number}",
     "sell": {
-      "body": "Hộ gia đình chọn vật liệu, xem báo giá của các cửa hàng gần mình và đặt lịch thu gom hoặc giao tại cửa hàng. Kabadiwala cân từng vật liệu và trả tiền mặt hoặc UPI. Hai bên đều nhận biên nhận.",
-      "point1": "Mỗi cửa hàng tự đặt giá, không thấp hơn giá sàn đã công bố",
+      "body": "Hộ gia đình thêm ảnh và thông tin thu gom rồi đặt lấy hàng hoặc giao tại cửa hàng. Không cần ước tính trọng lượng. Cửa hàng cân vật liệu và ghi lại khai báo thanh toán cùng biên nhận.",
+      "point1": "Mỗi cửa hàng tự đặt giá chào",
       "point2": "Khối lượng được ghi bằng gam từ cân của cửa hàng",
-      "point3": "Có liên kết theo dõi, không cần tài khoản"
+      "point3": "Đăng nhập và có quyền truy cập hồ sơ để xem thông tin thu gom riêng tư"
     },
     "trade": {
       "body": "Thanh toán giữa doanh nghiệp sử dụng cổng thanh toán. Xem đơn hàng để biết trạng thái thanh toán hiện tại.",
@@ -1079,19 +1089,19 @@
       },
       "howPricesWork": {
         "title": "Cách đặt giá",
-        "summary": "Vì sao ước tính là một khoảng và cách tính số tiền cuối cùng.",
+        "summary": "Cách giá chào độc lập của cửa hàng và trọng lượng đo được xác định số tiền.",
         "steps": {
           "estimate": {
-            "title": "Ước tính dùng giá của thành phố",
-            "body": "Trước khi bạn chọn kabadiwala, chúng tôi dùng giá chuẩn tại Bengaluru để hiển thị một khoảng."
+            "title": "Giá tham chiếu là thông tin có ngày",
+            "body": "Giá tham chiếu cung cấp bối cảnh. Chúng không quyết định giá chào của cửa hàng hay mức tối thiểu bắt buộc."
           },
           "own": {
             "title": "Mỗi kabadiwala tự đặt giá",
             "body": "Khi chọn một cửa hàng, bạn thấy giá riêng của họ cho từng vật liệu."
           },
           "floor": {
-            "title": "Không thấp hơn mức tối thiểu",
-            "body": "Luma.Green đặt giá tối thiểu cho mỗi vật liệu. Kabadiwala không được trả thấp hơn."
+            "title": "Giá chào độc lập",
+            "body": "Mỗi doanh nghiệp tự đặt giá chào. Luma.Green không áp dụng mức tối thiểu theo giá tham chiếu."
           },
           "final": {
             "title": "Khối lượng quyết định số tiền",
@@ -1219,23 +1229,23 @@
       },
       "setPrices": {
         "title": "Đặt giá của bạn",
-        "summary": "Bạn chọn mức trả, trên giá tối thiểu.",
+        "summary": "Chọn giá chào của bạn cho từng vật liệu.",
         "steps": {
           "open": {
             "title": "Mở Giá của tôi",
-            "body": "Bạn thấy từng vật liệu với giá tối thiểu bên cạnh."
+            "body": "Xem vật liệu và thông tin giá tham chiếu hiện có."
           },
           "enter": {
             "title": "Nhập giá mỗi kg",
             "body": "Nhập mức bạn muốn trả cho hộ gia đình theo từng vật liệu."
           },
           "floor": {
-            "title": "Không thấp hơn giá tối thiểu",
-            "body": "Giá thấp hơn mức tối thiểu không được lưu. Nếu mức tối thiểu tăng, giá của bạn cũng tăng và chúng tôi sẽ thông báo."
+            "title": "Đặt giá chào độc lập",
+            "body": "Giá tham chiếu không quyết định hoặc tự động thay đổi giá chào của bạn."
           },
           "blank": {
             "title": "Để trống giá một vật liệu",
-            "body": "Nếu không đặt giá, giá chuẩn của thành phố được áp dụng."
+            "body": "Nếu để trống vật liệu, vật liệu đó không có giá chào."
           },
           "history": {
             "title": "Biên nhận cũ không thay đổi",
@@ -1555,7 +1565,7 @@
       },
       "howPriceWorks": {
         "q": "Tiền của tôi được tính thế nào?",
-        "a": "Khối lượng từng vật liệu nhân giá mỗi kg của kabadiwala. Giá không được thấp hơn mức tối thiểu Luma.Green đặt ra."
+        "a": "Trọng lượng đo được của từng vật liệu nhân với giá theo kg đã thỏa thuận với cửa hàng. Giá tham chiếu chỉ để cung cấp thông tin."
       },
       "howPaid": {
         "q": "Tôi nhận tiền bằng cách nào?",
@@ -1595,7 +1605,7 @@
       },
       "ownPrices": {
         "q": "Tôi có thể tự đặt giá không?",
-        "a": "Có, cho từng vật liệu, miễn không thấp hơn giá tối thiểu của Luma.Green."
+        "a": "Có. Mỗi doanh nghiệp tự đặt giá chào cho từng vật liệu. Giá tham chiếu không phải mức tối thiểu bắt buộc."
       },
       "noVehicle": {
         "q": "Tôi không có xe. Vẫn đăng ký được không?",
@@ -2746,6 +2756,33 @@
     }
   },
   "track": {
+    "review": {
+      "title": "Kiểm tra biên nhận",
+      "declaration": "Cửa hàng đã khai báo thanh toán. Bạn chưa xác nhận đã nhận tiền.",
+      "accepted": "Đã chấp nhận biên nhận. Chỉ xác nhận thanh toán sau khi bạn nhận được tiền.",
+      "disputed": "Đã khiếu nại biên nhận. Đang chờ giải quyết.",
+      "acknowledged": "Bạn đã xác nhận nhận được tiền.",
+      "accept": "Chấp nhận",
+      "dispute": "Khiếu nại biên nhận",
+      "acknowledge": "Xác nhận đã nhận tiền",
+      "rejectLine": "Từ chối {material}",
+      "note": "Lý do khiếu nại",
+      "sharing": "Người hỗ trợ thu gom",
+      "phone": "Số điện thoại người hỗ trợ",
+      "adult": "Tôi xác nhận rằng tôi và người hỗ trợ được mời đều là người trưởng thành.",
+      "invite": "Mời người hỗ trợ",
+      "shareNote": "Chia sẻ liên kết thu gom này với người hỗ trợ. Họ phải đăng nhập bằng số điện thoại đã xác minh này và chấp nhận trong vòng 48 giờ. Không có tin nhắn nào được gửi.",
+      "active": "Đang hoạt động",
+      "pending": "Đang chờ chấp nhận",
+      "ended": "Quyền truy cập đã kết thúc",
+      "revoke": "Thu hồi quyền truy cập",
+      "leave": "Rời khỏi đợt thu gom",
+      "handover": "Ghi chú bàn giao",
+      "save": "Lưu ghi chú",
+      "error": "Không thể lưu thay đổi. Kiểm tra quyền truy cập của bạn rồi thử lại.",
+      "signIn": "Đăng nhập để xem đợt thu gom này",
+      "acceptedTotal": "Đã chấp nhận: {weight} · {amount}"
+    },
     "metaTitle": "Lịch đặt của bạn",
     "notFound": {
       "title": "Không tìm thấy lịch đặt này",
@@ -2839,7 +2876,7 @@
       "close": "Đóng",
       "otherNumber": "Dùng số khác"
     },
-    "saved": "Không cần tài khoản. Giữ liên kết để xem lịch trên mọi điện thoại.",
+    "saved": "Giữ liên kết này. Để xem thông tin riêng tư, hãy đăng nhập và có quyền đối với đợt thu gom này.",
     "sellMore": "Đặt lịch thu gom lần nữa",
     "tryAnother": "Thử cửa hàng khác",
     "dispatchChanged": "Yêu cầu đã chuyển sang cửa hàng gần bạn khác. Cửa hàng hiện tại hiển thị bên dưới.",
@@ -3291,12 +3328,12 @@
       "title": "Tồn kho",
       "lead": "Hàng bạn có và giá trị hôm nay.",
       "totalWeight": "Tổng khối lượng",
-      "worth": "Giá trị hôm nay",
-      "worthHint": "Theo giá thị trường hôm nay",
+      "worth": "Giá trị chào giá hiện tại",
+      "worthHint": "Giá trị chào giá hiện tại",
       "scrap": "Vật liệu đã thu gom",
       "recycled": "Vật liệu tái chế",
-      "atPrice": "Thị trường {price}/kg",
-      "noPrice": "Hôm nay chưa có giá thị trường",
+      "atPrice": "Giá trị chào giá hiện tại: {price}mỗi kg",
+      "noPrice": "Chưa có chào giá hiện tại",
       "sellTo": {
         "yard": "Bán cho một đơn vị sơ chế",
         "recycler": "Bán cho cơ sở tái chế",
@@ -3307,23 +3344,24 @@
       "emptyBusiness": "Mua trên chợ để hàng hiện tại đây.",
       "buy": "Mua vật liệu",
       "notBusinessTitle": "Chỉ dành cho doanh nghiệp",
-      "notBusinessBody": "Cửa hàng, đơn vị sơ chế, cơ sở tái chế và nhà máy quản lý tồn kho."
+      "notBusinessBody": "Cửa hàng, đơn vị sơ chế, cơ sở tái chế và nhà máy quản lý tồn kho.",
+      "recordedCost": "Chi phí đã ghi"
     },
     "prices": {
       "title": "Giá của tôi",
-      "lead": "Giá bạn trả hộ gia đình mỗi kg, không thấp hơn mức tối thiểu.",
+      "lead": "Giá chào theo kg của bạn cho hộ gia đình. Bạn tự quyết định các giá này.",
       "label": "Giá {material} của bạn, bằng rupee mỗi kg",
       "prefix": "₹",
       "suffix": "mỗi kg",
-      "minimum": "Tối thiểu {price}/kg",
+      "minimum": "Tham chiếu {price}/kg",
       "market": "Thị trường {price}/kg",
-      "notSet": "Chưa đặt. Hộ nhận giá thành phố là {price}/kg.",
+      "notSet": "Chưa có giá chào. Tham chiếu: {price}/kg.",
       "save": "Lưu",
       "saving": "Đang lưu…",
       "saved": "{material}: đã lưu {price}/kg.",
       "invalid": "Nhập giá, ví dụ 14 hoặc 14,50.",
-      "belowFloor": "Quá thấp. Tối thiểu là {price}/kg.",
-      "belowFloorUnknown": "Quá thấp. Giá này dưới mức tối thiểu.",
+      "belowFloor": "Nhập giá hợp lệ. Tham chiếu: {price}/kg.",
+      "belowFloorUnknown": "Nhập giá hợp lệ.",
       "emptyTitle": "Chưa có vật liệu",
       "emptyBody": "Vật liệu bạn mua được thiết lập khi cửa hàng được duyệt."
     },
@@ -3477,7 +3515,8 @@
       "application_received": "Đã nhận đơn",
       "application_approved": "Đơn đã được duyệt",
       "application_changes_requested": "Đơn cần chỉnh sửa",
-      "application_rejected": "Đơn chưa được duyệt"
+      "application_rejected": "Đơn chưa được duyệt",
+      "stock_low": "Cảnh báo tồn kho thấp"
     }
   },
   "integrations": {
@@ -3751,7 +3790,8 @@
     "addInput": "Thêm lô đầu vào",
     "chooseInput": "Chọn lô đầu vào",
     "combinedInput": "Tổng khối lượng đầu vào",
-    "multiInputHint": "Chỉ kết hợp vật liệu đã đo do bạn giữ. Mỗi lượng được tiêu thụ từ chính lô đó. Đây là bằng chứng xử lý và không tăng tồn kho."
+    "multiInputHint": "Chỉ kết hợp vật liệu đã đo do bạn giữ. Mỗi lượng được tiêu thụ từ chính lô đó. Đây là bằng chứng xử lý và không tăng tồn kho.",
+    "qualityReleaseRequired": "Cần kết quả kiểm tra được chấp nhận"
   },
   "evidence": {
     "title": "Tham chiếu tài liệu",
@@ -4166,5 +4206,163 @@
     "lead": "Đọc bản sao bằng chứng cố định cho mục đích đã nêu. Việc duyệt người nhận không cấp quyền vào hồ sơ doanh nghiệp khác.",
     "warning": "Chỉ chia sẻ kiểm tra đã chọn và tệp đã đánh dấu. Xóa dữ liệu cá nhân trước. Quyền truy cập tối đa 90 ngày và có thể thu hồi; không thể lấy lại bản đã tải xuống.",
     "snapshot": "Bản sao cố định tuyên bố của doanh nghiệp kiểm tra. Không phải chứng nhận hay xác minh độc lập."
+  },
+  "collectionOperations": {
+    "availability": "Lịch thu gom khả dụng",
+    "capacity": "Sức chứa mỗi khung giờ",
+    "holidays": "Ngày nghỉ (YYYY-MM-DD, cách nhau bằng dấu phẩy)",
+    "schedule": "Lịch thu gom",
+    "unassigned": "Chưa phân công. Đổi giờ hoặc hủy.",
+    "repeat": "Lặp lại mỗi {days} ngày",
+    "stop": "Dừng các lần tới",
+    "reschedule": "Đổi giờ thu gom",
+    "requested": "Đã gửi thay đổi cho người vận hành",
+    "saved": "Đã lưu",
+    "acknowledge": "Xác nhận đã nhận tiền",
+    "acknowledged": "Đã xác nhận thanh toán",
+    "fixedFee": "Phí công việc cố định. Doanh nghiệp giao việc trả tiền; Luma không bảo đảm lương.",
+    "due": "Hạn trả tiền: {date}",
+    "declarePayment": "Khai báo trả tiền cho người lao động",
+    "failedVisit": "Ghi nhận lần đến không thành",
+    "paymentDeclared": "Đã khai báo trả tiền; chờ người lao động xác nhận"
+  },
+  "geocoding": {
+    "consent": "Gửi vị trí này đến Google Maps để tìm địa chỉ.",
+    "find": "Tìm địa chỉ",
+    "loading": "Đang tìm địa chỉ…",
+    "manual": "Bạn có thể nhập địa chỉ thủ công.",
+    "unavailable": "Không thể tìm địa chỉ. Hãy nhập địa chỉ thủ công.",
+    "use": "Dùng địa chỉ này",
+    "confirm": "Tôi đã kiểm tra địa chỉ và muốn thay thế trường địa chỉ.",
+    "preview": "Chỉ xem trước. Việc lưu cần được xem xét theo chính sách dịch vụ.",
+    "attribution": "Google Maps"
+  },
+  "serviceRecords": {
+    "title": "Dịch vụ và chương trình",
+    "unavailable": "Chưa có thực hiện từ nhà cung cấp hoặc đổi thưởng. Hồ sơ không duyệt khoản vay, bảo hiểm, trợ cấp hay thanh toán.",
+    "enquiries": "Yêu cầu dịch vụ",
+    "programmes": "Hồ sơ chương trình",
+    "edit": "Sửa",
+    "reported": "Số liệu được báo cáo, bằng chứng chưa xác minh. Không thể hiện thỏa thuận đô thị hoặc phần thưởng đã có vốn.",
+    "area": "Khu vực",
+    "startsOn": "Ngày bắt đầu",
+    "endsOn": "Ngày kết thúc",
+    "coverageCount": "Số lượng bao phủ",
+    "trips": "Chuyến đi",
+    "centreHandovers": "Bàn giao tại trung tâm",
+    "groupIncomePaise": "Thu nhập nhóm (paise)",
+    "share": "Chia sẻ báo cáo tổng hợp",
+    "principal": "Chủ vật liệu / bên giao việc",
+    "materialReference": "Tham chiếu vật liệu",
+    "explicitReference": "Chỉ chia sẻ mã vật liệu và số gam đã ghi với người nhận được chọn.",
+    "commercialModel": "Mô hình thương mại",
+    "draft": "Bản nháp",
+    "enquiry": "Yêu cầu",
+    "closed": "Đã đóng",
+    "kinds": {
+      "equipment": "Thiết bị",
+      "staffing": "Nhân sự",
+      "transport": "Vận tải",
+      "environment": "Môi trường",
+      "accounting": "Kế toán",
+      "solar": "Điện mặt trời",
+      "scales": "Cân",
+      "voice": "Dịch vụ giọng nói",
+      "society": "Dịch vụ cộng đồng",
+      "welfare": "Phúc lợi",
+      "donation": "Quyên góp",
+      "reward": "Phần thưởng",
+      "finance": "Tài chính",
+      "insurance": "Bảo hiểm",
+      "attendance": "Chấm công",
+      "wet_service": "Dịch vụ rác ướt",
+      "other": "Khác"
+    },
+    "models": {
+      "partner_service": "Yêu cầu đối tác",
+      "materials_sale_reference": "Tham chiếu bán vật liệu",
+      "toll_jobwork": "Gia công với vật liệu thuộc bên giao việc",
+      "paid_collection": "Dịch vụ thu gom có phí",
+      "generator_paid_treatment": "Xử lý do bên phát sinh trả tiền"
+    },
+    "directions": {
+      "not_applicable": "Không thực hiện thanh toán",
+      "buyer_to_seller": "Người mua → người bán",
+      "principal_to_processor": "Bên giao việc → bên xử lý",
+      "customer_to_service": "Khách hàng → dịch vụ",
+      "generator_to_handler": "Bên phát sinh → bên xử lý"
+    },
+    "received": "Đã nhận",
+    "sharedReports": "Báo cáo kiểm toán được chia sẻ",
+    "revoke": "Hủy quyền truy cập",
+    "quantityGrams": "Số lượng (g)",
+    "recordName": "Tên hồ sơ"
+  },
+  "returnClaims": {
+    "title": "Hoàn trả và bằng chứng chương trình",
+    "returnTitle": "Hoàn trả toàn bộ",
+    "scheme": "Tham chiếu chương trình",
+    "issuer": "Tham chiếu đơn vị phát hành ngoài",
+    "freight": "Bên trả cước hoàn hàng",
+    "reconcile": "Đối soát",
+    "validate": "Kiểm tra nguồn",
+    "notice": "Chỉ là bằng chứng khai báo. Không phải chứng nhận chính thức hay phê duyệt thanh toán.",
+    "waiting": "Chờ nhận hàng thực tế, hoàn tiền đầy đủ từ nhà cung cấp và đảo ngược quyết toán."
+  },
+  "marketComparison": {
+    "quote": "Cần báo giá vận chuyển",
+    "freight": "Vận chuyển riêng: {price}/kg",
+    "notice": "Thanh toán chỉ thu tiền vật liệu. Thỏa thuận và trả cước vận chuyển riêng.",
+    "available": "Có sẵn từ {date}",
+    "delivered": "Vật liệu và vận chuyển: {price}/kg",
+    "freightInput": "Cước mỗi kg (tùy chọn)",
+    "availableInput": "Có sẵn từ (tùy chọn)",
+    "validityInput": "Hạn chào giá (tùy chọn)"
+  },
+  "recordedCosts": {
+    "acquisition": "Chi phí mua vào (paise)",
+    "processing": "Chi phí xử lý (paise)",
+    "reference": "Tham chiếu chứng từ chi phí",
+    "hint": "Để trống nghĩa là chưa biết. Chỉ nhập 0 khi chi phí bằng không đã được ghi nhận.",
+    "remaining": "Chi phí ghi nhận còn lại",
+    "input": "Chi phí đầu vào đã dùng",
+    "total": "Chi phí phân bổ cho đầu ra",
+    "unknown": "Chưa biết",
+    "loss": "Đầu ra đo được chịu chi phí tạp chất và hao hụt xử lý.",
+    "record": "Ghi chi phí mua vào",
+    "processingTotal": "Chi phí xử lý"
+  },
+  "stockClosing": {
+    "title": "Kiểm tra tồn kho hằng ngày",
+    "notice": "Chốt sổ lưu tồn kho hiện tại. Vẫn cho phép thay đổi sau đó.",
+    "note": "Ghi chú kiểm tra",
+    "record": "Ghi nhận chốt sổ hôm nay",
+    "last": "Lần chốt sổ gần nhất",
+    "none": "Chưa có lần chốt sổ",
+    "gramsUnit": "g",
+    "unknown": "Chưa rõ chi phí",
+    "balances": "Số dư khi chốt sổ",
+    "threshold": "Cảnh báo tồn kho thấp",
+    "thresholdHint": "Chỉ trong hộp thư tài khoản. Cảnh báo tắt cho đến khi được bật.",
+    "disabled": "Tắt",
+    "below": "Dưới mức cảnh báo",
+    "recent": "Cảnh báo gần đây (tối đa 20)",
+    "noAlerts": "Chưa có cảnh báo",
+    "material": "Vật liệu",
+    "grams": "Mức cảnh báo (gam)",
+    "enabled": "Bật cảnh báo",
+    "save": "Lưu cài đặt cảnh báo",
+    "closed": "Đã lưu chốt sổ",
+    "saved": "Đã lưu cài đặt cảnh báo",
+    "dateChanged": "Ngày đã thay đổi. Kiểm tra rồi thử lại.",
+    "alreadyRecorded": "Đã ghi nhận chốt sổ hôm nay.",
+    "limit": "Lịch sử tồn kho vượt giới hạn của công cụ. Hãy nhờ quản trị viên hỗ trợ.",
+    "mismatch": "Tồn kho và lịch sử biến động không khớp. Hãy nhờ quản trị viên kiểm tra.",
+    "correction": "Điều chỉnh tồn kho",
+    "add": "Thêm tồn kho",
+    "remove": "Giảm tồn kho",
+    "corrected": "Đã ghi nhận điều chỉnh",
+    "evidence": "Tham chiếu bằng chứng thực tế",
+    "recentCorrections": "Điều chỉnh gần đây (tối đa 20)"
   }
 }

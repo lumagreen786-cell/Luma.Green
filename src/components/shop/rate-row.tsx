@@ -1,7 +1,7 @@
 "use client";
 
 import { useMutation } from "convex/react";
-import { useTranslations } from "next-intl";
+import { useFormatter, useNow, useTranslations } from "next-intl";
 import { type SubmitEvent, useRef, useState } from "react";
 import { toast } from "sonner";
 
@@ -24,12 +24,11 @@ type Problem = "invalid" | "belowFloor" | "generic";
 /** What's wrong with a typed price, before it's sent. */
 export function priceProblem(
   text: string,
-  floorPaise: number | null,
+  _floorPaise: number | null,
 ): Problem | null {
   if (text.trim() === "") return null;
   const paise = parseRupees(text);
-  if (paise === null || paise === 0) return "invalid";
-  return floorPaise !== null && paise < floorPaise ? "belowFloor" : null;
+  return paise === null || paise === 0 ? "invalid" : null;
 }
 
 /**
@@ -39,10 +38,17 @@ export function priceProblem(
 export function RateRow({ row }: { row: RateCardRow }) {
   const canOperate = useCanOperate();
   const t = useTranslations("shop");
+  const workspace = useTranslations("workspace");
   const format = useFormat();
+  const dates = useFormatter();
+  const now = useNow({ updateInterval: 1000 });
   const setRate = useMutation(api.shop.setRate);
-  const saved = row.myPaise;
-  const [text, setText] = useState(saved === null ? "" : rupeesInput(saved));
+  const isExpired =
+    row.offerExpiresAt !== undefined && row.offerExpiresAt <= now.getTime();
+  const saved = isExpired ? null : row.myPaise;
+  const [text, setText] = useState(
+    row.myPaise === null ? "" : rupeesInput(row.myPaise),
+  );
   const [serverProblem, setServerProblem] = useState<Problem | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const input = useRef<HTMLInputElement>(null);
@@ -52,7 +58,7 @@ export function RateRow({ row }: { row: RateCardRow }) {
   const paise = parseRupees(text);
   const problem = priceProblem(text, row.floorPaise) ?? serverProblem;
   const isDirty = text.trim() !== "" && paise !== saved;
-  const current = effectivePaise(row);
+  const current = effectivePaise(isExpired ? { ...row, myPaise: null } : row);
 
   async function onSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -166,26 +172,49 @@ export function RateRow({ row }: { row: RateCardRow }) {
           id={`${id}-hint`}
           className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground sm:col-span-2"
         >
-          {row.floorPaise === null ? null : (
-            <span>
-              {t("prices.minimum", { price: format.perKg(row.floorPaise) })}
-            </span>
+          {row.offerExpiresAt === undefined ? null : (
+            <time dateTime={new Date(row.offerExpiresAt).toISOString()}>
+              {workspace("expires", {
+                date: dates.dateTime(row.offerExpiresAt, {
+                  dateStyle: "medium",
+                  timeStyle: "short",
+                }),
+              })}
+            </time>
           )}
-          {row.marketPaise === null ? null : (
-            <span>
-              {t("prices.market", { price: format.perKg(row.marketPaise) })}
-            </span>
-          )}
+          <MarketReference row={row} />
           {current === null || row.marketPaise === null ? null : (
             <MarketSideLabel side={compareToMarket(current, row.marketPaise)} />
           )}
         </p>
-        {saved === null && row.fallbackPaise !== null ? (
-          <p className="border-s-2 border-border ps-3 text-sm text-muted-foreground sm:col-span-2">
-            {t("prices.notSet", { price: format.perKg(row.fallbackPaise) })}
-          </p>
-        ) : null}
       </form>
     </li>
+  );
+}
+
+function MarketReference({ row }: { row: RateCardRow }) {
+  const t = useTranslations("shop");
+  const format = useFormat();
+  const dates = useFormatter();
+  return (
+    <>
+      {row.marketPaise === null ? null : (
+        <span>
+          {t("prices.market", { price: format.perKg(row.marketPaise) })}
+          {row.marketSource ? <> · {row.marketSource}</> : null}
+          {row.marketDate ? (
+            <>
+              {" "}
+              ·{" "}
+              <time dateTime={row.marketDate}>
+                {dates.dateTime(new Date(`${row.marketDate}T00:00:00Z`), {
+                  dateStyle: "medium",
+                })}
+              </time>
+            </>
+          ) : null}
+        </span>
+      )}
+    </>
   );
 }

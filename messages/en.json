@@ -13,6 +13,16 @@
     "dark": "Dark",
     "system": "System"
   },
+  "stockReports": {
+    "prepare": "Prepare stock report",
+    "download": "Download stock report",
+    "preparing": "Preparing your report…",
+    "complete": "Report ready",
+    "failed": "Could not prepare the report. Try again.",
+    "unavailable": "Reports are unavailable until background jobs are configured.",
+    "expired": "This report has expired. Prepare a new one.",
+    "notice": "Private stock snapshot. Available for 30 minutes. This is not a certificate."
+  },
   "common": {
     "loading": "Loading…",
     "error": "Something went wrong",
@@ -135,7 +145,7 @@
       "kabadiwala": {
         "title": "Kabadiwalas",
         "one": "Pickup requests from homes nearby.",
-        "two": "Set your own prices, never below the floor.",
+        "two": "Set your own offers for each material.",
         "three": "Sell your sorted stock to preprocessors.",
         "cta": "Join as a kabadiwala"
       },
@@ -176,8 +186,8 @@
         "body": "Choose your role and complete signup."
       },
       "floor": {
-        "title": "Fair prices, with a floor",
-        "body": "Shops set their own prices, but never below the minimum we publish for each material."
+        "title": "Independent shop offers",
+        "body": "Shops set their own offers. Dated reference prices are information, not a required minimum."
       },
       "escrow": {
         "title": "Awaiting gateway",
@@ -237,22 +247,22 @@
   },
   "prices": {
     "metaTitle": "Material prices in Bengaluru",
-    "metaDescription": "Material prices in Bengaluru, per kg: paper, plastic, metal, glass and e-waste, with the week's change, a 30-day chart and the least a shop may pay.",
+    "metaDescription": "Dated reference prices for recyclable materials in Bengaluru, per kg. Each business sets its own offers.",
     "eyebrow": "Bengaluru",
     "title": "Material prices",
-    "lead": "Prices per kilogram for recyclable materials. Shops set their own prices, but never below the floor. Choose a material to see its last 30 days.",
+    "lead": "Dated reference prices per kilogram. Each business sets its own offers. Choose a material to view available history.",
     "demoNote": "Sample prices for the prototype, not live market rates.",
     "date": "Prices for {date}",
-    "floorHelp": "Floor: the least a verified shop may pay you for a kilo.",
+    "floorHelp": "Reference price: dated information, not a required minimum or a shop offer.",
     "perKg": "{price}/kg",
-    "floor": "Floor {price}",
+    "floor": "Reference {price}",
     "noPrice": "No price yet",
     "columns": {
       "material": "Material",
       "today": "Today",
       "week": "This week",
       "month": "30 days",
-      "floor": "Floor"
+      "floor": "Reference"
     },
     "families": {
       "paper": "Paper",
@@ -277,7 +287,7 @@
       "today": "Today",
       "low": "30-day low",
       "high": "30-day high",
-      "floor": "Floor",
+      "floor": "Reference",
       "noFloor": "None",
       "close": "Close",
       "noHistory": "No price history yet."
@@ -285,7 +295,7 @@
     "chart": {
       "label": "{material}: price per kilo, day by day. Use the arrow keys to move between days.",
       "point": "{date}: {price}",
-      "floor": "Floor {price}",
+      "floor": "Reference {price}",
       "table": "Show the numbers",
       "tableCaption": "{material}, price per kilo by day",
       "date": "Date",
@@ -557,10 +567,10 @@
     "lead": "Materials move from homes to collection shops, preprocessors and recyclers before they become something new. Here is what happens at each step, and what Luma.Green records.",
     "stepLabel": "Step {number}",
     "sell": {
-      "body": "A household picks what it has, sees each nearby shop's offer and books a pickup or a drop-off. The kabadiwala weighs each material and pays in cash or UPI, and both get a receipt.",
-      "point1": "Each shop sets its own prices, never below the published floor",
+      "body": "A household adds photos and collection details, then books pickup or drop-off. No estimated weights are required. The shop weighs the materials and records its payment declaration and receipt.",
+      "point1": "Each shop sets its own offers",
       "point2": "Weights recorded in grams from the shop's scale",
-      "point3": "A tracking link, with no account needed"
+      "point3": "Sign in with record access to view private collection details"
     },
     "trade": {
       "body": "Business payments use the payment gateway. Check the order for its current payment status.",
@@ -1079,19 +1089,19 @@
       },
       "howPricesWork": {
         "title": "How prices are set",
-        "summary": "Why the estimate is a range, and how the final amount is worked out.",
+        "summary": "How independent shop offers and measured weights determine the amount.",
         "steps": {
           "estimate": {
-            "title": "Estimates use city prices",
-            "body": "Before you choose a kabadiwala, we use standard Bengaluru prices, so you see a range."
+            "title": "Reference prices are dated information",
+            "body": "Reference prices provide context. They do not set a shop offer or a required minimum."
           },
           "own": {
             "title": "Each kabadiwala sets a price",
             "body": "Once you choose one, you see their own price for each material."
           },
           "floor": {
-            "title": "Never below the minimum",
-            "body": "Luma.Green sets a minimum price for every material. No kabadiwala can pay less."
+            "title": "Independent offers",
+            "body": "Each business sets its own offers. Luma.Green does not enforce a reference-price minimum."
           },
           "final": {
             "title": "The weight decides the amount",
@@ -1219,23 +1229,23 @@
       },
       "setPrices": {
         "title": "Set your prices",
-        "summary": "You choose what you pay, above the minimum.",
+        "summary": "Choose what you offer for each material.",
         "steps": {
           "open": {
             "title": "Open My prices",
-            "body": "You see every material with the minimum price beside it."
+            "body": "View materials and available reference price information."
           },
           "enter": {
             "title": "Enter your price per kg",
             "body": "Type what you want to pay households for each material."
           },
           "floor": {
-            "title": "Stay above the minimum",
-            "body": "A price below the minimum isn't saved. If the minimum goes up, your price goes up too, and we tell you."
+            "title": "Set an independent offer",
+            "body": "Reference prices do not set or automatically change your offer."
           },
           "blank": {
             "title": "Leave a material blank",
-            "body": "If you set no price, the city's standard price is used."
+            "body": "If you leave a material blank, no offer is set for it."
           },
           "history": {
             "title": "Old receipts don't change",
@@ -1555,7 +1565,7 @@
       },
       "howPriceWorks": {
         "q": "How is my money worked out?",
-        "a": "The weight of each material times the kabadiwala's price per kg. Their price can never be below the minimum Luma.Green sets."
+        "a": "The measured weight of each material times the agreed shop price per kg. Reference prices are information only."
       },
       "howPaid": {
         "q": "How do I get paid?",
@@ -1595,7 +1605,7 @@
       },
       "ownPrices": {
         "q": "Can I set my own prices?",
-        "a": "Yes, for every material, as long as it's not below the minimum price Luma.Green sets."
+        "a": "Yes. Each business sets its own offers for each material. Reference prices are not a required minimum."
       },
       "noVehicle": {
         "q": "I don't have a vehicle. Can I still join?",
@@ -2839,11 +2849,38 @@
       "close": "Close",
       "otherNumber": "Use another number"
     },
-    "saved": "No account needed. Keep this link to check your booking on any phone.",
+    "saved": "Keep this link. Sign in and have permission for this collection to view its private details.",
     "sellMore": "Book another collection",
     "tryAnother": "Try another shop",
     "dispatchChanged": "Your request has moved to another nearby shop. The current shop is shown below.",
-    "retryDetails": "Add photos and check your details again. Choose another shop to send a new request."
+    "retryDetails": "Add photos and check your details again. Choose another shop to send a new request.",
+    "review": {
+      "title": "Review the receipt",
+      "declaration": "The shop declared payment. You have not confirmed receipt of payment.",
+      "accepted": "Receipt accepted. Confirm payment only after you receive it.",
+      "disputed": "Receipt disputed. Resolution is pending.",
+      "acknowledged": "You confirmed receipt of payment.",
+      "accept": "Accept",
+      "dispute": "Dispute receipt",
+      "acknowledge": "Confirm payment received",
+      "rejectLine": "Reject {material}",
+      "note": "Dispute reason",
+      "sharing": "Collection helpers",
+      "phone": "Helper phone number",
+      "adult": "I confirm that I am an adult and the invited helper is an adult.",
+      "invite": "Invite helper",
+      "shareNote": "Share this collection link with the helper. They must sign in with this verified phone and accept within 48 hours. No message is sent.",
+      "active": "Active",
+      "pending": "Awaiting acceptance",
+      "ended": "Access ended",
+      "revoke": "Revoke access",
+      "leave": "Leave collection",
+      "handover": "Handover note",
+      "save": "Save note",
+      "error": "The change could not be saved. Check your access and try again.",
+      "signIn": "Sign in to view this collection",
+      "acceptedTotal": "Accepted: {weight} · {amount}"
+    }
   },
   "market": {
     "sampleData": "Prices and amounts on this screen are sample data for the prototype.",
@@ -3291,12 +3328,12 @@
       "title": "Stock",
       "lead": "What you have now, and what it's worth today.",
       "totalWeight": "Total weight",
-      "worth": "Worth today",
-      "worthHint": "At today's market prices",
+      "worth": "Current offer value",
+      "worthHint": "Current offer value",
       "scrap": "Collected materials",
       "recycled": "Recycled material",
-      "atPrice": "Market {price}/kg",
-      "noPrice": "No market price today",
+      "atPrice": "Current offer value: {price}/kg",
+      "noPrice": "No current offer",
       "sellTo": {
         "yard": "Sell to a preprocessor",
         "recycler": "Sell to a recycler",
@@ -3307,23 +3344,24 @@
       "emptyBusiness": "Buy on the market, and it shows up here.",
       "buy": "Buy material",
       "notBusinessTitle": "Only for businesses",
-      "notBusinessBody": "Stock is kept by shops, preprocessors, recyclers and factories."
+      "notBusinessBody": "Stock is kept by shops, preprocessors, recyclers and factories.",
+      "recordedCost": "Recorded cost"
     },
     "prices": {
       "title": "My prices",
-      "lead": "What you pay households per kg. Never below the minimum.",
+      "lead": "Your offers to households per kg. You set them independently.",
       "label": "Your price for {material}, in rupees per kg",
       "prefix": "₹",
       "suffix": "/kg",
-      "minimum": "Minimum {price}/kg",
+      "minimum": "Reference {price}/kg",
       "market": "Market {price}/kg",
-      "notSet": "Not set yet. Households get the city price, {price}/kg.",
+      "notSet": "No offer set. Reference: {price}/kg.",
       "save": "Save",
       "saving": "Saving…",
       "saved": "{material}: {price}/kg saved.",
       "invalid": "Enter a price, like 14 or 14.50.",
-      "belowFloor": "Too low. The minimum is {price}/kg.",
-      "belowFloorUnknown": "Too low. This is under the minimum price.",
+      "belowFloor": "Enter a valid price. Reference: {price}/kg.",
+      "belowFloorUnknown": "Enter a valid price.",
       "emptyTitle": "No materials yet",
       "emptyBody": "The materials you buy are set when your shop is approved."
     },
@@ -3477,7 +3515,8 @@
       "application_received": "Application received",
       "application_approved": "Application approved",
       "application_changes_requested": "Application needs changes",
-      "application_rejected": "Application not approved"
+      "application_rejected": "Application not approved",
+      "stock_low": "Low stock alert"
     }
   },
   "integrations": {
@@ -3751,7 +3790,8 @@
     "addInput": "Add input lot",
     "chooseInput": "Choose an input lot",
     "combinedInput": "Total input mass",
-    "multiInputHint": "Combine only measured material you hold. Every input quantity is consumed from its own lot. This records processing evidence and does not add inventory stock."
+    "multiInputHint": "Combine only measured material you hold. Every input quantity is consumed from its own lot. This records processing evidence and does not add inventory stock.",
+    "qualityReleaseRequired": "Accepted tests required"
   },
   "evidence": {
     "title": "Document references",
@@ -4166,5 +4206,163 @@
     "error": "Could not update this report. Check the expiry, selected records and your access.",
     "snapshot": "Fixed snapshot of the inspecting business’s declaration. This is not a certificate or independent verification.",
     "limit": "Up to 100 recent records and approved recipients are shown."
+  },
+  "collectionOperations": {
+    "availability": "Collection availability",
+    "capacity": "Capacity per window",
+    "holidays": "Closed dates (YYYY-MM-DD, separated by commas)",
+    "schedule": "Collection schedule",
+    "unassigned": "Still unassigned. Change the time or cancel.",
+    "repeat": "Repeat every {days} days",
+    "stop": "Stop future visits",
+    "reschedule": "Change collection time",
+    "requested": "Change sent to the operator",
+    "saved": "Saved",
+    "acknowledge": "Confirm payment received",
+    "acknowledged": "Payment confirmed",
+    "fixedFee": "Fixed job fee. The assigning business pays; Luma does not guarantee wages.",
+    "due": "Payment due: {date}",
+    "declarePayment": "Declare worker payment",
+    "failedVisit": "Record failed visit",
+    "paymentDeclared": "Payment declared; awaiting worker confirmation"
+  },
+  "geocoding": {
+    "consent": "Send this point to Google Maps to find an address.",
+    "find": "Find address",
+    "loading": "Finding address…",
+    "manual": "You can enter the address manually.",
+    "unavailable": "Address lookup is unavailable. Enter the address manually.",
+    "use": "Use this address",
+    "confirm": "I checked this address and want to replace the address field.",
+    "preview": "Preview only. Address saving needs a service policy review.",
+    "attribution": "Google Maps"
+  },
+  "serviceRecords": {
+    "title": "Services and programmes",
+    "unavailable": "Provider execution and redemption are unavailable. Records do not approve loans, insurance, welfare or payments.",
+    "enquiries": "Service enquiries",
+    "programmes": "Programme records",
+    "edit": "Edit",
+    "reported": "Reported figures. Evidence is not verified. No municipal agreement or funded reward is implied.",
+    "area": "Area",
+    "startsOn": "Start date",
+    "endsOn": "End date",
+    "coverageCount": "Coverage count",
+    "trips": "Trips",
+    "centreHandovers": "Centre handovers",
+    "groupIncomePaise": "Group income (paise)",
+    "share": "Share aggregate report",
+    "principal": "Material owner / principal",
+    "materialReference": "Material reference",
+    "explicitReference": "Share only the material code and recorded grams with the chosen recipient.",
+    "commercialModel": "Commercial model",
+    "draft": "Draft",
+    "enquiry": "Enquiry",
+    "closed": "Closed",
+    "kinds": {
+      "equipment": "Equipment",
+      "staffing": "Staffing",
+      "transport": "Transport",
+      "environment": "Environment",
+      "accounting": "Accounting",
+      "solar": "Solar",
+      "scales": "Scales",
+      "voice": "Voice services",
+      "society": "Society services",
+      "welfare": "Welfare",
+      "donation": "Donation",
+      "reward": "Reward",
+      "finance": "Finance",
+      "insurance": "Insurance",
+      "attendance": "Attendance",
+      "wet_service": "Wet waste service",
+      "other": "Other"
+    },
+    "models": {
+      "partner_service": "Partner enquiry",
+      "materials_sale_reference": "Material sale reference",
+      "toll_jobwork": "Principal-owned toll work",
+      "paid_collection": "Paid collection service",
+      "generator_paid_treatment": "Generator-paid treatment"
+    },
+    "directions": {
+      "not_applicable": "No payment execution",
+      "buyer_to_seller": "Buyer → seller",
+      "principal_to_processor": "Principal → processor",
+      "customer_to_service": "Customer → service",
+      "generator_to_handler": "Generator → handler"
+    },
+    "received": "Received",
+    "sharedReports": "Shared audit reports",
+    "revoke": "Revoke access",
+    "quantityGrams": "Quantity (g)",
+    "recordName": "Record name"
+  },
+  "returnClaims": {
+    "title": "Returns and scheme evidence",
+    "returnTitle": "Full return",
+    "scheme": "Scheme reference",
+    "issuer": "External issuer reference",
+    "freight": "Return freight payer",
+    "reconcile": "Reconcile",
+    "validate": "Check source",
+    "notice": "Reported evidence only. This is not an official certificate or payment approval.",
+    "waiting": "Wait for physical receipt, full provider refund and settlement reversal."
+  },
+  "marketComparison": {
+    "quote": "Freight quote required",
+    "freight": "Separate freight: {price}/kg",
+    "notice": "Checkout collects material only. Agree and pay freight separately.",
+    "available": "Available from {date}",
+    "delivered": "Material and freight: {price}/kg",
+    "freightInput": "Freight per kg (optional)",
+    "availableInput": "Available from (optional)",
+    "validityInput": "Offer expiry (optional)"
+  },
+  "recordedCosts": {
+    "acquisition": "Acquisition cost (paise)",
+    "processing": "Processing cost (paise)",
+    "reference": "Cost evidence reference",
+    "hint": "Blank means unknown. Enter 0 only for a recorded zero cost.",
+    "remaining": "Remaining recorded cost",
+    "input": "Consumed input cost",
+    "total": "Allocated output cost",
+    "unknown": "Unknown",
+    "loss": "Measured outputs absorb the cost of contamination and process loss.",
+    "record": "Record acquisition cost",
+    "processingTotal": "Processing cost"
+  },
+  "stockClosing": {
+    "title": "Daily stock review",
+    "notice": "Closing saves stock now. Later changes remain allowed.",
+    "note": "Review note",
+    "record": "Record today’s closing",
+    "last": "Last closing",
+    "none": "No closing yet",
+    "gramsUnit": "g",
+    "unknown": "Unknown cost",
+    "balances": "Closing balances",
+    "threshold": "Low stock alert",
+    "thresholdHint": "Account inbox only. Alerts are off until enabled.",
+    "disabled": "Off",
+    "below": "Below the alert level",
+    "recent": "Recent alerts (up to 20)",
+    "noAlerts": "No alerts yet",
+    "material": "Material",
+    "grams": "Alert level (grams)",
+    "enabled": "Enable alert",
+    "save": "Save alert setting",
+    "closed": "Closing saved",
+    "saved": "Alert setting saved",
+    "dateChanged": "The date changed. Review and try again.",
+    "alreadyRecorded": "A closing is already recorded for today.",
+    "limit": "The stock history exceeds this tool’s limit. Ask an administrator for help.",
+    "mismatch": "Stock and movement records differ. Ask an administrator to review.",
+    "correction": "Stock correction",
+    "add": "Add stock",
+    "remove": "Remove stock",
+    "corrected": "Correction recorded",
+    "evidence": "Physical evidence reference",
+    "recentCorrections": "Recent corrections (up to 20)"
   }
 }
