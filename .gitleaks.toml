@@ -39,7 +39,7 @@ regexTarget = "line"
 regexes = ['''^\s*"[^"\r\n]+\.(ts|tsx|mts|js|mjs|cjs|json|png|webp|md)": "[a-f0-9]{64}",?\s*$''']
 
 [[rules.allowlists]]
-description = "Fixed account-removal enquiry operation identifier, not a provider credential"
+description = "Fixed removal enquiry operation identifier in its test and scanner probe"
 condition = "AND"
-paths = ['''^convex/accountRemoval\.test\.ts$''']
+paths = ['''^convex/accountRemoval\.test\.ts$''', '''^\.github/workflows/security\.yml$''']
 regexes = ['''^removal-enquiry-0001$''']

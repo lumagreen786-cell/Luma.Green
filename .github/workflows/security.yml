@@ -47,10 +47,12 @@ jobs:
           probe=$(mktemp -d)
           trap 'rm -rf "$probe"' EXIT
           mkdir -p "$probe/convex"
+          mkdir -p "$probe/.github/workflows"
           cd "$probe"
           fixture=0123456789abcdef
           printf 'vi.stubEnv("BETTER_AUTH_SECRET", "%s%s");\n' "$fixture" "$fixture" > convex/auth-sms.test.ts
           printf 'operationKey: "removal-enquiry-0001"\n' > convex/accountRemoval.test.ts
+          printf 'operationKey: "removal-enquiry-0001"\n' > .github/workflows/security.yml
           captures=docs/delivery/evidence/platform-foundation-2026-10-28
           mkdir -p "$captures"
           digest=$(printf 'synthetic-source-input' | sha256sum | cut -d ' ' -f 1)
@@ -60,7 +62,7 @@ jobs:
           "$TOOL_DIR/gitleaks" dir . --config "$GITHUB_WORKSPACE/.gitleaks.toml" \
             --ignore-gitleaks-allow --gitleaks-ignore-path /dev/null \
             --redact=100 --no-banner --log-level fatal --timeout 30
-          for target in convex/auth-sms.test.ts convex/accountRemoval.test.ts \
+          for target in convex/auth-sms.test.ts convex/accountRemoval.test.ts .github/workflows/security.yml \
             "$captures/foundation-captures.json" "$captures/approved-book-captures.json" \
             "$captures/approved-hashes.json"; do
             printf 'api_key = "%s"\n' "$(openssl rand -hex 24)" > "$target"

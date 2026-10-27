@@ -44,7 +44,7 @@ history reachable from `HEAD`, including the PR checkout. It uses the default
 provider and generic-key rules, plus the narrow exceptions in `.gitleaks.toml`:
 
 - Exact synthetic auth values in named isolated auth test files.
-- Exact report, service enquiry and account-removal enquiry operation identifiers in their named tests.
+- Exact report, service enquiry and account-removal enquiry operation identifiers in their named tests; the removal-enquiry literal is also used by the exact scanner-probe workflow.
 - The existing public investor-fixture batch label in its named scripts/reports.
 - Full SHA-256 values keyed by a named source/image file in the existing user-guide manifests and three exact foundation-capture JSON paths.
 
