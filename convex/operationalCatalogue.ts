@@ -194,15 +194,33 @@ export const review = mutation({
         (material.family !== row.family || material.stage !== row.stage)
       )
         throw new ConvexError("MATERIAL_DEFINITION_CONFLICT");
-      if (!material)
-        await ctx.db.insert("materials", {
-          code: row.materialCode,
-          family: row.family,
-          stage: row.stage,
-          names: { en: row.name },
-          sortOrder: 1000,
-          active: true,
+      if (!material?.active) {
+        const materialId =
+          material?._id ??
+          (await ctx.db.insert("materials", {
+            code: row.materialCode,
+            family: row.family,
+            stage: row.stage,
+            names: { en: row.name },
+            sortOrder: 1000,
+            active: true,
+          }));
+        if (material)
+          await ctx.db.patch("materials", materialId, { active: true });
+        await ctx.db.insert("auditLog", {
+          action: "material.definitionActivated",
+          entityTable: "materials",
+          entityId: materialId,
+          metadata: {
+            adminUserId: admin._id,
+            definitionId: row._id,
+            reference,
+            previousActive: material?.active ?? null,
+            hazardApprovalGranted: false,
+          },
+          createdAt: Date.now(),
         });
+      }
     }
     await ctx.db.patch("operationalDefinitions", row._id, {
       status: args.decision,

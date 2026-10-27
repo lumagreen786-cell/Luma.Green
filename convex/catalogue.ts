@@ -1,4 +1,4 @@
-import { v } from "convex/values";
+import { ConvexError, v } from "convex/values";
 
 import { mutation, query } from "./_generated/server";
 import { requireAdmin } from "./lib/access";
@@ -6,6 +6,11 @@ import { findProfile } from "./lib/applicationAccess";
 import { CATALOGUE } from "./lib/catalogue";
 import { shiftDate } from "./lib/dates";
 import { indiaToday } from "./lib/onboarding";
+import {
+  foundationMaterials,
+  PET_REFERENCE_DEFINITIONS,
+  PET_REFERENCE_SOURCE,
+} from "./lib/referenceDefinitions";
 import { vFamily } from "./lib/validators";
 import { vNames } from "./lib/views";
 
@@ -41,17 +46,30 @@ export const materials = query({
 /** Add canonical definitions only. Existing materials and all operational data stay intact. */
 export const initializeDefinitions = mutation({
   args: {},
-  returns: v.object({ inserted: v.number() }),
+  returns: v.object({
+    inserted: v.number(),
+    definitionsInserted: v.number(),
+    materialsSkipped: v.number(),
+    definitionsSkipped: v.number(),
+  }),
   handler: async (ctx) => {
     const admin = await requireAdmin(ctx);
     const profile = await findProfile(ctx, admin._id);
+    // Static, bounded input; never scan or replace the live catalogue.
+    const materials = foundationMaterials();
     let inserted = 0;
-    for (const [sortOrder, entry] of CATALOGUE.entries()) {
+    let definitionsInserted = 0;
+    const now = Date.now();
+    for (const [sortOrder, entry] of materials.entries()) {
       const existing = await ctx.db
         .query("materials")
         .withIndex("by_code", (q) => q.eq("code", entry.code))
         .unique();
-      if (existing) continue;
+      if (existing) {
+        if (existing.family !== entry.family || existing.stage !== entry.stage)
+          throw new ConvexError("MATERIAL_DEFINITION_CONFLICT");
+        continue;
+      }
       // Deliberately select fields: the source also contains prototype prices
       // and indicative factors, neither of which is a production input.
       const definition = {
@@ -60,7 +78,7 @@ export const initializeDefinitions = mutation({
         stage: entry.stage,
         names: entry.names,
         sortOrder,
-        active: true,
+        active: entry.active,
       };
       const id = await ctx.db.insert("materials", definition);
       await ctx.db.insert("auditLog", {
@@ -72,12 +90,63 @@ export const initializeDefinitions = mutation({
           adminUserId: admin._id,
           definition,
           factorStatus: "unknown",
+          sourceReference: PET_REFERENCE_DEFINITIONS.some(
+            ({ materialCode }) => materialCode === entry.code,
+          )
+            ? PET_REFERENCE_SOURCE
+            : "convex/lib/catalogue.ts: canonical material labels only",
+          hazardApprovalGranted: false,
         },
-        createdAt: Date.now(),
+        createdAt: now,
       });
       inserted += 1;
     }
-    return { inserted };
+    for (const definition of PET_REFERENCE_DEFINITIONS) {
+      const existing = await ctx.db
+        .query("operationalDefinitions")
+        .withIndex("by_material_version", (q) =>
+          q
+            .eq("materialCode", definition.materialCode)
+            .eq("version", definition.version),
+        )
+        .unique();
+      if (existing) {
+        if (
+          existing.family !== definition.family ||
+          existing.stage !== definition.stage
+        )
+          throw new ConvexError("MATERIAL_DEFINITION_CONFLICT");
+        // Preserve drafts and all later reviewed or retired content exactly.
+        continue;
+      }
+      const id = await ctx.db.insert("operationalDefinitions", {
+        ...definition,
+        status: "draft",
+        createdBy: admin._id,
+        createdAt: now,
+      });
+      await ctx.db.insert("auditLog", {
+        actorProfileId: profile?._id,
+        action: "catalogue.definitionDrafted",
+        entityTable: "operationalDefinitions",
+        entityId: id,
+        metadata: {
+          adminUserId: admin._id,
+          ...definition,
+          initialization: true,
+          hazardApprovalGranted: false,
+        },
+        createdAt: now,
+      });
+      definitionsInserted += 1;
+    }
+    return {
+      inserted,
+      definitionsInserted,
+      materialsSkipped: materials.length - inserted,
+      definitionsSkipped:
+        PET_REFERENCE_DEFINITIONS.length - definitionsInserted,
+    };
   },
 });
 
