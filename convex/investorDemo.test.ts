@@ -307,8 +307,10 @@ it("covers every workbook row in bounded batches without claiming approval or ex
     intakeMismatchRows: 0,
     commitmentExcessPairs: 0,
   });
-  // This integration case imports all140 identities and processes all518 rows in21 atomic batches.
-}, 60_000);
+  // This case imports 140 identities and processes 518 rows in 21 atomic batches.
+  // Hosted coverage took 48.4 seconds on one runner and exceeded 60 on another.
+  // Keep the full fixture and assertions; give only this bulk case a bounded budget.
+}, 120_000);
 
 it("uses only supported recurring dates and scrap intake history", async () => {
   const t = world();
