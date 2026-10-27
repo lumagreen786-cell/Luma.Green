@@ -151,6 +151,8 @@ import type * as pushState from "../pushState.js";
 import type * as quality from "../quality.js";
 import type * as qualityFiles from "../qualityFiles.js";
 import type * as review from "../review.js";
+import type * as reportJobs from "../reportJobs.js";
+import type * as reportJobDispatch from "../reportJobDispatch.js";
 import type * as routePlans from "../routePlans.js";
 import type * as saathi from "../saathi.js";
 import type * as shop from "../shop.js";
@@ -317,6 +319,8 @@ declare const fullApi: ApiFromModules<{
   quality: typeof quality;
   qualityFiles: typeof qualityFiles;
   review: typeof review;
+  reportJobs: typeof reportJobs;
+  reportJobDispatch: typeof reportJobDispatch;
   routePlans: typeof routePlans;
   saathi: typeof saathi;
   shop: typeof shop;

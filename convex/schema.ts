@@ -37,6 +37,7 @@ import { operationalTables } from "./lib/operationalSchema";
 import { organizationTables } from "./lib/organizationsSchema";
 import { publicDataFields } from "./lib/publicData";
 import { qualityFileTables } from "./lib/qualityFilesSchema";
+import { vReportStatus, vStockRow } from "./lib/reportJobs";
 import { routePlanningTables } from "./lib/routePlanningSchema";
 import { vMaterialOrigin, vSiteType } from "./lib/siteClassification";
 import { sourcingTables } from "./lib/sourcingSchema";
@@ -646,6 +647,22 @@ export default defineSchema({
   })
     .index("by_org_reference", ["orgId", "intakeReference"])
     .index("by_org_created", ["orgId", "createdAt"]),
+
+  reportJobs: defineTable({
+    orgId: v.id("orgs"),
+    ownerProfileId: v.id("profiles"),
+    operationKey: v.string(),
+    capabilityHash: v.string(),
+    status: vReportStatus,
+    snapshot: v.array(vStockRow),
+    result: v.optional(v.string()),
+    errorCode: v.optional(v.string()),
+    createdAt: v.number(),
+    expiresAt: v.number(),
+  })
+    .index("by_owner_org_key", ["ownerProfileId", "orgId", "operationKey"])
+    .index("by_org_status_expiry", ["orgId", "status", "expiresAt"])
+    .index("by_owner_org_created", ["ownerProfileId", "orgId", "createdAt"]),
 
   inventory: defineTable({
     orgId: v.id("orgs"),
