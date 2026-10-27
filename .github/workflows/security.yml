@@ -40,7 +40,7 @@ jobs:
             https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz
           echo "551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb  $TOOL_DIR/gitleaks.tar.gz" | sha256sum --check --status
           tar -xzf "$TOOL_DIR/gitleaks.tar.gz" -C "$TOOL_DIR" gitleaks
-      - name: Verify the scanner rejects a new key in an allowed fixture path
+      - name: Verify exact fixture exceptions still reject new keys
         env:
           TOOL_DIR: ${{ runner.temp }}/luma-security-tools
         run: |
@@ -50,17 +50,29 @@ jobs:
           cd "$probe"
           fixture=0123456789abcdef
           printf 'vi.stubEnv("BETTER_AUTH_SECRET", "%s%s");\n' "$fixture" "$fixture" > convex/auth-sms.test.ts
+          printf 'operationKey: "removal-enquiry-0001"\n' > convex/accountRemoval.test.ts
+          captures=docs/delivery/evidence/platform-foundation-2026-10-28
+          mkdir -p "$captures"
+          digest=$(printf 'synthetic-source-input' | sha256sum | cut -d ' ' -f 1)
+          for name in foundation-captures approved-book-captures approved-hashes; do
+            printf '  "src/lib/auth.ts": "%s",\n' "$digest" > "$captures/$name.json"
+          done
           "$TOOL_DIR/gitleaks" dir . --config "$GITHUB_WORKSPACE/.gitleaks.toml" \
             --ignore-gitleaks-allow --gitleaks-ignore-path /dev/null \
             --redact=100 --no-banner --log-level fatal --timeout 30
-          printf 'api_key = "%s"\n' "$(openssl rand -hex 24)" > convex/auth-sms.test.ts
-          set +e
-          "$TOOL_DIR/gitleaks" dir . --config "$GITHUB_WORKSPACE/.gitleaks.toml" \
-            --ignore-gitleaks-allow --gitleaks-ignore-path /dev/null \
-            --redact=100 --no-banner --log-level fatal --timeout 30
-          result=$?
-          set -e
-          test "$result" -eq 1
+          for target in convex/auth-sms.test.ts convex/accountRemoval.test.ts \
+            "$captures/foundation-captures.json" "$captures/approved-book-captures.json" \
+            "$captures/approved-hashes.json"; do
+            printf 'api_key = "%s"\n' "$(openssl rand -hex 24)" > "$target"
+            set +e
+            "$TOOL_DIR/gitleaks" dir . --config "$GITHUB_WORKSPACE/.gitleaks.toml" \
+              --ignore-gitleaks-allow --gitleaks-ignore-path /dev/null \
+              --redact=100 --no-banner --log-level fatal --timeout 30
+            result=$?
+            set -e
+            test "$result" -eq 1
+            rm "$target"
+          done
       - name: Scan repository history with redacted output
         env:
           TOOL_DIR: ${{ runner.temp }}/luma-security-tools

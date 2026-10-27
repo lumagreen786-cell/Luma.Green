@@ -44,9 +44,9 @@ history reachable from `HEAD`, including the PR checkout. It uses the default
 provider and generic-key rules, plus the narrow exceptions in `.gitleaks.toml`:
 
 - Exact synthetic auth values in named isolated auth test files.
-- Exact report and enquiry operation identifiers in their named tests.
+- Exact report, service enquiry and account-removal enquiry operation identifiers in their named tests.
 - The existing public investor-fixture batch label in its named scripts/reports.
-- Full SHA-256 values keyed by a named source/image file in screenshot manifests.
+- Full SHA-256 values keyed by a named source/image file in the existing user-guide manifests and three exact foundation-capture JSON paths.
 
 These exceptions apply only to the generic rule. No whole test or document
 directory is excluded by the project configuration. Provider-specific rules
@@ -54,9 +54,10 @@ remain active. Inline `gitleaks:allow` markers and `.gitleaksignore` files canno
 silence this workflow: it passes `--ignore-gitleaks-allow` and an empty ignore
 path. Any change to these controls requires security review.
 
-The job first proves that its exact synthetic auth value passes and a new random
-key in that same test path fails. It then runs the repository scan with full
-redaction. The random probe has no provider access and is removed when the step
+The job first proves that exact synthetic auth/operation values and named-file
+digests pass. It then replaces each allowed fixture or capture path with a new
+random key and requires detection. It runs the repository history scan with full
+redaction afterwards. The random probe has no provider access and is removed when the step
 ends. Scanner errors must not be treated as detections: the control requires the
 specific leak exit code. A scan error or unexpected result fails the job.
 
