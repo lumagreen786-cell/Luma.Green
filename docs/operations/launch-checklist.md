@@ -1,5 +1,14 @@
 # Account and deployment checklist
 
+> Current foundation status — 28 October 2026: use the
+> [active release checkpoint](../delivery/platform-foundation-2026-10-27.md)
+> for the candidate, checks and rollout status, and
+> [AGENTS.md](../../AGENTS.md#9-integration-boundaries) for current authentication
+> and provider rules. Phone sign-in is the current member path; email/password
+> login and recovery are disabled. `luma.green` is connected to the Luma Vercel
+> Production project. Expo is paused. The dated records below describe earlier
+> preparation and do not prove acceptance of the foundation candidate.
+
 > Status: approved setup plan, updated 7 October 2026. Account ownership and
 > provider activation are unverified except the known GitHub, Convex and Vercel
 > projects. No secret values belong in this file.

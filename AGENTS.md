@@ -15,6 +15,63 @@ how to do one job well.
 
 ---
 
+## Platform foundation rebuild authority — 27 October 2026
+
+**28 October owner update:** Expo iOS and Android work is paused. Preserve the
+existing mobile changes, but do not develop, package or release the Expo app
+until the owner resumes it. Cancel the queued Android build where possible.
+Continue the web platform, deployment and document work. This update overrides
+the mobile resumption below.
+
+This section takes priority over older prototype-preservation, migration,
+backward-compatibility and mobile-hold rules while this foundation release is
+prepared. Its temporary demonstration-data deletion and no-compatibility
+permission expires for future work once this foundation release is verified in
+Production. Existing security rules and the Expo pause remain active; expiry is
+not permission to resume native work. The owner states that there are no real
+users and that the existing records are demonstration data.
+
+- Finish the plain-English platform specification from the supplied stakeholder
+  workbook and chat notes. Resolve ordinary product gaps with explicit,
+  consistent defaults; do not ask again for decisions already delegated here.
+- Rebuild schemas, workflows and screens where the new specification needs it.
+  Delete obsolete code and demonstration records when necessary. No legacy
+  compatibility layer, data backfill or migration project is required for this
+  version. This is permission, not an instruction to delete working code without
+  a reason. Keep unrelated work in other checkouts intact.
+- Use Next.js on Vercel, Convex as the record and authorization owner,
+  Trigger.dev for justified long-running work, and private Cloudflare R2 storage.
+  Keep Cloudflare Turnstile, Surepass business checks and the existing OTP
+  providers (OS Digital ENVRIN; configured MSG91 alternative). Retain the current
+  Cashfree integration unless a later owner decision replaces it. Do not add AWS
+  infrastructure until a concrete unmet workload needs it.
+- Expo mobile development is resumed for iOS and Android, with iOS first.
+  The owner selected Expo with shared hosted web screens. Preserve and assess
+  the unfinished mobile demo work before integrating useful parts. Electron
+  desktop remains outside this resumed scope.
+- On 27 October, the owner read and approved the completed specification and
+  resumed implementation, commits, checked PR merge, Production deployment and
+  a screenshot document. Isolated screenshot fixtures may use test sessions
+  without sending OTP. Keep them labelled and outside public authentication;
+  do not deploy a public login bypass or claim fixture evidence as live access.
+- Implementation, proportional tests, commits and branch pushes are authorized.
+  Main still lands through checked PRs. Existing Production-only deployment,
+  credential privacy, real authentication, authorization, exact quantities,
+  auditability and provider verification rules still apply.
+- Seed reference definitions and clearly identified test fixtures separately.
+  Never seed invented live prices, verified permits, official certificates,
+  customer payments or real identities. Unavailable external services have an
+  honest unavailable state; ordinary product defaults cannot create provider
+  permission or legal approval.
+- List useful paid services and current prices for the owner. Do not purchase
+  plans, accept commercial terms or spend paid provider quota merely to unblock
+  development. Paid plan setup and iOS/Android store acceptance remain separate
+  evidence from local checks.
+
+Current specification and delivery progress are recorded in
+`docs/product/platform-refinement-interview.md` and
+`docs/delivery/platform-foundation-2026-10-27.md`.
+
 ## Current web redesign — 16 October 2026
 
 On 16 October, after local review, the owner authorized finishing the changes,

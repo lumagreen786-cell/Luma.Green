@@ -22,6 +22,7 @@ import type { TrackedBooking } from "@/components/track/types";
 import type { api } from "../../convex/_generated/api";
 import type { Id } from "../../convex/_generated/dataModel";
 import { CATALOGUE } from "../../convex/lib/catalogue";
+import { isSpecialistMaterial } from "../../convex/lib/specialistReferences";
 
 export const NOW = Date.parse("2026-10-14T06:00:00Z");
 const TODAY = "2026-10-14";
@@ -89,22 +90,26 @@ const stock: Stock = {
       grams: 260_000,
       marketPaise: 1500,
       valuePaise: 390_000,
+      costPaise: null,
       updatedAt: NOW,
     },
   ],
   totalGrams: 260_000,
   totalValuePaise: 390_000,
+  totalCostPaise: null,
 };
 const rateCard: RateCard = {
   city: "Bengaluru",
-  rows: materials.map((material, index) => ({
-    material,
-    myPaise: 1400 + index * 600,
-    floorPaise: 1200 + index * 400,
-    fallbackPaise: 1400 + index * 600,
-    marketPaise: 1500 + index * 600,
-    marketDate: TODAY,
-  })),
+  rows: materials
+    .filter((material) => !isSpecialistMaterial(material))
+    .map((material, index) => ({
+      material,
+      myPaise: 1400 + index * 600,
+      floorPaise: 1200 + index * 400,
+      fallbackPaise: 1400 + index * 600,
+      marketPaise: 1500 + index * 600,
+      marketDate: TODAY,
+    })),
 };
 const queue: FunctionReturnType<typeof api.review.queue> = [
   {

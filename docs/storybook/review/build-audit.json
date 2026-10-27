@@ -1,0 +1,85 @@
+{
+  "draft": false,
+  "pages": 16,
+  "output": "/Users/syedabdulmuqeeth/.codex/worktrees/platform-foundation/luma.green/output/pdf/luma-green-platform-storybook.pdf",
+  "screenshots": [
+    {
+      "page": 3,
+      "screenshot": "docs/delivery/evidence/platform-foundation-2026-10-28/household-request.png",
+      "sha256": "bcbcd7b9779faa5a7d75f35ba1cf133730f9cd711e5ee517e96b1f060166ebf2",
+      "caption": "Example screen - made-up data. Detail: photos and collection choice.",
+      "evidence": "Actual current Luma.Green components in an isolated documentation renderer. All data is made up; all writes and external requests are blocked. No production, authentication or provider acceptance is claimed. Full original reviewed and hash-approved in the capture manifest.",
+      "detail": {
+        "left": 15,
+        "top": 245,
+        "width": 360,
+        "height": 225
+      }
+    },
+    {
+      "page": 6,
+      "screenshot": "docs/delivery/evidence/platform-foundation-2026-10-28/household-receipt.png",
+      "sha256": "b0a48d2f851d0b8351e986f93ea5c491c7daccebaf4a37727c2097b42117ed89",
+      "caption": "Example screen - made-up data. Detail: receipt review and payment status.",
+      "evidence": "Actual current Luma.Green components in an isolated documentation renderer. All data is made up; all writes and external requests are blocked. No production, authentication or provider acceptance is claimed. Full original reviewed and hash-approved in the capture manifest.",
+      "detail": {
+        "left": 15,
+        "top": 125,
+        "width": 360,
+        "height": 285
+      }
+    },
+    {
+      "page": 8,
+      "screenshot": "docs/delivery/evidence/platform-foundation-2026-10-28/shop-workspace.png",
+      "sha256": "3e0fa790c53cc10d0b81ffacfff1a114ad198d4ff2dc99a995a299c3bb497b7f",
+      "caption": "Example screen - made-up data. Detail: the shop work queue.",
+      "evidence": "Actual current Luma.Green components in an isolated documentation renderer. All data is made up; all writes and external requests are blocked. No production, authentication or provider acceptance is claimed. Full original reviewed and hash-approved in the capture manifest.",
+      "detail": {
+        "left": 325,
+        "top": 220,
+        "width": 540,
+        "height": 270
+      }
+    },
+    {
+      "page": 10,
+      "screenshot": "docs/delivery/evidence/platform-foundation-2026-10-28/business-material.png",
+      "sha256": "144955efdb8e38b42667fcb68e1f827ebdfa34fb5f218e1bf064c6f153485cbb",
+      "caption": "Example screen - made-up data. Detail: an unassessed material record.",
+      "evidence": "Actual current Luma.Green components in an isolated documentation renderer. All data is made up; all writes and external requests are blocked. No production, authentication or provider acceptance is claimed. Full original reviewed and hash-approved in the capture manifest.",
+      "detail": {
+        "left": 325,
+        "top": 355,
+        "width": 500,
+        "height": 185
+      }
+    },
+    {
+      "page": 13,
+      "screenshot": "docs/delivery/evidence/platform-foundation-2026-10-28/services.png",
+      "sha256": "81964708ab7fec28efeacce69655d985cc2dd31d44aac6d0177bb70ecc1d37f7",
+      "caption": "Example screen - made-up data. Detail: a private service enquiry.",
+      "evidence": "Actual current Luma.Green components in an isolated documentation renderer. All data is made up; all writes and external requests are blocked. No production, authentication or provider acceptance is claimed. Full original reviewed and hash-approved in the capture manifest.",
+      "detail": {
+        "left": 200,
+        "top": 437,
+        "width": 600,
+        "height": 196
+      }
+    },
+    {
+      "page": 14,
+      "screenshot": "docs/delivery/evidence/platform-foundation-2026-10-28/admin.png",
+      "sha256": "a734e4e63e7978bdc7c742a3bb6a80d647ac0a7d9f7b8208a1d69bc536f4ae7a",
+      "caption": "Example screen - made-up data. Detail: the admin review queue.",
+      "evidence": "Actual current Luma.Green components in an isolated documentation renderer. All data is made up; all writes and external requests are blocked. No production, authentication or provider acceptance is claimed. Full original reviewed and hash-approved in the capture manifest.",
+      "detail": {
+        "left": 325,
+        "top": 185,
+        "width": 700,
+        "height": 225
+      }
+    }
+  ]
+}

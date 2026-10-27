@@ -1,5 +1,52 @@
 # Isolated guide screenshot preview
 
+## Foundation release evidence — 28 October 2026
+
+`capture-foundation.mjs` captures six current component examples and an
+English/Arabic/Urdu phone and tablet review matrix. Its default loopback origin
+is `http://127.0.0.1:3228`. Start the Vite server with `--port 3228`, after the
+current webpack production build. Restart that server after a rebuild so it
+reads the current stylesheet and per-locale font files.
+
+The retained baseline has 44 originals: six main examples, twenty responsive/theme
+variants, three admin reassignment views, five acquisition-cost dialog views
+and five daily closing/low-stock control views, plus five manufacturer intake
+cost-dialog views. The cost dialogs use a 2,400px
+tall documentation viewport; this does not claim that the whole form fits a
+normal phone screen without scrolling. All other frames are 1,000px tall.
+The manufacturer intake example supplies no approved material options or intake
+history. It opens the actual form and scrolls to the cost fields; it does not
+claim a classified byproduct or submit an intake. Its local `/app/intake-example`
+route exists only in this documentation harness.
+
+The final source refresh adds account removal (ready, held and recent-auth
+required), retained-evidence admin review, assigned worker/employer handovers,
+and Kannada phone/tablet examples. The complete plan now has 102 originals.
+New screens cover English light/dark at phone, tablet and desktop widths, plus
+Arabic/Urdu phone and Kannada phone/tablet examples. Removal remains open in
+these fixtures; no closure, erasure or review action is performed. Handover
+weights and IDs are made-up explanatory records, not proof of server linkage.
+Specialist references are excluded from ordinary shop offers by the actual
+shared specialist-material predicate.
+
+The output is separate from the historical maintained guide:
+`docs/delivery/evidence/platform-foundation-2026-10-28/`. Every image retains a
+visible “Example screen — made-up data” label. The illustrative clock is fixed
+at 14 October 2026; it is not the deployment date. All external requests and
+HTTP writes are blocked. Fixture mutations and actions reject. The receipt
+example shows an unconfirmed shop payment declaration, not a successful real
+payment. The yard example shows unassessed material, not a verified permit or
+certificate. None of these images proves live authentication or deployment.
+
+The capture manifest records the original PNG hash, current component hash,
+stylesheet hashes, adapter hashes, font loading and viewport dimensions. Wait
+for theme transitions before capture. Inspect every original before changing
+its visual review state from pending. Do not replace these images with generated
+interfaces, or use this command to overwrite historical screenshots.
+The command rejects a source change or build-ID change during a capture run.
+The working-tree flag distinguishes current uncommitted source from its HEAD
+checkpoint. Component and source hashes identify the exact captured content.
+
 This harness renders the existing Luma.Green React components in Chromium.
 It does not copy their markup or change their styles. It uses the current
 production build's CSS and exact per-locale Geist/Noto font classes, read from its generated HTML. The yellow provenance banner is added

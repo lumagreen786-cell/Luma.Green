@@ -17,11 +17,16 @@ import {
   unknownFactorImpactFixture,
   workspaceFixture,
 } from "./fixtures";
+import { foundationFixtures } from "./foundation-fixtures";
 import {
   operationalFixtures,
   routeHistoryFixture,
   routesFixture,
 } from "./operational-fixtures";
+import {
+  releaseGapFixtures,
+  removalStatusFixture,
+} from "./release-gap-fixtures";
 import {
   workspaceListFixture,
   workspaceTeamFixture,
@@ -90,6 +95,8 @@ export function useQuery(
 ): unknown {
   if (args === "skip") return undefined;
   const name = getFunctionName(query);
+  if (name === "accountRemoval:status")
+    return removalStatusFixture(window.location.search);
   const failure = failureQuery(name);
   if (failure.matched) return failure.value;
   // Legacy synthetic trades have no financial lifecycle or provider evidence.
@@ -120,9 +127,13 @@ function impactScenario() {
     ? unknownFactorImpactFixture
     : impactFixture;
 }
+const extendedFixtures = {
+  ...operationalFixtures,
+  ...foundationFixtures,
+  ...releaseGapFixtures,
+};
 function readFixture(name: string): unknown {
-  if (Object.hasOwn(operationalFixtures, name))
-    return operationalFixtures[name];
+  if (Object.hasOwn(extendedFixtures, name)) return extendedFixtures[name];
   switch (name) {
     case "householdPhotos:list": {
       return [];
@@ -168,6 +179,14 @@ export function useConvexAuth() {
 }
 export function usePaginatedQuery(query: FunctionReference<"query">) {
   const name = getFunctionName(query);
+  if (name === "stockIntake:mine")
+    return {
+      results: [],
+      status: "Exhausted",
+      loadMore: () => {
+        throw new Error("Documentation fixture: pagination is exhausted.");
+      },
+    };
   if (name === "routePlans:mine" || name === "routePlans:history") {
     const fixture =
       name === "routePlans:mine" ? routesFixture : routeHistoryFixture;

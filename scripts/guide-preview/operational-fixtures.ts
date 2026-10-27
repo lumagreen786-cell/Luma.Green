@@ -31,6 +31,8 @@ export const heldLotsFixture = {
       sourceKind: "self_declared",
       initialGrams: 125_000,
       availableGrams: 125_000,
+      initialCostPaise: null,
+      costPaise: null,
       status: "available",
       createdAt: NOW,
     },

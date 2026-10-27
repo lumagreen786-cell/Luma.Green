@@ -1,0 +1,20 @@
+{
+  "kind": "fictional illustration; not UI evidence",
+  "tool": "image_gen.imagegen",
+  "transparent_background": false,
+  "reference_images": null,
+  "source_filename": "exec-efd93a3e-e32f-4fd9-a1d5-28a91fafe65f.png",
+  "original_path": "/Users/syedabdulmuqeeth/.codex/generated_images/01a17e3b-32fc-7cb1-a8ba-5a528f7ea8dd/exec-efd93a3e-e32f-4fd9-a1d5-28a91fafe65f.png",
+  "dimensions": [1024, 1536],
+  "sha256": "2899d44a99010ebf38af2406790156ac353b8bed91c232f381553c5f07a1e3d3",
+  "prompt_file": "generation-prompt.txt",
+  "handling": "original bytes preserved; scenes selected using PDF clipping only",
+  "scene_order": [
+    "family photo",
+    "helper pickup",
+    "weighing and receipt",
+    "yard sorting",
+    "factory and new bag",
+    "admin help"
+  ]
+}

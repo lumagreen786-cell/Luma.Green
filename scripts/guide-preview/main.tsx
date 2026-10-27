@@ -8,9 +8,12 @@ import HouseholdLayout from "@/app/[locale]/(household)/layout";
 import JoinLayout from "@/app/[locale]/(join)/layout";
 import ForgotPasswordPage from "@/app/admin/forgot-password/page";
 import ResetPasswordPage from "@/app/admin/reset-password/page";
+import { AccountRemoval } from "@/components/account/account-removal";
 import { AccountSecurity } from "@/components/account/account-security";
+import { AccountRemovals } from "@/components/admin/account-removals";
 import { ConsoleHome } from "@/components/admin/console-home";
 import { ConsoleShell } from "@/components/admin/console-shell";
+import { OperationsConsole } from "@/components/admin/operations/operations-console";
 import { PilotNumbers } from "@/components/admin/pilot/pilot-numbers";
 import { PriceTables } from "@/components/admin/prices/price-tables";
 import { SupportInbox } from "@/components/admin/support/support-inbox";
@@ -31,12 +34,15 @@ import { MarketPage } from "@/components/market/market-page";
 import { SellPage } from "@/components/market/sell-page";
 import { TradesPage } from "@/components/market/trades-page";
 import { NotificationsPage } from "@/components/notifications/notifications-page";
+import { ReturnClaimsPage } from "@/components/operations/return-claims-page";
 import { AuditReports } from "@/components/quality/audit-reports";
 import { QualityDocuments } from "@/components/quality/quality-documents";
 import { SellFlow } from "@/components/sell/sell-flow";
+import { ServicesPage } from "@/components/services/services-page";
 import { RateCardPage } from "@/components/shop/rate-card-page";
 import { RequestDetail } from "@/components/shop/request-detail";
 import { RequestsPage } from "@/components/shop/requests-page";
+import { StockIntake } from "@/components/shop/stock-intake";
 import { StockPage } from "@/components/shop/stock-page";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { TrackView } from "@/components/track/track-view";
@@ -45,6 +51,7 @@ import { localeMeta } from "@/i18n/locales";
 
 import type { Id } from "../../convex/_generated/dataModel";
 import { NOW, trackedBooking } from "./fixtures";
+import { receiptExample } from "./foundation-fixtures";
 import { locale, messages } from "./locale";
 import { SellSelectionFixture } from "./selection-fixtures";
 
@@ -59,6 +66,8 @@ if (!localeFonts) throw new Error(`Build the ${locale} locale before capture.`);
 document.documentElement.className = localeFonts;
 const adminPages: Record<string, ReactNode | undefined> = {
   "/admin": <ConsoleHome />,
+  "/admin/account-removals": <AccountRemovals />,
+  "/admin/operations": <OperationsConsole />,
   "/admin/support": <SupportInbox />,
   "/admin/verification/guide-shop": (
     <ApplicationReview applicationId="guide-shop" />
@@ -103,10 +112,23 @@ const operationalPages: Record<string, ReactNode | undefined> = {
   "/en/app/market": <MarketPage />,
   "/en/app/trades": <TradesPage />,
   "/en/app/compliance": <CompliancePage />,
+  "/en/app/services": <ServicesPage />,
+  "/en/app/returns": <ReturnClaimsPage />,
+  "/en/app/intake-example": <StockIntake />,
 };
 const appPage = operationalPages[path] ?? defaultAppPage;
 const trackingPage = path.startsWith("/en/t/")
-  ? await HouseholdLayout({ children: <TrackView booking={trackedBooking} /> })
+  ? await HouseholdLayout({
+      children: (
+        <TrackView
+          booking={
+            new URLSearchParams(window.location.search).has("receipt")
+              ? receiptExample
+              : trackedBooking
+          }
+        />
+      ),
+    })
   : null;
 const sellPage =
   path === "/en/sell"
@@ -135,6 +157,8 @@ const accountPages: Record<string, ReactNode | undefined> = {
   "/en/account/workspaces": <WorkspacePage />,
   "/en/account/notifications": <NotificationsPage />,
   "/en/account/security": <AccountSecurity />,
+  "/en/account/removal": <AccountRemoval />,
+  "/en/account/services": <ServicesPage />,
 };
 const accountContent = accountPages[path];
 const accountPage = accountContent
@@ -173,6 +197,7 @@ createRoot(root).render(
       <div
         role="note"
         aria-label="Screenshot provenance"
+        dir="ltr"
         style={{
           padding: "12px 20px",
           position: "sticky",
@@ -184,7 +209,7 @@ createRoot(root).render(
           font: "600 14px/1.5 system-ui",
         }}
       >
-        SYNTHETIC DOCUMENTATION FIXTURE — actual Luma.Green components; no live
+        Example screen — made-up data. Actual Luma.Green components; no live
         account or records. All writes disabled.
       </div>
       {recoveryPage ??

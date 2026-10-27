@@ -4,6 +4,17 @@ Everything we've decided about what to build, how it's built and how it's run.
 Code rules live in [AGENTS.md](../AGENTS.md) and the
 [skills](../.claude/skills); this folder holds the plan and the reasons.
 
+**Foundation release, 28 October 2026:** start with the
+[plain-English specification](product/platform-refinement-interview.md),
+[source coverage audit](delivery/source-coverage-2026-10-27.md), and
+[current release checkpoint](delivery/platform-foundation-2026-10-27.md).
+The editable specification is in `output/docx/`; the specification, storybook
+and screen walkthrough PDFs are in `output/pdf/`. Capture scope and release
+status are stated in the checkpoint. Expo is paused.
+Useful [paid services](operations/platform-paid-services-2026-10-27.md) and
+[API/UX enhancements for later review](product/api-ux-enhancement-review-2026-10-27.md)
+are separate from purchased services and implemented features.
+
 **New here?** Read in this order: [vision](./product/vision.md) →
 [roles](./product/roles.md) → [architecture overview](./architecture/overview.md)
 → [roadmap](./delivery/roadmap.md).
