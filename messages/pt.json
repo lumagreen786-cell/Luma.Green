@@ -4436,5 +4436,19 @@
     "reference": "Referência",
     "more": "Mais",
     "capacity": "O armazenamento de documentos está cheio. Use registos manuais ou contacte o proprietário do espaço."
+  },
+  "privacy": {
+    "title": "Política de privacidade",
+    "lead": "Esta política abrange o site Luma.Green e os aplicativos Android, iOS, Windows e macOS.",
+    "dataTitle": "Dados utilizados",
+    "dataBody": "Usamos dados de conta e contato, localização escolhida, fotos, documentos, verificações comerciais e registros de transações e segurança para prestar serviços de reciclagem e proteger contas.",
+    "sharingTitle": "Quem recebe os dados",
+    "sharingBody": "Participantes autorizados e fornecedores configurados de hospedagem, SMS, verificação, pagamento e IA opcional recebem os dados necessários. O processamento pode ocorrer fora da Índia.",
+    "choicesTitle": "Suas escolhas",
+    "choicesBody": "Localização e notificações exigem permissão. Você escolhe os arquivos. O acesso usa cookies de sessão. A análise exige consentimento; relatórios de erros são separados. Gerencie permissões nas configurações do dispositivo.",
+    "requestsTitle": "Pedidos sobre conta e dados",
+    "requestsBody": "Remova sua conta abaixo ou escreva ao suporte para acesso, correção ou exclusão. Confirme a titularidade; não envie documentos de identidade por email. Resolva primeiro o trabalho ou a titularidade pendente.",
+    "retentionTitle": "O que fica após o encerramento",
+    "retentionBody": "O encerramento remove o acesso e as credenciais. Evidências comerciais, de pagamento, segurança e auditoria podem permanecer para revisão. Nem todo registro é apagado. Pergunte ao suporte sobre retenção e prazos."
   }
 }

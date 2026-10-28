@@ -4436,5 +4436,19 @@
     "reference": "Rujukan",
     "more": "Lagi",
     "capacity": "Storan dokumen penuh. Gunakan rekod manual atau hubungi pemilik ruang kerja."
+  },
+  "privacy": {
+    "title": "Dasar privasi",
+    "lead": "Dasar ini meliputi laman Luma.Green dan aplikasi Android, iOS, Windows serta macOS.",
+    "dataTitle": "Data yang kami gunakan",
+    "dataBody": "Kami menggunakan butiran akaun dan hubungan, lokasi pilihan anda, foto, dokumen, semakan perniagaan serta rekod transaksi dan keselamatan untuk perkhidmatan kitar semula dan perlindungan akaun.",
+    "sharingTitle": "Penerima data",
+    "sharingBody": "Peserta dibenarkan serta penyedia pengehosan, SMS, pengesahan, pembayaran dan AI pilihan yang dikonfigurasi menerima data diperlukan. Pemprosesan boleh berlaku di luar India.",
+    "choicesTitle": "Pilihan anda",
+    "choicesBody": "Lokasi dan pemberitahuan memerlukan izin. Pilih fail sendiri. Log masuk menggunakan kuki sesi. Analitik memerlukan persetujuan; laporan ralat adalah berasingan. Urus izin dalam tetapan peranti.",
+    "requestsTitle": "Permintaan akaun dan data",
+    "requestsBody": "Alih keluar akaun di bawah atau e-mel sokongan untuk akses, pembetulan atau pemadaman. Sahkan pemilikan; jangan e-mel dokumen pengenalan. Selesaikan kerja atau pemilikan tertunggak dahulu.",
+    "retentionTitle": "Yang kekal selepas penutupan",
+    "retentionBody": "Penutupan membuang akses log masuk dan kelayakan. Bukti perniagaan, pembayaran, keselamatan dan audit boleh disimpan untuk semakan. Bukan semua rekod dipadam. Tanya sokongan tentang penyimpanan dan tempoh."
   }
 }

@@ -1,3 +1,47 @@
+## Security repair integration checkpoint — 29 October 2026
+
+PR #25 combines the security/privacy repair with current main 45ad8a6.
+Both translation additions and delivery sections are preserved. Combined local
+pnpm check passes: 2,953 web/backend tests in 358 files; four security, 62 mobile
+policy, 14 mobile component and 30 desktop tests. Build: 3,318 pages. The full
+combined browser suite and hosted checks are the remaining merge gates.
+No native distribution or provider activation is included. Prior verification
+counts below describe their dated sources, not this combined checkpoint.
+
+## App security/privacy/permissions repair — 29 October 2026
+
+The owner approved security and privacy repairs across web/Expo/Electron,
+permission cleanup, tests, push, PR and checked merge. Work starts from main
+f687bbb on codex/app-security-privacy. Prior Production evidence remains local
+and outside the new commit. No signed build, OTA, feed or store submission is
+included. See the [bounded plan](app-security-privacy-plan-2026-10-29.md).
+
+Changes: compatible Electron/Undici/cache/forge updates; local tested cache
+security-zero and Deepmerge prototype-key patches; foreground-only production
+Expo permission compilation; `/privacy` and public account/data request links
+in all 33 languages; public/footer/account discovery. The existing Convex
+phone/TOTP and record-removal owners are unchanged. Better Auth 1.7 remains
+incompatible with the supported Convex adapter. Its affected optional plugins
+remain absent, with real HTTP/adapter tests; no advisory is suppressed. The
+Expo CLI Zod 3 tooling alert remains; do not force an unsupported Zod major.
+
+The [privacy/permission inventory](../operations/app-privacy-permissions.md)
+records provider data, retained-evidence review, translation review, support
+and final-binary/store gates. Public policy copy does not certify erasure or
+invent retention periods. Native-speaker and retention-policy acceptance remain
+separate from source and visual tests. User-guide work remains deferred.
+
+Local verification passed: pnpm check (2,870 web/backend tests; 4 security;
+62 mobile policy; 14 mobile component; 30 desktop), the Production build
+(3,285 pages), all 866 Production-build browser tests, Expo compatibility,
+Android/iOS JS exports, Electron 44.10.0 smoke, formatting and locale audit.
+The policy matrix now covers 42 layouts, including Russian; representative
+current captures were inspected. A hosted Russian footer overflow was fixed
+without relaxing checks; see the repair evidence. See the
+[repair evidence](app-security-privacy-results-2026-10-29.md) for residual
+advisories, exact scope and release limits. Hosted CI/review is the merge gate;
+this local checkpoint does not claim an already merged or signed release.
+
 ## India-wide follow-up - 29 October 2026
 
 The owner replaced the Bengaluru-only software scope with India-wide web

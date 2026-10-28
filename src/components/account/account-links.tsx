@@ -19,6 +19,7 @@ export function AccountLinks({
   const reports = useTranslations("auditReports");
   const services = useTranslations("serviceRecords");
   const removal = useTranslations("accountRemoval");
+  const privacy = useTranslations("privacy");
   const pathname = usePathname();
   const items = [
     { href: "/account/services", label: services("title"), icon: UsersIcon },
@@ -43,6 +44,7 @@ export function AccountLinks({
       label: removal("title"),
       icon: ShieldCheckIcon,
     },
+    { href: "/privacy", label: privacy("title"), icon: ShieldCheckIcon },
   ];
   return items.map(({ href, label, icon: Icon }) => (
     <Link

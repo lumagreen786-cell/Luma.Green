@@ -13,6 +13,9 @@ function permissionStrings(messages) {
 
 module.exports = function buildConfig() {
   const settings = resolveSettings(process.env);
+  const isDevelopment =
+    process.env.EAS_BUILD_PROFILE === "development" ||
+    (!process.env.EAS_BUILD_PROFILE && process.env.NODE_ENV !== "production");
   return {
     name: en.brand.name,
     slug: "lumagreen",
@@ -59,9 +62,21 @@ module.exports = function buildConfig() {
         "android.permission.CAMERA",
         "android.permission.RECORD_AUDIO",
         "android.permission.ACCESS_BACKGROUND_LOCATION",
+        "android.permission.ACTIVITY_RECOGNITION",
+        "com.google.android.gms.permission.ACTIVITY_RECOGNITION",
+        "android.permission.FOREGROUND_SERVICE",
+        "android.permission.FOREGROUND_SERVICE_LOCATION",
+        ...(isDevelopment ? [] : ["android.permission.SYSTEM_ALERT_WINDOW"]),
+        ...(settings.pushEnabled
+          ? []
+          : [
+              "android.permission.POST_NOTIFICATIONS",
+              "android.permission.VIBRATE",
+            ]),
       ],
     },
     plugins: [
+      ["./plugins/with-app-permissions.cjs", { isDevelopment }],
       "./plugins/with-camera-capture.cjs",
       [
         "expo-notifications",
@@ -76,7 +91,16 @@ module.exports = function buildConfig() {
       ],
       [
         "expo-location",
-        { locationWhenInUsePermission: en.native.locationBody },
+        {
+          locationWhenInUsePermission: en.native.locationBody,
+          locationAlwaysAndWhenInUsePermission: false,
+          locationAlwaysPermission: false,
+          motionUsagePermission: false,
+          isIosBackgroundLocationEnabled: false,
+          isAndroidBackgroundLocationEnabled: false,
+          isAndroidForegroundServiceEnabled: false,
+          isAndroidMotionActivityEnabled: false,
+        },
       ],
     ],
     updates: settings.projectId

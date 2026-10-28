@@ -4436,5 +4436,19 @@
     "reference": "Referans",
     "more": "Diğer",
     "capacity": "Belge depolama alanı dolu. Elle kayıt kullanın veya çalışma alanı sahibine başvurun."
+  },
+  "privacy": {
+    "title": "Gizlilik politikası",
+    "lead": "Bu politika Luma.Green web sitesi ile Android, iOS, Windows ve macOS uygulamalarını kapsar.",
+    "dataTitle": "Kullandığımız veriler",
+    "dataBody": "Geri dönüşüm hizmetleri ve hesap güvenliği için hesap ve iletişim bilgileri, seçtiğiniz konum, fotoğraflar, belgeler, işletme kontrolleri, işlem ve güvenlik kayıtlarını kullanırız.",
+    "sharingTitle": "Verileri kim alır",
+    "sharingBody": "Yetkili katılımcılar ve yapılandırılmış barındırma, SMS, doğrulama, ödeme ve isteğe bağlı yapay zekâ sağlayıcıları gereken verileri alır. İşleme Hindistan dışında yapılabilir.",
+    "choicesTitle": "Seçimleriniz",
+    "choicesBody": "Konum ve bildirimler izin gerektirir. Dosyaları kendiniz seçersiniz. Giriş, oturum çerezleri kullanır. Analiz onay gerektirir; hata raporları ayrıdır. İzinleri cihaz ayarlarında yönetin.",
+    "requestsTitle": "Hesap ve veri talepleri",
+    "requestsBody": "Aşağıdan hesabınızı kaldırın veya erişim, düzeltme ya da silme için desteğe e-posta gönderin. Sahipliği doğrulayın; kimlik belgelerini e-posta ile göndermeyin. Önce açık işleri veya sahiplik konularını çözün.",
+    "retentionTitle": "Kapatma sonrası kalanlar",
+    "retentionBody": "Kapatma, giriş erişimini ve kimlik bilgilerini kaldırır. İşletme, ödeme, güvenlik ve denetim kanıtları inceleme için kalabilir. Her kayıt silinmez. Saklama ve süreler için desteğe danışın."
   }
 }

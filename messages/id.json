@@ -4436,5 +4436,19 @@
     "reference": "Referensi",
     "more": "Lainnya",
     "capacity": "Penyimpanan dokumen penuh. Gunakan catatan manual atau hubungi pemilik ruang kerja."
+  },
+  "privacy": {
+    "title": "Kebijakan privasi",
+    "lead": "Kebijakan ini mencakup situs Luma.Green serta aplikasi Android, iOS, Windows dan macOS.",
+    "dataTitle": "Data yang kami gunakan",
+    "dataBody": "Kami menggunakan detail akun dan kontak, lokasi pilihan Anda, foto, dokumen, pemeriksaan usaha serta catatan transaksi dan keamanan untuk layanan daur ulang dan perlindungan akun.",
+    "sharingTitle": "Penerima data",
+    "sharingBody": "Peserta berwenang serta penyedia hosting, SMS, verifikasi, pembayaran dan AI opsional yang dikonfigurasi menerima data yang diperlukan. Pemrosesan dapat dilakukan di luar India.",
+    "choicesTitle": "Pilihan Anda",
+    "choicesBody": "Lokasi dan notifikasi memerlukan izin. Pilih berkas sendiri. Masuk menggunakan cookie sesi. Analitik memerlukan persetujuan; pelaporan kesalahan terpisah. Kelola izin di pengaturan perangkat.",
+    "requestsTitle": "Permintaan akun dan data",
+    "requestsBody": "Hapus akun di bawah atau kirim email ke dukungan untuk akses, perbaikan atau penghapusan. Verifikasi kepemilikan; jangan kirim dokumen identitas melalui email. Selesaikan pekerjaan atau kepemilikan yang masih terbuka dahulu.",
+    "retentionTitle": "Yang tersisa setelah penutupan",
+    "retentionBody": "Penutupan menghapus akses masuk dan kredensial. Bukti usaha, pembayaran, keamanan dan audit dapat disimpan untuk ditinjau. Tidak semua catatan dihapus. Tanyakan masa penyimpanan dan waktunya kepada dukungan."
   }
 }

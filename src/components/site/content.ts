@@ -41,6 +41,7 @@ export const footerGroups = [
       { href: "/solar", label: "footer.solar" },
       { href: "/help", label: "nav.help" },
       { href: "/contact", label: "nav.contact" },
+      { href: "/privacy", label: "privacy.title" },
     ],
   },
 ] as const satisfies readonly {

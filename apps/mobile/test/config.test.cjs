@@ -264,3 +264,35 @@ test("the shell links the existing Expo project without enabling OTA or push", (
   assert.equal(config.updates.enabled, false);
   assert.equal(config.extra.pushEnabled, false);
 });
+
+test("store configuration declares only foreground features and no developer permissions", () => {
+  const previous = process.env.EAS_BUILD_PROFILE;
+  process.env.EAS_BUILD_PROFILE = "production";
+  try {
+    const config = buildConfig();
+    for (const permission of [
+      "android.permission.SYSTEM_ALERT_WINDOW",
+      "android.permission.ACTIVITY_RECOGNITION",
+      "android.permission.FOREGROUND_SERVICE_LOCATION",
+      "android.permission.POST_NOTIFICATIONS",
+      "android.permission.VIBRATE",
+    ]) {
+      assert.ok(
+        config.android.blockedPermissions.includes(permission),
+        permission,
+      );
+    }
+    const location = config.plugins.find(
+      (plugin) => Array.isArray(plugin) && plugin[0] === "expo-location",
+    );
+    assert.equal(location[1].locationAlwaysAndWhenInUsePermission, false);
+    assert.equal(location[1].locationAlwaysPermission, false);
+    assert.equal(location[1].motionUsagePermission, false);
+    assert.equal(location[1].isIosBackgroundLocationEnabled, false);
+    assert.equal(location[1].isAndroidBackgroundLocationEnabled, false);
+    assert.equal(location[1].isAndroidForegroundServiceEnabled, false);
+  } finally {
+    if (previous === undefined) delete process.env.EAS_BUILD_PROFILE;
+    else process.env.EAS_BUILD_PROFILE = previous;
+  }
+});

@@ -13,6 +13,7 @@ export const publicRoutes = [
   "/how-it-works",
   "/participants",
   "/contact",
+  "/privacy",
   "/join",
   "/sell",
   "/prices",
