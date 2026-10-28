@@ -70,6 +70,11 @@ describe("the admin's note", () => {
 });
 
 describe("a business's area", () => {
+  it("uses the supplied city only to find its local area", () => {
+    expect(
+      areaFrom("Plot 2, Andheri, Mumbai", undefined, "Mumbai, Maharashtra"),
+    ).toBe("Andheri");
+  });
   it("prefers the first location tag", () => {
     expect(
       areaFrom("Plot 7, Peenya, Bengaluru", [" ", "Peenya 2nd Stage"]),
@@ -135,6 +140,7 @@ describe("from an application to a business", () => {
       orgDraftFrom({
         kind: "kabadiwala",
         kabadiwala: {
+          city: "Bengaluru",
           ownerName: "Kavitha S",
           shopName: " Kavitha Raddi Shop ",
           gstRegistered: true,
@@ -171,6 +177,7 @@ describe("from an application to a business", () => {
       orgDraftFrom({
         kind: "yard",
         business: {
+          city: "Bengaluru",
           businessName: "Irfan Metal & Plastic Yard",
           gstRegistered: false,
           gstin: "29AAIFI3344R1Z1", // typed, then "not registered" chosen
@@ -206,6 +213,7 @@ describe("from an application to a business", () => {
       orgDraftFrom({
         kind: "manufacturer",
         business: {
+          city: "Bengaluru",
           businessName: "Textile Works",
           address: "Factory Road, Bengaluru",
           siteType: "manufacturing_facility",
@@ -232,6 +240,7 @@ describe("from an application to a business", () => {
 
 describe("from an application to a Saathi", () => {
   const saathi = {
+    city: "Bengaluru",
     name: "Lakshmi Devi",
     area: "Yeshwanthpur",
     radiusKm: 5 as const,
@@ -284,6 +293,7 @@ describe("what changed between versions", () => {
       changedFields(
         {
           kabadiwala: {
+            city: "Bengaluru",
             shopName: "Kavitha Raddi",
             address: "Rajajinagar",
             location: { lat: 1, lng: 2 },
@@ -291,6 +301,7 @@ describe("what changed between versions", () => {
         },
         {
           kabadiwala: {
+            city: "Bengaluru",
             shopName: "Kavitha Raddi Shop",
             address: "Rajajinagar",
             location: { lng: 2, lat: 1 }, // same place, keys in another order

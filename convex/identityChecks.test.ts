@@ -17,6 +17,7 @@ const details = {
   address: "12 Test Street, Bengaluru",
 };
 const shop = {
+  city: "Bengaluru",
   ownerName: "Test Owner",
   shopName: details.businessName,
   gstRegistered: true,

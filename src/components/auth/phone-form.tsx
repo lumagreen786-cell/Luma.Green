@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowRightIcon } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -34,6 +35,13 @@ export function PhoneForm({
   initialPhone?: string;
   onSent?: (phone: string) => void;
 }) {
+  const mounted = useRef(true);
+  useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+    };
+  }, []);
   const t = useTranslations("auth");
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -50,7 +58,8 @@ export function PhoneForm({
   async function onSubmit(values: Values) {
     const phone = normalizeIndianMobile(values.phone);
     if (!phone || !canSend) return;
-    const error = await requestPhoneCode(phone);
+    const error = await requestPhoneCode(phone, () => mounted.current);
+    if (!mounted.current) return;
     if (error) {
       setError("root", { message: error });
       return;

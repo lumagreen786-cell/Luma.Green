@@ -1,3 +1,39 @@
+## EGM autonomous self-review — 29 October 2026
+
+The owner delegated routine review and repair choices. Fifteen fresh read-only
+Goldfish agents completed five rounds across native, auth/direct booking consumers
+and private papers. See [review plan, decisions and verification](egm-self-review-2026-10-29/README.md).
+Native and papers have two clean final rounds; authentication reached the five-round
+cap with a final missing-delivery fix, so no overall EGM convergence is claimed.
+
+This local branch combines prior repair `c2a13f0` with main `45ad8a6`; both handoff
+entries were preserved during conflict resolution. New repairs cover live restart
+proofs, post-await window checks, background invalidation, cancelled desktop
+navigation, bounded Android message transport, legacy email SMS policy, nested
+late auth/upload/booking results, unavailable delivery, and paper revision/edit
+reconciliation. Auth schema regeneration produced no change. No migration,
+provider setting, paid call or production data change was needed.
+
+Final local verification passed: `VITEST_MAX_WORKERS=4 pnpm check` with 2,978
+web/backend tests, two transport security tests, 61 mobile policy tests, 20 mobile
+component tests and 34 desktop tests; all types; zero lint errors (123 warnings).
+The disconnected build generated 3,285 pages and all 864 browser tests passed
+with two workers and retries disabled. Real unpackaged Electron smoke and both
+694-module Hermes exports passed. Fifty-four current synthetic component captures
+were visually inspected; paper actions fit all 33 locales at 320/390px. The
+report retains source/capture hashes, decisions, limits and a skill usage guide.
+Physical Android/iOS envelope execution, OS prompts/background transitions,
+installed Windows and signed update delivery remain untested. No binary, feed,
+OTA, store submission or deployment is part of this pass. Guide/Word changes are
+deferred; impacted screens are paper conflict recovery, unavailable inline/admin
+SMS and account phone binding. The new screen captures use synthetic component
+fixtures and do not establish authenticated or provider acceptance.
+
+The fresh dependency audit reports 12 advisory records, superseding the previous
+nine-record inventory for the current registry snapshot. No dependency versions
+or peer ranges changed in this pass. Keep existing node-forge patch and disabled
+optional auth paths. Details are in the linked report.
+
 ## EGM installation and defect repair — 29 October 2026
 
 The complete EGM 0.1.0 plugin is installed and enabled in local Codex. The task
@@ -32,6 +68,34 @@ declaration or production record changed. These repairs are local source work;
 no native binary, feed, OTA update, store submission or deployment is included.
 Live provider, signed update and physical-device acceptance remain open.
 Guide/Word changes remain deferred under AGENTS.md.
+
+## India-wide follow-up - 29 October 2026
+
+The owner replaced the Bengaluru-only software scope with India-wide web
+coverage and delegated official-source research and ordinary defaults. Read
+[the active delivery record](india-platform-2026-10-29.md) and
+[the implementation plan](../plans/2026-10-28-india-research-readiness.md).
+The task branch is `codex/india-research-readiness`, based on main `b6bcd56`, with checked main updates through `f687bbb`
+combined before release.
+New code covers state-qualified localities, guarded cross-city trade, local
+admin reassignment, safe preacceptance address redaction, dated regulatory
+references and private human-reviewed paper transcription. Paper extraction
+stays off without its separate enabled flag, explicit allowance and consent.
+Originals use atomic private database chunks with retained-source caps.
+
+All 53 team-form answers are labelled by evidence type. The owner delivery
+folder contains the editable research-filled form, a ten-page linked companion,
+37-URL source register and eight downloaded official PDFs with a hash manifest.
+Public research does not establish actual permits, recipes, contracts, provider
+approval, real-paper accuracy, cloud recovery or official carbon-market access.
+The newer geographic contract supersedes Bengaluru-first statements in older
+planning artifacts; preserve those as dated history rather than acceptance proof.
+
+Check the release PR and `Final_Release_Evidence/india-web-release-2026-10-29.json`
+for actual hosted and Production state. This handoff alone does not prove a
+release. Expo remains paused; unrelated primary-checkout changes are preserved.
+The owner left GitHub email verification/main protection queued. Keep checked
+PRs, backend-before-frontend and Production-only deployment.
 
 ## Production verification and locale restart repair — 29 October 2026
 

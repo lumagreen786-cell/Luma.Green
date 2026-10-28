@@ -88,7 +88,7 @@
   "home": {
     "metaDescription": "Luma.Green kết nối mạng lưới tái chế của Ấn Độ trên một nền tảng: hộ gia đình, cửa hàng kabadiwala, đơn vị sơ chế, cơ sở tái chế và nhà sản xuất, với giá công bằng, doanh nghiệp đã xác minh và biên nhận ở mỗi bước.",
     "hero": {
-      "eyebrow": "Bắt đầu tại Bengaluru",
+      "eyebrow": "Ấn Độ",
       "title": "Dọn đồ tái chế. Nhận tiền.",
       "lead": "Ảnh, lấy tận nơi hoặc mang đến cửa hàng, thanh toán sau khi cân.",
       "sell": "Tái chế",
@@ -97,8 +97,8 @@
     },
     "teaser": {
       "title": "Giá hôm nay",
-      "placeAndDate": "Bengaluru · {date}",
-      "place": "Bengaluru",
+      "placeAndDate": "{city} · {date}",
+      "place": "{city}",
       "seeAll": "Xem tất cả giá",
       "demoNote": "Giá mẫu cho nguyên mẫu.",
       "unavailable": "Giá hôm nay sẽ sớm xuất hiện tại đây.",
@@ -246,9 +246,9 @@
     }
   },
   "prices": {
-    "metaTitle": "Giá vật liệu tại Bengaluru hôm nay",
-    "metaDescription": "Giá tham chiếu có ngày theo kg cho vật liệu tái chế ở Bengaluru. Mỗi doanh nghiệp tự đặt giá chào.",
-    "eyebrow": "Bengaluru",
+    "metaTitle": "Giá vật liệu",
+    "metaDescription": "Giá tham chiếu có ngày theo kilôgam. Mỗi doanh nghiệp tự đặt giá chào. Chọn vật liệu để xem lịch sử hiện có.",
+    "eyebrow": "Ấn Độ",
     "title": "Giá vật liệu",
     "lead": "Giá tham chiếu có ngày theo kilôgam. Mỗi doanh nghiệp tự đặt giá chào. Chọn vật liệu để xem lịch sử hiện có.",
     "demoNote": "Giá mẫu cho nguyên mẫu, không phải giá thị trường trực tiếp.",
@@ -283,7 +283,7 @@
       "unknown": "Chưa đủ dữ liệu lịch sử"
     },
     "detail": {
-      "description": "{code} · {family} · Bengaluru",
+      "description": "{code} · {family}",
       "today": "Hôm nay",
       "low": "Thấp nhất trong 30 ngày",
       "high": "Cao nhất trong 30 ngày",
@@ -615,9 +615,9 @@
   },
   "contact": {
     "metaTitle": "Liên hệ",
-    "metaDescription": "Liên hệ đội ngũ Luma.Green để tham gia thí điểm tại Bengaluru.",
+    "metaDescription": "Luma.Green kết nối mạng lưới tái chế của Ấn Độ trên một nền tảng: hộ gia đình, cửa hàng kabadiwala, đơn vị sơ chế, cơ sở tái chế và nhà sản xuất, với giá công bằng, doanh nghiệp đã xác minh và biên nhận ở mỗi bước.",
     "title": "Trao đổi với chúng tôi",
-    "lead": "Chúng tôi bắt đầu tại Bengaluru với một nhóm nhỏ kabadiwala, đơn vị sơ chế, cơ sở tái chế và nhà máy. Hãy cho biết bạn là ai, kinh doanh vật liệu gì và lượng xử lý gần đúng mỗi tháng.",
+    "lead": "Luma.Green kết nối mạng lưới tái chế của Ấn Độ trên một nền tảng: hộ gia đình, cửa hàng kabadiwala, đơn vị sơ chế, cơ sở tái chế và nhà sản xuất, với giá công bằng, doanh nghiệp đã xác minh và biên nhận ở mỗi bước.",
     "emailHeading": "Truy cập sớm và câu hỏi chung",
     "securityHeading": "Báo cáo bảo mật",
     "securityBody": "Phát hiện lỗ hổng? Vui lòng báo riêng thay vì công khai."
@@ -2029,7 +2029,9 @@
         "sat": "T7",
         "sun": "CN"
       },
-      "changesTitle": "Nội dung cần sửa"
+      "changesTitle": "Nội dung cần sửa",
+      "city": "Thành phố hoặc địa phương",
+      "stateUT": "Bang hoặc lãnh thổ liên bang"
     },
     "kabadiwala": {
       "title": "Cửa hàng của bạn",
@@ -2216,7 +2218,8 @@
       "fileTooBig": "Tệp quá lớn",
       "uploadFailed": "Tải lên thất bại. Thử lại.",
       "generic": "Đã xảy ra lỗi. Thử lại.",
-      "pan": "Tra cứu mã GST và xác nhận doanh nghiệp."
+      "pan": "Tra cứu mã GST và xác nhận doanh nghiệp.",
+      "city": "Nhập thành phố hoặc địa phương từ 2–60 ký tự."
     },
     "identity": {
       "pan": "PAN (không bắt buộc)",
@@ -2261,7 +2264,8 @@
       "impact": "Tác động",
       "compliance": "Tuân thủ",
       "earnings": "Thu nhập",
-      "help": "Trợ giúp"
+      "help": "Trợ giúp",
+      "paperRecords": "Hồ sơ giấy"
     },
     "roles": {
       "kabadiwala": "Người thu mua kabadiwala",
@@ -2523,8 +2527,8 @@
   },
   "sell": {
     "metaTitle": "Đặt lịch thu gom",
-    "metaDescription": "Bán báo, nhựa, kim loại và đồ điện tử cũ tại nhà ở Bengaluru. Xem giá cửa hàng gần bạn, đặt lịch thu gom và nhận tiền tại cửa.",
-    "eyebrow": "Dành cho hộ tại Bengaluru",
+    "metaDescription": "Dọn đồ tái chế. Nhận tiền. Ảnh, lấy tận nơi hoặc mang đến cửa hàng, thanh toán sau khi cân.",
+    "eyebrow": "Ấn Độ",
     "title": "Đặt lịch thu gom tại nhà",
     "lead": "Chọn vật liệu và cửa hàng gần bạn, nhận tiền mặt hoặc UPI sau khi cân.",
     "promises": {
@@ -2537,7 +2541,7 @@
       "title": "Đặt lịch sắp mở",
       "body": "Chúng tôi đang thiết lập đặt lịch cho hộ gia đình. Vui lòng quay lại sau."
     },
-    "demoNote": "Giá và cửa hàng mẫu cho thí điểm Bengaluru.",
+    "demoNote": "Giá mẫu cho nguyên mẫu, không phải giá thị trường trực tiếp.",
     "loadError": "Không tải được. Kiểm tra kết nối rồi thử lại.",
     "retry": "Thử lại",
     "steps": {
@@ -4400,5 +4404,39 @@
     "assignedWork": "Giải quyết công việc được giao hoặc bàn giao trước.",
     "reviewLimit": "Cần xem xét thêm hồ sơ trước khi đóng.",
     "checkLimit": "Đóng tài khoản rồi đăng ký lại không đặt lại giới hạn kiểm tra doanh nghiệp hôm nay. Kiểm tra có thể bị giữ đến ngày tiếp theo tại Ấn Độ."
+  },
+  "papers": {
+    "title": "Hồ sơ giấy",
+    "lead": "Xác nhận chỉ lưu bằng chứng. Tồn kho và tiền không thay đổi.",
+    "upload": "Thêm ảnh giấy",
+    "source": "Ảnh gốc",
+    "text": "Văn bản chép lại",
+    "rows": "Hàng",
+    "addRow": "Thêm hàng",
+    "consent": "Gửi ảnh này đến mô hình bên ngoài để chép lại.",
+    "confirm": "Tôi đã kiểm tra ảnh và sửa văn bản này.",
+    "confirmed": "Văn bản đã xác nhận",
+    "unavailable": "Không thể trích xuất. Hãy nhập văn bản thủ công.",
+    "extract": "Trích xuất bản nháp",
+    "failed": "Trích xuất chưa hoàn tất. Hãy nhập thủ công.",
+    "duplicate": "Ảnh này đã được lưu. Mở hồ sơ của ảnh.",
+    "invalid": "Dùng JPEG hoặc PNG, tối đa 2 MB và 2400 điểm ảnh mỗi cạnh.",
+    "empty": "Chưa có hồ sơ giấy.",
+    "discard": "Xóa bản nháp",
+    "confirmAction": "Xác nhận văn bản",
+    "pending": "Đang xử lý ảnh…",
+    "manual": "Mở hồ sơ tồn kho thủ công",
+    "modelDraft": "Bản nháp chưa xác minh từ mô hình",
+    "saveFirst": "Lưu thay đổi trước khi trích xuất.",
+    "date": "Ngày",
+    "description": "Mô tả",
+    "quantity": "Số lượng",
+    "unit": "Đơn vị",
+    "amount": "Số tiền",
+    "reference": "Tham chiếu",
+    "more": "Thêm mục",
+    "capacity": "Bộ nhớ hồ sơ đã đầy. Hãy dùng hồ sơ thủ công hoặc liên hệ chủ không gian làm việc.",
+    "changed": "Tài liệu này đã thay đổi. Sao chép các chỉnh sửa trước khi mở bản đã lưu.",
+    "loadSaved": "Mở bản đã lưu"
   }
 }

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import { authClient } from "@/lib/auth-client";
+import { useMounted } from "@/lib/use-mounted";
 
 import { CODE_LENGTH, CodeInput } from "./code-input";
 import { codeErrorMessage } from "./errors";
@@ -47,6 +48,7 @@ export function AuthenticatorStep({
     };
   }, [totpURI]);
 
+  const isMounted = useMounted();
   const checking = useRef(false);
 
   async function verify(value: string) {
@@ -58,6 +60,7 @@ export function AuthenticatorStep({
       const { error: authError } = await authClient.twoFactor.verifyTotp({
         code: value,
       });
+      if (!isMounted()) return;
       if (!authError) {
         onVerified();
         return;
@@ -65,11 +68,12 @@ export function AuthenticatorStep({
       setCode("");
       setError(codeErrorMessage(authError).message);
     } catch {
+      if (!isMounted()) return;
       setCode("");
       setError(codeErrorMessage({}).message);
     } finally {
       checking.current = false;
-      setBusy(false);
+      if (isMounted()) setBusy(false);
     }
   }
 

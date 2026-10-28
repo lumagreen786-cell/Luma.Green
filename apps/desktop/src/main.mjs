@@ -23,7 +23,7 @@ import {
   mayRequestNotifications,
   secureWebPreferences,
 } from "./policy.mjs";
-import { setupUpdates } from "./updates.mjs";
+import { canRestartDocument, setupUpdates } from "./updates.mjs";
 
 const config = JSON.parse(
   readFileSync(new URL("../generated/config.json", import.meta.url), "utf8"),
@@ -68,29 +68,20 @@ function stateWindow() {
 }
 
 async function canRestart() {
-  const contents = stateWindow();
-  if (
-    !contents ||
-    updateSession.activeDownloads ||
-    BrowserWindow.getAllWindows().length !== 1 ||
-    !isUpdateHome(contents.getURL(), origin) ||
-    contents.isLoading()
-  )
-    return false;
-  const url = contents.getURL();
-  const token = updateSession.token;
-  const deadline = await contents.executeJavaScript(
-    "window.lumaAppUpdates && (window.lumaAppUpdates.isRestartPending() || window.lumaAppUpdates.prepareRestart()) ? window.lumaAppUpdates.getRestartDeadline() : 0",
-  );
-  return (
-    Number.isSafeInteger(deadline) &&
-    deadline > Date.now() &&
-    contents === stateWindow() &&
-    token === updateSession.token &&
-    contents.getURL() === url &&
-    updateSession.activeDownloads === 0 &&
-    !contents.isLoading()
-  );
+  return canRestartDocument(() => {
+    const contents = stateWindow();
+    return contents
+      ? {
+          contents,
+          url: contents.getURL(),
+          token: updateSession.token,
+          isHome: isUpdateHome(contents.getURL(), origin),
+          isLoading: contents.isLoading(),
+          activeDownloads: updateSession.activeDownloads,
+          windowCount: BrowserWindow.getAllWindows().length,
+        }
+      : null;
+  });
 }
 /** @returns {import('./localization.mjs').Messages} */
 const messages = () => catalogues[state.locale] ?? catalogues.en;
@@ -234,11 +225,13 @@ function attachGuards(window, isDocumentViewer = false) {
   if (isDocumentViewer) {
     return;
   }
-  contents.on("did-start-navigation", (_event, url, isInPlace, isMainFrame) => {
-    if (!isMainFrame || isInPlace) return;
-    permissionSession.generation += 1;
-    if (isAppUrl(url, origin)) updateSession.token = randomUUID();
-  });
+  contents.on(
+    "did-start-navigation",
+    (_event, _url, isInPlace, isMainFrame) => {
+      if (!isMainFrame || isInPlace) return;
+      permissionSession.generation += 1;
+    },
+  );
   contents.on("did-finish-load", () => publishUpdate());
 
   contents.on(
@@ -250,7 +243,10 @@ function attachGuards(window, isDocumentViewer = false) {
   contents.on("render-process-gone", () => {
     void showOffline(window);
   });
-  contents.on("did-navigate", (_event, url) => updateLocale(url));
+  contents.on("did-navigate", (_event, url) => {
+    if (isAppUrl(url, origin)) updateSession.token = randomUUID();
+    updateLocale(url);
+  });
   contents.on("did-navigate-in-page", (_event, url, isMainFrame) => {
     if (isMainFrame) permissionSession.generation += 1;
     updateLocale(url);

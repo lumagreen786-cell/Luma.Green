@@ -159,6 +159,38 @@ try {
   await permissionProbe.dispose();
   await page.goto(origin + "/");
   await page.evaluate(() => {
+    document.documentElement.dataset.cancelProbe = "retained";
+    location.assign("/slow");
+  });
+  // eslint-disable-next-line sonarjs/assertions-in-test-cases -- Verify navigation was pending before cancelling it.
+  await expect.poll(() => requests.hasSlowRequest).toBe(true);
+  await application.evaluate(({ BrowserWindow }) => {
+    BrowserWindow.getAllWindows()[0].webContents.stop();
+  });
+  assert.equal(
+    await page.evaluate(() => document.documentElement.dataset.cancelProbe),
+    "retained",
+  );
+  await page.evaluate(() =>
+    Reflect.get(window, "lumaAppUpdates").request("restart"),
+  );
+  // eslint-disable-next-line sonarjs/assertions-in-test-cases -- The retained document must still use its original update command nonce.
+  await expect
+    .poll(() =>
+      page.evaluate(() => Reflect.get(window, "lumaAppUpdates").getState()),
+    )
+    .toBe("blocked");
+  await page.evaluate(() =>
+    Reflect.get(window, "lumaAppUpdates").request("status"),
+  );
+  // eslint-disable-next-line sonarjs/assertions-in-test-cases -- A cancelled navigation must not leave the surviving bridge disconnected.
+  await expect
+    .poll(() =>
+      page.evaluate(() => Reflect.get(window, "lumaAppUpdates").getState()),
+    )
+    .toBe("unavailable");
+  requests.hasSlowRequest = false;
+  await page.evaluate(() => {
     window.open("/slow");
   });
   // eslint-disable-next-line sonarjs/assertions-in-test-cases -- Verify a real pending request before superseding it.

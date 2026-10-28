@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { NextIntlClientProvider } from "next-intl";
 import { beforeEach, expect, it, vi } from "vitest";
@@ -34,7 +34,7 @@ beforeEach(() => {
   mocks.verify.mockResolvedValue({ error: null });
 });
 function view() {
-  render(
+  return render(
     <NextIntlClientProvider locale="en" messages={messages}>
       <AccountPhone onReauthenticate={mocks.reauthenticate} />
     </NextIntlClientProvider>,
@@ -133,4 +133,17 @@ it("normalizes Arabic keyboard digits for both phone and code", async () => {
     updatePhoneNumber: true,
     disableSession: true,
   });
+});
+
+it("does not refresh another session after binding completes on an unmounted form", async () => {
+  const pending = Promise.withResolvers<{ error: null }>();
+  mocks.verify.mockReturnValueOnce(pending.promise);
+  const rendered = view();
+  await enterCode();
+  rendered.unmount();
+  await act(async () => {
+    pending.resolve({ error: null });
+    await pending.promise;
+  });
+  expect(mocks.refetch).not.toHaveBeenCalled();
 });

@@ -104,3 +104,33 @@ export function setupUpdates(
     },
   };
 }
+
+/** @typedef {{contents: {executeJavaScript: (code: string) => Promise<unknown>}, url: string, token: string, isHome: boolean, isLoading: boolean, activeDownloads: number, windowCount: number}} RestartDocument */
+/** @param {RestartDocument} document */
+function isIdleDocument(document) {
+  return (
+    document.isHome &&
+    !document.isLoading &&
+    document.activeDownloads === 0 &&
+    document.windowCount === 1
+  );
+}
+/** @param {() => RestartDocument | null} snapshot */
+export async function canRestartDocument(snapshot) {
+  const before = snapshot();
+  if (!before || !isIdleDocument(before)) return false;
+  const deadline = await before.contents.executeJavaScript(
+    "window.lumaAppUpdates && (window.lumaAppUpdates.isRestartPending() || window.lumaAppUpdates.prepareRestart()) ? window.lumaAppUpdates.getRestartDeadline() : 0",
+  );
+  const after = snapshot();
+  return (
+    typeof deadline === "number" &&
+    Number.isSafeInteger(deadline) &&
+    deadline > Date.now() &&
+    after !== null &&
+    after.contents === before.contents &&
+    after.token === before.token &&
+    after.url === before.url &&
+    isIdleDocument(after)
+  );
+}

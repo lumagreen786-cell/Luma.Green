@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Controller, useForm, useWatch } from "react-hook-form";
 import type { z } from "zod";
 
+import { CityField } from "@/components/location/city-field";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useRouter } from "@/i18n/navigation";
@@ -53,6 +54,7 @@ function toDraft(values: Partial<Values>): Draft {
     pan: values.gstRegistered === false ? undefined : values.pan,
     gstin: cleanGstin(values.gstRegistered, values.gstin),
     address: values.address,
+    city: values.city,
     location: values.location,
     offersPickup: values.offersPickup,
     vehicle: values.offersPickup ? values.vehicle : undefined,
@@ -97,6 +99,7 @@ export function KabadiwalaForm({
       gstin: draft.gstin ?? "",
       pan: draft.pan ?? "",
       address: draft.address ?? "",
+      city: draft.city ?? "",
       location: draft.location,
       offersPickup: draft.offersPickup,
       vehicle: draft.vehicle,
@@ -112,7 +115,7 @@ export function KabadiwalaForm({
     return resumeStage(
       [
         ["ownerName", "shopName", "gstRegistered", "gstin"],
-        ["address", "location"],
+        ["city", "address", "location"],
         ["offersPickup", "vehicle", "phones", "opens", "closes", "weeklyOff"],
       ],
       parsed.success ? [] : parsed.error.issues,
@@ -375,9 +378,21 @@ export function KabadiwalaForm({
         },
         {
           title: t("kabadiwala.address"),
-          fields: ["address", "location"],
+          fields: ["city", "address", "location"],
           content: (
             <>
+              <Controller
+                name="city"
+                control={control}
+                render={({ field, fieldState }) => (
+                  <CityField
+                    value={field.value}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    error={Boolean(fieldState.error)}
+                  />
+                )}
+              />
               <FormField
                 id="address"
                 label={t("kabadiwala.address")}

@@ -1,0 +1,549 @@
+{
+  "synthetic": true,
+  "captures": [
+    {
+      "name": "household-en-390-light.png",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "clippedButtons": [],
+        "loadedFonts": ["Noto Sans"]
+      },
+      "sha256": "f7345723f79122459facaa0f4ec0056536a48906b9015704b760c737798b2133"
+    },
+    {
+      "name": "household-en-390-dark.png",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "clippedButtons": [],
+        "loadedFonts": ["Noto Sans"]
+      },
+      "sha256": "254c5ad57284d2da6fa2b6dc84b3ebe9b151d641bc6f34a6615f056766bedba7"
+    },
+    {
+      "name": "household-en-768-light.png",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "clippedButtons": [],
+        "loadedFonts": ["Noto Sans"]
+      },
+      "sha256": "95a5eb2e1fda8d0e3ea7e01bee82ffdcae709784a199376c277eeeedc5fb790e"
+    },
+    {
+      "name": "household-en-768-dark.png",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "clippedButtons": [],
+        "loadedFonts": ["Noto Sans"]
+      },
+      "sha256": "9a7783769fc94d0a92fb2cb07030b7d7381f58e767fa36d9002342574de07986"
+    },
+    {
+      "name": "household-en-1440-light.png",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "clippedButtons": [],
+        "loadedFonts": ["Noto Sans"]
+      },
+      "sha256": "233243ed8d838bfb7bcdcee855afab21f6267ce7f722c981bf43f8b8e84b4f3f"
+    },
+    {
+      "name": "household-en-1440-dark.png",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "clippedButtons": [],
+        "loadedFonts": ["Noto Sans"]
+      },
+      "sha256": "be076933fca0a59bc95229c08b060c1bf3d8e1717badbf18dd5ca80af91d628d"
+    },
+    {
+      "name": "household-ar-390-light.png",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "clippedButtons": [],
+        "loadedFonts": [
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ]
+      },
+      "sha256": "c172bae147219e6992d9981bef8e7da93099494344c51a0b15ebdea6fbeace7f"
+    },
+    {
+      "name": "household-ar-390-dark.png",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "clippedButtons": [],
+        "loadedFonts": [
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ]
+      },
+      "sha256": "04d9be86c662f01ccd661145a142b983cd544e6f6cbf53961f718b9784c9756f"
+    },
+    {
+      "name": "household-ar-768-light.png",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "clippedButtons": [],
+        "loadedFonts": [
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ]
+      },
+      "sha256": "fa7c9dd38d6024b78f45a36cc17eb77e24451e82083ce291065358b9f427ab3a"
+    },
+    {
+      "name": "household-ar-768-dark.png",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "clippedButtons": [],
+        "loadedFonts": [
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ]
+      },
+      "sha256": "4a2770f36f45362c234ad9d7c3a318a911e97a0872534aa7bb250f4ebc6c827f"
+    },
+    {
+      "name": "household-ar-1440-light.png",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "clippedButtons": [],
+        "loadedFonts": [
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ]
+      },
+      "sha256": "aa5767528a4e5223ab8d37893dd0025990ce3faab4bb4094f8fae0f85810112c"
+    },
+    {
+      "name": "household-ar-1440-dark.png",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "clippedButtons": [],
+        "loadedFonts": [
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ]
+      },
+      "sha256": "e7b260d20fe82e2c3afed361536afa24760a5290d73b559cf21878a3136d01a2"
+    },
+    {
+      "name": "household-ur-390-light.png",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "clippedButtons": [],
+        "loadedFonts": [
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ]
+      },
+      "sha256": "d2a3478e346fd48737fdca937a9723faca7b27708b6e88d90f7de731b967e2bf"
+    },
+    {
+      "name": "household-ur-390-dark.png",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "clippedButtons": [],
+        "loadedFonts": [
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ]
+      },
+      "sha256": "197424cb89c530c73ff7f4f61a300f87c78765d9f81e09ddda6d41ddfd4925f8"
+    },
+    {
+      "name": "household-ur-768-light.png",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "clippedButtons": [],
+        "loadedFonts": [
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ]
+      },
+      "sha256": "9a859cc3bbb9823166c87b52d848c436bcf0dc2c324bf557151f84218ed23505"
+    },
+    {
+      "name": "household-ur-768-dark.png",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "clippedButtons": [],
+        "loadedFonts": [
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ]
+      },
+      "sha256": "561131f8d0870a6f189dbd5b218260a5225cb30ca1e59bd34be2510cd4fc44ed"
+    },
+    {
+      "name": "household-ur-1440-light.png",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "clippedButtons": [],
+        "loadedFonts": [
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ]
+      },
+      "sha256": "bddeceed8464486ab1fef627b6af7d0401e22b7f9e432a9fdb0f949b796e9836"
+    },
+    {
+      "name": "household-ur-1440-dark.png",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "clippedButtons": [],
+        "loadedFonts": [
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ]
+      },
+      "sha256": "7e50c8e6652b804bc76293b975938fd5cb7998d92ed2fbe54fd3c1882bbced7c"
+    },
+    {
+      "name": "household-kn-390-light.png",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "clippedButtons": [],
+        "loadedFonts": [
+          "Noto Sans",
+          "Noto Sans Kannada",
+          "Noto Sans Kannada Fallback"
+        ]
+      },
+      "sha256": "4d44323664b7c4eec80827a9fe380c43498fe3fd0450d3d8f2ce966bd3896a4f"
+    },
+    {
+      "name": "household-kn-390-dark.png",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "clippedButtons": [],
+        "loadedFonts": [
+          "Noto Sans",
+          "Noto Sans Kannada",
+          "Noto Sans Kannada Fallback"
+        ]
+      },
+      "sha256": "95f81e3a6789d0a2e09d0c0bb2c358e5095c98436f260cf6f25833b89e169e88"
+    },
+    {
+      "name": "household-kn-768-light.png",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "clippedButtons": [],
+        "loadedFonts": [
+          "Noto Sans",
+          "Noto Sans Kannada",
+          "Noto Sans Kannada Fallback"
+        ]
+      },
+      "sha256": "08c7c2d58c354d5fef43f4c42403b52942157a7b1b3dc11a53a92ea9cc20ac69"
+    },
+    {
+      "name": "household-kn-768-dark.png",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "clippedButtons": [],
+        "loadedFonts": [
+          "Noto Sans",
+          "Noto Sans Kannada",
+          "Noto Sans Kannada Fallback"
+        ]
+      },
+      "sha256": "141586f32665a06d7d15917d79e40a5013a0c9385c8e2de0bc900290078f8073"
+    },
+    {
+      "name": "household-kn-1440-light.png",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "clippedButtons": [],
+        "loadedFonts": [
+          "Noto Sans",
+          "Noto Sans Kannada",
+          "Noto Sans Kannada Fallback"
+        ]
+      },
+      "sha256": "8b8ba7fd3a2dc47b0e10941c6c196a6e24f9fbe54b03c1635e90f7e21d3e9b45"
+    },
+    {
+      "name": "household-kn-1440-dark.png",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "clippedButtons": [],
+        "loadedFonts": [
+          "Noto Sans",
+          "Noto Sans Kannada",
+          "Noto Sans Kannada Fallback"
+        ]
+      },
+      "sha256": "6c5accdc375390425bf7aed5188e845372d24800c7bf937b2552ac2a3bb86b70"
+    },
+    {
+      "name": "admin-en-390-light.png",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "clippedButtons": [],
+        "loadedFonts": ["Noto Sans"]
+      },
+      "sha256": "829d7900a4fd5494d10f6a0b134e3252a5c24692f356ada3f237f67165c034f7"
+    },
+    {
+      "name": "admin-en-390-dark.png",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "clippedButtons": [],
+        "loadedFonts": ["Noto Sans"]
+      },
+      "sha256": "ac6f77281bc236af87347d96136a147f9783d931a672940f98cfe02af41ebb80"
+    },
+    {
+      "name": "admin-en-768-light.png",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "clippedButtons": [],
+        "loadedFonts": ["Noto Sans"]
+      },
+      "sha256": "fe0fa94dd1f4e06497cc07e8e401364a6ce0224545752245bc67aa40cc6eb03e"
+    },
+    {
+      "name": "admin-en-768-dark.png",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "clippedButtons": [],
+        "loadedFonts": ["Noto Sans"]
+      },
+      "sha256": "222d5e762d1b59afbec4b0907d77bfa3425d0f9364b140ca91e6849568a1f53a"
+    },
+    {
+      "name": "admin-en-1440-light.png",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "clippedButtons": [],
+        "loadedFonts": ["Noto Sans"]
+      },
+      "sha256": "6d40d3f714d4ffb6c2b38c347c77f16fbcb06b81577c6870a2587f9709fb8dd7"
+    },
+    {
+      "name": "admin-en-1440-dark.png",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "clippedButtons": [],
+        "loadedFonts": ["Noto Sans"]
+      },
+      "sha256": "1048d8a91120bad566fde4b5123c722457780fff65818059efa20db581897e01"
+    }
+  ],
+  "labels": [
+    {
+      "locale": "ar",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "as",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "bn",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "de",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "es",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "fr",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "gu",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "hi",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "id",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "it",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "ja",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "kn",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "ko",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "ml",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "mr",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "ms",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "ne",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "nl",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "or",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "pa",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "pl",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "pt",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "ru",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "si",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "ta",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "te",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "th",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "tr",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "uk",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "ur",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "vi",
+      "width": 390,
+      "clipped": []
+    },
+    {
+      "locale": "zh",
+      "width": 390,
+      "clipped": []
+    }
+  ],
+  "sources": {
+    "src/components/sell/phone-sign-in.tsx": "7820728ee6faf7c10240dc29d212b2f1a6c60bec92bcb3247987f7d8295863b3",
+    "src/components/admin/admin-login.tsx": "479c5f2bd1fef59e2b7df78e2b751951d6e4cb79e015959726956d5f8cd5da59",
+    "src/lib/use-mounted.ts": "ee1482af373f863b1baaf072daf6022d4a664c3375a5e8b048a1793bf7d2a80f"
+  }
+}

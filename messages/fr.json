@@ -88,7 +88,7 @@
   "home": {
     "metaDescription": "Luma.Green réunit la filière indienne du recyclage sur une plateforme : ménages, kabadiwalas, opérateurs de prétraitement, recycleurs et fabricants, avec des prix justes, des entreprises vérifiées et un reçu à chaque étape.",
     "hero": {
-      "eyebrow": "Lancement à Bengaluru",
+      "eyebrow": "Inde",
       "title": "Faites place nette. Vos recyclables vous rapportent.",
       "lead": "Photos, collecte ou dépôt, puis paiement après la pesée.",
       "sell": "Recycler",
@@ -97,8 +97,8 @@
     },
     "teaser": {
       "title": "Prix du jour",
-      "placeAndDate": "Bengaluru · {date}",
-      "place": "Bengaluru",
+      "placeAndDate": "{city} · {date}",
+      "place": "{city}",
       "seeAll": "Voir tous les prix",
       "demoNote": "Prix d’exemple pour le prototype.",
       "unavailable": "Les prix du jour s’afficheront bientôt ici.",
@@ -246,9 +246,9 @@
     }
   },
   "prices": {
-    "metaTitle": "Prix des matériaux recyclables à Bengaluru aujourd’hui",
-    "metaDescription": "Prix de référence datés par kg pour les matériaux recyclables à Bengaluru. Chaque entreprise fixe ses offres.",
-    "eyebrow": "Bengaluru",
+    "metaTitle": "Prix des matériaux",
+    "metaDescription": "Prix de référence datés par kilogramme. Chaque entreprise fixe ses offres. Choisissez un matériau pour voir l’historique disponible.",
+    "eyebrow": "Inde",
     "title": "Prix des matériaux",
     "lead": "Prix de référence datés par kilogramme. Chaque entreprise fixe ses offres. Choisissez un matériau pour voir l’historique disponible.",
     "demoNote": "Prix d’exemple du prototype, sans cotation de marché en direct.",
@@ -283,7 +283,7 @@
       "unknown": "Historique encore insuffisant"
     },
     "detail": {
-      "description": "{code} · {family} · Bengaluru",
+      "description": "{code} · {family}",
       "today": "Aujourd’hui",
       "low": "Plus bas sur 30 jours",
       "high": "Plus haut sur 30 jours",
@@ -615,9 +615,9 @@
   },
   "contact": {
     "metaTitle": "Nous contacter",
-    "metaDescription": "Contactez l’équipe Luma.Green pour rejoindre le pilote à Bengaluru.",
+    "metaDescription": "Luma.Green réunit la filière indienne du recyclage sur une plateforme : ménages, kabadiwalas, opérateurs de prétraitement, recycleurs et fabricants, avec des prix justes, des entreprises vérifiées et un reçu à chaque étape.",
     "title": "Écrivez-nous",
-    "lead": "Nous commençons à Bengaluru avec un petit groupe de kabadiwalas, opérateurs de prétraitement, recycleurs et usines. Présentez votre activité, les matériaux échangés et votre volume mensuel approximatif.",
+    "lead": "Luma.Green réunit la filière indienne du recyclage sur une plateforme : ménages, kabadiwalas, opérateurs de prétraitement, recycleurs et fabricants, avec des prix justes, des entreprises vérifiées et un reçu à chaque étape.",
     "emailHeading": "Accès anticipé et questions générales",
     "securityHeading": "Signalements de sécurité",
     "securityBody": "Vous avez trouvé une faille ? Signalez-la en privé plutôt que publiquement."
@@ -2029,7 +2029,9 @@
         "sat": "Sam.",
         "sun": "Dim."
       },
-      "changesTitle": "Points à corriger"
+      "changesTitle": "Points à corriger",
+      "city": "Ville ou localité",
+      "stateUT": "État ou territoire de l’Union"
     },
     "kabadiwala": {
       "title": "Votre boutique",
@@ -2216,7 +2218,8 @@
       "fileTooBig": "Ce fichier est trop volumineux",
       "uploadFailed": "Échec de l’importation. Réessayez.",
       "generic": "Une erreur est survenue. Réessayez.",
-      "pan": "Recherchez votre numéro GST et confirmez votre entreprise."
+      "pan": "Recherchez votre numéro GST et confirmez votre entreprise.",
+      "city": "Saisissez une ville ou localité de 2 à 60 caractères."
     },
     "identity": {
       "pan": "PAN (facultatif)",
@@ -2261,7 +2264,8 @@
       "impact": "Bilan d’impact",
       "compliance": "Conformité",
       "earnings": "Gains",
-      "help": "Aide"
+      "help": "Aide",
+      "paperRecords": "Documents papier"
     },
     "roles": {
       "kabadiwala": "Collecteur kabadiwala",
@@ -2523,8 +2527,8 @@
   },
   "sell": {
     "metaTitle": "Réserver une collecte",
-    "metaDescription": "Vendez journaux, plastiques, métaux et anciens appareils électroniques à domicile à Bengaluru. Comparez les offres des boutiques voisines, réservez une collecte et recevez votre paiement chez vous.",
-    "eyebrow": "Pour les ménages de Bengaluru",
+    "metaDescription": "Faites place nette. Vos recyclables vous rapportent. Photos, collecte ou dépôt, puis paiement après la pesée.",
+    "eyebrow": "Inde",
     "title": "Réservez une collecte à domicile",
     "lead": "Sélectionnez vos matériaux, choisissez une boutique voisine et recevez un paiement en espèces ou par UPI après la pesée.",
     "promises": {
@@ -2537,7 +2541,7 @@
       "title": "Les réservations seront bientôt disponibles",
       "body": "Nous préparons les réservations pour les ménages. Revenez bientôt."
     },
-    "demoNote": "Prix et boutiques d’exemple pour le pilote de Bengaluru.",
+    "demoNote": "Prix d’exemple du prototype, sans cotation de marché en direct.",
     "loadError": "Chargement impossible. Vérifiez votre connexion et réessayez.",
     "retry": "Réessayer",
     "steps": {
@@ -4400,5 +4404,39 @@
     "assignedWork": "Réglez d’abord votre travail attribué ou la remise.",
     "reviewLimit": "D’autres dossiers doivent être examinés avant la fermeture.",
     "checkLimit": "Fermer le compte puis se réinscrire ne réinitialise pas la limite de vérifications professionnelles du jour. Elles peuvent rester bloquées jusqu’au lendemain en Inde."
+  },
+  "papers": {
+    "title": "Documents papier",
+    "lead": "La confirmation conserve seulement une preuve. Le stock et les fonds restent inchangés.",
+    "upload": "Ajouter une image du document",
+    "source": "Image originale",
+    "text": "Texte transcrit",
+    "rows": "Lignes",
+    "addRow": "Ajouter une ligne",
+    "consent": "Envoyer cette image au modèle externe pour transcription.",
+    "confirm": "J’ai vérifié l’image et corrigé cette transcription.",
+    "confirmed": "Transcription confirmée",
+    "unavailable": "Extraction indisponible. Saisissez le texte manuellement.",
+    "extract": "Extraire un brouillon",
+    "failed": "L’extraction n’a pas abouti. Utilisez la saisie manuelle.",
+    "duplicate": "Cette image est déjà enregistrée. Ouvrez son document.",
+    "invalid": "JPEG ou PNG, 2 Mo et 2400 pixels par côté maximum.",
+    "empty": "Aucun document papier pour le moment.",
+    "discard": "Abandonner le brouillon",
+    "confirmAction": "Confirmer la transcription",
+    "pending": "Traitement de l’image…",
+    "manual": "Ouvrir les registres manuels de stock",
+    "modelDraft": "Brouillon du modèle non vérifié",
+    "saveFirst": "Enregistrez vos modifications avant l’extraction.",
+    "date": "Jour",
+    "description": "Description du contenu",
+    "quantity": "Quantité",
+    "unit": "Unité",
+    "amount": "Montant",
+    "reference": "Référence",
+    "more": "Plus",
+    "capacity": "Le stockage des documents est plein. Utilisez les registres manuels ou contactez le propriétaire de l’espace.",
+    "changed": "Ce document a changé. Copiez vos modifications avant d’ouvrir la version enregistrée.",
+    "loadSaved": "Ouvrir la version enregistrée"
   }
 }

@@ -113,6 +113,13 @@ export function VerifyForm({
   const [secondsLeft, setSecondsLeft] = useState(() =>
     Math.max(0, Math.ceil((resendAt - Date.now()) / 1000)),
   );
+  const mounted = useRef(true);
+  useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+    };
+  }, []);
   const isFinishing = useRef(false);
   const requestPending = useRef(false);
   const [isResending, setResending] = useState(false);
@@ -169,9 +176,11 @@ export function VerifyForm({
     void (async () => {
       try {
         await ensureProfile({ locale });
+        if (!mounted.current) return;
         clearPhoneChallenge();
         router.replace(next);
       } catch {
+        if (!mounted.current) return;
         isFinishing.current = false;
         setStatus("profile-error");
         setError("errorGeneric");
@@ -191,6 +200,7 @@ export function VerifyForm({
     setStatus("checking");
     setError(null);
     const result = await verifyPhoneCode(phone, value);
+    if (!mounted.current) return;
     requestPending.current = false;
     if (result.kind === "error") {
       setStatus("idle");
@@ -212,7 +222,8 @@ export function VerifyForm({
     requestPending.current = true;
     setResending(true);
     setError(null);
-    const sendError = await requestPhoneCode(phone);
+    const sendError = await requestPhoneCode(phone, () => mounted.current);
+    if (!mounted.current) return;
     requestPending.current = false;
     setResending(false);
     if (sendError) {

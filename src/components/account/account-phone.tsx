@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/auth-client";
 import { asciiDigits } from "@/lib/number-input";
 import { requestPhoneCode } from "@/lib/phone-auth";
+import { useMounted } from "@/lib/use-mounted";
 
 import { api } from "../../../convex/_generated/api";
 import { normalizeIndianMobile } from "../../../convex/lib/phone";
@@ -27,12 +28,15 @@ function usePhoneBinding() {
   const [error, setError] = useState<string | null>(null);
   const [reauthenticate, setReauthenticate] = useState(false);
   const [verified, setVerified] = useState(false);
-  const [cooldown, setCooldown] = useState(0);
+  const [resendAt, setResendAt] = useState(0);
+  const [now, setNow] = useState(() => Date.now());
+  const cooldown = Math.max(0, Math.ceil((resendAt - now) / 1000));
+  const isMounted = useMounted();
   const pending = useRef(false);
   useEffect(() => {
     if (!cooldown) return;
     const timer = setTimeout(() => {
-      setCooldown(cooldown - 1);
+      setNow(Date.now());
     }, 1000);
     return () => {
       clearTimeout(timer);
@@ -48,10 +52,11 @@ function usePhoneBinding() {
     try {
       await action();
     } catch {
+      if (!isMounted()) return;
       setError(auth("errorGeneric"));
     } finally {
       pending.current = false;
-      setBusy(false);
+      if (isMounted()) setBusy(false);
     }
   }
   async function send() {
@@ -60,14 +65,16 @@ function usePhoneBinding() {
       setError(auth("mobileInvalid"));
       return;
     }
-    const failure = await requestPhoneCode(normalized);
+    const failure = await requestPhoneCode(normalized, isMounted);
+    if (!isMounted()) return;
     if (failure) {
       setError(auth(failure));
       return;
     }
     setPhone(normalized);
     setCode("");
-    setCooldown(30);
+    setNow(Date.now());
+    setResendAt(Date.now() + 300_000);
   }
   async function verify() {
     if (!phone) return;
@@ -77,6 +84,7 @@ function usePhoneBinding() {
       updatePhoneNumber: true,
       disableSession: true,
     });
+    if (!isMounted()) return;
     setCode("");
     if (failure) {
       if (

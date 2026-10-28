@@ -7,16 +7,19 @@ import { PhoneSignIn } from "./phone-sign-in";
 
 const calls = vi.hoisted(() => ({
   sendOtp: vi.fn(),
+  options: { phone: true },
   verify: vi.fn(),
   onVerified: vi.fn(),
   success: vi.fn(),
 }));
+vi.mock("convex/react", () => ({ useQuery: () => calls.options }));
 vi.mock("@/lib/auth-client", () => ({ authClient: { phoneNumber: calls } }));
 vi.mock("@/i18n/navigation", () => ({ Link: "a" }));
 vi.mock("sonner", () => ({ toast: { success: calls.success } }));
 
 beforeEach(() => {
   vi.resetAllMocks();
+  calls.options = { phone: true };
   vi.useFakeTimers();
   calls.sendOtp.mockResolvedValue({ error: null });
   calls.verify.mockResolvedValue({
@@ -142,4 +145,69 @@ it("uses elapsed time for resend when the browser resumes from the background", 
   expect(
     screen.getByRole("button", { name: messages.sell.phone.resend }),
   ).toBeVisible();
+});
+
+it("does not book from the old code after Change number", async () => {
+  await openCodeForm(false);
+  const pending = Promise.withResolvers<{
+    error: null;
+    data: { token: string };
+  }>();
+  calls.verify.mockReturnValueOnce(pending.promise);
+  fireEvent.change(screen.getByLabelText(messages.sell.phone.codeLabel), {
+    target: { value: "123456" },
+  });
+  fireEvent.click(
+    screen.getByRole("button", { name: messages.sell.phone.changeNumber }),
+  );
+  await act(async () => {
+    pending.resolve({ error: null, data: { token: "synthetic" } });
+    await pending.promise;
+  });
+  expect(calls.onVerified).not.toHaveBeenCalled();
+  expect(screen.getByLabelText(messages.sell.phone.label)).toHaveValue(
+    "9876543210",
+  );
+});
+
+it("does not show an old resend toast after Change number", async () => {
+  await openCodeForm();
+  const pending = Promise.withResolvers<{ error: null }>();
+  calls.sendOtp.mockReturnValueOnce(pending.promise);
+  fireEvent.click(
+    screen.getByRole("button", { name: messages.sell.phone.resend }),
+  );
+  fireEvent.click(
+    screen.getByRole("button", { name: messages.sell.phone.changeNumber }),
+  );
+  await act(async () => {
+    pending.resolve({ error: null });
+    await pending.promise;
+  });
+  expect(calls.success).not.toHaveBeenCalled();
+});
+
+it("shows unavailable SMS delivery without dispatching a send", async () => {
+  calls.options = { phone: false };
+  render(
+    <NextIntlClientProvider locale="en" messages={messages}>
+      <PhoneSignIn verifyLabel="Confirm" onVerified={calls.onVerified} />
+    </NextIntlClientProvider>,
+  );
+  expect(screen.getByRole("status")).toHaveTextContent(
+    messages.auth.unavailableBody,
+  );
+  expect(
+    screen.getByRole("button", { name: messages.sell.phone.sendCode }),
+  ).toBeDisabled();
+  fireEvent.change(screen.getByLabelText(messages.sell.phone.label), {
+    target: { value: "9876543210" },
+  });
+  await act(async () => {
+    fireEvent.keyDown(screen.getByLabelText(messages.sell.phone.label), {
+      key: "Enter",
+    });
+    await Promise.resolve();
+  });
+  expect(calls.sendOtp).not.toHaveBeenCalled();
 });

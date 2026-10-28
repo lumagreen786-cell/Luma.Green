@@ -1,4 +1,10 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { getFunctionName } from "convex/server";
 import { beforeEach, describe, expect, it, vi } from "vitest";
@@ -30,7 +36,9 @@ vi.mock("@/components/notifications/device-provider", () => ({
 }));
 vi.mock("convex/react", () => ({
   useQuery: (query: Parameters<typeof getFunctionName>[0]) =>
-    getFunctionName(query) === "identity:me" ? mocks.me : { adminSetup: true },
+    getFunctionName(query) === "identity:me"
+      ? mocks.me
+      : { adminSetup: true, phone: true },
   useMutation: () => vi.fn(),
   useConvexAuth: () => ({ isAuthenticated: Boolean(mocks.me) }),
 }));
@@ -182,4 +190,68 @@ describe("admin request failures", () => {
       ).toBeEnabled();
     });
   });
+});
+
+it("does not navigate after an admin phone verification outlives login", async () => {
+  const pending = Promise.withResolvers<{ kind: "authenticated" }>();
+  mocks.signIn.mockReturnValueOnce(pending.promise);
+  const view = render(<AdminLogin />);
+  await phoneStep();
+  view.unmount();
+  await act(async () => {
+    pending.resolve({ kind: "authenticated" });
+    await pending.promise;
+  });
+  expect(mocks.replace).not.toHaveBeenCalled();
+});
+it.each(["totp", "backup"])(
+  "does not navigate after an admin %s verification outlives login",
+  async (mode) => {
+    mocks.signIn.mockResolvedValueOnce({ kind: "second-factor" });
+    const user = userEvent.setup();
+    const view = render(<AdminLogin />);
+    await phoneStep();
+    const pending = Promise.withResolvers<{ error: null }>();
+    if (mode === "backup") {
+      await user.click(
+        screen.getByRole("button", { name: /Use a backup code/ }),
+      );
+      await user.type(screen.getByLabelText("Backup code"), "synthetic-code");
+      mocks.backup.mockReturnValueOnce(pending.promise);
+    } else {
+      fireEvent.change(
+        screen.getByLabelText("Code from your authenticator app"),
+        { target: { value: "123456" } },
+      );
+      mocks.verify.mockReturnValueOnce(pending.promise);
+    }
+    if (mode === "backup")
+      await user.click(screen.getByRole("button", { name: "Sign in" }));
+    view.unmount();
+    await act(async () => {
+      pending.resolve({ error: null });
+      await pending.promise;
+    });
+    expect(mocks.replace).not.toHaveBeenCalled();
+  },
+);
+it("does not complete enrolment after its authenticator form unmounts", async () => {
+  const done = vi.fn();
+  const pending = Promise.withResolvers<{ error: null }>();
+  mocks.verify.mockReturnValueOnce(pending.promise);
+  const view = render(
+    <AuthenticatorStep
+      totpURI="otpauth://totp/Luma?secret=JBSWY3DPEHPK3PXP"
+      onVerified={done}
+    />,
+  );
+  fireEvent.change(screen.getByLabelText("Code from the app"), {
+    target: { value: "123456" },
+  });
+  view.unmount();
+  await act(async () => {
+    pending.resolve({ error: null });
+    await pending.promise;
+  });
+  expect(done).not.toHaveBeenCalled();
 });

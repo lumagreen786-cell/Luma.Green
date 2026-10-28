@@ -12,9 +12,15 @@ import {
 } from "lucide-react";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { type RefObject, useEffect, useRef, useState } from "react";
-import { useForm, type UseFormReturn, useWatch } from "react-hook-form";
+import {
+  Controller,
+  useForm,
+  type UseFormReturn,
+  useWatch,
+} from "react-hook-form";
 import { z } from "zod";
 
+import { CityField } from "@/components/location/city-field";
 import { ReverseAddress } from "@/components/location/reverse-address";
 import { isConvexConfigured } from "@/components/providers/convex-provider";
 import { Button } from "@/components/ui/button";
@@ -31,9 +37,11 @@ import {
 import { isLocale, localeDirection } from "@/i18n/locales";
 import { useRouter } from "@/i18n/navigation";
 import { prepareUpload } from "@/lib/upload-image";
+import { assertMounted, useMounted } from "@/lib/use-mounted";
 
 import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
+import { canonicalCity } from "../../../convex/lib/geography";
 import {
   bookableDates,
   cleanAddress,
@@ -43,6 +51,7 @@ import {
   SLOT_WINDOWS,
   type SlotWindow,
 } from "../../../convex/lib/households";
+import { citySchema } from "../../../convex/lib/onboarding";
 import { indiaToday } from "../../../convex/lib/onboarding";
 import type { SellDraft } from "./draft";
 import { sellErrorKey } from "./errors";
@@ -64,6 +73,7 @@ export const recyclingDetailsSchema = z
   .object({
     name: z.string().refine(isValidName, "name"),
     address: z.string(),
+    city: citySchema,
     mode: z.enum(["pickup", "dropoff"]),
   })
   .refine(
@@ -104,6 +114,7 @@ function RecyclingFlow({
   const common = useTranslations("common");
   const locale = useLocale();
   const router = useRouter();
+  const isMounted = useMounted();
   const now = useNow();
   const today = indiaToday(now);
   const location = useLocation();
@@ -132,13 +143,15 @@ function RecyclingFlow({
     defaultValues: {
       name: initial.name,
       address: initial.address,
+      city: initial.city ?? "",
       mode: initial.mode,
     },
   });
   const mode = useWatch({ control: form.control, name: "mode" });
+  const city = useWatch({ control: form.control, name: "city" });
   const shops = useQuery(
     api.households.shops,
-    shopQueryArgs(stage, location.point),
+    shopQueryArgs(stage, location.point, city),
   );
   const available = shopsForMode(shops, mode);
   const selectedShop = available?.find((shop) => shop.id === shopId);
@@ -176,11 +189,14 @@ function RecyclingFlow({
     setError(null);
     try {
       await waitForAuth();
+      assertMounted(isMounted);
       await ensureProfile({ locale });
+      assertMounted(isMounted);
       let request = retryRequest;
       if (!request) {
         if (!selectedShop || !slotWindow) throw new Error("INVALID_REQUEST");
         const photoIds = await uploadPhotos(files);
+        assertMounted(isMounted);
         const values = form.getValues();
         request = {
           orgId: selectedShop.id,
@@ -195,10 +211,12 @@ function RecyclingFlow({
         setRetryRequest(request);
       }
       const token = await book(request);
+      assertMounted(isMounted);
       setStatus("booked");
       clearSellDraft();
       router.push(`/t/${token}`);
     } catch (error_) {
+      if (!isMounted()) return;
       if (error_ instanceof ConvexError) {
         setRetryRequest(null);
         if (error_.data === "PHOTO_NOT_AVAILABLE") clearUploads();
@@ -446,21 +464,24 @@ function BookingReview({
 }
 
 function usePhotoUploads() {
+  const isMounted = useMounted();
   const uploaded = useRef(new Map<File, Id<"householdPhotos">>());
   const upload = useAction(api.householdPhotos.upload);
   async function uploadPhotos(files: File[]) {
     const photoIds: Id<"householdPhotos">[] = [];
     for (const file of files) {
+      assertMounted(isMounted);
       let photoId = uploaded.current.get(file);
       if (!photoId) {
         try {
           const prepared = await prepareUpload(file, "machine_media");
+          assertMounted(isMounted);
           if (prepared.size > 2 * 1024 * 1024)
             throw new Error("PHOTO_UPLOAD_FAILED");
-          photoId = await upload({
-            name: prepared.name,
-            bytes: await prepared.arrayBuffer(),
-          });
+          const bytes = await prepared.arrayBuffer();
+          assertMounted(isMounted);
+          photoId = await upload({ name: prepared.name, bytes });
+          assertMounted(isMounted);
         } catch {
           throw new Error("PHOTO_UPLOAD_FAILED");
         }
@@ -547,6 +568,21 @@ function DetailsForm({
           </Label>
         ))}
       </RadioGroup>
+      <Controller
+        name="city"
+        control={form.control}
+        render={({ field, fieldState }) => (
+          <CityField
+            value={field.value}
+            onBlur={field.onBlur}
+            error={Boolean(fieldState.error)}
+            onChange={(value) => {
+              field.onChange(value);
+              clearShop();
+            }}
+          />
+        )}
+      />
       <div className="space-y-2">
         <Label htmlFor="recycle-name">{t("when.nameLabel")}</Label>
         <Input
@@ -842,12 +878,14 @@ function shopsForMode(shops: Shop[] | undefined, mode: Details["mode"]) {
   return shops?.filter((shop) => mode === "dropoff" || shop.offersPickup);
 }
 
-function shopQueryArgs(
+export function shopQueryArgs(
   stage: "details" | "schedule",
   point: ReturnType<typeof useLocation>["point"],
+  city: string,
 ): FunctionArgs<typeof api.households.shops> | "skip" {
-  return stage === "schedule"
-    ? { items: [], ...(point && { near: point }) }
+  const selected = canonicalCity(city);
+  return stage === "schedule" && selected
+    ? { city: selected, items: [], ...(point && { near: point }) }
     : "skip";
 }
 

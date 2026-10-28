@@ -13,6 +13,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useRouter } from "@/i18n/navigation";
+import { useMounted } from "@/lib/use-mounted";
 
 import { api } from "../../../convex/_generated/api";
 import { kgToGrams, pointsFor } from "../../../convex/lib/chain";
@@ -93,6 +94,7 @@ export function ConfirmStep({
   const time = useTimeFormat();
   const locale = useLocale();
   const router = useRouter();
+  const isMounted = useMounted();
   const book = useMutation(api.households.book);
   const ensureProfile = useMutation(api.identity.ensureProfile);
   const waitForAuth = useAuthReady();
@@ -120,7 +122,9 @@ export function ConfirmStep({
     setError(null);
     try {
       await waitForAuth();
+      if (!isMounted()) return;
       await ensureProfile({ locale });
+      if (!isMounted()) return;
       const token = await book({
         orgId: shop.id,
         mode: draft.mode,
@@ -132,10 +136,12 @@ export function ConfirmStep({
         name: draft.name,
         location: draft.mode === "pickup" ? location : undefined,
       });
+      if (!isMounted()) return;
       isBooked.current = true;
       setStatus("booked");
       router.push(`/t/${token}`);
     } catch (error_) {
+      if (!isMounted()) return;
       isSubmitting.current = false;
       const key = sellErrorKey(error_);
       setError(key);

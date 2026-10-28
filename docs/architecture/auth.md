@@ -79,8 +79,8 @@ component. Built and tested on 29 Sep 2026.
   with `AUTH_LOCAL_TEST_MODE=true`, a loopback inbox URL and a private bearer token.
   See [local delivery](../../scripts/local-auth/README.md). There is no fixed code
   or OTP logging; `AUTH_DEV_MODE` does not enable delivery.
-- Without a configured delivery path, `/login` offers a labelled code-entry preview.
-  Preview sends nothing, creates no session and cannot access private routes.
+- Without a configured delivery path, `/login` shows an unavailable state and
+  disables sending. It offers no code-entry preview or simulated sign-in.
 - Per-IP limits supplement the phone quota. The direct Convex endpoint is public,
   so IP headers alone are not a reliable protection against SMS abuse.
 
@@ -115,9 +115,15 @@ do not re-enable email login.
 - Lost authenticator and no recovery code means the account cannot pass the
   second factor. There is no automatic SMS-only reset. Support must follow a
   separately approved identity recovery process; one is not enabled by this UI.
-- Direct phone-password, phone-password-reset and number-change endpoints are
-  disabled. Changing the registered number needs a separate verified workflow.
-  The server checks forbidden number-change and trusted-device flags independently;
+- Direct phone-password and phone-password-reset endpoints are disabled. Ordinary
+  phone identities cannot change their registered number. An existing verified
+  non-admin email identity with no phone may bind an unused number after full
+  authentication in the last five minutes. The server checks current session
+  assurance before accepting `updatePhoneNumber: true`; binding preserves its
+  identity, session and required authenticator. It does not enable SMS-only login
+  for that legacy email identity. Ordinary SMS verification rejects a non-phone
+  email identity after checking its OTP and before creating a session.
+- The server checks forbidden number-change and trusted-device flags independently;
   a malformed unrelated option cannot disable either guard.
 - Authenticator setup, enable/disable, recovery-code changes and password changes
   write audit events without secrets. Every private Convex operation still checks
@@ -154,7 +160,7 @@ do not re-enable email login.
   denial, old-session revocation, expiry, attempt limits, concurrent redemption,
   recovery replacement, admin phone challenges and retired password-reset boundaries.
 - **E2E** (`e2e/auth.spec.ts` and `e2e/account-settings.spec.ts`) also checks the
-  disconnected preview and protected route return paths. Fixtures do not prove
+  disconnected unavailable-delivery UI and protected route return paths. Fixtures do not prove
   live SMS/email delivery or an authenticated production walkthrough.
 - **Local browser acceptance:** run the secured inbox and a local Convex backend.
   Create disposable users through actual signup/verification handlers. Retrieve
@@ -243,3 +249,13 @@ The five failed verification attempts per code remain separate from send limits.
 The existing HTTP endpoint queues delivery, so its response confirms scheduling,
 not provider acceptance. Confirm both provider acceptance and receipt on the handset
 before claiming live setup. Registration and household sign-in use this same code path.
+
+### Late results
+
+Removed sign-in, binding and factor forms ignore late local results. Household
+booking checks its screen lifetime after each wait, profile request, upload and
+booking request; an old completion cannot clear a newer draft or navigate.
+A dispatched server request can still complete. Better Auth uses shared browser
+cookies: concurrent completed sign-ins can select the account in HTTP response
+order. These UI guards do not control HttpOnly cookie writes. Every sign-in still
+requires all of its configured factors.

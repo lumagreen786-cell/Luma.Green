@@ -1,4 +1,4 @@
-import { render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useQuery } from "convex/react";
 import { NextIntlClientProvider } from "next-intl";
@@ -22,7 +22,7 @@ vi.mock("convex/react", () => ({
 }));
 
 function renderBoard() {
-  return render(
+  const result = render(
     <NextIntlClientProvider
       locale="en"
       messages={messages}
@@ -31,6 +31,9 @@ function renderBoard() {
       <PriceBoard />
     </NextIntlClientProvider>,
   );
+  const city = screen.queryByLabelText(messages.join.form.city);
+  if (city) fireEvent.change(city, { target: { value: "Bengaluru" } });
+  return result;
 }
 
 beforeEach(() => {
@@ -100,7 +103,7 @@ describe("PriceBoard", () => {
     const dialog = await screen.findByRole("dialog", {
       name: "Iron and steel",
     });
-    expect(dialog).toHaveTextContent("METAL-IRON · Metal · Bengaluru");
+    expect(dialog).toHaveTextContent("METAL-IRON · Metal");
     expect(within(dialog).getByText("30-day low")).toBeInTheDocument();
     const chart = within(dialog).getByRole("slider", {
       name: /Iron and steel: price per kilo/,
@@ -207,4 +210,25 @@ describe("PriceBoard", () => {
     await user.click(screen.getByRole("button", { name: "Try again" }));
     expect(screen.getByRole("region", { name: "Paper" })).toBeInTheDocument();
   });
+});
+
+it("queries the entered city and hides quotes when its locality becomes invalid", async () => {
+  renderBoard();
+  const field = screen.getByLabelText(messages.join.form.city);
+  fireEvent.change(field, { target: { value: " new   DELHI " } });
+  await userEvent.click(
+    screen.getByRole("combobox", { name: messages.join.form.stateUT }),
+  );
+  await userEvent.click(screen.getByRole("option", { name: "Delhi" }));
+  expect(useQuery).toHaveBeenLastCalledWith(expect.anything(), {
+    city: "New Delhi, Delhi",
+  });
+  fireEvent.change(field, { target: { value: "12345" } });
+  expect(useQuery).toHaveBeenLastCalledWith(expect.anything(), "skip");
+  expect(
+    screen.queryByRole("region", { name: "Paper" }),
+  ).not.toBeInTheDocument();
+  expect(screen.getByRole("alert")).toHaveTextContent(
+    messages.join.errors.city,
+  );
 });

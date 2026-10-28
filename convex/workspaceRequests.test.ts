@@ -14,6 +14,7 @@ const consent = {
   privacyAccepted: true,
 } as const;
 const shop = {
+  city: "Bengaluru",
   ownerName: "Demo Owner",
   shopName: "Demo Second Shop",
   gstRegistered: false,

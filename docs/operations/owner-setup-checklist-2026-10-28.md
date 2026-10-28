@@ -259,8 +259,18 @@ See [payments](../architecture/payments.md) for the full acceptance record.
       `OPENROUTER_API_KEY`, an approved vision `OPENROUTER_MODEL` and
       `PHOTO_ESTIMATE_DAILY_LIMIT` to Convex. `PHOTO_ESTIMATE_PROVIDER=openrouter`
       selects it. Review model retention and licensing. Manual entry works without it.
-      Paper-document OCR is a separate unimplemented feature; buying an AI key does
-      not complete it.
+      The 29 October paper workflow adds separate reviewed transcription evidence.
+      It does not import stock or issue official documents. Assisted extraction
+      requires `PAPER_TRANSCRIPTION_ENABLED=true` and an explicit
+      `PAPER_TRANSCRIPTION_DAILY_LIMIT` from 1 to 100 in Convex, as well as the
+      approved OpenRouter key/model and per-image user consent. It has additional
+      three/account/day and ten/organization/day caps and never retries a paid
+      extraction automatically. Keep it off until privacy, budget and real-paper
+      accuracy acceptance pass. Manual paper review works without the model.
+      Originals use private, atomic database chunks, capped at 100 MiB raw source
+      bytes and 100 retained sources per organization including confirmed
+      evidence; metadata/index overhead is additional database storage. These
+      are separate from the existing R2 quality-attachment scope.
 - [ ] **CodeRabbit:** install the GitHub App on this repository and select a
       plan. No app API key is required. Review a real PR before counting it as active.
 - [ ] **Search ownership:** Google Search Console and Bing can use DNS

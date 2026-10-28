@@ -3,7 +3,7 @@ import { ConvexError } from "convex/values";
 import type { Doc, Id } from "../_generated/dataModel";
 import type { MutationCtx } from "../_generated/server";
 import { requireApplicationParent } from "./applicationAccess";
-import { orgDraftFrom, PILOT_CITY, saathiDraftFrom, slugify } from "./review";
+import { orgDraftFrom, saathiDraftFrom, slugify } from "./review";
 import { MAX_WORKSPACES } from "./workspaceRoles";
 
 const MAX_SLUG_TRIES = 50;
@@ -35,6 +35,7 @@ async function startRateCard(
   ctx: MutationCtx,
   orgId: Id<"orgs">,
   families: Doc<"orgs">["families"],
+  city: string,
   now: number,
 ): Promise<number> {
   const materials = await ctx.db
@@ -51,7 +52,7 @@ async function startRateCard(
     const reference = await ctx.db
       .query("referencePrices")
       .withIndex("by_city_material", (q) =>
-        q.eq("city", PILOT_CITY).eq("materialCode", material.code),
+        q.eq("city", city).eq("materialCode", material.code),
       )
       .first();
     if (!reference) continue;
@@ -78,8 +79,6 @@ async function openBusiness(
   now: number,
 ): Promise<Id<"orgs">> {
   await requireApplicationParent(ctx, application);
-  const draft = orgDraftFrom(application);
-  if (!draft) throw new ConvexError("INCOMPLETE_APPLICATION");
 
   // The application identifies the business even after its owner changes.
   const existing = await ctx.db
@@ -93,6 +92,9 @@ async function openBusiness(
     });
     return existing._id;
   }
+
+  const draft = orgDraftFrom(application);
+  if (!draft) throw new ConvexError("INCOMPLETE_APPLICATION");
 
   const memberships = await ctx.db
     .query("memberships")
@@ -127,7 +129,7 @@ async function openBusiness(
   });
   const rateCardItems =
     draft.kind === "kabadiwala"
-      ? await startRateCard(ctx, orgId, draft.families, now)
+      ? await startRateCard(ctx, orgId, draft.families, draft.city, now)
       : 0;
   await ctx.db.insert("auditLog", {
     orgId,
@@ -153,9 +155,6 @@ async function openSaathi(
   actorProfileId: Id<"profiles"> | undefined,
   now: number,
 ): Promise<Id<"saathiProfiles">> {
-  const draft = saathiDraftFrom(application);
-  if (!draft) throw new ConvexError("INCOMPLETE_APPLICATION");
-
   const existing = await ctx.db
     .query("saathiProfiles")
     .withIndex("by_profile", (q) => q.eq("profileId", application.profileId))
@@ -164,6 +163,9 @@ async function openSaathi(
     await ctx.db.patch("saathiProfiles", existing._id, { status: "active" });
     return existing._id;
   }
+
+  const draft = saathiDraftFrom(application);
+  if (!draft) throw new ConvexError("INCOMPLETE_APPLICATION");
 
   const saathiProfileId = await ctx.db.insert("saathiProfiles", {
     ...draft,

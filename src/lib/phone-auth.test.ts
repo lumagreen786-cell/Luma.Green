@@ -70,3 +70,15 @@ describe("phone authentication failures", () => {
     });
   });
 });
+
+it("does not start SMS after a bot check outlives its form", async () => {
+  const pending = Promise.withResolvers<string>();
+  bot.mockReturnValueOnce(pending.promise);
+  calls.sendOtp.mockResolvedValue({ error: null });
+  const lifetime = { current: true };
+  const request = requestPhoneCode("+919876543210", () => lifetime.current);
+  lifetime.current = false;
+  pending.resolve("late-proof");
+  await request;
+  expect(calls.sendOtp).not.toHaveBeenCalled();
+});

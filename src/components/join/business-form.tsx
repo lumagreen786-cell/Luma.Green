@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Controller, useForm, useWatch } from "react-hook-form";
 import type { z } from "zod";
 
+import { CityField } from "@/components/location/city-field";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useRouter } from "@/i18n/navigation";
@@ -57,6 +58,7 @@ function toDraft(values: Partial<Values>): Draft {
     gstin: cleanGstin(true, values.gstin),
     materials: values.materials,
     address: values.address,
+    city: values.city,
     location: values.location,
     locationTags: values.locationTags,
     collectsFromSuppliers: values.collectsFromSuppliers,
@@ -109,6 +111,7 @@ export function BusinessForm({
       pan: draft.pan ?? "",
       materials: draft.materials ?? [],
       address: draft.address ?? "",
+      city: draft.city ?? "",
       location: draft.location,
       locationTags: draft.locationTags ?? [],
       collectsFromSuppliers: draft.collectsFromSuppliers,
@@ -124,7 +127,7 @@ export function BusinessForm({
     return resumeStage(
       [
         ["businessName", "gstRegistered", "gstin", "materials"],
-        ["address", "location", "locationTags"],
+        ["city", "address", "location", "locationTags"],
         ["collectsFromSuppliers", "phones", "opens", "closes", "weeklyOff"],
       ],
       parsed.success ? [] : parsed.error.issues,
@@ -355,9 +358,21 @@ export function BusinessForm({
         },
         {
           title: t("business.address"),
-          fields: ["address", "location", "locationTags"],
+          fields: ["city", "address", "location", "locationTags"],
           content: (
             <>
+              <Controller
+                name="city"
+                control={control}
+                render={({ field, fieldState }) => (
+                  <CityField
+                    value={field.value}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    error={Boolean(fieldState.error)}
+                  />
+                )}
+              />
               <FormField
                 id="address"
                 label={t("business.address")}

@@ -88,7 +88,7 @@
   "home": {
     "metaDescription": "Luma.Green connects India's recycling network: households, kabadiwalas, preprocessors, recyclers and manufacturers, with fair prices, verified businesses and a receipt at every step.",
     "hero": {
-      "eyebrow": "Starting in Bengaluru",
+      "eyebrow": "India",
       "title": "Clear out recyclables. Get paid.",
       "lead": "Photos, pickup or drop-off, and payment after weighing.",
       "sell": "Recycle",
@@ -97,8 +97,8 @@
     },
     "teaser": {
       "title": "Today's prices",
-      "placeAndDate": "Bengaluru · {date}",
-      "place": "Bengaluru",
+      "placeAndDate": "{city} · {date}",
+      "place": "{city}",
       "seeAll": "See all prices",
       "demoNote": "Sample prices for the prototype.",
       "unavailable": "Today's prices will show here soon.",
@@ -246,9 +246,9 @@
     }
   },
   "prices": {
-    "metaTitle": "Material prices in Bengaluru",
-    "metaDescription": "Dated reference prices for recyclable materials in Bengaluru, per kg. Each business sets its own offers.",
-    "eyebrow": "Bengaluru",
+    "metaTitle": "Material prices",
+    "metaDescription": "Dated reference prices per kilogram. Each business sets its own offers. Choose a material to view available history.",
+    "eyebrow": "India",
     "title": "Material prices",
     "lead": "Dated reference prices per kilogram. Each business sets its own offers. Choose a material to view available history.",
     "demoNote": "Sample prices for the prototype, not live market rates.",
@@ -283,7 +283,7 @@
       "unknown": "Not enough history yet"
     },
     "detail": {
-      "description": "{code} · {family} · Bengaluru",
+      "description": "{code} · {family}",
       "today": "Today",
       "low": "30-day low",
       "high": "30-day high",
@@ -615,9 +615,9 @@
   },
   "contact": {
     "metaTitle": "Contact",
-    "metaDescription": "Get in touch with the Luma.Green team about joining the Bengaluru pilot.",
+    "metaDescription": "Luma.Green connects India's recycling network: households, kabadiwalas, preprocessors, recyclers and manufacturers, with fair prices, verified businesses and a receipt at every step.",
     "title": "Talk to us",
-    "lead": "We're starting in Bengaluru with a small group of kabadiwalas, preprocessors, recyclers and factories. Tell us who you are, what you trade and roughly how much moves through you each month.",
+    "lead": "Luma.Green connects India's recycling network: households, kabadiwalas, preprocessors, recyclers and manufacturers, with fair prices, verified businesses and a receipt at every step.",
     "emailHeading": "Early access and general questions",
     "securityHeading": "Security reports",
     "securityBody": "Found a vulnerability? Please report it privately rather than in public."
@@ -2029,7 +2029,9 @@
         "sat": "Sat",
         "sun": "Sun"
       },
-      "changesTitle": "What to fix"
+      "changesTitle": "What to fix",
+      "city": "City or locality",
+      "stateUT": "State or union territory"
     },
     "kabadiwala": {
       "title": "Your shop",
@@ -2216,7 +2218,8 @@
       "fileTooBig": "This file is too big",
       "uploadFailed": "Upload failed. Try again.",
       "generic": "Something went wrong. Try again.",
-      "pan": "Look up your GST number and confirm your business."
+      "pan": "Look up your GST number and confirm your business.",
+      "city": "Enter a city or locality using 2–60 letters and spaces."
     },
     "identity": {
       "pan": "PAN (optional)",
@@ -2261,7 +2264,8 @@
       "impact": "Impact",
       "compliance": "Compliance",
       "earnings": "Earnings",
-      "help": "Help"
+      "help": "Help",
+      "paperRecords": "Paper records"
     },
     "roles": {
       "kabadiwala": "Kabadiwala",
@@ -2523,8 +2527,8 @@
   },
   "sell": {
     "metaTitle": "Book a collection",
-    "metaDescription": "Sell newspaper, plastic, metal and old electronics from home in Bengaluru. See what shops near you pay, book a pickup and get paid at your door.",
-    "eyebrow": "For homes in Bengaluru",
+    "metaDescription": "Clear out recyclables. Get paid. Photos, pickup or drop-off, and payment after weighing.",
+    "eyebrow": "India",
     "title": "Book a collection from home",
     "lead": "Pick what you have, choose a shop near you, and get paid in cash or UPI when it's weighed.",
     "promises": {
@@ -2537,7 +2541,7 @@
       "title": "Booking opens soon",
       "body": "We're setting up bookings for homes. Please check back shortly."
     },
-    "demoNote": "Sample prices and shops for the Bengaluru pilot.",
+    "demoNote": "Sample prices for the prototype, not live market rates.",
     "loadError": "We couldn't load this. Check your connection and try again.",
     "retry": "Try again",
     "steps": {
@@ -4400,5 +4404,39 @@
     "assignedWork": "Resolve your assigned work or handover first.",
     "reviewLimit": "More records need review before this account can close.",
     "checkLimit": "Closing and rejoining does not reset today’s business-check limit. Checks may stay on hold until the next day in India."
+  },
+  "papers": {
+    "title": "Paper records",
+    "lead": "Confirmation saves evidence only. Stock and money stay unchanged.",
+    "upload": "Add paper image",
+    "source": "Original image",
+    "text": "Transcribed text",
+    "rows": "Rows",
+    "addRow": "Add row",
+    "consent": "Send this image to the external model for transcription.",
+    "confirm": "I checked the image and corrected this transcription.",
+    "confirmed": "Confirmed transcription",
+    "unavailable": "Extraction is unavailable. Enter the text manually.",
+    "extract": "Extract a draft",
+    "failed": "Extraction did not complete. Use manual entry.",
+    "duplicate": "This image is already saved. Open its paper record.",
+    "invalid": "Use JPEG or PNG, up to 2 MB and 2400 pixels per side.",
+    "empty": "No paper records yet.",
+    "discard": "Discard draft",
+    "confirmAction": "Confirm transcription",
+    "pending": "Processing this image…",
+    "manual": "Open manual stock records",
+    "modelDraft": "Untrusted model draft",
+    "saveFirst": "Save your changes before extraction.",
+    "date": "Date",
+    "description": "Description",
+    "quantity": "Quantity",
+    "unit": "Unit",
+    "amount": "Amount",
+    "reference": "Reference",
+    "more": "More",
+    "capacity": "Paper storage is full. Use manual records or contact the workspace owner.",
+    "changed": "This paper changed. Copy your edits before loading the saved version.",
+    "loadSaved": "Load saved version"
   }
 }

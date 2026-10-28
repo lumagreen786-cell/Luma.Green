@@ -6,13 +6,14 @@ import { AdminLogin } from "./admin-login";
 
 const mocks = vi.hoisted(() => ({
   replace: vi.fn(),
+  phone: true,
   send: vi.fn(),
   verify: vi.fn(),
 }));
 vi.mock("@/components/providers/convex-provider", () => ({
   isConvexConfigured: true,
 }));
-vi.mock("convex/react", () => ({ useQuery: () => null }));
+vi.mock("convex/react", () => ({ useQuery: () => ({ phone: mocks.phone }) }));
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ replace: mocks.replace }),
 }));
@@ -22,6 +23,7 @@ vi.mock("@/lib/phone-auth", () => ({
 }));
 beforeEach(() => {
   vi.clearAllMocks();
+  mocks.phone = true;
   mocks.send.mockResolvedValue(null);
 });
 
@@ -44,7 +46,10 @@ it("holds admin login at the authenticator after a valid SMS code", async () => 
   render(<AdminLogin />);
   await user.type(screen.getByLabelText("Mobile number"), "9876543210");
   await user.click(screen.getByRole("button", { name: "Send code" }));
-  expect(mocks.send).toHaveBeenCalledWith("+919876543210");
+  expect(mocks.send).toHaveBeenCalledWith(
+    "+919876543210",
+    expect.any(Function),
+  );
   expect(screen.getByRole("button", { name: /Resend in/ })).toBeDisabled();
   await user.type(screen.getByLabelText("Code from your SMS"), "123456");
   await user.click(screen.getByRole("button", { name: "Verify phone" }));
@@ -64,4 +69,14 @@ it("keeps the phone step available after a failed send", async () => {
   expect(screen.getByRole("alert")).toHaveTextContent("Could not send");
   expect(screen.getByRole("button", { name: "Send code" })).toBeEnabled();
   expect(screen.queryByLabelText("Code from your SMS")).not.toBeInTheDocument();
+});
+
+it("shows unavailable SMS delivery and prevents sending", () => {
+  mocks.phone = false;
+  render(<AdminLogin />);
+  expect(screen.getByRole("status")).toHaveTextContent(
+    "SMS sign-in is unavailable",
+  );
+  expect(screen.getByRole("button", { name: "Send code" })).toBeDisabled();
+  expect(mocks.send).not.toHaveBeenCalled();
 });

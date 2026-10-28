@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+import { canonicalCity } from "./geography";
 import { normalizeIndianMobile } from "./phone";
 import { MATERIAL_ORIGINS, SITE_TYPES } from "./siteClassification";
 
@@ -97,6 +98,11 @@ const text = (min: number, max: number) =>
     .min(min, "tooShort")
     .max(max, "tooLong");
 
+export const citySchema = z
+  .string({ error: "required" })
+  .refine((value) => canonicalCity(value) !== null, "city")
+  .transform((value) => canonicalCity(value) ?? value);
+
 const time = z.string({ error: "required" }).regex(TIME, "time");
 
 const yesNo = z.boolean({ error: "chooseOne" });
@@ -156,6 +162,7 @@ export const kabadiwalaSchema = z
     gstin: z.string().optional(),
     pan: z.string().max(10).optional(),
     address: text(5, 200),
+    city: citySchema,
     location: locationSchema.optional(),
     offersPickup: yesNo,
     vehicle: z.enum(SHOP_VEHICLES).optional(),
@@ -184,6 +191,7 @@ export const businessSchema = z
     pan: z.string().max(10).optional(),
     materials: z.array(z.enum(MATERIAL_FAMILIES)).min(1, "pickAtLeastOne"),
     address: text(5, 200),
+    city: citySchema,
     location: locationSchema.optional(),
     locationTags: z.array(text(2, 40)).max(MAX_LOCATION_TAGS, "maxTags"),
     collectsFromSuppliers: yesNo,
@@ -246,6 +254,7 @@ export type DocumentsForm = z.infer<ReturnType<typeof documentsSchema>>;
 export const saathiSchema = z.object({
   name: text(2, 80),
   area: text(2, 120),
+  city: citySchema,
   location: locationSchema.optional(),
   radiusKm: z.union([z.literal(2), z.literal(5), z.literal(10)], {
     error: "chooseOne",

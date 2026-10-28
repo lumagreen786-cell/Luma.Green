@@ -1,0 +1,464 @@
+{
+  "fixture": "Isolated actual current PaperEditor; synthetic records; no backend/auth/provider acceptance",
+  "sources": {
+    "src/components/papers/paper-page.tsx": "835ca75d403f488db38649da135fbde70ff7e5103c8293257a7d4a0a93e2aa7e",
+    "src/app/globals.css": "bbf8eaca5401369d3ff1e089db725aefdc800a3999ac684e198c958b2d78560c",
+    "src/lib/fonts.ts": "ffb4b8691eadcdf377fd3c0e2584c82683ffbbef7008fe1800f31dcba8e785db",
+    "messages/en.json": "b0e3b3ef053ada9ed98233b5b8d34a229bc483192bd22fd04678fd521f8f9d88",
+    "messages/ar.json": "0d59cb8524f91bd560fe5f46aa9d8cb168c09fe6d324ffe5db86dd7fb67ffe00",
+    "messages/ur.json": "94d2131b76646f6e98a0efc1a6b2fd5f9ab69cc1f50a586c31572efc1d4c3b64",
+    "messages/kn.json": "c2e67177907e3948a619dd306b33f777c3a915e2258f637136525412a65a3dd3"
+  },
+  "captures": [
+    {
+      "name": "en-390-light.png",
+      "locale": "en",
+      "width": 390,
+      "theme": "light",
+      "synthetic": true,
+      "sha256": "fdd9a7707e2dbfe219e993e4a318f61e7d38a768eeb4ccb31ad5bf81e8627701",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "font": "\"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "loadedFonts": ["Geist", "Noto Sans"],
+        "clippedButtons": []
+      }
+    },
+    {
+      "name": "en-390-dark.png",
+      "locale": "en",
+      "width": 390,
+      "theme": "dark",
+      "synthetic": true,
+      "sha256": "09eb72d684b9c0ab396fa9913391b713d2573a2f949cf5afbf2d5a8a4716738e",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "font": "\"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "loadedFonts": ["Geist", "Noto Sans"],
+        "clippedButtons": []
+      }
+    },
+    {
+      "name": "en-768-light.png",
+      "locale": "en",
+      "width": 768,
+      "theme": "light",
+      "synthetic": true,
+      "sha256": "c8bfe0b360296b4d049afb53b1b7b3646de43438a355d7f76e28cbf6d48616d5",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "font": "\"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "loadedFonts": ["Geist", "Noto Sans"],
+        "clippedButtons": []
+      }
+    },
+    {
+      "name": "en-768-dark.png",
+      "locale": "en",
+      "width": 768,
+      "theme": "dark",
+      "synthetic": true,
+      "sha256": "ef2c1819aa31de42f154183205582bebb1eae856e1d9ab8cd19823074dcd6e13",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "font": "\"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "loadedFonts": ["Geist", "Noto Sans"],
+        "clippedButtons": []
+      }
+    },
+    {
+      "name": "en-1440-light.png",
+      "locale": "en",
+      "width": 1440,
+      "theme": "light",
+      "synthetic": true,
+      "sha256": "529968e6d5b561abee1ed6d41c6c3cc4722bfc02a47b82f36649bab35cebc36b",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "font": "\"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "loadedFonts": ["Geist", "Noto Sans"],
+        "clippedButtons": []
+      }
+    },
+    {
+      "name": "en-1440-dark.png",
+      "locale": "en",
+      "width": 1440,
+      "theme": "dark",
+      "synthetic": true,
+      "sha256": "f63426ca0184a08a53c4e934352317031295dbf94afd04db100069e9b419b276",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "font": "\"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "loadedFonts": ["Geist", "Noto Sans"],
+        "clippedButtons": []
+      }
+    },
+    {
+      "name": "ar-390-light.png",
+      "locale": "ar",
+      "width": 390,
+      "theme": "light",
+      "synthetic": true,
+      "sha256": "5f014fc847f7a612d6c158946b33dfded6a037431fad5c62fc46cca46970d3e7",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "font": "\"Noto Sans\", \"Noto Sans Arabic\", \"Noto Sans Arabic Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      }
+    },
+    {
+      "name": "ar-390-dark.png",
+      "locale": "ar",
+      "width": 390,
+      "theme": "dark",
+      "synthetic": true,
+      "sha256": "c0a7de668157724c76d1f4c3e328b390a7b930850bb7283b96b3e270203ed7a5",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "font": "\"Noto Sans\", \"Noto Sans Arabic\", \"Noto Sans Arabic Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      }
+    },
+    {
+      "name": "ar-768-light.png",
+      "locale": "ar",
+      "width": 768,
+      "theme": "light",
+      "synthetic": true,
+      "sha256": "b998f826f9f23126d66cf79170c1db08b3a0caa75d65cabded2654b1b25e41d1",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "font": "\"Noto Sans\", \"Noto Sans Arabic\", \"Noto Sans Arabic Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      }
+    },
+    {
+      "name": "ar-768-dark.png",
+      "locale": "ar",
+      "width": 768,
+      "theme": "dark",
+      "synthetic": true,
+      "sha256": "0e40453523e6be675d6cb7ec0b300fa5ec636292338661ee8b897d0b2834f599",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "font": "\"Noto Sans\", \"Noto Sans Arabic\", \"Noto Sans Arabic Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      }
+    },
+    {
+      "name": "ar-1440-light.png",
+      "locale": "ar",
+      "width": 1440,
+      "theme": "light",
+      "synthetic": true,
+      "sha256": "f983272ff8aa69e3fc85fc3c4a4d7804cae1f38db2ba311338622d51001f64a0",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "font": "\"Noto Sans\", \"Noto Sans Arabic\", \"Noto Sans Arabic Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      }
+    },
+    {
+      "name": "ar-1440-dark.png",
+      "locale": "ar",
+      "width": 1440,
+      "theme": "dark",
+      "synthetic": true,
+      "sha256": "1d1ee1005ff73499e675b678ec2c0a5d88d2b8bccba0accad99c99616ba695d6",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "font": "\"Noto Sans\", \"Noto Sans Arabic\", \"Noto Sans Arabic Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      }
+    },
+    {
+      "name": "ur-390-light.png",
+      "locale": "ur",
+      "width": 390,
+      "theme": "light",
+      "synthetic": true,
+      "sha256": "95060de5e166847ee35db6892ce4e4ce67a5767e25aeac8abfdf0281c692febe",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "font": "\"Noto Sans\", \"Noto Sans Arabic\", \"Noto Sans Arabic Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      }
+    },
+    {
+      "name": "ur-390-dark.png",
+      "locale": "ur",
+      "width": 390,
+      "theme": "dark",
+      "synthetic": true,
+      "sha256": "264acfde744daddcc393c59375073a480dd5f25bfe3b85531c8d94a4ecedfb03",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "font": "\"Noto Sans\", \"Noto Sans Arabic\", \"Noto Sans Arabic Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      }
+    },
+    {
+      "name": "ur-768-light.png",
+      "locale": "ur",
+      "width": 768,
+      "theme": "light",
+      "synthetic": true,
+      "sha256": "708a45a36372756fd6d7396c7bf668c70fda813f95f7f9d607f7097285006b04",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "font": "\"Noto Sans\", \"Noto Sans Arabic\", \"Noto Sans Arabic Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      }
+    },
+    {
+      "name": "ur-768-dark.png",
+      "locale": "ur",
+      "width": 768,
+      "theme": "dark",
+      "synthetic": true,
+      "sha256": "4cd9378dd3254b0cb0902754511bf20c8c9cd4206537d1aa9457313447b3c05e",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "font": "\"Noto Sans\", \"Noto Sans Arabic\", \"Noto Sans Arabic Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      }
+    },
+    {
+      "name": "ur-1440-light.png",
+      "locale": "ur",
+      "width": 1440,
+      "theme": "light",
+      "synthetic": true,
+      "sha256": "0dd14235244a19849bbf81b84a7f315014146d59d72aec8e4580b9b54482c753",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "font": "\"Noto Sans\", \"Noto Sans Arabic\", \"Noto Sans Arabic Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      }
+    },
+    {
+      "name": "ur-1440-dark.png",
+      "locale": "ur",
+      "width": 1440,
+      "theme": "dark",
+      "synthetic": true,
+      "sha256": "50b6db8a289c909035f91258bc44f3b6893f2b491d0e0082be793ebcb9ad9aa1",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "font": "\"Noto Sans\", \"Noto Sans Arabic\", \"Noto Sans Arabic Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      }
+    },
+    {
+      "name": "kn-390-light.png",
+      "locale": "kn",
+      "width": 390,
+      "theme": "light",
+      "synthetic": true,
+      "sha256": "49a2688af28b9be1b1af505117c969d959a27dfb3c75f569e29f662fbaeb71e2",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "font": "\"Noto Sans\", \"Noto Sans Kannada\", \"Noto Sans Kannada Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Kannada",
+          "Noto Sans Kannada Fallback"
+        ],
+        "clippedButtons": []
+      }
+    },
+    {
+      "name": "kn-390-dark.png",
+      "locale": "kn",
+      "width": 390,
+      "theme": "dark",
+      "synthetic": true,
+      "sha256": "84da7abbb3106b9ee0fd9e3468f406b4e08d6734b5dd253a3061d9871faf5e07",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "font": "\"Noto Sans\", \"Noto Sans Kannada\", \"Noto Sans Kannada Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Kannada",
+          "Noto Sans Kannada Fallback"
+        ],
+        "clippedButtons": []
+      }
+    },
+    {
+      "name": "kn-768-light.png",
+      "locale": "kn",
+      "width": 768,
+      "theme": "light",
+      "synthetic": true,
+      "sha256": "3930a8ad3c0d51102b26f41dbf50d2d940d947a6e0b8aba39c6f39065928cdd3",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "font": "\"Noto Sans\", \"Noto Sans Kannada\", \"Noto Sans Kannada Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Kannada",
+          "Noto Sans Kannada Fallback"
+        ],
+        "clippedButtons": []
+      }
+    },
+    {
+      "name": "kn-768-dark.png",
+      "locale": "kn",
+      "width": 768,
+      "theme": "dark",
+      "synthetic": true,
+      "sha256": "cfce008ebf2ac5335225cfd9869e27b1b54ecb0d8669551125207b29171fa742",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "font": "\"Noto Sans\", \"Noto Sans Kannada\", \"Noto Sans Kannada Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Kannada",
+          "Noto Sans Kannada Fallback"
+        ],
+        "clippedButtons": []
+      }
+    },
+    {
+      "name": "kn-1440-light.png",
+      "locale": "kn",
+      "width": 1440,
+      "theme": "light",
+      "synthetic": true,
+      "sha256": "1a1375d6c12367aac0cce0771fbc841d13fa971668cb0a15d127c0cb424a31dd",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "font": "\"Noto Sans\", \"Noto Sans Kannada\", \"Noto Sans Kannada Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Kannada",
+          "Noto Sans Kannada Fallback"
+        ],
+        "clippedButtons": []
+      }
+    },
+    {
+      "name": "kn-1440-dark.png",
+      "locale": "kn",
+      "width": 1440,
+      "theme": "dark",
+      "synthetic": true,
+      "sha256": "03ca43a59f94de8dcfc713abaa128b5d86e1fa73c1b8d309e4826d3aa5defbd4",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "font": "\"Noto Sans\", \"Noto Sans Kannada\", \"Noto Sans Kannada Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Kannada",
+          "Noto Sans Kannada Fallback"
+        ],
+        "clippedButtons": []
+      }
+    }
+  ]
+}

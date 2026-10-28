@@ -3,7 +3,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 
 import messages from "../../../messages/en.json";
-import { rememberPhone } from "./storage";
+import { readPhone, rememberPhone } from "./storage";
 import { VerifyFlow } from "./verify-flow";
 
 const calls = vi.hoisted(() => ({
@@ -249,5 +249,38 @@ it("keeps the phone number when editing from the compatibility code route", () =
   expect(screen.getByLabelText(messages.auth.mobileLabel)).toHaveValue(
     "9876543210",
   );
+  expect(calls.replace).not.toHaveBeenCalled();
+});
+
+it("does not clear a newer challenge or navigate after a profile request outlives the form", async () => {
+  const pending = Promise.withResolvers<null>();
+  calls.ensureProfile.mockReturnValueOnce(pending.promise);
+  calls.auth.isAuthenticated = true;
+  const view = render(form());
+  await enterCode();
+  expect(calls.ensureProfile).toHaveBeenCalledTimes(1);
+  view.unmount();
+  rememberPhone("+919876543211");
+  await act(async () => {
+    pending.resolve(null);
+    await pending.promise;
+  });
+  expect(readPhone()).toBe("+919876543211");
+  expect(calls.replace).not.toHaveBeenCalled();
+});
+
+it("does not replace a newer challenge when an old resend completes after unmount", async () => {
+  const pending = Promise.withResolvers<{ error: null }>();
+  calls.sendOtp.mockReturnValueOnce(pending.promise);
+  const view = render(form());
+  await elapseResend(300_000);
+  fireEvent.click(screen.getByRole("button", { name: messages.auth.resend }));
+  view.unmount();
+  rememberPhone("+919876543211");
+  await act(async () => {
+    pending.resolve({ error: null });
+    await pending.promise;
+  });
+  expect(readPhone()).toBe("+919876543211");
   expect(calls.replace).not.toHaveBeenCalled();
 });

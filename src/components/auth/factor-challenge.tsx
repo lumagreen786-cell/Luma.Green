@@ -14,6 +14,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { Link } from "@/i18n/navigation";
 import { authClient } from "@/lib/auth-client";
+import { useMounted } from "@/lib/use-mounted";
 
 type ChallengeError = "invalid" | "expired" | "limited" | "network" | null;
 function challengeError(failure: {
@@ -66,6 +67,7 @@ export function FactorChallenge({
   const [code, setCode] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<ChallengeError>(null);
+  const isMounted = useMounted();
   const pending = useRef(false);
 
   async function verify() {
@@ -86,6 +88,7 @@ export function FactorChallenge({
               code: code.trim(),
               trustDevice: false,
             });
+      if (!isMounted()) return;
       if (!result.error) {
         onVerified();
         return;
@@ -93,10 +96,11 @@ export function FactorChallenge({
       setError(challengeError(result.error));
       setCode("");
     } catch {
+      if (!isMounted()) return;
       setError("network");
     } finally {
       pending.current = false;
-      setBusy(false);
+      if (isMounted()) setBusy(false);
     }
   }
 

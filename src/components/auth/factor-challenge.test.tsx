@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { NextIntlClientProvider } from "next-intl";
 import { beforeEach, describe, expect, it, vi } from "vitest";
@@ -129,3 +129,34 @@ describe("authenticator challenge", () => {
     expect(localStorage).toHaveLength(0);
   });
 });
+
+it.each(["totp", "backup"])(
+  "ignores a late %s success after unmount",
+  async (mode) => {
+    const user = userEvent.setup();
+    const pending = Promise.withResolvers<{ error: null }>();
+    const rendered = view();
+    if (mode === "backup") {
+      await user.click(
+        screen.getByRole("button", { name: messages.auth.twoFactorUseBackup }),
+      );
+      await user.type(
+        screen.getByLabelText(messages.auth.twoFactorBackupLabel),
+        "test-recovery",
+      );
+      mocks.verifyBackupCode.mockReturnValueOnce(pending.promise);
+    } else {
+      enterCode();
+      mocks.verifyTotp.mockReturnValueOnce(pending.promise);
+    }
+    await user.click(
+      screen.getByRole("button", { name: messages.auth.verify }),
+    );
+    rendered.unmount();
+    await act(async () => {
+      pending.resolve({ error: null });
+      await pending.promise;
+    });
+    expect(mocks.verified).not.toHaveBeenCalled();
+  },
+);
