@@ -1,5 +1,39 @@
 # Dependency security patches
 
+## Current patches — 29 October 2026
+
+The source security/permission repair resumes only the approved foundation
+scope. The active pnpm patches are:
+
+- `deepmerge@4.3.1.patch`: reject `__proto__` in source and target copying,
+  including the actual CJS and UMD distribution entry points. The public
+  [upstream report](https://github.com/TehShrike/deepmerge/issues/273) describes
+  the null-prototype and own-key bypass. Luma's local patch preserves ordinary
+  nested/array merges and prevents the returned object inheriting attacker data.
+  This is a local mitigation, not a published upstream release. Its low-severity
+  advisory remains visible; neither the version nor the scanner is falsified.
+- `http-cache-semantics@4.3.0.patch`: reject security-zeroed no-store, private,
+  no-cache and implicit shared Set-Cookie entries before client max-stale can
+  reuse them. The published 4.3.0 artifact still failed the behavioral regression
+  despite being outside the reported affected version range. This local patch
+  retains reuse of an ordinary explicitly public response. It affects desktop
+  download tooling, not a new web cache or any private-record cache.
+
+`pnpm test:security` resolves the actual Expo config and desktop builder consumer
+copies. Both new regressions failed before the patches and pass after them.
+Run frozen-lockfile installation and those tests in CI. Retire each patch only
+when its owner releases a compatible fix and the same regressions pass without it.
+
+The previous node-forge 1.4.0 patch below is retired. The selected 1.4.2 artifact
+now passes the retained nested-signature rejection tests through Expo CLI, CLI
+certificates and Updates certificates, plus valid signature/CSR controls. Its
+old patch file is retained only as historical provenance and is not configured
+in patchedDependencies. Global/dlx EAS installations still have independent
+dependency trees: verify their actual verifier and signing behavior before a
+signed release. Workspace results cannot clear that separate toolchain gate.
+
+## Historical node-forge patch
+
 ## node-forge 1.4.0: nested DigestAlgorithm validation
 
 The workspace applies `node-forge@1.4.0.patch` to every installed copy of

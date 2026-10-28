@@ -4400,5 +4400,19 @@
     "assignedWork": "Risolvi prima il lavoro assegnato o la consegna.",
     "reviewLimit": "Occorre esaminare altri registri prima della chiusura.",
     "checkLimit": "Chiudere e iscriversi di nuovo non azzera il limite odierno delle verifiche aziendali. Le verifiche possono restare sospese fino al giorno successivo in India."
+  },
+  "privacy": {
+    "title": "Informativa sulla privacy",
+    "lead": "Questa informativa riguarda il sito Luma.Green e le app Android, iOS, Windows e macOS.",
+    "dataTitle": "Dati utilizzati",
+    "dataBody": "Usiamo dati di account e contatto, posizione scelta, foto, documenti, verifiche aziendali e registri di transazioni e sicurezza per fornire servizi di riciclo e proteggere gli account.",
+    "sharingTitle": "Destinatari dei dati",
+    "sharingBody": "I partecipanti autorizzati e i fornitori configurati di hosting, SMS, verifica, pagamento e IA facoltativa ricevono i dati necessari. Il trattamento può avvenire fuori dall’India.",
+    "choicesTitle": "Le tue scelte",
+    "choicesBody": "Posizione e notifiche richiedono il permesso. Scegli tu i file. L’accesso usa cookie di sessione. L’analisi richiede consenso; le segnalazioni di errore sono separate. Gestisci i permessi nelle impostazioni del dispositivo.",
+    "requestsTitle": "Richieste su account e dati",
+    "requestsBody": "Rimuovi l’account qui sotto o scrivi all’assistenza per accesso, rettifica o cancellazione. Verifica la titolarità; non inviare documenti d’identità via email. Risolvi prima le attività o la proprietà in sospeso.",
+    "retentionTitle": "Cosa resta dopo la chiusura",
+    "retentionBody": "La chiusura rimuove accesso e credenziali. Prove aziendali, di pagamento, sicurezza e audit possono restare per la verifica. Non tutti i registri vengono cancellati. Chiedi all’assistenza informazioni su conservazione e tempi."
   }
 }

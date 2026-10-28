@@ -34,6 +34,9 @@ Local type checks, policy tests and JavaScript exports do not prove a signed
 installer, physical-device acceptance, TestFlight or store approval. Record those
 separately in the delivery handoff.
 
+See [app privacy and minimum permissions](app-privacy-permissions.md) for the public
+policy, deletion instructions, data inventory and final-binary checks.
+
 ## Run checks without accounts
 
 Use Node 24 and the pinned pnpm version from the root of the repository:
@@ -81,7 +84,7 @@ stable across updates.
 
 ## Build, test, then release
 
-**Mobile signing gate:** the workspace's node-forge security patch does not
+**Mobile signing gate:** the workspace's verified node-forge resolution does not
 apply to a globally installed EAS CLI or `pnpm dlx eas-cli`; each uses a separate
 dependency tree. Before running the mobile guide's signed build or update
 commands, verify that the actual release toolchain uses a published fixed

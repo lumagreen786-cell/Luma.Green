@@ -4400,5 +4400,19 @@
     "assignedWork": "Najpierw zakończ przydzieloną pracę lub przekazanie.",
     "reviewLimit": "Przed zamknięciem trzeba sprawdzić więcej danych.",
     "checkLimit": "Zamknięcie i ponowna rejestracja nie resetują dzisiejszego limitu kontroli firmy. Kontrole mogą być wstrzymane do następnego dnia w Indiach."
+  },
+  "privacy": {
+    "title": "Polityka prywatności",
+    "lead": "Ta polityka obejmuje stronę Luma.Green oraz aplikacje Android, iOS, Windows i macOS.",
+    "dataTitle": "Wykorzystywane dane",
+    "dataBody": "Dane konta i kontaktowe, wybrana lokalizacja, zdjęcia, dokumenty, weryfikacja firm oraz rejestry transakcji i bezpieczeństwa służą usługom recyklingu i ochronie kont.",
+    "sharingTitle": "Odbiorcy danych",
+    "sharingBody": "Uprawnieni uczestnicy oraz skonfigurowani dostawcy hostingu, SMS, weryfikacji, płatności i opcjonalnej AI otrzymują niezbędne dane. Przetwarzanie może odbywać się poza Indiami.",
+    "choicesTitle": "Twój wybór",
+    "choicesBody": "Lokalizacja i powiadomienia wymagają zgody. Samodzielnie wybierasz pliki. Logowanie korzysta z plików cookie sesji. Analityka wymaga zgody; raporty błędów są osobne. Zarządzaj uprawnieniami w ustawieniach urządzenia.",
+    "requestsTitle": "Wnioski dotyczące konta i danych",
+    "requestsBody": "Usuń konto poniżej lub napisz do pomocy, aby uzyskać dostęp, poprawić albo usunąć dane. Potwierdź własność; nie wysyłaj dokumentów tożsamości e-mailem. Najpierw rozwiąż otwarte zadania lub kwestie własności.",
+    "retentionTitle": "Co pozostaje po zamknięciu",
+    "retentionBody": "Zamknięcie usuwa dostęp i dane logowania. Dowody biznesowe, płatnicze, bezpieczeństwa i audytu mogą pozostać do przeglądu. Nie każdy rekord jest usuwany. Zapytaj pomoc o przechowywanie i terminy."
   }
 }

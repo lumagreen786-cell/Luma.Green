@@ -1,0 +1,20 @@
+diff --git a/index.js b/index.js
+index 56c26025074cbcf218e3ec4d810662da93f8024e..f4f19c97d1737b622cecab6d1272a679ab8d58d6 100644
+--- a/index.js
++++ b/index.js
+@@ -395,6 +395,15 @@ module.exports = class CachePolicy {
+     evaluateRequest(req) {
+         this._assertRequestHasHeaders(req);
+ 
++        // Security-zeroed entries cannot become reusable through client max-stale.
++        // Keep these checks before the freshness and stale-response branches.
++        if (!this.storable() || this._rescc['no-cache'] ||
++            (this._isShared && (this._rescc['proxy-revalidate'] ||
++             this._rescc['s-maxage'] === '0' ||
++             (this._resHeaders['set-cookie'] && !this._rescc.public && !this._rescc.immutable)))) {
++            return this._evaluateRequestMissResult(req);
++        }
++
+         // In all circumstances, a cache MUST NOT ignore the must-revalidate directive
+         if (this._rescc['must-revalidate']) {
+             return this._evaluateRequestMissResult(req);
