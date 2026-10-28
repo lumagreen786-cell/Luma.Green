@@ -16,20 +16,20 @@ its test passes. No plan has been bought by this task.
 USD prices exclude tax, extra seats and usage. Prices were checked against the
 linked official pages on 28 October. The account checkout sets the actual bill.
 
-| Account or service                                                                  | Plan to start with                                             | Cost and owner action                                                                                                                                                                                        |
-| ----------------------------------------------------------------------------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [Vercel](https://vercel.com/pricing)                                                | Pro for the commercial web platform                            | USD20/month base. Reuse the Luma team and existing project. The current team dashboard shows Hobby. Upgrade this existing team to Pro for commercial use.                                                    |
-| [Convex](https://www.convex.dev/pricing)                                            | Professional recommended for Production backups and logs       | USD25/developer/month. Reuse the existing project. Confirm daily backups and who can restore them. Starter can run the app; Professional is an operations recommendation.                                    |
-| [Trigger.dev](https://trigger.dev/pricing)                                          | Free initially                                                 | USD0; includes USD5 monthly credits, 20 concurrent runs and 10 schedules. The current worker fits. Hobby at USD10/month is optional for seven-day logs; Pro at USD50 is not needed now.                      |
-| [PostHog](https://posthog.com/pricing)                                              | Free product analytics                                         | First one million monthly events free. Keep the other capture products off.                                                                                                                                  |
-| [Sentry](https://sentry.io/pricing/)                                                | Free Developer for one person                                  | Team starts at USD26/month with annual billing and default prepaid data if team access is needed. Extra data and products cost more.                                                                         |
-| [Cloudflare R2](https://developers.cloudflare.com/r2/pricing/)                      | Standard usage billing                                         | First 10 GB-month Standard storage free, then USD0.015/GB-month; operations have separate allowances and charges. Internet egress is free. Confirm billing activation in the existing account.               |
-| [Cloudflare Turnstile](https://developers.cloudflare.com/turnstile/plans/)          | Free                                                           | No paid Cloudflare plan is needed for this widget.                                                                                                                                                           |
-| [Google Geocoding](https://developers.google.com/maps/billing-and-pricing/overview) | Billing-enabled Google Cloud project                           | Usage billing, with quotas and billing alerts. No fixed Maps subscription is needed. Check the applicable India/global SKU in the billing account.                                                           |
-| [Resend](https://resend.com/pricing)                                                | Free initially                                                 | 3,000 emails/month, maximum 100/day. Pro is USD20/month for 50,000 emails if the daily limit is too small. Optional email invitations. Verified-phone invitations work without it.                           |
-| [GitHub](https://github.com/pricing)                                                | Current Free plan is sufficient for public-repository scanning | This repository is public. CodeQL and dependency review do not need a paid security add-on here. The repository owner must set branch rules; the current operator has push access, not administrator access. |
-| [CodeRabbit](https://www.coderabbit.ai/pricing)                                     | Optional Essentials                                            | USD24/developer/month with annual billing; check the monthly checkout quote if preferred. Install its GitHub App on this repository only.                                                                    |
-| Existing OTP, Surepass and Cashfree                                                 | Keep the current vendor accounts                               | Confirm balance, subscribed products and merchant approval. Charges follow the existing contracts. No replacement provider is requested.                                                                     |
+| Account or service                                                                  | Plan to start with                                             | Cost and owner action                                                                                                                                                                                                                                            |
+| ----------------------------------------------------------------------------------- | -------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Vercel](https://vercel.com/pricing)                                                | Pro for the commercial web platform                            | USD20/month base. Reuse the Luma team and existing project. The current team dashboard shows Hobby. Upgrade this existing team to Pro for commercial use.                                                                                                        |
+| [Convex](https://www.convex.dev/pricing)                                            | Professional recommended for Production backups and logs       | USD25/developer/month. Reuse the existing project. Confirm daily backups and who can restore them. Starter can run the app; Professional is an operations recommendation.                                                                                        |
+| [Trigger.dev](https://trigger.dev/pricing)                                          | Free initially                                                 | USD0; includes USD5 monthly credits, 20 concurrent runs and 10 schedules. The current worker fits. Hobby at USD10/month is optional for seven-day logs; Pro at USD50 is not needed now.                                                                          |
+| [PostHog](https://posthog.com/pricing)                                              | Free product analytics                                         | First one million monthly events free. Keep the other capture products off.                                                                                                                                                                                      |
+| [Sentry](https://sentry.io/pricing/)                                                | Free Developer for one person                                  | Team starts at USD26/month with annual billing and default prepaid data if team access is needed. Extra data and products cost more.                                                                                                                             |
+| [Cloudflare R2](https://developers.cloudflare.com/r2/pricing/)                      | Standard usage billing                                         | First 10 GB-month Standard storage free, then USD0.015/GB-month; operations have separate allowances and charges. Internet egress is free. Confirm billing activation in the existing account.                                                                   |
+| [Cloudflare Turnstile](https://developers.cloudflare.com/turnstile/plans/)          | Free                                                           | No paid Cloudflare plan is needed for this widget.                                                                                                                                                                                                               |
+| [Google Geocoding](https://developers.google.com/maps/billing-and-pricing/overview) | Billing-enabled Google Cloud project                           | Usage billing, with quotas and billing alerts. No fixed Maps subscription is needed. Check the applicable India/global SKU in the billing account.                                                                                                               |
+| [Resend](https://resend.com/pricing)                                                | Free initially                                                 | 3,000 emails/month, maximum 100/day. Pro is USD20/month for 50,000 emails if the daily limit is too small. Optional email invitations. Verified-phone invitations work without it.                                                                               |
+| [GitHub](https://github.com/pricing)                                                | Current Free plan is sufficient for public-repository scanning | This repository is public. CodeQL and dependency review do not need a paid security add-on here. Free scans are now active. Saving main-branch protection needs owner email verification in the open browser tab. The command-line account has push access only. |
+| [CodeRabbit](https://www.coderabbit.ai/pricing)                                     | Optional Essentials                                            | USD24/developer/month with annual billing; check the monthly checkout quote if preferred. Install its GitHub App on this repository only.                                                                                                                        |
+| Existing OTP, Surepass and Cashfree                                                 | Keep the current vendor accounts                               | Confirm balance, subscribed products and merchant approval. Charges follow the existing contracts. No replacement provider is requested.                                                                                                                         |
 
 **Recommended hosting base for one developer: USD45/month**
 (Vercel20 + Convex25 + Trigger Free), before tax and usage. This is a plan
@@ -81,15 +81,23 @@ business terms or provider approval.
       `SUREPASS_ENABLED=true`. Confirm GSTIN by PAN and GSTIN Advanced subscriptions
       and balance. Shared quota remains 20 paid attempts per verified account per
       India day. Development paid calls remain off. No new catalogue API is approved.
-- [ ] **GitHub owner:** enable Dependency graph and set the branch rules in
-      [GitHub owner settings](github-owner-settings.md). This needs owner permission,
-      not another API key. Do not send a password or unrestricted personal token.
+- [x] **GitHub free security checks:** the existing owner browser session enabled
+      Dependency graph, Dependabot vulnerability and malware alerts, and security
+      update PRs. `LUMA_DEPENDENCY_REVIEW_ENABLED=true` is installed. A real hosted
+      dependency-review run passed after activation. No new API key is needed.
+- [ ] **GitHub owner verification:** the main-branch rule is prepared with the
+      five required checks, PRs, zero approvals for the solo team, conversation
+      resolution, linear history and no bypass. GitHub requires the owner to
+      complete **Verify via email** before it saves. The rule is not yet active.
+      Finish that step in the open GitHub tab, then verify the saved rule using
+      [GitHub owner settings](github-owner-settings.md). Do not send a password
+      or unrestricted personal token.
 
-The first hosted CodeQL analysis passed with 103 rules and zero reported results.
-Dependency review stopped because Dependency graph is disabled. After the owner
-enables that graph, set the repository variable `LUMA_DEPENDENCY_REVIEW_ENABLED=true`
-and verify a real PR run. It is an account setup gate, not a paid-plan gate.
-The job remains skipped until setup is complete; a skip is not a security pass.
+CodeQL passed its hosted 103-rule scan with zero reported results on the tested
+revision. Dependency review initially stopped because Dependency graph was off.
+The graph is now enabled and its repeat passed. Its activation variable is
+retained so future environments can still wait for account setup. The current
+passed check is separate from the earlier skipped and failed attempts.
 
 Installed names were checked without printing secret values. Presence does not
 prove provider delivery, balance or approval. The new Convex Production has no
@@ -276,7 +284,8 @@ See [payments](../architecture/payments.md) for the full acceptance record.
 ## Work completed without new keys
 
 The foundation code, reference seeds and the reviewed platform documents are
-already shipped. This follow-up adds three integrated offline acceptance tests
+already shipped. The key-free follow-up passed 343 local suites with 2,850 tests,
+plus the hosted checks, and merged through PR11 at commit `739d1d4`. This follow-up adds three integrated offline acceptance tests
 for booking assignment and expiry, delivered-cost ranking and recurring
 institution requests with revocable aggregate sharing. It also proves a local
 workload with 50 verified phone sessions, 100 photo bookings, 50 concurrent

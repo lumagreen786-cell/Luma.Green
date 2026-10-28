@@ -28,12 +28,16 @@ they are separate from connected authentication and provider evidence.
 
 ## Account setup follow up 28 October 2026
 
-Continue on `chore/provider-setup-checklist`. The
+Key-free follow-up [PR11](https://github.com/lumagreen786-cell/Luma.Green/pull/11)
+merged at `739d1d4` after 343 local suites / 2,850 tests and all active hosted
+checks passed. Documentation closeout is on `docs/provider-setup-final-status`. The
 [owner account checklist](../operations/owner-setup-checklist-2026-10-28.md)
 separates existing keys, new scoped settings and optional purchases. Existing
 OTP and Surepass settings are installed. A local-only Web Push key pair is
 prepared privately but has not been installed. Public repository security scans
-need no paid upgrade. Branch protection needs repository-owner access.
+need no paid upgrade. Dependency graph and alerts were enabled through the existing owner browser
+session; the repeat dependency review passed. Main protection is prepared but
+its save requires owner email verification. It is not yet active.
 
 New [offline joint checks](key-free-acceptance-2026-10-28.md) strengthen R010,
 R026 and R046. The [local workload and restore drill](local-operations-drill-2026-10-28.md)

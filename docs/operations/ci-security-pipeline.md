@@ -1,21 +1,26 @@
 # CI and security pipeline
 
-Status: updated 28 October 2026 after the foundation shipped in
-[PR #10](https://github.com/lumagreen786-cell/Luma.Green/pull/10), main commit
-`d90c945`. The foundation release passed its active hosted checks. On PR #11,
-CodeQL passed on merge revision `6aa055d`: 103 rules ran with zero results and
-no alerts on `refs/pull/11/merge`. Dependency review failed because the required
-dependency-graph capability was not enabled. This remains an owner setup gate,
-not a passing or completed scan.
-[Hosted Security run](https://github.com/lumagreen786-cell/Luma.Green/actions/runs/40659264386).
+Status: checked 28 October 2026. The foundation
+shipped in [PR #10](https://github.com/lumagreen786-cell/Luma.Green/pull/10), main
+commit `d90c945`. PR #11 passed its active checks, including E2E, and merged as
+main `739d1d44` at 14:56 India time. The final
+Security run passed Dependency review and CodeQL at merge revision `6e83f884`.
+[Hosted Security run](https://github.com/lumagreen786-cell/Luma.Green/actions/runs/40659844421).
 
-Read-only GitHub checks confirm that `lumagreen786-cell/Luma.Green` is **public**
-and its owner type is **User**. The signed-in operator can push but has neither
-admin nor maintain permission. `main` reports `protected: false`; the ruleset and
-effective branch-rule lists are empty. Checked PR merges remain project policy,
-but server-side enforcement is not installed. The owner must apply the
-[exact owner settings](github-owner-settings.md). No account purchase, visibility
-change, permission grant or owner-setting mutation was performed by this audit.
+The repository is public and owned by personal account `lumagreen786-cell`.
+The command-line account has push access but no admin permission. The existing
+browser owner session was used to enable the dependency graph, Dependabot
+alerts, malware alerts and security updates, then set
+`LUMA_DEPENDENCY_REVIEW_ENABLED=true`. No new key or purchase was needed.
+
+Main branch protection is still **not saved**. The classic rule was prepared
+with the five exact GitHub Actions checks, strict status checks, PRs with zero
+approvals, conversation resolution, linear history and no bypass, force push or
+deletion. GitHub required owner email verification when Create was selected.
+That account verification is the remaining protection blocker. Checked PR
+merges remain project policy, but the prepared form is not enforcement. Resume
+[the owner checklist](github-owner-settings.md) after verification and confirm
+the saved result.
 
 The pipeline has three tiers. Each tier answers a different question. Keep the
 five existing required CI checks; security scanning supplements them.
@@ -108,8 +113,8 @@ audit gate would duplicate version alerts and fail on the reviewed `node-forge`
 backport: the registry still identifies the original version as vulnerable.
 The local patch and regression evidence must be reviewed together. Do not add a
 blanket audit ignore, downgrade or remove the patch just to change a scanner's
-version result. Dependabot availability and its repository alerts/graph settings
-still need account-side verification.
+version result. The repository graph and alerts are now enabled; review their
+actual findings and subsequent update PRs separately.
 
 No separate whole-lockfile SCA command was added here. Review existing advisories
 through Dependabot and the dependency graph. The dependency-diff job below is
@@ -133,23 +138,25 @@ not an API key or application secret. No personal access token is requested.
 | `CodeQL`            | Repository is public; runs on the Security workflow events            | Contents/actions read and security-events write in this job only; uploads JavaScript/TypeScript code-scanning results |
 | `Dependency review` | PR event, public repository and `LUMA_DEPENDENCY_REVIEW_ENABLED=true` | Contents read; rejects introduced high/critical dependency vulnerabilities; no PR-comment write                       |
 
-The hosted PR #11 run accepted CodeQL on merge revision `6aa055d` with 103
-rules and zero results. The alert view for `refs/pull/11/merge` was also empty.
-This proves that analysis ran on that revision; it does not prove that every
-future revision has no vulnerabilities.
+The latest hosted PR #11 Security run accepted CodeQL at merge revision
+`6e83f884`: 103 rules ran with zero results. [Dependency review passed](https://github.com/lumagreen786-cell/Luma.Green/actions/runs/40659844421/job/122726530154)
+in that same run. The enabled graph's SBOM contained 1,813 packages and 4,340
+relationships at this check. These counts show graph ingestion, not an absence
+of every possible vulnerable dependency. An empty new dependency diff is not a
+whole-lockfile vulnerability inventory.
 
-In that same run, [Dependency review failed](https://github.com/lumagreen786-cell/Luma.Green/actions/runs/40659264386/job/122717884501)
-with the message that dependency review was not supported and that the dependency
-graph must be enabled. The current operator cannot enable that repository
-setting. The workflow now leaves this job gated until the owner completes setup.
-A later skipped job means **not run**, not passed. Record a successful PR run
-after activation; an empty dependency diff is not a whole-lockfile inventory.
+The [first dependency-review attempt failed](https://github.com/lumagreen786-cell/Luma.Green/actions/runs/40659264386/job/122717884501)
+because the graph capability was unavailable. That failure is retained as setup
+history. The browser owner session then enabled the graph and related alerts,
+set the activation variable and reran the PR workflow successfully. The initial
+account setup gate is resolved. A future skipped job still means not run, not
+passed; inspect current revision results on each applicable PR.
 
 CodeQL uses no-build JavaScript/TypeScript analysis and the extended security
 query suite. Use this advanced workflow as its owner; do not also enable CodeQL
-default setup without checking for duplicate or conflicting analyses. The owner
-should confirm that the dependency graph is available and includes the pnpm
-workspace. It supplies dependency review and Dependabot.
+default setup without checking for duplicate or conflicting analyses. The
+enabled dependency graph supplies dependency review and Dependabot. Keep its
+workspace dependency coverage under review as package ownership changes.
 
 Before adding a dependency-review exception, check how the dependency graph
 represents the patched `node-forge` package. Keep the exact advisory, patch owner
@@ -157,28 +164,20 @@ and regression evidence together. This workflow contains no advisory exception.
 
 ### Owner actions
 
-1. Sign in with the repository owner or an account with admin permission. The
-   current push-only operator cannot apply owner settings.
-2. Apply [the branch/ruleset checklist](github-owner-settings.md). Its minimum
-   mandatory set is the five always-running CI job names. Do not add a
-   path-filtered workflow as a universally required check.
-3. In repository **Settings → Advanced Security**, enable **Dependency graph**
-   and **Dependabot alerts**. Older screens may call this section **Code security
-   and analysis**. Confirm that **Insights → Dependency graph → Dependencies**
-   contains the pnpm workspace dependencies. Do not activate a paid product or a
-   duplicate CodeQL default setup merely to enable these free features.
-4. After the graph is available, open **Settings → Secrets and variables →
-   Actions → Variables**. Create the repository variable
-   `LUMA_DEPENDENCY_REVIEW_ENABLED` with value `true`. Open or update a PR to
-   trigger Security, because dependency review is PR-only; a manual dispatch cannot prove
-   this job. Verify the latest merge revision and an actual dependency diff.
-   Retain the earlier failure as setup history until successful acceptance is
-   recorded. Review the already successful CodeQL analysis separately.
-5. Select CodeRabbit only if wanted. Its GitHub App installation, selected-repo
+1. Complete GitHub's owner email verification. Resume the prepared classic main
+   protection form and save it. Verify the five exact checks, strict status
+   checks, PRs with zero approvals, conversation resolution, linear history and
+   no bypass/force/deletion. The [owner checklist](github-owner-settings.md)
+   records the remaining steps. No new API key or paid plan is needed.
+2. Keep the already enabled dependency graph, Dependabot alerts, malware alerts,
+   security updates and `LUMA_DEPENDENCY_REVIEW_ENABLED=true`. Inspect dependency
+   review on future PR revisions and review current alerts separately. Do not
+   enable duplicate CodeQL default setup.
+3. Select CodeRabbit only if wanted. Its GitHub App installation, selected-repo
    access, data terms and billing need the owner's review. No application CI key
    is required. Check that it reviews the latest non-draft PR and reads
    `.coderabbit.yaml`; a configuration file alone does not prove a live review.
-6. Address review findings and rerun affected checks. Merge only after the
+4. Address review findings and rerun affected checks. Merge only after the
    applicable checks pass; do not use administrator bypass or bot merge grants.
 
 ### Optional future private-repository arrangement
@@ -238,10 +237,10 @@ called.
 Actionlint passed all repository workflows. `.coderabbit.yaml` validated against
 the provider's current JSON Schema (2020-12). Format and whitespace checks are
 part of the final local verification. The shipped foundation has its own hosted
-release receipt. CodeQL now has hosted acceptance on PR #11 at `6aa055d`.
-Dependency review failed on the account capability gate and remains unaccepted
-until owner setup and a successful PR run. Live bot review and owner branch-rule
-enforcement remain separate setup evidence. This task does not claim zero vulnerabilities.
+release receipt. CodeQL and Dependency review now have hosted acceptance on PR #11 at
+`6e83f884`. The earlier dependency-graph failure is retained as history. Live bot
+review remains separate. Main protection is prepared but unsaved because GitHub
+requires owner email verification; it must not be described as enforced. This task does not claim zero vulnerabilities.
 
 Primary technical references:
 [Gitleaks CLI/configuration and license](https://github.com/gitleaks/gitleaks),
