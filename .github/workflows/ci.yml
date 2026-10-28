@@ -76,6 +76,8 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm test:coverage
+      - name: Background-job websocket compatibility
+        run: pnpm test:security
       - name: Upload coverage
         if: always()
         uses: actions/upload-artifact@v7

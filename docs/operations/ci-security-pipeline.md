@@ -72,10 +72,12 @@ silence this workflow: it passes `--ignore-gitleaks-allow` and an empty ignore
 path. Any change to these controls requires security review.
 
 The job first proves that exact synthetic auth/operation values and named-file
-digests pass. It then replaces each allowed fixture or capture path with a new
-random key and requires detection. It runs the repository history scan with full
-redaction afterwards. The random probe has no provider access and is removed when the step
-ends. Scanner errors must not be treated as detections: the control requires the
+digests pass. It then replaces each named fixture or capture path with a fixed, high-entropy
+public synthetic canary and requires detection. The new optional-auth test uses
+the same exact synthetic-secret exception and is included in this control. It runs the repository history scan with full
+redaction afterwards. The public canary has no provider access and is removed when the step ends.
+Its fixed diverse alphabet avoids rare random samples below the generic rule
+entropy threshold. The scanner rules and provider patterns are not weakened. Scanner errors must not be treated as detections: the control requires the
 specific leak exit code. A scan error or unexpected result fails the job.
 
 No secret report is uploaded. Do not add raw JSON/SARIF secret artifacts or paste
@@ -252,3 +254,8 @@ Primary technical references:
 and [its schema](https://coderabbit.ai/integrations/schema.v2.json).
 
 Dependency setup references: [repository security setup](https://docs.github.com/en/code-security/getting-started/quickstart-for-securing-your-repository) and [Dependabot alerts](https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/configure-dependabot-alerts).
+
+The [28 October dependency follow-up](../delivery/dependency-security-2026-10-28.md)
+records the compatible package updates, remaining version alerts, actual auth
+feature guards and the scanner-control reproduction. A passing dependency-diff
+job does not mean the pre-existing advisory inventory is empty.
