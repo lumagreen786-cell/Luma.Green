@@ -10,7 +10,7 @@ id = "generic-api-key"
 [[rules.allowlists]]
 description = "Fixed synthetic auth secrets used only by isolated auth tests"
 condition = "AND"
-paths = ['''^convex/(auth-(email|sms|admin|two-factor)|investorDemoAuth|turnstile)\.test\.ts$''']
+paths = ['''^convex/(auth-(email|sms|admin|two-factor|optional-plugins)|investorDemoAuth|turnstile)\.test\.ts$''']
 regexes = ['''^(0123456789abcdef0123456789abcdef|test-secret-0123456789abcdef0123456789)$''']
 
 [[rules.allowlists]]
