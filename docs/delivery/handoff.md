@@ -18,7 +18,11 @@ The reviewed 36-page specification, 16-page storybook and 10-page walkthrough
 are in the same planning delivery folder. All 102 example captures are approved
 and labelled as test data; they do not prove provider execution.
 
-The current follow-up branch is `chore/provider-setup-checklist`. Read the
+The tested follow-up merged through [PR11](https://github.com/lumagreen786-cell/Luma.Green/pull/11)
+at `739d1d44babe0ba7e09349a22617f40fe485670d`. It passed 343 local suites
+and 2,850 tests, the hosted CI checks, the public browser suite and configured
+consent/bot-boundary checks. Current documentation closeout is on
+`docs/provider-setup-final-status`. Read the
 [exact account and API checklist](../operations/owner-setup-checklist-2026-10-28.md),
 [key-free acceptance report](key-free-acceptance-2026-10-28.md) and
 [local restore and workload report](local-operations-drill-2026-10-28.md).
@@ -37,11 +41,13 @@ Existing Production OTP and Surepass key names are installed. Development paid
 Surepass calls remain off. Do not print or request existing secret values.
 Optional accounts still need the scoped settings and acceptance listed in the
 checklist. The repository is public: public CodeQL and dependency review can run
-free. The first hosted CodeQL run passed (103 rules, zero reported results).
-Dependency review needs the owner to enable Dependency graph, then set
-`LUMA_DEPENDENCY_REVIEW_ENABLED=true` and verify a PR run. The prepared job
-remains skipped until that setup. Branch protection needs the repository owner; current operator
-access permits pushes but not repository administration.
+free. Hosted CodeQL passed (103 rules, zero reported results). The owner browser
+session enabled Dependency graph and Dependabot vulnerability/malware alerts and
+security updates, then installed `LUMA_DEPENDENCY_REVIEW_ENABLED=true`.
+The repeat dependency-review job passed. CLI access is still push-only; no new
+owner token was requested. Main protection was prepared but GitHub stopped its
+save at owner email verification. The owner must finish that authentication step
+and verify the saved five-check rule; do not claim main is protected yet.
 
 Expo remains paused. The original primary checkout contains unrelated mobile
 work; keep it intact. The foundation's temporary no-migration/demo-data deletion

@@ -1,13 +1,19 @@
 # GitHub owner setup
 
-Status: owner action checklist, checked 28 October 2026. No repository setting
-was changed while preparing this document.
+Status: checked 28 October 2026. Repository security
+settings were activated through the existing browser owner session. No new key
+or purchase was needed. Main branch protection is **prepared but unsaved**.
 
-Read-only GitHub checks confirm a public repository owned by the personal
-account `lumagreen786-cell`. The current operator has push permission, but no
-admin or maintain permission. `main` reports `protected: false`; repository
-rulesets and the effective rules for `main` are empty. The project requires
-checked PR merges, but GitHub does not yet enforce that policy.
+The public repository belongs to personal account `lumagreen786-cell`. The
+command-line operator has push permission, but no admin or maintain permission.
+The browser is separately signed in as the owner. Dependency graph, Dependabot
+alerts, malware alerts and security updates are now enabled. The repository
+variable `LUMA_DEPENDENCY_REVIEW_ENABLED` is `true`.
+
+The classic `main` branch-protection form was filled with the five exact checks
+and the rules below. Selecting **Create** reached GitHub's **Verify email**
+requirement. The rule has not been saved, and the owner must complete that
+verification. The prepared form is not evidence of effective protection.
 
 Public branch protection and branch rulesets are available on GitHub Free. A
 paid plan or a new API key will not give this operator admin permission. Use the
@@ -16,9 +22,14 @@ owner account or an account that already has repository admin permission.
 
 ## Apply the main branch rules
 
-Open this repository's **Settings**, then **Rules → Rulesets**. Create a branch
-ruleset. The names below describe the required outcome; GitHub may adjust its
-screen labels.
+First complete GitHub's owner email verification, then resume the prepared
+classic form under **Settings → Branches → Branch protection rules**. Recheck
+its `main` target and settings, then select **Create** again. If the form was
+lost, recreate it using the five checks and equivalent rules below.
+
+The table describes the same outcome for a branch ruleset under **Settings →
+Rules → Rulesets**. Use one checked configuration; do not create overlapping
+classic and ruleset rules without reviewing their combined effect.
 
 | Setting                                                 | Owner choice                                                                  |
 | ------------------------------------------------------- | ----------------------------------------------------------------------------- |
@@ -82,44 +93,45 @@ workflow that does not run for every PR can leave a documentation-only PR waitin
 forever. Engineers must still inspect and pass E2E whenever its workflow applies.
 [Skipped-workflow behavior](https://docs.github.com/en/pull-requests/how-tos/merge-and-close-pull-requests/troubleshooting-required-status-checks).
 
-Public CodeQL runs automatically without a paid plan. The first hosted PR #11
-run passed on merge revision `6aa055d`: 103 rules, zero results, and no alerts on
-`refs/pull/11/merge`. [Hosted Security run](https://github.com/lumagreen786-cell/Luma.Green/actions/runs/40659264386).
-Dependency review failed because its required dependency-graph capability was
-not enabled. That failure is an open owner setup gate. A subsequent gated skip
-is not a pass. Do not add a conditional job or paid bot as a blanket requirement.
-The minimum server-enforced set remains the five CI jobs above.
+Public CodeQL runs automatically without a paid plan. The final PR #11
+Security run passed CodeQL at merge revision `6e83f884`: 103 rules, zero results.
+[Hosted Security run](https://github.com/lumagreen786-cell/Luma.Green/actions/runs/40659844421).
+Dependency review also passed after graph activation. Keep conditional jobs and
+paid bots out of the universal required set. The minimum remains the five CI
+jobs above.
 
-## Enable the dependency checks
+## Dependency checks: activated and verified
 
-1. Use the owner/admin account. In repository **Settings → Advanced Security**,
-   enable **Dependency graph** and **Dependabot alerts**. An older screen may call
-   this **Code security and analysis**. These features are free for this public
-   repository; do not buy a security add-on or enable duplicate CodeQL setup.
-2. Open **Insights → Dependency graph → Dependencies**. Confirm that the graph
-   contains the pnpm workspace dependencies. If ingestion has not completed, keep
-   the workflow variable absent or false.
-3. Open **Settings → Secrets and variables → Actions → Variables**. Add the
-   repository variable `LUMA_DEPENDENCY_REVIEW_ENABLED` with value `true`.
-   This value is an activation flag, not a secret or API key.
-4. Open or update a PR to trigger Security. Inspect **Dependency review** on its
-   latest merge revision. A manual workflow dispatch skips this PR-only check and cannot
-   validate it. Check a meaningful dependency diff as well as the job result.
-5. Record the successful run and revision. Until then, keep the earlier
-   [failed job](https://github.com/lumagreen786-cell/Luma.Green/actions/runs/40659264386/job/122717884501)
-   marked as an account setup failure. Do not label a skipped run as accepted.
+The browser owner session completed these steps:
+
+- Enabled Dependency graph, Dependabot alerts, malware alerts and security
+  updates under **Settings → Advanced Security**.
+- Confirmed graph ingestion: the SBOM contained 1,813 packages and 4,340
+  relationships at this check.
+- Set repository variable `LUMA_DEPENDENCY_REVIEW_ENABLED=true` under
+  **Settings → Secrets and variables → Actions → Variables**.
+- Reran PR #11 Security and verified
+  [Dependency review passed](https://github.com/lumagreen786-cell/Luma.Green/actions/runs/40659844421/job/122726530154).
+
+The [initial failed attempt](https://github.com/lumagreen786-cell/Luma.Green/actions/runs/40659264386/job/122717884501)
+remains setup history, not the current state. No paid security plan was needed
+for this public repository. Review current alerts and future PR dependency diffs;
+a successful job is not a guarantee of zero vulnerabilities. A manual dispatch
+skips PR-only dependency review and cannot substitute for PR acceptance.
 
 [GitHub security setup](https://docs.github.com/en/code-security/getting-started/quickstart-for-securing-your-repository),
 [Dependabot alert setup](https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/configure-dependabot-alerts).
 
 ## Owner verification
 
-After saving, reopen the ruleset and confirm **Active**, target `main`, the empty
-bypass list and all five check names. Check the effective rules for `main`.
+After owner email verification and saving, reopen the classic protection rule
+and confirm target `main`, all five checks, strict status checks and the no-bypass
+setting. If using a ruleset instead, confirm **Active** and an empty bypass list.
+Check the effective protection for `main`.
 Confirm the merge box on a normal PR requires the PR and these checks. A source
 file that says main is protected is not evidence that GitHub enforces it.
 
-Record the ruleset name and verification date in the release handoff. Do not
+Record the rule name and verification date in the release handoff. Do not
 force-push or delete `main` to test protection. Do not share an owner password,
 a personal access token or a private key in the checklist. When another reviewer
 joins, change required approvals to one through a separate owner decision.
