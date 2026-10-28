@@ -1,4 +1,14 @@
 {
+  "stockReports": {
+    "prepare": "Voorraadrapport maken",
+    "download": "Voorraadrapport downloaden",
+    "preparing": "Uw rapport wordt voorbereid…",
+    "complete": "Rapport gereed",
+    "failed": "Het rapport kon niet worden gemaakt. Probeer het opnieuw.",
+    "unavailable": "Rapporten zijn niet beschikbaar totdat achtergrondtaken zijn ingesteld.",
+    "expired": "Dit rapport is verlopen. Maak een nieuw rapport.",
+    "notice": "Privévoorraadoverzicht op één moment. 30 minuten beschikbaar. Dit is geen certificaat."
+  },
   "brand": {
     "name": "Luma.Green",
     "tagline": "Een schonere toekomst in beweging"
@@ -135,7 +145,7 @@
       "kabadiwala": {
         "title": "Kabadiwala's",
         "one": "Ophaalverzoeken van huishoudens in de buurt.",
-        "two": "Bepaal uw eigen prijzen, nooit onder het minimum.",
+        "two": "Stel uw eigen aanbiedingen per materiaal vast.",
         "three": "Verkoop gesorteerde voorraad aan voorverwerkers.",
         "cta": "Aanmelden als kabadiwala"
       },
@@ -176,8 +186,8 @@
         "body": "Kies uw rol en rond de registratie af."
       },
       "floor": {
-        "title": "Eerlijke prijzen, met een minimum",
-        "body": "Winkels bepalen hun eigen prijzen, maar nooit onder het minimum dat we per materiaal publiceren."
+        "title": "Onafhankelijke winkelaanbiedingen",
+        "body": "Winkels stellen hun eigen aanbiedingen vast. Gedateerde referentieprijzen zijn informatie, geen verplicht minimum."
       },
       "escrow": {
         "title": "Wachten op betaalprovider",
@@ -237,22 +247,22 @@
   },
   "prices": {
     "metaTitle": "Recyclebaar materiaalprijzen in Bengaluru vandaag",
-    "metaDescription": "De recyclebaar materiaalprijzen in Bengaluru vandaag per kg: papier, plastic, metaal, glas en elektronica, met weekverschil, een grafiek van 30 dagen en het minimum dat een winkel mag betalen.",
+    "metaDescription": "Gedateerde referentieprijzen per kg voor recyclebare materialen in Bengaluru. Elk bedrijf stelt zijn eigen aanbiedingen vast.",
     "eyebrow": "Bengaluru",
     "title": "Materiaalprijzen",
-    "lead": "Wat recyclebaar materiaal vandaag per kilo opbrengt. Winkels bepalen hun prijzen, nooit onder het minimum. Tik op een materiaal voor de afgelopen 30 dagen.",
+    "lead": "Gedateerde referentieprijzen per kilogram. Elk bedrijf stelt zijn eigen aanbiedingen vast. Kies een materiaal om de beschikbare geschiedenis te bekijken.",
     "demoNote": "Voorbeeldprijzen voor het prototype, geen actuele marktprijzen.",
     "date": "Prijzen voor {date}",
-    "floorHelp": "Minimum: het laagste bedrag dat een geverifieerde winkel u per kilo mag betalen.",
+    "floorHelp": "Referentieprijs: gedateerde informatie, geen verplicht minimum of winkelaanbieding.",
     "perKg": "{price}/kg",
-    "floor": "Minimum {price}",
+    "floor": "Referentie {price}",
     "noPrice": "Nog geen prijs",
     "columns": {
       "material": "Materiaal",
       "today": "Vandaag",
       "week": "Deze week",
       "month": "30 dagen",
-      "floor": "Minimum"
+      "floor": "Referentie"
     },
     "families": {
       "paper": "Papier",
@@ -277,7 +287,7 @@
       "today": "Vandaag",
       "low": "Laagste in 30 dagen",
       "high": "Hoogste in 30 dagen",
-      "floor": "Minimum",
+      "floor": "Referentie",
       "noFloor": "Geen",
       "close": "Sluiten",
       "noHistory": "Nog geen prijsgeschiedenis."
@@ -285,7 +295,7 @@
     "chart": {
       "label": "{material}: prijs per kilo per dag. Gebruik de pijltoetsen om van dag te wisselen.",
       "point": "{date}: {price}",
-      "floor": "Minimum {price}",
+      "floor": "Referentie {price}",
       "table": "Cijfers tonen",
       "tableCaption": "{material}, prijs per kilo per dag",
       "date": "Datum",
@@ -557,10 +567,10 @@
     "lead": "Materialen gaan van huishoudens naar inzamelpunten, voorverwerkers en recyclers voordat ze iets nieuws worden. Luma.Green registreert elke overdracht.",
     "stepLabel": "Stap {number}",
     "sell": {
-      "body": "Een huishouden kiest de materialen, bekijkt het aanbod van winkels in de buurt en boekt ophalen of inleveren. De kabadiwala weegt elk materiaal en betaalt contant of via UPI. Beiden krijgen een bon.",
-      "point1": "Elke winkel bepaalt zijn eigen prijzen, nooit onder het gepubliceerde minimum",
+      "body": "Een huishouden voegt foto’s en inzameldetails toe en boekt ophalen of afgeven. Geschatte gewichten zijn niet nodig. De winkel weegt de materialen en registreert de betalingsverklaring en de bon.",
+      "point1": "Elke winkel stelt zijn eigen aanbiedingen vast",
       "point2": "Gewichten worden in grammen geregistreerd vanaf de winkelweegschaal",
-      "point3": "Een volglink zonder account"
+      "point3": "Meld u aan met toegang tot het dossier om privé-inzameldetails te bekijken"
     },
     "trade": {
       "body": "Zakelijke betalingen lopen via de betaalprovider. Bekijk de bestelling voor de huidige betaalstatus.",
@@ -1079,19 +1089,19 @@
       },
       "howPricesWork": {
         "title": "Hoe prijzen worden bepaald",
-        "summary": "Waarom de schatting een bereik is en hoe het definitieve bedrag wordt berekend.",
+        "summary": "Hoe onafhankelijke winkelaanbiedingen en gemeten gewichten het bedrag bepalen.",
         "steps": {
           "estimate": {
-            "title": "Schattingen gebruiken stadsprijzen",
-            "body": "Voordat u een kabadiwala kiest, gebruiken we standaardprijzen voor Bengaluru en tonen we een bereik."
+            "title": "Referentieprijzen zijn gedateerde informatie",
+            "body": "Referentieprijzen bieden context. Ze bepalen geen winkelaanbieding of verplicht minimum."
           },
           "own": {
             "title": "Elke kabadiwala bepaalt een prijs",
             "body": "Na uw keuze ziet u de eigen prijs van die winkel per materiaal."
           },
           "floor": {
-            "title": "Nooit onder het minimum",
-            "body": "Luma.Green bepaalt een minimumprijs voor elk materiaal. Geen kabadiwala mag minder betalen."
+            "title": "Onafhankelijke aanbiedingen",
+            "body": "Elk bedrijf stelt zijn eigen aanbiedingen vast. Luma.Green dwingt geen minimum op basis van referentieprijzen af."
           },
           "final": {
             "title": "Het gewicht bepaalt het bedrag",
@@ -1219,23 +1229,23 @@
       },
       "setPrices": {
         "title": "Stel uw prijzen in",
-        "summary": "U kiest wat u betaalt, boven het minimum.",
+        "summary": "Kies wat u voor elk materiaal biedt.",
         "steps": {
           "open": {
             "title": "Open Mijn prijzen",
-            "body": "U ziet elk materiaal met de minimumprijs ernaast."
+            "body": "Bekijk materialen en beschikbare referentieprijsinformatie."
           },
           "enter": {
             "title": "Voer uw prijs per kg in",
             "body": "Typ wat u huishoudens per materiaal wilt betalen."
           },
           "floor": {
-            "title": "Blijf boven het minimum",
-            "body": "Een prijs onder het minimum wordt niet opgeslagen. Stijgt het minimum, dan stijgt uw prijs mee en melden we dat."
+            "title": "Een onafhankelijke aanbieding instellen",
+            "body": "Referentieprijzen bepalen uw aanbieding niet en wijzigen deze niet automatisch."
           },
           "blank": {
             "title": "Laat een materiaal leeg",
-            "body": "Als u geen prijs instelt, wordt de standaardprijs van de stad gebruikt."
+            "body": "Als u een materiaal leeg laat, wordt daarvoor geen aanbieding ingesteld."
           },
           "history": {
             "title": "Oude bonnen veranderen niet",
@@ -1555,7 +1565,7 @@
       },
       "howPriceWorks": {
         "q": "Hoe wordt mijn bedrag berekend?",
-        "a": "Het gewicht van elk materiaal maal de prijs per kg van de kabadiwala. Die prijs mag nooit onder het minimum van Luma.Green liggen."
+        "a": "Het gemeten gewicht van elk materiaal maal de afgesproken winkelprijs per kg. Referentieprijzen zijn alleen informatie."
       },
       "howPaid": {
         "q": "Hoe word ik betaald?",
@@ -1595,7 +1605,7 @@
       },
       "ownPrices": {
         "q": "Kan ik mijn eigen prijzen bepalen?",
-        "a": "Ja, voor elk materiaal, zolang ze niet onder het minimum van Luma.Green liggen."
+        "a": "Ja. Elk bedrijf stelt zijn eigen aanbiedingen per materiaal vast. Referentieprijzen zijn geen verplicht minimum."
       },
       "noVehicle": {
         "q": "Ik heb geen voertuig. Kan ik me aanmelden?",
@@ -2746,6 +2756,33 @@
     }
   },
   "track": {
+    "review": {
+      "title": "Bon controleren",
+      "declaration": "De winkel heeft de betaling gemeld. U hebt de ontvangst nog niet bevestigd.",
+      "accepted": "Bon geaccepteerd. Bevestig de betaling pas nadat u deze hebt ontvangen.",
+      "disputed": "Bon betwist. De oplossing is nog in behandeling.",
+      "acknowledged": "U hebt de ontvangst van de betaling bevestigd.",
+      "accept": "Accepteren",
+      "dispute": "Bon betwisten",
+      "acknowledge": "Ontvangen betaling bevestigen",
+      "rejectLine": "{material} afwijzen",
+      "note": "Reden voor het geschil",
+      "sharing": "Inzamelhelpers",
+      "phone": "Telefoonnummer van de helper",
+      "adult": "Ik bevestig dat ik en de uitgenodigde helper beiden volwassen zijn.",
+      "invite": "Helper uitnodigen",
+      "shareNote": "Deel deze inzamellink met de helper. Deze moet zich met dit geverifieerde telefoonnummer aanmelden en binnen 48 uur accepteren. Er wordt geen bericht verzonden.",
+      "active": "Actief",
+      "pending": "Wacht op acceptatie",
+      "ended": "Toegang beëindigd",
+      "revoke": "Toegang intrekken",
+      "leave": "Inzameling verlaten",
+      "handover": "Overdrachtsnotitie",
+      "save": "Notitie opslaan",
+      "error": "De wijziging kon niet worden opgeslagen. Controleer uw toegang en probeer het opnieuw.",
+      "signIn": "Meld u aan om deze inzameling te bekijken",
+      "acceptedTotal": "Geaccepteerd: {weight} · {amount}"
+    },
     "metaTitle": "Uw boeking",
     "notFound": {
       "title": "We konden deze boeking niet vinden",
@@ -2839,7 +2876,7 @@
       "close": "Sluiten",
       "otherNumber": "Ander nummer gebruiken"
     },
-    "saved": "Geen account nodig. Bewaar deze link om uw boeking op elke telefoon te bekijken.",
+    "saved": "Bewaar deze link. Meld u aan en zorg dat u toestemming voor deze inzameling hebt om de privédetails te bekijken.",
     "sellMore": "Nog een inzameling boeken",
     "tryAnother": "Andere winkel proberen",
     "dispatchChanged": "Uw verzoek is naar een andere winkel in de buurt gegaan. De huidige winkel staat hieronder.",
@@ -3291,12 +3328,12 @@
       "title": "Voorraad",
       "lead": "Wat u nu heeft en wat het vandaag waard is.",
       "totalWeight": "Totaalgewicht",
-      "worth": "Waarde vandaag",
-      "worthHint": "Tegen de marktprijzen van vandaag",
+      "worth": "Huidige aanbiedingswaarde",
+      "worthHint": "Huidige aanbiedingswaarde",
       "scrap": "Ingezamelde materialen",
       "recycled": "Gerecycled materiaal",
-      "atPrice": "Markt {price}/kg",
-      "noPrice": "Vandaag geen marktprijs",
+      "atPrice": "Huidige aanbiedingswaarde: {price}/kg",
+      "noPrice": "Geen huidig aanbod",
       "sellTo": {
         "yard": "Verkopen aan een voorverwerker",
         "recycler": "Verkopen aan een recycler",
@@ -3307,23 +3344,24 @@
       "emptyBusiness": "Koop op de markt, dan verschijnt het hier.",
       "buy": "Materiaal kopen",
       "notBusinessTitle": "Alleen voor bedrijven",
-      "notBusinessBody": "Winkels, voorverwerkers, recyclers en fabrieken houden voorraad bij."
+      "notBusinessBody": "Winkels, voorverwerkers, recyclers en fabrieken houden voorraad bij.",
+      "recordedCost": "Geregistreerde kosten"
     },
     "prices": {
       "title": "Mijn prijzen",
-      "lead": "Wat u huishoudens per kg betaalt. Nooit onder het minimum.",
+      "lead": "Uw aanbiedingen aan huishoudens per kg. U bepaalt ze onafhankelijk.",
       "label": "Uw prijs voor {material}, in roepies per kg",
       "prefix": "₹",
       "suffix": "/kg",
-      "minimum": "Minimaal {price}/kg",
+      "minimum": "Referentie {price}/kg",
       "market": "Markt {price}/kg",
-      "notSet": "Nog niet ingesteld. Huishoudens krijgen de stadsprijs, {price}/kg.",
+      "notSet": "Geen aanbieding ingesteld. Referentie: {price}/kg.",
       "save": "Opslaan",
       "saving": "Opslaan…",
       "saved": "{material}: {price}/kg opgeslagen.",
       "invalid": "Voer een prijs in, bijvoorbeeld 14 of 14,50.",
-      "belowFloor": "Te laag. Het minimum is {price}/kg.",
-      "belowFloorUnknown": "Te laag. Dit ligt onder de minimumprijs.",
+      "belowFloor": "Voer een geldige prijs in. Referentie: {price}/kg.",
+      "belowFloorUnknown": "Voer een geldige prijs in.",
       "emptyTitle": "Nog geen materialen",
       "emptyBody": "Welke materialen u koopt, wordt bij goedkeuring van uw winkel vastgelegd."
     },
@@ -3477,7 +3515,8 @@
       "application_received": "Aanvraag ontvangen",
       "application_approved": "Aanvraag goedgekeurd",
       "application_changes_requested": "Aanvraag moet worden aangepast",
-      "application_rejected": "Aanvraag niet goedgekeurd"
+      "application_rejected": "Aanvraag niet goedgekeurd",
+      "stock_low": "Waarschuwing voor lage voorraad"
     }
   },
   "integrations": {
@@ -3751,7 +3790,8 @@
     "addInput": "Invoerpartij toevoegen",
     "chooseInput": "Kies een invoerpartij",
     "combinedInput": "Totale invoermassa",
-    "multiInputHint": "Combineer alleen gemeten materiaal dat u beheert. Elke hoeveelheid wordt uit de eigen partij verbruikt. Dit legt verwerkingsbewijs vast en voegt geen voorraad toe."
+    "multiInputHint": "Combineer alleen gemeten materiaal dat u beheert. Elke hoeveelheid wordt uit de eigen partij verbruikt. Dit legt verwerkingsbewijs vast en voegt geen voorraad toe.",
+    "qualityReleaseRequired": "Goedgekeurde tests vereist"
   },
   "evidence": {
     "title": "Documentverwijzingen",
@@ -4166,5 +4206,198 @@
     "lead": "Lees een vaste bewijskopie voor het vermelde doel. Goedkeuring van de ontvanger geeft geen toegang tot andere bedrijfsgegevens.",
     "warning": "Deel alleen de gekozen inspectie en aangevinkte bestanden. Verwijder eerst persoonsgegevens. Toegang maximaal 90 dagen, intrekbaar; gedownloade kopieën kunnen niet worden teruggehaald.",
     "snapshot": "Vaste kopie van de verklaring van het inspecterende bedrijf. Geen certificaat of onafhankelijke verificatie."
+  },
+  "collectionOperations": {
+    "availability": "Beschikbaarheid ophalen",
+    "capacity": "Capaciteit per tijdvak",
+    "holidays": "Gesloten dagen (YYYY-MM-DD, met komma’s gescheiden)",
+    "schedule": "Ophaalplanning",
+    "unassigned": "Nog niet toegewezen. Wijzig de tijd of annuleer.",
+    "repeat": "Elke {days} dagen herhalen",
+    "stop": "Toekomstige bezoeken stoppen",
+    "reschedule": "Ophaaltijd wijzigen",
+    "requested": "Wijziging naar beheerder gestuurd",
+    "saved": "Opgeslagen",
+    "acknowledge": "Ontvangen betaling bevestigen",
+    "acknowledged": "Betaling bevestigd",
+    "fixedFee": "Vaste werkvergoeding. De opdrachtgever betaalt; Luma garandeert geen loon.",
+    "due": "Betaling verschuldigd: {date}",
+    "declarePayment": "Werknemersbetaling vastleggen",
+    "failedVisit": "Mislukt bezoek vastleggen",
+    "paymentDeclared": "Betaling vastgelegd; wacht op bevestiging werknemer"
+  },
+  "geocoding": {
+    "consent": "Stuur dit punt naar Google Maps om een adres te vinden.",
+    "find": "Adres zoeken",
+    "loading": "Adres zoeken…",
+    "manual": "U kunt het adres handmatig invoeren.",
+    "unavailable": "Adres zoeken is niet beschikbaar. Voer het adres handmatig in.",
+    "use": "Dit adres gebruiken",
+    "confirm": "Ik heb dit adres gecontroleerd en wil het adresveld vervangen.",
+    "preview": "Alleen voorbeeld. Opslaan vereist een beoordeling van het servicebeleid.",
+    "attribution": "Google Maps"
+  },
+  "serviceRecords": {
+    "title": "Diensten en programma’s",
+    "unavailable": "Uitvoering door aanbieders en verzilvering zijn niet beschikbaar. Registraties keuren geen leningen, verzekeringen, steun of betalingen goed.",
+    "enquiries": "Dienstaanvragen",
+    "programmes": "Programmaregistraties",
+    "edit": "Bewerken",
+    "reported": "Gemelde cijfers en ongecontroleerde bewijzen. Geen gemeentelijke overeenkomst of gefinancierde beloning.",
+    "area": "Gebied",
+    "startsOn": "Startdatum",
+    "endsOn": "Einddatum",
+    "coverageCount": "Bereik",
+    "trips": "Ritten",
+    "centreHandovers": "Overdrachten aan centrum",
+    "groupIncomePaise": "Groepsinkomen (paise)",
+    "share": "Samengevoegd rapport delen",
+    "principal": "Materiaaleigenaar / opdrachtgever",
+    "materialReference": "Materiaalreferentie",
+    "explicitReference": "Deel alleen materiaalcode en vastgelegde grammen met de gekozen ontvanger.",
+    "commercialModel": "Bedrijfsmodel",
+    "draft": "Concept",
+    "enquiry": "Aanvraag",
+    "closed": "Gesloten",
+    "kinds": {
+      "equipment": "Apparatuur",
+      "staffing": "Personeel",
+      "transport": "Vervoer",
+      "environment": "Milieu",
+      "accounting": "Boekhouding",
+      "solar": "Zonne-energie",
+      "scales": "Weegschalen",
+      "voice": "Spraakdiensten",
+      "society": "Gemeenschapsdiensten",
+      "welfare": "Welzijn",
+      "donation": "Donatie",
+      "reward": "Beloning",
+      "finance": "Financiering",
+      "insurance": "Verzekering",
+      "attendance": "Aanwezigheid",
+      "wet_service": "Natafvaldienst",
+      "other": "Overig"
+    },
+    "models": {
+      "partner_service": "Partneraanvraag",
+      "materials_sale_reference": "Referentie materiaalverkoop",
+      "toll_jobwork": "Loonverwerking met eigendom bij opdrachtgever",
+      "paid_collection": "Betaalde ophaaldienst",
+      "generator_paid_treatment": "Door producent betaalde verwerking"
+    },
+    "directions": {
+      "not_applicable": "Geen betalingsuitvoering",
+      "buyer_to_seller": "Koper → verkoper",
+      "principal_to_processor": "Opdrachtgever → verwerker",
+      "customer_to_service": "Klant → dienst",
+      "generator_to_handler": "Producent → beheerder"
+    },
+    "received": "Ontvangen",
+    "sharedReports": "Gedeelde auditrapporten",
+    "revoke": "Toegang herroepen",
+    "quantityGrams": "Hoeveelheid (g)",
+    "recordName": "Naam van registratie"
+  },
+  "returnClaims": {
+    "title": "Retouren en programmabewijs",
+    "returnTitle": "Volledige retour",
+    "scheme": "Programmareferentie",
+    "issuer": "Referentie externe uitgever",
+    "freight": "Betaler retourvracht",
+    "reconcile": "Afstemmen",
+    "validate": "Bron controleren",
+    "notice": "Alleen gemeld bewijs. Geen officieel certificaat of betalingsgoedkeuring.",
+    "waiting": "Wacht op fysieke ontvangst, volledige terugbetaling en terugboeking van de afrekening."
+  },
+  "marketComparison": {
+    "quote": "Vrachtofferte vereist",
+    "freight": "Afzonderlijke vracht: {price}/kg",
+    "notice": "De betaling dekt alleen materiaal. Spreek vracht apart af en betaal deze apart.",
+    "available": "Beschikbaar vanaf {date}",
+    "delivered": "Materiaal en vracht: {price}/kg",
+    "freightInput": "Vracht per kg (optioneel)",
+    "availableInput": "Beschikbaar vanaf (optioneel)",
+    "validityInput": "Verloop aanbod (optioneel)"
+  },
+  "recordedCosts": {
+    "acquisition": "Aanschafkosten (paise)",
+    "processing": "Verwerkingskosten (paise)",
+    "reference": "Verwijzing naar kostenbewijs",
+    "hint": "Leeg betekent onbekend. Voer alleen 0 in bij vastgelegde kosten van nul.",
+    "remaining": "Resterende vastgelegde kosten",
+    "input": "Kosten verbruikte invoer",
+    "total": "Aan uitvoer toegewezen kosten",
+    "unknown": "Onbekend",
+    "loss": "Gemeten uitvoer draagt de kosten van verontreiniging en procesverlies.",
+    "record": "Aanschafkosten vastleggen",
+    "processingTotal": "Verwerkingskosten"
+  },
+  "stockClosing": {
+    "title": "Dagelijkse voorraadcontrole",
+    "notice": "De afsluiting bewaart de huidige voorraad. Latere wijzigingen blijven mogelijk.",
+    "note": "Controlenotitie",
+    "record": "Afsluiting van vandaag vastleggen",
+    "last": "Laatste afsluiting",
+    "none": "Nog geen afsluiting",
+    "gramsUnit": "g",
+    "unknown": "Kosten onbekend",
+    "balances": "Afsluitende voorraad",
+    "threshold": "Waarschuwing voor lage voorraad",
+    "thresholdHint": "Alleen in het accountpostvak. Waarschuwingen staan uit tot activering.",
+    "disabled": "Uit",
+    "below": "Onder de waarschuwingsgrens",
+    "recent": "Recente waarschuwingen (maximaal 20)",
+    "noAlerts": "Nog geen waarschuwingen",
+    "material": "Materiaal",
+    "grams": "Waarschuwingsgrens (gram)",
+    "enabled": "Waarschuwing inschakelen",
+    "save": "Waarschuwingsinstelling opslaan",
+    "closed": "Afsluiting opgeslagen",
+    "saved": "Waarschuwingsinstelling opgeslagen",
+    "dateChanged": "De datum is gewijzigd. Controleer en probeer opnieuw.",
+    "alreadyRecorded": "De afsluiting van vandaag is al vastgelegd.",
+    "limit": "De voorraadgeschiedenis overschrijdt de limiet van dit hulpmiddel. Vraag de beheerder om hulp.",
+    "mismatch": "Voorraad en bewegingen komen niet overeen. Vraag de beheerder om controle.",
+    "correction": "Voorraadcorrectie",
+    "add": "Voorraad toevoegen",
+    "remove": "Voorraad verminderen",
+    "corrected": "Correctie vastgelegd",
+    "evidence": "Verwijzing naar fysiek bewijs",
+    "recentCorrections": "Recente correcties (maximaal 20)"
+  },
+  "workerHandover": {
+    "title": "Overdracht van inzameling",
+    "hint": "Alleen bewijs. Voorraad en betaling houden aparte registraties.",
+    "limit": "Laatste 100 koppelingen. Bronkeuzes zijn beperkt.",
+    "job": "Toegewezen ophaaltaak",
+    "collection": "Inzameling",
+    "collected": "Ingezameld (g)",
+    "received": "Ontvangen (g)",
+    "variance": "Ontvangen − ingezameld (g)",
+    "record": "Ingezameld gewicht vastleggen",
+    "acknowledge": "Overdracht bevestigen",
+    "revoke": "Koppeling intrekken",
+    "acknowledged": "Overdracht bevestigd",
+    "link": "Inzameling koppelen",
+    "reason": "Reden",
+    "evidence": "Verwijzing naar fysiek bewijs"
+  },
+  "accountRemoval": {
+    "title": "Account sluiten",
+    "intro": "Uw aanmelding en toegang eindigen.",
+    "retained": "Noodzakelijke bedrijfs-, betaal-, materiaal- en auditgegevens blijven bewaard voor beoordeling. Niet alle gegevens worden gewist.",
+    "confirm": "Ik begrijp dit en wil mijn account sluiten.",
+    "action": "Account sluiten",
+    "held": "Uw account is niet gesloten.",
+    "reauth": "Meld u opnieuw aan om verder te gaan.",
+    "unavailable": "Sluiten is niet beschikbaar. Probeer het later opnieuw.",
+    "retry": "Het resultaat is niet bevestigd. Probeer opnieuw om hetzelfde verzoek te controleren.",
+    "closed": "De accounttoegang is gesloten.",
+    "adminReplacement": "Een vervangende beheerder moet apart worden geregeld.",
+    "businessOwner": "Draag eerst het bedrijfseigendom over.",
+    "activeCollection": "Rond eerst de actieve inzameling af.",
+    "assignedWork": "Rond eerst uw toegewezen werk of overdracht af.",
+    "reviewLimit": "Er moeten meer gegevens worden beoordeeld voordat het account kan sluiten.",
+    "checkLimit": "Sluiten en opnieuw registreren herstellen het daglimiet voor bedrijfscontroles niet. Controles kunnen tot de volgende dag in India geblokkeerd blijven."
   }
 }

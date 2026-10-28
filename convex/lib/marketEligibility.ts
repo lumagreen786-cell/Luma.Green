@@ -42,7 +42,7 @@ export async function requireEligibleByproduct(
     seller.kind !== "manufacturer" ||
     seller.kind !== listing.sellerKind ||
     buyer?.status !== "active" ||
-    material?.active !== true ||
+    !isOrdinaryMaterial(material) ||
     material.stage !== "scrap" ||
     material.byproductEligibility?.hazardStatus !== "non_hazardous" ||
     !seller.families.includes(material.family) ||

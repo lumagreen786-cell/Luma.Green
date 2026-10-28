@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 import { FinancialLifecycle } from "./financial-lifecycle";
 import { isAvailableTradeAction, isOpenTrade, reachedAt } from "./logic";
 import { MaterialIcon } from "./material-icon";
+import { OfferComparison } from "./offer-comparison";
 import { OfferSpecification } from "./offer-specification";
 import { TradeActions } from "./trade-actions";
 import { TradeSteps } from "./trade-steps";
@@ -74,6 +75,15 @@ export function TradeCard({
     <article className="flex h-full flex-col gap-3 border-b border-border py-4">
       <TradeHeading trade={trade} side={side} showSide={showSide} />
       {compact ? null : <OfferSpecification value={trade.specification} />}
+      {compact ? null : (
+        <OfferComparison
+          listing={{
+            askPaisePerKg: trade.paisePerKg,
+            freightPaisePerKg: trade.freightPaisePerKg,
+            deliveryAvailableAt: trade.deliveryAvailableAt,
+          }}
+        />
+      )}
       {compact || isHistorical || trade.status === "declined" ? null : (
         <TradeSteps status={trade.status} />
       )}

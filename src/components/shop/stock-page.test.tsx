@@ -19,6 +19,8 @@ beforeEach(() => {
   permissions.canOperate = true;
 });
 
+vi.mock("./stock-report", () => ({ StockReport: () => null }));
+vi.mock("./stock-closing", () => ({ StockClosing: () => null }));
 vi.mock("./stock-intake", () => ({ StockIntake: () => null }));
 vi.mock("convex/react", () => ({
   useConvexAuth: () => ({ isLoading: false, isAuthenticated: true }),
@@ -45,6 +47,7 @@ const IRON_ROW: Stock["rows"][number] = {
   grams: 260_000,
   marketPaise: 2700,
   valuePaise: 702_000,
+  costPaise: null,
   updatedAt: 0,
 };
 const NEWSPAPER_ROW: Stock["rows"][number] = {
@@ -53,6 +56,7 @@ const NEWSPAPER_ROW: Stock["rows"][number] = {
   grams: 180_000,
   marketPaise: 1450,
   valuePaise: 261_000,
+  costPaise: null,
   updatedAt: 0,
 };
 
@@ -60,6 +64,7 @@ const SHOP_STOCK: Stock = {
   kind: "kabadiwala",
   buyerKind: "yard",
   rows: [IRON_ROW, NEWSPAPER_ROW],
+  totalCostPaise: null,
   totalGrams: 440_000,
   totalValuePaise: 963_000,
 };
@@ -86,7 +91,9 @@ describe("StockPage", () => {
     expect(screen.getByText("Iron and steel")).toBeInTheDocument();
     expect(screen.getByText("260 kg")).toBeInTheDocument();
     expect(screen.getByText("₹7,020")).toBeInTheDocument();
-    expect(screen.getByText("Market ₹14.50/kg")).toBeInTheDocument();
+    expect(
+      screen.getByText("Current offer value: ₹14.50/kg"),
+    ).toBeInTheDocument();
     expect(
       screen.getByRole("link", { name: "Sell to a preprocessor" }),
     ).toHaveAttribute("href", "/app/sell");
@@ -150,10 +157,8 @@ describe("StockPage", () => {
       },
       SHOP_WORKSPACE,
     );
-    expect(screen.getAllByText("No market price today")).toHaveLength(2);
-    expect(
-      screen.queryByText("At today's market prices"),
-    ).not.toBeInTheDocument();
+    expect(screen.getAllByText("No current offer")).toHaveLength(2);
+    expect(screen.getByText("Current offer value")).toBeInTheDocument();
     expect(screen.queryByText("₹9,630")).not.toBeInTheDocument();
     expect(screen.getByText("₹7,020")).toBeInTheDocument();
   });

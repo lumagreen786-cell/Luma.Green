@@ -45,6 +45,7 @@ import {
 
 export function DeclareLot() {
   const t = useTranslations("lots");
+  const costs = useTranslations("recordedCosts");
   const canOperate = useCanOperate();
   const create = useMutation(api.traceability.declareLot);
   const router = useRouter();
@@ -57,6 +58,8 @@ export function DeclareLot() {
       state: "",
       grams: "",
       sourceReference: "",
+      acquisitionCostPaise: "",
+      costReference: "",
       streamClass: "unspecified",
       handlingClass: "unassessed",
     },
@@ -66,6 +69,9 @@ export function DeclareLot() {
     name: ["streamClass", "handlingClass"],
   });
   if (!canOperate) return null;
+  const invalidCostMessage = form.formState.errors.acquisitionCostPaise
+    ? costs("hint")
+    : undefined;
   return (
     <EvidenceDialog
       title={t("declare")}
@@ -86,6 +92,12 @@ export function DeclareLot() {
                 ...values,
                 grams: parseGrams(values.grams) ?? 0,
                 sourceReference: values.sourceReference || undefined,
+                acquisitionCostPaise: values.acquisitionCostPaise?.trim()
+                  ? parseGrams(values.acquisitionCostPaise)
+                  : undefined,
+                costReference: values.costReference?.trim()
+                  ? values.costReference
+                  : undefined,
               });
               form.reset();
               setOpen(false);
@@ -123,6 +135,19 @@ export function DeclareLot() {
             registration={form.register("sourceReference")}
             invalid={Boolean(form.formState.errors.sourceReference)}
           />
+          <LotField
+            label={costs("acquisition")}
+            inputMode="numeric"
+            registration={form.register("acquisitionCostPaise")}
+            invalid={Boolean(form.formState.errors.acquisitionCostPaise)}
+          />
+          <LotField
+            label={costs("reference")}
+            maxLength={500}
+            registration={form.register("costReference")}
+            invalid={Boolean(form.formState.errors.costReference)}
+          />
+          <p className="text-sm text-muted-foreground">{costs("hint")}</p>
           <ClassificationFields
             streamClass={streamClass}
             handlingClass={handlingClass}
@@ -137,6 +162,11 @@ export function DeclareLot() {
             busy={form.formState.isSubmitting}
             invalid={Object.keys(form.formState.errors).length > 0}
             failure={action.failure}
+            invalidMessage={
+              form.formState.errors.costReference
+                ? t("required")
+                : invalidCostMessage
+            }
           />
         </fieldset>
       </form>
@@ -152,11 +182,15 @@ export function TransformLot({
   availableGrams: number;
 }) {
   const t = useTranslations("lots");
+  const costs = useTranslations("recordedCosts");
   const format = useFormatter();
   const canOperate = useCanOperate();
   const transform = useMutation(api.traceability.transform);
   const [open, setOpen] = useState(false);
   const action = useEvidenceAction();
+  const [operationReference, setOperationReference] = useState(() =>
+    crypto.randomUUID(),
+  );
   const [facilityId, setFacilityId] = useState<Id<"industrialFacilities">>();
   const [processKind, setProcessKind] =
     useState<(typeof PROCESS_KINDS)[number]>();
@@ -167,6 +201,8 @@ export function TransformLot({
       additionalInputs: [],
       contaminationGrams: "0",
       processLossGrams: "0",
+      processingCostPaise: "",
+      costReference: "",
       outputs: [
         {
           materialCode: "",
@@ -185,6 +221,9 @@ export function TransformLot({
     name: ["contaminationGrams", "processLossGrams", "outputs"],
   });
   if (!canOperate) return null;
+  const invalidCostMessage = form.formState.errors.processingCostPaise
+    ? costs("hint")
+    : undefined;
   const accounted = accountedGrams({
     inputGrams: "",
     contaminationGrams,
@@ -252,6 +291,13 @@ export function TransformLot({
                   contaminationGrams:
                     parseGrams(values.contaminationGrams) ?? 0,
                   processLossGrams: parseGrams(values.processLossGrams) ?? 0,
+                  processingCostPaise: values.processingCostPaise?.trim()
+                    ? parseGrams(values.processingCostPaise)
+                    : undefined,
+                  costReference: values.costReference?.trim()
+                    ? values.costReference
+                    : undefined,
+                  operationReference,
                   outputs: values.outputs.map((row) => ({
                     ...row,
                     grams: parseGrams(row.grams) ?? 0,
@@ -261,6 +307,7 @@ export function TransformLot({
                 form.reset();
                 setFacilityId(undefined);
                 setProcessKind(undefined);
+                setOperationReference(crypto.randomUUID());
                 setOpen(false);
               },
             );
@@ -312,6 +359,20 @@ export function TransformLot({
               invalid={Boolean(form.formState.errors.processLossGrams)}
             />
           </div>
+          <LotField
+            label={costs("processing")}
+            inputMode="numeric"
+            registration={form.register("processingCostPaise")}
+            invalid={Boolean(form.formState.errors.processingCostPaise)}
+          />
+          <LotField
+            label={costs("reference")}
+            maxLength={500}
+            registration={form.register("costReference")}
+            invalid={Boolean(form.formState.errors.costReference)}
+          />
+          <p className="text-sm text-muted-foreground">{costs("hint")}</p>
+          <p className="text-sm text-muted-foreground">{costs("loss")}</p>
           <h3 className="font-medium">{t("outputs")}</h3>
           {outputs.fields.map((field, index) => (
             <fieldset
@@ -409,6 +470,11 @@ export function TransformLot({
             busy={form.formState.isSubmitting}
             invalid={Object.keys(form.formState.errors).length > 0}
             failure={action.failure}
+            invalidMessage={
+              form.formState.errors.costReference
+                ? t("required")
+                : invalidCostMessage
+            }
           />
         </fieldset>
       </form>

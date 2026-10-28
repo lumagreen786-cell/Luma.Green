@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 import { useFormat } from "@/components/app/format";
+import { RecordedCost } from "@/components/lots/cost-parts";
 import { EvidenceDialog, LotField, Mass } from "@/components/lots/form-parts";
 import { parseGrams } from "@/components/lots/logic";
 import { Button } from "@/components/ui/button";
@@ -26,18 +27,36 @@ import { isLocale, localeDirection } from "@/i18n/locales";
 
 import { api } from "../../../convex/_generated/api";
 
-const schema = z.object({
-  intakeReference: z.string().trim().min(1).max(120),
-  materialCode: z.string().min(1),
-  grams: z.string().refine((value) => (parseGrams(value) ?? 0) > 0),
-  producedOn: z.iso.date(),
-  sourceReference: z.string().trim().min(1).max(500),
-  weighingReference: z.string().trim().min(1).max(500),
-  ownProductionConfirmed: z.boolean().refine((value) => value),
-});
+const schema = z
+  .object({
+    intakeReference: z.string().trim().min(1).max(120),
+    materialCode: z.string().min(1),
+    grams: z.string().refine((value) => (parseGrams(value) ?? 0) > 0),
+    producedOn: z.iso.date(),
+    sourceReference: z.string().trim().min(1).max(500),
+    weighingReference: z.string().trim().min(1).max(500),
+    recordedCostPaise: z
+      .string()
+      .refine((value) => value.trim() === "" || parseGrams(value) !== null)
+      .optional(),
+    costReference: z
+      .string()
+      .trim()
+      .max(500)
+      .refine((value) => value === "" || value.length >= 3)
+      .optional(),
+    ownProductionConfirmed: z.boolean().refine((value) => value),
+  })
+  .refine(
+    (value) =>
+      !value.recordedCostPaise?.trim() ||
+      Boolean(value.costReference && value.costReference.length >= 3),
+    { path: ["costReference"] },
+  );
 
 export function StockIntake() {
   const t = useTranslations("stockIntake");
+  const costs = useTranslations("recordedCosts");
   const common = useTranslations("common");
   const canOperate = useCanOperate();
   const format = useFormatter();
@@ -70,6 +89,15 @@ export function StockIntake() {
               <Mass grams={row.grams} />
             </div>
             <p className="break-words">{row.materialCode}</p>
+            <p className="text-sm">
+              <span className="text-muted-foreground">{costs("total")}: </span>
+              <RecordedCost paise={row.recordedCostPaise} />
+            </p>
+            {row.costReference ? (
+              <p className="text-sm break-words">
+                {costs("reference")}: {row.costReference}
+              </p>
+            ) : null}
             <dl className="grid gap-3 text-sm sm:grid-cols-3">
               <div>
                 <dt className="text-muted-foreground">{t("date")}</dt>
@@ -113,6 +141,7 @@ export function StockIntake() {
 }
 function IntakeForm() {
   const t = useTranslations("stockIntake");
+  const costs = useTranslations("recordedCosts");
   const lots = useTranslations("lots");
   const common = useTranslations("common");
   const format = useFormat();
@@ -131,6 +160,8 @@ function IntakeForm() {
       producedOn: "",
       sourceReference: "",
       weighingReference: "",
+      recordedCostPaise: "",
+      costReference: "",
       ownProductionConfirmed: false,
     },
   });
@@ -158,6 +189,12 @@ function IntakeForm() {
               await save({
                 ...values,
                 grams: parseGrams(values.grams) ?? 0,
+                recordedCostPaise: values.recordedCostPaise?.trim()
+                  ? parseGrams(values.recordedCostPaise)
+                  : undefined,
+                costReference: values.costReference?.trim()
+                  ? values.costReference
+                  : undefined,
                 ownProductionConfirmed: true,
               });
               form.reset();
@@ -233,6 +270,22 @@ function IntakeForm() {
             registration={form.register("weighingReference")}
             invalid={Boolean(form.formState.errors.weighingReference)}
           />
+          <fieldset className="flex min-w-0 flex-col gap-3 border-t pt-4">
+            <legend className="font-medium">{costs("total")}</legend>
+            <LotField
+              label={costs("acquisition")}
+              inputMode="numeric"
+              registration={form.register("recordedCostPaise")}
+              invalid={Boolean(form.formState.errors.recordedCostPaise)}
+            />
+            <LotField
+              label={costs("reference")}
+              maxLength={500}
+              registration={form.register("costReference")}
+              invalid={Boolean(form.formState.errors.costReference)}
+            />
+            <p className="text-sm text-muted-foreground">{costs("hint")}</p>
+          </fieldset>
           <label
             htmlFor={`${id}-confirmed`}
             className="flex min-h-11 items-start gap-3 text-sm"

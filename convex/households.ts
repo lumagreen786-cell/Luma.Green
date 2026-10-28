@@ -5,7 +5,13 @@ import { mutation, query, type QueryCtx } from "./_generated/server";
 import { requireUser } from "./lib/access";
 import { findProfile } from "./lib/applicationAccess";
 import { bookingToken, canMoveBooking, kgToGrams } from "./lib/chain";
-import { beginDispatch } from "./lib/dispatch";
+import {
+  collectionActor,
+  collectionGrants,
+  isGrantActive,
+} from "./lib/collectionAccess";
+import { requireCollectionCapacity } from "./lib/collectionScheduling";
+import { beginDispatch, isPickupLocationEligible } from "./lib/dispatch";
 import { vSaathiTime } from "./lib/drafts";
 import { preparePhotoRequest } from "./lib/householdPhotos";
 import {
@@ -25,9 +31,11 @@ import {
   OPEN_BOOKING_STATUSES,
   PILOT_CITY,
 } from "./lib/households";
+import { isOrdinaryMaterial } from "./lib/materialEligibility";
 import { queueBookingNotification } from "./lib/notifications";
 import { indiaToday } from "./lib/onboarding";
 import { verifiedIndianMobile } from "./lib/phone";
+import { isRateCurrent } from "./lib/rateValidity";
 import { vBookingStatus } from "./lib/validators";
 import { vMaterialRef, vReceipt } from "./lib/views";
 import { currentProfile, materialIndex } from "./lib/workspace";
@@ -63,7 +71,7 @@ async function checkedBasket(
   const materials = await materialIndex(ctx);
   for (const item of items) {
     const material = materials.get(item.materialCode);
-    if (!material?.active || material.stage !== "scrap") {
+    if (!isOrdinaryMaterial(material) || material.stage !== "scrap") {
       throw new ConvexError("UNKNOWN_MATERIAL");
     }
   }
@@ -85,7 +93,7 @@ async function fallbackPrices(
       )
       .order("desc")
       .first();
-    if (newest) prices.set(code, newest.fallbackPaise);
+    if (newest && isRateCurrent(newest)) prices.set(code, newest.fallbackPaise);
   }
   return prices;
 }
@@ -100,7 +108,12 @@ async function rateCard(
     .withIndex("by_org_material", (q) => q.eq("orgId", orgId))
     .take(500);
   const oldestFirst = rows.toSorted((a, b) => a.updatedAt - b.updatedAt);
-  return new Map(oldestFirst.map((row) => [row.materialCode, row.paisePerKg]));
+  const latest = new Map(oldestFirst.map((row) => [row.materialCode, row]));
+  return new Map(
+    [...latest.values()]
+      .filter((row) => isRateCurrent(row))
+      .map((row) => [row.materialCode, row.paisePerKg]),
+  );
 }
 
 /** What a shop would pay for the basket: its rates, the fallback for gaps. */
@@ -110,10 +123,12 @@ function offerFor(
   fallback: ReadonlyMap<string, number>,
 ) {
   return {
-    estimatePaise: basketPaise(
-      items,
-      (code) => rates.get(code) ?? fallback.get(code),
-    ),
+    estimatePaise: items.some(
+      (item) =>
+        !rates.has(item.materialCode) && !fallback.has(item.materialCode),
+    )
+      ? undefined
+      : basketPaise(items, (code) => rates.get(code) ?? fallback.get(code)),
     fallbackCodes: items
       .filter((item) => !rates.has(item.materialCode))
       .map((item) => item.materialCode),
@@ -196,7 +211,7 @@ export const shops = query({
         name: org.name,
         area: org.area,
         address: org.address,
-        offersPickup: org.offersPickup,
+        offersPickup: org.offersPickup && isPickupLocationEligible(org, near),
         hours: org.hours,
         distanceKm:
           near && org.location ? distanceKm(near, org.location) : undefined,
@@ -236,12 +251,15 @@ async function bookableShop(
   ctx: QueryCtx,
   orgId: Id<"orgs">,
   mode: "pickup" | "dropoff",
+  location?: { lat: number; lng: number },
 ) {
   const org = await ctx.db.get("orgs", orgId);
   if (org?.kind !== "kabadiwala" || org.status !== "active")
     throw new ConvexError("SHOP_NOT_FOUND");
   if (mode === "pickup" && !org.offersPickup)
     throw new ConvexError("SHOP_NO_PICKUP");
+  if (mode === "pickup" && !isPickupLocationEligible(org, location))
+    throw new ConvexError("OUTSIDE_PICKUP_RADIUS");
   return org;
 }
 
@@ -273,7 +291,7 @@ export const book = mutation({
     if (existingToken) return existingToken;
     await checkedBasket(ctx, args.items, { allowEmpty: isPhotosOnly });
     checkLocation(args.location);
-    const org = await bookableShop(ctx, args.orgId, args.mode);
+    const org = await bookableShop(ctx, args.orgId, args.mode, args.location);
 
     const now = Date.now();
     const today = indiaToday(now);
@@ -283,6 +301,7 @@ export const book = mutation({
     if (!isWindowOpen(args.slotDate, args.slotWindow, today, now)) {
       throw new ConvexError("SLOT_PASSED");
     }
+    await requireCollectionCapacity(ctx, org, args.slotDate, args.slotWindow);
     const name = cleanText(args.name);
     if (!isValidName(name)) throw new ConvexError("INVALID_NAME");
     const address =
@@ -397,6 +416,7 @@ async function findBooking(ctx: QueryCtx, token: string) {
 }
 
 const vTrackView = v.object({
+  failedVisitReason: v.optional(v.string()),
   token: v.string(),
   status: vBookingStatus,
   mode: vMode,
@@ -406,6 +426,17 @@ const vTrackView = v.object({
   items: v.array(v.object({ material: vMaterialRef, estKg: v.number() })),
   estimatePaise: v.optional(v.number()),
   receipt: v.optional(vReceipt),
+  receiptReview: v.optional(
+    v.object({
+      receiptVersion: v.number(),
+      decision: v.union(v.literal("accepted"), v.literal("disputed")),
+      rejectedLineIndexes: v.array(v.number()),
+      acceptedGrams: v.number(),
+      acceptedPaise: v.number(),
+      reviewedAt: v.number(),
+      paymentAcknowledgedAt: v.optional(v.number()),
+    }),
+  ),
   points: v.optional(v.number()),
   shop: v.object({
     name: v.string(),
@@ -430,9 +461,8 @@ const vTrackView = v.object({
 });
 
 /**
- * A booking as its household sees it at /t/{token}. Public: the unguessable
- * token is the key. It never carries the household's phone or address —
- * anyone holding the link sees this.
+ * Private collection tracking. The token locates a record; the current session
+ * and an active collection grant authorize access.
  */
 export const track = query({
   args: { token: v.string() },
@@ -440,14 +470,28 @@ export const track = query({
   handler: async (ctx, args): Promise<Infer<typeof vTrackView> | null> => {
     const booking = await findBooking(ctx, args.token);
     if (!booking) return null;
+    const viewer = await currentProfile(ctx);
+    if (!viewer) return null;
+    const isMine = booking.householdProfileId === viewer._id;
+    if (!isMine) {
+      const { phone } = await collectionActor(ctx);
+      const grants = await collectionGrants(ctx, booking);
+      const isGrant = grants.some(
+        (g) =>
+          g.helperProfileId === viewer._id &&
+          g.phone === phone &&
+          isGrantActive(g, booking),
+      );
+      if (!isGrant) return null;
+    }
     const org = await ctx.db.get("orgs", booking.orgId);
     if (!org) return null;
     const materials = await materialIndex(ctx);
-    const viewer = await currentProfile(ctx);
-    const receipt = booking.receipt;
+    const receipt = isMine ? booking.receipt : undefined;
 
     return {
       token: booking.token,
+      failedVisitReason: isMine ? booking.failedVisitReason : undefined,
       dispatch: booking.dispatch && {
         attempt: booking.dispatch.attempt,
         offeredAt: booking.dispatch.offeredAt,
@@ -463,7 +507,7 @@ export const track = query({
         material: materialRef(materials, item.materialCode),
         estKg: item.estKg,
       })),
-      estimatePaise: booking.estimatePaise,
+      estimatePaise: isMine ? booking.estimatePaise : undefined,
       receipt: receipt && {
         lines: receipt.lines.map((line) => ({
           material: materialRef(materials, line.materialCode),
@@ -475,7 +519,8 @@ export const track = query({
         method: receipt.method,
         paidAt: receipt.paidAt,
       },
-      points: booking.points,
+      receiptReview: isMine ? booking.receiptReview : undefined,
+      points: isMine ? booking.points : undefined,
       shop: {
         name: org.name,
         area: org.area,
@@ -483,8 +528,8 @@ export const track = query({
         phone: await shopPhone(ctx, org),
         hours: org.hours,
       },
-      isMine: viewer !== null && booking.householdProfileId === viewer._id,
-      canCancel: canHouseholdCancel(booking.status),
+      isMine,
+      canCancel: isMine && canHouseholdCancel(booking.status),
       createdAt: booking.createdAt,
     };
   },
@@ -545,7 +590,9 @@ export const mine = query({
           0,
         ),
         estimatePaise: row.estimatePaise,
-        paidPaise: row.receipt?.totalPaise,
+        paidPaise: row.receiptReview?.paymentAcknowledgedAt
+          ? row.receipt?.totalPaise
+          : undefined,
         createdAt: row.createdAt,
       });
     }

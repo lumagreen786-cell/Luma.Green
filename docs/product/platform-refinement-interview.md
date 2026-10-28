@@ -1,14 +1,48 @@
 # Platform refinement interview
 
-> **Status:** implementation requested on 6 October 2026. This is the single
-> running record of the founder's refined requirements. Append each new
-> interview decision here first, then update the linked product summaries.
-> Unresolved commercial and legal choices remain open while compatible
-> implementation proceeds.
+> **Status:** foundation rebuild authorized on 27 October 2026. The latest
+> foundation entry below resolves ordinary earlier open product questions under
+> the owner’s delegated authority. Earlier entries remain historical context;
+> external permissions and release acceptance still need real evidence.
 
-The editable Word copy is
-[luma-green-platform-refinement-interview.docx](../../output/docx/luma-green-platform-refinement-interview.docx).
-Keep this Markdown record and the Word copy in sync after each interview update.
+The current editable foundation specification is
+[luma-green-connected-platform-specification.docx](../../output/docx/luma-green-connected-platform-specification.docx).
+The earlier interview Word file is historical. The 27 October decisions below
+and the current specification take priority over earlier unanswered questions.
+
+## Final foundation refinement on 28 October 2026
+
+The current specification remains a code-free business plan. Its ordinary
+product choices are answered. Assigned workers now record collected grams and
+an evidence reference against an employer-bound visit. The employer compares
+that with its existing completed receipt, keeps any variance reason and changes
+no stock or pay through the handover. Independent worker-owned trading and a
+separate day-bag product remain outside this version.
+
+The material reference initializer has 51 labels and 32 draft definitions in an
+empty database: 21 PET states and eleven specialist references across eight
+categories. Specialist routes remain unavailable and ordinary trade/intake
+cannot activate them merely by changing a flag. No seed invents a price,
+identity, permit, certificate or payment.
+
+Account removal requires explicit confirmation after recent full authentication.
+Canonical site ownership, last parent ownership, active visits and unfinished
+assigned work can hold removal; held means the account is not closed. Personal
+stakeholder registration history does not create an unsupported transfer hold.
+Eligible closure immediately withdraws private account and grant access, scrubs
+optional profile settings and queues bounded cleanup. Necessary financial,
+material and audit evidence stays under restricted review. No legal retention
+period or universal erasure promise is invented. Same-phone rejoining cannot
+recover old records or invitations or reset that India day's paid-check limit.
+The configured platform admin uses a separate replacement gate.
+
+The seven remaining partial source groups are acceptance/operating/outside
+readiness checks and missing optional paper extraction. The OCR draft and human
+confirmation path is not implemented; manual entry works. D37 permits optional
+AI unavailable without approved configuration. This is not a key-only setup task.
+The web release still needs final checks and Production verification. Expo is
+paused. Temporary foundation rebuild permission expires for future work after
+this release is verified in Production; security and the Expo pause continue.
 
 ## How this interview works
 
@@ -996,3 +1030,255 @@ for this correction; these targeted results do not replace those gates.
 The latest full unit preflight passed 2,306 of 2,322 tests in 79.58 seconds.
 The 16 failures are capture or Word freshness gates; no functional unit test
 failed. The final lint rerun and complete project check remain pending.
+
+## Foundation build decisions — 27 October 2026
+
+The owner authorizes closing the document gaps, rebuilding the platform,
+reference seeding, screen changes, tested commits and pushes. There are no real
+users; demo schemas and records may be replaced without backward compatibility
+or migration work. Expo uses shared hosted web screens, with iOS first.
+No plan purchase or unconfigured paid provider call is authorized.
+
+The decisions below are implementation defaults chosen under that delegation,
+not statements that a provider, law, or live release has been verified.
+They supersede older conflicting product proposals for this version.
+
+### D01 Release scope
+
+Build one connected platform for Bengaluru first. Core work covers household pickup and drop off, Saathi jobs, shop and centre stock, business buying and selling, processing, manufacturing source records, and scoped reports. The same business can buy, process, and sell. Specialist waste and partner services use the same record structure but remain unavailable for live execution until their required permissions and connections are verified. This is a service readiness condition, not an unanswered scope choice. Web is in scope. On 28 October the owner paused Expo iOS and Android work; preserve its existing changes until resumed. Desktop software is excluded from this version.
+
+Source basis: Excel rows 22 39 40 48; Chat phased scope and organic waste exclusions; current project rules.
+
+### D02 Success targets
+
+Use a first acceptance workload of 50 simultaneous signed in people and 100 collection requests per day. Target ordinary screen responses within 2 seconds on a normal connection; show progress for longer work. Aim for at least 95 percent of accepted pickups completed in the agreed window. Support acknowledges ordinary issues within one business day; operations owns collection failures and accounts owns payment exceptions. These are build and pilot targets, not an advertised service guarantee.
+
+Source basis: Chat metrics and roadmap.
+
+### D03 Business membership
+
+One person can belong to up to 10 workspaces. A business can own several workspaces or sites and hold several activities. Each workspace supports up to 100 members. A business owner grants membership, an authorized workspace admin manages member and viewer access, and only an owner changes ownership. A site activity never grants permission to perform regulated work by itself.
+
+Source basis: Excel G and H; Chat organisation model.
+
+### D04 Correction and deletion
+
+Owners and authorized admins can remove unsubmitted drafts. Finalized receipts, movements, quality decisions, orders, and payment evidence are corrected by a recorded reversal or amendment with a reason. Never silently rewrite that history. During this prelaunch foundation rebuild only, the owner permits removal of obsolete demonstration records and schemas without migration or compatibility work. That temporary rebuild permission expires for future work once this foundation release is verified in Production. Security rules and the Expo pause remain active.
+
+Source basis: Excel D9 D15 and similar; current audit rules.
+
+### D05 Approval limits
+
+Use owner, admin, member, and viewer as shared workspace access levels. Members record assigned operational work; viewers read only. Owners and admins manage teams and approved settings. Quality release and stock adjustments require a named responsible reviewer. Payment and refund operations retain the existing server checks and provider evidence; no person can mark a gateway payment successful. Do not create a second payment approval system merely because a spreadsheet names an accounts role.
+
+Source basis: Chat internal permission controls.
+
+### D06 Household sharing
+
+A household account is private by default. Share a specific collection only through an explicit verified adult invitation. A helper may view and record assigned handover work but cannot change rates, payment destination, or other family records. Sharing ends on revocation or completion of the assigned task. Do not create accounts for children in this version. Keep a clear leave or revoke action.
+
+Source basis: Excel G2 H2 and rows 3 to 8.
+
+### D07 Partner scope
+
+Core trading and operating accounts use Luma workspaces. Equipment, staffing, transport, environmental engineering, accounting, solar, scale, voice, society app, and welfare services are partner enquiries with scoped service records in this version. They are not independent copies of the trade system. An actual confirmed booking requires a configured partner. Unconfigured partners show unavailable. Rewards, lending, and official credit market execution remain unavailable while their required providers and permissions are absent.
+
+Source basis: Review Notes assumptions 6 7 and 9.
+
+### D08 Business activation
+
+Retain current valid business activation without a blanket 12 to 24 hour manual queue. Keep the current Surepass business registration check and explicit name and address confirmation. Retain the newer optional business PAN to GST discovery from current main, excluding household, Saathi, and admin accounts. Tax registration is separate from operating permission. A required facility permission review gates the affected activity, not ordinary sign in.
+
+Source basis: Excel H26 V26; current application rules.
+
+### D09 Lost and shared phones
+
+Keep verified phone sign in and all required authenticator checks. Shared phones do not mean shared sessions: show the active account and provide sign out. Lost phone recovery uses the existing verified recovery path and required second factors; support cannot bypass them. A departing worker loses membership immediately and the owner reassigns unfinished work. Phone binding preserves the existing identity and its security factors.
+
+Source basis: Excel T and linked users; current authentication rules.
+
+### D10 Suspension
+
+Suspension immediately blocks new orders, new work acceptance, and new operational changes by the suspended party. Keep existing receipts and permitted read access needed for resolution. Platform operations and the authorized counterparty can finish a dispute without granting the suspended party new rights. Only the platform admin can restore a platform suspension; an owner manages workspace membership separately.
+
+Source basis: Excel B2 and row 26.
+
+### D11 Assigning collection
+
+A household request is offered to eligible active shops that serve its location and have capacity for the selected window. The first permitted acceptance reserves the request once. Do not auto assign an ineligible shop. If no shop accepts within two hours, show still unassigned and offer another time or cancellation. Operations can reassign only to an eligible accepting shop and records the reason.
+
+Source basis: Excel I2 I9 and M9; I9 is incomplete.
+
+### D12 Times and cancellation
+
+Offer two hour pickup windows between 9 AM and 6 PM India time for the next seven days, limited by each shop availability. Drop off uses only a business published site and open hours. The household can cancel or change the time before collection starts. After the worker starts travel, a change becomes a reschedule request for the operator. A missed visit keeps its reason and permits a new booking; do not claim completion.
+
+Source basis: Excel M2 M9; household task.
+
+### D13 Household estimates
+
+Do not require household material names, weights, or a stock estimate. Photos and the collection details are sufficient before handover. The shop records actual materials and weights. Leave household stock valuation out of the first version. Any displayed material rate is an offer or dated reference, never a promised final total before weighing.
+
+Source basis: Excel N2 to O8; current household rules.
+
+### D14 Weighing and worker pay
+
+The shop records material lines, measured quantities and agreed rates. An assigned worker records a collected total and evidence; the employer compares it with the completed shop receipt. The handover changes no stock or money again. The household sees and confirms or disputes the receipt before acknowledging payment. A rejected line is excluded from accepted quantity and kept in the history. Worker fees are a fixed agreed job fee for this version, disclosed before acceptance. There is no default failed visit charge, hidden deduction, or platform wage guarantee. The assigning business pays the worker and records the due date and acknowledgement.
+
+Source basis: Excel K14 P14 and field worker rows.
+
+### D15 Location tracking
+
+Use explicit foreground location permission only for the active task. The assigned operator and requester see only the location information needed for that task. Stop sharing on completion, cancellation, sign out, or revocation. Manual address and status entry remain available. Do not use a 30 metre trigger, photo location, or a map position as proof of handover or payment. Do not add background employee tracking in this version.
+
+Source basis: Excel I2 I9 U11 and row 36; current permission rules.
+
+### D16 Minimum price
+
+Businesses set their own offers and contract rates. Do not enforce one compulsory platform minimum rate. Keep dated indicative market information separate from binding offers. Historical prototype floor settings do not authorize a new trade restriction. An accepted order keeps its rate and terms after the public reference changes.
+
+Source basis: Excel J and K; Chat corrections and pricing section.
+
+### D17 Market rate board
+
+Show a business own current offer with its validity. Public reference information must identify its source and date; show unavailable when missing. Treat a business rate older than 24 hours as stale unless it has a longer explicit contract validity. Any future completed trade benchmark uses compatible grades and geography, excludes demo and self trades, and requires at least five independent contributors. It does not replace the agreed price.
+
+Source basis: Excel J2 unfinished; Chat reference price board.
+
+### D18 Stock adjustments
+
+Use the append only movement record as stock authority. A correction needs a reason and responsible owner or admin; affected completed trades are resolved by amendments rather than editing old quantities. Reserve and consume exact grams once. Use exact recorded acquisition and processing costs for value, with a separately labelled current offer value. Low stock alerts are opt in business settings rather than guessed industry thresholds.
+
+Source basis: Excel N and O; Chat stock controls.
+
+### D19 Matching and quotes
+
+Required matching checks are active permitted account, accepted material and grade, service area, available quantity or capacity, required valid evidence, and compatible handling. Rank eligible results by delivered net value when prices exist, then distance and earliest availability. A missing price is request a quote, not zero. Use direct quotes and accepted orders first; auctions and tender management are outside this version.
+
+Source basis: Chat eligibility and ranking; Excel M19 M38.
+
+### D20 Order types
+
+Use one complete accepted quantity per business order in this version. Retain the existing full collection, dispatch, receipt, cancellation, and refund policy. Do not add part deliveries, part acceptance, credit lines, instalments, or advances. Longer supply relationships can create repeated complete orders with their own agreed terms.
+
+Source basis: Chat buying and procurement examples; current bounded payment process.
+
+### D21 Money movement
+
+A shop pays a household directly and Luma records the separate payment. Keep Cashfree as the selected business payment provider. Live business collection and split settlement require its configured approved policy and provider acceptance. Do not simulate escrow or add a manual paid override. Rewards, gold, lending, and official certificate trading do not gain a money movement path by being listed as services.
+
+Source basis: Excel P to S; Review Notes 2; Chat payment alternatives; current rules.
+
+### D22 Payment and disputes
+
+Record household cash or UPI/bank payment with payer, recipient, exact amount, date, method, and household acknowledgement or a recorded dispute. Business charges are disclosed before checkout; the buyer pays the disclosed platform fee. Preserve current Cashfree payment, cancellation, and full remaining refund guards. Unknown payment remains pending until verified. Operations acknowledges disputes within one business day; keep all weighing and provider evidence. A refund does not itself restore stock.
+
+Source basis: Excel payment columns; Chat settlement sections.
+
+### D23 Tax and movement documents
+
+Store transaction facts and the reviewed rule version with each applicable document. Generate only supported commercial receipts and evidence drafts until an applicable official tax or movement rule is verified. Never infer a universal tax rate, consent duration, form number, or filing permission from the chat. Missing required legal evidence blocks that particular movement. This closes the product behavior without inventing legal facts.
+
+Source basis: Chat Parts A and F and later consignment correction.
+
+### D24 Processing rules
+
+Provide source labelled reference definitions for sorting, baling, washing, shredding, pellet, fibre, yarn, fabric, and garment records. Each business supplies its actual input, output, additions, residuals, measured loss, test method, and contract specification. A run closes only when quantities reconcile in exact grams and all required results are present. No universal yield or tolerance is invented. Draft reference definitions do not claim approved product quality.
+
+Source basis: Excel row 17; Chat PET and processing examples.
+
+### D25 Quality differences and returns
+
+Keep seller and receiver weights and test evidence separately. The accepted order defines the quantity basis and quality tests; no automatic blanket percentage tolerance or double deduction. A mismatch creates a hold and dispute. The responsible buyer reviewer decides accept or reject under the agreed complete quantity policy. A return requires an eligible destination, recorded freight payer, approved disposition, and reconciliation of stock, money, and claims.
+
+Source basis: Chat quality and 10,000 versus 9,820 kilogram example.
+
+### D26 Recurring and wet waste services
+
+Support a repeating collection schedule as separate dated requests. Changing or ending the schedule affects future requests only. Keep a missed visit and its reason. Wet waste uses a distinct service enquiry and processing record path and cannot enter ordinary dry recyclable trade. Specialist handling remains unavailable without its verified receiver and rules. Holidays are defined by the business availability calendar; do not create visits outside it.
+
+Source basis: Excel rows 22 40 48; Chat organic waste exclusions.
+
+### D27 Public programme agreements
+
+Use scoped programme workspaces and aggregate area reports. A municipal or rural partner sees only an explicitly shared programme, area, period, and stream. Do not assume an agreement with a named public body. Record coverage, trips, centre handovers, service references, and group income evidence. Public contract payments and welfare awards remain partner decisions and are not fabricated by Luma.
+
+Source basis: Excel rows 24 40 41 42.
+
+### D28 Specialist material scope
+
+Keep separate material families and reference sources for ordinary dry recyclables, textiles, electronics, batteries, tyres, used cooking oil, lubricating oil, industrial residues, and end of life vehicles. Commercial category is distinct from legal waste classification. Do not adopt either 359 or 419 as a verified official list. Unknown or restricted streams require a verified permitted route and cannot be booked as ordinary household scrap. Biomedical waste and controlled drug destruction are excluded from this version.
+
+Source basis: Chat industry counts and unprovided referenced attachments; Excel 39.
+
+### D29 Environmental reports and certificates
+
+Provide collection receipts, processing records, source history reports, and clearly labelled evidence packs. Record valid official references when supplied by an authorized issuer. Do not issue official EPR certificates, certified recycled content documents, vehicle scrapping certificates, or carbon credits as ordinary Luma reports. Track allocation within each approved scheme and withdraw affected evidence after an invalid source or return. Credit market execution is unavailable until its own provider conditions pass.
+
+Source basis: Excel rows 21 30 31 43; Chat claims; current carbon scope.
+
+### D30 Rewards and donations
+
+Donation and reward records can describe an enquiry or programme, but no balance with monetary value is promised or issued in this version. Do not adopt one point equals one rupee, coupons, or gold redemption without funded merchant terms. The interface shows unavailable for redemption. Direct donations require a named approved recipient and receipt; Luma does not quietly divert household proceeds.
+
+Source basis: Excel P2 to S2 and rows 23 45 50.
+
+### D31 Finance welfare and attendance
+
+Loans, insurance, welfare enrolment, staffing compliance, and attendance are scoped partner referrals or service records. The provider decides eligibility and handles its regulated service. Share only the specifically authorized information. Luma support tracks referral complaints without promising a loan, cover, government benefit, or employee monitoring capability.
+
+Source basis: Excel rows 25 27 36 46.
+
+### D32 Notice rules
+
+The account inbox is the record of user notices. Send existing configured SMS for essential collection and account events, and email for its existing invitation or recovery purposes. Optional push requires explicit device permission and generic lock screen text. Deduplicate each event. Non urgent reminders run from 8 AM to 8 PM India time. Payment and sign in security messages are immediate. WhatsApp and voice show unavailable until configured, without blocking the app path.
+
+Source basis: Excel M; Chat notices.
+
+### D33 Voice and language support
+
+Keep all 33 registered languages and script aware fonts. Verify English, Kannada, Arabic and Urdu layouts as representative coverage, then preserve key parity across all. Use icons with accessible text; permit assisted entry with the account holder consent. Keep phone browser and Expo behavior shared. Do not add a separate voice or WhatsApp product to finish this version.
+
+Source basis: Excel T and row 51; current translation rules.
+
+### D34 Retention and access withdrawal
+
+Private data follows record access. Revoking sharing removes later access immediately. Keep finalized operational and payment evidence for the published retention policy; the release must not publish a fabricated statutory period. Unsubmitted abandoned drafts expire after 30 days unless linked to an open issue. Pending uploads expire after 24 hours. Account removal removes access and optional profile data while preserving required anonymized or restricted audit evidence under the reviewed retention policy.
+
+Source basis: Chat privacy and audit; current record preservation.
+
+### D35 Uploads and paper entry
+
+Accept only supported image or document formats, validate actual content, and enforce existing upload limits. Use private R2 for the configured supported file scope and retain working Convex storage for existing identity or unconfigured uploads until the common private upload path is ready. Never make a bucket public. A wrong or expired required document needs replacement and keeps the action blocked. Paper logbook extraction is an AI assisted draft that a person confirms before it affects stock or money.
+
+Source basis: Excel row 15 and evidence columns.
+
+### D36 Automatic tasks
+
+Use Convex scheduling for short transactional follow up and local cleanup. Use Trigger.dev for bounded long reports, document extraction, and AI work. Each job has one scheduler owner, a unique operation key, visible progress, a deadline, an execution limit, and a recorded failure. No automatic retry for a paid GST or OTP operation. Internal work can retry up to three times with delay when it is safe to repeat. India time owns business schedules; stored timestamps use a consistent universal time.
+
+Source basis: Chat expiry and daily jobs; requested automatic work.
+
+### D37 AI assistance
+
+AI can suggest a material description, extract a document, translate a draft, or summarize source records. It cannot grant permissions, set binding tax, approve a hazardous route, issue official evidence, change confirmed quantities, or pay. A person confirms any proposed saved change. Keep existing server quotas and configured model budget. Without an approved configured budget, the optional AI service is unavailable and the manual path remains usable.
+
+Source basis: Chat AI limits; owner planning request.
+
+### D38 Support and recovery
+
+Provide one support record linked to the request, stock record, order, service, or payment. Operations handles collection and access issues; accounts handles money; a qualified reviewer handles specialist evidence. Acknowledge within one business day and escalate unresolved payment or safety issues immediately to the responsible operator. Target restoring records to the last successful daily backup within one business day. These are internal acceptance targets until a published support commitment is approved.
+
+Source basis: Excel V26; Chat resilience and acceptance checks.
+
+### D39 Prices and fees
+
+Use one site subscription per business activity bundle, not separate charges for buyer and seller roles. Keep essential household and worker access free. The target monthly business tiers are Trader Plus 499 rupees with 3 members, Centre 2,499 with 5, Yard 7,499 with 10, Processor 14,999 with 15, Recycler/Manufacturer from 29,999 with 25, Enterprise from 75,000, and institution reporting 2,499 to 9,999 by agreed scope. Live subscription collection stays off until supported billing and applicable tax configuration are verified. A future disclosed marketplace fee is 0.5 percent of accepted pre tax material value, paid by the buyer and capped at 5,000 rupees per order; external records and internal processing attract no automatic commission. No charge is collected merely because this target price list exists.
+
+Source basis: Chat multiple price tables; Excel platform fees if any.
+
+### D40 Final business approval
+
+The platform owner is the final business and release approver. The implementation team records evidence for each task and the configured providers. Ship the web release only after required checks and current Production verification. Expo iOS/Android device and store acceptance are deferred while that work is paused. Use the first available internal test participants and fictional isolated fixtures before real transactions. If a release fails, stop affected writes and restore the previous working release; preserve the new evidence for repair.
+
+Source basis: Chat launch gates; current release rules.

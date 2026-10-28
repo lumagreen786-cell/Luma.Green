@@ -14,6 +14,7 @@ export function Timeline({
   timeline: TrackedBooking["timeline"];
 }) {
   const t = useTranslations("track.timeline");
+  const tReview = useTranslations("track.review");
   const format = useFormat();
 
   return (
@@ -43,7 +44,9 @@ export function Timeline({
               </span>
               <span className={cn("flex flex-col", isLast ? "" : "pb-4")}>
                 <span className={cn(isLast && "font-medium")}>
-                  {t(entry.status)}
+                  {entry.status === "completed"
+                    ? tReview("title")
+                    : t(entry.status)}
                 </span>
                 <time
                   dateTime={new Date(entry.at).toISOString()}

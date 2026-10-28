@@ -1,6 +1,10 @@
 import { createClient, type GenericCtx } from "@convex-dev/better-auth";
 import { convex } from "@convex-dev/better-auth/plugins";
-import { APIError, createAuthMiddleware } from "better-auth/api";
+import {
+  APIError,
+  createAuthMiddleware,
+  getAuthoritativeSessionFromCtx,
+} from "better-auth/api";
 import { betterAuth, type BetterAuthOptions } from "better-auth/minimal";
 import { phoneNumber } from "better-auth/plugins";
 
@@ -9,6 +13,7 @@ import { components, internal } from "./_generated/api";
 import type { DataModel } from "./_generated/dataModel";
 import authConfig from "./auth.config";
 import authSchema from "./betterAuth/schema";
+import { isAuthAccountClosed } from "./lib/accountClosure";
 import { adminSessionExpiry, isAdminEmail } from "./lib/admin";
 import { sendLocalPhoneCode } from "./lib/authEmail";
 import { isIndianMobile, phoneEmail } from "./lib/phone";
@@ -130,6 +135,12 @@ export const createAuthOptions = (ctx: GenericCtx<DataModel>) =>
           // Look the user up through the component: Better Auth's endpoint
           // context isn't available to hooks inside the Convex runtime.
           before: async (session) => {
+            if (await isAuthAccountClosed(ctx, session.userId)) {
+              throw new APIError("FORBIDDEN", {
+                code: "ACCOUNT_CLOSED",
+                message: "This account is closed.",
+              });
+            }
             const user = await authComponent.getAnyUserById(
               ctx,
               session.userId,
@@ -147,6 +158,22 @@ export const createAuthOptions = (ctx: GenericCtx<DataModel>) =>
     },
     hooks: {
       before: createAuthMiddleware(async (hookCtx) => {
+        // Sign-out remains available after domain access is withdrawn.
+        if (hookCtx.path !== "/sign-out") {
+          const session = await getAuthoritativeSessionFromCtx(hookCtx);
+          if (session && (await isAuthAccountClosed(ctx, session.user.id))) {
+            throw new APIError("UNAUTHORIZED", {
+              code: "ACCOUNT_CLOSED",
+              message: "This account is closed.",
+            });
+          }
+        }
+        if (["/delete-user", "/delete-user/callback"].includes(hookCtx.path)) {
+          throw new APIError("FORBIDDEN", {
+            code: "DOMAIN_REMOVAL_REQUIRED",
+            message: "Use account removal.",
+          });
+        }
         if (
           hookCtx.path === "/update-user" &&
           hookCtx.body &&

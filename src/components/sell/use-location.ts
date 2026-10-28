@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import type { Point } from "../../../convex/lib/households";
 
@@ -23,14 +23,23 @@ function coarse(value: number): number {
 export function useLocation() {
   const [state, setState] = useState<LocationState>({ status: "off" });
 
+  const generation = useRef(0);
+  useEffect(
+    () => () => {
+      generation.current += 1;
+    },
+    [],
+  );
   const locate = useCallback(() => {
     if (!("geolocation" in navigator)) {
       setState({ status: "failed" });
       return;
     }
+    const current = ++generation.current;
     setState({ status: "locating" });
     navigator.geolocation.getCurrentPosition(
       (position) => {
+        if (current !== generation.current) return;
         setState({
           status: "on",
           point: {
@@ -40,6 +49,7 @@ export function useLocation() {
         });
       },
       () => {
+        if (current !== generation.current) return;
         setState({ status: "failed" });
       },
       { enableHighAccuracy: false, timeout: 15_000, maximumAge: 300_000 },
@@ -47,6 +57,7 @@ export function useLocation() {
   }, []);
 
   const stop = useCallback(() => {
+    generation.current += 1;
     setState({ status: "off" });
   }, []);
 

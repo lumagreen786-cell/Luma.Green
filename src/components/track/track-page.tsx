@@ -1,6 +1,6 @@
 "use client";
 
-import { useQuery } from "convex/react";
+import { useConvexAuth, useQuery } from "convex/react";
 import { SearchXIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -12,9 +12,10 @@ import { Link } from "@/i18n/navigation";
 
 import { api } from "../../../convex/_generated/api";
 import { ErrorBoundary, LoadError, SellUnavailable } from "../sell/states";
+import { CollectionSharing } from "./receipt-sharing";
 import { TrackView } from "./track-view";
 
-/** `/t/{token}`: a booking, live, for anyone holding the link. */
+/** Collection access requires a current session and record permission. */
 export function TrackPage({ token }: { token: string }) {
   if (!isConvexConfigured) return <SellUnavailable />;
   return (
@@ -25,9 +26,30 @@ export function TrackPage({ token }: { token: string }) {
 }
 
 function LiveTrack({ token }: { token: string }) {
-  const booking = useQuery(api.households.track, { token });
+  const t = useTranslations("track.review");
+  const auth = useConvexAuth();
+  const returnPath = `/t/${token}`;
+  const booking = useQuery(
+    api.households.track,
+    auth.isAuthenticated ? { token } : "skip",
+  );
+  if (!auth.isLoading && !auth.isAuthenticated)
+    return (
+      <Button asChild>
+        <Link href={`/login?next=${encodeURIComponent(returnPath)}`}>
+          {t("signIn")}
+        </Link>
+      </Button>
+    );
   if (booking === undefined) return <TrackSkeleton />;
-  return booking === null ? <TrackNotFound /> : <TrackView booking={booking} />;
+  return booking === null ? (
+    <>
+      <TrackNotFound />
+      <CollectionSharing token={token} owner={false} open />
+    </>
+  ) : (
+    <TrackView booking={booking} />
+  );
 }
 
 export function TrackSkeleton() {

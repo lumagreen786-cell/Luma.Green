@@ -10,7 +10,7 @@ function row(
     marketPaise?: number | null;
   } = {},
 ) {
-  const { myPaise = null, fallbackPaise = 1000, marketPaise = 1100 } = prices;
+  const { myPaise = 1000, fallbackPaise = 1000, marketPaise = 1100 } = prices;
   return { material: { code }, myPaise, fallbackPaise, marketPaise };
 }
 
@@ -23,9 +23,9 @@ describe("compareToMarket", () => {
 });
 
 describe("effectivePaise", () => {
-  it("uses the shop's price, else the city fallback", () => {
+  it("uses only the current shop offer", () => {
     expect(effectivePaise({ myPaise: 1450, fallbackPaise: 1400 })).toBe(1450);
-    expect(effectivePaise({ myPaise: null, fallbackPaise: 1400 })).toBe(1400);
+    expect(effectivePaise({ myPaise: null, fallbackPaise: 1400 })).toBeNull();
     expect(effectivePaise({ myPaise: null, fallbackPaise: null })).toBeNull();
   });
 });

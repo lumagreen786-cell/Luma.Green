@@ -1,4 +1,65 @@
+# Phone-based local acceptance
+
+Use `provision-phone.mts` for current phone-only authentication. It uses real
+Better Auth phone send/verify handlers and the private loopback delivery inbox.
+It never enables email/password sign-in, installs a fixed code, disables SMS
+limits or calls a live provider. The fixed persona phone mapping lives in
+`convex/lib/localAcceptance.ts`. The server verifies that exact mapping and its
+internal phone-email identity before creating a local domain fixture.
+
+Run with the existing local backend, inbox and web server. Keep the web server
+bind hostname equal to the hostname in `SITE_URL`. For
+`SITE_URL=http://localhost:3230`, start the local web server with:
+
+```sh
+pnpm exec next dev --webpack --hostname localhost --port 3230
+```
+
+Binding it to `127.0.0.1` while using a `localhost` site caused a same-path redirect
+loop in this setup. Use matching local hostnames; do not change Production routing
+or weaken authentication to work around the launch mismatch.
+
+Then run:
+
+```sh
+pnpm exec jiti scripts/local-acceptance/provision-phone.mts
+pnpm exec playwright test --config playwright.foundation.config.ts
+```
+
+Private browser storage is saved with mode 0600 under the ignored
+`.convex/local-acceptance/` directory (mode 0700). The runner keeps actual codes
+only in memory. Browser traces, video and screenshots are disabled for these
+session-bearing checks. Do not print or copy the private session artifact.
+
+The phone runner also provisions the existing reserved Saathi persona for
+`foundation-handover-phone.spec.ts`. That loopback-only case uses the real phone
+sessions for the shop, worker and household. It creates a photo-only booking and
+assigned job through authenticated APIs, then uses the actual employer and worker
+screens with reload checks. Collected 1,001 g versus received 1,000 g requires a
+reason and employer acknowledgement. Stock and payment projections are compared
+before and after the handover actions. The cash receipt is an explicit synthetic
+local declaration; no real payment or live provider is involved.
+
+The remaining instructions describe the deprecated email-based runner. It is
+retained as historical setup guidance. Current auth correctly rejects that
+runner; do not re-enable email/password access to make it pass.
+
+---
+
 # Disposable local acceptance accounts
+
+## Saved local configuration
+
+The foundation test used a separate anonymous local database. Its frontend
+selection is saved in ignored `.convex/local-acceptance/frontend.env`; backend
+settings and session artifacts stay in the same restricted directory. The normal
+root `.env.local` has been restored to cloud development. Before rerunning local
+acceptance, preserve the current root environment, select the saved local
+frontend settings, and verify all three URLs are loopback addresses. Do not run
+fixture setup against the cloud selection. Restore normal settings afterwards.
+Start Next with `--hostname localhost` when `SITE_URL` uses `localhost`; an
+explicit `127.0.0.1` bind can cause Next's internal locale rewrite to be treated
+as an external redirect. This is a launch setting, not an authentication bypass.
 
 This runner prepares synthetic accounts for the approved local browser test.
 It does not prepare production data or prove email, SMS, payment or compliance

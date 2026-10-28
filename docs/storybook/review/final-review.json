@@ -1,0 +1,152 @@
+{
+  "status": "final-reviewed",
+  "date": "2026-10-28",
+  "revision": "account-removal-and-worker-handover",
+  "storybookPages": 16,
+  "walkthroughPages": 10,
+  "storybookScreens": 6,
+  "walkthroughScreens": 8,
+  "buildId": "nlVAG-H0jjuVjitY0gGx9",
+  "captureReceipt": "docs/delivery/evidence/platform-foundation-2026-10-28/approved-book-captures.json",
+  "captureManifestSha256": "15519049b301e68d35119add0254898de531686cdd6d0573bd05344a19ebab84",
+  "sourceHashesChecked": 602,
+  "scope": "Approved selected isolated actual-component images with made-up data. No production, authentication, account closure or provider acceptance. Full102-image QA is separate.",
+  "artwork": "Original fictional six-panel source preserved; PDF clipping only.",
+  "previousArtifacts": "/Users/syedabdulmuqeeth/Downloads/Luma_Platform_Planning/Previous_Artifacts_2026-10-28",
+  "checks": [
+    "All16 storybook pages rendered and visually inspected.",
+    "All10 walkthrough pages rendered and visually inspected; revised material wording re-rendered and inspected;9 unchanged page hashes match inspected images.",
+    "Eight Word media objects match original screenshot hashes exactly.",
+    "Six storybook and eight walkthrough captions state Example screen - made-up data.",
+    "All14 child scenes remain under60words.",
+    "No draft labels or replacement glyphs; Expo pause remains explicit."
+  ],
+  "outputs": [
+    {
+      "path": "output/pdf/luma-green-platform-storybook.pdf",
+      "sha256": "7cc7b27d0ea7af31eb7398489332b002c37a01cb93e78e0ba9a68ceb43f11f97",
+      "bytes": 5893166,
+      "downloadCopy": "/Users/syedabdulmuqeeth/Downloads/Luma_Platform_Planning/Luma_Green_Platform_Storybook.pdf"
+    },
+    {
+      "path": "output/docx/luma-green-screen-walkthrough.docx",
+      "sha256": "1a127462065e7ccc0e87f653ef9742f5bfc346cf02c1ee07b61720f1239a002e",
+      "bytes": 624369,
+      "downloadCopy": "/Users/syedabdulmuqeeth/Downloads/Luma_Platform_Planning/Luma_Green_Screen_Walkthrough.docx"
+    },
+    {
+      "path": "output/pdf/luma-green-screen-walkthrough.pdf",
+      "sha256": "7a0541bd24c74af96348011a923d131b68a2d574669b67876e99658204a82fc1",
+      "bytes": 591449,
+      "downloadCopy": "/Users/syedabdulmuqeeth/Downloads/Luma_Platform_Planning/Luma_Green_Screen_Walkthrough.pdf"
+    }
+  ],
+  "storybookPageRenders": [
+    {
+      "page": 1,
+      "sha256": "63c2235156fb947f6df6c5b6ab97853b218f851e222398662cac3375afbcd32f"
+    },
+    {
+      "page": 2,
+      "sha256": "8fb86f56e2b667765dd4be560bd7011f60eded0061f6153da68e1843056ba8b0"
+    },
+    {
+      "page": 3,
+      "sha256": "a837d0f8103b19c13ed104f749f51e604b8d1c30c19626938392d1837ae5c6a8"
+    },
+    {
+      "page": 4,
+      "sha256": "b608fe1d8ce2aca7594b4719be589da2ab0a7af2b317e34a9749ac6b40aac0a6"
+    },
+    {
+      "page": 5,
+      "sha256": "93a22e59cba3fe694d948018dd65f098d342c8b6f0666c0ec9944529ba1e1482"
+    },
+    {
+      "page": 6,
+      "sha256": "bfb0fbc5671acaf332e49673f4ba1d2e4e82a8f2996dc721e763e3ab75df892a"
+    },
+    {
+      "page": 7,
+      "sha256": "b81f2b480e6063ecd5323eb770da697c994ca30ff10def15f66eff274c229d24"
+    },
+    {
+      "page": 8,
+      "sha256": "17e5c13cb7cb5c8f20bb04426eb8da0885d03ad1a1ba824046fb4272e65da4a5"
+    },
+    {
+      "page": 9,
+      "sha256": "9cbbe9ddfedbc22361673308cdb4e4dd8748ab94f464446b25d7915f7b8b6b23"
+    },
+    {
+      "page": 10,
+      "sha256": "ef1c53845a90b0e2df459d8757667c5a8d474a72eb8acb2ab41133781e07facf"
+    },
+    {
+      "page": 11,
+      "sha256": "95ec5e9bfb8af5bbc1e93a7ac68f373a496559b4c10cd3e27756d20e37bbff8e"
+    },
+    {
+      "page": 12,
+      "sha256": "088e4789ef25b7328df1cf63e125e15f6a3560fce726ea1538294edd9947533e"
+    },
+    {
+      "page": 13,
+      "sha256": "0bb8bde99fd7463577aeb608b34ed6fb8f941c8d01efb0987e6eadf487b2e967"
+    },
+    {
+      "page": 14,
+      "sha256": "9ef096fd76f1b8cd7a8e11ee32445bc1690f6312fff8e77126c7dd60b9355471"
+    },
+    {
+      "page": 15,
+      "sha256": "4c1015df2b9d25cbad3ce5861428e1711797a5d926322fde623417f3ca80bb57"
+    },
+    {
+      "page": 16,
+      "sha256": "3e401867f5f2027846ccd334bc70db25e494f4f2065ed30300b28aa4135548c5"
+    }
+  ],
+  "walkthroughPageRenders": [
+    {
+      "page": 1,
+      "sha256": "a3c31206a6dcc417f5592e9933a240148bccc2ce40f4a91f5818a6df2f2c9a53"
+    },
+    {
+      "page": 2,
+      "sha256": "102bfab198465202cbc7082fa252dcc3f8256cf7ec20ae47908fb773f298084b"
+    },
+    {
+      "page": 3,
+      "sha256": "0748f11b6c529e2e69ec3f04b2a2ff0842380957ba97efe2987d38c8b0380dcb"
+    },
+    {
+      "page": 4,
+      "sha256": "9a31110e90ea29e66a680e0f30b6281e4f048d2ddea38fd21a59f384280b4557"
+    },
+    {
+      "page": 5,
+      "sha256": "53687cff650e9e51498187f0393079d67ff6a8e76ad5d9d659e78e32d903405a"
+    },
+    {
+      "page": 6,
+      "sha256": "5e366a18d9b547b0e7c6fa64f769ebca5ecda5a163ed534c34b586a5c94f55b6"
+    },
+    {
+      "page": 7,
+      "sha256": "25e821462a7e39e0b4fa959350f84c2b1a967448683666db60aefe388d3a92de"
+    },
+    {
+      "page": 8,
+      "sha256": "e0e0aa5ee7552c7d9ce3a68d4f294ab03bf415f4121aec5add311f12f4f8ea89"
+    },
+    {
+      "page": 9,
+      "sha256": "967f1af31d1d50e6f84992d7d7c3fdfe9a12d372b87dec5ca4ded7dc8bdd228c"
+    },
+    {
+      "page": 10,
+      "sha256": "dbdab5b9d5d61051527fea91554f1bbdd788b931c95497a500871018c01010cd"
+    }
+  ]
+}

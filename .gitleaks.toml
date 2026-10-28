@@ -1,0 +1,45 @@
+title = "Luma.Green secret scan"
+
+[extend]
+useDefault = true
+
+# Keep all provider-specific rules. Narrow only generic-key false positives.
+[[rules]]
+id = "generic-api-key"
+
+[[rules.allowlists]]
+description = "Fixed synthetic auth secrets used only by isolated auth tests"
+condition = "AND"
+paths = ['''^convex/(auth-(email|sms|admin|two-factor)|investorDemoAuth|turnstile)\.test\.ts$''']
+regexes = ['''^(0123456789abcdef0123456789abcdef|test-secret-0123456789abcdef0123456789)$''']
+
+[[rules.allowlists]]
+description = "Report operation identifier, not a provider credential"
+condition = "AND"
+paths = ['''^convex/reportJobs\.test\.ts$''']
+regexes = ['''^operation-123$''']
+
+[[rules.allowlists]]
+description = "Service enquiry operation identifier, not a provider credential"
+condition = "AND"
+paths = ['''^convex/services\.test\.ts$''']
+regexes = ['''^enquiry-operation-001$''']
+
+[[rules.allowlists]]
+description = "Public fixture batch label, defined in investorDemoRoster.ts"
+condition = "AND"
+paths = ['''^docs/investor-demo/(development|production)-verification\.json$''', '''^scripts/investor-demo/(seed|verify)-records\.py$''']
+regexes = ['''^investor-2026-10-10$''']
+
+[[rules.allowlists]]
+description = "SHA-256 of named source or image inputs in screenshot manifests"
+condition = "AND"
+paths = ['''^docs/user-guide/.*\.json$''', '''^docs/delivery/evidence/platform-foundation-2026-10-28/(foundation-captures|approved-book-captures|approved-hashes)\.json$''']
+regexTarget = "line"
+regexes = ['''^\s*"[^"\r\n]+\.(ts|tsx|mts|js|mjs|cjs|json|png|webp|md)": "[a-f0-9]{64}",?\s*$''']
+
+[[rules.allowlists]]
+description = "Fixed removal enquiry operation identifier in its test and scanner probe"
+condition = "AND"
+paths = ['''^convex/accountRemoval\.test\.ts$''', '''^\.github/workflows/security\.yml$''']
+regexes = ['''^removal-enquiry-0001$''']

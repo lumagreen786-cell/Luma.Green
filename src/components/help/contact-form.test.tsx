@@ -14,6 +14,7 @@ const send = vi.hoisted(() => vi.fn());
 const search = vi.hoisted(() => ({ current: "" }));
 
 vi.mock("convex/react", () => ({
+  useQuery: vi.fn(),
   useConvexAuth: () => ({ isLoading: false, isAuthenticated: true }),
   useMutation: () => send,
 }));

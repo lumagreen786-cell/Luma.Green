@@ -28,7 +28,9 @@ import { Link } from "@/i18n/navigation";
 import { api } from "../../../convex/_generated/api";
 import { NotForYou, QueryBoundary } from "./guards";
 import { MaterialIcon } from "./material-icon";
+import { StockClosing } from "./stock-closing";
 import { StockIntake } from "./stock-intake";
+import { StockReport } from "./stock-report";
 import type { Stock, StockRow } from "./types";
 import { useBusiness } from "./use-shop";
 
@@ -74,11 +76,22 @@ function StockBody() {
   if (stock === undefined) return <ListSkeleton rows={4} />;
   return (
     <>
+      <StockReport />
+      <StockClosing />
       <div className="grid grid-cols-2 gap-4">
         <StatCard
           label={t("totalWeight")}
           value={format.weight(stock.totalGrams)}
           icon={WeightIcon}
+        />
+        <StatCard
+          label={t("recordedCost")}
+          value={
+            stock.totalCostPaise == null
+              ? "—"
+              : format.money(stock.totalCostPaise)
+          }
+          icon={IndianRupeeIcon}
         />
         <StatCard
           label={t("worth")}
@@ -203,6 +216,10 @@ function StockItem({ row, totalGrams }: { row: StockRow; totalGrams: number }) {
         <div className="flex shrink-0 flex-col items-end">
           <span className="text-xl font-semibold tabular-nums">
             {format.weight(row.grams)}
+          </span>
+          <span className="text-sm text-muted-foreground tabular-nums">
+            {t("recordedCost")}:{" "}
+            {row.costPaise == null ? "—" : format.money(row.costPaise)}
           </span>
           {row.valuePaise === null ? null : (
             <span className="text-sm text-muted-foreground tabular-nums">

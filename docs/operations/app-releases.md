@@ -1,5 +1,28 @@
 # App release and account checklist
 
+## Owner update — 28 October 2026
+
+Expo development and packaging are paused. Do not start more iOS or Android
+builds or store submissions until the owner resumes the work. The queued Android
+build was cancelled. Preserve the existing source changes. Web deployment and
+document work continue.
+
+## Current foundation release on 27 October 2026
+
+Expo development is resumed. The iOS and Android shells share the hosted web
+screens at `https://luma.green`, with iOS tested first. Electron is outside this
+release. Earlier proposals for a separate app hostname and a permanent mobile
+toolbar do not apply to this version. Keep the current web navigation visible.
+
+The mobile location bridge needs explicit foreground permission and the exact
+trusted document. Backgrounding, navigation, sign-out and unmount invalidate late
+results. Do not add background tracking. Optional push and signed updates remain
+off without their required configuration. No EAS account or project is assumed.
+
+Local type checks, policy tests and JavaScript exports do not prove a signed
+installer, physical-device acceptance, TestFlight or store approval. Record those
+separately in the delivery handoff.
+
 > Status: implementation runbook, 2 October 2026. Apple, Google Play and Expo/EAS
 > accounts are not yet set up, as confirmed by the founder. No account, paid build, store
 > submission, signing identity or update feed was created by this change.

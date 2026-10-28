@@ -30,6 +30,8 @@ import { useCanOperate } from "@/components/workspace/permissions";
 import { Link } from "@/i18n/navigation";
 
 import { api } from "../../../convex/_generated/api";
+import { isListingOfferCurrent } from "../../../convex/lib/rateValidity";
+import { EmployerPaymentControls } from "../collection/operations-controls";
 import { BuyButton } from "./buy-dialog";
 import { ListingCard } from "./listing-card";
 import { isAvailableTradeAction, recycledFirst, tradeTotals } from "./logic";
@@ -70,6 +72,7 @@ function Home({ org }: { org: OrgWorkspace }) {
           actions={<QuickActions />}
         />
       </div>
+      <EmployerPaymentControls />
       <WaitingForYou trades={trades} showSide />
       <Stats trades={trades} listings={mine} />
       <LatestOffers offers={offers} recycled={recycled} isMaker={isMaker} />
@@ -154,7 +157,9 @@ function Stats({
 function OnSaleStat({ listings }: { listings: ListingView[] }) {
   const t = useTranslations("market.home.stats");
   const format = useFormat();
-  const open = listings.filter((listing) => listing.status === "open");
+  const open = listings.filter(
+    (listing) => listing.status === "open" && isListingOfferCurrent(listing),
+  );
   const grams = open.reduce((sum, listing) => sum + listing.grams, 0);
   return (
     <StatCard

@@ -83,7 +83,7 @@ function booking(overrides: Partial<TrackedBooking> = {}): TrackedBooking {
     },
     receipt: undefined,
     points: undefined,
-    isMine: false,
+    isMine: true,
     canCancel: true,
     createdAt: Date.UTC(2026, 8, 29, 6),
   };
@@ -150,22 +150,28 @@ describe("TrackView", () => {
     expect(cancel).toHaveBeenCalledWith({ token: "k7q2m9xw4c" });
   });
 
-  it("asks someone with just the link to confirm their number first", async () => {
-    render(withIntl(<TrackView booking={booking()} />));
-    await userEvent.click(
-      screen.getByRole("button", { name: "Cancel booking" }),
+  it("does not show financial controls to a collection helper", () => {
+    render(
+      withIntl(
+        <TrackView booking={booking({ isMine: false, canCancel: false })} />,
+      ),
     );
     expect(
-      screen.getByRole("dialog", { name: "Confirm it's you" }),
-    ).toBeInTheDocument();
+      screen.queryByRole("button", { name: "Accept" }),
+    ).not.toBeInTheDocument();
     expect(
-      screen.getByRole("textbox", { name: "Mobile number" }),
-    ).toBeInTheDocument();
+      screen.queryByRole("button", { name: "Invite helper" }),
+    ).not.toBeInTheDocument();
+    expect(screen.queryByText("You'll get about ₹174")).not.toBeInTheDocument();
   });
 
   it("hides cancelling from someone else who is signed in", () => {
     auth.isAuthenticated = true;
-    render(withIntl(<TrackView booking={booking()} />));
+    render(
+      withIntl(
+        <TrackView booking={booking({ isMine: false, canCancel: false })} />,
+      ),
+    );
     expect(
       screen.queryByRole("button", { name: "Cancel booking" }),
     ).not.toBeInTheDocument();
@@ -202,11 +208,15 @@ describe("TrackView", () => {
       ),
     );
     expect(
-      screen.getByRole("heading", { level: 1, name: "Done! You got ₹168.78" }),
+      screen.getByRole("heading", { level: 1, name: "Review the receipt" }),
     ).toBeInTheDocument();
     expect(screen.getByText("+16 recycle points")).toBeInTheDocument();
     expect(screen.getByText("11.6 kg at ₹14.50/kg")).toBeInTheDocument();
-    expect(screen.getByText("Weighed and paid")).toBeInTheDocument();
+    expect(screen.queryByText("Weighed and paid")).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Accept" })).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Confirm payment received" }),
+    ).not.toBeInTheDocument();
     expect(
       screen.queryByRole("button", { name: "Cancel booking" }),
     ).not.toBeInTheDocument();

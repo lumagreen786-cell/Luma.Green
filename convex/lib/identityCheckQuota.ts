@@ -2,6 +2,7 @@ import { ConvexError } from "convex/values";
 
 import type { Id } from "../_generated/dataModel";
 import type { MutationCtx } from "../_generated/server";
+import { canSpendAfterRemoval } from "./accountClosure";
 import { DAILY_CHECK_LIMIT } from "./identityChecks";
 import { indiaToday } from "./onboarding";
 
@@ -19,6 +20,12 @@ export async function spendIdentityAttempt(
     .withIndex("by_day", (q) => q.eq("day", day))
     .unique();
   if (profileId) {
+    const profile = await ctx.db.get("profiles", profileId);
+    if (
+      profile?.closedAt !== undefined ||
+      (profile?.phone && !(await canSpendAfterRemoval(ctx, profile.phone)))
+    )
+      throw new ConvexError("CHECK_LIMIT");
     const person = await ctx.db
       .query("identityPersonCheckDays")
       .withIndex("by_profile_day", (q) =>

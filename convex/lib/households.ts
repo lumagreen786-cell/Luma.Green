@@ -17,7 +17,7 @@ export const BASKET_MAX_ITEMS = 20;
 /** The most one material can weigh in one booking, in kg. */
 export const ITEM_MAX_KG = 500;
 /** A booking can be for today or up to this many days ahead. */
-export const SLOT_DAYS_AHEAD = 7;
+export const SLOT_DAYS_AHEAD = 6;
 /** How many bookings a household can have waiting at once. */
 export const MAX_OPEN_BOOKINGS = 5;
 
@@ -30,9 +30,9 @@ export type SlotWindow = (typeof SLOT_WINDOWS)[number];
 /** Each window's hours, India time: from the first to the second. */
 export const SLOT_WINDOW_HOURS: Record<SlotWindow, readonly [number, number]> =
   {
-    morning: [8, 12],
-    afternoon: [12, 16],
-    evening: [16, 20],
+    morning: [9, 11],
+    afternoon: [12, 14],
+    evening: [16, 18],
   };
 
 export interface BasketItem {

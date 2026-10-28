@@ -1,22 +1,17 @@
 import { ConvexError, v } from "convex/values";
 
-import type { Doc, Id } from "./_generated/dataModel";
-import { mutation, type MutationCtx, query } from "./_generated/server";
+import type { Id } from "./_generated/dataModel";
+import { mutation, query } from "./_generated/server";
 import { requireAdmin } from "./lib/access";
 import { findProfile } from "./lib/applicationAccess";
+import { indiaToday } from "./lib/onboarding";
 import { priceProblem } from "./lib/review";
 import { vFamily } from "./lib/validators";
 import { vNames } from "./lib/views";
 
-/**
- * The admin's price tables — docs/product/pricing.md. Per city and material:
- * the minimum a kabadiwala may pay households (the floor), and the fallback
- * used where a shop hasn't set a price. Integer paise per kilo.
- */
+/** Indicative city references only. They never change a business offer. */
 
 const MAX_MATERIALS = 200;
-/** Rate cards holding one material: every shop in the pilot, with room. */
-const MAX_RATE_CARDS = 2000;
 
 function cityFrom(input: string): string {
   const city = input.trim();
@@ -69,11 +64,7 @@ export const list = query({
   },
 });
 
-/**
- * Sets one material's floor and fallback for a city. Raising the floor above
- * a shop's price lifts that price to the floor (docs/product/pricing.md,
- * rule 2); returns how many shop prices were lifted.
- */
+/** Set indicative reference bounds. The response retains a zero lifted count. */
 export const set = mutation({
   args: {
     city: v.string(),
@@ -129,13 +120,7 @@ export const set = mutation({
       });
     }
 
-    const lifted = await liftRatesToFloor(ctx, {
-      city,
-      materialCode: material.code,
-      floorPaise: next.floorPaise,
-      actorProfileId,
-      now,
-    });
+    const lifted = 0;
 
     await ctx.db.insert("auditLog", {
       actorProfileId,
@@ -160,48 +145,69 @@ export const set = mutation({
   },
 });
 
-/** Lifts every shop price in the city that's now under the floor. */
-async function liftRatesToFloor(
-  ctx: MutationCtx,
-  change: {
-    city: string;
-    materialCode: string;
-    floorPaise: number;
-    actorProfileId: Id<"profiles"> | undefined;
-    now: number;
+/** A dated, source-labelled indication. It does not change any agreed order. */
+export const recordMarket = mutation({
+  args: {
+    city: v.string(),
+    materialCode: v.string(),
+    date: v.string(),
+    paisePerKg: v.number(),
+    sourceLabel: v.string(),
+    observedAt: v.number(),
+    expiresAt: v.optional(v.number()),
   },
-): Promise<number> {
-  const rates = await ctx.db
-    .query("rateCards")
-    .withIndex("by_material", (q) => q.eq("materialCode", change.materialCode))
-    .take(MAX_RATE_CARDS);
-  const cityOf = new Map<Id<"orgs">, Doc<"orgs">["city"] | null>();
-  let lifted = 0;
-  for (const rate of rates) {
-    if (rate.paisePerKg >= change.floorPaise) continue;
-    if (!cityOf.has(rate.orgId)) {
-      const org = await ctx.db.get("orgs", rate.orgId);
-      cityOf.set(rate.orgId, org?.city ?? null);
-    }
-    if (cityOf.get(rate.orgId) !== change.city) continue;
-    await ctx.db.patch("rateCards", rate._id, {
-      paisePerKg: change.floorPaise,
-      updatedAt: change.now,
+  returns: v.id("marketPrices"),
+  handler: async (ctx, args) => {
+    const admin = await requireAdmin(ctx);
+    const city = cityFrom(args.city);
+    const sourceLabel = args.sourceLabel.trim();
+    if (!sourceLabel || sourceLabel.length > 200)
+      throw new ConvexError("INVALID_REFERENCE");
+    if (
+      !Number.isSafeInteger(args.paisePerKg) ||
+      args.paisePerKg <= 0 ||
+      args.paisePerKg > 1_000_000
+    )
+      throw new ConvexError("INVALID_PRICE");
+    const now = Date.now();
+    if (
+      !Number.isSafeInteger(args.observedAt) ||
+      args.observedAt > now ||
+      args.observedAt < 0 ||
+      indiaToday(args.observedAt) !== args.date
+    )
+      throw new ConvexError("INVALID_DATE");
+    if (
+      args.expiresAt !== undefined &&
+      (!Number.isSafeInteger(args.expiresAt) ||
+        args.expiresAt <= args.observedAt)
+    )
+      throw new ConvexError("INVALID_DATE");
+    const material = await ctx.db
+      .query("materials")
+      .withIndex("by_code", (q) => q.eq("code", args.materialCode))
+      .unique();
+    if (!material?.active) throw new ConvexError("UNKNOWN_MATERIAL");
+    const actor = await findProfile(ctx, admin._id);
+    const id = await ctx.db.insert("marketPrices", {
+      ...args,
+      city,
+      sourceLabel,
     });
     await ctx.db.insert("auditLog", {
-      orgId: rate.orgId,
-      actorProfileId: change.actorProfileId,
-      action: "rateCard.liftedToFloor",
-      entityTable: "rateCards",
-      entityId: rate._id,
+      actorProfileId: actor?._id,
+      action: "marketPrice.recorded",
+      entityTable: "marketPrices",
+      entityId: id,
       metadata: {
-        materialCode: change.materialCode,
-        from: rate.paisePerKg,
-        to: change.floorPaise,
+        materialCode: args.materialCode,
+        city,
+        date: args.date,
+        sourceLabel,
+        observedAt: args.observedAt,
       },
-      createdAt: change.now,
+      createdAt: now,
     });
-    lifted += 1;
-  }
-  return lifted;
-}
+    return id;
+  },
+});

@@ -33,6 +33,7 @@ const DEMO_TABLES = [
   "applications",
   "materials",
   "inventory",
+  "inventoryMovements",
   "manufacturerStockIntakes",
   "rateCards",
   "industrialFacilities",
@@ -515,6 +516,19 @@ async function stock(write: Write, operator: Operator, now: number) {
       grams: 500_000,
       updatedAt: now,
     });
+    await write(
+      `stock-movement:${operator.persona.key}:${material.code}`,
+      "inventoryMovements",
+      {
+        orgId: operator.orgId,
+        actorProfileId: operator.profileId,
+        materialCode: material.code,
+        deltaGrams: 500_000,
+        costDeltaPaise: null,
+        sourceKey: `investor-demo:${operator.persona.key}:${material.code}`,
+        createdAt: now,
+      },
+    );
     if (
       operator.persona.access.kind === "org" &&
       operator.persona.access.orgKind === "manufacturer" &&

@@ -32,5 +32,6 @@ export const auditShareTables = {
     revokedAt: v.optional(v.number()),
   })
     .index("by_org", ["orgId"])
-    .index("by_recipient", ["recipientProfileId"]),
+    .index("by_recipient", ["recipientProfileId"])
+    .index("by_creator", ["createdBy"]),
 };

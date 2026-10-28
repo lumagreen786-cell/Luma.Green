@@ -1,0 +1,1777 @@
+{
+  "version": 1,
+  "updatedOn": "2026-10-28",
+  "purpose": "Offline fixture and source-scope crosswalk. Complete accounting does not mean complete implementation or production acceptance.",
+  "sourceAudit": "docs/delivery/source-coverage-2026-10-27.md",
+  "productionReferenceInitialization": {
+    "function": "internal.catalogue.initializeReferenceDefinitions",
+    "arguments": {
+      "operatorReference": "release-reference-required"
+    },
+    "emptyDatabaseCounts": {
+      "materials": 51,
+      "operationalDefinitions": 32
+    },
+    "syntheticFixtureWrites": false,
+    "rateOrFactorWrites": false,
+    "newPetMaterialsActive": false,
+    "specialistMaterialsActive": false
+  },
+  "offlineFixtureBoundary": {
+    "runtime": "convex-test only",
+    "guard": "AUTH_DEV_MODE for demo seed; AUTH_LOCAL_TEST_MODE plus loopback origins for participant acceptance seed",
+    "providerResults": "Injected synthetic Cashfree adapter result; fetch throws if any network call is attempted",
+    "approval": "No real provider approval, handling permit, certificate, bank transfer, SMS, location or factory execution is proved"
+  },
+  "linkedScenarios": [
+    {
+      "id": "household-order-return",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "links a synthetic household receipt, stock movement, inspected order and returned claim without calling providers",
+      "stages": [
+        "household receipt acceptance",
+        "direct cash acknowledgement as user report",
+        "booking-keyed integer stock movement",
+        "self-declared booking reference on physical lot",
+        "accepted lot inspection",
+        "frozen listing and order specification",
+        "unpaid dispatch refused",
+        "injected provider adapter result",
+        "real dispatch and receipt mutations",
+        "scheme declaration",
+        "full return agreement withdraws allocation",
+        "full measured return dispatch and receipt",
+        "financial reconciliation refused without further provider evidence"
+      ],
+      "limitations": [
+        "Booking-to-lot sourceReference is a declaration, not verified automatic provenance.",
+        "No refund or settlement is invented to complete reconciliation."
+      ]
+    },
+    {
+      "id": "service-recipient-access",
+      "testSuite": "convex/services.test.ts",
+      "testTitle": "keeps drafts private and permits only the chosen approved recipient after submission"
+    },
+    {
+      "id": "programme-share-revoke",
+      "testSuite": "convex/services.test.ts",
+      "testTitle": "shares only a fixed aggregate snapshot and revokes later recipient reads"
+    },
+    {
+      "id": "pet-side-stream-mass-balance",
+      "testSuite": "convex/traceability.test.ts",
+      "testTitle": "creates PET and side-stream child lots with exact mass balance"
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "R001",
+      "capability": "Verified phone and required second factors",
+      "sourceLocator": "S F2:G2 T2; C 23085-23094",
+      "scopeDecisions": ["D08", "D09"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/auth-sms.test.ts",
+        "convex/auth-two-factor.test.ts"
+      ],
+      "acceptanceLimit": "Provider delivery and current signed-in browser acceptance remain separate",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Provider delivery and current signed-in browser acceptance remain separate"
+    },
+    {
+      "id": "R002",
+      "capability": "PAN to GST discovery and confirmed business details",
+      "sourceLocator": "S H26 V26; C 22345-22363",
+      "scopeDecisions": ["D08"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/identityDiscovery.test.ts",
+        "convex/identityChecks.test.ts"
+      ],
+      "acceptanceLimit": "No paid call made for this audit",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "No paid call made for this audit"
+    },
+    {
+      "id": "R003",
+      "capability": "Business organizations sites and shared membership",
+      "sourceLocator": "S G9:H19; C 56-195",
+      "scopeDecisions": ["D03", "D05"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/organizations.test.ts",
+        "convex/applications.test.ts",
+        "convex/workspace.test.ts",
+        "src/components/workspace/workspace-page.test.tsx"
+      ],
+      "acceptanceLimit": "Limits and every role transition need current acceptance",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Limits and every role transition need current acceptance"
+    },
+    {
+      "id": "R004",
+      "capability": "Named member roles and revocation",
+      "sourceLocator": "S E9:E19 H9:H19",
+      "scopeDecisions": ["D03", "D05", "D09"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/workspace.test.ts",
+        "convex/stakeholderAccounts.test.ts"
+      ],
+      "acceptanceLimit": "Old spreadsheet role names map to owner admin member viewer",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Old spreadsheet role names map to owner admin member viewer"
+    },
+    {
+      "id": "R005",
+      "capability": "Suspended operators retain necessary dispute and receipt reads",
+      "sourceLocator": "S B2:B51; C 1385-1460",
+      "scopeDecisions": ["D10"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": ["convex/workspace.test.ts"],
+      "acceptanceLimit": "Active-only requireOrg/report source checks need a tested restricted read path",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Restricted own-workspace reads allow suspended organizations; writes and cross-workspace reads remain denied. Current browser acceptance remains separate."
+    },
+    {
+      "id": "R006",
+      "capability": "Recorded corrections and audit trail",
+      "sourceLocator": "S D9:D19 K9:K19; C 12203-12322",
+      "scopeDecisions": ["D04"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/quality.test.ts",
+        "convex/stakeholderAccounts.test.ts",
+        "convex/collaboration.test.ts"
+      ],
+      "acceptanceLimit": "Hash signatures in pasted code are proposals, not an accepted extra requirement",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Hash signatures in pasted code are proposals, not an accepted extra requirement"
+    },
+    {
+      "id": "R007",
+      "capability": "Collection-specific adult sharing with revocation",
+      "sourceLocator": "S G2:H8",
+      "scopeDecisions": ["D06"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": ["convex/households.test.ts"],
+      "acceptanceLimit": "Work in progress; prove live revocation and helper limits",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Work in progress; prove live revocation and helper limits"
+    },
+    {
+      "id": "R008",
+      "capability": "Child and family-wide accounts",
+      "sourceLocator": "S E2:E8 G2:H8",
+      "scopeDecisions": ["D06"],
+      "sourceAuditStatus": "L",
+      "disposition": "not_applicable_to_first_version",
+      "testSuites": [],
+      "acceptanceLimit": "Children excluded; whole-family unrestricted sharing replaced",
+      "evidenceLevel": "scope_or_external_evidence_only",
+      "sourceAuditLimit": "Children excluded; whole-family unrestricted sharing replaced"
+    },
+    {
+      "id": "R009",
+      "capability": "Household pickup/drop-off request and private photos",
+      "sourceLocator": "S I2 M2 V2; C 1478-1492",
+      "scopeDecisions": ["D11", "D12", "D13"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": ["convex/households.test.ts"],
+      "acceptanceLimit": "Current browser flow and actual stored private bytes need release evidence",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Current browser flow and actual stored private bytes need release evidence"
+    },
+    {
+      "id": "R010",
+      "capability": "Eligible first acceptance location window and capacity",
+      "sourceLocator": "S I2 I9 M9",
+      "scopeDecisions": ["D11"],
+      "sourceAuditStatus": "P",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/collectionScheduling.test.ts",
+        "convex/shop.test.ts"
+      ],
+      "acceptanceLimit": "Prove concurrent acceptance, eligibility, capacity and two-hour unassigned behavior together",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Prove concurrent acceptance, eligibility, capacity and two-hour unassigned behavior together"
+    },
+    {
+      "id": "R011",
+      "capability": "Availability rescheduling missed visits cancellation",
+      "sourceLocator": "S M2 M9 M15",
+      "scopeDecisions": ["D12"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/collectionScheduling.test.ts",
+        "src/components/collection/operations-controls.test.tsx"
+      ],
+      "acceptanceLimit": "Current work in progress; UI capture and end-to-end acceptance pending",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Current work in progress; UI capture and end-to-end acceptance pending"
+    },
+    {
+      "id": "R012",
+      "capability": "Household stock estimates and indicative valuation",
+      "sourceLocator": "S N2:O8",
+      "scopeDecisions": ["D13"],
+      "sourceAuditStatus": "C",
+      "disposition": "not_applicable_to_first_version",
+      "testSuites": [],
+      "acceptanceLimit": "No required estimate or household stock valuation in first version",
+      "evidenceLevel": "scope_or_external_evidence_only",
+      "sourceAuditLimit": "No required estimate or household stock valuation in first version"
+    },
+    {
+      "id": "R013",
+      "capability": "Measured receipt confirmation rejected lines dispute",
+      "sourceLocator": "S K2 K14 P9 V2; C 12323-12408",
+      "scopeDecisions": ["D14", "D22"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/households.test.ts",
+        "convex/foundationSeedAcceptance.test.ts",
+        "convex/shop.test.ts"
+      ],
+      "acceptanceLimit": "Verify partial rejected lines do not silently add accepted stock",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Verify partial rejected lines do not silently add accepted stock"
+    },
+    {
+      "id": "R014",
+      "capability": "Direct household cash UPI or bank evidence acknowledgement",
+      "sourceLocator": "S P9:Q9 P14:Q14",
+      "scopeDecisions": ["D21", "D22"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/households.test.ts",
+        "convex/foundationSeedAcceptance.test.ts",
+        "convex/shop.test.ts"
+      ],
+      "acceptanceLimit": "Record evidence is not proof of bank transfer",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Record evidence is not proof of bank transfer"
+    },
+    {
+      "id": "R015",
+      "capability": "Saathi job offers assignment and fixed worker fee",
+      "sourceLocator": "S M14 K14 P14 U14",
+      "scopeDecisions": ["D14"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/saathi.test.ts",
+        "convex/collectionScheduling.test.ts"
+      ],
+      "acceptanceLimit": "Worker due-date and acknowledgement current implementation needs acceptance",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Worker due-date and acknowledgement current implementation needs acceptance"
+    },
+    {
+      "id": "R016",
+      "capability": "Assigned Saathi collection and employer handover",
+      "sourceLocator": "S N14:O14 I14",
+      "scopeDecisions": ["D01", "D14", "D18"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/workerHandovers.test.ts",
+        "src/components/collection/worker-handovers.test.tsx"
+      ],
+      "acceptanceLimit": "Assigned-job-to-employer receipt linkage records collected/received grams, variance and evidence without moving stock or pay. Local worker/employer browser acceptance exists. Independent worker-owned day-bag trading was a candidate proposal and is outside this version; actual production and field evidence remain separate.",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Assigned-job-to-employer receipt linkage records collected/received grams, variance and evidence without moving stock or pay. Local worker/employer browser acceptance exists. Independent worker-owned day-bag trading was a candidate proposal and is outside this version; actual production and field evidence remain separate."
+    },
+    {
+      "id": "R017",
+      "capability": "Foreground task location only",
+      "sourceLocator": "S I2 G14 U11 U36",
+      "scopeDecisions": ["D15"],
+      "sourceAuditStatus": "C",
+      "disposition": "device_or_operational_evidence_block",
+      "testSuites": [],
+      "acceptanceLimit": "30 metre proof and background employee tracking rejected; device permission testing pending",
+      "evidenceLevel": "scope_or_external_evidence_only",
+      "sourceAuditLimit": "30 metre proof and background employee tracking rejected; device permission testing pending"
+    },
+    {
+      "id": "R018",
+      "capability": "Business independent buy/sell offers and locked terms",
+      "sourceLocator": "S J9:K19; C 9555-9740",
+      "scopeDecisions": ["D16", "D17"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/market.test.ts",
+        "convex/shop.test.ts",
+        "convex/lib/rateValidity.test.ts"
+      ],
+      "acceptanceLimit": "Work in progress; old floor seed/history must not control new offers",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Work in progress; old floor seed/history must not control new offers"
+    },
+    {
+      "id": "R019",
+      "capability": "Compulsory platform floor pricing",
+      "sourceLocator": "S J9 K9 J14; C 11777-11963",
+      "scopeDecisions": ["D16"],
+      "sourceAuditStatus": "C",
+      "disposition": "not_applicable_to_first_version",
+      "testSuites": [],
+      "acceptanceLimit": "Rejected; accepted rate remains binding",
+      "evidenceLevel": "scope_or_external_evidence_only",
+      "sourceAuditLimit": "Rejected; accepted rate remains binding"
+    },
+    {
+      "id": "R020",
+      "capability": "Dated reference prices and unavailable or stale states",
+      "sourceLocator": "S J2 L2:L19; C 1210-1384",
+      "scopeDecisions": ["D17"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/stock.test.ts",
+        "convex/publicData.test.ts",
+        "convex/lib/rateValidity.test.ts"
+      ],
+      "acceptanceLimit": "No current market provider response or live price verified",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "No current market provider response or live price verified"
+    },
+    {
+      "id": "R021",
+      "capability": "Independent completed-trade benchmark",
+      "sourceLocator": "S J2 L9; C 11777-11856",
+      "scopeDecisions": ["D17"],
+      "sourceAuditStatus": "L",
+      "disposition": "not_applicable_to_first_version",
+      "testSuites": [],
+      "acceptanceLimit": "Future only; five independent compatible contributors required",
+      "evidenceLevel": "scope_or_external_evidence_only",
+      "sourceAuditLimit": "Future only; five independent compatible contributors required"
+    },
+    {
+      "id": "R022",
+      "capability": "Exact stock movements reservation and receipt",
+      "sourceLocator": "S N9:N19; C 9249-9486",
+      "scopeDecisions": ["D18"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/lib/inventoryLedger.test.ts",
+        "convex/foundationSeedAcceptance.test.ts",
+        "convex/stockIntake.test.ts",
+        "convex/market.test.ts"
+      ],
+      "acceptanceLimit": "Fresh work; verify no write path changes inventory without movement",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Fresh work; verify no write path changes inventory without movement"
+    },
+    {
+      "id": "R023",
+      "capability": "Stock acquisition and processing cost valuation",
+      "sourceLocator": "S O9:O19; C 9555-9740",
+      "scopeDecisions": ["D18"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/lib/processingCosts.test.ts",
+        "convex/processingCosts.test.ts",
+        "convex/stockIntake.test.ts"
+      ],
+      "acceptanceLimit": "Exact input/process cost allocation and explicit manufacturer intake cost have code and focused local checks. Unknown costs remain unknown; cost does not prove title or tax valuation. Combined release checks and current browser/Production acceptance remain separate.",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Exact input/process cost allocation and explicit manufacturer intake cost have code and focused local checks. Unknown costs remain unknown; cost does not prove title or tax valuation. Combined release checks and current browser/Production acceptance remain separate."
+    },
+    {
+      "id": "R024",
+      "capability": "Stock adjustments daily closing low-stock alerts",
+      "sourceLocator": "S N9 N15 N16 O10",
+      "scopeDecisions": ["D18"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/stockClosing.test.ts",
+        "convex/lib/stockClosingSnapshot.test.ts"
+      ],
+      "acceptanceLimit": "Daily India-date closing, opt-in crossing alerts and reasoned owner/admin corrections have code owners and focused local checks. Exact cost, reservations, retries, suspended/viewer reads and inbox privacy are covered. Combined checks and current browser/Production acceptance remain separate.",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Daily India-date closing, opt-in crossing alerts and reasoned owner/admin corrections have code owners and focused local checks. Exact cost, reservations, retries, suspended/viewer reads and inbox privacy are covered. Combined checks and current browser/Production acceptance remain separate."
+    },
+    {
+      "id": "R025",
+      "capability": "Ordinary material listing and direct buying",
+      "sourceLocator": "S I9:I19 M9:M19; C 578-688",
+      "scopeDecisions": ["D01", "D19"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/market.test.ts",
+        "convex/foundationSeedAcceptance.test.ts",
+        "src/components/market/market-page.test.tsx"
+      ],
+      "acceptanceLimit": "No live trade or payment made",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "No live trade or payment made"
+    },
+    {
+      "id": "R026",
+      "capability": "Eligible matching ranked by delivered net value distance availability",
+      "sourceLocator": "S M19 M38; C 21870-21900",
+      "scopeDecisions": ["D19"],
+      "sourceAuditStatus": "P",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/market.test.ts",
+        "convex/lib/marketRanking.test.ts",
+        "convex/demand.test.ts"
+      ],
+      "acceptanceLimit": "Active material/family gates are partial; delivered cost, area, capacity and deterministic ranking need proof",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Exact material/specification groups rank known material-plus-freight cost, straight-line distance and recorded availability; unknown freight remains quote-required. Current area, capacity, permit and provider evidence still require joint acceptance; no new verified transport service is claimed."
+    },
+    {
+      "id": "R027",
+      "capability": "Demand supplier qualification agreement and releases",
+      "sourceLocator": "S M19 M38; C 578-688 23904-23964",
+      "scopeDecisions": ["D19", "D20"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/sourcing.test.ts",
+        "convex/demand.test.ts",
+        "src/components/sourcing/sourcing-page.test.tsx"
+      ],
+      "acceptanceLimit": "Release agreement is not proof of end-to-end procurement accounting",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Release agreement is not proof of end-to-end procurement accounting"
+    },
+    {
+      "id": "R028",
+      "capability": "RFx auctions tender and negotiation suite",
+      "sourceLocator": "S M19 M38; C 23921-23964 24582-24587",
+      "scopeDecisions": ["D19"],
+      "sourceAuditStatus": "L",
+      "disposition": "not_applicable_to_first_version",
+      "testSuites": [],
+      "acceptanceLimit": "Tender/auction excluded from first version; broader RFx proposal not selected",
+      "evidenceLevel": "scope_or_external_evidence_only",
+      "sourceAuditLimit": "Tender/auction excluded from first version; broader RFx proposal not selected"
+    },
+    {
+      "id": "R029",
+      "capability": "Complete quantity accepted paid dispatch receipt order",
+      "sourceLocator": "S M16:M19; C 12410-12504",
+      "scopeDecisions": ["D20", "D21"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/cashfreeLifecycle.test.ts",
+        "convex/foundationSeedAcceptance.test.ts",
+        "convex/market.test.ts"
+      ],
+      "acceptanceLimit": "Provider acceptance and local policy checks are separate",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Provider acceptance and local policy checks are separate"
+    },
+    {
+      "id": "R030",
+      "capability": "Partial delivery part acceptance advance and instalments",
+      "sourceLocator": "S R16:R19; C 23583 24136 24709",
+      "scopeDecisions": ["D20"],
+      "sourceAuditStatus": "C",
+      "disposition": "not_applicable_to_first_version",
+      "testSuites": [],
+      "acceptanceLimit": "Rejected in favor of repeated complete orders",
+      "evidenceLevel": "scope_or_external_evidence_only",
+      "sourceAuditLimit": "Rejected in favor of repeated complete orders"
+    },
+    {
+      "id": "R031",
+      "capability": "Cashfree collection refund and split settlement",
+      "sourceLocator": "S P16:S19; C 12000-12202",
+      "scopeDecisions": ["D21", "D22"],
+      "sourceAuditStatus": "B",
+      "disposition": "provider_or_external_evidence_block",
+      "testSuites": [
+        "convex/cashfreeLifecycle.test.ts",
+        "convex/cashfreePayments.test.ts"
+      ],
+      "acceptanceLimit": "Live default-off; provider approval immutable policy vendor readiness and settlement evidence required",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Live default-off; provider approval immutable policy vendor readiness and settlement evidence required"
+    },
+    {
+      "id": "R032",
+      "capability": "Commercial receipts invoices and external evidence",
+      "sourceLocator": "S U9 U15 U34; C 1009-1209",
+      "scopeDecisions": ["D23"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/commercialEvidence.test.ts",
+        "convex/returnsClaims.test.ts",
+        "convex/foundationSeedAcceptance.test.ts",
+        "src/components/market/invoice-page.test.tsx"
+      ],
+      "acceptanceLimit": "Offline linked tests exercise full physical return and claim withdrawal. Refund and settlement acceptance still require actual provider evidence.",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Commercial evidence does not establish official tax generation"
+    },
+    {
+      "id": "R033",
+      "capability": "Official GST invoice e-way bill hazardous manifest filing",
+      "sourceLocator": "S U9 U29 U34; C 11467-11776 22581-22646",
+      "scopeDecisions": ["D23", "D28"],
+      "sourceAuditStatus": "B",
+      "disposition": "provider_or_external_evidence_block",
+      "testSuites": [
+        "convex/returnsClaims.test.ts",
+        "convex/commercialEvidence.test.ts",
+        "convex/traceability.test.ts"
+      ],
+      "acceptanceLimit": "Reviewed legal rule version and authorized connection required; no official filing tested",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Reviewed legal rule version and authorized connection required; no official filing tested"
+    },
+    {
+      "id": "R034",
+      "capability": "Universal GST thresholds consent duration forms and tax rates",
+      "sourceLocator": "S U34; C 1009-1209 11467-11776",
+      "scopeDecisions": ["D23"],
+      "sourceAuditStatus": "C",
+      "disposition": "not_applicable_to_first_version",
+      "testSuites": ["convex/traceability.test.ts"],
+      "acceptanceLimit": "Conflicting chat arithmetic/legal defaults rejected; no legal claim accepted from source",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Conflicting chat arithmetic/legal defaults rejected; no legal claim accepted from source"
+    },
+    {
+      "id": "R035",
+      "capability": "Material family form grade and industry reference search",
+      "sourceLocator": "S C17 C38 C39; C 415-577 20927-21599",
+      "scopeDecisions": ["D24", "D28"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/lib/industryReference.test.ts",
+        "convex/traceability.test.ts",
+        "convex/operationalCatalogue.test.ts"
+      ],
+      "acceptanceLimit": "Source-labelled workbook_unverified references; not official category approval",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Source-labelled workbook_unverified references; not official category approval"
+    },
+    {
+      "id": "R036",
+      "capability": "PET process-stage reference definitions",
+      "sourceLocator": "S C17; C 196-414",
+      "scopeDecisions": ["D24"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": ["convex/catalogue.test.ts", "convex/quality.test.ts"],
+      "acceptanceLimit": "21 definitions; new materials inactive; reference seed execution not performed",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "21 definitions; new materials inactive; reference seed execution not performed"
+    },
+    {
+      "id": "R037",
+      "capability": "Lots custody ownership and source lineage",
+      "sourceLocator": "S H9 N17 N18; C 56-195 22049-22092",
+      "scopeDecisions": ["D24", "D29"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/traceability.test.ts",
+        "convex/production.test.ts"
+      ],
+      "acceptanceLimit": "Multi-owner chain and access need current end-to-end example",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Multi-owner chain and access need current end-to-end example"
+    },
+    {
+      "id": "R038",
+      "capability": "Multi-input process multiple outputs residuals loss mass balance",
+      "sourceLocator": "S H17 N17; C 196-414 12518-12603",
+      "scopeDecisions": ["D24"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/traceability.test.ts",
+        "convex/production.test.ts",
+        "src/components/operations/production-page.test.tsx"
+      ],
+      "acceptanceLimit": "No universal yield/tolerance or actual facility acceptance implied",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "No universal yield/tolerance or actual facility acceptance implied"
+    },
+    {
+      "id": "R039",
+      "capability": "Manufacturing recipes batches blends and source content records",
+      "sourceLocator": "S C19:C20; C 1509-1521",
+      "scopeDecisions": ["D24", "D29"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/production.test.ts",
+        "convex/quality.test.ts",
+        "src/components/operations/production-page.test.tsx"
+      ],
+      "acceptanceLimit": "A source-content declaration is not a certified recycled content document",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "A source-content declaration is not a certified recycled content document"
+    },
+    {
+      "id": "R040",
+      "capability": "Hot wash implies food contact or PP/HDPE identity",
+      "sourceLocator": "S C17; C 196-414",
+      "scopeDecisions": ["D24"],
+      "sourceAuditStatus": "C",
+      "disposition": "not_applicable_to_first_version",
+      "testSuites": ["convex/traceability.test.ts"],
+      "acceptanceLimit": "Rejected; composition and product suitability need actual tests",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Rejected; composition and product suitability need actual tests"
+    },
+    {
+      "id": "R041",
+      "capability": "Separate sender receiver weight QC review and quality hold",
+      "sourceLocator": "S H17 H18; C 9487-9554 12410-12504",
+      "scopeDecisions": ["D25"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/quality.test.ts",
+        "convex/qualityFiles.test.ts",
+        "convex/stakeholderAccounts.test.ts"
+      ],
+      "acceptanceLimit": "Current quality completion work must be verified",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Current quality completion work must be verified"
+    },
+    {
+      "id": "R042",
+      "capability": "Return destination freight payer approved disposition reconciliation",
+      "sourceLocator": "S M18 M19; C 23219-23249 23813-23825",
+      "scopeDecisions": ["D25"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/returnsClaims.test.ts",
+        "convex/foundationSeedAcceptance.test.ts"
+      ],
+      "acceptanceLimit": "Full quantity to eligible original seller only; physical movements are tested offline. Actual live collection, full refund and settlement reversal evidence still gate financial reconciliation.",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Full quantity to eligible original seller only; physical movements are tested offline. Actual live collection, full refund and settlement reversal evidence still gate financial reconciliation."
+    },
+    {
+      "id": "R043",
+      "capability": "Automatic five percent loss or double quality/weight deductions",
+      "sourceLocator": "S O17 O18; C 11420-11466 11964-11999",
+      "scopeDecisions": ["D24", "D25"],
+      "sourceAuditStatus": "C",
+      "disposition": "local_suite_linked",
+      "testSuites": ["convex/services.test.ts"],
+      "acceptanceLimit": "Private service or programme records have offline tests. Actual partner, collection, treatment, programme or donation execution remains unavailable without real providers and recipient approval. Suite coverage does not prove each site-specific browser journey.",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Source code fixed tolerances rejected; accepted order controls tests and quantity basis"
+    },
+    {
+      "id": "R044",
+      "capability": "Recurring dated dry collection and future stop",
+      "sourceLocator": "S V2 M22 M40; C 1478-1492",
+      "scopeDecisions": ["D26"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/collectionScheduling.test.ts",
+        "convex/services.test.ts"
+      ],
+      "acceptanceLimit": "Private service or programme records have offline tests. Actual partner, collection, treatment, programme or donation execution remains unavailable without real providers and recipient approval. Suite coverage does not prove each site-specific browser journey.",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Current implementation; business holiday calendar and missed visits must be tested"
+    },
+    {
+      "id": "R045",
+      "capability": "Wet-waste enquiry and separate service processing path",
+      "sourceLocator": "S C48 N48 U48; C 22328-22344",
+      "scopeDecisions": ["D26", "D28"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": ["convex/services.test.ts"],
+      "acceptanceLimit": "Separate wet-service enquiry exists. It does not execute treatment or grant a permitted receiver; specialist live execution remains unavailable.",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Separate wet-service enquiry exists. It does not execute treatment or grant a permitted receiver; specialist live execution remains unavailable."
+    },
+    {
+      "id": "R046",
+      "capability": "Institution scoped collections and stream reports",
+      "sourceLocator": "S C22 H22 V22; C 21954-21966",
+      "scopeDecisions": ["D01", "D27"],
+      "sourceAuditStatus": "P",
+      "disposition": "local_suite_linked",
+      "testSuites": ["convex/services.test.ts"],
+      "acceptanceLimit": "Recurring collection and reported programme/aggregate-sharing owners exist. Prove authorized institution use end to end. D26/D27 do not select a compulsory extra programme-to-recurrence record link or a verified public agreement.",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Recurring collection and reported programme/aggregate-sharing owners exist. Prove authorized institution use end to end. D26/D27 do not select a compulsory extra programme-to-recurrence record link or a verified public agreement."
+    },
+    {
+      "id": "R047",
+      "capability": "Municipal programme coverage trips handovers income evidence",
+      "sourceLocator": "S C24 C40:C42 H40:H42; C 22378-22395",
+      "scopeDecisions": ["D27"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": ["convex/services.test.ts"],
+      "acceptanceLimit": "Reported area, period, stream, coverage, trips, handovers, grams and group-income records; aggregate snapshot access and revocation tested. No public agreement or audited income implied.",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Reported area, period, stream, coverage, trips, handovers, grams and group-income records; aggregate snapshot access and revocation tested. No public agreement or audited income implied."
+    },
+    {
+      "id": "R048",
+      "capability": "Scoped audit evidence recipient expiry revoke",
+      "sourceLocator": "S I15 I24 I25; C 22049-22092",
+      "scopeDecisions": ["D27", "D29"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": ["convex/qualityFiles.test.ts"],
+      "acceptanceLimit": "Share is specific evidence; not area-wide public-body access",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Share is specific evidence; not area-wide public-body access"
+    },
+    {
+      "id": "R049",
+      "capability": "Reviewed facility activity scope and controlled destinations",
+      "sourceLocator": "S C17 C18 C39; C 21044-21071 22345-22363",
+      "scopeDecisions": ["D28"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/complianceReview.test.ts",
+        "convex/industrialProfiles.test.ts"
+      ],
+      "acceptanceLimit": "Actual permits and permitted receiver verification remain external",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Actual permits and permitted receiver verification remain external"
+    },
+    {
+      "id": "R050",
+      "capability": "Distinct electronics batteries tyres oils ELV textile families",
+      "sourceLocator": "S C39; C 22855-22958 23289-23300",
+      "scopeDecisions": ["D28"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/specialistReferences.test.ts",
+        "convex/catalogue.test.ts"
+      ],
+      "acceptanceLimit": "Eight distinct source categories and eleven inactive, unverified specialist references have ordinary-route guards. Total initialization is 51 materials and 32 draft definitions. Actual legal classification, verified specialist receiver/routes and treatment execution remain unavailable.",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Eight distinct source categories and eleven inactive, unverified specialist references have ordinary-route guards. Total initialization is 51 materials and 32 draft definitions. Actual legal classification, verified specialist receiver/routes and treatment execution remain unavailable."
+    },
+    {
+      "id": "R051",
+      "capability": "Hazardous treatment transport and authorized disposal execution",
+      "sourceLocator": "S C32 C33 C38 C39; C 22441-22854",
+      "scopeDecisions": ["D28"],
+      "sourceAuditStatus": "B",
+      "disposition": "provider_or_external_evidence_block",
+      "testSuites": [
+        "convex/complianceReview.test.ts",
+        "convex/traceability.test.ts"
+      ],
+      "acceptanceLimit": "Controlled disposition record exists; no live specialized movement/provider authority verified",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Controlled disposition record exists; no live specialized movement/provider authority verified"
+    },
+    {
+      "id": "R052",
+      "capability": "Biomedical controlled-drug destruction and pharma returns",
+      "sourceLocator": "S C38; C 21610-21735 22819-22854",
+      "scopeDecisions": ["D28"],
+      "sourceAuditStatus": "L",
+      "disposition": "not_applicable_to_first_version",
+      "testSuites": [],
+      "acceptanceLimit": "Explicit exclusions; paracetamol chat is reference proposal, not permission",
+      "evidenceLevel": "scope_or_external_evidence_only",
+      "sourceAuditLimit": "Explicit exclusions; paracetamol chat is reference proposal, not permission"
+    },
+    {
+      "id": "R053",
+      "capability": "359 or 419 official industry count",
+      "sourceLocator": "S Review Notes; C 415-577 20991-21599",
+      "scopeDecisions": ["D28"],
+      "sourceAuditStatus": "C",
+      "disposition": "not_applicable_to_first_version",
+      "testSuites": [],
+      "acceptanceLimit": "Neither count verified; unprovided referenced PDF/attachments cannot be claimed read",
+      "evidenceLevel": "scope_or_external_evidence_only",
+      "sourceAuditLimit": "Neither count verified; unprovided referenced PDF/attachments cannot be claimed read"
+    },
+    {
+      "id": "R054",
+      "capability": "Evidence packs and ordinary source history reports",
+      "sourceLocator": "S C21 C25 C30 C31; C 22049-22092",
+      "scopeDecisions": ["D29"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": ["convex/insights.test.ts", "convex/reportJobs.test.ts"],
+      "acceptanceLimit": "Report capability is separate from configured long report execution",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Report capability is separate from configured long report execution"
+    },
+    {
+      "id": "R055",
+      "capability": "Scheme allocation withdrawal after invalid source or return",
+      "sourceLocator": "S C21 C30 C31 C43; C 23132-23141",
+      "scopeDecisions": ["D29"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/returnsClaims.test.ts",
+        "convex/foundationSeedAcceptance.test.ts"
+      ],
+      "acceptanceLimit": "Unverified declared allocations are quantity bounded and withdrawn on accepted return or invalid source. This is not official scheme approval or certificate issuance.",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Unverified declared allocations are quantity bounded and withdrawn on accepted return or invalid source. This is not official scheme approval or certificate issuance."
+    },
+    {
+      "id": "R056",
+      "capability": "Official EPR GRS vehicle and carbon certificate execution",
+      "sourceLocator": "S C21 C30 C31 C43; C 19737-19878 20828-20872",
+      "scopeDecisions": ["D29"],
+      "sourceAuditStatus": "B",
+      "disposition": "provider_or_external_evidence_block",
+      "testSuites": [
+        "convex/commercialEvidence.test.ts",
+        "convex/insights.test.ts"
+      ],
+      "acceptanceLimit": "May store authorized external references; cannot mint official certificates or credits",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "May store authorized external references; cannot mint official certificates or credits"
+    },
+    {
+      "id": "R057",
+      "capability": "Donation programme enquiry approved recipient receipt",
+      "sourceLocator": "S P2 C23 C45 C50; C 1385-1460",
+      "scopeDecisions": ["D30"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": ["convex/services.test.ts"],
+      "acceptanceLimit": "Private donation and reward enquiries are recorded. Actual donation transfer/receipt and funded redemption require their separate approved paths and remain unavailable.",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Private donation and reward enquiries are recorded. Actual donation transfer/receipt and funded redemption require their separate approved paths and remain unavailable."
+    },
+    {
+      "id": "R058",
+      "capability": "One point equals rupee coupons gold balances",
+      "sourceLocator": "S R2:S2 R14:S14 C45",
+      "scopeDecisions": ["D30"],
+      "sourceAuditStatus": "C",
+      "disposition": "not_applicable_to_first_version",
+      "testSuites": [],
+      "acceptanceLimit": "Monetary rewards and gold redemption unavailable; no funded terms",
+      "evidenceLevel": "scope_or_external_evidence_only",
+      "sourceAuditLimit": "Monetary rewards and gold redemption unavailable; no funded terms"
+    },
+    {
+      "id": "R059",
+      "capability": "Partner service enquiry referrals scoped sharing complaints",
+      "sourceLocator": "S C27:C29 C32:C36 C44:C51; C 22040-22048",
+      "scopeDecisions": ["D07", "D31"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": ["convex/services.test.ts"],
+      "acceptanceLimit": "Chosen approved recipient access, withdrawal and linked support are implemented and tested locally. No provider booking or paid execution is proved.",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Chosen approved recipient access, withdrawal and linked support are implemented and tested locally. No provider booking or paid execution is proved."
+    },
+    {
+      "id": "R060",
+      "capability": "Loans insurance welfare staffing statutory services",
+      "sourceLocator": "S C25 C27 C36 C46; C 22307-22326",
+      "scopeDecisions": ["D31"],
+      "sourceAuditStatus": "B",
+      "disposition": "provider_or_external_evidence_block",
+      "testSuites": ["convex/services.test.ts"],
+      "acceptanceLimit": "Provider eligibility and explicit scoped sharing needed; no regulated execution verified",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Provider eligibility and explicit scoped sharing needed; no regulated execution verified"
+    },
+    {
+      "id": "R061",
+      "capability": "Attendance background employee tracking and platform wage promise",
+      "sourceLocator": "S U11 U14 C36",
+      "scopeDecisions": ["D14", "D15", "D31"],
+      "sourceAuditStatus": "C",
+      "disposition": "not_applicable_to_first_version",
+      "testSuites": [],
+      "acceptanceLimit": "Scoped referral only; background employee tracking excluded",
+      "evidenceLevel": "scope_or_external_evidence_only",
+      "sourceAuditLimit": "Scoped referral only; background employee tracking excluded"
+    },
+    {
+      "id": "R062",
+      "capability": "Account inbox deduplicated notices",
+      "sourceLocator": "S M2:M51; C 1385-1460",
+      "scopeDecisions": ["D32"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": ["convex/notifications.test.ts"],
+      "acceptanceLimit": "Essential SMS configured delivery is separate evidence",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Essential SMS configured delivery is separate evidence"
+    },
+    {
+      "id": "R063",
+      "capability": "Quiet hours essential immediate notifications",
+      "sourceLocator": "S M9 M14; C 1385-1460",
+      "scopeDecisions": ["D32"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": ["convex/notifications.test.ts", "convex/push.test.ts"],
+      "acceptanceLimit": "Fresh current work; prove nonurgent notices use India 08:00-20:00",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Fresh current work; prove nonurgent notices use India 08:00-20:00"
+    },
+    {
+      "id": "R064",
+      "capability": "WhatsApp voice IVR cross-posted social and society apps",
+      "sourceLocator": "S F2 F14 U2 C49 C51; Review Notes D68:D77",
+      "scopeDecisions": ["D07", "D32", "D33"],
+      "sourceAuditStatus": "B",
+      "disposition": "provider_or_external_evidence_block",
+      "testSuites": [],
+      "acceptanceLimit": "Configured partner needed; app/manual route remains usable; no extra product required",
+      "evidenceLevel": "scope_or_external_evidence_only",
+      "sourceAuditLimit": "Configured partner needed; app/manual route remains usable; no extra product required"
+    },
+    {
+      "id": "R065",
+      "capability": "33 languages accessible icons RTL script fonts",
+      "sourceLocator": "S T2:T51; C 21954-21966",
+      "scopeDecisions": ["D33"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": ["convex/reportJobs.test.ts"],
+      "acceptanceLimit": "Key presence is not full translation quality; representative current visual matrix pending",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Key presence is not full translation quality; representative current visual matrix pending"
+    },
+    {
+      "id": "R066",
+      "capability": "Retention revocation draft expiry upload expiry account removal",
+      "sourceLocator": "S D2 D9 G2; C 24182-24222",
+      "scopeDecisions": ["D34"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/accountRemoval.test.ts",
+        "convex/auth-two-factor.test.ts",
+        "src/components/account/account-removal.test.tsx",
+        "src/components/account/account-removal-session.test.tsx"
+      ],
+      "acceptanceLimit": "Recent full-auth removal, explicit ownership/work holds, immediate access withdrawal, profile scrub, bounded cleanup and restricted review have code and local checks. Same-phone history/grants and paid-limit reset are blocked. Disposable local phone acceptance exists; legal retention approval, historical erasure decisions and Production acceptance remain separate.",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Recent full-auth removal, explicit ownership/work holds, immediate access withdrawal, profile scrub, bounded cleanup and restricted review have code and local checks. Same-phone history/grants and paid-limit reset are blocked. Disposable local phone acceptance exists; legal retention approval, historical erasure decisions and Production acceptance remain separate."
+    },
+    {
+      "id": "R067",
+      "capability": "Private uploads validation record access and replacement",
+      "sourceLocator": "S H9 H15; C 21998-22014",
+      "scopeDecisions": ["D35"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": ["convex/files.test.ts", "convex/qualityFiles.test.ts"],
+      "acceptanceLimit": "Private configured R2 is separate from Convex fallback and live provider acceptance",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Private configured R2 is separate from Convex fallback and live provider acceptance"
+    },
+    {
+      "id": "R068",
+      "capability": "Paper logbook extraction human-confirmed draft",
+      "sourceLocator": "S F15 N15; C 22015-22039",
+      "scopeDecisions": ["D35", "D37"],
+      "sourceAuditStatus": "P",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/reportJobs.test.ts",
+        "convex/photoEstimates.test.ts"
+      ],
+      "acceptanceLimit": "The optional paper OCR draft and human-confirmation workflow is not implemented. D37 permits optional AI unavailable while manual entry works. This is missing optional code, not merely waiting for a provider key; photo estimates and report jobs do not complete it.",
+      "evidenceLevel": "optional_workflow_not_implemented",
+      "sourceAuditLimit": "The optional paper OCR draft and human-confirmation workflow is not implemented. D37 permits optional AI unavailable while manual entry works. This is missing optional code, not merely waiting for a provider key; photo estimates and report jobs do not complete it.",
+      "implementationState": "optional_workflow_not_implemented",
+      "manualPath": "convex/stockIntake.ts"
+    },
+    {
+      "id": "R069",
+      "capability": "Bounded durable report jobs progress dedupe failure",
+      "sourceLocator": "S U25; C 1461-1545",
+      "scopeDecisions": ["D36"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": ["convex/reportJobs.test.ts"],
+      "acceptanceLimit": "Trigger configuration and execution acceptance remain separate",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Trigger configuration and execution acceptance remain separate"
+    },
+    {
+      "id": "R070",
+      "capability": "Safe transactional scheduling India time",
+      "sourceLocator": "S K9 M9 M22; C 1461-1545",
+      "scopeDecisions": ["D36"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/collectionScheduling.test.ts",
+        "convex/notifications.test.ts"
+      ],
+      "acceptanceLimit": "No automatic paid retry allowed; current scheduler changes need regression checks",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "No automatic paid retry allowed; current scheduler changes need regression checks"
+    },
+    {
+      "id": "R071",
+      "capability": "Optional AI suggestions document translation and summary",
+      "sourceLocator": "S N2 F15; C 24587 24798",
+      "scopeDecisions": ["D37"],
+      "sourceAuditStatus": "B",
+      "disposition": "provider_or_external_evidence_block",
+      "testSuites": ["convex/photoEstimates.test.ts"],
+      "acceptanceLimit": "Manual path works; approved budget provider configuration and human confirmation required",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Manual path works; approved budget provider configuration and human confirmation required"
+    },
+    {
+      "id": "R072",
+      "capability": "Linked support ownership response update escalation",
+      "sourceLocator": "S V26; C 1461-1545",
+      "scopeDecisions": ["D38"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/support.test.ts",
+        "src/components/admin/support/support-inbox.test.tsx"
+      ],
+      "acceptanceLimit": "Fresh changes; prove linked record permission and money/safety escalation",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Fresh changes; prove linked record permission and money/safety escalation"
+    },
+    {
+      "id": "R073",
+      "capability": "Backup restore and pilot performance acceptance",
+      "sourceLocator": "S V26; C 1461-1545 24949-24954",
+      "scopeDecisions": ["D02", "D38"],
+      "sourceAuditStatus": "P",
+      "disposition": "device_or_operational_evidence_block",
+      "testSuites": [],
+      "acceptanceLimit": "No restore drill or 50-concurrent/100-request workload measurement in this audit",
+      "evidenceLevel": "scope_or_external_evidence_only",
+      "sourceAuditLimit": "No restore drill or 50-concurrent/100-request workload measurement in this audit"
+    },
+    {
+      "id": "R074",
+      "capability": "Published target site subscription tiers billing disabled",
+      "sourceLocator": "S S9:S51; C 1210-1384 10017-10189",
+      "scopeDecisions": ["D39"],
+      "sourceAuditStatus": "B",
+      "disposition": "provider_or_external_evidence_block",
+      "testSuites": [],
+      "acceptanceLimit": "Pricing policy is decided; no billing subscription entitlement owner proved",
+      "evidenceLevel": "scope_or_external_evidence_only",
+      "sourceAuditLimit": "Pricing policy is decided; no billing subscription entitlement owner proved"
+    },
+    {
+      "id": "R075",
+      "capability": "Disclosed buyer commission cap with approved tax/provider policy",
+      "sourceLocator": "S S9:S51; C 1210-1384",
+      "scopeDecisions": ["D39"],
+      "sourceAuditStatus": "B",
+      "disposition": "provider_or_external_evidence_block",
+      "testSuites": [
+        "convex/cashfreeLifecycle.test.ts",
+        "convex/lib/commercialPricing.test.ts"
+      ],
+      "acceptanceLimit": "No fee collection authorized just by target pricing; exact policy verification required",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "No fee collection authorized just by target pricing; exact policy verification required"
+    },
+    {
+      "id": "R076",
+      "capability": "Software SaaS discovery licence renewal SSO governance",
+      "sourceLocator": "S F19; C 23430-24799",
+      "scopeDecisions": ["D01", "D19", "D39"],
+      "sourceAuditStatus": "L",
+      "disposition": "not_applicable_to_first_version",
+      "testSuites": [],
+      "acceptanceLimit": "Broader generic procurement proposal not selected as a Luma operating product",
+      "evidenceLevel": "scope_or_external_evidence_only",
+      "sourceAuditLimit": "Broader generic procurement proposal not selected as a Luma operating product"
+    },
+    {
+      "id": "R077",
+      "capability": "Budget hierarchies ERP automatic reorder predictive pricing",
+      "sourceLocator": "S H19; C 23768-23798 24127-24143 24582-24587",
+      "scopeDecisions": ["D05", "D19", "D37"],
+      "sourceAuditStatus": "L",
+      "disposition": "not_applicable_to_first_version",
+      "testSuites": [],
+      "acceptanceLimit": "Not selected first-version scope; no silent implementation commitment from repeated chat drafts",
+      "evidenceLevel": "scope_or_external_evidence_only",
+      "sourceAuditLimit": "Not selected first-version scope; no silent implementation commitment from repeated chat drafts"
+    },
+    {
+      "id": "R078",
+      "capability": "PostgreSQL PostGIS FastAPI Keycloak Redis alternate stack",
+      "sourceLocator": "S F2:F51; C 689-1008 22969-22974 23311-23428",
+      "scopeDecisions": ["D01", "D36"],
+      "sourceAuditStatus": "D",
+      "disposition": "not_applicable_to_first_version",
+      "testSuites": [],
+      "acceptanceLimit": "Pasted architecture proposal superseded by Next.js Convex Trigger R2",
+      "evidenceLevel": "scope_or_external_evidence_only",
+      "sourceAuditLimit": "Pasted architecture proposal superseded by Next.js Convex Trigger R2"
+    },
+    {
+      "id": "R079",
+      "capability": "SQL Python routes mock GSTN generated legal certificates",
+      "sourceLocator": "S U29 U34; C 10492-20926",
+      "scopeDecisions": ["D23", "D28", "D29"],
+      "sourceAuditStatus": "D",
+      "disposition": "not_applicable_to_first_version",
+      "testSuites": [],
+      "acceptanceLimit": "Untrusted sample code and simulated legal success are discarded implementation proposals",
+      "evidenceLevel": "scope_or_external_evidence_only",
+      "sourceAuditLimit": "Untrusted sample code and simulated legal success are discarded implementation proposals"
+    },
+    {
+      "id": "R080",
+      "capability": "Expo shared hosted screens iOS then Android",
+      "sourceLocator": "S F2 F9 F14 F15; C 689-1008",
+      "scopeDecisions": ["D01", "D33", "D40"],
+      "sourceAuditStatus": "L",
+      "disposition": "not_applicable_to_first_version",
+      "testSuites": ["apps/mobile/test/navigation.test.ts"],
+      "acceptanceLimit": "Owner paused Expo iOS and Android on 28 October. Preserve existing changes; native packaging, device and store acceptance are outside the current web release.",
+      "evidenceLevel": "scope_decision_only",
+      "sourceAuditLimit": "Owner paused Expo iOS and Android on 28 October. Preserve existing changes; native packaging, device and store acceptance are outside the current web release."
+    },
+    {
+      "id": "R081",
+      "capability": "Electron desktop rollout",
+      "sourceLocator": "S F2 F9 F15",
+      "scopeDecisions": ["D01"],
+      "sourceAuditStatus": "L",
+      "disposition": "not_applicable_to_first_version",
+      "testSuites": [],
+      "acceptanceLimit": "Explicitly outside this version",
+      "evidenceLevel": "scope_or_external_evidence_only",
+      "sourceAuditLimit": "Explicitly outside this version"
+    },
+    {
+      "id": "R082",
+      "capability": "All participant linked private fixtures and current screenshot proof",
+      "sourceLocator": "S C2:C51; C 20122-20926",
+      "scopeDecisions": ["D40"],
+      "sourceAuditStatus": "P",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/foundationSeedAcceptance.test.ts",
+        "convex/foundationSeedCoverage.test.ts"
+      ],
+      "acceptanceLimit": "All 84 IDs, 28 participant keys and bounded linked offline scenarios are accounted for. Current captures and disposable local phone journeys exist. Each remaining role journey and actual Production/provider acceptance need their own evidence; fixtures are not live customer data.",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "All 84 IDs, 28 participant keys and bounded linked offline scenarios are accounted for. Current captures and disposable local phone journeys exist. Each remaining role journey and actual Production/provider acceptance need their own evidence; fixtures are not live customer data."
+    },
+    {
+      "id": "R083",
+      "capability": "Every material processing state residual and recipient seed",
+      "sourceLocator": "S C17:C20 C38:C39; C 196-577",
+      "scopeDecisions": ["D24", "D28", "D40"],
+      "sourceAuditStatus": "P",
+      "disposition": "local_suite_linked",
+      "testSuites": [
+        "convex/foundationSeedAcceptance.test.ts",
+        "convex/specialistReferences.test.ts"
+      ],
+      "acceptanceLimit": "All 21 PET states and eleven specialist labels across eight categories have reference and offline tests. These are not validated factory recipes, legal classifications or actual permitted receiver acceptance.",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "All 21 PET states and eleven specialist labels across eight categories have reference and offline tests. These are not validated factory recipes, legal classifications or actual permitted receiver acceptance."
+    },
+    {
+      "id": "R084",
+      "capability": "Principal-owned toll processing paid collection and treatment service records",
+      "sourceLocator": "S H17 C29 C32 C48; C 651-687 1590-1601",
+      "scopeDecisions": ["D01", "D07", "D21", "D26"],
+      "sourceAuditStatus": "I",
+      "disposition": "local_suite_linked",
+      "testSuites": ["convex/services.test.ts"],
+      "acceptanceLimit": "Four models derive payment direction; toll principal and explicit bounded material snapshot are recorded. Enquiries move no title, stock or money; execution is unavailable without the separate verified route.",
+      "evidenceLevel": "offline_synthetic_only",
+      "sourceAuditLimit": "Four models derive payment direction; toll principal and explicit bounded material snapshot are recorded. Enquiries move no title, stock or money; execution is unavailable without the separate verified route."
+    }
+  ],
+  "participants": [
+    {
+      "key": "household",
+      "fixture": "convex/lib/localAcceptance.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "creates every named local participant fixture once under the strict loopback gate without stock or payments",
+      "evidenceLevel": "synthetic_domain_record_only",
+      "workflowLimit": "Persona-specific operational, browser and device acceptance remains separate."
+    },
+    {
+      "key": "household-coordinator",
+      "fixture": "convex/lib/localAcceptance.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "creates every named local participant fixture once under the strict loopback gate without stock or payments",
+      "evidenceLevel": "synthetic_domain_record_only",
+      "workflowLimit": "Persona-specific operational, browser and device acceptance remains separate."
+    },
+    {
+      "key": "applicant",
+      "fixture": "convex/lib/localAcceptance.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "creates every named local participant fixture once under the strict loopback gate without stock or payments",
+      "evidenceLevel": "synthetic_domain_record_only",
+      "workflowLimit": "Persona-specific operational, browser and device acceptance remains separate."
+    },
+    {
+      "key": "kabadiwala",
+      "fixture": "convex/lib/localAcceptance.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "creates every named local participant fixture once under the strict loopback gate without stock or payments",
+      "evidenceLevel": "synthetic_domain_record_only",
+      "workflowLimit": "Persona-specific operational, browser and device acceptance remains separate."
+    },
+    {
+      "key": "preprocessor",
+      "fixture": "convex/lib/localAcceptance.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "creates every named local participant fixture once under the strict loopback gate without stock or payments",
+      "evidenceLevel": "synthetic_domain_record_only",
+      "workflowLimit": "Persona-specific operational, browser and device acceptance remains separate."
+    },
+    {
+      "key": "recycler",
+      "fixture": "convex/lib/localAcceptance.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "creates every named local participant fixture once under the strict loopback gate without stock or payments",
+      "evidenceLevel": "synthetic_domain_record_only",
+      "workflowLimit": "Persona-specific operational, browser and device acceptance remains separate."
+    },
+    {
+      "key": "manufacturer",
+      "fixture": "convex/lib/localAcceptance.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "creates every named local participant fixture once under the strict loopback gate without stock or payments",
+      "evidenceLevel": "synthetic_domain_record_only",
+      "workflowLimit": "Persona-specific operational, browser and device acceptance remains separate."
+    },
+    {
+      "key": "fibre-maker",
+      "fixture": "convex/lib/localAcceptance.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "creates every named local participant fixture once under the strict loopback gate without stock or payments",
+      "evidenceLevel": "synthetic_domain_record_only",
+      "workflowLimit": "Persona-specific operational, browser and device acceptance remains separate."
+    },
+    {
+      "key": "textile-maker",
+      "fixture": "convex/lib/localAcceptance.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "creates every named local participant fixture once under the strict loopback gate without stock or payments",
+      "evidenceLevel": "synthetic_domain_record_only",
+      "workflowLimit": "Persona-specific operational, browser and device acceptance remains separate."
+    },
+    {
+      "key": "garment-maker",
+      "fixture": "convex/lib/localAcceptance.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "creates every named local participant fixture once under the strict loopback gate without stock or payments",
+      "evidenceLevel": "synthetic_domain_record_only",
+      "workflowLimit": "Persona-specific operational, browser and device acceptance remains separate."
+    },
+    {
+      "key": "saathi",
+      "fixture": "convex/lib/localAcceptance.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "creates every named local participant fixture once under the strict loopback gate without stock or payments",
+      "evidenceLevel": "synthetic_domain_record_only",
+      "workflowLimit": "Persona-specific operational, browser and device acceptance remains separate."
+    },
+    {
+      "key": "apartment",
+      "fixture": "convex/lib/localAcceptance.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "creates every named local participant fixture once under the strict loopback gate without stock or payments",
+      "evidenceLevel": "synthetic_domain_record_only",
+      "workflowLimit": "Persona-specific operational, browser and device acceptance remains separate."
+    },
+    {
+      "key": "office",
+      "fixture": "convex/lib/localAcceptance.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "creates every named local participant fixture once under the strict loopback gate without stock or payments",
+      "evidenceLevel": "synthetic_domain_record_only",
+      "workflowLimit": "Persona-specific operational, browser and device acceptance remains separate."
+    },
+    {
+      "key": "hotel",
+      "fixture": "convex/lib/localAcceptance.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "creates every named local participant fixture once under the strict loopback gate without stock or payments",
+      "evidenceLevel": "synthetic_domain_record_only",
+      "workflowLimit": "Persona-specific operational, browser and device acceptance remains separate."
+    },
+    {
+      "key": "resort",
+      "fixture": "convex/lib/localAcceptance.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "creates every named local participant fixture once under the strict loopback gate without stock or payments",
+      "evidenceLevel": "synthetic_domain_record_only",
+      "workflowLimit": "Persona-specific operational, browser and device acceptance remains separate."
+    },
+    {
+      "key": "other-generator",
+      "fixture": "convex/lib/localAcceptance.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "creates every named local participant fixture once under the strict loopback gate without stock or payments",
+      "evidenceLevel": "synthetic_domain_record_only",
+      "workflowLimit": "Persona-specific operational, browser and device acceptance remains separate."
+    },
+    {
+      "key": "city-official",
+      "fixture": "convex/lib/localAcceptance.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "creates every named local participant fixture once under the strict loopback gate without stock or payments",
+      "evidenceLevel": "synthetic_domain_record_only",
+      "workflowLimit": "Persona-specific operational, browser and device acceptance remains separate."
+    },
+    {
+      "key": "csr-sponsor",
+      "fixture": "convex/lib/localAcceptance.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "creates every named local participant fixture once under the strict loopback gate without stock or payments",
+      "evidenceLevel": "synthetic_domain_record_only",
+      "workflowLimit": "Persona-specific operational, browser and device acceptance remains separate."
+    },
+    {
+      "key": "lender",
+      "fixture": "convex/lib/localAcceptance.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "creates every named local participant fixture once under the strict loopback gate without stock or payments",
+      "evidenceLevel": "synthetic_domain_record_only",
+      "workflowLimit": "Persona-specific operational, browser and device acceptance remains separate."
+    },
+    {
+      "key": "auditor",
+      "fixture": "convex/lib/localAcceptance.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "creates every named local participant fixture once under the strict loopback gate without stock or payments",
+      "evidenceLevel": "synthetic_domain_record_only",
+      "workflowLimit": "Persona-specific operational, browser and device acceptance remains separate."
+    },
+    {
+      "key": "union",
+      "fixture": "convex/lib/localAcceptance.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "creates every named local participant fixture once under the strict loopback gate without stock or payments",
+      "evidenceLevel": "synthetic_domain_record_only",
+      "workflowLimit": "Persona-specific operational, browser and device acceptance remains separate."
+    },
+    {
+      "key": "apparel-brand",
+      "fixture": "convex/lib/localAcceptance.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "creates every named local participant fixture once under the strict loopback gate without stock or payments",
+      "evidenceLevel": "synthetic_domain_record_only",
+      "workflowLimit": "Persona-specific operational, browser and device acceptance remains separate."
+    },
+    {
+      "key": "packaging-brand",
+      "fixture": "convex/lib/localAcceptance.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "creates every named local participant fixture once under the strict loopback gate without stock or payments",
+      "evidenceLevel": "synthetic_domain_record_only",
+      "workflowLimit": "Persona-specific operational, browser and device acceptance remains separate."
+    },
+    {
+      "key": "team-admin",
+      "fixture": "convex/lib/localAcceptance.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "creates every named local participant fixture once under the strict loopback gate without stock or payments",
+      "evidenceLevel": "synthetic_domain_record_only",
+      "workflowLimit": "Persona-specific operational, browser and device acceptance remains separate."
+    },
+    {
+      "key": "team-member",
+      "fixture": "convex/lib/localAcceptance.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "creates every named local participant fixture once under the strict loopback gate without stock or payments",
+      "evidenceLevel": "synthetic_domain_record_only",
+      "workflowLimit": "Persona-specific operational, browser and device acceptance remains separate."
+    },
+    {
+      "key": "team-viewer",
+      "fixture": "convex/lib/localAcceptance.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "creates every named local participant fixture once under the strict loopback gate without stock or payments",
+      "evidenceLevel": "synthetic_domain_record_only",
+      "workflowLimit": "Persona-specific operational, browser and device acceptance remains separate."
+    },
+    {
+      "key": "invite-recipient",
+      "fixture": "convex/lib/localAcceptance.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "creates every named local participant fixture once under the strict loopback gate without stock or payments",
+      "evidenceLevel": "synthetic_domain_record_only",
+      "workflowLimit": "Persona-specific operational, browser and device acceptance remains separate."
+    },
+    {
+      "key": "unrelated-owner",
+      "fixture": "convex/lib/localAcceptance.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "creates every named local participant fixture once under the strict loopback gate without stock or payments",
+      "evidenceLevel": "synthetic_domain_record_only",
+      "workflowLimit": "Persona-specific operational, browser and device acceptance remains separate."
+    }
+  ],
+  "materialStates": [
+    {
+      "materialCode": "PLASTIC-PET",
+      "referenceOwner": "convex/lib/referenceDefinitions.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "retains all PET reference states as unassessed physical evidence without creating stock or handling approval",
+      "evidenceLevel": "synthetic_mass_balance_and_access_only",
+      "processLimit": "Same-state measured transform verifies the generic record contract; not a validated factory conversion recipe."
+    },
+    {
+      "materialCode": "PLASTIC-PET-SORTED",
+      "referenceOwner": "convex/lib/referenceDefinitions.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "retains all PET reference states as unassessed physical evidence without creating stock or handling approval",
+      "evidenceLevel": "synthetic_mass_balance_and_access_only",
+      "processLimit": "Same-state measured transform verifies the generic record contract; not a validated factory conversion recipe."
+    },
+    {
+      "materialCode": "PLASTIC-PET-BALE",
+      "referenceOwner": "convex/lib/referenceDefinitions.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "retains all PET reference states as unassessed physical evidence without creating stock or handling approval",
+      "evidenceLevel": "synthetic_mass_balance_and_access_only",
+      "processLimit": "Same-state measured transform verifies the generic record contract; not a validated factory conversion recipe."
+    },
+    {
+      "materialCode": "PLASTIC-PET-DEBALED",
+      "referenceOwner": "convex/lib/referenceDefinitions.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "retains all PET reference states as unassessed physical evidence without creating stock or handling approval",
+      "evidenceLevel": "synthetic_mass_balance_and_access_only",
+      "processLimit": "Same-state measured transform verifies the generic record contract; not a validated factory conversion recipe."
+    },
+    {
+      "materialCode": "PLASTIC-PET-RAW-FLAKE",
+      "referenceOwner": "convex/lib/referenceDefinitions.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "retains all PET reference states as unassessed physical evidence without creating stock or handling approval",
+      "evidenceLevel": "synthetic_mass_balance_and_access_only",
+      "processLimit": "Same-state measured transform verifies the generic record contract; not a validated factory conversion recipe."
+    },
+    {
+      "materialCode": "RECYCLED-PET-FLAKE",
+      "referenceOwner": "convex/lib/referenceDefinitions.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "retains all PET reference states as unassessed physical evidence without creating stock or handling approval",
+      "evidenceLevel": "synthetic_mass_balance_and_access_only",
+      "processLimit": "Same-state measured transform verifies the generic record contract; not a validated factory conversion recipe."
+    },
+    {
+      "materialCode": "RECYCLED-PET-COLD-FLAKE",
+      "referenceOwner": "convex/lib/referenceDefinitions.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "retains all PET reference states as unassessed physical evidence without creating stock or handling approval",
+      "evidenceLevel": "synthetic_mass_balance_and_access_only",
+      "processLimit": "Same-state measured transform verifies the generic record contract; not a validated factory conversion recipe."
+    },
+    {
+      "materialCode": "RECYCLED-PET-HOT-FLAKE",
+      "referenceOwner": "convex/lib/referenceDefinitions.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "retains all PET reference states as unassessed physical evidence without creating stock or handling approval",
+      "evidenceLevel": "synthetic_mass_balance_and_access_only",
+      "processLimit": "Same-state measured transform verifies the generic record contract; not a validated factory conversion recipe."
+    },
+    {
+      "materialCode": "RECYCLED-PET-PELLET",
+      "referenceOwner": "convex/lib/referenceDefinitions.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "retains all PET reference states as unassessed physical evidence without creating stock or handling approval",
+      "evidenceLevel": "synthetic_mass_balance_and_access_only",
+      "processLimit": "Same-state measured transform verifies the generic record contract; not a validated factory conversion recipe."
+    },
+    {
+      "materialCode": "RECYCLED-PET-FIBRE",
+      "referenceOwner": "convex/lib/referenceDefinitions.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "retains all PET reference states as unassessed physical evidence without creating stock or handling approval",
+      "evidenceLevel": "synthetic_mass_balance_and_access_only",
+      "processLimit": "Same-state measured transform verifies the generic record contract; not a validated factory conversion recipe."
+    },
+    {
+      "materialCode": "RECYCLED-PET-YARN",
+      "referenceOwner": "convex/lib/referenceDefinitions.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "retains all PET reference states as unassessed physical evidence without creating stock or handling approval",
+      "evidenceLevel": "synthetic_mass_balance_and_access_only",
+      "processLimit": "Same-state measured transform verifies the generic record contract; not a validated factory conversion recipe."
+    },
+    {
+      "materialCode": "RECYCLED-PET-FABRIC",
+      "referenceOwner": "convex/lib/referenceDefinitions.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "retains all PET reference states as unassessed physical evidence without creating stock or handling approval",
+      "evidenceLevel": "synthetic_mass_balance_and_access_only",
+      "processLimit": "Same-state measured transform verifies the generic record contract; not a validated factory conversion recipe."
+    },
+    {
+      "materialCode": "RECYCLED-PET-GARMENT",
+      "referenceOwner": "convex/lib/referenceDefinitions.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "retains all PET reference states as unassessed physical evidence without creating stock or handling approval",
+      "evidenceLevel": "synthetic_mass_balance_and_access_only",
+      "processLimit": "Same-state measured transform verifies the generic record contract; not a validated factory conversion recipe."
+    },
+    {
+      "materialCode": "PLASTIC-PP-CAP",
+      "referenceOwner": "convex/lib/referenceDefinitions.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "retains all PET reference states as unassessed physical evidence without creating stock or handling approval",
+      "evidenceLevel": "synthetic_mass_balance_and_access_only",
+      "processLimit": "Same-state measured transform verifies the generic record contract; not a validated factory conversion recipe."
+    },
+    {
+      "materialCode": "PLASTIC-HDPE-CAP",
+      "referenceOwner": "convex/lib/referenceDefinitions.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "retains all PET reference states as unassessed physical evidence without creating stock or handling approval",
+      "evidenceLevel": "synthetic_mass_balance_and_access_only",
+      "processLimit": "Same-state measured transform verifies the generic record contract; not a validated factory conversion recipe."
+    },
+    {
+      "materialCode": "PLASTIC-PP-FLOAT",
+      "referenceOwner": "convex/lib/referenceDefinitions.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "retains all PET reference states as unassessed physical evidence without creating stock or handling approval",
+      "evidenceLevel": "synthetic_mass_balance_and_access_only",
+      "processLimit": "Same-state measured transform verifies the generic record contract; not a validated factory conversion recipe."
+    },
+    {
+      "materialCode": "PLASTIC-HDPE-FLOAT",
+      "referenceOwner": "convex/lib/referenceDefinitions.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "retains all PET reference states as unassessed physical evidence without creating stock or handling approval",
+      "evidenceLevel": "synthetic_mass_balance_and_access_only",
+      "processLimit": "Same-state measured transform verifies the generic record contract; not a validated factory conversion recipe."
+    },
+    {
+      "materialCode": "RECYCLED-PP-GROUND",
+      "referenceOwner": "convex/lib/referenceDefinitions.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "retains all PET reference states as unassessed physical evidence without creating stock or handling approval",
+      "evidenceLevel": "synthetic_mass_balance_and_access_only",
+      "processLimit": "Same-state measured transform verifies the generic record contract; not a validated factory conversion recipe."
+    },
+    {
+      "materialCode": "RECYCLED-HDPE-GROUND",
+      "referenceOwner": "convex/lib/referenceDefinitions.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "retains all PET reference states as unassessed physical evidence without creating stock or handling approval",
+      "evidenceLevel": "synthetic_mass_balance_and_access_only",
+      "processLimit": "Same-state measured transform verifies the generic record contract; not a validated factory conversion recipe."
+    },
+    {
+      "materialCode": "PLASTIC-PET-LABEL",
+      "referenceOwner": "convex/lib/referenceDefinitions.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "retains all PET reference states as unassessed physical evidence without creating stock or handling approval",
+      "evidenceLevel": "synthetic_mass_balance_and_access_only",
+      "processLimit": "Same-state measured transform verifies the generic record contract; not a validated factory conversion recipe."
+    },
+    {
+      "materialCode": "OTHER-PET-RESIDUAL",
+      "referenceOwner": "convex/lib/referenceDefinitions.ts",
+      "testSuite": "convex/foundationSeedAcceptance.test.ts",
+      "testTitle": "retains all PET reference states as unassessed physical evidence without creating stock or handling approval",
+      "evidenceLevel": "synthetic_mass_balance_and_access_only",
+      "processLimit": "Same-state measured transform verifies the generic record contract; not a validated factory conversion recipe."
+    }
+  ],
+  "specialistStreams": [
+    {
+      "stream": "electronics",
+      "disposition": "provider_or_legal_evidence_block",
+      "testSuites": [
+        "convex/complianceReview.test.ts",
+        "convex/traceability.test.ts"
+      ],
+      "limit": "Controlled or unassessed evidence must not grant ordinary trade or handling authority."
+    },
+    {
+      "stream": "batteries",
+      "disposition": "provider_or_legal_evidence_block",
+      "testSuites": [
+        "convex/complianceReview.test.ts",
+        "convex/traceability.test.ts"
+      ],
+      "limit": "Controlled or unassessed evidence must not grant ordinary trade or handling authority."
+    },
+    {
+      "stream": "tyres",
+      "disposition": "provider_or_legal_evidence_block",
+      "testSuites": [
+        "convex/complianceReview.test.ts",
+        "convex/traceability.test.ts"
+      ],
+      "limit": "Controlled or unassessed evidence must not grant ordinary trade or handling authority."
+    },
+    {
+      "stream": "used oil",
+      "disposition": "provider_or_legal_evidence_block",
+      "testSuites": [
+        "convex/complianceReview.test.ts",
+        "convex/traceability.test.ts"
+      ],
+      "limit": "Controlled or unassessed evidence must not grant ordinary trade or handling authority."
+    },
+    {
+      "stream": "end-of-life vehicles",
+      "disposition": "provider_or_legal_evidence_block",
+      "testSuites": [
+        "convex/complianceReview.test.ts",
+        "convex/traceability.test.ts"
+      ],
+      "limit": "Controlled or unassessed evidence must not grant ordinary trade or handling authority."
+    },
+    {
+      "stream": "hazardous residues",
+      "disposition": "provider_or_legal_evidence_block",
+      "testSuites": [
+        "convex/complianceReview.test.ts",
+        "convex/traceability.test.ts"
+      ],
+      "limit": "Controlled or unassessed evidence must not grant ordinary trade or handling authority."
+    },
+    {
+      "stream": "biomedical waste",
+      "disposition": "provider_or_legal_evidence_block",
+      "testSuites": [
+        "convex/complianceReview.test.ts",
+        "convex/traceability.test.ts"
+      ],
+      "limit": "Controlled or unassessed evidence must not grant ordinary trade or handling authority."
+    },
+    {
+      "stream": "pharmaceutical or controlled-drug destruction",
+      "disposition": "provider_or_legal_evidence_block",
+      "testSuites": [
+        "convex/complianceReview.test.ts",
+        "convex/traceability.test.ts"
+      ],
+      "limit": "Controlled or unassessed evidence must not grant ordinary trade or handling authority."
+    }
+  ],
+  "specialistReferences": [
+    {
+      "materialCode": "OTHER-CLOTHES",
+      "category": "textile",
+      "routeStatus": "unavailable",
+      "testSuite": "convex/specialistReferences.test.ts",
+      "testTitle": "seeds each distinct specialist category as inactive unverified references with insertion audits only"
+    },
+    {
+      "materialCode": "EWASTE-SMALL",
+      "category": "electronics",
+      "routeStatus": "unavailable",
+      "testSuite": "convex/specialistReferences.test.ts",
+      "testTitle": "seeds each distinct specialist category as inactive unverified references with insertion audits only"
+    },
+    {
+      "materialCode": "EWASTE-PHONE",
+      "category": "electronics",
+      "routeStatus": "unavailable",
+      "testSuite": "convex/specialistReferences.test.ts",
+      "testTitle": "seeds each distinct specialist category as inactive unverified references with insertion audits only"
+    },
+    {
+      "materialCode": "EWASTE-CABLE",
+      "category": "electronics",
+      "routeStatus": "unavailable",
+      "testSuite": "convex/specialistReferences.test.ts",
+      "testTitle": "seeds each distinct specialist category as inactive unverified references with insertion audits only"
+    },
+    {
+      "materialCode": "EWASTE-BATTERY",
+      "category": "battery",
+      "routeStatus": "unavailable",
+      "testSuite": "convex/specialistReferences.test.ts",
+      "testTitle": "seeds each distinct specialist category as inactive unverified references with insertion audits only"
+    },
+    {
+      "materialCode": "BATTERY-UNSPECIFIED",
+      "category": "battery",
+      "routeStatus": "unavailable",
+      "testSuite": "convex/specialistReferences.test.ts",
+      "testTitle": "seeds each distinct specialist category as inactive unverified references with insertion audits only"
+    },
+    {
+      "materialCode": "TYRE-USED",
+      "category": "tyre",
+      "routeStatus": "unavailable",
+      "testSuite": "convex/specialistReferences.test.ts",
+      "testTitle": "seeds each distinct specialist category as inactive unverified references with insertion audits only"
+    },
+    {
+      "materialCode": "UCO-USED",
+      "category": "used_cooking_oil",
+      "routeStatus": "unavailable",
+      "testSuite": "convex/specialistReferences.test.ts",
+      "testTitle": "seeds each distinct specialist category as inactive unverified references with insertion audits only"
+    },
+    {
+      "materialCode": "LUBRICATING-OIL-USED",
+      "category": "used_lubricating_oil",
+      "routeStatus": "unavailable",
+      "testSuite": "convex/specialistReferences.test.ts",
+      "testTitle": "seeds each distinct specialist category as inactive unverified references with insertion audits only"
+    },
+    {
+      "materialCode": "INDUSTRIAL-RESIDUE-UNCLASSIFIED",
+      "category": "industrial_residue",
+      "routeStatus": "unavailable",
+      "testSuite": "convex/specialistReferences.test.ts",
+      "testTitle": "seeds each distinct specialist category as inactive unverified references with insertion audits only"
+    },
+    {
+      "materialCode": "ELV-UNASSESSED",
+      "category": "end_of_life_vehicle",
+      "routeStatus": "unavailable",
+      "testSuite": "convex/specialistReferences.test.ts",
+      "testTitle": "seeds each distinct specialist category as inactive unverified references with insertion audits only"
+    }
+  ]
+}

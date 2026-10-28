@@ -1,4 +1,14 @@
 {
+  "stockReports": {
+    "prepare": "재고 보고서 준비",
+    "download": "재고 보고서 다운로드",
+    "preparing": "보고서를 준비하는 중…",
+    "complete": "보고서 준비 완료",
+    "failed": "보고서를 준비할 수 없습니다. 다시 시도하세요.",
+    "unavailable": "백그라운드 작업이 구성될 때까지 보고서를 사용할 수 없습니다.",
+    "expired": "이 보고서는 만료되었습니다. 새 보고서를 준비하세요.",
+    "notice": "특정 시점의 비공개 재고 현황입니다. 30분 동안 이용할 수 있습니다. 인증서가 아닙니다."
+  },
   "brand": {
     "name": "Luma.Green",
     "tagline": "더 깨끗한 내일을 향한 움직임"
@@ -135,7 +145,7 @@
       "kabadiwala": {
         "title": "고물상",
         "one": "가까운 가정의 수거 요청을 받습니다.",
-        "two": "최저 가격 이상에서 직접 가격을 정합니다.",
+        "two": "자재별로 자체 제안 가격을 설정하세요.",
         "three": "선별한 재고를 전처리업체에 팝니다.",
         "cta": "고물상으로 참여"
       },
@@ -176,8 +186,8 @@
         "body": "역할을 선택하고 가입을 완료하세요."
       },
       "floor": {
-        "title": "최저 가격이 있는 공정한 가격",
-        "body": "매장은 가격을 직접 정하지만, 자재별로 공개한 최저 가격보다 낮게 정할 수 없습니다."
+        "title": "상점의 독립적인 제안 가격",
+        "body": "상점이 자체 제안 가격을 정합니다. 날짜가 표시된 참고 가격은 정보이며 의무 최저 가격이 아닙니다."
       },
       "escrow": {
         "title": "결제 게이트웨이 대기 중",
@@ -237,22 +247,22 @@
   },
   "prices": {
     "metaTitle": "오늘 벵갈루루의 재활용품 가격",
-    "metaDescription": "벵갈루루의 오늘 kg당 재활용품 가격입니다. 종이, 플라스틱, 금속, 유리, 전자 폐기물의 주간 변동, 30일 차트, 매장 최저 매입가를 확인하세요.",
+    "metaDescription": "벵갈루루 재활용 자재의 kg당 날짜가 표시된 참고 가격입니다. 각 사업체가 자체 제안 가격을 정합니다.",
     "eyebrow": "벵갈루루",
     "title": "자원 가격",
-    "lead": "오늘의 kg당 판매 가격입니다. 매장은 최저 가격 이상에서 자체 가격을 정합니다. 자재를 누르면 지난 30일 가격을 볼 수 있습니다.",
+    "lead": "kg당 날짜가 표시된 참고 가격입니다. 각 사업체가 자체 제안 가격을 정합니다. 자재를 선택해 제공되는 이력을 확인하세요.",
     "demoNote": "시제품용 예시 가격이며 실시간 시장 가격이 아닙니다.",
     "date": "{date} 가격",
-    "floorHelp": "최저 가격: 확인된 매장이 1kg에 지급해야 하는 최소 금액입니다.",
+    "floorHelp": "참고 가격: 날짜가 표시된 정보이며 의무 최저 가격이나 상점의 제안 가격이 아닙니다.",
     "perKg": "{price}/kg",
-    "floor": "최저 {price}",
+    "floor": "참고 {price}",
     "noPrice": "아직 가격 없음",
     "columns": {
       "material": "자재",
       "today": "오늘",
       "week": "이번 주",
       "month": "30일",
-      "floor": "최저 가격"
+      "floor": "참고"
     },
     "families": {
       "paper": "종이",
@@ -277,7 +287,7 @@
       "today": "오늘",
       "low": "30일 최저가",
       "high": "30일 최고가",
-      "floor": "최저 가격",
+      "floor": "참고",
       "noFloor": "없음",
       "close": "닫기",
       "noHistory": "아직 가격 이력이 없습니다."
@@ -285,7 +295,7 @@
     "chart": {
       "label": "{material}: 일별 kg당 가격입니다. 화살표 키로 날짜를 이동하세요.",
       "point": "{date}: {price}",
-      "floor": "최저 {price}",
+      "floor": "참고 {price}",
       "table": "수치 보기",
       "tableCaption": "{material}의 일별 kg당 가격",
       "date": "날짜",
@@ -557,10 +567,10 @@
     "lead": "자원은 가정에서 수거점, 전처리업체, 재활용 업체를 거쳐 새로운 제품이 됩니다. Luma.Green은 모든 인계를 기록합니다.",
     "stepLabel": "{number}단계",
     "sell": {
-      "body": "가정은 가진 자재를 선택하고 주변 매장의 제안을 확인한 뒤 수거 또는 직접 전달을 예약합니다. 고물상이 자재별 무게를 재고 현금이나 UPI로 지급하며 양쪽 모두 영수증을 받습니다.",
-      "point1": "각 매장은 공개된 최저 가격 이상에서 자체 가격을 정합니다",
+      "body": "가정에서 사진과 수거 정보를 추가하고 방문 수거 또는 직접 반입을 예약합니다. 예상 무게는 필요하지 않습니다. 상점이 자재를 계량하고 지급 신고와 영수증을 기록합니다.",
+      "point1": "각 상점이 자체 제안 가격을 정합니다",
       "point2": "매장 저울로 잰 무게를 그램 단위로 기록합니다",
-      "point3": "계정 없이 쓰는 추적 링크"
+      "point3": "비공개 수거 정보를 보려면 로그인과 기록 접근 권한이 필요합니다"
     },
     "trade": {
       "body": "기업 간 결제는 결제 게이트웨이를 사용합니다. 현재 결제 상태는 주문에서 확인하세요.",
@@ -1079,19 +1089,19 @@
       },
       "howPricesWork": {
         "title": "가격을 정하는 방법",
-        "summary": "추정액에 범위가 있는 이유와 최종 금액 계산 방법입니다.",
+        "summary": "상점의 독립적인 제안 가격과 측정 무게로 금액이 정해지는 방식.",
         "steps": {
           "estimate": {
-            "title": "추정은 도시 가격을 사용합니다",
-            "body": "고물상을 선택하기 전에는 벵갈루루 표준 가격을 사용하므로 범위로 표시됩니다."
+            "title": "참고 가격은 날짜가 표시된 정보입니다",
+            "body": "참고 가격은 참고 정보를 제공합니다. 상점의 제안 가격이나 의무 최저 가격을 정하지 않습니다."
           },
           "own": {
             "title": "고물상마다 가격을 정합니다",
             "body": "고물상을 선택하면 해당 매장의 자재별 가격이 표시됩니다."
           },
           "floor": {
-            "title": "최저 가격 미만은 불가",
-            "body": "Luma.Green은 자재마다 최저 가격을 정합니다. 고물상은 그보다 적게 지급할 수 없습니다."
+            "title": "독립적인 제안 가격",
+            "body": "각 사업체가 자체 제안 가격을 정합니다. Luma.Green은 참고 가격에 따른 최저 가격을 강제하지 않습니다."
           },
           "final": {
             "title": "무게로 금액이 결정됩니다",
@@ -1219,23 +1229,23 @@
       },
       "setPrices": {
         "title": "가격 설정",
-        "summary": "최저 가격 이상에서 지급할 가격을 선택합니다.",
+        "summary": "자재별로 제안할 가격을 선택하세요.",
         "steps": {
           "open": {
             "title": "내 가격 열기",
-            "body": "각 자재 옆에 최저 가격이 표시됩니다."
+            "body": "자재와 제공되는 참고 가격 정보를 확인하세요."
           },
           "enter": {
             "title": "kg당 가격 입력",
             "body": "자재별로 가정에 지급할 가격을 입력하세요."
           },
           "floor": {
-            "title": "최저 가격 이상 유지",
-            "body": "최저 가격보다 낮으면 저장되지 않습니다. 최저 가격이 오르면 매장 가격도 올라가며 알려드립니다."
+            "title": "독립적인 제안 가격 설정",
+            "body": "참고 가격은 제안 가격을 정하거나 자동으로 변경하지 않습니다."
           },
           "blank": {
             "title": "자재 가격 비워 두기",
-            "body": "가격을 설정하지 않으면 도시 표준 가격을 사용합니다."
+            "body": "자재를 비워 두면 해당 자재의 제안 가격은 설정되지 않습니다."
           },
           "history": {
             "title": "이전 영수증은 바뀌지 않습니다",
@@ -1555,7 +1565,7 @@
       },
       "howPriceWorks": {
         "q": "대금은 어떻게 계산하나요?",
-        "a": "각 자재의 무게에 고물상의 kg당 가격을 곱합니다. Luma.Green이 정한 최저 가격보다 낮게 지급할 수 없습니다."
+        "a": "각 자재의 측정 무게에 상점과 합의한 kg당 가격을 곱합니다. 참고 가격은 정보용입니다."
       },
       "howPaid": {
         "q": "대금은 어떻게 받나요?",
@@ -1595,7 +1605,7 @@
       },
       "ownPrices": {
         "q": "내 가격을 직접 정할 수 있나요?",
-        "a": "네. Luma.Green이 정한 최저 가격 이상이면 자재별로 정할 수 있습니다."
+        "a": "네. 각 사업체가 자재별로 자체 제안 가격을 정합니다. 참고 가격은 의무 최저 가격이 아닙니다."
       },
       "noVehicle": {
         "q": "차량이 없어도 참여할 수 있나요?",
@@ -2746,6 +2756,33 @@
     }
   },
   "track": {
+    "review": {
+      "title": "영수증 검토",
+      "declaration": "상점에서 대금을 지급했다고 신고했습니다. 아직 대금 수령을 확인하지 않았습니다.",
+      "accepted": "영수증을 수락했습니다. 대금을 받은 후에만 수령을 확인하세요.",
+      "disputed": "영수증에 이의를 제기했습니다. 해결을 기다리는 중입니다.",
+      "acknowledged": "대금 수령을 확인했습니다.",
+      "accept": "수락",
+      "dispute": "영수증 이의 제기",
+      "acknowledge": "대금 수령 확인",
+      "rejectLine": "{material} 거부",
+      "note": "이의 제기 사유",
+      "sharing": "수거 도우미",
+      "phone": "도우미 전화번호",
+      "adult": "본인과 초대받은 도우미가 모두 성인임을 확인합니다.",
+      "invite": "도우미 초대",
+      "shareNote": "이 수거 링크를 도우미에게 공유하세요. 도우미는 이 인증된 전화번호로 로그인하고 48시간 이내에 수락해야 합니다. 메시지는 전송되지 않습니다.",
+      "active": "활성",
+      "pending": "수락 대기 중",
+      "ended": "접근 종료",
+      "revoke": "접근 권한 취소",
+      "leave": "수거에서 나가기",
+      "handover": "인계 메모",
+      "save": "메모 저장",
+      "error": "변경 사항을 저장할 수 없습니다. 접근 권한을 확인하고 다시 시도하세요.",
+      "signIn": "이 수거를 보려면 로그인하세요",
+      "acceptedTotal": "수락됨: {weight} · {amount}"
+    },
     "metaTitle": "내 예약",
     "notFound": {
       "title": "이 예약을 찾지 못했습니다",
@@ -2839,7 +2876,7 @@
       "close": "닫기",
       "otherNumber": "다른 번호 사용"
     },
-    "saved": "계정은 필요 없습니다. 이 링크를 보관하면 어떤 휴대전화에서도 예약을 확인할 수 있습니다.",
+    "saved": "이 링크를 보관하세요. 비공개 정보를 보려면 로그인하고 이 수거에 대한 권한이 있어야 합니다.",
     "sellMore": "다시 수거 예약",
     "tryAnother": "다른 매장 찾기",
     "dispatchChanged": "요청이 다른 가까운 매장으로 이동했습니다. 현재 매장은 아래에 표시됩니다.",
@@ -3291,12 +3328,12 @@
       "title": "재고",
       "lead": "현재 보유 재고와 오늘의 가치입니다.",
       "totalWeight": "총 무게",
-      "worth": "오늘의 가치",
-      "worthHint": "오늘 시장 가격 기준",
+      "worth": "현재 제안 가치",
+      "worthHint": "현재 제안 가치",
       "scrap": "수거한 자원",
       "recycled": "재활용 자재",
-      "atPrice": "시장 가격 {price}/kg",
-      "noPrice": "오늘 시장 가격 없음",
+      "atPrice": "현재 제안 가치: {price}/kg",
+      "noPrice": "현재 제안 없음",
       "sellTo": {
         "yard": "전처리업체에 판매",
         "recycler": "재활용 업체에 판매",
@@ -3307,23 +3344,24 @@
       "emptyBusiness": "시장에서 구매하면 여기에 표시됩니다.",
       "buy": "자재 구매",
       "notBusinessTitle": "사업자 전용",
-      "notBusinessBody": "매장, 전처리업체, 재활용 업체, 공장이 재고를 관리합니다."
+      "notBusinessBody": "매장, 전처리업체, 재활용 업체, 공장이 재고를 관리합니다.",
+      "recordedCost": "기록된 원가"
     },
     "prices": {
       "title": "내 가격",
-      "lead": "가정에 지급하는 kg당 가격입니다. 최저 가격 미만은 불가합니다.",
+      "lead": "가정에 제안하는 kg당 가격입니다. 직접 독립적으로 설정합니다.",
       "label": "{material} 가격, kg당 루피",
       "prefix": "₹",
       "suffix": "/kg",
-      "minimum": "최저 {price}/kg",
+      "minimum": "참고 {price}/kg",
       "market": "시장 가격 {price}/kg",
-      "notSet": "아직 설정하지 않았습니다. 가정에는 도시 가격 {price}/kg을 적용합니다.",
+      "notSet": "제안 가격이 없습니다. 참고: {price}/kg.",
       "save": "저장",
       "saving": "저장 중…",
       "saved": "{material}: {price}/kg으로 저장했습니다.",
       "invalid": "14 또는 14.50처럼 가격을 입력하세요.",
-      "belowFloor": "너무 낮습니다. 최저 가격은 {price}/kg입니다.",
-      "belowFloorUnknown": "너무 낮습니다. 최저 가격 미만입니다.",
+      "belowFloor": "유효한 가격을 입력하세요. 참고: {price}/kg.",
+      "belowFloorUnknown": "유효한 가격을 입력하세요.",
       "emptyTitle": "아직 자재가 없습니다",
       "emptyBody": "매장에서 매입하는 자재는 매장 승인 시 설정됩니다."
     },
@@ -3477,7 +3515,8 @@
       "application_received": "신청 접수",
       "application_approved": "신청 승인",
       "application_changes_requested": "신청 수정 필요",
-      "application_rejected": "신청 미승인"
+      "application_rejected": "신청 미승인",
+      "stock_low": "재고 부족 알림"
     }
   },
   "integrations": {
@@ -3751,7 +3790,8 @@
     "addInput": "투입 로트 추가",
     "chooseInput": "투입 로트 선택",
     "combinedInput": "총 투입 질량",
-    "multiInputHint": "보관 중인 측정된 자재만 합치세요. 각 수량은 해당 로트에서 소모됩니다. 이는 처리 증빙을 기록하며 재고를 추가하지 않습니다."
+    "multiInputHint": "보관 중인 측정된 자재만 합치세요. 각 수량은 해당 로트에서 소모됩니다. 이는 처리 증빙을 기록하며 재고를 추가하지 않습니다.",
+    "qualityReleaseRequired": "승인된 시험 결과가 필요합니다"
   },
   "evidence": {
     "title": "문서 참조",
@@ -4166,5 +4206,198 @@
     "lead": "명시된 목적을 위해 공유된 고정 증거 사본을 읽습니다. 수신자 승인이 다른 사업체 기록 접근을 허용하지 않습니다.",
     "warning": "선택한 검사와 표시한 파일만 공유하세요. 먼저 개인정보를 지우세요. 접근은 최대 90일이며 취소할 수 있지만 다운로드된 사본은 회수할 수 없습니다.",
     "snapshot": "검사 사업체 선언의 고정 사본입니다. 인증서나 독립 검증이 아닙니다."
+  },
+  "collectionOperations": {
+    "availability": "수거 가능 시간",
+    "capacity": "시간대별 수용량",
+    "holidays": "휴무일 (YYYY-MM-DD, 쉼표로 구분)",
+    "schedule": "수거 일정",
+    "unassigned": "아직 배정되지 않았습니다. 시간을 변경하거나 취소하세요.",
+    "repeat": "{days}일마다 반복",
+    "stop": "향후 방문 중지",
+    "reschedule": "수거 시간 변경",
+    "requested": "변경 요청을 운영자에게 보냈습니다",
+    "saved": "저장됨",
+    "acknowledge": "입금 확인",
+    "acknowledged": "지급 확인됨",
+    "fixedFee": "고정 작업비입니다. 배정 업체가 지급하며 Luma는 임금을 보장하지 않습니다.",
+    "due": "지급 기한: {date}",
+    "declarePayment": "작업자 지급 기록",
+    "failedVisit": "방문 실패 기록",
+    "paymentDeclared": "지급 기록됨; 작업자 확인 대기"
+  },
+  "geocoding": {
+    "consent": "주소를 찾기 위해 이 위치를 Google Maps로 보냅니다.",
+    "find": "주소 찾기",
+    "loading": "주소 검색 중…",
+    "manual": "주소를 직접 입력할 수 있습니다.",
+    "unavailable": "주소 검색을 사용할 수 없습니다. 직접 입력해 주세요.",
+    "use": "이 주소 사용",
+    "confirm": "주소를 확인했으며 주소 입력란을 바꾸겠습니다.",
+    "preview": "미리보기 전용입니다. 저장하려면 서비스 정책 검토가 필요합니다.",
+    "attribution": "Google Maps"
+  },
+  "serviceRecords": {
+    "title": "서비스 및 프로그램",
+    "unavailable": "제공자 실행과 보상 교환은 이용할 수 없습니다. 기록은 대출, 보험, 복지 또는 지급을 승인하지 않습니다.",
+    "enquiries": "서비스 문의",
+    "programmes": "프로그램 기록",
+    "edit": "수정",
+    "reported": "보고된 수치이며 증거는 미검증입니다. 지자체 계약이나 자금이 마련된 보상을 뜻하지 않습니다.",
+    "area": "지역",
+    "startsOn": "시작일",
+    "endsOn": "종료일",
+    "coverageCount": "대상 수",
+    "trips": "운행 횟수",
+    "centreHandovers": "센터 인계 횟수",
+    "groupIncomePaise": "그룹 소득 (파이사)",
+    "share": "집계 보고서 공유",
+    "principal": "자재 소유자 / 위탁자",
+    "materialReference": "자재 참조",
+    "explicitReference": "선택한 수신자에게 자재 코드와 기록된 그램만 공유합니다.",
+    "commercialModel": "거래 모델",
+    "draft": "초안",
+    "enquiry": "문의",
+    "closed": "종료",
+    "kinds": {
+      "equipment": "장비",
+      "staffing": "인력",
+      "transport": "운송",
+      "environment": "환경",
+      "accounting": "회계",
+      "solar": "태양광",
+      "scales": "저울",
+      "voice": "음성 서비스",
+      "society": "공동체 서비스",
+      "welfare": "복지",
+      "donation": "기부",
+      "reward": "보상",
+      "finance": "금융",
+      "insurance": "보험",
+      "attendance": "근태",
+      "wet_service": "습식 폐기물 서비스",
+      "other": "기타"
+    },
+    "models": {
+      "partner_service": "협력사 문의",
+      "materials_sale_reference": "자재 판매 참조",
+      "toll_jobwork": "위탁자가 자재를 소유하는 임가공",
+      "paid_collection": "유료 수거 서비스",
+      "generator_paid_treatment": "발생자 부담 처리"
+    },
+    "directions": {
+      "not_applicable": "지급 실행 없음",
+      "buyer_to_seller": "구매자 → 판매자",
+      "principal_to_processor": "위탁자 → 처리자",
+      "customer_to_service": "고객 → 서비스",
+      "generator_to_handler": "발생자 → 취급자"
+    },
+    "received": "수령됨",
+    "sharedReports": "공유 감사 보고서",
+    "revoke": "접근 취소",
+    "quantityGrams": "수량(g)",
+    "recordName": "기록 이름"
+  },
+  "returnClaims": {
+    "title": "반품 및 제도 증거",
+    "returnTitle": "전량 반품",
+    "scheme": "제도 참조",
+    "issuer": "외부 발행기관 참조",
+    "freight": "반품 운송비 부담자",
+    "reconcile": "대사",
+    "validate": "출처 확인",
+    "notice": "신고된 증거만 표시합니다. 공식 인증서나 지급 승인이 아닙니다.",
+    "waiting": "실물 수령, 제공업체의 전액 환불 및 정산 취소를 기다리세요."
+  },
+  "marketComparison": {
+    "quote": "운송비 견적 필요",
+    "freight": "별도 운송비: {price}/kg",
+    "notice": "결제에는 재료비만 포함됩니다. 운송비는 별도로 합의하고 지급하세요.",
+    "available": "{date}부터 가능",
+    "delivered": "재료 및 운송비: {price}/kg",
+    "freightInput": "kg당 운송비 (선택)",
+    "availableInput": "이용 가능일 (선택)",
+    "validityInput": "제안 만료일 (선택)"
+  },
+  "recordedCosts": {
+    "acquisition": "취득 비용(파이사)",
+    "processing": "가공 비용(파이사)",
+    "reference": "비용 증빙 참조",
+    "hint": "빈칸은 알 수 없음을 뜻합니다. 기록된 비용이 0인 경우에만 0을 입력하세요.",
+    "remaining": "남은 기록 비용",
+    "input": "소비한 투입물 비용",
+    "total": "산출물에 배분된 비용",
+    "unknown": "알 수 없음",
+    "loss": "측정된 산출물이 오염물과 공정 손실 비용을 부담합니다.",
+    "record": "취득 비용 기록",
+    "processingTotal": "가공 비용"
+  },
+  "stockClosing": {
+    "title": "일일 재고 검토",
+    "notice": "마감은 현재 재고를 저장합니다. 이후에도 변경할 수 있습니다.",
+    "note": "검토 메모",
+    "record": "오늘 마감 기록",
+    "last": "최근 마감",
+    "none": "아직 마감 기록이 없습니다",
+    "gramsUnit": "g",
+    "unknown": "원가 미상",
+    "balances": "마감 잔액",
+    "threshold": "재고 부족 알림",
+    "thresholdHint": "계정 받은편지함에만 표시됩니다. 켜기 전에는 알림이 꺼져 있습니다.",
+    "disabled": "꺼짐",
+    "below": "알림 기준 미만",
+    "recent": "최근 알림 (최대 20개)",
+    "noAlerts": "아직 알림이 없습니다",
+    "material": "자재",
+    "grams": "알림 기준 (그램)",
+    "enabled": "알림 켜기",
+    "save": "알림 설정 저장",
+    "closed": "마감이 저장되었습니다",
+    "saved": "알림 설정이 저장되었습니다",
+    "dateChanged": "날짜가 바뀌었습니다. 검토 후 다시 시도하세요.",
+    "alreadyRecorded": "오늘 마감이 이미 기록되었습니다.",
+    "limit": "재고 이력이 이 도구의 한도를 초과합니다. 관리자에게 도움을 요청하세요.",
+    "mismatch": "재고와 이동 기록이 다릅니다. 관리자에게 검토를 요청하세요.",
+    "correction": "재고 수정",
+    "add": "재고 추가",
+    "remove": "재고 감소",
+    "corrected": "수정이 기록되었습니다",
+    "evidence": "실물 증빙 참조",
+    "recentCorrections": "최근 수정 (최대 20개)"
+  },
+  "workerHandover": {
+    "title": "수거물 인계",
+    "hint": "증빙만 기록합니다. 재고와 임금 기록은 별도로 유지됩니다.",
+    "limit": "최근 연결 100개입니다. 원본 선택에는 제한이 있습니다.",
+    "job": "배정된 수거 작업",
+    "collection": "수거",
+    "collected": "수거량 (g)",
+    "received": "수령량 (g)",
+    "variance": "수령량 − 수거량 (g)",
+    "record": "수거 무게 기록",
+    "acknowledge": "인계 확인",
+    "revoke": "연결 취소",
+    "acknowledged": "인계가 확인되었습니다",
+    "link": "수거 연결",
+    "reason": "사유",
+    "evidence": "실물 증빙 참조"
+  },
+  "accountRemoval": {
+    "title": "계정 닫기",
+    "intro": "로그인과 계정 접근이 종료됩니다.",
+    "retained": "필요한 사업, 결제, 자재 및 감사 기록은 검토를 위해 보관됩니다. 모든 데이터가 삭제되지는 않습니다.",
+    "confirm": "내용을 이해했으며 계정을 닫겠습니다.",
+    "action": "계정 닫기",
+    "held": "계정이 닫히지 않았습니다.",
+    "reauth": "계속하려면 다시 로그인하세요.",
+    "unavailable": "지금은 계정을 닫을 수 없습니다. 나중에 다시 시도하세요.",
+    "retry": "결과가 확인되지 않았습니다. 같은 요청을 확인하려면 다시 시도하세요.",
+    "closed": "계정 접근이 종료되었습니다.",
+    "adminReplacement": "관리자 교체는 별도로 준비해야 합니다.",
+    "businessOwner": "계정을 닫기 전에 사업 소유권을 이전하세요.",
+    "activeCollection": "진행 중인 수거를 먼저 해결하세요.",
+    "assignedWork": "배정된 작업이나 인계를 먼저 해결하세요.",
+    "reviewLimit": "계정을 닫기 전에 추가 기록 검토가 필요합니다.",
+    "checkLimit": "계정을 닫고 다시 가입해도 오늘의 사업 확인 한도는 초기화되지 않습니다. 인도 시간으로 다음 날까지 확인이 보류될 수 있습니다."
   }
 }

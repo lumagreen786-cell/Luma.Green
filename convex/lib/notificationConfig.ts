@@ -16,6 +16,7 @@ export type NotificationEvent = typeof vNotificationEvent.type;
 export const vInboxEvent = v.union(
   vNotificationEvent,
   v.literal("collaboration_updated"),
+  v.literal("stock_low"),
 );
 export type InboxEvent = typeof vInboxEvent.type;
 export const vNotificationStatus = v.union(

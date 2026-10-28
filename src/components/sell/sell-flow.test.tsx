@@ -2,7 +2,7 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { getFunctionName } from "convex/server";
 import { NextIntlClientProvider } from "next-intl";
-import { beforeEach, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, expect, it, vi } from "vitest";
 
 import messages from "../../../messages/en.json";
 import { SellFlow } from "./sell-flow";
@@ -42,6 +42,18 @@ vi.mock("./phone-sign-in", () => ({
     <button onClick={onVerified}>Verify phone</button>
   ),
 }));
+type QueryFixture =
+  | {
+      id: string;
+      name: string;
+      area: string;
+      address: string;
+      offersPickup: boolean;
+      fallbackCodes: string[];
+    }[]
+  | { window: "morning" | "afternoon" | "evening"; remaining: number }[]
+  | undefined
+  | { phone: string | undefined };
 vi.mock("convex/react", () => ({
   useConvexAuth: () => ({
     isAuthenticated: calls.authenticated,
@@ -52,8 +64,15 @@ vi.mock("convex/react", () => ({
     getFunctionName(reference) === "households:book"
       ? calls.book
       : calls.profile,
-  useQuery: (reference: never, args: unknown) => {
+  // eslint-disable-next-line sonarjs/function-return-type -- Each mocked query has its own public return contract.
+  useQuery: (reference: never, args: unknown): QueryFixture => {
     if (args === "skip") return;
+    if (getFunctionName(reference) === "collectionScheduling:availability")
+      return [
+        { window: "morning", remaining: 20 },
+        { window: "afternoon", remaining: 20 },
+        { window: "evening", remaining: 20 },
+      ];
     return getFunctionName(reference) === "identity:me"
       ? { phone: calls.hasPhone ? "+919000000109" : undefined }
       : [
@@ -69,6 +88,8 @@ vi.mock("convex/react", () => ({
   },
 }));
 beforeEach(() => {
+  vi.useFakeTimers({ toFake: ["Date"] });
+  vi.setSystemTime(new Date("2026-10-27T02:30:00Z"));
   vi.clearAllMocks();
   sessionStorage.clear();
   calls.authenticated = true;
@@ -81,6 +102,9 @@ beforeEach(() => {
   vi.spyOn(URL, "revokeObjectURL").mockImplementation(() => {
     /* No browser URL allocation in this fixture. */
   });
+});
+afterEach(() => {
+  vi.useRealTimers();
 });
 function show() {
   return render(

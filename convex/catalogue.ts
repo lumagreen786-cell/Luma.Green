@@ -1,10 +1,14 @@
-import { v } from "convex/values";
+import { ConvexError, v } from "convex/values";
 
-import { mutation, query } from "./_generated/server";
+import { internalMutation, mutation, query } from "./_generated/server";
 import { requireAdmin } from "./lib/access";
 import { findProfile } from "./lib/applicationAccess";
 import { CATALOGUE } from "./lib/catalogue";
 import { shiftDate } from "./lib/dates";
+import {
+  initializeReferenceDefinitions as initializeReferenceDefinitionsInMutation,
+  referenceInitializationCounts,
+} from "./lib/initializeReferenceDefinitions";
 import { indiaToday } from "./lib/onboarding";
 import { vFamily } from "./lib/validators";
 import { vNames } from "./lib/views";
@@ -41,43 +45,30 @@ export const materials = query({
 /** Add canonical definitions only. Existing materials and all operational data stay intact. */
 export const initializeDefinitions = mutation({
   args: {},
-  returns: v.object({ inserted: v.number() }),
+  returns: referenceInitializationCounts,
   handler: async (ctx) => {
     const admin = await requireAdmin(ctx);
     const profile = await findProfile(ctx, admin._id);
-    let inserted = 0;
-    for (const [sortOrder, entry] of CATALOGUE.entries()) {
-      const existing = await ctx.db
-        .query("materials")
-        .withIndex("by_code", (q) => q.eq("code", entry.code))
-        .unique();
-      if (existing) continue;
-      // Deliberately select fields: the source also contains prototype prices
-      // and indicative factors, neither of which is a production input.
-      const definition = {
-        code: entry.code,
-        family: entry.family,
-        stage: entry.stage,
-        names: entry.names,
-        sortOrder,
-        active: true,
-      };
-      const id = await ctx.db.insert("materials", definition);
-      await ctx.db.insert("auditLog", {
-        actorProfileId: profile?._id,
-        action: "material.definitionInitialized",
-        entityTable: "materials",
-        entityId: id,
-        metadata: {
-          adminUserId: admin._id,
-          definition,
-          factorStatus: "unknown",
-        },
-        createdAt: Date.now(),
-      });
-      inserted += 1;
-    }
-    return { inserted };
+    return initializeReferenceDefinitionsInMutation(ctx, {
+      createdBy: admin._id,
+      actorProfileId: profile?._id,
+      metadata: { adminUserId: admin._id },
+    });
+  },
+});
+
+/** Deployment credentials are required to invoke internal functions through the CLI. */
+export const initializeReferenceDefinitions = internalMutation({
+  args: { operatorReference: v.string() },
+  returns: referenceInitializationCounts,
+  handler: async (ctx, args) => {
+    const operatorReference = args.operatorReference.trim();
+    if (!operatorReference || operatorReference.length > 120)
+      throw new ConvexError("INVALID_REFERENCE");
+    return initializeReferenceDefinitionsInMutation(ctx, {
+      createdBy: "operator:reference-bootstrap",
+      metadata: { operatorReference, source: "deployment_operator" },
+    });
   },
 });
 

@@ -74,6 +74,7 @@ export function aListing(overrides: Partial<ListingView> = {}): ListingView {
     isMine: false,
     origin: undefined,
     createdAt: Date.parse("2026-10-01T10:00:00Z"),
+    expiresAt: Date.now() + 86_400_000,
     ...overrides,
   };
 }

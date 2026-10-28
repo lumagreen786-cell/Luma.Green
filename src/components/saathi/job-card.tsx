@@ -35,6 +35,7 @@ export function JobCard({
   action?: ReactNode;
 }) {
   const t = useTranslations("saathi");
+  const payment = useTranslations("collectionOperations");
   const format = useFormat();
   const when = useJobWhen();
   const KindIcon = WORK_ICONS[job.kind];
@@ -97,6 +98,12 @@ export function JobCard({
         ) : null}
       </ul>
 
+      <p className="text-sm text-muted-foreground">{payment("fixedFee")}</p>
+      {job.paymentDueDate ? (
+        <p className="text-sm">
+          {payment("due", { date: job.paymentDueDate })}
+        </p>
+      ) : null}
       {action ? (
         <div className="flex flex-col justify-end">{action}</div>
       ) : null}

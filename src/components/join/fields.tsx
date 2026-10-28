@@ -11,6 +11,7 @@ import {
 import { useLocale, useTranslations } from "next-intl";
 import { type ReactNode, useId, useState } from "react";
 
+import { ReverseAddress } from "@/components/location/reverse-address";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
@@ -466,9 +467,13 @@ export function PhoneList({
 export function LocationButton({
   value,
   onChange,
+  address,
+  onAddress,
 }: {
   value: { lat: number; lng: number } | undefined;
   onChange: (value: { lat: number; lng: number }) => void;
+  address?: string;
+  onAddress?: (address: string) => void;
 }) {
   const t = useTranslations("join.form");
   const [state, setState] = useState<"idle" | "locating" | "failed">("idle");
@@ -527,6 +532,13 @@ export function LocationButton({
           <span className="text-muted-foreground">{t("locationWhy")}</span>
         ) : null}
       </p>
+      {onAddress ? (
+        <ReverseAddress
+          point={value}
+          address={address ?? ""}
+          onUse={onAddress}
+        />
+      ) : null}
     </div>
   );
 }

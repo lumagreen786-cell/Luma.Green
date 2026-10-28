@@ -11,11 +11,13 @@ import { z } from "zod";
 
 import { useFormat } from "@/components/app/format";
 import { EmptyState } from "@/components/app/page-parts";
+import { LotField } from "@/components/lots/form-parts";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useCanOperate } from "@/components/workspace/permissions";
 import { Link } from "@/i18n/navigation";
+import { fixedDecimalInput } from "@/lib/number-input";
 
 import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
@@ -101,6 +103,9 @@ interface Values {
   kg: string;
   price: string;
   note: string;
+  freight: string;
+  availableAt: string;
+  expiry: string;
   includeSpecification: boolean;
   grade: string;
   specification: string;
@@ -119,6 +124,9 @@ const EMPTY: Values = {
   kg: "",
   price: "",
   note: "",
+  freight: "",
+  availableAt: "",
+  expiry: "",
   includeSpecification: false,
   grade: "",
   specification: "",
@@ -137,6 +145,25 @@ function listingSchema(
         .string()
         .refine((value) => parseRupees(value, locale) !== null, "priceInvalid"),
       note: z.string().max(NOTE_MAX_LENGTH, "noteTooLong"),
+      freight: z
+        .string()
+        .refine(
+          (value) =>
+            !value.trim() || (fixedDecimalInput(value, 2, locale) ?? -1) >= 0,
+          "priceInvalid",
+        ),
+      availableAt: z
+        .string()
+        .refine(
+          (value) => !value || Number.isFinite(Date.parse(value)),
+          "priceInvalid",
+        ),
+      expiry: z
+        .string()
+        .refine(
+          (value) => !value || Number.isFinite(Date.parse(value)),
+          "priceInvalid",
+        ),
       includeSpecification: z.boolean(),
       grade: z.string().trim().max(120),
       specification: z.string().trim().max(500),
@@ -193,6 +220,7 @@ function ListingForm({
 }) {
   const t = useTranslations("market");
   const specificationCopy = useTranslations("marketSpecification");
+  const comparison = useTranslations("marketComparison");
   const specificationId = useId();
   const [lotId, setLotId] = useState<Id<"materialLots">>();
   const locale = useLocale();
@@ -258,6 +286,15 @@ function ListingForm({
         materialCode: values.materialCode,
         grams: wanted,
         askPaisePerKg: ask,
+        freightPaisePerKg: values.freight.trim()
+          ? (fixedDecimalInput(values.freight, 2, locale) ?? undefined)
+          : undefined,
+        deliveryAvailableAt: values.availableAt
+          ? Date.parse(values.availableAt)
+          : undefined,
+        contractValidUntil: values.expiry
+          ? Date.parse(values.expiry)
+          : undefined,
         note: trimmed === "" ? undefined : trimmed,
         ...(values.includeSpecification && {
           specification: {
@@ -316,6 +353,27 @@ function ListingForm({
           });
         }}
       />
+      <div className="grid gap-4 sm:grid-cols-2">
+        <LotField
+          label={comparison("freightInput")}
+          inputMode="decimal"
+          registration={register("freight")}
+          invalid={Boolean(errors.freight)}
+        />
+        <LotField
+          label={comparison("availableInput")}
+          type="datetime-local"
+          registration={register("availableAt")}
+          invalid={Boolean(errors.availableAt)}
+        />
+        <LotField
+          label={comparison("validityInput")}
+          type="datetime-local"
+          registration={register("expiry")}
+          invalid={Boolean(errors.expiry)}
+        />
+      </div>
+      <p className="text-sm text-muted-foreground">{comparison("notice")}</p>
       <NoteField
         input={register("note")}
         error={errorText("note")}

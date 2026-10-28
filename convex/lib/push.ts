@@ -10,6 +10,7 @@ import { requireUser } from "./access";
 import { findProfile } from "./applicationAccess";
 import { canAccessRecord } from "./collaboration";
 import type { InboxEvent } from "./notificationConfig";
+import { membershipFor } from "./workspace";
 
 export const vSubscription = v.object({
   endpoint: v.string(),
@@ -80,7 +81,7 @@ export async function hasActivePushSession(
   sessionId: string | undefined,
   profile: Doc<"profiles">,
 ): Promise<boolean> {
-  if (!sessionId) return false;
+  if (!sessionId || profile.closedAt !== undefined) return false;
   const stored: unknown = await ctx.runQuery(
     components.betterAuth.adapter.findOne,
     {
@@ -114,25 +115,35 @@ export async function pushAudit(
   });
 }
 
-export async function queueInbox(
-  ctx: MutationCtx,
-  input: {
-    profileId: Id<"profiles">;
-    event: InboxEvent;
-    taskId?: Id<"recordTasks">;
-    dedupKey: string;
-  },
-) {
+interface InboxInput {
+  profileId: Id<"profiles">;
+  event: InboxEvent;
+  taskId?: Id<"recordTasks">;
+  stockAlertId?: Id<"stockLowAlerts">;
+  dedupKey: string;
+}
+async function isInboxInputValid(ctx: MutationCtx, input: InboxInput) {
+  if (input.event === "stock_low") {
+    if (
+      input.taskId ||
+      !(await canReadStockAlert(ctx, input.stockAlertId, input.profileId))
+    )
+      throw new ConvexError("INVALID_NOTIFICATION");
+  } else if (input.stockAlertId) throw new ConvexError("INVALID_NOTIFICATION");
   if (input.event === "collaboration_updated") {
     const task = input.taskId
       ? await ctx.db.get("recordTasks", input.taskId)
       : null;
-    if (
-      !task ||
-      !(await canAccessRecord(ctx, task.scope, task.record, input.profileId))
-    )
-      return;
-  } else if (input.taskId) throw new ConvexError("INVALID_NOTIFICATION");
+    return Boolean(
+      task &&
+      (await canAccessRecord(ctx, task.scope, task.record, input.profileId)),
+    );
+  }
+  if (input.taskId) throw new ConvexError("INVALID_NOTIFICATION");
+  return true;
+}
+export async function queueInbox(ctx: MutationCtx, input: InboxInput) {
+  if (!(await isInboxInputValid(ctx, input))) return;
   const existing = await ctx.db
     .query("inbox")
     .withIndex("by_dedupKey", (q) => q.eq("dedupKey", input.dedupKey))
@@ -145,6 +156,8 @@ export async function queueInbox(
     createdAt: now,
   });
   await pushAudit(ctx, "inbox.created", "inbox", inboxId, input.profileId);
+  // Stock settings opt in to the account inbox only, never device delivery.
+  if (input.event === "stock_low") return;
   const config = pushEnv();
   if (!config.web && !config.expo) return;
   const devices = await ctx.db
@@ -178,9 +191,26 @@ export function checkedLocale(locale: string): string {
 
 /** Task notifications disappear when their recipient loses current record access. */
 export async function canReadInboxItem(ctx: QueryCtx, row: Doc<"inbox">) {
+  if (row.event === "stock_low")
+    return canReadStockAlert(ctx, row.stockAlertId, row.profileId);
   if (row.event !== "collaboration_updated") return true;
   const task = row.taskId ? await ctx.db.get("recordTasks", row.taskId) : null;
   return task
     ? canAccessRecord(ctx, task.scope, task.record, row.profileId)
     : false;
+}
+
+async function canReadStockAlert(
+  ctx: QueryCtx,
+  id: Id<"stockLowAlerts"> | undefined,
+  profileId: Id<"profiles">,
+) {
+  if (!id) return false;
+  const alert = await ctx.db.get("stockLowAlerts", id);
+  if (alert?.recipientProfileId !== profileId) return false;
+  const org = await ctx.db.get("orgs", alert.orgId);
+  return (
+    (org?.status === "active" || org?.status === "suspended") &&
+    Boolean(await membershipFor(ctx, profileId, alert.orgId))
+  );
 }

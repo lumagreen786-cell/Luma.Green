@@ -111,6 +111,23 @@ it("binds every declared input and output inspection without moving inventory", 
     ],
     evidenceReference: "Production TEST-1",
   };
+  const rejectedInspection = await owner.mutation(
+    api.quality.recordInspection,
+    {
+      lotId: output._id,
+      specificationReference: "Rejected test",
+      specificationVersion: "1",
+      sampleMethod: "Composite sample",
+      results: [{ parameter: "Moisture", unit: "percent", value: "20" }],
+      decision: "rejected",
+    },
+  );
+  await expect(
+    owner.mutation(api.production.declareBatch, {
+      ...args,
+      inspectionId: rejectedInspection,
+    }),
+  ).rejects.toThrow(/QUALITY_RELEASE_REQUIRED/);
   const id = await owner.mutation(api.production.declareBatch, args);
   expect(await owner.mutation(api.production.declareBatch, args)).toBe(id);
   const production = await owner.query(api.production.mine, {});

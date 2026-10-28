@@ -26,6 +26,7 @@ if (
 )
   throw new Error("Lot acceptance requires a local test origin.");
 const t = en.lots;
+const costs = en.recordedCosts;
 test.setTimeout(90_000);
 async function signIn(page: Page, key: string) {
   const account = credentials.accounts.find((row) => row.key === key);
@@ -89,6 +90,12 @@ test("measured lot processing, immutable correction, whole-lot hand-off and role
     await expect(declaration.getByRole("alert")).toHaveText(t.invalidInput);
     await declaration.getByLabel(t.mass, { exact: true }).fill("10000");
     await declaration
+      .getByLabel(costs.acquisition, { exact: true })
+      .fill("10001");
+    await declaration
+      .getByLabel(costs.reference, { exact: true })
+      .fill("Synthetic recorded intake cost");
+    await declaration
       .getByRole("button", { name: t.save, exact: true })
       .click();
     await expect(owner).toHaveURL(/\/app\/lots\/.+$/);
@@ -103,6 +110,12 @@ test("measured lot processing, immutable correction, whole-lot hand-off and role
       .getByLabel(t.contamination, { exact: true })
       .fill("500");
     await transformation.getByLabel(t.processLoss, { exact: true }).fill("500");
+    await transformation
+      .getByLabel(costs.processing, { exact: true })
+      .fill("401");
+    await transformation
+      .getByLabel(costs.reference, { exact: true })
+      .fill("Synthetic recorded process cost");
     await transformation
       .getByLabel(t.material, { exact: true })
       .fill(`${material} flakes`);
@@ -119,6 +132,12 @@ test("measured lot processing, immutable correction, whole-lot hand-off and role
       .getByRole("button", { name: t.save, exact: true })
       .click();
     await expect(transformation).toHaveCount(0);
+    await expect(
+      owner.getByText(costs.remaining, { exact: true }),
+    ).toBeVisible();
+    await expect(owner.getByText("₹20.01", { exact: true })).toBeVisible();
+    await expect(owner.getByText(costs.total, { exact: true })).toBeVisible();
+    await expect(owner.getByText("₹84.01", { exact: true })).toBeVisible();
     await expect(
       owner.getByRole("link", { name: `${material} flakes · Measured flake` }),
     ).toBeVisible();

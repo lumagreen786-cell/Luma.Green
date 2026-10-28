@@ -89,6 +89,7 @@ async function candidate(
       location: { lat: POINT.lat + 0.002, lng: POINT.lng },
       phones: [],
       weeklyOff: [],
+      hours: { opens: "09:00", closes: "18:00" },
       families: ["paper"],
       offersPickup: true,
       createdAt: Date.now(),
@@ -138,17 +139,14 @@ describe("pickup dispatch", () => {
       "offered",
       "accepted",
     ]);
-    const masked = await w.t.query(api.households.track, { token });
+    const masked = await w.household.query(api.households.track, { token });
     expect(JSON.stringify(masked)).not.toContain('"lat"');
     expect(masked?.dispatch).toMatchObject({
       attempt: 1,
       approximateLocation: false,
     });
 
-    for (const location of [
-      undefined,
-      { lat: POINT.lat + 1, lng: POINT.lng },
-    ]) {
+    for (const location of [undefined]) {
       const manualToken = await w.household.mutation(api.households.book, {
         ...w.args,
         location,
@@ -157,6 +155,12 @@ describe("pickup dispatch", () => {
       expect(manual.status).toBe("requested");
       expect(manual.dispatch?.expiresAt).toBe(Date.now() + OFFER_TIMEOUT_MS);
     }
+    await expect(
+      w.household.mutation(api.households.book, {
+        ...w.args,
+        location: { lat: POINT.lat + 1, lng: POINT.lng },
+      }),
+    ).rejects.toThrow("OUTSIDE_PICKUP_RADIUS");
   });
 
   it("passes a rejected offer to the closest eligible shop without reducing the quote", async () => {
@@ -219,7 +223,7 @@ describe("pickup dispatch", () => {
       "declined",
       "offered",
     ]);
-    const view = await w.t.query(api.households.track, { token });
+    const view = await w.household.query(api.households.track, { token });
     expect(view?.shop.name).toBe("nearest");
     expect(view?.dispatch?.attempt).toBe(2);
   });
@@ -239,6 +243,7 @@ describe("pickup dispatch", () => {
           location: { lat: POINT.lat + 1, lng: POINT.lng },
           phones: [],
           weeklyOff: [],
+          hours: { opens: "09:00", closes: "18:00" },
           families: ["paper"],
           offersPickup: true,
           createdAt: Date.now(),
@@ -258,22 +263,21 @@ describe("pickup dispatch", () => {
     expect(reassigned.status).toBe("requested");
   });
 
-  it("runs the scheduled timeout and auto-accepts a qualified replacement", async () => {
+  it("leaves an unaccepted request unassigned after two hours", async () => {
     const w = await world();
-    const next = await candidate(w, "automatic", { autoAccept: true });
+    await candidate(w, "automatic", { autoAccept: true });
     const token = await w.household.mutation(api.households.book, w.args);
     await w.t.finishAllScheduledFunctions(() =>
       vi.advanceTimersByTime(OFFER_TIMEOUT_MS),
     );
     const booking = await read(w, token);
-    expect(booking.orgId).toBe(next);
-    expect(booking.status).toBe("accepted");
-    const bookingEvents = await events(w, booking);
-    expect(bookingEvents.map((row) => row.event)).toEqual([
+    expect(booking.orgId).toBe(w.org._id);
+    expect(booking.status).toBe("requested");
+    expect(booking.dispatch?.expiresAt).toBeUndefined();
+    const expiredOfferEvents = await events(w, booking);
+    expect(expiredOfferEvents.map((e) => e.event)).toEqual([
       "offered",
       "timed_out",
-      "offered",
-      "accepted",
     ]);
   });
 
@@ -288,19 +292,22 @@ describe("pickup dispatch", () => {
     });
     const early = await read(w, token);
     expect(early.dispatch?.attempt).toBe(1);
-    await expire(w, original);
+    await w.shop.mutation(api.shop.respond, {
+      bookingId: original._id,
+      accept: false,
+    });
     const second = await read(w, token);
     expect(second.orgId).toBe(next);
     await expire(w, original);
     expect(await read(w, token)).toEqual(second);
     await expire(w, second);
     const exhausted = await read(w, token);
-    expect(exhausted.status).toBe("declined");
+    expect(exhausted.status).toBe("requested");
     expect(exhausted.dispatch?.expiresAt).toBeUndefined();
     const exhaustedEvents = await events(w, exhausted);
     expect(exhaustedEvents.map((row) => row.event)).toEqual([
       "offered",
-      "timed_out",
+      "declined",
       "offered",
       "timed_out",
     ]);
@@ -330,7 +337,7 @@ describe("pickup dispatch", () => {
     "rejects acceptance %i ms after the deadline before the expiry job runs",
     async (delay) => {
       const w = await world();
-      const next = await candidate(w, "next");
+      await candidate(w, "next");
       const token = await w.household.mutation(api.households.book, w.args);
       const original = await read(w, token);
       const originalEvents = await events(w, original);
@@ -338,6 +345,7 @@ describe("pickup dispatch", () => {
         ctx.db.query("auditLog").collect(),
       );
       vi.setSystemTime(original.createdAt + OFFER_TIMEOUT_MS + delay);
+      w.shop = await signInAs(w.t, SHOP);
 
       await expect(
         w.shop.mutation(api.shop.respond, {
@@ -356,13 +364,12 @@ describe("pickup dispatch", () => {
         attempt: 1,
       });
       const reassigned = await read(w, token);
-      expect(reassigned.orgId).toBe(next);
+      expect(reassigned.orgId).toBe(w.org._id);
       expect(reassigned.status).toBe("requested");
       const reassignedEvents = await events(w, reassigned);
       expect(reassignedEvents.map((row) => row.event)).toEqual([
         "offered",
         "timed_out",
-        "offered",
       ]);
     },
   );
@@ -372,6 +379,7 @@ describe("pickup dispatch", () => {
     const token = await w.household.mutation(api.households.book, w.args);
     const original = await read(w, token);
     vi.setSystemTime(original.createdAt + OFFER_TIMEOUT_MS - 1);
+    w.shop = await signInAs(w.t, SHOP);
     await w.shop.mutation(api.shop.respond, {
       bookingId: original._id,
       accept: true,
@@ -388,6 +396,7 @@ describe("pickup dispatch", () => {
       ctx.db.patch("bookings", original._id, { dispatch: undefined }),
     );
     vi.setSystemTime(original.createdAt + OFFER_TIMEOUT_MS);
+    w.shop = await signInAs(w.t, SHOP);
     await w.shop.mutation(api.shop.respond, {
       bookingId: original._id,
       accept: true,
@@ -430,7 +439,7 @@ describe("pickup dispatch", () => {
       attempt: 1,
     });
     const declined = await read(w, token);
-    expect(declined.status).toBe("declined");
+    expect(declined.status).toBe("requested");
     expect(declined.orgId).toBe(w.org._id);
   });
 

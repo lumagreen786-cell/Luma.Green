@@ -25,6 +25,25 @@ async function demoWorld() {
   const t = convexTest(schema, modules);
   registerAuth(t);
   await seedDemo(t);
+  await t.run(async (ctx) => {
+    const references = await ctx.db.query("marketPrices").collect();
+    for (const reference of references)
+      await ctx.db.patch("marketPrices", reference._id, {
+        sourceLabel: "Synthetic test reference",
+        observedAt: Date.now(),
+      });
+    const org = await ctx.db
+      .query("orgs")
+      .withIndex("by_slug", (q) => q.eq("slug", "ramesh-kabadi-store"))
+      .unique();
+    if (!org) throw new Error("Missing shop");
+    await ctx.db.insert("rateCards", {
+      orgId: org._id,
+      materialCode: "GLASS-BOTTLE",
+      paisePerKg: 200,
+      updatedAt: Date.now(),
+    });
+  });
   return t;
 }
 
@@ -271,7 +290,7 @@ describe("shop.complete", () => {
       bookingId: meena,
       lines: [
         { materialCode: "PAPER-NEWS", grams: 12_000 },
-        // Not on Ramesh's rate card: the city's fallback (₹2/kg) applies.
+        // Explicit test offer at ₹2/kg.
         { materialCode: "GLASS-BOTTLE", grams: 2500 },
         // A second bundle of the same material is added up.
         { materialCode: "PAPER-NEWS", grams: 7250 },
@@ -471,9 +490,9 @@ describe("the rate card", () => {
     const card = await shop.query(api.shop.rateCard, {});
 
     const families = new Set(card.rows.map((row) => row.material.family));
-    // Ramesh handles paper, plastic, metal and e-waste — no glass, no clothes.
-    expect([...families]).toEqual(["paper", "plastic", "metal", "ewaste"]);
-    expect(card.rows).toHaveLength(20);
+    // Declared e-waste scope does not grant an ordinary specialist route.
+    expect([...families]).toEqual(["paper", "plastic", "metal"]);
+    expect(card.rows).toHaveLength(16);
     for (const row of card.rows) {
       expect(row.myPaise).toBeGreaterThanOrEqual(row.floorPaise ?? 0);
       expect(row.fallbackPaise).toBeGreaterThan(0);
@@ -481,41 +500,15 @@ describe("the rate card", () => {
     }
   });
 
-  it("refuses a price below the floor", async () => {
+  it("accepts an own offer below the indicative reference", async () => {
     const t = await demoWorld();
     const shop = await signInAs(t, RAMESH);
-    const before = await priceRow(shop, "PAPER-NEWS");
-    const floor = before?.floorPaise ?? 0;
-
-    await expect(
-      shop.mutation(api.shop.setRate, {
-        materialCode: "PAPER-NEWS",
-        paisePerKg: floor - 1,
-      }),
-    ).rejects.toThrow(/BELOW_FLOOR/);
-    const unchanged = await priceRow(shop, "PAPER-NEWS");
-    expect(unchanged?.myPaise).toBe(before?.myPaise);
-
     await shop.mutation(api.shop.setRate, {
       materialCode: "PAPER-NEWS",
-      paisePerKg: floor,
+      paisePerKg: 1,
     });
     const saved = await priceRow(shop, "PAPER-NEWS");
-    expect(saved?.myPaise).toBe(floor);
-    const audit = await t.run(async (ctx) => {
-      const rows = await ctx.db
-        .query("auditLog")
-        .filter((q) => q.eq(q.field("action"), "rateCard.set"))
-        .collect();
-      return rows.map((row): unknown => row.metadata);
-    });
-    expect(audit).toEqual([
-      {
-        materialCode: "PAPER-NEWS",
-        fromPaise: before?.myPaise,
-        toPaise: floor,
-      },
-    ]);
+    expect(saved?.myPaise).toBe(1);
   });
 
   it("adds a price the shop hadn't set", async () => {

@@ -113,6 +113,29 @@ async function world() {
 }
 
 describe("workspace membership is the live authority", () => {
+  it("keeps suspended workspace records read-only for resolution", async () => {
+    const w = await world();
+    await w.t.run((ctx) =>
+      ctx.db.patch("orgs", w.orgId, { status: "suspended" }),
+    );
+    expect(await w.owner.query(api.workspace.mine, {})).toMatchObject({
+      kind: "org",
+      role: "viewer",
+      org: { id: w.orgId },
+    });
+    const stock = await w.owner.query(api.stock.mine, {});
+    expect(stock.totalGrams).toBeGreaterThan(0);
+    await expect(w.owner.query(api.market.trades, {})).resolves.toBeDefined();
+    await expect(
+      w.owner.mutation(api.shop.setRate, {
+        materialCode: "PAPER-NEWS",
+        paisePerKg: 1000,
+      }),
+    ).rejects.toThrow("NO_BUSINESS");
+    await expect(
+      w.other.query(api.workspace.team, { orgId: w.orgId }),
+    ).rejects.toThrow("WORKSPACE_CHANGED");
+  });
   it("denies selection and roster access outside the caller's memberships", async () => {
     const w = await world();
     await expect(

@@ -67,6 +67,8 @@ export const vTradeAction = v.union(
 );
 
 export const vTradeView = v.object({
+  freightPaisePerKg: v.optional(v.number()),
+  deliveryAvailableAt: v.optional(v.number()),
   specification: v.optional(vMaterialOfferSpecification),
   id: v.id("trades"),
   material: vMaterialRef,
@@ -91,6 +93,10 @@ export const vTradeView = v.object({
 });
 
 export const vListingView = v.object({
+  freightPaisePerKg: v.optional(v.number()),
+  deliveryAvailableAt: v.optional(v.number()),
+  distanceKm: v.optional(v.number()),
+  expiresAt: v.optional(v.number()),
   specification: v.optional(vMaterialOfferSpecification),
   id: v.id("listings"),
   origin: v.optional(v.literal("manufacturer_byproduct")),

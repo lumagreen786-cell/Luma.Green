@@ -1,4 +1,14 @@
 {
+  "stockReports": {
+    "prepare": "生成库存报告",
+    "download": "下载库存报告",
+    "preparing": "正在生成您的报告…",
+    "complete": "报告已就绪",
+    "failed": "无法生成报告。请重试。",
+    "unavailable": "配置后台任务后才能使用报告。",
+    "expired": "此报告已过期。请生成新报告。",
+    "notice": "某一时刻的私有库存快照。有效期为30分钟。这不是证书。"
+  },
   "brand": {
     "name": "Luma.Green",
     "tagline": "行动起来，共创更洁净的明天"
@@ -135,7 +145,7 @@
       "kabadiwala": {
         "title": "废品回收店",
         "one": "接收附近家庭的回收请求。",
-        "two": "自行定价，但不得低于最低价。",
+        "two": "为每种材料自主设置报价。",
         "three": "将分拣好的库存卖给预处理商。",
         "cta": "以废品回收店身份加入"
       },
@@ -176,8 +186,8 @@
         "body": "选择您的角色并完成注册。"
       },
       "floor": {
-        "title": "有底线的公平价格",
-        "body": "回收店可以自行定价，但不得低于我们为每种材料公布的最低价。"
+        "title": "店铺自主报价",
+        "body": "店铺自主设置报价。注明日期的参考价格仅供参考，不是强制最低价。"
       },
       "escrow": {
         "title": "等待支付网关",
@@ -237,22 +247,22 @@
   },
   "prices": {
     "metaTitle": "班加罗尔今日可回收材料价格",
-    "metaDescription": "班加罗尔今日每公斤可回收材料价格：纸、塑料、金属、玻璃和电子废弃物，附本周变化、30天图表和回收店最低收购价。",
+    "metaDescription": "班加罗尔可回收材料每公斤的注明日期参考价格。每家企业自主设置报价。",
     "eyebrow": "班加罗尔",
     "title": "材料价格",
-    "lead": "今天每公斤的售价。回收店可自行定价，但不得低于最低价。点击材料可查看过去30天的价格。",
+    "lead": "每公斤的注明日期参考价格。每家企业自主设置报价。选择材料以查看现有历史记录。",
     "demoNote": "这是原型演示的示例价格，并非实时市场价。",
     "date": "{date}的价格",
-    "floorHelp": "最低价：经过核验的回收店每公斤至少应支付的金额。",
+    "floorHelp": "参考价格：注明日期的信息，不是强制最低价或店铺报价。",
     "perKg": "{price}/公斤",
-    "floor": "最低价{price}",
+    "floor": "参考 {price}",
     "noPrice": "暂无价格",
     "columns": {
       "material": "材料",
       "today": "今天",
       "week": "本周",
       "month": "30天",
-      "floor": "最低价"
+      "floor": "参考"
     },
     "families": {
       "paper": "纸",
@@ -277,7 +287,7 @@
       "today": "今天",
       "low": "30天最低价",
       "high": "30天最高价",
-      "floor": "最低价",
+      "floor": "参考",
       "noFloor": "无",
       "close": "关闭",
       "noHistory": "暂无价格历史。"
@@ -285,7 +295,7 @@
     "chart": {
       "label": "{material}：每日每公斤价格。使用方向键切换日期。",
       "point": "{date}：{price}",
-      "floor": "最低价{price}",
+      "floor": "参考 {price}",
       "table": "显示数值",
       "tableCaption": "{material}的每日每公斤价格",
       "date": "日期",
@@ -557,10 +567,10 @@
     "lead": "材料从家庭流向回收店、预处理商和再生企业，最终成为新产品。Luma.Green记录每次交接。",
     "stepLabel": "第{number}步",
     "sell": {
-      "body": "家庭选择已有材料，查看附近各店报价，预约上门回收或送店。回收店逐项称重，通过现金或UPI付款，双方都获得收据。",
-      "point1": "各店自行定价，不得低于公布的最低价",
+      "body": "家庭添加照片和回收详情后，预约上门回收或自行送达。无需估算重量。店铺称重并记录付款声明和收据。",
+      "point1": "每家店铺自主设置报价",
       "point2": "使用店铺的秤称重，并以克记录",
-      "point3": "无需账户的追踪链接"
+      "point3": "查看私有回收详情需要登录并具有记录访问权限"
     },
     "trade": {
       "body": "企业付款通过支付网关进行。请查看订单以了解当前付款状态。",
@@ -1079,19 +1089,19 @@
       },
       "howPricesWork": {
         "title": "价格如何确定",
-        "summary": "估算为什么是一个范围，以及最终金额如何计算。",
+        "summary": "店铺的自主报价和实测重量如何确定金额。",
         "steps": {
           "estimate": {
-            "title": "估算使用城市价格",
-            "body": "选择回收店前，我们使用班加罗尔标准价格，因此显示金额范围。"
+            "title": "参考价格是注明日期的信息",
+            "body": "参考价格提供背景信息，不决定店铺报价或强制最低价。"
           },
           "own": {
             "title": "每家回收店自行定价",
             "body": "选定后，你会看到该店每种材料的价格。"
           },
           "floor": {
-            "title": "不得低于最低价",
-            "body": "Luma.Green为每种材料设置最低价。任何回收店都不能支付得更少。"
+            "title": "自主报价",
+            "body": "每家企业自主设置报价。Luma.Green不强制执行以参考价格为基础的最低价。"
           },
           "final": {
             "title": "重量决定金额",
@@ -1219,23 +1229,23 @@
       },
       "setPrices": {
         "title": "设置价格",
-        "summary": "在最低价以上，自行选择收购价。",
+        "summary": "选择您为每种材料提供的报价。",
         "steps": {
           "open": {
             "title": "打开我的价格",
-            "body": "查看所有材料及旁边的最低价。"
+            "body": "查看材料和现有参考价格信息。"
           },
           "enter": {
             "title": "输入每公斤价格",
             "body": "为每种材料输入你愿意支付给家庭的价格。"
           },
           "floor": {
-            "title": "不低于最低价",
-            "body": "低于最低价的价格无法保存。若最低价上涨，你的价格也会提高，我们会通知你。"
+            "title": "设置自主报价",
+            "body": "参考价格不会决定或自动更改您的报价。"
           },
           "blank": {
             "title": "某种材料不填价格",
-            "body": "未设置时使用城市标准价格。"
+            "body": "将某种材料留空，则不会为其设置报价。"
           },
           "history": {
             "title": "旧收据不会改变",
@@ -1555,7 +1565,7 @@
       },
       "howPriceWorks": {
         "q": "我的金额如何计算？",
-        "a": "每种材料的重量乘以回收店的每公斤价格。价格不能低于Luma.Green设置的最低价。"
+        "a": "每种材料的实测重量乘以与店铺商定的每公斤价格。参考价格仅供参考。"
       },
       "howPaid": {
         "q": "如何收款？",
@@ -1595,7 +1605,7 @@
       },
       "ownPrices": {
         "q": "可以自行设置价格吗？",
-        "a": "可以，每种材料都能设置，但不能低于Luma.Green规定的最低价。"
+        "a": "可以。每家企业为每种材料自主设置报价。参考价格不是强制最低价。"
       },
       "noVehicle": {
         "q": "没有车辆，还能加入吗？",
@@ -2746,6 +2756,33 @@
     }
   },
   "track": {
+    "review": {
+      "title": "核对收据",
+      "declaration": "店铺已申报付款。您尚未确认收到款项。",
+      "accepted": "收据已接受。请仅在收到款项后确认收款。",
+      "disputed": "已对收据提出异议。正在等待解决。",
+      "acknowledged": "您已确认收到款项。",
+      "accept": "接受",
+      "dispute": "对收据提出异议",
+      "acknowledge": "确认已收款",
+      "rejectLine": "拒绝{material}",
+      "note": "异议原因",
+      "sharing": "回收协助人",
+      "phone": "协助人电话号码",
+      "adult": "我确认本人和受邀协助人均为成年人。",
+      "invite": "邀请协助人",
+      "shareNote": "请将此回收链接分享给协助人。协助人必须使用此已验证的电话号码登录，并在48小时内接受邀请。系统不会发送消息。",
+      "active": "有效",
+      "pending": "等待接受",
+      "ended": "访问已结束",
+      "revoke": "撤销访问权限",
+      "leave": "退出此次回收",
+      "handover": "交接备注",
+      "save": "保存备注",
+      "error": "无法保存更改。请检查您的访问权限后重试。",
+      "signIn": "请登录以查看此次回收",
+      "acceptedTotal": "已接受：{weight} · {amount}"
+    },
     "metaTitle": "你的预约",
     "notFound": {
       "title": "未找到此预约",
@@ -2839,7 +2876,7 @@
       "close": "关闭",
       "otherNumber": "使用其他号码"
     },
-    "saved": "无需账户。保存此链接，即可在任何手机上查看预约。",
+    "saved": "请保存此链接。查看私有详情需要登录并拥有此次回收的权限。",
     "sellMore": "再次预约回收",
     "tryAnother": "试试其他店铺",
     "dispatchChanged": "请求已转至另一家附近店铺，当前店铺显示在下方。",
@@ -3291,12 +3328,12 @@
       "title": "库存",
       "lead": "当前库存及其今日价值。",
       "totalWeight": "总重量",
-      "worth": "今日价值",
-      "worthHint": "按今日市场价格",
+      "worth": "当前报价价值",
+      "worthHint": "当前报价价值",
       "scrap": "已收集材料",
       "recycled": "再生材料",
-      "atPrice": "市场价{price}/公斤",
-      "noPrice": "今日暂无市场价",
+      "atPrice": "当前报价价值: {price}/公斤",
+      "noPrice": "暂无有效报价",
       "sellTo": {
         "yard": "卖给预处理商",
         "recycler": "卖给再生企业",
@@ -3307,23 +3344,24 @@
       "emptyBusiness": "在市场采购后，会显示在这里。",
       "buy": "采购材料",
       "notBusinessTitle": "仅限企业",
-      "notBusinessBody": "店铺、预处理商、再生企业和工厂管理库存。"
+      "notBusinessBody": "店铺、预处理商、再生企业和工厂管理库存。",
+      "recordedCost": "已记录成本"
     },
     "prices": {
       "title": "我的价格",
-      "lead": "支付给家庭的每公斤价格，不得低于最低价。",
+      "lead": "您向家庭提供的每公斤报价，由您自主设置。",
       "label": "你的{material}价格，单位卢比/公斤",
       "prefix": "₹",
       "suffix": "/公斤",
-      "minimum": "最低{price}/公斤",
+      "minimum": "参考 {price}/kg",
       "market": "市场价{price}/公斤",
-      "notSet": "尚未设置，家庭将按城市价格{price}/公斤收款。",
+      "notSet": "未设置报价。参考：{price}/kg。",
       "save": "保存",
       "saving": "正在保存…",
       "saved": "已保存{material}：{price}/公斤。",
       "invalid": "请输入价格，例如14或14.50。",
-      "belowFloor": "过低，最低价为{price}/公斤。",
-      "belowFloorUnknown": "过低，低于最低价格。",
+      "belowFloor": "请输入有效价格。参考：{price}/kg。",
+      "belowFloorUnknown": "请输入有效价格。",
       "emptyTitle": "暂无材料",
       "emptyBody": "店铺获批时会设置收购材料。"
     },
@@ -3477,7 +3515,8 @@
       "application_received": "申请已收到",
       "application_approved": "申请已批准",
       "application_changes_requested": "申请需要修改",
-      "application_rejected": "申请未获批准"
+      "application_rejected": "申请未获批准",
+      "stock_low": "低库存提醒"
     }
   },
   "integrations": {
@@ -3751,7 +3790,8 @@
     "addInput": "添加投入批次",
     "chooseInput": "选择投入批次",
     "combinedInput": "投入总质量",
-    "multiInputHint": "仅合并由您保管且已测量的材料。每项数量都从其原批次中消耗。这只记录处理证据，不增加库存。"
+    "multiInputHint": "仅合并由您保管且已测量的材料。每项数量都从其原批次中消耗。这只记录处理证据，不增加库存。",
+    "qualityReleaseRequired": "需要已接受的检测结果"
   },
   "evidence": {
     "title": "文档参考信息",
@@ -4166,5 +4206,198 @@
     "lead": "阅读为指定目的共享的固定证据副本。接收人获得批准并不代表可以访问其他企业的记录。",
     "warning": "仅共享所选检验和勾选文件。请先删除个人信息。访问期限最多90天，可撤销；已下载的副本无法收回。",
     "snapshot": "检验企业声明的固定副本。这不是证书或独立验证。"
+  },
+  "collectionOperations": {
+    "availability": "收集可用时间",
+    "capacity": "每个时段的容量",
+    "holidays": "休息日期（YYYY-MM-DD，以逗号分隔）",
+    "schedule": "收集计划",
+    "unassigned": "尚未分配。请更改时间或取消。",
+    "repeat": "每{days}天重复",
+    "stop": "停止今后的上门服务",
+    "reschedule": "更改收集时间",
+    "requested": "更改已发送给运营方",
+    "saved": "已保存",
+    "acknowledge": "确认收到付款",
+    "acknowledged": "已确认付款",
+    "fixedFee": "固定工作费用。由派工企业支付；Luma不保证工资。",
+    "due": "付款到期日：{date}",
+    "declarePayment": "记录工人付款",
+    "failedVisit": "记录未完成的上门服务",
+    "paymentDeclared": "已记录付款，等待工人确认"
+  },
+  "geocoding": {
+    "consent": "将此位置发送给Google Maps以查找地址。",
+    "find": "查找地址",
+    "loading": "正在查找地址…",
+    "manual": "您可以手动输入地址。",
+    "unavailable": "地址查询不可用，请手动输入地址。",
+    "use": "使用此地址",
+    "confirm": "我已核对地址，并希望替换地址栏内容。",
+    "preview": "仅供预览。保存地址需要先审查服务政策。",
+    "attribution": "Google Maps"
+  },
+  "serviceRecords": {
+    "title": "服务和项目",
+    "unavailable": "供应商执行和奖励兑换不可用。记录不批准贷款、保险、福利或付款。",
+    "enquiries": "服务咨询",
+    "programmes": "项目记录",
+    "edit": "编辑",
+    "reported": "数据为自行报告，证据未经核实。不代表市政协议或已有资金的奖励。",
+    "area": "区域",
+    "startsOn": "开始日期",
+    "endsOn": "结束日期",
+    "coverageCount": "覆盖数量",
+    "trips": "行程次数",
+    "centreHandovers": "中心交接次数",
+    "groupIncomePaise": "群体收入（派萨）",
+    "share": "分享汇总报告",
+    "principal": "材料所有者／委托方",
+    "materialReference": "材料参考",
+    "explicitReference": "仅向选定接收方分享材料代码和记录的克数。",
+    "commercialModel": "商业模式",
+    "draft": "草稿",
+    "enquiry": "咨询",
+    "closed": "已关闭",
+    "kinds": {
+      "equipment": "设备",
+      "staffing": "人员",
+      "transport": "运输",
+      "environment": "环境",
+      "accounting": "会计",
+      "solar": "太阳能",
+      "scales": "秤",
+      "voice": "语音服务",
+      "society": "社区服务",
+      "welfare": "福利",
+      "donation": "捐赠",
+      "reward": "奖励",
+      "finance": "金融",
+      "insurance": "保险",
+      "attendance": "考勤",
+      "wet_service": "湿垃圾服务",
+      "other": "其他"
+    },
+    "models": {
+      "partner_service": "合作方咨询",
+      "materials_sale_reference": "材料销售参考",
+      "toll_jobwork": "委托方保留材料所有权的加工",
+      "paid_collection": "有偿收集服务",
+      "generator_paid_treatment": "产废方付费处理"
+    },
+    "directions": {
+      "not_applicable": "不执行付款",
+      "buyer_to_seller": "买方 → 卖方",
+      "principal_to_processor": "委托方 → 加工方",
+      "customer_to_service": "客户 → 服务方",
+      "generator_to_handler": "产废方 → 处理方"
+    },
+    "received": "已接收",
+    "sharedReports": "共享审计报告",
+    "revoke": "撤销访问",
+    "quantityGrams": "数量（克）",
+    "recordName": "记录名称"
+  },
+  "returnClaims": {
+    "title": "退货与计划证据",
+    "returnTitle": "全量退货",
+    "scheme": "计划参考编号",
+    "issuer": "外部签发方参考编号",
+    "freight": "退货运费承担方",
+    "reconcile": "核对",
+    "validate": "检查来源",
+    "notice": "仅为申报证据，不是官方证书或付款批准。",
+    "waiting": "请等待实物接收、服务商全额退款及结算撤销。"
+  },
+  "marketComparison": {
+    "quote": "需要运费报价",
+    "freight": "单独运费：{price}/公斤",
+    "notice": "结账仅收材料费。请另行商定并支付运费。",
+    "available": "自{date}起可用",
+    "delivered": "材料与运费：{price}/公斤",
+    "freightInput": "每公斤运费（可选）",
+    "availableInput": "可用日期（可选）",
+    "validityInput": "报价到期时间（可选）"
+  },
+  "recordedCosts": {
+    "acquisition": "购入成本（派萨）",
+    "processing": "加工成本（派萨）",
+    "reference": "成本凭证编号",
+    "hint": "留空表示未知。仅在已记录成本为零时输入 0。",
+    "remaining": "剩余已记录成本",
+    "input": "已耗用投入成本",
+    "total": "分配给产出的成本",
+    "unknown": "未知",
+    "loss": "实测产出承担污染物和加工损耗的成本。",
+    "record": "记录购入成本",
+    "processingTotal": "加工成本"
+  },
+  "stockClosing": {
+    "title": "每日库存核查",
+    "notice": "结存记录保存当前库存，之后仍可变更。",
+    "note": "核查备注",
+    "record": "记录今日结存",
+    "last": "最近结存",
+    "none": "尚无结存记录",
+    "gramsUnit": "g",
+    "unknown": "成本未知",
+    "balances": "结存余额",
+    "threshold": "低库存提醒",
+    "thresholdHint": "仅发送至账户收件箱。启用前提醒保持关闭。",
+    "disabled": "关闭",
+    "below": "低于提醒阈值",
+    "recent": "最近提醒（最多20条）",
+    "noAlerts": "尚无提醒",
+    "material": "材料",
+    "grams": "提醒阈值（克）",
+    "enabled": "启用提醒",
+    "save": "保存提醒设置",
+    "closed": "结存已保存",
+    "saved": "提醒设置已保存",
+    "dateChanged": "日期已变更，请核查后重试。",
+    "alreadyRecorded": "今日结存已记录。",
+    "limit": "库存历史超出此工具的限制，请联系管理员。",
+    "mismatch": "库存与变动记录不一致，请管理员核查。",
+    "correction": "库存更正",
+    "add": "增加库存",
+    "remove": "减少库存",
+    "corrected": "更正已记录",
+    "evidence": "实物凭证编号",
+    "recentCorrections": "最近更正（最多20条）"
+  },
+  "workerHandover": {
+    "title": "收集交接",
+    "hint": "仅记录凭证，库存与报酬使用各自记录。",
+    "limit": "最近100条关联，来源选项有限。",
+    "job": "已分配的上门收集任务",
+    "collection": "收集记录",
+    "collected": "已收集（g）",
+    "received": "已接收（g）",
+    "variance": "已接收 − 已收集（g）",
+    "record": "记录收集重量",
+    "acknowledge": "确认交接",
+    "revoke": "撤销关联",
+    "acknowledged": "交接已确认",
+    "link": "关联收集记录",
+    "reason": "原因",
+    "evidence": "实物凭证编号"
+  },
+  "accountRemoval": {
+    "title": "关闭账户",
+    "intro": "您的登录和访问权限将终止。",
+    "retained": "必要的业务、付款、材料和审计记录将保留以供审核。并非所有数据都会删除。",
+    "confirm": "我已了解，并希望关闭我的账户。",
+    "action": "关闭账户",
+    "held": "您的账户尚未关闭。",
+    "reauth": "请重新登录以继续。",
+    "unavailable": "暂时无法关闭账户，请稍后重试。",
+    "retry": "结果尚未确认。请重试以查询同一请求。",
+    "closed": "账户访问权限已关闭。",
+    "adminReplacement": "需要另行安排替代管理员。",
+    "businessOwner": "关闭账户前，请先移交企业所有权。",
+    "activeCollection": "请先解决正在进行的收集。",
+    "assignedWork": "请先完成分配的工作或交接。",
+    "reviewLimit": "关闭账户前还需审核更多记录。",
+    "checkLimit": "关闭账户后重新注册不会重置今天的企业核查额度。核查可能暂停至印度时间的次日。"
   }
 }

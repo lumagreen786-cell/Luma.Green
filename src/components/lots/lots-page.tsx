@@ -18,6 +18,11 @@ import { Link } from "@/i18n/navigation";
 import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
 import { requiresControlledRoute } from "../../../convex/lib/industrialClassification";
+import {
+  ProcessingCostSummary,
+  RecordAcquisitionCost,
+  RecordedCost,
+} from "./cost-parts";
 import { Mass } from "./form-parts";
 import { Inspections } from "./inspections";
 import { LotQueryBoundary } from "./lot-boundary";
@@ -125,6 +130,7 @@ function IncomingLots() {
 }
 function HeldLots() {
   const t = useTranslations("lots");
+  const costs = useTranslations("recordedCosts");
   const held = useQuery(api.traceability.mine);
   return (
     <section className="flex flex-col gap-4" aria-labelledby="held-lots">
@@ -155,7 +161,15 @@ function HeldLots() {
                       {t(`handling.${lot.handlingClass}`)}
                     </p>
                   </div>
-                  <Mass grams={lot.availableGrams} />
+                  <div className="space-y-1 text-end">
+                    <Mass grams={lot.availableGrams} />
+                    <p className="text-sm">
+                      <span className="text-muted-foreground">
+                        {costs("remaining")}:{" "}
+                      </span>
+                      <RecordedCost paise={lot.costPaise} />
+                    </p>
+                  </div>
                 </li>
               ))}
             </ul>
@@ -221,6 +235,7 @@ export function LotDetailPage({ lotId }: { lotId: Id<"materialLots"> }) {
 }
 function LotDetail({ lotId }: { lotId: Id<"materialLots"> }) {
   const t = useTranslations("lots");
+  const costs = useTranslations("recordedCosts");
   const format = useFormatter();
   const business = useBusiness();
   const canOperate = useCanOperate();
@@ -244,6 +259,7 @@ function LotDetail({ lotId }: { lotId: Id<"materialLots"> }) {
       <div className="flex flex-wrap items-center gap-3">
         <Badge variant="secondary">{t(lot.status)}</Badge>
         {isHolder ? <HeldLotActions lot={lot} city={business.city} /> : null}
+        <AcquisitionCostAction lot={lot} isHolder={isHolder} />
         {isHolder ? null : (
           <ReceiveLot lotId={lot.id} grams={lot.availableGrams} />
         )}
@@ -279,6 +295,16 @@ function LotDetail({ lotId }: { lotId: Id<"materialLots"> }) {
             <Mass grams={lot.availableGrams} />
           </dd>
         </div>
+        {isHolder ? (
+          <div>
+            <dt className="text-sm text-muted-foreground">
+              {costs("remaining")}
+            </dt>
+            <dd className="mt-1 text-xl">
+              <RecordedCost paise={lot.costPaise} />
+            </dd>
+          </div>
+        ) : null}
         {lot.sourceKind ? (
           <div>
             <dt className="text-sm text-muted-foreground">{t("source")}</dt>
@@ -340,6 +366,18 @@ function LotDetail({ lotId }: { lotId: Id<"materialLots"> }) {
   );
 }
 
+function AcquisitionCostAction({
+  lot,
+  isHolder,
+}: {
+  lot: FunctionReturnType<typeof api.traceability.history>["lot"];
+  isHolder: boolean;
+}) {
+  return isHolder && lot.canRecordAcquisitionCost ? (
+    <RecordAcquisitionCost lotId={lot.id} />
+  ) : null;
+}
+
 function Transformations({
   history,
 }: {
@@ -374,6 +412,7 @@ function Transformations({
                   {facility(`processKinds.${event.processKind}`)}
                 </p>
               ) : null}
+              <ProcessingCostSummary {...event} />
               <section aria-label={t("inputs")} className="space-y-2">
                 <h3 className="font-medium">{t("inputs")}</h3>
                 <ul>
@@ -512,7 +551,14 @@ function HeldLotActions({
   lot: FunctionReturnType<typeof api.traceability.history>["lot"];
   city: string;
 }) {
+  const t = useTranslations("lots");
   if (lot.status !== "available") return null;
+  if (lot.qualityReleased === false)
+    return (
+      <p className="text-sm text-muted-foreground">
+        {t("qualityReleaseRequired")}
+      </p>
+    );
   if (requiresControlledRoute(lot))
     return (
       <RecordDisposition

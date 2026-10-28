@@ -3,11 +3,13 @@
 import { convexTest } from "convex-test";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { api } from "./_generated/api";
+import { api, internal } from "./_generated/api";
 import { convexModules, registerAuth, signIn } from "./lib/auth.testing";
 import { CATALOGUE, catalogueEntry } from "./lib/catalogue";
 import { shiftDate } from "./lib/dates";
 import { indiaToday } from "./lib/onboarding";
+import { FOUNDATION_REFERENCE_DEFINITIONS } from "./lib/referenceDefinitions";
+import { specialistReference } from "./lib/specialistReferences";
 import schema from "./schema";
 
 const modules = convexModules(import.meta.glob("./**/*.*s"));
@@ -45,6 +47,9 @@ describe("production catalogue definitions", () => {
     expect(await t.run((ctx) => ctx.db.query("auditLog").collect())).toEqual(
       [],
     );
+    expect(
+      await t.run((ctx) => ctx.db.query("operationalDefinitions").collect()),
+    ).toEqual([]);
   });
 
   it("adds only missing definitions with unknown factors and no operational records", async () => {
@@ -56,19 +61,26 @@ describe("production catalogue definitions", () => {
     await admin.mutation(api.identity.ensureProfile, { locale: "en" });
     expect(
       await admin.mutation(api.catalogue.initializeDefinitions, {}),
-    ).toEqual({ inserted: 26 });
+    ).toEqual({
+      inserted: 51,
+      definitionsInserted: 32,
+      materialsSkipped: 0,
+      definitionsSkipped: 0,
+    });
     const materials = await t.run((ctx) =>
       ctx.db.query("materials").withIndex("by_sortOrder").collect(),
     );
     expect(
-      materials.map(({ code, family, stage, names, sortOrder, active }) => ({
-        code,
-        family,
-        stage,
-        names,
-        sortOrder,
-        active,
-      })),
+      materials
+        .slice(0, CATALOGUE.length)
+        .map(({ code, family, stage, names, sortOrder, active }) => ({
+          code,
+          family,
+          stage,
+          names,
+          sortOrder,
+          active,
+        })),
     ).toEqual(
       CATALOGUE.map(({ code, family, stage, names }, sortOrder) => ({
         code,
@@ -76,21 +88,55 @@ describe("production catalogue definitions", () => {
         stage,
         names,
         sortOrder,
-        active: true,
+        active: !specialistReference(code),
       })),
     );
     for (const material of materials) {
       expect(material.co2eFactor).toBeUndefined();
       expect(material.byproductEligibility).toBeUndefined();
     }
+    expect(materials).toHaveLength(51);
+    expect(new Set(materials.map(({ code }) => code)).size).toBe(51);
+    expect(
+      materials.slice(CATALOGUE.length).every(({ active }) => !active),
+    ).toBe(true);
+    const definitions = await admin.query(
+      api.operationalCatalogue.adminList,
+      {},
+    );
+    expect(definitions).toHaveLength(32);
+    for (const definition of definitions) {
+      expect(definition.status).toBe("draft");
+      expect(definition.sourceReference).toContain("workbook_unverified");
+      expect(definition.specification).toContain("quality thresholds");
+      expect(definition.specification).toContain(
+        "grants no hazard classification",
+      );
+      expect(
+        materials.find(({ code }) => code === definition.materialCode),
+      ).toBeDefined();
+    }
+    expect(
+      definitions
+        .map(({ materialCode }) => materialCode)
+        .toSorted((a, b) => a.localeCompare(b)),
+    ).toEqual(
+      FOUNDATION_REFERENCE_DEFINITIONS.map(
+        ({ materialCode }) => materialCode,
+      ).toSorted((a, b) => a.localeCompare(b)),
+    );
     const publicRows = await t.query(api.catalogue.materials, {});
+    expect(publicRows).toHaveLength(21);
     expect(publicRows.every((material) => material.co2eFactor === null)).toBe(
       true,
     );
     const audit = await t.run((ctx) => ctx.db.query("auditLog").collect());
     expect(
       audit.filter(({ action }) => action === "material.definitionInitialized"),
-    ).toHaveLength(26);
+    ).toHaveLength(51);
+    expect(
+      audit.filter(({ action }) => action === "catalogue.definitionDrafted"),
+    ).toHaveLength(32);
     const rows = await t.run(async (ctx) => ({
       references: await ctx.db.query("referencePrices").collect(),
       history: await ctx.db.query("marketPrices").collect(),
@@ -99,11 +145,18 @@ describe("production catalogue definitions", () => {
       trades: await ctx.db.query("trades").collect(),
       evidence: await ctx.db.query("commercialEvidence").collect(),
       lots: await ctx.db.query("materialLots").collect(),
+      eligibility: await ctx.db.query("facilityScopeReviews").collect(),
+      destinations: await ctx.db.query("controlledDestinations").collect(),
     }));
     for (const records of Object.values(rows)) expect(records).toEqual([]);
     expect(
       await admin.mutation(api.catalogue.initializeDefinitions, {}),
-    ).toEqual({ inserted: 0 });
+    ).toEqual({
+      inserted: 0,
+      definitionsInserted: 0,
+      materialsSkipped: 51,
+      definitionsSkipped: 32,
+    });
     expect(
       await t.run((ctx) =>
         ctx.db.query("materials").withIndex("by_sortOrder").collect(),
@@ -111,6 +164,9 @@ describe("production catalogue definitions", () => {
     ).toEqual(materials);
     expect(await t.run((ctx) => ctx.db.query("auditLog").collect())).toEqual(
       audit,
+    );
+    expect(await admin.query(api.operationalCatalogue.adminList, {})).toEqual(
+      definitions,
     );
   });
 
@@ -144,9 +200,179 @@ describe("production catalogue definitions", () => {
     const priceBefore = await t.run((ctx) => ctx.db.get(priceId));
     expect(
       await admin.mutation(api.catalogue.initializeDefinitions, {}),
-    ).toEqual({ inserted: 25 });
+    ).toEqual({
+      inserted: 50,
+      definitionsInserted: 32,
+      materialsSkipped: 1,
+      definitionsSkipped: 0,
+    });
     expect(await t.run((ctx) => ctx.db.get(id))).toEqual(before);
     expect(await t.run((ctx) => ctx.db.get(priceId))).toEqual(priceBefore);
+  });
+
+  it("rejects material code collisions atomically", async () => {
+    const t = world();
+    const admin = await signIn(t, {
+      email: ADMIN_EMAIL,
+      twoFactorEnabled: true,
+    });
+    await t.run((ctx) =>
+      ctx.db.insert("materials", {
+        code: "RECYCLED-PET-HOT-FLAKE",
+        family: "paper",
+        stage: "scrap",
+        names: { en: "Other reviewed material" },
+        sortOrder: 1,
+        active: true,
+      }),
+    );
+    await expect(
+      admin.mutation(api.catalogue.initializeDefinitions, {}),
+    ).rejects.toThrow("MATERIAL_DEFINITION_CONFLICT");
+    expect(
+      await t.run((ctx) => ctx.db.query("materials").collect()),
+    ).toHaveLength(1);
+    expect(
+      await t.run((ctx) => ctx.db.query("operationalDefinitions").collect()),
+    ).toEqual([]);
+    expect(await t.run((ctx) => ctx.db.query("auditLog").collect())).toEqual(
+      [],
+    );
+  });
+
+  it("rejects conflicting operational code versions without partial initialization", async () => {
+    const t = world();
+    const admin = await signIn(t, {
+      email: ADMIN_EMAIL,
+      twoFactorEnabled: true,
+    });
+    const reference = FOUNDATION_REFERENCE_DEFINITIONS[0];
+    await admin.mutation(api.operationalCatalogue.draft, {
+      ...reference,
+      family: "paper",
+    });
+    const auditBefore = await t.run((ctx) =>
+      ctx.db.query("auditLog").collect(),
+    );
+    await expect(
+      admin.mutation(api.catalogue.initializeDefinitions, {}),
+    ).rejects.toThrow("MATERIAL_DEFINITION_CONFLICT");
+    expect(await t.run((ctx) => ctx.db.query("materials").collect())).toEqual(
+      [],
+    );
+    expect(
+      await t.run((ctx) => ctx.db.query("operationalDefinitions").collect()),
+    ).toHaveLength(1);
+    expect(await t.run((ctx) => ctx.db.query("auditLog").collect())).toEqual(
+      auditBefore,
+    );
+  });
+
+  it("uses bounded indexed reads even when unrelated catalogue records grow", async () => {
+    vi.stubEnv("ADMIN_EMAIL", ADMIN_EMAIL);
+    const t = convexTest({
+      schema,
+      modules,
+      transactionLimits: { documentsRead: 100 },
+    });
+    registerAuth(t);
+    const admin = await signIn(t, {
+      email: ADMIN_EMAIL,
+      twoFactorEnabled: true,
+    });
+    await t.run(async (ctx) => {
+      for (let index = 0; index < 200; index += 1) {
+        await ctx.db.insert("materials", {
+          code: `CUSTOM-${String(index)}`,
+          family: "other",
+          stage: "scrap",
+          names: { en: `Custom material ${String(index)}` },
+          active: false,
+          sortOrder: 1000 + index,
+        });
+      }
+    });
+    expect(
+      await admin.mutation(api.catalogue.initializeDefinitions, {}),
+    ).toEqual({
+      inserted: 51,
+      definitionsInserted: 32,
+      materialsSkipped: 0,
+      definitionsSkipped: 0,
+    });
+    expect(
+      await admin.mutation(api.catalogue.initializeDefinitions, {}),
+    ).toEqual({
+      inserted: 0,
+      definitionsInserted: 0,
+      materialsSkipped: 51,
+      definitionsSkipped: 32,
+    });
+    const custom = await t.run((ctx) =>
+      ctx.db
+        .query("materials")
+        .withIndex("by_code", (q) => q.eq("code", "CUSTOM-199"))
+        .unique(),
+    );
+    expect(custom).toMatchObject({
+      active: false,
+      names: { en: "Custom material 199" },
+    });
+  });
+
+  it("lets the deployment operator initialize references internally without fabricating an admin identity", async () => {
+    const t = world();
+    const args = { operatorReference: "offline-test-release" };
+    expect(
+      await t.mutation(internal.catalogue.initializeReferenceDefinitions, args),
+    ).toEqual({
+      inserted: 51,
+      definitionsInserted: 32,
+      materialsSkipped: 0,
+      definitionsSkipped: 0,
+    });
+    const snapshot = await t.run(async (ctx) => ({
+      materials: await ctx.db.query("materials").collect(),
+      definitions: await ctx.db.query("operationalDefinitions").collect(),
+      audit: await ctx.db.query("auditLog").collect(),
+      prices: await ctx.db.query("referencePrices").collect(),
+      market: await ctx.db.query("marketPrices").collect(),
+      profiles: await ctx.db.query("profiles").collect(),
+    }));
+    expect(snapshot.prices).toEqual([]);
+    expect(snapshot.market).toEqual([]);
+    expect(snapshot.profiles).toEqual([]);
+    expect(
+      snapshot.materials.every(({ co2eFactor }) => co2eFactor === undefined),
+    ).toBe(true);
+    expect(snapshot.audit).toHaveLength(83);
+    for (const entry of snapshot.audit) {
+      expect(entry.actorProfileId).toBeUndefined();
+      expect(entry.metadata).toMatchObject({
+        source: "deployment_operator",
+        operatorReference: "offline-test-release",
+      });
+      expect(entry.metadata).not.toHaveProperty("adminUserId");
+    }
+    expect(
+      await t.mutation(internal.catalogue.initializeReferenceDefinitions, args),
+    ).toEqual({
+      inserted: 0,
+      definitionsInserted: 0,
+      materialsSkipped: 51,
+      definitionsSkipped: 32,
+    });
+    expect(await t.run((ctx) => ctx.db.query("auditLog").collect())).toEqual(
+      snapshot.audit,
+    );
+    await expect(
+      t.mutation(internal.catalogue.initializeReferenceDefinitions, {
+        operatorReference: " ",
+      }),
+    ).rejects.toThrow("INVALID_REFERENCE");
+    await expect(
+      t.mutation(api.catalogue.initializeDefinitions, {}),
+    ).rejects.toThrow("NOT_SIGNED_IN");
   });
 });
 

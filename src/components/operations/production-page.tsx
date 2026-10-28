@@ -11,6 +11,7 @@ import { z } from "zod";
 import { AppPageHeader, ListSkeleton } from "@/components/app/page-parts";
 import { useWorkspace } from "@/components/app/use-workspace";
 import { WorkflowTabs } from "@/components/app/workflow-tabs";
+import { ProcessingCostSummary } from "@/components/lots/cost-parts";
 import { EvidenceDialog, LotField, Mass } from "@/components/lots/form-parts";
 import { formIndex, parseGrams } from "@/components/lots/logic";
 import { NotForYou } from "@/components/shop/guards";
@@ -175,6 +176,7 @@ function ProductionWorkspace({ canOperate }: { canOperate: boolean }) {
                             <dd>{b.inspectionReference ?? t("empty")}</dd>
                           </div>
                         </dl>
+                        <ProcessingCostSummary {...b} />
                         <p>
                           {t("inputTotal")}: <Mass grams={b.inputGrams} /> ·{" "}
                           {t("outputTotal")}: <Mass grams={b.outputGrams} />
@@ -522,6 +524,9 @@ function BatchForm({ data }: { data: Data }) {
               label: `${fmt.dateTime(r.createdAt)} · ${lots("grams", { value: fmt.number(r.inputGrams) })}`,
             }))}
           />
+          {transformation ? (
+            <ProcessingCostSummary {...transformation} />
+          ) : null}
           <Choice
             label={t("inspection")}
             value={inspectionId}

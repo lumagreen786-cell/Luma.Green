@@ -1,4 +1,14 @@
 {
+  "stockReports": {
+    "prepare": "Stok raporu hazırla",
+    "download": "Stok raporunu indir",
+    "preparing": "Raporunuz hazırlanıyor…",
+    "complete": "Rapor hazır",
+    "failed": "Rapor hazırlanamadı. Tekrar deneyin.",
+    "unavailable": "Arka plan işleri yapılandırılana kadar raporlar kullanılamaz.",
+    "expired": "Bu raporun süresi doldu. Yeni bir rapor hazırlayın.",
+    "notice": "Stok durumunun özel anlık görüntüsü. 30 dakika kullanılabilir. Bu bir sertifika değildir."
+  },
   "brand": {
     "name": "Luma.Green",
     "tagline": "Daha temiz yarınlar için harekette"
@@ -82,7 +92,7 @@
       "today": "Bugün",
       "low": "30 günlük en düşük",
       "high": "30 günlük en yüksek",
-      "floor": "Taban",
+      "floor": "Referans",
       "noFloor": "Yok",
       "noHistory": "Henüz fiyat geçmişi yok."
     },
@@ -92,22 +102,22 @@
       "body": "Bağlantınızı kontrol edip tekrar deneyin."
     },
     "metaTitle": "Bengaluru’da bugünkü malzeme fiyatları",
-    "metaDescription": "Bengaluru’da kg başına malzeme fiyatları: kâğıt, plastik, metal, cam ve elektronik atık. Haftalık değişim, 30 günlük grafik ve dükkânın ödeyebileceği minimum tutar.",
+    "metaDescription": "Bengaluru’daki geri dönüştürülebilir malzemeler için kg başına tarihli referans fiyatları. Her işletme kendi tekliflerini belirler.",
     "eyebrow": "Bengaluru",
     "title": "Malzeme fiyatları",
-    "lead": "Malzemenin bugünkü kilo fiyatı. Dükkânlar tabanın altına düşmeden fiyat belirler. Son 30 günü görmek için malzemeye dokunun.",
+    "lead": "Kilogram başına tarihli referans fiyatları. Her işletme kendi tekliflerini belirler. Mevcut geçmişi görmek için malzeme seçin.",
     "demoNote": "Prototip için örnek fiyatlar; canlı piyasa oranları değildir.",
     "date": "{date} fiyatları",
-    "floorHelp": "Taban: doğrulanmış dükkânın bir kilo için ödeyebileceği en düşük tutar.",
+    "floorHelp": "Referans fiyatı: tarihli bilgi; zorunlu alt sınır veya dükkân teklifi değildir.",
     "perKg": "{price}/kg",
-    "floor": "Taban {price}",
+    "floor": "Referans {price}",
     "noPrice": "Henüz fiyat yok",
     "columns": {
       "material": "Malzeme",
       "today": "Bugün",
       "week": "Bu hafta",
       "month": "30 gün",
-      "floor": "Taban"
+      "floor": "Referans"
     },
     "families": {
       "paper": "Kâğıt",
@@ -130,7 +140,7 @@
     "chart": {
       "label": "{material}: günlük kilo fiyatı. Günler arasında geçmek için ok tuşlarını kullanın.",
       "point": "{date}: {price}",
-      "floor": "Taban {price}",
+      "floor": "Referans {price}",
       "table": "Sayıları göster",
       "tableCaption": "{material}, günlük kilo fiyatı",
       "date": "Tarih",
@@ -261,10 +271,10 @@
     "lead": "Malzemeler yeni bir ürüne dönüşmeden önce evlerden toplama dükkânlarına, ön işleme işletmelerine ve geri dönüşümcülere gider. Luma.Green her teslimatı kaydeder.",
     "stepLabel": "Adım {number}",
     "sell": {
-      "body": "Hane malzemelerini seçer, yakın dükkânların tekliflerini görür ve alım veya teslim ayarlar. Hurdacı her malzemeyi tartıp nakit veya UPI ile öder; iki taraf da makbuz alır.",
-      "point1": "Her dükkân kendi fiyatını belirler; yayımlanan tabanın altına inemez",
+      "body": "Hane fotoğraf ve toplama bilgilerini ekler, ardından alım veya bırakma rezervasyonu yapar. Tahmini ağırlık gerekmez. Dükkân malzemeleri tartar, ödeme beyanını ve makbuzu kaydeder.",
+      "point1": "Her dükkân kendi tekliflerini belirler",
       "point2": "Dükkân terazisinden ağırlıklar gram olarak kaydedilir",
-      "point3": "Hesap gerektirmeyen takip bağlantısı"
+      "point3": "Özel toplama ayrıntıları için kayıt erişim izniyle giriş yapın"
     },
     "trade": {
       "body": "İşletme ödemeleri ödeme geçidini kullanır. Güncel ödeme durumu için siparişi kontrol edin.",
@@ -701,19 +711,19 @@
       },
       "howPricesWork": {
         "title": "Fiyatlar nasıl belirlenir",
-        "summary": "Tahminin neden aralık olduğu ve son tutarın hesabı.",
+        "summary": "Bağımsız dükkân teklifleri ve ölçülen ağırlıklar tutarı nasıl belirler.",
         "steps": {
           "estimate": {
-            "title": "Tahmin şehir fiyatını kullanır",
-            "body": "Hurdacı seçmeden standart Bengaluru fiyatlarını kullanırız, bu yüzden aralık görürsünüz."
+            "title": "Referans fiyatları tarihli bilgidir",
+            "body": "Referans fiyatları bağlam sağlar. Dükkân teklifini veya zorunlu alt sınırı belirlemez."
           },
           "own": {
             "title": "Her hurdacı fiyat belirler",
             "body": "Seçtikten sonra her malzeme için kendi fiyatını görürsünüz."
           },
           "floor": {
-            "title": "Asla minimumun altında değil",
-            "body": "Luma.Green her malzemeye minimum fiyat koyar. Hiçbir hurdacı daha az ödeyemez."
+            "title": "Bağımsız teklifler",
+            "body": "Her işletme kendi tekliflerini belirler. Luma.Green referans fiyatına dayalı bir alt sınır uygulamaz."
           },
           "final": {
             "title": "Tutarı ağırlık belirler",
@@ -815,23 +825,23 @@
       },
       "setPrices": {
         "title": "Fiyatlarınızı belirleyin",
-        "summary": "Minimumun üstünde ödeyeceğinizi siz seçersiniz.",
+        "summary": "Her malzeme için teklifinizi seçin.",
         "steps": {
           "open": {
             "title": "Fiyatlarım’ı açın",
-            "body": "Her malzemenin yanında minimum fiyat görünür."
+            "body": "Malzemeleri ve mevcut referans fiyatı bilgilerini görün."
           },
           "enter": {
             "title": "Kg fiyatınızı girin",
             "body": "Her malzemeye haneye ödemek istediğiniz tutarı yazın."
           },
           "floor": {
-            "title": "Minimumun üstünde kalın",
-            "body": "Alt fiyat kaydedilmez. Minimum yükselirse sizin fiyatınız da yükselir, haber veririz."
+            "title": "Bağımsız teklif belirle",
+            "body": "Referans fiyatları teklifinizi belirlemez veya otomatik olarak değiştirmez."
           },
           "blank": {
             "title": "Bir fiyatı boş bırakın",
-            "body": "Fiyat belirlemezseniz standart şehir fiyatı kullanılır."
+            "body": "Bir malzemeyi boş bırakırsanız ona teklif belirlenmez."
           },
           "history": {
             "title": "Eski makbuzlar değişmez",
@@ -1231,7 +1241,7 @@
       },
       "howPriceWorks": {
         "q": "Alacağım tutar nasıl hesaplanır?",
-        "a": "Her malzemenin ağırlığı, hurdacının kilogram fiyatıyla çarpılır. Fiyatları Luma.Green’in belirlediği asgari fiyatın altında olamaz."
+        "a": "Her malzemenin ölçülen ağırlığı, dükkânla anlaşılan kg fiyatıyla çarpılır. Referans fiyatları yalnızca bilgi amaçlıdır."
       },
       "howPaid": {
         "q": "Ödememi nasıl alırım?",
@@ -1271,7 +1281,7 @@
       },
       "ownPrices": {
         "q": "Kendi fiyatlarımı belirleyebilir miyim?",
-        "a": "Evet, her malzeme için; ancak Luma.Green’in belirlediği asgari fiyatın altında olmamalıdır."
+        "a": "Evet. Her işletme her malzeme için kendi tekliflerini belirler. Referans fiyatları zorunlu alt sınır değildir."
       },
       "noVehicle": {
         "q": "Aracım yok. Yine de katılabilir miyim?",
@@ -1810,6 +1820,33 @@
     }
   },
   "track": {
+    "review": {
+      "title": "Makbuzu incele",
+      "declaration": "Dükkân ödeme yaptığını bildirdi. Ödemeyi aldığınızı henüz onaylamadınız.",
+      "accepted": "Makbuz kabul edildi. Ödemeyi ancak aldıktan sonra onaylayın.",
+      "disputed": "Makbuza itiraz edildi. Çözüm bekleniyor.",
+      "acknowledged": "Ödemeyi aldığınızı onayladınız.",
+      "accept": "Kabul et",
+      "dispute": "Makbuza itiraz et",
+      "acknowledge": "Ödemeyi aldığımı onayla",
+      "rejectLine": "{material} reddet",
+      "note": "İtiraz nedeni",
+      "sharing": "Toplama yardımcıları",
+      "phone": "Yardımcının telefon numarası",
+      "adult": "Benim ve davet edilen yardımcının yetişkin olduğunu onaylıyorum.",
+      "invite": "Yardımcı davet et",
+      "shareNote": "Bu toplama bağlantısını yardımcıyla paylaşın. Yardımcı bu doğrulanmış telefon numarasıyla giriş yapmalı ve 48 saat içinde kabul etmelidir. Mesaj gönderilmez.",
+      "active": "Etkin",
+      "pending": "Kabul bekleniyor",
+      "ended": "Erişim sona erdi",
+      "revoke": "Erişimi iptal et",
+      "leave": "Toplamadan ayrıl",
+      "handover": "Teslim notu",
+      "save": "Notu kaydet",
+      "error": "Değişiklik kaydedilemedi. Erişiminizi kontrol edip tekrar deneyin.",
+      "signIn": "Bu toplamayı görmek için giriş yapın",
+      "acceptedTotal": "Kabul edilen: {weight} · {amount}"
+    },
     "notFound": {
       "sell": "Toplama planla",
       "title": "Bu rezervasyonu bulamadık",
@@ -1903,7 +1940,7 @@
       "declined": "Dükkân reddetti",
       "cancelled": "İptal edildi"
     },
-    "saved": "Hesap gerekmez. Herhangi bir telefondan kontrol için bu bağlantıyı saklayın.",
+    "saved": "Bu bağlantıyı saklayın. Özel ayrıntıları görmek için giriş yapmalı ve bu toplama için izniniz olmalıdır.",
     "sellMore": "Yeniden toplama planla",
     "tryAnother": "Başka dükkân dene",
     "dispatchChanged": "Talebiniz yakındaki başka dükkâna geçti. Güncel dükkân aşağıda gösteriliyor.",
@@ -2193,16 +2230,16 @@
       "title": "Fiyatlarım",
       "saving": "Kaydediliyor…",
       "prefix": "₹",
-      "lead": "Hanelere kg başına ödediğiniz. Asla minimumun altında değil.",
+      "lead": "Hanelere kg başına teklifleriniz. Bunları bağımsız olarak belirlersiniz.",
       "label": "{material} fiyatınız, kg başına rupi",
       "suffix": "/kg",
-      "minimum": "Asgari {price}/kg",
+      "minimum": "Referans {price}/kg",
       "market": "Piyasa {price}/kg",
-      "notSet": "Henüz belirlenmedi. Haneler şehir fiyatı {price}/kg alır.",
+      "notSet": "Teklif belirlenmedi. Referans: {price}/kg.",
       "saved": "{material}: {price}/kg kaydedildi.",
       "invalid": "14 veya 14.50 gibi fiyat girin.",
-      "belowFloor": "Çok düşük. Minimum {price}/kg.",
-      "belowFloorUnknown": "Çok düşük. Minimum fiyatın altında.",
+      "belowFloor": "Geçerli bir fiyat girin. Referans: {price}/kg.",
+      "belowFloorUnknown": "Geçerli bir fiyat girin.",
       "emptyTitle": "Henüz malzeme yok",
       "emptyBody": "Aldığınız malzemeler dükkân onaylandığında belirlenir."
     },
@@ -2287,11 +2324,11 @@
       "buy": "Malzeme al",
       "lead": "Elinizdekiler ve bugünkü değerleri.",
       "totalWeight": "Toplam ağırlık",
-      "worth": "Bugünkü değer",
-      "worthHint": "Bugünün piyasa fiyatıyla",
+      "worth": "Güncel teklif değeri",
+      "worthHint": "Güncel teklif değeri",
       "recycled": "Geri dönüştürülmüş malzeme",
-      "atPrice": "Piyasa {price}/kg",
-      "noPrice": "Bugün piyasa fiyatı yok",
+      "atPrice": "Güncel teklif değeri: {price}/kg",
+      "noPrice": "Güncel teklif yok",
       "sellTo": {
         "yard": "Ön işleme işletmesine sat",
         "recycler": "Geri dönüşümcüye sat",
@@ -2301,7 +2338,8 @@
       "emptyShop": "Alımı tartıp ödeyin, burada görünsün.",
       "emptyBusiness": "Pazardan alın, burada görünsün.",
       "notBusinessTitle": "Yalnızca işletmeler için",
-      "notBusinessBody": "Stoku dükkân, ön işleme işletmesi, geri dönüşümcü ve fabrikalar tutar."
+      "notBusinessBody": "Stoku dükkân, ön işleme işletmesi, geri dönüşümcü ve fabrikalar tutar.",
+      "recordedCost": "Kayıtlı maliyet"
     },
     "slot": "{day}, {window}",
     "windows": {
@@ -2474,7 +2512,7 @@
       "kabadiwala": {
         "title": "Hurdacılar",
         "one": "Yakındaki evlerden alım talepleri.",
-        "two": "Taban fiyatın altına düşmeden fiyat belirleyin.",
+        "two": "Her malzeme için kendi tekliflerinizi belirleyin.",
         "three": "Ayrıştırılmış stokunuzu ön işleme işletmelerine satın.",
         "cta": "Hurdacı olarak katılın"
       },
@@ -2515,8 +2553,8 @@
         "body": "Rolünüzü seçin ve kaydı tamamlayın."
       },
       "floor": {
-        "title": "Taban fiyatla adil ücret",
-        "body": "Dükkânlar kendi fiyatını belirler ama malzeme için yayımladığımız minimumun altına inemez."
+        "title": "Bağımsız dükkân teklifleri",
+        "body": "Dükkânlar kendi tekliflerini belirler. Tarihli referans fiyatları bilgi amaçlıdır, zorunlu alt sınır değildir."
       },
       "escrow": {
         "title": "Ödeme altyapısı bekleniyor",
@@ -3477,7 +3515,8 @@
       "application_received": "Başvuru alındı",
       "application_approved": "Başvuru onaylandı",
       "application_changes_requested": "Başvuruda değişiklik gerekiyor",
-      "application_rejected": "Başvuru onaylanmadı"
+      "application_rejected": "Başvuru onaylanmadı",
+      "stock_low": "Düşük stok uyarısı"
     }
   },
   "integrations": {
@@ -3751,7 +3790,8 @@
     "addInput": "Girdi partisi ekle",
     "chooseInput": "Girdi partisi seç",
     "combinedInput": "Toplam girdi kütlesi",
-    "multiInputHint": "Yalnızca elinizdeki ölçülmüş malzemeyi birleştirin. Her miktar kendi partisinden tüketilir. Bu işlem işleme kanıtı kaydeder ve envanter stoğu eklemez."
+    "multiInputHint": "Yalnızca elinizdeki ölçülmüş malzemeyi birleştirin. Her miktar kendi partisinden tüketilir. Bu işlem işleme kanıtı kaydeder ve envanter stoğu eklemez.",
+    "qualityReleaseRequired": "Kabul edilmiş testler gerekli"
   },
   "evidence": {
     "title": "Belge referansları",
@@ -4166,5 +4206,198 @@
     "lead": "Belirtilen amaç için paylaşılan sabit kanıt kopyasını okuyun. Alıcı onayı, diğer işletme kayıtlarına erişim vermez.",
     "warning": "Yalnızca seçilen inceleme ve işaretlenen dosyaları paylaşın. Önce kişisel bilgileri kaldırın. Erişim en fazla 90 gün ve iptal edilebilir; indirilen kopyalar geri alınamaz.",
     "snapshot": "İnceleyen işletmenin beyanının sabit kopyası. Sertifika veya bağımsız doğrulama değildir."
+  },
+  "collectionOperations": {
+    "availability": "Toplama uygunluğu",
+    "capacity": "Zaman aralığı kapasitesi",
+    "holidays": "Kapalı günler (YYYY-MM-DD, virgülle ayırın)",
+    "schedule": "Toplama takvimi",
+    "unassigned": "Henüz atanmadı. Saati değiştirin veya iptal edin.",
+    "repeat": "Her {days} günde tekrarla",
+    "stop": "Gelecek ziyaretleri durdur",
+    "reschedule": "Toplama saatini değiştir",
+    "requested": "Değişiklik işletmeciye gönderildi",
+    "saved": "Kaydedildi",
+    "acknowledge": "Ödeme alındığını onayla",
+    "acknowledged": "Ödeme onaylandı",
+    "fixedFee": "Sabit iş ücreti. Atayan işletme öder; Luma ücret garantisi vermez.",
+    "due": "Ödeme tarihi: {date}",
+    "declarePayment": "Çalışan ödemesini bildir",
+    "failedVisit": "Başarısız ziyareti kaydet",
+    "paymentDeclared": "Ödeme bildirildi; çalışan onayı bekleniyor"
+  },
+  "geocoding": {
+    "consent": "Adres bulmak için bu konumu Google Maps hizmetine gönderin.",
+    "find": "Adres bul",
+    "loading": "Adres aranıyor…",
+    "manual": "Adresi elle girebilirsiniz.",
+    "unavailable": "Adres arama kullanılamıyor. Adresi elle girin.",
+    "use": "Bu adresi kullan",
+    "confirm": "Adresi kontrol ettim ve adres alanını değiştirmek istiyorum.",
+    "preview": "Yalnızca önizleme. Kayıt için hizmet politikası incelemesi gerekir.",
+    "attribution": "Google Maps"
+  },
+  "serviceRecords": {
+    "title": "Hizmetler ve programlar",
+    "unavailable": "Sağlayıcı yürütmesi ve ödül kullanımı mevcut değil. Kayıtlar kredi, sigorta, yardım veya ödeme onaylamaz.",
+    "enquiries": "Hizmet talepleri",
+    "programmes": "Program kayıtları",
+    "edit": "Düzenle",
+    "reported": "Bildirilen rakamlar ve doğrulanmamış kanıtlar. Belediye anlaşması veya finanse edilmiş ödül anlamına gelmez.",
+    "area": "Bölge",
+    "startsOn": "Başlangıç tarihi",
+    "endsOn": "Bitiş tarihi",
+    "coverageCount": "Kapsam sayısı",
+    "trips": "Seferler",
+    "centreHandovers": "Merkez teslimleri",
+    "groupIncomePaise": "Grup geliri (paise)",
+    "share": "Toplu raporu paylaş",
+    "principal": "Malzeme sahibi / işveren",
+    "materialReference": "Malzeme referansı",
+    "explicitReference": "Seçilen alıcıyla yalnızca malzeme kodunu ve kayıtlı gramları paylaş.",
+    "commercialModel": "Ticari model",
+    "draft": "Taslak",
+    "enquiry": "Talep",
+    "closed": "Kapalı",
+    "kinds": {
+      "equipment": "Ekipman",
+      "staffing": "Personel",
+      "transport": "Ulaşım",
+      "environment": "Çevre",
+      "accounting": "Muhasebe",
+      "solar": "Güneş enerjisi",
+      "scales": "Teraziler",
+      "voice": "Ses hizmetleri",
+      "society": "Topluluk hizmetleri",
+      "welfare": "Sosyal yardım",
+      "donation": "Bağış",
+      "reward": "Ödül",
+      "finance": "Finans",
+      "insurance": "Sigorta",
+      "attendance": "Devam kaydı",
+      "wet_service": "Islak atık hizmeti",
+      "other": "Diğer"
+    },
+    "models": {
+      "partner_service": "İş ortağı talebi",
+      "materials_sale_reference": "Malzeme satış referansı",
+      "toll_jobwork": "Mülkiyeti işverende kalan fason iş",
+      "paid_collection": "Ücretli toplama hizmeti",
+      "generator_paid_treatment": "Üreticinin ödediği arıtma"
+    },
+    "directions": {
+      "not_applicable": "Ödeme yürütülmez",
+      "buyer_to_seller": "Alıcı → satıcı",
+      "principal_to_processor": "İşveren → işleyici",
+      "customer_to_service": "Müşteri → hizmet",
+      "generator_to_handler": "Üretici → işleyici"
+    },
+    "received": "Teslim alındı",
+    "sharedReports": "Paylaşılan denetim raporları",
+    "revoke": "Erişimi iptal et",
+    "quantityGrams": "Miktar (g)",
+    "recordName": "Kayıt adı"
+  },
+  "returnClaims": {
+    "title": "İadeler ve program kanıtları",
+    "returnTitle": "Tam iade",
+    "scheme": "Program referansı",
+    "issuer": "Harici düzenleyici referansı",
+    "freight": "İade nakliyesini ödeyen",
+    "reconcile": "Mutabakat yap",
+    "validate": "Kaynağı denetle",
+    "notice": "Yalnızca beyan edilen kanıt. Resmî sertifika veya ödeme onayı değildir.",
+    "waiting": "Fiziksel teslimi, sağlayıcının tam iadesini ve mutabakatın ters kaydını bekleyin."
+  },
+  "marketComparison": {
+    "quote": "Nakliye teklifi gerekli",
+    "freight": "Ayrı nakliye: {price}/kg",
+    "notice": "Ödeme yalnızca malzemeyi kapsar. Nakliyeyi ayrıca kararlaştırın ve ödeyin.",
+    "available": "{date} itibarıyla mevcut",
+    "delivered": "Malzeme ve nakliye: {price}/kg",
+    "freightInput": "Kg başına nakliye (isteğe bağlı)",
+    "availableInput": "Kullanılabilirlik tarihi (isteğe bağlı)",
+    "validityInput": "Teklif bitişi (isteğe bağlı)"
+  },
+  "recordedCosts": {
+    "acquisition": "Edinim maliyeti (paise)",
+    "processing": "İşleme maliyeti (paise)",
+    "reference": "Maliyet kanıtı referansı",
+    "hint": "Boş alan bilinmiyor demektir. Yalnızca kaydedilmiş sıfır maliyet için 0 girin.",
+    "remaining": "Kalan kayıtlı maliyet",
+    "input": "Tüketilen girdinin maliyeti",
+    "total": "Çıktılara dağıtılan maliyet",
+    "unknown": "Bilinmiyor",
+    "loss": "Ölçülen çıktılar kirlenme ve işlem kaybının maliyetini üstlenir.",
+    "record": "Edinim maliyetini kaydet",
+    "processingTotal": "İşleme maliyeti"
+  },
+  "stockClosing": {
+    "title": "Günlük stok incelemesi",
+    "notice": "Kapanış mevcut stoku kaydeder. Sonraki değişikliklere izin verilir.",
+    "note": "İnceleme notu",
+    "record": "Bugünün kapanışını kaydet",
+    "last": "Son kapanış",
+    "none": "Henüz kapanış yok",
+    "gramsUnit": "g",
+    "unknown": "Maliyet bilinmiyor",
+    "balances": "Kapanış bakiyeleri",
+    "threshold": "Düşük stok uyarısı",
+    "thresholdHint": "Yalnızca hesap gelen kutusunda. Uyarılar açılana kadar kapalıdır.",
+    "disabled": "Kapalı",
+    "below": "Uyarı düzeyinin altında",
+    "recent": "Son uyarılar (en fazla 20)",
+    "noAlerts": "Henüz uyarı yok",
+    "material": "Malzeme",
+    "grams": "Uyarı düzeyi (gram)",
+    "enabled": "Uyarıyı aç",
+    "save": "Uyarı ayarını kaydet",
+    "closed": "Kapanış kaydedildi",
+    "saved": "Uyarı ayarı kaydedildi",
+    "dateChanged": "Tarih değişti. Kontrol edip yeniden deneyin.",
+    "alreadyRecorded": "Bugünün kapanışı zaten kaydedilmiş.",
+    "limit": "Stok geçmişi bu aracın sınırını aşıyor. Yöneticiden yardım isteyin.",
+    "mismatch": "Stok ve hareket kayıtları farklı. Yöneticiden inceleme isteyin.",
+    "correction": "Stok düzeltmesi",
+    "add": "Stok ekle",
+    "remove": "Stok azalt",
+    "corrected": "Düzeltme kaydedildi",
+    "evidence": "Fiziksel kanıt referansı",
+    "recentCorrections": "Son düzeltmeler (en fazla 20)"
+  },
+  "workerHandover": {
+    "title": "Toplanan malzeme teslimi",
+    "hint": "Yalnızca kanıt. Stok ve ödeme kayıtları ayrı kalır.",
+    "limit": "Son 100 bağlantı. Kaynak seçenekleri sınırlıdır.",
+    "job": "Atanan toplama işi",
+    "collection": "Toplama",
+    "collected": "Toplanan (g)",
+    "received": "Teslim alınan (g)",
+    "variance": "Teslim alınan − toplanan (g)",
+    "record": "Toplanan ağırlığı kaydet",
+    "acknowledge": "Teslimi onayla",
+    "revoke": "Bağlantıyı iptal et",
+    "acknowledged": "Teslim onaylandı",
+    "link": "Toplamayı bağla",
+    "reason": "Neden",
+    "evidence": "Fiziksel kanıt referansı"
+  },
+  "accountRemoval": {
+    "title": "Hesabı kapat",
+    "intro": "Oturum açma ve erişim hakkınız sona erecek.",
+    "retained": "Gerekli iş, ödeme, malzeme ve denetim kayıtları inceleme için saklanır. Tüm veriler silinmez.",
+    "confirm": "Anladım ve hesabımı kapatmak istiyorum.",
+    "action": "Hesabı kapat",
+    "held": "Hesabınız kapatılmadı.",
+    "reauth": "Devam etmek için yeniden oturum açın.",
+    "unavailable": "Hesap kapatma kullanılamıyor. Daha sonra deneyin.",
+    "retry": "Sonuç doğrulanmadı. Aynı isteği kontrol etmek için yeniden deneyin.",
+    "closed": "Hesap erişimi kapatıldı.",
+    "adminReplacement": "Yeni yönetici ayrıca belirlenmelidir.",
+    "businessOwner": "Hesabı kapatmadan önce işletme sahipliğini devredin.",
+    "activeCollection": "Önce etkin toplama işlemini çözün.",
+    "assignedWork": "Önce atanmış işinizi veya teslimi çözün.",
+    "reviewLimit": "Kapatmadan önce daha fazla kayıt incelenmelidir.",
+    "checkLimit": "Hesabı kapatıp yeniden katılmak bugünkü işletme kontrolü sınırını sıfırlamaz. Kontroller Hindistan saatine göre ertesi güne kadar bekletilebilir."
   }
 }

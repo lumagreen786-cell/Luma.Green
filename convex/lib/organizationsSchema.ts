@@ -36,5 +36,7 @@ export const organizationTables = {
     revokedAt: v.optional(v.number()),
   })
     .index("by_hash", ["tokenHash"])
-    .index("by_scope_created", ["scope", "createdAt"]),
+    .index("by_scope_created", ["scope", "createdAt"])
+    .index("by_phone", ["phone"])
+    .index("by_inviter", ["invitedBy"]),
 };

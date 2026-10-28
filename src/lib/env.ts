@@ -58,6 +58,13 @@ export const clientEnv = clientSchema.parse({
 export type ClientEnv = z.infer<typeof clientSchema>;
 
 const serverSchema = z.object({
+  GOOGLE_GEOCODING_ENABLED: z.string().optional(),
+  GOOGLE_GEOCODING_API_KEY: z.string().optional(),
+  GOOGLE_GEOCODING_ADDRESS_SAVE_ENABLED: z.string().optional(),
+  TRIGGER_SECRET_KEY: z.string().optional(),
+  TRIGGER_PROJECT_REF: z.string().optional(),
+  TRIGGER_CONVEX_URL: optionalUrl,
+  TRIGGER_JOBS_ENABLED: z.string().optional(),
   NODE_ENV: z
     .enum(["development", "test", "production"])
     .default("development"),
@@ -471,5 +478,25 @@ export function surepassEnv() {
 export function surepassExampleEnv() {
   return process.env.SUREPASS_EXAMPLE_TEST_ENABLED === "true"
     ? surepassEnv()
+    : null;
+}
+
+/** Convex-only dispatch settings. The provider endpoint is fixed in code. */
+export function triggerJobsConfig() {
+  const key = process.env.TRIGGER_SECRET_KEY?.trim();
+  return key && process.env.TRIGGER_JOBS_ENABLED === "true"
+    ? { secretKey: key }
+    : null;
+}
+
+/** Coordinates and provider content never enter telemetry or persistent storage. */
+export function geocodingEnv() {
+  const apiKey = process.env.GOOGLE_GEOCODING_API_KEY?.trim();
+  return apiKey && process.env.GOOGLE_GEOCODING_ENABLED === "true"
+    ? {
+        apiKey,
+        allowAddressSave:
+          process.env.GOOGLE_GEOCODING_ADDRESS_SAVE_ENABLED === "true",
+      }
     : null;
 }

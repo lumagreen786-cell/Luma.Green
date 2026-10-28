@@ -111,6 +111,12 @@ function RequestList({
 
 function RequestRow({ request }: { request: SupportRequest }) {
   const markAnswered = useMutation(api.support.markAnswered);
+  const triage = useMutation(api.support.triage);
+  const [showUpdates, setShowUpdates] = useState(false);
+  const updates = useQuery(
+    api.support.updates,
+    showUpdates ? { id: request.id } : "skip",
+  );
   const [isBusy, setIsBusy] = useState(false);
   const isOpen = request.status === "open";
   const headingId = `request-${request.id}`;
@@ -155,9 +161,56 @@ function RequestRow({ request }: { request: SupportRequest }) {
           </StatusPill>
         </div>
       </div>
+      <p className="text-sm">
+        Team: {request.team ?? "operations"} ·{" "}
+        {request.acknowledgedAt ? "Acknowledged" : "Needs acknowledgement"}
+        {request.escalatedAt ? " · Escalated" : ""}
+      </p>
+      {request.source ? (
+        <p className="text-sm">Linked record: {request.source.kind}</p>
+      ) : null}
+      {isOpen ? (
+        <section className="flex flex-wrap gap-2">
+          {(["operations", "accounts", "reviewer"] as const).map((team) => (
+            <Button
+              key={team}
+              variant="outline"
+              onClick={() => {
+                void triage({
+                  id: request.id,
+                  team,
+                  escalate: team === "accounts",
+                }).catch(() =>
+                  toast.error("Could not update support request."),
+                );
+              }}
+            >
+              Acknowledge · {team}
+            </Button>
+          ))}
+        </section>
+      ) : null}
       <p className="max-w-3xl text-sm leading-relaxed break-words whitespace-pre-line">
         {request.message}
       </p>
+      <Button
+        variant="outline"
+        onClick={() => {
+          setShowUpdates((value) => !value);
+        }}
+      >
+        View updates
+      </Button>
+      {showUpdates ? (
+        <section className="flex flex-col gap-2">
+          {updates?.map((update, index) => (
+            <p key={index} className="text-sm">
+              {update.team} · {update.urgent ? "Urgent" : "Update"} ·{" "}
+              {formatWhen(update.createdAt)}: {update.message}
+            </p>
+          ))}
+        </section>
+      ) : null}
       <div className="flex flex-wrap gap-2">
         <Button asChild variant="outline" size="sm" className="min-h-11">
           <a href={`tel:${request.phone}`}>

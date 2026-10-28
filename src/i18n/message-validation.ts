@@ -101,6 +101,7 @@ const sharedLiterals = [
   "Saathi",
   "pmsuryaghar.gov.in",
   "WhatsApp",
+  "Google Maps", // Google requires this exact untranslated attribution.
   "GSTIN",
   "UPI",
   "kg",

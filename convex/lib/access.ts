@@ -3,14 +3,20 @@ import { ConvexError } from "convex/values";
 
 import type { DataModel } from "../_generated/dataModel";
 import { authComponent } from "../auth";
+import { isAuthAccountClosed } from "./accountClosure";
 import { isAdminEmail } from "./admin";
 
 /**
  * The caller's Better Auth user, validated against their session. Never trust
  * `ctx.auth.getUserIdentity()` alone — it doesn't validate the session.
  */
-export async function requireUser(ctx: GenericCtx<DataModel>) {
+export async function openAuthUser(ctx: GenericCtx<DataModel>) {
   const user = await authComponent.safeGetAuthUser(ctx);
+  return user && !(await isAuthAccountClosed(ctx, user._id)) ? user : null;
+}
+
+export async function requireUser(ctx: GenericCtx<DataModel>) {
+  const user = await openAuthUser(ctx);
   if (!user) throw new ConvexError("NOT_SIGNED_IN");
   return user;
 }

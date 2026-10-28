@@ -4,7 +4,7 @@ import { isLocale } from "../src/i18n/locales";
 import { authEmailEnv } from "../src/lib/env";
 import { components } from "./_generated/api";
 import { mutation, query } from "./_generated/server";
-import { authComponent } from "./auth";
+import { openAuthUser } from "./lib/access";
 import { requireAdmin, requireUser } from "./lib/access";
 import { isAdminEmail, validateAdminProfile } from "./lib/admin";
 import { verifiedIndianMobile } from "./lib/phone";
@@ -56,7 +56,7 @@ export const me = query({
     }),
   ),
   handler: async (ctx) => {
-    const user = await authComponent.safeGetAuthUser(ctx);
+    const user = await openAuthUser(ctx);
     if (!user) return null;
 
     const profile = await ctx.db

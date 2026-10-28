@@ -365,6 +365,8 @@ describe("collaboration notifications", () => {
     ).rejects.toThrow("NOT_FOUND");
   });
   it("deduplicates due reminders and rejects stale, finished and revoked tasks", async () => {
+    vi.useFakeTimers({ toFake: ["Date"] });
+    vi.setSystemTime(new Date("2026-10-27T06:00:00Z"));
     const w = await world();
     await w.t.run((ctx) =>
       ctx.db.patch("recordTasks", w.taskId, { dueAt: Date.now() - 1 }),
@@ -440,6 +442,7 @@ describe("collaboration notifications", () => {
   it("runs a scheduled due reminder at the requested time", async () => {
     vi.useFakeTimers();
     try {
+      vi.setSystemTime(new Date("2026-10-27T06:00:00Z"));
       const w = await world();
       await w.owner.mutation(api.collaboration.updateTask, {
         taskId: w.taskId,

@@ -1,0 +1,116 @@
+{
+  "title": "Bobo's Big Recycling Day",
+  "subtitle": "A little story about the whole Luma.Green team",
+  "pages": [
+    {
+      "kind": "cover",
+      "title": "Bobo's Big\nRecycling Day",
+      "text": "A little story about the whole Luma.Green team.\nFor readers aged 5 to 12, with a grown-up nearby.",
+      "panel": 0
+    },
+    {
+      "kind": "art",
+      "title": "1. A bottle with a big idea",
+      "text": "Bobo the bottle had a problem.\n\"I cannot fit in the toy box!\"\nMira laughed. \"You belong with our clean, dry things for recycling.\"\nHer family had paper, bottles and boxes. They needed a safe way to pass them on.",
+      "panel": 0,
+      "tag": "HOUSEHOLD | The family starts the journey"
+    },
+    {
+      "kind": "screen",
+      "title": "2. A photo, a place, a time",
+      "text": "Mira's grown-up opens Luma.Green. She adds photos, an address and a time. She chooses pickup or drop-off and verifies her phone.\n\"Do I have to guess the weight?\" asks Mira.\n\"No. The shop measures it later.\"\nA request waits until a shop accepts.",
+      "screen": "household-request",
+      "tag": "HOUSEHOLD | Ask for a collection"
+    },
+    {
+      "kind": "art",
+      "title": "3. The team says hello",
+      "text": "Kavi runs the scrap shop. He accepts a collection. Sona, a Saathi, accepts her assigned job after checking its fixed fee.\nShe records the measured amount collected. The shop confirms what it received. Any difference needs a reason.\n\"My helmet is not a weighing bowl!\" says Sona.\nThis handover does not pay anyone or add stock again.",
+      "panel": 1,
+      "tag": "SHOP + SAATHI | Accept and collect"
+    },
+    {
+      "kind": "art",
+      "title": "4. Let the scale speak",
+      "text": "Kavi sorts the material and records its real weight and agreed price.\nBobo jumps on the scale. \"Do my shoes count?\"\n\"Step off, silly bottle!\"\nThe receipt keeps each material, weight and amount. Old records stay in the history when someone needs to make a correction.",
+      "panel": 2,
+      "tag": "WEIGHING | Measure first, then record"
+    },
+    {
+      "kind": "screen",
+      "title": "5. Look before you agree",
+      "text": "The grown-up checks the receipt. She can confirm it or report a wrong line. A dispute stays open for review.\nThe shop pays the household directly. The grown-up then acknowledges that payment separately.\n\"A receipt is not a magic money button,\" says Bobo.",
+      "screen": "household-receipt",
+      "tag": "RECEIPT + PAYMENT | Two separate checks"
+    },
+    {
+      "kind": "art",
+      "title": "6. Every gram has a place",
+      "text": "The shop records what it holds, buys and sells. A collection centre can also receive material. A yard, or preprocessor, sorts and groups it for the next business.\n\"Paper here. Bottles there. Sandwiches in my tummy!\" says Bobo.\nNobody sells the same saved material twice.",
+      "panel": 3,
+      "tag": "SHOP + CENTRE + YARD | Keep clear stock records"
+    },
+    {
+      "kind": "screen",
+      "title": "7. A useful stock book",
+      "text": "The team checks material, weight and recorded cost. Unknown costs stay unknown. The shop can save a daily stock review and choose a low-stock alert.\nOwners and admins manage access. Members do daily work. Viewers can read.\n\"Can everyone change everything?\" asks Mira.\n\"No. Each person has the right keys.\"",
+      "screen": "shop-workspace",
+      "tag": "BUSINESS TEAM | Work with the right access"
+    },
+    {
+      "kind": "art",
+      "title": "8. Old things, new possibilities",
+      "text": "A processor records what goes in, what comes out and what is left over. A recycler makes usable material. A manufacturer can make a new product from suitable material.\n\"A bottle could help make a bag!\" says Mira.\n\"Could it make lunch?\" asks Bobo.\n\"Please stop eating the story.\"",
+      "panel": 4,
+      "tag": "PROCESSOR + RECYCLER + MANUFACTURER | Keep source links"
+    },
+    {
+      "kind": "screen",
+      "title": "9. Buyers and sellers agree",
+      "text": "The buyer and seller agree on material, quality, weight, price and delivery. Transport costs have their own place.\nBusiness payment needs the enabled payment service and its checks. A missing service says it is unavailable.\nPaid collection, processing and treatment are separate services. They are not all material sales.\nA record alone does not approve a sale.",
+      "screen": "business-material",
+      "tag": "BUYER + SELLER | Clear terms before action"
+    },
+    {
+      "kind": "diagram",
+      "title": "10. A problem is not the end",
+      "text": "A wrong weight, failed test or missed visit needs a clear record. The team keeps the evidence and asks for help.\nA return needs approval and a safe destination. Sending material back and sorting out money are separate steps.\n\"No disappearing problems!\" says Bobo.",
+      "diagram": "issues",
+      "tag": "RETURNS + SUPPORT | Keep the old evidence"
+    },
+    {
+      "kind": "diagram",
+      "title": "11. A key for each door",
+      "text": "Photos and documents stay private.\nA verified adult can help with handover, but cannot approve receipts or payment.\nPeople can end sharing or request account removal. Unfinished duties must be resolved. Required records stay for review.\n\"Even Bobo needs the right key.\"",
+      "diagram": "privacy",
+      "tag": "SHARING | Permission comes first"
+    },
+    {
+      "kind": "screen",
+      "title": "12. More helpers, honest answers",
+      "text": "An apartment, office, local group or public partner may need a collection report. Other partners may help with equipment, transport, finance or welfare.\nPeople can send a private enquiry and record a programme.\n\"A question is not a promise,\" says Bobo.\nNo automatic loan, prize, donation payment or official certificate appears.",
+      "screen": "services",
+      "tag": "PARTNERS + PROGRAMMES | Ask, record and share carefully"
+    },
+    {
+      "kind": "screen",
+      "title": "13. Asha keeps watch",
+      "text": "Asha is the admin. Her sign-in needs extra protection. She reviews records, helps with problems and can offer a collection to another eligible shop. The shop still decides whether to accept.\nEach change leaves a history.\n\"A trail of facts,\" says Asha.\n\"Better than a trail of banana peels!\" says Bobo.",
+      "screen": "admin",
+      "tag": "ADMIN | Check, help and keep history"
+    },
+    {
+      "kind": "diagram",
+      "title": "14. One connected journey",
+      "text": "From a family's request to a new product, the team shares a chain of clear records. Some material takes fewer steps. Some needs a special permitted route.\n\"One more adventure?\" asks Bobo.\n\"First, put your shoes away,\" says Mira.\nThe little bottle grins. Tomorrow has room for better habits.",
+      "diagram": "loop",
+      "tag": "THE WHOLE TEAM | Follow the material and its evidence"
+    },
+    {
+      "kind": "notes",
+      "title": "A small note for grown-ups",
+      "text": "The characters and artwork are fictional. The app pictures use actual Luma.Green components with made-up data in an isolated test. They do not prove a real account, sign-in, deployment or provider transaction.\n\nLuma records household payments; it does not send them. Business checkout, messages, storage and other outside services depend on configuration and approval. An unavailable service must say so.\n\nProcessing records and reports are evidence, not automatically official certificates or carbon credits. Specialist material needs a verified permitted route. Expo mobile work is paused. This book covers the web platform.\n\nRead this book together. Children must ask an adult before using the app or handling material. Keep unsafe or unknown waste out of ordinary dry recycling.",
+      "tag": "28 OCTOBER 2026 | Story and screen evidence are different"
+    }
+  ]
+}

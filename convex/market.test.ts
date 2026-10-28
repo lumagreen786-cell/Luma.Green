@@ -39,6 +39,12 @@ async function demoWorld() {
   // This suite also exercises iron offers. Give its buyer explicit material
   // scope instead of relying on the former regular-chain family bypass.
   await t.run(async (ctx) => {
+    const fixtures = await ctx.db.query("listings").collect();
+    for (const fixture of fixtures)
+      if (fixture.status === "open")
+        await ctx.db.patch("listings", fixture._id, {
+          expiresAt: Date.now() + 30 * 86_400_000,
+        });
     const buyer = await ctx.db
       .query("orgs")
       .withIndex("by_slug", (q) => q.eq("slug", "peenya-paper-plastic-yard"))
@@ -1150,9 +1156,8 @@ describe("manufacturer non-hazardous byproduct offers", () => {
       if (!buyer) throw new Error("Missing buyer");
       await ctx.db.patch("orgs", buyer._id, { status: "suspended" });
     });
-    await expect(shop.query(api.market.browse, {})).rejects.toThrow(
-      /NO_BUSINESS/,
-    );
+    // Suspended workspaces retain read access to history but have no eligible market matches.
+    expect(await shop.query(api.market.browse, {})).toEqual([]);
   });
 });
 
@@ -1516,4 +1521,187 @@ describe("market evidence classification", () => {
       await shop.mutation(api.market.act, { tradeId, action: "decline" });
     },
   );
+});
+
+it("expires new requests and pending acceptance without repricing accepted orders", async () => {
+  const t = await demoWorld();
+  const shop = await signInAs(t, SHOP);
+  const yard = await signInAs(t, YARD);
+  const listing = await lotOf(yard, RAMESH, "PAPER-NEWS");
+  const accepted = await yard.mutation(api.market.requestTrade, {
+    listingId: listing.id,
+    grams: 1000,
+  });
+  const pending = await yard.mutation(api.market.requestTrade, {
+    listingId: listing.id,
+    grams: 1000,
+  });
+  await shop.mutation(api.market.act, { tradeId: accepted, action: "accept" });
+  const before = await tradeOf(yard, "buying", accepted);
+  await t.run((ctx) =>
+    ctx.db.patch("listings", listing.id, {
+      expiresAt: Date.now() - 1,
+      askPaisePerKg: listing.askPaisePerKg + 100,
+    }),
+  );
+  await expect(
+    yard.mutation(api.market.requestTrade, {
+      listingId: listing.id,
+      grams: 1000,
+    }),
+  ).rejects.toThrow(/LISTING_EXPIRED/);
+  await expect(
+    shop.mutation(api.market.act, { tradeId: pending, action: "accept" }),
+  ).rejects.toThrow(/LISTING_EXPIRED/);
+  const after = await tradeOf(yard, "buying", accepted);
+  expect(after).toMatchObject({
+    status: "accepted",
+    paisePerKg: before.paisePerKg,
+    totalPaise: before.totalPaise,
+  });
+  const requests = await shop.query(api.market.trades, {});
+  expect(
+    requests.selling.find((row) => row.id === pending)?.actions,
+  ).not.toContain("accept");
+  const currentOffers = await yard.query(api.market.browse, {});
+  expect(currentOffers.some((row) => row.id === listing.id)).toBe(false);
+});
+
+it("bounds explicit contract validity and releases only expired unsold reservations", async () => {
+  const t = await demoWorld();
+  const shop = await signInAs(t, SHOP);
+  const freeStock = await shop.query(api.market.sellable, {});
+  const available = freeStock.find((row) => row.material.code === "PAPER-NEWS");
+  if (!available) throw new Error("Missing stock");
+  const args = {
+    materialCode: "PAPER-NEWS",
+    grams: available.availableGrams,
+    askPaisePerKg: 100,
+  };
+  for (const contractValidUntil of [
+    Date.now() - 1,
+    Date.now() + 91 * 86_400_000,
+    0.5,
+  ])
+    await expect(
+      shop.mutation(api.market.createListing, { ...args, contractValidUntil }),
+    ).rejects.toThrow(/INVALID_OFFER_VALIDITY/);
+  const listingId = await shop.mutation(api.market.createListing, args);
+  const listing = await t.run((ctx) => ctx.db.get("listings", listingId));
+  expect(listing?.expiresAt).toBe((listing?.createdAt ?? 0) + 86_400_000);
+  await expect(shop.mutation(api.market.createListing, args)).rejects.toThrow(
+    /NOT_ENOUGH_STOCK/,
+  );
+  await t.run((ctx) =>
+    ctx.db.patch("listings", listingId, { expiresAt: Date.now() - 1 }),
+  );
+  const replacement = await shop.mutation(api.market.createListing, {
+    ...args,
+    contractValidUntil: Date.now() + 7 * 86_400_000,
+  });
+  expect(replacement).not.toBe(listingId);
+  expect(await t.run((ctx) => ctx.db.get("listings", listingId))).toMatchObject(
+    { status: "open", grams: args.grams },
+  );
+});
+
+it("ranks compatible offers on declared delivered cost and freezes separate freight context", async () => {
+  const t = await demoWorld(),
+    shop = await signInAs(t, SHOP),
+    yard = await signInAs(t, YARD);
+  const now = Date.now(),
+    first = await shop.mutation(api.market.createListing, {
+      materialCode: "PAPER-NEWS",
+      specification: { grade: "TEST-GRADE", specification: "TEST-SPEC" },
+      grams: 1000,
+      askPaisePerKg: 100,
+      freightPaisePerKg: 10,
+      deliveryAvailableAt: now + 3_600_000,
+    }),
+    second = await shop.mutation(api.market.createListing, {
+      materialCode: "PAPER-NEWS",
+      specification: { grade: "TEST-GRADE", specification: "TEST-SPEC" },
+      grams: 1000,
+      askPaisePerKg: 95,
+      freightPaisePerKg: 20,
+    });
+  const offers = await yard.query(api.market.browse, {
+    materialCode: "PAPER-NEWS",
+  });
+  expect(offers.slice(0, 2).map((row) => row.id)).toEqual([first, second]);
+  const tradeId = await yard.mutation(api.market.requestTrade, {
+    listingId: first,
+    grams: 1000,
+  });
+  await shop.mutation(api.market.act, { tradeId, action: "accept" });
+  const order = await tradeOf(yard, "buying", tradeId);
+  expect(order).toMatchObject({
+    paisePerKg: 100,
+    totalPaise: 100,
+    freightPaisePerKg: 10,
+    deliveryAvailableAt: now + 3_600_000,
+  });
+  for (const freightPaisePerKg of [-1, 0.5, Number.MAX_SAFE_INTEGER])
+    await expect(
+      shop.mutation(api.market.createListing, {
+        materialCode: "PAPER-NEWS",
+        specification: { grade: "TEST-GRADE", specification: "TEST-SPEC" },
+        grams: 1,
+        askPaisePerKg: 100,
+        freightPaisePerKg,
+      }),
+    ).rejects.toThrow(/INVALID_PRICE/);
+});
+
+it("rechecks backing stock so concurrent acceptances cannot promise the same remaining grams", async () => {
+  const t = await demoWorld(),
+    shop = await signInAs(t, SHOP),
+    yard = await signInAs(t, YARD);
+  await t.run(async (ctx) => {
+    const profile = await ctx.db
+      .query("profiles")
+      .withIndex("by_phone", (q) => q.eq("phone", SHOP))
+      .unique();
+    if (!profile) throw new Error("Missing profile");
+    const member = await ctx.db
+      .query("memberships")
+      .withIndex("by_profile", (q) => q.eq("profileId", profile._id))
+      .first();
+    if (!member) throw new Error("Missing member");
+    const listings = await ctx.db
+      .query("listings")
+      .withIndex("by_org", (q) => q.eq("orgId", member.orgId))
+      .collect();
+    for (const row of listings)
+      await ctx.db.patch("listings", row._id, { status: "withdrawn" });
+  });
+  await setStock(t, "ramesh-kabadi-store", "PAPER-NEWS", 2000);
+  const listingId = await shop.mutation(api.market.createListing, {
+    materialCode: "PAPER-NEWS",
+    grams: 2000,
+    askPaisePerKg: 100,
+  });
+  const a = await yard.mutation(api.market.requestTrade, {
+      listingId,
+      grams: 1000,
+    }),
+    b = await yard.mutation(api.market.requestTrade, {
+      listingId,
+      grams: 1000,
+    });
+  await setStock(t, "ramesh-kabadi-store", "PAPER-NEWS", 1000);
+  await expect(
+    yard.mutation(api.market.requestTrade, { listingId, grams: 2000 }),
+  ).rejects.toThrow(/NOT_ENOUGH_STOCK/);
+  const results = await Promise.allSettled([
+    shop.mutation(api.market.act, { tradeId: a, action: "accept" }),
+    shop.mutation(api.market.act, { tradeId: b, action: "accept" }),
+  ]);
+  expect(results.filter((row) => row.status === "fulfilled")).toHaveLength(1);
+  const trades = await shop.query(api.market.trades, {});
+  expect(
+    trades.selling.filter(
+      (row) => [a, b].includes(row.id) && row.status === "accepted",
+    ),
+  ).toHaveLength(1);
 });

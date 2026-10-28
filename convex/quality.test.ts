@@ -10,6 +10,7 @@ import {
   seedDemo,
   signInAs,
 } from "./lib/auth.testing";
+import { isCurrentAcceptedInspection } from "./lib/qualityRelease";
 import schema from "./schema";
 
 const modules = convexModules(import.meta.glob("./**/*.*s"));
@@ -102,9 +103,17 @@ describe("buyer-specific lot inspections", () => {
     expect(
       pending.rows.find((row) => row.id === corrected)?.approvedByProfileId,
     ).toBeUndefined();
+    const releasable = () =>
+      t.run(async (ctx) => {
+        const record = await ctx.db.get("lotInspections", initial);
+        if (!record) throw new Error("Missing inspection");
+        return isCurrentAcceptedInspection(ctx, record);
+      });
+    expect(await releasable()).toBe(true);
     await owner.mutation(api.quality.approveCorrection, {
       inspectionId: corrected,
     });
+    expect(await releasable()).toBe(false);
     const { rows } = await owner.query(api.quality.forLot, { lotId });
     expect(rows.find((row) => row.id === initial)).toMatchObject({
       decision: "accepted",

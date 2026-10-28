@@ -1,25 +1,26 @@
 ## Web UX simplification — 27 October 2026
 
-The owner approved the full UX review and authorised commit, push, checked PR
-merge and Production release. Work is isolated on `feat/web-ux-simplification`;
-the primary Android checkout and its uncommitted changes remain intact.
+## Platform foundation — release candidate, 28 October 2026
 
-Phone/code sign-in is one journey with reload/edit recovery and required factors.
-Registration keeps explicit saved consent, PAN/GST discovery and confirmation,
-combines business/documents, resumes drafts and opens activated workspaces.
-Booking has two stages, review, missing-choice guidance and safe declined retry.
-Role images are full links; daily work precedes totals; mobile navigation adapts
-to translated labels. View/list state, contextual documents/reports and an admin
-queue/detail view reduce return navigation.
+Continue from [the foundation checkpoint](platform-foundation-2026-10-27.md).
+The current branch is `feat/platform-foundation`. Expo is paused; preserved
+native work is outside this web release. Source reconciliation and the reviewed
+36-page plain-English specification are complete. The final 16-page storybook
+and 10-page walkthrough use reviewed current example captures.
 
-The initial full unit run passed 2,601 tests; the Production build generated all
-3,119 pages; 593 public/browser checks passed. The subsequent measured resize
-regression passed 462 language/theme/width views, and 84 protected fixture captures
-were retained, with representative layouts visually reviewed. Final check/build and PR/Production state
-are recorded in [the delivery record](web-ux-simplification-2026-10-27.md).
-Fixtures prove UI behavior only. No live SMS, paid lookup, booking or payment was
-sent. Provider and native acceptance remain separate. Guide/Word/cloud updates
-remain deferred at the owner's request; existing guide artifacts are preserved.
+Final local checks pass: 342 suites / 2,847 tests, types, lint, formatting,
+production webpack build (3,252 pages), and six real local phone browser cases.
+All 102 current example captures are approved. Development reference seeds are
+installed and idempotent; the Production backend dry run passed. Checked PR,
+hosted CI/review, Production backend/reference setup, main merge, Vercel
+Production and live verification still need their final PR/deployment receipt.
+Do not infer deployment from the local results here.
+
+The original primary checkout contains unrelated mobile work; keep it intact.
+Local acceptance services are stopped and root `.env.local` is restored to
+cloud development. Private local credentials remain ignored. Read the active
+checkpoint before cloud release commands. The older entries below describe
+earlier releases, not foundation acceptance.
 
 ## PAN discovery empty-draft repair — 26 October 2026
 

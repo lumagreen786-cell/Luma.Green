@@ -84,17 +84,17 @@ describe("what a basket is worth", () => {
 });
 
 describe("when a booking can be for", () => {
-  it("offers today and the seven days after", () => {
+  it("offers exactly seven dates, including today", () => {
     const dates = bookableDates("2026-09-29");
-    expect(dates).toHaveLength(8);
+    expect(dates).toHaveLength(7);
     expect(dates[0]).toBe("2026-09-29");
-    expect(dates.at(-1)).toBe("2026-10-06");
+    expect(dates.at(-1)).toBe("2026-10-05");
   });
 
-  it("accepts today up to seven days ahead, and real dates only", () => {
+  it("accepts today up to six days ahead, and real dates only", () => {
     const today = "2026-09-29";
     expect(isBookableDate("2026-09-29", today)).toBe(true);
-    expect(isBookableDate("2026-10-06", today)).toBe(true);
+    expect(isBookableDate("2026-10-05", today)).toBe(true);
     expect(isBookableDate("2026-09-28", today)).toBe(false);
     expect(isBookableDate("2026-10-07", today)).toBe(false);
     expect(isBookableDate("2026-09-31", today)).toBe(false);
@@ -103,8 +103,8 @@ describe("when a booking can be for", () => {
 
   it("closes today's window an hour before it ends", () => {
     const today = "2026-09-29";
-    expect(isWindowOpen(today, "morning", today, indiaTime(10, 59))).toBe(true);
-    expect(isWindowOpen(today, "morning", today, indiaTime(11))).toBe(false);
+    expect(isWindowOpen(today, "morning", today, indiaTime(9, 59))).toBe(true);
+    expect(isWindowOpen(today, "morning", today, indiaTime(10))).toBe(false);
     expect(isWindowOpen(today, "afternoon", today, indiaTime(11))).toBe(true);
     expect(isWindowOpen(today, "evening", today, indiaTime(19, 30))).toBe(
       false,

@@ -108,7 +108,11 @@ describe("material demand", () => {
     expect(await shop.query(api.demand.board, {})).toMatchObject({
       available: [],
     });
-    await expect(yard.query(api.demand.board, {})).rejects.toThrow(
+    const suspendedBoard = await yard.query(api.demand.board, {});
+    expect(suspendedBoard.canPost).toBe(false);
+    expect(suspendedBoard.available).toEqual([]);
+    expect(suspendedBoard.mine.map((row) => row.id)).toContain(id);
+    await expect(yard.mutation(api.demand.post, INPUT)).rejects.toThrow(
       /NO_BUSINESS/,
     );
   });

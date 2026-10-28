@@ -81,11 +81,11 @@ describe("searchHelp", () => {
   });
 
   it("needs every word to match, in any order", () => {
-    const both = ids(searchHelp(entries, { query: "minimum price" }));
-    const reversed = ids(searchHelp(entries, { query: "price minimum" }));
+    const both = ids(searchHelp(entries, { query: "independent offer" }));
+    const reversed = ids(searchHelp(entries, { query: "offer independent" }));
     expect(both).toEqual(reversed);
     expect(both).toContain("guide:setPrices");
-    expect(searchHelp(entries, { query: "minimum zebra" })).toEqual([]);
+    expect(searchHelp(entries, { query: "independent zebra" })).toEqual([]);
   });
 
   it("ignores case and punctuation", () => {

@@ -124,6 +124,7 @@ export const clearData = internalMutation({
       "saathiProfiles",
       "bookings",
       "inventory",
+      "inventoryMovements",
       "listings",
       "trades",
       "jobs",
@@ -234,6 +235,8 @@ async function seedCatalogue(ctx: MutationCtx, today: string, now: number) {
         city: DEMO_CITY,
         materialCode: entry.code,
         date: shiftDate(today, day),
+        sourceLabel: "Synthetic demo reference — not a live market benchmark",
+        observedAt: now + day * 86_400_000,
         paisePerKg: Math.round((entry.fallbackPaise * (1 + wobble)) / 50) * 50,
       });
     }
@@ -306,7 +309,9 @@ async function seedOrgs(
     const owner = org.ownerRole ? profiles.get(org.ownerRole) : undefined;
     const orgId = await seedOrg(ctx, org, owner, now);
     orgs.set(org.slug, orgId);
-    await seedStock(ctx, orgId, org.stock, now);
+    const actor = owner ?? profiles.values().next().value;
+    if (!actor) throw new ConvexError("DEMO_PROFILE_REQUIRED");
+    await seedStock(ctx, orgId, actor.profileId, org.stock, now);
     if (org.kind === "kabadiwala") await seedRateCard(ctx, orgId, org, now);
   }
   return orgs;
@@ -360,6 +365,7 @@ async function seedOrg(
 async function seedStock(
   ctx: MutationCtx,
   orgId: Id<"orgs">,
+  actorProfileId: Id<"profiles">,
   stock: Record<string, number>,
   now: number,
 ) {
@@ -368,7 +374,17 @@ async function seedStock(
       orgId,
       materialCode: code,
       grams: kgToGrams(kg),
+      costPaise: null,
       updatedAt: now,
+    });
+    await ctx.db.insert("inventoryMovements", {
+      orgId,
+      actorProfileId,
+      materialCode: code,
+      deltaGrams: kgToGrams(kg),
+      costDeltaPaise: null,
+      sourceKey: `demo:${orgId}:${code}`,
+      createdAt: now,
     });
   }
 }
@@ -534,6 +550,7 @@ async function seedMarket(ctx: MutationCtx, orgs: OrgIds, now: number) {
       city: DEMO_CITY,
       note: listing.note,
       status: "open",
+      expiresAt: now + 30 * DAY, // Explicit synthetic contract validity.
       createdAt: now - 2 * DAY,
       updatedAt: now - 2 * DAY,
     });
@@ -561,6 +578,7 @@ async function seedMarket(ctx: MutationCtx, orgs: OrgIds, now: number) {
         askPaisePerKg: paisePerKg,
         city: DEMO_CITY,
         status: isWaiting ? "open" : "sold",
+        ...(isWaiting && { expiresAt: now + 30 * DAY }),
         createdAt: created,
         updatedAt: created,
       }));

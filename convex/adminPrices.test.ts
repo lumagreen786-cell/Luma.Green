@@ -129,7 +129,7 @@ describe("the price tables", () => {
     });
   });
 
-  it("lift every shop price under a raised floor, and only those", async () => {
+  it("keeps business offers unchanged when a reference changes", async () => {
     const { t, admin } = await demoWorld();
     const before = await newspaperRates(t);
     const under = before.filter((rate) => rate.paisePerKg < 1450);
@@ -141,12 +141,12 @@ describe("the price tables", () => {
       floorPaise: 1450,
       fallbackPaise: 1600,
     });
-    expect(result).toEqual({ lifted: under.length });
+    expect(result).toEqual({ lifted: 0 });
 
     const after = await newspaperRates(t);
     for (const rate of after) {
       const was = before.find((old) => old._id === rate._id)?.paisePerKg ?? 0;
-      expect(rate.paisePerKg).toBe(Math.max(was, 1450));
+      expect(rate.paisePerKg).toBe(was);
     }
     const lifts = await t.run(async (ctx) =>
       ctx.db
@@ -154,7 +154,7 @@ describe("the price tables", () => {
         .filter((q) => q.eq(q.field("action"), "rateCard.liftedToFloor"))
         .collect(),
     );
-    expect(lifts).toHaveLength(under.length);
+    expect(lifts).toHaveLength(0);
   });
 
   it("refuse prices that don't make sense", async () => {
@@ -214,5 +214,73 @@ describe("the price tables", () => {
     await expect(halfway.mutation(api.adminPrices.set, change)).rejects.toThrow(
       /TWO_FACTOR_REQUIRED/,
     );
+  });
+});
+
+it("records source and observation date and does not create binding shop offers", async () => {
+  const { t, admin } = await demoWorld();
+  const before = await newspaperRates(t);
+  const observedAt = Date.now();
+  const { indiaToday } = await import("./lib/onboarding");
+  const args = {
+    city: CITY,
+    materialCode: "PAPER-NEWS",
+    date: indiaToday(observedAt),
+    paisePerKg: 1234,
+    sourceLabel: "Reported test reference only",
+    observedAt,
+  };
+  const id = await admin.mutation(api.adminPrices.recordMarket, args);
+  expect(await t.run((ctx) => ctx.db.get("marketPrices", id))).toMatchObject(
+    args,
+  );
+  expect(await newspaperRates(t)).toEqual(before);
+  await expect(
+    admin.mutation(api.adminPrices.recordMarket, { ...args, sourceLabel: " " }),
+  ).rejects.toThrow(/INVALID_REFERENCE/);
+  await expect(
+    admin.mutation(api.adminPrices.recordMarket, {
+      ...args,
+      observedAt: observedAt + 86_400_000,
+    }),
+  ).rejects.toThrow(/INVALID_DATE/);
+});
+
+it("hides unlabelled and stale indications instead of refreshing them at import time", async () => {
+  const { t } = await demoWorld();
+  const { marketPriceOn } = await import("./stock");
+  const { indiaToday } = await import("./lib/onboarding");
+  const now = Date.now();
+  const date = indiaToday(now);
+  await t.run(async (ctx) => {
+    await ctx.db.insert("marketPrices", {
+      city: CITY,
+      materialCode: "SOURCE-TEST",
+      date,
+      paisePerKg: 100,
+    });
+    expect(await marketPriceOn(ctx, CITY, "SOURCE-TEST", date)).toBeNull();
+    await ctx.db.insert("marketPrices", {
+      city: CITY,
+      materialCode: "STALE-TEST",
+      date,
+      paisePerKg: 100,
+      sourceLabel: "Test observation",
+      observedAt: now - 86_400_001,
+    });
+    expect(await marketPriceOn(ctx, CITY, "STALE-TEST", date)).toBeNull();
+    await ctx.db.insert("marketPrices", {
+      city: CITY,
+      materialCode: "VALID-TEST",
+      date,
+      paisePerKg: 100,
+      sourceLabel: "Test observation",
+      observedAt: now - 86_400_001,
+      expiresAt: now + 86_400_000,
+    });
+    expect(await marketPriceOn(ctx, CITY, "VALID-TEST", date)).toMatchObject({
+      paisePerKg: 100,
+      sourceLabel: "Test observation",
+    });
   });
 });

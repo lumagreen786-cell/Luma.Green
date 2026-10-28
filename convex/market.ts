@@ -23,18 +23,26 @@ import {
   requiresGatewayEvent,
   vPaymentVerification,
 } from "./lib/gatewayPayments";
+import { distanceKm } from "./lib/households";
 import { assertOrdinaryRoute } from "./lib/industrialClassification";
-import { stockGramsAfter } from "./lib/inventory";
+import { recordInventoryMovement } from "./lib/inventoryLedger";
 import { optionalReference, requiredLabel } from "./lib/lotEvidence";
 import {
   requireEligibleByproduct,
   requireOrdinaryTradeMaterial,
 } from "./lib/marketEligibility";
+import { compareEligibleOffers } from "./lib/marketRanking";
 import { isOrdinaryMaterial } from "./lib/materialEligibility";
 import {
   hasOfferLotClassification,
   vOfferSpecificationInput,
 } from "./lib/materialOfferSpecification";
+import { requireQualityRelease } from "./lib/qualityRelease";
+import {
+  isListingOfferCurrent,
+  OFFER_MAX_VALIDITY_MS,
+} from "./lib/rateValidity";
+import { heldMaterialGrams } from "./lib/returnClaims";
 import { vOrgKind, vTradeStatus } from "./lib/validators";
 import {
   vListingView,
@@ -92,6 +100,7 @@ async function requireOfferLot(
   )
     throw new ConvexError("LOT_NOT_ELIGIBLE");
   assertOrdinaryRoute(lot);
+  await requireQualityRelease(ctx, lot);
   if (!hasOfferLotClassification(lot))
     throw new ConvexError("LOT_NOT_ELIGIBLE");
   return lot;
@@ -203,11 +212,18 @@ function toListingView(
     material: materialRef(materials, listing.materialCode),
     grams: listing.grams,
     askPaisePerKg: listing.askPaisePerKg,
+    ...(listing.freightPaisePerKg !== undefined && {
+      freightPaisePerKg: listing.freightPaisePerKg,
+    }),
+    ...(listing.deliveryAvailableAt !== undefined && {
+      deliveryAvailableAt: listing.deliveryAvailableAt,
+    }),
     note: listing.note,
     specification: listing.specification,
     status: listing.status,
     isMine: listing.orgId === myOrgId,
     createdAt: listing.createdAt,
+    ...(listing.expiresAt !== undefined && { expiresAt: listing.expiresAt }),
   };
 }
 
@@ -223,6 +239,12 @@ function toTradeView(
     grams: trade.grams,
     paisePerKg: trade.paisePerKg,
     totalPaise: trade.totalPaise,
+    ...(trade.freightPaisePerKg !== undefined && {
+      freightPaisePerKg: trade.freightPaisePerKg,
+    }),
+    ...(trade.deliveryAvailableAt !== undefined && {
+      deliveryAvailableAt: trade.deliveryAvailableAt,
+    }),
     specification: trade.specification,
     status: trade.status,
     timeline: trade.timeline,
@@ -261,13 +283,20 @@ async function audit(
  * or sold and not yet dispatched. What's left of its stock is free to list,
  * so the same grams are never offered twice.
  */
-async function promisedGrams(
+export async function promisedGrams(
   ctx: QueryCtx,
   orgId: Id<"orgs">,
 ): Promise<Map<string, number>> {
   const promised = new Map<string, number>();
   const add = (code: string, grams: number) => {
-    promised.set(code, (promised.get(code) ?? 0) + grams);
+    const total = (promised.get(code) ?? 0) + grams;
+    if (
+      !Number.isSafeInteger(total) ||
+      !Number.isSafeInteger(grams) ||
+      grams < 0
+    )
+      throw new ConvexError("INVALID_WEIGHT");
+    promised.set(code, total);
   };
   const listings = await ctx.db
     .query("listings")
@@ -278,7 +307,8 @@ async function promisedGrams(
     throw new ConvexError("TOO_MANY_RESERVATIONS");
   }
   for (const listing of listings) {
-    if (listing.status === "open") add(listing.materialCode, listing.grams);
+    if (listing.status === "open" && isListingOfferCurrent(listing))
+      add(listing.materialCode, listing.grams);
   }
   const sales = await ctx.db
     .query("trades")
@@ -298,6 +328,8 @@ async function promisedGrams(
       add(trade.materialCode, trade.grams);
     }
   }
+  const held = await heldMaterialGrams(ctx, orgId);
+  for (const [code, grams] of held) add(code, grams);
   return promised;
 }
 
@@ -322,6 +354,32 @@ async function stockFor(ctx: QueryCtx, orgId: Id<"orgs">) {
   );
 }
 
+async function isListingStockBacked(
+  ctx: QueryCtx,
+  listing: Doc<"listings">,
+  grams = listing.grams,
+) {
+  const stock = await ctx.db
+    .query("inventory")
+    .withIndex("by_org_material", (q) =>
+      q.eq("orgId", listing.orgId).eq("materialCode", listing.materialCode),
+    )
+    .unique();
+  const promises = await promisedGrams(ctx, listing.orgId);
+  const balance = stock?.grams ?? 0,
+    reserved = promises.get(listing.materialCode) ?? 0;
+  if (
+    !Number.isSafeInteger(balance) ||
+    balance < 0 ||
+    !Number.isSafeInteger(listing.grams) ||
+    !Number.isSafeInteger(grams)
+  )
+    throw new ConvexError("INVALID_WEIGHT");
+  return (
+    BigInt(balance) - BigInt(reserved) + BigInt(listing.grams) >= BigInt(grams)
+  );
+}
+
 /** Adds (or, negative, takes) grams of one material to a business's stock. */
 async function moveStock(
   ctx: MutationCtx,
@@ -330,38 +388,15 @@ async function moveStock(
   deltaGrams: number,
   now: number,
 ) {
-  const row = await ctx.db
-    .query("inventory")
-    .withIndex("by_org_material", (q) =>
-      q.eq("orgId", actor.orgId).eq("materialCode", trade.materialCode),
-    )
-    .first();
   if (!isPositiveInteger(trade.grams)) throw new ConvexError("INVALID_WEIGHT");
-  const grams = stockGramsAfter(row?.grams ?? 0, deltaGrams);
-  let inventoryId: Id<"inventory">;
-  if (row) {
-    inventoryId = row._id;
-    await ctx.db.patch("inventory", row._id, { grams, updatedAt: now });
-  } else {
-    inventoryId = await ctx.db.insert("inventory", {
-      orgId: actor.orgId,
-      materialCode: trade.materialCode,
-      grams,
-      updatedAt: now,
-    });
-  }
-  await audit(ctx, {
+  await recordInventoryMovement(ctx, {
     orgId: actor.orgId,
     actorProfileId: actor.profileId,
-    action: "inventory.adjusted",
-    entityTable: "inventory",
-    entityId: inventoryId,
-    metadata: {
-      materialCode: trade.materialCode,
-      deltaGrams,
-      grams,
-      tradeId: trade._id,
-    },
+    materialCode: trade.materialCode,
+    deltaGrams,
+    addedCostPaise: deltaGrams > 0 ? trade.totalPaise : null,
+    sourceKey: `trade:${trade._id}:${deltaGrams > 0 ? "receipt" : "dispatch"}`,
+    createdAt: now,
   });
 }
 
@@ -411,6 +446,8 @@ async function takeFromListing(
 ) {
   const listing = await ctx.db.get("listings", trade.listingId);
   if (listing?.status !== "open") throw new ConvexError("LISTING_NOT_OPEN");
+  if (!isListingOfferCurrent(listing, now))
+    throw new ConvexError("LISTING_EXPIRED");
   if (
     listing.orgId !== trade.sellerOrgId ||
     listing.materialCode !== trade.materialCode
@@ -424,6 +461,8 @@ async function takeFromListing(
     await requireOrdinaryTradeMaterial(ctx, listing, trade.buyerOrgId);
   }
   if (listing.grams < trade.grams) throw new ConvexError("NOT_ENOUGH_LEFT");
+  if (!(await isListingStockBacked(ctx, listing, trade.grams)))
+    throw new ConvexError("NOT_ENOUGH_STOCK");
   if (listing.specification?.lotId)
     await requireOfferLot(
       ctx,
@@ -478,11 +517,85 @@ async function applyStep(
  * Open lots from the fixed chain tier below mine, plus approved non-hazardous
  * manufacturer byproducts for any matching active buyer, including other cities.
  */
+function matchesBuyerScope(
+  listing: Doc<"listings">,
+  material: Doc<"materials">,
+  org: Doc<"orgs">,
+  materialCode?: string,
+) {
+  const isByproduct =
+    listing.sellerKind === "manufacturer" &&
+    listing.origin === "manufacturer_byproduct" &&
+    isOrdinaryMaterial(material) &&
+    material.stage === "scrap" &&
+    material.byproductEligibility?.hazardStatus === "non_hazardous" &&
+    org.families.includes(material.family);
+  const isRegular =
+    listing.origin === undefined &&
+    isOrdinaryMaterial(material) &&
+    org.families.includes(material.family) &&
+    buyerKindFor(listing.sellerKind) === org.kind;
+  return (
+    listing.grams > 0 &&
+    listing.orgId !== org._id &&
+    (isByproduct || listing.city === org.city) &&
+    (isRegular || isByproduct) &&
+    (materialCode === undefined || listing.materialCode === materialCode) &&
+    isListingOfferCurrent(listing)
+  );
+}
+async function hasOfferEvidence(ctx: QueryCtx, listing: Doc<"listings">) {
+  if (!listing.specification?.lotId) return true;
+  try {
+    await requireOfferLot(
+      ctx,
+      listing.specification.lotId,
+      listing.orgId,
+      listing.materialCode,
+      listing.grams,
+    );
+    return true;
+  } catch (error) {
+    if (error instanceof ConvexError) return false;
+    throw error;
+  }
+}
+async function eligibleListingView(
+  ctx: QueryCtx,
+  listing: Doc<"listings">,
+  org: Doc<"orgs">,
+  materials: Materials,
+  orgOf: ReturnType<typeof orgLookup>,
+  materialCode?: string,
+) {
+  const material = materials.get(listing.materialCode);
+  if (!material || !matchesBuyerScope(listing, material, org, materialCode))
+    return null;
+  const seller = await orgOf(listing.orgId);
+  if (
+    seller?.status !== "active" ||
+    !seller.families.includes(material.family) ||
+    !(await isListingStockBacked(ctx, listing)) ||
+    !(await hasOfferEvidence(ctx, listing))
+  )
+    return null;
+  const distance =
+    seller.location && org.location
+      ? distanceKm(seller.location, org.location)
+      : undefined;
+  return {
+    ...toListingView(listing, seller, materials, org._id),
+    ...(distance !== undefined &&
+      Number.isFinite(distance) && { distanceKm: distance }),
+  };
+}
+
 export const browse = query({
   args: { materialCode: v.optional(v.string()) },
   returns: v.array(vListingView),
   handler: async (ctx, args) => {
     const { org } = await requireOrg(ctx, BUYER_KINDS, "read");
+    if (org.status !== "active") return [];
     const sellerKind = sellerKindFor(org.kind);
     const regular = sellerKind
       ? await ctx.db
@@ -504,37 +617,17 @@ export const browse = query({
     const orgOf = orgLookup(ctx);
     const views = [];
     for (const listing of [...regular, ...byproducts].toSorted(newestFirst)) {
-      const material = materials.get(listing.materialCode);
-      const isEligibleByproduct =
-        listing.sellerKind === "manufacturer" &&
-        listing.origin === "manufacturer_byproduct" &&
-        material?.active === true &&
-        material.stage === "scrap" &&
-        material.byproductEligibility?.hazardStatus === "non_hazardous" &&
-        org.families.includes(material.family);
-      const isRegularTrade =
-        listing.origin === undefined &&
-        isOrdinaryMaterial(material) &&
-        material !== undefined &&
-        org.families.includes(material.family) &&
-        buyerKindFor(listing.sellerKind) === org.kind;
-      const isForMe =
-        listing.grams > 0 &&
-        listing.orgId !== org._id &&
-        (isEligibleByproduct || listing.city === org.city) &&
-        (isRegularTrade || isEligibleByproduct) &&
-        (args.materialCode === undefined ||
-          listing.materialCode === args.materialCode);
-      if (!isForMe) continue;
-      const seller = await orgOf(listing.orgId);
-      if (
-        seller?.status !== "active" ||
-        !seller.families.includes(material.family)
-      )
-        continue;
-      views.push(toListingView(listing, seller, materials, org._id));
+      const view = await eligibleListingView(
+        ctx,
+        listing,
+        org,
+        materials,
+        orgOf,
+        args.materialCode,
+      );
+      if (view) views.push(view);
     }
-    return views;
+    return views.toSorted(compareEligibleOffers);
   },
 });
 
@@ -568,8 +661,12 @@ export const requestTrade = mutation({
       throw new ConvexError("WRONG_ROLE");
     }
     if (listing.status !== "open") throw new ConvexError("LISTING_NOT_OPEN");
+    if (!isListingOfferCurrent(listing))
+      throw new ConvexError("LISTING_EXPIRED");
     if (!isPositiveInteger(args.grams)) throw new ConvexError("INVALID_WEIGHT");
     if (args.grams > listing.grams) throw new ConvexError("NOT_ENOUGH_LEFT");
+    if (!(await isListingStockBacked(ctx, listing, args.grams)))
+      throw new ConvexError("NOT_ENOUGH_STOCK");
     if (listing.specification?.lotId)
       await requireOfferLot(
         ctx,
@@ -589,6 +686,8 @@ export const requestTrade = mutation({
       materialCode: listing.materialCode,
       grams: args.grams,
       paisePerKg: listing.askPaisePerKg,
+      freightPaisePerKg: listing.freightPaisePerKg,
+      deliveryAvailableAt: listing.deliveryAvailableAt,
       totalPaise,
       specification: listing.specification,
       status: "requested",
@@ -748,6 +847,39 @@ async function offerSpecification(
   };
 }
 
+function validatedOfferTerms(
+  args: {
+    contractValidUntil?: number;
+    freightPaisePerKg?: number;
+    deliveryAvailableAt?: number;
+    askPaisePerKg: number;
+  },
+  now: number,
+) {
+  const expiresAt = args.contractValidUntil ?? now + 24 * 60 * 60 * 1000;
+  if (
+    !Number.isSafeInteger(expiresAt) ||
+    expiresAt <= now ||
+    expiresAt > now + OFFER_MAX_VALIDITY_MS
+  )
+    throw new ConvexError("INVALID_OFFER_VALIDITY");
+  if (
+    args.freightPaisePerKg !== undefined &&
+    (!Number.isSafeInteger(args.freightPaisePerKg) ||
+      args.freightPaisePerKg < 0 ||
+      !Number.isSafeInteger(args.askPaisePerKg + args.freightPaisePerKg))
+  )
+    throw new ConvexError("INVALID_PRICE");
+  if (
+    args.deliveryAvailableAt !== undefined &&
+    (!Number.isSafeInteger(args.deliveryAvailableAt) ||
+      args.deliveryAvailableAt < 0 ||
+      args.deliveryAvailableAt > expiresAt)
+  )
+    throw new ConvexError("INVALID_OFFER_VALIDITY");
+  return expiresAt;
+}
+
 /** Offers a lot to the next business up the chain. */
 // eslint-disable-next-line unicorn/no-non-function-verb-prefix -- a registered Convex mutation is a const, and its name is the public API (api.market.createListing)
 export const createListing = mutation({
@@ -755,12 +887,17 @@ export const createListing = mutation({
     materialCode: v.string(),
     grams: v.number(),
     askPaisePerKg: v.number(),
+    contractValidUntil: v.optional(v.number()),
+    freightPaisePerKg: v.optional(v.number()),
+    deliveryAvailableAt: v.optional(v.number()),
     note: v.optional(v.string()),
     specification: v.optional(vOfferSpecificationInput),
   },
   returns: v.id("listings"),
   handler: async (ctx, args) => {
     const { profile, org } = await requireOrg(ctx, SELLER_KINDS);
+    const now = Date.now();
+    const expiresAt = validatedOfferTerms(args, now);
     if (!isPositiveInteger(args.grams)) throw new ConvexError("INVALID_WEIGHT");
     if (
       !isPositiveInteger(args.askPaisePerKg) ||
@@ -803,19 +940,21 @@ export const createListing = mutation({
       args.grams,
     );
 
-    const now = Date.now();
     const listingId = await ctx.db.insert("listings", {
       orgId: org._id,
       sellerKind: org.kind,
       materialCode: args.materialCode,
       grams: args.grams,
       askPaisePerKg: args.askPaisePerKg,
+      freightPaisePerKg: args.freightPaisePerKg,
+      deliveryAvailableAt: args.deliveryAvailableAt,
       city: org.city,
       note,
       specification,
       origin:
         org.kind === "manufacturer" ? "manufacturer_byproduct" : undefined,
       status: "open",
+      expiresAt,
       createdAt: now,
       updatedAt: now,
     });
@@ -829,6 +968,7 @@ export const createListing = mutation({
         materialCode: args.materialCode,
         grams: args.grams,
         askPaisePerKg: args.askPaisePerKg,
+        expiresAt,
       },
     });
     return listingId;
@@ -895,6 +1035,11 @@ export const trades = query({
         );
         if (!counterparty) continue;
         const view = toTradeView(trade, side, counterparty, materials);
+        if (trade.status === "requested") {
+          const listing = await ctx.db.get("listings", trade.listingId);
+          if (!listing || !isListingOfferCurrent(listing))
+            view.actions = view.actions.filter((action) => action !== "accept");
+        }
         result.push(role === "viewer" ? { ...view, actions: [] } : view);
       }
       return result;

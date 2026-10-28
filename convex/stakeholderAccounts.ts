@@ -2,6 +2,7 @@ import { ConvexError, v } from "convex/values";
 
 import { mutation, query } from "./_generated/server";
 import { requireAdmin } from "./lib/access";
+import { isProfileOpen, openStakeholders } from "./lib/accountClosure";
 import { findProfile, requireMember } from "./lib/applicationAccess";
 import { vSiteType } from "./lib/siteClassification";
 import {
@@ -127,8 +128,9 @@ export const pending = query({
       .query("stakeholderAccounts")
       .withIndex("by_status_createdAt", (q) => q.eq("status", "pending"))
       .take(100);
+    const openAccounts = await openStakeholders(ctx, accounts);
     return Promise.all(
-      accounts.map(async (account) => {
+      openAccounts.map(async (account) => {
         const profile = await ctx.db.get("profiles", account.ownerProfileId);
         return {
           id: account._id,
@@ -159,6 +161,8 @@ export const decide = mutation({
     if (account?.status !== "pending") {
       throw new ConvexError("NOT_PENDING");
     }
+    if (!(await isProfileOpen(ctx, account.ownerProfileId)))
+      throw new ConvexError("ACCOUNT_CLOSED");
     const note = args.reviewNote.trim();
     if (note.length < 10 || note.length > 1000) {
       throw new ConvexError("INVALID_REVIEW_NOTE");

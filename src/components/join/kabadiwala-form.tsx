@@ -405,6 +405,13 @@ export function KabadiwalaForm({
                   <LocationButton
                     value={field.value}
                     onChange={field.onChange}
+                    address={values.address ?? ""}
+                    onAddress={(address) => {
+                      setValue("address", address, {
+                        shouldDirty: true,
+                        shouldValidate: true,
+                      });
+                    }}
                   />
                 )}
               />

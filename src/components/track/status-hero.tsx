@@ -15,6 +15,7 @@ import { useFormat } from "@/components/app/format";
 import { cn } from "@/lib/utils";
 
 import type { BookingStatus } from "../../../convex/lib/chain";
+import { receiptStatusKey } from "./receipt-sharing";
 import { progressIndex, progressSteps } from "./status";
 import type { TrackedBooking } from "./types";
 
@@ -85,6 +86,7 @@ function Progress({ booking }: { booking: TrackedBooking }) {
  */
 export function StatusHero({ booking }: { booking: TrackedBooking }) {
   const t = useTranslations("track");
+  const tReview = useTranslations("track.review");
   const format = useFormat();
   const { icon: Icon, tone } = HERO[booking.status];
   const shop = booking.shop.name;
@@ -112,14 +114,18 @@ export function StatusHero({ booking }: { booking: TrackedBooking }) {
             id="track-title"
             className="font-display text-2xl leading-tight font-semibold tracking-tight text-balance wrap-anywhere sm:text-3xl"
           >
-            {t(`hero.${booking.status}`, {
-              shop,
-              mode: booking.mode,
-              amount: paid,
-            })}
+            {booking.status === "completed"
+              ? tReview("title")
+              : t(`hero.${booking.status}`, {
+                  shop,
+                  mode: booking.mode,
+                  amount: paid,
+                })}
           </h1>
           <p className="text-sm leading-relaxed text-muted-foreground">
-            {t(`hero.${booking.status}Body`)}
+            {booking.status === "completed"
+              ? tReview(receiptStatusKey(booking.receiptReview))
+              : t(`hero.${booking.status}Body`)}
           </p>
         </div>
       </div>

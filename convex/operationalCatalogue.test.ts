@@ -95,3 +95,81 @@ it("denies ordinary users, duplicate versions and conflicting existing material 
     }),
   ).rejects.toThrow(/MATERIAL_DEFINITION_CONFLICT/);
 });
+
+it("initialization preserves reviewed and retired records and review audits material activation", async () => {
+  const { t, admin, owner } = await world();
+  // seedDemo already owns some canonical materials; counts report what was added.
+  const initialMaterials = await t.run((ctx) =>
+    ctx.db.query("materials").collect(),
+  );
+  const result = await admin.mutation(api.catalogue.initializeDefinitions, {});
+  expect(result.inserted + result.materialsSkipped).toBe(51);
+  expect(result.materialsSkipped).toBe(initialMaterials.length);
+  expect(result.definitionsInserted).toBe(32);
+  const definitions = await admin.query(api.operationalCatalogue.adminList, {});
+  const hotFlake = definitions.find(
+    ({ materialCode }) => materialCode === "RECYCLED-PET-HOT-FLAKE",
+  );
+  const bale = definitions.find(
+    ({ materialCode }) => materialCode === "PLASTIC-PET-BALE",
+  );
+  if (!hotFlake || !bale) throw new Error("Missing reference definitions");
+  const beforeReview = await owner.query(api.operationalCatalogue.active, {
+    search: "",
+  });
+  expect(beforeReview.rows).toEqual([]);
+  await admin.mutation(api.operationalCatalogue.review, {
+    id: hotFlake.id,
+    decision: "active",
+    reference: "Facility and buyer specification reviewed separately",
+  });
+  await admin.mutation(api.operationalCatalogue.review, {
+    id: bale.id,
+    decision: "retired",
+    reference: "Reference rejected by reviewer",
+  });
+  const before = await t.run(async (ctx) => ({
+    definitions: await ctx.db.query("operationalDefinitions").collect(),
+    materials: await ctx.db.query("materials").collect(),
+    audit: await ctx.db.query("auditLog").collect(),
+  }));
+  expect(
+    before.materials.find(({ code }) => code === hotFlake.materialCode),
+  ).toMatchObject({ active: true });
+  expect(
+    before.materials.find(({ code }) => code === bale.materialCode),
+  ).toMatchObject({ active: false });
+  expect(
+    before.audit.filter(
+      ({ action }) => action === "material.definitionActivated",
+    ),
+  ).toHaveLength(1);
+  const materialAudit = before.audit.find(
+    ({ action }) => action === "material.definitionActivated",
+  );
+  expect(materialAudit?.metadata).toMatchObject({
+    previousActive: false,
+    hazardApprovalGranted: false,
+  });
+  expect(await admin.mutation(api.catalogue.initializeDefinitions, {})).toEqual(
+    {
+      inserted: 0,
+      definitionsInserted: 0,
+      materialsSkipped: 51,
+      definitionsSkipped: 32,
+    },
+  );
+  expect(
+    await t.run(async (ctx) => ({
+      definitions: await ctx.db.query("operationalDefinitions").collect(),
+      materials: await ctx.db.query("materials").collect(),
+      audit: await ctx.db.query("auditLog").collect(),
+    })),
+  ).toEqual(before);
+  const afterReview = await owner.query(api.operationalCatalogue.active, {
+    search: "",
+  });
+  expect(afterReview.rows.map(({ materialCode }) => materialCode)).toEqual([
+    hotFlake.materialCode,
+  ]);
+});

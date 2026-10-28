@@ -29,5 +29,7 @@ function codeOf(data: unknown): unknown {
 export function marketErrorKey(error: unknown): MarketErrorKey {
   if (!(error instanceof ConvexError)) return "generic";
   const code = codeOf(error.data);
-  return MARKET_ERRORS.find((known) => known === code) ?? "generic";
+  return code === "LISTING_EXPIRED"
+    ? "LISTING_NOT_OPEN"
+    : (MARKET_ERRORS.find((known) => known === code) ?? "generic");
 }

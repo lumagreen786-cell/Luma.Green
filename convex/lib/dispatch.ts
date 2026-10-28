@@ -4,11 +4,16 @@ import { internal } from "../_generated/api";
 import type { Doc, Id } from "../_generated/dataModel";
 import type { MutationCtx, QueryCtx } from "../_generated/server";
 import { kgToGrams, paiseFor } from "./chain";
+import {
+  availableCapacity,
+  requireCollectionCapacity,
+} from "./collectionScheduling";
 import { distanceKm, isWindowOpen } from "./households";
+import { isOrdinaryMaterial } from "./materialEligibility";
 import { queueBookingNotification } from "./notifications";
 import { indiaToday } from "./onboarding";
 
-export const OFFER_TIMEOUT_MS = 15 * 60 * 1000;
+export const OFFER_TIMEOUT_MS = 2 * 60 * 60 * 1000;
 export const DEFAULT_PICKUP_RADIUS_KM = 5;
 
 type Booking = Doc<"bookings">;
@@ -26,6 +31,24 @@ export function dispatchSettings(org: Org) {
   };
 }
 
+/** A supplied collection point must lie inside the shop's declared pickup area. */
+export function isPickupLocationEligible(
+  org: Org,
+  point: Point | undefined,
+): boolean {
+  return (
+    !point ||
+    Boolean(
+      org.location &&
+      distanceKm(point, org.location) <= dispatchSettings(org).pickupRadiusKm,
+    )
+  );
+}
+function knownCollectionPoint(booking: Booking): Point | undefined {
+  return booking.dispatch?.approximateLocation
+    ? undefined
+    : booking.dispatch?.origin;
+}
 async function offerEvent(
   ctx: MutationCtx,
   booking: Booking,
@@ -70,10 +93,28 @@ export async function acceptOffer(
   // A queued expiry can run late. The deadline must also hold at acceptance.
   if (
     booking.status !== "requested" ||
-    (booking.dispatch?.expiresAt !== undefined &&
-      booking.dispatch.expiresAt <= now)
+    (booking.dispatch !== undefined &&
+      (booking.dispatch.expiresAt === undefined ||
+        booking.dispatch.expiresAt <= now ||
+        (booking.dispatch.deadlineAt ?? booking.createdAt + OFFER_TIMEOUT_MS) <=
+          now))
   )
     throw new ConvexError("WRONG_STATUS");
+  const org = await ctx.db.get("orgs", booking.orgId);
+  if (!org || (booking.mode === "pickup" && !org.offersPickup))
+    throw new ConvexError("SHOP_NOT_FOUND");
+  if (
+    booking.mode === "pickup" &&
+    !isPickupLocationEligible(org, knownCollectionPoint(booking))
+  )
+    throw new ConvexError("OUTSIDE_PICKUP_RADIUS");
+  await requireCollectionCapacity(
+    ctx,
+    org,
+    booking.slotDate,
+    booking.slotWindow,
+    booking._id,
+  );
   await ctx.db.patch("bookings", booking._id, {
     status: "accepted",
     dispatch: booking.dispatch && { ...booking.dispatch, expiresAt: undefined },
@@ -145,13 +186,17 @@ export async function beginDispatch(
   location?: Point,
 ): Promise<void> {
   if (booking.mode !== "pickup") return;
+  const origin = location ?? knownCollectionPoint(booking);
+  if (!isPickupLocationEligible(org, origin))
+    throw new ConvexError("OUTSIDE_PICKUP_RADIUS");
   const dispatch = {
-    attempt: 1,
+    attempt: (booking.dispatch?.attempt ?? 0) + 1,
     offeredAt: now,
     expiresAt: now + OFFER_TIMEOUT_MS,
+    deadlineAt: now + OFFER_TIMEOUT_MS,
     attemptedOrgIds: [org._id],
-    origin: location ?? org.location,
-    approximateLocation: location === undefined,
+    origin: origin ?? org.location,
+    approximateLocation: origin === undefined,
   };
   await ctx.db.patch("bookings", booking._id, { dispatch });
   await openOffer(ctx, { ...booking, dispatch }, org, now);
@@ -170,7 +215,7 @@ async function candidateQuote(
       .withIndex("by_code", (q) => q.eq("code", item.materialCode))
       .first();
     if (
-      !material?.active ||
+      !isOrdinaryMaterial(material) ||
       material.stage !== "scrap" ||
       !org.families.includes(material.family)
     )
@@ -222,7 +267,9 @@ async function nextShop(
     // Compare every pickup shop in the pilot city. Truncating before distance
     // sorting can wrongly conclude that no eligible shop exists. A larger-city
     // launch needs a spatial index before this reaches Convex read limits.
-    .collect();
+    .take(5001);
+  if (shops.length > 5000)
+    throw new ConvexError("DISPATCH_CAPACITY_UNAVAILABLE");
   const candidates = shops
     .flatMap((org) => {
       if (
@@ -240,6 +287,15 @@ async function nextShop(
       (a, b) => a.distance - b.distance || a.org._id.localeCompare(b.org._id),
     );
   for (const { org } of candidates) {
+    if (
+      (await availableCapacity(
+        ctx,
+        org,
+        booking.slotDate,
+        booking.slotWindow,
+      )) < 1
+    )
+      continue;
     if (booking.requestKind === "photo_request")
       return { org, estimatePaise: undefined };
     const estimatePaise = await candidateQuote(ctx, booking, org);
@@ -273,12 +329,16 @@ export async function advanceOffer(
     indiaToday(now),
     now,
   );
-  const replacement = isWindowOpenNow ? await nextShop(ctx, booking) : null;
+  const replacement =
+    isWindowOpenNow &&
+    now < (booking.dispatch.deadlineAt ?? booking.createdAt + OFFER_TIMEOUT_MS)
+      ? await nextShop(ctx, booking)
+      : null;
   if (!replacement) {
     await ctx.db.patch("bookings", booking._id, {
-      status: "declined",
+      status: "requested",
       dispatch: { ...booking.dispatch, expiresAt: undefined },
-      timeline: [...booking.timeline, { status: "declined", at: now }],
+      timeline: [...booking.timeline, { status: "requested", at: now }],
       updatedAt: now,
     });
     await audit(
@@ -296,7 +356,8 @@ export async function advanceOffer(
     ...booking.dispatch,
     attempt: booking.dispatch.attempt + 1,
     offeredAt: now,
-    expiresAt: now + OFFER_TIMEOUT_MS,
+    expiresAt:
+      booking.dispatch.deadlineAt ?? booking.createdAt + OFFER_TIMEOUT_MS,
     attemptedOrgIds: [...booking.dispatch.attemptedOrgIds, org._id],
   };
   const timeline = [
@@ -326,4 +387,94 @@ export async function advanceOffer(
   });
   await queueBookingNotification(ctx, reassigned, "booking_reassigned");
   await openOffer(ctx, reassigned, org, now);
+}
+
+/** Admin changes the offer owner; only the destination shop can accept it. */
+export async function reassignCollection(
+  ctx: MutationCtx,
+  booking: Booking,
+  org: Org,
+  actorProfileId: Id<"profiles">,
+  reason: string,
+  now: number,
+): Promise<void> {
+  if (
+    booking.mode !== "pickup" ||
+    !["requested", "accepted"].includes(booking.status)
+  )
+    throw new ConvexError("WRONG_STATUS");
+  const current = await ctx.db.get("orgs", booking.orgId);
+  if (
+    org._id === booking.orgId ||
+    org.kind !== "kabadiwala" ||
+    org.status !== "active" ||
+    !org.offersPickup ||
+    org.city !== current?.city
+  )
+    throw new ConvexError("SHOP_NOT_FOUND");
+  if (!isPickupLocationEligible(org, knownCollectionPoint(booking)))
+    throw new ConvexError("OUTSIDE_PICKUP_RADIUS");
+  await requireCollectionCapacity(
+    ctx,
+    org,
+    booking.slotDate,
+    booking.slotWindow,
+    booking._id,
+  );
+  const estimatePaise =
+    booking.requestKind === "photo_request"
+      ? undefined
+      : await candidateQuote(ctx, booking, org);
+  if (estimatePaise === null)
+    throw new ConvexError("SHOP_CANNOT_SERVE_REQUEST");
+  const dispatch = {
+    attempt: (booking.dispatch?.attempt ?? 0) + 1,
+    offeredAt: now,
+    expiresAt: now + OFFER_TIMEOUT_MS,
+    deadlineAt: now + OFFER_TIMEOUT_MS,
+    attemptedOrgIds: [
+      ...(booking.dispatch?.attemptedOrgIds ?? [booking.orgId]),
+      org._id,
+    ],
+    origin: booking.dispatch?.origin,
+    approximateLocation: booking.dispatch?.approximateLocation ?? true,
+  };
+  const reassigned = {
+    ...booking,
+    orgId: org._id,
+    estimatePaise,
+    status: "requested" as const,
+    dispatch,
+    timeline: [...booking.timeline, { status: "requested" as const, at: now }],
+    updatedAt: now,
+  };
+  await ctx.db.patch("bookings", booking._id, {
+    orgId: reassigned.orgId,
+    estimatePaise,
+    status: reassigned.status,
+    dispatch,
+    timeline: reassigned.timeline,
+    updatedAt: now,
+  });
+  await audit(
+    ctx,
+    reassigned,
+    "booking.admin_reassigned",
+    now,
+    { fromOrgId: booking.orgId, reason, attempt: dispatch.attempt },
+    actorProfileId,
+  );
+  await offerEvent(ctx, reassigned, "offered", now);
+  if (org.ownerProfileId)
+    await queueBookingNotification(
+      ctx,
+      reassigned,
+      "booking_offer",
+      org.ownerProfileId,
+    );
+  await queueBookingNotification(ctx, reassigned, "booking_reassigned");
+  await ctx.scheduler.runAt(dispatch.expiresAt, internal.dispatch.expireOffer, {
+    bookingId: booking._id,
+    attempt: dispatch.attempt,
+  });
 }

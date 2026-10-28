@@ -38,6 +38,9 @@ export const vJobView = v.object({
   date: v.string(),
   window: vSaathiTime,
   payPaise: v.number(),
+  paymentDueDate: v.optional(v.string()),
+  employerPaidAt: v.optional(v.number()),
+  workerAcknowledgedAt: v.optional(v.number()),
   status: v.union(v.literal("open"), v.literal("assigned"), v.literal("done")),
   /** The business that posted it; null for a job the team posted. */
   postedBy: v.union(v.null(), v.object({ name: v.string(), kind: vOrgKind })),
@@ -131,6 +134,9 @@ function toView(
     date: job.date,
     window: job.window,
     payPaise: job.payPaise,
+    paymentDueDate: job.paymentDueDate,
+    employerPaidAt: job.employerPaidAt,
+    workerAcknowledgedAt: job.workerAcknowledgedAt,
     status: job.status,
     postedBy: poster ? { name: poster.name, kind: poster.kind } : null,
     inMyArea: isSameArea(job.area, myArea),
@@ -248,7 +254,7 @@ async function audit(
   ctx: MutationCtx,
   job: Doc<"jobs">,
   actorProfileId: Id<"profiles">,
-  action: "job.taken" | "job.done",
+  action: "job.taken" | "job.done" | "job.payment_acknowledged",
 ) {
   await ctx.db.insert("auditLog", {
     orgId: job.orgId,
@@ -317,6 +323,27 @@ export const finish = mutation({
 
     await ctx.db.patch("jobs", job._id, { status: "done" });
     await audit(ctx, job, profile._id, "job.done");
+    return null;
+  },
+});
+
+export const acknowledgePayment = mutation({
+  args: { jobId: v.id("jobs") },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    const { profile, saathi } = await requireSaathi(ctx);
+    const job = await ctx.db.get("jobs", args.jobId);
+    if (job?.saathiProfileId !== saathi._id)
+      throw new ConvexError("NOT_YOUR_JOB");
+    if (job.status !== "done" || job.employerPaidAt === undefined)
+      throw new ConvexError("PAYMENT_NOT_DECLARED");
+    if (job.workerAcknowledgedAt !== undefined) return null;
+    const now = Date.now();
+    await ctx.db.patch("jobs", job._id, {
+      workerAcknowledgedAt: now,
+      updatedAt: now,
+    });
+    await audit(ctx, job, profile._id, "job.payment_acknowledged");
     return null;
   },
 });

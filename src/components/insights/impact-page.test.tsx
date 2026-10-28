@@ -15,6 +15,7 @@ const workspace = vi.hoisted((): { current: unknown } => ({
 }));
 
 vi.mock("convex/react", () => ({
+  useMutation: () => vi.fn(),
   useConvexAuth: () => ({ isLoading: false, isAuthenticated: true }),
   useQuery: () => {
     if (impact.current instanceof Error) throw impact.current;

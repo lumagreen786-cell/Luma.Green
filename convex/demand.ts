@@ -136,12 +136,15 @@ export const board = query({
     return {
       today,
       maxDate,
-      canPost: materials.some((material) => canDemand(org, material)),
+      canPost:
+        org.status === "active" &&
+        materials.some((material) => canDemand(org, material)),
       materials: materials
         .filter((material) => canDemand(org, material))
         .map(({ code, names, family }) => ({ code, names, family })),
       mine,
-      available: available.slice(0, ECOSYSTEM_PAGE),
+      available:
+        org.status === "active" ? available.slice(0, ECOSYSTEM_PAGE) : [],
       truncated:
         own.length > ECOSYSTEM_PAGE ||
         available.length > ECOSYSTEM_PAGE ||

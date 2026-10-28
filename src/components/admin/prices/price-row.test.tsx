@@ -29,8 +29,8 @@ function setup(row: PriceRowData = newspaper) {
   render(<PriceRow row={row} city="Bengaluru" />);
   return {
     user,
-    minimum: screen.getByLabelText("Minimum ₹/kg for Newspaper"),
-    fallback: screen.getByLabelText("Fallback ₹/kg for Newspaper"),
+    minimum: screen.getByLabelText("Reference low ₹/kg for Newspaper"),
+    fallback: screen.getByLabelText("Reference price ₹/kg for Newspaper"),
     save: screen.getByRole("button", { name: "Save" }),
   };
 }
@@ -58,7 +58,7 @@ describe("PriceRow", () => {
     expect(save).toBeDisabled();
   });
 
-  it("saves rupees as exact paise, and says which shop prices went up", async () => {
+  it("saves exact reference paise without changing shop offers", async () => {
     setPrices.mockResolvedValue({ lifted: 3 });
     const { user, minimum, fallback, save } = setup();
     await user.clear(minimum);
@@ -74,11 +74,7 @@ describe("PriceRow", () => {
       fallbackPaise: 1500,
     });
     expect(toast.success).toHaveBeenCalledWith(
-      "Newspaper: minimum ₹12.50, fallback ₹15 a kilo.",
-      {
-        description:
-          "3 shop prices were below the new minimum and have been raised to it.",
-      },
+      "Newspaper: reference low ₹12.50, reference price ₹15 a kilo.",
     );
   });
 

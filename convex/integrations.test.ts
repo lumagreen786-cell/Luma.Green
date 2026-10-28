@@ -184,9 +184,12 @@ describe("machine credential lifecycle", () => {
       await ctx.db.patch("orgs", record.orgId, { status: "suspended" });
     });
     await expect(issue(owner)).rejects.toThrow(/NO_BUSINESS/);
-    await expect(owner.query(api.integrations.listKeys, {})).rejects.toThrow(
-      /NO_BUSINESS/,
-    );
+    const suspendedKeys = await owner.query(api.integrations.listKeys, {});
+    expect(suspendedKeys.canManage).toBe(false);
+    expect(suspendedKeys.keys.map((row) => row.id)).toContain(key.keyId);
+    await expect(
+      owner.mutation(api.integrations.revokeKey, { keyId: key.keyId }),
+    ).rejects.toThrow(/NO_BUSINESS/);
   });
 
   it.each([

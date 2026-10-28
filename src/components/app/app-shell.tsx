@@ -59,6 +59,8 @@ export function AppShell({ children }: { children: ReactNode }) {
   const logistics = useTranslations("logistics");
   const qualityDocuments = useTranslations("qualityDocuments");
   const operations = useTranslations("operations");
+  const services = useTranslations("serviceRecords");
+  const returnClaims = useTranslations("returnClaims");
   const common = useTranslations("common");
   const theme = useTranslations("theme");
   const navigation = useTranslations("nav");
@@ -122,6 +124,18 @@ export function AppShell({ children }: { children: ReactNode }) {
       ? [
           ...roleMore,
           {
+            href: "/app/services",
+            label: "title",
+            namespace: "serviceRecords",
+            icon: FileTextIcon,
+          },
+          {
+            href: "/app/returns",
+            label: "title",
+            namespace: "returnClaims",
+            icon: BoxesIcon,
+          },
+          {
             href: "/app/sourcing",
             label: "title",
             namespace: "sourcing",
@@ -172,6 +186,8 @@ export function AppShell({ children }: { children: ReactNode }) {
         ]
       : roleMore;
   const itemLabel = (item: NavItem) => {
+    if (item.namespace === "serviceRecords") return services("title");
+    if (item.namespace === "returnClaims") return returnClaims("title");
     if (item.namespace === "sourcing") return sourcing("title");
     if (item.namespace === "logistics") return logistics("title");
     if (item.namespace === "qualityDocuments") return qualityDocuments("title");

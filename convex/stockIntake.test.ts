@@ -80,6 +80,23 @@ it("adds exact stock once with immutable evidence and idempotent concurrent retr
   expect(
     stock.rows.find((row) => row.material.code === args.materialCode)?.grams,
   ).toBe(2000);
+  const movements = await t.run((ctx) =>
+    ctx.db
+      .query("inventoryMovements")
+      .withIndex("by_org_material", (q) =>
+        q.eq("orgId", orgId).eq("materialCode", args.materialCode),
+      )
+      .collect(),
+  );
+  expect(movements).toHaveLength(1);
+  expect(movements[0]).toMatchObject({
+    deltaGrams: 2000,
+    costDeltaPaise: null,
+  });
+  expect(
+    stock.rows.find((row) => row.material.code === args.materialCode)
+      ?.costPaise,
+  ).toBeNull();
   const records = await maker.query(api.stockIntake.mine, {
     paginationOpts: { numItems: 20, cursor: null },
   });
@@ -103,7 +120,7 @@ it("adds exact stock once with immutable evidence and idempotent concurrent retr
   expect(audit).toHaveLength(1);
   expect(audit[0]).toMatchObject({
     orgId,
-    metadata: { previousGrams: 0, intakeGrams: 2000, grams: 2000 },
+    metadata: { intakeGrams: 2000 },
   });
   expect(await t.run((ctx) => ctx.db.query("materialLots").collect())).toEqual(
     [],
@@ -223,6 +240,292 @@ it("rejects future/invalid dates, empty references and overflowing stock atomica
   );
   await expect(maker.mutation(api.stockIntake.record, args)).rejects.toThrow(
     "INVALID_WEIGHT",
+  );
+  expect(
+    await t.run((ctx) => ctx.db.query("manufacturerStockIntakes").collect()),
+  ).toEqual([]);
+});
+
+it("keeps movement sources idempotent and allocates every recorded paisa", async () => {
+  const { t, orgId, membershipId } = await world();
+  const { recordInventoryMovement } = await import("./lib/inventoryLedger");
+  const actorProfileId = await t.run(async (ctx) => {
+    const membership = await ctx.db.get("memberships", membershipId);
+    if (!membership) throw new Error("Missing test owner");
+    return membership.profileId;
+  });
+  const entry = {
+    orgId,
+    actorProfileId,
+    materialCode: "COST-TEST",
+    deltaGrams: 3,
+    addedCostPaise: 10,
+    sourceKey: "test:cost:intake",
+    createdAt: Date.now(),
+  };
+  const first = await t.run((ctx) => recordInventoryMovement(ctx, entry));
+  expect(await t.run((ctx) => recordInventoryMovement(ctx, entry))).toBe(first);
+  await expect(
+    t.run((ctx) => recordInventoryMovement(ctx, { ...entry, deltaGrams: 4 })),
+  ).rejects.toThrow(/INVENTORY_SOURCE_CONFLICT/);
+  await t.run((ctx) =>
+    recordInventoryMovement(ctx, {
+      ...entry,
+      deltaGrams: -1,
+      addedCostPaise: null,
+      sourceKey: "test:cost:dispatch:1",
+    }),
+  );
+  await t.run((ctx) =>
+    recordInventoryMovement(ctx, {
+      ...entry,
+      deltaGrams: -2,
+      addedCostPaise: null,
+      sourceKey: "test:cost:dispatch:2",
+    }),
+  );
+  const rows = await t.run((ctx) =>
+    ctx.db
+      .query("inventoryMovements")
+      .withIndex("by_org_material", (q) =>
+        q.eq("orgId", orgId).eq("materialCode", entry.materialCode),
+      )
+      .collect(),
+  );
+  expect(rows.map((row) => row.deltaGrams)).toEqual([3, -1, -2]);
+  expect(rows.map((row) => row.costDeltaPaise)).toEqual([10, -3, -7]);
+  const balance = await t.run((ctx) =>
+    ctx.db
+      .query("inventory")
+      .withIndex("by_org_material", (q) =>
+        q.eq("orgId", orgId).eq("materialCode", entry.materialCode),
+      )
+      .unique(),
+  );
+  expect(balance).toMatchObject({ grams: 0, costPaise: 0 });
+});
+
+it.each([undefined, null, 0, 100])(
+  "retains explicitly recorded intake cost %s without inventing missing values",
+  async (recordedCostPaise) => {
+    const { t, maker, orgId } = await world();
+    const costReference =
+      recordedCostPaise == null ? undefined : "RECORDED-ALLOCATED-INTAKE";
+    const id = await maker.mutation(api.stockIntake.record, {
+      ...args,
+      recordedCostPaise,
+      costReference,
+    });
+    const stock = await maker.query(api.stock.mine, {});
+    expect(
+      stock.rows.find(({ material }) => material.code === args.materialCode)
+        ?.costPaise,
+    ).toBe(recordedCostPaise ?? null);
+    const row = await t.run((ctx) =>
+      ctx.db.get("manufacturerStockIntakes", id),
+    );
+    expect(row).toMatchObject({ recordedCostPaise: recordedCostPaise ?? null });
+    const history = await maker.query(api.stockIntake.mine, {
+      paginationOpts: { cursor: null, numItems: 20 },
+    });
+    expect(history.page[0]).toMatchObject({
+      recordedCostPaise: recordedCostPaise ?? null,
+    });
+    const audit = await t.run((ctx) =>
+      ctx.db
+        .query("auditLog")
+        .withIndex("by_entity", (q) =>
+          q.eq("entityTable", "manufacturerStockIntakes").eq("entityId", id),
+        )
+        .collect(),
+    );
+    expect(audit).toHaveLength(1);
+    expect(audit[0].metadata).toMatchObject({
+      recordedCostPaise: recordedCostPaise ?? null,
+    });
+    const movement = await t.run((ctx) =>
+      ctx.db
+        .query("inventoryMovements")
+        .withIndex("by_org_source", (q) =>
+          q.eq("orgId", orgId).eq("sourceKey", `manufacturer:${id}`),
+        )
+        .unique(),
+    );
+    expect(movement?.costDeltaPaise).toBe(recordedCostPaise ?? null);
+  },
+);
+
+it("preserves every recorded intake paisa across partial and final stock removal", async () => {
+  const { t, maker, orgId, membershipId } = await world();
+  const valued = {
+    ...args,
+    grams: 3,
+    recordedCostPaise: 10,
+    costReference: "RECORDED-ALLOCATED-COST",
+  };
+  const ids = await Promise.all([
+    maker.mutation(api.stockIntake.record, valued),
+    maker.mutation(api.stockIntake.record, valued),
+  ]);
+  expect(ids[0]).toBe(ids[1]);
+  const { recordInventoryMovement } = await import("./lib/inventoryLedger");
+  await t.run(async (ctx) => {
+    const member = await ctx.db.get("memberships", membershipId);
+    if (!member) throw new Error("Missing member");
+    await recordInventoryMovement(ctx, {
+      orgId,
+      actorProfileId: member.profileId,
+      materialCode: args.materialCode,
+      deltaGrams: -1,
+      addedCostPaise: null,
+      sourceKey: "test:intake:partial-dispatch",
+      createdAt: Date.now(),
+    });
+  });
+  const partial = await maker.query(api.stock.mine, {});
+  expect(
+    partial.rows.find(({ material }) => material.code === args.materialCode),
+  ).toMatchObject({ grams: 2, costPaise: 7 });
+  await t.run(async (ctx) => {
+    const member = await ctx.db.get("memberships", membershipId);
+    if (!member) throw new Error("Missing member");
+    await recordInventoryMovement(ctx, {
+      orgId,
+      actorProfileId: member.profileId,
+      materialCode: args.materialCode,
+      deltaGrams: -2,
+      addedCostPaise: null,
+      sourceKey: "test:intake:final-dispatch",
+      createdAt: Date.now(),
+    });
+  });
+  const final = await t.run((ctx) =>
+    ctx.db
+      .query("inventory")
+      .withIndex("by_org_material", (q) =>
+        q.eq("orgId", orgId).eq("materialCode", args.materialCode),
+      )
+      .unique(),
+  );
+  expect(final).toMatchObject({ grams: 0, costPaise: 0 });
+  const movement = await t.run((ctx) =>
+    ctx.db
+      .query("inventoryMovements")
+      .withIndex("by_org_material", (q) =>
+        q.eq("orgId", orgId).eq("materialCode", args.materialCode),
+      )
+      .collect(),
+  );
+  expect(movement.map(({ costDeltaPaise }) => costDeltaPaise)).toEqual([
+    10, -3, -7,
+  ]);
+});
+
+it("normalizes historical missing cost to unknown and rejects changed cost or evidence on retry", async () => {
+  const { t, maker } = await world();
+  const legacy = await maker.mutation(api.stockIntake.record, args);
+  await t.run((ctx) =>
+    ctx.db.patch("manufacturerStockIntakes", legacy, {
+      recordedCostPaise: undefined,
+      costReference: undefined,
+    }),
+  );
+  expect(
+    await maker.mutation(api.stockIntake.record, {
+      ...args,
+      recordedCostPaise: null,
+    }),
+  ).toBe(legacy);
+  const valued = {
+    ...args,
+    intakeReference: "VALUED-INTAKE",
+    recordedCostPaise: 100,
+    costReference: "RECORDED-COST-1",
+  };
+  await maker.mutation(api.stockIntake.record, valued);
+  const mixed = await maker.query(api.stock.mine, {});
+  expect(
+    mixed.rows.find(({ material }) => material.code === args.materialCode)
+      ?.costPaise,
+  ).toBeNull();
+  await expect(
+    maker.mutation(api.stockIntake.record, {
+      ...valued,
+      recordedCostPaise: 101,
+    }),
+  ).rejects.toThrow("INTAKE_REFERENCE_CONFLICT");
+  await expect(
+    maker.mutation(api.stockIntake.record, {
+      ...valued,
+      costReference: "RECORDED-COST-2",
+    }),
+  ).rejects.toThrow("INTAKE_REFERENCE_CONFLICT");
+  expect(
+    await t.run((ctx) => ctx.db.query("manufacturerStockIntakes").collect()),
+  ).toHaveLength(2);
+});
+
+it("rejects invalid, unsupported and overflowing recorded costs atomically", async () => {
+  const { t, maker, orgId } = await world();
+  for (const recordedCostPaise of [-1, 0.5, Number.MAX_SAFE_INTEGER + 1])
+    await expect(
+      maker.mutation(api.stockIntake.record, {
+        ...args,
+        recordedCostPaise,
+        costReference: "RECORDED-COST",
+      }),
+    ).rejects.toThrow("INVALID_PRICE");
+  await expect(
+    maker.mutation(api.stockIntake.record, { ...args, recordedCostPaise: 0 }),
+  ).rejects.toThrow("COST_REFERENCE_REQUIRED");
+  await t.run((ctx) =>
+    ctx.db.insert("inventory", {
+      orgId,
+      materialCode: args.materialCode,
+      grams: 1,
+      costPaise: Number.MAX_SAFE_INTEGER,
+      updatedAt: Date.now(),
+    }),
+  );
+  await expect(
+    maker.mutation(api.stockIntake.record, {
+      ...args,
+      recordedCostPaise: 1,
+      costReference: "RECORDED-COST",
+    }),
+  ).rejects.toThrow("INVALID_PRICE");
+  expect(
+    await t.run((ctx) => ctx.db.query("manufacturerStockIntakes").collect()),
+  ).toEqual([]);
+  const stock = await t.run((ctx) =>
+    ctx.db
+      .query("inventory")
+      .withIndex("by_org_material", (q) =>
+        q.eq("orgId", orgId).eq("materialCode", args.materialCode),
+      )
+      .unique(),
+  );
+  expect(stock).toMatchObject({ grams: 1, costPaise: Number.MAX_SAFE_INTEGER });
+});
+
+it("keeps known intake valuation behind the existing manufacturer write permission", async () => {
+  const { t, maker, shop, membershipId } = await world();
+  const valued = {
+    ...args,
+    recordedCostPaise: 100,
+    costReference: "RECORDED-COST",
+  };
+  await expect(shop.mutation(api.stockIntake.record, valued)).rejects.toThrow(
+    "WRONG_ROLE",
+  );
+  await expect(t.mutation(api.stockIntake.record, valued)).rejects.toThrow(
+    "NOT_SIGNED_IN",
+  );
+  await t.run((ctx) =>
+    ctx.db.patch("memberships", membershipId, { role: "viewer" }),
+  );
+  await expect(maker.mutation(api.stockIntake.record, valued)).rejects.toThrow(
+    "WORKSPACE_PERMISSION_DENIED",
   );
   expect(
     await t.run((ctx) => ctx.db.query("manufacturerStockIntakes").collect()),

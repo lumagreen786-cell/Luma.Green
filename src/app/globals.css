@@ -12,6 +12,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --color-google-attribution: var(--google-attribution);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
@@ -110,6 +111,7 @@
 }
 
 :root {
+  --google-attribution: #1f1f1f;
   --background: oklch(0.985 0.002 250);
   --foreground: oklch(0.22 0.008 250);
   --card: oklch(1 0 0);
@@ -145,6 +147,7 @@
 }
 
 .dark {
+  --google-attribution: #ffffff;
   --background: oklch(0.165 0.004 250);
   --foreground: oklch(0.956 0.003 250);
   --card: oklch(0.21 0.005 250);

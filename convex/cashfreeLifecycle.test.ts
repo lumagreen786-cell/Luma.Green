@@ -209,6 +209,18 @@ it("authorizes once without moving stock, then dispatches and receives exactly o
   const observed2 = await w.buyer.query(api.cashfreeLifecycle.status, {
     tradeId: w.tradeId,
   });
+  const inventoryMovements = await w.t.run((ctx) =>
+    ctx.db.query("inventoryMovements").collect(),
+  );
+  const orderMovements = inventoryMovements.filter((row) =>
+    row.sourceKey.startsWith(`trade:${w.tradeId}:`),
+  );
+  expect(orderMovements).toHaveLength(2);
+  expect(
+    orderMovements
+      .map((row) => row.deltaGrams)
+      .reduce((sum, grams) => sum + grams, 0),
+  ).toBe(0);
   expect(observed2?.state).toBe("received");
   const claim = await w.t.mutation(internal.cashfreePayments.claim, {
     orderId: order._id,

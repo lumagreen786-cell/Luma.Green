@@ -32,8 +32,9 @@ import {
   vRefund,
   vSettlement,
 } from "./lib/cashfreeLifecycleSchema";
-import { stockGramsAfter } from "./lib/inventory";
+import { recordInventoryMovement } from "./lib/inventoryLedger";
 import { requireCurrentTradeMaterial } from "./lib/marketEligibility";
+import { requireTradeQualityRelease } from "./lib/qualityRelease";
 import { requireOrg } from "./lib/workspace";
 const policyView = v.object({ ...policyFields, createdAt: v.number() });
 export const policyForAdmin = query({
@@ -237,33 +238,24 @@ export const act = mutation({
       throw new ConvexError("TRADE_NOT_AVAILABLE");
     try {
       await requireCurrentTradeMaterial(ctx, trade);
+      await requireTradeQualityRelease(ctx, trade);
     } catch (error) {
       if (!(error instanceof ConvexError)) throw error;
       await hold(ctx, trade._id, "material_eligibility_changed");
       return null;
     }
-    const inventory = await ctx.db
-      .query("inventory")
-      .withIndex("by_org_material", (q) =>
-        q.eq("orgId", org._id).eq("materialCode", trade.materialCode),
-      )
-      .unique();
     const delta = args.action === "dispatch" ? -trade.grams : trade.grams;
     if (!Number.isSafeInteger(trade.grams) || trade.grams <= 0)
       throw new ConvexError("INVALID_WEIGHT");
-    const grams = stockGramsAfter(inventory?.grams ?? 0, delta);
-    if (inventory)
-      await ctx.db.patch("inventory", inventory._id, {
-        grams,
-        updatedAt: Date.now(),
-      });
-    else
-      await ctx.db.insert("inventory", {
-        orgId: org._id,
-        materialCode: trade.materialCode,
-        grams,
-        updatedAt: Date.now(),
-      });
+    await recordInventoryMovement(ctx, {
+      orgId: org._id,
+      actorProfileId: profile._id,
+      materialCode: trade.materialCode,
+      deltaGrams: delta,
+      addedCostPaise: delta > 0 ? trade.totalPaise : null,
+      sourceKey: `trade:${trade._id}:${args.action === "receive" ? "receipt" : "dispatch"}`,
+      createdAt: Date.now(),
+    });
     await ctx.db.insert("financialMovements", {
       tradeId: trade._id,
       kind: args.action,

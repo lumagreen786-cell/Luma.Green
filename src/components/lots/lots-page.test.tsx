@@ -10,6 +10,7 @@ import { fakeQueries, renderWithIntl } from "@/components/shop/test-helpers";
 import { WorkspacePermissions } from "@/components/workspace/permissions";
 
 import type { Id } from "../../../convex/_generated/dataModel";
+import en from "../../../messages/en.json";
 import { InspectionForm } from "./inspections";
 import {
   DeclareLot,
@@ -192,6 +193,9 @@ describe("lot evidence surfaces", () => {
       inputGrams: 1000,
       contaminationGrams: 0,
       processLossGrams: 0,
+      processingCostPaise: undefined,
+      costReference: undefined,
+      operationReference: expect.any(String),
       outputs: [
         {
           materialCode: "PET",
@@ -430,6 +434,72 @@ it("combines a selected held input while rejecting its overdrawn quantity", asyn
     expect.objectContaining({
       inputGrams: 1000,
       additionalInputs: [{ lotId: "lot-secondary", grams: 200 }],
+    }),
+  );
+});
+
+it("requires whole recorded paise and evidence while keeping a failed acquisition draft", async () => {
+  const user = userEvent.setup();
+  mocks.mutate
+    .mockRejectedValueOnce(new Error("Temporary failure"))
+    .mockResolvedValueOnce(lotId);
+  render(<DeclareLot />);
+  await user.click(screen.getByRole("button", { name: "Declare a lot" }));
+  await user.type(screen.getByLabelText("Material code or name"), "PET");
+  await user.type(screen.getByLabelText("Physical state"), "Bale");
+  await user.type(screen.getByLabelText("Mass (g)"), "1001");
+  await user.type(screen.getByLabelText(en.recordedCosts.acquisition), "٠");
+  await user.click(screen.getByRole("button", { name: "Save record" }));
+  expect(await screen.findByRole("alert")).toHaveTextContent(en.lots.required);
+  expect(mocks.mutate).not.toHaveBeenCalled();
+  await user.type(
+    screen.getByLabelText(en.recordedCosts.reference),
+    "Recorded acquisition evidence",
+  );
+  await user.click(screen.getByRole("button", { name: "Save record" }));
+  expect(await screen.findByRole("alert")).toHaveTextContent(
+    "Your values are kept",
+  );
+  expect(screen.getByLabelText(en.recordedCosts.acquisition)).toHaveValue("٠");
+  await user.click(screen.getByRole("button", { name: "Save record" }));
+  expect(mocks.mutate).toHaveBeenLastCalledWith(
+    expect.objectContaining({
+      acquisitionCostPaise: 0,
+      costReference: "Recorded acquisition evidence",
+    }),
+  );
+});
+
+it("keeps a process retry key and exact recorded cost after a failed save", async () => {
+  const user = userEvent.setup();
+  mocks.mutate
+    .mockRejectedValueOnce(new Error("Lost response"))
+    .mockResolvedValueOnce("process-one");
+  render(<TransformLot lotId={lotId} availableGrams={1000} />);
+  await user.click(
+    screen.getByRole("button", { name: "Record transformation" }),
+  );
+  await user.type(screen.getByLabelText("Input mass (g)"), "1000");
+  const output = within(screen.getByRole("group", { name: "Output 1" }));
+  await user.type(output.getByLabelText("Material code or name"), "PET");
+  await user.type(output.getByLabelText("Physical state"), "Flake");
+  await user.type(output.getByLabelText("Mass (g)"), "1000");
+  await user.type(screen.getByLabelText(en.recordedCosts.processing), "٣");
+  await user.type(
+    screen.getByLabelText(en.recordedCosts.reference),
+    "Recorded process evidence",
+  );
+  await user.click(screen.getByRole("button", { name: "Save record" }));
+  expect(await screen.findByRole("alert")).toHaveTextContent(
+    "Your values are kept",
+  );
+  await user.click(screen.getByRole("button", { name: "Save record" }));
+  expect(mocks.mutate).toHaveBeenCalledTimes(2);
+  expect(mocks.mutate.mock.calls[1]).toEqual(mocks.mutate.mock.calls[0]);
+  expect(mocks.mutate).toHaveBeenLastCalledWith(
+    expect.objectContaining({
+      processingCostPaise: 3,
+      operationReference: expect.any(String),
     }),
   );
 });

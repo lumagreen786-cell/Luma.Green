@@ -16,8 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 /**
- * `/t/{token}`: the link a household gets after booking. Works signed out —
- * the unguessable token is the key (docs/architecture/urls.md).
+ * The collection link locates the record; Convex checks the current session.
  */
 export default async function TrackRoute({ params }: Props) {
   const { token } = await params;

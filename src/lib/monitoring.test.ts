@@ -36,6 +36,25 @@ afterEach(() => {
 });
 
 describe("optional error monitoring", () => {
+  it("uses the same disabled and scrubbed configuration from the project-root entry", async () => {
+    config.NEXT_PUBLIC_SENTRY_DSN = "https://public@example.com/1";
+    vi.resetModules();
+    await import("../../instrumentation-client");
+    expect(sdk.init).not.toHaveBeenCalled();
+    config.NEXT_PUBLIC_TELEMETRY_ENABLED = true;
+    vi.resetModules();
+    await import("../../instrumentation-client");
+    await vi.waitFor(() => {
+      expect(sdk.init).toHaveBeenCalledWith(
+        expect.objectContaining({
+          enabled: true,
+          tracesSampleRate: 0,
+          beforeSend: expect.any(Function),
+        }),
+      );
+    });
+  });
+
   it("keeps the browser SDK inactive until both settings are present", async () => {
     vi.resetModules();
     await import("@/instrumentation-client");
