@@ -1,9 +1,18 @@
 # CI and security pipeline
 
-Status: configuration prepared on 28 October 2026. No plan was purchased, bot
-installed, repository permission changed, security product enabled or workflow
-run dispatched by this task. A local check is not evidence that a hosted job,
-paid product or bot review has run. The owner completes account setup later.
+Status: updated 28 October 2026 after the foundation shipped in
+[PR #10](https://github.com/lumagreen786-cell/Luma.Green/pull/10), main commit
+`d90c945`. The foundation release passed its active hosted checks. This follow-up
+prepares automatic public-repository CodeQL and dependency review; their new
+conditions still need a hosted run before acceptance is recorded.
+
+Read-only GitHub checks confirm that `lumagreen786-cell/Luma.Green` is **public**
+and its owner type is **User**. The signed-in operator can push but has neither
+admin nor maintain permission. `main` reports `protected: false`; the ruleset and
+effective branch-rule lists are empty. Checked PR merges remain project policy,
+but server-side enforcement is not installed. The owner must apply the
+[exact owner settings](github-owner-settings.md). No account purchase, visibility
+change, permission grant or owner-setting mutation was performed by this audit.
 
 The pipeline has three tiers. Each tier answers a different question. Keep the
 five existing required CI checks; security scanning supplements them.
@@ -28,7 +37,7 @@ is part of this change. Production remains the only deployment environment.
 
 `.github/workflows/security.yml` runs for PRs targeting `main`, pushes to `main`,
 manual dispatch, and Mondays at 04:23 UTC (09:53 India time). The scheduled run
-uses the default branch. A PR cannot activate its schedule before merge. New
+uses the default branch. A PR cannot activate a schedule change before merge. New
 runs cancel the previous run for the same workflow/ref. Every job has a timeout.
 
 ### Secret scan
@@ -99,74 +108,81 @@ blanket audit ignore, downgrade or remove the patch just to change a scanner's
 version result. Dependabot availability and its repository alerts/graph settings
 still need account-side verification.
 
-No new blocking SCA command was added here. Review new advisories through
-Dependabot and the dependency graph; use the paid dependency-diff check below
-only after setup. A future whole-lockfile audit gate needs advisory-specific,
-expiring decisions backed by patch evidence, not an unchecked global allowlist.
+No separate whole-lockfile SCA command was added here. Review existing advisories
+through Dependabot and the dependency graph. The dependency-diff job below is
+free for this public repository. A future whole-lockfile audit gate needs
+advisory-specific, expiring decisions backed by patch evidence, not an unchecked
+global allowlist.
 
-## 3. Paid account activation
+## 3. Public security scans and owner setup
 
-The following jobs are deliberately skipped by default. The current repository
-is private and under the personal owner `lumagreen786-cell`. A GitHub Pro purchase
-alone does not unlock private CodeQL scanning or dependency review. GitHub's
-current [private CodeQL guidance](https://docs.github.com/en/code-security/reference/code-scanning/troubleshoot-analysis-errors/private-repository-enablement)
-requires Team or Enterprise with Code Security enabled. Its
-[dependency-review documentation](https://docs.github.com/en/code-security/concepts/supply-chain-security/dependency-review)
-lists eligible organization-owned private repositories. Confirm an eligible
-organization/account arrangement with GitHub before buying for this purpose.
-Do not transfer the repository or change visibility as an automatic workaround.
+Public repositories can use CodeQL and dependency review without purchasing
+GitHub Pro, Team or a security add-on. This repository is public, so the current
+workflow selects the free public-repository path automatically. No API key,
+personal access token or activation variable is required for that path.
+[CodeQL availability](https://docs.github.com/en/code-security/concepts/code-scanning/codeql/codeql-code-scanning),
+[dependency review availability](https://docs.github.com/en/code-security/concepts/supply-chain-security/dependency-review).
 
-| Check             | Repository variable                   | Additional condition                                                  | Permissions / output                                                                               |
-| ----------------- | ------------------------------------- | --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| CodeQL            | `LUMA_CODEQL_ENABLED=true`            | Repository owner type is Organization; eligible Code Security enabled | Contents/actions read and security-events write in this job only; results in GitHub code scanning  |
-| Dependency review | `LUMA_DEPENDENCY_REVIEW_ENABLED=true` | PR event, Organization owner and eligible dependency-review feature   | Contents read; no PR-comment write; job summary, high/critical newly introduced vulnerability gate |
+| Check               | Current public-repository condition                        | Permissions and result                                                                                                |
+| ------------------- | ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `CodeQL`            | Repository is public; runs on the Security workflow events | Contents/actions read and security-events write in this job only; uploads JavaScript/TypeScript code-scanning results |
+| `Dependency review` | PR event and repository is public                          | Contents read; rejects introduced high/critical dependency vulnerabilities; no PR-comment write                       |
 
-Use repository **variables**, not application secrets, for these gates. A flag
-only declares that setup is complete; it cannot grant a license. Keep it absent
-or `false` until the operator checks actual eligibility and settings. If the
-account is not eligible, the jobs stay skipped. A skip is not a security pass.
-Do not make these job names required while they are conditional.
+The new public conditions are prepared in `security.yml`. A local syntax check
+or matching condition is not a completed hosted analysis. Record the exact
+revision and successful result after the first run. An analysis success means
+that the scan ran; review its alerts separately. Do not describe a skipped scan
+as passed, or an empty new dependency diff as a complete vulnerability inventory.
 
-CodeQL uses JavaScript/TypeScript, no application build/install, and the extended
-security query suite. Its action uploads results. A green analysis means the
-analysis ran successfully; it does not mean every alert was fixed. Review open
-alerts and configure an appropriate code-scanning merge rule separately only
-after the account supports it. Do not enable default setup and this advanced
-workflow at the same time without checking for duplicate analyses.
+CodeQL uses no-build JavaScript/TypeScript analysis and the extended security
+query suite. Use this advanced workflow as its owner; do not also enable CodeQL
+default setup without checking for duplicate or conflicting analyses. The owner
+should confirm that the dependency graph is available and includes the pnpm
+workspace. It supplies dependency review and Dependabot.
 
-Dependency review checks changes between the PR base/head dependency graphs; it
-is not a replacement for an initial full inventory. It fails for introduced high
-or critical advisories. It does not request comment write access. Confirm that
-the graph includes the pnpm workspace and lockfile. Before activation, test how
-GitHub represents the patched `node-forge` package; any proposed advisory
-exception needs the exact advisory, owned patch and regression record. This
-workflow contains no advisory exception.
+Before adding a dependency-review exception, check how the dependency graph
+represents the patched `node-forge` package. Keep the exact advisory, patch owner
+and regression evidence together. This workflow contains no advisory exception.
 
-### Account checklist
+### Owner actions
 
-1. Confirm the repository's account, visibility, branch policy and required job
-   names. Select any paid plan deliberately. Do not treat a promotional plan
-   quote as an approved purchase.
-2. Enable the eligible dependency graph, Dependabot alerts and Code Security
-   features in repository settings. Review billing, active-committer counts,
-   Actions budget and notification owners. No API permission grant is made by
-   this task.
-3. Leave paid-job variables off. Merge the prepared workflow through the existing
-   required checks. Inspect the free security jobs on that exact revision.
-4. Enable one paid variable only after verifying eligibility. Run a controlled
-   PR/manual check as appropriate. CodeQL needs an actual completed analysis and
-   reviewed alerts; dependency review needs a PR with a known dependency diff.
-   Record safe links and the exact analyzed commit.
-5. Select CodeRabbit's plan later. Review its requested GitHub App permissions,
-   selected repository scope, source-data processing and retention terms before
-   the owner installs or authorizes it. No CI application secret is required.
-6. Confirm CodeRabbit reads `.coderabbit.yaml`, completes a review on a non-draft
-   PR to `main` and sees the latest revision. A local schema check proves only
-   configuration shape. If automatic review paused or account quota ended,
-   resolve that state before treating the review as current.
-7. Review each finding. Fix it, or record a concrete supported reason for not
-   changing the code. Re-run affected tests. The human owner makes the final
-   merge decision after the five required checks pass.
+1. Sign in with the repository owner or an account with admin permission. The
+   current push-only operator cannot apply owner settings.
+2. Apply [the branch/ruleset checklist](github-owner-settings.md). Its minimum
+   mandatory set is the five always-running CI job names. Do not add a
+   path-filtered workflow as a universally required check.
+3. Confirm dependency graph and Dependabot alerts in repository settings. Check
+   existing CodeQL setup before using the advanced workflow. No purchase is
+   needed for these public-repository capabilities.
+4. Inspect the first hosted `CodeQL` analysis on this follow-up's exact revision.
+   Confirm successful upload and review the resulting alerts. Inspect
+   `Dependency review` on its PR and a meaningful future dependency diff.
+5. Select CodeRabbit only if wanted. Its GitHub App installation, selected-repo
+   access, data terms and billing need the owner's review. No application CI key
+   is required. Check that it reviews the latest non-draft PR and reads
+   `.coderabbit.yaml`; a configuration file alone does not prove a live review.
+6. Address review findings and rerun affected checks. Merge only after the
+   applicable checks pass; do not use administrator bypass or bot merge grants.
+
+### Optional future private-repository arrangement
+
+If the owner later chooses to make the repository private, review eligibility
+before that separate decision. A personal GitHub Pro purchase does not grant
+private CodeQL/dependency-review licensing. Eligible organization ownership and
+GitHub Code Security may be needed. Do not change visibility, transfer ownership
+or buy a plan automatically to make a job run.
+
+The workflow keeps an explicit private-organization path:
+
+| Check             | Private repository variable           | Additional condition                                              |
+| ----------------- | ------------------------------------- | ----------------------------------------------------------------- |
+| CodeQL            | `LUMA_CODEQL_ENABLED=true`            | Organization owner and eligible Code Security/account setup       |
+| Dependency review | `LUMA_DEPENDENCY_REVIEW_ENABLED=true` | PR event, Organization owner and eligible dependency-review setup |
+
+These are repository variables, not application secrets. They declare completed
+setup and cannot grant a license. Leave them absent/false unless the owner has
+verified that future private arrangement. Do not make a conditional job a
+universal required check.
 
 ### CodeRabbit review scope
 
@@ -183,24 +199,13 @@ fix, CI-fix and merge-conflict finishing tools are disabled. These settings do
 not grant or change the installed app's GitHub permissions. Do not enable
 automatic approvals, auto-merge or a new bot write workflow as part of setup.
 
-### Price reference, checked 28 October 2026
+### Paid plans are optional for the current public repository
 
-Public USD prices below exclude applicable taxes and account-specific terms.
-Recheck billing interval, promotion and required seats before any purchase.
-
-| Product                         | Published starting price                                            | What to verify                                                                           |
-| ------------------------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| GitHub Team                     | $4/user/month; current page includes a first-12-month qualification | Organization ownership, actual renewal quote, private branch rules and Actions allowance |
-| GitHub Code Security add-on     | $30/active committer/month                                          | Eligible base plan, active-committer billing and selected private repositories           |
-| GitHub Secret Protection add-on | $19/active committer/month                                          | Separate product; not required for the MIT CLI check prepared here                       |
-| CodeRabbit Essentials           | $30/developer/month, or $24/month billed annually                   | Current name replaces Pro; review scope, quota, source-data terms and seats              |
-| CodeRabbit Team                 | $60/developer/month, or $48/month billed annually                   | Extra automation is optional and remains disabled in this configuration                  |
-
-Sources: [GitHub plans](https://github.com/pricing),
-[GitHub security add-ons](https://github.com/security/plans),
-[CodeRabbit prices and plan-name FAQ](https://www.coderabbit.ai/pricing).
-The owner can start with existing checks, the CLI scanner and Dependabot while
-paid account choices remain pending. No paid purchase is required by these files.
+No GitHub purchase is required merely for public branch rules, CodeQL or
+dependency review. The separate [paid-service list](platform-paid-services-2026-10-27.md)
+records optional Team/security plans for a future private organization, and
+CodeRabbit options. Check current seats, billing interval and checkout before
+buying. No plan was purchased by this work.
 
 ## Verification and limits for this change
 
@@ -214,9 +219,10 @@ called.
 
 Actionlint passed all repository workflows. `.coderabbit.yaml` validated against
 the provider's current JSON Schema (2020-12). Format and whitespace checks are
-part of the final local verification. Hosted checks, license activation, live
-bot review, branch-rule enforcement and protected merges remain separate
-acceptance evidence. This task does not claim zero vulnerabilities.
+part of the final local verification. The shipped foundation has its own hosted
+release receipt. This follow-up's new public scan conditions still need hosted
+acceptance; live bot review and owner branch-rule enforcement remain separate
+setup evidence. This task does not claim zero vulnerabilities.
 
 Primary technical references:
 [Gitleaks CLI/configuration and license](https://github.com/gitleaks/gitleaks),

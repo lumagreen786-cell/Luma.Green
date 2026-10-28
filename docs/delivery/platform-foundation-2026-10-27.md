@@ -1,67 +1,55 @@
 # Platform foundation rebuild
 
-Status: active implementation, authorized 27 October 2026. This is the single
-plan and checkpoint for the rebuild; a foundation commit is not whole-platform
-release acceptance.
-
-**Release candidate:** all final local checks passed. The account-removal,
-specialist-reference and assigned-worker handover gaps are implemented. Optional
-paper OCR remains unavailable; manual entry works under D37. Provider acceptance,
-specialist legal/process approval and Production operations evidence remain
-explicit external or later gates.
-
-## Active release checkpoint — 28 October 2026
+Status: foundation released to Production on 28 October 2026 through
+[PR10](https://github.com/lumagreen786-cell/Luma.Green/pull/10), main commit
+`d90c94548ac4354eaea096555f93ad2d670f0219`. Vercel Production is Ready and the
+live domain is [luma.green](https://luma.green). Convex Production was deployed
+before the frontend. The owner delivery folder contains the release receipt,
+hosted CI results, live route checks and actual Production screenshots.
 
 The source register accounts for 84 groups: 48 implemented owner groups,
 7 partial acceptance groups, 9 provider-blocked groups, 10 conflicts, 8 later
-items, and 2 discarded items. Source accounting is complete; it is not proof
-of whole-platform Production acceptance. Release preparation is about 95%.
+items and 2 discarded items. Source accounting is complete. This is not a claim
+that all provider, legal, operational and future feature gates are complete.
+Optional paper OCR remains unimplemented; manual entry is available under D37.
 
-Final `VITEST_MAX_WORKERS=2 pnpm check` passed: 342 suites and 2,847 tests,
-zero lint errors (76 warnings), web/Convex types and existing native policy
-checks. `pnpm format:check` passed. The production webpack build passed with
-3,252 pages and build ID `nlVAG-H0jjuVjitY0gGx9`. The only failure in the prior
-combined run was an obsolete seven-link admin-navigation expectation; the new
-account-removal section makes eight. Its focused six-test suite and the final
-combined run pass. No source check was bypassed.
+Release verification passed 342 local suites and 2,847 tests, formatting,
+types, lint, build and six connected local phone journeys. Hosted verification
+passed all required checks, 830 public browser cases, two OTP boundary cases
+and five analytics consent cases. Production reference setup inserted 51
+material labels, 32 draft definitions and 17 service kinds, then zero on repeat.
+All eleven specialist references remain inactive. No invented live prices,
+verified permits, official credits, payments or real identities were seeded.
 
-All six connected local phone browser cases passed in 1.3 minutes: exact cost
-and cross-business privacy, service recipient revoke, manufacturer stock
-closing/returns, aggregate-only programme sharing/revoke, worker handover with
-unchanged stock/pay effects, and actual account closure that rejects its old
-token/private routes. Worker tests finish only their own synthetic jobs through
-the normal workflow so repeat runs do not occupy the next test slot. Bounded
-navigation/action waits preserve the cause of future browser failures.
+The reviewed final documents are the 36-page editable specification,
+16-page storybook and 10-page walkthrough. The 102 current example captures
+are layout evidence made with test data. Their receipt binds 602 source hashes;
+they are separate from connected authentication and provider evidence.
 
-Local acceptance services are stopped. Root `.env.local` is restored to cloud
-development. Saved local settings and credentials remain private and ignored;
-no operational provider credentials were copied. Final development Convex
-functions deployed successfully. Static reference initialization inserted 51
-material labels, 32 draft definitions and 17 service kinds. The second run
-inserted zero records and skipped all existing references. No prices, identities,
-stock, transactions, permits, certificates or provider approvals were seeded.
+## Account setup follow up 28 October 2026
 
-The Production backend dry run passed against `astute-peccary-795`, with no
-index deletions. This is not an actual Production deployment. The pre-existing
-53-commit history secret scan passed with no leaks; repeat the scan for the final
-committed candidate before push. Backend and web closeout commits are
-`1026812` and `3a6364a`.
+Continue on `chore/provider-setup-checklist`. The
+[owner account checklist](../operations/owner-setup-checklist-2026-10-28.md)
+separates existing keys, new scoped settings and optional purchases. Existing
+OTP and Surepass settings are installed. A local-only Web Push key pair is
+prepared privately but has not been installed. Public repository security scans
+need no paid upgrade. Branch protection needs repository-owner access.
 
-The final 36-page specification is editable and visually reviewed. The refreshed
-16-page storybook and 10-page screen walkthrough are rendered and reviewed.
-There are 102 current actual-component example captures; all are visually
-approved and labelled as made-up data. The selected artifact receipt binds 602
-source hashes and eight untouched screenshot originals. Root independently
-checked all 602 current source hashes and the final output/delivery-copy hashes.
-These captures prove layout, not authenticated or provider execution. Connected
-local phone tests provide separate workflow evidence. Earlier artifacts are
-preserved outside Git. Expo remains paused; its queued Android build is cancelled.
+New [offline joint checks](key-free-acceptance-2026-10-28.md) strengthen R010,
+R026 and R046. The [local workload and restore drill](local-operations-drill-2026-10-28.md)
+proves 50 verified sessions, 100 photo bookings, 50 concurrent signed-in readers,
+50 cross-person denials and exact restoration of 2,584 data rows and 104 files.
+All 28 canonical test participants passed the stronger local Production-build
+browser run, with expected-role assertions. The development-server syntax/loading
+failure did not reproduce there; no product fix is claimed. R073 still needs
+actual cloud scheduling, off-site custody and cloud recovery.
+These are new local proofs, not a change to the source register's Production
+acceptance categories. Read the follow-up PR for its own final checks.
 
-The candidate still needs its checked PR, hosted CI/review, actual Production
-backend release and idempotent static reference seeding, main merge, Vercel
-Production deployment, and live verification. No foundation Production release
-has occurred yet. Use the final PR/deployment receipt for those changing states;
-the checkpoint records local release preparation only.
+Expo is paused; its queued Android build was cancelled. The original primary
+checkout and native changes remain intact. The temporary foundation deletion
+and no-migration permission expired when the foundation shipped. Preserve
+current records in subsequent changes.
 
 The checkpoints below are historical and are superseded by this active record.
 
