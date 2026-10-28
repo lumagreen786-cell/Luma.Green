@@ -545,7 +545,7 @@ describe("household preview prices", () => {
       fallbackPaise: 1400,
     });
     const missing = await t.query(api.catalogue.priceBoard, {
-      city: "Chennai",
+      city: "Chennai, Tamil Nadu",
     });
     expect(missing.rows[0]?.fallbackPaise).toBeNull();
   });
@@ -680,7 +680,7 @@ describe("compact form quotes", () => {
     });
     for (const request of [
       { city: "Bengaluru", source: "market" },
-      { city: "Chennai", source: "fallback" },
+      { city: "Chennai, Tamil Nadu", source: "fallback" },
     ] as const) {
       const missing = await t.query(api.catalogue.priceQuotes, request);
       expect(missing.rows.every((row) => row.paisePerKg === null)).toBe(true);

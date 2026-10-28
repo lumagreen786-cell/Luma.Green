@@ -182,6 +182,7 @@ it("blocks duplicate pending calls and stale completions after PAN changes", asy
 it("requires selection and detail confirmation before a complete shop can activate", async () => {
   const { t, as, applicationId } = await setup();
   const shop = {
+    city: "Bengaluru",
     pan,
     gstRegistered: true,
     gstin,

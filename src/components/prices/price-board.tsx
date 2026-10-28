@@ -13,54 +13,56 @@ import { useState } from "react";
 
 import { useFormat } from "@/components/app/format";
 import { DemoNote, EmptyState } from "@/components/app/page-parts";
+import { CityField } from "@/components/location/city-field";
 import { isConvexConfigured } from "@/components/providers/convex-provider";
 import { DataBoundary } from "@/components/site/data-boundary";
 import { Button } from "@/components/ui/button";
 import { Dialog } from "@/components/ui/dialog";
 
 import { api } from "../../../convex/_generated/api";
-import {
-  groupBoard,
-  PRICE_CITY,
-  type PriceBoardData,
-  type PriceRow,
-} from "./board";
+import { canonicalCity } from "../../../convex/lib/geography";
+import { groupBoard, type PriceBoardData, type PriceRow } from "./board";
 import { FAMILY_ICONS } from "./family-icon";
 import { PriceDetail } from "./price-detail";
 import { PricePlaceholder } from "./price-placeholder";
 import { BoardColumns, PriceRowButton } from "./price-row";
 
 /**
- * The public price board for Bengaluru: live from Convex, grouped by family,
+ * The public price board for the selected city: live from Convex, grouped by family,
  * with recycled material in its own factory-gate section.
  */
 export function PriceBoard() {
+  const [city, setCity] = useState("");
   const t = useTranslations("prices");
   if (!isConvexConfigured) {
     return <PricePlaceholder state="unavailable" />;
   }
   return (
-    <DataBoundary
-      fallback={(retry) => (
-        <EmptyState
-          icon={CircleAlertIcon}
-          title={t("error.title")}
-          body={t("error.body")}
-          action={
-            <Button variant="outline" className="mt-2 h-11" onClick={retry}>
-              {t("error.retry")}
-            </Button>
-          }
-        />
-      )}
-    >
-      <LiveBoard />
-    </DataBoundary>
+    <div className="space-y-6">
+      <CityField value={city} onChange={setCity} />
+      <DataBoundary
+        fallback={(retry) => (
+          <EmptyState
+            icon={CircleAlertIcon}
+            title={t("error.title")}
+            body={t("error.body")}
+            action={
+              <Button variant="outline" className="mt-2 h-11" onClick={retry}>
+                {t("error.retry")}
+              </Button>
+            }
+          />
+        )}
+      >
+        <LiveBoard city={canonicalCity(city)} />
+      </DataBoundary>
+    </div>
   );
 }
 
-function LiveBoard() {
-  const board = useQuery(api.catalogue.priceBoard, { city: PRICE_CITY });
+function LiveBoard({ city }: { city: string | null }) {
+  const board = useQuery(api.catalogue.priceBoard, city ? { city } : "skip");
+  if (!city) return <PricePlaceholder state="empty" />;
 
   if (board === undefined) return <PricePlaceholder state="loading" />;
   const hasPrices = board.rows.some(

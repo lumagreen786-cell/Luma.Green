@@ -65,10 +65,8 @@ describe("home page", () => {
         .getByRole("region", { name: messages.home.hero.title })
         .querySelector("img"),
     ).toHaveAttribute("alt", "");
-    // Live prices still show an honest unavailable state without configuration.
-    expect(
-      screen.getByText("Today's prices will show here soon."),
-    ).toBeInTheDocument();
+    // Home directs people to explicit locality selection without assuming a city.
+    expect(screen.getByText(messages.prices.lead)).toBeInTheDocument();
   });
 
   it("draws the chain in the order scrap moves, numbered", async () => {

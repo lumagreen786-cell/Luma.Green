@@ -3,7 +3,6 @@ import { describe, expect, it } from "vitest";
 import {
   dayNumber,
   groupBoard,
-  pickTeaser,
   type PriceRow,
   seriesRange,
   trendOf,
@@ -70,44 +69,6 @@ describe("trendOf", () => {
   it("is unknown without a week of history", () => {
     expect(trendOf(null)).toBe("unknown");
     expect(trendOf(NaN)).toBe("unknown");
-  });
-});
-
-describe("pickTeaser", () => {
-  const board = [
-    row("PAPER-NEWS", "paper"),
-    row("PAPER-CARTON", "paper"),
-    row("PLASTIC-PET", "plastic"),
-    row("METAL-IRON", "metal"),
-    row("METAL-COPPER", "metal"),
-    row("RECYCLED-PET-FLAKE", "plastic", { stage: "recycled" }),
-  ];
-
-  it("shows everyday household scrap in a fixed order", () => {
-    expect(pickTeaser(board).map((r) => r.code)).toEqual([
-      "PAPER-NEWS",
-      "PAPER-CARTON",
-      "PLASTIC-PET",
-      "METAL-IRON",
-    ]);
-  });
-
-  it("tops up from other priced scrap when a code is missing or unpriced", () => {
-    const changed = board.map((r) =>
-      r.code === "PLASTIC-PET" ? { ...r, todayPaise: null } : r,
-    );
-    expect(pickTeaser(changed).map((r) => r.code)).toEqual([
-      "PAPER-NEWS",
-      "PAPER-CARTON",
-      "METAL-IRON",
-      "METAL-COPPER",
-    ]);
-  });
-
-  it("never shows recycled output to households", () => {
-    expect(
-      pickTeaser(board, ["RECYCLED-PET-FLAKE"], 2).map((r) => r.code),
-    ).toEqual(["PAPER-NEWS", "PAPER-CARTON"]);
   });
 });
 

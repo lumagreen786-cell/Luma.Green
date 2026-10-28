@@ -83,6 +83,8 @@ const serverSchema = z.object({
   BETTER_AUTH_URL: optionalUrl,
   OPENROUTER_API_KEY: z.string().optional(),
   OPENROUTER_MODEL: z.string().optional(),
+  PAPER_TRANSCRIPTION_ENABLED: z.string().optional(),
+  PAPER_TRANSCRIPTION_DAILY_LIMIT: z.string().optional(),
   PHOTO_ESTIMATE_DAILY_LIMIT: z.string().optional(),
   PHOTO_ESTIMATE_PROVIDER: z.string().optional(),
   PHOTO_ESTIMATE_ENDPOINT: z.string().optional(),
@@ -325,6 +327,28 @@ export function photoEstimateEnv() {
         ? process.env.PHOTO_ESTIMATE_MODEL
         : process.env.OPENROUTER_MODEL,
       dailyLimit: quota === undefined || quota.trim() === "" ? "100" : quota,
+    });
+  return parsed.success ? parsed.data : undefined;
+}
+
+/** Private papers need their own explicitly approved allowance; photo config never enables them. */
+export function paperTranscriptionEnv() {
+  if (process.env.PAPER_TRANSCRIPTION_ENABLED !== "true") return;
+  const parsed = z
+    .object({
+      apiKey: z
+        .string()
+        .trim()
+        .min(1)
+        .max(4096)
+        .regex(/^[^\r\n]+$/),
+      model: z.string().trim().min(1).max(200),
+      dailyLimit: z.coerce.number().int().min(1).max(100),
+    })
+    .safeParse({
+      apiKey: process.env.OPENROUTER_API_KEY,
+      model: process.env.OPENROUTER_MODEL,
+      dailyLimit: process.env.PAPER_TRANSCRIPTION_DAILY_LIMIT,
     });
   return parsed.success ? parsed.data : undefined;
 }

@@ -357,7 +357,7 @@ describe("browse", () => {
     });
   });
 
-  it("leaves out lots in other cities", async () => {
+  it("leaves out unbacked stock even in other cities", async () => {
     const t = await demoWorld();
     await t.run(async (ctx) => {
       const now = Date.now();
@@ -1704,4 +1704,42 @@ it("rechecks backing stock so concurrent acceptances cannot promise the same rem
       (row) => [a, b].includes(row.id) && row.status === "accepted",
     ),
   ).toHaveLength(1);
+});
+
+it("discovers and requests ordinary eligible stock across cities with unchanged guards", async () => {
+  const t = await demoWorld();
+  const yard = await signInAs(t, YARD);
+  const listingId = await t.run(async (ctx) => {
+    const rows = await ctx.db.query("listings").collect();
+    const row = rows.find(
+      (x) =>
+        x.status === "open" &&
+        x.sellerKind === "kabadiwala" &&
+        x.materialCode === "PAPER-NEWS",
+    );
+    if (!row) throw new Error("Missing ordinary offer");
+    await ctx.db.patch("orgs", row.orgId, { city: "Mumbai, Maharashtra" });
+    await ctx.db.patch("listings", row._id, { city: "Mumbai, Maharashtra" });
+    return row._id;
+  });
+  const found = await yard.query(api.market.browse, {});
+  expect(found.map((x) => x.id)).toContain(listingId);
+  const tradeId = await yard.mutation(api.market.requestTrade, {
+    listingId,
+    grams: 1000,
+  });
+  expect(await t.run((ctx) => ctx.db.get("trades", tradeId))).toMatchObject({
+    grams: 1000,
+    status: "requested",
+  });
+  await t.run(async (ctx) => {
+    const row = await ctx.db.get("listings", listingId);
+    if (!row) throw new Error("Missing offer");
+    await ctx.db.patch("orgs", row.orgId, { status: "suspended" });
+  });
+  const afterSuspension = await yard.query(api.market.browse, {});
+  expect(afterSuspension.map((x) => x.id)).not.toContain(listingId);
+  await expect(
+    yard.mutation(api.market.requestTrade, { listingId, grams: 1000 }),
+  ).rejects.toThrow("NOT_FOUND");
 });

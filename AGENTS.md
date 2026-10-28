@@ -32,6 +32,19 @@ until the owner resumes it. Cancel the queued Android build where possible.
 Continue the web platform, deployment and document work. This update overrides
 the mobile resumption below.
 
+**28 October India-wide update:** The owner now requests an India-wide web
+platform and authorizes public-source research to complete the team-input
+document and supported implementation. The former Bengaluru-only software
+limit is superseded. Capture an explicit service city; do not infer it from
+an address, GST result or GPS, or relabel Bengaluru prices as national prices.
+Keep local pickup radius, capacity, scoped access and provider checks. Public
+rules and registers are dated references, not proof of a facility's permission,
+an approved process, a partnership or official credit entitlement. Official
+carbon issuance, transaction and surrender/retirement require their own
+authorized external evidence and connection. The Expo pause, checked-PR and
+Production-only rules continue. This update does not renew the expired
+demonstration-data deletion permission or authorize paid provider calls.
+
 This section takes priority over older prototype-preservation, migration,
 backward-compatibility and mobile-hold rules while this foundation release is
 prepared. Its temporary demonstration-data deletion and no-compatibility

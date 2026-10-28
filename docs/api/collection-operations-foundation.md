@@ -6,6 +6,13 @@ Collection windows are 09–11, 12–14 and 16–18 India time. These three two-
 
 `collectionScheduling.availability({orgId,date})` returns each available window and remaining capacity, without private booking details. `saveAvailability({capacityPerWindow,holidayDates,enabledWindows})` requires the active business writer. `reschedule({bookingId,date,window})` requires the household owner; before travel it changes the saved time after eligibility checks, after travel it saves an operator request. `failedVisit({bookingId,reason})` requires the responsible business and keeps a missed-visit reason.
 
+Before acceptance, shop booking queries return only the known operational city
+where an address exists. They never infer a neighborhood from the household's
+private free-form address. The tracking token stays hidden and the phone stays
+masked. Normal acceptance reveals the exact address only within the authorized
+organization's booking access. A request without an address still returns no
+address; this privacy rule creates no location or coordinates.
+
 `collectionScheduling.repeat({bookingId,everyDays})` creates or replaces one active schedule for the household owner, with an interval of 7, 14 or 30 days. Each generated visit is a separate dated request. `stopRepeating` affects only future generation. One bounded Convex cron generates requests within the seven-date horizon, skips unavailable dates, and advances its next-date cursor transactionally. Previously dated requests remain unchanged. Schedule operation keys prevent duplicate visits.
 
 Worker job fees remain fixed integer paise disclosed on the offer. The business sets a due date and can declare payment only after completion. The assigned worker can acknowledge only that declaration. These records do not guarantee wages or prove bank settlement.

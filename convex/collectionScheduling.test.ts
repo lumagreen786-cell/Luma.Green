@@ -365,6 +365,7 @@ it("applies the pickup radius at discovery, booking and acceptance while preserv
   const w = await world();
   const far = { lat: 12, lng: 76 };
   const listed = await w.household.query(api.households.shops, {
+    city: "Bengaluru",
     items: [],
     near: far,
   });
@@ -463,7 +464,10 @@ it("requires an admin reason and a fresh destination acceptance for reassignment
   const choices = await admin.query(api.adminCollections.board, {});
   const brief = choices.bookings.find((row) => row.id === booking._id);
   expect(brief).toEqual({ id: booking._id, label: expect.any(String) });
-  expect(choices.shops).toContainEqual({
+  const localChoices = await admin.query(api.adminCollections.shops, {
+    bookingId: booking._id,
+  });
+  expect(localChoices.shops).toContainEqual({
     id: candidate,
     label: expect.any(String),
   });

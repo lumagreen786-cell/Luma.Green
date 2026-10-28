@@ -42,6 +42,7 @@ import {
 } from "./lib/notificationConfig";
 import { operationalTables } from "./lib/operationalSchema";
 import { organizationTables } from "./lib/organizationsSchema";
+import { paperTables } from "./lib/paperSchema";
 import {
   intakeCostFields,
   lotCostFields,
@@ -85,6 +86,7 @@ const timestamps = {
 };
 
 export default defineSchema({
+  ...paperTables,
   ...returnClaimsTables,
   ...geocodingTables,
   ...stockClosingTables,

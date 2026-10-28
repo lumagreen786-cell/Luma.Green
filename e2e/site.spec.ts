@@ -27,7 +27,7 @@ const pages = [
     path: "/prices",
     link: "Prices",
     heading: "Material prices",
-    title: "Material prices in Bengaluru · Luma.Green",
+    title: `${en.prices.metaTitle} · Luma.Green`,
   },
   { path: "/help", link: "Help", heading: /\S/, title: /· Luma\.Green$/ },
   {
@@ -76,14 +76,17 @@ test("home offers collection, business signup and material guidance", async ({
   await expect(main.locator("#demo-testimonials-heading")).toHaveCount(0);
 });
 
-test("the home price card still points to the board without live data", async ({
+test("the home price section links to explicit locality selection without editable controls", async ({
   page,
 }) => {
   await page.goto("/");
 
+  await expect(page.getByText(en.prices.lead, { exact: true })).toBeVisible();
   await expect(
-    page.getByText("Today's prices will show here soon."),
-  ).toBeVisible();
+    page
+      .getByRole("main")
+      .locator('form,input,textarea,select,[contenteditable="true"]'),
+  ).toHaveCount(0);
   await expect(
     page.getByRole("link", { name: "See all prices" }),
   ).toHaveAttribute("href", "/prices");

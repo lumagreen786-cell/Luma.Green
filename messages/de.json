@@ -88,7 +88,7 @@
   "home": {
     "metaDescription": "Luma.Green verbindet Indiens Recyclingkette auf einer Plattform: Haushalte, Kabadiwalas, Vorverarbeiter, Recycler und Hersteller. Mit fairen Preisen, geprüften Betrieben und einem Beleg bei jedem Schritt.",
     "hero": {
-      "eyebrow": "Start in Bengaluru",
+      "eyebrow": "Indien",
       "title": "Recyclingmaterial abgeben. Geld erhalten.",
       "lead": "Fotos, Abholung oder Abgabe und Bezahlung nach dem Wiegen.",
       "sell": "Recyceln",
@@ -97,8 +97,8 @@
     },
     "teaser": {
       "title": "Heutige Preise",
-      "placeAndDate": "Bengaluru · {date}",
-      "place": "Bengaluru",
+      "placeAndDate": "{city} · {date}",
+      "place": "{city}",
       "seeAll": "Alle Preise ansehen",
       "demoNote": "Beispielpreise für den Prototyp.",
       "unavailable": "Die heutigen Preise werden hier bald angezeigt.",
@@ -246,9 +246,9 @@
     }
   },
   "prices": {
-    "metaTitle": "Heutige Recyclingmaterialpreise in Bengaluru",
-    "metaDescription": "Datierte Referenzpreise pro kg für Recyclingmaterialien in Bengaluru. Jedes Unternehmen legt seine Angebote selbst fest.",
-    "eyebrow": "Bengaluru",
+    "metaTitle": "Materialpreise",
+    "metaDescription": "Datierte Referenzpreise pro Kilogramm. Jedes Unternehmen legt seine Angebote selbst fest. Wählen Sie ein Material für den verfügbaren Verlauf.",
+    "eyebrow": "Indien",
     "title": "Materialpreise",
     "lead": "Datierte Referenzpreise pro Kilogramm. Jedes Unternehmen legt seine Angebote selbst fest. Wählen Sie ein Material für den verfügbaren Verlauf.",
     "demoNote": "Beispielpreise für den Prototyp, keine aktuellen Marktpreise.",
@@ -283,7 +283,7 @@
       "unknown": "Noch nicht genug Verlaufsdaten"
     },
     "detail": {
-      "description": "{code} · {family} · Bengaluru",
+      "description": "{code} · {family}",
       "today": "Heute",
       "low": "30-Tage-Tief",
       "high": "30-Tage-Hoch",
@@ -615,9 +615,9 @@
   },
   "contact": {
     "metaTitle": "Kontakt",
-    "metaDescription": "Kontaktieren Sie das Luma.Green-Team zur Teilnahme am Pilotprojekt in Bengaluru.",
+    "metaDescription": "Luma.Green verbindet Indiens Recyclingkette auf einer Plattform: Haushalte, Kabadiwalas, Vorverarbeiter, Recycler und Hersteller. Mit fairen Preisen, geprüften Betrieben und einem Beleg bei jedem Schritt.",
     "title": "Sprechen Sie mit uns",
-    "lead": "Wir starten in Bengaluru mit einer kleinen Gruppe von Kabadiwalas, Vorverarbeitern, Recyclern und Fabriken. Sagen Sie uns, wer Sie sind, womit Sie handeln und welche Menge Sie ungefähr monatlich bewegen.",
+    "lead": "Luma.Green verbindet Indiens Recyclingkette auf einer Plattform: Haushalte, Kabadiwalas, Vorverarbeiter, Recycler und Hersteller. Mit fairen Preisen, geprüften Betrieben und einem Beleg bei jedem Schritt.",
     "emailHeading": "Früher Zugang und allgemeine Fragen",
     "securityHeading": "Sicherheitsmeldungen",
     "securityBody": "Eine Schwachstelle gefunden? Bitte melden Sie sie vertraulich und nicht öffentlich."
@@ -2029,7 +2029,9 @@
         "sat": "Sa",
         "sun": "So"
       },
-      "changesTitle": "Was geändert werden muss"
+      "changesTitle": "Was geändert werden muss",
+      "city": "Stadt oder Ort",
+      "stateUT": "Bundesstaat oder Unionsterritorium"
     },
     "kabadiwala": {
       "title": "Ihr Laden",
@@ -2216,7 +2218,8 @@
       "fileTooBig": "Diese Datei ist zu groß",
       "uploadFailed": "Hochladen fehlgeschlagen. Erneut versuchen.",
       "generic": "Etwas ist schiefgelaufen. Erneut versuchen.",
-      "pan": "Suchen Sie Ihre GST-Nummer und bestätigen Sie Ihr Unternehmen."
+      "pan": "Suchen Sie Ihre GST-Nummer und bestätigen Sie Ihr Unternehmen.",
+      "city": "Geben Sie eine Stadt oder einen Ort mit 2–60 Zeichen ein."
     },
     "identity": {
       "pan": "PAN (freiwillig)",
@@ -2261,7 +2264,8 @@
       "impact": "Wirkung",
       "compliance": "Konformität",
       "earnings": "Verdienst",
-      "help": "Hilfe"
+      "help": "Hilfe",
+      "paperRecords": "Papierbelege"
     },
     "roles": {
       "kabadiwala": "Kabadiwala-Betrieb",
@@ -2523,8 +2527,8 @@
   },
   "sell": {
     "metaTitle": "Abholung buchen",
-    "metaDescription": "Verkaufen Sie Zeitungen, Kunststoff, Metall und alte Elektronik von zu Hause in Bengaluru. Vergleichen Sie Ladenpreise, buchen Sie eine Abholung und werden Sie an der Haustür bezahlt.",
-    "eyebrow": "Für Haushalte in Bengaluru",
+    "metaDescription": "Recyclingmaterial abgeben. Geld erhalten. Fotos, Abholung oder Abgabe und Bezahlung nach dem Wiegen.",
+    "eyebrow": "Indien",
     "title": "Abholung von zu Hause buchen",
     "lead": "Wählen Sie Ihr Material und einen Laden in der Nähe. Nach dem Wiegen erhalten Sie Bargeld oder eine UPI-Zahlung.",
     "promises": {
@@ -2537,7 +2541,7 @@
       "title": "Buchungen sind bald verfügbar",
       "body": "Wir richten Haushaltsbuchungen ein. Bitte sehen Sie in Kürze wieder nach."
     },
-    "demoNote": "Beispielpreise und -läden für das Pilotprojekt in Bengaluru.",
+    "demoNote": "Beispielpreise für den Prototyp, keine aktuellen Marktpreise.",
     "loadError": "Dies konnte nicht geladen werden. Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
     "retry": "Erneut versuchen",
     "steps": {
@@ -4400,5 +4404,37 @@
     "assignedWork": "Klären Sie zuerst zugewiesene Arbeit oder Übergaben.",
     "reviewLimit": "Vor der Schließung müssen weitere Unterlagen geprüft werden.",
     "checkLimit": "Schließen und erneutes Registrieren setzen das heutige Limit für Geschäftsprüfungen nicht zurück. Prüfungen können bis zum nächsten Tag nach indischer Zeit gesperrt bleiben."
+  },
+  "papers": {
+    "title": "Papierbelege",
+    "lead": "Die Bestätigung speichert nur einen Nachweis. Bestand und Geld bleiben unverändert.",
+    "upload": "Belegbild hinzufügen",
+    "source": "Originalbild",
+    "text": "Übertragener Text",
+    "rows": "Zeilen",
+    "addRow": "Zeile hinzufügen",
+    "consent": "Dieses Bild zur Texterkennung an das externe Modell senden.",
+    "confirm": "Ich habe das Bild geprüft und diesen Text korrigiert.",
+    "confirmed": "Bestätigte Abschrift",
+    "unavailable": "Erkennung nicht verfügbar. Text manuell eingeben.",
+    "extract": "Entwurf erkennen",
+    "failed": "Erkennung nicht abgeschlossen. Manuell eingeben.",
+    "duplicate": "Dieses Bild ist schon gespeichert. Beleg öffnen.",
+    "invalid": "JPEG oder PNG, maximal 2 MB und 2400 Pixel je Seite.",
+    "empty": "Noch keine Papierbelege.",
+    "discard": "Entwurf verwerfen",
+    "confirmAction": "Abschrift bestätigen",
+    "pending": "Bild wird verarbeitet…",
+    "manual": "Manuelle Bestandsbelege öffnen",
+    "modelDraft": "Ungeprüfter Modellentwurf",
+    "saveFirst": "Änderungen vor der Erkennung speichern.",
+    "date": "Datum",
+    "description": "Beschreibung",
+    "quantity": "Menge",
+    "unit": "Einheit",
+    "amount": "Betrag",
+    "reference": "Referenz",
+    "more": "Weitere",
+    "capacity": "Der Belegspeicher ist voll. Nutzen Sie manuelle Aufzeichnungen oder kontaktieren Sie den Arbeitsbereichsinhaber."
   }
 }

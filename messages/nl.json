@@ -88,7 +88,7 @@
   "home": {
     "metaDescription": "Luma.Green brengt de Indiase recyclingnetwerk samen op één platform: huishoudens, kabadiwala's, voorverwerkers, recyclers en fabrikanten, met eerlijke prijzen, geverifieerde bedrijven en een bon bij elke stap.",
     "hero": {
-      "eyebrow": "We beginnen in Bengaluru",
+      "eyebrow": "India",
       "title": "Ruim recyclebare spullen op. Ontvang geld.",
       "lead": "Foto’s, ophalen of afgeven en betaling na het wegen.",
       "sell": "Recyclen",
@@ -97,8 +97,8 @@
     },
     "teaser": {
       "title": "Prijzen van vandaag",
-      "placeAndDate": "Bengaluru · {date}",
-      "place": "Bengaluru",
+      "placeAndDate": "{city} · {date}",
+      "place": "{city}",
       "seeAll": "Alle prijzen bekijken",
       "demoNote": "Voorbeeldprijzen voor het prototype.",
       "unavailable": "De prijzen van vandaag verschijnen hier binnenkort.",
@@ -246,9 +246,9 @@
     }
   },
   "prices": {
-    "metaTitle": "Recyclebaar materiaalprijzen in Bengaluru vandaag",
-    "metaDescription": "Gedateerde referentieprijzen per kg voor recyclebare materialen in Bengaluru. Elk bedrijf stelt zijn eigen aanbiedingen vast.",
-    "eyebrow": "Bengaluru",
+    "metaTitle": "Materiaalprijzen",
+    "metaDescription": "Gedateerde referentieprijzen per kilogram. Elk bedrijf stelt zijn eigen aanbiedingen vast. Kies een materiaal om de beschikbare geschiedenis te bekijken.",
+    "eyebrow": "India",
     "title": "Materiaalprijzen",
     "lead": "Gedateerde referentieprijzen per kilogram. Elk bedrijf stelt zijn eigen aanbiedingen vast. Kies een materiaal om de beschikbare geschiedenis te bekijken.",
     "demoNote": "Voorbeeldprijzen voor het prototype, geen actuele marktprijzen.",
@@ -283,7 +283,7 @@
       "unknown": "Nog onvoldoende geschiedenis"
     },
     "detail": {
-      "description": "{code} · {family} · Bengaluru",
+      "description": "{code} · {family}",
       "today": "Vandaag",
       "low": "Laagste in 30 dagen",
       "high": "Hoogste in 30 dagen",
@@ -615,9 +615,9 @@
   },
   "contact": {
     "metaTitle": "Contact",
-    "metaDescription": "Neem contact op met het Luma.Green-team over deelname aan de pilot in Bengaluru.",
+    "metaDescription": "Luma.Green brengt de Indiase recyclingnetwerk samen op één platform: huishoudens, kabadiwala's, voorverwerkers, recyclers en fabrikanten, met eerlijke prijzen, geverifieerde bedrijven en een bon bij elke stap.",
     "title": "Neem contact op",
-    "lead": "We beginnen in Bengaluru met een kleine groep kabadiwala's, voorverwerkers, recyclers en fabrieken. Vertel wie u bent, wat u verhandelt en ongeveer hoeveel materiaal u per maand verwerkt.",
+    "lead": "Luma.Green brengt de Indiase recyclingnetwerk samen op één platform: huishoudens, kabadiwala's, voorverwerkers, recyclers en fabrikanten, met eerlijke prijzen, geverifieerde bedrijven en een bon bij elke stap.",
     "emailHeading": "Vroege toegang en algemene vragen",
     "securityHeading": "Beveiligingsmeldingen",
     "securityBody": "Een kwetsbaarheid gevonden? Meld deze privé in plaats van openbaar."
@@ -2029,7 +2029,9 @@
         "sat": "Za",
         "sun": "Zo"
       },
-      "changesTitle": "Wat u moet aanpassen"
+      "changesTitle": "Wat u moet aanpassen",
+      "city": "Stad of plaats",
+      "stateUT": "Deelstaat of unieterritorium"
     },
     "kabadiwala": {
       "title": "Uw winkel",
@@ -2216,7 +2218,8 @@
       "fileTooBig": "Dit bestand is te groot",
       "uploadFailed": "Upload mislukt. Probeer het opnieuw.",
       "generic": "Er ging iets mis. Probeer het opnieuw.",
-      "pan": "Zoek uw GST-nummer op en bevestig uw bedrijf."
+      "pan": "Zoek uw GST-nummer op en bevestig uw bedrijf.",
+      "city": "Voer een stad of plaats van 2–60 tekens in."
     },
     "identity": {
       "pan": "PAN (optioneel)",
@@ -2261,7 +2264,8 @@
       "impact": "Impact",
       "compliance": "Naleving",
       "earnings": "Verdiensten",
-      "help": "Hulp"
+      "help": "Hulp",
+      "paperRecords": "Papieren documenten"
     },
     "roles": {
       "kabadiwala": "Kabadiwala",
@@ -2523,8 +2527,8 @@
   },
   "sell": {
     "metaTitle": "Inzameling boeken",
-    "metaDescription": "Verkoop kranten, plastic, metaal en oude elektronica vanuit huis in Bengaluru. Bekijk wat winkels in de buurt betalen, boek een inzameling en ontvang geld aan de deur.",
-    "eyebrow": "Voor huishoudens in Bengaluru",
+    "metaDescription": "Ruim recyclebare spullen op. Ontvang geld. Foto’s, ophalen of afgeven en betaling na het wegen.",
+    "eyebrow": "India",
     "title": "Inzameling aan huis boeken",
     "lead": "Kies wat u heeft en een winkel in de buurt. U wordt na het wegen contant of via UPI betaald.",
     "promises": {
@@ -2537,7 +2541,7 @@
       "title": "Boeken kan binnenkort",
       "body": "We bereiden boekingen voor huishoudens voor. Kijk binnenkort opnieuw."
     },
-    "demoNote": "Voorbeeldprijzen en winkels voor de pilot in Bengaluru.",
+    "demoNote": "Voorbeeldprijzen voor het prototype, geen actuele marktprijzen.",
     "loadError": "Dit kon niet worden geladen. Controleer uw verbinding en probeer het opnieuw.",
     "retry": "Opnieuw proberen",
     "steps": {
@@ -4400,5 +4404,37 @@
     "assignedWork": "Rond eerst uw toegewezen werk of overdracht af.",
     "reviewLimit": "Er moeten meer gegevens worden beoordeeld voordat het account kan sluiten.",
     "checkLimit": "Sluiten en opnieuw registreren herstellen het daglimiet voor bedrijfscontroles niet. Controles kunnen tot de volgende dag in India geblokkeerd blijven."
+  },
+  "papers": {
+    "title": "Papieren documenten",
+    "lead": "Bevestiging bewaart alleen bewijs. Voorraad en geld blijven gelijk.",
+    "upload": "Documentafbeelding toevoegen",
+    "source": "Originele afbeelding",
+    "text": "Overgeschreven tekst",
+    "rows": "Rijen",
+    "addRow": "Rij toevoegen",
+    "consent": "Stuur deze afbeelding naar het externe model voor transcriptie.",
+    "confirm": "Ik heb de afbeelding gecontroleerd en de tekst gecorrigeerd.",
+    "confirmed": "Bevestigde transcriptie",
+    "unavailable": "Extractie niet beschikbaar. Voer tekst handmatig in.",
+    "extract": "Concept extraheren",
+    "failed": "Extractie niet voltooid. Voer handmatig in.",
+    "duplicate": "Deze afbeelding is al opgeslagen. Open het document.",
+    "invalid": "Gebruik JPEG of PNG, maximaal 2 MB en 2400 pixels per zijde.",
+    "empty": "Nog geen papieren documenten.",
+    "discard": "Concept verwijderen",
+    "confirmAction": "Transcriptie bevestigen",
+    "pending": "Afbeelding verwerken…",
+    "manual": "Handmatige voorraadregistratie openen",
+    "modelDraft": "Ongecontroleerd modelconcept",
+    "saveFirst": "Sla wijzigingen op vóór extractie.",
+    "date": "Datum",
+    "description": "Beschrijving",
+    "quantity": "Hoeveelheid",
+    "unit": "Eenheid",
+    "amount": "Bedrag",
+    "reference": "Referentie",
+    "more": "Meer",
+    "capacity": "De documentopslag is vol. Gebruik handmatige registraties of neem contact op met de werkruimte-eigenaar."
   }
 }

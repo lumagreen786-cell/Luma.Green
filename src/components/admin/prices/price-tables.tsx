@@ -2,6 +2,7 @@
 
 import { useQuery } from "convex/react";
 import { ArrowDownToLineIcon, PackageOpenIcon, ShieldIcon } from "lucide-react";
+import { useState } from "react";
 
 import {
   AppPageHeader,
@@ -9,11 +10,12 @@ import {
   EmptyState,
   ListSkeleton,
 } from "@/components/app/page-parts";
+import { CityField } from "@/components/location/city-field";
 import { cn } from "@/lib/utils";
 
 import { api } from "../../../../convex/_generated/api";
 import type { Family } from "../../../../convex/lib/catalogue";
-import { PILOT_CITY } from "../../../../convex/lib/review";
+import { canonicalCity } from "../../../../convex/lib/geography";
 import { FAMILY_LABELS } from "../labels";
 import { CatalogueNames } from "./catalogue-names";
 import { CatalogueSetup } from "./catalogue-setup";
@@ -34,16 +36,28 @@ export function groupByFamily(
 
 /** `/admin/prices`: the city's minimum and fallback price per material. */
 export function PriceTables() {
-  const rows = useQuery(api.adminPrices.list, { city: PILOT_CITY });
+  const [input, setInput] = useState("");
+  const city = canonicalCity(input);
+  const rows = useQuery(api.adminPrices.list, city ? { city } : "skip");
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 lg:gap-8">
       <AppPageHeader
         title="Prices"
-        lead={`The indicative reference prices per kilo in ${PILOT_CITY}, for every material.`}
+        lead="Select a city to manage its dated indicative prices."
       />
       <DemoNote>Sample prices for the prototype, not market rates.</DemoNote>
       <PriceRules />
-      <PriceGroups rows={rows} />
+      <CityField
+        value={input}
+        onChange={setInput}
+        labels={{
+          city: "City or locality",
+          state: "State or union territory",
+          choose: "Choose one",
+          cityError: "Enter a city or locality using 2–60 letters and spaces.",
+        }}
+      />
+      {city ? <PriceGroups rows={rows} city={city} /> : null}
       <CatalogueSetup />
       <CatalogueNames />
       <MaterialClassification />
@@ -82,7 +96,13 @@ function PriceRules() {
   );
 }
 
-function PriceGroups({ rows }: { rows: readonly PriceRowData[] | undefined }) {
+function PriceGroups({
+  rows,
+  city,
+}: {
+  rows: readonly PriceRowData[] | undefined;
+  city: string;
+}) {
   if (rows === undefined) return <ListSkeleton rows={4} />;
   if (rows.length === 0) {
     return (
@@ -126,7 +146,7 @@ function PriceGroups({ rows }: { rows: readonly PriceRowData[] | undefined }) {
           </div>
           <div className="divide-y">
             {members.map((row) => (
-              <PriceRow key={row.code} row={row} city={PILOT_CITY} />
+              <PriceRow key={row.code} row={row} city={city} />
             ))}
           </div>
         </section>

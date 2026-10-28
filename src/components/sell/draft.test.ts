@@ -194,3 +194,15 @@ describe("a stored draft", () => {
     ).toEqual(EMPTY_DRAFT);
   });
 });
+
+it("keeps an explicitly entered city when a household draft is restored", () => {
+  expect(
+    parseDraft(JSON.stringify({ ...EMPTY_DRAFT, city: "Mumbai, Maharashtra" }))
+      .city,
+  ).toBe("Mumbai, Maharashtra");
+  expect(
+    parseDraft(
+      JSON.stringify({ address: "Old street", name: "Old draft", items: [] }),
+    ).city,
+  ).toBeUndefined();
+});
