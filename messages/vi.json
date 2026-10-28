@@ -3398,7 +3398,8 @@
     "browserNotice": "Trang này mở trong trình duyệt. Bạn có thể cần đăng nhập lại.",
     "cameraPermission": "Dùng camera chụp vật liệu hoặc giấy tờ xác minh.",
     "photoPermission": "Chọn ảnh để ước tính vật liệu và xác minh.",
-    "cameraTitle": "Máy ảnh"
+    "cameraTitle": "Máy ảnh",
+    "updateBusy": "Hoàn tất công việc. Mở lại Luma, rồi khởi động lại để cập nhật."
   },
   "analytics": {
     "title": "Phân tích tùy chọn",

@@ -52,6 +52,36 @@ try {
     console.error(error);
   });
   await page.getByRole("heading", { name: "Desktop fixture" }).waitFor();
+  // eslint-disable-next-line sonarjs/assertions-in-test-cases -- This executable verifies the real Electron update command boundary.
+  await expect
+    .poll(() =>
+      page.evaluate(() => Reflect.get(window, "lumaAppUpdates")?.getState()),
+    )
+    .toBe("unavailable");
+  await page.evaluate(() => {
+    Reflect.get(window, "lumaAppUpdates").request("check");
+  });
+  // eslint-disable-next-line sonarjs/assertions-in-test-cases -- This executable verifies the real Electron update command boundary.
+  await expect(page).toHaveURL(origin + "/");
+  await page.evaluate(() => {
+    Reflect.get(window, "lumaAppUpdates").request("restart");
+  });
+  // eslint-disable-next-line sonarjs/assertions-in-test-cases -- This executable verifies the real Electron update command boundary.
+  await expect
+    .poll(() =>
+      page.evaluate(() => Reflect.get(window, "lumaAppUpdates")?.getState()),
+    )
+    .toBe("blocked");
+  await page.evaluate(() => {
+    Reflect.get(window, "lumaAppUpdates").request("status");
+  });
+  // eslint-disable-next-line sonarjs/assertions-in-test-cases -- The real host must process the bounded command without navigation.
+  await expect
+    .poll(() =>
+      page.evaluate(() => Reflect.get(window, "lumaAppUpdates")?.getState()),
+    )
+    .toBe("unavailable");
+  assert.equal(application.windows().length, 1);
   assert.equal(
     await page.evaluate(() => typeof Reflect.get(window, "require")),
     "undefined",

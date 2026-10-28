@@ -3398,7 +3398,8 @@
     "browserNotice": "Ta strona otwiera się w przeglądarce. Może być wymagane ponowne logowanie.",
     "cameraPermission": "Użyj aparatu do zdjęć surowców lub dokumentów weryfikacyjnych.",
     "photoPermission": "Wybierz zdjęcia do szacowania surowców i weryfikacji.",
-    "cameraTitle": "Aparat"
+    "cameraTitle": "Aparat",
+    "updateBusy": "Zakończ pracę. Otwórz Luma ponownie, a następnie uruchom ponownie, aby zaktualizować."
   },
   "analytics": {
     "title": "Opcjonalna analityka",

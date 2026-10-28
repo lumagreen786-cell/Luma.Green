@@ -3398,7 +3398,8 @@
     "browserNotice": "此页面将在浏览器打开，可能需要重新登录。",
     "cameraPermission": "使用相机拍摄可回收材料或核验文件。",
     "photoPermission": "选择用于可回收材料估算和核验的照片。",
-    "cameraTitle": "相机"
+    "cameraTitle": "相机",
+    "updateBusy": "请先完成工作。重新打开 Luma，然后重启以更新。"
   },
   "analytics": {
     "title": "可选分析",

@@ -1,4 +1,4 @@
-const DEFAULT_APP_URL = "https://app.luma.green";
+const DEFAULT_APP_URL = "https://luma.green";
 // eslint-disable-next-line sonarjs/no-hardcoded-ip -- Android emulator loopback is restricted to explicit development
 const LOCAL_HOSTS = new Set(["localhost", "127.0.0.1", "[::1]", "10.0.2.2"]);
 

@@ -10,12 +10,13 @@
     "ios": "expo run:ios",
     "typecheck": "tsc --noEmit",
     "test": "node --test test/*.test.cjs test/*.test.ts",
-    "check": "pnpm typecheck && pnpm test",
+    "check": "pnpm typecheck && pnpm test && pnpm test:ui",
     "export": "expo export --platform all",
     "messages:generate": "node scripts/generate-messages.cjs",
     "demo:ios": "node scripts/demo.cjs ios",
     "demo:android": "node scripts/demo.cjs android",
-    "demo:device": "node scripts/demo.cjs device"
+    "demo:device": "node scripts/demo.cjs device",
+    "test:ui": "pnpm --workspace-root exec vitest run --config apps/mobile/vitest.config.mjs"
   },
   "dependencies": {
     "expo": "57.0.31",

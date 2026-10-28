@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 
+import { NativeUpdateControl } from "@/components/app/native-update-control";
 import { Logo } from "@/components/brand/logo";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { Button } from "@/components/ui/button";
@@ -33,7 +34,10 @@ export async function SiteHeader() {
             <Link href="/sell">{t("sellScrap")}</Link>
           </Button>
         </div>
-        <MobileNav className="ms-auto xl:hidden" />
+        <div className="ms-auto flex shrink-0 items-center gap-1">
+          <NativeUpdateControl compact />
+          <MobileNav className="xl:hidden" />
+        </div>
       </Container>
     </header>
   );

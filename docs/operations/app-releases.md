@@ -1,13 +1,24 @@
 # App release and account checklist
 
-## Owner update — 28 October 2026
+> Current source checkpoint: 29 October 2026. Expo and Electron packages and
+> their guarded update controls are in the repository. An Expo project and
+> Android demo signing identity already exist from the earlier demo. Check
+> current account and credential access before release; the setup checklist is
+> not proof that a step is still missing. This foundation change creates no
+> account, release binary, store submission or live update feed. See the
+> [current native foundation](../architecture/native-apps.md#four-platform-foundation-proposal--28-october-2026).
+
+The 29 October source foundation is the scoped exception to the historical
+native pause below. Native release builds and update publication remain paused.
+
+## Historical owner update — 28 October 2026
 
 Expo development and packaging are paused. Do not start more iOS or Android
 builds or store submissions until the owner resumes the work. The queued Android
 build was cancelled. Preserve the existing source changes. Web deployment and
 document work continue.
 
-## Current foundation release on 27 October 2026
+## Historical foundation release — 27 October 2026
 
 Expo development is resumed. The iOS and Android shells share the hosted web
 screens at `https://luma.green`, with iOS tested first. Electron is outside this
@@ -22,10 +33,6 @@ off without their required configuration. No EAS account or project is assumed.
 Local type checks, policy tests and JavaScript exports do not prove a signed
 installer, physical-device acceptance, TestFlight or store approval. Record those
 separately in the delivery handoff.
-
-> Status: implementation runbook, 2 October 2026. Apple, Google Play and Expo/EAS
-> accounts are not yet set up, as confirmed by the founder. No account, paid build, store
-> submission, signing identity or update feed was created by this change.
 
 ## Run checks without accounts
 
@@ -54,7 +61,7 @@ Full mobile binaries use local SDK tools or EAS Build after setup below.
 
 | Setup                               | Required values                                                                      | Where to put them                                                                   |
 | ----------------------------------- | ------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
-| App hostname and Vercel deployment  | `EXPO_PUBLIC_APP_URL`, `DESKTOP_APP_ORIGIN`, recommended `https://app.luma.green`    | Mobile build/update environment; desktop build environment                          |
+| App hostname and Vercel deployment  | `EXPO_PUBLIC_APP_URL`, `DESKTOP_APP_ORIGIN`, recommended `https://luma.green`        | Mobile build/update environment; desktop build environment                          |
 | Matching Convex auth configuration  | `SITE_URL` or exact additional `EXTRA_TRUSTED_ORIGINS`                               | Convex deployment; see the [pilot checklist](launch-checklist.md) for backend keys  |
 | Expo account and EAS project        | `EXPO_PUBLIC_EAS_PROJECT_ID` (real project UUID)                                     | Mobile build and update environments                                                |
 | EAS production update signing       | `LUMA_UPDATE_CERTIFICATE`, `LUMA_UPDATE_KEY_ID`; matching private key for publishing | Public certificate at build time; private key in secured release storage, never Git |

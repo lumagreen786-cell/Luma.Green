@@ -3398,7 +3398,8 @@
     "browserNotice": "This page opens in your browser. You may need to sign in again.",
     "cameraPermission": "Use the camera to photograph materials or verification documents.",
     "photoPermission": "Select photos for material estimates and verification.",
-    "cameraTitle": "Camera"
+    "cameraTitle": "Camera",
+    "updateBusy": "Finish your work. Reopen Luma, then restart to update."
   },
   "analytics": {
     "title": "Optional analytics",

@@ -24,9 +24,9 @@ test("Android delegates capture without broad storage permissions or session bac
   assert.ok(config.plugins.includes("./plugins/with-camera-capture.cjs"));
 });
 
-test("a fresh clone uses the dedicated app origin with OTA disabled", () => {
+test("a fresh clone uses the current website origin with OTA disabled", () => {
   assert.deepEqual(resolveSettings({}), {
-    origin: "https://app.luma.green",
+    origin: "https://luma.green",
     allowLocalHttp: false,
     projectId: undefined,
     signing: undefined,
@@ -235,4 +235,32 @@ test("a local production export cannot omit signing by omitting the EAS build pr
     resolveSettings({ NODE_ENV: "production" }).projectId,
     undefined,
   );
+});
+
+test("the internal Android demo is an installable APK using the live web screens", () => {
+  const { build } = require("../eas.json");
+  const profile = build.preview;
+  assert.equal(profile.distribution, "internal");
+  assert.equal(profile.android.buildType, "apk");
+  assert.notEqual(profile.developmentClient, true);
+  const settings = resolveSettings({
+    ...profile.env,
+    EAS_BUILD_PROFILE: "preview",
+    NODE_ENV: "production",
+  });
+  assert.equal(settings.origin, "https://luma.green");
+  assert.equal(settings.allowLocalHttp, false);
+  assert.equal(settings.pushEnabled, false);
+});
+
+test("the shell links the existing Expo project without enabling OTA or push", () => {
+  const config = buildConfig();
+  assert.equal(config.owner, "lumagreens-team");
+  assert.equal(config.slug, "lumagreen");
+  assert.equal(
+    config.extra.eas.projectId,
+    "f0e526e7-20d3-4657-8c45-78afb801cfdf",
+  );
+  assert.equal(config.updates.enabled, false);
+  assert.equal(config.extra.pushEnabled, false);
 });
