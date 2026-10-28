@@ -1,26 +1,53 @@
 ## Web UX simplification — 27 October 2026
 
-## Platform foundation — release candidate, 28 October 2026
+## Platform foundation shipped and account setup follow up 28 October 2026
 
-Continue from [the foundation checkpoint](platform-foundation-2026-10-27.md).
-The current branch is `feat/platform-foundation`. Expo is paused; preserved
-native work is outside this web release. Source reconciliation and the reviewed
-36-page plain-English specification are complete. The final 16-page storybook
-and 10-page walkthrough use reviewed current example captures.
+The foundation shipped through [checked PR10](https://github.com/lumagreen786-cell/Luma.Green/pull/10).
+Main commit `d90c94548ac4354eaea096555f93ad2d670f0219` is live on
+Vercel Production at [luma.green](https://luma.green). The Production Convex
+backend was deployed first. Reference seeding added 51 material labels,
+32 draft definitions and 17 service kinds; the repeat inserted zero.
+All eleven specialist references remain inactive. No live prices, permits,
+payments or identities were invented.
 
-Final local checks pass: 342 suites / 2,847 tests, types, lint, formatting,
-production webpack build (3,252 pages), and six real local phone browser cases.
-All 102 current example captures are approved. Development reference seeds are
-installed and idempotent; the Production backend dry run passed. Checked PR,
-hosted CI/review, Production backend/reference setup, main merge, Vercel
-Production and live verification still need their final PR/deployment receipt.
-Do not infer deployment from the local results here.
+Final local checks passed 342 suites and 2,847 tests. Hosted checks passed,
+including 830 public browser cases, two OTP boundary cases and five analytics
+consent cases. Production Ready and live route checks are recorded in the
+owner's `Downloads/Luma_Platform_Planning/Final_Release_Evidence` folder.
+The reviewed 36-page specification, 16-page storybook and 10-page walkthrough
+are in the same planning delivery folder. All 102 example captures are approved
+and labelled as test data; they do not prove provider execution.
 
-The original primary checkout contains unrelated mobile work; keep it intact.
-Local acceptance services are stopped and root `.env.local` is restored to
-cloud development. Private local credentials remain ignored. Read the active
-checkpoint before cloud release commands. The older entries below describe
-earlier releases, not foundation acceptance.
+The current follow-up branch is `chore/provider-setup-checklist`. Read the
+[exact account and API checklist](../operations/owner-setup-checklist-2026-10-28.md),
+[key-free acceptance report](key-free-acceptance-2026-10-28.md) and
+[local restore and workload report](local-operations-drill-2026-10-28.md).
+New offline tests close joint-proof gaps without changing product behavior.
+The local recovery drill proved 50 normal phone sessions, 100 photo bookings,
+50 concurrent signed-in readers, scoped denials and exact restoration of
+2,584 data rows and 104 files. All 28 canonical test participants passed the
+Production-build local browser run with expected-role assertions. A stricter
+development-server run had an intermittent syntax/loading failure; it did not
+reproduce in that Production-build run. No product fix is claimed. Cloud recovery
+and provider acceptance remain open.
+Check this follow-up PR for its own verification; earlier checks do not prove
+new changes passed.
+
+Existing Production OTP and Surepass key names are installed. Development paid
+Surepass calls remain off. Do not print or request existing secret values.
+Optional accounts still need the scoped settings and acceptance listed in the
+checklist. The repository is public: public CodeQL and dependency review can run
+free. The first hosted CodeQL run passed (103 rules, zero reported results).
+Dependency review needs the owner to enable Dependency graph, then set
+`LUMA_DEPENDENCY_REVIEW_ENABLED=true` and verify a PR run. The prepared job
+remains skipped until that setup. Branch protection needs the repository owner; current operator
+access permits pushes but not repository administration.
+
+Expo remains paused. The original primary checkout contains unrelated mobile
+work; keep it intact. The foundation's temporary no-migration/demo-data deletion
+authority expired when it shipped; preserve current records for future changes.
+Do not infer whole-platform provider or legal acceptance from this web release.
+The older entries below are historical.
 
 ## PAN discovery empty-draft repair — 26 October 2026
 

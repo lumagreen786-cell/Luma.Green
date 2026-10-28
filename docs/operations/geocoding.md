@@ -3,7 +3,9 @@
 Status: optional source implementation, 27 October 2026. No Google account,
 billing, key, terms acceptance or paid call was created by this work. Manual
 address entry remains available. The same hosted controls run in web, iOS and
-Android. No Maps SDK or new native permission is required for reverse geocoding.
+Android when native work resumes. Expo is paused; native build and device
+acceptance steps below are deferred. No Maps SDK or new native permission is
+required for the shared web reverse-geocoding controls.
 
 ## Request and data boundary
 

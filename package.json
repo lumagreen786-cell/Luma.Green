@@ -6,7 +6,7 @@
   "description": "Luma.Green \u2014 Cleaner Tomorrow in Motion. Recycling inventory, sector trade and carbon credits in one place.",
   "packageManager": "pnpm@11.24.0",
   "engines": {
-    "node": ">=24.0.0",
+    "node": "24.x",
     "pnpm": ">=11"
   },
   "scripts": {
