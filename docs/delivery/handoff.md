@@ -1,3 +1,23 @@
+## Production verification and locale restart repair — 29 October 2026
+
+PR #22 was squash-merged as 48dceea. Vercel marked that exact source Ready,
+Production and Current for luma.green. Live checks passed for 53 routes,
+including all 33 locale home pages. The 24-layout matrix covered English,
+Arabic, Urdu and Kannada at 390, 768 and 1440 pixels in both themes. Actual
+viewport widths were recorded; fonts loaded with no horizontal overflow or
+broken visible images. Public household and role-entry screens were inspected.
+No OTP, paid provider call, booking or payment was submitted. Existing sessions
+were preserved. Evidence is local under
+`docs/delivery/evidence/web-production-2026-10-29/`.
+
+Live verification found that regional HTML tags (for example kn-IN and ur-IN)
+did not match canonical home routes (/kn and /ur) in the shared restart guard.
+The guard now uses the primary language subtag. A regression first failed on
+the old code and passes with the repair; work routes remain blocked. Both Expo
+and Electron consume this shared source. No native binary, OTA update, feed,
+permission or backend schema changed. Installed native builds still need a
+separate release and device acceptance. Guide changes remain deferred.
+
 ## Checked release integration — 29 October 2026
 
 The owner authorized push, PR creation and merge into main after all checks pass.

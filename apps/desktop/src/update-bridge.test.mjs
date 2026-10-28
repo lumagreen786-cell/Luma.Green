@@ -9,8 +9,8 @@ import {
   updateBridgeScript,
 } from "../../shared/update-bridge.mjs";
 
-/** @param {string} path @param {'mobile' | 'desktop'} transport */
-function documentFixture(path = "/en", transport = "desktop") {
+/** @param {string} path @param {'mobile' | 'desktop'} transport @param {string} htmlLang */
+function documentFixture(path = "/en", transport = "desktop", htmlLang = "en") {
   /** @type {unknown[]} */
   const commands = [];
   /** @type {Array<() => void>} */
@@ -19,7 +19,7 @@ function documentFixture(path = "/en", transport = "desktop") {
   const document = Object.assign(new EventTarget(), {
     readyState: "complete",
     hidden: false,
-    documentElement: { lang: "en", inert: false },
+    documentElement: { lang: htmlLang, inert: false },
     querySelector: () => (query.blocked ? {} : null),
   });
   /** @param {string} url */
@@ -162,4 +162,18 @@ test("an expired restart lease cannot authorize a delayed native action", () => 
   assert.ok(home.bridge.getRestartDeadline() < home.clock.now);
   home.timers[0]();
   assert.equal(home.document.documentElement.inert, false);
+});
+
+test("regional HTML language tags match their canonical home route only", () => {
+  for (const [path, htmlLang] of [
+    ["/kn", "kn-IN"],
+    ["/ur", "ur-IN"],
+  ]) {
+    const home = documentFixture(path, "mobile", htmlLang);
+    assert.equal(home.bridge.canRestart(), true);
+    home.bridge.request("restart");
+    assert.equal(home.commands.length, 1);
+    const work = documentFixture(path + "/sell", "mobile", htmlLang);
+    assert.equal(work.bridge.canRestart(), false);
+  }
 });
