@@ -45,7 +45,7 @@ export function updateBridgeScript(origin, token, nextState, transport) {
     "var state='unavailable',edited=false,frozen=false,deadline=0,timer;",
     "function changed(){document.dispatchEvent(new Event(eventName));}",
     "function unfreeze(){if(frozen){document.documentElement.inert=false;frozen=false;deadline=0;}clearTimeout(timer);}",
-    "function safe(){var path=window.location.pathname,lang=document.documentElement.lang;",
+    "function safe(){var path=window.location.pathname,lang=document.documentElement.lang.split('-')[0].toLowerCase();",
     "return !edited&&!frozen&&document.readyState==='complete'&&!document.hidden&&!window.location.search&&!window.location.hash&&",
     "(path==='/'||path==='/'+lang||path==='/'+lang+'/')&&",
     '!document.querySelector(\'form,input:not([type="hidden"]),textarea,select,[contenteditable="true"],[aria-busy="true"],[role="dialog"]:not([data-app-update-dialog])\');}',
