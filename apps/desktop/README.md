@@ -98,13 +98,17 @@ add an authentication bypass, fake operational records or offline transactions.
 - Browser cookies persist in `persist:luma-green`. Normal web sign-out removes
   the session through the existing auth flow. The shell never copies tokens.
   The system browser has a separate cookie store and may need a separate sign-in.
-- All permissions are denied by default. Geolocation from the trusted
-  requesting frame and top-level page can request a native confirmation. Both
+- All permissions are denied by default. Geolocation from the trusted main
+  document in the main app window can request a native confirmation. Both
   permission check and request handlers enforce the same origin rule. A grant
   lasts for the current window/process. OS location permission may still deny it.
+  Navigation discards a pending confirmation, including a reload of the same URL
+  and in-page navigation away and back.
+  Subframes and document windows cannot request a location grant.
   Notifications use a separate native confirmation and grant, limited to the
   trusted main window and its top-level document; document windows and frames
-  cannot request them.
+  cannot request them. A navigation or same-URL reload also discards a pending
+  notification confirmation. In-page navigation away and back also invalidates it.
   File inputs use the native file picker. Camera/microphone capture is denied;
   select an existing photo instead.
 - Offline recovery has local translated text, RTL direction and a keyboard link

@@ -1,3 +1,38 @@
+## EGM installation and defect repair — 29 October 2026
+
+The complete EGM 0.1.0 plugin is installed and enabled in local Codex. The task
+used its drift-report process to compare the native design and package READMEs
+with code, then repaired reproduced defects. This was not a Goldfish design
+review. See the [usage guide and evidence](egm-audit-2026-10-29/README.md).
+
+The repair branch is `fix/egm-current-main`, based on checked main `f687bbb`.
+It preserves main's dependency patches, regional-language home guard and restart
+proof expiry. The original `feat/android-demo` branch and unrelated files remain
+intact. The shared restart guard now blocks empty/plaintext/uppercase editable
+content, alert dialogs and open native HTML dialogs. Mobile checks stage embedded
+rollback directives. Desktop location requires the main frame/window, and both
+location and notification prompts reject replies after full navigation, reload
+or away-and-back SPA navigation. Existing valid grants remain process-local.
+
+Local verification passed: `pnpm check` with 2,865 web/backend tests, two transport
+security tests, 59 mobile policy tests, 17 mobile hook/component tests and 30
+desktop tests; root/app types; zero lint errors and 122 existing warnings.
+The production build generated 3,252 pages. All 862 disconnected browser tests
+passed against it with retries disabled. The real unpackaged Electron smoke
+passed, Android/iOS Hermes exports passed, and 24 synthetic update-control
+captures were visually inspected. The report records earlier interrupted and
+failed attempts separately, including one PDF-popup closure whose transient
+cause is not established; later complete Electron smokes passed.
+
+The production-dependency audit still reports nine advisory records. Preserve
+the existing node-forge patch and disabled optional auth paths; the latest
+Convex Better Auth component still requires Better Auth below 1.7. Do not force
+its peer range or suppress alerts. No backend/schema/provider setting, permission
+declaration or production record changed. These repairs are local source work;
+no native binary, feed, OTA update, store submission or deployment is included.
+Live provider, signed update and physical-device acceptance remain open.
+Guide/Word changes remain deferred under AGENTS.md.
+
 ## Production verification and locale restart repair — 29 October 2026
 
 PR #22 was squash-merged as 48dceea. Vercel marked that exact source Ready,

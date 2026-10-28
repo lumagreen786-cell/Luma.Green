@@ -48,7 +48,7 @@ export function updateBridgeScript(origin, token, nextState, transport) {
     "function safe(){var path=window.location.pathname,lang=document.documentElement.lang.split('-')[0].toLowerCase();",
     "return !edited&&!frozen&&document.readyState==='complete'&&!document.hidden&&!window.location.search&&!window.location.hash&&",
     "(path==='/'||path==='/'+lang||path==='/'+lang+'/')&&",
-    '!document.querySelector(\'form,input:not([type="hidden"]),textarea,select,[contenteditable="true"],[aria-busy="true"],[role="dialog"]:not([data-app-update-dialog])\');}',
+    '!document.querySelector(\'form,input:not([type="hidden"]),textarea,select,[contenteditable]:not([contenteditable="false" i]),[aria-busy="true"],[role="dialog"]:not([data-app-update-dialog]),[role="alertdialog"],dialog[open]:not([data-app-update-dialog])\');}',
     "function mark(){edited=true;changed();}",
     "document.addEventListener('input',mark,true);document.addEventListener('change',mark,true);document.addEventListener('submit',mark,true);",
     "document.addEventListener('click',function(event){if(!event.target?.closest?.('[data-app-update-control],[data-app-update-dialog]'))mark();},true);",
