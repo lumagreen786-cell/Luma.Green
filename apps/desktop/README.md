@@ -3,7 +3,7 @@
 This package builds the macOS and Windows clients. It loads the existing Next.js
 app from one exact origin. All roles, forms, business rules and sign-in remain in
 that app and the existing Convex backend. There is no second server or local
-ledger. The default origin is `https://app.luma.green`; the operator must confirm
+ledger. The default origin is `https://luma.green`; the operator must confirm
 that this is the deployed app before a release.
 
 ## Development
@@ -133,8 +133,11 @@ test does not prove OS display. See [Electron notifications](https://www.electro
 Web content updates when the web deployment changes. Desktop executable changes
 require a new version in this package, a signed binary, and the platform feed.
 The app checks the feed at launch and every six hours. Stable updates download
-automatically, install on normal app quit, and restart immediately only if the
-user chooses **Restart**. Update failures do not stop the app. No configured
+automatically. Arrival updates the hosted download icon without opening a modal.
+Installation requires an explicit **Restart** and a fresh idle-home safety check.
+Normal quit does not install a downloaded update. Forms, task dialogs, downloads,
+document windows and any prior edit/task click block restart. Finish work and
+reopen Luma if the conservative document guard remains latched. Update failures do not stop the app. No configured
 feed, unpackaged mode, or unsigned development configuration means no checks.
 
 Use a public HTTPS **generic** feed. A private source repository is compatible
@@ -193,7 +196,7 @@ Release checklist:
    filenames. Upload artifacts first and metadata last. Keep old artifacts for
    recovery. Build scripts use `--publish never`; upload is a separate action.
 6. Install the previous signed version. Verify the new feed check, signature
-   validation, download, **Later**, normal-quit installation, explicit restart,
+   validation, download, **Later**, no installation on normal quit, guarded restart,
    and retained login. Test an unavailable feed and a bad signature too. A unit
    mock or successful package build is not proof of the update chain.
 

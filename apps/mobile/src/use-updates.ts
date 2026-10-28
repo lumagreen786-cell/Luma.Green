@@ -1,5 +1,5 @@
 import * as Updates from "expo-updates";
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 import {
   canCheckUpdate,
@@ -9,6 +9,8 @@ import {
 
 export function useShellUpdates() {
   const nativeUpdates = Updates.useUpdates();
+  const checking = useRef(false);
+  const restarting = useRef(false);
   const [checkState, setState] = useState<UpdateState>(
     !__DEV__ && Updates.isEnabled ? "idle" : "unavailable",
   );
@@ -18,7 +20,9 @@ export function useShellUpdates() {
       : checkState;
 
   const check = useCallback(async () => {
-    if (!canCheckUpdate(Updates.isEnabled, __DEV__, state)) return;
+    if (checking.current || !canCheckUpdate(Updates.isEnabled, __DEV__, state))
+      return;
+    checking.current = true;
     setState("checking");
     try {
       const result = await Updates.checkForUpdateAsync();
@@ -30,17 +34,26 @@ export function useShellUpdates() {
       setState(downloaded.isNew ? "ready" : "current");
     } catch {
       setState("failed");
+    } finally {
+      checking.current = false;
     }
   }, [state]);
 
-  const restart = useCallback(async () => {
-    if (!canRestartUpdate(state, true)) return;
-    try {
-      await Updates.reloadAsync();
-    } catch {
-      setState("failed");
-    }
-  }, [state]);
+  const restart = useCallback(
+    async (isSafe: boolean) => {
+      if (!isSafe || restarting.current || !canRestartUpdate(state, true))
+        return;
+      restarting.current = true;
+      try {
+        await Updates.reloadAsync();
+      } catch {
+        setState("failed");
+      } finally {
+        restarting.current = false;
+      }
+    },
+    [state],
+  );
 
   return { state, check, restart };
 }

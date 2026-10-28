@@ -195,7 +195,7 @@ void test("a release runtime cannot enable a development origin from extra confi
   const local = { appOrigin: "http://localhost:3000", allowLocalHttp: true };
   assert.throws(() => runtimeOrigin(local, false));
   assert.equal(runtimeOrigin(local, true), "http://localhost:3000");
-  assert.equal(runtimeOrigin(undefined, false), origin);
+  assert.equal(runtimeOrigin(undefined, false), "https://luma.green");
 });
 
 void test("update checks require a configured release runtime and are not repeated while downloading", () => {

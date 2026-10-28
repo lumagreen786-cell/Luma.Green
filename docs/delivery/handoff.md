@@ -1,3 +1,206 @@
+## Checked release integration — 29 October 2026
+
+The owner authorized push, PR creation and merge into main after all checks pass.
+The foundation was applied to current main b6bcd56 in the task-owned
+native-update-release checkout on codex/native-update-foundation-release.
+The original feat/android-demo checkout and unrelated files remain intact.
+Current web foundation and historical delivery records are preserved.
+
+Restart proof now carries the frozen document's expiry time. Mobile and desktop
+reject a delayed action after that lease expires, even if a timer or reply was
+delayed. Tests cover expired proof and delayed native actions. Shared controls
+still require explicit intent and a fresh safe document.
+
+Fresh combined-source checks passed: pnpm check, the production build (3,252
+pages), Expo dependency compatibility, Android/iOS JavaScript export, the local
+Electron smoke, and 27 production-build browser cases. The captures in the
+evidence folder were refreshed against this combined source. Hosted CI and
+review remain the merge gate; local checks do not imply a completed merge.
+No schema, provider quota, native release build, signed update feed or store
+submission changes are included. Main's normal Production-only web deployment
+remains separate from native app publication.
+
+## Shared Expo/Electron update foundation — 29 October 2026
+
+This supersedes the planning-only status in the 28 October entry below. The
+owner authorized source implementation, an update icon and explicit Restart
+for all four platforms, the future-web-change rule in AGENTS.md, tests and a
+local commit. No push, release build, OTA/feed activation, store submission or
+deployment is part of this checkpoint. Work remains on feat/android-demo.
+
+The repo already contains Expo and Electron. Their shared hosted control is
+now in public navigation and workspace sidebar/compact header. Browser and
+older-shell views remain unchanged. Both app defaults use https://luma.green.
+Disabled update builds show an honest unavailable state.
+
+Downloads do not open a modal, reload a page or install on quit. Restart needs
+explicit intent and a fresh idle-home check. Forms, editable fields, busy
+dialogs and prior edits/task clicks latch the document unsafe across SPA
+navigation. Finish work and reopen Luma when latched; flow-specific work locks
+are needed before relaxing this conservative guard. Expo requires a second
+frozen-document proof and drops it on navigation/unmount. Electron also blocks
+restart with a document window or active download. A timeout/failure unfreezes
+the document. These controls cannot prevent OS termination or recover unsaved
+workflow data after an ordinary user-initiated exit.
+
+The bridge accepts only status, check and restart. Electron cancels its
+nonce-bound window-open command without navigating the current page; it adds
+no preload or general IPC. Shared bridge source is copied into generated
+desktop resources and included in packaging. Desktop typecheck prepares those
+resources so checks also work in a fresh clone. Expo imports the same source.
+
+The root App packages workflow now includes web source changes. AGENTS.md
+requires Expo/Electron compatibility review, generated-copy updates when
+needed, app checks and honest device-test limits for every web change. It does
+not require a new native binary for an ordinary hosted web update.
+
+Final local verification: pnpm check passed with 2,551 web/backend tests,
+59 mobile policy tests, 14 mobile component/hook tests and 28 desktop tests,
+both app type checks and root lint/types. Lint has 65 existing warnings and no
+errors. The 27-case browser suite passed, including the 24-layout matrix;
+captures were visually reviewed. Android and iOS Hermes exports passed
+(693 modules). The real local unpackaged Electron smoke passed, including the
+nonce-bound status command without navigation. Formatting and diff whitespace
+checks passed. No production build or signed installer was created.
+
+Browser captures use a synthetic native update-ready state and prove
+layout/control behaviour only.
+See [the evidence record](evidence/native-updates-2026-10-29/README.md).
+Native binary changes still require the applicable store/distribution path.
+Signed update delivery, signing continuity/rotation, bad signed artifacts,
+interrupted install recovery and physical Windows/iOS acceptance remain open.
+Existing Android device permission/camera acceptance is not upgraded by these
+tests. Guide and Word work remains deferred.
+
+## Four-platform update and permission planning — 28 October 2026
+
+The owner requested a Windows, macOS, Android and iOS foundation plan with
+minimal update effort after installation. The proposal is in
+[native apps](../architecture/native-apps.md#four-platform-foundation-proposal--28-october-2026).
+It covers public distribution choices, update boundaries, scoped permissions,
+denial paths, signing, compatibility, recovery and acceptance evidence.
+
+The key owner decision remains open: whether occasional store-delivered mobile
+binary updates are acceptable. Native apps cannot promise that all future
+updates avoid stores. An installable web app is the alternative to assess if
+that condition is absolute. No new native code, account, build, release, store
+submission, push activation or OTA activation is authorized by this proposal.
+Existing Android demo changes are preserved. Guide/Word work remains deferred.
+
+Source review found that the current mobile shell does not connect its existing
+update hook to visible update controls. Play in-app updates are not implemented.
+Desktop signing/update source exists, but production feed/device acceptance is
+unproven. Validate current accounts and generated platform declarations before
+implementation; older account-setup notes are historical.
+
+## WebView-only shell and native permission support — 26 October 2026
+
+After the first installed demo, the owner confirmed Recycle opens successfully
+and requested removal of the permanent native header/footer. The normal screen
+now shows the hosted interface only, with native safe areas and Android Back.
+Native recovery buttons appear only after load failure. No page refresh or
+forced update interrupts a form.
+
+The Saathi selfie input is the agreed camera acceptance case. System camera
+capture and photo/document selection remain delegated through Android WebView;
+no broad photo/storage or microphone access is required. No startup permission
+prompt was added. A trusted on-demand Expo Location bridge replaces the
+WebView's FINE-only request, which can reject approximate Android permissions.
+It validates the active document and a native session nonce, accepts approximate
+access, bounds calls, serialises underlying native requests, and drops stale
+results after navigation/unmount. Native errors use standard geolocation error
+codes without returning provider details or logging coordinates.
+
+Four shell component tests and five location-hook tests cover chrome removal,
+Back, retry/remount, trusted access, denial, approximate location, timeout,
+concurrency and stale results. Pure bridge tests also exercise injected script
+callbacks and hostile/malformed messages. No additional library was required.
+Build profiles pin Node 24.18.0/pnpm 11.24.0; the SDK57 internal APK increments
+versionCode. The upload filter keeps required mobile source, icons, catalogues
+and the security patch, excluding web imagery, captures and local secrets.
+Full `pnpm check` passed: 2,549 web/backend, 59 mobile policy, 9 shell/hook
+and 23 desktop compatibility tests, lint and both type checks. Android Hermes
+export passed. A new hook-dependency warning was then removed; scoped lint and
+integrated mobile checks passed after that correction.
+
+The first revised upload stopped before remote build creation when local disk
+space ran out. Only task-created temporary inspection copies were removed.
+Retry submitted build `64034687-f237-4c87-9355-f31e439ae2ef`, versionCode 3,
+using the existing signing identity. VersionCode 2 has no submitted APK build.
+The current upload is 211 MB (prior upload 353 MB); Git checkout metadata is
+still included by the EAS archiver. The user requested installation before the
+camera test. The phone was not detected at the last connection check. An
+authorised monitor checks completion and installs with app data preserved if
+exactly one authorised phone is connected; otherwise it notifies to reconnect.
+Real-device camera/location and revised-layout acceptance remain pending.
+Guide/Word updates remain deferred.
+
+## Android demo installed on device — 26 October 2026
+
+Build `4f29436f-7010-494d-af06-a234ff6e0ff0` installed successfully on the
+owner-connected Samsung Galaxy A51 (SM-A515F), Android 13, after USB debugging
+was authorised. Installed package: `green.luma.app`, version 0.1.0 (1),
+minSdk 24, targetSdk 36. APK SHA-256:
+`1c688c1d3b5278c979ed9a9b1be01c1fc1a98320450a600b3b62188b782719d5`.
+ZIP integrity passed. The cold launch completed successfully and the app process
+remained running. The actual dark homepage was visually inspected: current
+Luma artwork, fonts, primary actions and native controls render on this device.
+Capture: `docs/delivery/evidence/android-demo-2026-10-26/home-dark.png`.
+Scoped AndroidRuntime/ReactNativeJS error-log check returned no entries.
+Chromium logged page-paint timing warnings; no app crash was observed.
+
+The owner is testing the public Recycle action next. Navigation, light mode,
+translated scripts, OTP/TOTP, camera, location, offline recovery, session
+persistence and completed workflows are not yet device-accepted. No OTP was
+sent, no booking/application was submitted, and no OS permission was granted
+by this installation check. This is a device startup check, not store-release
+acceptance. Guide/Word changes remain deferred.
+
+## Android Expo demo resumed — 26 October 2026
+
+The owner explicitly resumed Android work for a demo and deferred phone
+connection until the installer is built. This supersedes the Android hold only
+for this work; iOS and desktop releases remain on hold. Changes are on
+`feat/android-demo`. Preserve the unrelated untracked Surepass design document.
+
+The existing Expo WebView reuses the current web interface and imagery. Its
+default origin is now `https://luma.green`, and each EAS profile explicitly uses
+that Production origin. The internal `preview` profile emits an APK; it does not
+create a Vercel Preview deployment. Expo project linking uses the existing owner
+`lumagreens-team`, slug `lumagreen`. OTA and push remain off without their
+separate explicit configuration. Native controls now mirror web light/dark
+tokens and follow device appearance; manual web theme overrides do not yet
+synchronize native chrome. No new UI libraries were required.
+
+Full `pnpm check` passes: 2,549 web/backend tests, 55 mobile tests,
+23 desktop policy tests, both type checks and lint (65 existing warnings).
+Android Hermes export
+passes (689 modules). Live origin launcher check passes outside the network
+sandbox. These do not prove an installable APK or device acceptance.
+
+The Mac initially had 7.3 GiB free and no JDK/Android SDK. Official Android
+platform-tools 37.0.1 were downloaded to `/tmp/luma-android-tools`; adb runs.
+No full SDK/emulator/JDK was installed. EAS CLI 25.3.0 is installed separately
+in `/tmp/luma-eas-tools`, with the reviewed workspace node-forge patch applied
+through its own pnpm-workspace.yaml. The actual EAS CLI and certificate consumer
+each reject the upstream malformed-signature vector and pass valid
+SHA-1/256/384/512 controls, cross-checked with Node crypto. Re-verify after any
+CLI reinstall. Expo CLI device authentication completed as `luma.green`;
+cloud internal APK build `4f29436f-7010-494d-af06-a234ff6e0ff0` finished
+successfully on 26 October. Its 75,640,091-byte APK download returned HTTP 200.
+Build page: https://expo.dev/accounts/lumagreens-team/projects/lumagreen/builds/4f29436f-7010-494d-af06-a234ff6e0ff0.
+The readiness monitor was deleted after notification. Phone installation and
+all real-device acceptance checks remain pending.
+Expo generated the Android keystore remotely. No store submission or paid plan
+was requested. Android CNG prebuild passes: app name/icon, DayNight appearance,
+RTL, foreground location, camera intent delegation, disabled backups and blocked
+camera/microphone/broad-storage/background-location permissions are generated.
+The source archive includes the local uncommitted demo changes; its displayed
+Git commit is the base revision and does not by itself identify the uploaded bytes.
+
+Device acceptance, native camera/location/auth and store release remain separate.
+Guide/Word updates remain deferred.
+
 ## Web UX simplification — 27 October 2026
 
 ## Platform foundation shipped and account setup follow up 28 October 2026

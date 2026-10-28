@@ -3398,7 +3398,8 @@
     "browserNotice": "このページはブラウザーで開きます。再度ログインが必要な場合があります。",
     "cameraPermission": "カメラで資源や確認書類を撮影します。",
     "photoPermission": "資源の推定や確認に使う写真を選びます。",
-    "cameraTitle": "カメラ"
+    "cameraTitle": "カメラ",
+    "updateBusy": "作業を終えてください。Lumaを開き直し、更新のために再起動してください。"
   },
   "analytics": {
     "title": "任意のアクセス解析",

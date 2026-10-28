@@ -3398,7 +3398,8 @@
     "browserNotice": "Questa pagina si apre nel browser. Potresti dover accedere di nuovo.",
     "cameraPermission": "Usa la fotocamera per fotografare materiali o documenti di verifica.",
     "photoPermission": "Seleziona foto per stime dei materiali e verifica.",
-    "cameraTitle": "Fotocamera"
+    "cameraTitle": "Fotocamera",
+    "updateBusy": "Completa il lavoro. Riapri Luma, poi riavvia per aggiornare."
   },
   "analytics": {
     "title": "Analisi facoltative",

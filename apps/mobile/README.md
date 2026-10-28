@@ -6,7 +6,7 @@
 > approval are separate release steps.
 
 One Expo 57 / React Native app serves Android and iOS. Its web view loads
-`https://app.luma.green`. Next.js and Convex continue to run on servers. The
+`https://luma.green`. Next.js and Convex continue to run on servers. The
 mobile app does not contain a copy of the Next server or an offline ledger.
 The operator can deploy the app origin separately from the public website.
 Keep the app origin compatible with supported shell versions.
@@ -110,7 +110,7 @@ They are public app configuration, not places to put secrets.
 
 | Variable                            | Purpose                                                                                                                  |
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `EXPO_PUBLIC_APP_URL`               | Exact HTTPS origin, default `https://app.luma.green`. No path, credentials, query or fragment.                           |
+| `EXPO_PUBLIC_APP_URL`               | Exact HTTPS origin, default `https://luma.green`. No path, credentials, query or fragment.                               |
 | `EXPO_PUBLIC_ALLOW_LOCAL_HTTP`      | `1` enables loopback HTTP only in explicit development. Release runtimes reject it.                                      |
 | `EXPO_PUBLIC_PUSH_ENABLED`          | `true` enables optional push registration; default is off. Requires a real EAS project.                                  |
 | `LUMA_ANDROID_GOOGLE_SERVICES_FILE` | Build-time path to Firebase public `google-services.json` for `green.luma.app`. Never use a service-account private key. |
@@ -136,8 +136,10 @@ before the first signed build; no account or app ID has been registered. It uses
 the repository's branded PNG icons. Permission purpose strings are generated from all 33 root catalogues for iOS
 system dialogs. Supported locales also configure Android language settings; its
 OS owns the standard permission text. Native-speaker/device review is still required.
-The native control strip uses system script fonts; the web app keeps its Noto
-fonts. React Native primitives replace DOM-only shadcn components in this strip.
+The normal screen contains the hosted web interface within native safe areas.
+Native recovery controls appear only after a load failure and use system script
+fonts. The web interface keeps its Geist/Noto fonts. Safe areas and recovery
+controls follow device appearance; manual web theme choices apply within the page.
 
 ## Shared shell translations
 
@@ -158,13 +160,15 @@ file; its English catalogue import is type-only.
 - Web navigation stays on the exact app origin. Other HTTPS, phone and email
   links require confirmation before opening an OS handler. File, blob, data,
   JavaScript and arbitrary app schemes are blocked.
-- Safe areas, an accessible toolbar and Android hardware back are native.
+- Safe areas and Android hardware back are native. There is no permanent native
+  header, footer or update-status strip.
   Web-view load errors show Retry without erasing the session. An outage does
   not queue writes or provide offline transactions.
-- The page's location control triggers WebView/OS foreground permission on demand.
-  The native Location control also offers an explanation and permission request.
-  Neither asks at startup; only the page creates or submits coordinates.
-  Background location is blocked.
+- The page's location control uses a trusted bridge to Expo Location. It requests
+  native foreground permission on demand, including approximate-only access. There
+  is no startup location request. Only the page submits coordinates; background
+  location is blocked. Navigation/unmount discard late responses, requests are
+  bounded, and untrusted frames cannot request native access.
 - Android web file inputs delegate photo capture to the system camera app. The
   shell does not request its own CAMERA permission; it explicitly blocks that
   permission from dependency manifests. A small Expo config plugin adds the
@@ -218,9 +222,8 @@ There are three different releases:
 2. **Shell JavaScript/assets:** EAS Update can change code that fits the installed
    native runtime. The `fingerprint` runtime policy prevents a new native module
    from being sent to an old binary. The startup check can download an update;
-   it applies on a later cold start. The native update control can also check and
-   download. An active session is never forcibly reloaded; Restart needs a tap
-   and confirmation. Expo Go does not prove production OTA behavior.
+   it applies on a later cold start. There is no permanent update control. An active session is never forcibly
+   reloaded; downloaded updates apply on a later cold start. Expo Go does not prove production OTA behavior.
 3. **Native binary:** new native modules, permissions, Expo/RN versions or native
    identity settings need a new signed store build. EAS Update does not replace
    this step. A permanently fixed base install is not promised.
@@ -296,3 +299,78 @@ covers shared browser flows; it does not replace these checks in native binaries
   application, signing rejection, and recovery to a known-good release.
 
 Record device/OS versions and the signed build/update identities with the results.
+
+## Android demonstration — 26 October 2026
+
+The owner resumed Android work for an installable demo. iOS and desktop release
+work remains on hold. The Expo project is `@lumagreens-team/lumagreen`.
+Project linking alone does not enable OTA updates or push.
+
+The `preview` EAS profile produces an internal APK. This Expo profile name is
+not a Vercel Preview deployment: the APK loads the existing Production website
+at `https://luma.green`. It reuses the actual web images, fonts, translations and
+forms. Internet access is required. It does not need Metro to run after installation.
+
+After Expo CLI sign-in and the release-toolchain verification described above:
+
+```sh
+# From apps/mobile, using the verified EAS CLI installation:
+eas build --platform android --profile preview
+```
+
+An Expo account with project access and an available build allowance is needed.
+No Google Play account or local Android Studio/JDK is needed for this cloud-built
+APK. Do not buy a plan or submit a store release as part of the demo.
+Install the resulting APK on the test phone and allow installation from the
+chosen trusted source when Android asks. USB debugging is only needed for
+computer-driven installation, captures and device diagnostics.
+
+Test public screens, device light/dark mode, Kannada/Arabic, Back, offline Retry,
+photo selection/capture and location. Login must use the normal verified phone
+flow and any required authenticator. Live bookings and submissions create real
+records; use owner-approved test data. A successful bundle export does not prove
+APK compilation, installation or phone acceptance.
+
+## WebView-only Android revision
+
+The owner requested removal of the permanent native controls after the first
+Galaxy A51 test. The hosted page supplies all normal navigation and task actions.
+Android Back remains active; a native error screen offers Try again and browser
+handoff only after a failed load.
+
+Required capability paths remain native: Expo Location supplies foreground
+location when the trusted page asks, Android WebView delegates image capture to the system camera, and
+opens the system photo/document chooser for file inputs. These choices do not
+require unrestricted file storage or photo-library access. Permissions are not
+granted by installation. No additional Expo library is needed for these paths.
+
+The Saathi selfie input (`capture="user"`) is the camera acceptance case. With an
+owner-approved test account, open the selfie control, confirm native camera
+launch, then cancel and confirm the form remains available. Taking and accepting
+a photo can upload it to the owned draft; do that only with approved test content.
+No other app data, OTP/TOTP screens or personal gallery contents belong in test
+captures. Permission denial, picker cancellation and successful location lookup
+still require real-device evidence.
+
+Build profiles pin Node 24.18.0 and pnpm 11.24.0. The root `.easignore` excludes
+hosted imagery, delivery captures and generated output while retaining app icons,
+shared catalogues and the dependency-security patch.
+
+## Shared update foundation — 29 October 2026
+
+The hosted navigation shows the shared update icon only when the installed
+shell supplies the narrow update bridge. Expo checks/downloads compatible
+updates without a reload. The dialog offers an explicit Restart when ready.
+The current trusted document must supply a second frozen-document proof before
+the shell calls Expo reload. Navigation or unmount invalidates that proof.
+
+Restart is conservative: only a fresh public home document with no form, edit,
+task click or busy dialog is eligible. Finish work and reopen Luma if blocked.
+The document unfreezes after a failed restart or a bounded timeout. An update
+never forces an active form to reload. This does not grant new OS permissions.
+
+OTA stays unavailable without its explicit project, runtime/channel and
+production-signing configuration. iOS/Android bundles and mocked hook tests do
+not establish signed OTA, real-device updates or store acceptance. Native
+modules and permission changes still require a signed binary through the
+appropriate distribution channel.

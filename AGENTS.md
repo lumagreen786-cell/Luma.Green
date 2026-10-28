@@ -15,6 +15,15 @@ how to do one job well.
 
 ---
 
+## Update foundation delivery authority — 29 October 2026
+
+The owner resumed only the Expo/Electron update foundation and then authorized
+its push, PR and merge into main after all checks pass. This is the scoped
+exception to the 28 October native pause. It does not resume unrelated native
+features, signed release builds, OTA publication or store submission. The
+all-platform compatibility rule below applies to future web changes. Preserve
+the current web foundation, records and provider limits.
+
 ## Platform foundation rebuild authority — 27 October 2026
 
 **28 October owner update:** Expo iOS and Android work is paused. Preserve the
@@ -105,6 +114,37 @@ where a blind replacement would break accessibility or form behavior.
 ## 1. What we are building
 
 ### Current delivery priority: web only
+
+### All-platform foundation — 29 October 2026
+
+The owner authorized the shared update foundation for Android/iOS (Expo) and
+Windows/macOS (Electron), including an update icon, explicit Restart action,
+tests and a local commit. These app packages already live in this repository;
+keep them in the root pnpm workspace. This exception resumes foundation work
+only. It does not authorize native release builds, signing purchases, publishing
+updates, store submission or deployment.
+
+For every web change, review its effect on both Expo and Electron. Deliver the
+same supported web workflow in all four shells. Update shell code, bridges,
+permission declarations and generated translations when the change requires
+them; do not duplicate web screens or issue a binary for an ordinary web change.
+Run pnpm check (including pnpm apps:check) and relevant shell tests before
+committing. Changes to navigation, auth, files, permissions or updates also need
+the affected platform checks. Record device-only checks that cannot run locally
+in the delivery handoff; never describe them as passed.
+
+Updates must not interrupt work. Download in the background, show status without
+an unsolicited modal, and require an explicit safe Restart action. Never
+automatically reload an active screen or install on quit. Fail closed on an
+unknown/busy document. The foundation permits restart only from an idle public
+home document with no forms, edits, task dialogs or downloads; edits keep that
+document blocked across SPA navigation. Finish work and reopen the app before
+restarting when this conservative guard remains latched. New flow-specific work
+locks must be integrated before relaxing that guard.
+
+Compatible Expo updates cannot change native permissions or modules. Android
+and iOS binary changes still follow their store rules. Keep optional OTA, push
+and desktop feeds disabled until configured and separately accepted.
 
 On 15 October 2026, the owner resumed and expanded UI work across the whole web
 platform: public pages, login, signup, household recycling, workspaces and admin.

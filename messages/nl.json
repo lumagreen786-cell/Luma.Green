@@ -3398,7 +3398,8 @@
     "browserNotice": "Deze pagina opent in uw browser. Mogelijk moet u opnieuw inloggen.",
     "cameraPermission": "Gebruik de camera om recyclebaar materiaal of verificatiedocumenten te fotograferen.",
     "photoPermission": "Selecteer foto's voor recyclebaar materiaalschattingen en verificatie.",
-    "cameraTitle": "Camera"
+    "cameraTitle": "Camera",
+    "updateBusy": "Rond uw werk af. Open Luma opnieuw en start daarna opnieuw om bij te werken."
   },
   "analytics": {
     "title": "Optionele statistieken",

@@ -3398,7 +3398,8 @@
     "browserNotice": "Diese Seite öffnet sich im Browser. Möglicherweise müssen Sie sich erneut anmelden.",
     "cameraPermission": "Verwenden Sie die Kamera für Fotos von Recyclingmaterial oder Prüfunterlagen.",
     "photoPermission": "Wählen Sie Fotos für Materialschätzungen und die Prüfung aus.",
-    "cameraTitle": "Kamera"
+    "cameraTitle": "Kamera",
+    "updateBusy": "Schließen Sie Ihre Arbeit ab. Öffnen Sie Luma erneut und starten Sie dann zum Aktualisieren neu."
   },
   "analytics": {
     "title": "Freiwillige Nutzungsanalyse",
