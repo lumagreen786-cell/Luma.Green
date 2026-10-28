@@ -40,7 +40,7 @@ for (const { path, messages } of [
   });
 }
 
-for (const locale of ["en", "kn", "ta", "ar", "ur", "de"]) {
+for (const locale of ["en", "kn", "ta", "ar", "ur", "de", "ru"]) {
   test(`privacy fits translated scripts and device widths ${locale}`, async ({
     page,
   }, testInfo) => {
@@ -67,6 +67,17 @@ for (const locale of ["en", "kn", "ta", "ar", "ur", "de"]) {
           )
           .toBe(theme === "dark");
         await expect(page.locator("#requests")).toContainText(/\S/);
+        // A document can fit while a long word still spills out of its column.
+        await expect
+          .poll(() =>
+            page
+              .getByRole("contentinfo")
+              .locator("li")
+              .evaluateAll((items) =>
+                items.every((item) => item.scrollWidth <= item.clientWidth + 1),
+              ),
+          )
+          .toBe(true);
         await page.screenshot({
           path: testInfo.outputPath(
             `privacy-${locale}-${String(width)}-${theme}.png`,

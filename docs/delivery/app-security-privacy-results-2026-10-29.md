@@ -69,10 +69,10 @@ Fresh `pnpm check` passed: 2,870 web/backend tests in 347 files, four dependency
 security regressions, 62 mobile policy tests, 14 mobile component tests and 30
 desktop tests, plus root and both app type checks. Lint reports zero errors and
 122 existing warnings. Formatting, diff whitespace and the 33-locale copy audit
-passed. The Production build generated 3,285 pages. All 865 Production-build
-Playwright tests passed, including 36 policy layouts (six languages, three
+passed. The Production build generated 3,285 pages. All 866 Production-build
+Playwright tests passed, including 42 policy layouts (seven languages, three
 widths, both themes). Captures were visually inspected, including RTL and
-non-Latin text. Four public captures and a check inventory are under
+non-Latin text. Five public captures and a check inventory are under
 `evidence/app-security-privacy-2026-10-29/`; they show a local Production build
 with a disconnected backend, not native/device or provider acceptance.
 
@@ -85,3 +85,19 @@ update command boundary. Native release binaries were not built.
 
 Hosted checks and review remain the PR merge gate. No store submission,
 OTA/feed publication or live provider call is included.
+
+## Hosted browser failure and repair
+
+The first hosted full browser run passed 862 tests and failed three Russian
+320px layout checks. The new privacy label extended outside its footer column.
+A local column-level regression failed with 148px of text in a 128px column,
+although the macOS document itself remained 320px wide. The shared footer now
+wraps long words inside each link. No overflow assertion or viewport was relaxed.
+The privacy matrix now includes Russian and checks each footer item, in addition
+to the full document. This same hosted footer serves Expo and Electron.
+
+The corrected Production build passed all 866 browser tests. The timeout in one
+unchanged form unit test occurred during concurrent browser/unit execution;
+the same two-test form file passed alone in 877ms with unchanged five-second
+limits. The final full pnpm check passed without the browser workload. A current
+Russian phone/dark policy capture is retained with the other evidence.

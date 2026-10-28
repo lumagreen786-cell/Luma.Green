@@ -23,9 +23,11 @@ separate from source and visual tests. User-guide work remains deferred.
 
 Local verification passed: pnpm check (2,870 web/backend tests; 4 security;
 62 mobile policy; 14 mobile component; 30 desktop), the Production build
-(3,285 pages), all 865 Production-build browser tests, Expo compatibility,
+(3,285 pages), all 866 Production-build browser tests, Expo compatibility,
 Android/iOS JS exports, Electron 44.10.0 smoke, formatting and locale audit.
-The 36-layout policy captures were inspected. See the
+The policy matrix now covers 42 layouts, including Russian; representative
+current captures were inspected. A hosted Russian footer overflow was fixed
+without relaxing checks; see the repair evidence. See the
 [repair evidence](app-security-privacy-results-2026-10-29.md) for residual
 advisories, exact scope and release limits. Hosted CI/review is the merge gate;
 this local checkpoint does not claim an already merged or signed release.
