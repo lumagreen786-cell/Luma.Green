@@ -15,7 +15,8 @@ module.exports = function buildConfig() {
   const settings = resolveSettings(process.env);
   return {
     name: en.brand.name,
-    slug: "luma-green",
+    slug: "lumagreen",
+    owner: "lumagreens-team",
     icon: "../../public/brand/app-icon.png",
     version: "0.1.0",
     scheme: "lumagreen",
@@ -26,7 +27,7 @@ module.exports = function buildConfig() {
         { ios: permissionStrings(require(`../../messages/${locale}.json`)) },
       ]),
     ),
-    userInterfaceStyle: "light",
+    userInterfaceStyle: "automatic",
     runtimeVersion: { policy: "fingerprint" },
     ios: {
       bundleIdentifier: "green.luma.app",
@@ -91,7 +92,10 @@ module.exports = function buildConfig() {
       appOrigin: settings.origin,
       allowLocalHttp: settings.allowLocalHttp,
       pushEnabled: settings.pushEnabled,
-      ...(settings.projectId && { eas: { projectId: settings.projectId } }),
+      // Project linking is independent of opting in to OTA updates.
+      eas: {
+        projectId: settings.projectId ?? "f0e526e7-20d3-4657-8c45-78afb801cfdf",
+      },
     },
   };
 };

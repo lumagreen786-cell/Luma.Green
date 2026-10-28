@@ -11,7 +11,7 @@ import {
 
 test("empty environment is runnable without secrets or updater calls", () => {
   const config = buildConfig({});
-  assert.equal(config.appOrigin, "https://app.luma.green");
+  assert.equal(config.appOrigin, "https://luma.green");
   assert.equal(config.updateUrl, null);
   assert.equal(config.release, false);
 });

@@ -11,7 +11,7 @@
     "prepare:app": "node scripts/prepare.mjs",
     "dev": "node scripts/prepare.mjs && electron .",
     "test": "node --test src/*.test.mjs",
-    "typecheck": "tsc --project tsconfig.json",
+    "typecheck": "pnpm prepare:app && tsc --project tsconfig.json",
     "check": "pnpm test && pnpm typecheck",
     "pack": "node scripts/prepare.mjs && electron-builder --config electron-builder.mjs --dir --publish never",
     "dist:mac": "node scripts/prepare.mjs --release mac && electron-builder --config electron-builder.mjs --mac --publish never",

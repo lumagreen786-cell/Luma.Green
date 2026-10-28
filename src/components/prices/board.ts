@@ -10,9 +10,6 @@ export type PriceRow = PriceBoardData["rows"][number];
 export type PricePoint = PriceRow["series"][number];
 export type Family = PriceRow["family"];
 
-/** The pilot city. Every public price is for Bengaluru until a second city. */
-export const PRICE_CITY = "Bengaluru";
-
 /** Families in the order people look for them: paper and plastic first. */
 export const FAMILY_ORDER = [
   "paper",
@@ -52,37 +49,6 @@ export function trendOf(changePct: number | null): Trend {
   if (changePct === null || !Number.isFinite(changePct)) return "unknown";
   if (changePct > 0) return "up";
   return changePct < 0 ? "down" : "flat";
-}
-
-/** Everyday household scrap — what the home page's price card shows. */
-export const TEASER_CODES = [
-  "PAPER-NEWS",
-  "PAPER-CARTON",
-  "PLASTIC-PET",
-  "METAL-IRON",
-] as const;
-
-/**
- * The rows for the home page's price card: the everyday materials in
- * `codes` order, topped up from the rest of the scrap board if the
- * catalogue changes. Only rows with a price today.
- */
-export function pickTeaser(
-  rows: readonly PriceRow[],
-  codes: readonly string[] = TEASER_CODES,
-  count = 4,
-): PriceRow[] {
-  const priced = rows.filter(
-    (row) => row.stage === "scrap" && row.todayPaise !== null,
-  );
-  const chosen = codes
-    .map((code) => priced.find((row) => row.code === code))
-    .filter((row): row is PriceRow => row !== undefined);
-  for (const row of priced) {
-    if (chosen.length >= count) break;
-    if (!chosen.includes(row)) chosen.push(row);
-  }
-  return chosen.slice(0, count);
 }
 
 /** Lowest and highest price in a series; null for an empty one. */

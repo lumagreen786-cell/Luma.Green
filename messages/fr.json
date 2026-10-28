@@ -3402,7 +3402,8 @@
     "browserNotice": "Cette page s’ouvre dans votre navigateur. Une nouvelle connexion peut être nécessaire.",
     "cameraPermission": "Utilisez l’appareil photo pour photographier des matériaux ou des documents de vérification.",
     "photoPermission": "Sélectionnez des photos pour les estimations et les vérifications.",
-    "cameraTitle": "Appareil photo"
+    "cameraTitle": "Appareil photo",
+    "updateBusy": "Terminez votre travail. Rouvrez Luma, puis redémarrez pour mettre à jour."
   },
   "analytics": {
     "title": "Mesure d’audience facultative",

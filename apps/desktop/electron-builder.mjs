@@ -17,6 +17,7 @@ const builder = {
     "src/**/*.mjs",
     "!src/**/*.test.mjs",
     "generated/*.json",
+    "generated/*.mjs",
     "package.json",
   ],
   forceCodeSigning: config.release,

@@ -3402,7 +3402,8 @@
     "browserNotice": "브라우저에서 열리는 페이지입니다. 다시 로그인해야 할 수 있습니다.",
     "cameraPermission": "카메라로 재활용품이나 확인 서류를 촬영합니다.",
     "photoPermission": "재활용품 추정과 확인에 사용할 사진을 선택합니다.",
-    "cameraTitle": "카메라"
+    "cameraTitle": "카메라",
+    "updateBusy": "작업을 마치세요. Luma를 다시 연 다음 업데이트를 위해 다시 시작하세요."
   },
   "analytics": {
     "title": "선택적 분석",

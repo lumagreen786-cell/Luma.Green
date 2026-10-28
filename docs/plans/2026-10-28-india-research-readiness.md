@@ -96,4 +96,17 @@ The coordinator owns Git, release and shared documentation integration.
 - Public research cannot fill actual facility/process/provider-account facts.
 - All prior paid-service, native-release and GitHub owner-verification holds
   remain active. The owner explicitly left GitHub verification queued.
-- Next: finish source review, national contract and bounded implementation.
+- Release follow-up: combine checked main through `f687bbb`, keep the public
+  home price section free of editable controls so its native safe-restart
+  contract remains usable, then repeat combined checks and Production rollout.
+  Backend dry-run passed with only additive paper indexes and no index removal.
+
+## Final combined local checks — 29 October 2026
+
+Combined main `f687bbb` checks passed: 356 suites and 2,948 web/backend tests,
+zero lint errors (122 warnings), both type checks, two transport tests,
+30 desktop policy tests, 59 mobile policy tests and 14 mobile component tests.
+The Production build passed with 3,285 pages. Formatting and the committed
+history secret scan passed. No native binary was built. Earlier stopped checks
+and the memory-constrained browser run are not counted as passing evidence.
+Hosted checks and actual Production deployment remain separate gates.

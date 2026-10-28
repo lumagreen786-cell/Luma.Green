@@ -3402,7 +3402,8 @@
     "browserNotice": "Esta página abre no navegador. Talvez seja necessário entrar novamente.",
     "cameraPermission": "Use a câmera para fotografar matéria reciclável ou documentos de verificação.",
     "photoPermission": "Selecione fotos para estimativas de matéria reciclável e verificação.",
-    "cameraTitle": "Câmera"
+    "cameraTitle": "Câmera",
+    "updateBusy": "Conclua seu trabalho. Abra o Luma novamente e reinicie para atualizar."
   },
   "analytics": {
     "title": "Análises opcionais",

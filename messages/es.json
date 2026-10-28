@@ -3402,7 +3402,8 @@
     "browserNotice": "Esta página se abre en el navegador. Puede que debas iniciar sesión otra vez.",
     "cameraPermission": "Usa la cámara para fotografiar materiales o documentos de verificación.",
     "photoPermission": "Selecciona fotos para estimar materiales y verificar tu identidad.",
-    "cameraTitle": "Cámara"
+    "cameraTitle": "Cámara",
+    "updateBusy": "Termina tu trabajo. Vuelve a abrir Luma y reinicia para actualizar."
   },
   "analytics": {
     "title": "Analítica opcional",

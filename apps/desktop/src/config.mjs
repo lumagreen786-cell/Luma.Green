@@ -45,7 +45,7 @@ export function validateFeed(value) {
 export function buildConfig(env, releasePlatform) {
   const isRelease = releasePlatform !== undefined;
   const appOrigin = validateOrigin(
-    env.DESKTOP_APP_ORIGIN || "https://app.luma.green",
+    env.DESKTOP_APP_ORIGIN || "https://luma.green",
   );
   const updateUrl = validateFeed(env.DESKTOP_UPDATE_URL);
   if (isRelease) {

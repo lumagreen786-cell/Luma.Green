@@ -36,20 +36,63 @@ test("missing feed and unpackaged apps never contact updater", async () => {
     assert.deepEqual(calls, { feeds: 0, checks: 0, installs: 0 });
   }
 });
-test("updates download automatically but restart waits for user choice", async () => {
+test("arrival publishes status without a modal, install or automatic quit update", async () => {
   const { updater, calls, handlers } = mockUpdater();
-  let isConsent = false;
-  setupUpdates(updater, "https://example.com/", true, async () => isConsent);
+  /** @type {string[]} */
+  const notifications = [];
+  /** @type {string[]} */
+  const states = [];
+  let isSafe = false;
+  const updates = setupUpdates(
+    updater,
+    "https://example.com/",
+    true,
+    async (state) => {
+      notifications.push(state);
+      return true;
+    },
+    (state) => {
+      states.push(state);
+    },
+    async () => isSafe,
+  );
   assert.equal(updater.autoDownload, true);
-  assert.equal(updater.autoInstallOnAppQuit, true);
+  assert.equal(updater.autoInstallOnAppQuit, false);
   assert.equal(updater.allowPrerelease, false);
-  handlers.get("update-downloaded")?.();
-  await Promise.resolve();
+  await updates.restart();
   assert.equal(calls.installs, 0);
-  isConsent = true;
   handlers.get("update-downloaded")?.();
   await Promise.resolve();
+  assert.deepEqual(notifications, []);
+  assert.deepEqual(states, ["ready"]);
+  assert.equal(calls.installs, 0);
+  await updates.restart();
+  assert.equal(calls.installs, 0);
+  assert.equal(states.at(-1), "blocked");
+  isSafe = true;
+  await updates.restart();
   assert.equal(calls.installs, 1);
+});
+test("restart fails closed when safety cannot be established", async () => {
+  const { updater, calls, handlers } = mockUpdater();
+  /** @type {string[]} */
+  const states = [];
+  const updates = setupUpdates(
+    updater,
+    "https://example.com/",
+    true,
+    async () => true,
+    (state) => {
+      states.push(state);
+    },
+    async () => {
+      throw new Error("document gone");
+    },
+  );
+  handlers.get("update-downloaded")?.();
+  await updates.restart();
+  assert.equal(calls.installs, 0);
+  assert.equal(states.at(-1), "failed");
 });
 test("update failure does not reject the application check action", async () => {
   const { updater } = mockUpdater();
@@ -67,6 +110,7 @@ test("update failure does not reject the application check action", async () => 
 
 test("manual update reports a late download failure once", async () => {
   const { updater, handlers } = mockUpdater();
+  /** @type {string[]} */
   /** @type {string[]} */
   const notifications = [];
   const { promise: downloadPromise, reject: rejectDownload } =

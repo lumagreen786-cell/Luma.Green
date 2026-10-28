@@ -3412,7 +3412,8 @@
     "browserNotice": "Halaman ini dibuka di peramban. Anda mungkin perlu masuk lagi.",
     "cameraPermission": "Gunakan kamera untuk memotret bahan daur ulang atau dokumen verifikasi.",
     "photoPermission": "Pilih foto untuk perkiraan bahan daur ulang dan verifikasi.",
-    "cameraTitle": "Kamera"
+    "cameraTitle": "Kamera",
+    "updateBusy": "Selesaikan pekerjaan Anda. Buka kembali Luma, lalu mulai ulang untuk memperbarui."
   },
   "showcase": {
     "scene": "Adegan ilustrasi",

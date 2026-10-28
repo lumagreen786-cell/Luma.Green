@@ -34,6 +34,7 @@ import { isLocale, localeDirection } from "@/i18n/locales";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
+import { NativeUpdateControl } from "./native-update-control";
 import { type AppRole, NAV, type NavItem } from "./nav";
 import { ListSkeleton } from "./page-parts";
 import { useMobileNavCapacity } from "./use-mobile-nav-capacity";
@@ -304,6 +305,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           <AccountLinks className="border-s-2 border-transparent px-3 hover:bg-sidebar-accent" />
         </nav>
         <div className="flex shrink-0 flex-col gap-2 border-t border-sidebar-border pt-4">
+          <NativeUpdateControl compact />
           <div className="flex items-center justify-between gap-2">
             <LanguageSwitcher />
             <ThemeToggle />
@@ -330,18 +332,21 @@ export function AppShell({ children }: { children: ReactNode }) {
           >
             <Logo idPrefix="lg-bar" className="[&>svg]:size-7" />
           </Link>
-          <SheetTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon-lg"
-              aria-label={t("more")}
-              onClick={(event) => {
-                menuOpener.current = event.currentTarget;
-              }}
-            >
-              <EllipsisIcon aria-hidden />
-            </Button>
-          </SheetTrigger>
+          <div className="ms-auto flex items-center gap-1">
+            <NativeUpdateControl compact />
+            <SheetTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon-lg"
+                aria-label={t("more")}
+                onClick={(event) => {
+                  menuOpener.current = event.currentTarget;
+                }}
+              >
+                <EllipsisIcon aria-hidden />
+              </Button>
+            </SheetTrigger>
+          </div>
         </header>
         <SheetContent
           side={side}

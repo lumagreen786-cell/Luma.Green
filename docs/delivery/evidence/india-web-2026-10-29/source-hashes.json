@@ -1,0 +1,232 @@
+{
+  "captured": "2026-10-29",
+  "scope": "Labelled isolated current-component fixtures. No authentication, Production, provider, legal approval or native release proof.",
+  "captures": {
+    "geography-rtl-phone.png": {
+      "source": "visual-geography/ar-390-dark-join-retained-long-ut.png",
+      "sha256": "d57bc32aceaa58a2ea54a53ae295af0f956304c527baa6844918b7f936412025",
+      "bytes": 48860
+    },
+    "geography-price-desktop.png": {
+      "source": "visual-geography/en-1440-light-price-empty.png",
+      "sha256": "7f71ef2cef9daf275bddd4fd41f6d599fdfa756919722686ddf72cec87b4e22a",
+      "bytes": 35906
+    },
+    "paper-rtl-phone.png": {
+      "source": "visual-papers/ar-390-dark-review.png",
+      "sha256": "cd0a200f66882475be0170c8724ab52baebca784c9f5ac733085c8ee3836b79a",
+      "bytes": 177149
+    },
+    "paper-desktop.png": {
+      "source": "visual-papers/en-1440-light-review.png",
+      "sha256": "07eb03d566a389893d816df814b0940792293d507b6af0b0fd95449ef7b9d3a9",
+      "bytes": 189584
+    },
+    "admin-reference-desktop.png": {
+      "source": "visual-admin/admin-1440-light-carbon.png",
+      "sha256": "5eeaa7814d6e2dd3b862c639fde6c607cd7a996b1ade71c0fd06154e668831a8",
+      "bytes": 499269
+    },
+    "teaser-phone.png": {
+      "source": "visual-teaser/en-390-light-action.png",
+      "sha256": "78ad9fd499875ac1c045a717dbb148d70146fb3229000a3b65d4fc7137a12630",
+      "bytes": 25695
+    },
+    "teaser-rtl-desktop.png": {
+      "source": "visual-teaser/ur-1440-light-action.png",
+      "sha256": "a43ee1f828f0a9e6d36adc384437f4325f2e73da621412f7c88cf27364e75c91",
+      "bytes": 29389
+    }
+  },
+  "visual-geographySourceVerification": {
+    "convex/lib/geography.ts": {
+      "captured": "b10f8069dba1015ffccb999d2333ec0f921a02c02577ee6b1968bc474cf2f909",
+      "current": "b10f8069dba1015ffccb999d2333ec0f921a02c02577ee6b1968bc474cf2f909",
+      "matches": true
+    },
+    "src/components/location/city-field.tsx": {
+      "captured": "9850f00e75840da84f2daa49cf766a10231380db282f78343c7472197a8a14d8",
+      "current": "9850f00e75840da84f2daa49cf766a10231380db282f78343c7472197a8a14d8",
+      "matches": true
+    },
+    "src/components/join/kabadiwala-form.tsx": {
+      "captured": "79c3185af84953ecf51be46a19e4336fced96ca4d22b39ebf0def31e90d3e449",
+      "current": "79c3185af84953ecf51be46a19e4336fced96ca4d22b39ebf0def31e90d3e449",
+      "matches": true
+    },
+    "src/components/sell/simple-recycling-flow.tsx": {
+      "captured": "cf8a256e7c280c86a07c1aa333a67b00ba0019d70fb56d0b49b8445b7a2fee85",
+      "current": "cf8a256e7c280c86a07c1aa333a67b00ba0019d70fb56d0b49b8445b7a2fee85",
+      "matches": true
+    },
+    "src/components/prices/price-board.tsx": {
+      "captured": "dcd08924cd13c3b12909e8dbd40513a77394453d59415cc6db37774314cbbf7e",
+      "current": "dcd08924cd13c3b12909e8dbd40513a77394453d59415cc6db37774314cbbf7e",
+      "matches": true
+    },
+    "src/app/globals.css": {
+      "captured": "bbf8eaca5401369d3ff1e089db725aefdc800a3999ac684e198c958b2d78560c",
+      "current": "bbf8eaca5401369d3ff1e089db725aefdc800a3999ac684e198c958b2d78560c",
+      "matches": true
+    },
+    "src/lib/fonts.ts": {
+      "captured": "ffb4b8691eadcdf377fd3c0e2584c82683ffbbef7008fe1800f31dcba8e785db",
+      "current": "ffb4b8691eadcdf377fd3c0e2584c82683ffbbef7008fe1800f31dcba8e785db",
+      "matches": true
+    },
+    "messages/en.json": {
+      "captured": "901be034ecad47a12481657701fd9c53b4416323a599f0efa39b710b781123ce",
+      "current": "141b18f0561b8098a90b50f2341d84b5b1a5b7df59088121fabc2f851b52ebae",
+      "matches": false,
+      "capturedMatchesHead": true,
+      "renderedNamespacesUnchanged": {
+        "join": true,
+        "sell": true,
+        "prices": true
+      },
+      "note": "Merged native update message changes alter whole-catalogue hash; rendered fixture namespaces remain unchanged."
+    },
+    "messages/kn.json": {
+      "captured": "13c7766e5cf4d2d3f4e96ea570da057c48349ca7d04fbe4d0771d856d23ddb66",
+      "current": "2942022a72cdf25b09c9f68dce64c6dc1d71b4694bdbdf386357374a5b0d4156",
+      "matches": false,
+      "capturedMatchesHead": true,
+      "renderedNamespacesUnchanged": {
+        "join": true,
+        "sell": true,
+        "prices": true
+      },
+      "note": "Merged native update message changes alter whole-catalogue hash; rendered fixture namespaces remain unchanged."
+    },
+    "messages/ar.json": {
+      "captured": "0d0519a97cdcefc10844505d6df77561f0563a79c587a972369eb4ef59fe6b96",
+      "current": "103f4efeaa587ed775341541ebcc588150128a2cf5ac49da610cfdb8ae475d31",
+      "matches": false,
+      "capturedMatchesHead": true,
+      "renderedNamespacesUnchanged": {
+        "join": true,
+        "sell": true,
+        "prices": true
+      },
+      "note": "Merged native update message changes alter whole-catalogue hash; rendered fixture namespaces remain unchanged."
+    },
+    "messages/ur.json": {
+      "captured": "7c33f9c2289b979a177abca1b709b316c8016abbd1af389d2f3e76a5e5f96eee",
+      "current": "491d385fb1a77664faa84c15b145bc57319e553abbd950469d6f8f6875f7314f",
+      "matches": false,
+      "capturedMatchesHead": true,
+      "renderedNamespacesUnchanged": {
+        "join": true,
+        "sell": true,
+        "prices": true
+      },
+      "note": "Merged native update message changes alter whole-catalogue hash; rendered fixture namespaces remain unchanged."
+    }
+  },
+  "visual-papersSourceVerification": {
+    "src/components/papers/paper-page.tsx": {
+      "captured": "1f7e67ec3b7151bea1cea2b6c5294dd065c13f39a5daea2b3ba088b20680fefa",
+      "current": "1f7e67ec3b7151bea1cea2b6c5294dd065c13f39a5daea2b3ba088b20680fefa",
+      "matches": true
+    },
+    "src/app/globals.css": {
+      "captured": "bbf8eaca5401369d3ff1e089db725aefdc800a3999ac684e198c958b2d78560c",
+      "current": "bbf8eaca5401369d3ff1e089db725aefdc800a3999ac684e198c958b2d78560c",
+      "matches": true
+    },
+    "messages/en.json": {
+      "captured": "901be034ecad47a12481657701fd9c53b4416323a599f0efa39b710b781123ce",
+      "current": "141b18f0561b8098a90b50f2341d84b5b1a5b7df59088121fabc2f851b52ebae",
+      "matches": false,
+      "capturedMatchesHead": true,
+      "renderedNamespacesUnchanged": {
+        "papers": true
+      },
+      "note": "Merged native update message changes alter whole-catalogue hash; rendered fixture namespaces remain unchanged."
+    },
+    "messages/kn.json": {
+      "captured": "13c7766e5cf4d2d3f4e96ea570da057c48349ca7d04fbe4d0771d856d23ddb66",
+      "current": "2942022a72cdf25b09c9f68dce64c6dc1d71b4694bdbdf386357374a5b0d4156",
+      "matches": false,
+      "capturedMatchesHead": true,
+      "renderedNamespacesUnchanged": {
+        "papers": true
+      },
+      "note": "Merged native update message changes alter whole-catalogue hash; rendered fixture namespaces remain unchanged."
+    },
+    "messages/ar.json": {
+      "captured": "0d0519a97cdcefc10844505d6df77561f0563a79c587a972369eb4ef59fe6b96",
+      "current": "103f4efeaa587ed775341541ebcc588150128a2cf5ac49da610cfdb8ae475d31",
+      "matches": false,
+      "capturedMatchesHead": true,
+      "renderedNamespacesUnchanged": {
+        "papers": true
+      },
+      "note": "Merged native update message changes alter whole-catalogue hash; rendered fixture namespaces remain unchanged."
+    },
+    "messages/ur.json": {
+      "captured": "7c33f9c2289b979a177abca1b709b316c8016abbd1af389d2f3e76a5e5f96eee",
+      "current": "491d385fb1a77664faa84c15b145bc57319e553abbd950469d6f8f6875f7314f",
+      "matches": false,
+      "capturedMatchesHead": true,
+      "renderedNamespacesUnchanged": {
+        "papers": true
+      },
+      "note": "Merged native update message changes alter whole-catalogue hash; rendered fixture namespaces remain unchanged."
+    }
+  },
+  "visual-adminSourceVerification": {
+    "src/components/admin/operations/india-regulatory-references.tsx": {
+      "captured": "788b4658f9bf2aad938976b30f625656bf3aca06044ee1636d2ba1112c0499b8",
+      "current": "788b4658f9bf2aad938976b30f625656bf3aca06044ee1636d2ba1112c0499b8",
+      "matches": true
+    },
+    "src/lib/india-regulatory-references.ts": {
+      "captured": "ffaf4d5e4d2925581780a59207a141f8337620671231a4cabd12aa85ce227ca9",
+      "current": "ffaf4d5e4d2925581780a59207a141f8337620671231a4cabd12aa85ce227ca9",
+      "matches": true
+    },
+    "src/app/globals.css": {
+      "captured": "bbf8eaca5401369d3ff1e089db725aefdc800a3999ac684e198c958b2d78560c",
+      "current": "bbf8eaca5401369d3ff1e089db725aefdc800a3999ac684e198c958b2d78560c",
+      "matches": true
+    }
+  },
+  "visual-teaserSourceVerification": {
+    "src/components/site/home/price-teaser.tsx": {
+      "captured": "7a5ee9ad84e600f32861c4fffff77e7ac9f6ee603032d24b20193d921764d7d3",
+      "current": "7a5ee9ad84e600f32861c4fffff77e7ac9f6ee603032d24b20193d921764d7d3",
+      "matches": true
+    },
+    "src/app/globals.css": {
+      "captured": "bbf8eaca5401369d3ff1e089db725aefdc800a3999ac684e198c958b2d78560c",
+      "current": "bbf8eaca5401369d3ff1e089db725aefdc800a3999ac684e198c958b2d78560c",
+      "matches": true
+    },
+    "apps/shared/update-bridge.mjs": {
+      "captured": "904ce9e1c35787c77833fbcbc14d95c35b17e02eb192dec30a7c48e0cb37c461",
+      "current": "904ce9e1c35787c77833fbcbc14d95c35b17e02eb192dec30a7c48e0cb37c461",
+      "matches": true
+    },
+    "messages/en.json": {
+      "captured": "141b18f0561b8098a90b50f2341d84b5b1a5b7df59088121fabc2f851b52ebae",
+      "current": "141b18f0561b8098a90b50f2341d84b5b1a5b7df59088121fabc2f851b52ebae",
+      "matches": true
+    },
+    "messages/kn.json": {
+      "captured": "2942022a72cdf25b09c9f68dce64c6dc1d71b4694bdbdf386357374a5b0d4156",
+      "current": "2942022a72cdf25b09c9f68dce64c6dc1d71b4694bdbdf386357374a5b0d4156",
+      "matches": true
+    },
+    "messages/ar.json": {
+      "captured": "103f4efeaa587ed775341541ebcc588150128a2cf5ac49da610cfdb8ae475d31",
+      "current": "103f4efeaa587ed775341541ebcc588150128a2cf5ac49da610cfdb8ae475d31",
+      "matches": true
+    },
+    "messages/ur.json": {
+      "captured": "491d385fb1a77664faa84c15b145bc57319e553abbd950469d6f8f6875f7314f",
+      "current": "491d385fb1a77664faa84c15b145bc57319e553abbd950469d6f8f6875f7314f",
+      "matches": true
+    }
+  }
+}

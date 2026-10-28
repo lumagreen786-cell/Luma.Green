@@ -3412,7 +3412,8 @@
     "browserNotice": "Bu sayfa tarayıcıda açılır. Yeniden giriş yapmanız gerekebilir.",
     "cameraPermission": "Malzeme veya doğrulama belgelerini fotoğraflamak için kamerayı kullanın.",
     "photoPermission": "Malzeme tahmini ve doğrulama için fotoğraf seçin.",
-    "cameraTitle": "Kamera"
+    "cameraTitle": "Kamera",
+    "updateBusy": "İşinizi bitirin. Luma’yı yeniden açın, ardından güncellemek için yeniden başlatın."
   },
   "showcase": {
     "scene": "Örnek sahne",

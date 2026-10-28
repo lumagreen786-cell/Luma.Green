@@ -1,27 +1,22 @@
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { useQuery } from "convex/react";
 import { NextIntlClientProvider } from "next-intl";
 import type { ReactNode } from "react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, expect, it, vi } from "vitest";
 
-import { sampleBoard } from "@/components/prices/board.testing";
-
-import messages from "../../../../messages/en.json";
+import arabic from "../../../../messages/ar.json";
+import english from "../../../../messages/en.json";
+import kannada from "../../../../messages/kn.json";
+import urdu from "../../../../messages/ur.json";
 import { PriceTeaser } from "./price-teaser";
 
 const convex = vi.hoisted(() => ({ configured: true }));
-
 vi.mock("@/components/providers/convex-provider", () => ({
   get isConvexConfigured() {
     return convex.configured;
   },
 }));
-
-vi.mock("convex/react", () => ({
-  useConvexAuth: () => ({ isLoading: false, isAuthenticated: true }),
-  useQuery: vi.fn(),
-}));
-
+vi.mock("convex/react", () => ({ useQuery: vi.fn() }));
 vi.mock("@/i18n/navigation", () => ({
   Link: ({
     href,
@@ -36,100 +31,50 @@ vi.mock("@/i18n/navigation", () => ({
     </a>
   ),
 }));
+beforeEach(() => {
+  vi.clearAllMocks();
+});
 
-function renderTeaser() {
-  const result = render(
-    <NextIntlClientProvider
-      locale="en"
-      messages={messages}
-      timeZone="Asia/Kolkata"
-    >
+it.each([
+  ["en", english],
+  ["kn", kannada],
+  ["ar", arabic],
+  ["ur", urdu],
+] as const)(
+  "keeps configured home action-only and sends %s users to explicit locality selection",
+  (locale, messages) => {
+    convex.configured = true;
+    const { container } = render(
+      <NextIntlClientProvider locale={locale} messages={messages}>
+        <PriceTeaser />
+      </NextIntlClientProvider>,
+    );
+    expect(
+      container.querySelector(
+        'form,input,textarea,select,[contenteditable="true"]',
+      ),
+    ).toBeNull();
+    expect(useQuery).not.toHaveBeenCalled();
+    expect(
+      screen.getByRole("heading", { name: messages.home.teaser.title }),
+    ).toBeVisible();
+    expect(screen.getByText(messages.prices.lead)).toBeVisible();
+    expect(
+      screen.getByRole("link", { name: messages.home.teaser.seeAll }),
+    ).toHaveAttribute("href", "/prices");
+    expect(container).not.toHaveTextContent("Bengaluru");
+  },
+);
+
+it("keeps the city-selection link usable without configured data", () => {
+  convex.configured = false;
+  render(
+    <NextIntlClientProvider locale="en" messages={english}>
       <PriceTeaser />
     </NextIntlClientProvider>,
   );
-  const city = screen.queryByLabelText(messages.join.form.city);
-  if (city) fireEvent.change(city, { target: { value: "Bengaluru" } });
-  return result;
-}
-
-beforeEach(() => {
-  vi.clearAllMocks();
-  convex.configured = true;
-  vi.mocked(useQuery).mockReturnValue(sampleBoard);
-});
-
-describe("PriceTeaser", () => {
-  it("shows today's price for everyday scrap, never factory material", () => {
-    renderTeaser();
-
-    const rows = screen.getAllByRole("listitem");
-    expect(rows.map((row) => row.textContent)).toEqual([
-      expect.stringContaining("Newspaper"),
-      expect.stringContaining("Cardboard boxes"),
-      expect.stringContaining("PET bottles"),
-      expect.stringContaining("Iron and steel"),
-    ]);
-    expect(within(rows[0]).getByText("₹14/kg")).toBeInTheDocument();
-    expect(screen.queryByText(/Recycled PET flakes/)).not.toBeInTheDocument();
-    expect(screen.getByText("Bengaluru · Sep 29")).toBeInTheDocument();
-  });
-
-  it("says the prices are samples and links to the full board", () => {
-    renderTeaser();
-
-    expect(
-      screen.getByText("Sample prices for the prototype."),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("link", { name: "See all prices" }),
-    ).toHaveAttribute("href", "/prices");
-  });
-
-  it("holds its shape while loading", () => {
-    vi.mocked(useQuery).mockReturnValue(undefined);
-    renderTeaser();
-
-    expect(screen.getByRole("status", { name: "Loading…" })).toHaveAttribute(
-      "aria-busy",
-      "true",
-    );
-    expect(
-      screen.getByRole("heading", { name: "Today's prices" }),
-    ).toBeInTheDocument();
-  });
-
-  it("still points to the board when Convex isn't connected", () => {
-    convex.configured = false;
-    renderTeaser();
-
-    expect(
-      screen.getByText("Today's prices will show here soon."),
-    ).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "See all prices" })).toBeVisible();
-    expect(
-      screen.getByRole("status", { name: messages.home.teaser.unavailable }),
-    ).toHaveAttribute("aria-busy", "false");
-    expect(screen.queryByText(messages.common.loading)).not.toBeInTheDocument();
-    expect(screen.queryByRole("listitem")).not.toBeInTheDocument();
-    expect(screen.queryByText(/₹/)).not.toBeInTheDocument();
-    expect(useQuery).not.toHaveBeenCalled();
-  });
-
-  it("keeps the empty price layout without suggesting that a fetch is still pending", () => {
-    vi.mocked(useQuery).mockReturnValue({
-      ...sampleBoard,
-      rows: [],
-      date: null,
-    });
-    renderTeaser();
-
-    expect(
-      screen.getByRole("status", { name: messages.home.teaser.unavailable }),
-    ).toHaveAttribute("aria-busy", "false");
-    expect(screen.queryByRole("listitem")).not.toBeInTheDocument();
-    expect(screen.queryByText(/₹/)).not.toBeInTheDocument();
-    expect(
-      screen.getByRole("link", { name: "See all prices" }),
-    ).toHaveAttribute("href", "/prices");
-  });
+  expect(
+    screen.getByRole("link", { name: english.home.teaser.seeAll }),
+  ).toHaveAttribute("href", "/prices");
+  expect(useQuery).not.toHaveBeenCalled();
 });

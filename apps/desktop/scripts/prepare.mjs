@@ -20,6 +20,10 @@ const config = demo
   : buildConfig(process.env, releasePlatform);
 const generated = new URL("../generated/", import.meta.url);
 await mkdir(generated, { recursive: true });
+await copyFile(
+  new URL("../../shared/update-bridge.mjs", import.meta.url),
+  new URL("update-bridge.mjs", generated),
+);
 const messagesPath = new URL("../../../messages/", import.meta.url);
 /** @type {Record<string, import('../src/localization.mjs').Messages>} */
 const catalogues = {};

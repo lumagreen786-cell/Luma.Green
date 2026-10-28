@@ -95,6 +95,16 @@ remain separate release gates; their actual state is recorded in the PR and
 owner release receipt. Earlier foundation screenshots and provider mocks do
 not prove these new gates passed.
 
+## Combined-main release follow-up
+
+Checked main updates through `f687bbb` are preserved in this release. Review
+found that a city input on the public home page would keep its conservative
+native restart guard blocked. The home price section links to `/prices`; explicit
+city/state selection stays on that page. The guard is not relaxed. Full combined
+checks and hosted rollout remain required. Backend dry-run passed with additive
+paper indexes and no removed indexes. No native binary or paid provider call
+is part of this release.
+
 ## Remaining external evidence
 
 Actual facility permits, capacity, recipes, contracts, authorized recipients,
@@ -108,3 +118,13 @@ collection or validated national-scale capacity.
 GitHub owner email verification and saved main protection remain queued at the
 owner's request. Continue checked PRs without bypassing checks. No Preview,
 native release, paid service purchase or paid provider call is authorized.
+
+## Final combined local checks — 29 October 2026
+
+Combined main `f687bbb` checks passed: 356 suites and 2,948 web/backend tests,
+zero lint errors (122 warnings), both type checks, two transport tests,
+30 desktop policy tests, 59 mobile policy tests and 14 mobile component tests.
+The Production build passed with 3,285 pages. Formatting and the committed
+history secret scan passed. No native binary was built. Earlier stopped checks
+and the memory-constrained browser run are not counted as passing evidence.
+Hosted checks and actual Production deployment remain separate gates.

@@ -2518,7 +2518,8 @@
     "browserNotice": "Halaman ini dibuka dalam pelayar. Anda mungkin perlu log masuk semula.",
     "cameraPermission": "Gunakan kamera untuk mengambil gambar bahan kitar semula atau dokumen pengesahan.",
     "photoPermission": "Pilih foto untuk anggaran bahan kitar semula dan pengesahan.",
-    "cameraTitle": "Kamera"
+    "cameraTitle": "Kamera",
+    "updateBusy": "Selesaikan kerja anda. Buka semula Luma, kemudian mulakan semula untuk mengemas kini."
   },
   "showcase": {
     "scene": "Adegan ilustrasi",
