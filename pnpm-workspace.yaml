@@ -77,7 +77,16 @@ minimumReleaseAgeExclude:
 # Security fixes for transitive packages. xcode only uses the CommonJS v4 API.
 overrides:
   "xcode>uuid": 11.1.1
-  "posthog-js>dompurify": 3.4.16
+  "posthog-js>dompurify": 3.4.17
+  # AJV permits v3; require its patched URI parser without a v4 major override.
+  "ajv>fast-uri": "^3.1.9"
+  # Keep each Undici major on its own security patch; desktop-only v6 is paused.
+  "undici@>=7.0.0 <7.30.1": 7.30.1
+  "undici@>=8.0.0 <8.12.2": 8.12.2
+  # This optional peer remains inside Better Auth's ^1 range and owns Seroval.
+  "better-auth@1.6.33>solid-js": 1.9.16
+  # Trigger pins this Engine.IO owner; validate its real websocket transport.
+  "engine.io-client@6.5.4>ws": 8.21.0
 
 patchedDependencies:
   node-forge@1.4.0: patches/node-forge@1.4.0.patch
