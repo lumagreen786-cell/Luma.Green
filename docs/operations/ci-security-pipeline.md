@@ -2,9 +2,12 @@
 
 Status: updated 28 October 2026 after the foundation shipped in
 [PR #10](https://github.com/lumagreen786-cell/Luma.Green/pull/10), main commit
-`d90c945`. The foundation release passed its active hosted checks. This follow-up
-prepares automatic public-repository CodeQL and dependency review; their new
-conditions still need a hosted run before acceptance is recorded.
+`d90c945`. The foundation release passed its active hosted checks. On PR #11,
+CodeQL passed on merge revision `6aa055d`: 103 rules ran with zero results and
+no alerts on `refs/pull/11/merge`. Dependency review failed because the required
+dependency-graph capability was not enabled. This remains an owner setup gate,
+not a passing or completed scan.
+[Hosted Security run](https://github.com/lumagreen786-cell/Luma.Green/actions/runs/40659264386).
 
 Read-only GitHub checks confirm that `lumagreen786-cell/Luma.Green` is **public**
 and its owner type is **User**. The signed-in operator can push but has neither
@@ -118,21 +121,29 @@ global allowlist.
 
 Public repositories can use CodeQL and dependency review without purchasing
 GitHub Pro, Team or a security add-on. This repository is public, so the current
-workflow selects the free public-repository path automatically. No API key,
-personal access token or activation variable is required for that path.
+workflow selects free CodeQL automatically. Dependency review also has no
+license charge here, but requires the owner to enable the dependency graph and
+then set `LUMA_DEPENDENCY_REVIEW_ENABLED=true`. This is a repository variable,
+not an API key or application secret. No personal access token is requested.
 [CodeQL availability](https://docs.github.com/en/code-security/concepts/code-scanning/codeql/codeql-code-scanning),
 [dependency review availability](https://docs.github.com/en/code-security/concepts/supply-chain-security/dependency-review).
 
-| Check               | Current public-repository condition                        | Permissions and result                                                                                                |
-| ------------------- | ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `CodeQL`            | Repository is public; runs on the Security workflow events | Contents/actions read and security-events write in this job only; uploads JavaScript/TypeScript code-scanning results |
-| `Dependency review` | PR event and repository is public                          | Contents read; rejects introduced high/critical dependency vulnerabilities; no PR-comment write                       |
+| Check               | Current public-repository condition                                   | Permissions and result                                                                                                |
+| ------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `CodeQL`            | Repository is public; runs on the Security workflow events            | Contents/actions read and security-events write in this job only; uploads JavaScript/TypeScript code-scanning results |
+| `Dependency review` | PR event, public repository and `LUMA_DEPENDENCY_REVIEW_ENABLED=true` | Contents read; rejects introduced high/critical dependency vulnerabilities; no PR-comment write                       |
 
-The new public conditions are prepared in `security.yml`. A local syntax check
-or matching condition is not a completed hosted analysis. Record the exact
-revision and successful result after the first run. An analysis success means
-that the scan ran; review its alerts separately. Do not describe a skipped scan
-as passed, or an empty new dependency diff as a complete vulnerability inventory.
+The hosted PR #11 run accepted CodeQL on merge revision `6aa055d` with 103
+rules and zero results. The alert view for `refs/pull/11/merge` was also empty.
+This proves that analysis ran on that revision; it does not prove that every
+future revision has no vulnerabilities.
+
+In that same run, [Dependency review failed](https://github.com/lumagreen786-cell/Luma.Green/actions/runs/40659264386/job/122717884501)
+with the message that dependency review was not supported and that the dependency
+graph must be enabled. The current operator cannot enable that repository
+setting. The workflow now leaves this job gated until the owner completes setup.
+A later skipped job means **not run**, not passed. Record a successful PR run
+after activation; an empty dependency diff is not a whole-lockfile inventory.
 
 CodeQL uses no-build JavaScript/TypeScript analysis and the extended security
 query suite. Use this advanced workflow as its owner; do not also enable CodeQL
@@ -151,12 +162,18 @@ and regression evidence together. This workflow contains no advisory exception.
 2. Apply [the branch/ruleset checklist](github-owner-settings.md). Its minimum
    mandatory set is the five always-running CI job names. Do not add a
    path-filtered workflow as a universally required check.
-3. Confirm dependency graph and Dependabot alerts in repository settings. Check
-   existing CodeQL setup before using the advanced workflow. No purchase is
-   needed for these public-repository capabilities.
-4. Inspect the first hosted `CodeQL` analysis on this follow-up's exact revision.
-   Confirm successful upload and review the resulting alerts. Inspect
-   `Dependency review` on its PR and a meaningful future dependency diff.
+3. In repository **Settings → Advanced Security**, enable **Dependency graph**
+   and **Dependabot alerts**. Older screens may call this section **Code security
+   and analysis**. Confirm that **Insights → Dependency graph → Dependencies**
+   contains the pnpm workspace dependencies. Do not activate a paid product or a
+   duplicate CodeQL default setup merely to enable these free features.
+4. After the graph is available, open **Settings → Secrets and variables →
+   Actions → Variables**. Create the repository variable
+   `LUMA_DEPENDENCY_REVIEW_ENABLED` with value `true`. Open or update a PR to
+   trigger Security, because dependency review is PR-only; a manual dispatch cannot prove
+   this job. Verify the latest merge revision and an actual dependency diff.
+   Retain the earlier failure as setup history until successful acceptance is
+   recorded. Review the already successful CodeQL analysis separately.
 5. Select CodeRabbit only if wanted. Its GitHub App installation, selected-repo
    access, data terms and billing need the owner's review. No application CI key
    is required. Check that it reviews the latest non-draft PR and reads
@@ -180,8 +197,9 @@ The workflow keeps an explicit private-organization path:
 | Dependency review | `LUMA_DEPENDENCY_REVIEW_ENABLED=true` | PR event, Organization owner and eligible dependency-review setup |
 
 These are repository variables, not application secrets. They declare completed
-setup and cannot grant a license. Leave them absent/false unless the owner has
-verified that future private arrangement. Do not make a conditional job a
+setup and cannot grant a license. The dependency-review variable is also needed
+for the current public repository after its graph is enabled. Leave the private
+CodeQL variable absent/false unless the owner verifies that future arrangement. Do not make a conditional job a
 universal required check.
 
 ### CodeRabbit review scope
@@ -220,9 +238,10 @@ called.
 Actionlint passed all repository workflows. `.coderabbit.yaml` validated against
 the provider's current JSON Schema (2020-12). Format and whitespace checks are
 part of the final local verification. The shipped foundation has its own hosted
-release receipt. This follow-up's new public scan conditions still need hosted
-acceptance; live bot review and owner branch-rule enforcement remain separate
-setup evidence. This task does not claim zero vulnerabilities.
+release receipt. CodeQL now has hosted acceptance on PR #11 at `6aa055d`.
+Dependency review failed on the account capability gate and remains unaccepted
+until owner setup and a successful PR run. Live bot review and owner branch-rule
+enforcement remain separate setup evidence. This task does not claim zero vulnerabilities.
 
 Primary technical references:
 [Gitleaks CLI/configuration and license](https://github.com/gitleaks/gitleaks),
@@ -232,3 +251,5 @@ Primary technical references:
 [dependency-review action](https://github.com/actions/dependency-review-action),
 [CodeRabbit configuration](https://docs.coderabbit.ai/reference/configuration)
 and [its schema](https://coderabbit.ai/integrations/schema.v2.json).
+
+Dependency setup references: [repository security setup](https://docs.github.com/en/code-security/getting-started/quickstart-for-securing-your-repository) and [Dependabot alerts](https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/configure-dependabot-alerts).

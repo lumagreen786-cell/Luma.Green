@@ -1,7 +1,8 @@
 name: Security
 
 # These checks supplement the five required CI jobs. Public-repository scans
-# run free; private-repository scans retain explicit account eligibility gates.
+# are free. Dependency review waits for owner-enabled Dependency graph;
+# private-repository scans also retain account eligibility gates.
 on:
   pull_request:
     branches: [main]
@@ -129,7 +130,7 @@ jobs:
 
   dependency-review:
     name: Dependency review
-    if: github.event_name == 'pull_request' && (github.event.repository.private == false || (vars.LUMA_DEPENDENCY_REVIEW_ENABLED == 'true' && github.event.repository.owner.type == 'Organization'))
+    if: github.event_name == 'pull_request' && vars.LUMA_DEPENDENCY_REVIEW_ENABLED == 'true' && (github.event.repository.private == false || github.event.repository.owner.type == 'Organization')
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:

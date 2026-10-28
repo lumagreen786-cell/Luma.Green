@@ -37,7 +37,10 @@ Existing Production OTP and Surepass key names are installed. Development paid
 Surepass calls remain off. Do not print or request existing secret values.
 Optional accounts still need the scoped settings and acceptance listed in the
 checklist. The repository is public: public CodeQL and dependency review can run
-free. Branch protection still needs the repository owner; current operator
+free. The first hosted CodeQL run passed (103 rules, zero reported results).
+Dependency review needs the owner to enable Dependency graph, then set
+`LUMA_DEPENDENCY_REVIEW_ENABLED=true` and verify a PR run. The prepared job
+remains skipped until that setup. Branch protection needs the repository owner; current operator
 access permits pushes but not repository administration.
 
 Expo remains paused. The original primary checkout contains unrelated mobile

@@ -82,11 +82,35 @@ workflow that does not run for every PR can leave a documentation-only PR waitin
 forever. Engineers must still inspect and pass E2E whenever its workflow applies.
 [Skipped-workflow behavior](https://docs.github.com/en/pull-requests/how-tos/merge-and-close-pull-requests/troubleshooting-required-status-checks).
 
-The new public CodeQL and dependency-review conditions in `security.yml` do not
-need a paid plan or activation key. Confirm their first hosted results before
-considering any additional rule. Do not add a conditional job or a paid bot
-review as a blanket requirement merely because its configuration exists. The
-minimum server-enforced set in this checklist is the five CI jobs above.
+Public CodeQL runs automatically without a paid plan. The first hosted PR #11
+run passed on merge revision `6aa055d`: 103 rules, zero results, and no alerts on
+`refs/pull/11/merge`. [Hosted Security run](https://github.com/lumagreen786-cell/Luma.Green/actions/runs/40659264386).
+Dependency review failed because its required dependency-graph capability was
+not enabled. That failure is an open owner setup gate. A subsequent gated skip
+is not a pass. Do not add a conditional job or paid bot as a blanket requirement.
+The minimum server-enforced set remains the five CI jobs above.
+
+## Enable the dependency checks
+
+1. Use the owner/admin account. In repository **Settings → Advanced Security**,
+   enable **Dependency graph** and **Dependabot alerts**. An older screen may call
+   this **Code security and analysis**. These features are free for this public
+   repository; do not buy a security add-on or enable duplicate CodeQL setup.
+2. Open **Insights → Dependency graph → Dependencies**. Confirm that the graph
+   contains the pnpm workspace dependencies. If ingestion has not completed, keep
+   the workflow variable absent or false.
+3. Open **Settings → Secrets and variables → Actions → Variables**. Add the
+   repository variable `LUMA_DEPENDENCY_REVIEW_ENABLED` with value `true`.
+   This value is an activation flag, not a secret or API key.
+4. Open or update a PR to trigger Security. Inspect **Dependency review** on its
+   latest merge revision. A manual workflow dispatch skips this PR-only check and cannot
+   validate it. Check a meaningful dependency diff as well as the job result.
+5. Record the successful run and revision. Until then, keep the earlier
+   [failed job](https://github.com/lumagreen786-cell/Luma.Green/actions/runs/40659264386/job/122717884501)
+   marked as an account setup failure. Do not label a skipped run as accepted.
+
+[GitHub security setup](https://docs.github.com/en/code-security/getting-started/quickstart-for-securing-your-repository),
+[Dependabot alert setup](https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/configure-dependabot-alerts).
 
 ## Owner verification
 

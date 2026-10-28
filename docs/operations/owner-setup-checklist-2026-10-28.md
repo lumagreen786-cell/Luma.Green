@@ -81,9 +81,15 @@ business terms or provider approval.
       `SUREPASS_ENABLED=true`. Confirm GSTIN by PAN and GSTIN Advanced subscriptions
       and balance. Shared quota remains 20 paid attempts per verified account per
       India day. Development paid calls remain off. No new catalogue API is approved.
-- [ ] **GitHub owner:** set the branch rules in
+- [ ] **GitHub owner:** enable Dependency graph and set the branch rules in
       [GitHub owner settings](github-owner-settings.md). This needs owner permission,
       not another API key. Do not send a password or unrestricted personal token.
+
+The first hosted CodeQL analysis passed with 103 rules and zero reported results.
+Dependency review stopped because Dependency graph is disabled. After the owner
+enables that graph, set the repository variable `LUMA_DEPENDENCY_REVIEW_ENABLED=true`
+and verify a real PR run. It is an account setup gate, not a paid-plan gate.
+The job remains skipped until setup is complete; a skip is not a security pass.
 
 Installed names were checked without printing secret values. Presence does not
 prove provider delivery, balance or approval. The new Convex Production has no
