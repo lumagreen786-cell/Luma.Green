@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Controller, useForm, useWatch } from "react-hook-form";
 import type { z } from "zod";
 
+import { CityField } from "@/components/location/city-field";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "@/i18n/navigation";
 
@@ -44,6 +45,7 @@ function toDraft(values: Partial<Values>): Draft {
   return withoutUndefined({
     name: values.name,
     area: values.area,
+    city: values.city,
     location: values.location,
     radiusKm: radius,
     workTypes: values.workTypes,
@@ -80,6 +82,7 @@ export function SaathiForm({ application }: { application: Application }) {
     defaultValues: {
       name: draft.name ?? "",
       area: draft.area ?? "",
+      city: draft.city ?? "",
       location: draft.location,
       radiusKm: draft.radiusKm,
       workTypes: draft.workTypes ?? [],
@@ -93,7 +96,7 @@ export function SaathiForm({ application }: { application: Application }) {
     const parsed = saathiSchema.safeParse(getValues());
     return resumeStage(
       [
-        ["name", "area", "location", "radiusKm"],
+        ["name", "city", "area", "location", "radiusKm"],
         ["workTypes", "vehicle", "times", "days"],
         [],
       ],
@@ -158,7 +161,7 @@ export function SaathiForm({ application }: { application: Application }) {
       stages={[
         {
           title: t("saathi.area"),
-          fields: ["name", "area", "location", "radiusKm"],
+          fields: ["name", "city", "area", "location", "radiusKm"],
           content: (
             <>
               <FormField
@@ -181,6 +184,18 @@ export function SaathiForm({ application }: { application: Application }) {
                 />
               </FormField>
 
+              <Controller
+                name="city"
+                control={control}
+                render={({ field, fieldState }) => (
+                  <CityField
+                    value={field.value}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    error={Boolean(fieldState.error)}
+                  />
+                )}
+              />
               <FormField
                 id="area"
                 label={t("saathi.area")}

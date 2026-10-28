@@ -538,7 +538,6 @@ function matchesBuyerScope(
   return (
     listing.grams > 0 &&
     listing.orgId !== org._id &&
-    (isByproduct || listing.city === org.city) &&
     (isRegular || isByproduct) &&
     (materialCode === undefined || listing.materialCode === materialCode) &&
     isListingOfferCurrent(listing)
@@ -641,12 +640,7 @@ export const requestTrade = mutation({
   handler: async (ctx, args) => {
     const { profile, org } = await requireOrg(ctx, BUYER_KINDS);
     const listing = await ctx.db.get("listings", args.listingId);
-    if (
-      listing?.city !== org.city &&
-      listing?.origin !== "manufacturer_byproduct"
-    ) {
-      throw new ConvexError("NOT_FOUND");
-    }
+    if (!listing) throw new ConvexError("NOT_FOUND");
     if (listing.orgId === org._id) throw new ConvexError("OWN_LISTING");
     const seller = await ctx.db.get("orgs", listing.orgId);
     if (seller?.status !== "active") throw new ConvexError("NOT_FOUND");
@@ -663,6 +657,10 @@ export const requestTrade = mutation({
     if (listing.status !== "open") throw new ConvexError("LISTING_NOT_OPEN");
     if (!isListingOfferCurrent(listing))
       throw new ConvexError("LISTING_EXPIRED");
+    const materials = await materialIndex(ctx);
+    const material = materials.get(listing.materialCode);
+    if (!material || !matchesBuyerScope(listing, material, org))
+      throw new ConvexError("MATERIAL_NOT_ALLOWED");
     if (!isPositiveInteger(args.grams)) throw new ConvexError("INVALID_WEIGHT");
     if (args.grams > listing.grams) throw new ConvexError("NOT_ENOUGH_LEFT");
     if (!(await isListingStockBacked(ctx, listing, args.grams)))

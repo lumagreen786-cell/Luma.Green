@@ -23,5 +23,12 @@
     "critical": 1
   },
   "dependencyAuditExit": "nonzero; residual findings recorded in delivery results",
-  "captures": "Actual public policy UI on a local Production build with disconnected backend. No authenticated/native-device/provider proof."
+  "captures": "Actual public policy UI on a local Production build with disconnected backend. No authenticated/native-device/provider proof.",
+  "currentMainIntegration": {
+    "baseRevision": "45ad8a6ec22c23345d4e05ee0b0fc3e2073431bb",
+    "webBackendTests": 2953,
+    "webBackendTestFiles": 358,
+    "buildPages": 3318,
+    "browserGate": "Combined local suite running; hosted checks must pass before merge. Earlier counts describe the prior base."
+  }
 }

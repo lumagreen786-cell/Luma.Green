@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { NextIntlClientProvider } from "next-intl";
 import { expect, it, vi } from "vitest";
 
+import arabic from "../../../messages/ar.json";
 import messages from "../../../messages/en.json";
 import { KabadiwalaForm } from "./kabadiwala-form";
 import type * as AutosaveModule from "./use-autosave";
@@ -48,6 +49,9 @@ it("validates each shop stage and sends the complete retained application only a
   ).toBeVisible();
   await userEvent.click(screen.getByRole("button", { name: "Continue" }));
   expect(screen.getByLabelText("Shop address")).toBeVisible();
+  fireEvent.change(screen.getByLabelText(messages.join.form.city), {
+    target: { value: "Bengaluru" },
+  });
   fireEvent.change(screen.getByLabelText("Shop address"), {
     target: { value: "123 Demo street Bengaluru" },
   });
@@ -61,6 +65,7 @@ it("validates each shop stage and sends the complete retained application only a
       ownerName: "Demo owner",
       shopName: "Demo shop",
       address: "123 Demo street Bengaluru",
+      city: "Bengaluru",
       gstRegistered: false,
       offersPickup: false,
     }),
@@ -96,3 +101,50 @@ it("resumes at the incomplete address and keeps saved identity on Back", async (
     "Saved shop",
   );
 });
+
+it.each([
+  ["en", messages],
+  ["ar", arabic],
+] as const)(
+  "retains city and state when moving between application stages in %s",
+  async (locale, copy) => {
+    const application = {
+      kabadiwala: {
+        ownerName: "Test owner",
+        shopName: "Test shop",
+        gstRegistered: false,
+        city: "Bilaspur, Chhattisgarh",
+        address: "Full test address",
+      },
+      files: [],
+    } as unknown as Application;
+    render(
+      <NextIntlClientProvider locale={locale} messages={copy}>
+        <KabadiwalaForm application={application} loginPhone={undefined} />
+      </NextIntlClientProvider>,
+    );
+    const user = userEvent.setup();
+    await user.click(screen.getByRole("button", { name: copy.join.form.back }));
+    expect(
+      screen.getByRole("textbox", { name: copy.join.form.city }),
+    ).toHaveValue("Bilaspur");
+    expect(
+      screen.getByRole("combobox", { name: copy.join.form.stateUT }),
+    ).toHaveTextContent("Chhattisgarh");
+    await user.click(
+      screen.getByRole("combobox", { name: copy.join.form.stateUT }),
+    );
+    await user.click(screen.getByRole("option", { name: "Himachal Pradesh" }));
+    await user.click(screen.getByRole("button", { name: copy.auth.continue }));
+    await user.click(screen.getByRole("button", { name: copy.join.form.back }));
+    expect(
+      screen.getByRole("textbox", { name: copy.join.form.city }),
+    ).toHaveValue("Bilaspur");
+    expect(
+      screen.getByRole("combobox", { name: copy.join.form.stateUT }),
+    ).toHaveTextContent("Himachal Pradesh");
+    expect(screen.getByLabelText(copy.join.kabadiwala.address)).toHaveValue(
+      "Full test address",
+    );
+  },
+);

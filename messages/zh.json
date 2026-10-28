@@ -88,7 +88,7 @@
   "home": {
     "metaDescription": "Luma.Green将印度的资源回收网络连接在一个平台上：家庭、材料回收店、预处理商、再生企业和制造商，共享公平价格、经过核验的企业和每一步的收据。",
     "hero": {
-      "eyebrow": "从班加罗尔开始",
+      "eyebrow": "印度",
       "title": "清理可回收物，换取报酬。",
       "lead": "拍照、上门取件或送到店内，称重后付款。",
       "sell": "回收",
@@ -97,8 +97,8 @@
     },
     "teaser": {
       "title": "今日价格",
-      "placeAndDate": "班加罗尔 · {date}",
-      "place": "班加罗尔",
+      "placeAndDate": "{city} · {date}",
+      "place": "{city}",
       "seeAll": "查看全部价格",
       "demoNote": "原型演示的示例价格。",
       "unavailable": "今日价格即将显示在这里。",
@@ -246,9 +246,9 @@
     }
   },
   "prices": {
-    "metaTitle": "班加罗尔今日可回收材料价格",
-    "metaDescription": "班加罗尔可回收材料每公斤的注明日期参考价格。每家企业自主设置报价。",
-    "eyebrow": "班加罗尔",
+    "metaTitle": "材料价格",
+    "metaDescription": "每公斤的注明日期参考价格。每家企业自主设置报价。选择材料以查看现有历史记录。",
+    "eyebrow": "印度",
     "title": "材料价格",
     "lead": "每公斤的注明日期参考价格。每家企业自主设置报价。选择材料以查看现有历史记录。",
     "demoNote": "这是原型演示的示例价格，并非实时市场价。",
@@ -283,7 +283,7 @@
       "unknown": "历史数据还不足"
     },
     "detail": {
-      "description": "{code} · {family} · 班加罗尔",
+      "description": "{code} · {family}",
       "today": "今天",
       "low": "30天最低价",
       "high": "30天最高价",
@@ -615,9 +615,9 @@
   },
   "contact": {
     "metaTitle": "联系我们",
-    "metaDescription": "如需参加班加罗尔试点，请联系Luma.Green团队。",
+    "metaDescription": "Luma.Green将印度的资源回收网络连接在一个平台上：家庭、材料回收店、预处理商、再生企业和制造商，共享公平价格、经过核验的企业和每一步的收据。",
     "title": "与我们交流",
-    "lead": "我们先在班加罗尔与少量回收店、预处理商、再生企业和工厂合作。请介绍你的身份、交易材料和每月大致处理量。",
+    "lead": "Luma.Green将印度的资源回收网络连接在一个平台上：家庭、材料回收店、预处理商、再生企业和制造商，共享公平价格、经过核验的企业和每一步的收据。",
     "emailHeading": "抢先体验与一般问题",
     "securityHeading": "安全问题报告",
     "securityBody": "发现漏洞？请私下报告，不要公开发布。"
@@ -2029,7 +2029,9 @@
         "sat": "周六",
         "sun": "周日"
       },
-      "changesTitle": "需要修改"
+      "changesTitle": "需要修改",
+      "city": "城市或地区",
+      "stateUT": "邦或中央直辖区"
     },
     "kabadiwala": {
       "title": "你的店铺",
@@ -2216,7 +2218,8 @@
       "fileTooBig": "文件过大",
       "uploadFailed": "上传失败，请重试。",
       "generic": "发生问题，请重试。",
-      "pan": "请查询 GST 号码并确认您的企业。"
+      "pan": "请查询 GST 号码并确认您的企业。",
+      "city": "请输入2至60个字符的城市或地区名称。"
     },
     "identity": {
       "pan": "PAN（可选）",
@@ -2261,7 +2264,8 @@
       "impact": "环境效益",
       "compliance": "合规",
       "earnings": "收入",
-      "help": "帮助"
+      "help": "帮助",
+      "paperRecords": "纸质记录"
     },
     "roles": {
       "kabadiwala": "废品回收店",
@@ -2523,8 +2527,8 @@
   },
   "sell": {
     "metaTitle": "预约回收",
-    "metaDescription": "在班加罗尔家中出售报纸、塑料、金属和旧电子设备。查看附近店铺收购价，预约回收，在门口收款。",
-    "eyebrow": "面向班加罗尔家庭",
+    "metaDescription": "清理可回收物，换取报酬。 拍照、上门取件或送到店内，称重后付款。",
+    "eyebrow": "印度",
     "title": "预约上门回收",
     "lead": "选择材料和附近店铺，称重后通过现金或UPI收款。",
     "promises": {
@@ -2537,7 +2541,7 @@
       "title": "预约即将开放",
       "body": "我们正在设置家庭预约服务，请稍后查看。"
     },
-    "demoNote": "班加罗尔试点的示例价格与店铺。",
+    "demoNote": "这是原型演示的示例价格，并非实时市场价。",
     "loadError": "无法加载，请检查连接后重试。",
     "retry": "重试",
     "steps": {
@@ -4400,6 +4404,38 @@
     "assignedWork": "请先完成分配的工作或交接。",
     "reviewLimit": "关闭账户前还需审核更多记录。",
     "checkLimit": "关闭账户后重新注册不会重置今天的企业核查额度。核查可能暂停至印度时间的次日。"
+  },
+  "papers": {
+    "title": "纸质记录",
+    "lead": "确认仅保存证据，不改变库存或资金。",
+    "upload": "添加纸张图片",
+    "source": "原始图片",
+    "text": "转录文本",
+    "rows": "行",
+    "addRow": "添加行",
+    "consent": "将此图片发送至外部模型进行转录。",
+    "confirm": "我已核对图片并更正此文本。",
+    "confirmed": "已确认的转录",
+    "unavailable": "提取不可用，请手动输入文本。",
+    "extract": "提取草稿",
+    "failed": "提取未完成，请手动输入。",
+    "duplicate": "此图片已保存，请打开其记录。",
+    "invalid": "使用 JPEG 或 PNG，最大 2 MB，每边不超过 2400 像素。",
+    "empty": "暂无纸质记录。",
+    "discard": "丢弃草稿",
+    "confirmAction": "确认转录",
+    "pending": "正在处理图片…",
+    "manual": "打开手动库存记录",
+    "modelDraft": "未经核实的模型草稿",
+    "saveFirst": "提取前请保存更改。",
+    "date": "日期",
+    "description": "描述",
+    "quantity": "数量",
+    "unit": "单位",
+    "amount": "金额",
+    "reference": "参考",
+    "more": "更多",
+    "capacity": "纸质记录存储已满。请使用手动记录或联系工作区所有者。"
   },
   "privacy": {
     "title": "隐私政策",

@@ -4,6 +4,7 @@ import type { Id } from "./_generated/dataModel";
 import { mutation, query } from "./_generated/server";
 import { requireAdmin } from "./lib/access";
 import { findProfile } from "./lib/applicationAccess";
+import { canonicalCity } from "./lib/geography";
 import { indiaToday } from "./lib/onboarding";
 import { priceProblem } from "./lib/review";
 import { vFamily } from "./lib/validators";
@@ -14,9 +15,8 @@ import { vNames } from "./lib/views";
 const MAX_MATERIALS = 200;
 
 function cityFrom(input: string): string {
-  const city = input.trim();
-  if (city.length < 2 || city.length > 60)
-    throw new ConvexError("INVALID_CITY");
+  const city = canonicalCity(input);
+  if (!city) throw new ConvexError("INVALID_CITY");
   return city;
 }
 

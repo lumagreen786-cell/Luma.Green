@@ -101,3 +101,14 @@ unchanged form unit test occurred during concurrent browser/unit execution;
 the same two-test form file passed alone in 877ms with unchanged five-second
 limits. The final full pnpm check passed without the browser workload. A current
 Russian phone/dark policy capture is retained with the other evidence.
+
+## Current main integration
+
+Main advanced to 45ad8a6 while the repair was being checked. Both delivery
+sections and all non-conflicting translation values were preserved. Shared copy
+was regenerated; 33 catalogues / 3,232 messages have no coverage issues. The
+combined branch passed pnpm check: 2,953 web/backend tests in 358 files, four
+security regressions, 62 mobile policy tests, 14 mobile component tests and 30
+desktop tests. The combined Production build generated 3,318 pages. The local
+browser suite is rerunning, and fresh hosted checks must pass before merge.
+Earlier screenshot/test counts above describe the pre-integration repair.

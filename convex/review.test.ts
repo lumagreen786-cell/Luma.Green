@@ -100,6 +100,7 @@ async function insertApplication(
 }
 
 const saathiSection = {
+  city: "Bengaluru",
   name: "Geetha M",
   area: "Mathikere",
   radiusKm: 5 as const,
@@ -120,6 +121,7 @@ describe("the queue", () => {
         status: "submitted",
         submittedAt: now - 30 * HOUR,
         business: {
+          city: "Bengaluru",
           businessName: "Old Town Recyclers",
           address: "Old Madras Road, KR Puram, Bengaluru",
         },
@@ -290,6 +292,7 @@ describe("the queue", () => {
 
 describe("one application", () => {
   const shop = {
+    city: "Bengaluru",
     ownerName: "Ramesh K",
     shopName: "Ramesh Raddi",
     gstRegistered: false,

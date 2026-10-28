@@ -1,6 +1,17 @@
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vitest/config";
 
+// Let local operators bound memory use on small machines without changing CI.
+const workerSetting = process.env.VITEST_MAX_WORKERS;
+const workerLimit =
+  workerSetting === undefined ? undefined : Number(workerSetting);
+if (
+  workerLimit !== undefined &&
+  (!Number.isSafeInteger(workerLimit) || workerLimit < 1 || workerLimit > 16)
+) {
+  throw new Error("VITEST_MAX_WORKERS must be an integer from 1 to 16.");
+}
+
 // Artifact freshness is opt-in per AGENTS.md; runtime fixture tests remain here.
 export const guideTests = [
   "src/user-guide.test.ts",
@@ -16,6 +27,7 @@ export default defineConfig({
   // Native resolution of the `@/*` alias from tsconfig.json.
   resolve: { tsconfigPaths: true },
   test: {
+    maxWorkers: workerLimit,
     environment: "jsdom",
     globals: true,
     setupFiles: ["./vitest.setup.ts"],

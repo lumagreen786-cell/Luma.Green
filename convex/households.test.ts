@@ -110,6 +110,7 @@ describe("households.shops", () => {
   it("prices the basket at each shop's own rates, the city fallback for gaps", async () => {
     const t = await demoWorld();
     const shops = await t.query(api.households.shops, {
+      city: "Bengaluru",
       items: [
         { materialCode: "PAPER-NEWS", kg: 10 },
         { materialCode: "METAL-IRON", kg: 5 },
@@ -142,6 +143,7 @@ describe("households.shops", () => {
     });
 
     const shops = await t.query(api.households.shops, {
+      city: "Bengaluru",
       items: [{ materialCode: "PAPER-NEWS", kg: 10 }],
     });
     const names = shops.map((shop) => shop.name);
@@ -156,6 +158,7 @@ describe("households.shops", () => {
   it("sorts nearest first when the household shares where they are", async () => {
     const t = await demoWorld();
     const shops = await t.query(api.households.shops, {
+      city: "Bengaluru",
       items: [{ materialCode: "PAPER-NEWS", kg: 10 }],
       near: { lat: 13.028, lng: 77.5409 }, // Yeshwanthpur
     });
@@ -170,7 +173,7 @@ describe("households.shops", () => {
   it("refuses a basket it can't price", async () => {
     const t = await demoWorld();
     const shops = (items: { materialCode: string; kg: number }[]) =>
-      t.query(api.households.shops, { items });
+      t.query(api.households.shops, { city: "Bengaluru", items });
     await expect(shops([{ materialCode: "NOPE", kg: 1 }])).rejects.toThrow(
       /UNKNOWN_MATERIAL/,
     );
@@ -186,6 +189,7 @@ describe("households.shops", () => {
     ).rejects.toThrow(/INVALID_KG/);
     await expect(
       t.query(api.households.shops, {
+        city: "Bengaluru",
         items: [],
         near: { lat: 200, lng: 77 },
       }),
@@ -1044,6 +1048,9 @@ it("does not present expired offers or reference prices as a current household e
         expiresAt: Date.now() - 1,
       });
   });
-  const rows = await t.query(api.households.shops, { items: basket });
+  const rows = await t.query(api.households.shops, {
+    city: "Bengaluru",
+    items: basket,
+  });
   expect(rows.find((row) => row.id === id)?.estimatePaise).toBeUndefined();
 });

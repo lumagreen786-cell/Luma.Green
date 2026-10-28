@@ -88,7 +88,7 @@
   "prices": {
     "detail": {
       "close": "Kapat",
-      "description": "{code} · {family} · Bengaluru",
+      "description": "{code} · {family}",
       "today": "Bugün",
       "low": "30 günlük en düşük",
       "high": "30 günlük en yüksek",
@@ -101,9 +101,9 @@
       "title": "Fiyatlar yüklenemedi",
       "body": "Bağlantınızı kontrol edip tekrar deneyin."
     },
-    "metaTitle": "Bengaluru’da bugünkü malzeme fiyatları",
-    "metaDescription": "Bengaluru’daki geri dönüştürülebilir malzemeler için kg başına tarihli referans fiyatları. Her işletme kendi tekliflerini belirler.",
-    "eyebrow": "Bengaluru",
+    "metaTitle": "Malzeme fiyatları",
+    "metaDescription": "Kilogram başına tarihli referans fiyatları. Her işletme kendi tekliflerini belirler. Mevcut geçmişi görmek için malzeme seçin.",
+    "eyebrow": "Hindistan",
     "title": "Malzeme fiyatları",
     "lead": "Kilogram başına tarihli referans fiyatları. Her işletme kendi tekliflerini belirler. Mevcut geçmişi görmek için malzeme seçin.",
     "demoNote": "Prototip için örnek fiyatlar; canlı piyasa oranları değildir.",
@@ -291,9 +291,9 @@
   },
   "contact": {
     "metaTitle": "İletişim",
-    "metaDescription": "Bengaluru pilotuna katılmak için Luma.Green ekibiyle iletişime geçin.",
+    "metaDescription": "Luma.Green, Hindistan’ın geri dönüşüm ağını tek platformda birleştirir: haneler, toplama işletmeleri, ön işleme işletmeleri, geri dönüşümcüler ve üreticiler. Adil fiyatlar, doğrulanmış işletmeler ve her adımda makbuz.",
     "title": "Bizimle konuşun",
-    "lead": "Bengaluru’da küçük bir hurdacı, ön işleme işletmesi, geri dönüşümcü ve fabrika grubuyla başlıyoruz. Kim olduğunuzu, ne alıp sattığınızı ve aylık yaklaşık hacminizi anlatın.",
+    "lead": "Luma.Green, Hindistan’ın geri dönüşüm ağını tek platformda birleştirir: haneler, toplama işletmeleri, ön işleme işletmeleri, geri dönüşümcüler ve üreticiler. Adil fiyatlar, doğrulanmış işletmeler ve her adımda makbuz.",
     "emailHeading": "Erken erişim ve genel sorular",
     "securityHeading": "Güvenlik bildirimleri",
     "securityBody": "Bir güvenlik açığı mı buldunuz? Herkese açık paylaşmak yerine özel olarak bildirin."
@@ -1570,7 +1570,8 @@
       "trades": "Ticaretler",
       "impact": "Etki",
       "compliance": "Mevzuata uyum",
-      "earnings": "Kazançlar"
+      "earnings": "Kazançlar",
+      "paperRecords": "Kâğıt kayıtlar"
     },
     "navLabel": "Uygulama",
     "homeLink": "Luma.Green ana sayfa",
@@ -1748,8 +1749,8 @@
       "fixIt": "Düzelt",
       "locationNote": "Gerekirse başka yakın dükkân bulmak için yaklaşık konumunuz bu alımla kaydedilir."
     },
-    "metaDescription": "Bengaluru’da evden gazete, plastik, metal ve eski elektronik satın. Yakındaki dükkân fiyatlarını görün, alım ayarlayın ve kapıda ödeme alın.",
-    "eyebrow": "Bengaluru’daki evler için",
+    "metaDescription": "Geri dönüştürülebilirleri çıkar. Para kazan. Fotoğraflar, evden alım veya dükkâna teslim ve tartım sonrası ödeme.",
+    "eyebrow": "Hindistan",
     "title": "Evden toplama planlayın",
     "lead": "Malzemelerinizi ve yakındaki dükkânı seçin; tartıldığında nakit veya UPI alın.",
     "promises": {
@@ -1762,7 +1763,7 @@
       "title": "Rezervasyon yakında açılacak",
       "body": "Evler için rezervasyonları hazırlıyoruz. Kısa süre sonra tekrar bakın."
     },
-    "demoNote": "Bengaluru pilotu için örnek fiyat ve dükkânlar.",
+    "demoNote": "Prototip için örnek fiyatlar; canlı piyasa oranları değildir.",
     "loadError": "Yükleyemedik. Bağlantınızı kontrol edip tekrar deneyin.",
     "mine": {
       "title": "Rezervasyonlarınız",
@@ -2455,7 +2456,7 @@
   "home": {
     "metaDescription": "Luma.Green, Hindistan’ın geri dönüşüm ağını tek platformda birleştirir: haneler, toplama işletmeleri, ön işleme işletmeleri, geri dönüşümcüler ve üreticiler. Adil fiyatlar, doğrulanmış işletmeler ve her adımda makbuz.",
     "hero": {
-      "eyebrow": "Bengaluru’da başlıyoruz",
+      "eyebrow": "Hindistan",
       "title": "Geri dönüştürülebilirleri çıkar. Para kazan.",
       "lead": "Fotoğraflar, evden alım veya dükkâna teslim ve tartım sonrası ödeme.",
       "sell": "Geri dönüştür",
@@ -2464,8 +2465,8 @@
     },
     "teaser": {
       "title": "Bugünün fiyatları",
-      "placeAndDate": "Bengaluru · {date}",
-      "place": "Bengaluru",
+      "placeAndDate": "{city} · {date}",
+      "place": "{city}",
       "seeAll": "Tüm fiyatlar",
       "demoNote": "Prototip için örnek fiyatlar.",
       "unavailable": "Bugünün fiyatları yakında burada görünecek.",
@@ -2929,7 +2930,9 @@
         "sat": "Cmt",
         "sun": "Paz"
       },
-      "changesTitle": "Düzeltilecekler"
+      "changesTitle": "Düzeltilecekler",
+      "city": "Şehir veya yerleşim yeri",
+      "stateUT": "Eyalet veya birlik bölgesi"
     },
     "status": {
       "draft": {
@@ -3065,7 +3068,8 @@
       "fileTooBig": "Dosya çok büyük",
       "uploadFailed": "Yükleme başarısız. Tekrar deneyin.",
       "generic": "Bir sorun oluştu. Tekrar deneyin.",
-      "pan": "GST numaranızı arayıp işletmenizi onaylayın."
+      "pan": "GST numaranızı arayıp işletmenizi onaylayın.",
+      "city": "2–60 karakterlik bir şehir veya yerleşim yeri girin."
     },
     "identity": {
       "pan": "PAN (isteğe bağlı)",
@@ -4400,6 +4404,38 @@
     "assignedWork": "Önce atanmış işinizi veya teslimi çözün.",
     "reviewLimit": "Kapatmadan önce daha fazla kayıt incelenmelidir.",
     "checkLimit": "Hesabı kapatıp yeniden katılmak bugünkü işletme kontrolü sınırını sıfırlamaz. Kontroller Hindistan saatine göre ertesi güne kadar bekletilebilir."
+  },
+  "papers": {
+    "title": "Kâğıt kayıtlar",
+    "lead": "Onay yalnızca kanıtı kaydeder. Stok ve para değişmez.",
+    "upload": "Belge görseli ekle",
+    "source": "Özgün görsel",
+    "text": "Yazıya aktarılan metin",
+    "rows": "Satırlar",
+    "addRow": "Satır ekle",
+    "consent": "Bu görseli yazıya aktarım için harici modele gönder.",
+    "confirm": "Görseli kontrol ettim ve metni düzelttim.",
+    "confirmed": "Onaylı metin",
+    "unavailable": "Çıkarma kullanılamıyor. Metni elle girin.",
+    "extract": "Taslak çıkar",
+    "failed": "Çıkarma tamamlanmadı. Elle giriş yapın.",
+    "duplicate": "Bu görsel zaten kayıtlı. Kaydını açın.",
+    "invalid": "JPEG veya PNG, en fazla 2 MB ve her kenarda 2400 piksel.",
+    "empty": "Henüz kâğıt kayıt yok.",
+    "discard": "Taslağı sil",
+    "confirmAction": "Metni onayla",
+    "pending": "Görsel işleniyor…",
+    "manual": "Elle stok kayıtlarını aç",
+    "modelDraft": "Doğrulanmamış model taslağı",
+    "saveFirst": "Çıkarmadan önce değişiklikleri kaydedin.",
+    "date": "Tarih",
+    "description": "Açıklama",
+    "quantity": "Miktar",
+    "unit": "Birim",
+    "amount": "Tutar",
+    "reference": "Referans",
+    "more": "Diğer",
+    "capacity": "Belge depolama alanı dolu. Elle kayıt kullanın veya çalışma alanı sahibine başvurun."
   },
   "privacy": {
     "title": "Gizlilik politikası",

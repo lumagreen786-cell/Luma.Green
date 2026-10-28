@@ -129,6 +129,7 @@ function photo() {
 }
 async function details() {
   const user = userEvent.setup();
+  await user.type(screen.getByLabelText(messages.join.form.city), "Bengaluru");
   await user.type(
     screen.getByLabelText(messages.sell.when.nameLabel),
     "Test person",
@@ -174,6 +175,7 @@ it("starts with photos and personal details, without a material or weight questi
 it("requires photos and a pickup address, while drop-off can omit the address", () => {
   expect(
     recyclingDetailsSchema.safeParse({
+      city: "Bengaluru",
       name: "Test",
       address: "",
       mode: "pickup",
@@ -181,6 +183,7 @@ it("requires photos and a pickup address, while drop-off can omit the address", 
   ).toBe(false);
   expect(
     recyclingDetailsSchema.safeParse({
+      city: "Bengaluru",
       name: "Test",
       address: "",
       mode: "dropoff",

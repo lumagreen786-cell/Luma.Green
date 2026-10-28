@@ -35,6 +35,7 @@ const consent = {
 } as const;
 
 const shop = {
+  city: "Bengaluru",
   ownerName: "Ramesh K",
   shopName: "Ramesh Kabadi Store",
   gstRegistered: false,
@@ -363,6 +364,7 @@ describe("uploads", () => {
     });
     await yard.mutation(api.applications.saveDraft, {
       business: {
+        city: "Bengaluru",
         businessName: "Peenya Plastics",
         gstRegistered: true,
         gstin: "29ABCDE1234F1Z5",
@@ -532,6 +534,7 @@ it("activates Saathis after required ID and selfie uploads without PAN checks", 
   });
   await person.mutation(api.applications.saveDraft, {
     saathi: {
+      city: "Bengaluru",
       name: "Test Helper",
       area: "Bengaluru",
       radiusKm: 2,

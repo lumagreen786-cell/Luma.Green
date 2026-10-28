@@ -13,6 +13,7 @@ import {
 import { requireCollectionCapacity } from "./lib/collectionScheduling";
 import { beginDispatch, isPickupLocationEligible } from "./lib/dispatch";
 import { vSaathiTime } from "./lib/drafts";
+import { canonicalCity } from "./lib/geography";
 import { preparePhotoRequest } from "./lib/householdPhotos";
 import {
   basketError,
@@ -29,7 +30,6 @@ import {
   isWindowOpen,
   MAX_OPEN_BOOKINGS,
   OPEN_BOOKING_STATUSES,
-  PILOT_CITY,
 } from "./lib/households";
 import { isOrdinaryMaterial } from "./lib/materialEligibility";
 import { queueBookingNotification } from "./lib/notifications";
@@ -176,27 +176,27 @@ function sortShops(rows: ShopOffer[], isNearGiven: boolean): ShopOffer[] {
  */
 export const shops = query({
   args: {
+    city: v.string(),
     items: v.array(vItem),
     near: v.optional(v.object({ lat: v.number(), lng: v.number() })),
   },
   returns: v.array(vShopOffer),
   handler: async (ctx, args) => {
     await checkedBasket(ctx, args.items, { allowEmpty: true });
+    const city = canonicalCity(args.city);
+    if (!city) throw new ConvexError("INVALID_CITY");
     const near = args.near;
     if (near && !isValidPoint(near)) throw new ConvexError("INVALID_LOCATION");
 
     const orgs = await ctx.db
       .query("orgs")
       .withIndex("by_kind_city", (q) =>
-        q
-          .eq("kind", "kabadiwala")
-          .eq("city", PILOT_CITY)
-          .eq("status", "active"),
+        q.eq("kind", "kabadiwala").eq("city", city).eq("status", "active"),
       )
       .take(MAX_SHOPS);
     const fallback = await fallbackPrices(
       ctx,
-      PILOT_CITY,
+      city,
       args.items.map((item) => item.materialCode),
     );
 

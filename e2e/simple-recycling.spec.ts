@@ -33,6 +33,13 @@ for (const [locale, copy] of [
           exact: true,
         }),
       ).toBeVisible();
+      await page.getByLabel(copy.join.form.city).fill("Mumbai");
+      await page
+        .getByRole("combobox", { name: copy.join.form.stateUT })
+        .click();
+      await page
+        .getByRole("option", { name: "Maharashtra", exact: true })
+        .click();
       await expect(page.getByLabel(copy.sell.when.nameLabel)).toBeVisible();
       await expect(
         page.getByRole("button", {
@@ -69,6 +76,10 @@ for (const [locale, copy] of [
       await expect(page.getByLabel(copy.sell.when.addressLabel)).toHaveValue(
         "12 Test Street, Bengaluru",
       );
+      await expect(page.getByLabel(copy.join.form.city)).toHaveValue("Mumbai");
+      await expect(
+        page.getByRole("combobox", { name: copy.join.form.stateUT }),
+      ).toContainText("Maharashtra");
       await page.evaluate(async () => document.fonts.ready);
       expect(
         await page.evaluate(() => document.documentElement.scrollWidth),

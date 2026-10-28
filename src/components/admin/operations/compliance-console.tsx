@@ -13,6 +13,7 @@ import { Label } from "@/components/ui/label";
 import { api } from "../../../../convex/_generated/api";
 import { PROCESS_KINDS } from "../../../../convex/lib/industrialClassification";
 import { AdminChoice, AdminField } from "./definition-console";
+import { IndiaRegulatoryReferences } from "./india-regulatory-references";
 const reviewSchema = z.object({
   materialCodes: z.string().trim().min(1).max(1800),
   evidenceReference: z.string().trim().min(3).max(500),
@@ -76,6 +77,12 @@ export function FacilityReviewConsole() {
   const facility = data?.facilities.find((f) => f.id === facilityId);
   return (
     <div className="space-y-6">
+      <details>
+        <summary className="min-h-11 cursor-pointer py-3 font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring">
+          Find India regulatory references
+        </summary>
+        <IndiaRegulatoryReferences />
+      </details>
       <p className="text-sm text-muted-foreground">
         Review the actual registration, material and process scope. This records
         your evidence review; it does not issue a consent or submit to a

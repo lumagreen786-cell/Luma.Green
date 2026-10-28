@@ -1,3 +1,13 @@
+## Security repair integration checkpoint — 29 October 2026
+
+PR #25 combines the security/privacy repair with current main 45ad8a6.
+Both translation additions and delivery sections are preserved. Combined local
+pnpm check passes: 2,953 web/backend tests in 358 files; four security, 62 mobile
+policy, 14 mobile component and 30 desktop tests. Build: 3,318 pages. The full
+combined browser suite and hosted checks are the remaining merge gates.
+No native distribution or provider activation is included. Prior verification
+counts below describe their dated sources, not this combined checkpoint.
+
 ## App security/privacy/permissions repair — 29 October 2026
 
 The owner approved security and privacy repairs across web/Expo/Electron,
@@ -31,6 +41,34 @@ without relaxing checks; see the repair evidence. See the
 [repair evidence](app-security-privacy-results-2026-10-29.md) for residual
 advisories, exact scope and release limits. Hosted CI/review is the merge gate;
 this local checkpoint does not claim an already merged or signed release.
+
+## India-wide follow-up - 29 October 2026
+
+The owner replaced the Bengaluru-only software scope with India-wide web
+coverage and delegated official-source research and ordinary defaults. Read
+[the active delivery record](india-platform-2026-10-29.md) and
+[the implementation plan](../plans/2026-10-28-india-research-readiness.md).
+The task branch is `codex/india-research-readiness`, based on main `b6bcd56`, with checked main updates through `f687bbb`
+combined before release.
+New code covers state-qualified localities, guarded cross-city trade, local
+admin reassignment, safe preacceptance address redaction, dated regulatory
+references and private human-reviewed paper transcription. Paper extraction
+stays off without its separate enabled flag, explicit allowance and consent.
+Originals use atomic private database chunks with retained-source caps.
+
+All 53 team-form answers are labelled by evidence type. The owner delivery
+folder contains the editable research-filled form, a ten-page linked companion,
+37-URL source register and eight downloaded official PDFs with a hash manifest.
+Public research does not establish actual permits, recipes, contracts, provider
+approval, real-paper accuracy, cloud recovery or official carbon-market access.
+The newer geographic contract supersedes Bengaluru-first statements in older
+planning artifacts; preserve those as dated history rather than acceptance proof.
+
+Check the release PR and `Final_Release_Evidence/india-web-release-2026-10-29.json`
+for actual hosted and Production state. This handoff alone does not prove a
+release. Expo remains paused; unrelated primary-checkout changes are preserved.
+The owner left GitHub email verification/main protection queued. Keep checked
+PRs, backend-before-frontend and Production-only deployment.
 
 ## Production verification and locale restart repair — 29 October 2026
 

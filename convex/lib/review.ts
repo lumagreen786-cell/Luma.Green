@@ -1,4 +1,5 @@
 import type { Doc } from "../_generated/dataModel";
+import { canonicalCity, canonicalCityName, localityParts } from "./geography";
 import {
   type ApplicationStatus,
   SLA_DUE_SOON_HOURS,
@@ -12,7 +13,7 @@ import {
  * never disagree.
  */
 
-/** The pilot runs in one city; new businesses and Saathis start there. */
+/** Historical area-parser default; new provisioning always requires explicit city. */
 export const PILOT_CITY = "Bengaluru";
 
 const HOUR_MS = 60 * 60 * 1000;
@@ -129,6 +130,7 @@ function nonEmpty(value: string | undefined): string | undefined {
 export function areaFrom(
   address: string | undefined,
   tags?: readonly string[],
+  city = PILOT_CITY,
 ): string {
   const tag = tags?.map((value) => value.trim()).find(Boolean);
   if (tag) return tag.slice(0, MAX_AREA_CHARS);
@@ -136,11 +138,15 @@ export function areaFrom(
     .split(",")
     .map((part) => part.replaceAll(PINCODE, "").trim())
     .filter(Boolean);
-  const cityAt = parts.findIndex((part) => CITY_NAME.test(part));
+  const cityAt = parts.findIndex(
+    (part) =>
+      canonicalCityName(part) === canonicalCityName(localityParts(city).city) ||
+      (city === PILOT_CITY && CITY_NAME.test(part)),
+  );
   let area: string | undefined;
   if (cityAt > 0) area = parts[cityAt - 1];
   else if (cityAt === -1) area = parts.at(-1);
-  return (area ?? PILOT_CITY).slice(0, MAX_AREA_CHARS);
+  return (area ?? city).slice(0, MAX_AREA_CHARS);
 }
 
 /** The consent to show on the business: none when the unit claims exemption. */
@@ -194,13 +200,14 @@ export function orgDraftFrom(
     const shop = application.kabadiwala;
     const name = nonEmpty(shop?.shopName);
     const address = nonEmpty(shop?.address);
-    if (!shop || !name || !address) return null;
+    const city = canonicalCity(shop?.city);
+    if (!shop || !name || !address || !city) return null;
     const isPickupOffered = shop.offersPickup === true;
     return {
       kind: "kabadiwala",
       name,
-      city: PILOT_CITY,
-      area: areaFrom(address),
+      city,
+      area: areaFrom(address, undefined, city),
       address,
       location: shop.location,
       phones: phonesFrom(shop.phones),
@@ -216,7 +223,8 @@ export function orgDraftFrom(
   const business = application.business;
   const name = nonEmpty(business?.businessName);
   const address = nonEmpty(business?.address);
-  if (!business || !name || !address) return null;
+  const city = canonicalCity(business?.city);
+  if (!business || !name || !address || !city) return null;
   return {
     kind: application.kind,
     ...(business.siteType && { siteType: business.siteType }),
@@ -224,8 +232,8 @@ export function orgDraftFrom(
       materialOrigins: business.materialOrigins,
     }),
     name,
-    city: PILOT_CITY,
-    area: areaFrom(address, business.locationTags),
+    city,
+    area: areaFrom(address, business.locationTags, city),
     address,
     location: business.location,
     phones: phonesFrom(business.phones),
@@ -248,12 +256,19 @@ export function saathiDraftFrom(
   const name = nonEmpty(saathi.name);
   const area = nonEmpty(saathi.area);
   const { radiusKm, vehicle } = saathi;
-  if (!name || !area || radiusKm === undefined || vehicle === undefined) {
+  const city = canonicalCity(saathi.city);
+  if (
+    !name ||
+    !area ||
+    !city ||
+    radiusKm === undefined ||
+    vehicle === undefined
+  ) {
     return null;
   }
   return {
     name,
-    city: PILOT_CITY,
+    city,
     area,
     radiusKm,
     workTypes: saathi.workTypes ?? [],

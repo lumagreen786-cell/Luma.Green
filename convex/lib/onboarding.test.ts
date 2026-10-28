@@ -42,6 +42,7 @@ function errors(result: {
 }
 
 const shop = {
+  city: "Bengaluru",
   ownerName: "Ramesh K",
   shopName: "Ramesh Kabadi Store",
   gstRegistered: false,
@@ -55,6 +56,7 @@ const shop = {
 };
 
 const business = {
+  city: "Bengaluru",
   businessName: "Peenya Paper Yard",
   gstRegistered: true,
   gstin: "29ABCDE1234F1Z5",
@@ -77,6 +79,7 @@ const documents = {
 };
 
 const saathi = {
+  city: "Bengaluru",
   name: "Lakshmi",
   area: "Malleshwaram",
   radiusKm: 5 as const,
@@ -432,6 +435,7 @@ it("requires GST for business applicants even when an old draft opts out", () =>
 });
 it("strips retired PAN from Saathi forms without adding a validation requirement", () => {
   const person = {
+    city: "Bengaluru",
     name: "Test Helper",
     area: "Bengaluru",
     radiusKm: 2,

@@ -64,7 +64,9 @@ describe("the price tables", () => {
     });
 
     // A city with no table yet: every material, no prices.
-    const empty = await admin.query(api.adminPrices.list, { city: "Mysuru" });
+    const empty = await admin.query(api.adminPrices.list, {
+      city: "Mysuru, Karnataka",
+    });
     expect(empty).toHaveLength(CATALOGUE.length);
     expect(empty.every((row) => row.floorPaise === null)).toBe(true);
   });
@@ -117,12 +119,14 @@ describe("the price tables", () => {
   it("start a city's table the first time a price is set", async () => {
     const { admin } = await demoWorld();
     await admin.mutation(api.adminPrices.set, {
-      city: "Mysuru",
+      city: "Mysuru, Karnataka",
       materialCode: "PLASTIC-PET",
       floorPaise: 1500,
       fallbackPaise: 1800,
     });
-    const rows = await admin.query(api.adminPrices.list, { city: "Mysuru" });
+    const rows = await admin.query(api.adminPrices.list, {
+      city: "Mysuru, Karnataka",
+    });
     expect(rows.find((row) => row.code === "PLASTIC-PET")).toMatchObject({
       floorPaise: 1500,
       fallbackPaise: 1800,

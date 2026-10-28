@@ -123,6 +123,90 @@ async function auditActions(t: Test, entityId: string) {
 }
 
 describe("shop.requests", () => {
+  it("keeps a comma-free home address private until the assigned shop accepts", async () => {
+    const t = await demoWorld();
+    const shop = await signInAs(t, RAMESH);
+    const priya = await bookingOf(t, "Priya Sharma", "requested");
+    const privateAddress = "Flat9 SecretHouse Road Mumbai Maharashtra";
+    await t.run(async (ctx) => {
+      const booking = await ctx.db.get("bookings", priya);
+      if (!booking) throw new Error("Missing requested booking");
+      await ctx.db.patch(booking.orgId, { city: "Mumbai" });
+      await ctx.db.patch(priya, { address: privateAddress });
+    });
+
+    const groups = await shop.query(api.shop.requests, {});
+    const detail = await shop.query(api.shop.get, { bookingId: priya });
+    const requested = groups.new.find((booking) => booking.id === priya);
+    expect(requested).toMatchObject({
+      address: "Mumbai",
+      phone: "+91•••••••109",
+      token: "",
+    });
+    expect(detail?.booking).toMatchObject({
+      address: "Mumbai",
+      phone: "+91•••••••109",
+      token: "",
+    });
+    expect(JSON.stringify({ groups, detail })).not.toContain(privateAddress);
+
+    await shop.mutation(api.shop.respond, { bookingId: priya, accept: true });
+    const accepted = await shop.query(api.shop.get, { bookingId: priya });
+    expect(accepted?.booking).toMatchObject({
+      address: privateAddress,
+      phone: "+919000000109",
+      token: "priyademo1",
+      status: "accepted",
+    });
+
+    await t.run(async (ctx) => {
+      const booking = await ctx.db.get("bookings", priya);
+      if (!booking) throw new Error("Missing accepted booking");
+      const membership = await ctx.db
+        .query("memberships")
+        .withIndex("by_org", (q) => q.eq("orgId", booking.orgId))
+        .first();
+      const otherOrg = await ctx.db
+        .query("orgs")
+        .withIndex("by_slug", (q) => q.eq("slug", "sri-lakshmi-scrap"))
+        .unique();
+      if (!membership || !otherOrg) throw new Error("Missing other workspace");
+      await ctx.db.insert("memberships", {
+        profileId: membership.profileId,
+        orgId: otherOrg._id,
+        role: "member",
+        createdAt: Date.now(),
+      });
+      await ctx.db.patch(membership.profileId, { activeOrgId: otherOrg._id });
+    });
+    expect(await shop.query(api.shop.get, { bookingId: priya })).toBeNull();
+    const otherGroups = await shop.query(api.shop.requests, {});
+    expect(JSON.stringify(otherGroups)).not.toContain(privateAddress);
+    expect(otherGroups.active.map((booking) => booking.id)).not.toContain(
+      priya,
+    );
+  });
+
+  it.each(["pickup", "dropoff"] as const)(
+    "does not invent an address for a requested %s without one",
+    async (mode) => {
+      const t = await demoWorld();
+      const shop = await signInAs(t, RAMESH);
+      const id = await addBooking(t, "ramesh-kabadi-store", {
+        mode,
+        address: undefined,
+        status: "requested",
+        timeline: [{ status: "requested", at: Date.now() }],
+      });
+      const detail = await shop.query(api.shop.get, { bookingId: id });
+      expect(detail?.booking.address).toBeUndefined();
+      const groups = await shop.query(api.shop.requests, {});
+      expect(
+        groups.new.find((booking) => booking.id === id)?.address,
+      ).toBeUndefined();
+    },
+  );
+
   it("groups the shop's bookings: new, under way and done", async () => {
     const t = await demoWorld();
     const shop = await signInAs(t, RAMESH);
@@ -149,21 +233,21 @@ describe("shop.requests", () => {
     expect(groups.done[0]?.receipt?.totalPaise).toBeGreaterThan(0);
   });
 
-  it("shows only the area and a masked number until the shop accepts", async () => {
+  it("shows only the city and a masked number until the shop accepts", async () => {
     const t = await demoWorld();
     const shop = await signInAs(t, RAMESH);
     const priya = await bookingOf(t, "Priya Sharma", "requested");
 
     const { new: fresh } = await shop.query(api.shop.requests, {});
     expect(fresh.map((booking) => booking.address)).toEqual([
-      "Yeshwanthpur",
-      "Mathikere",
+      "Bengaluru",
+      "Bengaluru",
     ]);
     const before = await shop.query(api.shop.get, { bookingId: priya });
     expect(before?.booking).toMatchObject({
       name: "Priya",
       phone: "+91•••••••109",
-      address: "Yeshwanthpur",
+      address: "Bengaluru",
       token: "",
       status: "requested",
     });
@@ -214,7 +298,7 @@ describe("shop.respond", () => {
     const declined = await shop.query(api.shop.get, { bookingId: arjun });
     expect(declined?.booking).toMatchObject({
       status: "declined",
-      address: "Mathikere",
+      address: "Bengaluru",
       phone: "+91•••••••011",
     });
     await expect(

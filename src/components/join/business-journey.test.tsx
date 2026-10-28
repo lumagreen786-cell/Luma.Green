@@ -5,6 +5,7 @@ import { BusinessJourney } from "./business-journey";
 import type { Application } from "./use-mine";
 
 const business = {
+  city: "Bengaluru",
   businessName: "Example yard",
   gstRegistered: true,
   gstin: "29ABCDE1234F1Z5",

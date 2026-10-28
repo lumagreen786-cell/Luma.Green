@@ -88,7 +88,7 @@
   "home": {
     "metaDescription": "Luma.Green łączy indyjski łańcuch recyklingu na jednej platformie: gospodarstwa domowe, kabadiwalów, firmy przetwarzania wstępnego, recyklerów i producentów. Uczciwe ceny, zweryfikowane firmy i potwierdzenie na każdym etapie.",
     "hero": {
-      "eyebrow": "Zaczynamy w Bengaluru",
+      "eyebrow": "Indie",
       "title": "Oddaj surowce do recyklingu. Otrzymaj zapłatę.",
       "lead": "Zdjęcia, odbiór lub dostawa i płatność po zważeniu.",
       "sell": "Oddaj do recyklingu",
@@ -97,8 +97,8 @@
     },
     "teaser": {
       "title": "Dzisiejsze ceny",
-      "placeAndDate": "Bengaluru · {date}",
-      "place": "Bengaluru",
+      "placeAndDate": "{city} · {date}",
+      "place": "{city}",
       "seeAll": "Zobacz wszystkie ceny",
       "demoNote": "Przykładowe ceny w prototypie.",
       "unavailable": "Dzisiejsze ceny pojawią się tutaj wkrótce.",
@@ -246,9 +246,9 @@
     }
   },
   "prices": {
-    "metaTitle": "Dzisiejsze ceny surowców w Bengaluru",
-    "metaDescription": "Ceny referencyjne z datą za kg materiałów do recyklingu w Bengaluru. Każda firma ustala własne oferty.",
-    "eyebrow": "Bengaluru",
+    "metaTitle": "Ceny surowców",
+    "metaDescription": "Ceny referencyjne z datą za kilogram. Każda firma ustala własne oferty. Wybierz materiał, aby zobaczyć dostępną historię.",
+    "eyebrow": "Indie",
     "title": "Ceny surowców",
     "lead": "Ceny referencyjne z datą za kilogram. Każda firma ustala własne oferty. Wybierz materiał, aby zobaczyć dostępną historię.",
     "demoNote": "Przykładowe ceny w prototypie, nie bieżące stawki rynkowe.",
@@ -283,7 +283,7 @@
       "unknown": "Za mało danych historycznych"
     },
     "detail": {
-      "description": "{code} · {family} · Bengaluru",
+      "description": "{code} · {family}",
       "today": "Dzisiaj",
       "low": "Minimum z 30 dni",
       "high": "Maksimum z 30 dni",
@@ -615,9 +615,9 @@
   },
   "contact": {
     "metaTitle": "Kontakt",
-    "metaDescription": "Skontaktuj się z zespołem Luma.Green w sprawie udziału w pilotażu w Bengaluru.",
+    "metaDescription": "Luma.Green łączy indyjski łańcuch recyklingu na jednej platformie: gospodarstwa domowe, kabadiwalów, firmy przetwarzania wstępnego, recyklerów i producentów. Uczciwe ceny, zweryfikowane firmy i potwierdzenie na każdym etapie.",
     "title": "Porozmawiaj z nami",
-    "lead": "Zaczynamy w Bengaluru z małą grupą kabadiwalów, firm przetwarzania wstępnego, recyklerów i fabryk. Powiedz, kim jesteś, czym handlujesz i jakie ilości obsługujesz miesięcznie.",
+    "lead": "Luma.Green łączy indyjski łańcuch recyklingu na jednej platformie: gospodarstwa domowe, kabadiwalów, firmy przetwarzania wstępnego, recyklerów i producentów. Uczciwe ceny, zweryfikowane firmy i potwierdzenie na każdym etapie.",
     "emailHeading": "Wczesny dostęp i pytania ogólne",
     "securityHeading": "Zgłoszenia bezpieczeństwa",
     "securityBody": "Znaleziono lukę? Zgłoś ją prywatnie, zamiast publikować szczegóły."
@@ -2029,7 +2029,9 @@
         "sat": "Sob.",
         "sun": "Niedz."
       },
-      "changesTitle": "Co poprawić"
+      "changesTitle": "Co poprawić",
+      "city": "Miasto lub miejscowość",
+      "stateUT": "Stan lub terytorium związkowe"
     },
     "kabadiwala": {
       "title": "Twój punkt",
@@ -2216,7 +2218,8 @@
       "fileTooBig": "Plik jest za duży",
       "uploadFailed": "Przesyłanie nie powiodło się. Spróbuj ponownie.",
       "generic": "Wystąpił błąd. Spróbuj ponownie.",
-      "pan": "Wyszukaj numer GST i potwierdź firmę."
+      "pan": "Wyszukaj numer GST i potwierdź firmę.",
+      "city": "Wpisz miasto lub miejscowość, od 2 do 60 znaków."
     },
     "identity": {
       "pan": "PAN (opcjonalnie)",
@@ -2261,7 +2264,8 @@
       "impact": "Wpływ",
       "compliance": "Zgodność",
       "earnings": "Zarobki",
-      "help": "Pomoc"
+      "help": "Pomoc",
+      "paperRecords": "Dokumenty papierowe"
     },
     "roles": {
       "kabadiwala": "Punkt skupu",
@@ -2523,8 +2527,8 @@
   },
   "sell": {
     "metaTitle": "Zamów odbiór",
-    "metaDescription": "Sprzedaj z domu w Bengaluru gazety, plastik, metal i starą elektronikę. Sprawdź ceny pobliskich punktów, zarezerwuj odbiór i otrzymaj zapłatę przy drzwiach.",
-    "eyebrow": "Dla mieszkańców Bengaluru",
+    "metaDescription": "Oddaj surowce do recyklingu. Otrzymaj zapłatę. Zdjęcia, odbiór lub dostawa i płatność po zważeniu.",
+    "eyebrow": "Indie",
     "title": "Zamów odbiór z domu",
     "lead": "Wybierz materiały i pobliski punkt. Po ważeniu otrzymasz gotówkę lub płatność UPI.",
     "promises": {
@@ -2537,7 +2541,7 @@
       "title": "Rezerwacje będą wkrótce dostępne",
       "body": "Przygotowujemy rezerwacje dla mieszkańców. Sprawdź ponownie za chwilę."
     },
-    "demoNote": "Przykładowe ceny i punkty dla pilotażu w Bengaluru.",
+    "demoNote": "Przykładowe ceny w prototypie, nie bieżące stawki rynkowe.",
     "loadError": "Nie udało się wczytać danych. Sprawdź połączenie i spróbuj ponownie.",
     "retry": "Spróbuj ponownie",
     "steps": {
@@ -4400,6 +4404,38 @@
     "assignedWork": "Najpierw zakończ przydzieloną pracę lub przekazanie.",
     "reviewLimit": "Przed zamknięciem trzeba sprawdzić więcej danych.",
     "checkLimit": "Zamknięcie i ponowna rejestracja nie resetują dzisiejszego limitu kontroli firmy. Kontrole mogą być wstrzymane do następnego dnia w Indiach."
+  },
+  "papers": {
+    "title": "Dokumenty papierowe",
+    "lead": "Potwierdzenie zapisuje tylko dowód. Zapasy i pieniądze nie zmieniają się.",
+    "upload": "Dodaj obraz dokumentu",
+    "source": "Oryginalny obraz",
+    "text": "Przepisany tekst",
+    "rows": "Wiersze",
+    "addRow": "Dodaj wiersz",
+    "consent": "Wyślij ten obraz do modelu zewnętrznego w celu transkrypcji.",
+    "confirm": "Sprawdzono obraz i poprawiono tę transkrypcję.",
+    "confirmed": "Potwierdzona transkrypcja",
+    "unavailable": "Odczyt niedostępny. Wpisz tekst ręcznie.",
+    "extract": "Odczytaj wersję roboczą",
+    "failed": "Odczyt nie został ukończony. Wpisz ręcznie.",
+    "duplicate": "Ten obraz jest już zapisany. Otwórz dokument.",
+    "invalid": "Użyj JPEG lub PNG, maks. 2 MB i 2400 pikseli na bok.",
+    "empty": "Brak dokumentów papierowych.",
+    "discard": "Odrzuć wersję roboczą",
+    "confirmAction": "Potwierdź transkrypcję",
+    "pending": "Przetwarzanie obrazu…",
+    "manual": "Otwórz ręczne rejestry zapasów",
+    "modelDraft": "Niezweryfikowany szkic modelu",
+    "saveFirst": "Zapisz zmiany przed odczytem.",
+    "date": "Data",
+    "description": "Opis",
+    "quantity": "Ilość",
+    "unit": "Jednostka",
+    "amount": "Kwota",
+    "reference": "Odnośnik",
+    "more": "Więcej",
+    "capacity": "Brak miejsca na dokumenty. Użyj ręcznych rejestrów lub skontaktuj się z właścicielem obszaru roboczego."
   },
   "privacy": {
     "title": "Polityka prywatności",
