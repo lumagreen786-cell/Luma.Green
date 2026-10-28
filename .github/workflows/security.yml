@@ -1,7 +1,7 @@
 name: Security
 
-# These checks supplement the five required CI jobs. Paid checks stay skipped
-# until the owner completes the account steps in the security runbook.
+# These checks supplement the five required CI jobs. Public-repository scans
+# run free; private-repository scans retain explicit account eligibility gates.
 on:
   pull_request:
     branches: [main]
@@ -104,10 +104,10 @@ jobs:
           "$TOOL_DIR/actionlint" -color
 
   codeql:
-    name: CodeQL (account setup required)
-    # Private repositories require an eligible organization plan plus Code
-    # Security. A personal GitHub Pro subscription is not sufficient.
-    if: vars.LUMA_CODEQL_ENABLED == 'true' && github.event.repository.owner.type == 'Organization'
+    name: CodeQL
+    # Public repositories can use CodeQL for free. Private repositories still
+    # need explicit account approval and an eligible organization licence.
+    if: github.event.repository.private == false || (vars.LUMA_CODEQL_ENABLED == 'true' && github.event.repository.owner.type == 'Organization')
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
@@ -128,8 +128,8 @@ jobs:
           category: /language:javascript-typescript
 
   dependency-review:
-    name: Dependency review (account setup required)
-    if: github.event_name == 'pull_request' && vars.LUMA_DEPENDENCY_REVIEW_ENABLED == 'true' && github.event.repository.owner.type == 'Organization'
+    name: Dependency review
+    if: github.event_name == 'pull_request' && (github.event.repository.private == false || (vars.LUMA_DEPENDENCY_REVIEW_ENABLED == 'true' && github.event.repository.owner.type == 'Organization'))
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
