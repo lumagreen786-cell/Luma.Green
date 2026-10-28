@@ -440,6 +440,7 @@ async function approvedApplication(
       ...base,
       kind: "kabadiwala",
       kabadiwala: {
+        city: DEMO_CITY,
         ownerName: owner.name,
         shopName: org.name,
         gstRegistered: false,
@@ -458,6 +459,7 @@ async function approvedApplication(
     ...base,
     kind: org.kind,
     business: {
+      city: DEMO_CITY,
       businessName: org.name,
       gstRegistered: true,
       gstin: org.gstin,
@@ -490,6 +492,7 @@ async function seedSaathi(
   if (!saathi) return;
   const section = {
     name: saathi.name,
+    city: DEMO_CITY,
     area: "Yeshwanthpur",
     radiusKm: 5 as const,
     workTypes: ["home_pickups" as const, "yard_sorting" as const],
@@ -765,6 +768,7 @@ async function seedYardApplicant(
   if (!yard) return;
   const submittedAt = now - 19 * HOUR;
   const business = {
+    city: DEMO_CITY,
     businessName: "Irfan Metal & Plastic Yard",
     gstRegistered: true,
     gstin: "29AAIFI3344R1Z1",
@@ -843,6 +847,7 @@ async function seedShopApplicant(
   if (!shop) return;
   const submittedAt = now - 2 * HOUR;
   const kabadiwala = {
+    city: DEMO_CITY,
     ownerName: shop.name,
     shopName: "Kavitha Raddi Shop",
     gstRegistered: false,

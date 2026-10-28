@@ -1,3 +1,30 @@
+## India-wide follow-up - 29 October 2026
+
+The owner replaced the Bengaluru-only software scope with India-wide web
+coverage and delegated official-source research and ordinary defaults. Read
+[the active delivery record](india-platform-2026-10-29.md) and
+[the implementation plan](../plans/2026-10-28-india-research-readiness.md).
+The task branch is `codex/india-research-readiness`, based on main `b6bcd56`.
+New code covers state-qualified localities, guarded cross-city trade, local
+admin reassignment, safe preacceptance address redaction, dated regulatory
+references and private human-reviewed paper transcription. Paper extraction
+stays off without its separate enabled flag, explicit allowance and consent.
+Originals use atomic private database chunks with retained-source caps.
+
+All 53 team-form answers are labelled by evidence type. The owner delivery
+folder contains the editable research-filled form, a ten-page linked companion,
+37-URL source register and eight downloaded official PDFs with a hash manifest.
+Public research does not establish actual permits, recipes, contracts, provider
+approval, real-paper accuracy, cloud recovery or official carbon-market access.
+The newer geographic contract supersedes Bengaluru-first statements in older
+planning artifacts; preserve those as dated history rather than acceptance proof.
+
+Check the release PR and `Final_Release_Evidence/india-web-release-2026-10-29.json`
+for actual hosted and Production state. This handoff alone does not prove a
+release. Expo remains paused; unrelated primary-checkout changes are preserved.
+The owner left GitHub email verification/main protection queued. Keep checked
+PRs, backend-before-frontend and Production-only deployment.
+
 ## Web UX simplification — 27 October 2026
 
 ## Platform foundation shipped and account setup follow up 28 October 2026

@@ -4,10 +4,10 @@ import { useQuery } from "convex/react";
 import { useEffect, useMemo, useState } from "react";
 
 import { api } from "../../../convex/_generated/api";
+import { canonicalCity } from "../../../convex/lib/geography";
 import {
   isBookableDate,
   isWindowOpen,
-  PILOT_CITY,
   SLOT_WINDOWS,
 } from "../../../convex/lib/households";
 import { indiaToday } from "../../../convex/lib/onboarding";
@@ -53,11 +53,11 @@ export function withFreshSlot(
 }
 
 /** Household estimates use the city's fallback, never the market quote or floor. */
-function usePrices(): PriceMap | undefined {
-  const board = useQuery(api.catalogue.priceQuotes, {
-    city: PILOT_CITY,
-    source: "fallback",
-  });
+function usePrices(city: string | null): PriceMap | undefined {
+  const board = useQuery(
+    api.catalogue.priceQuotes,
+    city ? { city, source: "fallback" } : "skip",
+  );
   return useMemo(() => {
     if (!board) return;
     const prices = new Map<string, number>();
@@ -70,23 +70,19 @@ function usePrices(): PriceMap | undefined {
 }
 
 /**
- * The shops for this basket, while a step needs them. The last list stays
- * up while a new one loads (after "Use my location"), instead of flashing
- * back to a skeleton.
+ * The shops for the explicit locality while a step needs them. Never keep
+ * offers from an earlier city while a new city query is loading.
  */
 function useShops(
   isNeeded: boolean,
   items: SellDraft["items"],
   near: { lat: number; lng: number } | undefined,
+  city: string | null,
 ): ShopOffer[] | undefined {
-  const live = useQuery(
+  return useQuery(
     api.households.shops,
-    isNeeded ? { items, ...(near && { near }) } : "skip",
+    isNeeded && city ? { city, items, ...(near && { near }) } : "skip",
   );
-  const [kept, setKept] = useState(live);
-  if (live !== undefined && live !== kept) setKept(live);
-  if (!isNeeded) return;
-  return live ?? kept;
 }
 
 /**
@@ -97,7 +93,7 @@ function useShops(
 export function useSellState() {
   const [stored, update] = useSellDraft();
   const materials = useQuery(api.catalogue.materials);
-  const prices = usePrices();
+  const prices = usePrices(canonicalCity(stored?.city));
   const location = useLocation();
   const { wanted, goTo, replace } = useStepNavigation();
   const now = useNow();
@@ -118,6 +114,7 @@ export function useSellState() {
     wanted !== "basket" && items.length > 0,
     items,
     location.point,
+    canonicalCity(draft.city),
   );
   const shop = shops?.find((candidate) => candidate.id === draft.shopId);
   // While the list loads, trust the stored choice; once it's here, the shop

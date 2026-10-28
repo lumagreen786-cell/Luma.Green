@@ -28,6 +28,7 @@ export interface SellDraft {
   slotDate?: string;
   slotWindow?: SlotWindow;
   address: string;
+  city?: string;
   name: string;
 }
 
@@ -246,6 +247,7 @@ export function parseDraft(raw: string | null): SellDraft {
     slotDate: optionalText(value.slotDate),
     slotWindow,
     address: text(value.address),
+    ...(optionalText(value.city) && { city: optionalText(value.city) }),
     name: text(value.name),
   };
 }

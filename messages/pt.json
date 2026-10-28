@@ -88,7 +88,7 @@
   "home": {
     "metaDescription": "A Luma.Green reúne a rede de reciclagem da Índia em uma plataforma: famílias, kabadiwalas, pré-processadores, recicladores e fabricantes, com preços justos, empresas verificadas e recibo em cada etapa.",
     "hero": {
-      "eyebrow": "Começando em Bengaluru",
+      "eyebrow": "Índia",
       "title": "Liberte espaço com os recicláveis. Receba dinheiro.",
       "lead": "Fotos, recolha ou entrega e pagamento após a pesagem.",
       "sell": "Reciclar",
@@ -97,8 +97,8 @@
     },
     "teaser": {
       "title": "Preços de hoje",
-      "placeAndDate": "Bengaluru · {date}",
-      "place": "Bengaluru",
+      "placeAndDate": "{city} · {date}",
+      "place": "{city}",
       "seeAll": "Ver todos os preços",
       "demoNote": "Preços de exemplo para o protótipo.",
       "unavailable": "Os preços de hoje aparecerão aqui em breve.",
@@ -246,9 +246,9 @@
     }
   },
   "prices": {
-    "metaTitle": "Preços da matéria reciclável em Bengaluru hoje",
-    "metaDescription": "Preços de referência datados por kg de materiais recicláveis em Bengaluru. Cada empresa define as suas ofertas.",
-    "eyebrow": "Bengaluru",
+    "metaTitle": "Preços de materiais",
+    "metaDescription": "Preços de referência datados por quilograma. Cada empresa define as suas ofertas. Escolha um material para ver o histórico disponível.",
+    "eyebrow": "Índia",
     "title": "Preços de materiais",
     "lead": "Preços de referência datados por quilograma. Cada empresa define as suas ofertas. Escolha um material para ver o histórico disponível.",
     "demoNote": "Preços de exemplo do protótipo, não cotações de mercado ao vivo.",
@@ -283,7 +283,7 @@
       "unknown": "Histórico ainda insuficiente"
     },
     "detail": {
-      "description": "{code} · {family} · Bengaluru",
+      "description": "{code} · {family}",
       "today": "Hoje",
       "low": "Mínima de 30 dias",
       "high": "Máxima de 30 dias",
@@ -615,9 +615,9 @@
   },
   "contact": {
     "metaTitle": "Contato",
-    "metaDescription": "Fale com a equipe Luma.Green para participar do piloto em Bengaluru.",
+    "metaDescription": "A Luma.Green reúne a rede de reciclagem da Índia em uma plataforma: famílias, kabadiwalas, pré-processadores, recicladores e fabricantes, com preços justos, empresas verificadas e recibo em cada etapa.",
     "title": "Fale conosco",
-    "lead": "Começamos em Bengaluru com um pequeno grupo de kabadiwalas, pré-processadores, recicladores e fábricas. Diga quem você é, o que negocia e aproximadamente quanto material movimenta por mês.",
+    "lead": "A Luma.Green reúne a rede de reciclagem da Índia em uma plataforma: famílias, kabadiwalas, pré-processadores, recicladores e fabricantes, com preços justos, empresas verificadas e recibo em cada etapa.",
     "emailHeading": "Acesso antecipado e dúvidas gerais",
     "securityHeading": "Relatos de segurança",
     "securityBody": "Encontrou uma vulnerabilidade? Relate em particular em vez de publicar."
@@ -2029,7 +2029,9 @@
         "sat": "Sáb",
         "sun": "Dom"
       },
-      "changesTitle": "O que corrigir"
+      "changesTitle": "O que corrigir",
+      "city": "Cidade ou localidade",
+      "stateUT": "Estado ou território da união"
     },
     "kabadiwala": {
       "title": "Sua loja",
@@ -2216,7 +2218,8 @@
       "fileTooBig": "Este arquivo é grande demais",
       "uploadFailed": "Falha no envio. Tente novamente.",
       "generic": "Algo deu errado. Tente novamente.",
-      "pan": "Pesquise o seu número GST e confirme a empresa."
+      "pan": "Pesquise o seu número GST e confirme a empresa.",
+      "city": "Insira uma cidade ou localidade com 2–60 caracteres."
     },
     "identity": {
       "pan": "PAN (opcional)",
@@ -2261,7 +2264,8 @@
       "impact": "Impacto",
       "compliance": "Conformidade",
       "earnings": "Ganhos",
-      "help": "Ajuda"
+      "help": "Ajuda",
+      "paperRecords": "Registos em papel"
     },
     "roles": {
       "kabadiwala": "Kabadiwala",
@@ -2523,8 +2527,8 @@
   },
   "sell": {
     "metaTitle": "Agendar coleta",
-    "metaDescription": "Venda jornais, plástico, metal e eletrônicos usados de casa em Bengaluru. Veja quanto as lojas próximas pagam, agende uma coleta e receba na porta.",
-    "eyebrow": "Para casas em Bengaluru",
+    "metaDescription": "Liberte espaço com os recicláveis. Receba dinheiro. Fotos, recolha ou entrega e pagamento após a pesagem.",
+    "eyebrow": "Índia",
     "title": "Agende uma coleta em casa",
     "lead": "Escolha o que tem e uma loja próxima. Receba em dinheiro ou UPI após a pesagem.",
     "promises": {
@@ -2537,7 +2541,7 @@
       "title": "Agendamentos disponíveis em breve",
       "body": "Estamos preparando os agendamentos para casas. Volte em breve."
     },
-    "demoNote": "Preços e lojas de exemplo para o piloto de Bengaluru.",
+    "demoNote": "Preços de exemplo do protótipo, não cotações de mercado ao vivo.",
     "loadError": "Não foi possível carregar. Confira sua conexão e tente novamente.",
     "retry": "Tentar novamente",
     "steps": {
@@ -4399,5 +4403,37 @@
     "assignedWork": "Resolva primeiro o trabalho atribuído ou a entrega.",
     "reviewLimit": "É necessário rever mais registos antes do fecho.",
     "checkLimit": "Fechar e voltar a registar-se não repõe o limite de verificações empresariais de hoje. As verificações podem ficar suspensas até ao dia seguinte na Índia."
+  },
+  "papers": {
+    "title": "Registos em papel",
+    "lead": "A confirmação guarda apenas provas. O stock e o dinheiro não mudam.",
+    "upload": "Adicionar imagem do papel",
+    "source": "Imagem original",
+    "text": "Texto transcrito",
+    "rows": "Linhas",
+    "addRow": "Adicionar linha",
+    "consent": "Enviar esta imagem ao modelo externo para transcrição.",
+    "confirm": "Verifiquei a imagem e corrigi esta transcrição.",
+    "confirmed": "Transcrição confirmada",
+    "unavailable": "Extração indisponível. Introduza o texto manualmente.",
+    "extract": "Extrair rascunho",
+    "failed": "A extração não terminou. Use a introdução manual.",
+    "duplicate": "Esta imagem já está guardada. Abra o registo.",
+    "invalid": "Use JPEG ou PNG, até 2 MB e 2400 píxeis por lado.",
+    "empty": "Ainda não há registos em papel.",
+    "discard": "Descartar rascunho",
+    "confirmAction": "Confirmar transcrição",
+    "pending": "A processar a imagem…",
+    "manual": "Abrir registos manuais de stock",
+    "modelDraft": "Rascunho do modelo não verificado",
+    "saveFirst": "Guarde as alterações antes da extração.",
+    "date": "Data",
+    "description": "Descrição",
+    "quantity": "Quantidade",
+    "unit": "Unidade",
+    "amount": "Valor",
+    "reference": "Referência",
+    "more": "Mais",
+    "capacity": "O armazenamento de documentos está cheio. Use registos manuais ou contacte o proprietário do espaço."
   }
 }

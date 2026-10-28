@@ -57,7 +57,7 @@ const WINDOW_ORDER = { morning: 0, afternoon: 1, evening: 2 } as const;
 
 /**
  * Accepting reveals the household's name, phone and address; until then the
- * shop sees a first name, a masked number and the area.
+ * shop sees a first name, a masked number and the known operational city.
  */
 function isRevealed(booking: Booking): boolean {
   return (
@@ -66,20 +66,6 @@ function isRevealed(booking: Booking): boolean {
     booking.status === "completed" ||
     booking.timeline.some((step) => step.status === "accepted")
   );
-}
-
-/**
- * The area of an address: the last part before the city. "Flat 4B, Rose
- * Apartments, Yeshwanthpur, Bengaluru" → "Yeshwanthpur".
- */
-function areaOf(address: string, city: string): string | undefined {
-  const cityAt = address.toLowerCase().indexOf(`, ${city.toLowerCase()}`);
-  const beforeCity = cityAt === -1 ? address : address.slice(0, cityAt);
-  const parts = beforeCity
-    .split(",")
-    .map((part) => part.trim())
-    .filter((part) => part !== "");
-  return parts.at(-1);
 }
 
 function firstName(name: string | undefined): string | undefined {
@@ -99,7 +85,7 @@ function materialRef(materials: Materials, code: string) {
 function bookingView(booking: Booking, city: string, materials: Materials) {
   const canSee = isRevealed(booking);
   let address = booking.address;
-  if (address !== undefined && !canSee) address = areaOf(address, city);
+  if (address !== undefined && !canSee) address = city;
   return {
     id: booking._id,
     // The tracking link shows the address, so it waits for acceptance too.

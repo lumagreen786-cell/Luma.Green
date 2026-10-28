@@ -88,7 +88,7 @@
   "prices": {
     "detail": {
       "close": "Tutup",
-      "description": "{code} · {family} · Bengaluru",
+      "description": "{code} · {family}",
       "today": "Hari ini",
       "low": "Terendah 30 hari",
       "high": "Tertinggi 30 hari",
@@ -101,9 +101,9 @@
       "title": "Harga gagal dimuatkan",
       "body": "Semak sambungan anda dan cuba lagi."
     },
-    "metaTitle": "Harga bahan kitar semula Bengaluru hari ini",
-    "metaDescription": "Harga rujukan bertarikh bagi setiap kg bahan kitar semula di Bengaluru. Setiap perniagaan menetapkan tawaran sendiri.",
-    "eyebrow": "Bengaluru",
+    "metaTitle": "Harga bahan",
+    "metaDescription": "Harga rujukan bertarikh bagi setiap kilogram. Setiap perniagaan menetapkan tawaran sendiri. Pilih bahan untuk melihat sejarah yang tersedia.",
+    "eyebrow": "India",
     "title": "Harga bahan",
     "lead": "Harga rujukan bertarikh bagi setiap kilogram. Setiap perniagaan menetapkan tawaran sendiri. Pilih bahan untuk melihat sejarah yang tersedia.",
     "demoNote": "Harga contoh untuk prototaip, bukan kadar pasaran langsung.",
@@ -291,9 +291,9 @@
   },
   "contact": {
     "metaTitle": "Hubungi",
-    "metaDescription": "Hubungi pasukan Luma.Green tentang menyertai rintis Bengaluru.",
+    "metaDescription": "Luma.Green menyatukan rangkaian kitar semula India dalam satu platform: isi rumah, peniaga bahan kitar semula, pemproses awal, pengitar semula dan pengilang, dengan harga adil, perniagaan disahkan dan resit pada setiap langkah.",
     "title": "Bercakap dengan kami",
-    "lead": "Kami bermula di Bengaluru dengan sekumpulan kecil peniaga barang lusuh, pemproses awal, pengitar semula dan kilang. Beritahu siapa anda, bahan yang diniagakan dan anggaran jumlah yang melalui anda setiap bulan.",
+    "lead": "Luma.Green menyatukan rangkaian kitar semula India dalam satu platform: isi rumah, peniaga bahan kitar semula, pemproses awal, pengitar semula dan pengilang, dengan harga adil, perniagaan disahkan dan resit pada setiap langkah.",
     "emailHeading": "Akses awal dan soalan umum",
     "securityHeading": "Laporan keselamatan",
     "securityBody": "Menemui kelemahan keselamatan? Sila laporkan secara peribadi, bukan secara terbuka."
@@ -1570,7 +1570,8 @@
       "trades": "Urus niaga",
       "impact": "Impak",
       "compliance": "Pematuhan",
-      "earnings": "Pendapatan"
+      "earnings": "Pendapatan",
+      "paperRecords": "Rekod kertas"
     },
     "navLabel": "Aplikasi",
     "homeLink": "Laman utama Luma.Green",
@@ -1748,8 +1749,8 @@
       "fixIt": "Baiki",
       "locationNote": "Anggaran lokasi anda disimpan bersama kutipan ini supaya kami boleh mencari kedai lain berhampiran jika perlu."
     },
-    "metaDescription": "Jual surat khabar, plastik, logam dan elektronik lama dari rumah di Bengaluru. Lihat bayaran kedai berhampiran, tempah kutipan dan terima bayaran di depan pintu.",
-    "eyebrow": "Untuk rumah di Bengaluru",
+    "metaDescription": "Kosongkan bahan kitar semula. Terima bayaran. Foto, kutipan atau penghantaran, dan bayaran selepas ditimbang.",
+    "eyebrow": "India",
     "title": "Tempah kutipan dari rumah",
     "lead": "Pilih barang anda, pilih kedai berhampiran dan terima tunai atau UPI selepas ditimbang.",
     "promises": {
@@ -1762,7 +1763,7 @@
       "title": "Tempahan dibuka tidak lama lagi",
       "body": "Kami sedang menyediakan tempahan untuk rumah. Sila semak semula sebentar lagi."
     },
-    "demoNote": "Harga dan kedai contoh untuk rintis Bengaluru.",
+    "demoNote": "Harga contoh untuk prototaip, bukan kadar pasaran langsung.",
     "loadError": "Tidak dapat memuatkan. Semak sambungan anda dan cuba lagi.",
     "mine": {
       "title": "Tempahan anda",
@@ -2784,7 +2785,9 @@
         "sat": "Sab",
         "sun": "Ahd"
       },
-      "changesTitle": "Perkara untuk diperbaiki"
+      "changesTitle": "Perkara untuk diperbaiki",
+      "city": "Bandar atau kawasan",
+      "stateUT": "Negeri atau wilayah kesatuan"
     },
     "status": {
       "draft": {
@@ -2993,7 +2996,8 @@
       "fileTooBig": "Fail ini terlalu besar",
       "uploadFailed": "Muat naik gagal. Cuba lagi.",
       "generic": "Ralat berlaku. Cuba lagi.",
-      "pan": "Cari nombor GST dan sahkan perniagaan anda."
+      "pan": "Cari nombor GST dan sahkan perniagaan anda.",
+      "city": "Masukkan bandar atau kawasan dengan 2–60 aksara."
     },
     "identity": {
       "pan": "PAN (pilihan)",
@@ -3134,7 +3138,7 @@
   "home": {
     "metaDescription": "Luma.Green menyatukan rangkaian kitar semula India dalam satu platform: isi rumah, peniaga bahan kitar semula, pemproses awal, pengitar semula dan pengilang, dengan harga adil, perniagaan disahkan dan resit pada setiap langkah.",
     "hero": {
-      "eyebrow": "Bermula di Bengaluru",
+      "eyebrow": "India",
       "title": "Kosongkan bahan kitar semula. Terima bayaran.",
       "lead": "Foto, kutipan atau penghantaran, dan bayaran selepas ditimbang.",
       "sell": "Kitar semula",
@@ -3143,8 +3147,8 @@
     },
     "teaser": {
       "title": "Harga hari ini",
-      "placeAndDate": "Bengaluru · {date}",
-      "place": "Bengaluru",
+      "placeAndDate": "{city} · {date}",
+      "place": "{city}",
       "seeAll": "Lihat semua harga",
       "demoNote": "Harga contoh untuk prototaip.",
       "unavailable": "Harga hari ini akan dipaparkan di sini tidak lama lagi.",
@@ -4399,5 +4403,37 @@
     "assignedWork": "Selesaikan kerja atau serahan yang ditugaskan dahulu.",
     "reviewLimit": "Lebih banyak rekod perlu disemak sebelum akaun boleh ditutup.",
     "checkLimit": "Menutup akaun dan menyertai semula tidak menetapkan semula had semakan perniagaan hari ini. Semakan mungkin ditahan sehingga hari berikutnya di India."
+  },
+  "papers": {
+    "title": "Rekod kertas",
+    "lead": "Pengesahan hanya menyimpan bukti. Stok dan wang tidak berubah.",
+    "upload": "Tambah imej kertas",
+    "source": "Imej asal",
+    "text": "Teks transkripsi",
+    "rows": "Baris",
+    "addRow": "Tambah baris",
+    "consent": "Hantar imej ini kepada model luar untuk transkripsi.",
+    "confirm": "Saya telah menyemak imej dan membetulkan teks ini.",
+    "confirmed": "Transkripsi disahkan",
+    "unavailable": "Pengekstrakan tidak tersedia. Masukkan teks secara manual.",
+    "extract": "Ekstrak draf",
+    "failed": "Pengekstrakan belum selesai. Gunakan input manual.",
+    "duplicate": "Imej ini sudah disimpan. Buka rekodnya.",
+    "invalid": "Gunakan JPEG atau PNG, maksimum 2 MB dan 2400 piksel setiap sisi.",
+    "empty": "Belum ada rekod kertas.",
+    "discard": "Buang draf",
+    "confirmAction": "Sahkan teks",
+    "pending": "Memproses imej…",
+    "manual": "Buka rekod stok manual",
+    "modelDraft": "Draf model yang belum disahkan",
+    "saveFirst": "Simpan perubahan sebelum pengekstrakan.",
+    "date": "Tarikh",
+    "description": "Penerangan",
+    "quantity": "Kuantiti",
+    "unit": "Unit ukuran",
+    "amount": "Amaun",
+    "reference": "Rujukan",
+    "more": "Lagi",
+    "capacity": "Storan dokumen penuh. Gunakan rekod manual atau hubungi pemilik ruang kerja."
   }
 }

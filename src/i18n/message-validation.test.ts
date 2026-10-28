@@ -70,6 +70,7 @@ describe("message validation", () => {
   it("allows shared names, acronyms, units and placeholder-only formats", () => {
     for (const value of [
       "Luma.Green",
+      "India",
       "Bengaluru",
       "Bengaluru · {date}",
       "Karnataka",
@@ -92,6 +93,9 @@ describe("message validation", () => {
   });
 
   it("rejects copied labels and paragraphs without exempting their keys", () => {
+    expect(
+      hasUntranslatedCopy("Prices across India", "Prices across India"),
+    ).toBe(true);
     expect(hasUntranslatedCopy("Close", "Close")).toBe(true);
     expect(hasUntranslatedCopy("Egg", "Egg")).toBe(true);
     expect(

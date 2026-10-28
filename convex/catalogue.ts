@@ -5,6 +5,7 @@ import { requireAdmin } from "./lib/access";
 import { findProfile } from "./lib/applicationAccess";
 import { CATALOGUE } from "./lib/catalogue";
 import { shiftDate } from "./lib/dates";
+import { canonicalCity } from "./lib/geography";
 import {
   initializeReferenceDefinitions as initializeReferenceDefinitionsInMutation,
   referenceInitializationCounts,
@@ -91,6 +92,8 @@ export const priceQuotes = query({
     ),
   }),
   handler: async (ctx, args) => {
+    const city = canonicalCity(args.city);
+    if (!city) throw new ConvexError("INVALID_CITY");
     const materials = await ctx.db
       .query("materials")
       .withIndex("by_sortOrder")
@@ -103,7 +106,7 @@ export const priceQuotes = query({
         const reference = await ctx.db
           .query("referencePrices")
           .withIndex("by_city_material", (q) =>
-            q.eq("city", args.city).eq("materialCode", material.code),
+            q.eq("city", city).eq("materialCode", material.code),
           )
           .unique();
         rows.push({
@@ -115,7 +118,7 @@ export const priceQuotes = query({
           .query("marketPrices")
           .withIndex("by_city_material_date", (q) =>
             q
-              .eq("city", args.city)
+              .eq("city", city)
               .eq("materialCode", material.code)
               .gte("date", since),
           )
@@ -155,6 +158,8 @@ export const priceBoard = query({
     ),
   }),
   handler: async (ctx, args) => {
+    const city = canonicalCity(args.city);
+    if (!city) throw new ConvexError("INVALID_CITY");
     const materials = await ctx.db
       .query("materials")
       .withIndex("by_sortOrder")
@@ -168,7 +173,7 @@ export const priceBoard = query({
         .query("marketPrices")
         .withIndex("by_city_material_date", (q) =>
           q
-            .eq("city", args.city)
+            .eq("city", city)
             .eq("materialCode", material.code)
             .gte("date", since),
         )
@@ -176,7 +181,7 @@ export const priceBoard = query({
       const reference = await ctx.db
         .query("referencePrices")
         .withIndex("by_city_material", (q) =>
-          q.eq("city", args.city).eq("materialCode", material.code),
+          q.eq("city", city).eq("materialCode", material.code),
         )
         .unique();
       const last = series.at(-1);
@@ -203,7 +208,7 @@ export const priceBoard = query({
         })),
       });
     }
-    return { city: args.city, date: latest, rows };
+    return { city, date: latest, rows };
   },
 });
 

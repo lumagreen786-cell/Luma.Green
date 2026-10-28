@@ -319,6 +319,7 @@ it("notifies automatic activation once and rejects duplicate submissions", async
   });
   await user.mutation(api.applications.saveDraft, {
     kabadiwala: {
+      city: "Bengaluru",
       ownerName: "Ramesh K",
       shopName: "Ramesh Kabadi Store",
       gstRegistered: false,

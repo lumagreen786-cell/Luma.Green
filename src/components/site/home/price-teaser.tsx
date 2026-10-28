@@ -3,15 +3,12 @@
 import { useQuery } from "convex/react";
 import { ArrowRightIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
-import type { ReactNode } from "react";
+import { type ReactNode, useState } from "react";
 
 import { useFormat } from "@/components/app/format";
 import { DemoNote } from "@/components/app/page-parts";
-import {
-  pickTeaser,
-  PRICE_CITY,
-  type PriceRow,
-} from "@/components/prices/board";
+import { CityField } from "@/components/location/city-field";
+import { pickTeaser, type PriceRow } from "@/components/prices/board";
 import { FAMILY_ICONS } from "@/components/prices/family-icon";
 import { PriceChange } from "@/components/prices/price-change";
 import { PricePlaceholder } from "@/components/prices/price-placeholder";
@@ -20,10 +17,12 @@ import { isConvexConfigured } from "@/components/providers/convex-provider";
 import { Link } from "@/i18n/navigation";
 
 import { api } from "../../../../convex/_generated/api";
+import { canonicalCity } from "../../../../convex/lib/geography";
 import { DataBoundary } from "../data-boundary";
 
 /** Four everyday materials from today's board, beside the home page hero. */
 export function PriceTeaser() {
+  const [city, setCity] = useState("");
   const t = useTranslations("home.teaser");
   if (!isConvexConfigured) {
     return (
@@ -33,22 +32,31 @@ export function PriceTeaser() {
     );
   }
   return (
-    <DataBoundary
-      fallback={() => (
-        <TeaserCard>
-          <p className="text-muted-foreground">{t("error")}</p>
-        </TeaserCard>
-      )}
-    >
-      <LiveTeaser />
-    </DataBoundary>
+    <div className="space-y-4">
+      <CityField value={city} onChange={setCity} />
+      <DataBoundary
+        fallback={() => (
+          <TeaserCard>
+            <p className="text-muted-foreground">{t("error")}</p>
+          </TeaserCard>
+        )}
+      >
+        <LiveTeaser city={canonicalCity(city)} />
+      </DataBoundary>
+    </div>
   );
 }
 
-function LiveTeaser() {
+function LiveTeaser({ city }: { city: string | null }) {
   const t = useTranslations("home.teaser");
   const format = useFormat();
-  const board = useQuery(api.catalogue.priceBoard, { city: PRICE_CITY });
+  const board = useQuery(api.catalogue.priceBoard, city ? { city } : "skip");
+  if (!city)
+    return (
+      <TeaserCard>
+        <PricePlaceholder state="empty" compact />
+      </TeaserCard>
+    );
 
   if (board === undefined) {
     return (
@@ -71,8 +79,11 @@ function LiveTeaser() {
     <TeaserCard
       meta={
         board.date
-          ? t("placeAndDate", { date: format.date(board.date) })
-          : undefined
+          ? t("placeAndDate", {
+              city: board.city,
+              date: format.date(board.date),
+            })
+          : t("place", { city: board.city })
       }
     >
       <ul className="-my-3 divide-y">

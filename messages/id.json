@@ -88,7 +88,7 @@
   "prices": {
     "detail": {
       "close": "Tutup",
-      "description": "{code} · {family} · Bengaluru",
+      "description": "{code} · {family}",
       "today": "Hari ini",
       "low": "Terendah dalam 30 hari",
       "high": "Tertinggi dalam 30 hari",
@@ -101,9 +101,9 @@
       "title": "Harga gagal dimuat",
       "body": "Periksa koneksi Anda dan coba lagi."
     },
-    "metaTitle": "Harga bahan daur ulang di Bengaluru hari ini",
-    "metaDescription": "Harga referensi bertanggal per kg bahan daur ulang di Bengaluru. Setiap usaha menetapkan penawarannya sendiri.",
-    "eyebrow": "Bengaluru",
+    "metaTitle": "Harga bahan",
+    "metaDescription": "Harga referensi bertanggal per kilogram. Setiap usaha menetapkan penawarannya sendiri. Pilih bahan untuk melihat riwayat yang tersedia.",
+    "eyebrow": "India",
     "title": "Harga bahan",
     "lead": "Harga referensi bertanggal per kilogram. Setiap usaha menetapkan penawarannya sendiri. Pilih bahan untuk melihat riwayat yang tersedia.",
     "demoNote": "Contoh harga prototipe, bukan harga pasar langsung.",
@@ -291,9 +291,9 @@
   },
   "contact": {
     "metaTitle": "Kontak",
-    "metaDescription": "Hubungi tim Luma.Green untuk bergabung dalam uji coba Bengaluru.",
+    "metaDescription": "Luma.Green menyatukan jaringan daur ulang India dalam satu platform: rumah tangga, pengepul, pengolah awal, pendaur ulang, dan produsen, dengan harga adil, usaha terverifikasi, dan tanda terima di setiap tahap.",
     "title": "Bicaralah dengan kami",
-    "lead": "Kami memulai di Bengaluru bersama sekelompok kecil pengepul, pengolah awal, pendaur ulang, dan pabrik. Ceritakan siapa Anda, bahan yang diperdagangkan, serta perkiraan volume bulanan Anda.",
+    "lead": "Luma.Green menyatukan jaringan daur ulang India dalam satu platform: rumah tangga, pengepul, pengolah awal, pendaur ulang, dan produsen, dengan harga adil, usaha terverifikasi, dan tanda terima di setiap tahap.",
     "emailHeading": "Akses awal dan pertanyaan umum",
     "securityHeading": "Laporan keamanan",
     "securityBody": "Menemukan celah keamanan? Laporkan secara pribadi, jangan di ruang publik."
@@ -1570,7 +1570,8 @@
       "trades": "Transaksi",
       "impact": "Dampak",
       "compliance": "Kepatuhan",
-      "earnings": "Penghasilan"
+      "earnings": "Penghasilan",
+      "paperRecords": "Catatan kertas"
     },
     "navLabel": "Aplikasi",
     "homeLink": "Beranda Luma.Green",
@@ -1748,8 +1749,8 @@
       "fixIt": "Perbaiki",
       "locationNote": "Perkiraan lokasi Anda disimpan bersama penjemputan ini agar kami dapat mencari toko lain di sekitar jika perlu."
     },
-    "metaDescription": "Jual koran, plastik, logam, dan elektronik lama dari rumah di Bengaluru. Lihat harga toko sekitar, pesan penjemputan, dan terima pembayaran di depan pintu.",
-    "eyebrow": "Untuk rumah di Bengaluru",
+    "metaDescription": "Singkirkan barang daur ulang. Terima pembayaran. Foto, penjemputan atau pengantaran, dan pembayaran setelah ditimbang.",
+    "eyebrow": "India",
     "title": "Pesan penjemputan dari rumah",
     "lead": "Pilih barang, pilih toko terdekat, dan terima pembayaran tunai atau UPI setelah ditimbang.",
     "promises": {
@@ -1762,7 +1763,7 @@
       "title": "Pemesanan segera tersedia",
       "body": "Kami sedang menyiapkan pemesanan untuk rumah tangga. Periksa kembali sebentar lagi."
     },
-    "demoNote": "Contoh harga dan toko untuk uji coba Bengaluru.",
+    "demoNote": "Contoh harga prototipe, bukan harga pasar langsung.",
     "loadError": "Gagal memuat. Periksa koneksi Anda dan coba lagi.",
     "mine": {
       "title": "Pemesanan Anda",
@@ -2455,7 +2456,7 @@
   "home": {
     "metaDescription": "Luma.Green menyatukan jaringan daur ulang India dalam satu platform: rumah tangga, pengepul, pengolah awal, pendaur ulang, dan produsen, dengan harga adil, usaha terverifikasi, dan tanda terima di setiap tahap.",
     "hero": {
-      "eyebrow": "Dimulai di Bengaluru",
+      "eyebrow": "India",
       "title": "Singkirkan barang daur ulang. Terima pembayaran.",
       "lead": "Foto, penjemputan atau pengantaran, dan pembayaran setelah ditimbang.",
       "sell": "Daur ulang",
@@ -2464,8 +2465,8 @@
     },
     "teaser": {
       "title": "Harga hari ini",
-      "placeAndDate": "Bengaluru · {date}",
-      "place": "Bengaluru",
+      "placeAndDate": "{city} · {date}",
+      "place": "{city}",
       "seeAll": "Lihat semua harga",
       "demoNote": "Contoh harga untuk prototipe.",
       "unavailable": "Harga hari ini akan segera tampil di sini.",
@@ -2929,7 +2930,9 @@
         "sat": "Sab",
         "sun": "Min"
       },
-      "changesTitle": "Yang perlu diperbaiki"
+      "changesTitle": "Yang perlu diperbaiki",
+      "city": "Kota atau daerah",
+      "stateUT": "Negara bagian atau wilayah persatuan"
     },
     "status": {
       "draft": {
@@ -3065,7 +3068,8 @@
       "fileTooBig": "Berkas ini terlalu besar",
       "uploadFailed": "Unggahan gagal. Coba lagi.",
       "generic": "Terjadi kesalahan. Coba lagi.",
-      "pan": "Cari nomor GST dan konfirmasikan usaha Anda."
+      "pan": "Cari nomor GST dan konfirmasikan usaha Anda.",
+      "city": "Masukkan kota atau daerah dengan 2–60 karakter."
     },
     "identity": {
       "pan": "PAN (opsional)",
@@ -4399,5 +4403,37 @@
     "assignedWork": "Selesaikan pekerjaan atau serah terima yang ditugaskan dahulu.",
     "reviewLimit": "Catatan lain perlu ditinjau sebelum akun dapat ditutup.",
     "checkLimit": "Menutup akun dan bergabung lagi tidak mengatur ulang batas pemeriksaan bisnis hari ini. Pemeriksaan dapat ditahan hingga hari berikutnya di India."
+  },
+  "papers": {
+    "title": "Catatan kertas",
+    "lead": "Konfirmasi hanya menyimpan bukti. Stok dan uang tidak berubah.",
+    "upload": "Tambah gambar kertas",
+    "source": "Gambar asli",
+    "text": "Teks transkripsi",
+    "rows": "Baris",
+    "addRow": "Tambah baris",
+    "consent": "Kirim gambar ini ke model eksternal untuk ditranskripsi.",
+    "confirm": "Saya sudah memeriksa gambar dan memperbaiki teks ini.",
+    "confirmed": "Transkripsi dikonfirmasi",
+    "unavailable": "Ekstraksi tidak tersedia. Masukkan teks secara manual.",
+    "extract": "Ekstrak draf",
+    "failed": "Ekstraksi belum selesai. Gunakan entri manual.",
+    "duplicate": "Gambar ini sudah disimpan. Buka catatannya.",
+    "invalid": "Gunakan JPEG atau PNG, maksimal 2 MB dan 2400 piksel per sisi.",
+    "empty": "Belum ada catatan kertas.",
+    "discard": "Buang draf",
+    "confirmAction": "Konfirmasi teks",
+    "pending": "Memproses gambar…",
+    "manual": "Buka catatan stok manual",
+    "modelDraft": "Draf model yang belum diverifikasi",
+    "saveFirst": "Simpan perubahan sebelum ekstraksi.",
+    "date": "Tanggal",
+    "description": "Deskripsi",
+    "quantity": "Kuantitas",
+    "unit": "Satuan",
+    "amount": "Jumlah",
+    "reference": "Referensi",
+    "more": "Lainnya",
+    "capacity": "Penyimpanan dokumen penuh. Gunakan catatan manual atau hubungi pemilik ruang kerja."
   }
 }

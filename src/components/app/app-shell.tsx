@@ -154,6 +154,11 @@ export function AppShell({ children }: { children: ReactNode }) {
             icon: FileTextIcon,
           },
           {
+            href: "/app/papers",
+            label: "paperRecords",
+            icon: FileTextIcon,
+          },
+          {
             href: "/app/material-standards",
             label: "standards",
             namespace: "operations",

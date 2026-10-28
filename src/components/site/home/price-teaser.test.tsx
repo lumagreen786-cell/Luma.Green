@@ -1,4 +1,4 @@
-import { render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import { useQuery } from "convex/react";
 import { NextIntlClientProvider } from "next-intl";
 import type { ReactNode } from "react";
@@ -38,7 +38,7 @@ vi.mock("@/i18n/navigation", () => ({
 }));
 
 function renderTeaser() {
-  return render(
+  const result = render(
     <NextIntlClientProvider
       locale="en"
       messages={messages}
@@ -47,6 +47,9 @@ function renderTeaser() {
       <PriceTeaser />
     </NextIntlClientProvider>,
   );
+  const city = screen.queryByLabelText(messages.join.form.city);
+  if (city) fireEvent.change(city, { target: { value: "Bengaluru" } });
+  return result;
 }
 
 beforeEach(() => {

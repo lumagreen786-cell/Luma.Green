@@ -6,11 +6,21 @@ import { FILES_PATH, preflight, serve } from "./files";
 import { serve as serveIntegration } from "./integrationHttp";
 import { INTEGRATION_PATH } from "./lib/integrationHttp";
 import {
+  preflight as paperPreflight,
+  serve as servePaper,
+} from "./paperDrafts";
+import {
   preflight as qualityPreflight,
   serve as serveQuality,
 } from "./qualityFiles";
 
 const http = httpRouter();
+http.route({ pathPrefix: "/paper-files/", method: "GET", handler: servePaper });
+http.route({
+  pathPrefix: "/paper-files/",
+  method: "OPTIONS",
+  handler: paperPreflight,
+});
 http.route({
   pathPrefix: "/quality-files/",
   method: "GET",

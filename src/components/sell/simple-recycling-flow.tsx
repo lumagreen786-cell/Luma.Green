@@ -12,9 +12,15 @@ import {
 } from "lucide-react";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { type RefObject, useEffect, useRef, useState } from "react";
-import { useForm, type UseFormReturn, useWatch } from "react-hook-form";
+import {
+  Controller,
+  useForm,
+  type UseFormReturn,
+  useWatch,
+} from "react-hook-form";
 import { z } from "zod";
 
+import { CityField } from "@/components/location/city-field";
 import { ReverseAddress } from "@/components/location/reverse-address";
 import { isConvexConfigured } from "@/components/providers/convex-provider";
 import { Button } from "@/components/ui/button";
@@ -34,6 +40,7 @@ import { prepareUpload } from "@/lib/upload-image";
 
 import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
+import { canonicalCity } from "../../../convex/lib/geography";
 import {
   bookableDates,
   cleanAddress,
@@ -43,6 +50,7 @@ import {
   SLOT_WINDOWS,
   type SlotWindow,
 } from "../../../convex/lib/households";
+import { citySchema } from "../../../convex/lib/onboarding";
 import { indiaToday } from "../../../convex/lib/onboarding";
 import type { SellDraft } from "./draft";
 import { sellErrorKey } from "./errors";
@@ -64,6 +72,7 @@ export const recyclingDetailsSchema = z
   .object({
     name: z.string().refine(isValidName, "name"),
     address: z.string(),
+    city: citySchema,
     mode: z.enum(["pickup", "dropoff"]),
   })
   .refine(
@@ -132,13 +141,15 @@ function RecyclingFlow({
     defaultValues: {
       name: initial.name,
       address: initial.address,
+      city: initial.city ?? "",
       mode: initial.mode,
     },
   });
   const mode = useWatch({ control: form.control, name: "mode" });
+  const city = useWatch({ control: form.control, name: "city" });
   const shops = useQuery(
     api.households.shops,
-    shopQueryArgs(stage, location.point),
+    shopQueryArgs(stage, location.point, city),
   );
   const available = shopsForMode(shops, mode);
   const selectedShop = available?.find((shop) => shop.id === shopId);
@@ -547,6 +558,21 @@ function DetailsForm({
           </Label>
         ))}
       </RadioGroup>
+      <Controller
+        name="city"
+        control={form.control}
+        render={({ field, fieldState }) => (
+          <CityField
+            value={field.value}
+            onBlur={field.onBlur}
+            error={Boolean(fieldState.error)}
+            onChange={(value) => {
+              field.onChange(value);
+              clearShop();
+            }}
+          />
+        )}
+      />
       <div className="space-y-2">
         <Label htmlFor="recycle-name">{t("when.nameLabel")}</Label>
         <Input
@@ -842,12 +868,14 @@ function shopsForMode(shops: Shop[] | undefined, mode: Details["mode"]) {
   return shops?.filter((shop) => mode === "dropoff" || shop.offersPickup);
 }
 
-function shopQueryArgs(
+export function shopQueryArgs(
   stage: "details" | "schedule",
   point: ReturnType<typeof useLocation>["point"],
+  city: string,
 ): FunctionArgs<typeof api.households.shops> | "skip" {
-  return stage === "schedule"
-    ? { items: [], ...(point && { near: point }) }
+  const selected = canonicalCity(city);
+  return stage === "schedule" && selected
+    ? { city: selected, items: [], ...(point && { near: point }) }
     : "skip";
 }
 
