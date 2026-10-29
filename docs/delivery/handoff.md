@@ -11,7 +11,7 @@ CSV/JSON preparation exports have their local source and tests. Recurring paid
 billing and official regulated execution remain separate missing integrations,
 not configuration-only work. No fake paid or official state was added.
 
-Fresh pnpm check passed 3,019 tests/367 suites plus security/app compatibility;
+Fresh pnpm check passed 3,022 tests/368 suites plus security/app compatibility;
 Production build passed 3,351 pages and 42 focused browser checks. Three real normal
 local phone journeys and the actual local restore passed. The restore matched
 2,639 records/104 files and 50 pre-existing scoped sessions; cloud recovery and

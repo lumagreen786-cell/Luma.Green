@@ -34,7 +34,7 @@ changes are additive. Existing records are not backfilled or deleted.
 
 ## Fresh local evidence
 
-- `pnpm check`: passed; 367 suites and 3,019 web/backend tests, both type checks,
+- `pnpm check`: passed; 368 suites and 3,022 web/backend tests, both type checks,
   zero lint errors and 125 warnings. Four dependency-security tests, 30 desktop
   policy tests, 62 mobile policy tests and 14 mobile component tests passed.
   These compatibility checks did not package or release a native application.
@@ -120,3 +120,16 @@ No live price, real identity, permit, approved recipe, official certificate,
 customer payment or official credit was seeded by this pass. The local workload
 and restore touched only the verified disposable synthetic target. The original
 private backup, other checkouts and native source were preserved.
+
+## Hosted private-file repair
+
+The initial hosted CodeQL check found a check/read race in the private local
+acceptance configuration. The reader now opens the file without following a
+symlink, validates and reads that same descriptor, and closes it. Both config
+and test consumption use it; private environment files also keep the file-mode
+check. A deterministic path-replacement test and a symlink test failed on the
+old sequence; all three file-safety cases now pass. Normal-phone journeys, the
+workload and complete restore passed again with copied source. Fresh fullcheck
+passed 3,022 tests in 368 files. No production business or authentication code
+changed after the retained build/browser checks. Hosted new-head checks still
+control merge; the original CodeQL finding was not dismissed or bypassed.

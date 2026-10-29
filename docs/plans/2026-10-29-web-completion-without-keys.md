@@ -187,3 +187,31 @@ observed Vercel Hobby deployment-storage overage73.96GB/10GB; browser team acces
 works. No new deployment rejection yet, no paid upgrade or history deletion.
 Next: fullcheck/build, checkedPR, backend-first Production rollout, exact release
 verification, final coverage PDF and bounded handoff. Mobile/desktop stay paused.
+
+## Hosted security repair checkpoint
+
+PR27 opened at0b57d5e; all local checks/build/42browsercases passed. Hosted
+CodeQL found a high-severity path check/read race in the local acceptance
+configuration. Merge is blocked until the new source passes; no dismissal or
+security bypass. A deterministic path replacement and symlink regression failed
+on the old sequence. The reader now opens without following a symlink, checks
+that same descriptor and reads/closes it. Both config and test roster reads use
+the helper; frontend/backend env files also retain restricted-permission checks.
+Three regression cases pass; focused lint has0errors. No deployed business or
+authentication-factor code changed.
+
+Fresh copied-source normal-phone journeys,50person/100request workload and the
+complete restore passed again after the repair. The new receipt binds source
+including copied scripts/helper; original backup and root environment unchanged.
+Fullcheck is rerunning in /tmp/luma-web-completion/security-repair-full-check.log.
+After it passes, update counts and push the repair, wait for all hosted gates,
+then backend-first Production rollout and final coverage PDF. PR26 Hono patch
+remains separate queued dependency maintenance; read-only triage found the
+serveStatic advisory on an unused Node adapter path, not a new web regression.
+Aggregate GitHub dependency alerts are not declared cleared.
+
+Security-repair fullcheck now passed:3022tests/368files, both types,0lint errors,
+125warnings and unchanged4security/30desktop/62mobilepolicy/14mobilecomponent
+checks. Source frozen; push the bounded repair after normal hooks, then wait for
+new-head CodeQL and all hosted checks. Do not count the original failing gate
+as passing or claim a Production release before exact Vercel identity readback.

@@ -1,4 +1,4 @@
-import { readFileSync, statSync } from "node:fs";
+import { statSync } from "node:fs";
 import path from "node:path";
 import { parseEnv } from "node:util";
 
@@ -6,24 +6,22 @@ import { defineConfig, devices } from "@playwright/test";
 import { z } from "zod";
 
 import { isLoopbackHttpOrigin } from "./convex/lib/localAcceptance";
+import { readPrivateAcceptanceFile } from "./scripts/local-acceptance/private-file";
 
 // Run from the disposable clone. Never load, replace or provision root sessions.
 process.env.PLAYWRIGHT_NO_COPY_PROMPT = "1";
 const privateDir = path.resolve(".convex/local-acceptance");
 const rosterPath = path.join(privateDir, "phone-sessions.json");
-if (
-  (statSync(privateDir).mode & 0o077) !== 0 ||
-  (statSync(rosterPath).mode & 0o077) !== 0
-)
+if ((statSync(privateDir).mode & 0o077) !== 0)
   throw new Error(
     "Private local session files require restricted permissions.",
   );
 const artifact = z
   .object({ site: z.string().refine(isLoopbackHttpOrigin) })
-  .parse(JSON.parse(readFileSync(rosterPath, "utf8")));
-const frontend = parseEnv(readFileSync(".env.local", "utf8"));
+  .parse(JSON.parse(readPrivateAcceptanceFile(rosterPath)));
+const frontend = parseEnv(readPrivateAcceptanceFile(".env.local"));
 const backend = parseEnv(
-  readFileSync(path.join(privateDir, "backend.env"), "utf8"),
+  readPrivateAcceptanceFile(path.join(privateDir, "backend.env")),
 );
 const local = z
   .object({

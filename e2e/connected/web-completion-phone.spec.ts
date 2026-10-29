@@ -1,5 +1,4 @@
 import { randomUUID } from "node:crypto";
-import { readFileSync } from "node:fs";
 
 import {
   type Browser,
@@ -16,6 +15,7 @@ import { LOCAL_ACCEPTANCE_PERSONAS } from "../../convex/lib/localAcceptance";
 import ar from "../../messages/ar.json" with { type: "json" };
 import en from "../../messages/en.json" with { type: "json" };
 import { webCompletionTarget as target } from "../../playwright.web-completion.config";
+import { readPrivateAcceptanceFile } from "../../scripts/local-acceptance/private-file";
 import { localeMeta } from "../../src/i18n/locales";
 
 const cookie = z.object({
@@ -42,7 +42,7 @@ const rosterSchema = z.object({
   site: z.string(),
   accounts: z.array(savedAccount),
 });
-const rosterText = readFileSync(target.rosterPath, "utf8");
+const rosterText = readPrivateAcceptanceFile(target.rosterPath);
 const roster = rosterSchema.parse(JSON.parse(rosterText));
 const required = [
   "household",
