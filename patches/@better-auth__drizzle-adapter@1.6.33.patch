@@ -1,0 +1,13 @@
+diff --git a/dist/index.mjs b/dist/index.mjs
+index 4d10917..6b8b57a 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -553,7 +553,7 @@ const drizzleAdapter = (db, config) => {
+ 				}
+ 				if (!idColumn) return null;
+ 				const targetIds = db.select({ id: idColumn }).from(schemaModel).where(...clause).limit(1);
+-				return (await db.update(schemaModel).set(assignments).where(inArray(idColumn, targetIds)).returning())[0] ?? null;
++				return (await db.update(schemaModel).set(assignments).where(and(...clause, inArray(idColumn, targetIds))).returning())[0] ?? null;
+ 			},
+ 			options: config
+ 		};

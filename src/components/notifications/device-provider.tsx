@@ -18,6 +18,7 @@ import { useRouter } from "@/i18n/navigation";
 import { authClient } from "@/lib/auth-client";
 import { isDesktopShell, isNativePushAvailable } from "@/lib/push-device";
 import { preparePushDevice } from "@/lib/push-prepare";
+import { useMounted } from "@/lib/use-mounted";
 
 import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
@@ -31,7 +32,7 @@ interface DeviceContext {
   disable: () => Promise<void>;
 }
 const Device = createContext<DeviceContext | null>(null);
-const lifecycle: { revoke?: () => Promise<void> } = {};
+const lifecycle: { revoke?: (isCurrent?: () => boolean) => Promise<void> } = {};
 // Keep successful sign-out locks beyond provider effect cleanup/remount. A new
 // authenticated session has a new ID and therefore a separate lifecycle.
 const signOutLocks = new Map<string, symbol>();
@@ -74,14 +75,17 @@ function installationId() {
 }
 
 /** Call before clearing the auth session. Failures reject so the caller can retry. */
-export async function revokeCurrentDevice(): Promise<void> {
+export async function revokeCurrentDevice(
+  isCurrent: () => boolean = () => true,
+): Promise<void> {
+  if (!isCurrent()) throw new Error("PUSH_CLEANUP_CANCELLED");
   if (
     !lifecycle.revoke &&
     (localStorage.getItem(consentKey) === "true" ||
       localStorage.getItem(pendingRevocationKey) === "true")
   )
     throw new Error("PUSH_NOT_READY");
-  await lifecycle.revoke?.();
+  await lifecycle.revoke?.(isCurrent);
 }
 
 export function useNotificationDevice() {
@@ -238,6 +242,7 @@ function useDeviceLifecycle(
   const settings = options?.settings;
   const setStatus = options?.setStatus ?? ignoreStatus;
   const shouldRestore = options !== undefined;
+  const mounted = useMounted();
   const registerWeb = useMutation(api.push.registerWeb);
   const registerExpo = useMutation(api.push.registerExpo);
   const unregister = useMutation(api.push.unregister);
@@ -365,34 +370,48 @@ function useDeviceLifecycle(
     };
   }, [connect, setStatus, shouldRestore, sessionId]);
 
-  const disable = useCallback(async () => {
-    // Persist only consent, never a token. Do this before revocation so a refresh
-    // cannot silently recreate a device binding after the user turns it off.
-    localStorage.setItem(pendingRevocationKey, "true");
-    localStorage.removeItem(consentKey);
-    work.current.generation += 1;
-    work.current.abort?.abort();
-    await work.current.pending;
-    const installation = localStorage.getItem(installationKey);
-    if (installation)
-      await unregisterInstallation({ installationId: installation });
-    if (work.current.id) {
-      await unregister({ id: work.current.id });
-      work.current.id = undefined;
-    }
-    if (
-      !isNativePushAvailable() &&
-      !isDesktopShell() &&
-      "serviceWorker" in navigator
-    ) {
-      const registration =
-        await navigator.serviceWorker.getRegistration("/push-sw.js");
-      const subscription = await registration?.pushManager.getSubscription();
-      if (subscription) await subscription.unsubscribe();
-    }
-    localStorage.removeItem(pendingRevocationKey);
-    setStatus("off");
-  }, [setStatus, unregister, unregisterInstallation]);
+  const disable = useCallback(
+    async (isRequestedCurrent: () => boolean = () => true) => {
+      const assertCurrent = () => {
+        if (!mounted() || !isRequestedCurrent())
+          throw new Error("PUSH_CLEANUP_CANCELLED");
+      };
+      assertCurrent();
+      // Persist only consent, never a token. Do this before revocation so a refresh
+      // cannot silently recreate a device binding after the user turns it off.
+      localStorage.setItem(pendingRevocationKey, "true");
+      localStorage.removeItem(consentKey);
+      work.current.generation += 1;
+      work.current.abort?.abort();
+      await work.current.pending;
+      assertCurrent();
+      const installation = localStorage.getItem(installationKey);
+      if (installation)
+        await unregisterInstallation({ installationId: installation });
+      assertCurrent();
+      if (work.current.id) {
+        await unregister({ id: work.current.id });
+        assertCurrent();
+        work.current.id = undefined;
+      }
+      if (
+        !isNativePushAvailable() &&
+        !isDesktopShell() &&
+        "serviceWorker" in navigator
+      ) {
+        const registration =
+          await navigator.serviceWorker.getRegistration("/push-sw.js");
+        assertCurrent();
+        const subscription = await registration?.pushManager.getSubscription();
+        assertCurrent();
+        if (subscription) await subscription.unsubscribe();
+        assertCurrent();
+      }
+      localStorage.removeItem(pendingRevocationKey);
+      setStatus("off");
+    },
+    [mounted, setStatus, unregister, unregisterInstallation],
+  );
 
   useEffect(() => {
     lifecycle.revoke = disable;

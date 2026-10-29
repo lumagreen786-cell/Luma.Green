@@ -3823,7 +3823,7 @@
   },
   "accountPhone": {
     "title": "Verify your mobile number",
-    "description": "Add a number you own for collections and payments. This keeps your email account and does not merge another account. Continue to sign in with email.",
+    "description": "Add a number you own for collections and payments. This keeps your account and does not merge another account.",
     "verified": "Mobile number verified",
     "unavailable": "Phone verification is unavailable until SMS delivery is configured.",
     "inUse": "This number cannot be added. Use a number that is not attached to another account.",
@@ -4438,5 +4438,19 @@
     "capacity": "Paper storage is full. Use manual records or contact the workspace owner.",
     "changed": "This paper changed. Copy your edits before loading the saved version.",
     "loadSaved": "Load saved version"
+  },
+  "privacy": {
+    "title": "Privacy policy",
+    "lead": "This policy covers the Luma.Green website and Android, iOS, Windows and macOS apps.",
+    "dataTitle": "Data we use",
+    "dataBody": "We use account and contact details, your chosen location, photos, documents, business checks and transaction/security records to provide recycling services and protect accounts.",
+    "sharingTitle": "Who receives data",
+    "sharingBody": "Authorized participants and configured hosting, SMS, verification, payment and optional AI providers receive needed data. Processing can occur outside India.",
+    "choicesTitle": "Your choices",
+    "choicesBody": "Location and notifications require permission. Choose files yourself. Sign-in uses session cookies. Analytics is opt-in; error reporting is separate. Manage permissions in device settings.",
+    "requestsTitle": "Account and data requests",
+    "requestsBody": "Remove your account below, or email support for access, correction or deletion. Verify ownership; do not email identity documents. Resolve open work or ownership first.",
+    "retentionTitle": "What remains after closure",
+    "retentionBody": "Closure removes login access and credentials. Business, payment, safety and audit evidence can remain for review. It does not erase every record. Ask support about retention and timing."
   }
 }

@@ -639,3 +639,49 @@ it("a second sign-out caller cannot release the first caller's session lock", as
     screen.getByRole("button", { name: messages.common.loading }),
   ).toBeDisabled();
 });
+
+it("stops removed-screen logout cleanup after a pending registration settles", async () => {
+  const registration = Promise.withResolvers<string>();
+  mocks.registerExpo.mockReturnValueOnce(registration.promise);
+  const view = render(<SignOutApp />);
+  await userEvent.click(screen.getByRole("button", { name: "Direct enable" }));
+  await act(async () => {
+    await Promise.resolve();
+    nativeResult("granted", "ExpoPushToken[fixture-late]");
+  });
+  await waitFor(() => {
+    expect(mocks.registerExpo).toHaveBeenCalledOnce();
+  });
+  await userEvent.click(screen.getByRole("button", { name: "Log out" }));
+  view.unmount();
+  await act(async () => {
+    registration.resolve("removed-device");
+    await registration.promise;
+  });
+  expect(mocks.unregisterInstallation).not.toHaveBeenCalled();
+  expect(mocks.signOut).not.toHaveBeenCalled();
+});
+
+it("does not continue to device removal after installation cleanup loses its caller", async () => {
+  const cleanup = Promise.withResolvers<null>();
+  mocks.unregisterInstallation.mockReturnValueOnce(cleanup.promise);
+  render(<App />);
+  await userEvent.click(screen.getByRole("button", { name: "Enable" }));
+  await act(async () => {
+    await Promise.resolve();
+    nativeResult("granted", "ExpoPushToken[fixture]");
+  });
+  await waitFor(() => {
+    expect(mocks.registerExpo).toHaveBeenCalledOnce();
+  });
+  let isCurrent = true;
+  const leaving = revokeCurrentDevice(() => isCurrent);
+  const rejected = expect(leaving).rejects.toThrow("PUSH_CLEANUP_CANCELLED");
+  isCurrent = false;
+  await act(async () => {
+    cleanup.resolve(null);
+    await rejected;
+  });
+  expect(mocks.unregister).not.toHaveBeenCalled();
+  expect(localStorage.getItem("luma.push.revocation-pending")).toBe("true");
+});

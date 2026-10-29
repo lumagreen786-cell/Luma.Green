@@ -1,6 +1,7 @@
 import { act, renderHook } from "@testing-library/react";
 import { beforeEach, expect, it, vi } from "vitest";
 
+import { useAdminSignOut } from "../admin/use-admin-sign-out";
 import { useSignOut } from "./use-sign-out";
 
 const calls = vi.hoisted(() => ({
@@ -8,6 +9,8 @@ const calls = vi.hoisted(() => ({
   signOut: vi.fn(),
   error: vi.fn(),
   translate: (key: string) => key,
+  replace: vi.fn(),
+  sessionId: "fixture-session",
 }));
 vi.mock("@/components/notifications/device-provider", () => ({
   lockDeviceSignOut: () => vi.fn(),
@@ -15,14 +18,18 @@ vi.mock("@/components/notifications/device-provider", () => ({
 }));
 vi.mock("@/lib/auth-client", () => ({
   authClient: {
-    useSession: () => ({ data: { session: { id: "fixture-session" } } }),
+    useSession: () => ({ data: { session: { id: calls.sessionId } } }),
     signOut: calls.signOut,
   },
+}));
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ replace: calls.replace }),
 }));
 vi.mock("next-intl", () => ({ useTranslations: () => calls.translate }));
 vi.mock("sonner", () => ({ toast: { error: calls.error } }));
 beforeEach(() => {
   vi.resetAllMocks();
+  calls.sessionId = "fixture-session";
   calls.revoke.mockResolvedValue(undefined);
   calls.signOut.mockResolvedValue({ error: null });
 });
@@ -109,3 +116,109 @@ it("coalesces rapid logout taps while the auth request is pending", async () => 
   expect(done).toHaveBeenCalledOnce();
   expect(result.current.busy).toBe(false);
 });
+
+it.each(["during device cleanup", "during auth completion"])(
+  "does not continue a removed screen %s",
+  async (stage) => {
+    const cleanup = Promise.withResolvers<undefined>();
+    const logout = Promise.withResolvers<{ error: null }>();
+    if (stage === "during device cleanup")
+      calls.revoke.mockReturnValueOnce(cleanup.promise);
+    else calls.signOut.mockReturnValueOnce(logout.promise);
+    const done = vi.fn();
+    const { result, unmount } = renderHook(() => useSignOut(done));
+    let pending: Promise<void>;
+    await act(async () => {
+      pending = result.current.signOut();
+      await Promise.resolve();
+    });
+    unmount();
+    await act(async () => {
+      cleanup.resolve(undefined);
+      logout.resolve({ error: null });
+      await pending;
+    });
+    if (stage === "during device cleanup")
+      expect(calls.signOut).not.toHaveBeenCalled();
+    else expect(calls.signOut).toHaveBeenCalledOnce();
+    expect(done).not.toHaveBeenCalled();
+    expect(calls.error).not.toHaveBeenCalled();
+  },
+);
+
+for (const [kind, useLogout] of [
+  ["member", useSignOut],
+  ["admin", useAdminSignOut],
+] as const) {
+  it(`${kind} does not log out a newer session after device cleanup`, async () => {
+    const cleanup = Promise.withResolvers<undefined>();
+    calls.revoke.mockReturnValueOnce(cleanup.promise);
+    const { result, rerender } = renderHook(() => useLogout());
+    let pending: Promise<void>;
+    await act(async () => {
+      pending = result.current.signOut();
+      await Promise.resolve();
+    });
+    calls.sessionId = "newer-session";
+    rerender();
+    await act(async () => {
+      cleanup.resolve(undefined);
+      await pending;
+    });
+    expect(calls.signOut).not.toHaveBeenCalled();
+    expect(calls.replace).not.toHaveBeenCalled();
+  });
+}
+it.each(["during device cleanup", "during auth completion"])(
+  "admin does not navigate after unmount %s",
+  async (stage) => {
+    const cleanup = Promise.withResolvers<undefined>();
+    const logout = Promise.withResolvers<{ error: null }>();
+    if (stage === "during device cleanup")
+      calls.revoke.mockReturnValueOnce(cleanup.promise);
+    else calls.signOut.mockReturnValueOnce(logout.promise);
+    const { result, unmount } = renderHook(() => useAdminSignOut());
+    let pending: Promise<void>;
+    await act(async () => {
+      pending = result.current.signOut();
+      await Promise.resolve();
+    });
+    unmount();
+    await act(async () => {
+      cleanup.resolve(undefined);
+      logout.resolve({ error: null });
+      await pending;
+    });
+    expect(calls.replace).not.toHaveBeenCalled();
+    if (stage === "during device cleanup")
+      expect(calls.signOut).not.toHaveBeenCalled();
+    else expect(calls.signOut).toHaveBeenCalledOnce();
+  },
+);
+
+for (const [kind, useLogout] of [
+  ["member", useSignOut],
+  ["admin", useAdminSignOut],
+] as const) {
+  it(`${kind} does not continue into a newer observed session after auth completion`, async () => {
+    const logout = Promise.withResolvers<{ error: null }>();
+    calls.signOut.mockReturnValueOnce(logout.promise);
+    const done = vi.fn();
+    const { result, rerender } = renderHook(() =>
+      useLogout(...(kind === "member" ? ([done] as [() => void]) : [])),
+    );
+    let pending: Promise<void>;
+    await act(async () => {
+      pending = result.current.signOut();
+      await Promise.resolve();
+    });
+    calls.sessionId = "newer-session";
+    rerender();
+    await act(async () => {
+      logout.resolve({ error: null });
+      await pending;
+    });
+    expect(done).not.toHaveBeenCalled();
+    expect(calls.replace).not.toHaveBeenCalled();
+  });
+}

@@ -3823,7 +3823,7 @@
   },
   "accountPhone": {
     "title": "Cep telefonu numaranızı doğrulayın",
-    "description": "Toplama ve ödemeler için size ait bir numara ekleyin. E-posta hesabınız korunur, başka hesapla birleştirilmez. E-posta ile giriş yapmaya devam edin.",
+    "description": "Toplama ve ödemeler için size ait bir numara ekleyin. Hesabınız korunur, başka hesapla birleştirilmez.",
     "verified": "Cep telefonu numarası doğrulandı",
     "unavailable": "SMS gönderimi yapılandırılana kadar telefon doğrulaması kullanılamaz.",
     "inUse": "Bu numara eklenemez. Başka hesaba bağlı olmayan bir numara kullanın.",
@@ -4438,5 +4438,19 @@
     "capacity": "Belge depolama alanı dolu. Elle kayıt kullanın veya çalışma alanı sahibine başvurun.",
     "changed": "Bu belge değişti. Kayıtlı sürümü açmadan önce düzenlemelerinizi kopyalayın.",
     "loadSaved": "Kayıtlı sürümü aç"
+  },
+  "privacy": {
+    "title": "Gizlilik politikası",
+    "lead": "Bu politika Luma.Green web sitesi ile Android, iOS, Windows ve macOS uygulamalarını kapsar.",
+    "dataTitle": "Kullandığımız veriler",
+    "dataBody": "Geri dönüşüm hizmetleri ve hesap güvenliği için hesap ve iletişim bilgileri, seçtiğiniz konum, fotoğraflar, belgeler, işletme kontrolleri, işlem ve güvenlik kayıtlarını kullanırız.",
+    "sharingTitle": "Verileri kim alır",
+    "sharingBody": "Yetkili katılımcılar ve yapılandırılmış barındırma, SMS, doğrulama, ödeme ve isteğe bağlı yapay zekâ sağlayıcıları gereken verileri alır. İşleme Hindistan dışında yapılabilir.",
+    "choicesTitle": "Seçimleriniz",
+    "choicesBody": "Konum ve bildirimler izin gerektirir. Dosyaları kendiniz seçersiniz. Giriş, oturum çerezleri kullanır. Analiz onay gerektirir; hata raporları ayrıdır. İzinleri cihaz ayarlarında yönetin.",
+    "requestsTitle": "Hesap ve veri talepleri",
+    "requestsBody": "Aşağıdan hesabınızı kaldırın veya erişim, düzeltme ya da silme için desteğe e-posta gönderin. Sahipliği doğrulayın; kimlik belgelerini e-posta ile göndermeyin. Önce açık işleri veya sahiplik konularını çözün.",
+    "retentionTitle": "Kapatma sonrası kalanlar",
+    "retentionBody": "Kapatma, giriş erişimini ve kimlik bilgilerini kaldırır. İşletme, ödeme, güvenlik ve denetim kanıtları inceleme için kalabilir. Her kayıt silinmez. Saklama ve süreler için desteğe danışın."
   }
 }

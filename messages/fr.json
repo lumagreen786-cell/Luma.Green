@@ -3823,7 +3823,7 @@
   },
   "accountPhone": {
     "title": "Vérifiez votre numéro de mobile",
-    "description": "Ajoutez votre numéro pour les collectes et paiements. Votre compte e-mail est conservé sans fusion avec un autre compte. Continuez à vous connecter par e-mail.",
+    "description": "Ajoutez votre numéro pour les collectes et paiements. Votre compte est conservé sans fusion avec un autre compte.",
     "verified": "Numéro de mobile vérifié",
     "unavailable": "La vérification est indisponible tant que l’envoi de SMS n’est pas configuré.",
     "inUse": "Ce numéro ne peut pas être ajouté. Utilisez un numéro non associé à un autre compte.",
@@ -4438,5 +4438,19 @@
     "capacity": "Le stockage des documents est plein. Utilisez les registres manuels ou contactez le propriétaire de l’espace.",
     "changed": "Ce document a changé. Copiez vos modifications avant d’ouvrir la version enregistrée.",
     "loadSaved": "Ouvrir la version enregistrée"
+  },
+  "privacy": {
+    "title": "Politique de confidentialité",
+    "lead": "Cette politique couvre le site Luma.Green et les applications Android, iOS, Windows et macOS.",
+    "dataTitle": "Données utilisées",
+    "dataBody": "Nous utilisons les données de compte et de contact, la position choisie, les photos, documents, vérifications commerciales et registres de transactions et de sécurité pour assurer le recyclage et protéger les comptes.",
+    "sharingTitle": "Destinataires des données",
+    "sharingBody": "Les participants autorisés et les prestataires configurés d’hébergement, SMS, vérification, paiement et IA facultative reçoivent les données nécessaires. Le traitement peut avoir lieu hors de l’Inde.",
+    "choicesTitle": "Vos choix",
+    "choicesBody": "La localisation et les notifications nécessitent votre autorisation. Choisissez vous-même les fichiers. La connexion utilise des cookies de session. Les statistiques nécessitent un accord ; les rapports d’erreurs sont distincts. Gérez les autorisations dans les réglages de l’appareil.",
+    "requestsTitle": "Demandes de compte et de données",
+    "requestsBody": "Supprimez votre compte ci-dessous ou écrivez au support pour un accès, une correction ou une suppression. Vérifiez votre identité ; n’envoyez pas de pièce d’identité par courriel. Réglez d’abord les tâches ou la propriété en attente.",
+    "retentionTitle": "Ce qui reste après la fermeture",
+    "retentionBody": "La fermeture supprime l’accès et les identifiants. Des preuves commerciales, de paiement, de sécurité et d’audit peuvent rester pour examen. Tous les registres ne sont pas effacés. Interrogez le support sur la conservation et les délais."
   }
 }

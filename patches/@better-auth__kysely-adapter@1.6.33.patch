@@ -1,0 +1,13 @@
+diff --git a/dist/index.mjs b/dist/index.mjs
+index 4164652..d1ceaed 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -535,7 +535,7 @@ const kyselyAdapter = (db, config) => {
+ 					}
+ 					const selectIds = applyWhere(db.selectFrom(model).select(`${model}.${idField}`));
+ 					const targetIds = config?.type === "mssql" ? selectIds.top(1) : selectIds.limit(1);
+-					const updateQuery = db.updateTable(model).set(assignments).where(`${model}.${idField}`, "in", targetIds);
++					const updateQuery = applyWhere(db.updateTable(model).set(assignments)).where(`${model}.${idField}`, "in", targetIds);
+ 					if (config?.type === "mssql") return await updateQuery.outputAll("inserted").executeTakeFirst() ?? null;
+ 					return await updateQuery.returningAll().executeTakeFirst() ?? null;
+ 				},

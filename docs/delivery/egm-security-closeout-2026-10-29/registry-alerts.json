@@ -1,0 +1,66 @@
+{
+  "note": "Raw version-based alerts remain visible. Owned source patches do not change registry package versions.",
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 4,
+      "moderate": 0,
+      "high": 3,
+      "critical": 1
+    },
+    "dependencies": 1121,
+    "devDependencies": 528,
+    "optionalDependencies": 215,
+    "totalDependencies": 1799
+  },
+  "alerts": [
+    {
+      "id": "GHSA-mrhx-c7xc-m3w5",
+      "package": "zod",
+      "severity": "high",
+      "patched_versions": ">=4.6.6"
+    },
+    {
+      "id": "GHSA-q84f-53jg-9ppm",
+      "package": "better-auth",
+      "severity": "high",
+      "patched_versions": ">=1.7.0"
+    },
+    {
+      "id": "GHSA-44jh-23m7-hpcf",
+      "package": "better-auth",
+      "severity": "low",
+      "patched_versions": ">=1.7.7"
+    },
+    {
+      "id": "GHSA-44jh-23m7-hpcf",
+      "package": "@better-auth/kysely-adapter",
+      "severity": "low",
+      "patched_versions": ">=1.7.0"
+    },
+    {
+      "id": "GHSA-44jh-23m7-hpcf",
+      "package": "@better-auth/drizzle-adapter",
+      "severity": "low",
+      "patched_versions": ">=1.7.7"
+    },
+    {
+      "id": "GHSA-r4xp-prcw-77qf",
+      "package": "better-auth",
+      "severity": "high",
+      "patched_versions": ">=1.7.7"
+    },
+    {
+      "id": "GHSA-965c-763c-88jm",
+      "package": "better-auth",
+      "severity": "critical",
+      "patched_versions": ">=1.7.7"
+    },
+    {
+      "id": "GHSA-gcqx-w48m-w2h4",
+      "package": "deepmerge",
+      "severity": "low",
+      "patched_versions": null
+    }
+  ]
+}

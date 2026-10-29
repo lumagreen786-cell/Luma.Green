@@ -3823,7 +3823,7 @@
   },
   "accountPhone": {
     "title": "Verifica il tuo numero di cellulare",
-    "description": "Aggiungi un numero tuo per ritiri e pagamenti. Il tuo account email rimane separato dagli altri. Continua ad accedere con l’email.",
+    "description": "Aggiungi un numero tuo per ritiri e pagamenti. Il tuo account rimane separato dagli altri.",
     "verified": "Numero di cellulare verificato",
     "unavailable": "La verifica non è disponibile finché non viene configurato l’invio degli SMS.",
     "inUse": "Questo numero non può essere aggiunto. Usane uno non associato a un altro account.",
@@ -4438,5 +4438,19 @@
     "capacity": "Lo spazio per i documenti è pieno. Usa i registri manuali o contatta il proprietario dello spazio di lavoro.",
     "changed": "Questo documento è cambiato. Copia le modifiche prima di aprire la versione salvata.",
     "loadSaved": "Apri versione salvata"
+  },
+  "privacy": {
+    "title": "Informativa sulla privacy",
+    "lead": "Questa informativa riguarda il sito Luma.Green e le app Android, iOS, Windows e macOS.",
+    "dataTitle": "Dati utilizzati",
+    "dataBody": "Usiamo dati di account e contatto, posizione scelta, foto, documenti, verifiche aziendali e registri di transazioni e sicurezza per fornire servizi di riciclo e proteggere gli account.",
+    "sharingTitle": "Destinatari dei dati",
+    "sharingBody": "I partecipanti autorizzati e i fornitori configurati di hosting, SMS, verifica, pagamento e IA facoltativa ricevono i dati necessari. Il trattamento può avvenire fuori dall’India.",
+    "choicesTitle": "Le tue scelte",
+    "choicesBody": "Posizione e notifiche richiedono il permesso. Scegli tu i file. L’accesso usa cookie di sessione. L’analisi richiede consenso; le segnalazioni di errore sono separate. Gestisci i permessi nelle impostazioni del dispositivo.",
+    "requestsTitle": "Richieste su account e dati",
+    "requestsBody": "Rimuovi l’account qui sotto o scrivi all’assistenza per accesso, rettifica o cancellazione. Verifica la titolarità; non inviare documenti d’identità via email. Risolvi prima le attività o la proprietà in sospeso.",
+    "retentionTitle": "Cosa resta dopo la chiusura",
+    "retentionBody": "La chiusura rimuove accesso e credenziali. Prove aziendali, di pagamento, sicurezza e audit possono restare per la verifica. Non tutti i registri vengono cancellati. Chiedi all’assistenza informazioni su conservazione e tempi."
   }
 }

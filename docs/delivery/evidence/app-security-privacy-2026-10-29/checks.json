@@ -1,0 +1,34 @@
+{
+  "scope": "Local source and production-build checks; no signed native release/device/store acceptance",
+  "baseRevision": "f687bbb7f217dc3b38d7ddae4f8edfd69a4c248a",
+  "webBackendTests": 2870,
+  "webBackendTestFiles": 347,
+  "dependencySecurityRegressions": 4,
+  "mobilePolicyTests": 62,
+  "mobileComponentTests": 14,
+  "desktopTests": 30,
+  "productionBrowserTests": 866,
+  "privacyLayouts": 42,
+  "privacyLocales": ["en", "kn", "ta", "ar", "ur", "de", "ru"],
+  "privacyWidths": [320, 768, 1440],
+  "themes": ["light", "dark"],
+  "buildPages": 3285,
+  "expoExports": ["android", "ios"],
+  "electronSmoke": "passed on 44.10.0",
+  "dependencyInventory": {
+    "info": 0,
+    "low": 4,
+    "moderate": 0,
+    "high": 3,
+    "critical": 1
+  },
+  "dependencyAuditExit": "nonzero; residual findings recorded in delivery results",
+  "captures": "Actual public policy UI on a local Production build with disconnected backend. No authenticated/native-device/provider proof.",
+  "currentMainIntegration": {
+    "baseRevision": "45ad8a6ec22c23345d4e05ee0b0fc3e2073431bb",
+    "webBackendTests": 2953,
+    "webBackendTestFiles": 358,
+    "buildPages": 3318,
+    "browserGate": "Combined local suite running; hosted checks must pass before merge. Earlier counts describe the prior base."
+  }
+}

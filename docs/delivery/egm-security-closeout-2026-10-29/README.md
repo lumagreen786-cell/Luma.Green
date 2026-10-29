@@ -1,0 +1,103 @@
+# Security and auth closeout — 29 October 2026
+
+The owner requested repair of the twelve recorded dependency advisories,
+completion of the auth review, then a checked PR and merge. No service was
+activated, production data migrated, native binary published or factor bypassed.
+
+## Advisory disposition
+
+| Recorded package/advisory                                        | Resolution                                                                                                                                |
+| ---------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| node-forge GHSA-86w9-cpqp-85rv                                   | Current main selected 1.4.2; actual Expo verifier rejection and valid-signature controls pass. Retired 1.4.0 patch stays unregistered.    |
+| systeminformation GHSA-4vjg-vx72-qq4g and GHSA-7648-jmwf-vw7j    | Compatible 5.33.14 override, inside owner major ranges.                                                                                   |
+| @hono/node-server GHSA-rmxm-3fg6-px4f                            | Compatible 2.1.3 override.                                                                                                                |
+| Zod GHSA-mrhx-c7xc-m3w5                                          | Owned upstream backport to Expo's 3.25.76, six source/runtime targets; bounded-collection controls fail stock and pass installed patches. |
+| Better Auth GHSA-q84f-53jg-9ppm                                  | Owned backport exposes device request client/scope only to its claimed owner.                                                             |
+| Better Auth GHSA-r4xp-prcw-77qf and GHSA-965c-763c-88jm          | Owned purpose-key and record-namespace backport, strict record validation and no unsafe legacy fallback.                                  |
+| GHSA-44jh-23m7-hpcf, three Better Auth/SQL adapter audit records | Owned guarded outer-update backports; real PostgreSQL contention checks pass.                                                             |
+| deepmerge GHSA-gcqx-w48m-w2h4                                    | Current main's CJS/UMD source patch and behavioral controls retained.                                                                     |
+
+The twelve records include duplicate package entries for one SQL advisory.
+Four raw alerts disappear with supported package updates. Eight raw version-based
+alerts remain visible for patched versions. They are not suppressed or relabelled.
+`registry-alerts.json` records this result; it is not an audit-zero claim.
+
+The installed Convex auth integration requires Better Auth <1.7.0, and Expo CLI
+requires Zod 3. Forcing incompatible major versions would not be a safe repair.
+Patch sources, removal rules and limitations are in `patches/README.md`,
+`patch-provenance.json` and `zod-evidence.md`.
+
+## Auth repairs
+
+- Existing codes remain usable when SMS becomes unavailable. New sends and
+  resends stop, including the compatibility Change number route and phone binding.
+- Removed screens stop local continuation. Sign-out checks both the current
+  session and the screen before dispatch after device cleanup; a newer observed
+  session also prevents old navigation. Already-dispatched logout retains global
+  lifecycle cleanup. Shared HttpOnly cookie response order is not a device-wide
+  concurrent-sign-in guarantee.
+- Notification revocation receives the same lifetime/session predicate and checks
+  it after nested waits before further cleanup. Cancellation retains the pending
+  marker so notification registration fails closed until explicit cleanup.
+- Repeated admin authenticator setup retains the original primary-auth expiry.
+  A real handler test reproduced acceptance after the original five minutes;
+  the repaired handler rejects it. Same-user session rotation still preserves
+  displayed recovery codes.
+- Connected availability acceptance uses real local phone handlers and the
+  protected loopback inbox, instead of the retired email login. It respects
+  resend/phone quotas and does not reuse or invalidate the saved session artifact.
+  These connected browser cases were source/type checked, not executed here.
+
+## Review and evidence
+
+Fresh EGM Codebase Details reviewers reconstruct the complete mapped auth owners
+under `review-plan.md`. Findings and repairs are retained in the final checkpoint.
+Zod has independent spec and quality approvals. Auth library backports have an
+independent source/compatibility review; direct installed plugin controls pass.
+The proxy profile callback and cookie-state round trip are executed locally;
+full provider OAuth proxy exchange remains a source review, not provider acceptance.
+
+`captures/` contains 72 current-component synthetic fixtures for VerifyFlow,
+its edit-number form and AccountPhone binding in en/ar/ur/kn, light/dark, 390/768/1440px. Captures check
+font loading, horizontal bounds, action labels, disabled sends and keyboard
+navigation. They do not prove an authenticated account or SMS provider execution.
+Representative captures were visually inspected across scripts, widths and themes.
+The platform user guide remains deferred at the owner's instruction.
+
+## Final local checkpoint
+
+Authentication reached two consecutive clean fresh reviews in rounds 7 and 8.
+See `goldfish_review_report.md` for findings, decisions, read scope and limits.
+The prior `egm-self-review-2026-10-29` report remains historical evidence for
+`aa66d90`; this closeout owns the later auth review and current checks.
+
+- `pnpm check`: 3,023 web/backend tests, 183 installed security controls,
+  64 mobile policy tests, 20 mobile UI tests and 34 desktop tests pass. Root,
+  Convex and shell types pass. Lint has zero errors and 123 existing warnings.
+- Real PostgreSQL adapter contention: 10/10 pass against an isolated local
+  PostgreSQL 17 fixture. CI now runs this same explicit gate.
+- Empty-configuration production build: 3,318 pages generated. Chromium:
+  873/873 pass, two workers, retries disabled. Bot-check browser controls: 2/2 pass.
+- Real unpackaged Electron smoke passes. Both Expo Hermes exports pass with
+  694 modules per platform; Expo dependency compatibility passes.
+- Auth schema regeneration produces no difference. No data migration is needed.
+- Frozen-lockfile installation, indexed clean-tree formatting and redacted secret
+  scanning pass. Source digest metadata is represented as file/hash records,
+  preserving evidence without adding scanner exceptions. The existing unrelated
+  untracked Surepass design file is not edited or included in the PR.
+- Existing optional test-tool peer warnings remain: Unicorn expects ESLint 10,
+  and Better Auth's optional test peer lists Vitest through 4 while the repo
+  uses 5. Neither was introduced by this repair; supported auth/Expo runtime
+  major ranges were preserved and the actual suites pass.
+
+The Convex counter repair uses the existing fields in one mutation for failure
+increments and guarded lock resets. Recovery-code consumption retains its
+atomic compare-and-replace and audit callback. Database limiter guards and
+changes also share one transaction. A stock-adapter test lost concurrent updates;
+20 increments now return counts 1 through 20, and 20 count<5 attempts admit five.
+The real handler test locks the account after ten concurrent wrong recovery
+codes on separate challenges and denies the next attempt without a session.
+
+The final UI copy keeps the current account and no longer directs people to
+retired email sign-in. All 33 catalogues were updated. New local captures include
+that current copy. Native-speaker language acceptance remains open.

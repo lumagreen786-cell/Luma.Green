@@ -3823,7 +3823,7 @@
   },
   "accountPhone": {
     "title": "Verifica tu número de móvil",
-    "description": "Añade un número propio para recogidas y pagos. Tu cuenta de correo se mantiene y no se combina con otra. Sigue entrando con tu correo.",
+    "description": "Añade un número propio para recogidas y pagos. Tu cuenta se mantiene y no se combina con otra.",
     "verified": "Número de móvil verificado",
     "unavailable": "La verificación no está disponible hasta configurar el envío de SMS.",
     "inUse": "No se puede añadir este número. Usa uno que no esté asociado a otra cuenta.",
@@ -4438,5 +4438,19 @@
     "capacity": "El almacenamiento de documentos está lleno. Usa registros manuales o contacta con el propietario del espacio.",
     "changed": "Este documento ha cambiado. Copia tus cambios antes de abrir la versión guardada.",
     "loadSaved": "Abrir versión guardada"
+  },
+  "privacy": {
+    "title": "Política de privacidad",
+    "lead": "Esta política cubre el sitio de Luma.Green y las aplicaciones para Android, iOS, Windows y macOS.",
+    "dataTitle": "Datos que usamos",
+    "dataBody": "Usamos datos de cuenta y contacto, la ubicación elegida, fotos, documentos, verificaciones comerciales y registros de transacciones y seguridad para prestar servicios de reciclaje y proteger las cuentas.",
+    "sharingTitle": "Quién recibe los datos",
+    "sharingBody": "Los participantes autorizados y los proveedores configurados de alojamiento, SMS, verificación, pagos e IA opcional reciben los datos necesarios. El tratamiento puede realizarse fuera de India.",
+    "choicesTitle": "Tus opciones",
+    "choicesBody": "La ubicación y las notificaciones requieren permiso. Tú eliges los archivos. El acceso usa cookies de sesión. La analítica requiere consentimiento; los informes de errores son independientes. Gestiona los permisos en los ajustes del dispositivo.",
+    "requestsTitle": "Solicitudes de cuenta y datos",
+    "requestsBody": "Elimina tu cuenta abajo o escribe a soporte para acceder, corregir o borrar datos. Verifica la titularidad; no envíes documentos de identidad por correo. Resuelve primero el trabajo o la titularidad pendientes.",
+    "retentionTitle": "Qué queda tras el cierre",
+    "retentionBody": "El cierre elimina el acceso y las credenciales. Pueden conservarse pruebas comerciales, de pagos, seguridad y auditoría para revisión. No se borra cada registro. Consulta a soporte sobre conservación y plazos."
   }
 }

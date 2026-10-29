@@ -66,6 +66,20 @@ async function saveAssurance(
   });
 }
 
+async function retainAdminEnrollmentAssurance(ctx: Context) {
+  const session = ctx.context.session;
+  if (!session || !isAdminEmail(session.user.email)) return;
+  const proof = await readAssurance(ctx, session.session.id, session.user.id);
+  if (!proof) return;
+  await saveAssurance(
+    ctx,
+    session.session.id,
+    session.user.id,
+    false,
+    proof.expiresAt,
+  );
+}
+
 function forbidden(code: string): never {
   throw new APIError("FORBIDDEN", {
     code,
@@ -227,15 +241,7 @@ export function phoneTwoFactor() {
           handler: createAuthMiddleware(async (ctx) => {
             if (isAPIError(ctx.context.returned) || isPhoneBinding(ctx)) return;
             if (ctx.path === "/two-factor/enable") {
-              const session = ctx.context.session;
-              if (session && isAdminEmail(session.user.email)) {
-                await saveAssurance(
-                  ctx,
-                  session.session.id,
-                  session.user.id,
-                  false,
-                );
-              }
+              await retainAdminEnrollmentAssurance(ctx);
               return;
             }
             const current = ctx.context.newSession;

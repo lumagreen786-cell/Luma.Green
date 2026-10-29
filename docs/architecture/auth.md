@@ -56,8 +56,9 @@ component. Built and tested on 29 Sep 2026.
   valid. Other methods and auth routes retain their limits, including signup,
   sign-in, verification email, password recovery and token issuance. This rule
   does not cover the server-only `latest-jwks` route or expose private key fields.
-  A real-handler regression performs 105 key reads from one IP and checks the
-  existing credential quotas and unauthenticated token denial.
+  The JWKS limit exemption is implemented in the route-specific rate rules.
+  A dedicated repeated-key-read regression is not in the current test suite;
+  do not treat that route as covered by a 105-request test.
 
 ### SMS codes
 
@@ -259,3 +260,21 @@ A dispatched server request can still complete. Better Auth uses shared browser
 cookies: concurrent completed sign-ins can select the account in HTTP response
 order. These UI guards do not control HttpOnly cookie writes. Every sign-in still
 requires all of its configured factors.
+
+### Atomic auth updates
+
+The installed Convex auth adapter has no native `incrementOne` and does not wrap
+its read/write fallback in a transaction. Luma routes the installed library's
+factor-failure increment, expired-lock reset, guarded backup-code replacement
+and database rate-limit operations through `convex/betterAuth/atomic.ts`.
+Each guard and update executes in one transaction. Backup replacement keeps its
+existing audit callback in that transaction. The adapter wrapper accepts only
+the known operation shapes and keeps the existing ID/date mapping. There is no
+new root browser endpoint, table or data migration. Retain the concurrent
+actual-adapter and HTTP-handler tests when updating either auth dependency.
+
+Phone binding also checks the observed session after each wait and within its
+send helper. A same-user session rotation keeps entered values but prevents an
+old result from dispatching, reporting success or refreshing the newer session.
+The account form remains keyed by user so required same-user factor rotation
+does not erase revealed recovery codes.

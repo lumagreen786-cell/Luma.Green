@@ -1,0 +1,1341 @@
+{
+  "fixture": "Actual current VerifyFlow/PhoneForm isolated with unavailable delivery; synthetic challenge; no backend/auth/provider acceptance; AccountPhone binding uses synthetic send result, no verify/provider request",
+  "sources": [
+    {
+      "file": "src/components/auth/verify-flow.tsx",
+      "sha256": "ec6692e5dcc9313eeee8bcc6228b16c44d6182e21cfa8338be87ea568c21f88e"
+    },
+    {
+      "file": "src/components/auth/phone-form.tsx",
+      "sha256": "0167dda7fdc48b7518399d2c9bc48997e3ac698a3255c4f7022f0145d33bec5b"
+    },
+    {
+      "file": "src/app/globals.css",
+      "sha256": "bbf8eaca5401369d3ff1e089db725aefdc800a3999ac684e198c958b2d78560c"
+    },
+    {
+      "file": "messages/en.json",
+      "sha256": "55f697bb7b25f36dfc9bd92efb1a8097260e571125495076d5afca7aef5a0035"
+    },
+    {
+      "file": "messages/ar.json",
+      "sha256": "3cf16aa02f7b0b482ec5646ca3d4f3c4f4428310fa473192f83dcff4d60e1d0c"
+    },
+    {
+      "file": "messages/ur.json",
+      "sha256": "c354dd99ca0613ba4c999ef27d6ef4d91040a3df64f666c21c39dc4aad2b7557"
+    },
+    {
+      "file": "messages/kn.json",
+      "sha256": "c9d149dc8ae261f47d69479d211f84b08e4b4bb753bd7d740839b492f5fb1476"
+    },
+    {
+      "file": "src/components/account/account-phone.tsx",
+      "sha256": "5351f57a46f8023b26074da66e2b3ee34b92e58ddbefeaca9f83adf0d0f05b5e"
+    }
+  ],
+  "captures": [
+    {
+      "name": "en-390-light-code.png",
+      "locale": "en",
+      "width": 390,
+      "theme": "light",
+      "state": "code",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "loadedFonts": ["Geist", "Noto Sans"],
+        "clippedButtons": []
+      },
+      "sha256": "a0650e937ada52ded177449669ac2894e768eee2662589d30df6be173a7e594d"
+    },
+    {
+      "name": "en-390-light-edit.png",
+      "locale": "en",
+      "width": 390,
+      "theme": "light",
+      "state": "edit",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "loadedFonts": ["Geist", "Noto Sans"],
+        "clippedButtons": []
+      },
+      "sha256": "60733da799972d5c135c786b4bc42516f32ff73ed2f962ef6fce714d2f02862a"
+    },
+    {
+      "name": "en-390-dark-code.png",
+      "locale": "en",
+      "width": 390,
+      "theme": "dark",
+      "state": "code",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "loadedFonts": ["Geist", "Noto Sans"],
+        "clippedButtons": []
+      },
+      "sha256": "33ecd02b793af7710b7465eef78048178cab3ca14b167220181bcdf653f6f547"
+    },
+    {
+      "name": "en-390-dark-edit.png",
+      "locale": "en",
+      "width": 390,
+      "theme": "dark",
+      "state": "edit",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "loadedFonts": ["Geist", "Noto Sans"],
+        "clippedButtons": []
+      },
+      "sha256": "e7a7c2a8ca819c3862c0a95d5c64c2154178225eee414c1be5c9a0a0126cb12b"
+    },
+    {
+      "name": "en-768-light-code.png",
+      "locale": "en",
+      "width": 768,
+      "theme": "light",
+      "state": "code",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "loadedFonts": ["Geist", "Noto Sans"],
+        "clippedButtons": []
+      },
+      "sha256": "7755a400ab4d8a24619db06df507ae1116b1861916d645f3c9b9216e732325df"
+    },
+    {
+      "name": "en-768-light-edit.png",
+      "locale": "en",
+      "width": 768,
+      "theme": "light",
+      "state": "edit",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "loadedFonts": ["Geist", "Noto Sans"],
+        "clippedButtons": []
+      },
+      "sha256": "b7ef05ce9a1f5ca3262ad20eac3e0f5966a86e2354ef0cb0a561bd5db1ccde05"
+    },
+    {
+      "name": "en-768-dark-code.png",
+      "locale": "en",
+      "width": 768,
+      "theme": "dark",
+      "state": "code",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "loadedFonts": ["Geist", "Noto Sans"],
+        "clippedButtons": []
+      },
+      "sha256": "aad4160cd60dddfa7ea73aca77e4744ab380823f01c0729c7b5197f19efaaeca"
+    },
+    {
+      "name": "en-768-dark-edit.png",
+      "locale": "en",
+      "width": 768,
+      "theme": "dark",
+      "state": "edit",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "loadedFonts": ["Geist", "Noto Sans"],
+        "clippedButtons": []
+      },
+      "sha256": "911742caaeede7df226752f8236e6d90003de9bb73964134888d67eea7fae174"
+    },
+    {
+      "name": "en-1440-light-code.png",
+      "locale": "en",
+      "width": 1440,
+      "theme": "light",
+      "state": "code",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "loadedFonts": ["Geist", "Noto Sans"],
+        "clippedButtons": []
+      },
+      "sha256": "99de932c234879d92a2cd94c3090227988e9a4930c769ee67e4e5edd6ed81f18"
+    },
+    {
+      "name": "en-1440-light-edit.png",
+      "locale": "en",
+      "width": 1440,
+      "theme": "light",
+      "state": "edit",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "loadedFonts": ["Geist", "Noto Sans"],
+        "clippedButtons": []
+      },
+      "sha256": "86e9e443981096914d5bb0d6b183278d84cee6890afa4b96f173dfa8e65f36e4"
+    },
+    {
+      "name": "en-1440-dark-code.png",
+      "locale": "en",
+      "width": 1440,
+      "theme": "dark",
+      "state": "code",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "loadedFonts": ["Geist", "Noto Sans"],
+        "clippedButtons": []
+      },
+      "sha256": "ecbf9d46d9014037003850efa7f4955efddfc9bcb95ccb420f21047658b19b60"
+    },
+    {
+      "name": "en-1440-dark-edit.png",
+      "locale": "en",
+      "width": 1440,
+      "theme": "dark",
+      "state": "edit",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "loadedFonts": ["Geist", "Noto Sans"],
+        "clippedButtons": []
+      },
+      "sha256": "371c2ad502ae6ab8fccb94a889cef0ddf2331e3851a8175f5ce91087151599a6"
+    },
+    {
+      "name": "ar-390-light-code.png",
+      "locale": "ar",
+      "width": 390,
+      "theme": "light",
+      "state": "code",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "b998dd3ab05da5aed1323553b2a4fa920f1bb8ddad7e033b3919578822116b39"
+    },
+    {
+      "name": "ar-390-light-edit.png",
+      "locale": "ar",
+      "width": 390,
+      "theme": "light",
+      "state": "edit",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "f7513a52e663e726f90cadd4a0d8ada84d5cd29b09eeddaca671c2e4feb45369"
+    },
+    {
+      "name": "ar-390-dark-code.png",
+      "locale": "ar",
+      "width": 390,
+      "theme": "dark",
+      "state": "code",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "b79606823ed60155fc5e959b4bdb7b7418bd56dcf419b9c3406274b0489e8b01"
+    },
+    {
+      "name": "ar-390-dark-edit.png",
+      "locale": "ar",
+      "width": 390,
+      "theme": "dark",
+      "state": "edit",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "ea7fe3d754b7e4a75dc6c4043f46a5cc761b7b90ef0543d39238df1ea1a77a5a"
+    },
+    {
+      "name": "ar-768-light-code.png",
+      "locale": "ar",
+      "width": 768,
+      "theme": "light",
+      "state": "code",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "513504a65d8683ce502fc629ee72f1cf7028757899acc925dab83db5b83a2c9c"
+    },
+    {
+      "name": "ar-768-light-edit.png",
+      "locale": "ar",
+      "width": 768,
+      "theme": "light",
+      "state": "edit",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "269597ee2acfc9462f09f20ee2a9c4fe3d0c20657d9cba31669a66b0da0af942"
+    },
+    {
+      "name": "ar-768-dark-code.png",
+      "locale": "ar",
+      "width": 768,
+      "theme": "dark",
+      "state": "code",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "c518c9ab863ff3c45e224e263a2bf29230bd21053e29fd7b45af55c151bae21b"
+    },
+    {
+      "name": "ar-768-dark-edit.png",
+      "locale": "ar",
+      "width": 768,
+      "theme": "dark",
+      "state": "edit",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "5ded80e129a51e88bdb4dbed06fb86e99eaeb9ce1dac1060d99d117fce079b49"
+    },
+    {
+      "name": "ar-1440-light-code.png",
+      "locale": "ar",
+      "width": 1440,
+      "theme": "light",
+      "state": "code",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "9fe2c259bdaea2496af76c6331c516ddb59ca138ca4a8cc474db917538d6356c"
+    },
+    {
+      "name": "ar-1440-light-edit.png",
+      "locale": "ar",
+      "width": 1440,
+      "theme": "light",
+      "state": "edit",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "4696117ac09cf87bdf252c3d5628d2c8ef3edba7ba796628a22335055726b83b"
+    },
+    {
+      "name": "ar-1440-dark-code.png",
+      "locale": "ar",
+      "width": 1440,
+      "theme": "dark",
+      "state": "code",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "d32f6f640ef426121d3b09e72be9ef32ef1484680312b8881f4d057979079610"
+    },
+    {
+      "name": "ar-1440-dark-edit.png",
+      "locale": "ar",
+      "width": 1440,
+      "theme": "dark",
+      "state": "edit",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "7a8f934e4d323e5a7caa724830a23d8e3a66eded66f940c54940766774edeac1"
+    },
+    {
+      "name": "ur-390-light-code.png",
+      "locale": "ur",
+      "width": 390,
+      "theme": "light",
+      "state": "code",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "5a109ed7d0021d9ee3609c69170b3882bed6c136979e333bf42a48139e88df93"
+    },
+    {
+      "name": "ur-390-light-edit.png",
+      "locale": "ur",
+      "width": 390,
+      "theme": "light",
+      "state": "edit",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "7e340c6e196a7d30e708108a6ea2bd543eedc69b0770eb006d3eadae7ed4fad0"
+    },
+    {
+      "name": "ur-390-dark-code.png",
+      "locale": "ur",
+      "width": 390,
+      "theme": "dark",
+      "state": "code",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "71ca1df80686d64d0c05643f88a9ed31cfbacf441a05cff1605d314ed0c6b423"
+    },
+    {
+      "name": "ur-390-dark-edit.png",
+      "locale": "ur",
+      "width": 390,
+      "theme": "dark",
+      "state": "edit",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "a805ef5389e21951cd1fc976ceb74222acc44da904bc4edcce03b7d943a1d889"
+    },
+    {
+      "name": "ur-768-light-code.png",
+      "locale": "ur",
+      "width": 768,
+      "theme": "light",
+      "state": "code",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "ace98c820c5d3bdffd6fef305dc3578acfdf39e5c78734019429d77778df98f7"
+    },
+    {
+      "name": "ur-768-light-edit.png",
+      "locale": "ur",
+      "width": 768,
+      "theme": "light",
+      "state": "edit",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "3e73a41007fb83a0571511c36e77ec070eceda13dede1e03ba1485bb6a4f2f27"
+    },
+    {
+      "name": "ur-768-dark-code.png",
+      "locale": "ur",
+      "width": 768,
+      "theme": "dark",
+      "state": "code",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "b8f69d532e84b6d08a721e19860bc7181bc2f3e4cb930e18508b493776d0c547"
+    },
+    {
+      "name": "ur-768-dark-edit.png",
+      "locale": "ur",
+      "width": 768,
+      "theme": "dark",
+      "state": "edit",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "912a4279a5f5a4e363ff64f7b788272d4e351c6f6129661aa2b73315e1aa9626"
+    },
+    {
+      "name": "ur-1440-light-code.png",
+      "locale": "ur",
+      "width": 1440,
+      "theme": "light",
+      "state": "code",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "d7cb0dce62cbbdc4cb21b95694f62beb6b3cffcb131560dcbf67fdff69f1276d"
+    },
+    {
+      "name": "ur-1440-light-edit.png",
+      "locale": "ur",
+      "width": 1440,
+      "theme": "light",
+      "state": "edit",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "51c5e860a209efd4963f3f6db8d9c7cd9f2992120f8160295c4cbca2e0cd2886"
+    },
+    {
+      "name": "ur-1440-dark-code.png",
+      "locale": "ur",
+      "width": 1440,
+      "theme": "dark",
+      "state": "code",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "c484f1f429dcb05a055063cca38ec3b424be9023f5c5b561bd7ec63fd04cb254"
+    },
+    {
+      "name": "ur-1440-dark-edit.png",
+      "locale": "ur",
+      "width": 1440,
+      "theme": "dark",
+      "state": "edit",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "df569f65cdb245c2633cba3e819b8bfdfd0b6ad53f9342030cb3d20b0c0c5bde"
+    },
+    {
+      "name": "kn-390-light-code.png",
+      "locale": "kn",
+      "width": 390,
+      "theme": "light",
+      "state": "code",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Kannada",
+          "Noto Sans Kannada Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "d207a1e0b17f2479cb41d6a5edecdc7cb7b9169cfefb9d8066e36509ae501789"
+    },
+    {
+      "name": "kn-390-light-edit.png",
+      "locale": "kn",
+      "width": 390,
+      "theme": "light",
+      "state": "edit",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Kannada",
+          "Noto Sans Kannada Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "1d65b5c116bb51c022e54043246435fcd05439072f427416ba7acee66edc325e"
+    },
+    {
+      "name": "kn-390-dark-code.png",
+      "locale": "kn",
+      "width": 390,
+      "theme": "dark",
+      "state": "code",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Kannada",
+          "Noto Sans Kannada Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "865f5f0765c6b436cf25efe307e9d1faa56342af53ef503f87df3ac2ba4af84d"
+    },
+    {
+      "name": "kn-390-dark-edit.png",
+      "locale": "kn",
+      "width": 390,
+      "theme": "dark",
+      "state": "edit",
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Kannada",
+          "Noto Sans Kannada Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "77bf5bb9e1e9494c68fa507b9077a96881aeb2106c0b5cbec105d0319dd3f81d"
+    },
+    {
+      "name": "kn-768-light-code.png",
+      "locale": "kn",
+      "width": 768,
+      "theme": "light",
+      "state": "code",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Kannada",
+          "Noto Sans Kannada Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "5c2d2af6e3fa3e9e6b6e09b778764adcb7d858acf7312e5c40662361bdad2509"
+    },
+    {
+      "name": "kn-768-light-edit.png",
+      "locale": "kn",
+      "width": 768,
+      "theme": "light",
+      "state": "edit",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Kannada",
+          "Noto Sans Kannada Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "94b9e17aa9b80d87d6e7944450b05a82a70b2aee90d89dce11a202b44cc76b6f"
+    },
+    {
+      "name": "kn-768-dark-code.png",
+      "locale": "kn",
+      "width": 768,
+      "theme": "dark",
+      "state": "code",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Kannada",
+          "Noto Sans Kannada Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "f51b66adef834d69cbb53dffb2a464df2747620eae713b714558fe05ba72a438"
+    },
+    {
+      "name": "kn-768-dark-edit.png",
+      "locale": "kn",
+      "width": 768,
+      "theme": "dark",
+      "state": "edit",
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Kannada",
+          "Noto Sans Kannada Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "6718e8e928fd5478128a373aea3e77bc525877e6d678022c14cd25a8ea0cbb23"
+    },
+    {
+      "name": "kn-1440-light-code.png",
+      "locale": "kn",
+      "width": 1440,
+      "theme": "light",
+      "state": "code",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Kannada",
+          "Noto Sans Kannada Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "902d43d82dcb2f89469b459a08c92b2307c2a65e35b7c4175cb4b4ad25afeec4"
+    },
+    {
+      "name": "kn-1440-light-edit.png",
+      "locale": "kn",
+      "width": 1440,
+      "theme": "light",
+      "state": "edit",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Kannada",
+          "Noto Sans Kannada Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "39c529d31bf546fd339eef928605af463af4f872696d2a149275c61d8389e37f"
+    },
+    {
+      "name": "kn-1440-dark-code.png",
+      "locale": "kn",
+      "width": 1440,
+      "theme": "dark",
+      "state": "code",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Kannada",
+          "Noto Sans Kannada Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "dca9156d024f81d2c1272cbaff53a66166d8b9a88b626cbe7d384906f9b8843c"
+    },
+    {
+      "name": "kn-1440-dark-edit.png",
+      "locale": "kn",
+      "width": 1440,
+      "theme": "dark",
+      "state": "edit",
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Kannada",
+          "Noto Sans Kannada Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "43432cd072e2b546469c232a21e648da6eebac3a7173637695bb1e7267588bd3"
+    },
+    {
+      "name": "en-390-light-binding.png",
+      "locale": "en",
+      "width": 390,
+      "theme": "light",
+      "state": "binding",
+      "synthetic": true,
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "loadedFonts": ["Geist", "Noto Sans"],
+        "clippedButtons": []
+      },
+      "sha256": "2416ca0598496e40cc4eb1b27a1edc104f47eaa118b277381852d416ec751619"
+    },
+    {
+      "name": "en-390-dark-binding.png",
+      "locale": "en",
+      "width": 390,
+      "theme": "dark",
+      "state": "binding",
+      "synthetic": true,
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "loadedFonts": ["Geist", "Noto Sans"],
+        "clippedButtons": []
+      },
+      "sha256": "05b0ac502126b7b3276ecf3643c7470eb8ee0077a11b994aef047b9f5f3df38d"
+    },
+    {
+      "name": "en-768-light-binding.png",
+      "locale": "en",
+      "width": 768,
+      "theme": "light",
+      "state": "binding",
+      "synthetic": true,
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "loadedFonts": ["Geist", "Noto Sans"],
+        "clippedButtons": []
+      },
+      "sha256": "fe3db97818c1deabdc7a2e7a9165e373cbec11f229be58a25f7e3967c5df3cb0"
+    },
+    {
+      "name": "en-768-dark-binding.png",
+      "locale": "en",
+      "width": 768,
+      "theme": "dark",
+      "state": "binding",
+      "synthetic": true,
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "loadedFonts": ["Geist", "Noto Sans"],
+        "clippedButtons": []
+      },
+      "sha256": "8beaca0ff69a871a74da6e4e54c1ff33fe05a36e7f3262c76b4c7412fe58b489"
+    },
+    {
+      "name": "en-1440-light-binding.png",
+      "locale": "en",
+      "width": 1440,
+      "theme": "light",
+      "state": "binding",
+      "synthetic": true,
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "loadedFonts": ["Geist", "Noto Sans"],
+        "clippedButtons": []
+      },
+      "sha256": "e2272c4c0c8266bc8f7c808c08311628382f3d45ca394cd4578819a5715d1d42"
+    },
+    {
+      "name": "en-1440-dark-binding.png",
+      "locale": "en",
+      "width": 1440,
+      "theme": "dark",
+      "state": "binding",
+      "synthetic": true,
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "loadedFonts": ["Geist", "Noto Sans"],
+        "clippedButtons": []
+      },
+      "sha256": "cdac13d27197443f970ce92a2fd9ef6867bd01e6a1b30f66393eb5dea0c76b7f"
+    },
+    {
+      "name": "ar-390-light-binding.png",
+      "locale": "ar",
+      "width": 390,
+      "theme": "light",
+      "state": "binding",
+      "synthetic": true,
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "434a7dfafd0a310b91d10673ca9e896251969b768e4d55f5ade8f34e8b29589d"
+    },
+    {
+      "name": "ar-390-dark-binding.png",
+      "locale": "ar",
+      "width": 390,
+      "theme": "dark",
+      "state": "binding",
+      "synthetic": true,
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "5be92e1b7913961033b33b149acbc655b23a911a965b61ac89b9cfd66beacd3c"
+    },
+    {
+      "name": "ar-768-light-binding.png",
+      "locale": "ar",
+      "width": 768,
+      "theme": "light",
+      "state": "binding",
+      "synthetic": true,
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "08871858adba22d6ac3a03413c9cb86977cc943b170bf4afff7196427eda8c37"
+    },
+    {
+      "name": "ar-768-dark-binding.png",
+      "locale": "ar",
+      "width": 768,
+      "theme": "dark",
+      "state": "binding",
+      "synthetic": true,
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "8c5710f71f370e799cad422bc71e1e1061b15d67452fd99f0fb9ae5ffa719d36"
+    },
+    {
+      "name": "ar-1440-light-binding.png",
+      "locale": "ar",
+      "width": 1440,
+      "theme": "light",
+      "state": "binding",
+      "synthetic": true,
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "3506e558b99708bcdab444c00523b5a3e4380ebe4d092ff19123a9fa0c4928a8"
+    },
+    {
+      "name": "ar-1440-dark-binding.png",
+      "locale": "ar",
+      "width": 1440,
+      "theme": "dark",
+      "state": "binding",
+      "synthetic": true,
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "febf4f5787c37a6dc0ba719a4c16293c5e1198a6725619ed9fe9be7aa255e465"
+    },
+    {
+      "name": "ur-390-light-binding.png",
+      "locale": "ur",
+      "width": 390,
+      "theme": "light",
+      "state": "binding",
+      "synthetic": true,
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "e9a309ab3afec8469f21565ecb208e9723b9d40487dfa460867308a853b73106"
+    },
+    {
+      "name": "ur-390-dark-binding.png",
+      "locale": "ur",
+      "width": 390,
+      "theme": "dark",
+      "state": "binding",
+      "synthetic": true,
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "dc4ee880b6b2a071c82bf6890ecf78a44d355f71c13eb09e3dd437c427564301"
+    },
+    {
+      "name": "ur-768-light-binding.png",
+      "locale": "ur",
+      "width": 768,
+      "theme": "light",
+      "state": "binding",
+      "synthetic": true,
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "48b393de07acc179494ff8d908f23772ab3d15ab30c22438e1ebe821b6ce1afc"
+    },
+    {
+      "name": "ur-768-dark-binding.png",
+      "locale": "ur",
+      "width": 768,
+      "theme": "dark",
+      "state": "binding",
+      "synthetic": true,
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "ac488f2fdbbb9ddf7f6b3791da34803a56c2d5d9c3ecd9c880bc629db2dcd7e7"
+    },
+    {
+      "name": "ur-1440-light-binding.png",
+      "locale": "ur",
+      "width": 1440,
+      "theme": "light",
+      "state": "binding",
+      "synthetic": true,
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "e8bce74ab8df910d2f3a5b8bf5225140a25b0d269e73b1d02e03cd3fbdc6f818"
+    },
+    {
+      "name": "ur-1440-dark-binding.png",
+      "locale": "ur",
+      "width": 1440,
+      "theme": "dark",
+      "state": "binding",
+      "synthetic": true,
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Arabic",
+          "Noto Sans Arabic Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "dae04855644dfc0eaaf7151cd96ac23b6869a01e8283a5f1092e2e80ff4dd3ea"
+    },
+    {
+      "name": "kn-390-light-binding.png",
+      "locale": "kn",
+      "width": 390,
+      "theme": "light",
+      "state": "binding",
+      "synthetic": true,
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Kannada",
+          "Noto Sans Kannada Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "d4fbc52f45b0cbf91a7f8ad9b4c81288878cbf4e2d7b6135c7845b483c59f117"
+    },
+    {
+      "name": "kn-390-dark-binding.png",
+      "locale": "kn",
+      "width": 390,
+      "theme": "dark",
+      "state": "binding",
+      "synthetic": true,
+      "metrics": {
+        "pageWidth": 390,
+        "viewport": 390,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Kannada",
+          "Noto Sans Kannada Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "a4a90ad5f637e5ac580ac3286ed28c3cc2a81d9a6597bbc6669f316dfa4cb2fe"
+    },
+    {
+      "name": "kn-768-light-binding.png",
+      "locale": "kn",
+      "width": 768,
+      "theme": "light",
+      "state": "binding",
+      "synthetic": true,
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Kannada",
+          "Noto Sans Kannada Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "c033d292c55d9b0c171e66737d6956d2efe605c1d41af848300c5de53d9cc771"
+    },
+    {
+      "name": "kn-768-dark-binding.png",
+      "locale": "kn",
+      "width": 768,
+      "theme": "dark",
+      "state": "binding",
+      "synthetic": true,
+      "metrics": {
+        "pageWidth": 768,
+        "viewport": 768,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Kannada",
+          "Noto Sans Kannada Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "7a1ef7547367cf4bfcc7d2ed44f5a75c6b0c029f08859e3158e7ee537ac1ba03"
+    },
+    {
+      "name": "kn-1440-light-binding.png",
+      "locale": "kn",
+      "width": 1440,
+      "theme": "light",
+      "state": "binding",
+      "synthetic": true,
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Kannada",
+          "Noto Sans Kannada Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "87e63953a2acb315aae255eb2d60ec710cbc2cd0cc1ac83c248797ae846bdc30"
+    },
+    {
+      "name": "kn-1440-dark-binding.png",
+      "locale": "kn",
+      "width": 1440,
+      "theme": "dark",
+      "state": "binding",
+      "synthetic": true,
+      "metrics": {
+        "pageWidth": 1440,
+        "viewport": 1440,
+        "loadedFonts": [
+          "Geist",
+          "Noto Sans",
+          "Noto Sans Kannada",
+          "Noto Sans Kannada Fallback"
+        ],
+        "clippedButtons": []
+      },
+      "sha256": "2399f08cc7f84b7633ca563c69b616b7840d86d0d07942aaffb2c81cdb3b7078"
+    }
+  ]
+}

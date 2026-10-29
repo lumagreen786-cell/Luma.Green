@@ -15,6 +15,7 @@ import authConfig from "./auth.config";
 import authSchema from "./betterAuth/schema";
 import { isAuthAccountClosed } from "./lib/accountClosure";
 import { adminSessionExpiry, isAdminEmail } from "./lib/admin";
+import { withAtomicAuthUpdates } from "./lib/auth-atomic";
 import { sendLocalPhoneCode } from "./lib/authEmail";
 import { isIndianMobile, phoneEmail } from "./lib/phone";
 import {
@@ -111,7 +112,7 @@ export const createAuthOptions = (ctx: GenericCtx<DataModel>) =>
     trustedOrigins: trustedOrigins(),
     // Keep the same origin/CSRF boundary in tests and production.
     advanced: { disableOriginCheck: false, disableCSRFCheck: false },
-    database: authComponent.adapter(ctx),
+    database: withAtomicAuthUpdates(ctx, authComponent.adapter(ctx)),
     emailAndPassword: { enabled: false },
     // Kept in the database: in memory, each Convex request could start with a
     // clean slate. The plugins set the limits (phone: 10 a minute; two-factor:

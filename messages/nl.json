@@ -3823,7 +3823,7 @@
   },
   "accountPhone": {
     "title": "Verifieer je mobiele nummer",
-    "description": "Voeg je eigen nummer toe voor inzameling en betalingen. Je e-mailaccount blijft behouden; er worden geen accounts samengevoegd. Blijf inloggen met e-mail.",
+    "description": "Voeg je eigen nummer toe voor inzameling en betalingen. Je account blijft behouden; er worden geen accounts samengevoegd.",
     "verified": "Mobiel nummer geverifieerd",
     "unavailable": "Verificatie is pas beschikbaar nadat sms-bezorging is ingesteld.",
     "inUse": "Dit nummer kan niet worden toegevoegd. Gebruik een nummer zonder ander account.",
@@ -4438,5 +4438,19 @@
     "capacity": "De documentopslag is vol. Gebruik handmatige registraties of neem contact op met de werkruimte-eigenaar.",
     "changed": "Dit document is gewijzigd. Kopieer je wijzigingen voordat je de opgeslagen versie opent.",
     "loadSaved": "Opgeslagen versie openen"
+  },
+  "privacy": {
+    "title": "Privacybeleid",
+    "lead": "Dit beleid geldt voor de Luma.Green-website en de apps voor Android, iOS, Windows en macOS.",
+    "dataTitle": "Gegevens die we gebruiken",
+    "dataBody": "We gebruiken account- en contactgegevens, je gekozen locatie, foto’s, documenten, bedrijfscontroles en transactie- en beveiligingsgegevens voor recyclingdiensten en accountbescherming.",
+    "sharingTitle": "Wie gegevens ontvangt",
+    "sharingBody": "Bevoegde deelnemers en ingestelde aanbieders van hosting, sms, verificatie, betalingen en optionele AI ontvangen de nodige gegevens. Verwerking kan buiten India plaatsvinden.",
+    "choicesTitle": "Jouw keuzes",
+    "choicesBody": "Locatie en meldingen vereisen toestemming. Je kiest zelf bestanden. Aanmelden gebruikt sessiecookies. Analyse vereist toestemming; foutmeldingen staan daar los van. Beheer rechten in de apparaatinstellingen.",
+    "requestsTitle": "Verzoeken over account en gegevens",
+    "requestsBody": "Verwijder hieronder je account of mail de ondersteuning voor inzage, correctie of verwijdering. Bevestig het eigenaarschap; mail geen identiteitsdocumenten. Los eerst open werk of eigendomsvragen op.",
+    "retentionTitle": "Wat na sluiting blijft",
+    "retentionBody": "Sluiting verwijdert toegang en aanmeldgegevens. Bewijs voor zaken, betalingen, veiligheid en controle kan voor beoordeling blijven. Niet elk record wordt gewist. Vraag de ondersteuning naar bewaartermijnen en doorlooptijd."
   }
 }

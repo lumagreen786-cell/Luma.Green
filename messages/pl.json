@@ -3823,7 +3823,7 @@
   },
   "accountPhone": {
     "title": "Potwierdź numer telefonu",
-    "description": "Dodaj własny numer do odbiorów i płatności. Konto e-mail pozostaje oddzielne od innych kont. Nadal loguj się przez e-mail.",
+    "description": "Dodaj własny numer do odbiorów i płatności. Twoje konto pozostaje oddzielne od innych kont.",
     "verified": "Numer telefonu potwierdzony",
     "unavailable": "Weryfikacja będzie dostępna po skonfigurowaniu wysyłania SMS-ów.",
     "inUse": "Nie można dodać tego numeru. Użyj numeru niepowiązanego z innym kontem.",
@@ -4438,5 +4438,19 @@
     "capacity": "Brak miejsca na dokumenty. Użyj ręcznych rejestrów lub skontaktuj się z właścicielem obszaru roboczego.",
     "changed": "Ten dokument się zmienił. Skopiuj swoje zmiany przed otwarciem zapisanej wersji.",
     "loadSaved": "Otwórz zapisaną wersję"
+  },
+  "privacy": {
+    "title": "Polityka prywatności",
+    "lead": "Ta polityka obejmuje stronę Luma.Green oraz aplikacje Android, iOS, Windows i macOS.",
+    "dataTitle": "Wykorzystywane dane",
+    "dataBody": "Dane konta i kontaktowe, wybrana lokalizacja, zdjęcia, dokumenty, weryfikacja firm oraz rejestry transakcji i bezpieczeństwa służą usługom recyklingu i ochronie kont.",
+    "sharingTitle": "Odbiorcy danych",
+    "sharingBody": "Uprawnieni uczestnicy oraz skonfigurowani dostawcy hostingu, SMS, weryfikacji, płatności i opcjonalnej AI otrzymują niezbędne dane. Przetwarzanie może odbywać się poza Indiami.",
+    "choicesTitle": "Twój wybór",
+    "choicesBody": "Lokalizacja i powiadomienia wymagają zgody. Samodzielnie wybierasz pliki. Logowanie korzysta z plików cookie sesji. Analityka wymaga zgody; raporty błędów są osobne. Zarządzaj uprawnieniami w ustawieniach urządzenia.",
+    "requestsTitle": "Wnioski dotyczące konta i danych",
+    "requestsBody": "Usuń konto poniżej lub napisz do pomocy, aby uzyskać dostęp, poprawić albo usunąć dane. Potwierdź własność; nie wysyłaj dokumentów tożsamości e-mailem. Najpierw rozwiąż otwarte zadania lub kwestie własności.",
+    "retentionTitle": "Co pozostaje po zamknięciu",
+    "retentionBody": "Zamknięcie usuwa dostęp i dane logowania. Dowody biznesowe, płatnicze, bezpieczeństwa i audytu mogą pozostać do przeglądu. Nie każdy rekord jest usuwany. Zapytaj pomoc o przechowywanie i terminy."
   }
 }

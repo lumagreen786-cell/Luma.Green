@@ -1,0 +1,195 @@
+diff --git a/src/v3/types.ts b/src/v3/types.ts
+--- a/src/v3/types.ts
++++ b/src/v3/types.ts
+@@ -2263,6 +2263,7 @@
+           exact: true,
+           message: def.exactLength.message,
+         });
++        if (tooBig) return INVALID;
+         status.dirty();
+       }
+     }
+@@ -2291,7 +2292,7 @@
+           exact: false,
+           message: def.maxLength.message,
+         });
+-        status.dirty();
++        return INVALID;
+       }
+     }
+ 
+@@ -3723,7 +3724,7 @@
+           exact: false,
+           message: def.maxSize.message,
+         });
+-        status.dirty();
++        return INVALID;
+       }
+     }
+ 
+diff --git a/v3/types.js b/v3/types.js
+--- a/v3/types.js
++++ b/v3/types.js
+@@ -1769,6 +1769,7 @@
+                     exact: true,
+                     message: def.exactLength.message,
+                 });
++                if (tooBig) return INVALID;
+                 status.dirty();
+             }
+         }
+@@ -1795,7 +1796,7 @@
+                     exact: false,
+                     message: def.maxLength.message,
+                 });
+-                status.dirty();
++                return INVALID;
+             }
+         }
+         if (ctx.common.async) {
+@@ -2814,7 +2815,7 @@
+                     exact: false,
+                     message: def.maxSize.message,
+                 });
+-                status.dirty();
++                return INVALID;
+             }
+         }
+         const valueType = this._def.valueType;
+diff --git a/v3/types.cjs b/v3/types.cjs
+--- a/v3/types.cjs
++++ b/v3/types.cjs
+@@ -1790,6 +1790,7 @@
+                     exact: true,
+                     message: def.exactLength.message,
+                 });
++                if (tooBig) return parseUtil_js_1.INVALID;
+                 status.dirty();
+             }
+         }
+@@ -1816,7 +1817,7 @@
+                     exact: false,
+                     message: def.maxLength.message,
+                 });
+-                status.dirty();
++                return parseUtil_js_1.INVALID;
+             }
+         }
+         if (ctx.common.async) {
+@@ -2843,7 +2844,7 @@
+                     exact: false,
+                     message: def.maxSize.message,
+                 });
+-                status.dirty();
++                return parseUtil_js_1.INVALID;
+             }
+         }
+         const valueType = this._def.valueType;
+diff --git a/src/v4/core/schemas.ts b/src/v4/core/schemas.ts
+--- a/src/v4/core/schemas.ts
++++ b/src/v4/core/schemas.ts
+@@ -242,6 +242,32 @@
+     };
+ 
+     inst._zod.run = (payload, ctx) => {
++      // Leading upper bounds reject raw containers before allocation or child parsing.
++      const input = payload.value;
++      const size = def.type === "array" && Array.isArray(input)
++        ? input.length
++        : (def.type === "set" && input instanceof Set) || (def.type === "map" && input instanceof Map)
++          ? input.size
++          : -1;
++      if (size >= 0) {
++        for (const ch of checks) {
++          const d = ch._zod.def as { check: string; maximum?: number; length?: number; size?: number };
++          // A later check can rewrite the value; preserve its position before a bound.
++          if (!/_(length|size)$|_equals$/.test(d.check)) break;
++          const maximum = d.maximum ?? d.length ?? d.size;
++          if (maximum !== undefined && maximum >= 0 && size > maximum) {
++            const start = payload.issues.length;
++            // Built-in length and size checks are synchronous. Use their normal runner.
++            runChecks(payload, [ch], ctx);
++            if (payload.issues.length > start) {
++              // Later checks must not read this unparsed input.
++              (payload.issues[start] as { continue?: boolean }).continue = false;
++              return payload;
++            }
++          }
++        }
++      }
++
+       const result = inst._zod.parse(payload, ctx);
+ 
+       if (result instanceof Promise) {
+diff --git a/v4/core/schemas.js b/v4/core/schemas.js
+--- a/v4/core/schemas.js
++++ b/v4/core/schemas.js
+@@ -74,6 +74,32 @@
+             return payload;
+         };
+         inst._zod.run = (payload, ctx) => {
++            // Leading upper bounds reject raw containers before allocation or child parsing.
++            const input = payload.value;
++            const size = def.type === "array" && Array.isArray(input)
++              ? input.length
++              : (def.type === "set" && input instanceof Set) || (def.type === "map" && input instanceof Map)
++                ? input.size
++                : -1;
++            if (size >= 0) {
++              for (const ch of checks) {
++                const d = ch._zod.def;
++                // A later check can rewrite the value; preserve its position before a bound.
++                if (!/_(length|size)$|_equals$/.test(d.check)) break;
++                const maximum = d.maximum ?? d.length ?? d.size;
++                if (maximum !== undefined && maximum >= 0 && size > maximum) {
++                  const start = payload.issues.length;
++                  // Built-in length and size checks are synchronous. Use their normal runner.
++                  runChecks(payload, [ch], ctx);
++                  if (payload.issues.length > start) {
++                    // Later checks must not read this unparsed input.
++                    payload.issues[start].continue = false;
++                    return payload;
++                  }
++                }
++              }
++            }
++
+             const result = inst._zod.parse(payload, ctx);
+             if (result instanceof Promise) {
+                 if (ctx.async === false)
+diff --git a/v4/core/schemas.cjs b/v4/core/schemas.cjs
+--- a/v4/core/schemas.cjs
++++ b/v4/core/schemas.cjs
+@@ -104,6 +104,32 @@
+             return payload;
+         };
+         inst._zod.run = (payload, ctx) => {
++            // Leading upper bounds reject raw containers before allocation or child parsing.
++            const input = payload.value;
++            const size = def.type === "array" && Array.isArray(input)
++              ? input.length
++              : (def.type === "set" && input instanceof Set) || (def.type === "map" && input instanceof Map)
++                ? input.size
++                : -1;
++            if (size >= 0) {
++              for (const ch of checks) {
++                const d = ch._zod.def;
++                // A later check can rewrite the value; preserve its position before a bound.
++                if (!/_(length|size)$|_equals$/.test(d.check)) break;
++                const maximum = d.maximum ?? d.length ?? d.size;
++                if (maximum !== undefined && maximum >= 0 && size > maximum) {
++                  const start = payload.issues.length;
++                  // Built-in length and size checks are synchronous. Use their normal runner.
++                  runChecks(payload, [ch], ctx);
++                  if (payload.issues.length > start) {
++                    // Later checks must not read this unparsed input.
++                    payload.issues[start].continue = false;
++                    return payload;
++                  }
++                }
++              }
++            }
++
+             const result = inst._zod.parse(payload, ctx);
+             if (result instanceof Promise) {
+                 if (ctx.async === false)

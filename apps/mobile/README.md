@@ -213,6 +213,16 @@ they are not that public file. Adding this module requires a new native build,
 not an update to an older binary. Use a development build to test it, not Expo Go.
 See the [account and push setup steps](../../docs/operations/app-releases.md#notification-setup).
 
+## Development server exposure
+
+The Expo start scripts bind to localhost by default. This limits the remaining
+Zod 3 validation finding to trusted local development/build use; it does not
+patch that library. Use only trusted project configuration and do not expose
+Metro, its dev tools or an unauthenticated tunnel to untrusted users. Physical
+device development on a trusted network can explicitly select LAN with
+`pnpm --filter @luma/mobile exec expo start --dev-client --lan`; this is a deliberate development exception, not a
+production app permission. Prefer signed development builds for device acceptance.
+
 ## Updates and releases
 
 There are three different releases:
@@ -267,7 +277,7 @@ These are operator commands after setup, not commands run by this change.
 **Do not run them for signed releases until the
 [mobile signing gate](../../docs/operations/app-releases.md#build-test-then-release)
 is cleared.** `pnpm dlx eas-cli` and global EAS installations do not inherit the
-workspace's node-forge patch. Verify the actual release toolchain's fixed or
+workspace's verified node-forge resolution. Verify the actual release toolchain's fixed or
 patched dependency and signature tests first; see the
 [patch provenance](../../patches/README.md).
 

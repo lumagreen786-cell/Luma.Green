@@ -1,87 +1,324 @@
 {
   "date": "2026-10-29",
   "scope": "local source; synthetic records; no deployment/provider/device acceptance",
-  "sourceHashes": {
-    "apps/desktop/scripts/smoke.mjs": "737fde119dc74cd0ca59a954d998e4747a96022386bae642ad154380e04ca855",
-    "apps/desktop/src/main.mjs": "6936d48052ff8a4eb7737546dc0390b50b389138951c0bb3d6b8f9f4f43871e8",
-    "apps/desktop/src/policy.mjs": "ab395c59a5863a4f371e1937cf1173992aeb0aac94d72a027df3bd920ef73c8d",
-    "apps/desktop/src/policy.test.mjs": "fcacaf834e346c287d8031d2cdcc59c70d31e7f520e23c3392675398d0e71885",
-    "apps/desktop/src/update-bridge.test.mjs": "38df5ab8d8d3b81213614f9f2063623a6886a8220ce9c5167686bf52fc1bbdb2",
-    "apps/desktop/src/updates.mjs": "d8a4a299509ce8dadd00c53a97e8e0d3edad35585a9d32b238ad4eeb0a8c7d42",
-    "apps/desktop/src/updates.test.mjs": "ad3be73b260ed73db92d43c0e493bd137e25b7f767ee55e51ea5321091ef609c",
-    "apps/mobile/src/app.tsx": "b2d172384d8e6f6ade6e385c16da496084b33b217a38ebae2bc04b92f628f05e",
-    "apps/mobile/src/message-bridge.ts": "f271fc9d9d1fcbac1256aa55d4c3290630ec4e116261ce11df2796f836be947f",
-    "apps/mobile/src/use-updates.ts": "ea9b5c8d8b314ef165db2dd53c07472322f24c085f141373da41024296a9302a",
-    "apps/mobile/test/app-shell.test.tsx": "67cb07fa028cfd65f295993d1e3f85bb5f06de035df1817df3be3fcb7786fea7",
-    "apps/mobile/test/message-bridge.test.ts": "429bd5575dfbda3d96f83b3f4b4814e836dc93d3f3c655e07caa4d28e5a8d621",
-    "apps/mobile/test/shell-updates.test.tsx": "c5e2ba0ab33bb759814885c36d848fb60a25dd93ad961d7f23b68723a110ee2c",
-    "apps/shared/update-bridge.mjs": "23d46c6eec0ba0425acfc70d8f298c1a59aa782b7ef419cce3650540aa0c67ad",
-    "convex/auth-sms.test.ts": "caefb25aa524a26b8df1fc129d0c776b5075407f2b26803d79ec6778c175dca2",
-    "convex/auth-two-factor.test.ts": "29cf1359618ef2f154e3f52d1b6a461f878732c2fdd636406d6133fdd6167f5c",
-    "convex/auth.ts": "b723d97b8d51a634ee816cbb393c0010e9644b91c796630ee2a6a90b6658b067",
-    "convex/lib/phoneTwoFactor.ts": "44705696e935e9f6a1f4688161922eb6512d8b2d12c9c3d381bc6ae0712f95a5",
-    "convex/paperDrafts.test.ts": "4888fc2b1001f0cfeff495b34fe7f7a336bd56819de5582f871cb8277f113ada",
-    "convex/paperDrafts.ts": "987bca0e1d0557510c46fb42e9164d2995b7f62e1b385b6c637425f293d129f8",
-    "messages/ar.json": "0d59cb8524f91bd560fe5f46aa9d8cb168c09fe6d324ffe5db86dd7fb67ffe00",
-    "messages/as.json": "97547de11fc24f76b9fd333cb25d104719e5abfa75d39bc76605bb514dff26aa",
-    "messages/bn.json": "a42421ffbbc910e908b9eda3eeb75a1f5ab0c6f346d9c6f329fb72b23f471709",
-    "messages/de.json": "87ecba2a70d48258cb327d371552eb9ad284d6f15017b4d7a37e98c019f7a20e",
-    "messages/en.json": "b0e3b3ef053ada9ed98233b5b8d34a229bc483192bd22fd04678fd521f8f9d88",
-    "messages/es.json": "884cdd4e52e66ac86332aab10e2a00cf1680811efb131025107199ddb951a1a9",
-    "messages/fr.json": "c2bb8e9273345b8cc1ab6d1899304c12ad7f7fd515279e32d70c4ab74645f8f3",
-    "messages/gu.json": "265b11044da49d2c24eb44f4ab215652610761eab66f6352536d2a33dca9b571",
-    "messages/hi.json": "278e4344db88e10c7797de6d55c12ab29bd927af324c30f03a3ca2ae26ea2534",
-    "messages/id.json": "3a5470076d1da238ce90609000ca133e562072c9d4d45edcf38aaffea1c0f582",
-    "messages/it.json": "bd0a239c4a51d1299d94bada73617a71a679314d763d4e3e32ed61c0db0aa9e8",
-    "messages/ja.json": "9178584904e94b0259289495fb82ec7ce28b5409e2406bbabc354cc3975133ef",
-    "messages/kn.json": "c2e67177907e3948a619dd306b33f777c3a915e2258f637136525412a65a3dd3",
-    "messages/ko.json": "56bdbb4d3b27a142278d5e4676fadff0bdefe26d8d8953878b1e31c31ee381b4",
-    "messages/ml.json": "7d66b997aba8ac87d3d43b56f14eb60ed83df70e3a9aa73d11d61b86e60143c0",
-    "messages/mr.json": "86ef1c140598c0a9f9e83f8b60e64ea68f24e088fa571cfd047b22f77ec20a05",
-    "messages/ms.json": "311f7f7da19b898d1a887a9c46e6b6005b609bc20273059f40f5af2c50bcb330",
-    "messages/ne.json": "bc09ec7f96b333b36d52b505d767442b15323081db2edad9b6ea491a330409d2",
-    "messages/nl.json": "6bcaef49643889176265d9d06e03e14bb9c1d9be82e53abe19ca19118c60fddb",
-    "messages/or.json": "d10d7fcae1ba042abb08222e672f373b0956f9d592e5d168d50d23df4616a048",
-    "messages/pa.json": "c941af63818e90eed65d48bbf82dd43c8146a9d7ab2c98e5b1541385cc5a7136",
-    "messages/pl.json": "818a8fcdd79dd24a59205a754cb055c9928587666c62700c3094a5d7e0b16259",
-    "messages/pt.json": "675fe67a1c2fb2d9fd7b222db4e3fb509a2524f3e3720b891b36819067c6d8a1",
-    "messages/ru.json": "960efe5362fa1ec7e13fd4c8f77abb6048df88fa5abe471035a0115ebe7b228c",
-    "messages/si.json": "dbb638dccebe29b0782a5a1769591450ca2e2dd381e56e0f44cf2a4cbef3d651",
-    "messages/ta.json": "7580adc2e972414ba65d2193987d4d53b508cf18bd02e4125a28861bce06ca6e",
-    "messages/te.json": "ac2337d90d137c40de444f093e596226fbf7ad83aaccbf542f220b146de83d9a",
-    "messages/th.json": "b2f25e67a060ff250a1fb5ede81678a38c98dbf3dcd89b1130cd2a3a01fb8a22",
-    "messages/tr.json": "cc716ca66ed2c98ff78e2e8dd1257399f7c1b2c5242e7748645c2b8215de89ad",
-    "messages/uk.json": "60d8db4e40ce7df713c26112b2f203db8afa6c0930b5922ec05af625ed11b371",
-    "messages/ur.json": "94d2131b76646f6e98a0efc1a6b2fd5f9ab69cc1f50a586c31572efc1d4c3b64",
-    "messages/vi.json": "f6c9842826560f931d10a85a78b7e3cdacbad4035c7849c79e32c2e15d0c8af2",
-    "messages/zh.json": "008e1be37ed0817ac0546b5bd244689fa71d6538aa4130ce46e6ba2130958dfe",
-    "src/components/account/account-links.tsx": "48f9f20edfedf0a895ce3201e1f0951139fbd957a62513ca641f158ff5c1430e",
-    "src/components/account/account-phone.test.tsx": "79f44c06749f5025c3a0939d9b92f27ad01531ee691e68983cd70019d3134916",
-    "src/components/account/account-phone.tsx": "99338bb2d0148853591e140cfefd796e6bfd5f3486727d67992e940d869e3df7",
-    "src/components/admin/admin-login.test.tsx": "ae0913ad480b983aef8833d60dc1343664f9fc96d339e13e76185f2a358d7106",
-    "src/components/admin/admin-login.tsx": "479c5f2bd1fef59e2b7df78e2b751951d6e4cb79e015959726956d5f8cd5da59",
-    "src/components/admin/auth-failures.test.tsx": "29417fe7b20a058e7dc3af2d752f77bf9e609d4fbf13722735f4a27e2d52c742",
-    "src/components/admin/authenticator-step.tsx": "05a7e01e5c47aa5b67260d05e209d5b36b60c1b58faf510265d79e21393dc52d",
-    "src/components/auth/factor-challenge.test.tsx": "3503ba63b767776a6007d37440287b36d4f219c5932887942e3aeb0af96cca9e",
-    "src/components/auth/factor-challenge.tsx": "858829088ab6a7c20bb3ba08bc3c4be58894e08c7148e97c6b07a4d9067cc958",
-    "src/components/auth/phone-form.test.tsx": "86ddd1e4320d37f2a5c963e1bc95d6247f578ec831f1a2434c0bcbfe2612dd6b",
-    "src/components/auth/phone-form.tsx": "0167dda7fdc48b7518399d2c9bc48997e3ac698a3255c4f7022f0145d33bec5b",
-    "src/components/auth/verify-flow.test.tsx": "c79011e4b46723a53b6fa20228158bf121515d73698e1719c2362c40390e6809",
-    "src/components/auth/verify-flow.tsx": "6b8e0a71014ebd03d3c11cbf1453452fc077f09728f2f3b8befc82dfb30bc83d",
-    "src/components/papers/paper-page.test.tsx": "54aee0109658048906806e0245b61d1ee17db45a4e823e080d22581cec2af3bb",
-    "src/components/papers/paper-page.tsx": "835ca75d403f488db38649da135fbde70ff7e5103c8293257a7d4a0a93e2aa7e",
-    "src/components/sell/confirm-step.tsx": "77c54bbbfadd190db7fb21f42d02890e2733afe41860cfed036adc24f9255260",
-    "src/components/sell/phone-sign-in.test.tsx": "a86eae0a1336b2f3ae71e6a5778e2ccedd1c32fe458d979468c5f7e0879b1f2b",
-    "src/components/sell/phone-sign-in.tsx": "7820728ee6faf7c10240dc29d212b2f1a6c60bec92bcb3247987f7d8295863b3",
-    "src/components/sell/sell-flow.test.tsx": "c96f24183f977239de0413779341fad8a1620f845f676aa98cb9a83185508e77",
-    "src/components/sell/simple-recycling-flow.tsx": "03ce2528e68ac2adc31af6ba7106d8765a6948f8aefcabd6c5ad4984727967d2",
-    "src/components/site/content.ts": "d5eb8b567d382bef216104dde09d9ec78a3cfb32d2ad5c51f503642e1409a953",
-    "src/components/site/site-footer.tsx": "fbc025d89378549223acd811ab4a604bccb2afe161c0b52c8fae4aae43040c48",
-    "src/i18n/paths.ts": "24e495d312b678b5178dfcd9bfe69cc350409e991df6ac3e2a3e1a289f23e62c",
-    "src/lib/phone-auth.test.ts": "49d8752d90362b37befc525becec8d5df6b43512991786bc662f008bcb9599f9",
-    "src/lib/phone-auth.ts": "a3904583c452c71bf151751e50b0973338b8e0ea6b6d85f6f05e53dfae779635",
-    "src/lib/use-mounted.ts": "ee1482af373f863b1baaf072daf6022d4a664c3375a5e8b048a1793bf7d2a80f"
-  },
+  "sourceHashes": [
+    {
+      "file": "apps/desktop/scripts/smoke.mjs",
+      "sha256": "737fde119dc74cd0ca59a954d998e4747a96022386bae642ad154380e04ca855"
+    },
+    {
+      "file": "apps/desktop/src/main.mjs",
+      "sha256": "6936d48052ff8a4eb7737546dc0390b50b389138951c0bb3d6b8f9f4f43871e8"
+    },
+    {
+      "file": "apps/desktop/src/policy.mjs",
+      "sha256": "ab395c59a5863a4f371e1937cf1173992aeb0aac94d72a027df3bd920ef73c8d"
+    },
+    {
+      "file": "apps/desktop/src/policy.test.mjs",
+      "sha256": "fcacaf834e346c287d8031d2cdcc59c70d31e7f520e23c3392675398d0e71885"
+    },
+    {
+      "file": "apps/desktop/src/update-bridge.test.mjs",
+      "sha256": "38df5ab8d8d3b81213614f9f2063623a6886a8220ce9c5167686bf52fc1bbdb2"
+    },
+    {
+      "file": "apps/desktop/src/updates.mjs",
+      "sha256": "d8a4a299509ce8dadd00c53a97e8e0d3edad35585a9d32b238ad4eeb0a8c7d42"
+    },
+    {
+      "file": "apps/desktop/src/updates.test.mjs",
+      "sha256": "ad3be73b260ed73db92d43c0e493bd137e25b7f767ee55e51ea5321091ef609c"
+    },
+    {
+      "file": "apps/mobile/src/app.tsx",
+      "sha256": "b2d172384d8e6f6ade6e385c16da496084b33b217a38ebae2bc04b92f628f05e"
+    },
+    {
+      "file": "apps/mobile/src/message-bridge.ts",
+      "sha256": "f271fc9d9d1fcbac1256aa55d4c3290630ec4e116261ce11df2796f836be947f"
+    },
+    {
+      "file": "apps/mobile/src/use-updates.ts",
+      "sha256": "ea9b5c8d8b314ef165db2dd53c07472322f24c085f141373da41024296a9302a"
+    },
+    {
+      "file": "apps/mobile/test/app-shell.test.tsx",
+      "sha256": "67cb07fa028cfd65f295993d1e3f85bb5f06de035df1817df3be3fcb7786fea7"
+    },
+    {
+      "file": "apps/mobile/test/message-bridge.test.ts",
+      "sha256": "429bd5575dfbda3d96f83b3f4b4814e836dc93d3f3c655e07caa4d28e5a8d621"
+    },
+    {
+      "file": "apps/mobile/test/shell-updates.test.tsx",
+      "sha256": "c5e2ba0ab33bb759814885c36d848fb60a25dd93ad961d7f23b68723a110ee2c"
+    },
+    {
+      "file": "apps/shared/update-bridge.mjs",
+      "sha256": "23d46c6eec0ba0425acfc70d8f298c1a59aa782b7ef419cce3650540aa0c67ad"
+    },
+    {
+      "file": "convex/auth-sms.test.ts",
+      "sha256": "caefb25aa524a26b8df1fc129d0c776b5075407f2b26803d79ec6778c175dca2"
+    },
+    {
+      "file": "convex/auth-two-factor.test.ts",
+      "sha256": "29cf1359618ef2f154e3f52d1b6a461f878732c2fdd636406d6133fdd6167f5c"
+    },
+    {
+      "file": "convex/auth.ts",
+      "sha256": "b723d97b8d51a634ee816cbb393c0010e9644b91c796630ee2a6a90b6658b067"
+    },
+    {
+      "file": "convex/lib/phoneTwoFactor.ts",
+      "sha256": "44705696e935e9f6a1f4688161922eb6512d8b2d12c9c3d381bc6ae0712f95a5"
+    },
+    {
+      "file": "convex/paperDrafts.test.ts",
+      "sha256": "4888fc2b1001f0cfeff495b34fe7f7a336bd56819de5582f871cb8277f113ada"
+    },
+    {
+      "file": "convex/paperDrafts.ts",
+      "sha256": "987bca0e1d0557510c46fb42e9164d2995b7f62e1b385b6c637425f293d129f8"
+    },
+    {
+      "file": "messages/ar.json",
+      "sha256": "0d59cb8524f91bd560fe5f46aa9d8cb168c09fe6d324ffe5db86dd7fb67ffe00"
+    },
+    {
+      "file": "messages/as.json",
+      "sha256": "97547de11fc24f76b9fd333cb25d104719e5abfa75d39bc76605bb514dff26aa"
+    },
+    {
+      "file": "messages/bn.json",
+      "sha256": "a42421ffbbc910e908b9eda3eeb75a1f5ab0c6f346d9c6f329fb72b23f471709"
+    },
+    {
+      "file": "messages/de.json",
+      "sha256": "87ecba2a70d48258cb327d371552eb9ad284d6f15017b4d7a37e98c019f7a20e"
+    },
+    {
+      "file": "messages/en.json",
+      "sha256": "b0e3b3ef053ada9ed98233b5b8d34a229bc483192bd22fd04678fd521f8f9d88"
+    },
+    {
+      "file": "messages/es.json",
+      "sha256": "884cdd4e52e66ac86332aab10e2a00cf1680811efb131025107199ddb951a1a9"
+    },
+    {
+      "file": "messages/fr.json",
+      "sha256": "c2bb8e9273345b8cc1ab6d1899304c12ad7f7fd515279e32d70c4ab74645f8f3"
+    },
+    {
+      "file": "messages/gu.json",
+      "sha256": "265b11044da49d2c24eb44f4ab215652610761eab66f6352536d2a33dca9b571"
+    },
+    {
+      "file": "messages/hi.json",
+      "sha256": "278e4344db88e10c7797de6d55c12ab29bd927af324c30f03a3ca2ae26ea2534"
+    },
+    {
+      "file": "messages/id.json",
+      "sha256": "3a5470076d1da238ce90609000ca133e562072c9d4d45edcf38aaffea1c0f582"
+    },
+    {
+      "file": "messages/it.json",
+      "sha256": "bd0a239c4a51d1299d94bada73617a71a679314d763d4e3e32ed61c0db0aa9e8"
+    },
+    {
+      "file": "messages/ja.json",
+      "sha256": "9178584904e94b0259289495fb82ec7ce28b5409e2406bbabc354cc3975133ef"
+    },
+    {
+      "file": "messages/kn.json",
+      "sha256": "c2e67177907e3948a619dd306b33f777c3a915e2258f637136525412a65a3dd3"
+    },
+    {
+      "file": "messages/ko.json",
+      "sha256": "56bdbb4d3b27a142278d5e4676fadff0bdefe26d8d8953878b1e31c31ee381b4"
+    },
+    {
+      "file": "messages/ml.json",
+      "sha256": "7d66b997aba8ac87d3d43b56f14eb60ed83df70e3a9aa73d11d61b86e60143c0"
+    },
+    {
+      "file": "messages/mr.json",
+      "sha256": "86ef1c140598c0a9f9e83f8b60e64ea68f24e088fa571cfd047b22f77ec20a05"
+    },
+    {
+      "file": "messages/ms.json",
+      "sha256": "311f7f7da19b898d1a887a9c46e6b6005b609bc20273059f40f5af2c50bcb330"
+    },
+    {
+      "file": "messages/ne.json",
+      "sha256": "bc09ec7f96b333b36d52b505d767442b15323081db2edad9b6ea491a330409d2"
+    },
+    {
+      "file": "messages/nl.json",
+      "sha256": "6bcaef49643889176265d9d06e03e14bb9c1d9be82e53abe19ca19118c60fddb"
+    },
+    {
+      "file": "messages/or.json",
+      "sha256": "d10d7fcae1ba042abb08222e672f373b0956f9d592e5d168d50d23df4616a048"
+    },
+    {
+      "file": "messages/pa.json",
+      "sha256": "c941af63818e90eed65d48bbf82dd43c8146a9d7ab2c98e5b1541385cc5a7136"
+    },
+    {
+      "file": "messages/pl.json",
+      "sha256": "818a8fcdd79dd24a59205a754cb055c9928587666c62700c3094a5d7e0b16259"
+    },
+    {
+      "file": "messages/pt.json",
+      "sha256": "675fe67a1c2fb2d9fd7b222db4e3fb509a2524f3e3720b891b36819067c6d8a1"
+    },
+    {
+      "file": "messages/ru.json",
+      "sha256": "960efe5362fa1ec7e13fd4c8f77abb6048df88fa5abe471035a0115ebe7b228c"
+    },
+    {
+      "file": "messages/si.json",
+      "sha256": "dbb638dccebe29b0782a5a1769591450ca2e2dd381e56e0f44cf2a4cbef3d651"
+    },
+    {
+      "file": "messages/ta.json",
+      "sha256": "7580adc2e972414ba65d2193987d4d53b508cf18bd02e4125a28861bce06ca6e"
+    },
+    {
+      "file": "messages/te.json",
+      "sha256": "ac2337d90d137c40de444f093e596226fbf7ad83aaccbf542f220b146de83d9a"
+    },
+    {
+      "file": "messages/th.json",
+      "sha256": "b2f25e67a060ff250a1fb5ede81678a38c98dbf3dcd89b1130cd2a3a01fb8a22"
+    },
+    {
+      "file": "messages/tr.json",
+      "sha256": "cc716ca66ed2c98ff78e2e8dd1257399f7c1b2c5242e7748645c2b8215de89ad"
+    },
+    {
+      "file": "messages/uk.json",
+      "sha256": "60d8db4e40ce7df713c26112b2f203db8afa6c0930b5922ec05af625ed11b371"
+    },
+    {
+      "file": "messages/ur.json",
+      "sha256": "94d2131b76646f6e98a0efc1a6b2fd5f9ab69cc1f50a586c31572efc1d4c3b64"
+    },
+    {
+      "file": "messages/vi.json",
+      "sha256": "f6c9842826560f931d10a85a78b7e3cdacbad4035c7849c79e32c2e15d0c8af2"
+    },
+    {
+      "file": "messages/zh.json",
+      "sha256": "008e1be37ed0817ac0546b5bd244689fa71d6538aa4130ce46e6ba2130958dfe"
+    },
+    {
+      "file": "src/components/account/account-links.tsx",
+      "sha256": "48f9f20edfedf0a895ce3201e1f0951139fbd957a62513ca641f158ff5c1430e"
+    },
+    {
+      "file": "src/components/account/account-phone.test.tsx",
+      "sha256": "79f44c06749f5025c3a0939d9b92f27ad01531ee691e68983cd70019d3134916"
+    },
+    {
+      "file": "src/components/account/account-phone.tsx",
+      "sha256": "99338bb2d0148853591e140cfefd796e6bfd5f3486727d67992e940d869e3df7"
+    },
+    {
+      "file": "src/components/admin/admin-login.test.tsx",
+      "sha256": "ae0913ad480b983aef8833d60dc1343664f9fc96d339e13e76185f2a358d7106"
+    },
+    {
+      "file": "src/components/admin/admin-login.tsx",
+      "sha256": "479c5f2bd1fef59e2b7df78e2b751951d6e4cb79e015959726956d5f8cd5da59"
+    },
+    {
+      "file": "src/components/admin/auth-failures.test.tsx",
+      "sha256": "29417fe7b20a058e7dc3af2d752f77bf9e609d4fbf13722735f4a27e2d52c742"
+    },
+    {
+      "file": "src/components/admin/authenticator-step.tsx",
+      "sha256": "05a7e01e5c47aa5b67260d05e209d5b36b60c1b58faf510265d79e21393dc52d"
+    },
+    {
+      "file": "src/components/auth/factor-challenge.test.tsx",
+      "sha256": "3503ba63b767776a6007d37440287b36d4f219c5932887942e3aeb0af96cca9e"
+    },
+    {
+      "file": "src/components/auth/factor-challenge.tsx",
+      "sha256": "858829088ab6a7c20bb3ba08bc3c4be58894e08c7148e97c6b07a4d9067cc958"
+    },
+    {
+      "file": "src/components/auth/phone-form.test.tsx",
+      "sha256": "86ddd1e4320d37f2a5c963e1bc95d6247f578ec831f1a2434c0bcbfe2612dd6b"
+    },
+    {
+      "file": "src/components/auth/phone-form.tsx",
+      "sha256": "0167dda7fdc48b7518399d2c9bc48997e3ac698a3255c4f7022f0145d33bec5b"
+    },
+    {
+      "file": "src/components/auth/verify-flow.test.tsx",
+      "sha256": "c79011e4b46723a53b6fa20228158bf121515d73698e1719c2362c40390e6809"
+    },
+    {
+      "file": "src/components/auth/verify-flow.tsx",
+      "sha256": "6b8e0a71014ebd03d3c11cbf1453452fc077f09728f2f3b8befc82dfb30bc83d"
+    },
+    {
+      "file": "src/components/papers/paper-page.test.tsx",
+      "sha256": "54aee0109658048906806e0245b61d1ee17db45a4e823e080d22581cec2af3bb"
+    },
+    {
+      "file": "src/components/papers/paper-page.tsx",
+      "sha256": "835ca75d403f488db38649da135fbde70ff7e5103c8293257a7d4a0a93e2aa7e"
+    },
+    {
+      "file": "src/components/sell/confirm-step.tsx",
+      "sha256": "77c54bbbfadd190db7fb21f42d02890e2733afe41860cfed036adc24f9255260"
+    },
+    {
+      "file": "src/components/sell/phone-sign-in.test.tsx",
+      "sha256": "a86eae0a1336b2f3ae71e6a5778e2ccedd1c32fe458d979468c5f7e0879b1f2b"
+    },
+    {
+      "file": "src/components/sell/phone-sign-in.tsx",
+      "sha256": "7820728ee6faf7c10240dc29d212b2f1a6c60bec92bcb3247987f7d8295863b3"
+    },
+    {
+      "file": "src/components/sell/sell-flow.test.tsx",
+      "sha256": "c96f24183f977239de0413779341fad8a1620f845f676aa98cb9a83185508e77"
+    },
+    {
+      "file": "src/components/sell/simple-recycling-flow.tsx",
+      "sha256": "03ce2528e68ac2adc31af6ba7106d8765a6948f8aefcabd6c5ad4984727967d2"
+    },
+    {
+      "file": "src/components/site/content.ts",
+      "sha256": "d5eb8b567d382bef216104dde09d9ec78a3cfb32d2ad5c51f503642e1409a953"
+    },
+    {
+      "file": "src/components/site/site-footer.tsx",
+      "sha256": "fbc025d89378549223acd811ab4a604bccb2afe161c0b52c8fae4aae43040c48"
+    },
+    {
+      "file": "src/i18n/paths.ts",
+      "sha256": "24e495d312b678b5178dfcd9bfe69cc350409e991df6ac3e2a3e1a289f23e62c"
+    },
+    {
+      "file": "src/lib/phone-auth.test.ts",
+      "sha256": "49d8752d90362b37befc525becec8d5df6b43512991786bc662f008bcb9599f9"
+    },
+    {
+      "file": "src/lib/phone-auth.ts",
+      "sha256": "a3904583c452c71bf151751e50b0973338b8e0ea6b6d85f6f05e53dfae779635"
+    },
+    {
+      "file": "src/lib/use-mounted.ts",
+      "sha256": "ee1482af373f863b1baaf072daf6022d4a664c3375a5e8b048a1793bf7d2a80f"
+    }
+  ],
   "checks": {
     "pnpm check": {
       "exitCode": 0,

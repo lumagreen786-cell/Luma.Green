@@ -3823,7 +3823,7 @@
   },
   "accountPhone": {
     "title": "Xác minh số điện thoại của bạn",
-    "description": "Thêm số của bạn để thu gom và thanh toán. Tài khoản email được giữ riêng, không hợp nhất tài khoản khác. Tiếp tục đăng nhập bằng email.",
+    "description": "Thêm số của bạn để thu gom và thanh toán. Tài khoản của bạn được giữ riêng, không hợp nhất tài khoản khác.",
     "verified": "Đã xác minh số điện thoại",
     "unavailable": "Chưa thể xác minh điện thoại cho đến khi thiết lập gửi SMS.",
     "inUse": "Không thể thêm số này. Hãy dùng số chưa liên kết với tài khoản khác.",
@@ -4438,5 +4438,19 @@
     "capacity": "Bộ nhớ hồ sơ đã đầy. Hãy dùng hồ sơ thủ công hoặc liên hệ chủ không gian làm việc.",
     "changed": "Tài liệu này đã thay đổi. Sao chép các chỉnh sửa trước khi mở bản đã lưu.",
     "loadSaved": "Mở bản đã lưu"
+  },
+  "privacy": {
+    "title": "Chính sách quyền riêng tư",
+    "lead": "Chính sách này áp dụng cho trang Luma.Green và ứng dụng Android, iOS, Windows, macOS.",
+    "dataTitle": "Dữ liệu chúng tôi sử dụng",
+    "dataBody": "Chúng tôi dùng thông tin tài khoản, liên hệ, vị trí bạn chọn, ảnh, tài liệu, xác minh doanh nghiệp cùng hồ sơ giao dịch và bảo mật để cung cấp dịch vụ tái chế và bảo vệ tài khoản.",
+    "sharingTitle": "Bên nhận dữ liệu",
+    "sharingBody": "Người tham gia được phép và nhà cung cấp lưu trữ, SMS, xác minh, thanh toán, AI tùy chọn đã cấu hình nhận dữ liệu cần thiết. Dữ liệu có thể được xử lý ngoài Ấn Độ.",
+    "choicesTitle": "Lựa chọn của bạn",
+    "choicesBody": "Vị trí và thông báo cần quyền cho phép. Bạn tự chọn tệp. Đăng nhập dùng cookie phiên. Phân tích cần sự đồng ý; báo lỗi là riêng biệt. Quản lý quyền trong cài đặt thiết bị.",
+    "requestsTitle": "Yêu cầu về tài khoản và dữ liệu",
+    "requestsBody": "Xóa tài khoản bên dưới hoặc gửi email hỗ trợ để truy cập, sửa hay xóa dữ liệu. Xác minh quyền sở hữu; không gửi giấy tờ định danh qua email. Giải quyết công việc hoặc quyền sở hữu còn mở trước.",
+    "retentionTitle": "Dữ liệu còn lại sau khi đóng",
+    "retentionBody": "Đóng tài khoản loại bỏ quyền đăng nhập và thông tin xác thực. Bằng chứng kinh doanh, thanh toán, an toàn và kiểm toán có thể được giữ để xem xét. Không phải mọi hồ sơ đều bị xóa. Hỏi hỗ trợ về việc lưu giữ và thời hạn."
   }
 }
