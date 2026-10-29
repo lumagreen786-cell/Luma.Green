@@ -21,7 +21,7 @@
     "format:check": "prettier --check .",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:security": "node --test scripts/security/auth-purpose.test.mjs scripts/security/cache-policy.test.mjs scripts/security/deepmerge.test.mjs scripts/security/engine-io-ws.test.mjs scripts/security/zod-collections.test.mjs",
+    "test:security": "node --test scripts/security/auth-purpose.test.mjs scripts/security/cache-policy.test.mjs scripts/security/deepmerge.test.mjs scripts/security/engine-io-ws.test.mjs scripts/security/zod-collections.test.mjs scripts/security/systeminformation.test.mjs",
     "test:coverage": "vitest run --coverage",
     "e2e": "playwright test",
     "e2e:ui": "playwright test --ui",

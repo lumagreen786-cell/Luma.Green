@@ -40,5 +40,23 @@
       "file": "@better-auth__kysely-adapter@1.6.33.patch",
       "sha256": "ab8b4d83fb2f3009137e45a031f36a276579052182944bb7367c597df13fc07e"
     }
-  ]
+  ],
+  "systeminformation-5.33.16": {
+    "name": "systeminformation",
+    "version": "5.33.16",
+    "integrity": "sha512-R+Lh69IJXfJj6bfyH1In5cIR9FTr4hBS39YvlZHZjsK1p9cuELPq7hplZZIb56ZESMMb+DzdKqqE6Iomi01Mvg==",
+    "tarball": "https://registry.npmjs.org/systeminformation/-/systeminformation-5.33.16.tgz",
+    "advisory": "GHSA-3f7j-7jwc-fxfj",
+    "publishedAt": "2026-10-19T15:53:51.946Z",
+    "sourceHashes": [
+      {
+        "file": "lib/processes.js",
+        "sha256": "441c0b97978e0fa6e9964e879fc57cc40df9111e5918a96371209009fa852f6a"
+      },
+      {
+        "file": "lib/util.js",
+        "sha256": "02b6ca1a0c37bef6a207583577d711f46f21875a7439463ba99426b3ebaa209d"
+      }
+    ]
+  }
 }

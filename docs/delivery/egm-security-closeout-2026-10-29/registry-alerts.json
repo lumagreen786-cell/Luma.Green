@@ -1,5 +1,5 @@
 {
-  "note": "Raw version-based alerts remain visible. Owned source patches do not change registry package versions.",
+  "note": "Raw version-based alerts remain visible. Owned source patches do not change registry package versions. Rechecked after CI systeminformation follow-up.",
   "metadata": {
     "vulnerabilities": {
       "info": 0,

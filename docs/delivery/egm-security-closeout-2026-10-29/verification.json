@@ -101,7 +101,7 @@
     },
     {
       "file": "e2e/connected/auth-availability.spec.ts",
-      "sha256": "30277ed625030e5760a4bbb7509f8665fa5ff0d91904884f4ff5c4d3858bd50d"
+      "sha256": "1cd5ffe4538d41d3deab12ce261a9947996e8874f7710b3455b274c834be21bc"
     },
     {
       "file": "e2e/native-updates.spec.ts",
@@ -241,7 +241,7 @@
     },
     {
       "file": "package.json",
-      "sha256": "26abd08f5a210d9523654e3c353536e453332c121d1783fba484d517414b83b6"
+      "sha256": "9b17eff7465606fb825ac35d27ecf7ac62f8dcdb5285eca35e4e49a4da5c66ab"
     },
     {
       "file": "patches/@better-auth__drizzle-adapter@1.6.33.patch",
@@ -261,11 +261,11 @@
     },
     {
       "file": "pnpm-lock.yaml",
-      "sha256": "a26ba6d765ef7250f41a1696207f2c1a7aba00890f5e030ec7a1275209766fa3"
+      "sha256": "f48fd0187d78d16b5c853e07a8e46f3bb8c3b4effe5a544fada4d6d71a1395ac"
     },
     {
       "file": "pnpm-workspace.yaml",
-      "sha256": "03aac496d146a359be96f5e65e26e7f5c4e2366c0111c26d5ed47ec1650237b1"
+      "sha256": "523ea717c7ddf4d0860012f7b6bf713f857ac0b8454def3becb88a9ed5f0f5e7"
     },
     {
       "file": "scripts/security/auth-postgres.test.mjs",
@@ -410,6 +410,10 @@
     {
       "file": "src/lib/use-mounted.ts",
       "sha256": "ee1482af373f863b1baaf072daf6022d4a664c3375a5e8b048a1793bf7d2a80f"
+    },
+    {
+      "file": "scripts/security/systeminformation.test.mjs",
+      "sha256": "b8a6b615ddb71c5f8bc0c94f0340e5011374b315f6abfc48d973315bcfdea457"
     }
   ],
   "authReview": {
@@ -423,7 +427,7 @@
       "exitCode": 0,
       "webBackendSuites": 360,
       "webBackendTests": 3023,
-      "installedSecurityTests": 183,
+      "installedSecurityTests": 185,
       "mobilePolicyTests": 64,
       "mobileUiTests": 20,
       "desktopTests": 34,
@@ -484,5 +488,15 @@
     "No native device or signed release acceptance",
     "No full provider OAuth proxy exchange",
     "No device-wide HttpOnly cookie response ordering promise"
-  ]
+  ],
+  "ciFollowup": {
+    "additionalAdvisory": "GHSA-3f7j-7jwc-fxfj",
+    "systeminformation": "5.33.16",
+    "formatterTests": 2,
+    "subprocessExecution": false,
+    "privateFixtureRead": "same descriptor for fstat and read",
+    "productAuthSourcesChanged": false,
+    "validationScope": "App/auth product source unchanged. Browser/shell runs at 762617f; dependency and fixture follow-ups have new focused checks, full pnpm check and rebuild. Final remote CI must pass the new head.",
+    "productionBuildExitCode": 0
+  }
 }

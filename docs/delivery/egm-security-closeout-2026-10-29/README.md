@@ -9,7 +9,7 @@ activated, production data migrated, native binary published or factor bypassed.
 | Recorded package/advisory                                        | Resolution                                                                                                                                |
 | ---------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | node-forge GHSA-86w9-cpqp-85rv                                   | Current main selected 1.4.2; actual Expo verifier rejection and valid-signature controls pass. Retired 1.4.0 patch stays unregistered.    |
-| systeminformation GHSA-4vjg-vx72-qq4g and GHSA-7648-jmwf-vw7j    | Compatible 5.33.14 override, inside owner major ranges.                                                                                   |
+| systeminformation GHSA-4vjg-vx72-qq4g and GHSA-7648-jmwf-vw7j    | Compatible 5.33.16 override, inside owner major ranges.                                                                                   |
 | @hono/node-server GHSA-rmxm-3fg6-px4f                            | Compatible 2.1.3 override.                                                                                                                |
 | Zod GHSA-mrhx-c7xc-m3w5                                          | Owned upstream backport to Expo's 3.25.76, six source/runtime targets; bounded-collection controls fail stock and pass installed patches. |
 | Better Auth GHSA-q84f-53jg-9ppm                                  | Owned backport exposes device request client/scope only to its claimed owner.                                                             |
@@ -71,7 +71,7 @@ See `goldfish_review_report.md` for findings, decisions, read scope and limits.
 The prior `egm-self-review-2026-10-29` report remains historical evidence for
 `aa66d90`; this closeout owns the later auth review and current checks.
 
-- `pnpm check`: 3,023 web/backend tests, 183 installed security controls,
+- `pnpm check`: 3,023 web/backend tests, 185 installed security controls,
   64 mobile policy tests, 20 mobile UI tests and 34 desktop tests pass. Root,
   Convex and shell types pass. Lint has zero errors and 123 existing warnings.
 - Real PostgreSQL adapter contention: 10/10 pass against an isolated local
@@ -101,3 +101,24 @@ codes on separate challenges and denies the next attempt without a session.
 The final UI copy keeps the current account and no longer directs people to
 retired email sign-in. All 33 catalogues were updated. New local captures include
 that current copy. Native-speaker language acceptance remains open.
+
+## PR security follow-up
+
+GitHub dependency review identified an additional advisory on the initially
+selected systeminformation 5.33.14:
+[GHSA-3f7j-7jwc-fxfj](https://github.com/advisories/GHSA-3f7j-7jwc-fxfj).
+The override now selects the published fixed 5.33.16, released 19 October and
+within both consumers' supported major ranges and the existing age policy.
+No age exception or advisory ignore was added. The installed Windows services
+formatter is checked through both actual consumer paths with all subprocess
+entry points inert. Stock 5.33.14 fails; 5.33.16 passes Unicode-input and benign
+controls. This is formatting evidence, not Windows device acceptance.
+
+CodeQL also identified a permission-check/read race in the connected fixture.
+It now opens once, checks the same descriptor with fstat, reads that descriptor
+and closes it in finally. The final auth product owners remain unchanged from
+the two clean reviews. These follow-ups require the PR's new checks to pass.
+
+The full local check and disconnected build pass again after the dependency
+follow-up. Earlier browser/shell captures remain tied to the unchanged app
+sources at 762617f; final remote CI checks the new complete dependency cohort.
