@@ -14,6 +14,10 @@ const native = vi.hoisted(() => {
   const webProps: Record<string, unknown> = {};
   return {
     webProps,
+    appState: "active",
+    appStateListener: undefined as ((state: string) => void) | undefined,
+    invalidateLocation: vi.fn(),
+    invalidateUpdates: vi.fn(),
     reload: vi.fn(),
     goBack: vi.fn(),
     stopLoading: vi.fn(),
@@ -28,7 +32,10 @@ const native = vi.hoisted(() => {
 });
 
 vi.mock("expo-constants", () => ({
-  default: { expoConfig: { extra: { appOrigin: "https://luma.green" } } },
+  default: {
+    sessionId: "synthetic-native-session",
+    expoConfig: { extra: { appOrigin: "https://luma.green" } },
+  },
 }));
 vi.mock("expo-localization", () => ({
   getLocales: () => [{ languageTag: "en-IN" }],
@@ -46,7 +53,17 @@ vi.mock("react-native", async () => {
         role: "status",
         "aria-label": accessibilityLabel,
       }),
+    AppState: {
+      get currentState() {
+        return native.appState;
+      },
+      addEventListener: (_event: string, listener: (state: string) => void) => {
+        native.appStateListener = listener;
+        return { remove: vi.fn() };
+      },
+    },
     Alert: { alert: native.alert },
+    Platform: { OS: "android" },
     BackHandler: {
       addEventListener: (_event: string, canHandleBack: () => boolean) => {
         native.back = canHandleBack;
@@ -104,7 +121,7 @@ vi.mock("../src/use-native-location", () => ({
   useNativeLocation: () => ({
     script: "true;",
     receive: vi.fn(),
-    invalidate: vi.fn(),
+    invalidate: native.invalidateLocation,
   }),
 }));
 vi.mock("../src/use-native-updates", () => ({
@@ -112,7 +129,7 @@ vi.mock("../src/use-native-updates", () => ({
     script: "true;",
     ready: vi.fn(),
     receive: vi.fn(),
-    invalidate: vi.fn(),
+    invalidate: native.invalidateUpdates,
   }),
 }));
 vi.mock("../src/use-push-notifications", () => ({
@@ -139,6 +156,8 @@ function invoke(name: string, ...args: unknown[]) {
 beforeEach(() => {
   vi.clearAllMocks();
   native.webProps = {};
+  native.appState = "active";
+  native.appStateListener = undefined;
 });
 afterEach(cleanup);
 
@@ -189,4 +208,85 @@ describe("WebView-only Android shell", () => {
     expect(screen.getByTestId("hosted-app")).not.toBe(hosted);
     expect(native.reload).not.toHaveBeenCalled();
   });
+});
+
+it("invalidates pending native work on background and ignores background commands", () => {
+  render(<App />);
+  expect(native.appStateListener).toEqual(expect.any(Function));
+  act(() => {
+    native.appStateListener?.("inactive");
+  });
+  expect(native.invalidateLocation).not.toHaveBeenCalled();
+  act(() => {
+    native.appState = "background";
+    native.appStateListener?.("background");
+  });
+  expect(native.invalidateLocation).toHaveBeenCalledOnce();
+  expect(native.invalidateUpdates).toHaveBeenCalledOnce();
+  expect(native.invalidate).toHaveBeenCalledOnce();
+  invoke("onMessage", {
+    nativeEvent: {
+      data: JSON.stringify({
+        type: "luma.native.message",
+        nonce: "synthetic-native-session",
+        url: "https://luma.green/en",
+        data: "synthetic",
+      }),
+      url: "https://luma.green",
+    },
+  });
+  expect(native.receive).not.toHaveBeenCalled();
+  act(() => {
+    native.appState = "active";
+    native.appStateListener?.("active");
+  });
+  invoke("onMessage", {
+    nativeEvent: {
+      data: JSON.stringify({
+        type: "luma.native.message",
+        nonce: "synthetic-native-session",
+        url: "https://luma.green/en",
+        data: "synthetic",
+      }),
+      url: "https://luma.green",
+    },
+  });
+  expect(native.receive).toHaveBeenCalledOnce();
+});
+
+it("accepts an enveloped Android origin event as the current document", () => {
+  render(<App />);
+  invoke("onNavigationStateChange", {
+    url: "https://luma.green/sell",
+    canGoBack: true,
+  });
+  invoke("onMessage", {
+    nativeEvent: {
+      url: "https://luma.green",
+      data: JSON.stringify({
+        type: "luma.native.message",
+        nonce: "synthetic-native-session",
+        url: "https://luma.green/sell",
+        data: "synthetic-feature-message",
+      }),
+    },
+  });
+  expect(native.receive).toHaveBeenCalledWith(
+    "synthetic-feature-message",
+    "https://luma.green/sell",
+  );
+});
+it("rejects a bare fallback iframe message even when Android labels it with the top URL", () => {
+  render(<App />);
+  invoke("onNavigationStateChange", {
+    url: "https://luma.green/sell",
+    canGoBack: true,
+  });
+  invoke("onMessage", {
+    nativeEvent: {
+      url: "https://luma.green/sell",
+      data: JSON.stringify({ type: "luma.push.enable", requestId: "iframe" }),
+    },
+  });
+  expect(native.receive).not.toHaveBeenCalled();
 });

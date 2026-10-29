@@ -1,0 +1,279 @@
+diff --git a/dist/crypto/purpose.mjs b/dist/crypto/purpose.mjs
+new file mode 100644
+index 0000000..bc7cc5f
+--- /dev/null
++++ b/dist/crypto/purpose.mjs
+@@ -0,0 +1,19 @@
++import { hkdf } from "@noble/hashes/hkdf.js";
++import { sha256 } from "@noble/hashes/sha2.js";
++import { bytesToHex, utf8ToBytes } from "@noble/hashes/utils.js";
++//#region src/crypto/purpose.ts
++const salt = utf8ToBytes("better-auth:oauth-encryption:v1");
++function deriveSecret(secret, purpose) {
++	return bytesToHex(hkdf(sha256, utf8ToBytes(secret), salt, utf8ToBytes(`better-auth:${purpose}:v1`), 32));
++}
++/** Derive an isolated key for one OAuth ciphertext purpose, retaining rotation versions. */
++function derivePurposeKey(secret, purpose) {
++	if (typeof secret === "string") return deriveSecret(secret, purpose);
++	return {
++		keys: new Map(Array.from(secret.keys, ([version, value]) => [version, deriveSecret(value, purpose)])),
++		currentVersion: secret.currentVersion,
++		...secret.legacySecret && { legacySecret: deriveSecret(secret.legacySecret, purpose) }
++	};
++}
++//#endregion
++export { derivePurposeKey };
+diff --git a/dist/plugins/device-authorization/index.d.mts b/dist/plugins/device-authorization/index.d.mts
+index dd7096f..4c99da8 100644
+--- a/dist/plugins/device-authorization/index.d.mts
++++ b/dist/plugins/device-authorization/index.d.mts
+@@ -285,6 +285,8 @@ declare const deviceAuthorization: (options?: Partial<DeviceAuthorizationOptions
+                         enum: string[];
+                         description: string;
+                       };
++                      client_id: { type: string; description: string; };
++                      scope: { type: string; description: string; };
+                     };
+                   };
+                 };
+@@ -296,6 +298,8 @@ declare const deviceAuthorization: (options?: Partial<DeviceAuthorizationOptions
+     }, {
+       user_code: string;
+       status: string;
++      client_id?: string;
++      scope?: string;
+     }>;
+     deviceApprove: _$better_call0.StrictEndpoint<"/device/approve", {
+       method: "POST";
+diff --git a/dist/plugins/device-authorization/routes.mjs b/dist/plugins/device-authorization/routes.mjs
+index fc04b7a..ff58b2f 100644
+--- a/dist/plugins/device-authorization/routes.mjs
++++ b/dist/plugins/device-authorization/routes.mjs
+@@ -317,7 +317,9 @@ const deviceVerify = createAuthEndpoint("/device", {
+ 							"denied"
+ 						],
+ 						description: "Current status of the device authorization"
+-					}
++					},
++					client_id: { type: "string", description: "Client requesting authorization; visible only to the review owner" },
++					scope: { type: "string", description: "Requested permissions; visible only to the review owner" }
+ 				}
+ 			} } }
+ 		} }
+@@ -363,9 +365,11 @@ const deviceVerify = createAuthEndpoint("/device", {
+ 			set: { userId: session.user.id }
+ 		})) deviceCodeRecord.userId = session.user.id;
+ 	}
++	const canReviewRequest = session?.user.id !== void 0 && deviceCodeRecord.userId === session.user.id;
+ 	return ctx.json({
+ 		user_code,
+-		status: deviceCodeRecord.status
++		status: deviceCodeRecord.status,
++		...canReviewRequest ? { client_id: deviceCodeRecord.clientId, scope: deviceCodeRecord.scope } : {}
+ 	});
+ });
+ const deviceApprove = createAuthEndpoint("/device/approve", {
+diff --git a/dist/plugins/magic-link/index.mjs b/dist/plugins/magic-link/index.mjs
+index 2de327d..8cfded4 100644
+--- a/dist/plugins/magic-link/index.mjs
++++ b/dist/plugins/magic-link/index.mjs
+@@ -22,6 +22,20 @@ const magicLinkVerifyQuerySchema = z.object({
+ 	errorCallbackURL: z.string().meta({ description: "URL to redirect after error." }).optional(),
+ 	newUserCallbackURL: z.string().meta({ description: "URL to redirect after new user signup. Only used if the user is registering for the first time." }).optional()
+ });
++const magicLinkRecordSchema = z.object({
++	type: z.literal("magic-link"),
++	email: z.email(),
++	name: z.string().optional()
++}).strict();
++function parseMagicLinkRecord(value) {
++	try {
++		const parsed = JSON.parse(value);
++		return magicLinkRecordSchema.safeParse(parsed);
++	} catch {
++		return null;
++	}
++}
++const magicLinkIdentifier = (storedToken) => `magic-link:${storedToken}`;
+ const magicLink = (options) => {
+ 	const opts = {
+ 		storeToken: "plain",
+@@ -74,8 +88,9 @@ const magicLink = (options) => {
+ 				const verificationToken = opts?.generateToken ? await opts.generateToken(email) : generateRandomString(32, "a-z", "A-Z");
+ 				const storedToken = await storeToken(ctx, verificationToken);
+ 				await ctx.context.internalAdapter.createVerificationValue({
+-					identifier: storedToken,
++					identifier: magicLinkIdentifier(storedToken),
+ 					value: JSON.stringify({
++						type: "magic-link",
+ 						email,
+ 						name: ctx.body.name
+ 					}),
+@@ -150,10 +165,14 @@ const magicLink = (options) => {
+ 					throw ctx.redirect(errorCallbackURL.toString());
+ 				}
+ 				const newUserCallbackURL = new URL(ctx.query.newUserCallbackURL ? decodeURIComponent(ctx.query.newUserCallbackURL) : callbackURL, ctx.context.baseURL).toString();
+-				const storedToken = await storeToken(ctx, token);
+-				const tokenValue = await ctx.context.internalAdapter.consumeVerificationValue(storedToken);
++				const identifier = magicLinkIdentifier(await storeToken(ctx, token));
++				const pendingValue = await ctx.context.internalAdapter.findVerificationValue(identifier);
++				if (!pendingValue || !parseMagicLinkRecord(pendingValue.value)?.success) redirectWithError("INVALID_TOKEN");
++				const tokenValue = await ctx.context.internalAdapter.consumeVerificationValue(identifier);
+ 				if (!tokenValue) redirectWithError("INVALID_TOKEN");
+-				const { email, name } = JSON.parse(tokenValue.value);
++				const record = parseMagicLinkRecord(tokenValue.value);
++				if (!record?.success) redirectWithError("INVALID_TOKEN");
++				const { email, name } = record.data;
+ 				let isNewUser = false;
+ 				let user = await ctx.context.internalAdapter.findUserByEmail(email).then((res) => res?.user);
+ 				if (!user) if (!opts.disableSignUp) {
+diff --git a/dist/plugins/oauth-proxy/index.mjs b/dist/plugins/oauth-proxy/index.mjs
+index 09ea0cf..9b52f5d 100644
+--- a/dist/plugins/oauth-proxy/index.mjs
++++ b/dist/plugins/oauth-proxy/index.mjs
+@@ -6,7 +6,8 @@ import { symmetricDecrypt, symmetricEncrypt } from "../../crypto/index.mjs";
+ import { setSessionCookie } from "../../cookies/index.mjs";
+ import { redirectOnError } from "../../oauth2/errors.mjs";
+ import { handleOAuthUserInfo } from "../../oauth2/link-account.mjs";
+-import { parseGenericState } from "../../state.mjs";
++import { derivePurposeKey } from "../../crypto/purpose.mjs";
++import { getAuthStateVerificationIdentifier, parseGenericState } from "../../state.mjs";
+ import { PACKAGE_VERSION } from "../../version.mjs";
+ import { parseJSON } from "../../client/parser.mjs";
+ import { checkSkipProxy, resolveCurrentURL, stripTrailingSlash } from "./utils.mjs";
+@@ -78,7 +79,7 @@ const oAuthProxy = (opts) => {
+ 			let decryptedPayload;
+ 			try {
+ 				decryptedPayload = await symmetricDecrypt({
+-					key: getEncryptionKey(ctx),
++					key: derivePurposeKey(getEncryptionKey(ctx), "oauth-proxy-profile"),
+ 					data: encryptedProfile
+ 				});
+ 			} catch (e) {
+@@ -156,7 +157,7 @@ const oAuthProxy = (opts) => {
+ 					let statePackage;
+ 					try {
+ 						statePackage = parseJSON(await symmetricDecrypt({
+-							key: getEncryptionKey(ctx),
++							key: derivePurposeKey(getEncryptionKey(ctx), "oauth-proxy-package"),
+ 							data: state
+ 						}));
+ 					} catch {
+@@ -176,7 +177,7 @@ const oAuthProxy = (opts) => {
+ 					let stateData;
+ 					try {
+ 						stateData = parseJSON(await symmetricDecrypt({
+-							key: getEncryptionKey(ctx),
++							key: derivePurposeKey(getEncryptionKey(ctx), "oauth-proxy-state"),
+ 							data: statePackage.stateCookie
+ 						}));
+ 					} catch (e) {
+@@ -256,7 +257,7 @@ const oAuthProxy = (opts) => {
+ 						timestamp: Date.now()
+ 					};
+ 					const encryptedPayload = await symmetricEncrypt({
+-						key: getEncryptionKey(ctx),
++						key: derivePurposeKey(getEncryptionKey(ctx), "oauth-proxy-profile"),
+ 						data: JSON.stringify(payload)
+ 					});
+ 					proxyCallbackURL.searchParams.set("profile", encryptedPayload);
+@@ -284,11 +285,11 @@ const oAuthProxy = (opts) => {
+ 								const oauthStateCookie = ctx.context.createAuthCookie("oauth_state");
+ 								const encryptedCookieValue = parseSetCookieHeader(setCookieHeader).get(oauthStateCookie.name)?.value;
+ 								if (encryptedCookieValue) plaintextState = await symmetricDecrypt({
+-									key: ctx.context.secretConfig,
++									key: derivePurposeKey(ctx.context.secretConfig, "oauth-state-cookie"),
+ 									data: encryptedCookieValue
+ 								});
+ 							}
+-						} else plaintextState = (await ctx.context.internalAdapter.findVerificationValue(originalState))?.value;
++						} else plaintextState = (await ctx.context.internalAdapter.findVerificationValue(getAuthStateVerificationIdentifier(originalState)))?.value;
+ 						if (!plaintextState) {
+ 							ctx.context.logger.warn("No OAuth state found for proxy");
+ 							return;
+@@ -296,13 +297,13 @@ const oAuthProxy = (opts) => {
+ 						const statePackage = {
+ 							state: originalState,
+ 							stateCookie: await symmetricEncrypt({
+-								key: getEncryptionKey(ctx),
++								key: derivePurposeKey(getEncryptionKey(ctx), "oauth-proxy-state"),
+ 								data: plaintextState
+ 							}),
+ 							isOAuthProxy: true
+ 						};
+ 						const encryptedPackage = await symmetricEncrypt({
+-							key: getEncryptionKey(ctx),
++							key: derivePurposeKey(getEncryptionKey(ctx), "oauth-proxy-package"),
+ 							data: JSON.stringify(statePackage)
+ 						});
+ 						oauthURL.searchParams.set("state", encryptedPackage);
+diff --git a/dist/state.mjs b/dist/state.mjs
+index b781ef5..6c118b9 100644
+--- a/dist/state.mjs
++++ b/dist/state.mjs
+@@ -1,5 +1,6 @@
+ import { generateRandomString } from "./crypto/random.mjs";
+ import { symmetricDecrypt, symmetricEncrypt } from "./crypto/index.mjs";
++import { derivePurposeKey } from "./crypto/purpose.mjs";
+ import { expireCookie } from "./cookies/index.mjs";
+ import { BetterAuthError } from "@better-auth/core/error";
+ import * as z from "zod";
+@@ -21,6 +22,7 @@ const stateDataSchema = z.looseObject({
+ 	}).optional(),
+ 	requestSignUp: z.boolean().optional()
+ });
++const getAuthStateVerificationIdentifier = (state) => `auth-state:${state}`;
+ const INTERNAL_STATE_KEYS = new Set(Object.keys(stateDataSchema.shape));
+ var StateError = class extends BetterAuthError {
+ 	code;
+@@ -48,7 +50,7 @@ async function generateGenericState(c, stateData, settings) {
+ 			oauthState: state
+ 		};
+ 		const encryptedData = await symmetricEncrypt({
+-			key: c.context.secretConfig,
++			key: derivePurposeKey(c.context.secretConfig, "oauth-state-cookie"),
+ 			data: JSON.stringify(payload)
+ 		});
+ 		const stateCookie = c.context.createAuthCookie(settings?.cookieName ?? "oauth_state", { maxAge: 600 });
+@@ -67,7 +69,7 @@ async function generateGenericState(c, stateData, settings) {
+ 			...stateData,
+ 			oauthState: state
+ 		}),
+-		identifier: state,
++		identifier: getAuthStateVerificationIdentifier(state),
+ 		expiresAt
+ 	})) throw new StateError("Unable to create verification. Make sure the database adapter is properly working and there is a verification table in the database", { code: "state_generation_error" });
+ 	return {
+@@ -88,7 +90,7 @@ async function parseGenericState(c, state, settings) {
+ 		});
+ 		try {
+ 			const decryptedData = await symmetricDecrypt({
+-				key: c.context.secretConfig,
++				key: derivePurposeKey(c.context.secretConfig, "oauth-state-cookie"),
+ 				data: encryptedData
+ 			});
+ 			parsedData = stateDataSchema.parse(JSON.parse(decryptedData));
+@@ -106,7 +108,7 @@ async function parseGenericState(c, state, settings) {
+ 		});
+ 		expireCookie(c, stateCookie);
+ 	} else {
+-		const data = await c.context.internalAdapter.findVerificationValue(state);
++		const data = await c.context.internalAdapter.findVerificationValue(getAuthStateVerificationIdentifier(state));
+ 		if (!data) throw new StateError("State mismatch: verification not found", {
+ 			code: "state_mismatch",
+ 			details: { state }
+@@ -125,7 +127,7 @@ async function parseGenericState(c, state, settings) {
+ 			errorURL: parsedData.errorURL
+ 		});
+ 		expireCookie(c, stateCookie);
+-		await c.context.internalAdapter.deleteVerificationByIdentifier(state);
++		await c.context.internalAdapter.deleteVerificationByIdentifier(getAuthStateVerificationIdentifier(state));
+ 	}
+ 	if (parsedData.expiresAt < Date.now()) throw new StateError("Invalid state: request expired", {
+ 		code: "state_mismatch",
+@@ -135,4 +137,4 @@ async function parseGenericState(c, state, settings) {
+ 	return parsedData;
+ }
+ //#endregion
+-export { INTERNAL_STATE_KEYS, StateError, generateGenericState, parseGenericState };
++export { INTERNAL_STATE_KEYS, StateError, generateGenericState, getAuthStateVerificationIdentifier, parseGenericState };

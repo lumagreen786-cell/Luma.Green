@@ -67,6 +67,19 @@ jobs:
     name: Unit tests
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_DB: luma_security_test
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
     steps:
       - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
@@ -78,6 +91,11 @@ jobs:
       - run: pnpm test:coverage
       - name: Background-job websocket compatibility
         run: pnpm test:security
+      - name: Auth adapter PostgreSQL contention
+        run: pnpm test:security:postgres
+        env:
+          LUMA_TEST_PG_HOST: 127.0.0.1
+          LUMA_TEST_PG_PORT: "5432"
       - name: Upload coverage
         if: always()
         uses: actions/upload-artifact@v7

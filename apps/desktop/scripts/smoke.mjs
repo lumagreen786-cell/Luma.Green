@@ -90,6 +90,106 @@ try {
     await page.evaluate(() => typeof Reflect.get(window, "process")),
     "undefined",
   );
+  // Hold a native permission confirmation open while its requesting page leaves.
+  // Accepting that stale prompt must not grant the replacement document access.
+  const permissionProbe = await application.evaluateHandle(({ dialog }) => {
+    const probe = {
+      count: 0,
+      /** @type {(value: import("electron").MessageBoxReturnValue) => void} */
+      resolve: (_value) => {
+        /* Replaced when the native handler opens its confirmation. */
+      },
+      original: dialog.showMessageBox,
+    };
+    const nativeDialog = dialog;
+    nativeDialog.showMessageBox = () => {
+      probe.count += 1;
+      return new Promise((resolve) => {
+        probe.resolve = resolve;
+      });
+    };
+    return probe;
+  });
+  /** @param {string} kind */
+  const requestPermission = (kind) =>
+    page.evaluate((kind) => {
+      // eslint-disable-next-line unicorn/consistent-function-scoping -- This callback must remain inside the serialized renderer evaluation.
+      const done = () => {
+        /* Coordinates are not needed to test the permission boundary. */
+      };
+      if (kind === "location")
+        navigator.geolocation.getCurrentPosition(done, done);
+      else void Notification.requestPermission();
+    }, kind);
+  let promptCount = 0;
+  for (const kind of ["location", "notifications"]) {
+    for (const destination of [origin + "/ar", null, "spa"]) {
+      await requestPermission(kind);
+      promptCount += 1;
+      // eslint-disable-next-line sonarjs/assertions-in-test-cases -- Observe the real native permission handler.
+      await expect
+        .poll(() => permissionProbe.evaluate((probe) => probe.count))
+        .toBe(promptCount);
+      if (destination === "spa")
+        await page.evaluate(() => {
+          history.pushState({}, "", "/ar");
+          history.pushState({}, "", "/");
+        });
+      else if (destination) await page.goto(destination);
+      else await page.reload();
+      await permissionProbe.evaluate((probe) =>
+        probe.resolve({ response: 1, checkboxChecked: false }),
+      );
+      await requestPermission(kind);
+      promptCount += 1;
+      // eslint-disable-next-line sonarjs/assertions-in-test-cases -- A new document needs a new confirmation after the stale result.
+      await expect
+        .poll(() => permissionProbe.evaluate((probe) => probe.count))
+        .toBe(promptCount);
+      await permissionProbe.evaluate((probe) =>
+        probe.resolve({ response: 0, checkboxChecked: false }),
+      );
+      await page.goto(origin + "/");
+    }
+  }
+  await application.evaluate(({ dialog }, probe) => {
+    const nativeDialog = dialog;
+    nativeDialog.showMessageBox = probe.original;
+  }, permissionProbe);
+  await permissionProbe.dispose();
+  await page.goto(origin + "/");
+  await page.evaluate(() => {
+    document.documentElement.dataset.cancelProbe = "retained";
+    location.assign("/slow");
+  });
+  // eslint-disable-next-line sonarjs/assertions-in-test-cases -- Verify navigation was pending before cancelling it.
+  await expect.poll(() => requests.hasSlowRequest).toBe(true);
+  await application.evaluate(({ BrowserWindow }) => {
+    BrowserWindow.getAllWindows()[0].webContents.stop();
+  });
+  assert.equal(
+    await page.evaluate(() => document.documentElement.dataset.cancelProbe),
+    "retained",
+  );
+  await page.evaluate(() =>
+    Reflect.get(window, "lumaAppUpdates").request("restart"),
+  );
+  // eslint-disable-next-line sonarjs/assertions-in-test-cases -- The retained document must still use its original update command nonce.
+  await expect
+    .poll(() =>
+      page.evaluate(() => Reflect.get(window, "lumaAppUpdates").getState()),
+    )
+    .toBe("blocked");
+  await page.evaluate(() =>
+    Reflect.get(window, "lumaAppUpdates").request("status"),
+  );
+  // eslint-disable-next-line sonarjs/assertions-in-test-cases -- A cancelled navigation must not leave the surviving bridge disconnected.
+  await expect
+    .poll(() =>
+      page.evaluate(() => Reflect.get(window, "lumaAppUpdates").getState()),
+    )
+    .toBe("unavailable");
+  requests.hasSlowRequest = false;
   await page.evaluate(() => {
     window.open("/slow");
   });
@@ -162,7 +262,7 @@ try {
   await page.getByRole("heading", { name: "Desktop fixture" }).waitFor();
   assert.equal(page.url(), `${origin}/ar`);
   console.warn(
-    "Desktop smoke passed: sandbox, cancelled navigation, blocked popup, blob preview, main-window restoration, Arabic offline screen and retry.",
+    "Desktop smoke passed: sandbox, stale location/notification confirmations, cancelled navigation, blocked popup, blob preview, main-window restoration, Arabic offline screen and retry.",
   );
 } finally {
   await application.close();

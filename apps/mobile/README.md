@@ -131,8 +131,9 @@ Preview and production builds reject local origins even if the development flag
 is present. `originWhitelist=['*']` routes every navigation through our policy
 instead of letting the WebView library automatically open unknown schemes.
 
-`app.config.js` sets the proposed app IDs to `green.luma.app`. Confirm ownership
-before the first signed build; no account or app ID has been registered. It uses
+`app.config.js` sets the app IDs to `green.luma.app`. The Android demo uses the
+linked Expo project described below. Confirm platform account and app-ID
+ownership before a store release; project linking does not prove store approval. It uses
 the repository's branded PNG icons. Permission purpose strings are generated from all 33 root catalogues for iOS
 system dialogs. Supported locales also configure Android language settings; its
 OS owns the standard permission text. Native-speaker/device review is still required.
@@ -232,8 +233,13 @@ There are three different releases:
 2. **Shell JavaScript/assets:** EAS Update can change code that fits the installed
    native runtime. The `fingerprint` runtime policy prevents a new native module
    from being sent to an old binary. The startup check can download an update;
-   it applies on a later cold start or through the explicit safe Restart control.
-   An active session is never forcibly reloaded. Expo Go does not prove production OTA behavior.
+   it applies on a later cold start or an explicit safe Restart. The hosted
+   download icon shows update status without opening a modal. Restart requires
+   a fresh idle public home document. Forms, editable content, task dialogs and
+   prior edits/task clicks block it. Finish work and reopen Luma if the guard
+   remains latched. An embedded rollback directive is staged through the same
+   check/fetch path and requires the same restart guard. Expo Go does not prove
+   production OTA behavior.
 3. **Native binary:** new native modules, permissions, Expo/RN versions or native
    identity settings need a new signed store build. EAS Update does not replace
    this step. A permanently fixed base install is not promised.

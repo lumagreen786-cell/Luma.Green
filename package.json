@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "license": "UNLICENSED",
-  "description": "Luma.Green — Cleaner Tomorrow in Motion. Recycling inventory, sector trade and carbon credits in one place.",
+  "description": "Luma.Green \u2014 Cleaner Tomorrow in Motion. Recycling inventory, sector trade and carbon credits in one place.",
   "packageManager": "pnpm@11.24.0",
   "engines": {
     "node": "24.x",
@@ -21,7 +21,7 @@
     "format:check": "prettier --check .",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:security": "node --test scripts/security/*.test.mjs",
+    "test:security": "node --test scripts/security/auth-purpose.test.mjs scripts/security/cache-policy.test.mjs scripts/security/deepmerge.test.mjs scripts/security/engine-io-ws.test.mjs scripts/security/zod-collections.test.mjs scripts/security/systeminformation.test.mjs",
     "test:coverage": "vitest run --coverage",
     "e2e": "playwright test",
     "e2e:ui": "playwright test --ui",
@@ -39,7 +39,8 @@
     "desktop:pack": "pnpm --filter @luma/desktop run pack",
     "apps:check": "pnpm --filter \"./apps/*\" check",
     "guide:check": "vitest run --config vitest.guide.config.mts",
-    "astryx": "node node_modules/@astryxdesign/cli/clients/cli/bin/astryx.mjs"
+    "astryx": "node node_modules/@astryxdesign/cli/clients/cli/bin/astryx.mjs",
+    "test:security:postgres": "node --test scripts/security/auth-postgres.test.mjs"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,mjs,cjs}": [
@@ -103,6 +104,7 @@
     "@vitejs/plugin-react": "^6.1.2",
     "@vitest/coverage-v8": "^5.0.5",
     "convex-test": "^0.0.62",
+    "drizzle-orm": "0.45.2",
     "eslint": "^9",
     "eslint-config-next": "16.4.3",
     "eslint-config-prettier": "^10.1.8",
@@ -117,6 +119,7 @@
     "jiti": "2.7.0",
     "jsdom": "^30.1.1",
     "lint-staged": "^17.5.1",
+    "pg": "8.16.3",
     "prettier": "^3.9.9",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "tailwindcss": "^4",

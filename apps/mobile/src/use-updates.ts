@@ -26,12 +26,16 @@ export function useShellUpdates() {
     setState("checking");
     try {
       const result = await Updates.checkForUpdateAsync();
-      if (!result.isAvailable) {
+      if (!result.isAvailable && !result.isRollBackToEmbedded) {
         setState("current");
         return;
       }
       const downloaded = await Updates.fetchUpdateAsync();
-      setState(downloaded.isNew ? "ready" : "current");
+      setState(
+        downloaded.isNew || downloaded.isRollBackToEmbedded
+          ? "ready"
+          : "current",
+      );
     } catch {
       setState("failed");
     } finally {

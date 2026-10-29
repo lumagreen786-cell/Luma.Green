@@ -12,9 +12,12 @@ export type VerifyPhoneResult =
 /** A lost connection must leave the form ready for another attempt. */
 export async function requestPhoneCode(
   phone: string,
+  isCurrent: () => boolean = () => true,
 ): Promise<SendCodeErrorKey | null> {
   try {
+    if (!isCurrent()) return "sendFailed";
     const token = await requestBotToken();
+    if (!isCurrent()) return "sendFailed";
     const { error } = await authClient.phoneNumber.sendOtp({
       phoneNumber: phone,
       ...(token && {

@@ -3831,7 +3831,7 @@
   },
   "accountPhone": {
     "title": "Verifica tu número de móvil",
-    "description": "Añade un número propio para recogidas y pagos. Tu cuenta de correo se mantiene y no se combina con otra. Sigue entrando con tu correo.",
+    "description": "Añade un número propio para recogidas y pagos. Tu cuenta se mantiene y no se combina con otra.",
     "verified": "Número de móvil verificado",
     "unavailable": "La verificación no está disponible hasta configurar el envío de SMS.",
     "inUse": "No se puede añadir este número. Usa uno que no esté asociado a otra cuenta.",
@@ -4461,7 +4461,9 @@
     "amount": "Importe",
     "reference": "Referencia",
     "more": "Más",
-    "capacity": "El almacenamiento de documentos está lleno. Usa registros manuales o contacta con el propietario del espacio."
+    "capacity": "El almacenamiento de documentos está lleno. Usa registros manuales o contacta con el propietario del espacio.",
+    "changed": "Este documento ha cambiado. Copia tus cambios antes de abrir la versión guardada.",
+    "loadSaved": "Abrir versión guardada"
   },
   "businessSubscriptions": {
     "title": "Plan del centro",

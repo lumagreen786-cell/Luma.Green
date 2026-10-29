@@ -689,8 +689,12 @@ export const serve = httpAction(async (ctx, request) => {
     source = await ctx.runQuery(internal.paperDrafts.readSource, {
       draftId: raw as Id<"paperDrafts">,
     });
-  } catch {
-    return new Response("UNAVAILABLE", { status: 404, headers });
+  } catch (error) {
+    const status =
+      error instanceof ConvexError && error.data === "PAPER_SOURCE_INTEGRITY"
+        ? 503
+        : 404;
+    return new Response("UNAVAILABLE", { status, headers });
   }
   return new Response(source.bytes, {
     headers: {

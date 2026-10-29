@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { NextIntlClientProvider } from "next-intl";
 import { beforeEach, expect, it, vi } from "vitest";
@@ -13,6 +13,7 @@ const mocks = vi.hoisted(() => ({
   reauthenticate: vi.fn(),
   phone: true,
   verified: false,
+  sessionId: "fixture-session",
 }));
 vi.mock("@/components/providers/use-signed-in-query", () => ({
   useSignedInQuery: () => ({ phone: mocks.phone }),
@@ -21,7 +22,10 @@ vi.mock("@/lib/auth-client", () => ({
   authClient: {
     phoneNumber: { sendOtp: mocks.sendOtp, verify: mocks.verify },
     useSession: () => ({
-      data: { user: { phoneNumberVerified: mocks.verified } },
+      data: {
+        user: { phoneNumberVerified: mocks.verified },
+        session: { id: mocks.sessionId },
+      },
       refetch: mocks.refetch,
     }),
   },
@@ -30,11 +34,12 @@ beforeEach(() => {
   vi.resetAllMocks();
   mocks.phone = true;
   mocks.verified = false;
+  mocks.sessionId = "fixture-session";
   mocks.sendOtp.mockResolvedValue({ error: null });
   mocks.verify.mockResolvedValue({ error: null });
 });
 function view() {
-  render(
+  return render(
     <NextIntlClientProvider locale="en" messages={messages}>
       <AccountPhone onReauthenticate={mocks.reauthenticate} />
     </NextIntlClientProvider>,
@@ -133,4 +138,92 @@ it("normalizes Arabic keyboard digits for both phone and code", async () => {
     updatePhoneNumber: true,
     disableSession: true,
   });
+});
+
+it("does not refresh another session after binding completes on an unmounted form", async () => {
+  const pending = Promise.withResolvers<{ error: null }>();
+  mocks.verify.mockReturnValueOnce(pending.promise);
+  const rendered = view();
+  await enterCode();
+  rendered.unmount();
+  await act(async () => {
+    pending.resolve({ error: null });
+    await pending.promise;
+  });
+  expect(mocks.refetch).not.toHaveBeenCalled();
+});
+
+it("keeps a sent binding challenge when delivery is disabled", async () => {
+  const user = userEvent.setup();
+  const rendered = view();
+  await user.type(
+    screen.getByLabelText(messages.auth.mobileLabel),
+    "9000000241",
+  );
+  await user.click(
+    screen.getByRole("button", { name: messages.auth.sendCode }),
+  );
+  mocks.phone = false;
+  rendered.rerender(
+    <NextIntlClientProvider locale="en" messages={messages}>
+      <AccountPhone onReauthenticate={mocks.reauthenticate} />
+    </NextIntlClientProvider>,
+  );
+  expect(screen.getByLabelText(messages.auth.codeLabel)).toBeVisible();
+  expect(
+    screen.getByRole("button", { name: messages.auth.resend }),
+  ).toBeDisabled();
+  await user.type(screen.getByLabelText(messages.auth.codeLabel), "123456");
+  await user.click(screen.getByRole("button", { name: messages.auth.verify }));
+  expect(mocks.verify).toHaveBeenCalledOnce();
+  expect(mocks.sendOtp).toHaveBeenCalledOnce();
+});
+
+it("does not refresh or report old binding success after a same-user session rotation", async () => {
+  const pending = Promise.withResolvers<{ error: null }>();
+  mocks.verify.mockReturnValueOnce(pending.promise);
+  const rendered = view();
+  await enterCode();
+  mocks.sessionId = "rotated-session";
+  rendered.rerender(
+    <NextIntlClientProvider locale="en" messages={messages}>
+      <AccountPhone onReauthenticate={mocks.reauthenticate} />
+    </NextIntlClientProvider>,
+  );
+  await act(async () => {
+    pending.resolve({ error: null });
+    await pending.promise;
+  });
+  expect(mocks.refetch).not.toHaveBeenCalled();
+  expect(
+    screen.queryByText(messages.accountPhone.verified),
+  ).not.toBeInTheDocument();
+  expect(screen.getByLabelText(messages.auth.codeLabel)).toBeVisible();
+});
+it("does not restore an old send result after a same-user session rotation", async () => {
+  const pending = Promise.withResolvers<{ error: null }>();
+  mocks.sendOtp.mockReturnValueOnce(pending.promise);
+  const rendered = view();
+  const user = userEvent.setup();
+  await user.type(
+    screen.getByLabelText(messages.auth.mobileLabel),
+    "9000000241",
+  );
+  await user.click(
+    screen.getByRole("button", { name: messages.auth.sendCode }),
+  );
+  mocks.sessionId = "rotated-session";
+  rendered.rerender(
+    <NextIntlClientProvider locale="en" messages={messages}>
+      <AccountPhone onReauthenticate={mocks.reauthenticate} />
+    </NextIntlClientProvider>,
+  );
+  await act(async () => {
+    pending.resolve({ error: null });
+    await pending.promise;
+  });
+  expect(
+    screen.queryByLabelText(messages.auth.codeLabel),
+  ).not.toBeInTheDocument();
+  expect(mocks.refetch).not.toHaveBeenCalled();
 });

@@ -5,8 +5,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
+  AppState,
   BackHandler,
   Linking,
+  Platform,
   Pressable,
   StyleSheet,
   Text,
@@ -18,6 +20,7 @@ import { WebView, type WebViewNavigation } from "react-native-webview";
 
 import { localeDirection } from "../../../src/i18n/locales";
 import { LocaleProvider, useTranslations } from "./i18n";
+import { messageBridgeScript, parseNativeMessage } from "./message-bridge";
 import {
   classifyNavigation,
   handleNavigationChange,
@@ -129,6 +132,18 @@ function Shell({
   });
 
   useEffect(() => {
+    const subscription = AppState.addEventListener("change", (state) => {
+      if (state !== "background") return;
+      invalidateLocation();
+      invalidateUpdates();
+      push.invalidate();
+    });
+    return () => {
+      subscription.remove();
+    };
+  }, [invalidateLocation, invalidateUpdates, push]);
+
+  useEffect(() => {
     const listener = BackHandler.addEventListener("hardwareBackPress", () => {
       if (!canGoBack) return false;
       webView.current?.goBack();
@@ -237,15 +252,31 @@ function Shell({
           }
           onNavigationStateChange={trackNavigation}
           injectedJavaScriptBeforeContentLoaded={
-            location.script + updates.script
+            messageBridgeScript(origin, Constants.sessionId) +
+            location.script +
+            updates.script
           }
-          injectedJavaScript={location.script + updates.script}
+          injectedJavaScript={
+            messageBridgeScript(origin, Constants.sessionId) +
+            location.script +
+            updates.script
+          }
           injectedJavaScriptForMainFrameOnly
           injectedJavaScriptBeforeContentLoadedForMainFrameOnly
           onMessage={({ nativeEvent }) => {
-            void location.receive(nativeEvent.data, nativeEvent.url);
-            void push.receive(nativeEvent.data, nativeEvent.url);
-            void updates.receive(nativeEvent.data, nativeEvent.url);
+            if (AppState.currentState !== "active") return;
+            const data = parseNativeMessage(
+              nativeEvent.data,
+              nativeEvent.url,
+              currentUrl.current,
+              origin,
+              Constants.sessionId,
+              Platform.OS === "android",
+            );
+            if (data === null) return;
+            void location.receive(data, currentUrl.current);
+            void push.receive(data, currentUrl.current);
+            void updates.receive(data, currentUrl.current);
           }}
           onLoadStart={() => {
             invalidateUpdates();
@@ -260,7 +291,10 @@ function Shell({
             setLoading(nativeEvent.progress < 1);
           }}
           onLoadEnd={() => {
-            webView.current?.injectJavaScript(location.script);
+            webView.current?.injectJavaScript(
+              messageBridgeScript(origin, Constants.sessionId) +
+                location.script,
+            );
             setLoading(false);
             push.ready();
             updates.ready();

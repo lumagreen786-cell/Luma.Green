@@ -3,13 +3,15 @@ import userEvent from "@testing-library/user-event";
 import { getFunctionName } from "convex/server";
 import { NextIntlClientProvider } from "next-intl";
 import type { ReactNode } from "react";
-import { afterEach, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, expect, it, vi } from "vitest";
 
 import type { Id } from "../../../convex/_generated/dataModel";
 import messages from "../../../messages/en.json";
 import { PaperEditor, PaperPage } from "./paper-page";
 const mocks = vi.hoisted(() => ({
   business: { id: "workspace-a" },
+  other: null as Record<string, unknown> | null,
+  detail: null as Record<string, unknown> | null,
   upload: vi.fn(),
   confirm: vi.fn(),
   save: vi.fn(),
@@ -30,9 +32,16 @@ vi.mock("convex/react", () => ({
     if (name.endsWith(":confirm")) return mocks.confirm;
     return name.endsWith(":save") ? mocks.save : mocks.discard;
   },
-  useQuery: () => ({ assisted: false, canOperate: true }),
+  useQuery: (
+    reference: Parameters<typeof getFunctionName>[0],
+    args: { draftId?: string },
+  ) => {
+    if (!getFunctionName(reference).endsWith(":get"))
+      return { assisted: false, canOperate: true };
+    return args.draftId === mocks.other?.id ? mocks.other : mocks.detail;
+  },
   usePaginatedQuery: () => ({
-    results: [],
+    results: [mocks.detail, mocks.other].filter(Boolean),
     status: "Exhausted",
     loadMore: vi.fn(),
   }),
@@ -59,11 +68,28 @@ const paper = {
   reviewedContent: undefined,
   confirmedAt: undefined,
 };
+beforeEach(() => {
+  mocks.save.mockResolvedValue({ draftId: paper.id, revision: 2 });
+  mocks.confirm.mockResolvedValue({
+    draftId: paper.id,
+    revision: 2,
+    status: "confirmed",
+  });
+});
 afterEach(() => {
   vi.clearAllMocks();
+  mocks.detail = null;
+  mocks.other = null;
   vi.unstubAllGlobals();
 });
-function setup(isAssisted = false, canOperate = true) {
+function boardContent() {
+  return (
+    <NextIntlClientProvider locale="en" messages={messages}>
+      <PaperPage />
+    </NextIntlClientProvider>
+  );
+}
+function setup(isAssisted = false, canOperate = true, onDiscard = vi.fn()) {
   const ActualURL = URL;
   vi.stubGlobal(
     "URL",
@@ -78,7 +104,7 @@ function setup(isAssisted = false, canOperate = true) {
         paper={paper}
         assisted={isAssisted}
         canOperate={canOperate}
-        onDiscard={vi.fn()}
+        onDiscard={onDiscard}
       />
     </NextIntlClientProvider>,
   );
@@ -238,3 +264,162 @@ it("binds a live upload to the workspace that opened the file picker", async () 
     });
   });
 });
+
+it("keeps dirty edits when another member saves and requires explicit conflict recovery", async () => {
+  const user = userEvent.setup();
+  setup();
+  // Remount through the real board/detail path to exercise revision keys and memory.
+  const { cleanup } = await import("@testing-library/react");
+  cleanup();
+  mocks.detail = { ...paper };
+  const content = boardContent;
+  const view = render(content());
+  await user.click(screen.getByRole("button", { name: paper.name }));
+  await user.type(
+    screen.getByRole("textbox", { name: messages.papers.text }),
+    "my unsaved correction",
+  );
+  mocks.detail = {
+    ...paper,
+    revision: 2,
+    reviewedContent: { text: "other saved text", rows: [] },
+  };
+  view.rerender(content());
+  expect(
+    screen.getByRole("textbox", { name: messages.papers.text }),
+  ).toHaveValue("my unsaved correction");
+  expect(
+    screen.getByRole("button", { name: messages.common.save }),
+  ).toBeDisabled();
+  expect(
+    screen.getByRole("button", { name: messages.papers.confirmAction }),
+  ).toBeDisabled();
+  await user.click(
+    screen.getByRole("button", { name: messages.papers.loadSaved }),
+  );
+  expect(
+    screen.getByRole("textbox", { name: messages.papers.text }),
+  ).toHaveValue("other saved text");
+  await user.click(screen.getByRole("button", { name: messages.common.save }));
+  expect(mocks.save).toHaveBeenCalledWith({
+    draftId: paper.id,
+    expectedRevision: 2,
+    content: { text: "other saved text", rows: [] },
+  });
+});
+
+it("shows clean remote updates but requires review again for the new revision", async () => {
+  const user = userEvent.setup();
+  setup();
+  const { cleanup } = await import("@testing-library/react");
+  cleanup();
+  mocks.detail = {
+    ...paper,
+    reviewedContent: { text: "old saved text", rows: [] },
+  };
+  const content = boardContent;
+  const view = render(content());
+  await user.click(screen.getByRole("button", { name: paper.name }));
+  await user.click(
+    screen.getByRole("checkbox", { name: messages.papers.confirm }),
+  );
+  expect(
+    screen.getByRole("button", { name: messages.papers.confirmAction }),
+  ).toBeEnabled();
+  mocks.detail = {
+    ...paper,
+    revision: 2,
+    reviewedContent: { text: "new saved text", rows: [] },
+  };
+  view.rerender(content());
+  expect(
+    screen.getByRole("textbox", { name: messages.papers.text }),
+  ).toHaveValue("new saved text");
+  expect(
+    screen.getByRole("checkbox", { name: messages.papers.confirm }),
+  ).not.toBeChecked();
+  expect(
+    screen.getByRole("button", { name: messages.papers.confirmAction }),
+  ).toBeDisabled();
+});
+
+it("does not close another record after a delayed discard finishes on an unmounted editor", async () => {
+  const user = userEvent.setup();
+  const done = vi.fn();
+  const discarded = Promise.withResolvers<null>();
+  mocks.discard.mockReturnValueOnce(discarded.promise);
+  const view = setup(false, true, done);
+  await user.click(
+    screen.getByRole("button", { name: messages.papers.discard }),
+  );
+  view.unmount();
+  await act(async () => {
+    discarded.resolve(null);
+    await discarded.promise;
+  });
+  expect(done).not.toHaveBeenCalled();
+});
+
+it.each(["after", "before", "newer"])(
+  "reconciles a late save after switching records, reopen=%s",
+  async (order) => {
+    const isNewerEdits = order === "newer";
+    const user = userEvent.setup();
+    setup();
+    const { cleanup } = await import("@testing-library/react");
+    cleanup();
+    const pending = Promise.withResolvers<{
+      draftId: typeof paper.id;
+      revision: number;
+    }>();
+    mocks.save.mockReturnValueOnce(pending.promise);
+    mocks.detail = { ...paper };
+    mocks.other = { ...paper, id: "paper-other", name: "Other paper.png" };
+    const content = () => (
+      <NextIntlClientProvider locale="en" messages={messages}>
+        <PaperPage />
+      </NextIntlClientProvider>
+    );
+    const view = render(content());
+    await user.click(screen.getByRole("button", { name: paper.name }));
+    await user.type(
+      screen.getByRole("textbox", { name: messages.papers.text }),
+      "submitted",
+    );
+    await user.click(
+      screen.getByRole("button", { name: messages.common.save }),
+    );
+    await user.click(screen.getByRole("button", { name: "Other paper.png" }));
+    if (order !== "after") {
+      await user.click(screen.getByRole("button", { name: paper.name }));
+      if (isNewerEdits)
+        await user.type(
+          screen.getByRole("textbox", { name: messages.papers.text }),
+          " newer",
+        );
+    }
+    mocks.detail = {
+      ...paper,
+      revision: 2,
+      reviewedContent: { text: "submitted", rows: [] },
+    };
+    await act(async () => {
+      pending.resolve({ draftId: paper.id, revision: 2 });
+      await pending.promise;
+    });
+    view.rerender(content());
+    if (order === "after")
+      await user.click(screen.getByRole("button", { name: paper.name }));
+    expect(
+      screen.getByRole("textbox", { name: messages.papers.text }),
+    ).toHaveValue(isNewerEdits ? "submitted newer" : "submitted");
+    if (isNewerEdits)
+      expect(
+        screen.getByRole("button", { name: messages.papers.loadSaved }),
+      ).toBeEnabled();
+    else
+      expect(
+        screen.queryByRole("button", { name: messages.papers.loadSaved }),
+      ).not.toBeInTheDocument();
+  },
+);

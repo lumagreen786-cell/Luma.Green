@@ -27,6 +27,77 @@ actual release result. Older guide/Word captures remain historical and their
 refresh is deferred until requested. Main protection/email verification stays
 queued at the owner's request. No secrets, paid calls or native release.
 
+## EGM autonomous self-review — 29 October 2026
+
+The owner delegated routine review and repair choices. Fifteen fresh read-only
+Goldfish agents completed five rounds across native, auth/direct booking consumers
+and private papers. See [review plan, decisions and verification](egm-self-review-2026-10-29/README.md).
+Native and papers have two clean final rounds; authentication reached the five-round
+cap with a final missing-delivery fix, so no overall EGM convergence is claimed.
+
+This local branch combines prior repair `c2a13f0` with main `45ad8a6`; both handoff
+entries were preserved during conflict resolution. New repairs cover live restart
+proofs, post-await window checks, background invalidation, cancelled desktop
+navigation, bounded Android message transport, legacy email SMS policy, nested
+late auth/upload/booking results, unavailable delivery, and paper revision/edit
+reconciliation. Auth schema regeneration produced no change. No migration,
+provider setting, paid call or production data change was needed.
+
+Final local verification passed: `VITEST_MAX_WORKERS=4 pnpm check` with 2,978
+web/backend tests, two transport security tests, 61 mobile policy tests, 20 mobile
+component tests and 34 desktop tests; all types; zero lint errors (123 warnings).
+The disconnected build generated 3,285 pages and all 864 browser tests passed
+with two workers and retries disabled. Real unpackaged Electron smoke and both
+694-module Hermes exports passed. Fifty-four current synthetic component captures
+were visually inspected; paper actions fit all 33 locales at 320/390px. The
+report retains source/capture hashes, decisions, limits and a skill usage guide.
+Physical Android/iOS envelope execution, OS prompts/background transitions,
+installed Windows and signed update delivery remain untested. No binary, feed,
+OTA, store submission or deployment is part of this pass. Guide/Word changes are
+deferred; impacted screens are paper conflict recovery, unavailable inline/admin
+SMS and account phone binding. The new screen captures use synthetic component
+fixtures and do not establish authenticated or provider acceptance.
+
+The fresh dependency audit reports 12 advisory records, superseding the previous
+nine-record inventory for the current registry snapshot. No dependency versions
+or peer ranges changed in this pass. Keep existing node-forge patch and disabled
+optional auth paths. Details are in the linked report.
+
+## EGM installation and defect repair — 29 October 2026
+
+The complete EGM 0.1.0 plugin is installed and enabled in local Codex. The task
+used its drift-report process to compare the native design and package READMEs
+with code, then repaired reproduced defects. This was not a Goldfish design
+review. See the [usage guide and evidence](egm-audit-2026-10-29/README.md).
+
+The repair branch is `fix/egm-current-main`, based on checked main `f687bbb`.
+It preserves main's dependency patches, regional-language home guard and restart
+proof expiry. The original `feat/android-demo` branch and unrelated files remain
+intact. The shared restart guard now blocks empty/plaintext/uppercase editable
+content, alert dialogs and open native HTML dialogs. Mobile checks stage embedded
+rollback directives. Desktop location requires the main frame/window, and both
+location and notification prompts reject replies after full navigation, reload
+or away-and-back SPA navigation. Existing valid grants remain process-local.
+
+Local verification passed: `pnpm check` with 2,865 web/backend tests, two transport
+security tests, 59 mobile policy tests, 17 mobile hook/component tests and 30
+desktop tests; root/app types; zero lint errors and 122 existing warnings.
+The production build generated 3,252 pages. All 862 disconnected browser tests
+passed against it with retries disabled. The real unpackaged Electron smoke
+passed, Android/iOS Hermes exports passed, and 24 synthetic update-control
+captures were visually inspected. The report records earlier interrupted and
+failed attempts separately, including one PDF-popup closure whose transient
+cause is not established; later complete Electron smokes passed.
+
+The production-dependency audit still reports nine advisory records. Preserve
+the existing node-forge patch and disabled optional auth paths; the latest
+Convex Better Auth component still requires Better Auth below 1.7. Do not force
+its peer range or suppress alerts. No backend/schema/provider setting, permission
+declaration or production record changed. These repairs are local source work;
+no native binary, feed, OTA update, store submission or deployment is included.
+Live provider, signed update and physical-device acceptance remain open.
+Guide/Word changes remain deferred under AGENTS.md.
+
 ## Security repair integration checkpoint — 29 October 2026
 
 PR #25 combines the security/privacy repair with current main 45ad8a6.
@@ -2516,3 +2587,42 @@ Guide and Word updates are explicitly deferred by the owner; AGENTS.md now makes
 them opt-in. Existing artifact tests remain available as `pnpm guide:check`; code
 and runtime fixture tests stay required. No Google Docs update was requested. No automatic SMS retries;
 five-minute spacing, five sends then a 24-hour lock from the fifth send.
+
+## EGM security/auth closeout — 29 October 2026
+
+The owner authorized the twelve-advisory repair, auth review completion, push,
+PR and checked merge. Current source includes compatible dependency patches,
+owned auth/Zod backports, local atomic Convex auth updates and stale-auth-screen
+repairs. Auth reached two clean fresh reviews (rounds 7/8). The full local check,
+build, 873 browser cases, PostgreSQL contention checks and shell checks pass.
+Details and exact limits: [security closeout](egm-security-closeout-2026-10-29/README.md).
+
+Eight raw version alerts remain visible for source-patched dependencies. No alert
+was suppressed, no package version falsified and no incompatible auth/Expo major
+forced. Keep the behavioral regressions when removing patches. No schema change
+or data migration. New component methods need the normal backend-before-frontend
+production deployment; no root browser API was added. No provider activation,
+native binary, OTA feed, store submission or device acceptance is claimed.
+
+The connected phone availability browser fixture was updated but not executed
+without its provisioned loopback runtime. It requires normal phone resend/quota
+availability and never resets limits. Platform guide/Word/cloud updates remain
+deferred under the owner's standing instruction. Preserve the two unrelated
+untracked delivery paths. Remote CI, checked-head merge and Production outcome
+are recorded by the PR after local verification; do not infer them from this
+local checkpoint.
+
+## Current main integration
+
+Integrated main `20dfc8e` and preserved its paper assistance, billing and service
+work. The paper editor keeps the reviewed save/conflict callback and the new
+assistance section. Two fresh source reviews found no defects in the combined
+paper boundary; 51 focused paper tests pass. Auth product owners did not change.
+The connected fixture reuses main's tested private-file descriptor helper.
+
+The combined `pnpm check` passes: 370 suites, 3,092 app/backend tests, 185 security
+controls, 64 mobile policy, 20 mobile UI and 34 desktop tests; zero lint errors
+and 126 warnings. The disconnected production build generates 3,351 pages.
+All 72 synthetic auth captures were refreshed against the combined catalogues.
+The earlier 873-case browser proof belongs to the earlier source; the combined
+browser suite and final PR checks remain separate gates.

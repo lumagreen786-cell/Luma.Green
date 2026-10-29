@@ -94,3 +94,41 @@ When an official fixed node-forge release is published, update the dependency
 resolution, remove this patch and its `patchedDependencies` entry together, and
 retain the behavioral tests. Run the audit, mobile checks and both JavaScript
 exports again. Do not remove the patch solely to clear an install or audit error.
+
+## Compatible auth and collection backports — 29 October 2026
+
+- `better-auth@1.6.33.patch` separates OAuth state and Magic Link verification
+  namespaces, strictly validates Magic Link records before and after consumption,
+  and derives separate OAuth encryption keys for state cookies, proxy packages,
+  proxy state and profiles. It retains versioned/legacy key rotation within each
+  purpose. It also returns device client/scope details only to the claimed owner.
+  The selected operations come from
+  [upstream purpose separation](https://github.com/better-auth/better-auth/commit/ac54bfd67821a7607533af2059858b12bc54e26a)
+  and the published 1.7.7 artifact. Old optional OAuth/Magic Link challenges expire;
+  there is no fallback to shared-key ciphertext or unprefixed records.
+- `@better-auth__drizzle-adapter@1.6.33.patch` and
+  `@better-auth__kysely-adapter@1.6.33.patch` repeat the guard on the PostgreSQL
+  outer update, preserving one-row selection. This is the narrow
+  [upstream guarded-update repair](https://github.com/better-auth/better-auth/commit/35d7cd389220f99cfc98ac699e6a42b48313a740).
+  CI runs real PostgreSQL contention tests, in addition to normal security tests.
+- `zod@3.25.76.patch` stops child traversal after a failed leading upper bound
+  on constrained arrays/sets. It covers v3 and this package's old v4 exports,
+  including both runtime module formats and matching TypeScript source. It
+  adapts [upstream a0ebf97](https://github.com/colinhacks/zod/commit/a0ebf97).
+  Unconstrained schemas retain their existing contract. A false early `when`
+  predicate may run again after child parsing, as in upstream.
+
+Better Auth 1.7 is outside the installed Convex integration's supported peer
+range; Expo CLI still requires Zod 3. These patches preserve those contracts.
+They do not enable optional auth plugins or change Luma's stored factor crypto.
+No auth schema change or production migration is required. Keep the package
+versions and registry alerts honest. Eight version-based audit records remain
+visible for these patched packages and deepmerge; none is ignored.
+
+Run `pnpm test:security` against the actual installed consumer paths. Run
+`pnpm test:security:postgres` only with an isolated local database named
+`luma_security_test` and `LUMA_TEST_PG_HOST`/`LUMA_TEST_PG_PORT`; CI provides it.
+Retire each backport only after a supported compatible release passes the same
+regressions without that patch. Provenance, SHA-256 hashes, upstream artifact
+integrity and the Better Auth MIT notice are retained in
+`docs/delivery/egm-security-closeout-2026-10-29/`.

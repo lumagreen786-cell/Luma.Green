@@ -23,7 +23,7 @@ import {
   mayRequestNotifications,
   secureWebPreferences,
 } from "./policy.mjs";
-import { setupUpdates } from "./updates.mjs";
+import { canRestartDocument, setupUpdates } from "./updates.mjs";
 
 const config = JSON.parse(
   readFileSync(new URL("../generated/config.json", import.meta.url), "utf8"),
@@ -42,6 +42,8 @@ const locationGrants = new Set();
 const notificationGrants = new Set();
 const notificationPrompts = new Set();
 const updateSession = { token: randomUUID(), activeDownloads: 0 };
+// Permission replies expire on full and in-page navigation, even away and back.
+const permissionSession = { generation: 0 };
 
 /** @param {import('./updates.mjs').UpdateState} [updateState] */
 function publishUpdate(updateState = updates.getState()) {
@@ -66,29 +68,20 @@ function stateWindow() {
 }
 
 async function canRestart() {
-  const contents = stateWindow();
-  if (
-    !contents ||
-    updateSession.activeDownloads ||
-    BrowserWindow.getAllWindows().length !== 1 ||
-    !isUpdateHome(contents.getURL(), origin) ||
-    contents.isLoading()
-  )
-    return false;
-  const url = contents.getURL();
-  const token = updateSession.token;
-  const deadline = await contents.executeJavaScript(
-    "window.lumaAppUpdates && (window.lumaAppUpdates.isRestartPending() || window.lumaAppUpdates.prepareRestart()) ? window.lumaAppUpdates.getRestartDeadline() : 0",
-  );
-  return (
-    Number.isSafeInteger(deadline) &&
-    deadline > Date.now() &&
-    contents === stateWindow() &&
-    token === updateSession.token &&
-    contents.getURL() === url &&
-    updateSession.activeDownloads === 0 &&
-    !contents.isLoading()
-  );
+  return canRestartDocument(() => {
+    const contents = stateWindow();
+    return contents
+      ? {
+          contents,
+          url: contents.getURL(),
+          token: updateSession.token,
+          isHome: isUpdateHome(contents.getURL(), origin),
+          isLoading: contents.isLoading(),
+          activeDownloads: updateSession.activeDownloads,
+          windowCount: BrowserWindow.getAllWindows().length,
+        }
+      : null;
+  });
 }
 /** @returns {import('./localization.mjs').Messages} */
 const messages = () => catalogues[state.locale] ?? catalogues.en;
@@ -232,10 +225,13 @@ function attachGuards(window, isDocumentViewer = false) {
   if (isDocumentViewer) {
     return;
   }
-  contents.on("did-start-navigation", (_event, url, isInPlace, isMainFrame) => {
-    if (isMainFrame && !isInPlace && isAppUrl(url, origin))
-      updateSession.token = randomUUID();
-  });
+  contents.on(
+    "did-start-navigation",
+    (_event, _url, isInPlace, isMainFrame) => {
+      if (!isMainFrame || isInPlace) return;
+      permissionSession.generation += 1;
+    },
+  );
   contents.on("did-finish-load", () => publishUpdate());
 
   contents.on(
@@ -247,8 +243,14 @@ function attachGuards(window, isDocumentViewer = false) {
   contents.on("render-process-gone", () => {
     void showOffline(window);
   });
-  contents.on("did-navigate", (_event, url) => updateLocale(url));
-  contents.on("did-navigate-in-page", (_event, url) => updateLocale(url));
+  contents.on("did-navigate", (_event, url) => {
+    if (isAppUrl(url, origin)) updateSession.token = randomUUID();
+    updateLocale(url);
+  });
+  contents.on("did-navigate-in-page", (_event, url, isMainFrame) => {
+    if (isMainFrame) permissionSession.generation += 1;
+    updateLocale(url);
+  });
 }
 
 /** @param {string} url */
@@ -377,6 +379,7 @@ function requestNotifications(contents, details, callback) {
     return;
   }
   const requestedUrl = contents.getURL();
+  const requestGeneration = permissionSession.generation;
   const m = messages();
   notificationPrompts.add(contents.id);
   void dialog
@@ -393,6 +396,7 @@ function requestNotifications(contents, details, callback) {
         response === 1 &&
         !contents.isDestroyed() &&
         contents.getURL() === requestedUrl &&
+        permissionSession.generation === requestGeneration &&
         contents === state.mainWindow?.webContents;
       if (isGrant) notificationGrants.add(contents.id);
       callback(isGrant);
@@ -424,6 +428,8 @@ function configureSession() {
               details.requestingUrl || requestingOrigin,
               contents.getURL(),
               origin,
+              details.isMainFrame,
+              contents === state.mainWindow?.webContents,
             );
     },
   );
@@ -439,6 +445,8 @@ function configureSession() {
           details.requestingUrl,
           contents.getURL(),
           origin,
+          details.isMainFrame,
+          contents === state.mainWindow?.webContents,
         )
       ) {
         callback(false);
@@ -449,6 +457,8 @@ function configureSession() {
         return;
       }
       const m = messages();
+      const requestedUrl = contents.getURL();
+      const requestGeneration = permissionSession.generation;
       void dialog
         .showMessageBox({
           type: "question",
@@ -459,12 +469,14 @@ function configureSession() {
           cancelId: 0,
         })
         .then(({ response }) => {
-          const allowed =
+          const isAllowed =
             response === 1 &&
             !contents.isDestroyed() &&
-            isAppUrl(contents.getURL(), origin);
-          if (allowed) locationGrants.add(contents.id);
-          callback(allowed);
+            contents === state.mainWindow?.webContents &&
+            contents.getURL() === requestedUrl &&
+            permissionSession.generation === requestGeneration;
+          if (isAllowed) locationGrants.add(contents.id);
+          callback(isAllowed);
         })
         .catch(() => callback(false));
     },

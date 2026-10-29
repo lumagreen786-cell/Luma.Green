@@ -1,6 +1,6 @@
 "use client";
 
-import { useConvexAuth, useMutation } from "convex/react";
+import { useConvexAuth, useMutation, useQuery } from "convex/react";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { useSearchParams } from "next/navigation";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
@@ -56,11 +56,20 @@ const AFTER_SIGN_IN = "/app";
 
 /** `/login/verify`: the 6-digit code, then into the app. */
 export function VerifyFlow() {
+  return isConvexConfigured ? (
+    <ConnectedVerifyFlow />
+  ) : (
+    <PhoneForm canSend={false} />
+  );
+}
+
+function ConnectedVerifyFlow() {
   const phone = useStoredValue(readPhone);
   const [editing, setEditing] = useState(false);
-  if (!isConvexConfigured) return <PhoneForm canSend={false} />;
+  const delivery = useQuery(api.identity.signInOptions);
   return editing ? (
     <PhoneForm
+      canSend={delivery?.phone === true}
       initialPhone={phone?.slice(3)}
       onSent={() => {
         setEditing(false);
@@ -91,6 +100,8 @@ export function VerifyForm({
   const next = safeNextPath(searchParams.get("next"), AFTER_SIGN_IN);
   const { isAuthenticated } = useConvexAuth();
   const ensureProfile = useMutation(api.identity.ensureProfile);
+  const delivery = useQuery(api.identity.signInOptions);
+  const canSend = delivery?.phone === true;
 
   // The number lives in this tab's session storage, never in the URL.
   const storedPhone = useStoredValue(readPhone);
@@ -113,6 +124,13 @@ export function VerifyForm({
   const [secondsLeft, setSecondsLeft] = useState(() =>
     Math.max(0, Math.ceil((resendAt - Date.now()) / 1000)),
   );
+  const mounted = useRef(true);
+  useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+    };
+  }, []);
   const isFinishing = useRef(false);
   const requestPending = useRef(false);
   const [isResending, setResending] = useState(false);
@@ -169,9 +187,11 @@ export function VerifyForm({
     void (async () => {
       try {
         await ensureProfile({ locale });
+        if (!mounted.current) return;
         clearPhoneChallenge();
         router.replace(next);
       } catch {
+        if (!mounted.current) return;
         isFinishing.current = false;
         setStatus("profile-error");
         setError("errorGeneric");
@@ -191,6 +211,7 @@ export function VerifyForm({
     setStatus("checking");
     setError(null);
     const result = await verifyPhoneCode(phone, value);
+    if (!mounted.current) return;
     requestPending.current = false;
     if (result.kind === "error") {
       setStatus("idle");
@@ -204,6 +225,7 @@ export function VerifyForm({
   async function resend() {
     if (
       !phone ||
+      !canSend ||
       status !== "idle" ||
       requestPending.current ||
       Date.now() < resendAt
@@ -212,7 +234,8 @@ export function VerifyForm({
     requestPending.current = true;
     setResending(true);
     setError(null);
-    const sendError = await requestPhoneCode(phone);
+    const sendError = await requestPhoneCode(phone, () => mounted.current);
+    if (!mounted.current) return;
     requestPending.current = false;
     setResending(false);
     if (sendError) {
@@ -343,6 +366,11 @@ export function VerifyForm({
         </Button>
       </form>
 
+      {delivery?.phone === false ? (
+        <p role="status" className="text-sm text-muted-foreground">
+          {t("unavailableBody")}
+        </p>
+      ) : null}
       <div className="flex justify-center" aria-live="polite">
         {secondsLeft > 0 ? (
           <p className="text-sm text-muted-foreground">
@@ -354,7 +382,7 @@ export function VerifyForm({
           <Button
             variant="ghost"
             className="min-h-11"
-            disabled={isBusy}
+            disabled={isBusy || !canSend}
             onClick={() => {
               void resend();
             }}

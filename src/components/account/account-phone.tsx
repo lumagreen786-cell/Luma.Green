@@ -11,11 +11,12 @@ import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/auth-client";
 import { asciiDigits } from "@/lib/number-input";
 import { requestPhoneCode } from "@/lib/phone-auth";
+import { useMounted } from "@/lib/use-mounted";
 
 import { api } from "../../../convex/_generated/api";
 import { normalizeIndianMobile } from "../../../convex/lib/phone";
 
-function usePhoneBinding() {
+function usePhoneBinding(canSend: boolean) {
   const t = useTranslations("accountPhone");
   const auth = useTranslations("auth");
   const security = useTranslations("accountSecurity");
@@ -27,12 +28,21 @@ function usePhoneBinding() {
   const [error, setError] = useState<string | null>(null);
   const [reauthenticate, setReauthenticate] = useState(false);
   const [verified, setVerified] = useState(false);
-  const [cooldown, setCooldown] = useState(0);
+  const [resendAt, setResendAt] = useState(0);
+  const [now, setNow] = useState(() => Date.now());
+  const cooldown = Math.max(0, Math.ceil((resendAt - now) / 1000));
+  const isMounted = useMounted();
+  const sessionId = session.data?.session.id;
+  const observedSession = useRef(sessionId);
+  useEffect(() => {
+    observedSession.current = sessionId;
+  }, [sessionId]);
+  const isCurrent = () => isMounted() && observedSession.current === sessionId;
   const pending = useRef(false);
   useEffect(() => {
     if (!cooldown) return;
     const timer = setTimeout(() => {
-      setCooldown(cooldown - 1);
+      setNow(Date.now());
     }, 1000);
     return () => {
       clearTimeout(timer);
@@ -48,26 +58,30 @@ function usePhoneBinding() {
     try {
       await action();
     } catch {
+      if (!isCurrent()) return;
       setError(auth("errorGeneric"));
     } finally {
       pending.current = false;
-      setBusy(false);
+      if (isMounted()) setBusy(false);
     }
   }
   async function send() {
+    if (!canSend) return;
     const normalized = normalizeIndianMobile(asciiDigits(number));
     if (!normalized) {
       setError(auth("mobileInvalid"));
       return;
     }
-    const failure = await requestPhoneCode(normalized);
+    const failure = await requestPhoneCode(normalized, isCurrent);
+    if (!isCurrent()) return;
     if (failure) {
       setError(auth(failure));
       return;
     }
     setPhone(normalized);
     setCode("");
-    setCooldown(30);
+    setNow(Date.now());
+    setResendAt(Date.now() + 300_000);
   }
   async function verify() {
     if (!phone) return;
@@ -77,6 +91,7 @@ function usePhoneBinding() {
       updatePhoneNumber: true,
       disableSession: true,
     });
+    if (!isCurrent()) return;
     setCode("");
     if (failure) {
       if (
@@ -116,9 +131,11 @@ function usePhoneBinding() {
 function PhoneBindingForm({
   state,
   id,
+  canSend,
 }: {
   state: ReturnType<typeof usePhoneBinding>;
   id: string;
+  canSend: boolean;
 }) {
   const auth = useTranslations("auth");
   const {
@@ -183,7 +200,10 @@ function PhoneBindingForm({
         <Button
           type="submit"
           disabled={
-            busy || reauthenticate || (phone !== null && code.length !== 6)
+            busy ||
+            reauthenticate ||
+            (phone === null && !canSend) ||
+            (phone !== null && code.length !== 6)
           }
         >
           {auth(label)}
@@ -193,7 +213,7 @@ function PhoneBindingForm({
             <Button
               type="button"
               variant="outline"
-              disabled={busy || cooldown > 0}
+              disabled={busy || !canSend || cooldown > 0}
               onClick={() => {
                 void perform(send);
               }}
@@ -232,8 +252,8 @@ export function AccountPhone({
 }) {
   const t = useTranslations("accountPhone");
   const security = useTranslations("accountSecurity");
-  const state = usePhoneBinding();
   const options = useSignedInQuery(api.identity.signInOptions);
+  const state = usePhoneBinding(options?.phone === true);
   const id = useId();
   let content = null;
   if (state.verified)
@@ -242,7 +262,21 @@ export function AccountPhone({
         {t("verified")}
       </p>
     );
-  else if (options?.phone) content = <PhoneBindingForm state={state} id={id} />;
+  else if (options?.phone || state.phone)
+    content = (
+      <>
+        <PhoneBindingForm
+          state={state}
+          id={id}
+          canSend={options?.phone === true}
+        />
+        {options?.phone === false ? (
+          <p role="status" className="text-sm text-muted-foreground">
+            {t("unavailable")}
+          </p>
+        ) : null}
+      </>
+    );
   else if (options !== undefined)
     content = (
       <p className="text-sm text-muted-foreground">{t("unavailable")}</p>

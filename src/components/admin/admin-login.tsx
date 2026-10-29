@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/auth-client";
 import { requestPhoneCode, verifyPhoneCode } from "@/lib/phone-auth";
+import { useMounted } from "@/lib/use-mounted";
 
 import { api } from "../../../convex/_generated/api";
 import { normalizeIndianMobile } from "../../../convex/lib/phone";
@@ -43,6 +44,7 @@ function LoginSteps() {
         </p>
       ) : null}
       <PhoneStep
+        canSend={options?.phone}
         onTwoFactor={() => {
           setNotice(null);
           setStep("code");
@@ -77,9 +79,11 @@ function LoginSteps() {
 }
 
 function PhoneStep({
+  canSend,
   onTwoFactor,
   onNoAuthenticator,
 }: {
+  canSend: boolean | undefined;
   onTwoFactor: () => void;
   onNoAuthenticator: () => void;
 }) {
@@ -90,6 +94,7 @@ function PhoneStep({
   const [error, setError] = useState<string | null>(null);
   const [retryAt, setRetryAt] = useState(0);
   const [now, setNow] = useState(0);
+  const isMounted = useMounted();
   const pending = useRef(false);
   useEffect(() => {
     if (!sent) return;
@@ -101,7 +106,7 @@ function PhoneStep({
     };
   }, [sent]);
   async function send() {
-    if (pending.current || Date.now() < retryAt) return;
+    if (!canSend || pending.current || Date.now() < retryAt) return;
     const normalized = normalizeIndianMobile(phone);
     if (!normalized) {
       setError("Enter a valid Indian mobile number.");
@@ -110,7 +115,8 @@ function PhoneStep({
     pending.current = true;
     setBusy(true);
     setError(null);
-    const failure = await requestPhoneCode(normalized);
+    const failure = await requestPhoneCode(normalized, isMounted);
+    if (!isMounted()) return;
     pending.current = false;
     setBusy(false);
     if (failure) {
@@ -133,6 +139,7 @@ function PhoneStep({
     setBusy(true);
     setError(null);
     const result = await verifyPhoneCode(phone, code);
+    if (!isMounted()) return;
     pending.current = false;
     setBusy(false);
     if (result.kind === "second-factor") onTwoFactor();
@@ -152,6 +159,9 @@ function PhoneStep({
         void (sent ? verify() : send());
       }}
     >
+      {canSend === false ? (
+        <p role="status">SMS sign-in is unavailable. Try again later.</p>
+      ) : null}
       <div className="flex flex-col gap-2">
         <Label htmlFor="admin-phone">Mobile number</Label>
         <Input
@@ -189,7 +199,9 @@ function PhoneStep({
       <Button
         type="submit"
         size="lg"
-        disabled={busy || (sent && code.length !== CODE_LENGTH)}
+        disabled={
+          busy || (!sent && !canSend) || (sent && code.length !== CODE_LENGTH)
+        }
       >
         {busy ? "Checking…" : null}
         {!busy && sent ? "Verify phone" : null}
@@ -199,7 +211,7 @@ function PhoneStep({
         <Button
           type="button"
           variant="ghost"
-          disabled={busy || now < retryAt}
+          disabled={!canSend || busy || now < retryAt}
           onClick={() => {
             void send();
           }}
@@ -226,6 +238,7 @@ function CodeStep({
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const isMounted = useMounted();
   const checking = useRef(false);
 
   async function check(value: string) {
@@ -238,6 +251,7 @@ function CodeStep({
         mode === "totp"
           ? await authClient.twoFactor.verifyTotp({ code: value })
           : await authClient.twoFactor.verifyBackupCode({ code: value });
+      if (!isMounted()) return;
       if (!authError) {
         onDone();
         return;
@@ -250,11 +264,12 @@ function CodeStep({
       setCode("");
       setError(message);
     } catch {
+      if (!isMounted()) return;
       setCode("");
       setError(codeErrorMessage({}).message);
     } finally {
       checking.current = false;
-      setBusy(false);
+      if (isMounted()) setBusy(false);
     }
   }
 

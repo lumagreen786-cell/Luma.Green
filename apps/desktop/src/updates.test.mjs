@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { setupUpdates } from "./updates.mjs";
+import { canRestartDocument, setupUpdates } from "./updates.mjs";
 function mockUpdater() {
   /** @type {Map<string, (...args: unknown[]) => void>} */
   const handlers = new Map();
@@ -134,4 +134,23 @@ test("manual update reports a late download failure once", async () => {
   rejectDownload(new Error("download offline"));
   await pending;
   assert.deepEqual(notifications, ["failed"]);
+});
+
+test("restart rechecks document windows after the asynchronous proof", async () => {
+  const proof = Promise.withResolvers();
+  const state = {
+    contents: { executeJavaScript: async () => proof.promise },
+    url: "https://luma.green/",
+    token: "document",
+    isHome: true,
+    isLoading: false,
+    activeDownloads: 0,
+    windowCount: 1,
+  };
+  const pending = canRestartDocument(() => state);
+  state.windowCount = 2;
+  proof.resolve(Date.now() + 1000);
+  assert.equal(await pending, false);
+  state.windowCount = 1;
+  assert.equal(await canRestartDocument(() => state), true);
 });

@@ -37,6 +37,7 @@ import {
 import { isLocale, localeDirection } from "@/i18n/locales";
 import { useRouter } from "@/i18n/navigation";
 import { prepareUpload } from "@/lib/upload-image";
+import { assertMounted, useMounted } from "@/lib/use-mounted";
 
 import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
@@ -113,6 +114,7 @@ function RecyclingFlow({
   const common = useTranslations("common");
   const locale = useLocale();
   const router = useRouter();
+  const isMounted = useMounted();
   const now = useNow();
   const today = indiaToday(now);
   const location = useLocation();
@@ -187,11 +189,14 @@ function RecyclingFlow({
     setError(null);
     try {
       await waitForAuth();
+      assertMounted(isMounted);
       await ensureProfile({ locale });
+      assertMounted(isMounted);
       let request = retryRequest;
       if (!request) {
         if (!selectedShop || !slotWindow) throw new Error("INVALID_REQUEST");
         const photoIds = await uploadPhotos(files);
+        assertMounted(isMounted);
         const values = form.getValues();
         request = {
           orgId: selectedShop.id,
@@ -206,10 +211,12 @@ function RecyclingFlow({
         setRetryRequest(request);
       }
       const token = await book(request);
+      assertMounted(isMounted);
       setStatus("booked");
       clearSellDraft();
       router.push(`/t/${token}`);
     } catch (error_) {
+      if (!isMounted()) return;
       if (error_ instanceof ConvexError) {
         setRetryRequest(null);
         if (error_.data === "PHOTO_NOT_AVAILABLE") clearUploads();
@@ -457,21 +464,24 @@ function BookingReview({
 }
 
 function usePhotoUploads() {
+  const isMounted = useMounted();
   const uploaded = useRef(new Map<File, Id<"householdPhotos">>());
   const upload = useAction(api.householdPhotos.upload);
   async function uploadPhotos(files: File[]) {
     const photoIds: Id<"householdPhotos">[] = [];
     for (const file of files) {
+      assertMounted(isMounted);
       let photoId = uploaded.current.get(file);
       if (!photoId) {
         try {
           const prepared = await prepareUpload(file, "machine_media");
+          assertMounted(isMounted);
           if (prepared.size > 2 * 1024 * 1024)
             throw new Error("PHOTO_UPLOAD_FAILED");
-          photoId = await upload({
-            name: prepared.name,
-            bytes: await prepared.arrayBuffer(),
-          });
+          const bytes = await prepared.arrayBuffer();
+          assertMounted(isMounted);
+          photoId = await upload({ name: prepared.name, bytes });
+          assertMounted(isMounted);
         } catch {
           throw new Error("PHOTO_UPLOAD_FAILED");
         }

@@ -3831,7 +3831,7 @@
   },
   "accountPhone": {
     "title": "Mobilnummer bestätigen",
-    "description": "Füge deine eigene Nummer für Abholungen und Zahlungen hinzu. Dein E-Mail-Konto bleibt bestehen; kein anderes Konto wird verbunden. Melde dich weiter per E-Mail an.",
+    "description": "Füge deine eigene Nummer für Abholungen und Zahlungen hinzu. Dein Konto bleibt bestehen; kein anderes Konto wird verbunden.",
     "verified": "Mobilnummer bestätigt",
     "unavailable": "Die Bestätigung ist erst verfügbar, wenn der SMS-Versand eingerichtet ist.",
     "inUse": "Diese Nummer kann nicht hinzugefügt werden. Verwende eine Nummer ohne anderes Konto.",
@@ -4461,7 +4461,9 @@
     "amount": "Betrag",
     "reference": "Referenz",
     "more": "Weitere",
-    "capacity": "Der Belegspeicher ist voll. Nutzen Sie manuelle Aufzeichnungen oder kontaktieren Sie den Arbeitsbereichsinhaber."
+    "capacity": "Der Belegspeicher ist voll. Nutzen Sie manuelle Aufzeichnungen oder kontaktieren Sie den Arbeitsbereichsinhaber.",
+    "changed": "Dieses Dokument wurde geändert. Kopiere deine Änderungen, bevor du die gespeicherte Version öffnest.",
+    "loadSaved": "Gespeicherte Version öffnen"
   },
   "businessSubscriptions": {
     "title": "Standorttarif",

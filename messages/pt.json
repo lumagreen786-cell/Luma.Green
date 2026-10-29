@@ -3831,7 +3831,7 @@
   },
   "accountPhone": {
     "title": "Verifique seu número de celular",
-    "description": "Adicione um número seu para coletas e pagamentos. Sua conta de email permanece e não é unida a outra. Continue entrando com seu email.",
+    "description": "Adicione um número seu para coletas e pagamentos. Sua conta permanece e não é unida a outra.",
     "verified": "Número de celular verificado",
     "unavailable": "A verificação não está disponível até configurar o envio de SMS.",
     "inUse": "Não é possível adicionar este número. Use um que não esteja associado a outra conta.",
@@ -4461,7 +4461,9 @@
     "amount": "Valor",
     "reference": "Referência",
     "more": "Mais",
-    "capacity": "O armazenamento de documentos está cheio. Use registos manuais ou contacte o proprietário do espaço."
+    "capacity": "O armazenamento de documentos está cheio. Use registos manuais ou contacte o proprietário do espaço.",
+    "changed": "Este documento mudou. Copie as suas alterações antes de abrir a versão guardada.",
+    "loadSaved": "Abrir versão guardada"
   },
   "businessSubscriptions": {
     "title": "Plano da unidade",

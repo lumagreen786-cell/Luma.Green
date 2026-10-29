@@ -4,6 +4,7 @@ import { afterEach, expect, it, vi } from "vitest";
 
 import { components } from "./_generated/api";
 import { convexModules, registerAuth, signIn } from "./lib/auth.testing";
+import { phoneEmail } from "./lib/phone";
 import schema from "./schema";
 
 const modules = convexModules(import.meta.glob("./**/*.*s"));
@@ -89,22 +90,20 @@ it.each(["msg91", "osdigital"])(
   },
 );
 
-it.each([
-  { email: "admin@luma.test", status: 200 },
-  { email: "member@luma.test", status: 200 },
-])(
-  "phone-code sign-in enforces the configured factor for $email",
-  async ({ email, status }) => {
+it.each([true, false])(
+  "phone-code sign-in enforces the configured factor (admin=%s)",
+  async (isAdmin) => {
+    const email = phoneEmail("+919876543210");
     vi.stubEnv("SITE_URL", "https://luma.test");
     vi.stubEnv("CONVEX_SITE_URL", "https://test.convex.site");
     vi.stubEnv("BETTER_AUTH_SECRET", "0123456789abcdef0123456789abcdef");
-    vi.stubEnv("ADMIN_EMAIL", "admin@luma.test");
+    vi.stubEnv("ADMIN_EMAIL", isAdmin ? email : phoneEmail("+919876543211"));
     const t = convexTest(schema, modules);
     registerAuth(t);
     await signIn(t, {
       email,
       phoneNumber: "+919876543210",
-      twoFactorEnabled: email === "admin@luma.test",
+      twoFactorEnabled: isAdmin,
     });
     const sessions = () =>
       t.run((ctx) =>
@@ -137,9 +136,9 @@ it.each([
       },
       body: JSON.stringify({ phoneNumber: "+919876543210", code: "345678" }),
     });
-    expect(result.status).toBe(status);
+    expect(result.status).toBe(200);
     const after = await sessions();
-    if (email === "admin@luma.test") {
+    if (isAdmin) {
       expect(await result.json()).toMatchObject({ twoFactorRedirect: true });
       expect(after.page).toEqual(before.page);
     } else {

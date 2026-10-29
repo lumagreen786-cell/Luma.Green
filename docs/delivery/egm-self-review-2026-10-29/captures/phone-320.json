@@ -1,0 +1,167 @@
+[
+  {
+    "locale": "ar",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "as",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "bn",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "de",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "en",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "es",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "fr",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "gu",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "hi",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "id",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "it",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "ja",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "kn",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "ko",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "ml",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "mr",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "ms",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "ne",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "nl",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "or",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "pa",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "pl",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "pt",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "ru",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "si",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "ta",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "te",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "th",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "tr",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "uk",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "ur",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "vi",
+    "width": 320,
+    "clipped": []
+  },
+  {
+    "locale": "zh",
+    "width": 320,
+    "clipped": []
+  }
+]

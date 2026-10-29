@@ -3831,7 +3831,7 @@
   },
   "accountPhone": {
     "title": "Verifica il tuo numero di cellulare",
-    "description": "Aggiungi un numero tuo per ritiri e pagamenti. Il tuo account email rimane separato dagli altri. Continua ad accedere con l’email.",
+    "description": "Aggiungi un numero tuo per ritiri e pagamenti. Il tuo account rimane separato dagli altri.",
     "verified": "Numero di cellulare verificato",
     "unavailable": "La verifica non è disponibile finché non viene configurato l’invio degli SMS.",
     "inUse": "Questo numero non può essere aggiunto. Usane uno non associato a un altro account.",
@@ -4461,7 +4461,9 @@
     "amount": "Importo",
     "reference": "Riferimento",
     "more": "Altro",
-    "capacity": "Lo spazio per i documenti è pieno. Usa i registri manuali o contatta il proprietario dello spazio di lavoro."
+    "capacity": "Lo spazio per i documenti è pieno. Usa i registri manuali o contatta il proprietario dello spazio di lavoro.",
+    "changed": "Questo documento è cambiato. Copia le modifiche prima di aprire la versione salvata.",
+    "loadSaved": "Apri versione salvata"
   },
   "businessSubscriptions": {
     "title": "Piano della sede",

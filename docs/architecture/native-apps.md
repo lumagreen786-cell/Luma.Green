@@ -54,6 +54,9 @@ package gets a backend admin key or copies a login token to the browser.
 
 ## Update behavior
 
+The [bounded update protocol](native-update-protocol.md) defines exact messages,
+limits, proof expiry, live safety checks and failure recovery.
+
 | Change                                    | Delivery                                                                  | When it applies                                                           |
 | ----------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
 | Hosted operational UI                     | Deploy the trusted app origin                                             | Normal page navigation or reload; active forms are not forcibly refreshed |

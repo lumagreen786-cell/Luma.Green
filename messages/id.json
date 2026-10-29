@@ -3831,7 +3831,7 @@
   },
   "accountPhone": {
     "title": "Verifikasi nomor ponsel Anda",
-    "description": "Tambahkan nomor milik Anda untuk pengumpulan dan pembayaran. Akun email tetap terpisah dari akun lain. Tetap masuk dengan email.",
+    "description": "Tambahkan nomor milik Anda untuk pengumpulan dan pembayaran. Akun Anda tetap terpisah dari akun lain.",
     "verified": "Nomor ponsel terverifikasi",
     "unavailable": "Verifikasi belum tersedia sampai pengiriman SMS dikonfigurasi.",
     "inUse": "Nomor ini tidak dapat ditambahkan. Gunakan nomor yang tidak terkait akun lain.",
@@ -4461,7 +4461,9 @@
     "amount": "Jumlah",
     "reference": "Referensi",
     "more": "Lainnya",
-    "capacity": "Penyimpanan dokumen penuh. Gunakan catatan manual atau hubungi pemilik ruang kerja."
+    "capacity": "Penyimpanan dokumen penuh. Gunakan catatan manual atau hubungi pemilik ruang kerja.",
+    "changed": "Dokumen ini berubah. Salin suntingan Anda sebelum membuka versi tersimpan.",
+    "loadSaved": "Buka versi tersimpan"
   },
   "businessSubscriptions": {
     "title": "Paket lokasi",

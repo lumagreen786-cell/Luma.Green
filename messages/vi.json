@@ -3831,7 +3831,7 @@
   },
   "accountPhone": {
     "title": "Xác minh số điện thoại của bạn",
-    "description": "Thêm số của bạn để thu gom và thanh toán. Tài khoản email được giữ riêng, không hợp nhất tài khoản khác. Tiếp tục đăng nhập bằng email.",
+    "description": "Thêm số của bạn để thu gom và thanh toán. Tài khoản của bạn được giữ riêng, không hợp nhất tài khoản khác.",
     "verified": "Đã xác minh số điện thoại",
     "unavailable": "Chưa thể xác minh điện thoại cho đến khi thiết lập gửi SMS.",
     "inUse": "Không thể thêm số này. Hãy dùng số chưa liên kết với tài khoản khác.",
@@ -4461,7 +4461,9 @@
     "amount": "Số tiền",
     "reference": "Tham chiếu",
     "more": "Thêm mục",
-    "capacity": "Bộ nhớ hồ sơ đã đầy. Hãy dùng hồ sơ thủ công hoặc liên hệ chủ không gian làm việc."
+    "capacity": "Bộ nhớ hồ sơ đã đầy. Hãy dùng hồ sơ thủ công hoặc liên hệ chủ không gian làm việc.",
+    "changed": "Tài liệu này đã thay đổi. Sao chép các chỉnh sửa trước khi mở bản đã lưu.",
+    "loadSaved": "Mở bản đã lưu"
   },
   "businessSubscriptions": {
     "title": "Gói cơ sở",

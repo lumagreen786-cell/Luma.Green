@@ -127,6 +127,12 @@ Revocation is effective on the next read; already downloaded bytes cannot be
 recalled. Blob previews stay in memory and object URLs are revoked on change,
 workspace switch and unmount. No localStorage, IndexedDB or service-worker cache.
 
+Dirty local editor content retains its original expected revision when another
+session saves. It is not replaced by the subscription. Save, confirmation,
+extraction and discard are blocked until explicit conflict recovery. The user
+can copy local edits before choosing Load saved version. Clean editors follow
+remote changes, and a changed revision clears the prior confirmation choice.
+
 Errors use existing auth/workspace errors plus `PAPER_NOT_FOUND` (also cross-org
 or expired record), `PAPER_INVALID_FILE`, `PAPER_INVALID_CONTENT`,
 `PAPER_REVISION_CONFLICT`, `PAPER_CONFIRMED`, `PAPER_UPLOAD_LIMIT` and
@@ -135,6 +141,11 @@ keys or extracted text in error messages. Authentication and permission failures
 must not be hidden as provider failures. HTTP returns 401 for no usable session,
 404 for inaccessible source, 503 for storage failure; OPTIONS rejects untrusted
 origins. No raw provider response is a public error.
+
+The HTTP handler identifies storage failure through the typed
+`PAPER_SOURCE_INTEGRITY` error from the private chunk owner. Other opaque lookup
+failures, including malformed IDs, stay concealed as 404. This does not promise
+classification of every unknown backend exception.
 
 ## File safety and preservation
 

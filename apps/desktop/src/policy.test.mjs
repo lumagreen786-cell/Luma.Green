@@ -102,9 +102,16 @@ test("OS navigation rejects executable and custom schemes, credentials and contr
   ])
     assert.equal(isExternalUrl(url), false, url);
 });
-test("location requires trusted requesting frame and trusted top-level page", () => {
+test("location requires a trusted main frame in the main app window", () => {
   assert.equal(
-    mayRequestLocation("geolocation", `${origin}/join`, origin, origin),
+    mayRequestLocation(
+      "geolocation",
+      `${origin}/join`,
+      origin,
+      origin,
+      true,
+      true,
+    ),
     true,
   );
   for (const permission of [
@@ -114,17 +121,62 @@ test("location requires trusted requesting frame and trusted top-level page", ()
     "display-capture",
     "unknown",
   ])
-    assert.equal(mayRequestLocation(permission, origin, origin, origin), false);
+    assert.equal(
+      mayRequestLocation(permission, origin, origin, origin, true, true),
+      false,
+    );
   assert.equal(
-    mayRequestLocation("geolocation", "https://evil.test", origin, origin),
+    mayRequestLocation(
+      "geolocation",
+      "https://evil.test",
+      origin,
+      origin,
+      true,
+      true,
+    ),
     false,
   );
   assert.equal(
-    mayRequestLocation("geolocation", origin, "https://evil.test", origin),
+    mayRequestLocation(
+      "geolocation",
+      origin,
+      "https://evil.test",
+      origin,
+      true,
+      true,
+    ),
     false,
   );
   assert.equal(
-    mayRequestLocation("geolocation", `blob:${origin}/id`, origin, origin),
+    mayRequestLocation(
+      "geolocation",
+      `blob:${origin}/id`,
+      origin,
+      origin,
+      true,
+      true,
+    ),
+    false,
+  );
+  for (const [isMainFrame, isMainWindow] of [
+    [false, true],
+    [true, false],
+    [false, false],
+  ]) {
+    assert.equal(
+      mayRequestLocation(
+        "geolocation",
+        origin,
+        origin,
+        origin,
+        isMainFrame,
+        isMainWindow,
+      ),
+      false,
+    );
+  }
+  assert.equal(
+    mayRequestLocation("geolocation", origin, origin, origin),
     false,
   );
 });

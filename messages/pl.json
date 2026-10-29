@@ -3831,7 +3831,7 @@
   },
   "accountPhone": {
     "title": "Potwierdź numer telefonu",
-    "description": "Dodaj własny numer do odbiorów i płatności. Konto e-mail pozostaje oddzielne od innych kont. Nadal loguj się przez e-mail.",
+    "description": "Dodaj własny numer do odbiorów i płatności. Twoje konto pozostaje oddzielne od innych kont.",
     "verified": "Numer telefonu potwierdzony",
     "unavailable": "Weryfikacja będzie dostępna po skonfigurowaniu wysyłania SMS-ów.",
     "inUse": "Nie można dodać tego numeru. Użyj numeru niepowiązanego z innym kontem.",
@@ -4461,7 +4461,9 @@
     "amount": "Kwota",
     "reference": "Odnośnik",
     "more": "Więcej",
-    "capacity": "Brak miejsca na dokumenty. Użyj ręcznych rejestrów lub skontaktuj się z właścicielem obszaru roboczego."
+    "capacity": "Brak miejsca na dokumenty. Użyj ręcznych rejestrów lub skontaktuj się z właścicielem obszaru roboczego.",
+    "changed": "Ten dokument się zmienił. Skopiuj swoje zmiany przed otwarciem zapisanej wersji.",
+    "loadSaved": "Otwórz zapisaną wersję"
   },
   "businessSubscriptions": {
     "title": "Plan placówki",

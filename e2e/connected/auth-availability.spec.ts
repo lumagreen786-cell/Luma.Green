@@ -1,33 +1,131 @@
 import { readFileSync } from "node:fs";
 import { setTimeout as delay } from "node:timers/promises";
+import { parseEnv } from "node:util";
 
 import { expect, type Page, test } from "@playwright/test";
 import { z } from "zod";
 
-import en from "../../messages/en.json";
+import {
+  isLoopbackHttpOrigin,
+  LOCAL_ACCEPTANCE_PHONE_NUMBERS,
+} from "../../convex/lib/localAcceptance";
+import { phoneEmail } from "../../convex/lib/phone";
+import en from "../../messages/en.json" with { type: "json" };
+import { readPrivateAcceptanceFile as readPrivateFile } from "../../scripts/local-acceptance/private-file";
 
-const raw: unknown = JSON.parse(
-  readFileSync(".convex/local-acceptance/credentials.json", "utf8"),
-);
-const accountSchema = z.object({
-  key: z.string(),
-  email: z.email(),
-  password: z.string(),
-});
+// Match the current phone runner: local private configuration and actual OTP
+// delivery only. No session artifact is signed out or rewritten by these cases.
+
+const accountSchema = z.object({ key: z.string(), phone: z.string() });
 const roster = z
-  .object({ site: z.url(), accounts: z.array(accountSchema) })
-  .parse(raw);
-// Workspace membership tests deliberately remove team-role access. Keep this
-// transport regression on an identity whose workspace remains stable.
-const account = accountSchema.parse(
-  roster.accounts.find(({ key }) => key === "preprocessor"),
-);
+  .object({
+    site: z.string().refine(isLoopbackHttpOrigin),
+    accounts: z.array(accountSchema),
+  })
+  .parse(
+    JSON.parse(readPrivateFile(".convex/local-acceptance/phone-sessions.json")),
+  );
 const site = new URL(roster.site);
+z.object({
+  NEXT_PUBLIC_CONVEX_URL: z.string().refine(isLoopbackHttpOrigin),
+  NEXT_PUBLIC_CONVEX_SITE_URL: z.string().refine(isLoopbackHttpOrigin),
+}).parse(parseEnv(readFileSync(".env.local", "utf8")));
+const localBackend = z
+  .object({
+    SITE_URL: z.string().refine(isLoopbackHttpOrigin),
+    AUTH_LOCAL_TEST_MODE: z.literal("true"),
+    AUTH_LOCAL_EMAIL_INBOX_URL: z.url(),
+    AUTH_LOCAL_EMAIL_INBOX_TOKEN: z.string().min(32),
+  })
+  .parse(parseEnv(readPrivateFile(".convex/local-acceptance/backend.env")));
+const inbox = new URL(localBackend.AUTH_LOCAL_EMAIL_INBOX_URL);
 if (
-  site.protocol !== "http:" ||
-  !["localhost", "127.0.0.1", "[::1]"].includes(site.hostname)
+  new URL(localBackend.SITE_URL).origin !== site.origin ||
+  !isLoopbackHttpOrigin(inbox.origin) ||
+  inbox.pathname !== "/deliver"
 )
-  throw new Error("Auth availability acceptance requires the local site.");
+  throw new Error(
+    "Auth availability requires the current loopback phone runtime and private inbox.",
+  );
+
+const messageSchema = z.object({
+  id: z.string(),
+  kind: z.string(),
+  text: z.string(),
+});
+const messagesSchema = z.object({ messages: z.array(messageSchema) });
+
+async function inboxMessages(phone: string) {
+  const url = new URL("/messages", inbox);
+  url.searchParams.set("to", phone);
+  // Only the Node runner sends this bearer token; never pass it to a browser.
+  const response = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${localBackend.AUTH_LOCAL_EMAIL_INBOX_TOKEN}`,
+    },
+    redirect: "error",
+    signal: AbortSignal.timeout(2000),
+  });
+  if (!response.ok)
+    throw new Error("The private local inbox refused the runner.");
+  return messagesSchema.parse(await response.json()).messages;
+}
+async function waitForPhoneCode(phone: string, previous: Set<string>) {
+  // Delivery is scheduled after the send response. Only private inbox reads
+  // repeat: at most 20 bounded reads, with no resend or provider retry.
+  for (let attempt = 0; attempt < 20; attempt++) {
+    const messages = await inboxMessages(phone);
+    const delivered = messages.findLast(
+      ({ id, kind }) => !previous.has(id) && kind === "phone-code",
+    );
+    if (delivered && /^\d{6}$/.test(delivered.text)) return delivered.text;
+    if (attempt < 19) await delay(250);
+  }
+  throw new Error(
+    "A fresh library-generated phone code was not delivered in time.",
+  );
+}
+async function signInPhone(
+  page: Page,
+  key: keyof typeof LOCAL_ACCEPTANCE_PHONE_NUMBERS,
+) {
+  const account = roster.accounts.find((entry) => entry.key === key);
+  if (account?.phone !== LOCAL_ACCEPTANCE_PHONE_NUMBERS[key])
+    throw new Error("The fixed provisioned local phone persona is required.");
+  const phone = account.phone;
+  const oldMessages = await inboxMessages(phone);
+  const previous = new Set(oldMessages.map(({ id }) => id));
+  const send = await page.request.post("/api/auth/phone-number/send-otp", {
+    headers: { Origin: site.origin },
+    data: { phoneNumber: phone },
+  });
+  if (!send.ok())
+    throw new Error(
+      "Local phone send failed; no automatic resend is attempted.",
+    );
+  const code = await waitForPhoneCode(phone, previous);
+  const verify = await page.request.post("/api/auth/phone-number/verify", {
+    headers: { Origin: site.origin },
+    data: { phoneNumber: phone, code },
+  });
+  if (!verify.ok())
+    throw new Error("The real local phone verification failed.");
+  const userSchema = z.object({
+    phoneNumber: z.literal(phone),
+    phoneNumberVerified: z.literal(true),
+    email: z.literal(phoneEmail(phone)),
+  });
+  const identity = z
+    .object({ user: userSchema })
+    .safeParse(await verify.json());
+  if (!identity.success)
+    throw new Error("The local phone identity needs further authentication.");
+}
+// Four cases each use a different fixed phone persona and one actual code.
+// Existing resend spacing and the five-send/24-hour phone lock remain active.
+// Provisioning and reruns require a provisioned local
+// runtime whose normal quota permits them; this suite never resets that quota.
+process.env.PLAYWRIGHT_NO_COPY_PROMPT = "1";
 
 async function exhaustTokenQuota(page: Page) {
   for (let index = 0; index < 105; index++) {
@@ -47,7 +145,12 @@ async function exhaustTokenQuota(page: Page) {
   throw new Error("The existing token quota did not reject the bounded probe.");
 }
 
-test.use({ trace: "off", screenshot: "off", video: "off" });
+test.use({
+  baseURL: site.origin,
+  trace: "off",
+  screenshot: "off",
+  video: "off",
+});
 
 test("a rate-limited token check preserves the session and offers explicit recovery", async ({
   page,
@@ -60,11 +163,7 @@ test("a rate-limited token check preserves the session and offers explicit recov
       responses.push({ path, status: response.status() });
   });
   await context.setExtraHTTPHeaders({ "X-Forwarded-For": "192.0.2.242" });
-  const login = await page.request.post("/api/auth/sign-in/email", {
-    headers: { Origin: site.origin },
-    data: { email: account.email, password: account.password },
-  });
-  expect(login.status()).toBe(200);
+  await signInPhone(page, "preprocessor");
   await page.goto("/en/account/security");
   await expect(
     page.getByRole("heading", { name: en.accountSecurity.title, exact: true }),
@@ -86,7 +185,7 @@ test("a rate-limited token check preserves the session and offers explicit recov
     page.getByRole("heading", { name: en.accountSecurity.title, exact: true }),
   ).toHaveCount(0);
   await expect(
-    page.getByLabel(en.emailAuth.password, { exact: true }),
+    page.getByText(en.accountSecurity.description, { exact: true }),
   ).toHaveCount(0);
   // Honour the real server's quiet window. No quota reset, relogin or blind retry.
   await delay((retryAfter + 1) * 1000);
@@ -123,7 +222,7 @@ test("a rate-limited token check preserves the session and offers explicit recov
     throw new Error(`Recovery failed: ${JSON.stringify(diagnostic)}`);
   }
   await expect(
-    page.getByLabel(en.emailAuth.password, { exact: true }),
+    page.getByText(en.accountSecurity.description, { exact: true }),
   ).toBeVisible();
   await page.getByRole("button", { name: en.nav.openMenu }).click();
   await page
@@ -143,11 +242,7 @@ test("a client token transport failure preserves the signed-in route until manua
 }) => {
   await page.setViewportSize({ width: 1024, height: 800 });
   await context.setExtraHTTPHeaders({ "X-Forwarded-For": "192.0.2.245" });
-  const login = await page.request.post("/api/auth/sign-in/email", {
-    headers: { Origin: site.origin },
-    data: { email: account.email, password: account.password },
-  });
-  expect(login.status()).toBe(200);
+  await signInPhone(page, "kabadiwala");
   let faults = 0;
   await page.route("**/api/auth/convex/token", async (route) => {
     faults++;
@@ -196,11 +291,15 @@ test("a client token transport failure preserves the signed-in route until manua
 });
 
 for (const [index, entry] of [
-  { path: "/account/security", heading: en.accountSecurity.title },
-  { path: "/account/notifications", heading: en.notifications.title },
   {
-    path: "/login/email/complete?next=/account/security",
+    path: "/account/security",
     heading: en.accountSecurity.title,
+    persona: "manufacturer" as const,
+  },
+  {
+    path: "/account/notifications",
+    heading: en.notifications.title,
+    persona: "household" as const,
   },
 ].entries()) {
   test(`client token failure has manual recovery at ${entry.path}`, async ({
@@ -210,11 +309,7 @@ for (const [index, entry] of [
     await context.setExtraHTTPHeaders({
       "X-Forwarded-For": `192.0.2.${String(246 + index)}`,
     });
-    const login = await page.request.post("/api/auth/sign-in/email", {
-      headers: { Origin: site.origin },
-      data: { email: account.email, password: account.password },
-    });
-    expect(login.status()).toBe(200);
+    await signInPhone(page, entry.persona);
     await page.route("**/api/auth/convex/token", async (route) => {
       await route.fulfill({
         status: 503,

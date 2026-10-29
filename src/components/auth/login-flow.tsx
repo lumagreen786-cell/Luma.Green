@@ -40,7 +40,8 @@ function LoginSteps({ canSend }: { canSend: boolean }) {
   const [lastPhone, setLastPhone] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const activePhone = useStoredValue(readActivePhone);
-  const codePhone = phone ?? (canSend && !isEditing ? activePhone : null);
+  const codePhone =
+    phone ?? (isConvexConfigured && !isEditing ? activePhone : null);
 
   if (codePhone === undefined) return <LoginSkeleton />;
 

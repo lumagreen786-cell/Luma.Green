@@ -1,5 +1,6 @@
 "use client";
 
+import { useQuery } from "convex/react";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { LockIcon } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
@@ -21,7 +22,9 @@ import {
   type SendCodeErrorKey,
   verifyPhoneCode,
 } from "@/lib/phone-auth";
+import { useMounted } from "@/lib/use-mounted";
 
+import { api } from "../../../convex/_generated/api";
 import {
   formatIndianMobile,
   normalizeIndianMobile,
@@ -49,10 +52,12 @@ export function PhoneSignIn({
   verifyLabel: string;
   onVerified: () => void;
 }) {
+  const options = useQuery(api.identity.signInOptions);
   const [phone, setPhone] = useState<string | null>(null);
   const [lastNumber, setLastNumber] = useState("");
   return phone === null ? (
     <NumberForm
+      canSend={options?.phone}
       initialNumber={lastNumber}
       onSent={(number) => {
         setLastNumber(number.startsWith("+91") ? number.slice(3) : number);
@@ -61,6 +66,7 @@ export function PhoneSignIn({
     />
   ) : (
     <CodeForm
+      canSend={options?.phone}
       phone={phone}
       verifyLabel={verifyLabel}
       onChangeNumber={() => {
@@ -72,21 +78,25 @@ export function PhoneSignIn({
 }
 
 function NumberForm({
+  canSend,
   initialNumber,
   onSent,
 }: {
+  canSend: boolean | undefined;
   initialNumber: string;
   onSent: (phone: string) => void;
 }) {
   const t = useTranslations("sell.phone");
   const auth = useTranslations("auth");
   const id = useId();
+  const isMounted = useMounted();
   const [value, setValue] = useState(initialNumber);
   const [error, setError] = useState<"invalid" | SendCodeErrorKey | null>(null);
   const [isSending, setSending] = useState(false);
 
   async function send(event: SyntheticEvent) {
     event.preventDefault();
+    if (!canSend) return;
     const phone = normalizeIndianMobile(value);
     if (!phone) {
       setError("invalid");
@@ -94,7 +104,8 @@ function NumberForm({
     }
     setError(null);
     setSending(true);
-    const failure = await requestPhoneCode(phone);
+    const failure = await requestPhoneCode(phone, isMounted);
+    if (!isMounted()) return;
     setSending(false);
     if (failure) {
       setError(failure);
@@ -111,6 +122,9 @@ function NumberForm({
       }}
       className="flex flex-col gap-3"
     >
+      {canSend === false ? (
+        <p role="status">{auth("unavailableBody")}</p>
+      ) : null}
       <Label htmlFor={id} className="text-base">
         {t("label")}
       </Label>
@@ -146,7 +160,7 @@ function NumberForm({
         type="submit"
         size="lg"
         className="h-12 text-base"
-        disabled={isSending}
+        disabled={isSending || !canSend}
       >
         {t(isSending ? "sending" : "sendCode")}
       </Button>
@@ -159,11 +173,13 @@ function NumberForm({
 }
 
 function CodeForm({
+  canSend,
   phone,
   verifyLabel,
   onChangeNumber,
   onVerified,
 }: {
+  canSend: boolean | undefined;
   phone: string;
   verifyLabel: string;
   onChangeNumber: () => void;
@@ -173,6 +189,7 @@ function CodeForm({
   const format = useFormatter();
   const auth = useTranslations("auth");
   const id = useId();
+  const isMounted = useMounted();
   const [code, setCode] = useState("");
   const [isChecking, setChecking] = useState(false);
   const [needsFactor, setNeedsFactor] = useState(false);
@@ -211,6 +228,7 @@ function CodeForm({
     setChecking(true);
     setError(null);
     const result = await verifyPhoneCode(phone, value);
+    if (!isMounted()) return;
     requestPending.current = false;
     if (result.kind === "error") {
       setChecking(false);
@@ -226,11 +244,18 @@ function CodeForm({
   }
 
   async function resend() {
-    if (isChecking || requestPending.current || Date.now() < resendAt) return;
+    if (
+      !canSend ||
+      isChecking ||
+      requestPending.current ||
+      Date.now() < resendAt
+    )
+      return;
     requestPending.current = true;
     setResending(true);
     setError(null);
-    const failure = await requestPhoneCode(phone);
+    const failure = await requestPhoneCode(phone, isMounted);
+    if (!isMounted()) return;
     requestPending.current = false;
     setResending(false);
     if (failure) {
@@ -258,6 +283,9 @@ function CodeForm({
 
   return (
     <div className="flex flex-col gap-4">
+      {canSend === false ? (
+        <p role="status">{auth("unavailableBody")}</p>
+      ) : null}
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
         <p className="text-muted-foreground">
           {t("sentTo", { phone: ltr(formatIndianMobile(phone)) })}
@@ -342,7 +370,7 @@ function CodeForm({
           <Button
             type="button"
             variant="ghost"
-            disabled={isChecking || isResending}
+            disabled={!canSend || isChecking || isResending}
             onClick={() => {
               void resend();
             }}

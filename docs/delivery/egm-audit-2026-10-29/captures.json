@@ -1,0 +1,117 @@
+{
+  "date": "2026-10-29",
+  "baseCommit": "f687bbb",
+  "evidence": "Synthetic native update-ready status on the actual disconnected local production homepage. Not signed update delivery.",
+  "locales": ["en", "ar", "ur", "kn"],
+  "widths": [390, 768, 1440],
+  "themes": ["light", "dark"],
+  "sources": {
+    "apps/shared/update-bridge.mjs": "3477026167aad5e0122ff287689f82fa532043f8488d3c4a89f1181f9155497d",
+    "src/components/app/native-update-control.tsx": "690bf0e5c87c078019baf5c9867bb64db3b423659c502dbc74fc4f2ed2661329",
+    "e2e/native-updates.spec.ts": "b745dfaf2e24934edfb29b28ce134fa518fcfdcd1028669cd6a49439e86ee31e",
+    "pnpm-lock.yaml": "5139edb6feb6706d73b34b06ebdc6669aeab0fb1527c78d31aca6b29d86a263c"
+  },
+  "captures": [
+    {
+      "file": "captures/ar-1440-dark.png",
+      "sha256": "97679fdc07b25b1313907872d7e84ec36fd16d2c2b199284286c477cfc65e161"
+    },
+    {
+      "file": "captures/ar-1440-light.png",
+      "sha256": "780c55b3393197ff588dda05e1d5accdeaaf9c32fa0a6059d34effb4a5681697"
+    },
+    {
+      "file": "captures/ar-390-dark.png",
+      "sha256": "f4a5d363246317d3bddfbdbdf545c2da38053d386a202f0d3c171664a03f3d4e"
+    },
+    {
+      "file": "captures/ar-390-light.png",
+      "sha256": "90a2e7c0929aa0b5d352cd0d9c76eb87b3519bcb9036919db0354b9db1dba872"
+    },
+    {
+      "file": "captures/ar-768-dark.png",
+      "sha256": "4bb965e8bd67a17e527524236d330017dc399d4af3a41027d06bcd9f29fa5747"
+    },
+    {
+      "file": "captures/ar-768-light.png",
+      "sha256": "9155ac49e6896ae32298f1c732a7c255381d00a3d1e1213d0a181793fd548bff"
+    },
+    {
+      "file": "captures/en-1440-dark.png",
+      "sha256": "b23b7e192c053380aa21c9f739cc28e781a9852c8434e3f5c1bd164abdc9d444"
+    },
+    {
+      "file": "captures/en-1440-light.png",
+      "sha256": "5420f3315ce7e851378809b83ae8784d39f70a049eb5c7999dd4a30bc54654b2"
+    },
+    {
+      "file": "captures/en-390-dark.png",
+      "sha256": "b7585cc4f00c768b6b4a1c424ff8c8f10d8944acd85a0e91a4cd914f06008012"
+    },
+    {
+      "file": "captures/en-390-light.png",
+      "sha256": "53c7dcee79969b47d5db6e51b2245b5c217478dbec03dfeaf658ad03bf27f0ab"
+    },
+    {
+      "file": "captures/en-768-dark.png",
+      "sha256": "6920a9769649b1f10259db1dec6bb9adaf04e65b75d1e6786f6959dbe4c27cb2"
+    },
+    {
+      "file": "captures/en-768-light.png",
+      "sha256": "6df3f139e7218d84d408752601fc545dea840711614f8c0aa2003317b0daf03a"
+    },
+    {
+      "file": "captures/kn-1440-dark.png",
+      "sha256": "3b4be7baba916f25f79070d78bfbf8cffaa4d153d7f877542dfcd892cf912c5e"
+    },
+    {
+      "file": "captures/kn-1440-light.png",
+      "sha256": "524945428278500c977a21257e6723f3f10bf6fb53686f4418447eedbb060840"
+    },
+    {
+      "file": "captures/kn-390-dark.png",
+      "sha256": "ebf94c3fe0809c0b82abc9eb2286ce95319f2dd5c8f7c31a05c27d823d549285"
+    },
+    {
+      "file": "captures/kn-390-light.png",
+      "sha256": "b251c9f2c188faaf04c7c5942be4ecf4925f01e04f3ce02d0ae144cddd6457fd"
+    },
+    {
+      "file": "captures/kn-768-dark.png",
+      "sha256": "ae14b9d5ef95a74990a9c004ddf864e28d748db176ba19a9e6050f3564d5fd81"
+    },
+    {
+      "file": "captures/kn-768-light.png",
+      "sha256": "d103f94e7ff15ecae2d7b990cab75f425654070046a42944884a486f247d5f78"
+    },
+    {
+      "file": "captures/ur-1440-dark.png",
+      "sha256": "0460f8b96ac0a2b4b42b0472a240b34677bb13af3d0515fb73f70f810069f411"
+    },
+    {
+      "file": "captures/ur-1440-light.png",
+      "sha256": "8d1cdd4969f1845d9d6a200753952b715ee0b10b5fae163eee89d8281b3a033b"
+    },
+    {
+      "file": "captures/ur-390-dark.png",
+      "sha256": "f3518ffe847f88e5053fdd0eba6ed2d1461147bffb582673631ffa10f8e1419a"
+    },
+    {
+      "file": "captures/ur-390-light.png",
+      "sha256": "9f3084df26f652efe5d48d385731c6158a474775ea8a4f0bed2b11f37680526a"
+    },
+    {
+      "file": "captures/ur-768-dark.png",
+      "sha256": "9c3c807c2ee130e49b179296e55817c9231493170a83be41fba7950493160e0f"
+    },
+    {
+      "file": "captures/ur-768-light.png",
+      "sha256": "575967be46bded29316b4d7c1e719cb11f355716e14a9c4a9a77235f33984bf8"
+    }
+  ],
+  "visualReview": {
+    "status": "reviewed",
+    "method": "All 24 captures inspected in four locale contact sheets. Dialogs, labels, close actions and Restart controls fit in both themes at all three widths.",
+    "limits": "Synthetic update state; no native-speaker translation acceptance or signed native update delivery."
+  }
+}

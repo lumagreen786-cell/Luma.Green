@@ -3831,7 +3831,7 @@
   },
   "accountPhone": {
     "title": "Sahkan nombor telefon anda",
-    "description": "Tambah nombor sendiri untuk kutipan dan pembayaran. Akaun e-mel dikekalkan tanpa digabungkan dengan akaun lain. Terus log masuk dengan e-mel.",
+    "description": "Tambah nombor sendiri untuk kutipan dan pembayaran. Akaun anda dikekalkan tanpa digabungkan dengan akaun lain.",
     "verified": "Nombor telefon disahkan",
     "unavailable": "Pengesahan tidak tersedia sehingga penghantaran SMS dikonfigurasi.",
     "inUse": "Nombor ini tidak boleh ditambah. Gunakan nombor yang tidak terikat pada akaun lain.",
@@ -4461,7 +4461,9 @@
     "amount": "Amaun",
     "reference": "Rujukan",
     "more": "Lagi",
-    "capacity": "Storan dokumen penuh. Gunakan rekod manual atau hubungi pemilik ruang kerja."
+    "capacity": "Storan dokumen penuh. Gunakan rekod manual atau hubungi pemilik ruang kerja.",
+    "changed": "Dokumen ini telah berubah. Salin suntingan anda sebelum membuka versi yang disimpan.",
+    "loadSaved": "Buka versi disimpan"
   },
   "businessSubscriptions": {
     "title": "Pelan tapak",

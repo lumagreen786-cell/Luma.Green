@@ -210,6 +210,26 @@ it("protects raw source bytes at HTTP/session seam and revokes subsequent reads"
     404,
   );
 });
+it("reports unavailable source chunks without revealing inaccessible papers", async () => {
+  const { t, shop, other } = await world();
+  const draft = await shop.action(api.paperDrafts.upload, {
+    expectedOrgId: await selectedOrg(shop),
+    name: "broken.png",
+    contentType: "image/png",
+    bytes: image,
+  });
+  const row = await t.run((ctx) => ctx.db.get("paperDrafts", draft.draftId));
+  if (!row) throw new Error("fixture");
+  await t.run((ctx) => ctx.db.delete(row.chunkIds[0]));
+  const response = await shop.fetch(`/paper-files/${draft.draftId}`);
+  expect(response.status).toBe(503);
+  expect(await response.text()).toBe("UNAVAILABLE");
+  expect(response.headers.get("Cache-Control")).toBe("private, no-store");
+  const concealed = await other.fetch(`/paper-files/${draft.draftId}`);
+  const unsigned = await t.fetch(`/paper-files/${draft.draftId}`);
+  expect(concealed.status).toBe(404);
+  expect(unsigned.status).toBe(401);
+});
 it("reserves concurrency once and blocks stale results without overwriting manual evidence", async () => {
   const { t, shop } = await world();
   vi.stubEnv("PAPER_TRANSCRIPTION_ENABLED", "true");

@@ -3831,7 +3831,7 @@
   },
   "accountPhone": {
     "title": "Verify your mobile number",
-    "description": "Add a number you own for collections and payments. This keeps your email account and does not merge another account. Continue to sign in with email.",
+    "description": "Add a number you own for collections and payments. This keeps your account and does not merge another account.",
     "verified": "Mobile number verified",
     "unavailable": "Phone verification is unavailable until SMS delivery is configured.",
     "inUse": "This number cannot be added. Use a number that is not attached to another account.",
@@ -4461,7 +4461,9 @@
     "amount": "Amount",
     "reference": "Reference",
     "more": "More",
-    "capacity": "Paper storage is full. Use manual records or contact the workspace owner."
+    "capacity": "Paper storage is full. Use manual records or contact the workspace owner.",
+    "changed": "This paper changed. Copy your edits before loading the saved version.",
+    "loadSaved": "Load saved version"
   },
   "businessSubscriptions": {
     "title": "Site plan",

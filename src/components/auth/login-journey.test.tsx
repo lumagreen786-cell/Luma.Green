@@ -5,6 +5,7 @@ import { beforeEach, expect, it, vi } from "vitest";
 
 import messages from "../../../messages/en.json";
 import { LoginFlow } from "./login-flow";
+import { rememberPhone } from "./storage";
 
 const calls = vi.hoisted(() => ({
   sendOtp: vi.fn(),
@@ -13,6 +14,7 @@ const calls = vi.hoisted(() => ({
   push: vi.fn(),
   replace: vi.fn(),
   auth: { isAuthenticated: false },
+  canSend: true,
 }));
 vi.mock("@/lib/auth-client", () => ({ authClient: { phoneNumber: calls } }));
 vi.mock("@/components/providers/convex-provider", () => ({
@@ -22,7 +24,7 @@ vi.mock("@/components/providers/use-signed-in-query", () => ({
   useVerifiedSession: () => ({ isReady: false, isPending: false }),
 }));
 vi.mock("convex/react", () => ({
-  useQuery: () => ({ phone: true }),
+  useQuery: () => ({ phone: calls.canSend }),
   useConvexAuth: () => calls.auth,
   useMutation: () => calls.ensure,
 }));
@@ -41,6 +43,7 @@ beforeEach(() => {
   localStorage.clear();
   sessionStorage.clear();
   calls.auth.isAuthenticated = false;
+  calls.canSend = true;
   calls.sendOtp.mockResolvedValue({ error: null });
   calls.verify.mockResolvedValue({
     error: null,
@@ -166,4 +169,12 @@ it("keeps a sent code usable after a reload without sending another SMS", async 
   render(form());
   expect(screen.getByLabelText(messages.auth.codeLabel)).toBeVisible();
   expect(calls.sendOtp).toHaveBeenCalledOnce();
+});
+
+it("restores a received challenge even when SMS delivery is now unavailable", async () => {
+  rememberPhone("+919876543210");
+  calls.canSend = false;
+  render(form());
+  expect(await screen.findByLabelText(messages.auth.codeLabel)).toBeVisible();
+  expect(calls.sendOtp).not.toHaveBeenCalled();
 });

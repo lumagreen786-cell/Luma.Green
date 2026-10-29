@@ -112,6 +112,20 @@ test("update notices never freeze, navigate or restart; task clicks latch unsafe
   assert.equal(home.commands.length, 0);
 });
 
+for (const change of ["input", "dialog", "hidden"]) {
+  test("pending restart rejects late " + change, () => {
+    const home = documentFixture();
+    assert.equal(home.bridge.prepareRestart(), true);
+    assert.equal(home.bridge.isRestartPending(), true);
+    if (change === "input") home.document.dispatchEvent(new Event("input"));
+    else if (change === "dialog") home.query.blocked = true;
+    else home.document.hidden = true;
+    assert.equal(home.bridge.isRestartPending(), false);
+    home.timers[0]();
+    assert.equal(home.document.documentElement.inert, false);
+  });
+}
+
 test("update protocol accepts only exact bounded commands from the trusted document", () => {
   const origin = "https://luma.green";
   const valid = JSON.stringify({

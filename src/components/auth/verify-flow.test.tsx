@@ -3,7 +3,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 
 import messages from "../../../messages/en.json";
-import { rememberPhone } from "./storage";
+import { readPhone, rememberPhone } from "./storage";
 import { VerifyFlow } from "./verify-flow";
 
 const calls = vi.hoisted(() => ({
@@ -12,10 +12,12 @@ const calls = vi.hoisted(() => ({
   ensureProfile: vi.fn(),
   replace: vi.fn(),
   auth: { isAuthenticated: false },
+  options: { phone: true },
 }));
 vi.mock("@/lib/auth-client", () => ({ authClient: { phoneNumber: calls } }));
 vi.mock("convex/react", () => ({
   useConvexAuth: () => calls.auth,
+  useQuery: () => calls.options,
   useMutation: () => calls.ensureProfile,
 }));
 vi.mock("@/components/providers/convex-provider", () => ({
@@ -36,6 +38,7 @@ beforeEach(() => {
   vi.useFakeTimers();
   vi.setSystemTime(new Date("2026-10-16T08:00:00Z"));
   calls.auth.isAuthenticated = false;
+  calls.options = { phone: true };
   calls.verify.mockResolvedValue({
     error: null,
     data: { token: "test-session" },
@@ -250,4 +253,64 @@ it("keeps the phone number when editing from the compatibility code route", () =
     "9876543210",
   );
   expect(calls.replace).not.toHaveBeenCalled();
+});
+
+it("does not clear a newer challenge or navigate after a profile request outlives the form", async () => {
+  const pending = Promise.withResolvers<null>();
+  calls.ensureProfile.mockReturnValueOnce(pending.promise);
+  calls.auth.isAuthenticated = true;
+  const view = render(form());
+  await enterCode();
+  expect(calls.ensureProfile).toHaveBeenCalledTimes(1);
+  view.unmount();
+  rememberPhone("+919876543211");
+  await act(async () => {
+    pending.resolve(null);
+    await pending.promise;
+  });
+  expect(readPhone()).toBe("+919876543211");
+  expect(calls.replace).not.toHaveBeenCalled();
+});
+
+it("does not replace a newer challenge when an old resend completes after unmount", async () => {
+  const pending = Promise.withResolvers<{ error: null }>();
+  calls.sendOtp.mockReturnValueOnce(pending.promise);
+  const view = render(form());
+  await elapseResend(300_000);
+  fireEvent.click(screen.getByRole("button", { name: messages.auth.resend }));
+  view.unmount();
+  rememberPhone("+919876543211");
+  await act(async () => {
+    pending.resolve({ error: null });
+    await pending.promise;
+  });
+  expect(readPhone()).toBe("+919876543211");
+  expect(calls.replace).not.toHaveBeenCalled();
+});
+
+it("retains code entry but disables resend when delivery becomes unavailable", async () => {
+  const view = render(form());
+  await elapseResend(300_000);
+  calls.options = { phone: false };
+  view.rerender(form());
+  expect(
+    screen.getByRole("button", { name: messages.auth.resend }),
+  ).toBeDisabled();
+  expect(screen.getByText(messages.auth.unavailableBody)).toBeVisible();
+  await enterCode();
+  expect(calls.verify).toHaveBeenCalledOnce();
+  expect(calls.sendOtp).not.toHaveBeenCalled();
+});
+
+it("does not send a new code from Change number while delivery is unavailable", () => {
+  calls.options = { phone: false };
+  render(form());
+  fireEvent.click(
+    screen.getByRole("button", { name: messages.auth.changeNumber }),
+  );
+  expect(
+    screen.getByRole("button", { name: messages.auth.sendCode }),
+  ).toBeDisabled();
+  expect(screen.getByText(messages.auth.unavailableBody)).toBeVisible();
+  expect(calls.sendOtp).not.toHaveBeenCalled();
 });

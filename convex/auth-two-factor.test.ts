@@ -169,6 +169,60 @@ async function newChallenge(t: Test) {
 }
 
 describe("phone codes with optional authenticator protection", () => {
+  it.each([false, true])(
+    "does not turn a bound legacy email into SMS sign-in (factor=%s)",
+    async (hasFactor) => {
+      const { t, browser } = await (hasFactor ? enrolled() : signedIn());
+      const session = sessionShape.parse(
+        await responseBody(browser.request("/get-session")),
+      );
+      await t.run((ctx) =>
+        ctx.runMutation(components.betterAuth.adapter.updateOne, {
+          input: {
+            model: "user",
+            where: [{ field: "_id", value: session.user.id }],
+            update: { email: "legacy@luma.test", emailVerified: true },
+          },
+        }),
+      );
+      const before = await t.run((ctx) =>
+        ctx.runQuery(components.betterAuth.adapter.findMany, {
+          model: "session",
+          paginationOpts: { cursor: null, numItems: 100 },
+        }),
+      );
+      const other = client(t);
+      await seedCode(t);
+      const bad = await other.request("/phone-number/verify", {
+        phoneNumber: PHONE,
+        code: "000000",
+      });
+      expect(bad.status).toBe(400);
+      expect(await bad.json()).toMatchObject({ code: "INVALID_OTP" });
+      const response = await other.request("/phone-number/verify", {
+        phoneNumber: PHONE,
+        code: SMS_CODE,
+      });
+      expect(response.status).toBe(403);
+      expect(await response.json()).toMatchObject({
+        code: "UNSUPPORTED_PHONE_ACCOUNT_CHANGE",
+      });
+      expect(
+        [...other.cookies.keys()].some(
+          (key) => key.endsWith("session_token") || key.includes("convex_jwt"),
+        ),
+      ).toBe(false);
+      expect(await responseBody(other.request("/get-session"))).toBeNull();
+      const after = await t.run((ctx) =>
+        ctx.runQuery(components.betterAuth.adapter.findMany, {
+          model: "session",
+          paginationOpts: { cursor: null, numItems: 100 },
+        }),
+      );
+      expect(after).toEqual(before);
+    },
+  );
+
   it("keeps phone-only sign-in and first enrollment inactive until an authenticator code is valid", async () => {
     const { t, browser } = await signedIn();
     expect(await responseStatus(browser.request("/get-session"))).toBe(200);
@@ -744,4 +798,67 @@ it("uses the real full-auth assurance for removal and denies old HTTP sessions i
     401,
   );
   expect(await responseStatus(browser.request("/sign-out", {}))).toBe(200);
+});
+
+it.each([false, true])(
+  "preserves an assured legacy email binding and factors (factor=%s)",
+  async (hasFactor) => {
+    const { t, browser } = await (hasFactor ? enrolled() : signedIn());
+    const before = sessionShape.parse(
+      await responseBody(browser.request("/get-session")),
+    );
+    await t.run((ctx) =>
+      ctx.runMutation(components.betterAuth.adapter.updateOne, {
+        input: {
+          model: "user",
+          where: [{ field: "_id", value: before.user.id }],
+          update: {
+            email: "legacy-binding@luma.test",
+            emailVerified: true,
+            phoneNumber: null,
+            phoneNumberVerified: false,
+          },
+        },
+      }),
+    );
+    const phoneNumber = "+919000000039";
+    await seedCode(t, phoneNumber);
+    const response = await browser.request("/phone-number/verify", {
+      phoneNumber,
+      code: SMS_CODE,
+      updatePhoneNumber: true,
+      disableSession: true,
+    });
+    expect(response.status).toBe(200);
+    const after = await responseBody(browser.request("/get-session"));
+    expect(after).toMatchObject({
+      session: { id: before.session.id },
+      user: {
+        id: before.user.id,
+        email: "legacy-binding@luma.test",
+        phoneNumber,
+        phoneNumberVerified: true,
+        twoFactorEnabled: hasFactor,
+      },
+    });
+  },
+);
+
+it("does not extend admin primary-auth freshness by repeating enrollment", async () => {
+  vi.useFakeTimers();
+  const start = Date.now();
+  vi.stubEnv("ADMIN_EMAIL", `${PHONE.slice(1)}@phone.luma.green`);
+  const { t, browser } = await signedIn();
+  vi.setSystemTime(start + 299_000);
+  const setupResponse = await browser.request("/two-factor/enable", {});
+  expect(setupResponse.status).toBe(200);
+  const setup = setupSchema.parse(await setupResponse.json());
+  vi.setSystemTime(start + 301_000);
+  const code = await codeFor(t, setup.totpURI);
+  expect(
+    await responseStatus(browser.request("/two-factor/verify-totp", { code })),
+  ).toBe(403);
+  expect(await responseStatus(browser.request("/two-factor/enable", {}))).toBe(
+    403,
+  );
 });

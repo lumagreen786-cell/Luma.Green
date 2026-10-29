@@ -3831,7 +3831,7 @@
   },
   "accountPhone": {
     "title": "Verifieer je mobiele nummer",
-    "description": "Voeg je eigen nummer toe voor inzameling en betalingen. Je e-mailaccount blijft behouden; er worden geen accounts samengevoegd. Blijf inloggen met e-mail.",
+    "description": "Voeg je eigen nummer toe voor inzameling en betalingen. Je account blijft behouden; er worden geen accounts samengevoegd.",
     "verified": "Mobiel nummer geverifieerd",
     "unavailable": "Verificatie is pas beschikbaar nadat sms-bezorging is ingesteld.",
     "inUse": "Dit nummer kan niet worden toegevoegd. Gebruik een nummer zonder ander account.",
@@ -4461,7 +4461,9 @@
     "amount": "Bedrag",
     "reference": "Referentie",
     "more": "Meer",
-    "capacity": "De documentopslag is vol. Gebruik handmatige registraties of neem contact op met de werkruimte-eigenaar."
+    "capacity": "De documentopslag is vol. Gebruik handmatige registraties of neem contact op met de werkruimte-eigenaar.",
+    "changed": "Dit document is gewijzigd. Kopieer je wijzigingen voordat je de opgeslagen versie opent.",
+    "loadSaved": "Opgeslagen versie openen"
   },
   "businessSubscriptions": {
     "title": "Vestigingsplan",

@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { NextIntlClientProvider } from "next-intl";
 import { beforeEach, expect, it, vi } from "vitest";
@@ -95,4 +95,30 @@ it("validates a configured phone before sending an OTP", async () => {
   ).toHaveAccessibleDescription(messages.auth.mobileInvalid);
   expect(calls.push).not.toHaveBeenCalled();
   expect(calls.sendOtp).not.toHaveBeenCalled();
+});
+
+it("ignores a successful send after the form unmounts", async () => {
+  const pending = Promise.withResolvers<{ error: null }>();
+  calls.sendOtp.mockReturnValueOnce(pending.promise);
+  const onSent = vi.fn();
+  const view = render(
+    <NextIntlClientProvider locale="en" messages={messages}>
+      <PhoneForm onSent={onSent} />
+    </NextIntlClientProvider>,
+  );
+  await userEvent.type(
+    screen.getByLabelText(messages.auth.mobileLabel),
+    "9876543210",
+  );
+  await userEvent.click(
+    screen.getByRole("button", { name: messages.auth.sendCode }),
+  );
+  view.unmount();
+  await act(async () => {
+    pending.resolve({ error: null });
+    await pending.promise;
+  });
+  expect(calls.rememberPhone).not.toHaveBeenCalled();
+  expect(onSent).not.toHaveBeenCalled();
+  expect(calls.push).not.toHaveBeenCalled();
 });

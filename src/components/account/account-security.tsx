@@ -23,6 +23,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Link, useRouter } from "@/i18n/navigation";
 import { authClient } from "@/lib/auth-client";
 import { signOutWithDeviceRevocation } from "@/lib/sign-out";
+import { useMounted } from "@/lib/use-mounted";
 
 import { api } from "../../../convex/_generated/api";
 import { PHONE_EMAIL_DOMAIN } from "../../../convex/lib/phone";
@@ -52,11 +53,17 @@ export function AccountSecurity() {
 
 /** Secret values are held only in this mounted form, never browser storage. */
 function SecurityForm() {
+  const isMounted = useMounted();
   const t = useTranslations("accountSecurity");
   const common = useTranslations("common");
   const person = useSignedInQuery(api.identity.me);
   const router = useRouter();
   const session = authClient.useSession();
+  const sessionId = session.data?.session.id;
+  const currentSessionId = useRef(sessionId);
+  useEffect(() => {
+    currentSessionId.current = sessionId;
+  }, [sessionId]);
   const [password, setPassword] = useState("");
   const [setup, setSetup] = useState<Enrollment | null>(null);
   const [codes, setCodes] = useState<string[] | null>(null);
@@ -77,17 +84,21 @@ function SecurityForm() {
     try {
       await action();
     } catch {
+      if (!isMounted()) return;
       setError("generic");
     } finally {
       pending.current = false;
-      setBusy(false);
-      setPassword("");
+      if (isMounted()) {
+        setBusy(false);
+        setPassword("");
+      }
     }
   }
 
   async function enable() {
     const { data, error: failure } =
       await authClient.twoFactor.enable(credentials);
+    if (!isMounted()) return;
     if (failure) {
       setError(securityError(failure));
       return;
@@ -98,6 +109,7 @@ function SecurityForm() {
 
   async function verify() {
     const { error: failure } = await authClient.twoFactor.verifyTotp({ code });
+    if (!isMounted()) return;
     if (failure) {
       setError(
         failure.code === "INVALID_CODE" ? "errorCode" : securityError(failure),
@@ -114,18 +126,24 @@ function SecurityForm() {
     if (confirmation === "regenerate") {
       const { data, error: failure } =
         await authClient.twoFactor.generateBackupCodes(credentials);
+      if (!isMounted()) return;
       if (failure) setError(securityError(failure));
       else setCodes(data.backupCodes);
     } else {
       const { error: failure } =
         await authClient.twoFactor.disable(credentials);
+      if (!isMounted()) return;
       if (failure) setError(securityError(failure));
     }
     setConfirmation(null);
   }
 
   async function signInAgain() {
-    await signOutWithDeviceRevocation(session.data?.session.id);
+    await signOutWithDeviceRevocation(
+      sessionId,
+      () => isMounted() && currentSessionId.current === sessionId,
+    );
+    if (!isMounted() || currentSessionId.current !== sessionId) return;
     router.replace({
       pathname: "/login",
       query: { next: "/account/security" },

@@ -28,6 +28,29 @@ import { hasPaperContent, type PaperContent } from "../../../convex/lib/paper";
 import { type AssistMemory, PaperAssistance } from "./paper-assistance";
 
 type Paper = FunctionReturnType<typeof api.paperDrafts.get>;
+interface PaperBuffer {
+  revision: number;
+  content: PaperContent;
+  dirty: boolean;
+}
+
+function currentPaperBuffer(
+  buffer: PaperBuffer | null,
+  paperRevision: number,
+  acknowledgement?: PaperBuffer,
+): PaperBuffer | null {
+  const current =
+    acknowledgement &&
+    buffer?.dirty &&
+    !acknowledgement.dirty &&
+    acknowledgement.content === buffer.content &&
+    acknowledgement.revision > buffer.revision
+      ? acknowledgement
+      : buffer;
+  if (!current) return null;
+  return current.dirty || current.revision > paperRevision ? current : null;
+}
+
 const fieldNames = {
   dateText: "date",
   description: "description",
@@ -73,7 +96,12 @@ function PaperBoard({ orgId }: { orgId: Id<"orgs"> }) {
   const upload = useAction(api.paperDrafts.upload);
   const [selected, setSelected] = useState<Id<"paperDrafts">>();
   const [draftMemory, setDraftMemory] = useState<
-    Record<string, { revision: number; content: PaperContent }>
+    Partial<
+      Record<
+        string,
+        { revision: number; content: PaperContent; dirty: boolean }
+      >
+    >
   >({});
   const [assistMemory, setAssistMemory] = useState<AssistMemory>({});
   const [busy, setBusy] = useState(false);
@@ -202,11 +230,25 @@ function PaperBoard({ orgId }: { orgId: Id<"orgs"> }) {
             key={selected}
             draftId={selected}
             memory={draftMemory[selected]}
-            onDraftChange={(revision, content) => {
-              setDraftMemory((current) => ({
-                ...current,
-                [selected]: { revision, content },
-              }));
+            onDraftChange={(revision, content, submitted, savedRevision) => {
+              setDraftMemory((current) => {
+                const previous = current[selected];
+                if (
+                  submitted &&
+                  (previous?.revision !== revision ||
+                    previous.content !== submitted)
+                )
+                  return current;
+                let next: PaperBuffer | undefined;
+                if (submitted && savedRevision !== undefined)
+                  next = {
+                    revision: savedRevision,
+                    content: submitted,
+                    dirty: false,
+                  };
+                else if (content) next = { revision, content, dirty: true };
+                return { ...current, [selected]: next };
+              });
             }}
             assisted={Boolean(available?.assisted)}
             canOperate={Boolean(available?.canOperate)}
@@ -236,8 +278,13 @@ function PaperDetail({
   memory,
   onDraftChange,
 }: {
-  memory?: { revision: number; content: PaperContent };
-  onDraftChange: (revision: number, content: PaperContent) => void;
+  memory?: { revision: number; content: PaperContent; dirty: boolean };
+  onDraftChange: (
+    revision: number,
+    content: PaperContent | undefined,
+    submitted?: PaperContent,
+    savedRevision?: number,
+  ) => void;
   draftId: Id<"paperDrafts">;
   assisted: boolean;
   canOperate: boolean;
@@ -247,13 +294,13 @@ function PaperDetail({
   if (!paper) return <ListSkeleton />;
   return (
     <PaperEditor
-      key={`${paper.id}:${String(paper.revision)}`}
+      key={paper.id}
       paper={paper}
-      initialContent={
-        memory?.revision === paper.revision ? memory.content : undefined
-      }
-      onContentChange={(content) => {
-        onDraftChange(paper.revision, content);
+      initialContent={memory?.content}
+      initialRevision={memory?.revision}
+      initialDirty={memory?.dirty}
+      onContentChange={(content, revision, submitted, savedRevision) => {
+        onDraftChange(revision, content, submitted, savedRevision);
       }}
       assisted={assisted}
       canOperate={canOperate}
@@ -267,10 +314,19 @@ export function PaperEditor({
   canOperate,
   onDiscard,
   initialContent,
+  initialRevision,
+  initialDirty = true,
   onContentChange,
 }: {
   initialContent?: PaperContent;
-  onContentChange?: (content: PaperContent) => void;
+  initialRevision?: number;
+  initialDirty?: boolean;
+  onContentChange?: (
+    content: PaperContent | undefined,
+    revision: number,
+    submitted?: PaperContent,
+    savedRevision?: number,
+  ) => void;
   paper: Paper;
   assisted: boolean;
   canOperate: boolean;
@@ -279,11 +335,40 @@ export function PaperEditor({
   const t = useTranslations("papers");
   const common = useTranslations("common");
   const id = useId();
-  const [content, setContent] = useState<PaperContent>(() =>
-    initialPaperContent(paper, initialContent),
+  const [buffer, setBuffer] = useState<{
+    revision: number;
+    content: PaperContent;
+    dirty: boolean;
+  } | null>(() =>
+    initialContent
+      ? {
+          revision: initialRevision ?? paper.revision,
+          content: initialContent,
+          dirty: initialDirty,
+        }
+      : null,
   );
-  const [dirty, setDirty] = useState(Boolean(initialContent));
-  const [confirmed, setConfirmed] = useState(false);
+  // A saved local response may precede its live-query update. Keep that response
+  // until the server catches up; dirty content always keeps its original base.
+  const local = currentPaperBuffer(
+    buffer,
+    paper.revision,
+    initialContent
+      ? {
+          revision: initialRevision ?? paper.revision,
+          content: initialContent,
+          dirty: initialDirty,
+        }
+      : undefined,
+  );
+  const content = local?.content ?? initialPaperContent(paper);
+  const expectedRevision = local?.revision ?? paper.revision;
+  const isDirty = local?.dirty ?? false;
+  const hasConflict = isDirty && expectedRevision !== paper.revision;
+  const [confirmationRevision, setConfirmationRevision] = useState<
+    number | null
+  >(null);
+  const isConfirmed = confirmationRevision === expectedRevision && !hasConflict;
   const [consent, setConsent] = useState(false);
   const [busy, setBusy] = useState(false);
   const [failure, setFailure] = useState(false);
@@ -301,10 +386,23 @@ export function PaperEditor({
     };
   }, []);
   function change(next: PaperContent) {
-    setContent(next);
-    onContentChange?.(next);
-    setDirty(true);
-    setConfirmed(false);
+    setBuffer({ revision: expectedRevision, content: next, dirty: true });
+    onContentChange?.(next, expectedRevision);
+    setConfirmationRevision(null);
+  }
+  function saved(revision: number) {
+    // Reconcile this submitted snapshot even if the editor has been replaced.
+    // The board compares identity and baseline before removing dirty memory.
+    onContentChange?.(undefined, expectedRevision, content, revision);
+    if (!mounted.current) return;
+    setBuffer({ revision, content, dirty: false });
+  }
+  function loadSaved() {
+    setBuffer(null);
+    onContentChange?.(undefined, paper.revision);
+    setConfirmationRevision(null);
+    setConsent(false);
+    setFailure(false);
   }
   async function perform(work: () => Promise<unknown>) {
     setBusy(true);
@@ -323,16 +421,16 @@ export function PaperEditor({
       <section className="grid min-w-0 gap-6 lg:grid-cols-2">
         <PrivatePaper draftId={paper.id} />
         <section className="min-w-0 space-y-4">
-          {paper.extractedContent ? (
-            <details>
-              <summary>{t("modelDraft")}</summary>
-              <p className="break-words whitespace-pre-wrap">
-                {paper.extractedContent.text}
-              </p>
-            </details>
-          ) : null}
-          {paper.status === "confirmed" ? (
-            <p role="status">{t("confirmed")}</p>
+          <PaperDraftNotice paper={paper} />
+          {hasConflict ? (
+            <section className="space-y-3" aria-live="polite">
+              <p role="alert">{t("changed")}</p>
+              <ActionButton
+                label={t("loadSaved")}
+                variant="secondary"
+                onClick={loadSaved}
+              />
+            </section>
           ) : null}
           <fieldset
             disabled={!isEditable || busy}
@@ -381,16 +479,16 @@ export function PaperEditor({
                     />
                     <span>{t("consent")}</span>
                   </label>
-                  {dirty ? <p>{t("saveFirst")}</p> : null}
+                  {isDirty ? <p>{t("saveFirst")}</p> : null}
                   <ActionButton
                     label={t("extract")}
                     variant="secondary"
-                    isDisabled={!consent || busy || dirty}
+                    isDisabled={!consent || busy || isDirty}
                     onClick={() => {
                       void perform(async () => {
                         const result = await extract({
                           draftId: paper.id,
-                          expectedRevision: paper.revision,
+                          expectedRevision,
                           consent: true,
                         });
                         if (!mounted.current) {
@@ -415,10 +513,12 @@ export function PaperEditor({
               >
                 <Checkbox
                   id={`${id}-confirm`}
-                  checked={confirmed}
+                  checked={isConfirmed}
                   disabled={busy}
                   onCheckedChange={(value) => {
-                    setConfirmed(value === true);
+                    setConfirmationRevision(
+                      value === true ? expectedRevision : null,
+                    );
                   }}
                 />
                 <span>{t("confirm")}</span>
@@ -426,45 +526,49 @@ export function PaperEditor({
               <section className="flex flex-wrap gap-3">
                 <ActionButton
                   label={t("confirmAction")}
-                  isDisabled={!canConfirmPaper(confirmed, busy, content)}
+                  isDisabled={
+                    hasConflict || !canConfirmPaper(isConfirmed, busy, content)
+                  }
                   onClick={() => {
-                    void perform(() =>
-                      confirm({
+                    void perform(async () => {
+                      const result = await confirm({
                         draftId: paper.id,
-                        expectedRevision: paper.revision,
+                        expectedRevision,
                         content,
                         confirmed: true,
-                      }),
-                    );
+                      });
+                      saved(result.revision);
+                    });
                   }}
                 >
                   {t("confirmAction")}
                 </ActionButton>
                 <Button
                   variant="outline"
-                  disabled={busy}
+                  disabled={busy || hasConflict}
                   onClick={() => {
-                    void perform(() =>
-                      save({
+                    void perform(async () => {
+                      const result = await save({
                         draftId: paper.id,
-                        expectedRevision: paper.revision,
+                        expectedRevision,
                         content,
-                      }),
-                    );
+                      });
+                      saved(result.revision);
+                    });
                   }}
                 >
                   {common("save")}
                 </Button>
                 <Button
                   variant="outline"
-                  disabled={busy}
+                  disabled={busy || hasConflict}
                   onClick={() => {
                     void perform(async () => {
                       await discard({
                         draftId: paper.id,
-                        expectedRevision: paper.revision,
+                        expectedRevision,
                       });
-                      onDiscard();
+                      if (mounted.current) onDiscard();
                     });
                   }}
                 >
@@ -473,16 +577,54 @@ export function PaperEditor({
               </section>
             </>
           ) : null}
-          {paper.status === "extracting" ? (
-            <p role="status">{t("pending")}</p>
-          ) : null}
-          {busy ? <p role="status">{common("loading")}</p> : null}
-          {failure ? <p role="alert">{common("error")}</p> : null}
+          <PaperActivity paper={paper} busy={busy} failure={failure} />
         </section>
       </section>
     </section>
   );
 }
+function PaperDraftNotice({ paper }: { paper: Paper }) {
+  const t = useTranslations("papers");
+  return (
+    <>
+      {" "}
+      {paper.extractedContent ? (
+        <details>
+          <summary>{t("modelDraft")}</summary>
+          <p className="break-words whitespace-pre-wrap">
+            {paper.extractedContent.text}
+          </p>
+        </details>
+      ) : null}
+      {paper.status === "confirmed" ? (
+        <p role="status">{t("confirmed")}</p>
+      ) : null}
+    </>
+  );
+}
+function PaperActivity({
+  paper,
+  busy,
+  failure,
+}: {
+  paper: Paper;
+  busy: boolean;
+  failure: boolean;
+}) {
+  const t = useTranslations("papers");
+  const common = useTranslations("common");
+  return (
+    <>
+      {" "}
+      {paper.status === "extracting" ? (
+        <p role="status">{t("pending")}</p>
+      ) : null}
+      {busy ? <p role="status">{common("loading")}</p> : null}
+      {failure ? <p role="alert">{common("error")}</p> : null}
+    </>
+  );
+}
+
 function PrivatePaper({ draftId }: { draftId: Id<"paperDrafts"> }) {
   const t = useTranslations("papers");
   const common = useTranslations("common");

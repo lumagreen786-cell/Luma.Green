@@ -4,6 +4,51 @@ import { expect, test } from "@playwright/test";
 
 import { updateBridgeScript } from "../apps/shared/update-bridge.mjs";
 
+for (const attributes of [
+  { contenteditable: "" },
+  { contenteditable: "plaintext-only" },
+  { contenteditable: "TRUE" },
+  { role: "alertdialog" },
+  { tag: "dialog", open: "" },
+]) {
+  test(
+    "restart blocks pending work " + JSON.stringify(attributes),
+    async ({ page, baseURL }) => {
+      const origin = new URL(baseURL ?? "http://localhost:3128").origin;
+      await page.addInitScript(
+        updateBridgeScript(origin, "test-token", "ready", "desktop"),
+      );
+      await page.goto("/");
+      await page.waitForLoadState("load");
+      const result = await page.evaluate((attributes) => {
+        const element = document.createElement(attributes.tag ?? "div");
+        for (const [name, value] of Object.entries(attributes)) {
+          if (name !== "tag" && typeof value === "string")
+            element.setAttribute(name, value);
+        }
+        document.body.append(element);
+        const bridge = Reflect.get(window, "lumaAppUpdates") as {
+          canRestart: () => boolean;
+          request: (action: string) => void;
+          getState: () => string;
+        };
+        const canRestart = bridge.canRestart();
+        bridge.request("restart");
+        return {
+          canRestart,
+          state: bridge.getState(),
+          frozen: document.documentElement.inert,
+        };
+      }, attributes);
+      expect(result).toEqual({
+        canRestart: false,
+        state: "blocked",
+        frozen: false,
+      });
+    },
+  );
+}
+
 test("native update arrival does not interrupt a form or accept restart after editing", async ({
   page,
   baseURL,

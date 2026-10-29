@@ -15,9 +15,13 @@ import authConfig from "./auth.config";
 import authSchema from "./betterAuth/schema";
 import { isAuthAccountClosed } from "./lib/accountClosure";
 import { adminSessionExpiry, isAdminEmail } from "./lib/admin";
+import { withAtomicAuthUpdates } from "./lib/auth-atomic";
 import { sendLocalPhoneCode } from "./lib/authEmail";
 import { isIndianMobile, phoneEmail } from "./lib/phone";
-import { phoneTwoFactor } from "./lib/phoneTwoFactor";
+import {
+  assertPhoneVerificationIdentity,
+  phoneTwoFactor,
+} from "./lib/phoneTwoFactor";
 import { securityAudit } from "./lib/securityAudit";
 import { CODE_TTL_MINUTES, codeDelivery } from "./lib/sms";
 import { smsPhoneHash } from "./lib/smsLimits";
@@ -108,7 +112,7 @@ export const createAuthOptions = (ctx: GenericCtx<DataModel>) =>
     trustedOrigins: trustedOrigins(),
     // Keep the same origin/CSRF boundary in tests and production.
     advanced: { disableOriginCheck: false, disableCSRFCheck: false },
-    database: authComponent.adapter(ctx),
+    database: withAtomicAuthUpdates(ctx, authComponent.adapter(ctx)),
     emailAndPassword: { enabled: false },
     // Kept in the database: in memory, each Convex request could start with a
     // clean slate. The plugins set the limits (phone: 10 a minute; two-factor:
@@ -218,6 +222,11 @@ export const createAuthOptions = (ctx: GenericCtx<DataModel>) =>
         expiresIn: CODE_TTL_MINUTES * 60,
         allowedAttempts: 5,
         phoneNumberValidator: isIndianMobile,
+        callbackOnVerification: ({ user, phoneNumber: phone }, hookCtx) => {
+          // Missing endpoint context cannot authorize an account binding.
+          assertPhoneVerificationIdentity(hookCtx ?? {}, user, phone);
+          return Promise.resolve();
+        },
         // Hand the code to an action through the scheduler: the request
         // returns at once, and nothing is left as a dangling promise that
         // Convex could drop.

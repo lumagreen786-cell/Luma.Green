@@ -9,7 +9,7 @@ import { twoFactor } from "better-auth/plugins";
 import { z } from "zod";
 
 import { isAdminEmail } from "./admin";
-import { PHONE_EMAIL_DOMAIN } from "./phone";
+import { PHONE_EMAIL_DOMAIN, phoneEmail } from "./phone";
 
 type Context = Parameters<typeof getAuthoritativeSessionFromCtx>[0];
 const REAUTH_WINDOW_MS = 5 * 60_000;
@@ -66,6 +66,20 @@ async function saveAssurance(
   });
 }
 
+async function retainAdminEnrollmentAssurance(ctx: Context) {
+  const session = ctx.context.session;
+  if (!session || !isAdminEmail(session.user.email)) return;
+  const proof = await readAssurance(ctx, session.session.id, session.user.id);
+  if (!proof) return;
+  await saveAssurance(
+    ctx,
+    session.session.id,
+    session.user.id,
+    false,
+    proof.expiresAt,
+  );
+}
+
 function forbidden(code: string): never {
   throw new APIError("FORBIDDEN", {
     code,
@@ -101,6 +115,16 @@ function isPhoneBinding(ctx: { path?: string; body?: unknown }): boolean {
     ctx.path === "/phone-number/verify" &&
     z.object({ updatePhoneNumber: z.literal(true) }).safeParse(ctx.body).success
   );
+}
+
+/** Runs after the plugin validates the OTP, before it creates a sign-in session. */
+export function assertPhoneVerificationIdentity(
+  ctx: { path?: string; body?: unknown },
+  user: { email: string },
+  phone: string,
+) {
+  if (!isPhoneBinding(ctx) && user.email !== phoneEmail(phone))
+    forbidden("UNSUPPORTED_PHONE_ACCOUNT_CHANGE");
 }
 
 /** Binding proves possession for the current email identity; it never signs in. */
@@ -217,15 +241,7 @@ export function phoneTwoFactor() {
           handler: createAuthMiddleware(async (ctx) => {
             if (isAPIError(ctx.context.returned) || isPhoneBinding(ctx)) return;
             if (ctx.path === "/two-factor/enable") {
-              const session = ctx.context.session;
-              if (session && isAdminEmail(session.user.email)) {
-                await saveAssurance(
-                  ctx,
-                  session.session.id,
-                  session.user.id,
-                  false,
-                );
-              }
+              await retainAdminEnrollmentAssurance(ctx);
               return;
             }
             const current = ctx.context.newSession;

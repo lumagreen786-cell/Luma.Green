@@ -72,10 +72,20 @@ export function isExternalUrl(value) {
         /\d/u.test(path);
 }
 
-/** @param {string} permission @param {string} frameUrl @param {string} topUrl @param {string} origin */
-export function mayRequestLocation(permission, frameUrl, topUrl, origin) {
+/** @param {string} permission @param {string} frameUrl @param {string} topUrl @param {string} origin
+ * @param {boolean} [isMainFrame] @param {boolean} [isMainWindow] */
+export function mayRequestLocation(
+  permission,
+  frameUrl,
+  topUrl,
+  origin,
+  isMainFrame = false,
+  isMainWindow = false,
+) {
   return (
     permission === "geolocation" &&
+    isMainFrame &&
+    isMainWindow &&
     isAppUrl(frameUrl, origin) &&
     isAppUrl(topUrl, origin)
   );

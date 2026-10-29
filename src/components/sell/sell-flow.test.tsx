@@ -1,4 +1,10 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { getFunctionName } from "convex/server";
 import { NextIntlClientProvider } from "next-intl";
@@ -10,6 +16,7 @@ import { recyclingDetailsSchema } from "./simple-recycling-flow";
 
 const calls = vi.hoisted(() => ({
   upload: vi.fn(),
+  prepare: vi.fn(),
   ready: vi.fn(),
   book: vi.fn(),
   profile: vi.fn(),
@@ -25,7 +32,7 @@ vi.mock("@/i18n/navigation", () => ({
   useRouter: () => ({ push: calls.push }),
 }));
 vi.mock("@/lib/upload-image", () => ({
-  prepareUpload: (file: File) => Promise.resolve(file),
+  prepareUpload: calls.prepare,
 }));
 vi.mock("./use-location", () => ({
   useLocation: () => ({
@@ -95,6 +102,7 @@ beforeEach(() => {
   calls.authenticated = true;
   calls.hasPhone = true;
   calls.ready.mockResolvedValue(undefined);
+  calls.prepare.mockImplementation((file: File) => Promise.resolve(file));
   calls.upload.mockResolvedValue("photo-fixture");
   calls.profile.mockResolvedValue(null);
   calls.book.mockResolvedValue("booking-token");
@@ -124,10 +132,11 @@ function photo() {
   const file = new File(["photo"], "paper.jpg", { type: "image/jpeg" });
   Object.defineProperty(file, "arrayBuffer", {
     value: () => Promise.resolve(new ArrayBuffer(5)),
+    configurable: true,
   });
   return file;
 }
-async function details() {
+async function details(hasMultiplePhotos = false) {
   const user = userEvent.setup();
   await user.type(screen.getByLabelText(messages.join.form.city), "Bengaluru");
   await user.type(
@@ -141,7 +150,7 @@ async function details() {
   fireEvent.change(
     screen.getByLabelText(messages.sell.simple.photos, { selector: "input" }),
     {
-      target: { files: [photo()] },
+      target: { files: hasMultiplePhotos ? [photo(), photo()] : [photo()] },
     },
   );
   await user.click(
@@ -284,3 +293,73 @@ it("explains why a signed-in account without a phone cannot book", async () => {
     screen.getByRole("button", { name: messages.sell.simple.confirm }),
   ).toBeDisabled();
 });
+
+it("preserves a newer draft and current page after an old booking finishes", async () => {
+  const pending = Promise.withResolvers<string>();
+  calls.book.mockReturnValueOnce(pending.promise);
+  const view = show();
+  const user = await details();
+  await schedule(user);
+  await user.click(
+    screen.getByRole("button", { name: messages.sell.simple.confirm }),
+  );
+  await waitFor(() => {
+    expect(calls.book).toHaveBeenCalledOnce();
+  });
+  view.unmount();
+  sessionStorage.setItem("lg.sellDraft", "newer synthetic draft");
+  await act(async () => {
+    pending.resolve("old-booking");
+    await pending.promise;
+  });
+  expect(calls.push).not.toHaveBeenCalled();
+  expect(sessionStorage.getItem("lg.sellDraft")).toBe("newer synthetic draft");
+});
+
+it.each(["preparation", "bytes", "first-upload"])(
+  "stops nested photo work after unmount during %s",
+  async (boundary) => {
+    const pending = Promise.withResolvers<File>();
+    const bytes = Promise.withResolvers<ArrayBuffer>();
+    const upload = Promise.withResolvers<string>();
+    const view = show();
+    const user = await details(true);
+    const first = photo();
+    Object.defineProperty(first, "arrayBuffer", {
+      value: () => bytes.promise,
+      configurable: true,
+    });
+    // The file selected by details() is the first item; its preparation supplies this controlled file.
+    if (boundary === "preparation")
+      calls.prepare.mockReturnValueOnce(pending.promise);
+    else calls.prepare.mockResolvedValueOnce(first);
+    if (boundary === "first-upload") {
+      bytes.resolve(new ArrayBuffer(5));
+      calls.upload.mockReturnValueOnce(upload.promise);
+    }
+    await schedule(user);
+    await user.click(
+      screen.getByRole("button", { name: messages.sell.simple.confirm }),
+    );
+    await waitFor(() => {
+      expect(calls.prepare).toHaveBeenCalledOnce();
+    });
+    if (boundary === "first-upload")
+      await waitFor(() => {
+        expect(calls.upload).toHaveBeenCalledOnce();
+      });
+    view.unmount();
+    await act(async () => {
+      pending.resolve(first);
+      bytes.resolve(new ArrayBuffer(5));
+      upload.resolve("photo-fixture");
+      await Promise.resolve();
+    });
+    expect(calls.upload).toHaveBeenCalledTimes(
+      boundary === "first-upload" ? 1 : 0,
+    );
+    expect(calls.prepare).toHaveBeenCalledTimes(1);
+    expect(calls.book).not.toHaveBeenCalled();
+    expect(calls.push).not.toHaveBeenCalled();
+  },
+);

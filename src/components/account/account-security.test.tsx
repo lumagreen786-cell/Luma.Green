@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { act, fireEvent, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { NextIntlClientProvider } from "next-intl";
 import { beforeEach, describe, expect, it, vi } from "vitest";
@@ -274,4 +274,27 @@ it("preserves revealed recovery codes on same-user session rotation and clears t
     </NextIntlClientProvider>,
   );
   expect(screen.queryByText("fixture-code")).not.toBeInTheDocument();
+});
+
+it("does not dispatch logout or navigate after reauthentication leaves its screen", async () => {
+  const pending = Promise.withResolvers<undefined>();
+  mocks.revoke.mockReturnValueOnce(pending.promise);
+  mocks.enable.mockResolvedValueOnce({
+    error: { code: "SECURITY_REAUTH_REQUIRED" },
+  });
+  const user = userEvent.setup();
+  const rendered = view();
+  await user.click(
+    screen.getByRole("button", { name: messages.accountSecurity.enable }),
+  );
+  await user.click(
+    screen.getByRole("button", { name: messages.accountSecurity.signInAgain }),
+  );
+  rendered.unmount();
+  await act(async () => {
+    pending.resolve(undefined);
+    await pending.promise;
+  });
+  expect(mocks.signOut).not.toHaveBeenCalled();
+  expect(mocks.replace).not.toHaveBeenCalled();
 });

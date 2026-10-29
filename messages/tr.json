@@ -3831,7 +3831,7 @@
   },
   "accountPhone": {
     "title": "Cep telefonu numaranızı doğrulayın",
-    "description": "Toplama ve ödemeler için size ait bir numara ekleyin. E-posta hesabınız korunur, başka hesapla birleştirilmez. E-posta ile giriş yapmaya devam edin.",
+    "description": "Toplama ve ödemeler için size ait bir numara ekleyin. Hesabınız korunur, başka hesapla birleştirilmez.",
     "verified": "Cep telefonu numarası doğrulandı",
     "unavailable": "SMS gönderimi yapılandırılana kadar telefon doğrulaması kullanılamaz.",
     "inUse": "Bu numara eklenemez. Başka hesaba bağlı olmayan bir numara kullanın.",
@@ -4461,7 +4461,9 @@
     "amount": "Tutar",
     "reference": "Referans",
     "more": "Diğer",
-    "capacity": "Belge depolama alanı dolu. Elle kayıt kullanın veya çalışma alanı sahibine başvurun."
+    "capacity": "Belge depolama alanı dolu. Elle kayıt kullanın veya çalışma alanı sahibine başvurun.",
+    "changed": "Bu belge değişti. Kayıtlı sürümü açmadan önce düzenlemelerinizi kopyalayın.",
+    "loadSaved": "Kayıtlı sürümü aç"
   },
   "businessSubscriptions": {
     "title": "Tesis planı",
