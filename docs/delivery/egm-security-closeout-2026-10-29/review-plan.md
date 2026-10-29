@@ -184,7 +184,7 @@ Acceptance: actual-adapter concurrent failure accounting, legacy/normal controls
 expired/nonexpired lock guards, actual handler tests and full checks. Record a
 meaningful failure before repair. Independent spec and quality review plus fresh
 EGM auth convergence must include this owner. New mapped sources are
-`convex/betterAuth/atomic.ts`, `convex/lib/auth-atomic.ts`,
+`convex/betterAuth/atomic.ts`, `convex/lib/authAtomic.ts`,
 `convex/auth-atomic.test.ts`, and the `convex/auth.ts` database wiring.
 
 The owner's explicit request to finish the auth review and self-answer routine

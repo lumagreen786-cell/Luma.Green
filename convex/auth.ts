@@ -15,7 +15,7 @@ import authConfig from "./auth.config";
 import authSchema from "./betterAuth/schema";
 import { isAuthAccountClosed } from "./lib/accountClosure";
 import { adminSessionExpiry, isAdminEmail } from "./lib/admin";
-import { withAtomicAuthUpdates } from "./lib/auth-atomic";
+import { withAtomicAuthUpdates } from "./lib/authAtomic";
 import { sendLocalPhoneCode } from "./lib/authEmail";
 import { isIndianMobile, phoneEmail } from "./lib/phone";
 import {

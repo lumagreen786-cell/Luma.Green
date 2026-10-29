@@ -137,3 +137,18 @@ and 126 warnings. The disconnected production build generates 3,351 pages.
 All 72 synthetic auth captures were refreshed against the combined catalogues.
 The earlier 873-case browser proof belongs to the earlier source; the combined
 browser suite and final PR checks remain separate gates.
+
+## Production module-path correction after PR28
+
+PR28 merged as `959a4a1` after all 12 active checks passed: 875 remote browser
+cases, 2 bot-check and 5 analytics cases included. The Production dry run then
+rejected `lib/auth-atomic.ts`: deployed Convex paths cannot contain hyphens.
+The automatic frontend build was canceled before publication. The current public
+release stays on `20dfc8e` while the correction follows checked PR controls.
+
+Rename the helper to `lib/authAtomic.ts` and update its one import. The helper's
+implementation bytes do not change. A filesystem regression test fails against
+the old path and prevents invalid module names across deployed Convex sources.
+The corrected Production dry run passes for `astute-peccary-795`; no indexes
+are deleted. Deploy the checked backend before merging the corrected frontend.
+No provider flags, secrets, schema, records or native releases change.
