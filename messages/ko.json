@@ -2265,7 +2265,8 @@
       "compliance": "규정 준수",
       "earnings": "수입",
       "help": "도움말",
-      "paperRecords": "종이 기록"
+      "paperRecords": "종이 기록",
+      "billing": "사업장 요금제"
     },
     "roles": {
       "kabadiwala": "고물상",
@@ -3819,7 +3820,14 @@
     "external_organization": "발급 기관",
     "trade_seller": "판매자",
     "trade_buyer": "구매자",
-    "correctionHint": "원본은 계속 표시됩니다. 새 참조를 저장하여 교체하세요."
+    "correctionHint": "원본은 계속 표시됩니다. 새 참조를 저장하여 교체하세요.",
+    "export": {
+      "download": "증빙 목록 다운로드",
+      "json": "JSON",
+      "notice": "검증되지 않은 참조입니다. 정부 제출 자료가 아닙니다.",
+      "partial": "일부 목록: 로드된 행만 포함합니다.",
+      "complete": "사용 가능한 모든 행을 로드했습니다."
+    }
   },
   "accountPhone": {
     "title": "휴대폰 번호 인증",
@@ -4301,7 +4309,25 @@
     "sharedReports": "공유 감사 보고서",
     "revoke": "접근 취소",
     "quantityGrams": "수량(g)",
-    "recordName": "기록 이름"
+    "recordName": "기록 이름",
+    "acknowledged": "수신 확인됨",
+    "responded": "답변됨",
+    "declined": "거절됨",
+    "workflow": {
+      "requester": "요청자",
+      "recipient": "수신자",
+      "respond": "답변",
+      "acknowledge": "확인 확인",
+      "decline": "거절",
+      "close": "닫기",
+      "edit": "수정",
+      "submit": "메시지 전송",
+      "revoke": "접근 취소",
+      "message": "메시지",
+      "history": "요청 이력",
+      "notice": "제공자 실행과 보상 교환은 이용할 수 없습니다. 기록은 대출, 보험, 복지 또는 지급을 승인하지 않습니다.",
+      "empty": "아직 기록이 없습니다."
+    }
   },
   "returnClaims": {
     "title": "반품 및 제도 증거",
@@ -4436,6 +4462,62 @@
     "reference": "참조",
     "more": "더 보기",
     "capacity": "문서 저장 공간이 가득 찼습니다. 수동 기록을 사용하거나 작업 공간 소유자에게 문의하세요."
+  },
+  "businessSubscriptions": {
+    "title": "사업장 요금제",
+    "lead": "이 사업장의 희망 요금제를 저장하세요.",
+    "off": "결제가 꺼져 있습니다. 희망 요금제를 저장해도 유료 구독이 시작되지 않습니다.",
+    "plan": "요금제",
+    "monthly": "월 목표 가격",
+    "members": "구성원: {count}",
+    "agreed": "범위는 협의",
+    "from": "{price}부터",
+    "selected": "희망 요금제 저장됨",
+    "cancelled": "요청 취소됨",
+    "none": "요청 없음",
+    "save": "희망 요금제 저장",
+    "cancel": "요청 취소",
+    "ownerOnly": "사업장 소유자만 이 선택을 변경할 수 있습니다.",
+    "history": "요청 기록",
+    "verified": "검증된 정원: {count}명",
+    "stale": "저장하기 전에 페이지를 새로 고치세요.",
+    "plans": {
+      "trader": "상인 플러스",
+      "centre": "센터",
+      "yard": "야적장",
+      "processor": "가공업체",
+      "recycler": "재활용업체 / 제조업체",
+      "enterprise": "대기업",
+      "institution": "기관 보고"
+    }
+  },
+  "paperAssist": {
+    "title": "텍스트 지원",
+    "lead": "확정된 본문만 사용합니다. 모든 결과를 검토하세요. 공식 승인이 아닙니다.",
+    "unavailable": "모델을 사용할 수 없습니다. 직접 입력하세요.",
+    "task": "작업",
+    "summary": "요약",
+    "translation": "번역",
+    "language": "대상 언어",
+    "create": "새 초안",
+    "capacity": "10개가 저장되었습니다. 추가하려면 미확정 초안을 삭제하세요.",
+    "confirmed": "검토됨",
+    "source": "원문",
+    "model": "검토하지 않은 모델 초안",
+    "useModel": "검토란에 복사",
+    "reviewedText": "검토한 텍스트",
+    "pending": "모델 응답 대기 중",
+    "consent": "이 문서의 텍스트를 외부 모델에 전송합니다.",
+    "generate": "초안 요청",
+    "review": "이 텍스트를 원문과 대조했습니다.",
+    "confirm": "텍스트 확정",
+    "discard": "초안 삭제",
+    "failed": "모델 결과가 없습니다. 직접 입력할 수 있습니다.",
+    "emptySource": "이 문서에는 지원에 사용할 확정된 본문이 없습니다.",
+    "conflict": "이 기록이 변경되었습니다. 편집 내용은 유지됩니다. 검토 전에 저장된 텍스트를 다시 불러오세요.",
+    "reload": "저장된 텍스트 다시 불러오기",
+    "localDraft": "이전 미저장 텍스트",
+    "savedText": "최신 저장 텍스트"
   },
   "privacy": {
     "title": "개인정보 처리방침",

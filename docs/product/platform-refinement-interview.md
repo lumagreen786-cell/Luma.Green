@@ -36,13 +36,17 @@ period or universal erasure promise is invented. Same-phone rejoining cannot
 recover old records or invitations or reset that India day's paid-check limit.
 The configured platform admin uses a separate replacement gate.
 
-The seven remaining partial source groups are acceptance/operating/outside
-readiness checks and missing optional paper extraction. The OCR draft and human
-confirmation path is not implemented; manual entry works. D37 permits optional
-AI unavailable without approved configuration. This is not a key-only setup task.
-The web release still needs final checks and Production verification. Expo is
-paused. Temporary foundation rebuild permission expires for future work after
-this release is verified in Production; security and the Expo pause continue.
+29 October reconciliation: private single-image paper transcription and human
+confirmation shipped in PR24. The agreed web follow-up adds reviewed text
+summary/translation, private service-request responses and per-site plan
+preferences. Each has its own contract and current verification record. Paid
+AI stays off without consent, approved budgets and configuration. Recurring
+subscription collection still needs provider-specific implementation, merchant
+approval and approved terms; a saved preference is not a paid subscription.
+The seven historical partial groups retain their wider live/operating evidence
+limits rather than implying missing paper code. Auctions/tenders and ERP remain
+deferred by the owner. Mobile/desktop remain paused. The foundation already
+shipped; its temporary no-migration/deletion permission has expired.
 
 ## How this interview works
 

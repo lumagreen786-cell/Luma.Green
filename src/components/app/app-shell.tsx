@@ -160,6 +160,11 @@ export function AppShell({ children }: { children: ReactNode }) {
             icon: FileTextIcon,
           },
           {
+            href: "/app/billing",
+            label: "billing",
+            icon: FileTextIcon,
+          },
+          {
             href: "/app/material-standards",
             label: "standards",
             namespace: "operations",

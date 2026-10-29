@@ -2265,7 +2265,8 @@
       "compliance": "Konformität",
       "earnings": "Verdienst",
       "help": "Hilfe",
-      "paperRecords": "Papierbelege"
+      "paperRecords": "Papierbelege",
+      "billing": "Standorttarif"
     },
     "roles": {
       "kabadiwala": "Kabadiwala-Betrieb",
@@ -3819,7 +3820,14 @@
     "external_organization": "Ausstellende Organisation",
     "trade_seller": "Verkäufer",
     "trade_buyer": "Käufer",
-    "correctionHint": "Das Original bleibt sichtbar. Speichern Sie einen neuen Verweis als Ersatz."
+    "correctionHint": "Das Original bleibt sichtbar. Speichern Sie einen neuen Verweis als Ersatz.",
+    "export": {
+      "download": "Nachweisliste herunterladen",
+      "json": "JSON",
+      "notice": "Ungeprüfte Verweise. Keine behördliche Einreichung.",
+      "partial": "Teilliste: nur geladene Zeilen.",
+      "complete": "Alle verfügbaren Zeilen sind geladen."
+    }
   },
   "accountPhone": {
     "title": "Mobilnummer bestätigen",
@@ -4301,7 +4309,25 @@
     "sharedReports": "Geteilte Prüfberichte",
     "revoke": "Zugriff widerrufen",
     "quantityGrams": "Menge (g)",
-    "recordName": "Name des Eintrags"
+    "recordName": "Name des Eintrags",
+    "acknowledged": "Empfang bestätigt",
+    "responded": "Beantwortet",
+    "declined": "Abgelehnt",
+    "workflow": {
+      "requester": "Anfragende Person",
+      "recipient": "Empfangende Person",
+      "respond": "Antworten",
+      "acknowledge": "Bestätigung bestätigen",
+      "decline": "Ablehnen",
+      "close": "Schließen",
+      "edit": "Bearbeiten",
+      "submit": "Nachricht abschicken",
+      "revoke": "Zugriff widerrufen",
+      "message": "Ihre Nachricht",
+      "history": "Anfrageverlauf",
+      "notice": "Anbieterausführung und Einlösung sind nicht verfügbar. Die Einträge genehmigen keine Kredite, Versicherungen, Leistungen oder Zahlungen.",
+      "empty": "Noch keine Aufzeichnungen."
+    }
   },
   "returnClaims": {
     "title": "Rückgaben und Programmnachweise",
@@ -4436,6 +4462,62 @@
     "reference": "Referenz",
     "more": "Weitere",
     "capacity": "Der Belegspeicher ist voll. Nutzen Sie manuelle Aufzeichnungen oder kontaktieren Sie den Arbeitsbereichsinhaber."
+  },
+  "businessSubscriptions": {
+    "title": "Standorttarif",
+    "lead": "Speichern Sie einen Tarifwunsch für diesen Standort.",
+    "off": "Die Abrechnung ist deaktiviert. Ein Tarifwunsch startet kein kostenpflichtiges Abonnement.",
+    "plan": "Tarif",
+    "monthly": "Monatlicher Zielpreis",
+    "members": "Mitglieder: {count}",
+    "agreed": "Umfang nach Vereinbarung",
+    "from": "Ab {price}",
+    "selected": "Tarifwunsch gespeichert",
+    "cancelled": "Anfrage storniert",
+    "none": "Keine Anfrage",
+    "save": "Wunsch speichern",
+    "cancel": "Anfrage stornieren",
+    "ownerOnly": "Nur der Standortinhaber kann diesen Wunsch ändern.",
+    "history": "Anfrageverlauf",
+    "verified": "Bestätigte Kapazität: {count} Mitglieder",
+    "stale": "Laden Sie die Seite vor dem Speichern neu.",
+    "plans": {
+      "trader": "Händler Plus",
+      "centre": "Zentrum",
+      "yard": "Hof",
+      "processor": "Verarbeiter",
+      "recycler": "Recycler / Hersteller",
+      "enterprise": "Großunternehmen",
+      "institution": "Institutionelle Berichte"
+    }
+  },
+  "paperAssist": {
+    "title": "Texthilfe",
+    "lead": "Verwendet nur bestätigten Text. Prüfen Sie jedes Ergebnis; keine amtliche Genehmigung.",
+    "unavailable": "Modell nicht verfügbar. Text manuell eingeben.",
+    "task": "Aufgabe",
+    "summary": "Zusammenfassung",
+    "translation": "Übersetzung",
+    "language": "Zielsprache",
+    "create": "Neuer Entwurf",
+    "capacity": "Zehn Einträge gespeichert. Unbestätigten Entwurf löschen, um einen hinzuzufügen.",
+    "confirmed": "Geprüft",
+    "source": "Quelltext",
+    "model": "Ungeprüfter Modellentwurf",
+    "useModel": "Zur Prüfung kopieren",
+    "reviewedText": "Ihr geprüfter Text",
+    "pending": "Warten auf das Modell",
+    "consent": "Text dieses Dokuments an das externe Modell senden.",
+    "generate": "Entwurf anfordern",
+    "review": "Ich habe diesen Text mit der Quelle verglichen.",
+    "confirm": "Text bestätigen",
+    "discard": "Entwurf verwerfen",
+    "failed": "Kein Modellergebnis. Manuelle Eingabe möglich.",
+    "emptySource": "Dieses Dokument hat keinen bestätigten Haupttext für die Texthilfe.",
+    "conflict": "Dieser Eintrag wurde geändert. Ihre Änderungen bleiben erhalten. Laden Sie vor der Prüfung den gespeicherten Text neu.",
+    "reload": "Gespeicherten Text neu laden",
+    "localDraft": "Vorheriger ungespeicherter Text",
+    "savedText": "Zuletzt gespeicherter Text"
   },
   "privacy": {
     "title": "Datenschutzerklärung",

@@ -1,0 +1,152 @@
+{
+  "preparedOn": "2026-10-29",
+  "officeSession": "2026-10-30",
+  "scope": "Agreed web platform only; mobile, desktop, auctions/tenders and ERP remain paused/deferred.",
+  "purchaseAuthority": false,
+  "baseRecommendationUsdPerMonth": 45,
+  "baseExclusions": "Before tax, extra developer seats and usage. Vercel Pro20 + Convex Professional25; Trigger Free.",
+  "accounts": [
+    {
+      "name": "Vercel",
+      "action": "Reuse Luma team and existing luma-green project; review Pro upgrade",
+      "plan": "Pro",
+      "price": "USD20/month base, plus usage/tax",
+      "url": "https://vercel.com/pricing",
+      "keys": "No personal API token needed; owner project access"
+    },
+    {
+      "name": "Convex",
+      "action": "Reuse existing project/Production astute-peccary-795",
+      "plan": "Professional recommended",
+      "price": "USD25/developer/month, plus usage/tax",
+      "url": "https://www.convex.dev/pricing",
+      "keys": "No replacement database or authentication secret; confirm backup owner and plan"
+    },
+    {
+      "name": "PostHog",
+      "action": "Create/select project and region",
+      "plan": "Free initially",
+      "price": "First1million analytics events/month free",
+      "url": "https://posthog.com/pricing",
+      "keys": "Project ingestion key and ingestion host; no personal admin token"
+    },
+    {
+      "name": "Sentry",
+      "action": "Create/select web project and alert recipient",
+      "plan": "Developer initially; paid team plan only if needed",
+      "price": "Confirm current team quote at checkout",
+      "url": "https://sentry.io/pricing/",
+      "keys": "DSN; optional narrowly scoped source-map token, organization and project names"
+    },
+    {
+      "name": "Cloudflare R2",
+      "action": "Create private Standard bucket in existing account",
+      "plan": "Usage billing with free allowance",
+      "price": "See current official storage and operation rates; set alerts",
+      "url": "https://developers.cloudflare.com/r2/pricing/",
+      "keys": "Account ID, bucket name and bucket-scoped read/write S3 credentials"
+    },
+    {
+      "name": "Cloudflare Turnstile",
+      "action": "Create widget for luma.green",
+      "plan": "Free",
+      "price": "No paid Cloudflare plan required for this widget",
+      "url": "https://developers.cloudflare.com/turnstile/plans/",
+      "keys": "Public site key, private secret key, approved hostnames"
+    },
+    {
+      "name": "Google Cloud Geocoding",
+      "action": "Create/select billing-enabled project and enable Geocoding API",
+      "plan": "Usage billing",
+      "price": "Set quotas and billing alerts; confirm applicable India/global SKU",
+      "url": "https://developers.google.com/maps/documentation/geocoding/guides-v3/get-api-key",
+      "keys": "Server key restricted to Geocoding API; deployment-compatible restrictions; storage-terms review"
+    },
+    {
+      "name": "Trigger.dev",
+      "action": "Create/select cloud project",
+      "plan": "Free initially",
+      "price": "USD0;5USD monthly compute credits; Hobby10USD optional",
+      "url": "https://trigger.dev/pricing",
+      "keys": "Project reference, Production secret key and worker deployment access"
+    },
+    {
+      "name": "Resend",
+      "action": "Create/select account and verify sending domain",
+      "plan": "Free initially",
+      "price": "Free daily send limit100; upgrade only if required",
+      "url": "https://resend.com/pricing",
+      "keys": "Scoped sending API key, verified domain and approved sender address"
+    },
+    {
+      "name": "OpenRouter",
+      "action": "Create/select account; choose approved model and privacy settings",
+      "plan": "Usage billing",
+      "price": "Owner-approved small budget; no amount spent by this task",
+      "url": "https://openrouter.ai/blog/insights/zero-data-retention/",
+      "keys": "API key, chosen model, explicit separate transcription/assistance daily allowances"
+    },
+    {
+      "name": "OTP providers",
+      "action": "Retain existing OS Digital ENVRIN; MSG91 remains configured alternative",
+      "plan": "Existing vendor arrangement",
+      "price": "Confirm funded balance and approved sender/templates",
+      "url": null,
+      "keys": "Already installed Production names; do not resend existing secret values"
+    },
+    {
+      "name": "Surepass",
+      "action": "Reuse account; confirm subscribed GSTIN-by-PAN and GSTIN detail products",
+      "plan": "Existing vendor arrangement",
+      "price": "Confirm balance;20paid attempts/account/India day remains enforced",
+      "url": "https://surepass.io/",
+      "keys": "Existing token; do not activate unrelated catalogue APIs"
+    },
+    {
+      "name": "Cashfree",
+      "action": "Reuse merchant account; confirm PG/EasySplit and request Subscriptions eligibility",
+      "plan": "Merchant agreement",
+      "price": "Confirm contract, settlement/vendor and recurring-product terms",
+      "url": "https://www.cashfree.com/devstudio/subs",
+      "keys": "Product-specific approved credentials/webhook setup later; no recurring adapter/mandate implied by PG key"
+    },
+    {
+      "name": "CodeRabbit",
+      "action": "Optional GitHub App on this repository only",
+      "plan": "Essentials optional",
+      "price": "USD24/developer/month shown with annual billing; check monthly quote",
+      "url": "https://www.coderabbit.ai/pricing",
+      "keys": "GitHub App installation; no unrestricted personal token"
+    }
+  ],
+  "notNeededNow": [
+    "AWS",
+    "Expo/EAS paid plan",
+    "Apple Developer",
+    "Google Play Console",
+    "Second OTP provider",
+    "Second database",
+    "Paid IDE"
+  ],
+  "blockedBeyondKeys": [
+    "Official GST/e-way/manifest filing connector and legal rule review",
+    "Official EPR/GRS/vehicle/carbon issuance or trading authorization and provider-specific integration",
+    "Cashfree recurring mandate producer, verified webhooks, approved collectible tax/renewal/refund terms and live acceptance",
+    "Regulated lender/insurance/treatment execution and selected provider contracts",
+    "Actual operator permits, capacity, recipes, calibrated measurements and approved receivers",
+    "Separate cloud restore and real national workload acceptance",
+    "Real model accuracy/privacy acceptance on redacted approved samples"
+  ],
+  "secretHandling": "Use invitations or enter keys directly in the correct Production provider settings. Never return secret values in PDFs, email, screenshots, chat or GitHub.",
+  "verification": "Official pricing/setup pages checked29October2026. Account-specific balances, plan, approval and live delivery remain unverified until the owner session.",
+  "vercelStorageObservation": {
+    "checkedAt": "2026-10-29T00:09:23.321575+00:00",
+    "team": "luma-0f95",
+    "plan": "Hobby",
+    "deploymentStorageGb": 73.96,
+    "includedGb": 10,
+    "status": "Dashboard shows exceeded resources; no new deployment rejection verified yet.",
+    "ownerAction": "Review Pro and retention; any history cleanup requires owner approval.",
+    "officialSource": "https://vercel.com/changelog/hobby-projects-now-retain-fewer-deployments-to-free-up-storage"
+  }
+}

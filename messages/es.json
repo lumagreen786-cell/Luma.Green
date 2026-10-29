@@ -2265,7 +2265,8 @@
       "compliance": "Cumplimiento normativo",
       "earnings": "Ingresos",
       "help": "Ayuda",
-      "paperRecords": "Registros en papel"
+      "paperRecords": "Registros en papel",
+      "billing": "Plan del centro"
     },
     "roles": {
       "kabadiwala": "Comerciante kabadiwala",
@@ -3819,7 +3820,14 @@
     "external_organization": "Organización emisora",
     "trade_seller": "Vendedor",
     "trade_buyer": "Comprador",
-    "correctionHint": "El original sigue visible. Guarda una nueva referencia para sustituirlo."
+    "correctionHint": "El original sigue visible. Guarda una nueva referencia para sustituirlo.",
+    "export": {
+      "download": "Descargar lista de pruebas",
+      "json": "JSON",
+      "notice": "Referencias sin verificar. No es una presentación oficial.",
+      "partial": "Lista parcial: solo filas cargadas.",
+      "complete": "Todas las filas disponibles están cargadas."
+    }
   },
   "accountPhone": {
     "title": "Verifica tu número de móvil",
@@ -4301,7 +4309,25 @@
     "sharedReports": "Informes de auditoría compartidos",
     "revoke": "Revocar acceso",
     "quantityGrams": "Cantidad (gramos)",
-    "recordName": "Nombre del registro"
+    "recordName": "Nombre del registro",
+    "acknowledged": "Recepción reconocida",
+    "responded": "Respondida",
+    "declined": "Rechazada",
+    "workflow": {
+      "requester": "Solicitante",
+      "recipient": "Destinatario",
+      "respond": "Responder",
+      "acknowledge": "Confirmar reconocimiento",
+      "decline": "Rechazar",
+      "close": "Cerrar",
+      "edit": "Editar",
+      "submit": "Enviar mensaje",
+      "revoke": "Revocar acceso",
+      "message": "Tu mensaje",
+      "history": "Historial de solicitud",
+      "notice": "La ejecución del proveedor y el canje no están disponibles. Los registros no aprueban préstamos, seguros, ayudas ni pagos.",
+      "empty": "Aún no hay registros."
+    }
   },
   "returnClaims": {
     "title": "Devoluciones y pruebas del programa",
@@ -4436,6 +4462,62 @@
     "reference": "Referencia",
     "more": "Más",
     "capacity": "El almacenamiento de documentos está lleno. Usa registros manuales o contacta con el propietario del espacio."
+  },
+  "businessSubscriptions": {
+    "title": "Plan del centro",
+    "lead": "Guarda una preferencia de plan para este centro.",
+    "off": "La facturación está desactivada. Guardar una preferencia no inicia una suscripción de pago.",
+    "plan": "Plan",
+    "monthly": "Precio mensual objetivo",
+    "members": "Miembros: {count}",
+    "agreed": "Alcance según acuerdo",
+    "from": "Desde {price}",
+    "selected": "Preferencia guardada",
+    "cancelled": "Solicitud cancelada",
+    "none": "Sin solicitud",
+    "save": "Guardar preferencia",
+    "cancel": "Cancelar solicitud",
+    "ownerOnly": "Solo el propietario del centro puede cambiar esta preferencia.",
+    "history": "Historial de solicitudes",
+    "verified": "Capacidad verificada: {count} miembros",
+    "stale": "Actualiza esta página antes de guardar.",
+    "plans": {
+      "trader": "Comerciante Plus",
+      "centre": "Centro",
+      "yard": "Patio",
+      "processor": "Procesador",
+      "recycler": "Reciclador / Fabricante",
+      "enterprise": "Gran empresa",
+      "institution": "Informes institucionales"
+    }
+  },
+  "paperAssist": {
+    "title": "Ayuda de texto",
+    "lead": "Solo usa texto confirmado. Revise cada resultado; no es aprobación oficial.",
+    "unavailable": "Modelo no disponible. Introduzca el texto manualmente.",
+    "task": "Tarea",
+    "summary": "Resumen",
+    "translation": "Traducción",
+    "language": "Idioma de destino",
+    "create": "Nuevo borrador",
+    "capacity": "Hay diez registros. Descarte un borrador sin confirmar para añadir otro.",
+    "confirmed": "Revisado",
+    "source": "Texto original",
+    "model": "Borrador del modelo sin verificar",
+    "useModel": "Copiar para revisar",
+    "reviewedText": "Su texto revisado",
+    "pending": "Esperando al modelo",
+    "consent": "Enviar el texto de este documento al modelo externo.",
+    "generate": "Solicitar borrador",
+    "review": "He cotejado este texto con el original.",
+    "confirm": "Confirmar texto",
+    "discard": "Descartar borrador",
+    "failed": "Sin resultado del modelo. Puede introducir texto manualmente.",
+    "emptySource": "Este documento no tiene texto principal confirmado para recibir ayuda.",
+    "conflict": "Este registro cambió. Sus cambios se conservan. Recargue el texto guardado antes de revisarlo.",
+    "reload": "Recargar texto guardado",
+    "localDraft": "Texto anterior sin guardar",
+    "savedText": "Último texto guardado"
   },
   "privacy": {
     "title": "Política de privacidad",

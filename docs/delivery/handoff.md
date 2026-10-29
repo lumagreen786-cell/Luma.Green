@@ -1,3 +1,32 @@
+## Agreed web completion - 29 October 2026
+
+Continue with [the active delivery record](web-completion-2026-10-29.md) and
+[the current plan](../plans/2026-10-29-web-completion-without-keys.md). This pass
+preserves checked main 2875c58/PR25 on codex/web-completion-no-keys. The owner
+confirmed agreed web scope first; auctions/ERP remain deferred and mobile and
+desktop stay paused. Do not infer resumption from older exceptions below.
+
+Paper assistance, site-plan preferences, private service replies and scoped
+CSV/JSON preparation exports have their local source and tests. Recurring paid
+billing and official regulated execution remain separate missing integrations,
+not configuration-only work. No fake paid or official state was added.
+
+Fresh pnpm check passed 3,022 tests/368 suites plus security/app compatibility;
+Production build passed 3,351 pages and 42 focused browser checks. Three real normal
+local phone journeys and the actual local restore passed. The restore matched
+2,639 records/104 files and 50 pre-existing scoped sessions; cloud recovery and
+national load remain unverified. See retained JSON receipts for source hashes.
+
+Hosted checks, checked merge and Production identity are separate gates. Read
+the final owner release receipt rather than treating this local checkpoint as
+proof of release. Vercel browser access works, but Hobby storage shows 73.96 GB/
+10 GB. No new deployment rejection, upgrade or history deletion at this point.
+The original source/blank form/private backup/root environment remain intact.
+Requested PDFs are updated with their stated evidence; final coverage uses the
+actual release result. Older guide/Word captures remain historical and their
+refresh is deferred until requested. Main protection/email verification stays
+queued at the owner's request. No secrets, paid calls or native release.
+
 ## Security repair integration checkpoint — 29 October 2026
 
 PR #25 combines the security/privacy repair with current main 45ad8a6.

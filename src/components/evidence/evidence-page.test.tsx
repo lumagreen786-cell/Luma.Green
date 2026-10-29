@@ -200,3 +200,45 @@ it("keeps original history and removes its replace action once a correction is l
     screen.getAllByRole("button", { name: messages.evidence.correct }),
   ).toHaveLength(1);
 });
+
+it("downloads an explicitly partial unfiled list without saving or reading more rows and revokes its local URL", async () => {
+  const createUrl = vi.fn(() => "blob:synthetic-evidence-list"),
+    revokeUrl = vi.fn();
+  const NativeUrl = URL;
+  vi.stubGlobal(
+    "URL",
+    class extends NativeUrl {
+      static readonly createObjectURL = createUrl;
+      static readonly revokeObjectURL = revokeUrl;
+    },
+  );
+  const click = vi
+    .spyOn(HTMLAnchorElement.prototype, "click")
+    .mockImplementation(vi.fn());
+  try {
+    data.rows = [original];
+    data.status = "CanLoadMore";
+    render(view());
+    expect(screen.getByText(messages.evidence.export.partial)).toBeVisible();
+    expect(screen.getByText(messages.evidence.export.notice)).toBeVisible();
+    await userEvent.click(
+      screen.getByRole("button", { name: messages.evidence.export.download }),
+    );
+    expect(createUrl).toHaveBeenCalledOnce();
+    expect(click).toHaveBeenCalledOnce();
+    expect(revokeUrl).toHaveBeenCalledWith("blob:synthetic-evidence-list");
+    expect(data.save).not.toHaveBeenCalled();
+    expect(data.loadMore).not.toHaveBeenCalled();
+  } finally {
+    click.mockRestore();
+    vi.unstubAllGlobals();
+  }
+});
+
+it("disables evidence downloads while scoped rows are loading or belong to another workspace", () => {
+  data.rows = [{ ...original, orgId: "different-workspace" }];
+  render(view());
+  expect(
+    screen.getByRole("button", { name: messages.evidence.export.download }),
+  ).toBeDisabled();
+});

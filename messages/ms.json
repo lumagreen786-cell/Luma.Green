@@ -1571,7 +1571,8 @@
       "impact": "Impak",
       "compliance": "Pematuhan",
       "earnings": "Pendapatan",
-      "paperRecords": "Rekod kertas"
+      "paperRecords": "Rekod kertas",
+      "billing": "Pelan tapak"
     },
     "navLabel": "Aplikasi",
     "homeLink": "Laman utama Luma.Green",
@@ -3819,7 +3820,14 @@
     "external_organization": "Organisasi pengeluar",
     "trade_seller": "Penjual",
     "trade_buyer": "Pembeli",
-    "correctionHint": "Rekod asal kekal kelihatan. Simpan rujukan baharu untuk menggantikannya."
+    "correctionHint": "Rekod asal kekal kelihatan. Simpan rujukan baharu untuk menggantikannya.",
+    "export": {
+      "download": "Muat turun senarai bukti",
+      "json": "JSON",
+      "notice": "Rujukan belum disahkan. Bukan pemfailan kerajaan.",
+      "partial": "Senarai separa: baris dimuat sahaja.",
+      "complete": "Semua baris tersedia telah dimuat."
+    }
   },
   "accountPhone": {
     "title": "Sahkan nombor telefon anda",
@@ -4301,7 +4309,25 @@
     "sharedReports": "Laporan audit dikongsi",
     "revoke": "Batalkan akses",
     "quantityGrams": "Kuantiti (g)",
-    "recordName": "Nama rekod"
+    "recordName": "Nama rekod",
+    "acknowledged": "Penerimaan diakui",
+    "responded": "Dibalas",
+    "declined": "Ditolak",
+    "workflow": {
+      "requester": "Pemohon",
+      "recipient": "Penerima",
+      "respond": "Balas",
+      "acknowledge": "Sahkan pengakuan",
+      "decline": "Tolak",
+      "close": "Tutup",
+      "edit": "Sunting",
+      "submit": "Hantar mesej",
+      "revoke": "Batalkan akses",
+      "message": "Mesej anda",
+      "history": "Sejarah permintaan",
+      "notice": "Pelaksanaan penyedia dan penebusan tidak tersedia. Rekod tidak meluluskan pinjaman, insurans, bantuan atau bayaran.",
+      "empty": "Belum ada rekod."
+    }
   },
   "returnClaims": {
     "title": "Pemulangan dan bukti skim",
@@ -4436,6 +4462,62 @@
     "reference": "Rujukan",
     "more": "Lagi",
     "capacity": "Storan dokumen penuh. Gunakan rekod manual atau hubungi pemilik ruang kerja."
+  },
+  "businessSubscriptions": {
+    "title": "Pelan tapak",
+    "lead": "Simpan pilihan pelan untuk tapak ini.",
+    "off": "Pengebilan dimatikan. Pilihan tidak memulakan langganan berbayar.",
+    "plan": "Pelan",
+    "monthly": "Harga bulanan sasaran",
+    "members": "Ahli: {count}",
+    "agreed": "Skop mengikut persetujuan",
+    "from": "Dari {price}",
+    "selected": "Pilihan disimpan",
+    "cancelled": "Permintaan dibatalkan",
+    "none": "Tiada permintaan",
+    "save": "Simpan pilihan",
+    "cancel": "Batal permintaan",
+    "ownerOnly": "Hanya pemilik tapak boleh mengubah pilihan ini.",
+    "history": "Sejarah permintaan",
+    "verified": "Kapasiti disahkan: {count} ahli",
+    "stale": "Muat semula halaman sebelum menyimpan.",
+    "plans": {
+      "trader": "Peniaga Plus",
+      "centre": "Pusat",
+      "yard": "Kawasan",
+      "processor": "Pemproses",
+      "recycler": "Pengitar semula / Pengilang",
+      "enterprise": "Perusahaan besar",
+      "institution": "Pelaporan institusi"
+    }
+  },
+  "paperAssist": {
+    "title": "Bantuan teks",
+    "lead": "Hanya menggunakan teks yang disahkan. Semak setiap hasil; bukan kelulusan rasmi.",
+    "unavailable": "Model tidak tersedia. Masukkan teks secara manual.",
+    "task": "Tugas",
+    "summary": "Ringkasan",
+    "translation": "Terjemahan",
+    "language": "Bahasa sasaran",
+    "create": "Draf baharu",
+    "capacity": "Sepuluh rekod disimpan. Padam draf belum disahkan untuk menambah lagi.",
+    "confirmed": "Disemak",
+    "source": "Teks sumber",
+    "model": "Draf model belum disemak",
+    "useModel": "Salin untuk semakan",
+    "reviewedText": "Teks yang anda semak",
+    "pending": "Menunggu model",
+    "consent": "Hantar teks dokumen ini kepada model luar.",
+    "generate": "Minta draf",
+    "review": "Saya telah membandingkan teks ini dengan sumber.",
+    "confirm": "Sahkan teks",
+    "discard": "Padam draf",
+    "failed": "Tiada hasil model. Kemasukan manual tersedia.",
+    "emptySource": "Dokumen ini tiada teks utama yang disahkan untuk bantuan.",
+    "conflict": "Rekod ini berubah. Suntingan anda dikekalkan. Muat semula teks disimpan sebelum menyemak.",
+    "reload": "Muat semula teks disimpan",
+    "localDraft": "Teks terdahulu yang belum disimpan",
+    "savedText": "Teks disimpan terkini"
   },
   "privacy": {
     "title": "Dasar privasi",

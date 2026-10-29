@@ -1,0 +1,44 @@
+{
+  "scope": "Combined checked main2875c58 plus agreed web changes; local checks only. Hosted/merge/Production status is separate.",
+  "fullCheck": {
+    "result": "passed",
+    "webBackendSuites": 368,
+    "webBackendTests": 3022,
+    "lintErrors": 0,
+    "lintWarnings": 125,
+    "webAndBackendTypes": "passed",
+    "dependencySecurityTests": 4,
+    "desktopPolicyTests": 30,
+    "mobilePolicyTests": 62,
+    "mobileComponentTests": 14
+  },
+  "build": {
+    "result": "passed",
+    "pages": 3351,
+    "frontendBackendUrls": "empty",
+    "telemetryEnabled": false,
+    "warnings": "Existing Sentry/OpenTelemetry dynamic require warning; no build error.",
+    "sourceReuse": "Subsequent changes affect only the private acceptance loader/tests and delivery records. The tested production runtime is unchanged; hosted new-head build remains required."
+  },
+  "productionBuildBrowser": {
+    "result": "passed",
+    "tests": 42,
+    "scope": "billing/paper/service entry guards, privacy and shared hosted update controls; no signed native release or provider acceptance"
+  },
+  "localeAudit": {
+    "result": "mechanical-checks-pass",
+    "locales": 33,
+    "messagesPerLocale": 3304,
+    "linguisticReview": "native-review-pending"
+  },
+  "nativeReleasePerformed": false,
+  "paidProviderCalls": false,
+  "earlierFailedOrStoppedChecks": "Not counted as passing evidence. See task plan; full final run supersedes them.",
+  "codeqlRepair": {
+    "finding": "Initial hosted high-severity path check/read race in private local test configuration.",
+    "repair": "Open without following symlinks, validate/read the same descriptor and close it; both configuration and roster consumption use the helper.",
+    "regression": "Two actual old-sequence cases failed; all3private-file cases pass after repair.",
+    "currentLocalFullCheck": "passed3022tests/368files",
+    "hostedRecheck": "Pending new head; no alert dismissal or merge bypass."
+  }
+}

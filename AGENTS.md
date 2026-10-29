@@ -15,6 +15,21 @@ how to do one job well.
 
 ---
 
+## Agreed web completion — 29 October 2026
+
+The owner authorized finishing the remaining agreed web features that can be
+built without API keys or external approval, updating the plain-English PDFs,
+and providing the exact account/API signup list. In a direct reply, the owner
+kept auctions/tenders and ERP/budget/reorder work deferred. Mobile and desktop
+remain paused; preserve their source and do not develop, package or release
+them. Existing compatibility checks may run. Keep provider-dependent actions
+off until their configuration, budget, terms and acceptance are verified.
+Plan selection is not payment, a service response is not regulated execution,
+and a prepared evidence export is not an official filing. Complete local code
+and tests where possible, then list remaining provider-specific integration,
+operating evidence and live acceptance separately. The active plan is
+`docs/plans/2026-10-29-web-completion-without-keys.md`.
+
 ## App security and privacy repair authority — 29 October 2026
 
 The owner authorized fixing the audited security/privacy gaps and removing

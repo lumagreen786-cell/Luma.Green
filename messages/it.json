@@ -2265,7 +2265,8 @@
       "compliance": "Conformità",
       "earnings": "Guadagni",
       "help": "Aiuto",
-      "paperRecords": "Documenti cartacei"
+      "paperRecords": "Documenti cartacei",
+      "billing": "Piano della sede"
     },
     "roles": {
       "kabadiwala": "Kabadiwala",
@@ -3819,7 +3820,14 @@
     "external_organization": "Organizzazione emittente",
     "trade_seller": "Venditore",
     "trade_buyer": "Acquirente",
-    "correctionHint": "L’originale resta visibile. Salva un nuovo riferimento per sostituirlo."
+    "correctionHint": "L’originale resta visibile. Salva un nuovo riferimento per sostituirlo.",
+    "export": {
+      "download": "Scarica elenco delle prove",
+      "json": "JSON",
+      "notice": "Riferimenti non verificati. Non è un deposito ufficiale.",
+      "partial": "Elenco parziale: solo righe caricate.",
+      "complete": "Tutte le righe disponibili sono caricate."
+    }
   },
   "accountPhone": {
     "title": "Verifica il tuo numero di cellulare",
@@ -4301,7 +4309,25 @@
     "sharedReports": "Rapporti di audit condivisi",
     "revoke": "Revoca accesso",
     "quantityGrams": "Quantità (g)",
-    "recordName": "Nome del record"
+    "recordName": "Nome del record",
+    "acknowledged": "Ricezione riconosciuta",
+    "responded": "Risposta inviata",
+    "declined": "Rifiutata",
+    "workflow": {
+      "requester": "Richiedente",
+      "recipient": "Destinatario",
+      "respond": "Rispondi",
+      "acknowledge": "Conferma il riconoscimento",
+      "decline": "Rifiuta",
+      "close": "Chiudi",
+      "edit": "Modifica",
+      "submit": "Invia messaggio",
+      "revoke": "Revoca accesso",
+      "message": "Il tuo messaggio",
+      "history": "Cronologia della richiesta",
+      "notice": "Esecuzione del fornitore e riscatto non disponibili. I registri non approvano prestiti, assicurazioni, sussidi o pagamenti.",
+      "empty": "Nessun registro ancora."
+    }
   },
   "returnClaims": {
     "title": "Resi e prove del programma",
@@ -4436,6 +4462,62 @@
     "reference": "Riferimento",
     "more": "Altro",
     "capacity": "Lo spazio per i documenti è pieno. Usa i registri manuali o contatta il proprietario dello spazio di lavoro."
+  },
+  "businessSubscriptions": {
+    "title": "Piano della sede",
+    "lead": "Salva una preferenza di piano per questa sede.",
+    "off": "La fatturazione è disattivata. Una preferenza non avvia un abbonamento a pagamento.",
+    "plan": "Piano",
+    "monthly": "Prezzo mensile indicativo",
+    "members": "Membri: {count}",
+    "agreed": "Ambito da concordare",
+    "from": "Da {price}",
+    "selected": "Preferenza salvata",
+    "cancelled": "Richiesta annullata",
+    "none": "Nessuna richiesta",
+    "save": "Salva preferenza",
+    "cancel": "Annulla richiesta",
+    "ownerOnly": "Solo il proprietario della sede può modificare questa preferenza.",
+    "history": "Cronologia richieste",
+    "verified": "Capacità verificata: {count} membri",
+    "stale": "Aggiorna la pagina prima di salvare.",
+    "plans": {
+      "trader": "Commerciante Plus",
+      "centre": "Centro",
+      "yard": "Piazzale",
+      "processor": "Trasformatore",
+      "recycler": "Riciclatore / Produttore",
+      "enterprise": "Grande impresa",
+      "institution": "Rapporti istituzionali"
+    }
+  },
+  "paperAssist": {
+    "title": "Assistenza testo",
+    "lead": "Usa solo testo confermato. Controlla ogni risultato; non è un’approvazione ufficiale.",
+    "unavailable": "Modello non disponibile. Inserisci il testo manualmente.",
+    "task": "Attività",
+    "summary": "Riepilogo",
+    "translation": "Traduzione",
+    "language": "Lingua di destinazione",
+    "create": "Nuova bozza",
+    "capacity": "Dieci record salvati. Elimina una bozza non confermata per aggiungerne un altro.",
+    "confirmed": "Verificato",
+    "source": "Testo originale",
+    "model": "Bozza del modello non verificata",
+    "useModel": "Copia per revisione",
+    "reviewedText": "Il tuo testo verificato",
+    "pending": "In attesa del modello",
+    "consent": "Invia il testo di questo documento al modello esterno.",
+    "generate": "Richiedi bozza",
+    "review": "Ho confrontato questo testo con l’originale.",
+    "confirm": "Conferma testo",
+    "discard": "Elimina bozza",
+    "failed": "Nessun risultato del modello. Puoi inserire il testo manualmente.",
+    "emptySource": "Questo documento non ha un testo principale confermato da elaborare.",
+    "conflict": "Questo record è cambiato. Le modifiche sono conservate. Ricarica il testo salvato prima di verificarlo.",
+    "reload": "Ricarica testo salvato",
+    "localDraft": "Testo precedente non salvato",
+    "savedText": "Ultimo testo salvato"
   },
   "privacy": {
     "title": "Informativa sulla privacy",

@@ -1571,7 +1571,8 @@
       "impact": "Etki",
       "compliance": "Mevzuata uyum",
       "earnings": "Kazançlar",
-      "paperRecords": "Kâğıt kayıtlar"
+      "paperRecords": "Kâğıt kayıtlar",
+      "billing": "Tesis planı"
     },
     "navLabel": "Uygulama",
     "homeLink": "Luma.Green ana sayfa",
@@ -3819,7 +3820,14 @@
     "external_organization": "Düzenleyen kuruluş",
     "trade_seller": "Satıcı",
     "trade_buyer": "Alıcı",
-    "correctionHint": "Asıl kayıt görünür kalır. Yerine yeni bir referans kaydedin."
+    "correctionHint": "Asıl kayıt görünür kalır. Yerine yeni bir referans kaydedin.",
+    "export": {
+      "download": "Kanıt listesini indir",
+      "json": "JSON",
+      "notice": "Doğrulanmamış referanslar. Resmî başvuru değildir.",
+      "partial": "Kısmi liste: yalnızca yüklenen satırlar.",
+      "complete": "Kullanılabilir tüm satırlar yüklendi."
+    }
   },
   "accountPhone": {
     "title": "Cep telefonu numaranızı doğrulayın",
@@ -4301,7 +4309,25 @@
     "sharedReports": "Paylaşılan denetim raporları",
     "revoke": "Erişimi iptal et",
     "quantityGrams": "Miktar (g)",
-    "recordName": "Kayıt adı"
+    "recordName": "Kayıt adı",
+    "acknowledged": "Alındı onaylandı",
+    "responded": "Yanıtlandı",
+    "declined": "Reddedildi",
+    "workflow": {
+      "requester": "Talep eden",
+      "recipient": "Alıcı",
+      "respond": "Yanıtla",
+      "acknowledge": "Onaylamayı onaylayın",
+      "decline": "Reddet",
+      "close": "Kapat",
+      "edit": "Düzenle",
+      "submit": "Mesaj gönder",
+      "revoke": "Erişimi iptal et",
+      "message": "Mesajınız",
+      "history": "Talep geçmişi",
+      "notice": "Sağlayıcı yürütmesi ve ödül kullanımı mevcut değil. Kayıtlar kredi, sigorta, yardım veya ödeme onaylamaz.",
+      "empty": "Henüz kayıt yok."
+    }
   },
   "returnClaims": {
     "title": "İadeler ve program kanıtları",
@@ -4436,6 +4462,62 @@
     "reference": "Referans",
     "more": "Diğer",
     "capacity": "Belge depolama alanı dolu. Elle kayıt kullanın veya çalışma alanı sahibine başvurun."
+  },
+  "businessSubscriptions": {
+    "title": "Tesis planı",
+    "lead": "Bu tesis için bir plan tercihi kaydedin.",
+    "off": "Faturalandırma kapalıdır. Tercih kaydetmek ücretli abonelik başlatmaz.",
+    "plan": "Plan",
+    "monthly": "Hedef aylık fiyat",
+    "members": "Üyeler: {count}",
+    "agreed": "Kapsam anlaşmaya göre",
+    "from": "{price} başlangıç fiyatı",
+    "selected": "Tercih kaydedildi",
+    "cancelled": "Talep iptal edildi",
+    "none": "Talep yok",
+    "save": "Tercihi kaydet",
+    "cancel": "Talebi iptal et",
+    "ownerOnly": "Bu tercihi yalnızca tesis sahibi değiştirebilir.",
+    "history": "Talep geçmişi",
+    "verified": "Doğrulanmış kapasite: {count} üye",
+    "stale": "Kaydetmeden önce sayfayı yenileyin.",
+    "plans": {
+      "trader": "Tüccar Plus",
+      "centre": "Merkez",
+      "yard": "Saha",
+      "processor": "İşleyici",
+      "recycler": "Geri dönüştürücü / Üretici",
+      "enterprise": "Büyük işletme",
+      "institution": "Kurum raporlaması"
+    }
+  },
+  "paperAssist": {
+    "title": "Metin yardımı",
+    "lead": "Yalnızca onaylanan metni kullanır. Her sonucu kontrol edin; resmî onay değildir.",
+    "unavailable": "Model kullanılamıyor. Metni elle girin.",
+    "task": "Görev",
+    "summary": "Özet",
+    "translation": "Çeviri",
+    "language": "Hedef dil",
+    "create": "Yeni taslak",
+    "capacity": "On kayıt var. Yeni kayıt için onaylanmamış bir taslağı silin.",
+    "confirmed": "İncelendi",
+    "source": "Kaynak metin",
+    "model": "Modelin incelenmemiş taslağı",
+    "useModel": "İncelemek için kopyala",
+    "reviewedText": "İncelediğiniz metin",
+    "pending": "Model bekleniyor",
+    "consent": "Bu belgenin metnini dış modele gönderin.",
+    "generate": "Taslak iste",
+    "review": "Bu metni kaynakla karşılaştırdım.",
+    "confirm": "Metni onayla",
+    "discard": "Taslağı sil",
+    "failed": "Model sonucu yok. Elle giriş yapılabilir.",
+    "emptySource": "Bu belgede yardım için onaylanmış ana metin yok.",
+    "conflict": "Bu kayıt değişti. Düzenlemeleriniz korundu. İncelemeden önce kayıtlı metni yeniden yükleyin.",
+    "reload": "Kayıtlı metni yeniden yükle",
+    "localDraft": "Önceki kaydedilmemiş metin",
+    "savedText": "Son kayıtlı metin"
   },
   "privacy": {
     "title": "Gizlilik politikası",

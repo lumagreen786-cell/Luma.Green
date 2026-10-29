@@ -71,8 +71,30 @@ export const serviceCommercialFields = {
 export const vServiceState = v.union(
   v.literal("draft"),
   v.literal("enquiry"),
+  v.literal("acknowledged"),
+  v.literal("responded"),
+  v.literal("declined"),
   v.literal("closed"),
 );
+export const vServiceAction = v.union(
+  v.literal("acknowledge"),
+  v.literal("respond"),
+  v.literal("decline"),
+  v.literal("close"),
+);
+export const vServiceHistory = v.object({
+  action: v.union(
+    vServiceAction,
+    v.literal("edit"),
+    v.literal("submit"),
+    v.literal("revoke"),
+  ),
+  party: v.union(v.literal("requester"), v.literal("recipient")),
+  actorProfileId: v.id("profiles"),
+  at: v.number(),
+  message: v.optional(v.string()),
+  operationKey: v.optional(v.string()),
+});
 export const programmeAggregateFields = {
   area: v.string(),
   startsOn: v.string(),
@@ -100,6 +122,7 @@ export const serviceRecordsTables = {
     creationFingerprint: v.optional(v.string()),
     ...serviceCommercialFields,
     kind: vServiceKind,
+    history: v.optional(v.array(vServiceHistory)),
     submittedOnCreate: v.boolean(),
     title: v.string(),
     details: v.string(),

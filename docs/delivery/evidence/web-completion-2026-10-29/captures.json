@@ -1,0 +1,79 @@
+{
+  "scope": "Selected labelled synthetic component captures. No authentication, backend, paid provider or Production acceptance proof.",
+  "provenance": "Captured before lint-only formatting/helper refactors and additive privacy catalogue merge. Source comparison found no changed visible strings, classes or DOM hierarchy; capture-time source hashes remain separate from current-source checks.",
+  "matrix": "Full agent reviews: billing72, paper72, services/evidence48 captures; all en/kn/ar/ur, light/dark, phone/tablet/desktop with bounded additional states.",
+  "images": [
+    {
+      "file": "billing-en-390-light-saved.png",
+      "sha256": "cf44805ae8b4e27ec3f3d302f22a711591b90c96634a51ebb989580673256c9c",
+      "sourceFixture": "visual-billing",
+      "original": "en-390-light-saved.png"
+    },
+    {
+      "file": "billing-en-1440-light-saved.png",
+      "sha256": "b358f3a0f1813af12671c93b2075ae40daf89ceb9365bc6cadf72dcbacfe99d5",
+      "sourceFixture": "visual-billing",
+      "original": "en-1440-light-saved.png"
+    },
+    {
+      "file": "billing-ar-390-dark-saved.png",
+      "sha256": "a38aebde0988aa19f4ac35eef8b195627ba037f57a1256bcecec09776b198ff2",
+      "sourceFixture": "visual-billing",
+      "original": "ar-390-dark-saved.png"
+    },
+    {
+      "file": "paper-manual-en-390-light.png",
+      "sha256": "5bf14913a01d86be61cb62e68846cf190ca64fd566314898b833cf7f64c9de36",
+      "sourceFixture": "visual-assistance",
+      "original": "manual-en-390-light.png"
+    },
+    {
+      "file": "paper-manual-en-1440-light.png",
+      "sha256": "b9c5e28dc151705bcc38aa565437def0d1a0e23c7325390dbe1e0dcee41dc73f",
+      "sourceFixture": "visual-assistance",
+      "original": "manual-en-1440-light.png"
+    },
+    {
+      "file": "paper-conflict-ar-390-dark.png",
+      "sha256": "12c895ba5c761a4e04f9458c6e49c2cf2b3f7335f893c6fd2fe99c502eee3ed3",
+      "sourceFixture": "visual-assistance",
+      "original": "conflict-ar-390-dark.png"
+    },
+    {
+      "file": "services-services-en-390-light.png",
+      "sha256": "2a143388ca77eacff52bd3dd4f88a800fef5c1a048a4ac5474d01e1565b00a79",
+      "sourceFixture": "visual-services",
+      "original": "services-en-390-light.png"
+    },
+    {
+      "file": "services-services-en-1440-light.png",
+      "sha256": "faa49a2432128786f712df453845f395628e76efd3b0e99cef00b0c38a6e4cb1",
+      "sourceFixture": "visual-services",
+      "original": "services-en-1440-light.png"
+    },
+    {
+      "file": "services-services-ar-390-dark.png",
+      "sha256": "5d1aa6be85ed40a13d153030f2874cbbb7f04b80d5f9fc67b1eac4b0106211c7",
+      "sourceFixture": "visual-services",
+      "original": "services-ar-390-dark.png"
+    },
+    {
+      "file": "evidence-evidence-en-390-light.png",
+      "sha256": "7cd6db926a49cf263a1aca30b7f5f7a36749144a8e16ab04ef5676b678121103",
+      "sourceFixture": "visual-services",
+      "original": "evidence-en-390-light.png"
+    },
+    {
+      "file": "evidence-evidence-en-1440-light.png",
+      "sha256": "0842edaf41c972fe765400dad2438656209a7b02f8c6ee7f65fa57127cef6d3b",
+      "sourceFixture": "visual-services",
+      "original": "evidence-en-1440-light.png"
+    },
+    {
+      "file": "evidence-evidence-ar-390-dark.png",
+      "sha256": "33e382cba4ec97acae9c404222f779f2ae8286c9eea28690e23bb213959a75f2",
+      "sourceFixture": "visual-services",
+      "original": "evidence-ar-390-dark.png"
+    }
+  ]
+}

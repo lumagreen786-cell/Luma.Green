@@ -349,3 +349,57 @@ describe("verified phone invitations", () => {
     ).rejects.toThrow("TEAM_ACCESS_DENIED");
   });
 });
+
+it("checks authoritative site seats again at phone invitation acceptance and preserves billing-off additions", async () => {
+  const w = await world();
+  await w.owner.mutation(internal.teamInvitations.persist, {
+    scope: w.workspace,
+    phone: "+919123456789",
+    role: "member",
+    token: w.token,
+  });
+  await w.t.run(async (ctx) => {
+    await ctx.db.insert("businessSubscriptionEntitlements", {
+      orgId: w.orgId,
+      provider: "cashfree",
+      providerSubscriptionId: "verified-test-subscription",
+      providerEventId: "verified-test-event",
+      plan: "trader",
+      verifiedAt: Date.now(),
+      validFrom: Date.now() - 1000,
+      validUntil: Date.now() + 60_000,
+      memberLimit: 3,
+      siteLimit: 1,
+    });
+    for (const n of [1, 2]) {
+      const profileId = await ctx.db.insert("profiles", {
+        authUserId: `phone-cap-${String(n)}`,
+        kind: "member",
+        locale: "en",
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+      });
+      await ctx.db.insert("memberships", {
+        orgId: w.orgId,
+        profileId,
+        role: "viewer",
+        createdAt: Date.now(),
+      });
+    }
+  });
+  vi.stubEnv("BUSINESS_SUBSCRIPTIONS_ENFORCEMENT_ENABLED", "true");
+  await expect(
+    w.person.mutation(api.teamInvitations.accept, { token: w.token }),
+  ).rejects.toThrow("SUBSCRIPTION_MEMBER_LIMIT");
+  vi.stubEnv("BUSINESS_SUBSCRIPTIONS_ENFORCEMENT_ENABLED", "false");
+  await w.person.mutation(api.teamInvitations.accept, { token: w.token });
+  expect(await w.person.query(api.workspace.mine, {})).toMatchObject({
+    kind: "org",
+  });
+  // A consumed token remains unusable under the existing invitation contract.
+  await expect(
+    w.person.mutation(api.teamInvitations.accept, { token: w.token }),
+  ).rejects.toThrow("INVITATION_UNAVAILABLE");
+  const team = await w.owner.query(api.workspace.team, { orgId: w.orgId });
+  expect(team.members).toHaveLength(4);
+});

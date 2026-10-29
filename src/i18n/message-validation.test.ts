@@ -8,6 +8,21 @@ import {
 } from "./message-validation";
 
 describe("message validation", () => {
+  it("allows the JSON format name and exact plan words without exempting copied sentences", () => {
+    expect(hasUntranslatedCopy("JSON", "JSON", "kn")).toBe(false);
+    expect(
+      hasUntranslatedCopy("JSON export records", "JSON export records", "kn"),
+    ).toBe(true);
+    for (const language of ["es", "pl", "tr", "nl"])
+      expect(hasUntranslatedCopy("Plan", "Plan", language)).toBe(false);
+    expect(hasUntranslatedCopy("Centre", "Centre", "fr")).toBe(false);
+    expect(hasUntranslatedCopy("Plan", "Plan", "kn")).toBe(true);
+    expect(hasUntranslatedCopy("Centre", "Centre", "es")).toBe(true);
+    expect(hasUntranslatedCopy("Plan your work", "Plan your work", "es")).toBe(
+      true,
+    );
+  });
+
   it("retains invalid leaf values so validation can report them", () => {
     expect(
       flattenMessages({ common: { title: "Hello", empty: null, list: [] } }),
