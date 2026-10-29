@@ -2265,7 +2265,8 @@
       "compliance": "コンプライアンス",
       "earnings": "収入",
       "help": "ヘルプ",
-      "paperRecords": "紙の記録"
+      "paperRecords": "紙の記録",
+      "billing": "拠点プラン"
     },
     "roles": {
       "kabadiwala": "資源回収店",
@@ -3819,7 +3820,14 @@
     "external_organization": "発行組織",
     "trade_seller": "売り手",
     "trade_buyer": "買い手",
-    "correctionHint": "元の記録は表示されたままです。新しい参照を保存して置き換えます。"
+    "correctionHint": "元の記録は表示されたままです。新しい参照を保存して置き換えます。",
+    "export": {
+      "download": "証拠一覧をダウンロード",
+      "json": "JSON",
+      "notice": "未検証の参照情報です。政府への提出ではありません。",
+      "partial": "一部の一覧：読み込み済みの行のみ。",
+      "complete": "利用可能なすべての行を読み込みました。"
+    }
   },
   "accountPhone": {
     "title": "携帯電話番号を確認",
@@ -4301,7 +4309,25 @@
     "sharedReports": "共有監査レポート",
     "revoke": "アクセスを取り消す",
     "quantityGrams": "量(g)",
-    "recordName": "記録名"
+    "recordName": "記録名",
+    "acknowledged": "受領確認済み",
+    "responded": "返信済み",
+    "declined": "辞退済み",
+    "workflow": {
+      "requester": "依頼者",
+      "recipient": "受信者",
+      "respond": "返信",
+      "acknowledge": "確認の確認",
+      "decline": "辞退",
+      "close": "閉じる",
+      "edit": "編集",
+      "submit": "メッセージを送る",
+      "revoke": "アクセスを取り消す",
+      "message": "メッセージ",
+      "history": "依頼履歴",
+      "notice": "提供者による実行と特典交換は利用できません。記録は融資、保険、給付、支払いを承認しません。",
+      "empty": "まだ記録はありません。"
+    }
   },
   "returnClaims": {
     "title": "返品と制度の証拠",
@@ -4436,5 +4462,61 @@
     "reference": "参照情報",
     "more": "その他",
     "capacity": "文書の保存容量がいっぱいです。手動の記録を使うか、ワークスペースの所有者に連絡してください。"
+  },
+  "businessSubscriptions": {
+    "title": "拠点プラン",
+    "lead": "この拠点の希望プランを保存します。",
+    "off": "請求は無効です。希望の保存では有料契約は開始されません。",
+    "plan": "プラン",
+    "monthly": "月額目標価格",
+    "members": "メンバー: {count}",
+    "agreed": "範囲は合意による",
+    "from": "{price}から",
+    "selected": "希望を保存しました",
+    "cancelled": "申請を取り消しました",
+    "none": "申請なし",
+    "save": "希望を保存",
+    "cancel": "申請を取り消す",
+    "ownerOnly": "この希望を変更できるのは拠点所有者のみです。",
+    "history": "申請履歴",
+    "verified": "確認済み定員：{count}人",
+    "stale": "保存前にページを更新してください。",
+    "plans": {
+      "trader": "トレーダープラス",
+      "centre": "センター",
+      "yard": "ヤード",
+      "processor": "処理業者",
+      "recycler": "リサイクル業者 / 製造業者",
+      "enterprise": "大企業",
+      "institution": "機関向け報告"
+    }
+  },
+  "paperAssist": {
+    "title": "テキスト支援",
+    "lead": "確定済みの本文のみを使います。すべての結果を確認してください。公的な承認ではありません。",
+    "unavailable": "モデルを利用できません。手動で入力してください。",
+    "task": "作業",
+    "summary": "要約",
+    "translation": "翻訳",
+    "language": "翻訳先の言語",
+    "create": "新しい下書き",
+    "capacity": "10件保存済みです。追加するには未確定の下書きを削除してください。",
+    "confirmed": "確認済み",
+    "source": "元の本文",
+    "model": "未確認のモデル下書き",
+    "useModel": "確認欄にコピー",
+    "reviewedText": "確認した本文",
+    "pending": "モデルの応答待ち",
+    "consent": "この文書の本文を外部モデルに送信します。",
+    "generate": "下書きを依頼",
+    "review": "この本文を原文と照合しました。",
+    "confirm": "本文を確定",
+    "discard": "下書きを削除",
+    "failed": "モデルの結果がありません。手動で入力できます。",
+    "emptySource": "この文書には支援に使える確定済みの本文がありません。",
+    "conflict": "この記録は変更されました。編集中の内容は保持されています。確認前に保存済み本文を再読込してください。",
+    "reload": "保存済み本文を再読込",
+    "localDraft": "以前の未保存の本文",
+    "savedText": "最新の保存済み本文"
   }
 }

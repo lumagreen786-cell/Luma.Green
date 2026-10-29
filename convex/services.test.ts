@@ -639,7 +639,7 @@ it("returns the original enquiry on a creation retry after edits and changed sou
     shareMaterialLotReference: true,
     commercialModel: "toll_jobwork" as const,
     principalParty: "Principal material owner",
-    submit: true,
+    submit: false,
   };
   const id = await w.creator.mutation(api.services.createEnquiry, original);
   await w.creator.mutation(api.services.updateEnquiry, {
@@ -781,3 +781,366 @@ async function referenceAudits(t: Awaited<ReturnType<typeof world>>["t"]) {
     return rows.flat();
   });
 }
+
+it("records the selected recipient conversation once and preserves frozen terms", async () => {
+  const w = await world();
+  const id = await w.creator.mutation(api.services.createEnquiry, {
+    ...ENQUIRY,
+    recipientId: w.accountId,
+    submit: true,
+  });
+  const ack = {
+    id,
+    version: 1,
+    operationKey: "response-ack-001",
+    action: "acknowledge" as const,
+  };
+  await expect(
+    w.other.mutation(api.services.actOnEnquiry, ack),
+  ).rejects.toThrow("RECORD_ACCESS_DENIED");
+  await w.recipient.mutation(api.services.actOnEnquiry, ack);
+  await w.recipient.mutation(api.services.actOnEnquiry, ack);
+  expect(await w.creator.query(api.services.enquiry, { id })).toMatchObject({
+    state: "acknowledged",
+    version: 2,
+    history: [
+      expect.objectContaining({ action: "acknowledge", party: "recipient" }),
+    ],
+  });
+  await expect(
+    w.recipient.mutation(api.services.actOnEnquiry, {
+      ...ack,
+      operationKey: "response-stale-001",
+      action: "respond",
+      message: "A response",
+    }),
+  ).rejects.toThrow("RECORD_CHANGED");
+  await w.recipient.mutation(api.services.actOnEnquiry, {
+    id,
+    version: 2,
+    operationKey: "response-text-001",
+    action: "respond",
+    message: "We can discuss the request",
+  });
+  await expect(
+    w.creator.mutation(api.services.updateEnquiry, {
+      id,
+      version: 3,
+      title: "Changed terms",
+      details: ENQUIRY.details,
+      state: "closed",
+    }),
+  ).rejects.toThrow("RECORD_CHANGED");
+  await w.creator.mutation(api.services.updateEnquiry, {
+    id,
+    version: 3,
+    title: ENQUIRY.title,
+    details: ENQUIRY.details,
+    state: "closed",
+  });
+  await expect(
+    w.recipient.mutation(api.services.actOnEnquiry, {
+      id,
+      version: 4,
+      operationKey: "response-after-close",
+      action: "respond",
+      message: "Must not save",
+    }),
+  ).rejects.toThrow("RECORD_CHANGED");
+  const row = await w.creator.query(api.services.enquiry, { id });
+  expect(row.history).toHaveLength(3);
+  expect(row.allowedActions).toEqual([]);
+  const audits = await w.t.run((ctx) =>
+    ctx.db
+      .query("auditLog")
+      .withIndex("by_entity", (q) =>
+        q.eq("entityTable", "serviceEnquiries").eq("entityId", id),
+      )
+      .take(100),
+  );
+  expect(
+    audits.filter(
+      (item) => item.entityId === id && item.action === "service.acknowledge",
+    ),
+  ).toHaveLength(1);
+  await w.creator.mutation(api.services.revokeEnquiryRecipient, { id });
+  await expect(w.recipient.query(api.services.enquiry, { id })).rejects.toThrow(
+    "RECORD_ACCESS_DENIED",
+  );
+});
+
+it.each(["suspended", "removed", "rejected", "transferred"] as const)(
+  "ends recipient access when source authority is %s",
+  async (change) => {
+    const w = await world();
+    const id = await w.creator.mutation(api.services.createEnquiry, {
+      ...ENQUIRY,
+      orgId: w.orgId,
+      recipientId: w.accountId,
+      submit: true,
+    });
+    await w.t.run(async (ctx) => {
+      switch (change) {
+        case "suspended": {
+          await ctx.db.patch("orgs", w.orgId, { status: "suspended" });
+          break;
+        }
+        case "removed": {
+          const rows = await ctx.db
+            .query("memberships")
+            .withIndex("by_org", (q) => q.eq("orgId", w.orgId))
+            .take(100);
+          for (const row of rows) await ctx.db.delete("memberships", row._id);
+          break;
+        }
+        case "rejected": {
+          await ctx.db.patch("stakeholderAccounts", w.accountId, {
+            status: "rejected",
+          });
+          break;
+        }
+        case "transferred": {
+          const row = await ctx.db.get("serviceEnquiries", id);
+          if (!row) throw new Error("Fixture missing");
+          await ctx.db.patch("stakeholderAccounts", w.accountId, {
+            ownerProfileId: row.requesterProfileId,
+          });
+          break;
+        }
+      }
+    });
+    const hidden = await w.recipient.query(api.services.board, {});
+    expect(hidden.received).toEqual([]);
+    await expect(
+      w.recipient.query(api.services.enquiry, { id }),
+    ).rejects.toThrow("RECORD_ACCESS_DENIED");
+    await expect(
+      w.recipient.mutation(api.services.actOnEnquiry, {
+        id,
+        version: 1,
+        operationKey: "blocked-response-001",
+        action: "acknowledge",
+      }),
+    ).rejects.toThrow("RECORD_ACCESS_DENIED");
+  },
+);
+
+it("denies recipient-only actions to the requester and keeps declined requests terminal", async () => {
+  const w = await world();
+  const draft = await w.creator.mutation(api.services.createEnquiry, {
+    ...ENQUIRY,
+    recipientId: w.accountId,
+  });
+  await expect(
+    w.recipient.mutation(api.services.actOnEnquiry, {
+      id: draft,
+      version: 1,
+      operationKey: "private-draft-ack",
+      action: "acknowledge",
+    }),
+  ).rejects.toThrow("RECORD_ACCESS_DENIED");
+  await w.creator.mutation(api.services.updateEnquiry, {
+    id: draft,
+    version: 1,
+    title: "Edited draft request",
+    details: "Changed before submission",
+    state: "draft",
+  });
+  await w.creator.mutation(api.services.updateEnquiry, {
+    id: draft,
+    version: 2,
+    title: "Edited draft request",
+    details: "Changed before submission",
+    state: "enquiry",
+  });
+  await expect(
+    w.creator.mutation(api.services.actOnEnquiry, {
+      id: draft,
+      version: 3,
+      operationKey: "requester-decline",
+      action: "decline",
+    }),
+  ).rejects.toThrow("RECORD_CHANGED");
+  const args = {
+    id: draft,
+    version: 3,
+    operationKey: "recipient-decline",
+    action: "decline" as const,
+    message: "Unable to help",
+  };
+  await w.recipient.mutation(api.services.actOnEnquiry, args);
+  await w.recipient.mutation(api.services.actOnEnquiry, args);
+  await expect(
+    w.recipient.mutation(api.services.actOnEnquiry, {
+      ...args,
+      message: "Changed payload",
+    }),
+  ).rejects.toThrow("OPERATION_KEY_REUSED");
+  expect(
+    await w.creator.query(api.services.enquiry, { id: draft }),
+  ).toMatchObject({ state: "declined", version: 4, allowedActions: [] });
+});
+
+it("reserves closure and revocation when discussion reaches its rate or text limits", async () => {
+  const w = await world();
+  const id = await w.creator.mutation(api.services.createEnquiry, {
+    ...ENQUIRY,
+    recipientId: w.accountId,
+    submit: true,
+  });
+  for (let n = 0; n < 4; n++)
+    await w.recipient.mutation(api.services.actOnEnquiry, {
+      id,
+      version: n + 1,
+      operationKey: `bounded-text-${String(n)}`,
+      action: "respond",
+      message: "a".repeat(2000),
+    });
+  await expect(
+    w.recipient.mutation(api.services.actOnEnquiry, {
+      id,
+      version: 5,
+      operationKey: "bounded-text-extra",
+      action: "respond",
+      message: "extra",
+    }),
+  ).rejects.toThrow("HISTORY_LIMIT");
+  await w.recipient.mutation(api.services.actOnEnquiry, {
+    id,
+    version: 5,
+    operationKey: "bounded-close-001",
+    action: "close",
+  });
+  await w.creator.mutation(api.services.revokeEnquiryRecipient, { id });
+  expect(await w.creator.query(api.services.enquiry, { id })).toMatchObject({
+    state: "closed",
+    version: 7,
+  });
+  const rateId = await w.creator.mutation(api.services.createEnquiry, {
+    ...ENQUIRY,
+    operationKey: "rate-new-request",
+    recipientId: w.accountId,
+    submit: true,
+  });
+  for (let n = 0; n < 12; n++)
+    await w.recipient.mutation(api.services.actOnEnquiry, {
+      id: rateId,
+      version: n + 1,
+      operationKey: `bounded-rate-${String(n)}`,
+      action: "respond",
+      message: "short",
+    });
+  await expect(
+    w.recipient.mutation(api.services.actOnEnquiry, {
+      id: rateId,
+      version: 13,
+      operationKey: "bounded-rate-extra",
+      action: "respond",
+      message: "extra",
+    }),
+  ).rejects.toThrow("RESPONSE_RATE_LIMIT");
+  await w.recipient.mutation(api.services.actOnEnquiry, {
+    id: rateId,
+    version: 13,
+    operationKey: "rate-close-001",
+    action: "close",
+  });
+});
+
+it.each(["viewer", "different_workspace"] as const)(
+  "blocks requester response for %s even when the same person owns the stakeholder recipient",
+  async (change) => {
+    const w = await world();
+    const id = await w.creator.mutation(api.services.createEnquiry, {
+      ...ENQUIRY,
+      orgId: w.orgId,
+      recipientId: w.accountId,
+      submit: true,
+    });
+    await w.t.run(async (ctx) => {
+      const row = await ctx.db.get("serviceEnquiries", id);
+      if (!row) throw new Error("Missing fixture");
+      await ctx.db.patch("stakeholderAccounts", w.accountId, {
+        ownerProfileId: row.requesterProfileId,
+      });
+      await ctx.db.patch("serviceEnquiries", id, {
+        recipientProfileId: row.requesterProfileId,
+      });
+      const membership = await ctx.db
+        .query("memberships")
+        .withIndex("by_profile_org", (q) =>
+          q.eq("profileId", row.requesterProfileId).eq("orgId", w.orgId),
+        )
+        .unique();
+      if (!membership) throw new Error("Missing fixture");
+      if (change === "viewer")
+        await ctx.db.patch("memberships", membership._id, { role: "viewer" });
+      else {
+        const orgs = await ctx.db.query("orgs").take(20);
+        const other = orgs.find((org) => org._id !== w.orgId);
+        if (!other) throw new Error("Missing fixture");
+        await ctx.db.patch("profiles", row.requesterProfileId, {
+          activeOrgId: other._id,
+        });
+      }
+    });
+    await expect(
+      w.creator.mutation(api.services.actOnEnquiry, {
+        id,
+        version: 1,
+        operationKey: "requester-write-denied",
+        action: "respond",
+        message: "Must not save",
+      }),
+    ).rejects.toThrow("RECORD_ACCESS_DENIED");
+  },
+);
+
+it("revokes both aggregate report and enquiry sharing when the source requester loses workspace membership", async () => {
+  const w = await world();
+  const programmeId = await w.creator.mutation(api.services.createProgramme, {
+    ...PROGRAMME,
+    orgId: w.orgId,
+  });
+  const reportId = await w.creator.mutation(api.services.shareProgramme, {
+    programmeId,
+    recipientId: w.accountId,
+    operationKey: "membership-report-share",
+    purpose: "Synthetic reported totals",
+    expiresAt: Date.now() + 86_400_000,
+  });
+  const enquiryId = await w.creator.mutation(api.services.createEnquiry, {
+    ...ENQUIRY,
+    orgId: w.orgId,
+    recipientId: w.accountId,
+    submit: true,
+  });
+  const before = await w.recipient.query(api.services.board, {});
+  expect(before.reports).toContainEqual(
+    expect.objectContaining({ id: reportId }),
+  );
+  expect(before.received).toContainEqual(
+    expect.objectContaining({ id: enquiryId }),
+  );
+  await w.t.run(async (ctx) => {
+    const source = await ctx.db.get("programmeRecords", programmeId);
+    if (!source) throw new Error("Missing fixture");
+    const membership = await ctx.db
+      .query("memberships")
+      .withIndex("by_profile_org", (q) =>
+        q.eq("profileId", source.requesterProfileId).eq("orgId", w.orgId),
+      )
+      .unique();
+    if (!membership) throw new Error("Missing fixture");
+    await ctx.db.delete("memberships", membership._id);
+  });
+  const after = await w.recipient.query(api.services.board, {});
+  expect(after.received).toEqual([]);
+  expect(after.reports).toEqual([]);
+  await expect(
+    w.recipient.query(api.services.report, { id: reportId }),
+  ).rejects.toThrow("RECORD_ACCESS_DENIED");
+  await expect(
+    w.recipient.query(api.services.enquiry, { id: enquiryId }),
+  ).rejects.toThrow("RECORD_ACCESS_DENIED");
+});

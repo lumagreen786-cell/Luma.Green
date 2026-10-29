@@ -2265,7 +2265,8 @@
       "compliance": "Zgodność",
       "earnings": "Zarobki",
       "help": "Pomoc",
-      "paperRecords": "Dokumenty papierowe"
+      "paperRecords": "Dokumenty papierowe",
+      "billing": "Plan placówki"
     },
     "roles": {
       "kabadiwala": "Punkt skupu",
@@ -3819,7 +3820,14 @@
     "external_organization": "Organizacja wystawiająca",
     "trade_seller": "Sprzedawca",
     "trade_buyer": "Kupujący",
-    "correctionHint": "Oryginał pozostaje widoczny. Zapisz nowe odwołanie, aby go zastąpić."
+    "correctionHint": "Oryginał pozostaje widoczny. Zapisz nowe odwołanie, aby go zastąpić.",
+    "export": {
+      "download": "Pobierz listę dowodów",
+      "json": "JSON",
+      "notice": "Niezweryfikowane odniesienia. To nie jest zgłoszenie urzędowe.",
+      "partial": "Lista częściowa: tylko wczytane wiersze.",
+      "complete": "Wczytano wszystkie dostępne wiersze."
+    }
   },
   "accountPhone": {
     "title": "Potwierdź numer telefonu",
@@ -4301,7 +4309,25 @@
     "sharedReports": "Udostępnione raporty audytu",
     "revoke": "Odwołaj dostęp",
     "quantityGrams": "Ilość (g)",
-    "recordName": "Nazwa rekordu"
+    "recordName": "Nazwa rekordu",
+    "acknowledged": "Potwierdzono odbiór",
+    "responded": "Udzielono odpowiedzi",
+    "declined": "Odrzucono",
+    "workflow": {
+      "requester": "Wnioskodawca",
+      "recipient": "Odbiorca",
+      "respond": "Odpowiedz",
+      "acknowledge": "Potwierdź potwierdzenie",
+      "decline": "Odrzuć",
+      "close": "Zamknij",
+      "edit": "Edytuj",
+      "submit": "Wyślij wiadomość",
+      "revoke": "Odwołaj dostęp",
+      "message": "Twoja wiadomość",
+      "history": "Historia wniosku",
+      "notice": "Realizacja usługodawcy i wymiana nagród są niedostępne. Rejestry nie zatwierdzają pożyczek, ubezpieczeń, świadczeń ani płatności.",
+      "empty": "Brak zapisów."
+    }
   },
   "returnClaims": {
     "title": "Zwroty i dowody programu",
@@ -4436,5 +4462,61 @@
     "reference": "Odnośnik",
     "more": "Więcej",
     "capacity": "Brak miejsca na dokumenty. Użyj ręcznych rejestrów lub skontaktuj się z właścicielem obszaru roboczego."
+  },
+  "businessSubscriptions": {
+    "title": "Plan placówki",
+    "lead": "Zapisz preferowany plan dla tej placówki.",
+    "off": "Rozliczenia są wyłączone. Preferencja nie uruchamia płatnej subskrypcji.",
+    "plan": "Plan",
+    "monthly": "Docelowa cena miesięczna",
+    "members": "Członkowie: {count}",
+    "agreed": "Zakres do uzgodnienia",
+    "from": "Od {price}",
+    "selected": "Preferencja zapisana",
+    "cancelled": "Wniosek anulowany",
+    "none": "Brak wniosku",
+    "save": "Zapisz preferencję",
+    "cancel": "Anuluj wniosek",
+    "ownerOnly": "Tylko właściciel placówki może zmienić tę preferencję.",
+    "history": "Historia wniosków",
+    "verified": "Zweryfikowana pojemność: {count} członków",
+    "stale": "Odśwież stronę przed zapisaniem.",
+    "plans": {
+      "trader": "Handlowiec Plus",
+      "centre": "Centrum",
+      "yard": "Plac",
+      "processor": "Przetwórca",
+      "recycler": "Recykler / Producent",
+      "enterprise": "Duże przedsiębiorstwo",
+      "institution": "Raporty instytucjonalne"
+    }
+  },
+  "paperAssist": {
+    "title": "Pomoc z tekstem",
+    "lead": "Używa tylko potwierdzonego tekstu. Sprawdź każdy wynik; to nie jest oficjalne zatwierdzenie.",
+    "unavailable": "Model niedostępny. Wpisz tekst ręcznie.",
+    "task": "Zadanie",
+    "summary": "Podsumowanie",
+    "translation": "Tłumaczenie",
+    "language": "Język docelowy",
+    "create": "Nowy szkic",
+    "capacity": "Zapisano dziesięć rekordów. Usuń niepotwierdzony szkic, aby dodać kolejny.",
+    "confirmed": "Sprawdzono",
+    "source": "Tekst źródłowy",
+    "model": "Niesprawdzony szkic modelu",
+    "useModel": "Kopiuj do sprawdzenia",
+    "reviewedText": "Twój sprawdzony tekst",
+    "pending": "Oczekiwanie na model",
+    "consent": "Wyślij tekst tego dokumentu do modelu zewnętrznego.",
+    "generate": "Poproś o szkic",
+    "review": "Sprawdziłem ten tekst ze źródłem.",
+    "confirm": "Potwierdź tekst",
+    "discard": "Usuń szkic",
+    "failed": "Brak wyniku modelu. Można wpisać tekst ręcznie.",
+    "emptySource": "Ten dokument nie ma potwierdzonej treści do przetworzenia.",
+    "conflict": "Ten rekord się zmienił. Twoje zmiany zachowano. Wczytaj zapisany tekst przed sprawdzeniem.",
+    "reload": "Wczytaj zapisany tekst",
+    "localDraft": "Poprzedni niezapisany tekst",
+    "savedText": "Ostatni zapisany tekst"
   }
 }

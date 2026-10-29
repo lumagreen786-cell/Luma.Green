@@ -190,3 +190,20 @@ describe("commercial evidence", () => {
     expect(anotherOrg.page).toEqual([]);
   });
 });
+
+it("binds preparation reads to the expected selected workspace even when its evidence list is empty", async () => {
+  const { t, trade } = await world();
+  const seller = await signInAs(t, "+919000000101");
+  await expect(
+    seller.query(api.commercialEvidence.mine, {
+      expectedOrgId: trade.buyerOrgId,
+      paginationOpts: firstPage,
+    }),
+  ).rejects.toThrow("EVIDENCE_SCOPE_CHANGED");
+  await expect(
+    seller.query(api.commercialEvidence.mine, {
+      expectedOrgId: trade.sellerOrgId,
+      paginationOpts: firstPage,
+    }),
+  ).resolves.toMatchObject({ page: [] });
+});

@@ -1,5 +1,18 @@
 # Luma Green account and API setup checklist
 
+29 October update: use `office-setup-2026-10-30.json` and the owner's six-page
+Office API Setup Checklist for the upcoming office session. Retain the existing
+accounts; mobile/desktop and auctions/ERP remain paused/deferred. The new
+subscription UI is a saved preference, not paid recurring billing. Official
+filing and regulated execution still need provider-specific integration.
+
+Private confirmed-paper summary/translation uses separate optional Convex
+settings `PAPER_ASSISTANCE_ENABLED` and `PAPER_ASSISTANCE_DAILY_LIMIT`, with
+existing approved OpenRouter settings, per-request consent and no default
+paid allowance. Manual derivatives work without keys. A billing enforcement
+flag never creates a paid entitlement; the verified recurring producer is
+not implemented or enabled by this checklist.
+
 Checked 28 October 2026. The web foundation is already live at
 [luma.green](https://luma.green). This checklist enables the optional services
 and closes the remaining account setup gates. It does not require another OTP

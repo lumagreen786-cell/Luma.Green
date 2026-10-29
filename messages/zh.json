@@ -2265,7 +2265,8 @@
       "compliance": "合规",
       "earnings": "收入",
       "help": "帮助",
-      "paperRecords": "纸质记录"
+      "paperRecords": "纸质记录",
+      "billing": "场地方案"
     },
     "roles": {
       "kabadiwala": "废品回收店",
@@ -3819,7 +3820,14 @@
     "external_organization": "签发组织",
     "trade_seller": "卖方",
     "trade_buyer": "买方",
-    "correctionHint": "原记录仍然可见。保存新的参考信息以替换它。"
+    "correctionHint": "原记录仍然可见。保存新的参考信息以替换它。",
+    "export": {
+      "download": "下载证据清单",
+      "json": "JSON",
+      "notice": "未经核实的参考资料。并非政府申报。",
+      "partial": "部分清单：仅含已加载的行。",
+      "complete": "已加载所有可用行。"
+    }
   },
   "accountPhone": {
     "title": "验证您的手机号",
@@ -4301,7 +4309,25 @@
     "sharedReports": "共享审计报告",
     "revoke": "撤销访问",
     "quantityGrams": "数量（克）",
-    "recordName": "记录名称"
+    "recordName": "记录名称",
+    "acknowledged": "已确认收到",
+    "responded": "已回复",
+    "declined": "已拒绝",
+    "workflow": {
+      "requester": "请求方",
+      "recipient": "接收方",
+      "respond": "回复",
+      "acknowledge": "确认确认",
+      "decline": "拒绝",
+      "close": "关闭",
+      "edit": "编辑",
+      "submit": "发送留言",
+      "revoke": "撤销访问",
+      "message": "你的消息",
+      "history": "请求历史",
+      "notice": "供应商执行和奖励兑换不可用。记录不批准贷款、保险、福利或付款。",
+      "empty": "暂无记录。"
+    }
   },
   "returnClaims": {
     "title": "退货与计划证据",
@@ -4436,5 +4462,61 @@
     "reference": "参考",
     "more": "更多",
     "capacity": "纸质记录存储已满。请使用手动记录或联系工作区所有者。"
+  },
+  "businessSubscriptions": {
+    "title": "场地方案",
+    "lead": "保存此场地的方案意向。",
+    "off": "计费已关闭。保存意向不会开始付费订阅。",
+    "plan": "方案",
+    "monthly": "目标月价",
+    "members": "成员: {count}",
+    "agreed": "范围另行约定",
+    "from": "{price}起",
+    "selected": "意向已保存",
+    "cancelled": "请求已取消",
+    "none": "暂无请求",
+    "save": "保存意向",
+    "cancel": "取消请求",
+    "ownerOnly": "只有场地所有者可以更改此意向。",
+    "history": "请求记录",
+    "verified": "已验证容量：{count}名成员",
+    "stale": "保存前请刷新此页面。",
+    "plans": {
+      "trader": "贸易商增强版",
+      "centre": "中心",
+      "yard": "堆场",
+      "processor": "处理商",
+      "recycler": "回收商 / 制造商",
+      "enterprise": "大型企业",
+      "institution": "机构报告"
+    }
+  },
+  "paperAssist": {
+    "title": "文本辅助",
+    "lead": "仅使用已确认的文本。请审核每项结果；这不是官方批准。",
+    "unavailable": "模型不可用。请手动输入文本。",
+    "task": "任务",
+    "summary": "摘要",
+    "translation": "翻译",
+    "language": "目标语言",
+    "create": "新建草稿",
+    "capacity": "已保存十条记录。请删除未确认的草稿后再添加。",
+    "confirmed": "已审核",
+    "source": "原始文本",
+    "model": "未经审核的模型草稿",
+    "useModel": "复制到审核区",
+    "reviewedText": "您审核后的文本",
+    "pending": "等待模型",
+    "consent": "将此文档文本发送到外部模型。",
+    "generate": "请求草稿",
+    "review": "我已将此文本与原文核对。",
+    "confirm": "确认文本",
+    "discard": "删除草稿",
+    "failed": "没有模型结果。可以手动输入。",
+    "emptySource": "此文档没有可供辅助处理的已确认正文。",
+    "conflict": "此记录已更改。您的编辑仍被保留。请先重新加载已保存文本再审核。",
+    "reload": "重新加载已保存文本",
+    "localDraft": "之前未保存的文本",
+    "savedText": "最新已保存文本"
   }
 }

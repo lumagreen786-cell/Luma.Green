@@ -100,6 +100,9 @@ describe("service records page", () => {
           version: 1,
           canEdit: false,
           providerStatus: "unavailable",
+          history: [],
+          canRespond: false,
+          allowedActions: [],
           recipientId: "test-recipient" as Id<"stakeholderAccounts">,
         },
       ],
@@ -190,4 +193,111 @@ describe("service records page", () => {
     expect(choices[0]).toHaveAttribute("dir", "rtl");
     expect(screen.getByText(arabic.serviceRecords.unavailable)).toBeVisible();
   });
+});
+
+it("keeps response text on failure, saves explicitly and renders localized party history without IDs", async () => {
+  const row = {
+    id: "synthetic-request" as Id<"serviceEnquiries">,
+    commercialModel: "partner_service" as const,
+    paymentDirection: "not_applicable" as const,
+    principalParty: "",
+    kind: "equipment" as const,
+    title: "Synthetic partner request",
+    details: "Synthetic private conversation",
+    state: "acknowledged" as const,
+    version: 2,
+    canEdit: false,
+    providerStatus: "unavailable" as const,
+    canRespond: true,
+    allowedActions: ["respond", "close"] as ("respond" | "close")[],
+    history: [
+      {
+        action: "acknowledge" as const,
+        party: "recipient" as const,
+        actorProfileId: "private-profile-id" as Id<"profiles">,
+        at: 1_793_250_000_000,
+      },
+    ],
+  };
+  vi.mocked(useSignedInQuery).mockReturnValue({
+    orgId: null,
+    canCreate: false,
+    enquiries: [],
+    received: [row],
+    programmes: [],
+    reports: [],
+    recipients: [],
+    lots: [],
+  });
+  update.mockRejectedValueOnce(new Error("Simulated failure"));
+  page();
+  const user = userEvent.setup();
+  expect(screen.getByText(/Recipient · Acknowledge/)).toBeVisible();
+  expect(screen.queryByText(/private-profile-id/)).not.toBeInTheDocument();
+  const input = screen.getByLabelText(messages.serviceRecords.workflow.message);
+  await user.type(input, "Discuss the request after review");
+  await user.click(
+    screen.getByRole("button", {
+      name: messages.serviceRecords.workflow.respond,
+    }),
+  );
+  await waitFor(() =>
+    expect(
+      screen.getByRole("button", {
+        name: messages.serviceRecords.workflow.respond,
+      }),
+    ).toBeEnabled(),
+  );
+  expect(input).toHaveValue("Discuss the request after review");
+  const first = update.mock.calls[0]?.[0] as { operationKey: string };
+  await user.click(
+    screen.getByRole("button", {
+      name: messages.serviceRecords.workflow.respond,
+    }),
+  );
+  await waitFor(() => expect(input).toHaveValue(""));
+  expect(update).toHaveBeenLastCalledWith(
+    expect.objectContaining({
+      id: row.id,
+      version: 2,
+      action: "respond",
+      message: "Discuss the request after review",
+      operationKey: first.operationKey,
+    }),
+  );
+  expect(create).not.toHaveBeenCalled();
+});
+
+it("shows terminal requests as a conversation record with no response controls", () => {
+  vi.mocked(useSignedInQuery).mockReturnValue({
+    orgId: null,
+    canCreate: false,
+    enquiries: [],
+    received: [
+      {
+        id: "terminal-request" as Id<"serviceEnquiries">,
+        commercialModel: "partner_service",
+        paymentDirection: "not_applicable",
+        principalParty: "",
+        kind: "equipment",
+        title: "Closed synthetic request",
+        details: "Saved reported request",
+        state: "closed",
+        version: 4,
+        canEdit: false,
+        providerStatus: "unavailable",
+        canRespond: true,
+        allowedActions: [],
+        history: [],
+      },
+    ],
+    programmes: [],
+    reports: [],
+    recipients: [],
+    lots: [],
+  });
+  page("ar");
+  expect(screen.getByText("Closed synthetic request")).toBeVisible();
+  expect(screen.queryByRole("textbox")).not.toBeInTheDocument();
+  expect(screen.queryByRole("button")).not.toBeInTheDocument();
 });

@@ -1571,7 +1571,8 @@
       "impact": "Dampak",
       "compliance": "Kepatuhan",
       "earnings": "Penghasilan",
-      "paperRecords": "Catatan kertas"
+      "paperRecords": "Catatan kertas",
+      "billing": "Paket lokasi"
     },
     "navLabel": "Aplikasi",
     "homeLink": "Beranda Luma.Green",
@@ -3819,7 +3820,14 @@
     "external_organization": "Organisasi penerbit",
     "trade_seller": "Penjual",
     "trade_buyer": "Pembeli",
-    "correctionHint": "Catatan asli tetap terlihat. Simpan referensi baru untuk menggantikannya."
+    "correctionHint": "Catatan asli tetap terlihat. Simpan referensi baru untuk menggantikannya.",
+    "export": {
+      "download": "Unduh daftar bukti",
+      "json": "JSON",
+      "notice": "Referensi belum diverifikasi. Bukan pengajuan pemerintah.",
+      "partial": "Daftar sebagian: hanya baris yang dimuat.",
+      "complete": "Semua baris tersedia telah dimuat."
+    }
   },
   "accountPhone": {
     "title": "Verifikasi nomor ponsel Anda",
@@ -4301,7 +4309,25 @@
     "sharedReports": "Laporan audit bersama",
     "revoke": "Cabut akses",
     "quantityGrams": "Kuantitas (g)",
-    "recordName": "Nama catatan"
+    "recordName": "Nama catatan",
+    "acknowledged": "Penerimaan diakui",
+    "responded": "Dibalas",
+    "declined": "Ditolak",
+    "workflow": {
+      "requester": "Pemohon",
+      "recipient": "Penerima",
+      "respond": "Balas",
+      "acknowledge": "Konfirmasikan pengakuan",
+      "decline": "Tolak",
+      "close": "Tutup",
+      "edit": "Ubah",
+      "submit": "Kirim pesan",
+      "revoke": "Cabut akses",
+      "message": "Pesan Anda",
+      "history": "Riwayat permintaan",
+      "notice": "Pelaksanaan penyedia dan penukaran tidak tersedia. Catatan tidak menyetujui pinjaman, asuransi, bantuan atau pembayaran.",
+      "empty": "Belum ada catatan."
+    }
   },
   "returnClaims": {
     "title": "Pengembalian dan bukti skema",
@@ -4436,5 +4462,61 @@
     "reference": "Referensi",
     "more": "Lainnya",
     "capacity": "Penyimpanan dokumen penuh. Gunakan catatan manual atau hubungi pemilik ruang kerja."
+  },
+  "businessSubscriptions": {
+    "title": "Paket lokasi",
+    "lead": "Simpan preferensi paket untuk lokasi ini.",
+    "off": "Penagihan nonaktif. Preferensi tidak memulai langganan berbayar.",
+    "plan": "Paket",
+    "monthly": "Target harga bulanan",
+    "members": "Anggota: {count}",
+    "agreed": "Cakupan sesuai kesepakatan",
+    "from": "Mulai {price}",
+    "selected": "Preferensi disimpan",
+    "cancelled": "Permintaan dibatalkan",
+    "none": "Tidak ada permintaan",
+    "save": "Simpan preferensi",
+    "cancel": "Batalkan permintaan",
+    "ownerOnly": "Hanya pemilik lokasi yang dapat mengubah preferensi ini.",
+    "history": "Riwayat permintaan",
+    "verified": "Kapasitas terverifikasi: {count} anggota",
+    "stale": "Muat ulang halaman sebelum menyimpan.",
+    "plans": {
+      "trader": "Pedagang Plus",
+      "centre": "Pusat",
+      "yard": "Lapangan",
+      "processor": "Pengolah",
+      "recycler": "Pendaur ulang / Produsen",
+      "enterprise": "Perusahaan besar",
+      "institution": "Pelaporan institusi"
+    }
+  },
+  "paperAssist": {
+    "title": "Bantuan teks",
+    "lead": "Hanya memakai teks terkonfirmasi. Periksa setiap hasil; bukan persetujuan resmi.",
+    "unavailable": "Model tidak tersedia. Masukkan teks secara manual.",
+    "task": "Tugas",
+    "summary": "Ringkasan",
+    "translation": "Terjemahan",
+    "language": "Bahasa tujuan",
+    "create": "Draf baru",
+    "capacity": "Sepuluh catatan tersimpan. Hapus draf belum terkonfirmasi untuk menambah lagi.",
+    "confirmed": "Ditinjau",
+    "source": "Teks sumber",
+    "model": "Draf model belum diperiksa",
+    "useModel": "Salin untuk ditinjau",
+    "reviewedText": "Teks yang Anda tinjau",
+    "pending": "Menunggu model",
+    "consent": "Kirim teks dokumen ini ke model eksternal.",
+    "generate": "Minta draf",
+    "review": "Saya telah mencocokkan teks ini dengan sumber.",
+    "confirm": "Konfirmasi teks",
+    "discard": "Hapus draf",
+    "failed": "Tidak ada hasil model. Entri manual tersedia.",
+    "emptySource": "Dokumen ini belum memiliki teks utama terkonfirmasi untuk dibantu.",
+    "conflict": "Catatan ini berubah. Suntingan Anda tetap disimpan. Muat ulang teks tersimpan sebelum meninjau.",
+    "reload": "Muat ulang teks tersimpan",
+    "localDraft": "Teks sebelumnya yang belum disimpan",
+    "savedText": "Teks tersimpan terbaru"
   }
 }

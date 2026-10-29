@@ -2265,7 +2265,8 @@
       "compliance": "Compliance",
       "earnings": "Earnings",
       "help": "Help",
-      "paperRecords": "Paper records"
+      "paperRecords": "Paper records",
+      "billing": "Site plan"
     },
     "roles": {
       "kabadiwala": "Kabadiwala",
@@ -3819,7 +3820,14 @@
     "external_organization": "Issuing organisation",
     "trade_seller": "Seller",
     "trade_buyer": "Buyer",
-    "correctionHint": "The original stays visible. Save a new reference to replace it."
+    "correctionHint": "The original stays visible. Save a new reference to replace it.",
+    "export": {
+      "download": "Download evidence list",
+      "json": "JSON",
+      "notice": "Unverified references. Not a government filing.",
+      "partial": "Partial list: only loaded rows.",
+      "complete": "All available rows are loaded."
+    }
   },
   "accountPhone": {
     "title": "Verify your mobile number",
@@ -4301,7 +4309,25 @@
     "sharedReports": "Shared audit reports",
     "revoke": "Revoke access",
     "quantityGrams": "Quantity (g)",
-    "recordName": "Record name"
+    "recordName": "Record name",
+    "acknowledged": "Acknowledged",
+    "responded": "Responded",
+    "declined": "Declined",
+    "workflow": {
+      "requester": "Requester",
+      "recipient": "Recipient",
+      "respond": "Respond",
+      "acknowledge": "Acknowledge",
+      "decline": "Decline",
+      "close": "Close",
+      "edit": "Edit",
+      "submit": "Send message",
+      "revoke": "Revoke access",
+      "message": "Your message",
+      "history": "Request history",
+      "notice": "Provider execution and redemption are unavailable. Records do not approve loans, insurance, welfare or payments.",
+      "empty": "No records yet."
+    }
   },
   "returnClaims": {
     "title": "Returns and scheme evidence",
@@ -4436,5 +4462,61 @@
     "reference": "Reference",
     "more": "More",
     "capacity": "Paper storage is full. Use manual records or contact the workspace owner."
+  },
+  "businessSubscriptions": {
+    "title": "Site plan",
+    "lead": "Save a plan preference for this site.",
+    "off": "Billing is off. A preference does not start a paid subscription.",
+    "plan": "Plan",
+    "monthly": "Target monthly price",
+    "members": "Members: {count}",
+    "agreed": "Scope by agreement",
+    "from": "From {price}",
+    "selected": "Preference saved",
+    "cancelled": "Request cancelled",
+    "none": "No request",
+    "save": "Save preference",
+    "cancel": "Cancel request",
+    "ownerOnly": "Only a site owner can change this preference.",
+    "history": "Request history",
+    "verified": "Verified capacity: {count} members",
+    "stale": "Refresh this page before saving.",
+    "plans": {
+      "trader": "Trader Plus",
+      "centre": "Centre",
+      "yard": "Yard",
+      "processor": "Processor",
+      "recycler": "Recycler / Manufacturer",
+      "enterprise": "Enterprise",
+      "institution": "Institution Reporting"
+    }
+  },
+  "paperAssist": {
+    "title": "Text assistance",
+    "lead": "Uses confirmed text only. Review each result; no official approval.",
+    "unavailable": "Model unavailable. Enter text manually.",
+    "task": "Task",
+    "summary": "Summary",
+    "translation": "Translation",
+    "language": "Target language",
+    "create": "New draft",
+    "capacity": "Ten records saved. Discard an unconfirmed draft to add another.",
+    "confirmed": "Reviewed",
+    "source": "Source text",
+    "model": "Untrusted model draft",
+    "useModel": "Copy to review",
+    "reviewedText": "Your reviewed text",
+    "pending": "Waiting for the model",
+    "consent": "Send this paper text to the external model.",
+    "generate": "Request draft",
+    "review": "I checked this text against the source.",
+    "confirm": "Confirm text",
+    "discard": "Discard draft",
+    "failed": "No model result. Manual entry is available.",
+    "emptySource": "This paper has no confirmed body text to assist with.",
+    "conflict": "This record changed. Your edits are kept. Reload the saved text before reviewing.",
+    "reload": "Reload saved text",
+    "localDraft": "Previous unsaved text",
+    "savedText": "Latest saved text"
   }
 }

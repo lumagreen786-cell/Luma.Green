@@ -2,7 +2,7 @@
 import { useMutation } from "convex/react";
 import type { FunctionReturnType } from "convex/server";
 import { useFormatter, useTranslations } from "next-intl";
-import { type ReactNode, useRef, useState } from "react";
+import { type ReactNode, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 
 import { AppPageHeader, ListSkeleton } from "@/components/app/page-parts";
@@ -107,7 +107,7 @@ function ServicesContent({ data }: { data: Board }) {
                 }}
               />
             ) : null}
-            {!row.canEdit || row.state === "closed" ? null : (
+            {!row.canEdit || row.state !== "draft" ? null : (
               <ActionButton
                 label={t("edit")}
                 onClick={() => {
@@ -115,11 +115,15 @@ function ServicesContent({ data }: { data: Board }) {
                 }}
               />
             )}
+            <Conversation row={row} />
           </article>
         ))}
       </section>
       <section className="flex flex-col gap-3 border-t border-border pt-6">
         <h2 className="text-lg font-semibold">{t("received")}</h2>
+        {data.received.length === 0 ? (
+          <p className="text-sm text-muted-foreground">{t("workflow.empty")}</p>
+        ) : null}
         {data.received.map((row) => (
           <article
             key={row.id}
@@ -128,6 +132,8 @@ function ServicesContent({ data }: { data: Board }) {
             <h3 className="font-semibold">{row.title}</h3>
             <p className="whitespace-pre-line">{row.details}</p>
             <p>{t(`directions.${row.paymentDirection}`)}</p>
+            <p className="text-sm">{t(row.state)}</p>
+            <Conversation row={row} />
             {row.materialSnapshot ? (
               <p>
                 {row.materialSnapshot.materialCode} · {t("quantityGrams")}:{" "}
@@ -204,6 +210,100 @@ function ServicesContent({ data }: { data: Board }) {
         ))}
       </section>
     </>
+  );
+}
+function Conversation({ row }: { row: Enquiry }) {
+  const t = useTranslations("serviceRecords.workflow"),
+    common = useTranslations("common"),
+    format = useFormatter();
+  const act = useMutation(api.services.actOnEnquiry);
+  const [message, setMessage] = useState(""),
+    [busy, setBusy] = useState(false);
+  const locked = useRef(false),
+    mounted = useRef(true);
+  const operation = useRef<{ payload: string; key: string } | null>(null);
+  useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+    };
+  }, []);
+  if (row.state === "draft") return null;
+  const run = (action: Enquiry["allowedActions"][number]) => {
+    if (locked.current) return;
+    if (action === "respond" && !message.trim()) return;
+    const text = action === "acknowledge" ? "" : message.trim();
+    const payload = JSON.stringify({ action, message: text });
+    if (operation.current?.payload !== payload)
+      operation.current = { payload, key: crypto.randomUUID() };
+    locked.current = true;
+    setBusy(true);
+    void act({
+      id: row.id,
+      version: row.version,
+      operationKey: operation.current.key,
+      action,
+      message: text || undefined,
+    })
+      .then(() => {
+        if (!mounted.current) return;
+        if (action !== "acknowledge") setMessage("");
+        operation.current = null;
+      })
+      .catch(() => {
+        if (mounted.current) toast.error(common("error"));
+      })
+      .finally(() => {
+        locked.current = false;
+        if (mounted.current) setBusy(false);
+      });
+  };
+  return (
+    <section className="w-full min-w-0 space-y-3" aria-label={t("history")}>
+      <p className="text-sm text-muted-foreground">{t("notice")}</p>
+      <ol className="divide-y border-y border-border">
+        {row.history.map((entry, index) => (
+          <li key={index} className="min-w-0 space-y-1 py-3 text-sm">
+            <p>
+              {t(entry.party)} · {t(entry.action)} ·{" "}
+              {format.dateTime(entry.at, {
+                dateStyle: "medium",
+                timeStyle: "short",
+              })}
+            </p>
+            {entry.message ? (
+              <p className="break-words whitespace-pre-line">{entry.message}</p>
+            ) : null}
+          </li>
+        ))}
+      </ol>
+      {row.allowedActions.length > 0 ? (
+        <>
+          <Field label={t("message")}>
+            <Textarea
+              maxLength={2000}
+              disabled={busy}
+              value={message}
+              onChange={(event) => {
+                setMessage(event.target.value);
+              }}
+            />
+          </Field>
+          <div className="flex flex-wrap gap-2">
+            {row.allowedActions.map((action) => (
+              <ActionButton
+                key={action}
+                label={t(action)}
+                isDisabled={busy || (action === "respond" && !message.trim())}
+                onClick={() => {
+                  run(action);
+                }}
+              />
+            ))}
+          </div>
+        </>
+      ) : null}
+    </section>
   );
 }
 function EnquiryForm({

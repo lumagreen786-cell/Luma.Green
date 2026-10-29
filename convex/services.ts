@@ -19,6 +19,8 @@ import {
   SERVICE_KINDS,
   vCommercialModel,
   vPaymentDirection,
+  vServiceAction,
+  vServiceHistory,
   vServiceKind,
   vServiceState,
 } from "./lib/serviceRecordsSchema";
@@ -44,6 +46,9 @@ const vEnquiry = v.object({
   orgId: v.optional(v.id("orgs")),
   canEdit: v.boolean(),
   providerStatus: v.literal("unavailable"),
+  history: v.array(vServiceHistory),
+  canRespond: v.boolean(),
+  allowedActions: v.array(vServiceAction),
 });
 const vProgramme = v.object({
   id: v.id("programmeRecords"),
@@ -177,21 +182,34 @@ async function recipient(
     throw new ConvexError("RECIPIENT_UNAVAILABLE");
   return row;
 }
+interface ShareSource {
+  requesterProfileId: Id<"profiles">;
+  orgId?: Id<"orgs">;
+}
+async function isSourceShareable(ctx: QueryCtx, source: ShareSource) {
+  if (!(await isProfileOpen(ctx, source.requesterProfileId))) return false;
+  if (!source.orgId) return true;
+  const org = await ctx.db.get("orgs", source.orgId);
+  return (
+    org?.status === "active" &&
+    Boolean(await membershipFor(ctx, source.requesterProfileId, source.orgId))
+  );
+}
 async function canReceive(
   ctx: QueryCtx,
   profileId: Id<"profiles">,
   row: {
     recipientId?: Id<"stakeholderAccounts">;
     recipientProfileId?: Id<"profiles">;
-    requesterProfileId?: Id<"profiles">;
   },
+  source: ShareSource,
 ) {
   if (
     !row.recipientId ||
+    source.requesterProfileId === profileId ||
     row.recipientProfileId !== profileId ||
     !(await isProfileOpen(ctx, profileId)) ||
-    (row.requesterProfileId &&
-      !(await isProfileOpen(ctx, row.requesterProfileId)))
+    !(await isSourceShareable(ctx, source))
   )
     return false;
   const target = await ctx.db.get("stakeholderAccounts", row.recipientId);
@@ -215,6 +233,7 @@ async function audit(
 function enquiryView(
   row: Doc<"serviceEnquiries">,
   canEdit: boolean,
+  canRespond = false,
 ): Infer<typeof vEnquiry> {
   return {
     id: row._id,
@@ -231,8 +250,132 @@ function enquiryView(
     orgId: row.orgId,
     canEdit,
     providerStatus: "unavailable",
+    history: row.history ?? [],
+    canRespond: enquiryActions(row, canEdit, canRespond).includes("respond"),
+    allowedActions: enquiryActions(row, canEdit, canRespond),
   };
 }
+
+type ServiceAction = Infer<typeof vServiceAction>;
+const SERVICE_ACTION_STATES = {
+  acknowledge: "acknowledged",
+  respond: "responded",
+  decline: "declined",
+  close: "closed",
+} as const satisfies Record<ServiceAction, Infer<typeof vServiceState>>;
+function enquiryActions(
+  row: Doc<"serviceEnquiries">,
+  isOwner: boolean,
+  isReceiver: boolean,
+): ServiceAction[] {
+  if (
+    row.state === "draft" ||
+    row.state === "closed" ||
+    row.state === "declined" ||
+    (!isOwner && !isReceiver)
+  )
+    return [];
+  return [
+    ...(isReceiver && row.state === "enquiry" ? ["acknowledge" as const] : []),
+    "respond",
+    ...(isReceiver ? ["decline" as const] : []),
+    "close",
+  ];
+}
+function historyEntry(
+  row: Doc<"serviceEnquiries">,
+  entry: Infer<typeof vServiceHistory>,
+) {
+  const history = row.history ?? [];
+  if (
+    history.length >=
+    (entry.action === "close" || entry.action === "revoke" ? 100 : 98)
+  )
+    throw new ConvexError("HISTORY_LIMIT");
+  if (
+    entry.action !== "close" &&
+    entry.action !== "revoke" &&
+    history.filter(
+      (item) =>
+        item.actorProfileId === entry.actorProfileId &&
+        item.at > Date.now() - 60_000,
+    ).length >= 12
+  )
+    throw new ConvexError("RESPONSE_RATE_LIMIT");
+  if (
+    history.reduce((count, item) => count + (item.message?.length ?? 0), 0) +
+      (entry.message?.length ?? 0) >
+    8000
+  )
+    throw new ConvexError("HISTORY_LIMIT");
+  return [...history, entry];
+}
+
+export const actOnEnquiry = mutation({
+  args: {
+    id: v.id("serviceEnquiries"),
+    version: v.number(),
+    operationKey: v.string(),
+    action: vServiceAction,
+    message: v.optional(v.string()),
+  },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    const { profile } = await actor(ctx),
+      row = await ctx.db.get("serviceEnquiries", args.id);
+    if (!row) throw new ConvexError("RECORD_ACCESS_DENIED");
+    const isOwner = await canEditOwn(ctx, profile._id, row),
+      isReceiver =
+        row.state !== "draft" && (await canReceive(ctx, profile._id, row, row));
+    if (!isOwner && !isReceiver) throw new ConvexError("RECORD_ACCESS_DENIED");
+    const key = operationKey(args.operationKey),
+      message = text(
+        args.message ?? "",
+        args.action === "respond" ? 1 : 0,
+        2000,
+      );
+    if (message && args.action === "acknowledge")
+      throw new ConvexError("INVALID_RECORD");
+    const prior = row.history?.find((item) => item.operationKey === key);
+    if (prior) {
+      if (
+        prior.actorProfileId !== profile._id ||
+        prior.action !== args.action ||
+        (prior.message ?? "") !== message
+      )
+        throw new ConvexError("OPERATION_KEY_REUSED");
+      return null;
+    }
+    if (
+      !Number.isSafeInteger(args.version) ||
+      row.version !== args.version ||
+      !enquiryActions(row, isOwner, isReceiver).includes(args.action)
+    )
+      throw new ConvexError("RECORD_CHANGED");
+    const state = SERVICE_ACTION_STATES[args.action];
+    await ctx.db.patch("serviceEnquiries", row._id, {
+      state,
+      version: row.version + 1,
+      updatedAt: Date.now(),
+      history: historyEntry(row, {
+        action: args.action,
+        party: isOwner ? "requester" : "recipient",
+        actorProfileId: profile._id,
+        at: Date.now(),
+        message: message || undefined,
+        operationKey: key,
+      }),
+    });
+    await audit(
+      ctx,
+      profile._id,
+      "serviceEnquiries",
+      row._id,
+      `service.${args.action}`,
+    );
+    return null;
+  },
+});
 
 function programmeView(
   row: Doc<"programmeRecords">,
@@ -523,13 +666,26 @@ export const updateEnquiry = mutation({
     if (
       row.version !== args.version ||
       row.state === "closed" ||
-      (row.state === "enquiry" && args.state === "draft")
+      row.state === "declined" ||
+      (row.state === "draft" &&
+        !["draft", "enquiry", "closed"].includes(args.state)) ||
+      (row.state !== "draft" &&
+        (args.state !== "closed" ||
+          args.title !== row.title ||
+          args.details !== row.details))
     )
       throw new ConvexError("RECORD_CHANGED");
     if (args.state === "enquiry") await recipient(ctx, row.recipientId);
+    const editAction = args.state === "enquiry" ? "submit" : "edit";
     await ctx.db.patch("serviceEnquiries", row._id, {
       title: text(args.title, 3, 120),
       details: text(args.details, 5, 2000),
+      history: historyEntry(row, {
+        action: args.state === "closed" ? "close" : editAction,
+        party: "requester",
+        actorProfileId: profile._id,
+        at: Date.now(),
+      }),
       state: args.state,
       version: row.version + 1,
       updatedAt: Date.now(),
@@ -765,15 +921,12 @@ export async function canReadProgrammeReport(
   isOwner: boolean,
 ) {
   const source = await ctx.db.get("programmeRecords", row.programmeId);
-  if (!source || !(await isProfileOpen(ctx, source.requesterProfileId)))
-    return false;
-  if (isOwner) return canOwn(ctx, profileId, source);
-  if (row.revokedAt !== undefined || row.expiresAt <= Date.now()) return false;
-  if (source.orgId) {
-    const org = await ctx.db.get("orgs", source.orgId);
-    if (org?.status !== "active") return false;
-  }
-  return canReceive(ctx, profileId, row);
+  if (!source) return false;
+  return isOwner
+    ? canOwn(ctx, profileId, source)
+    : row.revokedAt === undefined &&
+        row.expiresAt > Date.now() &&
+        (await canReceive(ctx, profileId, row, source));
 }
 export const enquiry = query({
   args: { id: v.id("serviceEnquiries") },
@@ -786,10 +939,16 @@ export const enquiry = query({
     if (
       !isOwn &&
       !who.isAdmin &&
-      (row.state === "draft" || !(await canReceive(ctx, who.profile._id, row)))
+      (row.state === "draft" ||
+        !(await canReceive(ctx, who.profile._id, row, row)))
     )
       throw new ConvexError("RECORD_ACCESS_DENIED");
-    return enquiryView(row, await canEditOwn(ctx, who.profile._id, row));
+    return enquiryView(
+      row,
+      await canEditOwn(ctx, who.profile._id, row),
+      row.state !== "draft" &&
+        (await canReceive(ctx, who.profile._id, row, row)),
+    );
   },
 });
 export const programme = query({
@@ -866,10 +1025,14 @@ async function visibleEnquiries(
   for (const row of rows) {
     const canRead = isOwner
       ? await canOwn(ctx, profileId, row)
-      : row.state !== "draft" && (await canReceive(ctx, profileId, row));
+      : row.state !== "draft" && (await canReceive(ctx, profileId, row, row));
     if (canRead)
       result.push(
-        enquiryView(row, isOwner && (await canEditOwn(ctx, profileId, row))),
+        enquiryView(
+          row,
+          isOwner && (await canEditOwn(ctx, profileId, row)),
+          !isOwner,
+        ),
       );
   }
   return result;
@@ -924,6 +1087,12 @@ export const revokeEnquiryRecipient = mutation({
     await ctx.db.patch("serviceEnquiries", row._id, {
       recipientId: undefined,
       recipientProfileId: undefined,
+      history: historyEntry(row, {
+        action: "revoke",
+        party: "requester",
+        actorProfileId: profile._id,
+        at: Date.now(),
+      }),
       version: row.version + 1,
       updatedAt: Date.now(),
     });
@@ -952,7 +1121,7 @@ export async function canAccessServiceSource(
   const row = await ctx.db.get("serviceEnquiries", source.id);
   return row
     ? (await canOwn(ctx, profileId, row)) ||
-        (row.state !== "draft" && (await canReceive(ctx, profileId, row)))
+        (row.state !== "draft" && (await canReceive(ctx, profileId, row, row)))
     : false;
 }
 export async function serviceSupportSources(

@@ -2265,7 +2265,8 @@
       "compliance": "Naleving",
       "earnings": "Verdiensten",
       "help": "Hulp",
-      "paperRecords": "Papieren documenten"
+      "paperRecords": "Papieren documenten",
+      "billing": "Vestigingsplan"
     },
     "roles": {
       "kabadiwala": "Kabadiwala",
@@ -3819,7 +3820,14 @@
     "external_organization": "Uitgevende organisatie",
     "trade_seller": "Verkoper",
     "trade_buyer": "Koper",
-    "correctionHint": "Het origineel blijft zichtbaar. Bewaar een nieuwe verwijzing om het te vervangen."
+    "correctionHint": "Het origineel blijft zichtbaar. Bewaar een nieuwe verwijzing om het te vervangen.",
+    "export": {
+      "download": "Bewijslijst downloaden",
+      "json": "JSON",
+      "notice": "Ongeverifieerde verwijzingen. Geen overheidsindiening.",
+      "partial": "Gedeeltelijke lijst: alleen geladen rijen.",
+      "complete": "Alle beschikbare rijen zijn geladen."
+    }
   },
   "accountPhone": {
     "title": "Verifieer je mobiele nummer",
@@ -4301,7 +4309,25 @@
     "sharedReports": "Gedeelde auditrapporten",
     "revoke": "Toegang herroepen",
     "quantityGrams": "Hoeveelheid (g)",
-    "recordName": "Naam van registratie"
+    "recordName": "Naam van registratie",
+    "acknowledged": "Ontvangst bevestigd",
+    "responded": "Beantwoord",
+    "declined": "Afgewezen",
+    "workflow": {
+      "requester": "Aanvrager",
+      "recipient": "Ontvanger",
+      "respond": "Antwoorden",
+      "acknowledge": "Bevestig de bevestiging",
+      "decline": "Afwijzen",
+      "close": "Sluiten",
+      "edit": "Bewerken",
+      "submit": "Bericht versturen",
+      "revoke": "Toegang herroepen",
+      "message": "Uw bericht",
+      "history": "Aanvraaggeschiedenis",
+      "notice": "Uitvoering door aanbieders en verzilvering zijn niet beschikbaar. Registraties keuren geen leningen, verzekeringen, steun of betalingen goed.",
+      "empty": "Nog geen registraties."
+    }
   },
   "returnClaims": {
     "title": "Retouren en programmabewijs",
@@ -4436,5 +4462,61 @@
     "reference": "Referentie",
     "more": "Meer",
     "capacity": "De documentopslag is vol. Gebruik handmatige registraties of neem contact op met de werkruimte-eigenaar."
+  },
+  "businessSubscriptions": {
+    "title": "Vestigingsplan",
+    "lead": "Bewaar een planvoorkeur voor deze vestiging.",
+    "off": "Facturering staat uit. Een voorkeur start geen betaald abonnement.",
+    "plan": "Plan",
+    "monthly": "Beoogde maandprijs",
+    "members": "Leden: {count}",
+    "agreed": "Omvang volgens afspraak",
+    "from": "Vanaf {price}",
+    "selected": "Voorkeur opgeslagen",
+    "cancelled": "Verzoek geannuleerd",
+    "none": "Geen verzoek",
+    "save": "Voorkeur opslaan",
+    "cancel": "Verzoek annuleren",
+    "ownerOnly": "Alleen de vestigingseigenaar kan deze voorkeur wijzigen.",
+    "history": "Verzoekgeschiedenis",
+    "verified": "Geverifieerde capaciteit: {count} leden",
+    "stale": "Vernieuw deze pagina voordat u opslaat.",
+    "plans": {
+      "trader": "Handelaar Plus",
+      "centre": "Centrum",
+      "yard": "Terrein",
+      "processor": "Verwerker",
+      "recycler": "Recycler / Fabrikant",
+      "enterprise": "Grootbedrijf",
+      "institution": "Institutionele rapportage"
+    }
+  },
+  "paperAssist": {
+    "title": "Teksthulp",
+    "lead": "Gebruikt alleen bevestigde tekst. Controleer elk resultaat; geen officiële goedkeuring.",
+    "unavailable": "Model niet beschikbaar. Voer tekst handmatig in.",
+    "task": "Taak",
+    "summary": "Samenvatting",
+    "translation": "Vertaling",
+    "language": "Doeltaal",
+    "create": "Nieuw concept",
+    "capacity": "Tien records opgeslagen. Verwijder een onbevestigd concept om er een toe te voegen.",
+    "confirmed": "Gecontroleerd",
+    "source": "Brontekst",
+    "model": "Ongecontroleerd modelconcept",
+    "useModel": "Kopiëren ter controle",
+    "reviewedText": "Uw gecontroleerde tekst",
+    "pending": "Wachten op het model",
+    "consent": "Stuur deze documenttekst naar het externe model.",
+    "generate": "Concept aanvragen",
+    "review": "Ik heb deze tekst met de bron vergeleken.",
+    "confirm": "Tekst bevestigen",
+    "discard": "Concept verwijderen",
+    "failed": "Geen modelresultaat. Handmatige invoer is mogelijk.",
+    "emptySource": "Dit document heeft geen bevestigde hoofdtekst voor teksthulp.",
+    "conflict": "Deze record is gewijzigd. Uw bewerkingen blijven bewaard. Laad de opgeslagen tekst opnieuw voor controle.",
+    "reload": "Opgeslagen tekst herladen",
+    "localDraft": "Vorige niet-opgeslagen tekst",
+    "savedText": "Laatst opgeslagen tekst"
   }
 }
