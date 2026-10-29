@@ -37,8 +37,8 @@ importers:
         specifier: 0.7.1
         version: 0.7.1(@astryxdesign/core@0.7.1(@stylexjs/stylex@0.19.1)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react@19.3.0)
       '@convex-dev/better-auth':
-        specifier: 0.12.5
-        version: 0.12.5(@standard-schema/spec@1.1.0)(better-auth@1.6.33(patch_hash=1195728e94a767e802eb351ba5d80965eeec361094900daf14c4bdf91ef01845)(@opentelemetry/api@1.9.1)(drizzle-orm@0.45.2(@opentelemetry/api@1.9.1)(kysely@0.29.5)(pg@8.16.3))(next@16.4.3(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@playwright/test@1.64.1)(@types/node@24.19.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(pg@8.16.3)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(vitest@5.0.5))(convex@1.46.0(react@19.3.0))(hono@4.13.14)(react@19.3.0)(typescript@5.9.3)
+        specifier: 0.12.6
+        version: 0.12.6(@standard-schema/spec@1.1.0)(better-auth@1.6.33(patch_hash=1195728e94a767e802eb351ba5d80965eeec361094900daf14c4bdf91ef01845)(@opentelemetry/api@1.9.1)(drizzle-orm@0.45.2(@opentelemetry/api@1.9.1)(kysely@0.29.5)(pg@8.16.3))(next@16.4.3(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@playwright/test@1.64.1)(@types/node@24.19.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(pg@8.16.3)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(vitest@5.0.5))(convex@1.47.0(react@19.3.0))(hono@4.13.14)(react@19.3.0)(typescript@5.9.3)
       '@hookform/resolvers':
         specifier: ^5.9.1
         version: 5.9.1(@sinclair/typebox@0.27.12)(@standard-schema/spec@1.1.0)(ajv-formats@2.1.1(ajv@8.20.0))(ajv@8.20.0)(react-hook-form@7.88.0(react@19.3.0))(zod@4.6.6)
@@ -70,8 +70,8 @@ importers:
         specifier: ^0.4.0
         version: 0.4.0
       convex:
-        specifier: ^1.46.0
-        version: 1.46.0(react@19.3.0)
+        specifier: ^1.47.0
+        version: 1.47.0(react@19.3.0)
       gsap:
         specifier: 3.15.0
         version: 3.15.0
@@ -179,8 +179,8 @@ importers:
         specifier: ^5.0.5
         version: 5.0.5(vitest@5.0.5)
       convex-test:
-        specifier: ^0.0.62
-        version: 0.0.62(convex@1.46.0(react@19.3.0))
+        specifier: ^0.0.65
+        version: 0.0.65(convex@1.47.0(react@19.3.0))
       drizzle-orm:
         specifier: 0.45.2
         version: 0.45.2(@opentelemetry/api@1.9.1)(kysely@0.29.5)(pg@8.16.3)
@@ -913,8 +913,8 @@ packages:
     resolution: {integrity: sha512-aalGyl7dbB5PArRebDIX43ZvBlXrYm9uWzGJ26t+4SzJVPsOuvfILGGbw5X4yX7i50YEmJ8zvbiWnqH/AAnZqg==}
     engines: {node: '>=22'}
 
-  '@convex-dev/better-auth@0.12.5':
-    resolution: {integrity: sha512-YFUbGk04OlINno9FpOTNZN67AP+kSQsblfep5zs1f/WTgMWjD5FymU6rSSh3mu52gukmDNnBJTjC/lj4QRpjlQ==}
+  '@convex-dev/better-auth@0.12.6':
+    resolution: {integrity: sha512-Y3zSbCE6iSyrqkEHrcTh87CRp0dl5kljkOHfkIz6y4edhJ2crniWxb86D5hQQlirMkkdTB76sJrP8xAZf+PdgA==}
     peerDependencies:
       better-auth: '>=1.6.11 <1.7.0'
       convex: ^1.25.0
@@ -4730,12 +4730,12 @@ packages:
   convert-source-map@2.0.0:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
 
-  convex-helpers@0.1.124:
-    resolution: {integrity: sha512-Gbu/jq6I3x5Y51cXP5c7+CI3t15vX5Xi2G0tOym3rxpBtYqrI+qWwxkqZgJYrHHccY42wZudB8h6kS3fak8Aeg==}
+  convex-helpers@0.1.129:
+    resolution: {integrity: sha512-8QJLbym0fKsf3tYcF2ZTX37NeYt/BkOFBjBwB2LR1fXUAajeYaTLV11gi/0IVOU/jCdH2j/VseHhHid1qQcqFw==}
     hasBin: true
     peerDependencies:
       '@standard-schema/spec': ^1.0.0
-      convex: ^1.43.0
+      convex: ^1.46.0
       hono: ^4.0.5
       react: ^17.0.2 || ^18.0.0 || ^19.0.0
       typescript: ^5.5 || ^6.0.0 || ^7.0.0
@@ -4752,13 +4752,13 @@ packages:
       zod:
         optional: true
 
-  convex-test@0.0.62:
-    resolution: {integrity: sha512-gvFps/A1JhOlFToZKjStSX8lWQS8oPF4oKm6U5D/ZdmOtfC7bKqw5Ce5ccAf45jvxPKPcFiyWt8JrueE+byB2g==}
+  convex-test@0.0.65:
+    resolution: {integrity: sha512-2FgHlLGraM2O3tEVpOfvoHSleK0x92J8xjQ/qClWzNJX3NcmgvuNeWBrmma7sLJ8lB3ENPxx6ykJTfvZmWg3BQ==}
     peerDependencies:
       convex: ^1.43.0
 
-  convex@1.46.0:
-    resolution: {integrity: sha512-dhBwDQTZDOhi5SUGAX17EWNehCdNq6/UFrSL0eLZuGfMkdsQbCVWVRZCzbZ5CF+/pgvoGxtApbEoTSipqL4JTw==}
+  convex@1.47.0:
+    resolution: {integrity: sha512-B1z/lOmex7i09NASq8+2WG9rZLzGXXOSkpwGOpaNIvOs4awyW4RMgpVBjt8r2wvvHwhEBEsOr2pGYpulnmAxYQ==}
     engines: {node: '>=20.0.0', npm: '>=7.0.0'}
     hasBin: true
     peerDependencies:
@@ -9985,13 +9985,13 @@ snapshots:
 
   '@conventional-changelog/template@1.4.0': {}
 
-  '@convex-dev/better-auth@0.12.5(@standard-schema/spec@1.1.0)(better-auth@1.6.33(patch_hash=1195728e94a767e802eb351ba5d80965eeec361094900daf14c4bdf91ef01845)(@opentelemetry/api@1.9.1)(drizzle-orm@0.45.2(@opentelemetry/api@1.9.1)(kysely@0.29.5)(pg@8.16.3))(next@16.4.3(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@playwright/test@1.64.1)(@types/node@24.19.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(pg@8.16.3)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(vitest@5.0.5))(convex@1.46.0(react@19.3.0))(hono@4.13.14)(react@19.3.0)(typescript@5.9.3)':
+  '@convex-dev/better-auth@0.12.6(@standard-schema/spec@1.1.0)(better-auth@1.6.33(patch_hash=1195728e94a767e802eb351ba5d80965eeec361094900daf14c4bdf91ef01845)(@opentelemetry/api@1.9.1)(drizzle-orm@0.45.2(@opentelemetry/api@1.9.1)(kysely@0.29.5)(pg@8.16.3))(next@16.4.3(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@playwright/test@1.64.1)(@types/node@24.19.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(pg@8.16.3)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(vitest@5.0.5))(convex@1.47.0(react@19.3.0))(hono@4.13.14)(react@19.3.0)(typescript@5.9.3)':
     dependencies:
       '@better-fetch/fetch': 1.3.2
       better-auth: 1.6.33(patch_hash=1195728e94a767e802eb351ba5d80965eeec361094900daf14c4bdf91ef01845)(@opentelemetry/api@1.9.1)(drizzle-orm@0.45.2(@opentelemetry/api@1.9.1)(kysely@0.29.5)(pg@8.16.3))(next@16.4.3(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@playwright/test@1.64.1)(@types/node@24.19.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(pg@8.16.3)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(vitest@5.0.5)
       common-tags: 1.8.2
-      convex: 1.46.0(react@19.3.0)
-      convex-helpers: 0.1.124(@standard-schema/spec@1.1.0)(convex@1.46.0(react@19.3.0))(hono@4.13.14)(react@19.3.0)(typescript@5.9.3)(zod@4.6.7)
+      convex: 1.47.0(react@19.3.0)
+      convex-helpers: 0.1.129(@standard-schema/spec@1.1.0)(convex@1.47.0(react@19.3.0))(hono@4.13.14)(react@19.3.0)(typescript@5.9.3)(zod@4.6.7)
       jose: 6.2.12
       react: 19.3.0
       remeda: 2.50.0
@@ -13921,9 +13921,9 @@ snapshots:
 
   convert-source-map@2.0.0: {}
 
-  convex-helpers@0.1.124(@standard-schema/spec@1.1.0)(convex@1.46.0(react@19.3.0))(hono@4.13.14)(react@19.3.0)(typescript@5.9.3)(zod@4.6.7):
+  convex-helpers@0.1.129(@standard-schema/spec@1.1.0)(convex@1.47.0(react@19.3.0))(hono@4.13.14)(react@19.3.0)(typescript@5.9.3)(zod@4.6.7):
     dependencies:
-      convex: 1.46.0(react@19.3.0)
+      convex: 1.47.0(react@19.3.0)
     optionalDependencies:
       '@standard-schema/spec': 1.1.0
       hono: 4.13.14
@@ -13931,11 +13931,11 @@ snapshots:
       typescript: 5.9.3
       zod: 4.6.7
 
-  convex-test@0.0.62(convex@1.46.0(react@19.3.0)):
+  convex-test@0.0.65(convex@1.47.0(react@19.3.0)):
     dependencies:
-      convex: 1.46.0(react@19.3.0)
+      convex: 1.47.0(react@19.3.0)
 
-  convex@1.46.0(react@19.3.0):
+  convex@1.47.0(react@19.3.0):
     dependencies:
       esbuild: 0.27.0
       prettier: 3.9.9
