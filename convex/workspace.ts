@@ -17,6 +17,7 @@ import { isPhoneGrantCurrent } from "./lib/accountClosure";
 import { findApplication, findProfile } from "./lib/applicationAccess";
 import { vApplicationKind, vApplicationStatus } from "./lib/drafts";
 import { hashToken } from "./lib/integrations";
+import { requireSubscriptionMemberCapacity } from "./lib/subscriptions";
 import { vOrgSummary } from "./lib/views";
 import {
   currentProfile,
@@ -607,6 +608,7 @@ export const acceptInvitation = mutation({
         members.length >= MAX_WORKSPACE_MEMBERS
       )
         throw new ConvexError("TEAM_LIMIT");
+      await requireSubscriptionMemberCapacity(ctx, org._id, members.length);
       const id = await ctx.db.insert("memberships", {
         profileId: profile._id,
         orgId: org._id,

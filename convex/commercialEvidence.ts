@@ -228,10 +228,15 @@ export const forTrade = query({
 
 /** An organisation can read only the references its own people reported. */
 export const mine = query({
-  args: { paginationOpts: paginationOptsValidator },
+  args: {
+    paginationOpts: paginationOptsValidator,
+    expectedOrgId: v.optional(v.id("orgs")),
+  },
   returns: paginationResultValidator(vEvidenceView),
   handler: async (ctx, args) => {
     const { org } = await requireOrg(ctx, undefined, "read");
+    if (args.expectedOrgId !== undefined && args.expectedOrgId !== org._id)
+      throw new ConvexError("EVIDENCE_SCOPE_CHANGED");
     const result = await ctx.db
       .query("commercialEvidence")
       .withIndex("by_org_created", (q) => q.eq("orgId", org._id))

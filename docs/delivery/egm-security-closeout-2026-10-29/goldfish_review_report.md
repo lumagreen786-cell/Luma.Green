@@ -76,3 +76,18 @@ provider exchange and native-device acceptance remain separate. Already-dispatch
 HTTP responses retain the browser's shared HttpOnly cookie ordering behavior.
 Source guards stop local continuation; they do not establish device-wide ordering
 of concurrent sign-ins.
+
+## Current main integration
+
+Integrated main `20dfc8e` and preserved its paper assistance, billing and service
+work. The paper editor keeps the reviewed save/conflict callback and the new
+assistance section. Two fresh source reviews found no defects in the combined
+paper boundary; 51 focused paper tests pass. Auth product owners did not change.
+The connected fixture reuses main's tested private-file descriptor helper.
+
+The combined `pnpm check` passes: 370 suites, 3,092 app/backend tests, 185 security
+controls, 64 mobile policy, 20 mobile UI and 34 desktop tests; zero lint errors
+and 126 warnings. The disconnected production build generates 3,351 pages.
+All 72 synthetic auth captures were refreshed against the combined catalogues.
+The earlier 873-case browser proof belongs to the earlier source; the combined
+browser suite and final PR checks remain separate gates.

@@ -209,3 +209,31 @@ count and updates lastRequest. Read and test each guard in one transaction.
 Unknown guarded-update shapes reject. Keep key uniqueness, existing indexes,
 public ID/date mapping and existing auth update audit callbacks. The same real
 adapter test must show twenty concurrent calls admit exactly five at count<5.
+
+## Integration with current main 20dfc8e
+
+Main advanced through PR #27 after this PR opened. Preserve that web-completion
+release, its new optional assistance/subscription/service owners and current
+native pause. Do not add native work or activate providers. The app auth product
+owners remain unchanged; environment changes append separate optional gates and
+the app shell adds its billing link.
+
+The paper-page conflict combines the original guarded draft-memory callback
+with main's separate PaperAssistance sibling and assistance-memory owner. Retain
+both: old save completions reconcile only their submitted snapshot, newer edits
+survive, explicit conflict recovery belongs to the shown revision, and assistance
+keeps its separately scoped job/proposal workflow. Translation merge must preserve
+both sets of keys and values; all 33 catalogues were checked against a recursive
+three-way merge. Both handoff sections remain.
+
+The connected auth fixture now reuses main's tested readPrivateAcceptanceFile
+owner, which opens once and checks/reads the same descriptor. Remove the duplicate
+local helper; no private credentials or source artifacts are rewritten.
+
+Fresh read-only integration reviewers inspect PaperBoard, PaperDetail, PaperEditor,
+PaperAssistance, paper/paperAssist contracts, private/source/revision access and
+current tests. Check the combined save/switch/assist/conflict boundary, not an
+unrequested redesign of unrelated services/billing. Run the full combined checks
+and build, then fresh hosted CI. Auth convergence is retained only because its
+product owners did not change; the integration review must surface any new direct
+auth/access impact it finds.

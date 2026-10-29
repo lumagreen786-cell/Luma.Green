@@ -2265,7 +2265,8 @@
       "compliance": "Tuân thủ",
       "earnings": "Thu nhập",
       "help": "Trợ giúp",
-      "paperRecords": "Hồ sơ giấy"
+      "paperRecords": "Hồ sơ giấy",
+      "billing": "Gói cơ sở"
     },
     "roles": {
       "kabadiwala": "Người thu mua kabadiwala",
@@ -3819,7 +3820,14 @@
     "external_organization": "Tổ chức cấp",
     "trade_seller": "Bên bán",
     "trade_buyer": "Bên mua",
-    "correctionHint": "Bản gốc vẫn hiển thị. Lưu tham chiếu mới để thay thế."
+    "correctionHint": "Bản gốc vẫn hiển thị. Lưu tham chiếu mới để thay thế.",
+    "export": {
+      "download": "Tải danh sách bằng chứng",
+      "json": "JSON",
+      "notice": "Tham chiếu chưa xác minh. Không phải hồ sơ nộp cơ quan nhà nước.",
+      "partial": "Danh sách một phần: chỉ các hàng đã tải.",
+      "complete": "Đã tải tất cả hàng hiện có."
+    }
   },
   "accountPhone": {
     "title": "Xác minh số điện thoại của bạn",
@@ -4301,7 +4309,25 @@
     "sharedReports": "Báo cáo kiểm toán được chia sẻ",
     "revoke": "Hủy quyền truy cập",
     "quantityGrams": "Số lượng (g)",
-    "recordName": "Tên hồ sơ"
+    "recordName": "Tên hồ sơ",
+    "acknowledged": "Đã xác nhận nhận",
+    "responded": "Đã trả lời",
+    "declined": "Đã từ chối",
+    "workflow": {
+      "requester": "Người yêu cầu",
+      "recipient": "Người nhận",
+      "respond": "Trả lời",
+      "acknowledge": "Xác nhận xác nhận",
+      "decline": "Từ chối",
+      "close": "Đóng",
+      "edit": "Sửa",
+      "submit": "Gửi lời nhắn",
+      "revoke": "Hủy quyền truy cập",
+      "message": "Tin nhắn của bạn",
+      "history": "Lịch sử yêu cầu",
+      "notice": "Chưa có thực hiện từ nhà cung cấp hoặc đổi thưởng. Hồ sơ không duyệt khoản vay, bảo hiểm, trợ cấp hay thanh toán.",
+      "empty": "Chưa có bản ghi."
+    }
   },
   "returnClaims": {
     "title": "Hoàn trả và bằng chứng chương trình",
@@ -4438,6 +4464,62 @@
     "capacity": "Bộ nhớ hồ sơ đã đầy. Hãy dùng hồ sơ thủ công hoặc liên hệ chủ không gian làm việc.",
     "changed": "Tài liệu này đã thay đổi. Sao chép các chỉnh sửa trước khi mở bản đã lưu.",
     "loadSaved": "Mở bản đã lưu"
+  },
+  "businessSubscriptions": {
+    "title": "Gói cơ sở",
+    "lead": "Lưu lựa chọn gói cho cơ sở này.",
+    "off": "Thanh toán đang tắt. Lưu lựa chọn không bắt đầu đăng ký trả phí.",
+    "plan": "Gói",
+    "monthly": "Giá mục tiêu mỗi tháng",
+    "members": "Thành viên: {count}",
+    "agreed": "Phạm vi theo thỏa thuận",
+    "from": "Từ {price}",
+    "selected": "Đã lưu lựa chọn",
+    "cancelled": "Đã hủy yêu cầu",
+    "none": "Chưa có yêu cầu",
+    "save": "Lưu lựa chọn",
+    "cancel": "Hủy yêu cầu",
+    "ownerOnly": "Chỉ chủ cơ sở có thể thay đổi lựa chọn này.",
+    "history": "Lịch sử yêu cầu",
+    "verified": "Sức chứa đã xác minh: {count} thành viên",
+    "stale": "Tải lại trang trước khi lưu.",
+    "plans": {
+      "trader": "Thương nhân Plus",
+      "centre": "Trung tâm",
+      "yard": "Bãi",
+      "processor": "Đơn vị xử lý",
+      "recycler": "Đơn vị tái chế / Nhà sản xuất",
+      "enterprise": "Doanh nghiệp lớn",
+      "institution": "Báo cáo tổ chức"
+    }
+  },
+  "paperAssist": {
+    "title": "Hỗ trợ văn bản",
+    "lead": "Chỉ dùng văn bản đã xác nhận. Kiểm tra mọi kết quả; không phải phê duyệt chính thức.",
+    "unavailable": "Mô hình không khả dụng. Nhập văn bản thủ công.",
+    "task": "Tác vụ",
+    "summary": "Tóm tắt",
+    "translation": "Dịch",
+    "language": "Ngôn ngữ đích",
+    "create": "Bản nháp mới",
+    "capacity": "Đã lưu mười bản. Xóa bản nháp chưa xác nhận để thêm bản mới.",
+    "confirmed": "Đã kiểm tra",
+    "source": "Văn bản nguồn",
+    "model": "Bản nháp mô hình chưa kiểm tra",
+    "useModel": "Sao chép để kiểm tra",
+    "reviewedText": "Văn bản bạn đã kiểm tra",
+    "pending": "Đang chờ mô hình",
+    "consent": "Gửi văn bản tài liệu này đến mô hình bên ngoài.",
+    "generate": "Yêu cầu bản nháp",
+    "review": "Tôi đã đối chiếu văn bản này với nguồn.",
+    "confirm": "Xác nhận văn bản",
+    "discard": "Xóa bản nháp",
+    "failed": "Không có kết quả mô hình. Có thể nhập thủ công.",
+    "emptySource": "Tài liệu này chưa có phần văn bản chính được xác nhận để hỗ trợ.",
+    "conflict": "Bản ghi đã thay đổi. Các chỉnh sửa của bạn được giữ lại. Tải lại văn bản đã lưu trước khi kiểm tra.",
+    "reload": "Tải lại văn bản đã lưu",
+    "localDraft": "Văn bản cũ chưa lưu",
+    "savedText": "Văn bản mới nhất đã lưu"
   },
   "privacy": {
     "title": "Chính sách quyền riêng tư",

@@ -21,6 +21,7 @@ import {
 } from "./lib/organizations";
 import { vTeamScope } from "./lib/organizationsSchema";
 import { normalizeIndianMobile } from "./lib/phone";
+import { requireSubscriptionMemberCapacity } from "./lib/subscriptions";
 import { membershipFor } from "./lib/workspace";
 import {
   canManageWorkspaceRole,
@@ -205,6 +206,7 @@ export const accept = mutation({
           members.length >= MAX_WORKSPACE_MEMBERS
         )
           throw new ConvexError("TEAM_LIMIT");
+        await requireSubscriptionMemberCapacity(ctx, scope.id, members.length);
         await ctx.db.insert("memberships", {
           orgId: scope.id,
           profileId: profile._id,

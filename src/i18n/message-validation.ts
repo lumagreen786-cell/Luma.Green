@@ -105,6 +105,7 @@ const sharedLiterals = [
   "Google Maps", // Google requires this exact untranslated attribution.
   "GSTIN",
   "UPI",
+  "JSON", // Standard file-format identifier, shared across languages.
   "kg",
   "km",
   "min",
@@ -119,9 +120,11 @@ const sharedLiterals = [
 const identicalTranslations: Readonly<
   Partial<Record<string, readonly string[]>>
 > = {
-  es: ["No"],
-  fr: ["Notifications"],
+  es: ["No", "Plan"],
+  fr: ["Notifications", "Centre"],
   it: ["No"],
+  pl: ["Plan"],
+  tr: ["Plan"],
   pt: ["Material", "Metal", "Total", "Kabadiwalas", "Saathis"],
   nl: [
     "Contact",
@@ -134,6 +137,7 @@ const identicalTranslations: Readonly<
     "Camera",
     "Privacy",
     "per kg",
+    "Plan",
   ],
 };
 

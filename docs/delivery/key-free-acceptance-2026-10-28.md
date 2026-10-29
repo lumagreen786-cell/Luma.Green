@@ -58,10 +58,12 @@ not establish actual factory recipes, hazard classifications, operating permits
 or a permitted receiver's acceptance. Never invent those facts or activate a
 specialist route to obtain a complete-looking seed set.
 
-**Other partial groups.** R068 still needs a future optional paper-extraction
-implementation and confirmation controls; a key alone will not enable it.
-Manual entry is available under D37. R073 restore/load evidence is a separate
-operational task. No restore or load drill was performed by this test pass.
+**29 October correction.** R068 paper transcription and confirmation shipped
+in PR24; the newer paper-assistance contract covers the follow-up. The original
+missing-code statement is superseded. R073 subsequently gained the separate
+local recovery/workload drill recorded in local-operations-drill-2026-10-28.md;
+that does not prove a cloud restore or country-scale capacity. No such drill
+was performed by the three tests in this specific report.
 
 ## Verification
 

@@ -25,6 +25,7 @@ import { Link } from "@/i18n/navigation";
 import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
 import { hasPaperContent, type PaperContent } from "../../../convex/lib/paper";
+import { type AssistMemory, PaperAssistance } from "./paper-assistance";
 
 type Paper = FunctionReturnType<typeof api.paperDrafts.get>;
 interface PaperBuffer {
@@ -102,6 +103,7 @@ function PaperBoard({ orgId }: { orgId: Id<"orgs"> }) {
       >
     >
   >({});
+  const [assistMemory, setAssistMemory] = useState<AssistMemory>({});
   const [busy, setBusy] = useState(false);
   const [failure, setFailure] = useState<
     "duplicate" | "invalid" | "capacity" | "error"
@@ -223,36 +225,47 @@ function PaperBoard({ orgId }: { orgId: Id<"orgs"> }) {
         </Button>
       ) : null}
       {selected ? (
-        <PaperDetail
-          key={selected}
-          draftId={selected}
-          memory={draftMemory[selected]}
-          onDraftChange={(revision, content, submitted, savedRevision) => {
-            setDraftMemory((current) => {
-              const previous = current[selected];
-              if (
-                submitted &&
-                (previous?.revision !== revision ||
-                  previous.content !== submitted)
-              )
-                return current;
-              let next: PaperBuffer | undefined;
-              if (submitted && savedRevision !== undefined)
-                next = {
-                  revision: savedRevision,
-                  content: submitted,
-                  dirty: false,
-                };
-              else if (content) next = { revision, content, dirty: true };
-              return { ...current, [selected]: next };
-            });
-          }}
-          assisted={Boolean(available?.assisted)}
-          canOperate={Boolean(available?.canOperate)}
-          onDiscard={() => {
-            setSelected(undefined);
-          }}
-        />
+        <>
+          <PaperDetail
+            key={selected}
+            draftId={selected}
+            memory={draftMemory[selected]}
+            onDraftChange={(revision, content, submitted, savedRevision) => {
+              setDraftMemory((current) => {
+                const previous = current[selected];
+                if (
+                  submitted &&
+                  (previous?.revision !== revision ||
+                    previous.content !== submitted)
+                )
+                  return current;
+                let next: PaperBuffer | undefined;
+                if (submitted && savedRevision !== undefined)
+                  next = {
+                    revision: savedRevision,
+                    content: submitted,
+                    dirty: false,
+                  };
+                else if (content) next = { revision, content, dirty: true };
+                return { ...current, [selected]: next };
+              });
+            }}
+            assisted={Boolean(available?.assisted)}
+            canOperate={Boolean(available?.canOperate)}
+            onDiscard={() => {
+              setSelected(undefined);
+            }}
+          />
+          <PaperAssistance
+            key={`assist:${selected}`}
+            draftId={selected}
+            orgId={orgId}
+            memory={assistMemory}
+            remember={(id, draft) => {
+              setAssistMemory((current) => ({ ...current, [id]: draft }));
+            }}
+          />
+        </>
       ) : null}
     </section>
   );

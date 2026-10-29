@@ -11,6 +11,7 @@ import { AppPageHeader, ListSkeleton } from "@/components/app/page-parts";
 import { EvidenceDialog, LotField } from "@/components/lots/form-parts";
 import { NotForYou } from "@/components/shop/guards";
 import { useBusiness } from "@/components/shop/use-shop";
+import { ActionButton } from "@/components/ui/action-button";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -22,6 +23,10 @@ import {
 import { useCanOperate } from "@/components/workspace/permissions";
 import { isLocale, localeDirection } from "@/i18n/locales";
 import { Link } from "@/i18n/navigation";
+import {
+  evidencePreparationCsv,
+  evidencePreparationExport,
+} from "@/lib/evidence-preparation-export";
 
 import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
@@ -57,10 +62,10 @@ export function EvidencePage() {
         icon={FileTextIcon}
       />
     );
-  return <EvidenceHistory key={business.id} />;
+  return <EvidenceHistory key={business.id} orgId={business.id} />;
 }
 
-function EvidenceHistory() {
+function EvidenceHistory({ orgId }: { orgId: Id<"orgs"> }) {
   const t = useTranslations("evidence");
   const lots = useTranslations("lots");
   const inbox = useTranslations("notifications");
@@ -69,7 +74,7 @@ function EvidenceHistory() {
   const canOperate = useCanOperate();
   const { results, status, loadMore } = usePaginatedQuery(
     api.commercialEvidence.mine,
-    {},
+    { expectedOrgId: orgId },
     { initialNumItems: 20 },
   );
   const replaced = new Set(
@@ -82,6 +87,56 @@ function EvidenceHistory() {
         lead={t("lead")}
         actions={canOperate ? <ReferenceForm /> : undefined}
       />
+      <section className="space-y-2 border-t border-border pt-4">
+        <p className="text-sm text-muted-foreground">{t("export.notice")}</p>
+        <div className="flex flex-wrap gap-2">
+          {(["csv", "json"] as const).map((kind) => (
+            <ActionButton
+              key={kind}
+              label={t(kind === "csv" ? "export.download" : "export.json")}
+              isDisabled={
+                status === "LoadingFirstPage" ||
+                status === "LoadingMore" ||
+                results.some((row) => row.orgId !== orgId)
+              }
+              onClick={() => {
+                let url: string | undefined;
+                try {
+                  const input = {
+                    orgId,
+                    generatedAt: Date.now(),
+                    complete: status === "Exhausted",
+                    references: results,
+                  };
+                  const content =
+                    kind === "csv"
+                      ? evidencePreparationCsv(input)
+                      : evidencePreparationExport(input);
+                  url = URL.createObjectURL(
+                    new Blob([content], {
+                      type:
+                        kind === "csv"
+                          ? "text/csv;charset=utf-8"
+                          : "application/json",
+                    }),
+                  );
+                  const anchor = document.createElement("a");
+                  anchor.href = url;
+                  anchor.download = `luma-unfiled-evidence.${kind}`;
+                  anchor.click();
+                } catch {
+                  toast.error(common("error"));
+                } finally {
+                  if (url) URL.revokeObjectURL(url);
+                }
+              }}
+            />
+          ))}
+        </div>
+        <p className="text-sm">
+          {t(status === "Exhausted" ? "export.complete" : "export.partial")}
+        </p>
+      </section>
       {canOperate ? null : (
         <p className="text-sm text-muted-foreground">{lots("readOnly")}</p>
       )}

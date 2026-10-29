@@ -83,6 +83,8 @@ const serverSchema = z.object({
   BETTER_AUTH_URL: optionalUrl,
   OPENROUTER_API_KEY: z.string().optional(),
   OPENROUTER_MODEL: z.string().optional(),
+  PAPER_ASSISTANCE_ENABLED: z.string().optional(),
+  PAPER_ASSISTANCE_DAILY_LIMIT: z.string().optional(),
   PAPER_TRANSCRIPTION_ENABLED: z.string().optional(),
   PAPER_TRANSCRIPTION_DAILY_LIMIT: z.string().optional(),
   PHOTO_ESTIMATE_DAILY_LIMIT: z.string().optional(),
@@ -353,6 +355,28 @@ export function paperTranscriptionEnv() {
   return parsed.success ? parsed.data : undefined;
 }
 
+/** Text assistance has a separate explicit allowance; other model flags never enable it. */
+export function paperAssistanceEnv() {
+  if (process.env.PAPER_ASSISTANCE_ENABLED !== "true") return;
+  const parsed = z
+    .object({
+      apiKey: z
+        .string()
+        .trim()
+        .min(1)
+        .max(4096)
+        .regex(/^[^\r\n]+$/),
+      model: z.string().trim().min(1).max(200),
+      dailyLimit: z.coerce.number().int().min(1).max(100),
+    })
+    .safeParse({
+      apiKey: process.env.OPENROUTER_API_KEY,
+      model: process.env.OPENROUTER_MODEL,
+      dailyLimit: process.env.PAPER_ASSISTANCE_DAILY_LIMIT,
+    });
+  return parsed.success ? parsed.data : undefined;
+}
+
 /** Optional push channels. Convex owns these secrets; no public build flag is needed. */
 export function pushEnv() {
   const parsed = z
@@ -523,4 +547,9 @@ export function geocodingEnv() {
           process.env.GOOGLE_GEOCODING_ADDRESS_SAVE_ENABLED === "true",
       }
     : null;
+}
+
+/** Paid limits require separate verified server evidence; billing remains off. */
+export function isBusinessSubscriptionsEnforced(): boolean {
+  return process.env.BUSINESS_SUBSCRIPTIONS_ENFORCEMENT_ENABLED === "true";
 }

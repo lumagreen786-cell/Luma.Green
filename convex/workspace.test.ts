@@ -496,3 +496,58 @@ describe("invitation delivery ownership", () => {
     ).not.toHaveProperty("attemptedAt");
   });
 });
+
+it("checks a verified subscription seat limit at email acceptance without revoking current access", async () => {
+  const w = await world();
+  await w.verify();
+  await w.addInvite();
+  vi.stubEnv("BUSINESS_SUBSCRIPTIONS_ENFORCEMENT_ENABLED", "true");
+  const id = await w.t.run((ctx) =>
+    ctx.db.insert("businessSubscriptionEntitlements", {
+      orgId: w.orgId,
+      provider: "cashfree",
+      providerSubscriptionId: "verified-test-subscription",
+      providerEventId: "verified-test-event",
+      plan: "trader",
+      verifiedAt: Date.now(),
+      validFrom: Date.now() - 1000,
+      validUntil: Date.now() + 60_000,
+      memberLimit: 3,
+      siteLimit: 1,
+    }),
+  );
+  await w.t.run(async (ctx) => {
+    for (const n of [1, 2]) {
+      const profileId = await ctx.db.insert("profiles", {
+        authUserId: `subscription-cap-${String(n)}`,
+        kind: "member",
+        locale: "en",
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+      });
+      await ctx.db.insert("memberships", {
+        orgId: w.orgId,
+        profileId,
+        role: "viewer",
+        createdAt: Date.now(),
+      });
+    }
+  });
+  await expect(
+    w.person.mutation(api.workspace.acceptInvitation, { token }),
+  ).rejects.toThrow("SUBSCRIPTION_MEMBER_LIMIT");
+  expect(await w.owner.query(api.workspace.mine, {})).toMatchObject({
+    kind: "org",
+  });
+  await w.t.run((ctx) =>
+    ctx.db.patch("businessSubscriptionEntitlements", id, {
+      validUntil: Date.now() - 1,
+    }),
+  );
+  expect(await w.owner.query(api.workspace.mine, {})).toMatchObject({
+    kind: "org",
+  });
+  expect(
+    await w.person.mutation(api.workspace.acceptInvitation, { token }),
+  ).toBe(w.orgId);
+});

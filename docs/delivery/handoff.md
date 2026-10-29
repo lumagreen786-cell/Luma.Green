@@ -1,3 +1,32 @@
+## Agreed web completion - 29 October 2026
+
+Continue with [the active delivery record](web-completion-2026-10-29.md) and
+[the current plan](../plans/2026-10-29-web-completion-without-keys.md). This pass
+preserves checked main 2875c58/PR25 on codex/web-completion-no-keys. The owner
+confirmed agreed web scope first; auctions/ERP remain deferred and mobile and
+desktop stay paused. Do not infer resumption from older exceptions below.
+
+Paper assistance, site-plan preferences, private service replies and scoped
+CSV/JSON preparation exports have their local source and tests. Recurring paid
+billing and official regulated execution remain separate missing integrations,
+not configuration-only work. No fake paid or official state was added.
+
+Fresh pnpm check passed 3,022 tests/368 suites plus security/app compatibility;
+Production build passed 3,351 pages and 42 focused browser checks. Three real normal
+local phone journeys and the actual local restore passed. The restore matched
+2,639 records/104 files and 50 pre-existing scoped sessions; cloud recovery and
+national load remain unverified. See retained JSON receipts for source hashes.
+
+Hosted checks, checked merge and Production identity are separate gates. Read
+the final owner release receipt rather than treating this local checkpoint as
+proof of release. Vercel browser access works, but Hobby storage shows 73.96 GB/
+10 GB. No new deployment rejection, upgrade or history deletion at this point.
+The original source/blank form/private backup/root environment remain intact.
+Requested PDFs are updated with their stated evidence; final coverage uses the
+actual release result. Older guide/Word captures remain historical and their
+refresh is deferred until requested. Main protection/email verification stays
+queued at the owner's request. No secrets, paid calls or native release.
+
 ## EGM autonomous self-review — 29 October 2026
 
 The owner delegated routine review and repair choices. Fifteen fresh read-only
@@ -2582,3 +2611,18 @@ deferred under the owner's standing instruction. Preserve the two unrelated
 untracked delivery paths. Remote CI, checked-head merge and Production outcome
 are recorded by the PR after local verification; do not infer them from this
 local checkpoint.
+
+## Current main integration
+
+Integrated main `20dfc8e` and preserved its paper assistance, billing and service
+work. The paper editor keeps the reviewed save/conflict callback and the new
+assistance section. Two fresh source reviews found no defects in the combined
+paper boundary; 51 focused paper tests pass. Auth product owners did not change.
+The connected fixture reuses main's tested private-file descriptor helper.
+
+The combined `pnpm check` passes: 370 suites, 3,092 app/backend tests, 185 security
+controls, 64 mobile policy, 20 mobile UI and 34 desktop tests; zero lint errors
+and 126 warnings. The disconnected production build generates 3,351 pages.
+All 72 synthetic auth captures were refreshed against the combined catalogues.
+The earlier 873-case browser proof belongs to the earlier source; the combined
+browser suite and final PR checks remain separate gates.

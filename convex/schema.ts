@@ -42,6 +42,7 @@ import {
 } from "./lib/notificationConfig";
 import { operationalTables } from "./lib/operationalSchema";
 import { organizationTables } from "./lib/organizationsSchema";
+import { paperAssistTables } from "./lib/paperAssistSchema";
 import { paperTables } from "./lib/paperSchema";
 import {
   intakeCostFields,
@@ -60,6 +61,7 @@ import { sourcingTables } from "./lib/sourcingSchema";
 import { specialistMaterialFields } from "./lib/specialistMaterialSchema";
 import { vStakeholderKind, vStakeholderStatus } from "./lib/stakeholderKinds";
 import { stockClosingTables } from "./lib/stockClosingSchema";
+import { businessSubscriptionTables } from "./lib/subscriptionSchema";
 import {
   vBookingStatus,
   vFamily,
@@ -87,6 +89,8 @@ const timestamps = {
 
 export default defineSchema({
   ...paperTables,
+  ...paperAssistTables,
+  ...businessSubscriptionTables,
   ...returnClaimsTables,
   ...geocodingTables,
   ...stockClosingTables,

@@ -2265,7 +2265,8 @@
       "compliance": "Conformité",
       "earnings": "Gains",
       "help": "Aide",
-      "paperRecords": "Documents papier"
+      "paperRecords": "Documents papier",
+      "billing": "Offre du site"
     },
     "roles": {
       "kabadiwala": "Collecteur kabadiwala",
@@ -3819,7 +3820,14 @@
     "external_organization": "Organisation émettrice",
     "trade_seller": "Vendeur",
     "trade_buyer": "Acheteur",
-    "correctionHint": "L’original reste visible. Enregistrez une nouvelle référence pour le remplacer."
+    "correctionHint": "L’original reste visible. Enregistrez une nouvelle référence pour le remplacer.",
+    "export": {
+      "download": "Télécharger la liste des preuves",
+      "json": "JSON",
+      "notice": "Références non vérifiées. Aucun dépôt officiel.",
+      "partial": "Liste partielle : lignes chargées uniquement.",
+      "complete": "Toutes les lignes disponibles sont chargées."
+    }
   },
   "accountPhone": {
     "title": "Vérifiez votre numéro de mobile",
@@ -4301,7 +4309,25 @@
     "sharedReports": "Rapports d’audit partagés",
     "revoke": "Révoquer l’accès",
     "quantityGrams": "Quantité (g)",
-    "recordName": "Nom du dossier"
+    "recordName": "Nom du dossier",
+    "acknowledged": "Réception reconnue",
+    "responded": "Réponse envoyée",
+    "declined": "Refusée",
+    "workflow": {
+      "requester": "Demandeur",
+      "recipient": "Destinataire",
+      "respond": "Répondre",
+      "acknowledge": "Confirmer l'accusé de réception",
+      "decline": "Refuser",
+      "close": "Fermer",
+      "edit": "Modifier",
+      "submit": "Envoyer le message",
+      "revoke": "Révoquer l’accès",
+      "message": "Votre message",
+      "history": "Historique de la demande",
+      "notice": "L’exécution du prestataire et l’échange sont indisponibles. Ces dossiers ne valident aucun prêt, assurance, aide ou paiement.",
+      "empty": "Aucun registre pour le moment."
+    }
   },
   "returnClaims": {
     "title": "Retours et preuves du programme",
@@ -4438,6 +4464,62 @@
     "capacity": "Le stockage des documents est plein. Utilisez les registres manuels ou contactez le propriétaire de l’espace.",
     "changed": "Ce document a changé. Copiez vos modifications avant d’ouvrir la version enregistrée.",
     "loadSaved": "Ouvrir la version enregistrée"
+  },
+  "businessSubscriptions": {
+    "title": "Offre du site",
+    "lead": "Enregistrez une préférence pour ce site.",
+    "off": "La facturation est désactivée. Une préférence ne démarre pas un abonnement payant.",
+    "plan": "Offre",
+    "monthly": "Prix mensuel cible",
+    "members": "Membres: {count}",
+    "agreed": "Périmètre selon accord",
+    "from": "À partir de {price}",
+    "selected": "Préférence enregistrée",
+    "cancelled": "Demande annulée",
+    "none": "Aucune demande",
+    "save": "Enregistrer le choix",
+    "cancel": "Annuler la demande",
+    "ownerOnly": "Seul le propriétaire du site peut modifier ce choix.",
+    "history": "Historique des demandes",
+    "verified": "Capacité vérifiée : {count} membres",
+    "stale": "Actualisez cette page avant de sauvegarder.",
+    "plans": {
+      "trader": "Négociant Plus",
+      "centre": "Centre",
+      "yard": "Parc",
+      "processor": "Transformateur",
+      "recycler": "Recycleur / Fabricant",
+      "enterprise": "Grande entreprise",
+      "institution": "Rapports institutionnels"
+    }
+  },
+  "paperAssist": {
+    "title": "Aide au texte",
+    "lead": "Utilise uniquement le texte confirmé. Vérifiez chaque résultat ; aucune approbation officielle.",
+    "unavailable": "Modèle indisponible. Saisissez le texte manuellement.",
+    "task": "Tâche",
+    "summary": "Résumé",
+    "translation": "Traduction",
+    "language": "Langue cible",
+    "create": "Nouveau brouillon",
+    "capacity": "Dix enregistrements. Supprimez un brouillon non confirmé pour en ajouter un.",
+    "confirmed": "Vérifié",
+    "source": "Texte source",
+    "model": "Brouillon du modèle non vérifié",
+    "useModel": "Copier pour révision",
+    "reviewedText": "Votre texte vérifié",
+    "pending": "En attente du modèle",
+    "consent": "Envoyer le texte de ce document au modèle externe.",
+    "generate": "Demander un brouillon",
+    "review": "J’ai comparé ce texte à la source.",
+    "confirm": "Confirmer le texte",
+    "discard": "Supprimer le brouillon",
+    "failed": "Aucun résultat du modèle. Saisie manuelle possible.",
+    "emptySource": "Ce document ne contient pas de texte principal confirmé à traiter.",
+    "conflict": "Cet enregistrement a changé. Vos modifications sont conservées. Rechargez le texte enregistré avant révision.",
+    "reload": "Recharger le texte enregistré",
+    "localDraft": "Ancien texte non enregistré",
+    "savedText": "Dernier texte enregistré"
   },
   "privacy": {
     "title": "Politique de confidentialité",

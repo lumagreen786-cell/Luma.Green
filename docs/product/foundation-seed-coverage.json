@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedOn": "2026-10-28",
+  "updatedOn": "2026-10-29",
   "purpose": "Offline fixture and source-scope crosswalk. Complete accounting does not mean complete implementation or production acceptance.",
   "sourceAudit": "docs/delivery/source-coverage-2026-10-27.md",
   "productionReferenceInitialization": {
@@ -202,9 +202,9 @@
         "convex/collectionScheduling.test.ts",
         "convex/shop.test.ts"
       ],
-      "acceptanceLimit": "Prove concurrent acceptance, eligibility, capacity and two-hour unassigned behavior together",
+      "acceptanceLimit": "Joint local tests now cover radius, slot capacity, duplicate acceptance and the two-hour unassigned deadline together. Hosted/field concurrency and actual operator service coverage remain separate; see key-free-acceptance-2026-10-28.md.",
       "evidenceLevel": "offline_synthetic_only",
-      "sourceAuditLimit": "Prove concurrent acceptance, eligibility, capacity and two-hour unassigned behavior together"
+      "sourceAuditLimit": "Joint local tests now cover radius, slot capacity, duplicate acceptance and the two-hour unassigned deadline together. Hosted/field concurrency and actual operator service coverage remain separate; see key-free-acceptance-2026-10-28.md."
     },
     {
       "id": "R011",
@@ -439,9 +439,9 @@
         "convex/lib/marketRanking.test.ts",
         "convex/demand.test.ts"
       ],
-      "acceptanceLimit": "Active material/family gates are partial; delivered cost, area, capacity and deterministic ranking need proof",
+      "acceptanceLimit": "Local joint tests cover known material-plus-freight ranking, unknown freight, suspended sellers and removed material scope. Existing specification/distance/availability guards remain. Real freight, legal route, capacity and provider acceptance still need evidence.",
       "evidenceLevel": "offline_synthetic_only",
-      "sourceAuditLimit": "Exact material/specification groups rank known material-plus-freight cost, straight-line distance and recorded availability; unknown freight remains quote-required. Current area, capacity, permit and provider evidence still require joint acceptance; no new verified transport service is claimed."
+      "sourceAuditLimit": "Local joint tests cover known material-plus-freight ranking, unknown freight, suspended sellers and removed material scope. Existing specification/distance/availability guards remain. Real freight, legal route, capacity and provider acceptance still need evidence."
     },
     {
       "id": "R027",
@@ -543,9 +543,9 @@
         "convex/commercialEvidence.test.ts",
         "convex/traceability.test.ts"
       ],
-      "acceptanceLimit": "Reviewed legal rule version and authorized connection required; no official filing tested",
+      "acceptanceLimit": "Scoped commercial references and explicitly unfiled CSV/JSON evidence-list preparation are implemented in the 29 October follow-up. Official GST/e-way/hazardous submission, legal applicability and provider-specific filing integration remain blocked; adding a key alone is insufficient.",
       "evidenceLevel": "offline_synthetic_only",
-      "sourceAuditLimit": "Reviewed legal rule version and authorized connection required; no official filing tested"
+      "sourceAuditLimit": "Scoped commercial references and explicitly unfiled CSV/JSON evidence-list preparation are implemented in the 29 October follow-up. Official GST/e-way/hazardous submission, legal applicability and provider-specific filing integration remain blocked; adding a key alone is insufficient."
     },
     {
       "id": "R034",
@@ -724,9 +724,9 @@
       "sourceAuditStatus": "P",
       "disposition": "local_suite_linked",
       "testSuites": ["convex/services.test.ts"],
-      "acceptanceLimit": "Recurring collection and reported programme/aggregate-sharing owners exist. Prove authorized institution use end to end. D26/D27 do not select a compulsory extra programme-to-recurrence record link or a verified public agreement.",
+      "acceptanceLimit": "Recurring collection, reported programme totals, chosen-recipient snapshots and revocation have joint local proof and participant-browser evidence. Real institution agreements and full field journeys remain acceptance inputs; reported totals are not verified automatic aggregation.",
       "evidenceLevel": "offline_synthetic_only",
-      "sourceAuditLimit": "Recurring collection and reported programme/aggregate-sharing owners exist. Prove authorized institution use end to end. D26/D27 do not select a compulsory extra programme-to-recurrence record link or a verified public agreement."
+      "sourceAuditLimit": "Recurring collection, reported programme totals, chosen-recipient snapshots and revocation have joint local proof and participant-browser evidence. Real institution agreements and full field journeys remain acceptance inputs; reported totals are not verified automatic aggregation."
     },
     {
       "id": "R047",
@@ -907,9 +907,9 @@
       "sourceAuditStatus": "B",
       "disposition": "provider_or_external_evidence_block",
       "testSuites": ["convex/services.test.ts"],
-      "acceptanceLimit": "Provider eligibility and explicit scoped sharing needed; no regulated execution verified",
+      "acceptanceLimit": "29 October adds private requester/selected-recipient acknowledgement, replies, decline, closure and history with revocation. This is conversation handling only. Actual loan/insurance/welfare/treatment execution remains provider-specific and permission-gated.",
       "evidenceLevel": "offline_synthetic_only",
-      "sourceAuditLimit": "Provider eligibility and explicit scoped sharing needed; no regulated execution verified"
+      "sourceAuditLimit": "29 October adds private requester/selected-recipient acknowledgement, replies, decline, closure and history with revocation. This is conversation handling only. Actual loan/insurance/welfare/treatment execution remains provider-specific and permission-gated."
     },
     {
       "id": "R061",
@@ -955,9 +955,9 @@
       "sourceAuditStatus": "B",
       "disposition": "provider_or_external_evidence_block",
       "testSuites": [],
-      "acceptanceLimit": "Configured partner needed; app/manual route remains usable; no extra product required",
+      "acceptanceLimit": "The app/manual request path is usable. WhatsApp, voice/IVR, society-app and social connectors require a selected authorized provider/product contract and further connector-specific implementation; they are not all implemented or enabled by a generic key.",
       "evidenceLevel": "scope_or_external_evidence_only",
-      "sourceAuditLimit": "Configured partner needed; app/manual route remains usable; no extra product required"
+      "sourceAuditLimit": "The app/manual request path is usable. WhatsApp, voice/IVR, society-app and social connectors require a selected authorized provider/product contract and further connector-specific implementation; they are not all implemented or enabled by a generic key."
     },
     {
       "id": "R065",
@@ -1008,14 +1008,14 @@
       "sourceAuditStatus": "P",
       "disposition": "local_suite_linked",
       "testSuites": [
-        "convex/reportJobs.test.ts",
-        "convex/photoEstimates.test.ts"
+        "convex/paperDrafts.test.ts",
+        "convex/paperAssist.test.ts"
       ],
-      "acceptanceLimit": "The optional paper OCR draft and human-confirmation workflow is not implemented. D37 permits optional AI unavailable while manual entry works. This is missing optional code, not merely waiting for a provider key; photo estimates and report jobs do not complete it.",
-      "evidenceLevel": "optional_workflow_not_implemented",
-      "sourceAuditLimit": "The optional paper OCR draft and human-confirmation workflow is not implemented. D37 permits optional AI unavailable while manual entry works. This is missing optional code, not merely waiting for a provider key; photo estimates and report jobs do not complete it.",
-      "implementationState": "optional_workflow_not_implemented",
-      "manualPath": "convex/stockIntake.ts"
+      "acceptanceLimit": "Private single-image paper sources, optional bounded transcription, corrected drafts and explicit human confirmation are implemented. The 29 October follow-up adds manual/optional-model summary and translation derivatives with separate review. No ledger import or official document posting. Real-paper model quality/privacy and live acceptance remain separate.",
+      "evidenceLevel": "implemented_scoped_workflow_live_model_acceptance_pending",
+      "sourceAuditLimit": "Private single-image paper sources, optional bounded transcription, corrected drafts and explicit human confirmation are implemented. The 29 October follow-up adds manual/optional-model summary and translation derivatives with separate review. No ledger import or official document posting. Real-paper model quality/privacy and live acceptance remain separate.",
+      "implementationState": "private_reviewed_paper_and_assistance",
+      "manualPath": "src/components/papers/paper-page.tsx"
     },
     {
       "id": "R069",
@@ -1051,10 +1051,13 @@
       "scopeDecisions": ["D37"],
       "sourceAuditStatus": "B",
       "disposition": "provider_or_external_evidence_block",
-      "testSuites": ["convex/photoEstimates.test.ts"],
-      "acceptanceLimit": "Manual path works; approved budget provider configuration and human confirmation required",
+      "testSuites": [
+        "convex/photoEstimates.test.ts",
+        "convex/paperAssist.test.ts"
+      ],
+      "acceptanceLimit": "Photo-estimation code and bounded confirmed-paper summary/translation assistance exist, with manual paths and default-off approved-budget gates. This is not a general autonomous business agent. Live model privacy/accuracy and approved configuration remain open.",
       "evidenceLevel": "offline_synthetic_only",
-      "sourceAuditLimit": "Manual path works; approved budget provider configuration and human confirmation required"
+      "sourceAuditLimit": "Photo-estimation code and bounded confirmed-paper summary/translation assistance exist, with manual paths and default-off approved-budget gates. This is not a general autonomous business agent. Live model privacy/accuracy and approved configuration remain open."
     },
     {
       "id": "R072",
@@ -1079,9 +1082,9 @@
       "sourceAuditStatus": "P",
       "disposition": "device_or_operational_evidence_block",
       "testSuites": [],
-      "acceptanceLimit": "No restore drill or 50-concurrent/100-request workload measurement in this audit",
+      "acceptanceLimit": "A separate 28 October local drill restored 2584 rows and104 private files and measured50 signed-in sessions/100 requests. This is dated local evidence. Files-inclusive cloud restore, recovery timings and national workload acceptance remain unverified.",
       "evidenceLevel": "scope_or_external_evidence_only",
-      "sourceAuditLimit": "No restore drill or 50-concurrent/100-request workload measurement in this audit"
+      "sourceAuditLimit": "A separate 28 October local drill restored 2584 rows and104 private files and measured50 signed-in sessions/100 requests. This is dated local evidence. Files-inclusive cloud restore, recovery timings and national workload acceptance remain unverified."
     },
     {
       "id": "R074",
@@ -1090,10 +1093,10 @@
       "scopeDecisions": ["D39"],
       "sourceAuditStatus": "B",
       "disposition": "provider_or_external_evidence_block",
-      "testSuites": [],
-      "acceptanceLimit": "Pricing policy is decided; no billing subscription entitlement owner proved",
-      "evidenceLevel": "scope_or_external_evidence_only",
-      "sourceAuditLimit": "Pricing policy is decided; no billing subscription entitlement owner proved"
+      "testSuites": ["convex/businessSubscriptions.test.ts"],
+      "acceptanceLimit": "29 October adds per-site target plan preferences, select/change/cancel/history and guarded future verified-entitlement member limits. No active paid entitlement producer, recurring mandate checkout or verified recurring webhook exists. Merchant/tax/renewal policy, provider-specific billing implementation and live acceptance remain blocked beyond keys.",
+      "evidenceLevel": "keyless_plan_requests_recurring_billing_blocked",
+      "sourceAuditLimit": "29 October adds per-site target plan preferences, select/change/cancel/history and guarded future verified-entitlement member limits. No active paid entitlement producer, recurring mandate checkout or verified recurring webhook exists. Merchant/tax/renewal policy, provider-specific billing implementation and live acceptance remain blocked beyond keys."
     },
     {
       "id": "R075",
@@ -1193,9 +1196,9 @@
         "convex/foundationSeedAcceptance.test.ts",
         "convex/foundationSeedCoverage.test.ts"
       ],
-      "acceptanceLimit": "All 84 IDs, 28 participant keys and bounded linked offline scenarios are accounted for. Current captures and disposable local phone journeys exist. Each remaining role journey and actual Production/provider acceptance need their own evidence; fixtures are not live customer data.",
+      "acceptanceLimit": "All84 source IDs and28 canonical participant keys are accounted for; the28-role local browser pass and current scoped feature tests/captures are explicit evidence. They do not prove every feature of every role, actual provider execution or all Production business journeys.",
       "evidenceLevel": "offline_synthetic_only",
-      "sourceAuditLimit": "All 84 IDs, 28 participant keys and bounded linked offline scenarios are accounted for. Current captures and disposable local phone journeys exist. Each remaining role journey and actual Production/provider acceptance need their own evidence; fixtures are not live customer data."
+      "sourceAuditLimit": "All84 source IDs and28 canonical participant keys are accounted for; the28-role local browser pass and current scoped feature tests/captures are explicit evidence. They do not prove every feature of every role, actual provider execution or all Production business journeys."
     },
     {
       "id": "R083",
@@ -1208,9 +1211,9 @@
         "convex/foundationSeedAcceptance.test.ts",
         "convex/specialistReferences.test.ts"
       ],
-      "acceptanceLimit": "All 21 PET states and eleven specialist labels across eight categories have reference and offline tests. These are not validated factory recipes, legal classifications or actual permitted receiver acceptance.",
+      "acceptanceLimit": "Reference labels, all21 PET states and11 inactive specialist references have bounded offline tests. Actual factory recipes, measured losses, legal classifications, permits and receiver acceptance remain operator/qualified-review evidence; no invented live reference activation.",
       "evidenceLevel": "offline_synthetic_only",
-      "sourceAuditLimit": "All 21 PET states and eleven specialist labels across eight categories have reference and offline tests. These are not validated factory recipes, legal classifications or actual permitted receiver acceptance."
+      "sourceAuditLimit": "Reference labels, all21 PET states and11 inactive specialist references have bounded offline tests. Actual factory recipes, measured losses, legal classifications, permits and receiver acceptance remain operator/qualified-review evidence; no invented live reference activation."
     },
     {
       "id": "R084",

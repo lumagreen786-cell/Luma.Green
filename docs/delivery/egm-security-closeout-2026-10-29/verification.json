@@ -101,7 +101,7 @@
     },
     {
       "file": "e2e/connected/auth-availability.spec.ts",
-      "sha256": "1cd5ffe4538d41d3deab12ce261a9947996e8874f7710b3455b274c834be21bc"
+      "sha256": "836ac7d149e712cb935394043961138bacf46b49ecc238f19d338caffb339826"
     },
     {
       "file": "e2e/native-updates.spec.ts",
@@ -109,135 +109,135 @@
     },
     {
       "file": "messages/ar.json",
-      "sha256": "3cf16aa02f7b0b482ec5646ca3d4f3c4f4428310fa473192f83dcff4d60e1d0c"
+      "sha256": "67f5ceaad001dece16dab6478e0f9fcd585ba1bb52e62b1fd6650eb029fce1d3"
     },
     {
       "file": "messages/as.json",
-      "sha256": "8bd9cf5f08ecccb54cde1e68aeb777c83f0261c858232a836d2fa0a5a94c6dfa"
+      "sha256": "21cab63bbebb805194347d08d7d01d8920afbb264bc77c82dc85f9f522aa8b93"
     },
     {
       "file": "messages/bn.json",
-      "sha256": "cc6db240897560eb24f521b92ba3fdeeb8ebefc5ac60bde2c83f5c9db5af037c"
+      "sha256": "27cae1ceac8ed4a7c485895dfbd703c67fe9d1b46549296ccb180bb00d9d56bd"
     },
     {
       "file": "messages/de.json",
-      "sha256": "24c70c82288b22b8ca04920a13a3a6c347155bdb37c9911e34646611c14a1c93"
+      "sha256": "1b8aba7d32ba2ca670271120fbaee37c5ef720488ffbdc1fdc73e48ba64a899e"
     },
     {
       "file": "messages/en.json",
-      "sha256": "55f697bb7b25f36dfc9bd92efb1a8097260e571125495076d5afca7aef5a0035"
+      "sha256": "390f6b53a871aef36dfffd1cc5551fbc1fc88a4bc19d5b0715c074a6e71ad2f6"
     },
     {
       "file": "messages/es.json",
-      "sha256": "135afe8f5ce5b7e73ceaa94f733f449735d0e19c313c27284158efb851962fdd"
+      "sha256": "7a71a2b3d442688f66b7af409e7907ffe1f8e10874c59e723b32c266a6fc00f0"
     },
     {
       "file": "messages/fr.json",
-      "sha256": "8ac885bc96f3283b09e4740c6a2c6235bb27ea1a58591af6ee4479f8dfcacccf"
+      "sha256": "7949521be2d9707835cb140660a764c3fcd85c039d01796d708fc40aba0fdc06"
     },
     {
       "file": "messages/gu.json",
-      "sha256": "86b1c9ed28151bac94366c577b16a0063e54007414c51455e34312746f75769a"
+      "sha256": "e8afcdc51f09716e70071e29da7cb410e2053bf4cf2f85d81479e1b61929c1db"
     },
     {
       "file": "messages/hi.json",
-      "sha256": "515fd95f7082293d9031a1bab447337dfcc4924333f9bc78e1fef7ebf3779ff0"
+      "sha256": "cc770c54b911d9aa4694d53a9a46e33e91d21df0dc47fba8e42ec1632aadf71c"
     },
     {
       "file": "messages/id.json",
-      "sha256": "7c6aa9bef2de821cc43a0dd6350656bbb604b954bd79c7999cf2f17213d0cdb9"
+      "sha256": "8108f0711451efd73760df923eaa67ce2a0eb063be1346850e950378da3ef1b1"
     },
     {
       "file": "messages/it.json",
-      "sha256": "09dd76787db330d0e3bf6a49c76a2b74a3fe4a850bb58299c7e2a947043d7231"
+      "sha256": "59287b55418be21bf354c08f88147ce6607aed04e678e3c22eec2ae463b28430"
     },
     {
       "file": "messages/ja.json",
-      "sha256": "5519dd05627921e3d880fab80ead329c42bca64359090c0ddc590d191d20edd1"
+      "sha256": "c0400fcba0ca4b7bd2d370668bc319e134ccb9edd11f6f0a2ae3b091a8a968c5"
     },
     {
       "file": "messages/kn.json",
-      "sha256": "c9d149dc8ae261f47d69479d211f84b08e4b4bb753bd7d740839b492f5fb1476"
+      "sha256": "5c8fcf9ec2f0e9be177ce623e656f904a31a8f32cd213658420b4640d6889825"
     },
     {
       "file": "messages/ko.json",
-      "sha256": "17832f38d03499aa58274c83b07550501d00687f963871d1a754bc8006a6e75c"
+      "sha256": "1344d66b295843ccadcaaa1286ff2bf342c9676133c048b0fe813bfb5ed3b275"
     },
     {
       "file": "messages/ml.json",
-      "sha256": "8e7fd8ea6f5ef90ea9a7ae405c0941c7aa9fa4e59a7146181a484b7736291e72"
+      "sha256": "cb324404446ca5fe53cc29a5b9378f1e3827771e424f737b82073c05a6118c4c"
     },
     {
       "file": "messages/mr.json",
-      "sha256": "421faad8a53bff79193ff421af29c2ad03583d967226863f26f7a0c1516e6e05"
+      "sha256": "1074f63976b515e27bd4347f9c251a324bcadebdbfbd77729a6cf54f1dc3fc45"
     },
     {
       "file": "messages/ms.json",
-      "sha256": "434feff0cc6391768b791cbc25a5998a660426af58749573c0fea16aaf224f35"
+      "sha256": "9452d455b1c29d706e0e47691971f6e0ead7a8708a07073a950fb9e682736d80"
     },
     {
       "file": "messages/ne.json",
-      "sha256": "4b51f17d9ae093f604bf164e18d95aa9a55772394ba52ab8018c5a0742e87157"
+      "sha256": "696136ebe107f43ca79a159a84ce932c466c5627b239e9f7cd76c732f1304cdc"
     },
     {
       "file": "messages/nl.json",
-      "sha256": "13132c67ba53368d812df5f68b904ff58174bb494e262e3d92a9bc3dbbe285a6"
+      "sha256": "eae73c91314635f0d64b61b18e1b20db92ba9f068ff27fda9e402d03b0d3a57b"
     },
     {
       "file": "messages/or.json",
-      "sha256": "cb0bda9ab3b9677938ff74516e6e9923988446797ec95b3586596ab25339369d"
+      "sha256": "2c275bb8062942ef0bc03e85426a5ab68871d27cfc896840b89c76a3ceec4cb1"
     },
     {
       "file": "messages/pa.json",
-      "sha256": "b3e05590775d42fc82c3967354017bb321ab9c00dc4d8cf8aadde1d074e336e8"
+      "sha256": "1220f8774fe611b42e2f3f4ffe2fc5d5d9f138133807a8ac6965e08d15ecebe3"
     },
     {
       "file": "messages/pl.json",
-      "sha256": "d2285bcb18d5456dd3767268154f8a8256e39ee598baf97d161dfd40128c72af"
+      "sha256": "aff4c1fac67ec5f4672b2fbfb6e6fa1bfc253de91899ea0df1371f3a86d0201e"
     },
     {
       "file": "messages/pt.json",
-      "sha256": "6e6c6c00652962691a805f96373baad3651d880a9a53fbad190fe25912e2cae2"
+      "sha256": "3203753a2dbd51af3eb02af111c5d04a48558e0d99f209660b4145f92fd819dc"
     },
     {
       "file": "messages/ru.json",
-      "sha256": "a07919e3bba3fec713d9967e91c09202cde2ca4dad895929c637499804346bfb"
+      "sha256": "6153bac8994b7f4540e1eb120775af821f2f0ee1fe4072b76805c9bbd9c8effe"
     },
     {
       "file": "messages/si.json",
-      "sha256": "260db84d38f0980dbaee898f3824c12620f80dff06c9e54977c54da43e943eea"
+      "sha256": "a404d3656323dc4c5879be9d4970a2eff773516a8d4d5b10bdc17254c22861cf"
     },
     {
       "file": "messages/ta.json",
-      "sha256": "5f495e48902540d1ae834ef94066e32c0a7a9f68c481d87c4e0f8a1cdd921f4b"
+      "sha256": "a1cbf46da1ffdb627ee920bbe4ea1ca46b85d21f2b3a449ba5538d7963d22c03"
     },
     {
       "file": "messages/te.json",
-      "sha256": "17c5feacc8d72d23404905c2e8c3f05b1c4943c5521c6dfb0cbbe7b17e48f665"
+      "sha256": "2f25bc2711a9b842e6ffdb1b65c8061faaf6c2785ba1295b34c58ab43c128666"
     },
     {
       "file": "messages/th.json",
-      "sha256": "25aa59bfa287d00cfd1fcf7a1d321438e805c3bc90ae0eec6b89b3810181e7a5"
+      "sha256": "c227c3feba45e18a81fdf87d46da8ed3dc1c5b0e1aeef8646e87be23c31bc772"
     },
     {
       "file": "messages/tr.json",
-      "sha256": "81cb71645d58a769ea0eb5d45eeb2267a69785ce2780592478265ec8cb3383c7"
+      "sha256": "b9bb7b0f721d6ea50a18befb0b2fb32046c4a13e2d83dddc086f0fa96005e60b"
     },
     {
       "file": "messages/uk.json",
-      "sha256": "d3fc41a1d4d52615d99f405995415e73a6d36b8f64bbc28f1fb214716788dfc3"
+      "sha256": "4095d07f23ff009b2062f577d0a8a6ef6120992c24e7f2802a2fb431f053e60f"
     },
     {
       "file": "messages/ur.json",
-      "sha256": "c354dd99ca0613ba4c999ef27d6ef4d91040a3df64f666c21c39dc4aad2b7557"
+      "sha256": "5478e59aa9168027d367dfd62a372231f26e786dbf03f34b73ee6757651091f5"
     },
     {
       "file": "messages/vi.json",
-      "sha256": "f6e9bad23801ede4bd132c22245b4969fb53eecb7013f5f24e05618e43793fc5"
+      "sha256": "a882f80e603bbc3b650870d1511df2d2d54d794af1281ee222961c785b011aa1"
     },
     {
       "file": "messages/zh.json",
-      "sha256": "0914d2a2c09617d7d1ffb74433c3c9511e823dfaa017853077e5b22721472d78"
+      "sha256": "d9d054a1e1fc6cdd7d7cb46bacd83a77272d3b6960db587d7f4dca39c9764d27"
     },
     {
       "file": "package.json",
@@ -373,7 +373,7 @@
     },
     {
       "file": "src/components/papers/paper-page.tsx",
-      "sha256": "835ca75d403f488db38649da135fbde70ff7e5103c8293257a7d4a0a93e2aa7e"
+      "sha256": "dbb72bbada7ec97f41f9df046747890bed5691b27e9001c7124db141eba181a7"
     },
     {
       "file": "src/components/sell/confirm-step.tsx",
@@ -498,5 +498,29 @@
     "productAuthSourcesChanged": false,
     "validationScope": "App/auth product source unchanged. Browser/shell runs at 762617f; dependency and fixture follow-ups have new focused checks, full pnpm check and rebuild. Final remote CI must pass the new head.",
     "productionBuildExitCode": 0
+  },
+  "integration": {
+    "main": "20dfc8ebd839d642d51d09699b695e120ac082ae",
+    "pnpmCheck": {
+      "exitCode": 0,
+      "suites": 370,
+      "appBackendTests": 3092,
+      "securityTests": 185,
+      "lintErrors": 0,
+      "lintWarnings": 126
+    },
+    "productionBuild": {
+      "exitCode": 0,
+      "pages": 3351
+    },
+    "paperTests": 51,
+    "freshPaperReviews": {
+      "rounds": 2,
+      "bothClean": true,
+      "sourceOnly": true
+    },
+    "authProductOwnersUnchanged": true,
+    "captures": 72,
+    "browserSuite": "running; previous 873-case result belongs to pre-integration source"
   }
 }

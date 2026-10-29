@@ -2265,7 +2265,8 @@
       "compliance": "Conformidade",
       "earnings": "Ganhos",
       "help": "Ajuda",
-      "paperRecords": "Registos em papel"
+      "paperRecords": "Registos em papel",
+      "billing": "Plano da unidade"
     },
     "roles": {
       "kabadiwala": "Kabadiwala",
@@ -3819,7 +3820,14 @@
     "external_organization": "Organização emissora",
     "trade_seller": "Vendedor",
     "trade_buyer": "Comprador",
-    "correctionHint": "O original permanece visível. Guarde uma nova referência para o substituir."
+    "correctionHint": "O original permanece visível. Guarde uma nova referência para o substituir.",
+    "export": {
+      "download": "Transferir lista de provas",
+      "json": "JSON",
+      "notice": "Referências não verificadas. Não é uma entrega oficial.",
+      "partial": "Lista parcial: apenas linhas carregadas.",
+      "complete": "Todas as linhas disponíveis estão carregadas."
+    }
   },
   "accountPhone": {
     "title": "Verifique seu número de celular",
@@ -4301,7 +4309,25 @@
     "sharedReports": "Relatórios de auditoria compartilhados",
     "revoke": "Revogar acesso",
     "quantityGrams": "Quantidade (g)",
-    "recordName": "Nome do registo"
+    "recordName": "Nome do registo",
+    "acknowledged": "Receção reconhecida",
+    "responded": "Respondido",
+    "declined": "Recusado",
+    "workflow": {
+      "requester": "Solicitante",
+      "recipient": "Destinatário",
+      "respond": "Responder",
+      "acknowledge": "Confirmar reconhecimento",
+      "decline": "Recusar",
+      "close": "Fechar",
+      "edit": "Editar",
+      "submit": "Enviar mensagem",
+      "revoke": "Revogar acesso",
+      "message": "Sua mensagem",
+      "history": "Histórico do pedido",
+      "notice": "Execução do prestador e resgate indisponíveis. Os registos não aprovam empréstimos, seguros, apoios ou pagamentos.",
+      "empty": "Ainda não há registos."
+    }
   },
   "returnClaims": {
     "title": "Devoluções e provas do programa",
@@ -4438,6 +4464,62 @@
     "capacity": "O armazenamento de documentos está cheio. Use registos manuais ou contacte o proprietário do espaço.",
     "changed": "Este documento mudou. Copie as suas alterações antes de abrir a versão guardada.",
     "loadSaved": "Abrir versão guardada"
+  },
+  "businessSubscriptions": {
+    "title": "Plano da unidade",
+    "lead": "Guarde uma preferência de plano para esta unidade.",
+    "off": "A faturação está desativada. Uma preferência não inicia uma assinatura paga.",
+    "plan": "Plano",
+    "monthly": "Preço mensal previsto",
+    "members": "Membros: {count}",
+    "agreed": "Âmbito por acordo",
+    "from": "A partir de {price}",
+    "selected": "Preferência guardada",
+    "cancelled": "Pedido cancelado",
+    "none": "Sem pedido",
+    "save": "Guardar preferência",
+    "cancel": "Cancelar pedido",
+    "ownerOnly": "Só o proprietário da unidade pode alterar esta preferência.",
+    "history": "Histórico de pedidos",
+    "verified": "Capacidade verificada: {count} membros",
+    "stale": "Atualize esta página antes de guardar.",
+    "plans": {
+      "trader": "Comerciante Plus",
+      "centre": "Centro",
+      "yard": "Parque",
+      "processor": "Processador",
+      "recycler": "Reciclador / Fabricante",
+      "enterprise": "Grande empresa",
+      "institution": "Relatórios institucionais"
+    }
+  },
+  "paperAssist": {
+    "title": "Ajuda de texto",
+    "lead": "Usa apenas texto confirmado. Verifique cada resultado; não é aprovação oficial.",
+    "unavailable": "Modelo indisponível. Introduza o texto manualmente.",
+    "task": "Tarefa",
+    "summary": "Resumo",
+    "translation": "Tradução",
+    "language": "Idioma de destino",
+    "create": "Novo rascunho",
+    "capacity": "Dez registos guardados. Elimine um rascunho não confirmado para adicionar outro.",
+    "confirmed": "Revisto",
+    "source": "Texto original",
+    "model": "Rascunho do modelo não verificado",
+    "useModel": "Copiar para revisão",
+    "reviewedText": "O seu texto revisto",
+    "pending": "A aguardar o modelo",
+    "consent": "Enviar o texto deste documento ao modelo externo.",
+    "generate": "Pedir rascunho",
+    "review": "Comparei este texto com o original.",
+    "confirm": "Confirmar texto",
+    "discard": "Eliminar rascunho",
+    "failed": "Sem resultado do modelo. Pode introduzir texto manualmente.",
+    "emptySource": "Este documento não tem texto principal confirmado para receber ajuda.",
+    "conflict": "Este registo mudou. As suas alterações foram mantidas. Recarregue o texto guardado antes de o rever.",
+    "reload": "Recarregar texto guardado",
+    "localDraft": "Texto anterior não guardado",
+    "savedText": "Último texto guardado"
   },
   "privacy": {
     "title": "Política de privacidade",

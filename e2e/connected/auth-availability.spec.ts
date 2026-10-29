@@ -1,10 +1,4 @@
-import {
-  closeSync,
-  constants,
-  fstatSync,
-  openSync,
-  readFileSync,
-} from "node:fs";
+import { readFileSync } from "node:fs";
 import { setTimeout as delay } from "node:timers/promises";
 import { parseEnv } from "node:util";
 
@@ -17,22 +11,10 @@ import {
 } from "../../convex/lib/localAcceptance";
 import { phoneEmail } from "../../convex/lib/phone";
 import en from "../../messages/en.json" with { type: "json" };
+import { readPrivateAcceptanceFile as readPrivateFile } from "../../scripts/local-acceptance/private-file";
 
 // Match the current phone runner: local private configuration and actual OTP
 // delivery only. No session artifact is signed out or rewritten by these cases.
-function readPrivateFile(path: string) {
-  const descriptor = openSync(path, constants.O_RDONLY | constants.O_NOFOLLOW);
-  try {
-    const metadata = fstatSync(descriptor);
-    if (!metadata.isFile() || (metadata.mode & 0o077) !== 0)
-      throw new Error(
-        "Local phone acceptance inputs require private file permissions.",
-      );
-    return readFileSync(descriptor, "utf8");
-  } finally {
-    closeSync(descriptor);
-  }
-}
 
 const accountSchema = z.object({ key: z.string(), phone: z.string() });
 const roster = z

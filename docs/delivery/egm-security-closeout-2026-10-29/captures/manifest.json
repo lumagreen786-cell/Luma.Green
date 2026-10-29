@@ -15,19 +15,19 @@
     },
     {
       "file": "messages/en.json",
-      "sha256": "55f697bb7b25f36dfc9bd92efb1a8097260e571125495076d5afca7aef5a0035"
+      "sha256": "390f6b53a871aef36dfffd1cc5551fbc1fc88a4bc19d5b0715c074a6e71ad2f6"
     },
     {
       "file": "messages/ar.json",
-      "sha256": "3cf16aa02f7b0b482ec5646ca3d4f3c4f4428310fa473192f83dcff4d60e1d0c"
+      "sha256": "67f5ceaad001dece16dab6478e0f9fcd585ba1bb52e62b1fd6650eb029fce1d3"
     },
     {
       "file": "messages/ur.json",
-      "sha256": "c354dd99ca0613ba4c999ef27d6ef4d91040a3df64f666c21c39dc4aad2b7557"
+      "sha256": "5478e59aa9168027d367dfd62a372231f26e786dbf03f34b73ee6757651091f5"
     },
     {
       "file": "messages/kn.json",
-      "sha256": "c9d149dc8ae261f47d69479d211f84b08e4b4bb753bd7d740839b492f5fb1476"
+      "sha256": "5c8fcf9ec2f0e9be177ce623e656f904a31a8f32cd213658420b4640d6889825"
     },
     {
       "file": "src/components/account/account-phone.tsx",
@@ -47,7 +47,7 @@
         "loadedFonts": ["Geist", "Noto Sans"],
         "clippedButtons": []
       },
-      "sha256": "a0650e937ada52ded177449669ac2894e768eee2662589d30df6be173a7e594d"
+      "sha256": "9ae6b61bead56904f6d062f7a626b56f017f23259e588316a7cf7774270d042a"
     },
     {
       "name": "en-390-light-edit.png",
@@ -75,7 +75,7 @@
         "loadedFonts": ["Geist", "Noto Sans"],
         "clippedButtons": []
       },
-      "sha256": "33ecd02b793af7710b7465eef78048178cab3ca14b167220181bcdf653f6f547"
+      "sha256": "10f6987e8bd41c00f9ee02d468b5dd27190b8ce95e7cecd1c0326aae285a3b54"
     },
     {
       "name": "en-390-dark-edit.png",
@@ -103,7 +103,7 @@
         "loadedFonts": ["Geist", "Noto Sans"],
         "clippedButtons": []
       },
-      "sha256": "7755a400ab4d8a24619db06df507ae1116b1861916d645f3c9b9216e732325df"
+      "sha256": "b8e56760ccfccf4a117e10901f39398bbaf2f0ff5d536a14fa71c49626e668b2"
     },
     {
       "name": "en-768-light-edit.png",
@@ -131,7 +131,7 @@
         "loadedFonts": ["Geist", "Noto Sans"],
         "clippedButtons": []
       },
-      "sha256": "aad4160cd60dddfa7ea73aca77e4744ab380823f01c0729c7b5197f19efaaeca"
+      "sha256": "c30d2caf8f8ecc79ca10f448a72bc9baf32184f7690a2e37d2ccec8f8fba9ea7"
     },
     {
       "name": "en-768-dark-edit.png",
@@ -159,7 +159,7 @@
         "loadedFonts": ["Geist", "Noto Sans"],
         "clippedButtons": []
       },
-      "sha256": "99de932c234879d92a2cd94c3090227988e9a4930c769ee67e4e5edd6ed81f18"
+      "sha256": "d786c48ffb7486bc6f2361c2640460e92ffd84c24d77b6e6bc2f43d119356b41"
     },
     {
       "name": "en-1440-light-edit.png",
@@ -220,7 +220,7 @@
         ],
         "clippedButtons": []
       },
-      "sha256": "b998dd3ab05da5aed1323553b2a4fa920f1bb8ddad7e033b3919578822116b39"
+      "sha256": "00a8a1aac1f45c7491818e8c516a5d3feb569c5909c2a21d42b56fa01381555b"
     },
     {
       "name": "ar-390-light-edit.png",
@@ -372,7 +372,7 @@
         ],
         "clippedButtons": []
       },
-      "sha256": "9fe2c259bdaea2496af76c6331c516ddb59ca138ca4a8cc474db917538d6356c"
+      "sha256": "e88834adc5a6fcfc83374c08b4d81d38b0e8ac706ec226a2a286ef278b58c92b"
     },
     {
       "name": "ar-1440-light-edit.png",
@@ -410,7 +410,7 @@
         ],
         "clippedButtons": []
       },
-      "sha256": "d32f6f640ef426121d3b09e72be9ef32ef1484680312b8881f4d057979079610"
+      "sha256": "bfb5a6b3923f3faf2e5ee5d8ff5a7f57b73ccb6bc0ce0cb895aa35db1e25c8d4"
     },
     {
       "name": "ar-1440-dark-edit.png",
@@ -448,7 +448,7 @@
         ],
         "clippedButtons": []
       },
-      "sha256": "5a109ed7d0021d9ee3609c69170b3882bed6c136979e333bf42a48139e88df93"
+      "sha256": "118684d447e8f517be9a3b1e29b7a07a9724ca509b45928ca3099cd2cf12cf84"
     },
     {
       "name": "ur-390-light-edit.png",
@@ -486,7 +486,7 @@
         ],
         "clippedButtons": []
       },
-      "sha256": "71ca1df80686d64d0c05643f88a9ed31cfbacf441a05cff1605d314ed0c6b423"
+      "sha256": "fa37a2d47eb71b3720fb716c39808581b0e4c234b0245c493843a9f346b0478c"
     },
     {
       "name": "ur-390-dark-edit.png",
@@ -562,7 +562,7 @@
         ],
         "clippedButtons": []
       },
-      "sha256": "b8f69d532e84b6d08a721e19860bc7181bc2f3e4cb930e18508b493776d0c547"
+      "sha256": "8617674a12ad4b617d610c47d70caec529d79d4bf7ac4faf0cbd56729794beb1"
     },
     {
       "name": "ur-768-dark-edit.png",
@@ -600,7 +600,7 @@
         ],
         "clippedButtons": []
       },
-      "sha256": "d7cb0dce62cbbdc4cb21b95694f62beb6b3cffcb131560dcbf67fdff69f1276d"
+      "sha256": "190ae5ce3769272a8cd4638931cfb22a3d2fcd55d85f27bc288dc3eda965e417"
     },
     {
       "name": "ur-1440-light-edit.png",
@@ -638,7 +638,7 @@
         ],
         "clippedButtons": []
       },
-      "sha256": "c484f1f429dcb05a055063cca38ec3b424be9023f5c5b561bd7ec63fd04cb254"
+      "sha256": "d0e368bd6b33d976513fc32319cdd543e2b5edfa3b47dd4213558bb53fc8fe16"
     },
     {
       "name": "ur-1440-dark-edit.png",
@@ -676,7 +676,7 @@
         ],
         "clippedButtons": []
       },
-      "sha256": "d207a1e0b17f2479cb41d6a5edecdc7cb7b9169cfefb9d8066e36509ae501789"
+      "sha256": "bf1257766084a5d356341772e02ab633710f40d54c8272d695564c6db6e316ad"
     },
     {
       "name": "kn-390-light-edit.png",
@@ -714,7 +714,7 @@
         ],
         "clippedButtons": []
       },
-      "sha256": "865f5f0765c6b436cf25efe307e9d1faa56342af53ef503f87df3ac2ba4af84d"
+      "sha256": "68c8afd0554a642c01b3e1ed672146122a4d9abbce4484cab50d5824bf491975"
     },
     {
       "name": "kn-390-dark-edit.png",
@@ -790,7 +790,7 @@
         ],
         "clippedButtons": []
       },
-      "sha256": "f51b66adef834d69cbb53dffb2a464df2747620eae713b714558fe05ba72a438"
+      "sha256": "54e1c043b88d5b4eeff290671ee4fc672e51acdee5f9aa22c5864299884a4205"
     },
     {
       "name": "kn-768-dark-edit.png",
@@ -900,7 +900,7 @@
         "loadedFonts": ["Geist", "Noto Sans"],
         "clippedButtons": []
       },
-      "sha256": "2416ca0598496e40cc4eb1b27a1edc104f47eaa118b277381852d416ec751619"
+      "sha256": "75a5dca6a869fd43ed1da5c67c98cc47e7b35322de6888ee69bc14eb515feb43"
     },
     {
       "name": "en-390-dark-binding.png",
@@ -915,7 +915,7 @@
         "loadedFonts": ["Geist", "Noto Sans"],
         "clippedButtons": []
       },
-      "sha256": "05b0ac502126b7b3276ecf3643c7470eb8ee0077a11b994aef047b9f5f3df38d"
+      "sha256": "71a45323365c5c81e5c1a28d45ad9b4344dea25d25a25b3978102995cabcc491"
     },
     {
       "name": "en-768-light-binding.png",
@@ -930,7 +930,7 @@
         "loadedFonts": ["Geist", "Noto Sans"],
         "clippedButtons": []
       },
-      "sha256": "fe3db97818c1deabdc7a2e7a9165e373cbec11f229be58a25f7e3967c5df3cb0"
+      "sha256": "e4855db929f7f25ab8c5c5c80dc1dad24a14fe5a68913d770cfdfa6de4d2ae94"
     },
     {
       "name": "en-768-dark-binding.png",
@@ -945,7 +945,7 @@
         "loadedFonts": ["Geist", "Noto Sans"],
         "clippedButtons": []
       },
-      "sha256": "8beaca0ff69a871a74da6e4e54c1ff33fe05a36e7f3262c76b4c7412fe58b489"
+      "sha256": "fb653ae71eeed6b1e6a2b0848a1e72066271ce120ed57a098bb555c9f010df9d"
     },
     {
       "name": "en-1440-light-binding.png",
@@ -960,7 +960,7 @@
         "loadedFonts": ["Geist", "Noto Sans"],
         "clippedButtons": []
       },
-      "sha256": "e2272c4c0c8266bc8f7c808c08311628382f3d45ca394cd4578819a5715d1d42"
+      "sha256": "ecca9bb514bfbe4ed4ce19f8a6b77aadbee95f750800bcfa6380e8057b45afe6"
     },
     {
       "name": "en-1440-dark-binding.png",
@@ -975,7 +975,7 @@
         "loadedFonts": ["Geist", "Noto Sans"],
         "clippedButtons": []
       },
-      "sha256": "cdac13d27197443f970ce92a2fd9ef6867bd01e6a1b30f66393eb5dea0c76b7f"
+      "sha256": "657b5aae4eb67aa6c137388ac56d12b58f73fe027b139e5e569eff37e855b691"
     },
     {
       "name": "ar-390-light-binding.png",
@@ -995,7 +995,7 @@
         ],
         "clippedButtons": []
       },
-      "sha256": "434a7dfafd0a310b91d10673ca9e896251969b768e4d55f5ade8f34e8b29589d"
+      "sha256": "7bfc129dfd135cae7b2cd1a7a02bd4da6cd009cfa08aaf42f7561ed553d9ba69"
     },
     {
       "name": "ar-390-dark-binding.png",
@@ -1015,7 +1015,7 @@
         ],
         "clippedButtons": []
       },
-      "sha256": "5be92e1b7913961033b33b149acbc655b23a911a965b61ac89b9cfd66beacd3c"
+      "sha256": "8152980e901b2e6e393b84fb3368036291e86e5027f73b4013a2b3e862ba1bab"
     },
     {
       "name": "ar-768-light-binding.png",
@@ -1035,7 +1035,7 @@
         ],
         "clippedButtons": []
       },
-      "sha256": "08871858adba22d6ac3a03413c9cb86977cc943b170bf4afff7196427eda8c37"
+      "sha256": "a87025849d85a0eaf13878ee74e5d4ff0231e26f5406f83c8ef4e49b4ec19be5"
     },
     {
       "name": "ar-768-dark-binding.png",
@@ -1055,7 +1055,7 @@
         ],
         "clippedButtons": []
       },
-      "sha256": "8c5710f71f370e799cad422bc71e1e1061b15d67452fd99f0fb9ae5ffa719d36"
+      "sha256": "87af2b32a47ed422d9558ea96d144cb844705ca57898b218f360ce00fb90591f"
     },
     {
       "name": "ar-1440-light-binding.png",
@@ -1075,7 +1075,7 @@
         ],
         "clippedButtons": []
       },
-      "sha256": "3506e558b99708bcdab444c00523b5a3e4380ebe4d092ff19123a9fa0c4928a8"
+      "sha256": "21d29c3d8c978d5277a43904451df92a3f68d640e212a25b21880b37edf0805c"
     },
     {
       "name": "ar-1440-dark-binding.png",
@@ -1095,7 +1095,7 @@
         ],
         "clippedButtons": []
       },
-      "sha256": "febf4f5787c37a6dc0ba719a4c16293c5e1198a6725619ed9fe9be7aa255e465"
+      "sha256": "09be3aa069857e279f41bd7769eb24a6da3d75dceee364106e27e39cc896905e"
     },
     {
       "name": "ur-390-light-binding.png",
@@ -1115,7 +1115,7 @@
         ],
         "clippedButtons": []
       },
-      "sha256": "e9a309ab3afec8469f21565ecb208e9723b9d40487dfa460867308a853b73106"
+      "sha256": "d11159818ce91126e4bc79bfd422603657e44b6d79cf604a1d65ecd286a2003b"
     },
     {
       "name": "ur-390-dark-binding.png",
@@ -1135,7 +1135,7 @@
         ],
         "clippedButtons": []
       },
-      "sha256": "dc4ee880b6b2a071c82bf6890ecf78a44d355f71c13eb09e3dd437c427564301"
+      "sha256": "36c2b83b47589435c99082626fb83293d81181b19c6c7fc742d61daad81600d6"
     },
     {
       "name": "ur-768-light-binding.png",
@@ -1155,7 +1155,7 @@
         ],
         "clippedButtons": []
       },
-      "sha256": "48b393de07acc179494ff8d908f23772ab3d15ab30c22438e1ebe821b6ce1afc"
+      "sha256": "58251df762663dcb00a5d696e98d2c316b10065852cc0edd3576920af79e60c9"
     },
     {
       "name": "ur-768-dark-binding.png",
@@ -1175,7 +1175,7 @@
         ],
         "clippedButtons": []
       },
-      "sha256": "ac488f2fdbbb9ddf7f6b3791da34803a56c2d5d9c3ecd9c880bc629db2dcd7e7"
+      "sha256": "c5726e1c257d359612b4406dbc5c93a62f39c0751d17eb4fb47dbc9c8b16b9dd"
     },
     {
       "name": "ur-1440-light-binding.png",
@@ -1195,7 +1195,7 @@
         ],
         "clippedButtons": []
       },
-      "sha256": "e8bce74ab8df910d2f3a5b8bf5225140a25b0d269e73b1d02e03cd3fbdc6f818"
+      "sha256": "c06a819ae5c1025bb3a758fd69a1d22ab39d20661ee9c5ec610648e41c9e8d4a"
     },
     {
       "name": "ur-1440-dark-binding.png",
@@ -1215,7 +1215,7 @@
         ],
         "clippedButtons": []
       },
-      "sha256": "dae04855644dfc0eaaf7151cd96ac23b6869a01e8283a5f1092e2e80ff4dd3ea"
+      "sha256": "5b3c3b4a30053a88089c948e25f6168c6b8aaaae0eff50b21d5f6f09cbffb1c7"
     },
     {
       "name": "kn-390-light-binding.png",
@@ -1235,7 +1235,7 @@
         ],
         "clippedButtons": []
       },
-      "sha256": "d4fbc52f45b0cbf91a7f8ad9b4c81288878cbf4e2d7b6135c7845b483c59f117"
+      "sha256": "5d041e8cf8a2c9e0d15f364a04fae815ce9d50e98b68dfc288d654695ab9e580"
     },
     {
       "name": "kn-390-dark-binding.png",
@@ -1255,7 +1255,7 @@
         ],
         "clippedButtons": []
       },
-      "sha256": "a4a90ad5f637e5ac580ac3286ed28c3cc2a81d9a6597bbc6669f316dfa4cb2fe"
+      "sha256": "7b18af7a8d54972e7a1cae3ce05fd364f57950dcce143393dd4b340860ba4193"
     },
     {
       "name": "kn-768-light-binding.png",
@@ -1275,7 +1275,7 @@
         ],
         "clippedButtons": []
       },
-      "sha256": "c033d292c55d9b0c171e66737d6956d2efe605c1d41af848300c5de53d9cc771"
+      "sha256": "1d5cfbfea3fa7a862d4ab969077645f0ead0d8d8281ad792b2ede9fec03a99a8"
     },
     {
       "name": "kn-768-dark-binding.png",
@@ -1295,7 +1295,7 @@
         ],
         "clippedButtons": []
       },
-      "sha256": "7a1ef7547367cf4bfcc7d2ed44f5a75c6b0c029f08859e3158e7ee537ac1ba03"
+      "sha256": "5f774d386281c3ded8b44152903b2ae939e40c242982e5d85e57a7d5ac9ae510"
     },
     {
       "name": "kn-1440-light-binding.png",
@@ -1315,7 +1315,7 @@
         ],
         "clippedButtons": []
       },
-      "sha256": "87e63953a2acb315aae255eb2d60ec710cbc2cd0cc1ac83c248797ae846bdc30"
+      "sha256": "afb1acf5b96f8b7aadc6667848851265cfa65ae5fd17abb45243cf5b161b30c0"
     },
     {
       "name": "kn-1440-dark-binding.png",
@@ -1335,7 +1335,7 @@
         ],
         "clippedButtons": []
       },
-      "sha256": "2399f08cc7f84b7633ca563c69b616b7840d86d0d07942aaffb2c81cdb3b7078"
+      "sha256": "ed0409bdca2c8e0fb3ae2015168483ab75333ccb1e091372f9b72826f722726d"
     }
   ]
 }
