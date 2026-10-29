@@ -9,7 +9,7 @@ import { Container } from "./container";
 import { footerGroups } from "./content";
 
 const linkClass =
-  "inline-flex min-h-11 items-center text-muted-foreground outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50";
+  "inline-flex min-h-11 max-w-full items-center text-muted-foreground [overflow-wrap:anywhere] outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50";
 
 export async function SiteFooter() {
   const [t, brand, labels] = await Promise.all([

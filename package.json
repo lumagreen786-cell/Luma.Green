@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "license": "UNLICENSED",
-  "description": "Luma.Green \u2014 Cleaner Tomorrow in Motion. Recycling inventory, sector trade and carbon credits in one place.",
+  "description": "Luma.Green — Cleaner Tomorrow in Motion. Recycling inventory, sector trade and carbon credits in one place.",
   "packageManager": "pnpm@11.24.0",
   "engines": {
     "node": "24.x",
@@ -21,7 +21,7 @@
     "format:check": "prettier --check .",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:security": "node --test scripts/security/engine-io-ws.test.mjs",
+    "test:security": "node --test scripts/security/*.test.mjs",
     "test:coverage": "vitest run --coverage",
     "e2e": "playwright test",
     "e2e:ui": "playwright test --ui",

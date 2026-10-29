@@ -4518,5 +4518,19 @@
     "reload": "Gespeicherten Text neu laden",
     "localDraft": "Vorheriger ungespeicherter Text",
     "savedText": "Zuletzt gespeicherter Text"
+  },
+  "privacy": {
+    "title": "Datenschutzerklärung",
+    "lead": "Diese Erklärung gilt für die Luma.Green-Website und die Apps für Android, iOS, Windows und macOS.",
+    "dataTitle": "Verwendete Daten",
+    "dataBody": "Wir nutzen Konto- und Kontaktdaten, den gewählten Standort, Fotos, Dokumente, Geschäftsprüfungen sowie Transaktions- und Sicherheitsdaten für Recyclingdienste und den Schutz der Konten.",
+    "sharingTitle": "Empfänger der Daten",
+    "sharingBody": "Berechtigte Beteiligte und eingerichtete Anbieter für Hosting, SMS, Prüfung, Zahlung und optionale KI erhalten nötige Daten. Die Verarbeitung kann außerhalb Indiens stattfinden.",
+    "choicesTitle": "Ihre Wahlmöglichkeiten",
+    "choicesBody": "Standort und Mitteilungen erfordern eine Erlaubnis. Dateien wählen Sie selbst. Die Anmeldung nutzt Sitzungscookies. Analysen benötigen Zustimmung; Fehlerberichte sind davon getrennt. Verwalten Sie Berechtigungen in den Geräteeinstellungen.",
+    "requestsTitle": "Anfragen zu Konto und Daten",
+    "requestsBody": "Entfernen Sie unten Ihr Konto oder schreiben Sie dem Support für Auskunft, Berichtigung oder Löschung. Bestätigen Sie die Inhaberschaft; senden Sie keine Ausweisdokumente per E-Mail. Klären Sie zuerst offene Aufgaben oder Eigentumsfragen.",
+    "retentionTitle": "Was nach der Schließung bleibt",
+    "retentionBody": "Die Schließung entfernt Zugang und Anmeldedaten. Geschäfts-, Zahlungs-, Sicherheits- und Prüfbelege können zur Prüfung verbleiben. Nicht jeder Datensatz wird gelöscht. Fragen Sie den Support nach Aufbewahrung und Fristen."
   }
 }

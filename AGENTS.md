@@ -30,6 +30,17 @@ and tests where possible, then list remaining provider-specific integration,
 operating evidence and live acceptance separately. The active plan is
 `docs/plans/2026-10-29-web-completion-without-keys.md`.
 
+## App security and privacy repair authority — 29 October 2026
+
+The owner authorized fixing the audited security/privacy gaps and removing
+unused permissions across web, Expo and Electron, then testing, pushing,
+creating a PR and merging after all active checks pass. This extends the scoped
+foundation exception to source/dependency/permission repairs and public privacy
+notices. It does not authorize signed native release builds, store submission,
+paid setup or OTA/feed publication. Preserve authentication factors, records,
+provider limits and the checked Production-only web path. Do not force an
+unsupported auth integration upgrade merely to remove a version alert.
+
 ## Update foundation delivery authority — 29 October 2026
 
 The owner resumed only the Expo/Electron update foundation and then authorized
