@@ -77,14 +77,14 @@
     },
     {
       "file": "convex/auth.ts",
-      "sha256": "dde3f5e33a4b9613d71fe88e3f4975b347e8b012d23027bd28242cabfa66f6af"
+      "sha256": "de37e7d9f9b9bd6a744364dbdfdc1daefd10c255ed0abf10a9423a31ebd4317a"
     },
     {
       "file": "convex/betterAuth/atomic.ts",
       "sha256": "d4a72845ae7b6f266e7fea1d01d72a03076408aa6c2fad770f6daf91d7ea75da"
     },
     {
-      "file": "convex/lib/auth-atomic.ts",
+      "file": "convex/lib/authAtomic.ts",
       "sha256": "7d6921d8f42f8889adbe114022d5676b8cc05c90442c352c9852867fca2b4599"
     },
     {
@@ -521,6 +521,36 @@
     },
     "authProductOwnersUnchanged": true,
     "captures": 72,
-    "browserSuite": "running; previous 873-case result belongs to pre-integration source"
+    "browserSuite": {
+      "tests": 875,
+      "localExitCode": 0,
+      "remoteExitCode": 0,
+      "retriesLocal": 0
+    }
+  },
+  "checkedMerge": {
+    "pr": 28,
+    "checkedHead": "91437ca9b737c0cbba3ccf171e6e90a7c7707569",
+    "merge": "959a4a18c324ee3da51acb49b8de87d40cbf25b7",
+    "activeChecksPassed": 12,
+    "remoteChromium": 875,
+    "botCheck": 2,
+    "analyticsConsent": 5
+  },
+  "deploymentPathCorrection": {
+    "rejectedPath": "convex/lib/auth-atomic.ts",
+    "validPath": "convex/lib/authAtomic.ts",
+    "implementationBytesUnchanged": true,
+    "regressionFailedBeforeRename": true,
+    "productionDryRun": "astute-peccary-795 accepted; no indexes deleted",
+    "frontend": "initial automatic build canceled before publication; correction needs checked PR and backend-first release",
+    "localChecks": {
+      "exitCode": 0,
+      "suites": 371,
+      "appTests": 3093,
+      "securityTests": 185,
+      "productionBuildPages": 3351
+    },
+    "independentReview": "clean after Windows/POSIX separator repair; helper bytes unchanged"
   }
 }
