@@ -1,0 +1,36 @@
+{
+  "scope": "Combined checked main2875c58 plus agreed web changes; local checks only. Hosted/merge/Production status is separate.",
+  "fullCheck": {
+    "result": "passed",
+    "webBackendSuites": 367,
+    "webBackendTests": 3019,
+    "lintErrors": 0,
+    "lintWarnings": 125,
+    "webAndBackendTypes": "passed",
+    "dependencySecurityTests": 4,
+    "desktopPolicyTests": 30,
+    "mobilePolicyTests": 62,
+    "mobileComponentTests": 14
+  },
+  "build": {
+    "result": "passed",
+    "pages": 3351,
+    "frontendBackendUrls": "empty",
+    "telemetryEnabled": false,
+    "warnings": "Existing Sentry/OpenTelemetry dynamic require warning; no build error."
+  },
+  "productionBuildBrowser": {
+    "result": "passed",
+    "tests": 42,
+    "scope": "billing/paper/service entry guards, privacy and shared hosted update controls; no signed native release or provider acceptance"
+  },
+  "localeAudit": {
+    "result": "mechanical-checks-pass",
+    "locales": 33,
+    "messagesPerLocale": 3304,
+    "linguisticReview": "native-review-pending"
+  },
+  "nativeReleasePerformed": false,
+  "paidProviderCalls": false,
+  "earlierFailedOrStoppedChecks": "Not counted as passing evidence. See task plan; full final run supersedes them."
+}

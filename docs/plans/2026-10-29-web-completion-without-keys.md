@@ -161,3 +161,29 @@ Office checklist passed6pages. Coverage PDF waits for final verification.
 The disposable acceptance harness now copies frontend source/config/public files
 and starts Next from that private copy; root environment and build files are
 not its runtime inputs. The unchanged original synthetic backup stays intact.
+
+## Current local acceptance checkpoint
+
+Task checkpoint4f2a9a4 and checked-main merge010cc57 preserve PR25. Mechanical
+locale audit now passes33locales/3304messages after an exact JSON identifier and
+locale-word validator repair, with RED/GREEN145tests. No message-key exemption.
+Combined lint passed; types exposed3test/guide-fixture errors, repaired with both
+web/backend types passing. Failed/stopped runs are not passing fullcheck proof.
+
+Fresh isolated normal-phone UI/server/reload journeys passed for plan, paper
+summary and RTL service response/revocation, including cross-org denial and
+unchanged authorized stock/money projections. No paid provider call or external
+proxy request. Actual local clear/restore preserved2639user/componentrecords in
+132exportedtables plus104files;50pre-existing sessions retained scoped access.
+Original private backup and root environment unchanged. Frontend copied source
+and assets match current files; public receipt binds actual source hashes.
+This is local synthetic acceptance, not cloud recovery or national capacity.
+
+Removed only this task checkout's old generated .next and disposable frontend
+.next outputs; space recovered to9.4GiB. Original backup/source retained. Fresh
+fullcheck is running in /tmp/luma-web-completion/release-full-check.log with
+2workers; no concurrent heavy build/browser process. Office PDF now includes
+observed Vercel Hobby deployment-storage overage73.96GB/10GB; browser team access
+works. No new deployment rejection yet, no paid upgrade or history deletion.
+Next: fullcheck/build, checkedPR, backend-first Production rollout, exact release
+verification, final coverage PDF and bounded handoff. Mobile/desktop stay paused.

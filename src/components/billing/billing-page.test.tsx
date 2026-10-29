@@ -103,7 +103,7 @@ it("retains choice after a stale write error and cancels only the saved request"
   view();
   const u = userEvent.setup();
   await u.click(screen.getByRole("combobox"));
-  await u.click(screen.getByRole("option", { name: "Yard", exact: true }));
+  await u.click(screen.getByRole("option", { name: "Yard" }));
   await u.click(
     screen.getByRole("button", { name: messages.businessSubscriptions.save }),
   );
@@ -136,7 +136,7 @@ it("retains the plan choice and offers a real sign-in recovery after recent-auth
   view();
   const user = userEvent.setup();
   await user.click(screen.getByRole("combobox"));
-  await user.click(screen.getByRole("option", { name: "Yard", exact: true }));
+  await user.click(screen.getByRole("option", { name: "Yard" }));
   await user.click(
     screen.getByRole("button", { name: messages.businessSubscriptions.save }),
   );

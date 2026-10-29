@@ -138,5 +138,15 @@
     "Real model accuracy/privacy acceptance on redacted approved samples"
   ],
   "secretHandling": "Use invitations or enter keys directly in the correct Production provider settings. Never return secret values in PDFs, email, screenshots, chat or GitHub.",
-  "verification": "Official pricing/setup pages checked29October2026. Account-specific balances, plan, approval and live delivery remain unverified until the owner session."
+  "verification": "Official pricing/setup pages checked29October2026. Account-specific balances, plan, approval and live delivery remain unverified until the owner session.",
+  "vercelStorageObservation": {
+    "checkedAt": "2026-10-29T00:09:23.321575+00:00",
+    "team": "luma-0f95",
+    "plan": "Hobby",
+    "deploymentStorageGb": 73.96,
+    "includedGb": 10,
+    "status": "Dashboard shows exceeded resources; no new deployment rejection verified yet.",
+    "ownerAction": "Review Pro and retention; any history cleanup requires owner approval.",
+    "officialSource": "https://vercel.com/changelog/hobby-projects-now-retain-fewer-deployments-to-free-up-storage"
+  }
 }
