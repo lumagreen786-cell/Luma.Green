@@ -15,6 +15,45 @@ how to do one job well.
 
 ---
 
+## Environment, HTTP and storage rules — 3 November 2026
+
+This section supersedes older environment and file-storage instructions.
+
+- **Convex owns environment settings by default.** Store backend settings and
+  provider secrets in the matching Convex deployment. Add a setting to Vercel
+  only when the Next.js frontend or build requires it. Document that need. Never
+  copy operational provider secrets to Vercel or expose them with `NEXT_PUBLIC_*`.
+  Local files contain only the connection and frontend settings needed to run
+  the app. Keep secrets out of Git, chat, logs and screenshots.
+- **Use Convex for backend HTTP work.** Use queries and mutations for database
+  operations, actions for external requests, and Convex HTTP actions for webhooks
+  and other HTTP endpoints. Do not add a Next.js API route as a default proxy.
+  Keep a Next.js route only when the framework needs it, such as the Better Auth
+  cookie/session proxy. Keep authentication, access checks and provider limits
+  at the Convex boundary; a frontend check is not sufficient.
+- **OS Digital ENVRIN serves development and production SMS codes.** Configure
+  all five OS Digital settings separately on both deployments. Keep the approved
+  sender and DLT template, current OTP quotas and authenticator requirements.
+  Missing or invalid configuration must block delivery. Do not retry paid sends
+  automatically. Settings presence does not prove SMS delivery; a live test needs
+  an approved recipient and allowance. Never print an OTP or provider secret.
+- **R2 is the required store for all file contents.** This includes photos,
+  application and identity documents, quality attachments and retained paper
+  originals. Do not add new Convex file-storage paths or database chunks for file
+  contents. Convex keeps metadata, ownership, access checks and audit records.
+  Use separate private development and production buckets, with separate
+  bucket-scoped credentials stored only in the matching Convex deployment.
+  Do not enable public bucket access or fall back to Convex storage when R2 fails.
+- **The full R2 move is pending implementation.** Existing code and historical
+  runbooks still include Convex files and paper chunks. Inventory these paths,
+  prepare a transfer and rollback plan, and verify file bytes and authorized and
+  denied reads before removing any existing file. Preserve records and access
+  rules. This instruction does not claim that migration or bucket setup is done.
+- **Turnstile requires separate setup and acceptance.** Use matching frontend
+  site keys and Convex secrets for each environment. Verify exact hostnames and
+  token success, failure and replay handling before enabling enforcement. Billing
+  activation alone does not configure Turnstile or R2.
+
 ## Agreed web completion — 29 October 2026
 
 The owner authorized finishing the remaining agreed web features that can be
@@ -548,10 +587,11 @@ there, never in a component.
   it does not restore stock or cancel the trade automatically. Never add a manual
   paid override. A kabadiwala pays a household directly; Luma records that
   separate flow.
-- **R2** — optional private storage for new quality attachments, off until
-  configured. Application/identity documents and unconfigured quality uploads
-  use Convex storage. Reads enforce existing record permissions. See
-  [R2 setup](docs/architecture/r2-storage-plan.md).
+- **R2** — required private storage for all file contents under the 3 November
+  rules above. The existing implementation covers quality attachments only;
+  full file migration and separate bucket setup are pending. The historical
+  [R2 setup](docs/architecture/r2-storage-plan.md) describes that first stage,
+  not the full approved scope. Preserve record permissions during the move.
 - **Mapbox** — not required; location uses the browser. Do not use image GPS
   metadata as a location authority.
 - **Expo / React Native and Electron** — native shells are in `apps/`. Signed
