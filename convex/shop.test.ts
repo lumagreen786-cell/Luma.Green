@@ -21,6 +21,9 @@ const FARIDA = "+919000000102"; // Peenya Paper & Plastic Yard
 const LAKSHMI = "+919000000105"; // a Saathi, no business
 
 async function demoWorld() {
+  // Keep today's seeded evening pickup open, including after hours and Sundays.
+  vi.useFakeTimers({ toFake: ["Date"] });
+  vi.setSystemTime(new Date("2026-10-01T03:30:00Z"));
   vi.stubEnv("AUTH_DEV_MODE", "true");
   const t = convexTest(schema, modules);
   registerAuth(t);
@@ -51,6 +54,7 @@ type Test = Awaited<ReturnType<typeof demoWorld>>;
 type Person = Awaited<ReturnType<typeof signInAs>>;
 
 afterEach(() => {
+  vi.useRealTimers();
   vi.unstubAllEnvs();
 });
 
