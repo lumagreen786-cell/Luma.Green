@@ -7,6 +7,7 @@ import { privateMetadata } from "@/lib/seo";
 
 interface Props {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ procurement?: string | string[] }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -15,6 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return privateMetadata(t("trades"));
 }
 
-export default function Page() {
-  return <TradesPage />;
+export default async function Page({ searchParams }: Props) {
+  const { procurement } = await searchParams;
+  return <TradesPage isRecycledPet={procurement === "pet"} />;
 }

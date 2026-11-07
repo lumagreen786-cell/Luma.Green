@@ -3,7 +3,7 @@
 import { useQuery } from "convex/react";
 import { SearchXIcon, StoreIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 import { useFormat } from "@/components/app/format";
 import {
@@ -16,12 +16,15 @@ import {
 import { useListScroll } from "@/components/app/use-list-scroll";
 import { useViewPreference } from "@/components/app/use-view-preference";
 import type { OrgWorkspace } from "@/components/app/use-workspace";
+import { Button } from "@/components/ui/button";
+import { Link } from "@/i18n/navigation";
 
 import { api } from "../../../convex/_generated/api";
 import { BuyButton } from "./buy-dialog";
 import { ListingCard } from "./listing-card";
 import { materialOptions, recycledFirst } from "./logic";
 import { MaterialFilter } from "./material-filter";
+import { isRecycledPetFeedstock } from "./pet-procurement";
 import { useOrg } from "./use-org";
 import { useRecycledCodes } from "./use-recycled-codes";
 
@@ -29,7 +32,11 @@ import { useRecycledCodes } from "./use-recycled-codes";
  * `/app/market`: server-approved chain and manufacturer-byproduct offers.
  * The server checks the buyer's approved material scope for every offer.
  */
-export function MarketPage() {
+export function MarketPage({
+  isRecycledPet = false,
+}: {
+  isRecycledPet?: boolean;
+}) {
   const t = useTranslations("market");
   const org = useOrg();
   const canBuy = org !== null;
@@ -37,18 +44,59 @@ export function MarketPage() {
   return (
     <>
       <AppPageHeader
-        title={t("browse.title")}
+        title={t(isRecycledPet ? "recycledPetProcurement" : "browse.title")}
         lead={canBuy ? t("browse.lead") : undefined}
+        actions={
+          canBuy ? (
+            <div className="flex flex-wrap gap-2">
+              <Button asChild variant="outline">
+                <Link
+                  href={
+                    isRecycledPet
+                      ? "/app/market"
+                      : "/app/market?procurement=pet"
+                  }
+                >
+                  {t(isRecycledPet ? "browse.all" : "recycledPetProcurement")}
+                </Link>
+              </Button>
+              {isRecycledPet ? (
+                <Button asChild variant="outline">
+                  <Link href="/app/trades?procurement=pet&tab=buying">
+                    {t("trades.title")}
+                  </Link>
+                </Button>
+              ) : null}
+            </div>
+          ) : undefined
+        }
       />
-      {canBuy ? <Lots org={org} /> : <NotForYou />}
+      {canBuy ? (
+        <Lots
+          key={isRecycledPet ? "pet" : "all"}
+          org={org}
+          isRecycledPet={isRecycledPet}
+        />
+      ) : (
+        <NotForYou />
+      )}
     </>
   );
 }
 
-function Lots({ org }: { org: OrgWorkspace }) {
+function Lots({
+  org,
+  isRecycledPet,
+}: {
+  org: OrgWorkspace;
+  isRecycledPet: boolean;
+}) {
   const t = useTranslations("market");
   const format = useFormat();
-  const listings = useQuery(api.market.browse, {});
+  const available = useQuery(api.market.browse, {});
+  const listings = isRecycledPet
+    ? available?.filter((lot) => isRecycledPetFeedstock(lot.material.code))
+    : available;
   const recycled = useRecycledCodes();
   const [savedMaterial, saveMaterial] = useViewPreference(
     `market.${org.id}`,
@@ -63,12 +111,6 @@ function Lots({ org }: { org: OrgWorkspace }) {
   };
 
   useListScroll(`market.${org.id}`, listings !== undefined);
-  const ordered = useMemo(() => {
-    if (!listings) return [];
-    return org.kind === "manufacturer"
-      ? recycledFirst(listings, recycled)
-      : listings;
-  }, [listings, org.kind, recycled]);
 
   if (listings === undefined) return <ListSkeleton rows={4} />;
   if (listings.length === 0) {
@@ -81,6 +123,8 @@ function Lots({ org }: { org: OrgWorkspace }) {
     );
   }
 
+  const ordered =
+    org.kind === "manufacturer" ? recycledFirst(listings, recycled) : listings;
   const options = materialOptions(listings, (names, code) =>
     format.material(names, code),
   );
@@ -108,7 +152,12 @@ function Lots({ org }: { org: OrgWorkspace }) {
                 <ListingCard
                   listing={listing}
                   isRecycled={recycled.has(listing.material.code)}
-                  action={<BuyButton listing={listing} />}
+                  action={
+                    <BuyButton
+                      listing={listing}
+                      isRecycledPet={isRecycledPet}
+                    />
+                  }
                 />
               </li>
             ))}

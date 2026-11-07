@@ -2976,6 +2976,7 @@
     "retryDetails": "फोटो थप्नुहोस् र आफ्नो विवरण फेरि जाँच्नुहोस्। नयाँ अनुरोध पठाउन अर्को पसल छान्नुहोस्।"
   },
   "market": {
+    "recycledPetProcurement": "पुनःप्रशोधित PET खरिद",
     "perKg": "{price}/kg",
     "recycled": "पुनर्चक्रित",
     "errors": {

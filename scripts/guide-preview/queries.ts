@@ -11,6 +11,7 @@ import {
   myListingsFixture,
   offersFixture,
   onboardingFixture,
+  petTradesFixture,
   priceQuotesFixture,
   sellableFixture,
   tradesFixture,
@@ -132,6 +133,13 @@ const extendedFixtures = {
   ...foundationFixtures,
   ...releaseGapFixtures,
 };
+function tradeFixture() {
+  return new URLSearchParams(window.location.search).get("procurement") ===
+    "pet"
+    ? petTradesFixture
+    : tradesFixture;
+}
+
 function readFixture(name: string): unknown {
   if (Object.hasOwn(extendedFixtures, name)) return extendedFixtures[name];
   switch (name) {
@@ -156,7 +164,7 @@ function readFixture(name: string): unknown {
     name === "market:trades" &&
     window.location.pathname.endsWith("/app/trades")
   )
-    return tradesFixture;
+    return tradeFixture();
   if (name === "insights:compliance") return complianceFixture;
   if (name === "identity:signInOptions")
     return { adminSetup: false, phone: true, email: true };

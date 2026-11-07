@@ -21,6 +21,7 @@ import { Link } from "@/i18n/navigation";
 
 import { api } from "../../../convex/_generated/api";
 import { byUrgency, isAvailableTradeAction } from "./logic";
+import { isRecycledPetFeedstock } from "./pet-procurement";
 import { TradeCard } from "./trade-card";
 import type { TradeView } from "./types";
 import { useOrg } from "./use-org";
@@ -32,7 +33,11 @@ type Tab = "buying" | "selling";
  * button. All approved businesses have both directions because eligible
  * manufacturer byproducts can return to any matching approved buyer.
  */
-export function TradesPage() {
+export function TradesPage({
+  isRecycledPet = false,
+}: {
+  isRecycledPet?: boolean;
+}) {
   const t = useTranslations("market");
   const org = useOrg();
   return (
@@ -40,11 +45,35 @@ export function TradesPage() {
       <AppPageHeader
         title={t("trades.title")}
         lead={t("trades.gatewayPending")}
+        actions={
+          org ? (
+            <div className="flex flex-wrap gap-2">
+              <Button asChild variant="outline">
+                <Link
+                  href={
+                    isRecycledPet
+                      ? "/app/trades"
+                      : "/app/trades?procurement=pet"
+                  }
+                >
+                  {t(isRecycledPet ? "browse.all" : "recycledPetProcurement")}
+                </Link>
+              </Button>
+              {isRecycledPet ? (
+                <Button asChild variant="outline">
+                  <Link href="/app/market?procurement=pet">
+                    {t("recycledPetProcurement")}
+                  </Link>
+                </Button>
+              ) : null}
+            </div>
+          ) : undefined
+        }
       />
       {org ? (
         // The tab can come from the link (?tab=buying), which needs Suspense.
         <Suspense fallback={<ListSkeleton />}>
-          <Trades org={org} />
+          <Trades org={org} isRecycledPet={isRecycledPet} />
         </Suspense>
       ) : (
         <EmptyState
@@ -57,7 +86,13 @@ export function TradesPage() {
   );
 }
 
-function Trades({ org }: { org: OrgWorkspace }) {
+function Trades({
+  org,
+  isRecycledPet,
+}: {
+  org: OrgWorkspace;
+  isRecycledPet: boolean;
+}) {
   const locale = useLocale();
   const t = useTranslations("market");
   const trades = useQuery(api.market.trades);
@@ -71,11 +106,21 @@ function Trades({ org }: { org: OrgWorkspace }) {
   useListScroll(`trades.${org.id}`, trades !== undefined);
   if (trades === undefined) return <ListSkeleton />;
 
+  const scopedTrades = isRecycledPet
+    ? {
+        buying: trades.buying.filter((trade) =>
+          isRecycledPetFeedstock(trade.material.code),
+        ),
+        selling: trades.selling.filter((trade) =>
+          isRecycledPetFeedstock(trade.material.code),
+        ),
+      }
+    : trades;
   const waiting = {
-    buying: trades.buying.filter((trade) =>
+    buying: scopedTrades.buying.filter((trade) =>
       trade.actions.some((action) => isAvailableTradeAction(action)),
     ).length,
-    selling: trades.selling.filter((trade) =>
+    selling: scopedTrades.selling.filter((trade) =>
       trade.actions.some((action) => isAvailableTradeAction(action)),
     ).length,
   };
@@ -135,18 +180,33 @@ function Trades({ org }: { org: OrgWorkspace }) {
       </TabsList>
       {(["buying", "selling"] as const).map((value) => (
         <TabsContent key={value} value={value}>
-          <TradeList tab={value} trades={trades[value]} />
+          <TradeList
+            tab={value}
+            trades={scopedTrades[value]}
+            isRecycledPet={isRecycledPet}
+          />
         </TabsContent>
       ))}
     </Tabs>
   );
 }
 
-function TradeList({ tab, trades }: { tab: Tab; trades: TradeView[] }) {
+function TradeList({
+  tab,
+  trades,
+  isRecycledPet,
+}: {
+  tab: Tab;
+  trades: TradeView[];
+  isRecycledPet: boolean;
+}) {
   const t = useTranslations("market.trades");
   const headingId = useId();
   if (trades.length === 0) {
     const isBuying = tab === "buying";
+    const marketHref = isRecycledPet
+      ? "/app/market?procurement=pet"
+      : "/app/market";
     return (
       <EmptyState
         icon={isBuying ? ShoppingCartIcon : TagIcon}
@@ -154,7 +214,7 @@ function TradeList({ tab, trades }: { tab: Tab; trades: TradeView[] }) {
         body={t(isBuying ? "emptyBuyingBody" : "emptySellingBody")}
         action={
           <Button asChild size="lg" className="mt-2 h-11">
-            <Link href={isBuying ? "/app/market" : "/app/sell"}>
+            <Link href={isBuying ? marketHref : "/app/sell"}>
               {t(isBuying ? "goBuy" : "goSell")}
             </Link>
           </Button>

@@ -2888,6 +2888,7 @@
     "retryDetails": "添加照片并重新检查您的信息。选择另一家店铺发送新请求。"
   },
   "market": {
+    "recycledPetProcurement": "再生 PET 采购",
     "sampleData": "此页面的价格和金额为原型示例数据。",
     "simulated": "示例数据。原型中的付款均为模拟，不会转移真实资金。",
     "perKg": "{price}/公斤",

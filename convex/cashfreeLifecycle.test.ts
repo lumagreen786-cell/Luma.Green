@@ -872,3 +872,101 @@ it("reconciles exact seller-paid provider fees from net and gross evidence", asy
     await w.buyer.query(api.cashfreeLifecycle.status, { tradeId: w.tradeId }),
   ).toMatchObject({ settlement: "settled", state: "authorized" });
 });
+
+it("reconciles a recycled PET quote through delivery with matching provider evidence", async () => {
+  const w = await world();
+  const buyer = await signInAs(w.t, "+919000000104");
+  const seller = w.outsider;
+  const offers = await buyer.query(api.market.browse, {
+    materialCode: "RECYCLED-PET-FLAKE",
+  });
+  const offer = offers.at(0);
+  if (!offer) throw new Error("Missing PET quote");
+
+  const tradeId = await buyer.mutation(api.market.requestTrade, {
+    listingId: offer.id,
+    grams: 1000,
+  });
+  const requested = await buyer.query(api.market.trades, {});
+  expect(requested.buying.find((trade) => trade.id === tradeId)).toMatchObject({
+    status: "requested",
+    grams: 1000,
+    totalPaise: offer.askPaisePerKg,
+  });
+  await seller.mutation(api.market.act, { tradeId, action: "accept" });
+  await expect(
+    w.buyer.query(api.cashfreeLifecycle.status, { tradeId }),
+  ).rejects.toThrow("TRADE_NOT_FOUND");
+
+  const trade = await w.t.run((ctx) => ctx.db.get("trades", tradeId));
+  const sellerOrgId = trade?.sellerOrgId;
+  if (!sellerOrgId) throw new Error("Missing PET seller");
+  await w.t.mutation(internal.cashfreePayments.registerVendor, {
+    orgId: sellerOrgId,
+    mode: "live",
+    vendorId: "test_pet_vendor",
+  });
+  await w.t.mutation(internal.cashfreePayments.recordVendor, {
+    mode: "live",
+    vendorId: "test_pet_vendor",
+    status: "ACTIVE",
+  });
+  await expect(
+    seller.mutation(api.cashfreeLifecycle.act, {
+      tradeId,
+      action: "dispatch",
+      reference: "PET-LOAD-01",
+    }),
+  ).rejects.toThrow();
+
+  const order = await collect({ ...w, buyer, seller, tradeId, sellerOrgId });
+  await seller.mutation(api.cashfreeLifecycle.act, {
+    tradeId,
+    action: "dispatch",
+    reference: "PET-LOAD-01",
+  });
+  await buyer.mutation(api.cashfreeLifecycle.act, {
+    tradeId,
+    action: "receive",
+    reference: "PET-GRN-01",
+  });
+  expect(
+    await buyer.query(api.cashfreeLifecycle.status, { tradeId }),
+  ).toMatchObject({
+    state: "received",
+    collection: "live_confirmed",
+    settlement: "pending",
+  });
+
+  const amount = offer.askPaisePerKg;
+  await w.t.mutation(internal.cashfreeSettlements.observe, {
+    mode: "live",
+    vendorId: "test_pet_vendor",
+    settlementId: "pet-settlement",
+    status: "SUCCESS",
+    amountPaise: amount,
+    settlementPaise: amount,
+    grossPaise: amount,
+    feePaise: 0,
+    adjustmentPaise: 0,
+    eventAt: Date.now(),
+    bodyHash: "d".repeat(64),
+  });
+  await w.t.mutation(internal.cashfreeSettlements.record, {
+    orderId: order._id,
+    settlementId: "pet-settlement",
+    vendorId: "test_pet_vendor",
+    allocationPaise: amount,
+    feePaise: 0,
+    fingerprint: "pet-test-proof",
+    matches: true,
+  });
+  expect(
+    await buyer.query(api.cashfreeLifecycle.status, { tradeId }),
+  ).toMatchObject({
+    state: "received",
+    collection: "live_confirmed",
+    settlement: "settled",
+    totalPaise: amount,
+  });
+});

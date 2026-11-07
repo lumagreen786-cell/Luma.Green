@@ -2888,6 +2888,7 @@
     "retryDetails": "Adicione fotos e confira os seus dados novamente. Escolha outra loja para enviar um novo pedido."
   },
   "market": {
+    "recycledPetProcurement": "Compra de PET reciclado",
     "sampleData": "Preços e valores nesta tela são dados de exemplo para o protótipo.",
     "simulated": "Dados de exemplo. Pagamentos são simulados no protótipo: não há movimentação de dinheiro real.",
     "perKg": "{price}/kg",

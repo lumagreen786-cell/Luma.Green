@@ -1949,6 +1949,7 @@
     "retryDetails": "Fotoğraf ekleyin ve bilgilerinizi yeniden kontrol edin. Yeni bir talep göndermek için başka bir dükkân seçin."
   },
   "market": {
+    "recycledPetProcurement": "Geri dönüştürülmüş PET alımı",
     "buy": {
       "cancel": "İptal",
       "button": "Satın al",

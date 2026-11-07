@@ -196,3 +196,30 @@ it("follows a new explicit trade tab on the same mounted page", async () => {
     "true",
   );
 });
+
+it("keeps PET payment and delivery records in the same buying scope", () => {
+  data.tab = "buying";
+  data.trades.buying.push({
+    ...bought,
+    id: "pet",
+    material: {
+      code: "RECYCLED-PET-PELLET",
+      names: { en: "Recycled PET pellets" },
+      family: "plastic",
+    },
+  });
+  render(
+    <WithIntl>
+      <TradesPage isRecycledPet />
+    </WithIntl>,
+  );
+  expect(
+    screen.getByRole("heading", { name: /Recycled PET pellets/ }),
+  ).toBeVisible();
+  expect(
+    screen.queryByRole("heading", { name: /Newspaper/ }),
+  ).not.toBeInTheDocument();
+  expect(
+    screen.getByRole("link", { name: "Recycled PET procurement" }),
+  ).toHaveAttribute("href", "/app/market?procurement=pet");
+});

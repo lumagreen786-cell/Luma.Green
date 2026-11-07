@@ -1,3 +1,18 @@
+## Recycled PET procurement workspace - 8 November 2026
+
+The market and trade history have a linked PET scope for recycled flakes and
+pellets. They reuse the existing approved offer window, trade history, purchase
+request and Cashfree lifecycle. Raw PET and other resins stay in the general
+views. The feature does not create a second payment record. The current
+scope filters the existing bounded market and history results.
+
+The local lifecycle test uses seeded offers and simulated provider evidence.
+It covers purchase request, seller acceptance, authorization, dispatch,
+receipt, and payment reconciliation. Live Cashfree settlement, device-only
+Expo and Electron acceptance, and production activation remain separate.
+The maintained guide should include the new scope when the screenshot guide
+is refreshed.
+
 ## Agreed web completion - 29 October 2026
 
 Continue with [the active delivery record](web-completion-2026-10-29.md) and
