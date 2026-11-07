@@ -135,3 +135,37 @@ test("rejects unsafe inventory totals", () => {
   ];
   assert.throws(() => screenIndustryPilot(input), /UNSAFE_TOTAL/);
 });
+
+test("calculates per-load contribution and break-even without credit income", () => {
+  const input = fixture();
+  const loadCosts = {
+    materialPaise: 300,
+    processingPaise: 180,
+    rejectDisposalPaise: 120,
+    transactionFeesPaise: 200,
+  };
+  const report = screenIndustryPilot({ ...input, loadCosts });
+  assert.deepEqual(report.quotes, [
+    {
+      buyer: "Fit",
+      netQuotePaise: 700,
+      contributionPaise: -100,
+      breakEvenQuotePaise: 1100,
+    },
+  ]);
+  assert.equal(report.baseCreditRevenuePaise, 0);
+  assert.throws(() =>
+    screenIndustryPilot({
+      ...input,
+      loadCosts: { ...loadCosts, processingPaise: undefined },
+    }),
+  );
+  assert.throws(
+    () =>
+      screenIndustryPilot({
+        ...input,
+        loadCosts: { ...loadCosts, processingPaise: Number.MAX_SAFE_INTEGER },
+      }),
+    /UNSAFE_TOTAL/,
+  );
+});
