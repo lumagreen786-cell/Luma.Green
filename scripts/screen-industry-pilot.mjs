@@ -41,7 +41,14 @@ const climate = z.strictObject({
   inventory: z.array(inventoryRow).max(1000),
   projectEstimateKgCo2e: z.int().optional(),
 });
+const loadCosts = z.strictObject({
+  materialPaise: amount,
+  processingPaise: amount,
+  rejectDisposalPaise: amount,
+  transactionFeesPaise: amount,
+});
 const pilot = z.strictObject({
+  loadCosts: loadCosts.optional(),
   intake: industryPilotIntake,
   batch,
   quotes: z.array(quote).max(100),
@@ -59,6 +66,7 @@ export function screenIndustryPilot(input) {
     intake,
     batch: measured,
     quotes,
+    loadCosts: costs,
     climate: accounting,
   } = pilot.parse(input);
   if (
@@ -82,14 +90,25 @@ export function screenIndustryPilot(input) {
         measured.outputGrams >= entry.minimumGrams &&
         measured.outputGrams <= entry.maximumGrams,
     )
-    .map((entry) => ({
-      buyer: entry.buyer,
-      netQuotePaise: safeInteger(
-        BigInt(entry.quotedPaise) -
-          BigInt(entry.freightPaise) -
-          BigInt(entry.handlingPaise),
-      ),
-    }))
+    .map((entry) => {
+      const deliveryCost =
+        BigInt(entry.freightPaise) + BigInt(entry.handlingPaise);
+      const netQuote = BigInt(entry.quotedPaise) - deliveryCost;
+      const result = {
+        buyer: entry.buyer,
+        netQuotePaise: safeInteger(netQuote),
+      };
+      if (costs === undefined) return result;
+      const otherCost = Object.values(costs).reduce(
+        (total, value) => total + BigInt(value),
+        0n,
+      );
+      return {
+        ...result,
+        contributionPaise: safeInteger(netQuote - otherCost),
+        breakEvenQuotePaise: safeInteger(deliveryCost + otherCost),
+      };
+    })
     .toSorted((left, right) => right.netQuotePaise - left.netQuotePaise);
 
   const inventory = Object.fromEntries(
