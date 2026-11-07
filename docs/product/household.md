@@ -84,3 +84,38 @@ accepting.
 1. What recycle points are worth and what they redeem for.
 2. Whether a separate consented study should retain photos and original model output for accuracy evaluation. The current photo flow stores neither.
 3. The dispatch timeout (15 minutes is a guess — measure it in the pilot).
+
+## Gemini concept review and delivery plan
+
+Reviewed the [shared Gemini household mockup](https://gemini.google.com/share/dcc490e1c816)
+on 8 November 2026. It shows four areas: scrap selling, eco tools, shared
+household access, and rewards. Use these as workflow references. Use Luma's
+existing design system and label fixture data in tests.
+
+| Concept                              | Luma delivery decision                                                                                                                                                                                                                                             | Acceptance evidence                                                                                                                                                                   |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Photos and material suggestions      | Keep the existing pickup form. Accept optional private photos. Add an optional suggestion step when a provider and usage limits are approved. Let the operator correct the suggestion. Record the measured weight at pickup.                                       | A failed or incorrect suggestion never blocks booking. Only an authorized party can read the photo. The receipt uses the measured weight.                                             |
+| Nearby buyers and collection routing | Use service city, service radius, accepted grade, collection setup, minimum load and capacity. Compare real quotes after stated transport and handling costs. Add apartment or shared collection only when the operator supports it.                               | Test an individual home, a shared collection site and an area with no service. Missing quotes show unavailable. Municipal vehicle location and arrival times require a verified feed. |
+| Family and pickup hand-off           | Start with an invitation or a revocable, time-limited share for one pickup. Each signed-in person uses their own account and authentication. A pickup helper sees the assigned hand-off only.                                                                      | Test expiration, revocation, unrelated pickup denial and denial of payment and household settings access. Review any future child-account workflow separately.                        |
+| Eco, solar and air quality           | Keep household estimates separate from measured impacts and issued credits. Park solar quotes and local air quality until there is a verified provider, source date and approved scope. Leave Wi-Fi scanning and background geofencing out of the pickup workflow. | Show the source and period of any supported estimate. No estimated number creates a credit, changes a corporate inventory, or proves a provider result.                               |
+| Payouts, vouchers and gold           | Keep the existing payout record. Defer the wallet, reward conversion and gold until provider, legal, payment and settlement requirements are reviewed.                                                                                                             | A payout only shows settled after verified provider evidence.                                                                                                                         |
+
+### Build order
+
+1. Improve booking and routing with existing data. Keep collector measurements
+   and the receipt as the weight source. Add permission checks for every view.
+2. Link pickup receipt lines to processing lots with explicit allocation.
+   Reconcile material and quantity in the same transaction. Use private R2 for
+   new evidence files and retain access metadata in Convex. Check that repeated
+   imports cannot allocate the same weight twice.
+3. Test a time-limited pickup hand-off with the existing receipt-sharing rules
+   as a reference. Add optional material suggestions after the provider gate.
+4. Run the web flow with approved fixtures on phone, tablet and desktop in both
+   themes and affected languages, including Arabic and Urdu. Run the shared
+   Expo and Electron compatibility checks. Verify real routing, quote and
+   access behavior before production activation.
+
+The [carbon plan](../plans/2026-11-08-carbon-evidence-and-trading.md) owns
+methodology screening, verification, registry reconciliation and trading.
+A household photo or pickup receipt supports traceability. A claim also needs
+measured downstream activity, documented claim rights and independent review.
