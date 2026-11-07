@@ -1084,3 +1084,124 @@ export const recordControlledDisposition = mutation({
     return id;
   },
 });
+
+const carbonBatchLot = v.object({
+  lotId: v.id("materialLots"),
+  materialCode: v.string(),
+  state: v.string(),
+  grams: v.number(),
+});
+
+/** Recorded physical evidence for preparation. Never verifies a carbon claim. */
+export const carbonBatchPreparation = query({
+  args: {
+    expectedOrgId: v.id("orgs"),
+    transformationId: v.id("lotTransformations"),
+  },
+  returns: v.object({
+    schemaVersion: v.literal(1),
+    purpose: v.literal("carbon_evidence_preparation"),
+    verificationStatus: v.literal("recorded_unverified"),
+    orgId: v.id("orgs"),
+    transformationId: v.id("lotTransformations"),
+    recordedAt: v.number(),
+    facilityId: v.optional(v.id("industrialFacilities")),
+    processKind: v.optional(vProcessKind),
+    inputDetail: v.union(
+      v.literal("recorded_lot_edges"),
+      v.literal("legacy_primary_only"),
+    ),
+    primaryInputLotId: v.id("materialLots"),
+    inputGrams: v.number(),
+    contaminationGrams: v.number(),
+    processLossGrams: v.number(),
+    inputs: v.array(carbonBatchLot),
+    outputs: v.array(carbonBatchLot),
+  }),
+  handler: async (ctx, { expectedOrgId, transformationId }) => {
+    const { org } = await requireOrg(ctx, undefined, "read");
+    if (expectedOrgId !== org._id)
+      throw new ConvexError("EVIDENCE_SCOPE_CHANGED");
+
+    const batch = await ctx.db.get("lotTransformations", transformationId);
+    if (batch?.orgId !== org._id)
+      throw new ConvexError("TRANSFORMATION_NOT_FOUND");
+
+    const [inputs, outputs] = await Promise.all([
+      ctx.db
+        .query("lotTransformationInputs")
+        .withIndex("by_transformation", (q) =>
+          q.eq("transformationId", transformationId),
+        )
+        .take(21),
+      ctx.db
+        .query("materialLots")
+        .withIndex("by_parent_transformation", (q) =>
+          q.eq("parentTransformationId", transformationId),
+        )
+        .take(11),
+    ]);
+
+    const inputIds = new Set(inputs.map((input) => input.lotId));
+    if (
+      inputs.length > 0 &&
+      (inputs.length > 20 ||
+        inputIds.size !== inputs.length ||
+        !inputIds.has(batch.inputLotId) ||
+        inputs.reduce(
+          (total, input) => total + positiveGrams(input.grams),
+          0,
+        ) !== batch.inputGrams)
+    )
+      throw new ConvexError("INVALID_TRANSFORMATION_INPUTS");
+
+    if (
+      outputs.some(
+        (lot) =>
+          lot.declaredByOrgId !== org._id || lot.sourceKind !== "transformed",
+      )
+    )
+      throw new ConvexError("INVALID_TRANSFORMATION_OUTPUTS");
+
+    const outputLots = outputs.map(
+      ({ _id, materialCode, state, initialGrams }) => ({
+        lotId: _id,
+        materialCode,
+        state,
+        grams: initialGrams,
+      }),
+    );
+    balancedOutputGrams(
+      batch.inputGrams,
+      batch.contaminationGrams,
+      batch.processLossGrams,
+      outputLots,
+    );
+
+    return {
+      schemaVersion: 1 as const,
+      purpose: "carbon_evidence_preparation" as const,
+      verificationStatus: "recorded_unverified" as const,
+      orgId: org._id,
+      transformationId,
+      recordedAt: batch.createdAt,
+      facilityId: batch.facilityId,
+      processKind: batch.processKind,
+      inputDetail:
+        inputs.length > 0
+          ? ("recorded_lot_edges" as const)
+          : ("legacy_primary_only" as const),
+      primaryInputLotId: batch.inputLotId,
+      inputGrams: batch.inputGrams,
+      contaminationGrams: batch.contaminationGrams,
+      processLossGrams: batch.processLossGrams,
+      inputs: inputs.map(({ lotId, materialCode, state, grams }) => ({
+        lotId,
+        materialCode,
+        state,
+        grams,
+      })),
+      outputs: outputLots,
+    };
+  },
+});

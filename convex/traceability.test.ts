@@ -963,3 +963,130 @@ it("keeps sibling input details private after either input remainder changes cus
     expect(history.custody).toHaveLength(2);
   }
 });
+
+async function carbonBatch() {
+  const { t, yard, recycler, orgs } = await world();
+  const input = await yard.mutation(api.traceability.declareLot, {
+    materialCode: "PLASTIC-PET",
+    state: "Sorted",
+    grams: 1001,
+    sourceReference: "Private source reference",
+  });
+  const transformationId = await yard.mutation(api.traceability.transform, {
+    inputLotId: input,
+    inputGrams: 1001,
+    contaminationGrams: 1,
+    processLossGrams: 2,
+    outputs: [
+      { materialCode: "RECYCLED-PET-FLAKE", state: "Washed", grams: 998 },
+    ],
+  });
+  const args = { expectedOrgId: orgs.yard, transformationId };
+  const output = await t.run((ctx) =>
+    ctx.db
+      .query("materialLots")
+      .withIndex("by_parent_transformation", (q) =>
+        q.eq("parentTransformationId", transformationId),
+      )
+      .first(),
+  );
+  if (!output) throw new Error("Missing output");
+  return { t, yard, recycler, orgs, args, input, output };
+}
+
+describe("carbon batch preparation", () => {
+  it("returns a scoped physical snapshot using original output weights after custody changes", async () => {
+    const { t, yard, recycler, orgs, args, input, output } =
+      await carbonBatch();
+    await t.run((ctx) =>
+      ctx.db.patch("materialLots", output._id, {
+        orgId: orgs.recycler,
+        availableGrams: 100,
+      }),
+    );
+    expect(
+      await yard.query(api.traceability.carbonBatchPreparation, args),
+    ).toEqual({
+      schemaVersion: 1,
+      purpose: "carbon_evidence_preparation",
+      verificationStatus: "recorded_unverified",
+      orgId: orgs.yard,
+      transformationId: args.transformationId,
+      recordedAt: expect.any(Number),
+      inputDetail: "recorded_lot_edges",
+      primaryInputLotId: input,
+      inputGrams: 1001,
+      contaminationGrams: 1,
+      processLossGrams: 2,
+      inputs: [
+        {
+          lotId: input,
+          materialCode: "PLASTIC-PET",
+          state: "Sorted",
+          grams: 1001,
+        },
+      ],
+      outputs: [
+        {
+          lotId: output._id,
+          materialCode: "RECYCLED-PET-FLAKE",
+          state: "Washed",
+          grams: 998,
+        },
+      ],
+    });
+    await expect(
+      recycler.query(api.traceability.carbonBatchPreparation, {
+        ...args,
+        expectedOrgId: orgs.recycler,
+      }),
+    ).rejects.toThrow(/TRANSFORMATION_NOT_FOUND/);
+  });
+
+  it("rejects stale workspace scope and requires authentication", async () => {
+    const { t, yard, orgs, args } = await carbonBatch();
+    await expect(
+      yard.query(api.traceability.carbonBatchPreparation, {
+        ...args,
+        expectedOrgId: orgs.shop,
+      }),
+    ).rejects.toThrow(/EVIDENCE_SCOPE_CHANGED/);
+    await expect(
+      t.query(api.traceability.carbonBatchPreparation, args),
+    ).rejects.toThrow(/NOT_SIGNED_IN/);
+  });
+
+  it("marks missing legacy input detail and rejects an inconsistent output weight", async () => {
+    const { t, yard, args, input, output } = await carbonBatch();
+    const edge = await t.run((ctx) =>
+      ctx.db
+        .query("lotTransformationInputs")
+        .withIndex("by_transformation", (q) =>
+          q.eq("transformationId", args.transformationId),
+        )
+        .first(),
+    );
+    if (!edge) throw new Error("Missing input edge");
+    await t.run((ctx) =>
+      ctx.db.patch("lotTransformationInputs", edge._id, { grams: 1000 }),
+    );
+    await expect(
+      yard.query(api.traceability.carbonBatchPreparation, args),
+    ).rejects.toThrow(/INVALID_TRANSFORMATION_INPUTS/);
+    await t.run((ctx) => ctx.db.delete("lotTransformationInputs", edge._id));
+    expect(
+      await yard.query(api.traceability.carbonBatchPreparation, args),
+    ).toMatchObject({
+      inputDetail: "legacy_primary_only",
+      primaryInputLotId: input,
+      inputGrams: 1001,
+      inputs: [],
+    });
+    await t.run((ctx) =>
+      ctx.db.patch("materialLots", output._id, { initialGrams: 999 }),
+    );
+    await expect(
+      yard.query(api.traceability.carbonBatchPreparation, args),
+    ).rejects.toThrow(/MASS_BALANCE_MISMATCH/);
+  });
+});
