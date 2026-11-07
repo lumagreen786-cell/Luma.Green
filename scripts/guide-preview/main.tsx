@@ -87,6 +87,8 @@ const defaultAppPage = path.includes("/requests/") ? (
 ) : (
   <RoleHome />
 );
+const isRecycledPet =
+  new URLSearchParams(window.location.search).get("procurement") === "pet";
 const operationalPages: Record<string, ReactNode | undefined> = {
   "/en/app/finance-example": (
     <div className="flex flex-col gap-6">
@@ -109,8 +111,8 @@ const operationalPages: Record<string, ReactNode | undefined> = {
   "/en/app/impact": <ImpactPage />,
   "/en/app/trades/guide-receipt/invoice": <InvoicePage id="guide-receipt" />,
   "/en/app/requests": <RequestsPage />,
-  "/en/app/market": <MarketPage />,
-  "/en/app/trades": <TradesPage />,
+  "/en/app/market": <MarketPage isRecycledPet={isRecycledPet} />,
+  "/en/app/trades": <TradesPage isRecycledPet={isRecycledPet} />,
   "/en/app/compliance": <CompliancePage />,
   "/en/app/services": <ServicesPage />,
   "/en/app/returns": <ReturnClaimsPage />,

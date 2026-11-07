@@ -468,6 +468,18 @@ const demoTrade: TradeView = {
   actions: [],
   createdAt: NOW - HOUR,
 };
+export const petTradesFixture: FunctionReturnType<typeof api.market.trades> = {
+  buying: [
+    {
+      ...demoTrade,
+      id: "guide-pet-trade" as Id<"trades">,
+      material: materialRef("RECYCLED-PET-FLAKE"),
+      status: "completed",
+      actions: [],
+    },
+  ],
+  selling: [],
+};
 export const tradesFixture: FunctionReturnType<typeof api.market.trades> = {
   buying: [demoTrade],
   selling: [],

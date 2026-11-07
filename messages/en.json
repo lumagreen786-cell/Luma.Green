@@ -2888,6 +2888,7 @@
     }
   },
   "market": {
+    "recycledPetProcurement": "Recycled PET procurement",
     "sampleData": "Prices and amounts on this screen are sample data for the prototype.",
     "simulated": "Sample data. Payments are simulated in the prototype: no real money moves.",
     "perKg": "{price}/kg",

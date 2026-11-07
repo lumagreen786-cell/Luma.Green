@@ -2888,6 +2888,7 @@
     "retryDetails": "Thêm ảnh và kiểm tra lại thông tin của bạn. Chọn cửa hàng khác để gửi yêu cầu mới."
   },
   "market": {
+    "recycledPetProcurement": "Thu mua PET tái chế",
     "sampleData": "Giá và số tiền trên màn hình này là dữ liệu mẫu cho nguyên mẫu.",
     "simulated": "Dữ liệu mẫu. Thanh toán trong nguyên mẫu chỉ được mô phỏng: không chuyển tiền thật.",
     "perKg": "{price}/kg",

@@ -9,6 +9,25 @@ type FinancialSnapshot = NonNullable<
 /** Explicit interface examples only. Never used by the application backend. */
 export function financeFixture(args: unknown): FinancialSnapshot | null {
   if (
+    args !== null &&
+    typeof args === "object" &&
+    "tradeId" in args &&
+    args.tradeId === "guide-pet-trade" &&
+    window.location.pathname.endsWith("/app/trades") &&
+    new URLSearchParams(window.location.search).get("procurement") === "pet"
+  ) {
+    return {
+      state: "received",
+      collection: "live_confirmed",
+      settlement: "settled",
+      refund: "none",
+      actions: [],
+      policyReady: true,
+      totalPaise: 150_000,
+      grams: 100_000,
+    };
+  }
+  if (
     args === null ||
     typeof args !== "object" ||
     !("tradeId" in args) ||

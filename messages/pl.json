@@ -2888,6 +2888,7 @@
     "retryDetails": "Dodaj zdjęcia i ponownie sprawdź swoje dane. Wybierz inny punkt, aby wysłać nowe zgłoszenie."
   },
   "market": {
+    "recycledPetProcurement": "Zakup PET z recyklingu",
     "sampleData": "Ceny i kwoty na tym ekranie to przykładowe dane prototypu.",
     "simulated": "Dane przykładowe. Płatności w prototypie są symulowane: prawdziwe pieniądze nie są przesyłane.",
     "perKg": "{price}/kg",

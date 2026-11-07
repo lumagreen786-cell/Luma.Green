@@ -212,3 +212,29 @@ it("restores the material filter after returning to the market", async () => {
     screen.queryByRole("heading", { name: "Iron and steel" }),
   ).not.toBeInTheDocument();
 });
+
+it("keeps recycled PET procurement offers separate from raw PET and other resins", () => {
+  data.listings = [
+    lot("flake", "RECYCLED-PET-FLAKE", "Recycled PET flakes"),
+    lot("pellet", "RECYCLED-PET-PELLET", "Recycled PET pellets"),
+    lot("raw", "PLASTIC-PET", "PET bottles"),
+    lot("hdpe", "RECYCLED-HDPE-GRANULE", "Recycled HDPE granules"),
+  ];
+  render(
+    <WithIntl>
+      <MarketPage isRecycledPet />
+    </WithIntl>,
+  );
+  expect(
+    screen.getByRole("heading", { level: 3, name: "Recycled PET flakes" }),
+  ).toBeVisible();
+  expect(
+    screen.getByRole("heading", { level: 3, name: "Recycled PET pellets" }),
+  ).toBeVisible();
+  expect(
+    screen.queryByRole("heading", { level: 3, name: "PET bottles" }),
+  ).not.toBeInTheDocument();
+  expect(
+    screen.queryByRole("heading", { level: 3, name: "Recycled HDPE granules" }),
+  ).not.toBeInTheDocument();
+});

@@ -38,9 +38,11 @@ import type { ListingView } from "./types";
 export function BuyButton({
   listing,
   className,
+  isRecycledPet = false,
 }: {
   listing: ListingView;
   className?: string;
+  isRecycledPet?: boolean;
 }) {
   const canOperate = useCanOperate();
   const now = useNow({ updateInterval: 60_000 });
@@ -78,6 +80,7 @@ export function BuyButton({
           <BuyForm
             listing={listing}
             material={material}
+            isRecycledPet={isRecycledPet}
             onDone={() => {
               setIsOpen(false);
             }}
@@ -109,10 +112,12 @@ function BuyForm({
   listing,
   material,
   onDone,
+  isRecycledPet,
 }: {
   listing: ListingView;
   material: string;
   onDone: () => void;
+  isRecycledPet: boolean;
 }) {
   const t = useTranslations("market");
   const locale = useLocale();
@@ -173,7 +178,13 @@ function BuyForm({
         action: {
           label: t("buy.seeTrades"),
           onClick: () => {
-            router.push({ pathname: "/app/trades", query: { tab: "buying" } });
+            router.push({
+              pathname: "/app/trades",
+              query: {
+                tab: "buying",
+                ...(isRecycledPet && { procurement: "pet" }),
+              },
+            });
           },
         },
       });

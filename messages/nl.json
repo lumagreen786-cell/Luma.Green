@@ -2888,6 +2888,7 @@
     "retryDetails": "Voeg foto's toe en controleer je gegevens opnieuw. Kies een andere winkel om een nieuw verzoek te sturen."
   },
   "market": {
+    "recycledPetProcurement": "Inkoop van gerecycled PET",
     "sampleData": "Prijzen en bedragen op dit scherm zijn voorbeeldgegevens voor het prototype.",
     "simulated": "Voorbeeldgegevens. Betalingen zijn gesimuleerd in het prototype: er wordt geen echt geld verplaatst.",
     "perKg": "{price}/kg",
