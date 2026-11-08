@@ -56,6 +56,45 @@ const outputValidator = v.object({
   handlingClass: v.optional(vHandlingClass),
 });
 
+async function acceptedReceiptVersion(
+  ctx: QueryCtx,
+  orgId: Id<"orgs">,
+  bookingId: Id<"bookings">,
+  materialCode: string,
+  grams: number,
+) {
+  const booking = await ctx.db.get("bookings", bookingId);
+  if (
+    booking?.orgId !== orgId ||
+    booking.status !== "completed" ||
+    !booking.receipt
+  )
+    throw new ConvexError("RECEIPT_NOT_FOUND");
+
+  const { receipt, receiptReview } = booking;
+  if (
+    receiptReview?.decision !== "accepted" ||
+    receiptReview.receiptVersion !== receipt.paidAt ||
+    receiptReview.rejectedLineIndexes.length > 0
+  )
+    throw new ConvexError("RECEIPT_REVIEW_REQUIRED");
+
+  const matching = receipt.lines.filter(
+    (line) => line.materialCode === materialCode,
+  );
+  if (matching.length !== 1 || matching[0].grams !== grams)
+    throw new ConvexError("RECEIPT_LINE_MISMATCH");
+
+  const existing = await ctx.db
+    .query("materialLots")
+    .withIndex("by_source_booking_material", (q) =>
+      q.eq("sourceBookingId", bookingId).eq("materialCode", materialCode),
+    )
+    .first();
+  if (existing) throw new ConvexError("RECEIPT_LINE_ALREADY_LINKED");
+  return receipt.paidAt;
+}
+
 /** A physical declaration only: it does not add stock or verify provenance. */
 export const declareLot = mutation({
   args: {
@@ -63,6 +102,7 @@ export const declareLot = mutation({
     state: v.string(),
     grams: v.number(),
     sourceReference: v.optional(v.string()),
+    sourceBookingId: v.optional(v.id("bookings")),
     acquisitionCostPaise: v.optional(vRecordedCost),
     costReference: v.optional(v.string()),
     streamClass: v.optional(vStreamClass),
@@ -71,19 +111,32 @@ export const declareLot = mutation({
   returns: v.id("materialLots"),
   handler: async (ctx, args) => {
     const { org, profile } = await requireOrg(ctx);
+    const materialCode = requiredLabel(args.materialCode);
+    const grams = positiveGrams(args.grams);
+    const sourceReceiptVersion = args.sourceBookingId
+      ? await acceptedReceiptVersion(
+          ctx,
+          org._id,
+          args.sourceBookingId,
+          materialCode,
+          grams,
+        )
+      : undefined;
     const now = Date.now();
     const costPaise = recordedCost(args.acquisitionCostPaise);
     const costReference = recordedCostReference(costPaise, args.costReference);
     const id = await ctx.db.insert("materialLots", {
       orgId: org._id,
       declaredByOrgId: org._id,
-      materialCode: requiredLabel(args.materialCode),
+      materialCode,
       state: requiredLabel(args.state),
       streamClass: args.streamClass ?? "unspecified",
       handlingClass: args.handlingClass ?? "unassessed",
       sourceKind: "self_declared",
       sourceReference: optionalReference(args.sourceReference),
-      initialGrams: positiveGrams(args.grams),
+      sourceBookingId: args.sourceBookingId,
+      sourceReceiptVersion,
+      initialGrams: grams,
       availableGrams: args.grams,
       costBasisGrams: args.grams,
       isAcquisitionCostRecordable: true,
@@ -103,7 +156,8 @@ export const declareLot = mutation({
       entityId: id,
       metadata: {
         sourceKind: "self_declared",
-        grams: args.grams,
+        ...(args.sourceBookingId && { receiptLinked: true }),
+        grams,
         costPaise,
         costReference,
         streamClass: args.streamClass ?? "unspecified",

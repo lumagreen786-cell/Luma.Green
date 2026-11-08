@@ -847,6 +847,8 @@ export default defineSchema({
     handlingClass: v.optional(vHandlingClass),
     sourceKind: v.union(v.literal("self_declared"), v.literal("transformed")),
     sourceReference: v.optional(v.string()),
+    sourceBookingId: v.optional(v.id("bookings")),
+    sourceReceiptVersion: v.optional(v.number()),
     parentTransformationId: v.optional(v.id("lotTransformations")),
     initialGrams: v.number(),
     availableGrams: v.number(),
@@ -864,7 +866,8 @@ export default defineSchema({
     .index("by_declared_org_created", ["declaredByOrgId", "createdAt"])
     .index("by_org_material_created", ["orgId", "materialCode", "createdAt"])
     .index("by_parent_transformation", ["parentTransformationId"])
-    .index("by_pending_receiver", ["pendingReceiverOrgId"]),
+    .index("by_pending_receiver", ["pendingReceiverOrgId"])
+    .index("by_source_booking_material", ["sourceBookingId", "materialCode"]),
 
   /** Append-only physical hand-offs. Title and payment live elsewhere. */
   lotCustodyEvents: defineTable({

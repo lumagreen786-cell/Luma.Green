@@ -1090,3 +1090,76 @@ describe("carbon batch preparation", () => {
     ).rejects.toThrow(/MASS_BALANCE_MISMATCH/);
   });
 });
+
+it("links an accepted household receipt line once without adding stock", async () => {
+  const { t, shop, yard, orgs } = await world();
+  const source = await t.run(async (ctx) => {
+    const bookings = await ctx.db
+      .query("bookings")
+      .withIndex("by_org_status", (q) =>
+        q.eq("orgId", orgs.shop).eq("status", "completed"),
+      )
+      .take(10);
+    const booking = bookings.find((row) => row.receipt?.lines.length);
+    if (!booking?.receipt) throw new Error("Missing fixture receipt");
+    const line = booking.receipt.lines.at(0);
+    if (!line) throw new Error("Missing fixture receipt line");
+    return { bookingId: booking._id, receipt: booking.receipt, line };
+  });
+  const args = {
+    materialCode: source.line.materialCode,
+    state: "Received",
+    grams: source.line.grams,
+    sourceBookingId: source.bookingId,
+  };
+  await expect(
+    yard.mutation(api.traceability.declareLot, args),
+  ).rejects.toThrow(/RECEIPT_NOT_FOUND/);
+  await expect(
+    shop.mutation(api.traceability.declareLot, args),
+  ).rejects.toThrow(/RECEIPT_REVIEW_REQUIRED/);
+  await t.run((ctx) =>
+    ctx.db.patch("bookings", source.bookingId, {
+      receiptReview: {
+        receiptVersion: source.receipt.paidAt,
+        decision: "accepted",
+        rejectedLineIndexes: [],
+        acceptedGrams: source.receipt.lines.reduce(
+          (sum, line) => sum + line.grams,
+          0,
+        ),
+        acceptedPaise: source.receipt.totalPaise,
+        reviewedAt: Date.now(),
+      },
+    }),
+  );
+  await expect(
+    shop.mutation(api.traceability.declareLot, {
+      ...args,
+      grams: args.grams - 1,
+    }),
+  ).rejects.toThrow(/RECEIPT_LINE_MISMATCH/);
+  const stock = await shop.query(api.stock.mine, {});
+  const attempts = await Promise.allSettled([
+    shop.mutation(api.traceability.declareLot, args),
+    shop.mutation(api.traceability.declareLot, args),
+  ]);
+  expect(
+    attempts.filter((attempt) => attempt.status === "fulfilled"),
+  ).toHaveLength(1);
+  const created = attempts.find((attempt) => attempt.status === "fulfilled");
+  if (!created) throw new Error("No linked lot");
+  const stored = await t.run((ctx) =>
+    ctx.db.get("materialLots", created.value),
+  );
+  expect(stored).toMatchObject({
+    sourceBookingId: source.bookingId,
+    sourceReceiptVersion: source.receipt.paidAt,
+    initialGrams: source.line.grams,
+  });
+  const view = await shop.query(api.traceability.history, {
+    lotId: created.value,
+  });
+  expect(JSON.stringify(view)).not.toContain(source.bookingId);
+  expect(await shop.query(api.stock.mine, {})).toEqual(stock);
+});

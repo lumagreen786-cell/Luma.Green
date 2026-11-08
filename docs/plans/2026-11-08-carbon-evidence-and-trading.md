@@ -110,3 +110,18 @@ lineage from matching times or weights.
 
 Complete the security audit and release checks in parallel. Verify R2 access,
 Turnstile and owner-only merges with the relevant account access before rollout.
+
+## Receipt lineage contract
+
+A shop operator can pass an optional source booking ID to the existing lot
+declaration. The server must find a completed booking in that shop, a current
+household acceptance, and exactly one receipt line for the material. The new
+lot must use the full line weight. Declare smaller downstream lots through
+the processing workflow. Reject another intake lot for the same receipt and
+material, including concurrent requests. The link and audit record are
+written in the same transaction. It adds no inventory movement.
+
+The booking ID and receipt version stay in private records. Lot history and
+carbon draft exports keep household details out. The fields and index are
+additive, so old records need no backfill. In a rollback, stop new linked
+declarations and retain the fields and index for recorded links.
