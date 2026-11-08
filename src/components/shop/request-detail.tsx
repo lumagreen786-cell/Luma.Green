@@ -130,6 +130,8 @@ function RequestView({ detail }: { detail: BookingDetail }) {
 
       {booking.receipt ? (
         <ReceiptView
+          bookingId={booking.id}
+          receiptLotLinks={detail.receiptLotLinks}
           receipt={booking.receipt}
           points={points}
           name={booking.name}

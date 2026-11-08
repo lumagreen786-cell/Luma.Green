@@ -19,6 +19,7 @@ import type * as auth from "../auth.js";
 import type * as authEvents from "../authEvents.js";
 import type * as businessSubscriptions from "../businessSubscriptions.js";
 import type * as byproductClassification from "../byproductClassification.js";
+import type * as carbonProjects from "../carbonProjects.js";
 import type * as cashfreeActions from "../cashfreeActions.js";
 import type * as cashfreeHttp from "../cashfreeHttp.js";
 import type * as cashfreeLifecycle from "../cashfreeLifecycle.js";
@@ -68,6 +69,7 @@ import type * as lib_applicationActivation from "../lib/applicationActivation.js
 import type * as lib_auditSharesSchema from "../lib/auditSharesSchema.js";
 import type * as lib_authAtomic from "../lib/authAtomic.js";
 import type * as lib_authEmail from "../lib/authEmail.js";
+import type * as lib_carbonProjectSchema from "../lib/carbonProjectSchema.js";
 import type * as lib_cashfree from "../lib/cashfree.js";
 import type * as lib_cashfreeLifecycle from "../lib/cashfreeLifecycle.js";
 import type * as lib_cashfreeLifecycleContract from "../lib/cashfreeLifecycleContract.js";
@@ -237,6 +239,7 @@ declare const fullApi: ApiFromModules<{
   authEvents: typeof authEvents;
   businessSubscriptions: typeof businessSubscriptions;
   byproductClassification: typeof byproductClassification;
+  carbonProjects: typeof carbonProjects;
   cashfreeActions: typeof cashfreeActions;
   cashfreeHttp: typeof cashfreeHttp;
   cashfreeLifecycle: typeof cashfreeLifecycle;
@@ -286,6 +289,7 @@ declare const fullApi: ApiFromModules<{
   "lib/auditSharesSchema": typeof lib_auditSharesSchema;
   "lib/authAtomic": typeof lib_authAtomic;
   "lib/authEmail": typeof lib_authEmail;
+  "lib/carbonProjectSchema": typeof lib_carbonProjectSchema;
   "lib/cashfree": typeof lib_cashfree;
   "lib/cashfreeLifecycle": typeof lib_cashfreeLifecycle;
   "lib/cashfreeLifecycleContract": typeof lib_cashfreeLifecycleContract;

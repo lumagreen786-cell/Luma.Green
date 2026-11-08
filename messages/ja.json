@@ -3318,6 +3318,7 @@
       "done": "支払いを保存しました。"
     },
     "receipt": {
+      "lotLinked": "ロットを関連付けました",
       "thanks": "リサイクルにご協力ありがとうございます！",
       "thanksNamed": "{name}さん、リサイクルにご協力ありがとうございます！",
       "title": "支払済み：{amount}",
@@ -3800,6 +3801,25 @@
     "combinedInput": "投入総質量",
     "multiInputHint": "自分が保管する計測済み材料だけを組み合わせてください。各数量は元のロットから消費されます。これは処理証拠の記録であり、在庫を増やしません。",
     "qualityReleaseRequired": "合格した試験結果が必要です"
+  },
+  "carbonProjects": {
+    "name": "プロジェクト名",
+    "referenceHint": "文書IDのみ入力してください。個人情報やパスワードは入力しないでください。",
+    "title": "カーボンプロジェクト",
+    "method": "方法論",
+    "draft": "下書き",
+    "reviewed": "内部レビュー済み",
+    "review": "内部レビューを記録",
+    "kinds": {
+      "baseline": "ベースライン",
+      "monitoring": "モニタリング",
+      "claim_rights": "主張する権利",
+      "verification_report": "検証報告書",
+      "registry_project": "登録簿のプロジェクト",
+      "registry_issuance": "登録簿での発行",
+      "registry_transfer": "登録簿での移転",
+      "registry_retirement": "登録簿での償却"
+    }
   },
   "evidence": {
     "title": "文書の参照情報",

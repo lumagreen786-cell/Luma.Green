@@ -3308,6 +3308,7 @@
       "completed": "ගෙවූ"
     },
     "receipt": {
+      "lotLinked": "තොගය සම්බන්ධ කර ඇත",
       "line": "{price}/kg බැගින් {weight}",
       "title": "{amount} ගෙවූ",
       "kg": "{kg} kg",
@@ -3800,6 +3801,25 @@
     "combinedInput": "මුළු ආදාන බර",
     "multiInputHint": "ඔබ සතු මනින ලද ද්‍රව්‍ය පමණක් එක් කරන්න. සෑම ප්‍රමාණයක්ම එහිම කාණ්ඩයෙන් වැය වේ. මෙය සැකසුම් සාක්ෂි සටහන් කරයි; තොග එකතු නොකරයි.",
     "qualityReleaseRequired": "පිළිගත් පරීක්ෂණ අවශ්‍යයි"
+  },
+  "carbonProjects": {
+    "name": "ව්‍යාපෘතියේ නම",
+    "referenceHint": "ලේඛන හැඳුනුම පමණක් ඇතුළත් කරන්න. පෞද්ගලික දත්ත හෝ මුරපද ඇතුළත් නොකරන්න.",
+    "title": "කාබන් ව්‍යාපෘති",
+    "method": "ක්‍රමවේදය",
+    "draft": "කෙටුම්පත",
+    "reviewed": "අභ්‍යන්තර සමාලෝචනය නිමයි",
+    "review": "අභ්‍යන්තර සමාලෝචනය සටහන් කරන්න",
+    "kinds": {
+      "baseline": "පදනම් මට්ටම",
+      "monitoring": "අධීක්ෂණය",
+      "claim_rights": "හිමිකම් අයිතිවාසිකම්",
+      "verification_report": "සත්‍යාපන වාර්තාව",
+      "registry_project": "ලේඛන ව්‍යාපෘතිය",
+      "registry_issuance": "ලේඛන නිකුතුව",
+      "registry_transfer": "ලේඛන මාරුව",
+      "registry_retirement": "ලේඛන විශ්‍රාමය"
+    }
   },
   "evidence": {
     "title": "ලේඛන යොමු",

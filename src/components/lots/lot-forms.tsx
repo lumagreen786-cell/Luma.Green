@@ -43,7 +43,15 @@ import {
   transformSchema,
 } from "./logic";
 
-export function DeclareLot() {
+export function DeclareLot({
+  receiptSource,
+}: {
+  receiptSource?: {
+    bookingId: Id<"bookings">;
+    materialCode: string;
+    grams: number;
+  };
+} = {}) {
   const t = useTranslations("lots");
   const costs = useTranslations("recordedCosts");
   const canOperate = useCanOperate();
@@ -54,9 +62,9 @@ export function DeclareLot() {
   const form = useForm<z.infer<typeof declareSchema>>({
     resolver: zodResolver(declareSchema),
     defaultValues: {
-      materialCode: "",
+      materialCode: receiptSource?.materialCode ?? "",
       state: "",
-      grams: "",
+      grams: receiptSource ? String(receiptSource.grams) : "",
       sourceReference: "",
       acquisitionCostPaise: "",
       costReference: "",
@@ -90,7 +98,12 @@ export function DeclareLot() {
             await action.run(async () => {
               const id = await create({
                 ...values,
-                grams: parseGrams(values.grams) ?? 0,
+                materialCode:
+                  receiptSource?.materialCode ?? values.materialCode,
+                grams: receiptSource?.grams ?? parseGrams(values.grams) ?? 0,
+                ...(receiptSource && {
+                  sourceBookingId: receiptSource.bookingId,
+                }),
                 sourceReference: values.sourceReference || undefined,
                 acquisitionCostPaise: values.acquisitionCostPaise?.trim()
                   ? parseGrams(values.acquisitionCostPaise)
@@ -113,6 +126,7 @@ export function DeclareLot() {
           <LotField
             label={t("material")}
             maxLength={120}
+            readOnly={Boolean(receiptSource)}
             registration={form.register("materialCode")}
             invalid={Boolean(form.formState.errors.materialCode)}
           />
@@ -125,10 +139,13 @@ export function DeclareLot() {
           <LotField
             label={t("mass")}
             inputMode="numeric"
+            readOnly={Boolean(receiptSource)}
             registration={form.register("grams")}
             invalid={Boolean(form.formState.errors.grams)}
           />
-          <p className="text-sm text-muted-foreground">{t("integerHint")}</p>
+          {receiptSource ? null : (
+            <p className="text-sm text-muted-foreground">{t("integerHint")}</p>
+          )}
           <LotField
             label={t("sourceReference")}
             maxLength={500}

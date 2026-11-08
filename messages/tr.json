@@ -2414,6 +2414,7 @@
       "completed": "Ödendi"
     },
     "receipt": {
+      "lotLinked": "Parti bağlandı",
       "line": "{price}/kg ile {weight}",
       "title": "{amount} ödendi",
       "kg": "{kg} kg",
@@ -3800,6 +3801,25 @@
     "combinedInput": "Toplam girdi kütlesi",
     "multiInputHint": "Yalnızca elinizdeki ölçülmüş malzemeyi birleştirin. Her miktar kendi partisinden tüketilir. Bu işlem işleme kanıtı kaydeder ve envanter stoğu eklemez.",
     "qualityReleaseRequired": "Kabul edilmiş testler gerekli"
+  },
+  "carbonProjects": {
+    "name": "Proje adı",
+    "referenceHint": "Yalnızca belge kimliğini girin. Kişisel veri ve parolaları yazmayın.",
+    "title": "Karbon projeleri",
+    "method": "Metodoloji",
+    "draft": "Taslak",
+    "reviewed": "İç inceleme tamamlandı",
+    "review": "İç incelemeyi kaydet",
+    "kinds": {
+      "baseline": "Referans senaryo",
+      "monitoring": "İzleme",
+      "claim_rights": "Talep hakları",
+      "verification_report": "Doğrulama raporu",
+      "registry_project": "Sicil projesi",
+      "registry_issuance": "Sicilde ihraç",
+      "registry_transfer": "Sicilde devir",
+      "registry_retirement": "Sicilde iptal"
+    }
   },
   "evidence": {
     "title": "Belge referansları",

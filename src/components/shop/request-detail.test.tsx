@@ -1,8 +1,10 @@
 import { screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { useMutation, useQuery } from "convex/react";
 import type { ReactNode } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
+import type { Id } from "../../../convex/_generated/dataModel";
 import { RequestDetail } from "./request-detail";
 import {
   booking,
@@ -33,7 +35,9 @@ vi.mock("convex/react", () => ({
   useMutation: vi.fn(),
 }));
 vi.mock("sonner", () => ({ toast: { success: vi.fn(), error: vi.fn() } }));
+const { push } = vi.hoisted(() => ({ push: vi.fn() }));
 vi.mock("@/i18n/navigation", () => ({
+  useRouter: () => ({ push }),
   Link: ({
     href,
     children,
@@ -208,8 +212,59 @@ describe("RequestDetail", () => {
     expect(screen.getByText("19.25 kg at ₹14.50/kg")).toBeInTheDocument();
     expect(screen.getByText("Weighed and paid")).toBeInTheDocument();
     expect(
+      screen.queryByRole("button", { name: "Declare a lot" }),
+    ).not.toBeInTheDocument();
+    expect(
       screen.queryByRole("button", { name: /^Confirm/ }),
     ).not.toBeInTheDocument();
+  });
+
+  it("declares a lot with the receipt's fixed material and exact mass", async () => {
+    const user = userEvent.setup();
+    const lotId = "lot-1" as Id<"materialLots">;
+    const declare = vi.fn().mockResolvedValue(lotId);
+    vi.mocked(useMutation).mockReturnValue(
+      declare as unknown as ReturnType<typeof useMutation>,
+    );
+    const paid = booking({
+      status: "completed",
+      receipt: {
+        lines: [{ material: PET, grams: 2501, paisePerKg: 2100, paise: 5252 }],
+        totalPaise: 5252,
+        method: "cash",
+        paidAt: NOW.getTime(),
+      },
+    });
+    renderDetail(
+      detail(paid, {
+        receiptLotLinks: [{ materialCode: PET.code, isLinked: false }],
+      }),
+    );
+
+    await user.click(screen.getByRole("button", { name: "Declare a lot" }));
+    const material = screen.getByRole("textbox", {
+      name: "Material code or name",
+    });
+    expect(material).toHaveValue(PET.code);
+    expect(material).toHaveAttribute("readonly");
+    const mass = screen.getByRole("textbox", { name: "Mass (g)" });
+    expect(mass).toHaveValue("2501");
+    expect(mass).toHaveAttribute("readonly");
+    await user.type(
+      screen.getByRole("textbox", { name: "Physical state" }),
+      "Sorted",
+    );
+    await user.click(screen.getByRole("button", { name: "Save record" }));
+
+    expect(declare).toHaveBeenCalledWith(
+      expect.objectContaining({
+        sourceBookingId: paid.id,
+        materialCode: PET.code,
+        grams: 2501,
+        state: "Sorted",
+      }),
+    );
+    expect(push).toHaveBeenCalledWith(`/app/lots/${lotId}`);
   });
 
   it("says when a request isn't this shop's, or doesn't exist", () => {

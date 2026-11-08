@@ -3,6 +3,7 @@ import { v } from "convex/values";
 
 import { accountRemovalTables } from "./lib/accountRemovalSchema";
 import { auditShareTables } from "./lib/auditSharesSchema";
+import { carbonProjectTables } from "./lib/carbonProjectSchema";
 import { lifecycleTables } from "./lib/cashfreeLifecycleSchema";
 import { cashfreeTables } from "./lib/cashfreeSchema";
 import { collaborationTables } from "./lib/collaborationSchema";
@@ -162,7 +163,9 @@ export default defineSchema({
     createdAt: v.number(),
   })
     .index("by_batch_key", ["batchKey", "key"])
+    .index("by_table_record", ["table", "recordId"])
     .index("by_batch", ["batchKey"]),
+  ...carbonProjectTables,
   ...operationalTables,
   ...sourcingTables,
   ...routePlanningTables,
@@ -913,6 +916,7 @@ export default defineSchema({
   })
     .index("by_input_lot_created", ["inputLotId", "createdAt"])
     .index("by_org_operation", ["orgId", "operationReference"])
+    .index("by_org_facility_created", ["orgId", "facilityId", "createdAt"])
     .index("by_org_created", ["orgId", "createdAt"]),
 
   /** Inspection results stay immutable, including proposed corrections. */

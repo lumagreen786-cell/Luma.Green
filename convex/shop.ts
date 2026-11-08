@@ -291,6 +291,47 @@ export const requests = query({
   },
 });
 
+async function receiptLotLinksFor(ctx: QueryCtx, booking: Booking) {
+  const { receipt, receiptReview } = booking;
+  if (
+    !receipt ||
+    booking.status !== "completed" ||
+    receiptReview?.decision !== "accepted" ||
+    receiptReview.receiptVersion !== receipt.paidAt ||
+    receiptReview.rejectedLineIndexes.length > 0 ||
+    receipt.lines.length > MAX_LINES
+  ) {
+    return;
+  }
+
+  return Promise.all(
+    receipt.lines
+      .filter(
+        (line) =>
+          Number.isSafeInteger(line.grams) &&
+          line.grams > 0 &&
+          receipt.lines.filter(
+            (other) => other.materialCode === line.materialCode,
+          ).length === 1,
+      )
+      .map(async ({ materialCode }) => {
+        const lot = await ctx.db
+          .query("materialLots")
+          .withIndex("by_source_booking_material", (q) =>
+            q
+              .eq("sourceBookingId", booking._id)
+              .eq("materialCode", materialCode),
+          )
+          .first();
+        return {
+          materialCode,
+          isLinked: lot !== null,
+          ...(lot?.orgId === booking.orgId && { lotId: lot._id }),
+        };
+      }),
+  );
+}
+
 /**
  * `/app/requests/[id]`: one of my bookings, with its timeline, what I pay per
  * kg for each item, and the points it earned. Null for an unknown id or
@@ -311,6 +352,15 @@ export const get = query({
         }),
       ),
       points: v.union(v.number(), v.null()),
+      receiptLotLinks: v.optional(
+        v.array(
+          v.object({
+            materialCode: v.string(),
+            isLinked: v.boolean(),
+            lotId: v.optional(v.id("materialLots")),
+          }),
+        ),
+      ),
     }),
   ),
   handler: async (ctx, args) => {
@@ -325,11 +375,13 @@ export const get = query({
       const rate = await rateFor(ctx, org, item.materialCode);
       if (rate) rates.push({ materialCode: item.materialCode, ...rate });
     }
+    const receiptLotLinks = await receiptLotLinksFor(ctx, booking);
     return {
       booking: bookingView(booking, org.city, materials),
       timeline: booking.timeline,
       rates,
       points: booking.points ?? null,
+      ...(receiptLotLinks && { receiptLotLinks }),
     };
   },
 });

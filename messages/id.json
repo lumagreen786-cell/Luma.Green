@@ -2414,6 +2414,7 @@
       "completed": "Dibayar"
     },
     "receipt": {
+      "lotLinked": "Lot ditautkan",
       "line": "{weight} dengan harga {price}/kg",
       "title": "Dibayar {amount}",
       "kg": "{kg} kg",
@@ -3800,6 +3801,25 @@
     "combinedInput": "Total massa masukan",
     "multiInputHint": "Gabungkan hanya bahan terukur dalam penguasaan Anda. Setiap jumlah dikonsumsi dari lotnya sendiri. Ini mencatat bukti pemrosesan dan tidak menambah stok.",
     "qualityReleaseRequired": "Hasil uji yang diterima diperlukan"
+  },
+  "carbonProjects": {
+    "name": "Nama proyek",
+    "referenceHint": "Masukkan ID dokumen saja. Jangan sertakan data pribadi atau kata sandi.",
+    "title": "Proyek karbon",
+    "method": "Metodologi",
+    "draft": "Draf",
+    "reviewed": "Ditinjau secara internal",
+    "review": "Catat tinjauan internal",
+    "kinds": {
+      "baseline": "Garis dasar",
+      "monitoring": "Pemantauan",
+      "claim_rights": "Hak klaim",
+      "verification_report": "Laporan verifikasi",
+      "registry_project": "Proyek registri",
+      "registry_issuance": "Penerbitan registri",
+      "registry_transfer": "Transfer registri",
+      "registry_retirement": "Penghentian di registri"
+    }
   },
   "evidence": {
     "title": "Referensi dokumen",

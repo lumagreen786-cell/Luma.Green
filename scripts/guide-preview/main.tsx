@@ -22,6 +22,7 @@ import { VerificationWorkspace } from "@/components/admin/verification/verificat
 import { AppShell } from "@/components/app/app-shell";
 import { RoleHome } from "@/components/app/role-home";
 import { FactorChallenge } from "@/components/auth/factor-challenge";
+import { CarbonProjectsPage } from "@/components/carbon/carbon-projects-page";
 import { CompliancePage } from "@/components/insights/compliance-page";
 import { ImpactPage } from "@/components/insights/impact-page";
 import { BusinessJoin, KabadiwalaJoin } from "@/components/join/join-pages";
@@ -116,6 +117,7 @@ const operationalPages: Record<string, ReactNode | undefined> = {
   "/en/app/requests": <RequestsPage />,
   "/en/app/market": <MarketPage isRecycledPet={isRecycledPet} />,
   "/en/app/trades": <TradesPage isRecycledPet={isRecycledPet} />,
+  "/en/app/carbon-projects": <CarbonProjectsPage />,
   "/en/app/compliance": <CompliancePage />,
   "/en/app/services": <ServicesPage />,
   "/en/app/returns": <ReturnClaimsPage />,

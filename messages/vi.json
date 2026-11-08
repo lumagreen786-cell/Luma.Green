@@ -3318,6 +3318,7 @@
       "done": "Đã lưu thanh toán."
     },
     "receipt": {
+      "lotLinked": "Đã liên kết lô",
       "thanks": "Cảm ơn bạn đã tái chế!",
       "thanksNamed": "Cảm ơn {name} đã tái chế!",
       "title": "Đã trả {amount}",
@@ -3800,6 +3801,25 @@
     "combinedInput": "Tổng khối lượng đầu vào",
     "multiInputHint": "Chỉ kết hợp vật liệu đã đo do bạn giữ. Mỗi lượng được tiêu thụ từ chính lô đó. Đây là bằng chứng xử lý và không tăng tồn kho.",
     "qualityReleaseRequired": "Cần kết quả kiểm tra được chấp nhận"
+  },
+  "carbonProjects": {
+    "name": "Tên dự án",
+    "referenceHint": "Chỉ nhập mã tài liệu. Không nhập dữ liệu cá nhân hoặc mật khẩu.",
+    "title": "Dự án carbon",
+    "method": "Phương pháp",
+    "draft": "Bản nháp",
+    "reviewed": "Đã rà soát nội bộ",
+    "review": "Ghi nhận rà soát nội bộ",
+    "kinds": {
+      "baseline": "Đường cơ sở",
+      "monitoring": "Giám sát",
+      "claim_rights": "Quyền yêu cầu",
+      "verification_report": "Báo cáo xác minh",
+      "registry_project": "Dự án trong sổ đăng ký",
+      "registry_issuance": "Phát hành trong sổ đăng ký",
+      "registry_transfer": "Chuyển nhượng trong sổ đăng ký",
+      "registry_retirement": "Hủy tín chỉ trong sổ đăng ký"
+    }
   },
   "evidence": {
     "title": "Tham chiếu tài liệu",

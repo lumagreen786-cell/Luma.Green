@@ -3318,6 +3318,7 @@
       "done": "ادائیگی محفوظ ہو گئی۔"
     },
     "receipt": {
+      "lotLinked": "لاٹ منسلک ہے",
       "thanks": "ری سائیکل کرنے کا شکریہ!",
       "thanksNamed": "ری سائیکل کرنے کا شکریہ، {name}!",
       "title": "ادائیگی: {amount}",
@@ -3800,6 +3801,25 @@
     "combinedInput": "کل ماخذ وزن",
     "multiInputHint": "صرف اپنی تحویل میں موجود ناپا ہوا مواد ملائیں۔ ہر مقدار اسی کے لاٹ سے استعمال ہوتی ہے۔ یہ عمل کاری کا ثبوت ہے، اسٹاک نہیں بڑھاتا۔",
     "qualityReleaseRequired": "منظور شدہ ٹیسٹ درکار ہیں"
+  },
+  "carbonProjects": {
+    "name": "منصوبے کا نام",
+    "referenceHint": "صرف دستاویز کی شناخت درج کریں۔ ذاتی معلومات اور پاس ورڈ درج نہ کریں۔",
+    "title": "کاربن منصوبے",
+    "method": "طریقۂ کار",
+    "draft": "مسودہ",
+    "reviewed": "اندرونی جائزہ مکمل",
+    "review": "اندرونی جائزہ درج کریں",
+    "kinds": {
+      "baseline": "بنیادی سطح",
+      "monitoring": "نگرانی",
+      "claim_rights": "دعوے کے حقوق",
+      "verification_report": "تصدیقی رپورٹ",
+      "registry_project": "رجسٹری منصوبہ",
+      "registry_issuance": "رجسٹری میں اجرا",
+      "registry_transfer": "رجسٹری میں منتقلی",
+      "registry_retirement": "رجسٹری میں ریٹائرمنٹ"
+    }
   },
   "evidence": {
     "title": "دستاویز کے حوالے",

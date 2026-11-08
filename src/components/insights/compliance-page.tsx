@@ -63,6 +63,7 @@ export function CompliancePage() {
   const t = useTranslations("compliance");
   const workspace = useWorkspace();
   const integrations = useTranslations("integrations");
+  const carbon = useTranslations("carbonProjects");
 
   return (
     <>
@@ -71,9 +72,14 @@ export function CompliancePage() {
         lead={t("lead")}
         actions={
           workspace?.kind === "org" ? (
-            <Button asChild variant="outline">
-              <Link href="/app/integrations">{integrations("title")}</Link>
-            </Button>
+            <div className="flex flex-wrap gap-2">
+              <Button asChild variant="outline">
+                <Link href="/app/integrations">{integrations("title")}</Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link href="/app/carbon-projects">{carbon("title")}</Link>
+              </Button>
+            </div>
           ) : undefined
         }
       />

@@ -7,11 +7,19 @@ history. Operator-entered material and state labels are excluded. The file
 does not grant verifier access or establish eligibility, issuance or a trade.
 Do not use demonstration batches in an external evidence pack.
 
-Still required for the carbon trading milestone: link receipt and custody
-evidence, collect actual facility records and claim rights, apply an eligible
-method, verify the report, reconcile official registry records and validate an
-authorized trading channel. Refresh the investor walkthrough after the complete
-feature is merged and its tested screenshots can be labelled accurately.
+The shop request detail can link an accepted receipt line to a lot. The
+Compliance workspace now has a Carbon projects page with a facility, candidate
+method, measured batch links and document references. Workspace managers can
+mark the current references internally reviewed. A reference or internal review
+does not authorize a claim. See the [preparation API](../api/carbon-project-preparation.md)
+and the [implementation plan](../plans/2026-11-08-carbon-evidence-and-trading.md).
+
+Still required for official carbon trading: actual pilot facility records and
+signed claim rights, method-specific monitoring and claim allocation, secure
+verifier exchange and independent reports, official registry reconciliation
+and an authorized trading channel. Refresh the investor walkthrough after
+the complete feature is merged and its tested screenshots can be labelled
+accurately.
 
 ## Recycled PET procurement workspace - 8 November 2026
 
