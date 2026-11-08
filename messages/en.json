@@ -3318,6 +3318,7 @@
       "done": "Payment saved."
     },
     "receipt": {
+      "lotLinked": "Lot linked",
       "thanks": "Thank you for recycling!",
       "thanksNamed": "Thank you for recycling, {name}!",
       "title": "Paid {amount}",
@@ -3800,6 +3801,25 @@
     "combinedInput": "Total input mass",
     "multiInputHint": "Combine only measured material you hold. Every input quantity is consumed from its own lot. This records processing evidence and does not add inventory stock.",
     "qualityReleaseRequired": "Accepted tests required"
+  },
+  "carbonProjects": {
+    "name": "Project name",
+    "referenceHint": "Enter the document ID only. Keep personal data and passwords out.",
+    "title": "Carbon projects",
+    "method": "Methodology",
+    "draft": "Draft",
+    "reviewed": "Internally reviewed",
+    "review": "Mark internally reviewed",
+    "kinds": {
+      "baseline": "Baseline",
+      "monitoring": "Monitoring",
+      "claim_rights": "Claim rights",
+      "verification_report": "Verification report",
+      "registry_project": "Registry project",
+      "registry_issuance": "Registry issuance",
+      "registry_transfer": "Registry transfer",
+      "registry_retirement": "Registry retirement"
+    }
   },
   "evidence": {
     "title": "Document references",

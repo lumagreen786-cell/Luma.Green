@@ -3318,6 +3318,7 @@
       "done": "Zahlung gespeichert."
     },
     "receipt": {
+      "lotLinked": "Materialcharge verknüpft",
       "thanks": "Vielen Dank fürs Recycling!",
       "thanksNamed": "Vielen Dank fürs Recycling, {name}!",
       "title": "{amount} bezahlt",
@@ -3800,6 +3801,25 @@
     "combinedInput": "Gesamte Eingangsmasse",
     "multiInputHint": "Kombinieren Sie nur gemessenes Material in Ihrer Obhut. Jede Menge wird aus ihrem eigenen Los verbraucht. Dies erfasst einen Verarbeitungsnachweis und erhöht keinen Bestand.",
     "qualityReleaseRequired": "Akzeptierte Prüfergebnisse erforderlich"
+  },
+  "carbonProjects": {
+    "name": "Projektname",
+    "referenceHint": "Geben Sie nur die Dokument-ID ein. Lassen Sie persönliche Daten und Passwörter weg.",
+    "title": "Kohlenstoffprojekte",
+    "method": "Methodik",
+    "draft": "Entwurf",
+    "reviewed": "Intern geprüft",
+    "review": "Interne Prüfung erfassen",
+    "kinds": {
+      "baseline": "Referenzszenario",
+      "monitoring": "Überwachung",
+      "claim_rights": "Anspruchsrechte",
+      "verification_report": "Verifizierungsbericht",
+      "registry_project": "Registerprojekt",
+      "registry_issuance": "Ausgabe im Register",
+      "registry_transfer": "Übertragung im Register",
+      "registry_retirement": "Stilllegung im Register"
+    }
   },
   "evidence": {
     "title": "Dokumentverweise",

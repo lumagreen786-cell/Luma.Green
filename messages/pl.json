@@ -3318,6 +3318,7 @@
       "done": "Płatność zapisana."
     },
     "receipt": {
+      "lotLinked": "Partia powiązana",
       "thanks": "Dziękujemy za recykling!",
       "thanksNamed": "Dziękujemy za recykling, {name}!",
       "title": "Zapłacono {amount}",
@@ -3800,6 +3801,25 @@
     "combinedInput": "Łączna masa wejściowa",
     "multiInputHint": "Łącz tylko zmierzony materiał pod swoją opieką. Każda ilość jest zużywana z własnej partii. To zapis dowodu przetwarzania, który nie dodaje zapasu.",
     "qualityReleaseRequired": "Wymagane zaakceptowane testy"
+  },
+  "carbonProjects": {
+    "name": "Nazwa projektu",
+    "referenceHint": "Wpisz tylko identyfikator dokumentu. Pomiń dane osobowe i hasła.",
+    "title": "Projekty węglowe",
+    "method": "Metodyka",
+    "draft": "Wersja robocza",
+    "reviewed": "Przegląd wewnętrzny zakończony",
+    "review": "Zapisz przegląd wewnętrzny",
+    "kinds": {
+      "baseline": "Poziom odniesienia",
+      "monitoring": "Monitorowanie",
+      "claim_rights": "Prawa do roszczenia",
+      "verification_report": "Raport z weryfikacji",
+      "registry_project": "Projekt w rejestrze",
+      "registry_issuance": "Emisja w rejestrze",
+      "registry_transfer": "Transfer w rejestrze",
+      "registry_retirement": "Umorzenie w rejestrze"
+    }
   },
   "evidence": {
     "title": "Odwołania do dokumentów",

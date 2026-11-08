@@ -3318,6 +3318,7 @@
       "done": "付款已保存。"
     },
     "receipt": {
+      "lotLinked": "已关联批次",
       "thanks": "感谢参与回收！",
       "thanksNamed": "{name}，感谢参与回收！",
       "title": "已支付{amount}",
@@ -3800,6 +3801,25 @@
     "combinedInput": "投入总质量",
     "multiInputHint": "仅合并由您保管且已测量的材料。每项数量都从其原批次中消耗。这只记录处理证据，不增加库存。",
     "qualityReleaseRequired": "需要已接受的检测结果"
+  },
+  "carbonProjects": {
+    "name": "项目名称",
+    "referenceHint": "仅输入文件编号。请勿输入个人信息或密码。",
+    "title": "碳项目",
+    "method": "方法学",
+    "draft": "草稿",
+    "reviewed": "内部审查完成",
+    "review": "记录内部审查",
+    "kinds": {
+      "baseline": "基准线",
+      "monitoring": "监测",
+      "claim_rights": "主张权利",
+      "verification_report": "核查报告",
+      "registry_project": "登记项目",
+      "registry_issuance": "登记签发",
+      "registry_transfer": "登记转让",
+      "registry_retirement": "登记注销"
+    }
   },
   "evidence": {
     "title": "文档参考信息",

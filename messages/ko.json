@@ -3318,6 +3318,7 @@
       "done": "결제를 저장했습니다."
     },
     "receipt": {
+      "lotLinked": "로트가 연결됨",
       "thanks": "재활용해 주셔서 감사합니다!",
       "thanksNamed": "{name}님, 재활용해 주셔서 감사합니다!",
       "title": "지급액 {amount}",
@@ -3800,6 +3801,25 @@
     "combinedInput": "총 투입 질량",
     "multiInputHint": "보관 중인 측정된 자재만 합치세요. 각 수량은 해당 로트에서 소모됩니다. 이는 처리 증빙을 기록하며 재고를 추가하지 않습니다.",
     "qualityReleaseRequired": "승인된 시험 결과가 필요합니다"
+  },
+  "carbonProjects": {
+    "name": "프로젝트 이름",
+    "referenceHint": "문서 ID만 입력하세요. 개인정보나 비밀번호는 입력하지 마세요.",
+    "title": "탄소 프로젝트",
+    "method": "방법론",
+    "draft": "초안",
+    "reviewed": "내부 검토 완료",
+    "review": "내부 검토 기록",
+    "kinds": {
+      "baseline": "기준선",
+      "monitoring": "모니터링",
+      "claim_rights": "청구 권리",
+      "verification_report": "검증 보고서",
+      "registry_project": "등록부 프로젝트",
+      "registry_issuance": "등록부 발급",
+      "registry_transfer": "등록부 이전",
+      "registry_retirement": "등록부 상쇄 처리"
+    }
   },
   "evidence": {
     "title": "문서 참조",

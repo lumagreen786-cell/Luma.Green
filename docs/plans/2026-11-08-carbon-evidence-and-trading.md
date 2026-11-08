@@ -125,3 +125,31 @@ The booking ID and receipt version stay in private records. Lot history and
 carbon draft exports keep household details out. The fields and index are
 additive, so old records need no backfill. In a rollback, stop new linked
 declarations and retain the fields and index for recorded links.
+
+## Workspace implementation
+
+The shop request detail offers a lot link on each eligible, household-accepted
+receipt line. The lot form locks the source, material and weight. Reloading
+the request shows which lines already have lots. Households confirm the receipt
+in the existing flow. Saathis continue to use the pickup flow.
+
+Business workspace members open Carbon projects from Compliance. Operators
+select a recorded facility, create a project and attach eligible measured
+transformations from that facility. A transformation can belong to only one
+project in this workspace workflow. This check is an internal safeguard.
+Formal claim allocation still requires an overlap check across periods,
+schemes and lot lineage.
+
+Operators can record references for the baseline, monitoring, claim rights
+and independent verification report. Owners and managers can mark the
+references internally reviewed. Changes reopen review. Viewers can read their
+workspace records. Registry references show as reported and unverified.
+
+Before external submission, confirm the facility operator and documented claim
+rights, agree the method and monitoring plan, and obtain the required
+independent validation and verification. To enable trading, confirm the
+registry account, permitted venue or counterparty channel, settlement rules
+and supported interface. Match the provider evidence to the project, owner,
+serial ranges, vintage and unit count before recording an external event as
+confirmed. Private verifier file exchange, formal allocation and provider
+reconciliation remain separate work.

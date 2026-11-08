@@ -213,6 +213,43 @@ const carbonHistory = {
 };
 
 export const operationalFixtures: Record<string, unknown> = {
+  "industrialProfiles:mine": [
+    { _id: "guide-facility", name: "Example recovery facility" },
+  ],
+  "carbonProjects:mine": {
+    rows: [
+      {
+        id: "guide-carbon-project",
+        facilityId: "guide-facility",
+        facilityName: "Example recovery facility",
+        name: "PET recovery pilot",
+        method: "verra_vmr0007",
+        status: "draft",
+        revision: 2,
+        updatedAt: NOW,
+        evidenceStatus: "reported_unverified",
+        evidence: [
+          {
+            kind: "baseline",
+            reference: "Example baseline record",
+            recordedAt: NOW,
+          },
+        ],
+      },
+    ],
+    hasMore: false,
+  },
+  "carbonProjects:batches": {
+    rows: [
+      {
+        transformationId: carbonTransform,
+        inputGrams: 125_000,
+        recordedAt: NOW,
+      },
+    ],
+    hasMore: false,
+  },
+  "carbonProjects:batchOptions": { rows: [], hasMore: false },
   "traceability:mine": heldLotsFixture,
   "traceability:history": carbonHistory,
   "quality:forLot": { rows: [], hasMore: false },

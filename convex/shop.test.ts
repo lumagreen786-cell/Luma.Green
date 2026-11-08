@@ -709,3 +709,62 @@ it("completes a pickup exactly at the safe stock boundary", async () => {
   expect(currentStock?.grams).toBe(Number.MAX_SAFE_INTEGER);
   expect(await auditActions(t, bookingId)).toContain("booking.completed");
 });
+
+it("shows accepted receipt lot links only to the receipt shop", async () => {
+  const t = await demoWorld();
+  const shop = await signInAs(t, RAMESH);
+  const bookingId = await bookingOf(t, "Fatima Khan", "completed");
+  const before = await shop.query(api.shop.get, { bookingId });
+  expect(before?.receiptLotLinks).toBeUndefined();
+  const receipt = before?.booking.receipt;
+  const line = receipt?.lines.at(0);
+  if (!receipt || !line) throw new Error("Missing fixture receipt");
+
+  await t.run((ctx) =>
+    ctx.db.patch("bookings", bookingId, {
+      receiptReview: {
+        receiptVersion: receipt.paidAt,
+        decision: "accepted",
+        rejectedLineIndexes: [],
+        acceptedGrams: receipt.lines.reduce((sum, item) => sum + item.grams, 0),
+        acceptedPaise: receipt.totalPaise,
+        reviewedAt: Date.now(),
+      },
+    }),
+  );
+  const eligible = await shop.query(api.shop.get, { bookingId });
+  expect(eligible?.receiptLotLinks).toContainEqual({
+    materialCode: line.material.code,
+    isLinked: false,
+  });
+
+  const lotId = await shop.mutation(api.traceability.declareLot, {
+    materialCode: line.material.code,
+    state: "Received",
+    grams: line.grams,
+    sourceBookingId: bookingId,
+  });
+  const linked = await shop.query(api.shop.get, { bookingId });
+  expect(linked?.receiptLotLinks).toContainEqual({
+    materialCode: line.material.code,
+    isLinked: true,
+    lotId,
+  });
+
+  const yard = await signInAs(t, FARIDA);
+  const yardWorkspace = await yard.query(api.workspace.mine, {});
+  if (yardWorkspace?.kind !== "org") throw new Error("Missing yard");
+  await shop.mutation(api.traceability.dispatch, {
+    lotId,
+    receiverOrgId: yardWorkspace.org.id,
+  });
+  await yard.mutation(api.traceability.receive, {
+    lotId,
+    receivedGrams: line.grams,
+  });
+  const transferred = await shop.query(api.shop.get, { bookingId });
+  expect(transferred?.receiptLotLinks).toContainEqual({
+    materialCode: line.material.code,
+    isLinked: true,
+  });
+});

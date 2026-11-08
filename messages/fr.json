@@ -3318,6 +3318,7 @@
       "done": "Paiement enregistré."
     },
     "receipt": {
+      "lotLinked": "Lot associé",
       "thanks": "Merci de recycler !",
       "thanksNamed": "Merci de recycler, {name} !",
       "title": "{amount} payés",
@@ -3800,6 +3801,25 @@
     "combinedInput": "Masse totale entrante",
     "multiInputHint": "Combinez uniquement des matières mesurées sous votre garde. Chaque quantité est consommée depuis son propre lot. Cela enregistre une preuve de traitement sans ajouter de stock.",
     "qualityReleaseRequired": "Résultats de tests acceptés requis"
+  },
+  "carbonProjects": {
+    "name": "Nom du projet",
+    "referenceHint": "Saisissez uniquement l’identifiant du document. Excluez les données personnelles et les mots de passe.",
+    "title": "Projets carbone",
+    "method": "Méthodologie",
+    "draft": "Brouillon",
+    "reviewed": "Revue interne terminée",
+    "review": "Consigner la revue interne",
+    "kinds": {
+      "baseline": "Scénario de référence",
+      "monitoring": "Suivi",
+      "claim_rights": "Droits de revendication",
+      "verification_report": "Rapport de vérification",
+      "registry_project": "Projet au registre",
+      "registry_issuance": "Émission au registre",
+      "registry_transfer": "Transfert au registre",
+      "registry_retirement": "Retrait au registre"
+    }
   },
   "evidence": {
     "title": "Références documentaires",

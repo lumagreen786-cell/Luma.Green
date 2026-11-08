@@ -3318,6 +3318,7 @@
       "done": "تم حفظ الدفع."
     },
     "receipt": {
+      "lotLinked": "تم ربط الدفعة",
       "thanks": "شكرًا لك على إعادة التدوير!",
       "thanksNamed": "شكرًا لك على إعادة التدوير يا {name}!",
       "title": "دُفع {amount}",
@@ -3800,6 +3801,25 @@
     "combinedInput": "إجمالي كتلة الإدخال",
     "multiInputHint": "اجمع فقط المواد المقاسة التي بحوزتك. تُستهلك كل كمية من دفعتها الأصلية. هذا يسجل أدلة المعالجة ولا يضيف مخزونًا.",
     "qualityReleaseRequired": "يلزم قبول نتائج الاختبارات"
+  },
+  "carbonProjects": {
+    "name": "اسم المشروع",
+    "referenceHint": "أدخل معرّف المستند فقط. لا تدخل بيانات شخصية أو كلمات مرور.",
+    "title": "مشاريع الكربون",
+    "method": "المنهجية",
+    "draft": "مسودة",
+    "reviewed": "تمت المراجعة داخليًا",
+    "review": "تسجيل المراجعة الداخلية",
+    "kinds": {
+      "baseline": "خط الأساس",
+      "monitoring": "الرصد",
+      "claim_rights": "حقوق المطالبة",
+      "verification_report": "تقرير التحقق",
+      "registry_project": "مشروع السجل",
+      "registry_issuance": "الإصدار في السجل",
+      "registry_transfer": "التحويل في السجل",
+      "registry_retirement": "الإلغاء في السجل"
+    }
   },
   "evidence": {
     "title": "مراجع المستندات",

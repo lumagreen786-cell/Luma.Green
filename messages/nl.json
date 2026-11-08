@@ -3318,6 +3318,7 @@
       "done": "Betaling opgeslagen."
     },
     "receipt": {
+      "lotLinked": "Partij gekoppeld",
       "thanks": "Bedankt voor het recyclen!",
       "thanksNamed": "Bedankt voor het recyclen, {name}!",
       "title": "{amount} betaald",
@@ -3800,6 +3801,25 @@
     "combinedInput": "Totale invoermassa",
     "multiInputHint": "Combineer alleen gemeten materiaal dat u beheert. Elke hoeveelheid wordt uit de eigen partij verbruikt. Dit legt verwerkingsbewijs vast en voegt geen voorraad toe.",
     "qualityReleaseRequired": "Goedgekeurde tests vereist"
+  },
+  "carbonProjects": {
+    "name": "Projectnaam",
+    "referenceHint": "Vul alleen de document-ID in. Laat persoonsgegevens en wachtwoorden weg.",
+    "title": "Koolstofprojecten",
+    "method": "Methodologie",
+    "draft": "Concept",
+    "reviewed": "Intern beoordeeld",
+    "review": "Interne beoordeling vastleggen",
+    "kinds": {
+      "baseline": "Referentiescenario",
+      "monitoring": "Toezicht",
+      "claim_rights": "Claimrechten",
+      "verification_report": "Verificatierapport",
+      "registry_project": "Registerproject",
+      "registry_issuance": "Uitgifte in het register",
+      "registry_transfer": "Overdracht in het register",
+      "registry_retirement": "Intrekking in het register"
+    }
   },
   "evidence": {
     "title": "Documentverwijzingen",
