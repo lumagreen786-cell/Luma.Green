@@ -3663,6 +3663,7 @@
     "invitationLimit": "Osiągnięto limit zaproszeń. Poczekaj przed wysłaniem kolejnego zaproszenia."
   },
   "lots": {
+    "carbonEvidenceDraft": "Wewnętrzny projekt dokumentacji emisji",
     "title": "Partie i jakość",
     "lead": "Zapisuj zmierzony materiał, przetwarzanie i fizyczne przekazania.",
     "evidenceNote": "Te zapisy opisują dowody fizyczne. Nie zmieniają zapasów, płatności, własności prawnej ani certyfikatów.",

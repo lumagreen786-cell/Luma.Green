@@ -156,8 +156,95 @@ export const routeHistoryFixture = {
   isDone: true,
   continueCursor: "",
 } satisfies FunctionReturnType<typeof api.routePlans.history>;
+const carbonInput = "guide-operations-lot" as Id<"materialLots">;
+const carbonOutput = "guide-carbon-output" as Id<"materialLots">;
+const carbonTransform = "guide-carbon-transform" as Id<"lotTransformations">;
+const carbonHistory = {
+  access: "holder",
+  lot: {
+    id: carbonInput,
+    materialCode: "PLASTIC-PET",
+    state: "Sorted",
+    availableGrams: 0,
+    initialGrams: 125_000,
+    status: "exhausted",
+    streamClass: "unspecified",
+    handlingClass: "unassessed",
+    qualityReleased: false,
+    canRecordAcquisitionCost: false,
+  },
+  custody: [],
+  hasMoreCustody: false,
+  transformations: [
+    {
+      id: carbonTransform,
+      createdAt: NOW,
+      inputGrams: 125_000,
+      contaminationGrams: 1000,
+      processLossGrams: 2000,
+      processingCostPaise: null,
+      consumedInputCostPaise: null,
+      totalOutputCostPaise: null,
+      inputs: [
+        {
+          id: carbonInput,
+          grams: 125_000,
+          canOpen: false,
+          materialCode: "PLASTIC-PET",
+          state: "Sorted",
+        },
+      ],
+      outputs: [
+        {
+          id: carbonOutput,
+          grams: 122_000,
+          canOpen: false,
+          materialCode: "RECYCLED-PET-FLAKE",
+          state: "Washed",
+          streamClass: "unspecified",
+          handlingClass: "unassessed",
+        },
+      ],
+    },
+  ],
+  hasMoreTransformations: false,
+  dispositions: [],
+  hasMoreDispositions: false,
+};
+
 export const operationalFixtures: Record<string, unknown> = {
   "traceability:mine": heldLotsFixture,
+  "traceability:history": carbonHistory,
+  "quality:forLot": { rows: [], hasMore: false },
+  "traceability:carbonBatchPreparation": {
+    schemaVersion: 1,
+    purpose: "carbon_evidence_preparation",
+    verificationStatus: "recorded_unverified",
+    orgId: "guide-org",
+    transformationId: carbonTransform,
+    recordedAt: NOW,
+    primaryInputLotId: carbonInput,
+    inputDetail: "recorded_lot_edges",
+    inputGrams: 125_000,
+    contaminationGrams: 1000,
+    processLossGrams: 2000,
+    inputs: [
+      {
+        lotId: carbonInput,
+        materialCode: "PLASTIC-PET",
+        state: "Sorted",
+        grams: 125_000,
+      },
+    ],
+    outputs: [
+      {
+        lotId: carbonOutput,
+        materialCode: "RECYCLED-PET-FLAKE",
+        state: "Washed",
+        grams: 122_000,
+      },
+    ],
+  },
   "traceability:incoming": incomingLotsFixture,
   "traceability:sent": sentLotsFixture,
   "qualityFiles:board": qualityFixture,

@@ -3663,6 +3663,7 @@
     "invitationLimit": "Das Einladungslimit ist erreicht. Warten Sie, bevor Sie eine weitere Einladung senden."
   },
   "lots": {
+    "carbonEvidenceDraft": "Interner Entwurf der Kohlenstoffnachweise",
     "title": "Lose und Qualität",
     "lead": "Erfassen Sie gemessenes Material, Verarbeitung und physische Übergaben.",
     "evidenceNote": "Diese Aufzeichnungen beschreiben physische Nachweise. Sie ändern weder Bestand, Zahlung, rechtliches Eigentum noch Zertifikate.",

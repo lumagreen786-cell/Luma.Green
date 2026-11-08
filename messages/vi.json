@@ -3663,6 +3663,7 @@
     "invitationLimit": "Đã đạt giới hạn lời mời. Hãy đợi trước khi gửi lời mời khác."
   },
   "lots": {
+    "carbonEvidenceDraft": "Bản nháp nội bộ về bằng chứng carbon",
     "title": "Lô và chất lượng",
     "lead": "Ghi vật liệu đã đo, quá trình xử lý và bàn giao thực tế.",
     "evidenceNote": "Các bản ghi mô tả bằng chứng thực tế. Chúng không thay đổi tồn kho, thanh toán, quyền sở hữu pháp lý hay chứng nhận.",

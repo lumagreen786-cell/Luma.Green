@@ -3663,6 +3663,7 @@
     "invitationLimit": "已达到邀请次数上限。请稍候再发送邀请。"
   },
   "lots": {
+    "carbonEvidenceDraft": "内部碳证据草稿",
     "title": "批次与质量",
     "lead": "记录实测材料、加工和实物交接。",
     "evidenceNote": "这些记录描述实物证据，不改变库存、付款、法律所有权或证书。",

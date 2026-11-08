@@ -3663,6 +3663,7 @@
     "invitationLimit": "Batas undangan telah tercapai. Tunggu sebelum mengirim undangan berikutnya."
   },
   "lots": {
+    "carbonEvidenceDraft": "Draf internal bukti karbon",
     "title": "Lot dan mutu",
     "lead": "Catat bahan terukur, pemrosesan, dan serah terima fisik.",
     "evidenceNote": "Catatan ini menjelaskan bukti fisik. Catatan tidak mengubah stok, pembayaran, kepemilikan hukum, atau sertifikat.",

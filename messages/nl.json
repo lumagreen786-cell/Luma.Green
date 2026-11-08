@@ -3663,6 +3663,7 @@
     "invitationLimit": "De uitnodigingslimiet is bereikt. Wacht voordat u nog een uitnodiging verstuurt."
   },
   "lots": {
+    "carbonEvidenceDraft": "Intern concept voor koolstofbewijs",
     "title": "Partijen en kwaliteit",
     "lead": "Leg gemeten materiaal, verwerking en fysieke overdrachten vast.",
     "evidenceNote": "Deze registraties beschrijven fysiek bewijs. Ze wijzigen geen voorraad, betaling, juridisch eigendom of certificaten.",

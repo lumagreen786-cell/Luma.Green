@@ -3663,6 +3663,7 @@
     "invitationLimit": "Had jemputan telah dicapai. Tunggu sebelum menghantar jemputan lain."
   },
   "lots": {
+    "carbonEvidenceDraft": "Draf dalaman bukti karbon",
     "title": "Lot dan kualiti",
     "lead": "Rekodkan bahan yang diukur, pemprosesan dan serahan fizikal.",
     "evidenceNote": "Rekod ini menerangkan bukti fizikal. Ia tidak mengubah stok, pembayaran, pemilikan sah atau sijil.",

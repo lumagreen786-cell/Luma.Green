@@ -3663,6 +3663,7 @@
     "invitationLimit": "Se ha alcanzado el límite de invitaciones. Espere antes de enviar otra."
   },
   "lots": {
+    "carbonEvidenceDraft": "Borrador interno de evidencia de carbono",
     "title": "Lotes y calidad",
     "lead": "Registre el material medido, el procesamiento y las entregas físicas.",
     "evidenceNote": "Estos registros describen pruebas físicas. No cambian las existencias, el pago, la propiedad legal ni los certificados.",

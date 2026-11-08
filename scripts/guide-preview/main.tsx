@@ -27,7 +27,7 @@ import { ImpactPage } from "@/components/insights/impact-page";
 import { BusinessJoin, KabadiwalaJoin } from "@/components/join/join-pages";
 import { StatusView } from "@/components/join/status-view";
 import { LogisticsPage } from "@/components/logistics/logistics-page";
-import { LotsPage } from "@/components/lots/lots-page";
+import { LotDetailPage, LotsPage } from "@/components/lots/lots-page";
 import { FinancialLifecycle } from "@/components/market/financial-lifecycle";
 import { InvoicePage } from "@/components/market/invoice-page";
 import { MarketPage } from "@/components/market/market-page";
@@ -103,6 +103,9 @@ const operationalPages: Record<string, ReactNode | undefined> = {
     </div>
   ),
   "/en/app/lots": <LotsPage />,
+  "/en/app/lots/guide-operations-lot": (
+    <LotDetailPage lotId={"guide-operations-lot" as Id<"materialLots">} />
+  ),
   "/en/app/logistics": <LogisticsPage />,
   "/en/app/quality-documents": <QualityDocuments />,
   "/en/app/prices": <RateCardPage />,

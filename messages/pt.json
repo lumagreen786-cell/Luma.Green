@@ -3663,6 +3663,7 @@
     "invitationLimit": "O limite de convites foi atingido. Aguarde antes de enviar outro convite."
   },
   "lots": {
+    "carbonEvidenceDraft": "Rascunho interno de evidências de carbono",
     "title": "Lotes e qualidade",
     "lead": "Registe o material medido, o processamento e as entregas físicas.",
     "evidenceNote": "Estes registos descrevem provas físicas. Não alteram o stock, o pagamento, a propriedade legal ou os certificados.",
