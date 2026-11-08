@@ -86,3 +86,22 @@ arithmetic difference between supplied baseline, project and leakage values
 in grams CO₂e, including a negative result. Method eligibility, factor
 selection, lineage across organizations and approved reductions require a
 separate review.
+
+## Check the files in a reviewed evidence package
+
+Keep the downloaded review snapshot and the four referenced documents in a
+private local directory. Create a private JSON index with keys `snapshot`,
+`baseline`, `monitoring`, `claim_rights` and `verification_report`. Each
+value is a relative file name inside that directory. Use one file per kind.
+
+```sh
+node scripts/carbon/evidence-manifest.mjs build PRIVATE_DIR INDEX.json > MANIFEST.json
+node scripts/carbon/evidence-manifest.mjs verify PRIVATE_DIR INDEX.json MANIFEST.json
+```
+
+Send the manifest through a trusted private channel if the verifier needs to
+compare bytes. It contains the project ID, review revision, byte counts and
+SHA-256 digests. It contains no source file paths or document contents. A
+match checks file integrity against the supplied manifest. The verifier must
+still confirm the documents' identity, authority and relationship to the
+project. This tool has no upload or sharing permissions.
