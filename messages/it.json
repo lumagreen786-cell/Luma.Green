@@ -3663,6 +3663,7 @@
     "invitationLimit": "È stato raggiunto il limite di inviti. Attendi prima di inviarne un altro."
   },
   "lots": {
+    "carbonEvidenceDraft": "Bozza interna delle prove sul carbonio",
     "title": "Lotti e qualità",
     "lead": "Registra il materiale misurato, la lavorazione e le consegne fisiche.",
     "evidenceNote": "Questi registri descrivono prove fisiche. Non modificano scorte, pagamenti, proprietà legale o certificati.",

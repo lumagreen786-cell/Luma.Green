@@ -1,3 +1,18 @@
+## Carbon evidence preparation workspace - 8 November 2026
+
+Lot transformation history can open and download an internal JSON draft.
+The existing Convex query checks the current workspace and transformation
+ownership. The draft preserves measured grams and incomplete legacy input
+history. Operator-entered material and state labels are excluded. The file
+does not grant verifier access or establish eligibility, issuance or a trade.
+Do not use demonstration batches in an external evidence pack.
+
+Still required for the carbon trading milestone: link receipt and custody
+evidence, collect actual facility records and claim rights, apply an eligible
+method, verify the report, reconcile official registry records and validate an
+authorized trading channel. Refresh the investor walkthrough after the complete
+feature is merged and its tested screenshots can be labelled accurately.
+
 ## Recycled PET procurement workspace - 8 November 2026
 
 The market and trade history have a linked PET scope for recycled flakes and

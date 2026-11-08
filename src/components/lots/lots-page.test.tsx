@@ -503,3 +503,49 @@ it("keeps a process retry key and exact recorded cost after a failed save", asyn
     }),
   );
 });
+
+it("loads an internal carbon draft only when a holder opens it", async () => {
+  const transformationId = "transform-1";
+  queries({
+    "traceability:history": {
+      ...history,
+      transformations: [
+        {
+          id: transformationId,
+          createdAt: 100,
+          inputGrams: 1234,
+          contaminationGrams: 0,
+          processLossGrams: 0,
+          inputs: [],
+          outputs: [],
+        },
+      ],
+    },
+    "traceability:carbonBatchPreparation": {
+      orgId: mocks.business.id,
+      transformationId,
+      recordedAt: 100,
+      inputDetail: "recorded_lot_edges",
+      primaryInputLotId: lotId,
+      inputGrams: 1234,
+      contaminationGrams: 0,
+      processLossGrams: 0,
+      inputs: [],
+      outputs: [],
+    },
+  });
+  render(<LotDetailPage lotId={lotId} />);
+  expect(
+    screen.queryByRole("button", { name: en.evidence.export.json }),
+  ).not.toBeInTheDocument();
+  await userEvent.click(
+    screen.getByRole("button", { name: en.lots.carbonEvidenceDraft }),
+  );
+  expect(
+    screen.getByRole("button", { name: en.evidence.export.json }),
+  ).toBeEnabled();
+  expect(useQuery).toHaveBeenCalledWith(expect.anything(), {
+    expectedOrgId: mocks.business.id,
+    transformationId,
+  });
+});

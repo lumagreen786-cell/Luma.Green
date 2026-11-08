@@ -3663,6 +3663,7 @@
     "invitationLimit": "Davet sınırına ulaşıldı. Başka bir davet göndermeden önce bekleyin."
   },
   "lots": {
+    "carbonEvidenceDraft": "Dahili karbon kanıtı taslağı",
     "title": "Partiler ve kalite",
     "lead": "Ölçülen malzemeyi, işlemeyi ve fiziksel teslimleri kaydedin.",
     "evidenceNote": "Bu kayıtlar fiziksel kanıtları açıklar. Stoku, ödemeyi, yasal mülkiyeti veya sertifikaları değiştirmez.",

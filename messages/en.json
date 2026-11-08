@@ -3663,6 +3663,7 @@
     "switchHint": "Sign out to sign in or register with the invited email address."
   },
   "lots": {
+    "carbonEvidenceDraft": "Internal carbon evidence draft",
     "title": "Lots and quality",
     "lead": "Record measured material, processing and physical hand-offs.",
     "evidenceNote": "These records describe physical evidence. They do not change stock, payment, legal ownership or certificates.",

@@ -3663,6 +3663,7 @@
     "invitationLimit": "La limite d’invitations est atteinte. Attendez avant d’en envoyer une autre."
   },
   "lots": {
+    "carbonEvidenceDraft": "Brouillon interne des preuves carbone",
     "title": "Lots et qualité",
     "lead": "Consignez les matières mesurées, le traitement et les remises physiques.",
     "evidenceNote": "Ces registres décrivent des preuves physiques. Ils ne modifient ni le stock, ni le paiement, ni la propriété légale, ni les certificats.",

@@ -18,6 +18,7 @@ import { Link } from "@/i18n/navigation";
 import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
 import { requiresControlledRoute } from "../../../convex/lib/industrialClassification";
+import { CarbonBatchExport } from "./carbon-batch-export";
 import {
   ProcessingCostSummary,
   RecordAcquisitionCost,
@@ -357,7 +358,7 @@ function LotDetail({ lotId }: { lotId: Id<"materialLots"> }) {
       </section>
       {isHolder ? (
         <>
-          <Transformations history={history} />
+          <Transformations history={history} orgId={business.id} />
           <Dispositions history={history} />
           <Inspections lotId={lot.id} city={business.city} />
         </>
@@ -380,8 +381,10 @@ function AcquisitionCostAction({
 
 function Transformations({
   history,
+  orgId,
 }: {
   history: FunctionReturnType<typeof api.traceability.history>;
+  orgId: Id<"orgs">;
 }) {
   const t = useTranslations("lots");
   const format = useFormatter();
@@ -413,6 +416,7 @@ function Transformations({
                 </p>
               ) : null}
               <ProcessingCostSummary {...event} />
+              <CarbonBatchExport orgId={orgId} transformationId={event.id} />
               <section aria-label={t("inputs")} className="space-y-2">
                 <h3 className="font-medium">{t("inputs")}</h3>
                 <ul>
