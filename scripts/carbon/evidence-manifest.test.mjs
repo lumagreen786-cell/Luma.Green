@@ -102,3 +102,13 @@ test("rejects references missing from the review and files outside the package",
     /reference/u,
   );
 });
+
+test("rejects an empty file or a directory in place of a document", () => {
+  writeFileSync(path.join(fixture.directory, source.baseline), "");
+  expect(() => buildEvidenceManifest(fixture.directory, source)).toThrow(
+    /nonempty/u,
+  );
+  expect(() =>
+    buildEvidenceManifest(fixture.directory, { ...source, baseline: "." }),
+  ).toThrow(/nonempty/u);
+});

@@ -1,5 +1,13 @@
 import { createHash } from "node:crypto";
-import { readFileSync, realpathSync, statSync } from "node:fs";
+import {
+  closeSync,
+  constants,
+  fstatSync,
+  openSync,
+  readFileSync,
+  readSync,
+  realpathSync,
+} from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { isDeepStrictEqual } from "node:util";
@@ -36,11 +44,31 @@ function readPrivateFile(root, name) {
   ) {
     throw new Error("File is outside the private directory.");
   }
-  const info = statSync(file);
-  if (!info.isFile() || info.size === 0 || info.size > maxDocumentBytes) {
-    throw new Error("Expected a nonempty file of up to 32 MiB.");
+  const fd = openSync(
+    file,
+    // Open read-only and reject a replaced symlink. Nonblocking avoids a FIFO
+    // wait if another local process replaces the file before open.
+    constants.O_RDONLY | constants.O_NOFOLLOW | constants.O_NONBLOCK,
+  );
+  try {
+    const info = fstatSync(fd);
+    if (!info.isFile() || info.size === 0 || info.size > maxDocumentBytes) {
+      throw new Error("Expected a nonempty file of up to 32 MiB.");
+    }
+    const bytes = Buffer.alloc(info.size + 1);
+    let offset = 0;
+    while (offset < bytes.length) {
+      const count = readSync(fd, bytes, offset, bytes.length - offset, null);
+      if (count === 0) break;
+      offset += count;
+    }
+    if (offset !== info.size || fstatSync(fd).mtimeMs !== info.mtimeMs) {
+      throw new Error("File changed during the integrity check.");
+    }
+    return bytes.subarray(0, offset);
+  } finally {
+    closeSync(fd);
   }
-  return readFileSync(file);
 }
 
 function integrity(bytes) {
