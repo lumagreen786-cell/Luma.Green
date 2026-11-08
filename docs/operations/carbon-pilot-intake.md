@@ -127,3 +127,12 @@ customer delegation and revocation, commercial terms, fees, testing access,
 and duplicate-submission recovery. Treat India's BEE route as a separate
 integration. A customer-facing preparation API can use the evidence checklist
 without accessing either registry.
+
+To assemble a local filing preparation index, run
+`node scripts/carbon/filing-pack.mjs PRIVATE_DIRECTORY INDEX.json`. The index
+contains the same `program` and `evidenceReferences` fields, plus a `files`
+object in the evidence manifest format. Use a frozen workspace review export
+as the snapshot. The tool checks the method against the chosen program and
+fingerprints the snapshot and its four review documents. It lists additional
+program references separately. Those references need their own evidence review.
+The index is an internal preparation document, with no submission function.

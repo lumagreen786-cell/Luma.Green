@@ -21,6 +21,7 @@ const snapshotSchema = z.object({
   purpose: z.literal("internal_carbon_review"),
   evidenceStatus: z.literal("reported_unverified"),
   projectId: reference,
+  method: reference.optional(),
   revision: z.number().int().positive(),
   references: z.array(z.object({ kind: reference, reference })).max(40),
 });
@@ -79,13 +80,18 @@ function integrity(bytes) {
 }
 
 /** Fingerprint a private review package without copying its files or names. */
-export function buildEvidenceManifest(directory, source) {
+export function buildEvidenceManifest(directory, source, expectedMethod) {
   const paths = packageSchema.parse(source);
   const root = realpathSync(directory);
   const snapshotBytes = readPrivateFile(root, paths.snapshot);
   const snapshot = snapshotSchema.parse(
     JSON.parse(snapshotBytes.toString("utf8")),
   );
+  if (expectedMethod !== undefined && snapshot.method !== expectedMethod) {
+    throw new Error(
+      "The reviewed project method does not match the pilot program.",
+    );
+  }
   const documents = kinds.map((kind) => {
     const references = snapshot.references.filter(
       (entry) => entry.kind === kind,

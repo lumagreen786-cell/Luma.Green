@@ -20,18 +20,22 @@ const recyclingEvidence = [
 const programs = {
   non_pet_plastics: {
     method: recyclingMethod,
+    methodId: "verra_vmr0007",
     evidence: [...recyclingEvidence, "polymer_and_output_grade"],
   },
   container_glass: {
     method: recyclingMethod,
+    methodId: "verra_vmr0007",
     evidence: [...recyclingEvidence, "container_glass_and_cullet_grade"],
   },
   metals: {
     method: recyclingMethod,
+    methodId: "verra_vmr0007",
     evidence: [...recyclingEvidence, "aluminium_or_steel_grade_and_recovery"],
   },
   e_waste: {
     method: "Verra VMR0008 + AMS-III.BA.",
+    methodId: "verra_vmr0008",
     evidence: [
       "equipment_categories",
       "custody_and_recovery",
@@ -42,6 +46,7 @@ const programs = {
   },
   compressed_biogas: {
     method: "BEE BM WA03.003",
+    methodId: "bee_wa03_003",
     evidence: [
       "weighed_feedstock_by_type",
       "prior_waste_treatment",
@@ -53,6 +58,7 @@ const programs = {
   },
   industrial_efficiency: {
     method: "BEE BM IN02.001",
+    methodId: "bee_in02_001",
     evidence: [
       "equipment_and_commissioning",
       "meter_calibration",
@@ -71,14 +77,14 @@ export function screenIndustryReadiness(program, evidenceReferences) {
     throw new Error("Expected an object of evidence references.");
   }
 
-  const { method, evidence } = programs[program];
+  const { method, methodId, evidence } = programs[program];
   const required = [...commonEvidence, ...evidence];
   for (const [kind, reference] of Object.entries(evidenceReferences)) {
     if (
-      !required.includes(kind) ||
       typeof reference !== "string" ||
+      reference.length > 160 ||
       reference.trim().length === 0 ||
-      reference.length > 160
+      !required.includes(kind)
     ) {
       throw new Error("Invalid evidence reference.");
     }
@@ -89,7 +95,9 @@ export function screenIndustryReadiness(program, evidenceReferences) {
   return {
     program,
     candidateMethod: method,
-    status: missing.length ? "missing_evidence" : "ready_for_internal_review",
+    methodId,
+    status:
+      missing.length > 0 ? "missing_evidence" : "ready_for_internal_review",
     evidenceStatus: "reported_unverified",
     missing,
   };

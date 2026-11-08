@@ -112,3 +112,38 @@ test("rejects an empty file or a directory in place of a document", () => {
     buildEvidenceManifest(fixture.directory, { ...source, baseline: "." }),
   ).toThrow(/nonempty/u);
 });
+
+test("checks a filing pack against the method in the reviewed snapshot", async () => {
+  const { buildFilingPack } = await import("./filing-pack.mjs");
+  const { screenIndustryReadiness } = await import("./industry-readiness.mjs");
+  writeFileSync(
+    path.join(fixture.directory, source.snapshot),
+    JSON.stringify({
+      ...snapshot,
+      method: "verra_vmr0007",
+    }),
+  );
+  const references = Object.fromEntries(
+    screenIndustryReadiness("metals", {}).missing.map((kind) => [
+      kind,
+      "internal-id",
+    ]),
+  );
+  expect(
+    buildFilingPack(fixture.directory, {
+      program: "metals",
+      evidenceReferences: references,
+      files: source,
+    }),
+  ).toMatchObject({
+    status: "requires_filing_review",
+    reviewedWorkspaceEvidence: { revision: 12 },
+  });
+  expect(() =>
+    buildFilingPack(fixture.directory, {
+      program: "e_waste",
+      evidenceReferences: {},
+      files: source,
+    }),
+  ).toThrow("method does not match");
+});
