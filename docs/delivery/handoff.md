@@ -14,6 +14,13 @@ mark the current references internally reviewed. A reference or internal review
 does not authorize a claim. See the [preparation API](../api/carbon-project-preparation.md)
 and the [implementation plan](../plans/2026-11-08-carbon-evidence-and-trading.md).
 
+A manager's internal review now freezes the references and linked batches at
+that revision. Workspace readers can download the current review. Corrections
+leave old snapshots available by revision and require a new review. The
+[carbon pilot intake](../operations/carbon-pilot-intake.md) lists facility
+documents, account access and two offline checks for monitoring and trade
+reconciliation. Both checks use supplied records and do not contact providers.
+
 Still required for official carbon trading: actual pilot facility records and
 signed claim rights, method-specific monitoring and claim allocation, secure
 verifier exchange and independent reports, official registry reconciliation

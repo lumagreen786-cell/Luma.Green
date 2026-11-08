@@ -1,6 +1,6 @@
 "use client";
 
-import { useMutation, useQuery } from "convex/react";
+import { useConvex, useMutation, useQuery } from "convex/react";
 import type { FunctionReturnType } from "convex/server";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { type SubmitEvent, useId, useState } from "react";
@@ -105,6 +105,9 @@ function Projects({
           {rows.rows.map((project) => (
             <li key={project.id} className="space-y-4 py-4">
               <ProjectSummary project={project} />
+              {project.snapshotRevision === project.revision ? (
+                <DownloadReview orgId={orgId} project={project} />
+              ) : null}
               <Button
                 type="button"
                 variant="outline"
@@ -137,6 +140,59 @@ function Projects({
       )}
       {rows.hasMore ? <p>{evidence("export.partial")}</p> : null}
     </>
+  );
+}
+
+function DownloadReview({
+  orgId,
+  project,
+}: {
+  orgId: Id<"orgs">;
+  project: Project;
+}) {
+  const client = useConvex();
+  const t = useTranslations("evidence.export");
+  const common = useTranslations("common");
+  const [isBusy, setIsBusy] = useState(false);
+
+  async function download() {
+    setIsBusy(true);
+    let url: string | undefined;
+    try {
+      const snapshot = await client.query(api.carbonProjects.reviewSnapshot, {
+        expectedOrgId: orgId,
+        projectId: project.id,
+        revision: project.revision,
+      });
+      if (!snapshot) throw new Error("Missing internal review snapshot");
+      url = URL.createObjectURL(
+        new Blob([JSON.stringify(snapshot, null, 2)], {
+          type: "application/json",
+        }),
+      );
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `luma-internal-carbon-review-${String(project.revision)}.json`;
+      link.click();
+    } catch {
+      toast.error(common("error"));
+    } finally {
+      if (url) URL.revokeObjectURL(url);
+      setIsBusy(false);
+    }
+  }
+
+  return (
+    <Button
+      type="button"
+      variant="outline"
+      disabled={isBusy}
+      onClick={() => {
+        void download();
+      }}
+    >
+      {t("download")}
+    </Button>
   );
 }
 
@@ -446,7 +502,7 @@ function ProjectActions({
   };
   const canMarkReviewed =
     canReview &&
-    project.status === "draft" &&
+    project.snapshotRevision !== project.revision &&
     requiredEvidence.every((kind) =>
       project.evidence.some((entry) => entry.kind === kind),
     );

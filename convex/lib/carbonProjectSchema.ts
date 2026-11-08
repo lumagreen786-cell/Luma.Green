@@ -37,7 +37,27 @@ export const carbonEvidenceFields = {
   recordedAt: v.number(),
 };
 
+export const carbonReviewSnapshotFields = {
+  projectId: v.id("carbonProjects"),
+  facilityId: v.id("industrialFacilities"),
+  method: vCarbonMethod,
+  revision: v.number(),
+  reviewedAt: v.number(),
+  references: v.array(v.object(carbonEvidenceFields)),
+  batches: v.array(
+    v.object({
+      transformationId: v.id("lotTransformations"),
+      inputGrams: v.number(),
+      recordedAt: v.number(),
+    }),
+  ),
+};
+
 export const carbonProjectTables = {
+  carbonReviewSnapshots: defineTable(carbonReviewSnapshotFields).index(
+    "by_project_revision",
+    ["projectId", "revision"],
+  ),
   carbonProjectBatches: defineTable({
     projectId: v.id("carbonProjects"),
     transformationId: v.id("lotTransformations"),
@@ -60,6 +80,7 @@ export const carbonProjectTables = {
       }),
     ),
     revision: v.number(),
+    snapshotRevision: v.optional(v.number()),
     createdAt: v.number(),
     updatedAt: v.number(),
   })
