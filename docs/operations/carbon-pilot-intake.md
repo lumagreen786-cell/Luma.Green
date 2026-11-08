@@ -105,3 +105,25 @@ SHA-256 digests. It contains no source file paths or document contents. A
 match checks file integrity against the supplied manifest. The verifier must
 still confirm the documents' identity, authority and relationship to the
 project. This tool has no upload or sharing permissions.
+
+## Screen evidence by industry
+
+Run `node scripts/carbon/industry-readiness.mjs intake.json` with a private
+JSON file that contains a `program` and an `evidenceReferences` object. Start
+with an empty object to get the program checklist. Fill its keys with short
+internal document identifiers. Keep document contents and personal data out of
+this file.
+
+Supported programs are `non_pet_plastics`, `container_glass`, `metals`,
+`e_waste`, `compressed_biogas` and `industrial_efficiency`. Run a separate
+screen for each facility, process line and activity. A complete checklist is
+ready for internal review. A reviewer still has to inspect each document and
+confirm the method applies. This tool does not create a registry filing.
+
+The representative approves a specific evidence pack and signs any required
+declarations. An independent verifier makes its own findings. Before enabling
+registry automation, obtain written confirmation of Verra's allowed actions,
+customer delegation and revocation, commercial terms, fees, testing access,
+and duplicate-submission recovery. Treat India's BEE route as a separate
+integration. A customer-facing preparation API can use the evidence checklist
+without accessing either registry.
