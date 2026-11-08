@@ -66,6 +66,7 @@ import type * as lib_adminRecovery from "../lib/adminRecovery.js";
 import type * as lib_applicationAccess from "../lib/applicationAccess.js";
 import type * as lib_applicationActivation from "../lib/applicationActivation.js";
 import type * as lib_auditSharesSchema from "../lib/auditSharesSchema.js";
+import type * as lib_authAtomic from "../lib/authAtomic.js";
 import type * as lib_authEmail from "../lib/authEmail.js";
 import type * as lib_cashfree from "../lib/cashfree.js";
 import type * as lib_cashfreeLifecycle from "../lib/cashfreeLifecycle.js";
@@ -283,6 +284,7 @@ declare const fullApi: ApiFromModules<{
   "lib/applicationAccess": typeof lib_applicationAccess;
   "lib/applicationActivation": typeof lib_applicationActivation;
   "lib/auditSharesSchema": typeof lib_auditSharesSchema;
+  "lib/authAtomic": typeof lib_authAtomic;
   "lib/authEmail": typeof lib_authEmail;
   "lib/cashfree": typeof lib_cashfree;
   "lib/cashfreeLifecycle": typeof lib_cashfreeLifecycle;

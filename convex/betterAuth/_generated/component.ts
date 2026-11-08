@@ -1325,4 +1325,44 @@ export type ComponentApi<Name extends string | undefined = string | undefined> =
         Name
       >;
     };
+    atomic: {
+      consumeRateLimit: FunctionReference<
+        "mutation",
+        "internal",
+        {
+          key: string;
+          operation:
+            | { kind: "reset"; now: number; observedAtMs: number }
+            | {
+                kind: "consume";
+                maximum: number;
+                now: number;
+                windowStart: number;
+              };
+        },
+        null | { count: number; lastRequest: number; rowId: string },
+        Name
+      >;
+      incrementOne: FunctionReference<
+        "mutation",
+        "internal",
+        {
+          factorId: string;
+          operation:
+            | { kind: "increment" }
+            | { expiredAtMs: number; kind: "resetExpired" }
+            | {
+                backupCodes: string;
+                expectedBackupCodes: string;
+                kind: "replaceBackupCodes";
+                onUpdateHandle: string;
+              };
+        },
+        | null
+        | { failedVerificationCount: number }
+        | { failedVerificationCount: number; lockedUntil: null }
+        | { backupCodes: string },
+        Name
+      >;
+    };
   };
