@@ -9,6 +9,7 @@ import {
 } from "./_generated/server";
 import {
   carbonEvidenceFields,
+  carbonReviewSnapshotFields,
   requiredCarbonEvidence,
   vCarbonEvidenceKind,
   vCarbonMethod,
@@ -28,6 +29,7 @@ const projectFields = {
   evidence: v.array(v.object(carbonEvidenceFields)),
   updatedAt: v.number(),
   revision: v.number(),
+  snapshotRevision: v.optional(v.number()),
 };
 
 const projectArgs = {
@@ -308,6 +310,7 @@ export const mine = query({
         ),
         updatedAt: row.updatedAt,
         revision: row.revision,
+        snapshotRevision: row.snapshotRevision,
       })),
       hasMore: rows.length > pageSize,
     };
@@ -424,16 +427,37 @@ export const review = mutation({
       args.projectId,
       args.expectedRevision,
     );
-    if (project.status === "internally_reviewed") return null;
+    if (project.snapshotRevision === project.revision) return null;
     const evidence = latestEvidence(project);
     if (requiredCarbonEvidence.some((kind) => !evidence.has(kind)))
       throw new ConvexError("CARBON_EVIDENCE_REQUIRED");
 
     const now = Date.now();
     const revision = project.revision + 1;
+    const batches = await batchesForProject(ctx, project._id).take(
+      maximumBatches + 1,
+    );
+    if (batches.length > maximumBatches)
+      throw new ConvexError("CARBON_BATCH_LIMIT");
+    await ctx.db.insert("carbonReviewSnapshots", {
+      projectId: project._id,
+      facilityId: project.facilityId,
+      method: project.method,
+      revision,
+      reviewedAt: now,
+      references: [...evidence.values()].map(
+        ({ kind, reference, recordedAt }) => ({ kind, reference, recordedAt }),
+      ),
+      batches: batches.map(({ transformationId, inputGrams, recordedAt }) => ({
+        transformationId,
+        inputGrams,
+        recordedAt,
+      })),
+    });
     await ctx.db.patch("carbonProjects", project._id, {
       status: "internally_reviewed",
       revision,
+      snapshotRevision: revision,
       updatedAt: now,
     });
     await ctx.db.insert("auditLog", {
@@ -446,5 +470,42 @@ export const review = mutation({
       createdAt: now,
     });
     return null;
+  },
+});
+
+export const reviewSnapshot = query({
+  args: { ...projectArgs, revision: v.number() },
+  returns: v.union(
+    v.null(),
+    v.object({
+      ...carbonReviewSnapshotFields,
+      schemaVersion: v.literal(1),
+      purpose: v.literal("internal_carbon_review"),
+      evidenceStatus: v.literal("reported_unverified"),
+    }),
+  ),
+  handler: async (ctx, { expectedOrgId, projectId, revision }) => {
+    const { org } = await requireOrg(ctx, undefined, "read");
+    checkWorkspace(org._id, expectedOrgId);
+    await requireProject(ctx, org._id, projectId);
+    const row = await ctx.db
+      .query("carbonReviewSnapshots")
+      .withIndex("by_project_revision", (q) =>
+        q.eq("projectId", projectId).eq("revision", revision),
+      )
+      .unique();
+    if (!row) return null;
+    return {
+      projectId: row.projectId,
+      facilityId: row.facilityId,
+      method: row.method,
+      revision: row.revision,
+      reviewedAt: row.reviewedAt,
+      references: row.references,
+      batches: row.batches,
+      schemaVersion: 1 as const,
+      purpose: "internal_carbon_review" as const,
+      evidenceStatus: "reported_unverified" as const,
+    };
   },
 });

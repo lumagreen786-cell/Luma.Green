@@ -1,3 +1,5 @@
+import { readFile } from "node:fs/promises";
+
 import { expect, test } from "@playwright/test";
 
 import { api } from "../../convex/_generated/api";
@@ -88,6 +90,28 @@ test("local manufacturer prepares a carbon project while another workspace canno
     await expect(
       project.getByText("Synthetic local claim_rights", { exact: true }),
     ).toBeVisible();
+
+    const downloadPromise = page.waitForEvent("download");
+    await project
+      .getByRole("button", { name: en.evidence.export.download })
+      .click();
+    const download = await downloadPromise;
+    expect(download.suggestedFilename()).toMatch(
+      /^luma-internal-carbon-review-\d+\.json$/u,
+    );
+    const snapshot: unknown = JSON.parse(
+      await readFile(await download.path(), "utf8"),
+    );
+    expect(snapshot).toMatchObject({
+      purpose: "internal_carbon_review",
+      evidenceStatus: "reported_unverified",
+      references: expect.arrayContaining([
+        expect.objectContaining({
+          kind: "claim_rights",
+          reference: "Synthetic local claim_rights",
+        }),
+      ]),
+    });
 
     const otherPage = await preprocessor.newPage();
     await otherPage.goto("/app/carbon-projects");

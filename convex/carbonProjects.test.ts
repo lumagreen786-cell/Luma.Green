@@ -68,6 +68,7 @@ describe("carbon project preparation", () => {
     const {
       t,
       recycler,
+      shop,
       recyclerOrgId: expectedOrgId,
       facilityId,
     } = await world();
@@ -131,6 +132,27 @@ describe("carbon project preparation", () => {
       hasMore: false,
     });
 
+    const snapshotArgs = { ...scope, revision: 6 };
+    const snapshot = await recycler.query(
+      api.carbonProjects.reviewSnapshot,
+      snapshotArgs,
+    );
+    expect(snapshot).toMatchObject({
+      projectId,
+      revision: 6,
+      purpose: "internal_carbon_review",
+      evidenceStatus: "reported_unverified",
+      batches: [],
+    });
+    expect(snapshot?.references.map(({ kind }) => kind)).toEqual(required);
+    await expect(
+      shop.query(api.carbonProjects.reviewSnapshot, snapshotArgs),
+    ).rejects.toThrow(/EVIDENCE_SCOPE_CHANGED/);
+    await recycler.mutation(api.carbonProjects.review, {
+      ...scope,
+      expectedRevision: 6,
+    });
+
     await recycler.mutation(api.carbonProjects.recordEvidence, {
       ...scope,
       kind: "registry_issuance",
@@ -148,6 +170,15 @@ describe("carbon project preparation", () => {
         expect.objectContaining({ kind: "registry_issuance" }),
       ]),
     );
+    expect(
+      await recycler.query(api.carbonProjects.reviewSnapshot, snapshotArgs),
+    ).toEqual(snapshot);
+    expect(
+      await recycler.query(api.carbonProjects.reviewSnapshot, {
+        ...scope,
+        revision: 7,
+      }),
+    ).toBeNull();
     const events = await t.run((ctx) =>
       ctx.db
         .query("auditLog")
@@ -455,6 +486,14 @@ describe("carbon project preparation", () => {
     await recycler.mutation(api.carbonProjects.detachBatch, {
       ...detach,
       expectedRevision: 8,
+    });
+    expect(
+      await recycler.query(api.carbonProjects.reviewSnapshot, {
+        ...winner,
+        revision: 7,
+      }),
+    ).toMatchObject({
+      batches: [{ transformationId, inputGrams: 100 }],
     });
     const removed = await recycler.query(api.carbonProjects.batches, winner);
     expect(removed).toEqual({ rows: [], hasMore: false });

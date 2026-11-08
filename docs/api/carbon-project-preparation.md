@@ -45,3 +45,18 @@ attachment time. The transformation becomes available for a new project link.
 The schema adds empty project and batch link tables and lookup indexes on
 existing records. Existing records do not need a data migration. In a
 rollback, disable new project writes and retain the tables and audit history.
+
+## Frozen internal review
+
+The existing review mutation saves an immutable snapshot in the same transaction
+as its audit event. A manager can review a legacy current revision to create its
+first snapshot. The new `carbonProjects.reviewSnapshot` query takes the selected
+workspace ID, project ID and review revision. It returns the matching snapshot
+or null for an unknown revision. Cross-workspace access is denied. The snapshot
+contains the candidate method, facility ID, document references and linked batch
+IDs with exact recorded input mass. It is an internal export of reported records.
+It carries no eligibility, measurement approval, or issuance status.
+
+Old snapshots remain readable by revision after a correction. The workspace
+only offers the current snapshot for download. No backfill is required. On
+rollback, keep the snapshot table and audit records for prior reviews.

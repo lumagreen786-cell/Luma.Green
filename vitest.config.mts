@@ -34,7 +34,11 @@ export default defineConfig({
     // Convex tests sit next to the functions. Pure helpers run in jsdom like
     // everything else; files using convex-test opt into `edge-runtime` with a
     // `@vitest-environment` comment, as the Convex runtime isn't Node.
-    include: ["src/**/*.{test,spec}.{ts,tsx}", "convex/**/*.test.ts"],
+    include: [
+      "src/**/*.{test,spec}.{ts,tsx}",
+      "convex/**/*.test.ts",
+      "scripts/carbon/**/*.test.mjs",
+    ],
     // Playwright owns `e2e/` — Vitest must never try to run those.
     exclude: [
       "e2e/**",
