@@ -2452,6 +2452,7 @@
     "description": "Izinkan PostHog dan Google Analytics mengukur kunjungan ke halaman publik. Kami tidak merekam formulir, halaman pribadi, atau pemutaran ulang sesi. Pilihan Anda tidak mengubah akses ke platform.",
     "accept": "Izinkan analitik",
     "decline": "Tetap nonaktifkan analitik",
+    "withdraw": "Nonaktifkan analitik",
     "settings": "Pengaturan analitik",
     "saved": "Pilihan Anda disimpan di perangkat ini.",
     "unavailable": "Peramban gagal menyimpan pilihan ini. Analitik akan tetap nonaktif."
@@ -4615,6 +4616,25 @@
     "reload": "Muat ulang teks tersimpan",
     "localDraft": "Teks sebelumnya yang belum disimpan",
     "savedText": "Teks tersimpan terbaru"
+  },
+  "collectionPrivacy": {
+    "phone": "Kami menggunakan nomor telepon Anda untuk masuk dan mengirim kabar layanan melalui SMS.",
+    "email": "Untuk membuat akun, kami menggunakan nama, alamat email, dan kata sandi Anda. Kami mengirim tautan untuk memverifikasi alamat email Anda.",
+    "booking": "Kami menggunakan nama, nomor telepon, foto, kota, dan waktu pilihan Anda untuk mengatur daur ulang. Untuk penjemputan, kami juga menggunakan alamat dan lokasi yang Anda bagikan."
+  },
+  "privacyRequests": {
+    "title": "Permintaan privasi",
+    "lead": "Pilih satu permintaan. Tim privasi akan meninjau dan membalasnya. Simpan nomor permintaan.",
+    "kind": "Jenis permintaan",
+    "submit": "Kirim permintaan",
+    "received": "Permintaan diterima",
+    "responded": "Tim telah membalas",
+    "access": "Akses data saya",
+    "correction": "Koreksi data saya",
+    "erasure": "Hapus data saya",
+    "grievance": "Ajukan keluhan privasi",
+    "nomination": "Tunjuk perwakilan",
+    "withdrawal": "Tarik persetujuan"
   },
   "privacy": {
     "title": "Kebijakan privasi",

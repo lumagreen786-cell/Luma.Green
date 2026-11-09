@@ -61,6 +61,7 @@ describe("collection capacity and recurrence", () => {
     expect(availability.every((s) => s.remaining === 0)).toBe(true);
     await expect(
       w.household.mutation(api.households.book, {
+        adultConfirmed: true,
         ...input,
         items: [{ materialCode: "PAPER-NEWS", kg: 1 }],
         orgId: w.org._id,
@@ -273,6 +274,7 @@ describe("linked support and draft retention", () => {
 it("starts a fresh two-hour assignment round only after an explicit time change", async () => {
   const w = await world();
   const token = await w.household.mutation(api.households.book, {
+    adultConfirmed: true,
     ...input,
     items: [{ materialCode: "PAPER-NEWS", kg: 1 }],
     orgId: w.org._id,
@@ -374,6 +376,7 @@ it("applies the pickup radius at discovery, booking and acceptance while preserv
   );
   await expect(
     w.household.mutation(api.households.book, {
+      adultConfirmed: true,
       ...input,
       items: [{ materialCode: "PAPER-NEWS", kg: 1 }],
       orgId: w.org._id,
@@ -381,6 +384,7 @@ it("applies the pickup radius at discovery, booking and acceptance while preserv
     }),
   ).rejects.toThrow("OUTSIDE_PICKUP_RADIUS");
   const token = await w.household.mutation(api.households.book, {
+    adultConfirmed: true,
     ...input,
     items: [{ materialCode: "PAPER-NEWS", kg: 1 }],
     orgId: w.org._id,
@@ -446,6 +450,7 @@ it("requires an admin reason and a fresh destination acceptance for reassignment
     return id;
   });
   const token = await w.household.mutation(api.households.book, {
+    adultConfirmed: true,
     ...input,
     items: [{ materialCode: "PAPER-NEWS", kg: 1 }],
     orgId: w.org._id,

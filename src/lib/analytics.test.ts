@@ -28,6 +28,8 @@ describe("public analytics boundary", () => {
     "/admin",
     "/admin/login",
     "/login",
+    "/privacy",
+    "/ar/account/privacy",
     "/join",
     "/join/status",
     "/sell",

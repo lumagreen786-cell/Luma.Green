@@ -3413,6 +3413,7 @@
     "description": "Consenti a PostHog e Google Analytics di misurare le visite alle pagine pubbliche. Non registriamo moduli, pagine private o riproduzioni di sessioni. La scelta non cambia l'accesso alla piattaforma.",
     "accept": "Consenti analisi",
     "decline": "Mantieni le analisi disattivate",
+    "withdraw": "Disattiva le analisi",
     "settings": "Impostazioni delle analisi",
     "saved": "La tua scelta è salvata su questo dispositivo.",
     "unavailable": "Il browser non ha potuto salvare la scelta. Le analisi resteranno disattivate.",
@@ -4615,6 +4616,25 @@
     "reload": "Ricarica testo salvato",
     "localDraft": "Testo precedente non salvato",
     "savedText": "Ultimo testo salvato"
+  },
+  "collectionPrivacy": {
+    "phone": "Usiamo il tuo numero di telefono per farti accedere e inviarti aggiornamenti sul servizio via SMS.",
+    "email": "Per creare il tuo account usiamo il tuo nome, il tuo indirizzo email e la tua password. Ti inviamo un link per verificare il tuo indirizzo email.",
+    "booking": "Usiamo il tuo nome, numero di telefono, foto, città e orario scelto per organizzare il riciclo. Per il ritiro usiamo anche il tuo indirizzo e la posizione che condividi."
+  },
+  "privacyRequests": {
+    "title": "Richieste sulla privacy",
+    "lead": "Scegli una richiesta. Il team per la privacy la esaminerà e ti risponderà. Conserva il numero della richiesta.",
+    "kind": "Tipo di richiesta",
+    "submit": "Invia richiesta",
+    "received": "Richiesta ricevuta",
+    "responded": "Il team ha risposto",
+    "access": "Accedere ai miei dati",
+    "correction": "Correggere i miei dati",
+    "erasure": "Cancellare i miei dati",
+    "grievance": "Presentare un reclamo sulla privacy",
+    "nomination": "Designare un rappresentante",
+    "withdrawal": "Revocare il consenso"
   },
   "privacy": {
     "title": "Informativa sulla privacy",

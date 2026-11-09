@@ -46,6 +46,10 @@ import { organizationTables } from "./lib/organizationsSchema";
 import { paperAssistTables } from "./lib/paperAssistSchema";
 import { paperTables } from "./lib/paperSchema";
 import {
+  vPrivacyRequestKind,
+  vPrivacyRequestStatus,
+} from "./lib/privacyRequestSchema";
+import {
   intakeCostFields,
   lotCostFields,
   transformationCostFields,
@@ -1132,6 +1136,18 @@ export default defineSchema({
   })
     .index("by_conversation_createdAt", ["conversationId", "createdAt"])
     .index("by_sender_createdAt", ["senderProfileId", "createdAt"]),
+
+  /** Minimal authenticated intake, kept separate from anonymous support messages. */
+  privacyRequests: defineTable({
+    profileId: v.id("profiles"),
+    kind: vPrivacyRequestKind,
+    status: vPrivacyRequestStatus,
+    createdAt: v.number(),
+    respondedAt: v.optional(v.number()),
+  })
+    .index("by_profileId_status_kind", ["profileId", "status", "kind"])
+    .index("by_profileId_status", ["profileId", "status"])
+    .index("by_status", ["status"]),
 
   /** Messages from the help centre and the solar page, for the team to answer. */
   supportRequests: defineTable({

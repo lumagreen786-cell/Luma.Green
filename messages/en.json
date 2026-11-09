@@ -3413,6 +3413,7 @@
     "description": "Allow PostHog and Google Analytics to measure visits to public pages. We do not record forms, private pages or session replays. Your choice does not change access to the platform.",
     "accept": "Allow analytics",
     "decline": "Keep analytics off",
+    "withdraw": "Turn off analytics",
     "settings": "Analytics settings",
     "saved": "Your choice is saved on this device.",
     "unavailable": "Your browser could not save this choice. Analytics will stay off.",
@@ -4615,6 +4616,25 @@
     "reload": "Reload saved text",
     "localDraft": "Previous unsaved text",
     "savedText": "Latest saved text"
+  },
+  "collectionPrivacy": {
+    "phone": "We use your phone number to sign you in and send you service updates by SMS.",
+    "email": "To create your account, we use your name, email address and password. We send a link to verify your email address.",
+    "booking": "We use your name, phone number, photos, city and chosen time to arrange recycling. For pickup, we also use your address and any location you share."
+  },
+  "privacyRequests": {
+    "title": "Privacy requests",
+    "lead": "Choose a request. The privacy team will review it and reply. Keep the request number for your records.",
+    "kind": "Request type",
+    "submit": "Send request",
+    "received": "Request received",
+    "responded": "Team replied",
+    "access": "Access my data",
+    "correction": "Correct my data",
+    "erasure": "Erase my data",
+    "grievance": "Raise a privacy grievance",
+    "nomination": "Nominate a representative",
+    "withdrawal": "Withdraw consent"
   },
   "privacy": {
     "title": "Privacy policy",

@@ -3413,6 +3413,7 @@
     "description": "Autorisez PostHog et Google Analytics à mesurer les visites des pages publiques. Nous n’enregistrons ni formulaires, ni pages privées, ni relectures de sessions. Votre choix ne change pas l’accès à la plateforme.",
     "accept": "Autoriser la mesure d’audience",
     "decline": "Laisser la mesure désactivée",
+    "withdraw": "Désactiver la mesure d’audience",
     "settings": "Paramètres de mesure d’audience",
     "saved": "Votre choix est enregistré sur cet appareil.",
     "unavailable": "Votre navigateur n’a pas pu enregistrer ce choix. La mesure restera désactivée.",
@@ -4615,6 +4616,25 @@
     "reload": "Recharger le texte enregistré",
     "localDraft": "Ancien texte non enregistré",
     "savedText": "Dernier texte enregistré"
+  },
+  "collectionPrivacy": {
+    "phone": "Nous utilisons votre numéro de téléphone pour vous connecter et vous envoyer des nouvelles du service par SMS.",
+    "email": "Pour créer votre compte, nous utilisons votre nom, votre adresse e-mail et votre mot de passe. Nous envoyons un lien pour vérifier votre adresse e-mail.",
+    "booking": "Nous utilisons votre nom, votre numéro de téléphone, vos photos, votre ville et le créneau choisi pour organiser le recyclage. Pour un enlèvement, nous utilisons aussi votre adresse et la position que vous partagez."
+  },
+  "privacyRequests": {
+    "title": "Demandes de confidentialité",
+    "lead": "Choisissez une demande. L’équipe chargée de la confidentialité l’examinera et vous répondra. Conservez le numéro de la demande.",
+    "kind": "Type de demande",
+    "submit": "Envoyer la demande",
+    "received": "Demande reçue",
+    "responded": "L’équipe a répondu",
+    "access": "Accéder à mes données",
+    "correction": "Corriger mes données",
+    "erasure": "Effacer mes données",
+    "grievance": "Déposer une réclamation sur mes données",
+    "nomination": "Désigner un représentant",
+    "withdrawal": "Retirer mon consentement"
   },
   "privacy": {
     "title": "Politique de confidentialité",

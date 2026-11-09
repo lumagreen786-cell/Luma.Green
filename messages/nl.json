@@ -3413,6 +3413,7 @@
     "description": "Sta PostHog en Google Analytics toe bezoeken aan openbare pagina's te meten. We registreren geen formulieren, privépagina's of sessieopnamen. Uw keuze verandert uw toegang niet.",
     "accept": "Statistieken toestaan",
     "decline": "Statistieken uit laten",
+    "withdraw": "Analytics uitschakelen",
     "settings": "Instellingen voor statistieken",
     "saved": "Uw keuze is opgeslagen op dit apparaat.",
     "unavailable": "Uw browser kon de keuze niet opslaan. Statistieken blijven uit.",
@@ -4615,6 +4616,25 @@
     "reload": "Opgeslagen tekst herladen",
     "localDraft": "Vorige niet-opgeslagen tekst",
     "savedText": "Laatst opgeslagen tekst"
+  },
+  "collectionPrivacy": {
+    "phone": "We gebruiken je telefoonnummer om je te laten inloggen en je per sms updates over de dienst te sturen.",
+    "email": "Om je account te maken gebruiken we je naam, e-mailadres en wachtwoord. We sturen een link om je e-mailadres te verifiëren.",
+    "booking": "We gebruiken je naam, telefoonnummer, foto's, plaats en gekozen tijd om de recycling te regelen. Bij ophalen gebruiken we ook je adres en de locatie die je deelt."
+  },
+  "privacyRequests": {
+    "title": "Privacyverzoeken",
+    "lead": "Kies een verzoek. Het privacyteam beoordeelt het en antwoordt. Bewaar het verzoeknummer.",
+    "kind": "Type verzoek",
+    "submit": "Verzoek versturen",
+    "received": "Verzoek ontvangen",
+    "responded": "Het team heeft geantwoord",
+    "access": "Mijn gegevens inzien",
+    "correction": "Mijn gegevens corrigeren",
+    "erasure": "Mijn gegevens verwijderen",
+    "grievance": "Een privacyklacht indienen",
+    "nomination": "Een vertegenwoordiger aanwijzen",
+    "withdrawal": "Toestemming intrekken"
   },
   "privacy": {
     "title": "Privacybeleid",

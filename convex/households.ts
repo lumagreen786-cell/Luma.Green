@@ -265,6 +265,7 @@ async function bookableShop(
 
 export const book = mutation({
   args: {
+    adultConfirmed: v.literal(true),
     photoIds: v.optional(v.array(v.id("householdPhotos"))),
     orgId: v.id("orgs"),
     mode: vMode,
@@ -366,6 +367,7 @@ export const book = mutation({
       entityTable: "bookings",
       entityId: bookingId,
       metadata: {
+        adultConfirmed: args.adultConfirmed,
         mode: args.mode,
         items: args.items.length,
         photoCount: photoIds.length,

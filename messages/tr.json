@@ -2452,6 +2452,7 @@
     "description": "PostHog ve Google Analytics’in herkese açık sayfa ziyaretlerini ölçmesine izin verin. Formları, özel sayfaları veya oturum tekrarlarını kaydetmeyiz. Seçiminiz platforma erişimi değiştirmez.",
     "accept": "Analize izin ver",
     "decline": "Analizi kapalı tut",
+    "withdraw": "Analitiği kapat",
     "settings": "Analiz ayarları",
     "saved": "Seçiminiz bu cihazda kaydedildi.",
     "unavailable": "Tarayıcı seçiminizi kaydedemedi. Analiz kapalı kalacak."
@@ -4615,6 +4616,25 @@
     "reload": "Kayıtlı metni yeniden yükle",
     "localDraft": "Önceki kaydedilmemiş metin",
     "savedText": "Son kayıtlı metin"
+  },
+  "collectionPrivacy": {
+    "phone": "Telefon numaranızı giriş yapmanız ve hizmetle ilgili bilgileri SMS ile almanız için kullanırız.",
+    "email": "Hesabınızı oluşturmak için adınızı, e-posta adresinizi ve şifrenizi kullanırız. E-posta adresinizi doğrulamak için bir bağlantı göndeririz.",
+    "booking": "Geri dönüşümü düzenlemek için adınızı, telefon numaranızı, fotoğrafları, şehrinizi ve seçtiğiniz saati kullanırız. Teslim almak için adresinizi ve paylaştığınız konumu da kullanırız."
+  },
+  "privacyRequests": {
+    "title": "Gizlilik talepleri",
+    "lead": "Bir talep seçin. Gizlilik ekibi talebi inceleyip yanıtlayacak. Talep numarasını saklayın.",
+    "kind": "Talep türü",
+    "submit": "Talebi gönder",
+    "received": "Talep alındı",
+    "responded": "Ekip yanıtladı",
+    "access": "Verilerime eriş",
+    "correction": "Verilerimi düzelt",
+    "erasure": "Verilerimi sil",
+    "grievance": "Gizlilik şikâyetinde bulun",
+    "nomination": "Temsilci belirle",
+    "withdrawal": "Onayı geri çek"
   },
   "privacy": {
     "title": "Gizlilik politikası",

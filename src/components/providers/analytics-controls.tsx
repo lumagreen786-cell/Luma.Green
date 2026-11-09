@@ -45,7 +45,9 @@ export function AnalyticsControls() {
   const [open, setOpen] = useState(false);
   const [failed, setFailed] = useState(false);
   const currentChoice = failed ? "denied" : stored;
-  const isVisible = analyticsPage(pathname) !== undefined;
+  const isVisible =
+    analyticsPage(pathname) !== undefined ||
+    (pathname === "/privacy" && (currentChoice === "granted" || failed));
   function choose(value: AnalyticsChoice) {
     if (value === "denied") stopAnalytics();
     const isSaved = saveAnalyticsChoice(value);
@@ -105,15 +107,16 @@ export function AnalyticsControls() {
               </div>
             </>
           ) : (
-            <div className="flex items-center justify-between gap-2">
+            <div className="flex flex-wrap items-center justify-between gap-2">
               <p className="text-xs text-muted-foreground">{t("saved")}</p>
               <Button
                 variant="ghost"
                 onClick={() => {
-                  setOpen(true);
+                  if (currentChoice === "granted") choose("denied");
+                  else setOpen(true);
                 }}
               >
-                {t("settings")}
+                {t(currentChoice === "granted" ? "withdraw" : "settings")}
               </Button>
             </div>
           )}

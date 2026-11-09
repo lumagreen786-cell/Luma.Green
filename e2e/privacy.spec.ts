@@ -23,6 +23,12 @@ for (const { path, messages } of [
     );
     await expect(
       page.getByRole("link", {
+        name: messages.privacyRequests.title,
+        exact: true,
+      }),
+    ).toHaveAttribute("href", `${path === "/" ? "" : path}/account/privacy`);
+    await expect(
+      page.getByRole("link", {
         name: messages.accountRemoval.title,
         exact: true,
       }),

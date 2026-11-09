@@ -71,6 +71,7 @@ async function world(isEnabled = false) {
   );
   if (!org) throw new Error("Missing shop");
   const token = await household.mutation(api.households.book, {
+    adultConfirmed: true,
     orgId: org._id,
     mode: "pickup",
     items: [{ materialCode: "PAPER-NEWS", kg: 10 }],
@@ -399,6 +400,7 @@ it("suppresses an offer after acceptance and suppresses an acceptance after comp
 it("notifies the household when the shop accepts a drop-off without dispatch", async () => {
   const w = await world();
   const token = await w.household.mutation(api.households.book, {
+    adultConfirmed: true,
     orgId: w.booking.orgId,
     mode: "dropoff",
     items: [{ materialCode: "PAPER-NEWS", kg: 10 }],

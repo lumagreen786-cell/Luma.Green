@@ -6,6 +6,8 @@ import { useLocale, useTranslations } from "next-intl";
 import { useRef, useState } from "react";
 
 import { isConvexConfigured } from "@/components/providers/convex-provider";
+import { AgeConfirmation } from "@/components/site/age-confirmation";
+import { CollectionPrivacy } from "@/components/site/collection-privacy";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -97,6 +99,7 @@ export function EmailForm({ canSend }: { canSend: boolean }) {
     null,
   );
   const [sent, setSent] = useState(false);
+  const [isAdult, setIsAdult] = useState(false);
   const pending = useRef(false);
   const finish = () => {
     router.replace({
@@ -106,7 +109,7 @@ export function EmailForm({ canSend }: { canSend: boolean }) {
   };
 
   async function submit(action: EmailAction = mode) {
-    if (pending.current) return;
+    if (pending.current || (action === "signup" && !isAdult)) return;
     if (!isConvexConfigured || (!canSend && action !== "signin")) {
       setError("unavailable");
       return;
@@ -178,6 +181,7 @@ export function EmailForm({ canSend }: { canSend: boolean }) {
             void submit();
           }}
         >
+          {mode === "signup" ? <CollectionPrivacy purpose="email" /> : null}
           <CredentialFields
             mode={mode}
             busy={busy}
@@ -188,6 +192,9 @@ export function EmailForm({ canSend }: { canSend: boolean }) {
             onName={setName}
             onPassword={setPassword}
           />
+          {mode === "signup" ? (
+            <AgeConfirmation checked={isAdult} onChange={setIsAdult} />
+          ) : null}
           {error ? (
             <p role="alert" className="text-sm text-destructive">
               {t(error)}
@@ -196,7 +203,10 @@ export function EmailForm({ canSend }: { canSend: boolean }) {
           <Button
             size="lg"
             disabled={
-              busy || !isConvexConfigured || (mode !== "signin" && !canSend)
+              busy ||
+              !isConvexConfigured ||
+              (mode !== "signin" && !canSend) ||
+              (mode === "signup" && !isAdult)
             }
           >
             {busy ? common("loading") : t(mode)}
@@ -228,6 +238,7 @@ export function EmailForm({ canSend }: { canSend: boolean }) {
                 setMode(item);
                 setError(null);
                 setSent(false);
+                setIsAdult(false);
                 setPassword("");
               }}
             >
