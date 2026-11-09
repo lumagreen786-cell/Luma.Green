@@ -23,6 +23,7 @@ const PRIYA = "+919000000109";
 const HOME = "Flat 12, 4th Cross, Mathikere, Bengaluru";
 
 afterEach(() => {
+  vi.useRealTimers();
   vi.unstubAllEnvs();
 });
 
@@ -335,6 +336,8 @@ describe("households.book", () => {
   });
 
   it("books from today up to six days ahead", async () => {
+    vi.useFakeTimers({ toFake: ["Date"] });
+    vi.setSystemTime(new Date("2026-11-10T04:00:00Z"));
     const t = await demoWorld();
     const arjun = await newHousehold(t);
     const today = indiaToday();
