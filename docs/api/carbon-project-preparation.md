@@ -85,8 +85,17 @@ industry when set. Other framework screens remain available for comparison.
   permission, project scope and that the gate belongs to the framework.
   A conflicting revision requires a reload. The audit event stores the
   gate and status without copying the private reference. Screening shows the
-  current reference for each gate. The audit log retains the status changes.
-  The frozen project review has its own document references.
+  current reference for each gate. Every accepted revision also saves the
+  reference and time in private, append-only history in the same transaction.
+  Retries do not add another entry. The frozen project review has its own
+  document references.
+- `carbonProjects.frameworkHistory` takes the selected workspace, project
+  and framework. It returns up to 100 recent changes, newest first, with a
+  completeness indicator. The Carbon projects screen opens this history on
+  demand. Only authorized workspace readers can see prior references.
+  Screenings from before this change have partial history. The migration
+  does not invent past references. On rollback, keep the history table and
+  audit log.
 
 The supported and contradicted statuses are workspace reports. They do
 not verify a document, approve eligibility or change a frozen project review.

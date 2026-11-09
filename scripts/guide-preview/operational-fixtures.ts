@@ -258,6 +258,25 @@ export const operationalFixtures: Record<string, unknown> = {
       ],
     },
   ],
+  "carbonProjects:frameworkHistory": {
+    historyComplete: true,
+    changes: [
+      {
+        gate: "collection_scope",
+        status: "contradicted",
+        reference: "Example collection scope finding",
+        recordedAt: NOW,
+        revision: 2,
+      },
+      {
+        gate: "municipal_waste_origin",
+        status: "supported",
+        reference: "Example municipal source record",
+        recordedAt: NOW,
+        revision: 1,
+      },
+    ],
+  },
   "carbonProjects:batches": {
     rows: [
       {

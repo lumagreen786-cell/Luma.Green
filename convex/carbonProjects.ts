@@ -15,6 +15,7 @@ import {
 } from "./_generated/server";
 import {
   carbonEvidenceFields,
+  carbonFrameworkChangeFields,
   carbonFrameworkCheckFields,
   carbonFrameworkScreeningFields,
   carbonReviewSnapshotFields,
@@ -126,6 +127,61 @@ export const frameworkScreenings = query({
   },
 });
 
+function screeningFor(
+  ctx: QueryCtx,
+  projectId: Id<"carbonProjects">,
+  framework: Doc<"carbonFrameworkScreenings">["framework"],
+) {
+  return ctx.db
+    .query("carbonFrameworkScreenings")
+    .withIndex("by_project_framework", (q) =>
+      q.eq("projectId", projectId).eq("framework", framework),
+    )
+    .unique();
+}
+
+export const frameworkHistory = query({
+  args: { ...projectArgs, framework: vCarbonFramework },
+  returns: v.object({
+    ...carbonFrameworkScreeningFields,
+    evidenceStatus: v.literal("reported_unverified"),
+    historyComplete: v.boolean(),
+    changes: v.array(v.object(carbonFrameworkChangeFields)),
+  }),
+  handler: async (ctx, { expectedOrgId, projectId, framework }) => {
+    const { org } = await requireOrg(ctx, undefined, "read");
+    checkWorkspace(org._id, expectedOrgId);
+    await requireProject(ctx, org._id, projectId);
+    const [screening, changes] = await Promise.all([
+      screeningFor(ctx, projectId, framework),
+      ctx.db
+        .query("carbonFrameworkChanges")
+        .withIndex("by_project_framework_revision", (q) =>
+          q.eq("projectId", projectId).eq("framework", framework),
+        )
+        .order("desc")
+        .take(100),
+    ]);
+    const revision = screening?.revision ?? 0;
+    return {
+      framework,
+      revision,
+      evidenceStatus: "reported_unverified" as const,
+      checks: screening?.checks ?? [],
+      historyComplete: changes.length === revision,
+      changes: changes.map(
+        ({ gate, status, reference, revision, recordedAt }) => ({
+          gate,
+          status,
+          reference,
+          revision,
+          recordedAt,
+        }),
+      ),
+    };
+  },
+});
+
 export const recordFrameworkCheck = mutation({
   args: {
     ...editArgs,
@@ -144,12 +200,7 @@ export const recordFrameworkCheck = mutation({
     const reference = cleanEvidenceText(args.reference, 160);
     if (!reference) throw new ConvexError("INVALID_CARBON_REFERENCE");
 
-    const row = await ctx.db
-      .query("carbonFrameworkScreenings")
-      .withIndex("by_project_framework", (q) =>
-        q.eq("projectId", projectId).eq("framework", framework),
-      )
-      .unique();
+    const row = await screeningFor(ctx, projectId, framework);
     const currentRevision = row?.revision ?? 0;
     const checks = row?.checks ?? [];
     const existing = checks.find((check) => check.gate === gate);
@@ -169,8 +220,10 @@ export const recordFrameworkCheck = mutation({
     if (isUnchanged) return null;
 
     const revision = currentRevision + 1;
-    const nextChecks = checks.filter((check) => check.gate !== gate);
-    nextChecks.push({ gate, status, reference });
+    const recordedAt = Date.now();
+    const check = { gate, status, reference };
+    const nextChecks = checks.filter((entry) => entry.gate !== gate);
+    nextChecks.push(check);
     if (row) {
       await ctx.db.patch("carbonFrameworkScreenings", row._id, {
         checks: nextChecks,
@@ -184,6 +237,13 @@ export const recordFrameworkCheck = mutation({
         revision,
       });
     }
+    await ctx.db.insert("carbonFrameworkChanges", {
+      projectId,
+      framework,
+      ...check,
+      revision,
+      recordedAt,
+    });
     await ctx.db.insert("auditLog", {
       orgId: org._id,
       actorProfileId: profile._id,
@@ -191,7 +251,7 @@ export const recordFrameworkCheck = mutation({
       entityTable: "carbonProjects",
       entityId: projectId,
       metadata: { framework, gate, status, revision },
-      createdAt: Date.now(),
+      createdAt: recordedAt,
     });
     return null;
   },

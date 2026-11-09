@@ -129,6 +129,15 @@ test("local manufacturer prepares a carbon project while another workspace canno
       screening.getByText(inventoryReference, { exact: true }),
     ).toBeVisible();
 
+    await screening
+      .getByRole("button", { name: en.logistics.history, exact: true })
+      .click();
+    await expect(
+      screening.getByText(en.logistics.revision.replace("{number}", "1"), {
+        exact: false,
+      }),
+    ).toBeVisible();
+
     const downloadPromise = page.waitForEvent("download");
     await project
       .getByRole("button", { name: en.evidence.export.download })

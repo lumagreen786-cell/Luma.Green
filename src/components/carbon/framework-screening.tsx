@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "convex/react";
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import { type SubmitEvent, useId, useState } from "react";
 import { toast } from "sonner";
 
@@ -120,6 +120,14 @@ export function FrameworkScreening({
               }}
             />
           ) : null}
+          {record ? (
+            <FrameworkHistory
+              key={`history-${framework}`}
+              orgId={orgId}
+              projectId={projectId}
+              framework={framework}
+            />
+          ) : null}
           <dl className="divide-y divide-border border-y border-border text-sm">
             {gates.map((gate) => {
               const check = record?.checks.find((entry) => entry.gate === gate);
@@ -144,6 +152,74 @@ export function FrameworkScreening({
         </>
       )}
     </section>
+  );
+}
+
+function FrameworkHistory({
+  orgId,
+  projectId,
+  framework,
+}: {
+  orgId: Id<"orgs">;
+  projectId: Id<"carbonProjects">;
+  framework: CarbonFrameworkId;
+}) {
+  const [open, setOpen] = useState(false);
+  const t = useTranslations("carbonProjects.screening");
+  const history = useTranslations("logistics");
+  const evidence = useTranslations("evidence");
+  const format = useFormatter();
+  const id = useId();
+  const result = useQuery(
+    api.carbonProjects.frameworkHistory,
+    open ? { expectedOrgId: orgId, projectId, framework } : "skip",
+  );
+
+  return (
+    <div className="space-y-2">
+      <Button
+        type="button"
+        variant="outline"
+        aria-expanded={open}
+        aria-controls={id}
+        onClick={() => {
+          setOpen(!open);
+        }}
+      >
+        {history("history")}
+      </Button>
+      <div id={id} hidden={!open}>
+        {open && !result ? <ListSkeleton rows={1} /> : null}
+        {open && result ? (
+          <>
+            {result.historyComplete ? null : (
+              <p className="text-sm text-muted-foreground">
+                {evidence("export.partial")}
+              </p>
+            )}
+            <ul className="divide-y divide-border text-sm">
+              {result.changes.map((change) => (
+                <li key={change.revision} className="space-y-1 py-2">
+                  <p>
+                    {history("revision", { number: change.revision })} ·{" "}
+                    <time dateTime={new Date(change.recordedAt).toISOString()}>
+                      {format.dateTime(change.recordedAt, {
+                        dateStyle: "medium",
+                        timeStyle: "short",
+                      })}
+                    </time>
+                  </p>
+                  <p>
+                    {t(`gates.${change.gate}`)} · {t(`status.${change.status}`)}
+                  </p>
+                  <p className="break-all">{change.reference}</p>
+                </li>
+              ))}
+            </ul>
+          </>
+        ) : null}
+      </div>
+    </div>
   );
 }
 

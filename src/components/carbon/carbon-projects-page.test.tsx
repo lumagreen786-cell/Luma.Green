@@ -254,3 +254,48 @@ it("sets the matched methodology when an operator selects an industry", async ()
     industry: "compressed_biogas",
   });
 });
+
+it("shows prior evidence references on demand to a workspace viewer", async () => {
+  state.role = "viewer";
+  const check = {
+    gate: "method_and_version",
+    status: "supported",
+    reference: "Current method reference",
+  };
+  const historyQueries: Record<string, unknown> = {
+    ...queries,
+    "carbonProjects:frameworkScreenings": [
+      { framework: "verra", revision: 2, checks: [check] },
+    ],
+    "carbonProjects:frameworkHistory": {
+      historyComplete: true,
+      changes: [
+        { ...check, revision: 2, recordedAt: 2 },
+        {
+          ...check,
+          revision: 1,
+          recordedAt: 1,
+          status: "contradicted",
+          reference: "Earlier method reference",
+        },
+      ],
+    },
+  };
+  state.query.mockImplementation((name, args) =>
+    args === "skip" ? undefined : historyQueries[name],
+  );
+  renderPage();
+  const screening = await openScreening();
+  expect(
+    within(screening).queryByText("Earlier method reference"),
+  ).not.toBeInTheDocument();
+  await userEvent.click(
+    within(screening).getByRole("button", { name: messages.logistics.history }),
+  );
+  expect(within(screening).getByText("Earlier method reference")).toBeVisible();
+  expect(state.query).toHaveBeenCalledWith("carbonProjects:frameworkHistory", {
+    expectedOrgId: "org-1",
+    projectId: "project-1",
+    framework: "verra",
+  });
+});

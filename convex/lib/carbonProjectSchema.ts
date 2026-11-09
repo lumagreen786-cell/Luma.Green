@@ -22,6 +22,12 @@ export const carbonFrameworkCheckFields = {
   reference: v.string(),
 };
 
+export const carbonFrameworkChangeFields = {
+  ...carbonFrameworkCheckFields,
+  revision: v.number(),
+  recordedAt: v.number(),
+};
+
 export const carbonFrameworkScreeningFields = {
   framework: vCarbonFramework,
   revision: v.number(),
@@ -82,6 +88,15 @@ export const carbonReviewSnapshotFields = {
 };
 
 export const carbonProjectTables = {
+  carbonFrameworkChanges: defineTable({
+    projectId: v.id("carbonProjects"),
+    framework: vCarbonFramework,
+    ...carbonFrameworkChangeFields,
+  }).index("by_project_framework_revision", [
+    "projectId",
+    "framework",
+    "revision",
+  ]),
   carbonFrameworkScreenings: defineTable({
     projectId: v.id("carbonProjects"),
     ...carbonFrameworkScreeningFields,

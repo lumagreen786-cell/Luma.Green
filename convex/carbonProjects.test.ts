@@ -883,6 +883,63 @@ describe("carbon framework screening", () => {
     expect(JSON.stringify(events)).not.toContain("PRIVATE-TEST-SCREENING");
   });
 
+  it("retains private screening evidence across revisions without duplicating retries", async () => {
+    const {
+      t,
+      recycler,
+      shop,
+      recyclerOrgId: expectedOrgId,
+      shopOrgId,
+      facilityId,
+      membershipId,
+    } = await world();
+    const projectId = await recycler.mutation(api.carbonProjects.create, {
+      expectedOrgId,
+      facilityId,
+      name: "Private screening history",
+      method: "verra_vmr0007",
+    });
+    const scope = { expectedOrgId, projectId, framework: "verra" } as const;
+    const first = {
+      ...scope,
+      gate: "method_and_version",
+      status: "supported",
+      reference: "METHOD-RECORD-1",
+      expectedRevision: 0,
+    } as const;
+    const second = {
+      ...first,
+      status: "contradicted",
+      reference: "METHOD-RECORD-2",
+      expectedRevision: 1,
+    } as const;
+    await recycler.mutation(api.carbonProjects.recordFrameworkCheck, first);
+    await recycler.mutation(api.carbonProjects.recordFrameworkCheck, second);
+    await recycler.mutation(api.carbonProjects.recordFrameworkCheck, second);
+
+    await t.run((ctx) =>
+      ctx.db.patch("memberships", membershipId, { role: "viewer" }),
+    );
+    await expect(
+      recycler.query(api.carbonProjects.frameworkHistory, scope),
+    ).resolves.toMatchObject({
+      evidenceStatus: "reported_unverified",
+      revision: 2,
+      historyComplete: true,
+      changes: [
+        { revision: 2, reference: "METHOD-RECORD-2", status: "contradicted" },
+        { revision: 1, reference: "METHOD-RECORD-1", status: "supported" },
+      ],
+      checks: [{ reference: "METHOD-RECORD-2" }],
+    });
+    await expect(
+      shop.query(api.carbonProjects.frameworkHistory, {
+        ...scope,
+        expectedOrgId: shopOrgId,
+      }),
+    ).rejects.toThrow(/CARBON_PROJECT_NOT_FOUND/);
+  });
+
   it("rejects invalid gates and references, and prevents stale changes within each framework", async () => {
     const {
       recycler,
