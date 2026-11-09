@@ -91,6 +91,44 @@ test("local manufacturer prepares a carbon project while another workspace canno
       project.getByText("Synthetic local claim_rights", { exact: true }),
     ).toBeVisible();
 
+    const screeningCopy = en.carbonProjects.screening;
+    const openScreening = project.getByRole("button", {
+      name: screeningCopy.title,
+      exact: true,
+    });
+    await openScreening.click();
+    const screening = project.getByRole("region", {
+      name: screeningCopy.title,
+    });
+    await choose(page, screening, screeningCopy.framework, "GHG Protocol");
+    await choose(
+      page,
+      screening,
+      screeningCopy.check,
+      screeningCopy.gates.inventory_boundary_and_scopes,
+    );
+    await choose(
+      page,
+      screening,
+      screeningCopy.result,
+      screeningCopy.status.supported,
+    );
+    const inventoryReference = "Synthetic local inventory boundary";
+    await screening
+      .getByLabel(en.evidence.reference, { exact: true })
+      .fill(inventoryReference);
+    await screening.getByRole("button", { name: screeningCopy.save }).click();
+    await expect(
+      screening.getByText(inventoryReference, { exact: true }),
+    ).toBeVisible();
+    await page.reload();
+    await expect(status).toBeVisible();
+    await openScreening.click();
+    await choose(page, screening, screeningCopy.framework, "GHG Protocol");
+    await expect(
+      screening.getByText(inventoryReference, { exact: true }),
+    ).toBeVisible();
+
     const downloadPromise = page.waitForEvent("download");
     await project
       .getByRole("button", { name: en.evidence.export.download })
@@ -128,7 +166,20 @@ test("local manufacturer prepares a carbon project while another workspace canno
       0,
     );
 
+    const savedProjects = await owner.query(api.carbonProjects.mine, {
+      expectedOrgId: scope.org.id,
+    });
+    const savedProject = savedProjects.rows.find(
+      (entry) => entry.name === projectName,
+    );
+    if (!savedProject) throw new Error("Missing saved carbon project");
     const other = await clientFor(preprocessor);
+    await expect(
+      other.query(api.carbonProjects.frameworkScreenings, {
+        expectedOrgId: scope.org.id,
+        projectId: savedProject.id,
+      }),
+    ).rejects.toThrow(/EVIDENCE_SCOPE_CHANGED/);
     await expect(
       other.query(api.carbonProjects.mine, { expectedOrgId: scope.org.id }),
     ).rejects.toThrow(/EVIDENCE_SCOPE_CHANGED/);

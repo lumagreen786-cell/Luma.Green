@@ -1,8 +1,18 @@
 import { readFile } from "node:fs/promises";
 import { pathToFileURL } from "node:url";
 
-import { buildEvidenceManifest } from "./evidence-manifest.mjs";
+import { buildFilingEvidenceManifest } from "./evidence-manifest.mjs";
 import { screenIndustryReadiness } from "./industry-readiness.mjs";
+
+const workspaceIndustries = {
+  pet: "pet_plastics",
+  non_pet_plastics: null,
+  container_glass: null,
+  metals: "metals_recycling",
+  e_waste: "e_waste_recovery",
+  compressed_biogas: "compressed_biogas",
+  industrial_efficiency: "industrial_manufacturing",
+};
 
 /** Assemble a local preparation pack. The additional references need their own review. */
 export function buildFilingPack(directory, source) {
@@ -10,10 +20,11 @@ export function buildFilingPack(directory, source) {
     source.program,
     source.evidenceReferences,
   );
-  const manifest = buildEvidenceManifest(
+  const { manifest, workspaceIndustryStatus } = buildFilingEvidenceManifest(
     directory,
     source.files,
     readiness.methodId,
+    workspaceIndustries[readiness.program],
   );
 
   return {
@@ -24,6 +35,7 @@ export function buildFilingPack(directory, source) {
         ? "missing_evidence"
         : "requires_filing_review",
     readiness,
+    workspaceIndustryStatus,
     reviewedWorkspaceEvidence: manifest,
     evidenceReferences: source.evidenceReferences,
   };

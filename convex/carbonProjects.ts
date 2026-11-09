@@ -1,5 +1,11 @@
 import { ConvexError, v } from "convex/values";
 
+import {
+  carbonFrameworkIds,
+  carbonGatesForProject,
+  carbonIndustries,
+  type CarbonIndustryId,
+} from "../src/lib/carbon-frameworks";
 import type { Doc, Id } from "./_generated/dataModel";
 import {
   mutation,
@@ -9,9 +15,13 @@ import {
 } from "./_generated/server";
 import {
   carbonEvidenceFields,
+  carbonFrameworkCheckFields,
+  carbonFrameworkScreeningFields,
   carbonReviewSnapshotFields,
   requiredCarbonEvidence,
   vCarbonEvidenceKind,
+  vCarbonFramework,
+  vCarbonIndustry,
   vCarbonMethod,
   vCarbonProjectStatus,
 } from "./lib/carbonProjectSchema";
@@ -23,6 +33,7 @@ const projectFields = {
   facilityId: v.id("industrialFacilities"),
   facilityName: v.string(),
   method: vCarbonMethod,
+  industry: v.optional(vCarbonIndustry),
   name: v.string(),
   status: vCarbonProjectStatus,
   evidenceStatus: v.literal("reported_unverified"),
@@ -65,6 +76,14 @@ function latestEvidence(row: Doc<"carbonProjects">) {
   return new Map(row.evidence.map((entry) => [entry.kind, entry]));
 }
 
+function checkIndustryMethod(
+  industry: CarbonIndustryId,
+  method: Doc<"carbonProjects">["method"],
+) {
+  if (carbonIndustries[industry].method !== method)
+    throw new ConvexError("CARBON_INDUSTRY_METHOD_MISMATCH");
+}
+
 async function requireProject(
   ctx: QueryCtx,
   orgId: Id<"orgs">,
@@ -87,6 +106,96 @@ async function projectForEdit(
     throw new ConvexError("CARBON_PROJECT_CHANGED");
   return project;
 }
+
+export const frameworkScreenings = query({
+  args: projectArgs,
+  returns: v.array(v.object(carbonFrameworkScreeningFields)),
+  handler: async (ctx, { expectedOrgId, projectId }) => {
+    const { org } = await requireOrg(ctx, undefined, "read");
+    checkWorkspace(org._id, expectedOrgId);
+    await requireProject(ctx, org._id, projectId);
+    const rows = await ctx.db
+      .query("carbonFrameworkScreenings")
+      .withIndex("by_project_framework", (q) => q.eq("projectId", projectId))
+      .take(carbonFrameworkIds.length);
+    return rows.map(({ framework, revision, checks }) => ({
+      framework,
+      revision,
+      checks,
+    }));
+  },
+});
+
+export const recordFrameworkCheck = mutation({
+  args: {
+    ...editArgs,
+    framework: vCarbonFramework,
+    ...carbonFrameworkCheckFields,
+  },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    const { org, profile } = await requireOrg(ctx);
+    const { expectedOrgId, projectId, framework, gate, status } = args;
+    checkWorkspace(org._id, expectedOrgId);
+    const project = await requireProject(ctx, org._id, projectId);
+    const gates = carbonGatesForProject(framework, project.industry);
+    if (!gates.includes(gate))
+      throw new ConvexError("INVALID_CARBON_FRAMEWORK_GATE");
+    const reference = cleanEvidenceText(args.reference, 160);
+    if (!reference) throw new ConvexError("INVALID_CARBON_REFERENCE");
+
+    const row = await ctx.db
+      .query("carbonFrameworkScreenings")
+      .withIndex("by_project_framework", (q) =>
+        q.eq("projectId", projectId).eq("framework", framework),
+      )
+      .unique();
+    const currentRevision = row?.revision ?? 0;
+    const checks = row?.checks ?? [];
+    const existing = checks.find((check) => check.gate === gate);
+    const isUnchanged =
+      existing?.status === status && existing.reference === reference;
+
+    if (args.expectedRevision !== currentRevision) {
+      // The last check may have saved before the client received its response.
+      if (
+        isUnchanged &&
+        args.expectedRevision === currentRevision - 1 &&
+        checks.at(-1) === existing
+      )
+        return null;
+      throw new ConvexError("CARBON_FRAMEWORK_CHANGED");
+    }
+    if (isUnchanged) return null;
+
+    const revision = currentRevision + 1;
+    const nextChecks = checks.filter((check) => check.gate !== gate);
+    nextChecks.push({ gate, status, reference });
+    if (row) {
+      await ctx.db.patch("carbonFrameworkScreenings", row._id, {
+        checks: nextChecks,
+        revision,
+      });
+    } else {
+      await ctx.db.insert("carbonFrameworkScreenings", {
+        projectId,
+        framework,
+        checks: nextChecks,
+        revision,
+      });
+    }
+    await ctx.db.insert("auditLog", {
+      orgId: org._id,
+      actorProfileId: profile._id,
+      action: "carbon_project.framework_check_recorded",
+      entityTable: "carbonProjects",
+      entityId: projectId,
+      metadata: { framework, gate, status, revision },
+      createdAt: Date.now(),
+    });
+    return null;
+  },
+});
 
 function batchesForProject(ctx: QueryCtx, projectId: Id<"carbonProjects">) {
   return ctx.db
@@ -298,6 +407,7 @@ export const mine = query({
         facilityId: row.facilityId,
         facilityName: row.facilityName,
         method: row.method,
+        industry: row.industry,
         name: row.name,
         status: row.status,
         evidenceStatus: "reported_unverified" as const,
@@ -323,6 +433,7 @@ export const create = mutation({
     facilityId: v.id("industrialFacilities"),
     name: v.string(),
     method: vCarbonMethod,
+    industry: v.optional(vCarbonIndustry),
   },
   returns: v.id("carbonProjects"),
   handler: async (ctx, args) => {
@@ -333,6 +444,8 @@ export const create = mutation({
       throw new ConvexError("FACILITY_NOT_FOUND");
     const name = cleanEvidenceText(args.name, 120);
     if (!name) throw new ConvexError("INVALID_CARBON_PROJECT_NAME");
+    const { industry } = args;
+    if (industry) checkIndustryMethod(industry, args.method);
 
     const prior = await ctx.db
       .query("carbonProjects")
@@ -344,7 +457,16 @@ export const create = mutation({
           .eq("name", name),
       )
       .first();
-    if (prior) return prior._id;
+    if (prior) {
+      if (industry && prior.industry !== industry) {
+        throw new ConvexError(
+          prior.industry
+            ? "CARBON_INDUSTRY_ALREADY_ASSIGNED"
+            : "CARBON_INDUSTRY_ASSIGNMENT_REQUIRED",
+        );
+      }
+      return prior._id;
+    }
 
     const now = Date.now();
     const id = await ctx.db.insert("carbonProjects", {
@@ -352,6 +474,7 @@ export const create = mutation({
       facilityId: facility._id,
       facilityName: facility.name,
       method: args.method,
+      industry,
       name,
       status: "draft",
       evidence: [],
@@ -365,10 +488,53 @@ export const create = mutation({
       action: "carbon_project.created",
       entityTable: "carbonProjects",
       entityId: id,
-      metadata: { method: args.method, revision: 1 },
+      metadata: { method: args.method, industry, revision: 1 },
       createdAt: now,
     });
     return id;
+  },
+});
+
+export const assignIndustry = mutation({
+  args: { ...editArgs, industry: vCarbonIndustry },
+  returns: v.null(),
+  handler: async (
+    ctx,
+    { expectedOrgId, projectId, industry, expectedRevision },
+  ) => {
+    const { org, profile } = await requireOrg(ctx);
+    checkWorkspace(org._id, expectedOrgId);
+    const project = await requireProject(ctx, org._id, projectId);
+    if (
+      project.industry === industry &&
+      (expectedRevision === project.revision ||
+        expectedRevision === project.revision - 1)
+    )
+      return null;
+    if (project.revision !== expectedRevision)
+      throw new ConvexError("CARBON_PROJECT_CHANGED");
+    if (project.industry)
+      throw new ConvexError("CARBON_INDUSTRY_ALREADY_ASSIGNED");
+    checkIndustryMethod(industry, project.method);
+
+    const revision = project.revision + 1;
+    const now = Date.now();
+    await ctx.db.patch("carbonProjects", projectId, {
+      industry,
+      status: "draft",
+      revision,
+      updatedAt: now,
+    });
+    await ctx.db.insert("auditLog", {
+      orgId: org._id,
+      actorProfileId: profile._id,
+      action: "carbon_project.industry_assigned",
+      entityTable: "carbonProjects",
+      entityId: projectId,
+      metadata: { industry, revision, previousStatus: project.status },
+      createdAt: now,
+    });
+    return null;
   },
 });
 
@@ -443,6 +609,7 @@ export const review = mutation({
       projectId: project._id,
       facilityId: project.facilityId,
       method: project.method,
+      industry: project.industry,
       revision,
       reviewedAt: now,
       references: [...evidence.values()].map(
@@ -499,6 +666,7 @@ export const reviewSnapshot = query({
       projectId: row.projectId,
       facilityId: row.facilityId,
       method: row.method,
+      industry: row.industry,
       revision: row.revision,
       reviewedAt: row.reviewedAt,
       references: row.references,

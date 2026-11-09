@@ -114,11 +114,15 @@ with an empty object to get the program checklist. Fill its keys with short
 internal document identifiers. Keep document contents and personal data out of
 this file.
 
-Supported programs are `non_pet_plastics`, `container_glass`, `metals`,
+Supported programs are `pet`, `non_pet_plastics`, `container_glass`, `metals`,
 `e_waste`, `compressed_biogas` and `industrial_efficiency`. Run a separate
 screen for each facility, process line and activity. A complete checklist is
 ready for internal review. A reviewer still has to inspect each document and
-confirm the method applies. This tool does not create a registry filing.
+confirm the method applies. For PET, the checklist asks for collection scope,
+dry mass and PET output grade, virgin displacement, and the applicable
+facility scenario and capacity. Apply the collection conditions in
+[AMS-III.AJ. v9](https://cdm.unfccc.int/UserManagement/FileStorage/WDFQ1I93T5S7J2EXHC84LOZUBPKM0G).
+This tool does not create a registry filing.
 
 The representative approves a specific evidence pack and signs any required
 declarations. An independent verifier makes its own findings. Before enabling
@@ -133,6 +137,9 @@ To assemble a local filing preparation index, run
 contains the same `program` and `evidenceReferences` fields, plus a `files`
 object in the evidence manifest format. Use a frozen workspace review export
 as the snapshot. The tool checks the method against the chosen program and
-fingerprints the snapshot and its four review documents. It lists additional
-program references separately. Those references need their own evidence review.
+fingerprints the snapshot and its four review documents. If the snapshot
+has a workspace industry, it must match the chosen activity. An unassigned
+snapshot can be used for internal review and needs separate confirmation of
+the activity. Non-PET plastics and container glass use unassigned snapshots.
+The index lists additional program references separately. Those references need their own evidence review.
 The index is an internal preparation document, with no submission function.

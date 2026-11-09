@@ -22,6 +22,7 @@ const snapshotSchema = z.object({
   evidenceStatus: z.literal("reported_unverified"),
   projectId: reference,
   method: reference.optional(),
+  industry: reference.optional(),
   revision: z.number().int().positive(),
   references: z.array(z.object({ kind: reference, reference })).max(40),
 });
@@ -79,8 +80,7 @@ function integrity(bytes) {
   };
 }
 
-/** Fingerprint a private review package without copying its files or names. */
-export function buildEvidenceManifest(directory, source, expectedMethod) {
+function readEvidencePackage(directory, source, expectedMethod) {
   const paths = packageSchema.parse(source);
   const root = realpathSync(directory);
   const snapshotBytes = readPrivateFile(root, paths.snapshot);
@@ -92,6 +92,10 @@ export function buildEvidenceManifest(directory, source, expectedMethod) {
       "The reviewed project method does not match the pilot program.",
     );
   }
+  return { paths, root, snapshot, snapshotBytes };
+}
+
+function fingerprintEvidencePackage({ paths, root, snapshot, snapshotBytes }) {
   const documents = kinds.map((kind) => {
     const references = snapshot.references.filter(
       (entry) => entry.kind === kind,
@@ -108,6 +112,33 @@ export function buildEvidenceManifest(directory, source, expectedMethod) {
     revision: snapshot.revision,
     snapshot: integrity(snapshotBytes),
     documents,
+  };
+}
+
+/** Fingerprint a private review package without copying its files or names. */
+export function buildEvidenceManifest(directory, source, expectedMethod) {
+  return fingerprintEvidencePackage(
+    readEvidencePackage(directory, source, expectedMethod),
+  );
+}
+
+export function buildFilingEvidenceManifest(
+  directory,
+  source,
+  method,
+  industry,
+) {
+  const evidence = readEvidencePackage(directory, source, method);
+  const assignedIndustry = evidence.snapshot.industry;
+  if (assignedIndustry !== undefined && assignedIndustry !== industry) {
+    throw new Error(
+      "The reviewed project industry does not match the pilot program.",
+    );
+  }
+  return {
+    manifest: fingerprintEvidencePackage(evidence),
+    workspaceIndustryStatus:
+      assignedIndustry === undefined ? "unassigned" : "matched",
   };
 }
 

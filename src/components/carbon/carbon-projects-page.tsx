@@ -2,7 +2,7 @@
 
 import { useConvex, useMutation, useQuery } from "convex/react";
 import type { FunctionReturnType } from "convex/server";
-import { useFormatter, useLocale, useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import { type SubmitEvent, useId, useState } from "react";
 import { toast } from "sonner";
 
@@ -13,19 +13,18 @@ import { ActionButton } from "@/components/ui/action-button";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { isLocale, localeDirection } from "@/i18n/locales";
 import { Link } from "@/i18n/navigation";
+import {
+  carbonIndustries,
+  type CarbonIndustryId,
+  carbonIndustryIds,
+} from "@/lib/carbon-frameworks";
 
 import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
 import { hasWorkspacePermission } from "../../../convex/lib/workspaceRoles";
+import { Choice } from "./choice";
+import { FrameworkScreening } from "./framework-screening";
 
 const methods = {
   verra_vmr0007: "Verra VMR0007",
@@ -89,10 +88,13 @@ function Projects({
   canReview: boolean;
 }) {
   const rows = useQuery(api.carbonProjects.mine, { expectedOrgId: orgId });
+  const t = useTranslations("carbonProjects.screening");
   const lots = useTranslations("lots");
   const evidence = useTranslations("evidence");
   const operations = useTranslations("operations");
   const [openBatchProject, setOpenBatchProject] =
+    useState<Id<"carbonProjects"> | null>(null);
+  const [openScreeningProject, setOpenScreeningProject] =
     useState<Id<"carbonProjects"> | null>(null);
   if (!rows) return <ListSkeleton />;
   return (
@@ -105,6 +107,9 @@ function Projects({
           {rows.rows.map((project) => (
             <li key={project.id} className="space-y-4 py-4">
               <ProjectSummary project={project} />
+              {canOperate && !project.industry ? (
+                <AssignIndustry orgId={orgId} project={project} />
+              ) : null}
               {project.snapshotRevision === project.revision ? (
                 <DownloadReview orgId={orgId} project={project} />
               ) : null}
@@ -124,6 +129,26 @@ function Projects({
                 <ProjectBatches
                   orgId={orgId}
                   project={project}
+                  canOperate={canOperate}
+                />
+              ) : null}
+              <Button
+                type="button"
+                variant="outline"
+                aria-expanded={openScreeningProject === project.id}
+                onClick={() => {
+                  setOpenScreeningProject(
+                    openScreeningProject === project.id ? null : project.id,
+                  );
+                }}
+              >
+                {t("title")}
+              </Button>
+              {openScreeningProject === project.id ? (
+                <FrameworkScreening
+                  orgId={orgId}
+                  projectId={project.id}
+                  industry={project.industry}
                   canOperate={canOperate}
                 />
               ) : null}
@@ -204,6 +229,9 @@ function ProjectSummary({ project }: { project: Project }) {
       <h2 className="text-lg font-semibold break-words">{project.name}</h2>
       <p className="text-sm break-words">
         {project.facilityName} · {methods[project.method]}
+        {project.industry ? (
+          <> · {t(`industry.labels.${project.industry}`)}</>
+        ) : null}
       </p>
       <p className="text-sm text-muted-foreground">
         {t(project.status === "draft" ? "draft" : "reviewed")} ·{" "}
@@ -357,37 +385,82 @@ function ProjectBatches({
   );
 }
 
-function Choice({
-  id,
-  name,
-  label,
-  options,
+function AssignIndustry({
+  orgId,
+  project,
 }: {
-  id: string;
-  name: string;
-  label: string;
-  options: readonly { value: string; label: string }[];
+  orgId: Id<"orgs">;
+  project: Project;
 }) {
-  const locale = useLocale();
+  const t = useTranslations("carbonProjects.industry");
+  const operations = useTranslations("operations");
+  const common = useTranslations("common");
+  const assign = useMutation(api.carbonProjects.assignIndustry);
+  const id = useId();
+  const [isOpen, setIsOpen] = useState(false);
+  const [isBusy, setIsBusy] = useState(false);
+  const available = carbonIndustryIds.filter(
+    (industry) => carbonIndustries[industry].method === project.method,
+  );
+
+  async function submit(event: SubmitEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const industry = available.find((entry) => entry === form.get("industry"));
+    if (isBusy || !industry) return;
+    setIsBusy(true);
+    try {
+      await assign({
+        expectedOrgId: orgId,
+        projectId: project.id,
+        industry,
+        expectedRevision: project.revision,
+      });
+      toast.success(operations("saved"));
+    } catch {
+      toast.error(common("error"));
+    } finally {
+      setIsBusy(false);
+    }
+  }
+
   return (
-    <div className="space-y-2">
-      <Label htmlFor={id}>{label}</Label>
-      <Select
-        name={name}
-        required
-        dir={isLocale(locale) ? localeDirection(locale) : "ltr"}
+    <div className="max-w-xl space-y-3">
+      <Button
+        type="button"
+        variant="outline"
+        aria-expanded={isOpen}
+        onClick={() => {
+          setIsOpen((current) => !current);
+        }}
       >
-        <SelectTrigger id={id} className="min-h-11 w-full">
-          <SelectValue placeholder={label} />
-        </SelectTrigger>
-        <SelectContent>
-          {options.map((option) => (
-            <SelectItem key={option.value} value={option.value}>
-              {option.label}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+        {t("assign")}
+      </Button>
+      {isOpen ? (
+        <form
+          className="space-y-3"
+          onSubmit={(event) => {
+            void submit(event);
+          }}
+        >
+          <p className="text-sm text-muted-foreground">{t("assignmentHint")}</p>
+          <Choice
+            id={id}
+            name="industry"
+            label={t("title")}
+            options={available.map((value) => ({
+              value,
+              label: t(`labels.${value}`),
+            }))}
+            disabled={isBusy}
+          />
+          <ActionButton
+            type="submit"
+            label={operations("save")}
+            isDisabled={isBusy}
+          />
+        </form>
+      ) : null}
     </div>
   );
 }
@@ -404,14 +477,18 @@ function CreateProject({ orgId }: { orgId: Id<"orgs"> }) {
   const [isBusy, setIsBusy] = useState(false);
   const [formVersion, setFormVersion] = useState(0);
 
+  const [industry, setIndustry] = useState<CarbonIndustryId>();
+  const [genericMethod, setGenericMethod] = useState<keyof typeof methods>();
+  const selectedMethod = industry
+    ? carbonIndustries[industry].method
+    : undefined;
+
   async function submit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
     const name = form.get("name");
     const site = facilities?.find((item) => item._id === form.get("facility"));
-    const method = (Object.keys(methods) as (keyof typeof methods)[]).find(
-      (value) => value === form.get("method"),
-    );
+    const method = selectedMethod ?? genericMethod;
     if (isBusy || !site || !method || typeof name !== "string" || !name.trim())
       return;
     setIsBusy(true);
@@ -421,7 +498,10 @@ function CreateProject({ orgId }: { orgId: Id<"orgs"> }) {
         facilityId: site._id,
         name: name.trim(),
         method,
+        ...(industry && { industry }),
       });
+      setIndustry(undefined);
+      setGenericMethod(undefined);
       setFormVersion((version) => version + 1);
       toast.success(production("saved"));
     } catch {
@@ -460,14 +540,44 @@ function CreateProject({ orgId }: { orgId: Id<"orgs"> }) {
         }))}
       />
       <Choice
-        id={`${id}-method`}
-        name="method"
-        label={t("method")}
-        options={Object.entries(methods).map(([value, label]) => ({
-          value,
-          label,
-        }))}
+        id={`${id}-industry`}
+        name="industry"
+        label={t("industry.title")}
+        value={industry ?? "other"}
+        options={[
+          { value: "other", label: t("industry.other") },
+          ...carbonIndustryIds.map((value) => ({
+            value,
+            label: t(`industry.labels.${value}`),
+          })),
+        ]}
+        onValueChange={(value) => {
+          setIndustry(carbonIndustryIds.find((entry) => entry === value));
+        }}
       />
+      {selectedMethod ? (
+        <dl className="space-y-1 text-sm">
+          <dt className="font-medium">{t("method")}</dt>
+          <dd>{methods[selectedMethod]}</dd>
+        </dl>
+      ) : (
+        <Choice
+          id={`${id}-method`}
+          name="method"
+          label={t("method")}
+          value={genericMethod ?? ""}
+          options={Object.entries(methods).map(([value, label]) => ({
+            value,
+            label,
+          }))}
+          onValueChange={(value) => {
+            const method = (
+              Object.keys(methods) as (keyof typeof methods)[]
+            ).find((entry) => entry === value);
+            if (method) setGenericMethod(method);
+          }}
+        />
+      )}
       <ActionButton
         type="submit"
         label={production("save")}

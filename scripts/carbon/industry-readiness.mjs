@@ -18,6 +18,17 @@ const recyclingEvidence = [
 ];
 
 const programs = {
+  pet: {
+    method: recyclingMethod,
+    methodId: "verra_vmr0007",
+    evidence: [
+      ...recyclingEvidence,
+      "collection_scope_and_selective_exclusion",
+      "dry_mass_and_pet_output_grade",
+      "virgin_displacement",
+      "scenario_and_capacity",
+    ],
+  },
   non_pet_plastics: {
     method: recyclingMethod,
     methodId: "verra_vmr0007",
