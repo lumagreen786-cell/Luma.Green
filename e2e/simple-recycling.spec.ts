@@ -33,6 +33,7 @@ for (const [locale, copy] of [
           exact: true,
         }),
       ).toBeVisible();
+      await page.getByRole("checkbox", { name: copy.join.consent.age }).check();
       await page.getByLabel(copy.join.form.city).fill("Mumbai");
       await page
         .getByRole("combobox", { name: copy.join.form.stateUT })

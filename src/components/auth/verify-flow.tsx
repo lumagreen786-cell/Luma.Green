@@ -31,6 +31,7 @@ import { LoginSkeleton } from "./login-flow";
 import { PhoneForm } from "./phone-form";
 import {
   clearPhoneChallenge,
+  hasPhoneAdultDeclaration,
   readPhone,
   readPhoneSentAt,
   rememberPhone,
@@ -86,9 +87,11 @@ function ConnectedVerifyFlow() {
 
 export function VerifyForm({
   phoneNumber,
+  adultConfirmed = false,
   onChangeNumber,
 }: {
   phoneNumber?: string;
+  adultConfirmed?: boolean;
   onChangeNumber?: () => void;
 } = {}) {
   const t = useTranslations("auth");
@@ -210,7 +213,11 @@ export function VerifyForm({
     requestPending.current = true;
     setStatus("checking");
     setError(null);
-    const result = await verifyPhoneCode(phone, value);
+    const result = await verifyPhoneCode(
+      phone,
+      value,
+      adultConfirmed || hasPhoneAdultDeclaration(phone),
+    );
     if (!mounted.current) return;
     requestPending.current = false;
     if (result.kind === "error") {
@@ -242,7 +249,7 @@ export function VerifyForm({
       setError(sendError);
       return;
     }
-    rememberPhone(phone);
+    rememberPhone(phone, adultConfirmed || hasPhoneAdultDeclaration(phone));
     setResendAt(Date.now() + RESEND_AFTER_SECONDS * 1000);
     setSecondsLeft(RESEND_AFTER_SECONDS);
     toast.success(t("resent"));

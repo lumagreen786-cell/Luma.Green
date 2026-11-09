@@ -8,17 +8,28 @@ import { useSyncExternalStore } from "react";
 
 const PHONE_KEY = "lg.signInPhone";
 const SENT_AT_KEY = "lg.signInSentAt";
+const ADULT_KEY = "lg.signInAdultDeclaration";
 const PREVIEW_KEY = "lg.signInPreview";
 const LANGUAGE_KEY = "lg.languageChosen";
 
 /** The number a code was just sent to — kept out of the URL on purpose. */
-export function rememberPhone(e164: string): void {
+export function rememberPhone(e164: string, hasAdultDeclaration = false): void {
   try {
+    sessionStorage.removeItem(ADULT_KEY);
     sessionStorage.setItem(PHONE_KEY, e164);
     sessionStorage.setItem(SENT_AT_KEY, String(Date.now()));
+    if (hasAdultDeclaration) sessionStorage.setItem(ADULT_KEY, "1");
     sessionStorage.removeItem(PREVIEW_KEY);
   } catch {
     // Without storage the verify screen sends the user back to enter it again.
+  }
+}
+
+export function hasPhoneAdultDeclaration(phone: string): boolean {
+  try {
+    return readPhone() === phone && sessionStorage.getItem(ADULT_KEY) === "1";
+  } catch {
+    return false;
   }
 }
 
@@ -51,6 +62,7 @@ export function readActivePhone(): string | null {
 /** Remove a consumed challenge after the full sign-in succeeds. */
 export function clearPhoneChallenge(): void {
   try {
+    sessionStorage.removeItem(ADULT_KEY);
     sessionStorage.removeItem(PHONE_KEY);
     sessionStorage.removeItem(SENT_AT_KEY);
   } catch {

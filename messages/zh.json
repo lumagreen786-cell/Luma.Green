@@ -3413,6 +3413,7 @@
     "description": "允许PostHog和Google Analytics统计公共页面访问。我们不记录表单、私密页面或会话回放。你的选择不会影响平台访问权限。",
     "accept": "允许分析",
     "decline": "保持关闭分析",
+    "withdraw": "关闭分析",
     "settings": "分析设置",
     "saved": "选择已保存在此设备上。",
     "unavailable": "浏览器无法保存此选择，分析将保持关闭。",
@@ -4542,6 +4543,25 @@
     "reload": "重新加载已保存文本",
     "localDraft": "之前未保存的文本",
     "savedText": "最新已保存文本"
+  },
+  "collectionPrivacy": {
+    "phone": "我们使用你的手机号码帮助你登录，并通过短信发送服务通知。",
+    "email": "我们使用你的姓名、电子邮件地址和密码来创建账户。我们会发送链接以验证你的电子邮件地址。",
+    "booking": "我们使用你的姓名、手机号码、照片、城市和所选时间来安排回收。如需上门取件，我们也会使用你的地址和你分享的位置。"
+  },
+  "privacyRequests": {
+    "title": "隐私请求",
+    "lead": "请选择一项请求。隐私团队将审核并回复。请保留请求编号。",
+    "kind": "请求类型",
+    "submit": "发送请求",
+    "received": "已收到请求",
+    "responded": "团队已回复",
+    "access": "访问我的数据",
+    "correction": "更正我的数据",
+    "erasure": "删除我的数据",
+    "grievance": "提交隐私投诉",
+    "nomination": "指定代表",
+    "withdrawal": "撤回同意"
   },
   "privacy": {
     "title": "隐私政策",

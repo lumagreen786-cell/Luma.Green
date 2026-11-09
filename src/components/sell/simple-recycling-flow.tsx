@@ -23,6 +23,8 @@ import { z } from "zod";
 import { CityField } from "@/components/location/city-field";
 import { ReverseAddress } from "@/components/location/reverse-address";
 import { isConvexConfigured } from "@/components/providers/convex-provider";
+import { AgeConfirmation } from "@/components/site/age-confirmation";
+import { CollectionPrivacy } from "@/components/site/collection-privacy";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -118,6 +120,7 @@ function RecyclingFlow({
   const now = useNow();
   const today = indiaToday(now);
   const location = useLocation();
+  const [isAdult, setIsAdult] = useState(false);
   const [stage, setStage] = useState<"details" | "schedule">("details");
   const [files, setFiles] = useState<File[]>([]);
   const [photoError, setPhotoError] = useState<string>();
@@ -162,9 +165,9 @@ function RecyclingFlow({
     days.includes(slotDate) &&
     slotWindow !== undefined &&
     isWindowOpen(slotDate, slotWindow, today, now);
-  const canBook = Boolean(
-    retryRequest ?? (selectedShop && hasSlot && files.length > 0),
-  );
+  const canBook =
+    isAdult &&
+    Boolean(retryRequest ?? (selectedShop && hasSlot && files.length > 0));
 
   const isLocked = status !== "idle" || retryRequest !== null;
   const heading = useRef<HTMLHeadingElement>(null);
@@ -173,6 +176,7 @@ function RecyclingFlow({
   }, [stage]);
 
   function next(values: Details) {
+    if (!isAdult) return;
     if (files.length === 0) {
       setPhotoError(simple("photoRequired"));
       return;
@@ -199,6 +203,7 @@ function RecyclingFlow({
         assertMounted(isMounted);
         const values = form.getValues();
         request = {
+          adultConfirmed: true,
           orgId: selectedShop.id,
           mode: values.mode,
           items: [],
@@ -237,6 +242,11 @@ function RecyclingFlow({
       {stage === "details" ? (
         <DetailsForm
           form={form}
+          isAdult={isAdult}
+          setIsAdult={(confirmed) => {
+            setIsAdult(confirmed);
+            if (!confirmed) location.stop();
+          }}
           mode={mode}
           location={location}
           files={files}
@@ -480,7 +490,11 @@ function usePhotoUploads() {
             throw new Error("PHOTO_UPLOAD_FAILED");
           const bytes = await prepared.arrayBuffer();
           assertMounted(isMounted);
-          photoId = await upload({ name: prepared.name, bytes });
+          photoId = await upload({
+            name: prepared.name,
+            bytes,
+            adultConfirmed: true,
+          });
           assertMounted(isMounted);
         } catch {
           throw new Error("PHOTO_UPLOAD_FAILED");
@@ -501,6 +515,8 @@ function usePhotoUploads() {
 
 function DetailsForm({
   form,
+  isAdult,
+  setIsAdult,
   mode,
   location,
   files,
@@ -511,6 +527,8 @@ function DetailsForm({
   clearShop,
 }: {
   form: UseFormReturn<Details>;
+  isAdult: boolean;
+  setIsAdult: (isAdult: boolean) => void;
   mode: Details["mode"];
   location: ReturnType<typeof useLocation>;
   files: File[];
@@ -535,6 +553,10 @@ function DetailsForm({
         void form.handleSubmit(next)(event);
       }}
     >
+      <div className="space-y-2">
+        <CollectionPrivacy purpose="booking" />
+        <AgeConfirmation checked={isAdult} onChange={setIsAdult} />
+      </div>
       <RecyclingPhotos
         files={files}
         onChange={(value) => {
@@ -609,7 +631,7 @@ function DetailsForm({
               type="button"
               variant="ghost"
               size="sm"
-              disabled={location.state.status === "locating"}
+              disabled={!isAdult || location.state.status === "locating"}
               onClick={location.locate}
             >
               <LocateFixedIcon aria-hidden />
@@ -656,12 +678,17 @@ function DetailsForm({
           ) : null}
         </div>
       ) : (
-        <Button type="button" variant="outline" onClick={location.locate}>
+        <Button
+          type="button"
+          variant="outline"
+          disabled={!isAdult}
+          onClick={location.locate}
+        >
           <LocateFixedIcon aria-hidden />
           {simple("location")}
         </Button>
       )}
-      <Button size="lg" type="submit" className="w-full">
+      <Button size="lg" type="submit" className="w-full" disabled={!isAdult}>
         {simple("next")}
         <ArrowRightIcon aria-hidden className="rtl:rotate-180" />
       </Button>

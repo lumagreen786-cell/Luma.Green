@@ -244,7 +244,7 @@ test("a simulated human can consent to manual public page views without URL secr
   ).toEqual([]);
 });
 
-test("settings let a visitor withdraw consent and keep it off after reload", async ({
+test("the privacy notice lets a visitor withdraw analytics consent in one action", async ({
   page,
 }) => {
   const requests = await interceptVendors(page);
@@ -253,25 +253,35 @@ test("settings let a visitor withdraw consent and keep it off after reload", asy
   await expect
     .poll(() => requests.some(({ url }) => url.includes("googletagmanager")))
     .toBe(true);
-  await page.getByRole("button", { name: en.analytics.settings }).click();
+  const beforePrivacy = requests.length;
+  await page.goto("/privacy");
+  await expect(
+    page.getByRole("button", { name: en.analytics.withdraw }),
+  ).toBeVisible();
+  expect(requests).toHaveLength(beforePrivacy);
   await Promise.all([
     page.waitForEvent("load"),
-    page.getByRole("button", { name: en.analytics.decline }).click(),
+    page.getByRole("button", { name: en.analytics.withdraw }).click(),
   ]);
   await expect(
-    page.getByRole("button", { name: en.analytics.settings }),
-  ).toBeVisible();
+    page.getByRole("complementary", { name: en.analytics.title }),
+  ).toHaveCount(0);
   await expect(page.getByRole("main")).toBeVisible();
   const count = requests.length;
   await page.reload();
   await expect(
-    page.getByRole("button", { name: en.analytics.settings }),
-  ).toBeVisible();
+    page.getByRole("complementary", { name: en.analytics.title }),
+  ).toHaveCount(0);
   await expect(page.getByRole("main")).toBeVisible();
   expect(requests).toHaveLength(count);
   expect(
     await page.evaluate(() => localStorage.getItem("luma.analytics.v1")),
   ).toBe("denied");
+  await page.goto("/");
+  await expect(
+    page.getByRole("button", { name: en.analytics.settings }),
+  ).toBeVisible();
+  expect(requests).toHaveLength(count);
   expect(
     await page.evaluate(() =>
       (window.dataLayer ?? []).map((command) =>

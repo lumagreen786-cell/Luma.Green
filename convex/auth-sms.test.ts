@@ -149,3 +149,58 @@ it.each([true, false])(
     }
   },
 );
+
+it.each([undefined, "0", "1"])(
+  "requires the adult declaration before creating a phone account (%s)",
+  async (declaration) => {
+    vi.stubEnv("SITE_URL", "https://luma.test");
+    vi.stubEnv("CONVEX_SITE_URL", "https://test.convex.site");
+    vi.stubEnv("BETTER_AUTH_SECRET", "0123456789abcdef0123456789abcdef");
+    vi.stubEnv("ADMIN_EMAIL", phoneEmail("+919876543211"));
+    const t = convexTest(schema, modules);
+    registerAuth(t);
+    const phoneNumber = "+919876543210";
+    const now = Date.now();
+    await t.run((ctx) =>
+      ctx.runMutation(components.betterAuth.adapter.create, {
+        input: {
+          model: "verification",
+          data: {
+            identifier: phoneNumber,
+            value: "345678:0",
+            expiresAt: now + 60_000,
+            createdAt: now,
+            updatedAt: now,
+          },
+        },
+      }),
+    );
+    const response = await t.fetch("/api/auth/phone-number/verify", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Origin: "https://luma.test",
+        ...(declaration !== undefined && {
+          "x-luma-adult-declaration": declaration,
+        }),
+      },
+      body: JSON.stringify({ phoneNumber, code: "345678" }),
+    });
+    const users = await t.run((ctx) =>
+      ctx.runQuery(components.betterAuth.adapter.findMany, {
+        model: "user",
+        paginationOpts: { cursor: null, numItems: 10 },
+      }),
+    );
+    if (declaration === "1") {
+      expect(response.status).toBe(200);
+      expect(users.page).toHaveLength(1);
+    } else {
+      expect(response.status).toBe(403);
+      expect(await response.json()).toMatchObject({
+        code: "ADULT_DECLARATION_REQUIRED",
+      });
+      expect(users.page).toEqual([]);
+    }
+  },
+);

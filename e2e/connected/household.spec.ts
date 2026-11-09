@@ -197,6 +197,9 @@ test("phone household pickup produces an exact receipt and adds measured stock o
       .getByRole("textbox", { name: en.sell.when.nameLabel })
       .fill(name);
     await household
+      .getByRole("checkbox", { name: en.join.consent.age })
+      .check();
+    await household
       .getByRole("button", { name: en.sell.simple.next, exact: true })
       .click();
     await household
@@ -216,6 +219,9 @@ test("phone household pickup produces an exact receipt and adds measured stock o
     await household
       .getByRole("textbox", { name: en.sell.phone.label, exact: true })
       .fill(phone.slice(3));
+    await household
+      .getByRole("checkbox", { name: en.join.consent.age })
+      .check();
     await household
       .getByRole("button", { name: en.sell.phone.sendCode, exact: true })
       .click();

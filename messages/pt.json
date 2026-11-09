@@ -3413,6 +3413,7 @@
     "description": "Permita que PostHog e Google Analytics meçam visitas às páginas públicas. Não registramos formulários, páginas privadas nem reproduções de sessões. Sua escolha não altera o acesso à plataforma.",
     "accept": "Permitir análises",
     "decline": "Manter análises desligadas",
+    "withdraw": "Desativar a análise",
     "settings": "Configurações de análises",
     "saved": "Sua escolha foi salva neste dispositivo.",
     "unavailable": "O navegador não conseguiu salvar a escolha. As análises continuarão desligadas.",
@@ -4542,6 +4543,25 @@
     "reload": "Recarregar texto guardado",
     "localDraft": "Texto anterior não guardado",
     "savedText": "Último texto guardado"
+  },
+  "collectionPrivacy": {
+    "phone": "Usamos o seu número de telefone para iniciar sessão e enviar atualizações do serviço por SMS.",
+    "email": "Para criar a sua conta, usamos o seu nome, endereço de e-mail e senha. Enviamos um link para verificar o seu endereço de e-mail.",
+    "booking": "Usamos o seu nome, número de telefone, fotos, cidade e horário escolhido para organizar a reciclagem. Para a recolha, também usamos o seu endereço e a localização que partilhar."
+  },
+  "privacyRequests": {
+    "title": "Pedidos de privacidade",
+    "lead": "Escolha um pedido. A equipe de privacidade vai analisar e responder. Guarde o número do pedido.",
+    "kind": "Tipo de pedido",
+    "submit": "Enviar pedido",
+    "received": "Pedido recebido",
+    "responded": "A equipe respondeu",
+    "access": "Acessar meus dados",
+    "correction": "Corrigir meus dados",
+    "erasure": "Excluir meus dados",
+    "grievance": "Apresentar uma reclamação de privacidade",
+    "nomination": "Nomear um representante",
+    "withdrawal": "Retirar o consentimento"
   },
   "privacy": {
     "title": "Política de privacidade",

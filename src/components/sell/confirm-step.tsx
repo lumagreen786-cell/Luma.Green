@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { useSignOut } from "@/components/account/use-sign-out";
 import { useFormat } from "@/components/app/format";
 import { DemoNote } from "@/components/app/page-parts";
+import { AgeConfirmation } from "@/components/site/age-confirmation";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -100,6 +101,7 @@ export function ConfirmStep({
   const waitForAuth = useAuthReady();
   const { isLoading, isAuthenticated } = useConvexAuth();
   const me = useQuery(api.identity.me, isAuthenticated ? {} : "skip");
+  const [isAdult, setIsAdult] = useState(false);
   const [status, setStatus] = useState<"idle" | "booking" | "booked">("idle");
   const [error, setError] = useState<SellErrorKey | null>(null);
   const isBooked = useRef(false);
@@ -116,7 +118,7 @@ export function ConfirmStep({
 
   async function submit() {
     // One booking per tap, even if the code check and a tap land together.
-    if (isSubmitting.current) return;
+    if (!isAdult || isSubmitting.current) return;
     isSubmitting.current = true;
     setStatus("booking");
     setError(null);
@@ -126,6 +128,7 @@ export function ConfirmStep({
       await ensureProfile({ locale });
       if (!isMounted()) return;
       const token = await book({
+        adultConfirmed: true,
         orgId: shop.id,
         mode: draft.mode,
         items: [...items],
@@ -349,7 +352,10 @@ export function ConfirmStep({
             </AlertDescription>
           </Alert>
         ) : null}
-        {phoneContent()}
+        {status === "idle" ? (
+          <AgeConfirmation checked={isAdult} onChange={setIsAdult} />
+        ) : null}
+        {isAdult ? phoneContent() : null}
       </section>
     </div>
   );

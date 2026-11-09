@@ -18,6 +18,7 @@ const linkClass =
 export function PrivacyContent() {
   const t = useTranslations("privacy");
   const removal = useTranslations("accountRemoval");
+  const requests = useTranslations("privacyRequests");
   return (
     <Container className="max-w-3xl space-y-8 py-8 sm:py-12">
       <header className="space-y-4">
@@ -41,6 +42,9 @@ export function PrivacyContent() {
           </p>
           {section === "requests" && (
             <div className="flex flex-wrap gap-x-6 gap-y-2">
+              <Link href="/account/privacy" className={linkClass}>
+                {requests("title")}
+              </Link>
               <Link href="/account/removal" className={linkClass}>
                 {removal("title")}
               </Link>

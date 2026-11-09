@@ -3413,6 +3413,7 @@
     "description": "Zezwól PostHog i Google Analytics na pomiar wizyt na stronach publicznych. Nie rejestrujemy formularzy, stron prywatnych ani nagrań sesji. Wybór nie zmienia dostępu do platformy.",
     "accept": "Zezwól na analitykę",
     "decline": "Pozostaw analitykę wyłączoną",
+    "withdraw": "Wyłącz analitykę",
     "settings": "Ustawienia analityki",
     "saved": "Wybór jest zapisany na tym urządzeniu.",
     "unavailable": "Przeglądarka nie mogła zapisać wyboru. Analityka pozostanie wyłączona.",
@@ -4542,6 +4543,25 @@
     "reload": "Wczytaj zapisany tekst",
     "localDraft": "Poprzedni niezapisany tekst",
     "savedText": "Ostatni zapisany tekst"
+  },
+  "collectionPrivacy": {
+    "phone": "Używamy Twojego numeru telefonu do logowania oraz wysyłania aktualności o usłudze przez SMS.",
+    "email": "Do założenia konta używamy Twojego imienia i nazwiska, adresu e-mail oraz hasła. Wysyłamy link do potwierdzenia adresu e-mail.",
+    "booking": "Używamy Twojego imienia i nazwiska, telefonu, zdjęć, miasta i wybranej godziny, aby zorganizować recykling. Przy odbiorze korzystamy też z adresu i udostępnionej lokalizacji."
+  },
+  "privacyRequests": {
+    "title": "Wnioski dotyczące prywatności",
+    "lead": "Wybierz wniosek. Zespół ds. prywatności rozpatrzy go i odpowie. Zachowaj numer wniosku.",
+    "kind": "Rodzaj wniosku",
+    "submit": "Wyślij wniosek",
+    "received": "Wniosek przyjęty",
+    "responded": "Zespół odpowiedział",
+    "access": "Uzyskaj dostęp do moich danych",
+    "correction": "Popraw moje dane",
+    "erasure": "Usuń moje dane",
+    "grievance": "Złóż skargę dotyczącą prywatności",
+    "nomination": "Wyznacz przedstawiciela",
+    "withdrawal": "Wycofaj zgodę"
   },
   "privacy": {
     "title": "Polityka prywatności",

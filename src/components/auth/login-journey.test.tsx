@@ -75,6 +75,9 @@ it("sends and verifies in place, keeps the number on edit, and preserves the des
     "9876543210",
   );
   await userEvent.click(
+    screen.getByRole("checkbox", { name: messages.join.consent.age }),
+  );
+  await userEvent.click(
     screen.getByRole("button", { name: messages.auth.sendCode }),
   );
   expect(await screen.findByLabelText(messages.auth.codeLabel)).toBeVisible();
@@ -84,6 +87,9 @@ it("sends and verifies in place, keeps the number on edit, and preserves the des
   );
   expect(screen.getByLabelText(messages.auth.mobileLabel)).toHaveValue(
     "9876543210",
+  );
+  await userEvent.click(
+    screen.getByRole("checkbox", { name: messages.join.consent.age }),
   );
   await userEvent.click(
     screen.getByRole("button", { name: messages.auth.sendCode }),
@@ -97,6 +103,7 @@ it("sends and verifies in place, keeps the number on edit, and preserves the des
   expect(calls.verify).toHaveBeenCalledExactlyOnceWith({
     phoneNumber: "+919876543210",
     code: "123456",
+    fetchOptions: { headers: { "x-luma-adult-declaration": "1" } },
   });
   calls.auth.isAuthenticated = true;
   await act(async () => {
@@ -119,6 +126,9 @@ it("keeps inline code entry usable when browser storage is blocked", async () =>
       "9876543210",
     );
     await userEvent.click(
+      screen.getByRole("checkbox", { name: messages.join.consent.age }),
+    );
+    await userEvent.click(
       screen.getByRole("button", { name: messages.auth.sendCode }),
     );
     expect(await screen.findByLabelText(messages.auth.codeLabel)).toBeVisible();
@@ -137,6 +147,9 @@ it("waits for the required authenticator instead of opening the destination afte
   await userEvent.type(
     screen.getByLabelText(messages.auth.mobileLabel),
     "9876543210",
+  );
+  await userEvent.click(
+    screen.getByRole("checkbox", { name: messages.join.consent.age }),
   );
   await userEvent.click(
     screen.getByRole("button", { name: messages.auth.sendCode }),
@@ -160,6 +173,9 @@ it("keeps a sent code usable after a reload without sending another SMS", async 
   await user.type(
     screen.getByLabelText(messages.auth.mobileLabel),
     "9876543210",
+  );
+  await user.click(
+    screen.getByRole("checkbox", { name: messages.join.consent.age }),
   );
   await user.click(
     screen.getByRole("button", { name: messages.auth.sendCode }),

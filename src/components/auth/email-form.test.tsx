@@ -90,11 +90,22 @@ it("creates an unverified account and asks for mailbox verification without navi
   await userEvent.click(
     screen.getByRole("button", { name: messages.emailAuth.signup }),
   );
+  expect(screen.getByText(messages.collectionPrivacy.email)).toBeVisible();
+  expect(
+    screen.getByRole("link", { name: messages.privacy.title }),
+  ).toHaveAttribute("href", "/privacy");
+  expect(calls.signup).not.toHaveBeenCalled();
   await userEvent.type(
     screen.getByLabelText(messages.emailAuth.name),
     "Disposable Member",
   );
   await credentials();
+  expect(
+    screen.getByRole("button", { name: messages.emailAuth.signup }),
+  ).toBeDisabled();
+  await userEvent.click(
+    screen.getByRole("checkbox", { name: messages.join.consent.age }),
+  );
   await userEvent.click(
     screen.getByRole("button", {
       name: messages.emailAuth.signup,

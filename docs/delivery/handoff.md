@@ -43,6 +43,22 @@ Expo and Electron acceptance, and production activation remain separate.
 The maintained guide should include the new scope when the screenshot guide
 is refreshed.
 
+## DPDP readiness — 9 November 2026
+
+The owner confirmed that public account signup and household bookings are for
+adults and approved `support@luma.green` for privacy contact. The readiness
+change adds collection notices, adult declarations, a signed-in privacy case
+form, an admin queue and direct analytics withdrawal from the privacy page.
+The [data protection runbook](../operations/data-protection.md) records the
+operating checks and legal decisions still needed. The new case table starts
+empty. Existing records require no conversion. Deploy Convex before the web
+release. Reload older open signup or booking screens before retrying.
+
+The hosted pages are shared by the native shells. The change uses their
+existing navigation and permissions. Guide updates are deferred. A future
+guide refresh covers sign-in, household details, the privacy page, account
+privacy requests and the admin support queue.
+
 ## Agreed web completion - 29 October 2026
 
 Continue with [the active delivery record](web-completion-2026-10-29.md) and

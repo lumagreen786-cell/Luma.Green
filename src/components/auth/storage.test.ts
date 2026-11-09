@@ -2,6 +2,7 @@ import { afterEach, expect, it, vi } from "vitest";
 
 import {
   clearPhoneChallenge,
+  hasPhoneAdultDeclaration,
   readActivePhone,
   readPhone,
   readPhoneSentAt,
@@ -35,4 +36,16 @@ it("does not resume a consumed or expired code challenge", () => {
   sessionStorage.setItem("lg.signInSentAt", String(Date.now() - 300_001));
   sessionStorage.setItem("lg.signInPhone", "+919876543211");
   expect(readActivePhone()).toBeNull();
+});
+
+it("keeps the declaration with the current phone challenge only", () => {
+  const phone = "+919876543211";
+  rememberPhone(phone, true);
+  expect(hasPhoneAdultDeclaration(phone)).toBe(true);
+  expect(hasPhoneAdultDeclaration("+919876543212")).toBe(false);
+  rememberPhone(phone);
+  expect(hasPhoneAdultDeclaration(phone)).toBe(false);
+  rememberPhone(phone, true);
+  clearPhoneChallenge();
+  expect(hasPhoneAdultDeclaration(phone)).toBe(false);
 });

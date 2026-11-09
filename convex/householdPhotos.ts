@@ -81,7 +81,7 @@ export const finalize = internalMutation({
 
 /** Store bytes on the server: a caller can never claim another file's storage ID. */
 export const upload = action({
-  args: { name: v.string(), bytes: v.bytes() },
+  args: { adultConfirmed: v.literal(true), name: v.string(), bytes: v.bytes() },
   returns: v.id("householdPhotos"),
   handler: async (ctx, args): Promise<Id<"householdPhotos">> => {
     await requireUser(ctx);

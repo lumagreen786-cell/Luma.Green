@@ -1,5 +1,6 @@
 /// <reference types="vite/client" />
 // @vitest-environment edge-runtime
+import { makeFunctionReference } from "convex/server";
 import { convexTest } from "convex-test";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
@@ -83,6 +84,7 @@ const basket = [
 
 async function pickupAt(t: World, slug = "ramesh-kabadi-store") {
   return {
+    adultConfirmed: true as const,
     orgId: await orgId(t, slug),
     mode: "pickup" as const,
     items: basket,
@@ -238,6 +240,21 @@ describe("households.book", () => {
         .collect(),
     );
     expect(audit.map((row) => row.action)).toEqual(["booking.requested"]);
+    expect(audit[0]?.metadata).toMatchObject({ adultConfirmed: true });
+  });
+
+  it("requires an adult declaration before saving a household booking", async () => {
+    const t = await demoWorld();
+    const arjun = await newHousehold(t);
+    const { adultConfirmed, ...booking } = await pickupAt(t);
+    const untypedBook = makeFunctionReference<"mutation">("households:book");
+    expect(adultConfirmed).toBe(true);
+    await expect(arjun.mutation(untypedBook, booking)).rejects.toThrow(
+      /adultConfirmed/,
+    );
+    await expect(
+      arjun.mutation(untypedBook, { ...booking, adultConfirmed: false }),
+    ).rejects.toThrow(/Expected .*true/);
   });
 
   it("needs a signed-in household", async () => {
@@ -600,6 +617,7 @@ describe("photo-only household requests", () => {
     const t = await demoWorld();
     const as = await newHousehold(t);
     const photoId = await as.action(api.householdPhotos.upload, {
+      adultConfirmed: true,
       name: "scrap.jpg",
       bytes: imageBytes(),
     });
@@ -687,6 +705,7 @@ describe("photo-only household requests", () => {
     const as = await newHousehold(t);
     const other = await newHousehold(t, "+919876500002");
     const photoId = await as.action(api.householdPhotos.upload, {
+      adultConfirmed: true,
       name: "scrap.jpg",
       bytes: imageBytes(),
     });
@@ -710,22 +729,34 @@ describe("photo-only household requests", () => {
       }),
     ).rejects.toThrow("INVALID_PHOTOS");
   });
+  it("rejects a photo upload without the adult declaration", async () => {
+    const t = await demoWorld();
+    const household = await newHousehold(t);
+    const upload = makeFunctionReference<"action">("householdPhotos:upload");
+    await expect(
+      household.action(upload, { name: "scrap.jpg", bytes: imageBytes() }),
+    ).rejects.toThrow(/adultConfirmed/);
+  });
+
   it("rejects untrusted types and oversized uploads before storage, and expires only unattached photos", async () => {
     const t = await demoWorld();
     const as = await newHousehold(t);
     await expect(
       as.action(api.householdPhotos.upload, {
+        adultConfirmed: true,
         name: "fake.jpg",
         bytes: new TextEncoder().encode("<svg/>").buffer,
       }),
     ).rejects.toThrow("PHOTO_TYPE");
     await expect(
       as.action(api.householdPhotos.upload, {
+        adultConfirmed: true,
         name: "big.jpg",
         bytes: new Uint8Array(2 * 1024 * 1024 + 1).buffer,
       }),
     ).rejects.toThrow("PHOTO_SIZE");
     const photoId = await as.action(api.householdPhotos.upload, {
+      adultConfirmed: true,
       name: "scrap.jpg",
       bytes: imageBytes(),
     });
@@ -753,6 +784,7 @@ it("limits photo upload reservations atomically per phone profile", async () => 
   }
   await expect(
     as.action(api.householdPhotos.upload, {
+      adultConfirmed: true,
       name: "scrap.jpg",
       bytes: new Uint8Array([0xff, 0xd8, 0xff]).buffer,
     }),
@@ -769,6 +801,7 @@ it.each([false, true])(
     vi.stubEnv("ADMIN_EMAIL", "photo-admin@example.test");
     const as = await newHousehold(t);
     const photoId = await as.action(api.householdPhotos.upload, {
+      adultConfirmed: true,
       name: "scrap.jpg",
       bytes: imageBytes(),
     });
