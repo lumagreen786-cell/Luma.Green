@@ -357,8 +357,12 @@ describe("households.book", () => {
     vi.setSystemTime(new Date("2026-11-10T04:00:00Z"));
     const t = await demoWorld();
     const arjun = await newHousehold(t);
-    const today = indiaToday();
     const booking = await pickupAt(t);
+    // Isolate the date limit from the fixture shop's weekly closure.
+    await t.run((ctx) =>
+      ctx.db.patch("orgs", booking.orgId, { weeklyOff: [] }),
+    );
+    const today = indiaToday();
     for (const slotDate of [shiftDate(today, -1), shiftDate(today, 8), "x"]) {
       await expect(
         arjun.mutation(api.households.book, { ...booking, slotDate }),

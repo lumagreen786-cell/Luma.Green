@@ -78,3 +78,22 @@ The compatibility check and all 73 native policy tests plus type checks pass.
 Only exact-version age exceptions were added; the global policy is unchanged.
 Native UI work and binary releases remain on hold. Required hosted checks remain
 merge gates.
+
+## Compatibility follow-up — 9 November 2026
+
+The owner approved the Expo 57.0.31 to 57.0.32 patch and its required direct
+dependencies. The resolved patch changes five companion packages:
+expo-constants 57.0.23, expo-dev-client 57.0.21, expo-location 57.0.23,
+expo-notifications 57.0.25 and expo-updates 57.0.27. No package-age exception
+was needed. The official npm registry integrity hashes matched the lockfile
+for all 32 changed package artifacts, and all 64 registry signatures verified.
+
+The new Expo CLI does not declare Zod. The resulting lockfile has no Zod 3
+package, so the active Zod 3 patch entry was removed. The test now asserts
+that the legacy dependency is absent and still accepts an explicit legacy
+artifact for reproduction. All 158 regression cases passed with the old
+patched artifact.
+
+The pinned dependencies passed the Expo compatibility check, mobile types,
+64 native policy tests and 20 component tests. This change covers SDK
+compatibility only. Native packaging and releases remain paused.
