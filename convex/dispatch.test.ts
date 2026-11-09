@@ -46,6 +46,7 @@ async function world() {
   const household = await signInAs(t, HOUSEHOLD);
   const shop = await signInAs(t, SHOP);
   const args = {
+    adultConfirmed: true as const,
     orgId: org._id,
     mode: "pickup" as const,
     items: [{ materialCode: "PAPER-NEWS", kg: 10 }],
@@ -545,6 +546,7 @@ it("reassigns a photo request without inventing an estimate", async () => {
   const w = await world();
   const otherId = await candidate(w, "photo-replacement");
   const photoId = await w.household.action(api.householdPhotos.upload, {
+    adultConfirmed: true,
     name: "scrap.jpg",
     bytes: new Uint8Array([0xff, 0xd8, 0xff, 0xe0]).buffer,
   });

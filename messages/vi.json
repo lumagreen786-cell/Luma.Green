@@ -3413,6 +3413,7 @@
     "description": "Cho phép PostHog và Google Analytics đo lượt truy cập trang công khai. Chúng tôi không ghi biểu mẫu, trang riêng tư hoặc phát lại phiên. Lựa chọn không ảnh hưởng quyền truy cập nền tảng.",
     "accept": "Cho phép phân tích",
     "decline": "Tiếp tục tắt phân tích",
+    "withdraw": "Tắt phân tích",
     "settings": "Cài đặt phân tích",
     "saved": "Lựa chọn được lưu trên thiết bị này.",
     "unavailable": "Trình duyệt không lưu được lựa chọn. Phân tích sẽ tiếp tục tắt.",
@@ -4542,6 +4543,25 @@
     "reload": "Tải lại văn bản đã lưu",
     "localDraft": "Văn bản cũ chưa lưu",
     "savedText": "Văn bản mới nhất đã lưu"
+  },
+  "collectionPrivacy": {
+    "phone": "Chúng tôi dùng số điện thoại của bạn để đăng nhập và gửi thông tin dịch vụ qua SMS.",
+    "email": "Để tạo tài khoản, chúng tôi dùng tên, địa chỉ email và mật khẩu của bạn. Chúng tôi gửi liên kết để xác minh địa chỉ email của bạn.",
+    "booking": "Chúng tôi dùng tên, số điện thoại, ảnh, thành phố và thời gian bạn chọn để sắp xếp việc tái chế. Nếu đến thu gom, chúng tôi cũng dùng địa chỉ và vị trí bạn chia sẻ."
+  },
+  "privacyRequests": {
+    "title": "Yêu cầu về quyền riêng tư",
+    "lead": "Chọn một yêu cầu. Nhóm phụ trách quyền riêng tư sẽ xem xét và trả lời. Hãy giữ lại mã yêu cầu.",
+    "kind": "Loại yêu cầu",
+    "submit": "Gửi yêu cầu",
+    "received": "Đã nhận yêu cầu",
+    "responded": "Nhóm đã trả lời",
+    "access": "Truy cập dữ liệu của tôi",
+    "correction": "Sửa dữ liệu của tôi",
+    "erasure": "Xóa dữ liệu của tôi",
+    "grievance": "Khiếu nại về quyền riêng tư",
+    "nomination": "Chỉ định người đại diện",
+    "withdrawal": "Rút lại sự đồng ý"
   },
   "privacy": {
     "title": "Chính sách quyền riêng tư",

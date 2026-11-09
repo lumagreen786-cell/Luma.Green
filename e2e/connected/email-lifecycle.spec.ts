@@ -204,6 +204,7 @@ test("email signup, verified ownership and password recovery use the real browse
     page.getByLabel(en.emailAuth.password, { exact: true }),
     initialPassword,
   );
+  await page.getByRole("checkbox", { name: en.join.consent.age }).check();
   await page
     .getByRole("button", { name: en.emailAuth.signup, exact: true })
     .click();

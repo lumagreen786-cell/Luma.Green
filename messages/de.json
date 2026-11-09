@@ -3413,6 +3413,7 @@
     "description": "Erlauben Sie PostHog und Google Analytics, Besuche öffentlicher Seiten zu messen. Formulare, private Seiten und Sitzungsaufzeichnungen werden nicht erfasst. Ihre Wahl ändert den Plattformzugang nicht.",
     "accept": "Nutzungsanalyse erlauben",
     "decline": "Nutzungsanalyse deaktiviert lassen",
+    "withdraw": "Analyse deaktivieren",
     "settings": "Einstellungen zur Nutzungsanalyse",
     "saved": "Ihre Wahl wird auf diesem Gerät gespeichert.",
     "unavailable": "Ihr Browser konnte diese Wahl nicht speichern. Die Nutzungsanalyse bleibt deaktiviert.",
@@ -4542,6 +4543,25 @@
     "reload": "Gespeicherten Text neu laden",
     "localDraft": "Vorheriger ungespeicherter Text",
     "savedText": "Zuletzt gespeicherter Text"
+  },
+  "collectionPrivacy": {
+    "phone": "Wir verwenden deine Telefonnummer zur Anmeldung und für Mitteilungen zum Dienst per SMS.",
+    "email": "Für dein Konto verwenden wir deinen Namen, deine E-Mail-Adresse und dein Passwort. Wir senden dir einen Link, um deine E-Mail-Adresse zu bestätigen.",
+    "booking": "Für die Organisation des Recyclings verwenden wir deinen Namen, deine Telefonnummer, Fotos, deine Stadt und den gewählten Termin. Bei Abholung verwenden wir auch deine Adresse und deinen Standort, wenn du ihn teilst."
+  },
+  "privacyRequests": {
+    "title": "Datenschutzanfragen",
+    "lead": "Wählen Sie eine Anfrage aus. Das Datenschutzteam prüft sie und antwortet Ihnen. Bewahren Sie die Anfragenummer auf.",
+    "kind": "Art der Anfrage",
+    "submit": "Anfrage senden",
+    "received": "Anfrage erhalten",
+    "responded": "Das Team hat geantwortet",
+    "access": "Auf meine Daten zugreifen",
+    "correction": "Meine Daten berichtigen",
+    "erasure": "Meine Daten löschen",
+    "grievance": "Datenschutzbeschwerde einreichen",
+    "nomination": "Eine Vertretung benennen",
+    "withdrawal": "Einwilligung widerrufen"
   },
   "privacy": {
     "title": "Datenschutzerklärung",

@@ -63,6 +63,7 @@ function LoginSteps({ canSend }: { canSend: boolean }) {
       ) : (
         <VerifyForm
           phoneNumber={codePhone}
+          adultConfirmed={phone !== null}
           onChangeNumber={() => {
             setPhone(null);
             setIsEditing(true);

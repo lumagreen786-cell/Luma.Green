@@ -105,8 +105,10 @@ async function reserveCodeRequest(
  * The options on their own, so the component (convex/betterAuth/adapter.ts)
  * and the schema generator (scripts/generate-auth-schema.mts) share them.
  */
-export const createAuthOptions = (ctx: GenericCtx<DataModel>) =>
-  ({
+export const createAuthOptions = (ctx: GenericCtx<DataModel>) => {
+  // The Convex HTTP integration builds these options for each request.
+  let hasAdultDeclaration = false;
+  return {
     appName: "Luma.Green",
     baseURL: process.env.SITE_URL,
     trustedOrigins: trustedOrigins(),
@@ -162,6 +164,10 @@ export const createAuthOptions = (ctx: GenericCtx<DataModel>) =>
     },
     hooks: {
       before: createAuthMiddleware(async (hookCtx) => {
+        if (hookCtx.path === "/phone-number/verify") {
+          hasAdultDeclaration =
+            hookCtx.headers?.get("x-luma-adult-declaration") === "1";
+        }
         // Sign-out remains available after domain access is withdrawn.
         if (hookCtx.path !== "/sign-out") {
           const session = await getAuthoritativeSessionFromCtx(hookCtx);
@@ -244,12 +250,23 @@ export const createAuthOptions = (ctx: GenericCtx<DataModel>) =>
           });
         },
         signUpOnVerification: {
-          getTempEmail: phoneEmail,
+          getTempEmail: (phone) => {
+            const email = phoneEmail(phone);
+            if (!hasAdultDeclaration && !isAdminEmail(email)) {
+              throw new APIError("FORBIDDEN", {
+                code: "ADULT_DECLARATION_REQUIRED",
+                message:
+                  "Confirm that you are at least 18 and request a new code.",
+              });
+            }
+            return email;
+          },
           getTempName: (phone) => phone,
         },
       }),
     ],
-  }) satisfies BetterAuthOptions;
+  } satisfies BetterAuthOptions;
+};
 
 export const createAuth = (ctx: GenericCtx<DataModel>) =>
   betterAuth(createAuthOptions(ctx));

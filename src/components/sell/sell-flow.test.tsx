@@ -29,6 +29,7 @@ vi.mock("@/components/providers/convex-provider", () => ({
   isConvexConfigured: true,
 }));
 vi.mock("@/i18n/navigation", () => ({
+  Link: "a",
   useRouter: () => ({ push: calls.push }),
 }));
 vi.mock("@/lib/upload-image", () => ({
@@ -39,6 +40,7 @@ vi.mock("./use-location", () => ({
     state: { status: "off" },
     point: undefined,
     locate: calls.locate,
+    stop: vi.fn(),
   }),
 }));
 vi.mock("./use-auth-ready", () => ({
@@ -138,6 +140,9 @@ function photo() {
 }
 async function details(hasMultiplePhotos = false) {
   const user = userEvent.setup();
+  await user.click(
+    screen.getByRole("checkbox", { name: messages.join.consent.age }),
+  );
   await user.type(screen.getByLabelText(messages.join.form.city), "Bengaluru");
   await user.type(
     screen.getByLabelText(messages.sell.when.nameLabel),
@@ -169,6 +174,22 @@ async function schedule(user: ReturnType<typeof userEvent.setup>) {
   );
   await user.click(screen.getAllByRole("option")[0]);
 }
+it("shows what the recycling request uses before collecting any booking details", () => {
+  show();
+  expect(screen.getByText(messages.collectionPrivacy.booking)).toBeVisible();
+  expect(
+    screen.getByRole("link", { name: messages.privacy.title }),
+  ).toHaveAttribute("href", "/privacy");
+  expect(
+    screen.getByRole("button", { name: messages.sell.simple.next }),
+  ).toBeDisabled();
+  expect(
+    screen.getByRole("button", { name: messages.sell.simple.location }),
+  ).toBeDisabled();
+  expect(calls.upload).not.toHaveBeenCalled();
+  expect(calls.book).not.toHaveBeenCalled();
+});
+
 it("starts with photos and personal details, without a material or weight questionnaire", () => {
   show();
   expect(
@@ -221,10 +242,15 @@ it("submits owned photos without invented materials, weights or prices", async (
   await waitFor(() => {
     expect(calls.push).toHaveBeenCalledWith("/t/booking-token");
   });
-  expect(calls.upload).toHaveBeenCalledOnce();
+  expect(calls.upload).toHaveBeenCalledExactlyOnceWith({
+    name: "paper.jpg",
+    bytes: new ArrayBuffer(5),
+    adultConfirmed: true,
+  });
   expect(calls.book).toHaveBeenCalledWith(
     expect.objectContaining({
       items: [],
+      adultConfirmed: true,
       photoIds: ["photo-fixture"],
       name: "Test person",
       address: "12 Test Street, Bengaluru",

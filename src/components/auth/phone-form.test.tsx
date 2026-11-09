@@ -35,9 +35,20 @@ it("restores the send button after a network error and completes a retry", async
       <PhoneForm />
     </NextIntlClientProvider>,
   );
+  expect(screen.getByText(messages.collectionPrivacy.phone)).toBeVisible();
+  expect(
+    screen.getByRole("link", { name: messages.privacy.title }),
+  ).toHaveAttribute("href", "/privacy");
+  expect(
+    screen.getByRole("button", { name: messages.auth.sendCode }),
+  ).toBeDisabled();
+  expect(calls.sendOtp).not.toHaveBeenCalled();
   await userEvent.type(
     screen.getByLabelText(messages.auth.mobileLabel),
     "9876543210",
+  );
+  await userEvent.click(
+    screen.getByRole("checkbox", { name: messages.join.consent.age }),
   );
   await userEvent.click(
     screen.getByRole("button", { name: messages.auth.sendCode }),
@@ -49,7 +60,7 @@ it("restores the send button after a network error and completes a retry", async
   expect(retry).toBeEnabled();
   expect(calls.push).not.toHaveBeenCalled();
   await userEvent.click(retry);
-  expect(calls.rememberPhone).toHaveBeenCalledWith("+919876543210");
+  expect(calls.rememberPhone).toHaveBeenCalledWith("+919876543210", true);
   expect(calls.push).toHaveBeenCalledWith({
     pathname: "/login/verify",
     query: { next: "/app" },
@@ -85,6 +96,9 @@ it("validates a configured phone before sending an OTP", async () => {
   );
   await userEvent.type(screen.getByLabelText(messages.auth.mobileLabel), "123");
   await userEvent.click(
+    screen.getByRole("checkbox", { name: messages.join.consent.age }),
+  );
+  await userEvent.click(
     screen.getByRole("button", { name: messages.auth.sendCode }),
   );
   expect(await screen.findByRole("alert")).toHaveTextContent(
@@ -109,6 +123,9 @@ it("ignores a successful send after the form unmounts", async () => {
   await userEvent.type(
     screen.getByLabelText(messages.auth.mobileLabel),
     "9876543210",
+  );
+  await userEvent.click(
+    screen.getByRole("checkbox", { name: messages.join.consent.age }),
   );
   await userEvent.click(
     screen.getByRole("button", { name: messages.auth.sendCode }),
