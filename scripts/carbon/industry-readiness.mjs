@@ -15,6 +15,7 @@ const recyclingEvidence = [
   "mass_balance",
   "process_energy",
   "buyer_end_use",
+  "virgin_displacement",
 ];
 
 const programs = {
@@ -25,7 +26,6 @@ const programs = {
       ...recyclingEvidence,
       "collection_scope_and_selective_exclusion",
       "dry_mass_and_pet_output_grade",
-      "virgin_displacement",
       "scenario_and_capacity",
     ],
   },
@@ -53,6 +53,7 @@ const programs = {
       "process_energy",
       "residue_destination",
       "buyer_end_use",
+      "virgin_displacement",
     ],
   },
   compressed_biogas: {

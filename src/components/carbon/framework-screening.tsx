@@ -35,22 +35,27 @@ export function FrameworkScreening({
   projectId,
   industry,
   canOperate,
+  isOpen,
 }: {
   orgId: Id<"orgs">;
   projectId: Id<"carbonProjects">;
   industry?: CarbonIndustryId;
   canOperate: boolean;
+  isOpen: boolean;
 }) {
-  const args = { expectedOrgId: orgId, projectId };
+  const args = isOpen ? { expectedOrgId: orgId, projectId } : "skip";
   const records = useQuery(api.carbonProjects.frameworkScreenings, args);
   const t = useTranslations("carbonProjects.screening");
   const id = useId();
-  const candidate = industry ? carbonIndustries[industry] : undefined;
   const [selection, setSelection] = useState<CarbonFrameworkId>();
-  const framework = selection ?? candidate?.framework ?? carbonFrameworkIds[0];
+  const [isSaving, setIsSaving] = useState(false);
   const [drafts, setDrafts] = useState<
     Partial<Record<CarbonFrameworkId, FrameworkDraft>>
   >({});
+  if (!isOpen) return null;
+
+  const candidate = industry ? carbonIndustries[industry] : undefined;
+  const framework = selection ?? candidate?.framework ?? carbonFrameworkIds[0];
   const definition = carbonFrameworks[framework];
   const gates = carbonGatesForProject(framework, industry);
   const source =
@@ -75,6 +80,7 @@ export function FrameworkScreening({
           label: carbonFrameworks[value].name,
         }))}
         value={framework}
+        disabled={isSaving}
         onValueChange={(value) => {
           const selected = carbonFrameworkIds.find((entry) => entry === value);
           if (selected) setSelection(selected);
@@ -115,6 +121,8 @@ export function FrameworkScreening({
               gates={gates}
               revision={record?.revision ?? 0}
               draft={drafts[framework]}
+              isBusy={isSaving}
+              onBusyChange={setIsSaving}
               onDraftChange={(draft) => {
                 setDrafts((previous) => ({ ...previous, [framework]: draft }));
               }}
@@ -230,6 +238,8 @@ function FrameworkCheckForm({
   gates,
   revision,
   draft,
+  isBusy,
+  onBusyChange,
   onDraftChange,
 }: {
   orgId: Id<"orgs">;
@@ -238,6 +248,8 @@ function FrameworkCheckForm({
   gates: readonly CarbonGateId[];
   revision: number;
   draft?: FrameworkDraft;
+  isBusy: boolean;
+  onBusyChange: (isBusy: boolean) => void;
   onDraftChange: (value: FrameworkDraft | undefined) => void;
 }) {
   const record = useMutation(api.carbonProjects.recordFrameworkCheck);
@@ -246,7 +258,6 @@ function FrameworkCheckForm({
   const operations = useTranslations("operations");
   const common = useTranslations("common");
   const id = useId();
-  const [isBusy, setIsBusy] = useState(false);
 
   function updateDraft(change: Partial<FrameworkDraft>) {
     onDraftChange({ revision, ...draft, ...change });
@@ -264,7 +275,7 @@ function FrameworkCheckForm({
     )
       return;
 
-    setIsBusy(true);
+    onBusyChange(true);
     try {
       await record({
         expectedOrgId: orgId,
@@ -280,7 +291,7 @@ function FrameworkCheckForm({
     } catch {
       toast.error(common("error"));
     } finally {
-      setIsBusy(false);
+      onBusyChange(false);
     }
   }
 

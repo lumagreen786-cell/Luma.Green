@@ -114,9 +114,14 @@ test("local manufacturer prepares a carbon project while another workspace canno
       screeningCopy.status.supported,
     );
     const inventoryReference = "Synthetic local inventory boundary";
-    await screening
-      .getByLabel(en.evidence.reference, { exact: true })
-      .fill(inventoryReference);
+    const referenceInput = screening.getByLabel(en.evidence.reference, {
+      exact: true,
+    });
+    await referenceInput.fill(inventoryReference);
+    await openScreening.click();
+    await expect(screening).toHaveCount(0);
+    await openScreening.click();
+    await expect(referenceInput).toHaveValue(inventoryReference);
     await screening.getByRole("button", { name: screeningCopy.save }).click();
     await expect(
       screening.getByText(inventoryReference, { exact: true }),

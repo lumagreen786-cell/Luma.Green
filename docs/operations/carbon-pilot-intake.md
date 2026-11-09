@@ -118,8 +118,9 @@ Supported programs are `pet`, `non_pet_plastics`, `container_glass`, `metals`,
 `e_waste`, `compressed_biogas` and `industrial_efficiency`. Run a separate
 screen for each facility, process line and activity. A complete checklist is
 ready for internal review. A reviewer still has to inspect each document and
-confirm the method applies. For PET, the checklist asks for collection scope,
-dry mass and PET output grade, virgin displacement, and the applicable
+confirm the method applies. The Verra recycling activities all require a
+reference for virgin material displacement. For PET, the checklist also asks
+for collection scope, dry mass and PET output grade, and the applicable
 facility scenario and capacity. Apply the collection conditions in
 [AMS-III.AJ. v9](https://cdm.unfccc.int/UserManagement/FileStorage/WDFQ1I93T5S7J2EXHC84LOZUBPKM0G).
 This tool does not create a registry filing.

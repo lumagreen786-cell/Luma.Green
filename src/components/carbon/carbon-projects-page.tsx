@@ -96,6 +96,9 @@ function Projects({
     useState<Id<"carbonProjects"> | null>(null);
   const [openScreeningProject, setOpenScreeningProject] =
     useState<Id<"carbonProjects"> | null>(null);
+  const [visitedScreeningProjects, setVisitedScreeningProjects] = useState<
+    ReadonlySet<Id<"carbonProjects">>
+  >(() => new Set());
   if (!rows) return <ListSkeleton />;
   return (
     <>
@@ -137,6 +140,11 @@ function Projects({
                 variant="outline"
                 aria-expanded={openScreeningProject === project.id}
                 onClick={() => {
+                  if (!visitedScreeningProjects.has(project.id)) {
+                    setVisitedScreeningProjects((previous) =>
+                      new Set(previous).add(project.id),
+                    );
+                  }
                   setOpenScreeningProject(
                     openScreeningProject === project.id ? null : project.id,
                   );
@@ -144,12 +152,13 @@ function Projects({
               >
                 {t("title")}
               </Button>
-              {openScreeningProject === project.id ? (
+              {visitedScreeningProjects.has(project.id) ? (
                 <FrameworkScreening
                   orgId={orgId}
                   projectId={project.id}
                   industry={project.industry}
                   canOperate={canOperate}
+                  isOpen={openScreeningProject === project.id}
                 />
               ) : null}
               {canOperate ? (

@@ -1,4 +1,4 @@
-import { render, screen, within } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { getFunctionName } from "convex/server";
 import { NextIntlClientProvider } from "next-intl";
@@ -227,6 +227,53 @@ it("retains an unfinished check when switching frameworks and saves against its 
     status: "supported",
     reference: "Updated listing decision",
   });
+});
+
+it("retains a screening draft when the project panel is closed and reopened", async () => {
+  const labels = messages.carbonProjects.screening;
+  renderPage();
+  const section = await openScreening();
+  await choose(labels.check, labels.gates.registration, section);
+  await userEvent.type(
+    within(section).getByLabelText(messages.evidence.reference),
+    "Unfinished project reference",
+  );
+  await userEvent.click(screen.getByRole("button", { name: labels.title }));
+  expect(
+    screen.queryByRole("region", { name: labels.title }),
+  ).not.toBeInTheDocument();
+
+  const reopened = await openScreening();
+  expect(
+    within(reopened).getByLabelText(messages.evidence.reference),
+  ).toHaveValue("Unfinished project reference");
+});
+
+it("keeps the active framework selected until its pending save settles", async () => {
+  const labels = messages.carbonProjects.screening;
+  const save = Promise.withResolvers<null>();
+  state.mutation.mockReturnValueOnce(save.promise);
+  renderPage();
+  const section = await openScreening();
+
+  await choose(labels.check, labels.gates.registration, section);
+  await choose(labels.result, labels.status.supported, section);
+  await userEvent.type(
+    within(section).getByLabelText(messages.evidence.reference),
+    "Reported listing",
+  );
+  await userEvent.click(
+    within(section).getByRole("button", { name: labels.save }),
+  );
+
+  const selector = within(section).getByRole("combobox", {
+    name: labels.framework,
+  });
+  expect(selector).toBeDisabled();
+  expect(state.mutation).toHaveBeenCalledTimes(1);
+  save.resolve(null);
+  await waitFor(() => expect(selector).toBeEnabled());
+  await choose(labels.framework, "Gold Standard", section);
 });
 
 it("sets the matched methodology when an operator selects an industry", async () => {

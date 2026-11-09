@@ -14,9 +14,9 @@ test("screens a PET facility using the combined Verra method and keeps evidence 
     mass_balance: "input-output-and-reject-ledger",
     process_energy: "metered-electricity-and-fuel",
     buyer_end_use: "identified-manufacturer-and-production-record",
+    virgin_displacement: "comparable-virgin-product-and-displacement",
     collection_scope_and_selective_exclusion: "collection-route-and-scope",
     dry_mass_and_pet_output_grade: "dry-weight-and-grade-tests",
-    virgin_displacement: "comparable-virgin-product-and-displacement",
     scenario_and_capacity: "applicable-case-and-capacity-evidence",
   };
 
@@ -80,3 +80,19 @@ test("rejects unsupported programs and evidence for a different activity", () =>
     screenIndustryReadiness("metals", { claim_rights_and_overlap: " " }),
   ).toThrow("Invalid evidence");
 });
+
+test.each(["pet", "non_pet_plastics", "container_glass", "metals", "e_waste"])(
+  "requires displacement evidence for %s before internal review",
+  (program) => {
+    const initial = screenIndustryReadiness(program, {});
+    const references = Object.fromEntries(
+      initial.missing
+        .filter((kind) => kind !== "virgin_displacement")
+        .map((kind) => [kind, "fixture-reference"]),
+    );
+    expect(screenIndustryReadiness(program, references)).toMatchObject({
+      status: "missing_evidence",
+      missing: ["virgin_displacement"],
+    });
+  },
+);
