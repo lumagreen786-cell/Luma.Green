@@ -10,11 +10,17 @@ import {
   vStreamClass,
 } from "./lib/industrialClassification";
 import {
+  isMatchingDispatch,
+  recordLotDispatch,
+  recordLotReceipt,
+} from "./lib/lotCustody";
+import {
   balancedOutputGrams,
   optionalReference,
   positiveGrams,
   requiredLabel,
 } from "./lib/lotEvidence";
+import { requireUnreservedLot } from "./lib/lotReservations";
 import { indiaToday } from "./lib/onboarding";
 import {
   allocateRecordedCost,
@@ -33,21 +39,6 @@ async function orgName(ctx: QueryCtx, id: Id<"orgs">) {
   const org = await ctx.db.get("orgs", id);
   return org?.name ?? "";
 }
-function isMatchingDispatch(
-  event: Doc<"lotCustodyEvents"> | null,
-  lot: Doc<"materialLots">,
-  receiver: Id<"orgs">,
-): event is Doc<"lotCustodyEvents"> {
-  return (
-    lot.status === "in_transit" &&
-    event?.kind === "dispatched" &&
-    event.lotId === lot._id &&
-    event.fromOrgId === lot.orgId &&
-    event.toOrgId === receiver &&
-    event.grams === lot.availableGrams
-  );
-}
-
 const outputValidator = v.object({
   materialCode: v.string(),
   state: v.string(),
@@ -227,43 +218,19 @@ export const dispatch = mutation({
       throw new ConvexError("LOT_NOT_AVAILABLE");
     }
     assertOrdinaryRoute(lot);
+    await requireUnreservedLot(ctx, lot);
     await requireQualityRelease(ctx, lot);
     if (org._id === args.receiverOrgId) throw new ConvexError("SAME_CUSTODIAN");
     const receiver = await ctx.db.get("orgs", args.receiverOrgId);
     if (receiver?.status !== "active") {
       throw new ConvexError("RECEIVER_NOT_ACTIVE");
     }
-    const now = Date.now();
-    const dispatchId = await ctx.db.insert("lotCustodyEvents", {
-      lotId: lot._id,
-      kind: "dispatched",
-      fromOrgId: org._id,
-      toOrgId: receiver._id,
-      grams: lot.availableGrams,
+    return recordLotDispatch(ctx, {
+      lot,
+      receiverOrgId: receiver._id,
       actorProfileId: profile._id,
-      createdAt: now,
+      now: Date.now(),
     });
-    await ctx.db.patch("materialLots", lot._id, {
-      status: "in_transit",
-      pendingReceiverOrgId: receiver._id,
-      pendingDispatchId: dispatchId,
-      updatedAt: now,
-    });
-    await ctx.db.insert("auditLog", {
-      orgId: org._id,
-      actorProfileId: profile._id,
-      action: "material_lot.dispatched",
-      entityTable: "materialLots",
-      entityId: lot._id,
-      metadata: {
-        dispatchId,
-        receiverOrgId: receiver._id,
-        grams: lot.availableGrams,
-        dispatchedRecordedCostPaise: lot.costPaise ?? null,
-      },
-      createdAt: now,
-    });
-    return dispatchId;
   },
 });
 
@@ -280,42 +247,17 @@ export const receive = mutation({
     if (positiveGrams(args.receivedGrams) !== lot.availableGrams) {
       throw new ConvexError("WEIGHT_DISPUTE");
     }
-    if (!lot.pendingDispatchId) throw new ConvexError("DISPATCH_NOT_FOUND");
-    const now = Date.now();
-    const receiptId = await ctx.db.insert("lotCustodyEvents", {
-      lotId: lot._id,
-      kind: "received",
-      fromOrgId: lot.orgId,
-      toOrgId: org._id,
-      grams: args.receivedGrams,
-      dispatchId: lot.pendingDispatchId,
+    const dispatch = lot.pendingDispatchId
+      ? await ctx.db.get("lotCustodyEvents", lot.pendingDispatchId)
+      : null;
+    if (!isMatchingDispatch(dispatch, lot, org._id))
+      throw new ConvexError("DISPATCH_NOT_FOUND");
+    if (dispatch.tradeId) throw new ConvexError("USE_TRADE_RECEIPT");
+    await recordLotReceipt(ctx, {
+      lot,
+      dispatch,
       actorProfileId: profile._id,
-      createdAt: now,
-    });
-    await ctx.db.patch("materialLots", lot._id, {
-      orgId: org._id,
-      status: "available",
-      pendingReceiverOrgId: undefined,
-      pendingDispatchId: undefined,
-      costBasisGrams: args.receivedGrams,
-      isAcquisitionCostRecordable: true,
-      initialCostPaise: null,
-      costPaise: null,
-      costReference: undefined,
-      updatedAt: now,
-    });
-    await ctx.db.insert("auditLog", {
-      orgId: org._id,
-      actorProfileId: profile._id,
-      action: "material_lot.received",
-      entityTable: "materialLots",
-      entityId: lot._id,
-      metadata: {
-        receiptId,
-        dispatchId: lot.pendingDispatchId,
-        grams: args.receivedGrams,
-      },
-      createdAt: now,
+      now: Date.now(),
     });
     return null;
   },
@@ -344,6 +286,7 @@ async function readTransformationInputs(
     if (lot.status !== "available" || grams > lot.availableGrams)
       throw new ConvexError("NOT_ENOUGH_LOT_GRAMS");
     assertOrdinaryRoute(lot);
+    await requireUnreservedLot(ctx, lot);
     await requireQualityRelease(ctx, lot);
     totalGrams += grams;
     if (!Number.isSafeInteger(totalGrams))
@@ -702,6 +645,7 @@ export const history = query({
   args: { lotId: v.id("materialLots") },
   returns: v.object({
     access: v.union(v.literal("holder"), v.literal("pending_receiver")),
+    pendingTradeId: v.optional(v.id("trades")),
     lot: v.object({
       id: v.id("materialLots"),
       declaredByOrgId: v.optional(v.id("orgs")),
@@ -836,6 +780,7 @@ export const history = query({
       : {};
     return {
       access: isHolder ? ("holder" as const) : ("pending_receiver" as const),
+      ...(dispatch?.tradeId && { pendingTradeId: dispatch.tradeId }),
       lot: {
         id: lot._id,
         ...declaration,

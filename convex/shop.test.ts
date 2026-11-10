@@ -358,6 +358,22 @@ describe("shop.startTrip", () => {
 });
 
 describe("shop.complete", () => {
+  it("rejects a new receipt that does not report direct cash", async () => {
+    const t = await demoWorld();
+    const shop = await signInAs(t, RAMESH);
+    const bookingId = await bookingOf(t, "Meena Iyer", "accepted");
+    await expect(
+      shop.mutation(api.shop.complete, {
+        bookingId,
+        lines: [{ materialCode: "PAPER-NEWS", grams: 1000 }],
+        // A stale or tampered client can still send the old value.
+        method: "upi" as "cash",
+      }),
+    ).rejects.toThrow();
+    const booking = await shop.query(api.shop.get, { bookingId });
+    expect(booking?.booking.status).toBe("accepted");
+  });
+
   it("pays at the shop's rates, keeps the receipt and adds the weight to stock", async () => {
     const t = await demoWorld();
     const shop = await signInAs(t, RAMESH);
@@ -383,7 +399,7 @@ describe("shop.complete", () => {
         // A second bundle of the same material is added up.
         { materialCode: "PAPER-NEWS", grams: 7250 },
       ],
-      method: "upi",
+      method: "cash",
     });
 
     const newsPaise = paiseFor(19_250, newsRate);
@@ -395,7 +411,7 @@ describe("shop.complete", () => {
     expect(paid?.booking.status).toBe("completed");
     expect(paid?.points).toBe(pointsFor(totalPaise));
     expect(paid?.booking.receipt).toMatchObject({
-      method: "upi",
+      method: "cash",
       totalPaise,
       lines: [
         {

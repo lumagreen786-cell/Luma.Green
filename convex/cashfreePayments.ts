@@ -358,6 +358,7 @@ export const prepare = internalMutation({
       throw new ConvexError("GATEWAY_REQUIRED");
     const currentFinancial = await financial(ctx, trade._id);
     if (
+      trade.directCashReceipt ||
       trade.status !== "accepted" ||
       (currentFinancial?.state ?? "awaiting_payment") !== "awaiting_payment"
     )
@@ -1037,6 +1038,7 @@ export const availability = query({
       role === "viewer" ||
       !config?.checkoutEnabled ||
       trade.buyerOrgId !== org._id ||
+      trade.directCashReceipt ||
       trade.status !== "accepted" ||
       (lifecycle?.state ?? "awaiting_payment") !== "awaiting_payment" ||
       (config.mode === "live" && !(await isLiveReady(ctx)))

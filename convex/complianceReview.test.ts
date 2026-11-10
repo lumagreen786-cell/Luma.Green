@@ -11,6 +11,7 @@ import {
   signIn,
   signInAs,
 } from "./lib/auth.testing";
+import { currentOrdinaryCustodyReview } from "./lib/facilityCustodyScope";
 import schema from "./schema";
 const modules = convexModules(import.meta.glob("./**/*.*s"));
 afterEach(() => {
@@ -48,6 +49,53 @@ async function world() {
   );
   return { t, admin, owner, foreign, facilityId, registrationId };
 }
+it("requires an explicit, current consent review to authorize ordinary trade custody", async () => {
+  const { t, admin, owner, facilityId, registrationId } = await world();
+  const review = {
+    facilityId,
+    registrationId,
+    materialCodes: ["PLASTIC-PET"],
+    processes: ["washing" as const],
+    decision: "approved" as const,
+    evidenceReference: "Checked issuer source for ordinary PET custody",
+    validUntil: "2026-12-31",
+  };
+  const orgId = await t.run(async (ctx) => {
+    const facility = await ctx.db.get("industrialFacilities", facilityId);
+    if (!facility) throw new Error("Missing facility fixture");
+    return facility.orgId;
+  });
+  const check = (materialCode: string) =>
+    t.run((ctx) =>
+      currentOrdinaryCustodyReview(ctx, { facilityId, orgId, materialCode }),
+    );
+  await admin.mutation(api.complianceReview.reviewFacility, review);
+  expect(await check("PLASTIC-PET")).toBeNull();
+  await expect(
+    owner.mutation(api.complianceReview.reviewFacility, {
+      ...review,
+      ordinaryTradeCustody: true,
+    }),
+  ).rejects.toThrow("NOT_ADMIN");
+
+  const approved = await admin.mutation(api.complianceReview.reviewFacility, {
+    ...review,
+    ordinaryTradeCustody: true,
+  });
+  const approvedReview = await check("PLASTIC-PET");
+  expect(approvedReview?._id).toBe(approved);
+  expect(await check("RESIDUAL-TEST")).toBeNull();
+  await owner.mutation(api.industrialProfiles.recordRegistration, {
+    facilityId,
+    kind: "consent_to_operate",
+    reference: "Replacement consent after review",
+    issuedAt: "2026-01-01",
+    validUntil: "2027-01-01",
+    supersedesId: registrationId,
+  });
+  expect(await check("PLASTIC-PET")).toBeNull();
+});
+
 it("invalidates scoped review after a facility edit in the same clock tick", async () => {
   const { admin, owner, foreign, facilityId, registrationId } = await world();
   await expect(owner.query(api.complianceReview.queue, {})).rejects.toThrow(

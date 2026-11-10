@@ -227,3 +227,10 @@ export function useMutation() {
   return rejectWrite;
 }
 export const useAction = useMutation;
+
+export function useConvex() {
+  return {
+    query: (reference: FunctionReference<"query">) =>
+      Promise.try(() => readFixture(getFunctionName(reference))),
+  };
+}

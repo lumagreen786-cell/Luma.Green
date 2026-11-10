@@ -98,8 +98,10 @@ function Receipt({ id }: { id: string }) {
     );
   }
   // Old LG numbers remain visible as history, never as a verified payment.
-  const reference = receipt.legacyReceiptNo;
-  const recordedAt = receipt.legacyRecordedAt;
+  const reference =
+    receipt.directCashReceipt?.reference ?? receipt.legacyReceiptNo;
+  const recordedAt =
+    receipt.directCashReceipt?.recordedAt ?? receipt.legacyRecordedAt;
   if (reference === null || recordedAt === null) {
     return (
       <>
@@ -150,6 +152,7 @@ function ReceiptDocument({
   const t = useTranslations("market");
   const format = useFormat();
   const formatter = useFormatter();
+  const payment = useTranslations("tradeLifecycle");
   // A receipt is kept, so its dates carry the year.
   const fullDate = (at: number) =>
     formatter.dateTime(new Date(at), { dateStyle: "medium" });
@@ -201,7 +204,11 @@ function ReceiptDocument({
               {t("receipt.statusLabel")}
             </dt>
             <dd>
-              <StatusPill tone="neutral">{t("receipt.unverified")}</StatusPill>
+              <StatusPill tone="neutral">
+                {receipt.directCashReceipt
+                  ? payment("cashReported")
+                  : t("receipt.unverified")}
+              </StatusPill>
             </dd>
           </dl>
         </div>
@@ -270,7 +277,11 @@ function ReceiptDocument({
               className="mt-0.5 size-4 shrink-0 text-muted-foreground"
             />
             <div className="flex flex-col gap-0.5">
-              <p>{t("trades.legacyUnverified")}</p>
+              <p>
+                {receipt.directCashReceipt
+                  ? payment("cashNote")
+                  : t("trades.legacyUnverified")}
+              </p>
             </div>
           </div>
           {receipt.needsEwayBill ? (

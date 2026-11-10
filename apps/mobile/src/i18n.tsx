@@ -4,7 +4,7 @@ import type en from "../../../messages/en.json";
 import { defaultLocale, type Locale } from "../../../src/i18n/locales";
 import shellMessages from "./messages.json";
 
-type Scope = "native" | "common" | "brand" | "notifications";
+type Scope = "native" | "common" | "brand" | "notifications" | "homeReminder";
 type ShellMessages = Pick<typeof en, Scope>;
 const catalogues: Record<Locale, ShellMessages> = shellMessages;
 const LocaleContext = createContext<Locale>(defaultLocale);

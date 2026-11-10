@@ -68,6 +68,7 @@ export function FacilityReviewConsole() {
     "approved" | "rejected" | "revoked" | ""
   >("");
   const [processes, setProcesses] = useState<Process[]>([]);
+  const [includeOrdinaryCustody, setIncludeOrdinaryCustody] = useState(false);
   const [failed, setFailed] = useState(false);
   const [saved, setSaved] = useState(false);
   const form = useForm<z.infer<typeof reviewSchema>>({
@@ -113,12 +114,16 @@ export function FacilityReviewConsole() {
                 registrationId: registration.id,
                 decision,
                 processes,
+                ...(includeOrdinaryCustody && {
+                  ordinaryTradeCustody: true as const,
+                }),
                 materialCodes: values.materialCodes
                   .split(",")
                   .map((s) => s.trim())
                   .filter(Boolean),
               });
               form.reset();
+              setIncludeOrdinaryCustody(false);
               setSaved(true);
             } catch {
               setFailed(true);
@@ -134,6 +139,7 @@ export function FacilityReviewConsole() {
               setFacility(value);
               setRegistration("");
               setProcesses([]);
+              setIncludeOrdinaryCustody(false);
             }}
             options={
               data?.facilities.map((f) => ({
@@ -145,7 +151,10 @@ export function FacilityReviewConsole() {
           <AdminChoice
             label="Registration evidence"
             value={registrationId}
-            onChange={setRegistration}
+            onChange={(value) => {
+              setRegistration(value);
+              setIncludeOrdinaryCustody(false);
+            }}
             options={
               facility?.registrations.map((r) => ({
                 value: r.id,
@@ -160,7 +169,12 @@ export function FacilityReviewConsole() {
               const parsed = z
                 .enum(["approved", "rejected", "revoked"])
                 .safeParse(value);
-              if (parsed.success) setDecision(parsed.data);
+              if (!parsed.success) {
+                return;
+              }
+
+              setDecision(parsed.data);
+              setIncludeOrdinaryCustody(false);
             }}
             options={[
               { value: "approved", label: "Approved evidence scope" },
@@ -177,6 +191,24 @@ export function FacilityReviewConsole() {
             onChange={setProcesses}
             available={facility?.capabilities ?? []}
           />
+          {decision === "approved" &&
+          facility?.registrations.some(
+            (r) =>
+              r.id === registrationId &&
+              r.current &&
+              r.kind === "consent_to_operate",
+          ) ? (
+            <Label className="flex min-h-11 items-center gap-2">
+              <Checkbox
+                checked={includeOrdinaryCustody}
+                onCheckedChange={(checked) => {
+                  setIncludeOrdinaryCustody(checked === true);
+                }}
+              />
+              Confirm this consent covers ordinary trade custody for the listed
+              materials at this site
+            </Label>
+          ) : null}
           <AdminField
             label="Evidence and review reference"
             registration={form.register("evidenceReference")}
@@ -212,6 +244,9 @@ export function FacilityReviewConsole() {
                   {r.validUntil}
                 </p>
                 <p className="break-words">{r.materialCodes.join(", ")}</p>
+                {r.ordinaryTradeCustody ? (
+                  <p>Ordinary trade custody reviewed</p>
+                ) : null}
                 <p className="break-words">{r.evidenceReference}</p>
               </div>
             ))}

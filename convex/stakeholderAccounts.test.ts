@@ -5,6 +5,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { api } from "./_generated/api";
 import { convexModules, registerAuth, signIn } from "./lib/auth.testing";
+import { PARTICIPANT_TYPES } from "./lib/participantTypes";
 import schema from "./schema";
 
 const modules = convexModules(import.meta.glob("./**/*.*s"));
@@ -32,6 +33,115 @@ async function member(t: Test, phone: string) {
 }
 
 describe("stakeholder accounts", () => {
+  it("records a restricted participant type as a request and never grants staff access", async () => {
+    const t = setup();
+    const applicant = await member(t, "+919000000320");
+    const args = {
+      ageConfirmed: true as const,
+      privacyAccepted: true as const,
+      kind: "participant_applicant" as const,
+      participantType: "luma_team" as const,
+      organizationName: "Luma applicant",
+    };
+    const id = await applicant.mutation(api.stakeholderAccounts.request, args);
+    expect(
+      await applicant.mutation(api.stakeholderAccounts.request, args),
+    ).toBe(id);
+    expect(
+      await applicant.query(api.stakeholderAccounts.mineForParticipant, {
+        participantType: "luma_team",
+      }),
+    ).toMatchObject({ id, participantType: "luma_team", status: "pending" });
+    await expect(
+      applicant.mutation(api.stakeholderAccounts.request, {
+        ...args,
+        kind: "city_official",
+      }),
+    ).rejects.toThrow();
+    const admin = await signIn(t, {
+      email: "admin@luma.test",
+      twoFactorEnabled: true,
+    });
+    await admin.mutation(api.identity.ensureProfile, { locale: "en" });
+    await admin.mutation(api.stakeholderAccounts.decide, {
+      id,
+      decision: "approve",
+      reviewNote: "Identity reviewed without a staff grant",
+    });
+    await expect(
+      applicant.query(api.stakeholderAccounts.pending, {}),
+    ).rejects.toThrow();
+    await t.run(async (ctx) => {
+      expect(await ctx.db.query("memberships").take(1)).toEqual([]);
+      expect(await ctx.db.query("organizationMemberships").take(1)).toEqual([]);
+    });
+  });
+
+  it("accepts each directory participant type as a private, pending application", async () => {
+    const t = setup();
+    const another = await member(t, "+919000000322");
+    expect(new Set(PARTICIPANT_TYPES).size).toBe(41);
+    for (const [index, participantType] of PARTICIPANT_TYPES.entries()) {
+      const applicant = await member(
+        t,
+        `+919000001${String(index).padStart(3, "0")}`,
+      );
+      const id = await applicant.mutation(api.stakeholderAccounts.request, {
+        ageConfirmed: true,
+        privacyAccepted: true,
+        kind: "participant_applicant",
+        participantType,
+        organizationName: "Role fixture",
+      });
+      expect(
+        await applicant.query(api.stakeholderAccounts.mineForParticipant, {
+          participantType,
+        }),
+      ).toMatchObject({ id, participantType, status: "pending" });
+      expect(
+        await another.query(api.stakeholderAccounts.mineForParticipant, {
+          participantType,
+        }),
+      ).toBeNull();
+    }
+  });
+
+  it("requires review of the initial role before another participant request", async () => {
+    const t = setup();
+    const applicant = await member(t, "+919000000323");
+    const request = {
+      ageConfirmed: true as const,
+      privacyAccepted: true as const,
+      kind: "participant_applicant" as const,
+      participantType: "trader" as const,
+      organizationName: "Verified applicant",
+    };
+    const id = await applicant.mutation(
+      api.stakeholderAccounts.request,
+      request,
+    );
+    const extra = {
+      ...request,
+      participantType: "equipment_supplier" as const,
+    };
+    await expect(
+      applicant.mutation(api.stakeholderAccounts.request, extra),
+    ).rejects.toThrow("INITIAL_ROLE_PENDING");
+    const admin = await signIn(t, {
+      email: "admin@luma.test",
+      twoFactorEnabled: true,
+    });
+    await admin.mutation(api.identity.ensureProfile, { locale: "en" });
+    await admin.mutation(api.stakeholderAccounts.decide, {
+      id,
+      decision: "approve",
+      reviewNote: "Verified organisation details",
+    });
+    await expect(
+      applicant.mutation(api.stakeholderAccounts.request, extra),
+    ).resolves.toBeDefined();
+  });
+
   it("accepts non-household generator sites without granting trade access", async () => {
     const t = setup();
     const apartment = await member(t, "+919000000306");

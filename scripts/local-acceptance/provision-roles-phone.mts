@@ -159,6 +159,7 @@ async function verifyPhone(
       `A fresh library-generated phone code was not delivered for ${persona.key}.`,
     );
   const verify = await context.post("/api/auth/phone-number/verify", {
+    headers: { "x-luma-adult-declaration": "1" },
     data: { phoneNumber: persona.phone, code: delivered.text },
   });
   if (!verify.ok())

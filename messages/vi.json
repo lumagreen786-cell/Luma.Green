@@ -139,7 +139,7 @@
         "title": "Hộ gia đình",
         "one": "Xem giá trị vật liệu trước khi đặt lịch.",
         "two": "Thu gom tại cửa hoặc mang đến cửa hàng.",
-        "three": "Nhận tiền mặt hoặc UPI, kèm biên nhận.",
+        "three": "Nhận tiền mặt, kèm biên nhận.",
         "cta": "Tái chế"
       },
       "kabadiwala": {
@@ -611,7 +611,7 @@
       "body": "Nhận việc thu gom, phân loại và làm ca có trả công gần nhà, rồi theo dõi thu nhập."
     },
     "householdHeading": "Và mọi hộ gia đình",
-    "householdBody": "Đặt lịch thu gom tại nhà bằng số điện thoại di động: chọn vật liệu, so sánh báo giá của các cửa hàng và nhận thanh toán bằng tiền mặt hoặc UPI từ cửa hàng kèm biên nhận."
+    "householdBody": "Đặt lịch thu gom tại nhà bằng số điện thoại di động: chọn vật liệu, so sánh báo giá của các cửa hàng và nhận thanh toán bằng tiền mặt từ cửa hàng kèm biên nhận."
   },
   "contact": {
     "metaTitle": "Liên hệ",
@@ -1079,7 +1079,7 @@
           },
           "pay": {
             "title": "Nhận tiền ngay tại chỗ",
-            "body": "Bằng tiền mặt hoặc UPI, trước khi họ rời đi. Luma.Green không giữ tiền của bạn."
+            "body": "Bằng tiền mặt, trước khi họ rời đi. Luma.Green không giữ tiền của bạn."
           },
           "receipt": {
             "title": "Kiểm tra biên nhận",
@@ -1218,7 +1218,7 @@
             "body": "Ứng dụng tính theo giá của bạn. Cho hộ gia đình xem màn hình."
           },
           "pay": {
-            "title": "Trả bằng tiền mặt hoặc UPI",
+            "title": "Trả bằng tiền mặt",
             "body": "Trả trước khi rời đi và chọn phương thức đã dùng."
           },
           "save": {
@@ -1569,7 +1569,7 @@
       },
       "howPaid": {
         "q": "Tôi nhận tiền bằng cách nào?",
-        "a": "Tại cửa, bằng tiền mặt hoặc UPI, trước khi kabadiwala rời đi. Luma.Green ghi nhận thanh toán nhưng không giữ tiền của bạn."
+        "a": "Tại cửa, bằng tiền mặt, trước khi kabadiwala rời đi. Luma.Green ghi nhận thanh toán nhưng không giữ tiền của bạn."
       },
       "recyclePoints": {
         "q": "Điểm tái chế là gì?",
@@ -1621,7 +1621,7 @@
       },
       "payHousehold": {
         "q": "Luma.Green có trả tiền cho hộ thay tôi không?",
-        "a": "Không. Bạn trả tiền mặt hoặc UPI tại cửa. Ứng dụng ghi lại số tiền và cách trả."
+        "a": "Không. Bạn trả tiền mặt tại cửa. Ứng dụng ghi lại số tiền và cách trả."
       },
       "paidByYard": {
         "q": "Tôi nhận tiền thế nào khi bán cho đơn vị sơ chế?",
@@ -2217,6 +2217,7 @@
       "fileType": "Không dùng được loại tệp này ở đây",
       "fileTooBig": "Tệp quá lớn",
       "uploadFailed": "Tải lên thất bại. Thử lại.",
+      "uploadUnavailable": "Hiện chưa thể tải tệp riêng tư lên.",
       "generic": "Đã xảy ra lỗi. Thử lại.",
       "pan": "Tra cứu mã GST và xác nhận doanh nghiệp.",
       "city": "Nhập thành phố hoặc địa phương từ 2–60 ký tự."
@@ -2531,7 +2532,7 @@
     "metaDescription": "Dọn đồ tái chế. Nhận tiền. Ảnh, lấy tận nơi hoặc mang đến cửa hàng, thanh toán sau khi cân.",
     "eyebrow": "Ấn Độ",
     "title": "Đặt lịch thu gom tại nhà",
-    "lead": "Chọn vật liệu và cửa hàng gần bạn, nhận tiền mặt hoặc UPI sau khi cân.",
+    "lead": "Chọn vật liệu và cửa hàng gần bạn, nhận tiền mặt sau khi cân.",
     "promises": {
       "label": "Vì sao bán ở đây",
       "noAccount": "Xác minh điện thoại để đặt lịch",
@@ -2650,7 +2651,7 @@
       "dropoff": "Bạn mang đến cửa hàng",
       "whenValue": "{day} · {window}, {time}",
       "youGet": "Bạn sẽ nhận khoảng {amount}",
-      "payNote": "Cửa hàng cân vật liệu và trả tiền mặt hoặc UPI.",
+      "payNote": "Cửa hàng cân vật liệu và trả tiền mặt.",
       "phoneTitle": "Xác nhận số di động",
       "phoneLead": "Chúng tôi gửi mã 6 chữ số qua SMS. Lịch đặt gắn với số này để theo dõi trên mọi điện thoại.",
       "bookingAs": "Đặt lịch bằng {phone}",
@@ -2807,7 +2808,7 @@
       "requested": "{mode, select, pickup {Chờ {shop} chấp nhận} other {Chờ {shop} xác nhận}}",
       "requestedBody": "Chúng tôi đã gửi yêu cầu. Trang cập nhật ngay khi họ trả lời.",
       "accepted": "{mode, select, pickup {{shop} đã nhận lịch thu gom} other {{shop} đang chờ bạn đến}}",
-      "acceptedBody": "Chuẩn bị vật liệu. Sau khi cân, bạn nhận tiền mặt hoặc UPI.",
+      "acceptedBody": "Chuẩn bị vật liệu. Sau khi cân, bạn nhận tiền mặt.",
       "on_the_way": "{shop} đang đến",
       "on_the_wayBody": "Chuẩn bị vật liệu gần cửa.",
       "completed": "Xong! Bạn nhận {amount}",
@@ -2848,7 +2849,7 @@
     "money": {
       "title": "Tiền và điểm của bạn",
       "estimate": "Bạn sẽ nhận khoảng {amount}",
-      "estimateNote": "Cửa hàng cân vật liệu và trả tiền mặt hoặc UPI.",
+      "estimateNote": "Cửa hàng cân vật liệu và trả tiền mặt.",
       "paid": "Bạn nhận {amount}",
       "paidBy": "Trả bằng {method, select, upi {UPI} other {tiền mặt}} · {date}",
       "estimateWas": "Ước tính trước đó là {amount}",
@@ -3413,6 +3414,7 @@
     "description": "Cho phép PostHog và Google Analytics đo lượt truy cập trang công khai. Chúng tôi không ghi biểu mẫu, trang riêng tư hoặc phát lại phiên. Lựa chọn không ảnh hưởng quyền truy cập nền tảng.",
     "accept": "Cho phép phân tích",
     "decline": "Tiếp tục tắt phân tích",
+    "withdraw": "Tắt phân tích",
     "settings": "Cài đặt phân tích",
     "saved": "Lựa chọn được lưu trên thiết bị này.",
     "unavailable": "Trình duyệt không lưu được lựa chọn. Phân tích sẽ tiếp tục tắt.",
@@ -3803,6 +3805,79 @@
     "qualityReleaseRequired": "Cần kết quả kiểm tra được chấp nhận"
   },
   "carbonProjects": {
+    "industry": {
+      "title": "Ngành",
+      "other": "Dự án khác",
+      "assign": "Chọn ngành",
+      "assignmentHint": "Chọn ngành phù hợp với phương pháp của dự án. Bạn chỉ có thể chọn một lần.",
+      "labels": {
+        "pet_plastics": "Nhựa PET",
+        "metals_recycling": "Tái chế kim loại",
+        "e_waste_recovery": "Thu hồi vật liệu từ rác điện tử",
+        "compressed_biogas": "Khí sinh học nén",
+        "industrial_manufacturing": "Nâng cao hiệu suất sản xuất công nghiệp"
+      }
+    },
+    "screening": {
+      "title": "Sàng lọc theo khung",
+      "framework": "Khung",
+      "notice": "Tất cả kết quả kiểm tra do người dùng tự báo cáo. Chương trình bên ngoài đưa ra quyết định chính thức.",
+      "petExample": "Mức độ phù hợp với ví dụ PET",
+      "source": "Phương pháp chính thức",
+      "process": "Quy trình chính thức",
+      "check": "Yêu cầu",
+      "result": "Kết quả kiểm tra",
+      "save": "Lưu kết quả kiểm tra",
+      "conflict": "Nội dung sàng lọc đã thay đổi. Hãy xem kết quả mới nhất trước khi lưu.",
+      "useLatest": "Dùng phiên bản mới nhất",
+      "fit": {
+        "candidate": "Phương pháp có thể áp dụng. Hãy xác nhận dự án đủ điều kiện.",
+        "unconfirmed": "Chưa xác nhận phương pháp hiện tại có phù hợp hay không.",
+        "no_listed_method": "Không tìm thấy phương pháp phù hợp trong danh sách đã công bố.",
+        "out_of_scope": "Nằm ngoài phạm vi loại bỏ carbon lâu dài.",
+        "accounting_only": "Chỉ dùng để hạch toán phát thải."
+      },
+      "status": {
+        "missing": "Chưa có",
+        "supported": "Có bằng chứng hỗ trợ",
+        "contradicted": "Mâu thuẫn với bằng chứng"
+      },
+      "gates": {
+        "method_and_version": "Phương pháp và phiên bản",
+        "site_and_operator": "Cơ sở và đơn vị vận hành",
+        "baseline_and_additionality": "Đường cơ sở và tính bổ sung",
+        "claim_rights_and_overlap": "Quyền tuyên bố và sự trùng lặp",
+        "monitoring_and_calculation": "Giám sát và tính toán",
+        "validation": "Thẩm định thiết kế",
+        "registration": "Đăng ký dự án",
+        "verification": "Xác minh kết quả",
+        "issuance": "Phát hành tín chỉ",
+        "transfer_and_settlement": "Chuyển giao và thanh toán",
+        "retirement": "Hủy để sử dụng hoặc nộp lại tín chỉ",
+        "municipal_waste_origin": "Nguồn chất thải đô thị",
+        "collection_scope": "Phạm vi thu gom và trường hợp loại trừ",
+        "material_and_mass_balance": "Vật liệu và cân bằng khối lượng",
+        "process_energy": "Năng lượng sử dụng trong quy trình",
+        "buyer_end_use": "Mục đích sử dụng cuối cùng của bên mua",
+        "virgin_material_displacement": "Thay thế nguyên liệu nguyên sinh",
+        "indian_entity_and_authorized_venue": "Pháp nhân tại Ấn Độ và sàn giao dịch được cấp phép",
+        "safeguards_and_consultation": "Biện pháp bảo đảm an toàn và tham vấn",
+        "jurisdiction": "Khu vực pháp lý đủ điều kiện",
+        "durable_removal_and_storage": "Loại bỏ và lưu trữ carbon lâu dài",
+        "inventory_boundary_and_scopes": "Ranh giới kiểm kê và phạm vi phát thải",
+        "scenario_and_capacity": "Kịch bản của cơ sở và công suất đủ điều kiện",
+        "dry_mass_and_pet_grade": "Khối lượng khô và cấp chất lượng PET đầu ra",
+        "recovered_metal_and_grade": "Kim loại thu hồi và cấp chất lượng đầu ra",
+        "equipment_categories_and_custody": "Loại thiết bị và chuỗi bàn giao",
+        "residue_destination": "Nơi tiếp nhận chất thải còn lại",
+        "feedstock_and_prior_treatment": "Nguyên liệu đã cân và phương thức xử lý trước đó",
+        "gas_metering_and_methane_leakage": "Đo khí và rò rỉ metan",
+        "digestate_and_offtake": "Xử lý bã thải sau phân hủy và tiêu thụ đầu ra",
+        "equipment_and_commissioning": "Thiết bị và vận hành thử",
+        "meter_calibration": "Hiệu chuẩn đồng hồ đo",
+        "comparable_output_and_feedstock": "Đầu ra và nguyên liệu có thể so sánh"
+      }
+    },
     "name": "Tên dự án",
     "referenceHint": "Chỉ nhập mã tài liệu. Không nhập dữ liệu cá nhân hoặc mật khẩu.",
     "title": "Dự án carbon",
@@ -3875,8 +3950,8 @@
   },
   "industry": {
     "title": "Tham chiếu ngành",
-    "lead": "Tìm trong sổ làm việc được cung cấp. Các tham chiếu này chưa được xác minh và không cấp phép giao dịch hay xử lý vật liệu.",
-    "sourceNote": "Văn bản nguồn hiển thị bằng tiếng Anh gốc của sổ làm việc.",
+    "lead": "Tìm trong tài liệu tham khảo được cung cấp. Các tham chiếu này chưa được xác minh và không cấp phép giao dịch hay xử lý vật liệu.",
+    "sourceNote": "Nội dung tham khảo hiển thị bằng tiếng Anh.",
     "sectors": "Tham chiếu lĩnh vực",
     "industries": "Ma trận ngành",
     "lifecycles": "Vòng đời vật liệu",
@@ -3982,6 +4057,10 @@
     "note": "Đây là khai báo của nhà sản xuất, không phải xác minh độc lập về chất lượng, quyền sở hữu hay quy định. Không thể sửa hồ sơ sau khi lưu."
   },
   "tradeLifecycle": {
+    "cashRecord": "Ghi nhận tiền mặt đã nhận",
+    "cashReported": "Đã báo nhận tiền mặt",
+    "cashNote": "Người mua trả trực tiếp cho người bán. Luma ghi lại báo cáo của người bán.",
+    "cashReference": "Mã tham chiếu biên nhận tiền mặt",
     "title": "Thanh toán và giao nhận",
     "collectionLabel": "Khoản thanh toán của người mua",
     "settlementLabel": "Quyết toán cho người bán",
@@ -4488,6 +4567,11 @@
     "loadSaved": "Mở bản đã lưu"
   },
   "businessSubscriptions": {
+    "draftsTitle": "Hóa đơn nháp",
+    "draftsEmpty": "Chưa có bản nháp.",
+    "draftTotal": "Tạm tính trước thuế của bản nháp",
+    "draftBook": "Bảng giá {version}",
+    "draftUsage": "{count} đơn tiền mặt",
     "title": "Gói cơ sở",
     "lead": "Lưu lựa chọn gói cho cơ sở này.",
     "off": "Thanh toán đang tắt. Lưu lựa chọn không bắt đầu đăng ký trả phí.",
@@ -4543,6 +4627,25 @@
     "localDraft": "Văn bản cũ chưa lưu",
     "savedText": "Văn bản mới nhất đã lưu"
   },
+  "collectionPrivacy": {
+    "phone": "Chúng tôi dùng số điện thoại của bạn để đăng nhập và gửi thông tin dịch vụ qua SMS.",
+    "email": "Để tạo tài khoản, chúng tôi dùng tên, địa chỉ email và mật khẩu của bạn. Chúng tôi gửi liên kết để xác minh địa chỉ email của bạn.",
+    "booking": "Chúng tôi dùng tên, số điện thoại, ảnh, thành phố và thời gian bạn chọn để sắp xếp việc tái chế. Nếu đến thu gom, chúng tôi cũng dùng địa chỉ và vị trí bạn chia sẻ."
+  },
+  "privacyRequests": {
+    "title": "Yêu cầu về quyền riêng tư",
+    "lead": "Chọn một yêu cầu. Nhóm phụ trách quyền riêng tư sẽ xem xét và trả lời. Hãy giữ lại mã yêu cầu.",
+    "kind": "Loại yêu cầu",
+    "submit": "Gửi yêu cầu",
+    "received": "Đã nhận yêu cầu",
+    "responded": "Nhóm đã trả lời",
+    "access": "Truy cập dữ liệu của tôi",
+    "correction": "Sửa dữ liệu của tôi",
+    "erasure": "Xóa dữ liệu của tôi",
+    "grievance": "Khiếu nại về quyền riêng tư",
+    "nomination": "Chỉ định người đại diện",
+    "withdrawal": "Rút lại sự đồng ý"
+  },
   "privacy": {
     "title": "Chính sách quyền riêng tư",
     "lead": "Chính sách này áp dụng cho trang Luma.Green và ứng dụng Android, iOS, Windows, macOS.",
@@ -4556,5 +4659,124 @@
     "requestsBody": "Xóa tài khoản bên dưới hoặc gửi email hỗ trợ để truy cập, sửa hay xóa dữ liệu. Xác minh quyền sở hữu; không gửi giấy tờ định danh qua email. Giải quyết công việc hoặc quyền sở hữu còn mở trước.",
     "retentionTitle": "Dữ liệu còn lại sau khi đóng",
     "retentionBody": "Đóng tài khoản loại bỏ quyền đăng nhập và thông tin xác thực. Bằng chứng kinh doanh, thanh toán, an toàn và kiểm toán có thể được giữ để xem xét. Không phải mọi hồ sơ đều bị xóa. Hỏi hỗ trợ về việc lưu giữ và thời hạn."
+  },
+  "participantDirectory": {
+    "title": "Chọn vai trò của bạn",
+    "search": "Tìm vai trò",
+    "empty": "Không tìm thấy vai trò phù hợp",
+    "continue": "Tiếp tục",
+    "apply": "Đăng ký vai trò này",
+    "roles": {
+      "household": "Hộ gia đình",
+      "small_business": "Cửa hàng hoặc doanh nghiệp nhỏ",
+      "industrial_seller": "Bên bán phế liệu công nghiệp",
+      "institution": "Tổ chức",
+      "kabadiwala": "Kabadiwala",
+      "saathi": "Saathi",
+      "dry_waste_centre": "Điểm thu gom rác khô hoặc hợp tác xã thu gom",
+      "large_yard": "Bãi tập kết lớn",
+      "collection_contractor": "Nhà thầu thu gom tận nhà",
+      "rural_collector": "Chính quyền nông thôn hoặc nhóm tự lực",
+      "trader": "Thương nhân, môi giới hoặc nhà xuất khẩu",
+      "preprocessor": "Đơn vị sơ chế",
+      "recycler": "Đơn vị tái chế",
+      "e_waste_operator": "Đơn vị thu gom, tháo dỡ hoặc tân trang rác điện tử",
+      "wet_waste_processor": "Đơn vị xử lý rác ướt",
+      "intermediary_manufacturer": "Nhà sản xuất hàng trung gian",
+      "end_goods_manufacturer": "Nhà sản xuất thành phẩm",
+      "epr_brand": "Thương hiệu có nghĩa vụ EPR",
+      "pro": "Tổ chức trách nhiệm nhà sản xuất",
+      "epr_trading": "Giao dịch EPR",
+      "carbon_trading": "Giao dịch carbon",
+      "transporter": "Đơn vị vận chuyển và bản kê",
+      "equipment_supplier": "Nhà cung cấp thiết bị",
+      "boiler_water_supplier": "Nhà cung cấp lò hơi, cơ sở xử lý hoặc xe bồn",
+      "weighing_vendor": "Nhà cung cấp cân hoặc trạm cân xe",
+      "solar_provider": "Nhà cung cấp năng lượng mặt trời",
+      "environmental_engineer": "Kỹ thuật môi trường",
+      "hr_provider": "Đơn vị cung cấp dịch vụ nhân sự",
+      "accounting_provider": "Kế toán và tuân thủ",
+      "employee_tracking": "Theo dõi nhân sự",
+      "waste_picker_union": "Tổ chức phi chính phủ hoặc nghiệp đoàn người thu gom",
+      "city_official": "Cán bộ thành phố",
+      "csr_lender_auditor": "Nhóm CSR, bên cho vay hoặc kiểm toán viên",
+      "luma_team": "Đội ngũ Luma.Green",
+      "ward_official": "Cán bộ phường",
+      "community_champion": "Đại diện cộng đồng",
+      "payment_partner": "Đối tác thanh toán",
+      "rewards_partner": "Đối tác chương trình thưởng",
+      "welfare_partner": "Đối tác bảo hiểm hoặc phúc lợi",
+      "society_partner": "Đối tác quản lý khu dân cư hoặc cơ sở",
+      "voice_partner": "Đối tác dịch vụ thoại hoặc ngôn ngữ"
+    },
+    "groups": {
+      "generators": "Hộ gia đình và bên bán vật liệu",
+      "collection": "Thu gom và tập kết",
+      "processing": "Xử lý và sản xuất",
+      "markets": "Thương hiệu và thị trường môi trường",
+      "services": "Vận tải và dịch vụ",
+      "partners": "Cộng đồng, chính quyền và đối tác"
+    }
+  },
+  "apartmentCollection": {
+    "pickup": "Thu gom tại chung cư",
+    "code": "Mã cộng đồng",
+    "noRoute": "Chưa có tuyến thu gom được duyệt cho chung cư này. Hãy nhờ ban quản lý tòa nhà hoặc hội cư dân sắp xếp thu gom."
+  },
+  "householdFamily": {
+    "title": "Thành viên gia đình",
+    "description": "Thành viên gia đình có thể theo dõi các lượt thu gom bạn chia sẻ. Biên nhận, ảnh và dấu chân carbon của bạn vẫn riêng tư.",
+    "phone": "Số di động của thành viên gia đình",
+    "invite": "Tạo lời mời",
+    "code": "Mã mời",
+    "codeHelp": "Chia sẻ mã này riêng tư. Mã hết hạn sau 7 ngày. Luma không gửi tin nhắn.",
+    "join": "Tham gia hộ gia đình",
+    "joinedAt": "Đã tham gia vào {date}",
+    "leave": "Rời hộ gia đình",
+    "collections": "Lượt thu gom gia đình chia sẻ",
+    "share": "Chia sẻ trạng thái",
+    "makePrivate": "Dừng chia sẻ",
+    "recent": "Hãy đăng xuất rồi đăng nhập lại trước khi tiếp tục.",
+    "invalid": "Mã không hợp lệ, đã hết hạn hoặc dành cho số di động khác.",
+    "verified": "Xác minh số di động để sử dụng lời mời."
+  },
+  "householdTools": {
+    "navigation": "Công cụ cho hộ gia đình",
+    "recycle": "Đem đi tái chế",
+    "activity": "Hoạt động",
+    "services": "Dịch vụ",
+    "footprint": "Dấu chân carbon",
+    "settings": "Cài đặt",
+    "loading": "Đang tải lịch hẹn…",
+    "noBookings": "Chưa có lịch hẹn.",
+    "electricityTitle": "Dấu chân carbon từ điện",
+    "electricityReading": "Điện lưới đã dùng (kWh)",
+    "invalidReading": "Nhập số kWh trên hóa đơn hoặc công tơ. Dùng tối đa ba chữ số thập phân.",
+    "calculate": "Tính mức ước tính",
+    "estimate": "Phát thải ước tính từ điện lưới: {amount} kg CO₂",
+    "privateCalculation": "Chỉ số của bạn chỉ hiển thị trên màn hình này. Kết quả chỉ tính điện.",
+    "gridSource": "Hệ số điện lưới Ấn Độ, CEA 2025–26",
+    "airQuality": "Chất lượng không khí",
+    "roofSolar": "Kiểm tra điện mặt trời trên mái",
+    "roofPrecision": "Kiểm tra mái nhà cần vị trí chính xác.",
+    "lookupConsent": "Gửi vị trí của tôi đến Google Maps để kiểm tra. Luma không lưu vị trí đó.",
+    "lookupUnavailable": "Không có kết quả.",
+    "locationUnavailable": "Không lấy được vị trí phù hợp.",
+    "lookupLimit": "Đã đến giới hạn tra cứu. Hãy thử lại sau.",
+    "airScore": "Chỉ số chất lượng không khí phổ quát: {score} trên 100. Càng cao càng tốt.",
+    "roofEstimate": "Sản lượng ước tính trên mái: {energy} kWh/năm (DC) với {panels} tấm pin."
+  },
+  "homeReminder": {
+    "title": "Nhắc nhở khi rời nhà",
+    "consent": "Thiết lập khi bạn ở nhà. Thiết bị dùng vị trí trong nền để nhận biết lúc bạn rời đi. Luma không nhận lịch sử vị trí của bạn.",
+    "enable": "Bật nhắc nhở khi rời nhà",
+    "disable": "Tắt nhắc nhở khi rời nhà",
+    "notificationTitle": "Trước khi bạn rời đi",
+    "notificationBody": "Kiểm tra đèn và thiết bị có thể tắt.",
+    "unavailable": "Tính năng nhắc khi rời nhà không khả dụng. Kiểm tra quyền trên thiết bị và thử lại khi ở nhà.",
+    "dailyTitle": "Nhắc nhở hằng ngày",
+    "time": "Giờ nhắc",
+    "add": "Thêm vào lịch",
+    "calendarHelp": "Mở tệp lịch để thiết lập thông báo hằng ngày."
   }
 }

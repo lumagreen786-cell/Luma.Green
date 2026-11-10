@@ -234,6 +234,26 @@ export function LotDetailPage({ lotId }: { lotId: Id<"materialLots"> }) {
     </LotAccess>
   );
 }
+function PendingLotReceipt({
+  lotId,
+  grams,
+  tradeId,
+}: {
+  lotId: Id<"materialLots">;
+  grams: number;
+  tradeId?: Id<"trades">;
+}) {
+  const market = useTranslations("market.home");
+  if (!tradeId) return <ReceiveLot lotId={lotId} grams={grams} />;
+  return (
+    <Button asChild variant="outline">
+      <Link href={{ pathname: "/app/trades", query: { tab: "buying" } }}>
+        {market("trades")}
+      </Link>
+    </Button>
+  );
+}
+
 function LotDetail({ lotId }: { lotId: Id<"materialLots"> }) {
   const t = useTranslations("lots");
   const costs = useTranslations("recordedCosts");
@@ -262,7 +282,11 @@ function LotDetail({ lotId }: { lotId: Id<"materialLots"> }) {
         {isHolder ? <HeldLotActions lot={lot} city={business.city} /> : null}
         <AcquisitionCostAction lot={lot} isHolder={isHolder} />
         {isHolder ? null : (
-          <ReceiveLot lotId={lot.id} grams={lot.availableGrams} />
+          <PendingLotReceipt
+            lotId={lot.id}
+            grams={lot.availableGrams}
+            tradeId={history.pendingTradeId}
+          />
         )}
       </div>
       {isHolder ? null : (

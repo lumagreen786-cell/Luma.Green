@@ -1,6 +1,18 @@
 import { ConvexError } from "convex/values";
 
 import workbook from "../data/industryWorkbook.json";
+import {
+  printedPetProcesses,
+  printedPetSource,
+  printedPetStages,
+  printedPetTags,
+} from "../data/printedPetReference";
+import systemDesign from "../data/systemDesignReference.json";
+
+const sectorMappings: ReadonlyMap<
+  string,
+  (typeof systemDesign.sectors)[keyof typeof systemDesign.sectors]
+> = new Map(Object.entries(systemDesign.sectors));
 
 export const REFERENCE_KINDS = [
   "sectors",
@@ -18,26 +30,43 @@ export function getIndustrySector(id: string) {
 function referenceRows(kind: ReferenceKind) {
   switch (kind) {
     case "sectors": {
-      return workbook.sectors.map((row) => ({
-        id: row.id,
-        title: row.name,
-        subtitle: `${row.code} · ${row.category}`,
-        sheet: row.sheet,
-        row: row.row,
-        details: [
-          { key: "annexure", value: row.annexure },
-          { key: "category", value: row.category },
-          { key: "division", value: row.division },
-          { key: "industryGroup", value: row.analysis.industryGroup },
-          { key: "inputs", value: row.analysis.inputs },
-          { key: "products", value: row.analysis.products },
-          { key: "byproducts", value: row.analysis.byproducts },
-          { key: "recoverableWaste", value: row.analysis.recoverableWaste },
-          { key: "residualWaste", value: row.analysis.residualWaste },
-          { key: "nextUser", value: row.analysis.nextUser },
-          { key: "suggestedFlow", value: row.analysis.suggestedFlow },
-        ],
-      }));
+      return workbook.sectors.map((row) => {
+        const mapping = sectorMappings.get(row.id);
+        return {
+          id: row.id,
+          title: row.name,
+          subtitle: `${row.code} · ${row.category}`,
+          sheet: row.sheet,
+          row: row.row,
+          details: [
+            { key: "annexure", value: row.annexure },
+            { key: "category", value: row.category },
+            { key: "division", value: row.division },
+            { key: "industryGroup", value: row.analysis.industryGroup },
+            { key: "inputs", value: row.analysis.inputs },
+            { key: "products", value: row.analysis.products },
+            {
+              key: "byproducts",
+              value: mapping?.saleable ?? row.analysis.byproducts,
+            },
+            {
+              key: "recoverableWaste",
+              value: mapping?.recoverable ?? row.analysis.recoverableWaste,
+            },
+            {
+              key: "residualWaste",
+              value: mapping?.residual ?? row.analysis.residualWaste,
+            },
+            {
+              key: "nextUser",
+              value: mapping?.nextUser ?? row.analysis.nextUser,
+            },
+            { key: "suggestedFlow", value: row.analysis.suggestedFlow },
+            { key: "route", value: mapping?.route ?? "" },
+            { key: "materialState", value: mapping?.families ?? "" },
+          ],
+        };
+      });
     }
     case "industries": {
       return workbook.industries.map((row) => ({
@@ -59,37 +88,99 @@ function referenceRows(kind: ReferenceKind) {
       }));
     }
     case "lifecycles": {
-      return workbook.lifecycles.map((row) => ({
-        id: row.id,
-        title: row.grade,
-        subtitle: row.family,
-        sheet: row.sheet,
-        row: row.row,
-        details: [
-          { key: "materialState", value: row.state },
-          { key: "route", value: row.route },
-          { key: "products", value: row.soldAs },
-          { key: "nextUser", value: row.nextUser },
-          { key: "qualityAttributes", value: row.qualityAttributes },
-        ],
-      }));
+      return [
+        ...workbook.lifecycles.map((row) => ({
+          id: row.id,
+          title: row.grade,
+          subtitle: row.family,
+          sheet: row.sheet,
+          row: row.row,
+          details: [
+            { key: "materialState", value: row.state },
+            { key: "route", value: row.route },
+            { key: "products", value: row.soldAs },
+            { key: "nextUser", value: row.nextUser },
+            { key: "qualityAttributes", value: row.qualityAttributes },
+          ],
+        })),
+        ...systemDesign.chains.map((row) => ({
+          id: row.id,
+          title: row.output,
+          subtitle: row.family,
+          sheet: `${systemDesign.workbook} · ${row.sheet}`,
+          row: row.row,
+          details: [
+            { key: "inputs", value: row.inputs },
+            { key: "industryGroup", value: row.role },
+            { key: "suggestedFlow", value: row.process },
+            { key: "qualityAttributes", value: row.quality },
+            { key: "byproducts", value: row.byproducts },
+            { key: "nextUser", value: row.nextUser },
+          ],
+        })),
+        ...printedPetProcesses.map((process, index) => ({
+          id: `printed-pet-process-${String(index + 1)}`,
+          title: process.title,
+          subtitle: "Printed PET process notes",
+          sheet: printedPetSource,
+          row: process.page,
+          details: [
+            { key: "inputs", value: process.inputs },
+            { key: "route", value: process.route },
+          ],
+        })),
+      ];
     }
     case "byproducts": {
-      return workbook.byproducts.map((row) => ({
-        id: row.id,
-        title: row.name,
-        subtitle: row.generatedBy,
-        sheet: row.sheet,
-        row: row.row,
-        details: [
-          {
-            key: "reportedCommercialStatus",
-            value: row.reportedCommercialStatus,
-          },
-          { key: "nextUser", value: row.potentialBuyer },
-          { key: "qualityAttributes", value: row.qualityAttributes },
-        ],
-      }));
+      return [
+        ...workbook.byproducts.map((row) => ({
+          id: row.id,
+          title: row.name,
+          subtitle: row.generatedBy,
+          sheet: row.sheet,
+          row: row.row,
+          details: [
+            {
+              key: "reportedCommercialStatus",
+              value: row.reportedCommercialStatus,
+            },
+            { key: "nextUser", value: row.potentialBuyer },
+            { key: "qualityAttributes", value: row.qualityAttributes },
+          ],
+        })),
+        ...systemDesign.byproducts.map((row) => ({
+          id: row.id,
+          title: row.material,
+          subtitle: `Paracetamol · ${row.step}`,
+          sheet: systemDesign.pharmaDocument,
+          row: row.row,
+          details: [
+            { key: "recoverableWaste", value: row.recovery },
+            { key: "suggestedFlow", value: row.treatment },
+          ],
+        })),
+        ...printedPetStages.flatMap(({ page, stage, streams }, stageIndex) =>
+          streams.map(([name, use, treatment], streamIndex) => ({
+            id: `printed-pet-stream-${String(stageIndex + 1)}-${String(streamIndex + 1)}`,
+            title: name,
+            subtitle: stage,
+            sheet: printedPetSource,
+            row: page,
+            details: [
+              { key: "note", value: use },
+              { key: "route", value: treatment },
+            ],
+          })),
+        ),
+        ...printedPetTags.map(([tag, meaning, examples]) => ({
+          id: `printed-pet-tag-${tag}`,
+          title: meaning,
+          subtitle: `PET source tag ${tag}`,
+          sheet: printedPetSource,
+          row: 1,
+          details: [{ key: "note", value: examples }],
+        })),
+      ];
     }
   }
 }

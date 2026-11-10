@@ -139,7 +139,7 @@
         "title": "Gospodarstwa domowe",
         "one": "Sprawdź wartość surowców przed rezerwacją.",
         "two": "Odbiór przy drzwiach lub dostawa do punktu.",
-        "three": "Zapłata gotówką lub UPI, z potwierdzeniem.",
+        "three": "Zapłata gotówką, z potwierdzeniem.",
         "cta": "Oddaj do recyklingu"
       },
       "kabadiwala": {
@@ -611,7 +611,7 @@
       "body": "Podejmuj płatne odbiory, sortowanie i zmiany blisko domu oraz sprawdzaj zarobki."
     },
     "householdHeading": "Także dla każdego gospodarstwa",
-    "householdBody": "Zamów odbiór z domu, podając numer telefonu komórkowego: wybierz materiały, porównaj oferty punktów skupu i odbierz od punktu płatność gotówką lub przez UPI wraz z pokwitowaniem."
+    "householdBody": "Zamów odbiór z domu, podając numer telefonu komórkowego: wybierz materiały, porównaj oferty punktów skupu i odbierz od punktu płatność gotówką wraz z pokwitowaniem."
   },
   "contact": {
     "metaTitle": "Kontakt",
@@ -1079,7 +1079,7 @@
           },
           "pay": {
             "title": "Otrzymaj zapłatę na miejscu",
-            "body": "Gotówką lub przez UPI, zanim odbierający odjedzie. Luma.Green nigdy nie przechowuje Twoich pieniędzy."
+            "body": "Gotówką, zanim odbierający odjedzie. Luma.Green nigdy nie przechowuje Twoich pieniędzy."
           },
           "receipt": {
             "title": "Sprawdź potwierdzenie",
@@ -1218,7 +1218,7 @@
             "body": "Aplikacja obliczy ją według Twoich cen. Pokaż ekran mieszkańcowi."
           },
           "pay": {
-            "title": "Zapłać gotówką lub przez UPI",
+            "title": "Zapłać gotówką",
             "body": "Zapłać przed odjazdem i wybierz sposób płatności."
           },
           "save": {
@@ -1569,7 +1569,7 @@
       },
       "howPaid": {
         "q": "Jak otrzymam zapłatę?",
-        "a": "Przy odbiorze, gotówką lub przez UPI, zanim odbierający odjedzie. Luma.Green zapisuje płatność, ale nigdy nie przechowuje Twoich pieniędzy."
+        "a": "Przy odbiorze, gotówką, zanim odbierający odjedzie. Luma.Green zapisuje płatność, ale nigdy nie przechowuje Twoich pieniędzy."
       },
       "recyclePoints": {
         "q": "Czym są punkty za recykling?",
@@ -1621,7 +1621,7 @@
       },
       "payHousehold": {
         "q": "Czy Luma.Green płaci mieszkańcowi za mnie?",
-        "a": "Nie. Płacisz gotówką lub przez UPI przy odbiorze. Aplikacja zapisuje kwotę i sposób płatności."
+        "a": "Nie. Płacisz gotówką przy odbiorze. Aplikacja zapisuje kwotę i sposób płatności."
       },
       "paidByYard": {
         "q": "Jak otrzymuję zapłatę za sprzedaż firmie przetwarzania wstępnego?",
@@ -2217,6 +2217,7 @@
       "fileType": "Nie można tu użyć tego typu pliku",
       "fileTooBig": "Plik jest za duży",
       "uploadFailed": "Przesyłanie nie powiodło się. Spróbuj ponownie.",
+      "uploadUnavailable": "Przesyłanie prywatnych plików jest obecnie niedostępne.",
       "generic": "Wystąpił błąd. Spróbuj ponownie.",
       "pan": "Wyszukaj numer GST i potwierdź firmę.",
       "city": "Wpisz miasto lub miejscowość, od 2 do 60 znaków."
@@ -2531,7 +2532,7 @@
     "metaDescription": "Oddaj surowce do recyklingu. Otrzymaj zapłatę. Zdjęcia, odbiór lub dostawa i płatność po zważeniu.",
     "eyebrow": "Indie",
     "title": "Zamów odbiór z domu",
-    "lead": "Wybierz materiały i pobliski punkt. Po ważeniu otrzymasz gotówkę lub płatność UPI.",
+    "lead": "Wybierz materiały i pobliski punkt. Po ważeniu otrzymasz gotówkę.",
     "promises": {
       "label": "Dlaczego warto tu sprzedawać",
       "noAccount": "Zweryfikuj telefon, aby zamówić",
@@ -2650,7 +2651,7 @@
       "dropoff": "Dostarczysz do punktu",
       "whenValue": "{day} · {window}, {time}",
       "youGet": "Otrzymasz około {amount}",
-      "payNote": "Punkt zważy surowce i zapłaci gotówką lub przez UPI.",
+      "payNote": "Punkt zważy surowce i zapłaci gotówką.",
       "phoneTitle": "Potwierdź numer telefonu",
       "phoneLead": "Wyślemy SMS-em 6-cyfrowy kod. Rezerwacja zostanie zapisana pod tym numerem, aby można było ją śledzić na dowolnym telefonie.",
       "bookingAs": "Rezerwacja dla {phone}",
@@ -2807,7 +2808,7 @@
       "requested": "{mode, select, pickup {Oczekiwanie na przyjęcie przez {shop}} other {Oczekiwanie na potwierdzenie przez {shop}}}",
       "requestedBody": "Wysłaliśmy prośbę. Strona zaktualizuje się po otrzymaniu odpowiedzi.",
       "accepted": "{mode, select, pickup {{shop} przyjął odbiór} other {{shop} oczekuje na Ciebie}}",
-      "acceptedBody": "Przygotuj surowce. Po ważeniu otrzymasz gotówkę lub płatność UPI.",
+      "acceptedBody": "Przygotuj surowce. Po ważeniu otrzymasz gotówkę.",
       "on_the_way": "{shop} jest w drodze",
       "on_the_wayBody": "Przygotuj surowce przy drzwiach.",
       "completed": "Gotowe! Otrzymano {amount}",
@@ -2848,7 +2849,7 @@
     "money": {
       "title": "Pieniądze i punkty",
       "estimate": "Otrzymasz około {amount}",
-      "estimateNote": "Punkt zważy surowce i zapłaci gotówką lub przez UPI.",
+      "estimateNote": "Punkt zważy surowce i zapłaci gotówką.",
       "paid": "Otrzymano {amount}",
       "paidBy": "Zapłacono {method, select, upi {przez UPI} other {gotówką}} · {date}",
       "estimateWas": "Szacunek wynosił {amount}",
@@ -3413,6 +3414,7 @@
     "description": "Zezwól PostHog i Google Analytics na pomiar wizyt na stronach publicznych. Nie rejestrujemy formularzy, stron prywatnych ani nagrań sesji. Wybór nie zmienia dostępu do platformy.",
     "accept": "Zezwól na analitykę",
     "decline": "Pozostaw analitykę wyłączoną",
+    "withdraw": "Wyłącz analitykę",
     "settings": "Ustawienia analityki",
     "saved": "Wybór jest zapisany na tym urządzeniu.",
     "unavailable": "Przeglądarka nie mogła zapisać wyboru. Analityka pozostanie wyłączona.",
@@ -3803,6 +3805,79 @@
     "qualityReleaseRequired": "Wymagane zaakceptowane testy"
   },
   "carbonProjects": {
+    "industry": {
+      "title": "Branża",
+      "other": "Inny projekt",
+      "assign": "Ustaw branżę",
+      "assignmentHint": "Wybierz branżę zgodną z metodą projektu. Możesz ją ustawić tylko raz.",
+      "labels": {
+        "pet_plastics": "Tworzywa PET",
+        "metals_recycling": "Recykling metali",
+        "e_waste_recovery": "Odzysk z elektroodpadów",
+        "compressed_biogas": "Sprężony biogaz",
+        "industrial_manufacturing": "Efektywność produkcji przemysłowej"
+      }
+    },
+    "screening": {
+      "title": "Wstępna ocena wymogów",
+      "framework": "Ramy oceny",
+      "notice": "Użytkownicy sami deklarują wyniki. Oficjalne decyzje podejmuje zewnętrzny program.",
+      "petExample": "Zastosowanie do przykładu PET",
+      "source": "Oficjalne metody",
+      "process": "Oficjalna procedura",
+      "check": "Wymóg",
+      "result": "Wynik oceny",
+      "save": "Zapisz wynik",
+      "conflict": "Ocena się zmieniła. Przed zapisaniem sprawdź najnowsze wyniki.",
+      "useLatest": "Użyj najnowszej wersji",
+      "fit": {
+        "candidate": "Możliwa metoda. Potwierdź, że projekt spełnia wymogi.",
+        "unconfirmed": "Zgodność z obowiązującą metodą pozostaje niepotwierdzona.",
+        "no_listed_method": "W opublikowanym wykazie nie znaleziono pasującej metody.",
+        "out_of_scope": "Poza zakresem trwałego usuwania dwutlenku węgla.",
+        "accounting_only": "Wyłącznie rozliczanie emisji."
+      },
+      "status": {
+        "missing": "Brak danych",
+        "supported": "Potwierdza wymóg",
+        "contradicted": "Podważa spełnienie wymogu"
+      },
+      "gates": {
+        "method_and_version": "Metoda i wersja",
+        "site_and_operator": "Zakład i operator",
+        "baseline_and_additionality": "Scenariusz bazowy i dodatkowość",
+        "claim_rights_and_overlap": "Prawo do zgłaszania redukcji i nakładanie się roszczeń",
+        "monitoring_and_calculation": "Monitorowanie i obliczenia",
+        "validation": "Walidacja projektu",
+        "registration": "Rejestracja projektu",
+        "verification": "Weryfikacja wyników",
+        "issuance": "Emisja jednostek węglowych",
+        "transfer_and_settlement": "Przeniesienie i rozliczenie",
+        "retirement": "Umorzenie lub przekazanie jednostek",
+        "municipal_waste_origin": "Pochodzenie odpadów komunalnych",
+        "collection_scope": "Zakres zbiórki i wyłączenia",
+        "material_and_mass_balance": "Materiały i bilans masy",
+        "process_energy": "Zużycie energii w procesie",
+        "buyer_end_use": "Końcowe zastosowanie przez nabywcę",
+        "virgin_material_displacement": "Zastępowanie surowców pierwotnych",
+        "indian_entity_and_authorized_venue": "Podmiot indyjski i zatwierdzony rynek",
+        "safeguards_and_consultation": "Środki ochronne i konsultacje",
+        "jurisdiction": "Dopuszczalna jurysdykcja",
+        "durable_removal_and_storage": "Trwałe usuwanie i składowanie",
+        "inventory_boundary_and_scopes": "Granice i zakresy inwentaryzacji",
+        "scenario_and_capacity": "Scenariusz dla zakładu i kwalifikująca się wydajność",
+        "dry_mass_and_pet_grade": "Sucha masa i klasa jakości PET",
+        "recovered_metal_and_grade": "Odzyskany metal i klasa produktu",
+        "equipment_categories_and_custody": "Kategorie urządzeń i łańcuch kontroli pochodzenia",
+        "residue_destination": "Miejsce zagospodarowania pozostałości",
+        "feedstock_and_prior_treatment": "Zważony wsad i wcześniejsze przetwarzanie",
+        "gas_metering_and_methane_leakage": "Pomiar gazu i wycieki metanu",
+        "digestate_and_offtake": "Zagospodarowanie i odbiór pofermentu",
+        "equipment_and_commissioning": "Urządzenia i oddanie do użytku",
+        "meter_calibration": "Kalibracja mierników",
+        "comparable_output_and_feedstock": "Porównywalna produkcja i wsad"
+      }
+    },
     "name": "Nazwa projektu",
     "referenceHint": "Wpisz tylko identyfikator dokumentu. Pomiń dane osobowe i hasła.",
     "title": "Projekty węglowe",
@@ -3875,8 +3950,8 @@
   },
   "industry": {
     "title": "Odnośniki branżowe",
-    "lead": "Przeszukaj dostarczony skoroszyt. Te dane są niezweryfikowane i nie zezwalają na handel ani przetwarzanie materiałów.",
-    "sourceNote": "Tekst źródłowy jest wyświetlany w oryginalnym języku angielskim skoroszytu.",
+    "lead": "Przeszukaj udostępnione materiały referencyjne. Te dane są niezweryfikowane i nie zezwalają na handel ani przetwarzanie materiałów.",
+    "sourceNote": "Teksty źródłowe są wyświetlane po angielsku.",
     "sectors": "Odnośniki sektorowe",
     "industries": "Macierz branżowa",
     "lifecycles": "Cykl życia materiału",
@@ -3982,6 +4057,10 @@
     "note": "To deklaracje producenta, a nie niezależna weryfikacja jakości, własności lub zgodności. Zapisów nie można edytować po zapisaniu."
   },
   "tradeLifecycle": {
+    "cashRecord": "Zarejestruj przyjęcie gotówki",
+    "cashReported": "Zgłoszono przyjęcie gotówki",
+    "cashNote": "Kupujący płaci sprzedawcy bezpośrednio. Luma zapisuje zgłoszenie sprzedawcy.",
+    "cashReference": "Numer potwierdzenia płatności gotówką",
     "title": "Płatność i dostawa",
     "collectionLabel": "Płatność kupującego",
     "settlementLabel": "Rozliczenie ze sprzedawcą",
@@ -4488,6 +4567,11 @@
     "loadSaved": "Otwórz zapisaną wersję"
   },
   "businessSubscriptions": {
+    "draftsTitle": "Projekty faktur",
+    "draftsEmpty": "Nie ma jeszcze projektów.",
+    "draftTotal": "Suma częściowa projektu przed podatkiem",
+    "draftBook": "Cennik {version}",
+    "draftUsage": "Liczba zamówień gotówkowych: {count}",
     "title": "Plan placówki",
     "lead": "Zapisz preferowany plan dla tej placówki.",
     "off": "Rozliczenia są wyłączone. Preferencja nie uruchamia płatnej subskrypcji.",
@@ -4543,6 +4627,25 @@
     "localDraft": "Poprzedni niezapisany tekst",
     "savedText": "Ostatni zapisany tekst"
   },
+  "collectionPrivacy": {
+    "phone": "Używamy Twojego numeru telefonu do logowania oraz wysyłania aktualności o usłudze przez SMS.",
+    "email": "Do założenia konta używamy Twojego imienia i nazwiska, adresu e-mail oraz hasła. Wysyłamy link do potwierdzenia adresu e-mail.",
+    "booking": "Używamy Twojego imienia i nazwiska, telefonu, zdjęć, miasta i wybranej godziny, aby zorganizować recykling. Przy odbiorze korzystamy też z adresu i udostępnionej lokalizacji."
+  },
+  "privacyRequests": {
+    "title": "Wnioski dotyczące prywatności",
+    "lead": "Wybierz wniosek. Zespół ds. prywatności rozpatrzy go i odpowie. Zachowaj numer wniosku.",
+    "kind": "Rodzaj wniosku",
+    "submit": "Wyślij wniosek",
+    "received": "Wniosek przyjęty",
+    "responded": "Zespół odpowiedział",
+    "access": "Uzyskaj dostęp do moich danych",
+    "correction": "Popraw moje dane",
+    "erasure": "Usuń moje dane",
+    "grievance": "Złóż skargę dotyczącą prywatności",
+    "nomination": "Wyznacz przedstawiciela",
+    "withdrawal": "Wycofaj zgodę"
+  },
   "privacy": {
     "title": "Polityka prywatności",
     "lead": "Ta polityka obejmuje stronę Luma.Green oraz aplikacje Android, iOS, Windows i macOS.",
@@ -4556,5 +4659,124 @@
     "requestsBody": "Usuń konto poniżej lub napisz do pomocy, aby uzyskać dostęp, poprawić albo usunąć dane. Potwierdź własność; nie wysyłaj dokumentów tożsamości e-mailem. Najpierw rozwiąż otwarte zadania lub kwestie własności.",
     "retentionTitle": "Co pozostaje po zamknięciu",
     "retentionBody": "Zamknięcie usuwa dostęp i dane logowania. Dowody biznesowe, płatnicze, bezpieczeństwa i audytu mogą pozostać do przeglądu. Nie każdy rekord jest usuwany. Zapytaj pomoc o przechowywanie i terminy."
+  },
+  "participantDirectory": {
+    "title": "Wybierz swoją rolę",
+    "search": "Szukaj ról",
+    "empty": "Brak pasujących ról",
+    "continue": "Dalej",
+    "apply": "Zgłoś się w tej roli",
+    "roles": {
+      "household": "Gospodarstwo domowe",
+      "small_business": "Sklep lub mała firma",
+      "industrial_seller": "Sprzedawca złomu przemysłowego",
+      "institution": "Instytucja",
+      "kabadiwala": "Kabadiwala",
+      "saathi": "Saathi",
+      "dry_waste_centre": "Punkt odpadów suchych lub spółdzielnia zbieraczy",
+      "large_yard": "Duży plac składowy",
+      "collection_contractor": "Wykonawca odbioru od drzwi do drzwi",
+      "rural_collector": "Wiejska jednostka samorządu lub grupa samopomocy",
+      "trader": "Handlowiec, pośrednik lub eksporter",
+      "preprocessor": "Zakład obróbki wstępnej",
+      "recycler": "Zakład recyklingu",
+      "e_waste_operator": "Odbiorca, demontażysta lub zakład odnawiania elektroodpadów",
+      "wet_waste_processor": "Zakład przetwarzania odpadów mokrych",
+      "intermediary_manufacturer": "Producent półproduktów",
+      "end_goods_manufacturer": "Producent wyrobów gotowych",
+      "epr_brand": "Marka objęta ROP",
+      "pro": "Organizacja odpowiedzialności producentów",
+      "epr_trading": "Obrót w ramach ROP",
+      "carbon_trading": "Handel uprawnieniami do emisji",
+      "transporter": "Przewoźnik i dokumenty przewozowe",
+      "equipment_supplier": "Dostawca sprzętu",
+      "boiler_water_supplier": "Dostawca kotłów, instalacji uzdatniania lub cystern",
+      "weighing_vendor": "Dostawca wag lub wag samochodowych",
+      "solar_provider": "Dostawca energii słonecznej",
+      "environmental_engineer": "Inżynieria środowiska",
+      "hr_provider": "Dostawca usług kadrowych",
+      "accounting_provider": "Księgowość i zgodność z przepisami",
+      "employee_tracking": "Ewidencja personelu",
+      "waste_picker_union": "NGO lub związek zbieraczy odpadów",
+      "city_official": "Urzędnik miejski",
+      "csr_lender_auditor": "Zespół CSR, kredytodawca lub audytor",
+      "luma_team": "Zespół Luma.Green",
+      "ward_official": "Urzędnik dzielnicowy",
+      "community_champion": "Przedstawiciel społeczności",
+      "payment_partner": "Partner płatniczy",
+      "rewards_partner": "Partner programu nagród",
+      "welfare_partner": "Partner ubezpieczeniowy lub socjalny",
+      "society_partner": "Partner zarządzania osiedlem lub obiektem",
+      "voice_partner": "Partner usług głosowych lub językowych"
+    },
+    "groups": {
+      "generators": "Gospodarstwa domowe i sprzedawcy materiałów",
+      "collection": "Odbiór i konsolidacja",
+      "processing": "Przetwarzanie i produkcja",
+      "markets": "Marki i rynki środowiskowe",
+      "services": "Logistyka i usługi",
+      "partners": "Społeczność, administracja i partnerzy"
+    }
+  },
+  "apartmentCollection": {
+    "pickup": "Odbiór z budynku wielorodzinnego",
+    "code": "Kod wspólnoty",
+    "noRoute": "Brak sprawdzonego odbioru dla tego budynku. Poproś zarządcę lub wspólnotę mieszkańców o zorganizowanie odbioru."
+  },
+  "householdFamily": {
+    "title": "Członkowie rodziny",
+    "description": "Członkowie rodziny mogą śledzić udostępnione odbiory. Twoje potwierdzenia, zdjęcia i ślad węglowy pozostają prywatne.",
+    "phone": "Numer telefonu członka rodziny",
+    "invite": "Utwórz zaproszenie",
+    "code": "Kod zaproszenia",
+    "codeHelp": "Udostępnij ten kod prywatnie. Wygasa po 7 dniach. Luma nie wysyła wiadomości.",
+    "join": "Dołącz do gospodarstwa",
+    "joinedAt": "Dołączono {date}",
+    "leave": "Opuść gospodarstwo",
+    "collections": "Udostępnione odbiory rodzinne",
+    "share": "Udostępnij postęp",
+    "makePrivate": "Zakończ udostępnianie",
+    "recent": "Wyloguj się i zaloguj ponownie, aby kontynuować.",
+    "invalid": "Kod jest nieprawidłowy, wygasł lub dotyczy innego numeru.",
+    "verified": "Zweryfikuj numer telefonu, aby korzystać z zaproszeń."
+  },
+  "householdTools": {
+    "navigation": "Narzędzia dla domu",
+    "recycle": "Oddaj do recyklingu",
+    "activity": "Aktywność",
+    "services": "Usługi",
+    "footprint": "Ślad węglowy",
+    "settings": "Ustawienia",
+    "loading": "Wczytywanie rezerwacji…",
+    "noBookings": "Brak rezerwacji.",
+    "electricityTitle": "Ślad zużycia energii elektrycznej",
+    "electricityReading": "Zużyta energia z sieci (kWh)",
+    "invalidReading": "Wpisz liczbę kWh z rachunku lub licznika. Użyj maksymalnie trzech miejsc po przecinku.",
+    "calculate": "Oblicz szacunek",
+    "estimate": "Szacowana emisja z sieci: {amount} kg CO₂",
+    "privateCalculation": "Odczyt pozostaje na tym ekranie. Wynik obejmuje tylko energię elektryczną.",
+    "gridSource": "Współczynnik dla sieci w Indiach, CEA 2025–26",
+    "airQuality": "Jakość powietrza",
+    "roofSolar": "Sprawdź potencjał solarny dachu",
+    "roofPrecision": "Sprawdzenie dachu wymaga dokładnej lokalizacji.",
+    "lookupConsent": "Wyślij moją lokalizację do Google Maps na potrzeby tego sprawdzenia. Luma jej nie zapisuje.",
+    "lookupUnavailable": "Brak wyników.",
+    "locationUnavailable": "Nie udało się uzyskać odpowiedniej lokalizacji.",
+    "lookupLimit": "Osiągnięto limit zapytań. Spróbuj ponownie później.",
+    "airScore": "Uniwersalny indeks jakości powietrza: {score} na 100. Im wyżej, tym lepiej.",
+    "roofEstimate": "Modelowana produkcja z dachu: {energy} kWh/rok (prąd stały) przy {panels} panelach."
+  },
+  "homeReminder": {
+    "title": "Przypomnienie przy wyjściu z domu",
+    "consent": "Skonfiguruj przypomnienie w domu. Urządzenie używa lokalizacji w tle, aby wykryć wyjście. Luma nie otrzymuje historii lokalizacji.",
+    "enable": "Włącz przypomnienie o wyjściu",
+    "disable": "Wyłącz przypomnienie o wyjściu",
+    "notificationTitle": "Przed wyjściem",
+    "notificationBody": "Sprawdź, które światła i urządzenia możesz wyłączyć.",
+    "unavailable": "Przypomnienie jest niedostępne. Sprawdź uprawnienia urządzenia i spróbuj ponownie w domu.",
+    "dailyTitle": "Codzienne przypomnienie",
+    "time": "Godzina przypomnienia",
+    "add": "Dodaj do kalendarza",
+    "calendarHelp": "Otwórz plik kalendarza, aby ustawić codzienny alert."
   }
 }

@@ -60,3 +60,43 @@ It carries no eligibility, measurement approval, or issuance status.
 Old snapshots remain readable by revision after a correction. The workspace
 only offers the current snapshot for download. No backfill is required. On
 rollback, keep the snapshot table and audit records for prior reviews.
+
+## Framework screening
+
+The Carbon projects screen can show a separate screening for Verra VCS,
+Gold Standard, Climate Action Reserve, Puro.earth, ACR, India CCTS and the
+GHG Protocol. The PET example's method fit is guidance. The actual project's
+activity and eligibility need their own evidence. The GHG Protocol checklist
+covers accounting without issuance, transfer or retirement gates.
+
+The optional industry on `carbonProjects.create` selects one of five
+activity checklists and must match the selected candidate method. Existing
+projects can use `carbonProjects.assignIndustry` with the project revision
+to set a compatible industry once. Assignment opens a new draft revision
+and leaves historical snapshots readable. New snapshots include the
+industry when set. Other framework screens remain available for comparison.
+
+- `carbonProjects.frameworkScreenings` takes the selected workspace and
+  project IDs. It returns the current recorded gates and revision per
+  framework. An absent gate means no evidence assessment has been recorded.
+- `carbonProjects.recordFrameworkCheck` takes those IDs plus the framework,
+  gate, expected revision, reported status and short evidence reference.
+  The first write uses revision 0. The server verifies membership, operate
+  permission, project scope and that the gate belongs to the framework.
+  A conflicting revision requires a reload. The audit event stores the
+  gate and status without copying the private reference. Screening shows the
+  current reference for each gate. Every accepted revision also saves the
+  reference and time in private, append-only history in the same transaction.
+  Retries do not add another entry. The frozen project review has its own
+  document references.
+- `carbonProjects.frameworkHistory` takes the selected workspace, project
+  and framework. It returns up to 100 recent changes, newest first, with a
+  completeness indicator. The Carbon projects screen opens this history on
+  demand. Only authorized workspace readers can see prior references.
+  Screenings from before this change have partial history. The migration
+  does not invent past references. On rollback, keep the history table and
+  audit log.
+
+The supported and contradicted statuses are workspace reports. They do
+not verify a document, approve eligibility or change a frozen project review.
+This flow has no registry credentials, uploads or provider writes.

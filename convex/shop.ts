@@ -7,6 +7,7 @@ import {
   query,
   type QueryCtx,
 } from "./_generated/server";
+import { requireApartmentCollection } from "./lib/apartmentCollections";
 import {
   type BookingStatus,
   canMoveBooking,
@@ -523,6 +524,12 @@ export const startTrip = mutation({
     const { profile, org } = await requireOrg(ctx, SHOP);
     const booking = await myBooking(ctx, org, args.bookingId);
     if (booking.mode !== "pickup") throw new ConvexError("NOT_A_PICKUP");
+    await requireApartmentCollection(
+      ctx,
+      booking.apartmentRouteId,
+      org._id,
+      booking.slotDate,
+    );
     await moveBooking(ctx, {
       booking,
       to: "on_the_way",
@@ -543,7 +550,7 @@ export const complete = mutation({
   args: {
     bookingId: v.id("bookings"),
     lines: v.array(v.object({ materialCode: v.string(), grams: v.number() })),
-    method: v.union(v.literal("cash"), v.literal("upi")),
+    method: v.literal("cash"),
   },
   returns: v.object({ totalPaise: v.number(), points: v.number() }),
   handler: async (ctx, args) => {

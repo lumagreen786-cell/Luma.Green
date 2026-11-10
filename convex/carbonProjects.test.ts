@@ -145,6 +145,24 @@ describe("carbon project preparation", () => {
       batches: [],
     });
     expect(snapshot?.references.map(({ kind }) => kind)).toEqual(required);
+    await recycler.mutation(api.carbonProjects.recordFrameworkCheck, {
+      ...scope,
+      framework: "verra",
+      gate: "method_and_version",
+      status: "supported",
+      reference: "PRIVATE-TEST-METHOD",
+      expectedRevision: 0,
+    });
+    expect(
+      await recycler.query(api.carbonProjects.reviewSnapshot, snapshotArgs),
+    ).toEqual(snapshot);
+    expect(
+      await recycler.query(api.carbonProjects.mine, { expectedOrgId }),
+    ).toMatchObject({
+      rows: [
+        { revision: 6, snapshotRevision: 6, status: "internally_reviewed" },
+      ],
+    });
     await expect(
       shop.query(api.carbonProjects.reviewSnapshot, snapshotArgs),
     ).rejects.toThrow(/EVIDENCE_SCOPE_CHANGED/);
@@ -191,6 +209,7 @@ describe("carbon project preparation", () => {
       "carbon_project.internally_reviewed",
     );
     expect(JSON.stringify(events)).not.toContain("TEST-UNVERIFIED-REGISTRY");
+    expect(JSON.stringify(events)).not.toContain("PRIVATE-TEST-METHOD");
   });
 
   it("rejects overlapping edits and preserves history on a correction", async () => {
@@ -533,5 +552,486 @@ describe("carbon project preparation", () => {
       revision: 8,
       attachedAt: attaches[0]?.createdAt,
     });
+  });
+});
+
+describe("carbon framework screening", () => {
+  it("creates projects only when the selected industry's candidate method matches", async () => {
+    const {
+      recycler,
+      recyclerOrgId: expectedOrgId,
+      facilityId,
+    } = await world();
+    const routes = [
+      ["pet_plastics", "verra_vmr0007"],
+      ["metals_recycling", "verra_vmr0007"],
+      ["e_waste_recovery", "verra_vmr0008"],
+      ["compressed_biogas", "bee_wa03_003"],
+      ["industrial_manufacturing", "bee_in02_001"],
+    ] as const;
+    for (const [industry, method] of routes) {
+      const input = {
+        expectedOrgId,
+        facilityId,
+        name: industry,
+        industry,
+        method,
+      };
+      const id = await recycler.mutation(api.carbonProjects.create, input);
+      expect(await recycler.mutation(api.carbonProjects.create, input)).toBe(
+        id,
+      );
+    }
+    const { rows } = await recycler.query(api.carbonProjects.mine, {
+      expectedOrgId,
+    });
+    expect(rows).toHaveLength(routes.length);
+    expect(rows.map(({ industry, method }) => [industry, method])).toEqual(
+      expect.arrayContaining([...routes]),
+    );
+    await expect(
+      recycler.mutation(api.carbonProjects.create, {
+        expectedOrgId,
+        facilityId,
+        name: "Invalid project",
+        industry: "compressed_biogas",
+        method: "verra_vmr0007",
+      }),
+    ).rejects.toThrow(/CARBON_INDUSTRY_METHOD_MISMATCH/);
+    await expect(
+      recycler.mutation(api.carbonProjects.create, {
+        expectedOrgId,
+        facilityId,
+        name: "pet_plastics",
+        industry: "metals_recycling",
+        method: "verra_vmr0007",
+      }),
+    ).rejects.toThrow(/CARBON_INDUSTRY_ALREADY_ASSIGNED/);
+  });
+
+  it("assigns a legacy industry once and preserves generic checks and old reviews", async () => {
+    const {
+      t,
+      recycler,
+      recyclerOrgId: expectedOrgId,
+      facilityId,
+      membershipId,
+    } = await world();
+    const create = {
+      expectedOrgId,
+      facilityId,
+      name: "Legacy electronics recycling",
+      method: "verra_vmr0008",
+    } as const;
+    const projectId = await recycler.mutation(
+      api.carbonProjects.create,
+      create,
+    );
+    const scope = { expectedOrgId, projectId };
+    const assign = {
+      ...scope,
+      industry: "e_waste_recovery",
+      expectedRevision: 6,
+    } as const;
+    const check = {
+      ...scope,
+      framework: "verra",
+      gate: "method_and_version",
+      status: "supported",
+      reference: "PRIVATE-LEGACY-METHOD",
+      expectedRevision: 0,
+    } as const;
+    const industryCheck = {
+      ...check,
+      gate: "equipment_categories_and_custody",
+      reference: "PRIVATE-INDUSTRY-CUSTODY",
+      expectedRevision: 1,
+    } as const;
+
+    await expect(
+      recycler.mutation(api.carbonProjects.create, {
+        ...create,
+        industry: assign.industry,
+      }),
+    ).rejects.toThrow(/CARBON_INDUSTRY_ASSIGNMENT_REQUIRED/);
+    await recycler.mutation(api.carbonProjects.recordFrameworkCheck, check);
+    await expect(
+      recycler.mutation(api.carbonProjects.recordFrameworkCheck, industryCheck),
+    ).rejects.toThrow(/INVALID_CARBON_FRAMEWORK_GATE/);
+    const required = [
+      "baseline",
+      "monitoring",
+      "claim_rights",
+      "verification_report",
+    ] as const;
+    for (const [index, kind] of required.entries()) {
+      await recycler.mutation(api.carbonProjects.recordEvidence, {
+        ...scope,
+        kind,
+        reference: `TEST-${kind}`,
+        expectedRevision: index + 1,
+      });
+    }
+    await recycler.mutation(api.carbonProjects.review, {
+      ...scope,
+      expectedRevision: 5,
+    });
+    const oldSnapshotArgs = { ...scope, revision: 6 };
+    const original = await recycler.query(
+      api.carbonProjects.reviewSnapshot,
+      oldSnapshotArgs,
+    );
+    expect(original).toBeTruthy();
+    expect(original?.industry).toBeUndefined();
+    await expect(
+      recycler.mutation(api.carbonProjects.assignIndustry, {
+        ...assign,
+        industry: "pet_plastics",
+      }),
+    ).rejects.toThrow(/CARBON_INDUSTRY_METHOD_MISMATCH/);
+    await expect(
+      recycler.mutation(api.carbonProjects.assignIndustry, {
+        ...assign,
+        expectedRevision: 5,
+      }),
+    ).rejects.toThrow(/CARBON_PROJECT_CHANGED/);
+    await t.run((ctx) =>
+      ctx.db.patch("memberships", membershipId, { role: "viewer" }),
+    );
+    await expect(
+      recycler.mutation(api.carbonProjects.assignIndustry, assign),
+    ).rejects.toThrow(/WORKSPACE_PERMISSION_DENIED/);
+    await t.run((ctx) =>
+      ctx.db.patch("memberships", membershipId, { role: "owner" }),
+    );
+    await recycler.mutation(api.carbonProjects.assignIndustry, assign);
+    await recycler.mutation(api.carbonProjects.assignIndustry, assign);
+    await expect(
+      recycler.mutation(api.carbonProjects.assignIndustry, {
+        ...assign,
+        industry: "pet_plastics",
+        expectedRevision: 7,
+      }),
+    ).rejects.toThrow(/CARBON_INDUSTRY_ALREADY_ASSIGNED/);
+    expect(
+      await recycler.query(api.carbonProjects.mine, { expectedOrgId }),
+    ).toMatchObject({
+      rows: [
+        {
+          industry: assign.industry,
+          revision: 7,
+          snapshotRevision: 6,
+          status: "draft",
+        },
+      ],
+    });
+    await recycler.mutation(
+      api.carbonProjects.recordFrameworkCheck,
+      industryCheck,
+    );
+    expect(
+      await recycler.query(api.carbonProjects.frameworkScreenings, scope),
+    ).toMatchObject([
+      {
+        framework: "verra",
+        revision: 2,
+        checks: [
+          { gate: check.gate, reference: check.reference },
+          { gate: industryCheck.gate, reference: industryCheck.reference },
+        ],
+      },
+    ]);
+    await recycler.mutation(api.carbonProjects.review, {
+      ...scope,
+      expectedRevision: 7,
+    });
+    expect(
+      await recycler.query(api.carbonProjects.reviewSnapshot, {
+        ...scope,
+        revision: 8,
+      }),
+    ).toMatchObject({ industry: assign.industry, revision: 8 });
+    expect(
+      await recycler.query(api.carbonProjects.reviewSnapshot, oldSnapshotArgs),
+    ).toEqual(original);
+    const events = await t.run((ctx) =>
+      ctx.db
+        .query("auditLog")
+        .withIndex("by_entity", (q) =>
+          q.eq("entityTable", "carbonProjects").eq("entityId", projectId),
+        )
+        .take(20),
+    );
+    expect(
+      events.filter(
+        ({ action }) => action === "carbon_project.industry_assigned",
+      ),
+    ).toMatchObject([
+      {
+        metadata: {
+          industry: assign.industry,
+          revision: 7,
+          previousStatus: "internally_reviewed",
+        },
+      },
+    ]);
+  });
+
+  it("scopes checks by workspace and keeps private references out of the audit log", async () => {
+    const {
+      t,
+      recycler,
+      shop,
+      recyclerOrgId: expectedOrgId,
+      shopOrgId,
+      facilityId,
+      membershipId,
+    } = await world();
+    const projectId = await recycler.mutation(api.carbonProjects.create, {
+      expectedOrgId,
+      facilityId,
+      name: "Framework screening fixture",
+      method: "verra_vmr0007",
+    });
+    const scope = { expectedOrgId, projectId };
+    const check = {
+      ...scope,
+      framework: "verra",
+      gate: "method_and_version",
+      status: "supported",
+      reference: " PRIVATE-TEST-SCREENING ",
+      expectedRevision: 0,
+    } as const;
+
+    expect(
+      await recycler.query(api.carbonProjects.frameworkScreenings, scope),
+    ).toEqual([]);
+    await t.run((ctx) =>
+      ctx.db.patch("memberships", membershipId, { role: "member" }),
+    );
+    await recycler.mutation(api.carbonProjects.recordFrameworkCheck, check);
+    await recycler.mutation(api.carbonProjects.recordFrameworkCheck, check);
+    const stored = [
+      {
+        framework: "verra",
+        revision: 1,
+        checks: [
+          {
+            gate: "method_and_version",
+            status: "supported",
+            reference: "PRIVATE-TEST-SCREENING",
+          },
+        ],
+      },
+    ];
+    await t.run((ctx) =>
+      ctx.db.patch("memberships", membershipId, { role: "viewer" }),
+    );
+    expect(
+      await recycler.query(api.carbonProjects.frameworkScreenings, scope),
+    ).toEqual(stored);
+    await expect(
+      recycler.mutation(api.carbonProjects.recordFrameworkCheck, check),
+    ).rejects.toThrow(/WORKSPACE_PERMISSION_DENIED/);
+    await expect(
+      shop.query(api.carbonProjects.frameworkScreenings, scope),
+    ).rejects.toThrow(/EVIDENCE_SCOPE_CHANGED/);
+    await expect(
+      shop.query(api.carbonProjects.frameworkScreenings, {
+        ...scope,
+        expectedOrgId: shopOrgId,
+      }),
+    ).rejects.toThrow(/CARBON_PROJECT_NOT_FOUND/);
+    await expect(
+      shop.mutation(api.carbonProjects.recordFrameworkCheck, {
+        ...check,
+        expectedOrgId: shopOrgId,
+      }),
+    ).rejects.toThrow(/CARBON_PROJECT_NOT_FOUND/);
+    await expect(
+      t.query(api.carbonProjects.frameworkScreenings, scope),
+    ).rejects.toThrow(/NOT_SIGNED_IN/);
+    await expect(
+      t.mutation(api.carbonProjects.recordFrameworkCheck, check),
+    ).rejects.toThrow(/NOT_SIGNED_IN/);
+    await t.run((ctx) => ctx.db.delete("memberships", membershipId));
+    await expect(
+      recycler.query(api.carbonProjects.frameworkScreenings, scope),
+    ).rejects.toThrow(/NO_BUSINESS/);
+
+    const events = await t.run((ctx) =>
+      ctx.db
+        .query("auditLog")
+        .withIndex("by_entity", (q) =>
+          q.eq("entityTable", "carbonProjects").eq("entityId", projectId),
+        )
+        .take(10),
+    );
+    expect(events).toMatchObject([
+      { action: "carbon_project.created" },
+      {
+        action: "carbon_project.framework_check_recorded",
+        orgId: expectedOrgId,
+        metadata: {
+          framework: "verra",
+          gate: "method_and_version",
+          status: "supported",
+          revision: 1,
+        },
+      },
+    ]);
+    expect(JSON.stringify(events)).not.toContain("PRIVATE-TEST-SCREENING");
+  });
+
+  it("retains private screening evidence across revisions without duplicating retries", async () => {
+    const {
+      t,
+      recycler,
+      shop,
+      recyclerOrgId: expectedOrgId,
+      shopOrgId,
+      facilityId,
+      membershipId,
+    } = await world();
+    const projectId = await recycler.mutation(api.carbonProjects.create, {
+      expectedOrgId,
+      facilityId,
+      name: "Private screening history",
+      method: "verra_vmr0007",
+    });
+    const scope = { expectedOrgId, projectId, framework: "verra" } as const;
+    const first = {
+      ...scope,
+      gate: "method_and_version",
+      status: "supported",
+      reference: "METHOD-RECORD-1",
+      expectedRevision: 0,
+    } as const;
+    const second = {
+      ...first,
+      status: "contradicted",
+      reference: "METHOD-RECORD-2",
+      expectedRevision: 1,
+    } as const;
+    await recycler.mutation(api.carbonProjects.recordFrameworkCheck, first);
+    await recycler.mutation(api.carbonProjects.recordFrameworkCheck, second);
+    await recycler.mutation(api.carbonProjects.recordFrameworkCheck, second);
+
+    await t.run((ctx) =>
+      ctx.db.patch("memberships", membershipId, { role: "viewer" }),
+    );
+    await expect(
+      recycler.query(api.carbonProjects.frameworkHistory, scope),
+    ).resolves.toMatchObject({
+      evidenceStatus: "reported_unverified",
+      revision: 2,
+      historyComplete: true,
+      changes: [
+        { revision: 2, reference: "METHOD-RECORD-2", status: "contradicted" },
+        { revision: 1, reference: "METHOD-RECORD-1", status: "supported" },
+      ],
+      checks: [{ reference: "METHOD-RECORD-2" }],
+    });
+    await expect(
+      shop.query(api.carbonProjects.frameworkHistory, {
+        ...scope,
+        expectedOrgId: shopOrgId,
+      }),
+    ).rejects.toThrow(/CARBON_PROJECT_NOT_FOUND/);
+  });
+
+  it("rejects invalid gates and references, and prevents stale changes within each framework", async () => {
+    const {
+      recycler,
+      recyclerOrgId: expectedOrgId,
+      facilityId,
+    } = await world();
+    const projectId = await recycler.mutation(api.carbonProjects.create, {
+      expectedOrgId,
+      facilityId,
+      name: "Framework revision fixture",
+      method: "verra_vmr0007",
+    });
+    const scope = { expectedOrgId, projectId };
+    const check = {
+      ...scope,
+      framework: "verra",
+      gate: "method_and_version",
+      status: "supported",
+      reference: "TEST-A",
+      expectedRevision: 0,
+    } as const;
+
+    await expect(
+      recycler.mutation(api.carbonProjects.recordFrameworkCheck, {
+        ...check,
+        gate: "durable_removal_and_storage",
+      }),
+    ).rejects.toThrow(/INVALID_CARBON_FRAMEWORK_GATE/);
+    await expect(
+      recycler.mutation(api.carbonProjects.recordFrameworkCheck, {
+        ...check,
+        reference: " ",
+      }),
+    ).rejects.toThrow(/INVALID_CARBON_REFERENCE/);
+    const concurrent = await Promise.allSettled([
+      recycler.mutation(api.carbonProjects.recordFrameworkCheck, check),
+      recycler.mutation(api.carbonProjects.recordFrameworkCheck, {
+        ...check,
+        reference: "TEST-B",
+      }),
+    ]);
+    expect(
+      concurrent.filter(({ status }) => status === "fulfilled"),
+    ).toHaveLength(1);
+    await expect(
+      recycler.mutation(api.carbonProjects.recordFrameworkCheck, {
+        ...check,
+        reference: "TEST-C",
+      }),
+    ).rejects.toThrow(/CARBON_FRAMEWORK_CHANGED/);
+    await recycler.mutation(api.carbonProjects.recordFrameworkCheck, {
+      ...check,
+      status: "contradicted",
+      expectedRevision: 1,
+      reference: "TEST-D",
+    });
+    await expect(
+      recycler.mutation(api.carbonProjects.recordFrameworkCheck, check),
+    ).rejects.toThrow(/CARBON_FRAMEWORK_CHANGED/);
+    await recycler.mutation(api.carbonProjects.recordFrameworkCheck, {
+      ...check,
+      framework: "puro",
+      gate: "durable_removal_and_storage",
+      status: "contradicted",
+    });
+    expect(
+      await recycler.query(api.carbonProjects.frameworkScreenings, scope),
+    ).toEqual(
+      expect.arrayContaining([
+        {
+          framework: "verra",
+          revision: 2,
+          checks: [
+            {
+              gate: "method_and_version",
+              status: "contradicted",
+              reference: "TEST-D",
+            },
+          ],
+        },
+        {
+          framework: "puro",
+          revision: 1,
+          checks: [
+            {
+              gate: "durable_removal_and_storage",
+              status: "contradicted",
+              reference: "TEST-A",
+            },
+          ],
+        },
+      ]),
+    );
   });
 });

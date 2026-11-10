@@ -16,6 +16,7 @@ export function register() {
     // surprises. Raise deliberately when investigating something specific.
     tracesSampleRate: process.env.VERCEL_ENV === "production" ? 0.1 : 1,
     // Operator data (phone, PAN, GSTIN) must never leave the app in a trace.
+    // eslint-disable-next-line @typescript-eslint/no-deprecated -- Keep the supported Sentry 10 PII opt-out explicit until its privacy migration is reviewed.
     sendDefaultPii: false,
   });
 }

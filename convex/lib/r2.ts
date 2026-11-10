@@ -16,12 +16,13 @@ async function request(
   method: "PUT" | "GET" | "DELETE",
   bytes?: ArrayBuffer,
   contentType?: string,
+  sha256?: string,
 ) {
   const { config } = r2Env();
   if (
     config?.accountId !== ref.accountId ||
     config.bucket !== ref.bucket ||
-    !/^quality\/[a-f0-9-]{36}$/.test(ref.key)
+    !/^(?:quality|household|application)\/[a-f0-9-]{36}$/.test(ref.key)
   )
     throw new ConvexError("STORAGE_UNAVAILABLE");
   try {
@@ -36,7 +37,10 @@ async function request(
       {
         method,
         ...(bytes && { body: bytes }),
-        headers: contentType ? { "Content-Type": contentType } : {},
+        headers: {
+          ...(contentType && { "Content-Type": contentType }),
+          ...(sha256 && { "X-Amz-Content-Sha256": sha256 }),
+        },
       },
     );
     return await fetch(signed, {
@@ -51,8 +55,9 @@ export async function putR2(
   ref: R2Reference,
   bytes: ArrayBuffer,
   contentType: string,
+  sha256?: string,
 ) {
-  const response = await request(ref, "PUT", bytes, contentType);
+  const response = await request(ref, "PUT", bytes, contentType, sha256);
   if (!response.ok) throw new ConvexError("STORAGE_UNAVAILABLE");
 }
 export async function deleteR2(ref: R2Reference) {
@@ -64,34 +69,38 @@ export async function getR2(
   ref: R2Reference,
   expectedSize: number,
   sha256: string,
+  maxBytes = QUALITY_MAX_BYTES,
 ): Promise<Blob | null> {
+  if (
+    !Number.isSafeInteger(expectedSize) ||
+    expectedSize < 0 ||
+    expectedSize > maxBytes
+  )
+    throw new ConvexError("STORAGE_UNAVAILABLE");
   const response = await request(ref, "GET");
   if (response.status === 404) return null;
-  if (!response.ok || !response.body || expectedSize > QUALITY_MAX_BYTES)
+  if (!response.ok || !response.body)
     throw new ConvexError("STORAGE_UNAVAILABLE");
   const reader = response.body.getReader();
-  const chunks: Uint8Array<ArrayBuffer>[] = [];
+  const bytes = new Uint8Array(expectedSize);
   let size = 0;
   try {
     while (size <= expectedSize) {
       const part = await reader.read();
       if (part.done) break;
-      size += part.value.byteLength;
-      if (size > expectedSize || size > QUALITY_MAX_BYTES)
-        throw new Error("Size mismatch");
-      chunks.push(new Uint8Array(part.value));
+      const next = size + part.value.byteLength;
+      if (next > expectedSize) throw new Error("Size mismatch");
+      bytes.set(part.value, size);
+      size = next;
     }
     if (size !== expectedSize) throw new Error("Size mismatch");
-    const blob = new Blob(chunks);
     const hash = [
-      ...new Uint8Array(
-        await crypto.subtle.digest("SHA-256", await blob.arrayBuffer()),
-      ),
+      ...new Uint8Array(await crypto.subtle.digest("SHA-256", bytes)),
     ]
       .map((n) => n.toString(16).padStart(2, "0"))
       .join("");
     if (hash !== sha256) throw new Error("Checksum mismatch");
-    return blob;
+    return new Blob([bytes]);
   } catch {
     try {
       await reader.cancel();

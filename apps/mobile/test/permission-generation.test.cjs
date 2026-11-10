@@ -50,6 +50,7 @@ test("compiled production configuration contains no background or developer acce
           EXPO_PUBLIC_APP_URL: "https://luma.green",
           EXPO_PUBLIC_EAS_PROJECT_ID: "",
           EXPO_PUBLIC_PUSH_ENABLED: "false",
+          EXPO_PUBLIC_HOME_REMINDERS_ENABLED: "false",
           LUMA_UPDATE_CERTIFICATE: "",
           LUMA_UPDATE_KEY_ID: "",
         },
@@ -80,4 +81,20 @@ test("compiled production configuration contains no background or developer acce
     "android.permission.ACCESS_FINE_LOCATION",
     "android.permission.INTERNET",
   ]);
+});
+
+test("enabled home reminders preserve only the required iOS location capability", () => {
+  const result = trimIosPermissions(
+    {
+      NSLocationAlwaysAndWhenInUseUsageDescription: "home exit reminder",
+      NSMotionUsageDescription: "unused",
+      UIBackgroundModes: ["location", "audio", "remote-notification"],
+    },
+    false,
+    true,
+  );
+  assert.deepEqual(result, {
+    NSLocationAlwaysAndWhenInUseUsageDescription: "home exit reminder",
+    UIBackgroundModes: ["location"],
+  });
 });

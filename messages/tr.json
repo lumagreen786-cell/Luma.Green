@@ -420,7 +420,7 @@
             "body": "Uygulama sizin fiyatınızla hesaplar. Ekranı haneye gösterin."
           },
           "pay": {
-            "title": "Nakit veya UPI ödeyin",
+            "title": "Nakit ödeyin",
             "body": "Gitmeden ödeyin ve yöntemi seçin."
           }
         },
@@ -701,7 +701,7 @@
           },
           "pay": {
             "title": "Hemen ödeme alın",
-            "body": "Gitmeden önce nakit veya UPI. Luma.Green paranızı tutmaz."
+            "body": "Gitmeden önce nakit. Luma.Green paranızı tutmaz."
           },
           "receipt": {
             "title": "Makbuzu kontrol edin",
@@ -1245,7 +1245,7 @@
       },
       "howPaid": {
         "q": "Ödememi nasıl alırım?",
-        "a": "Hurdacı ayrılmadan önce kapınızda nakit veya UPI ile. Luma.Green ödemeyi kaydeder ama paranızı asla tutmaz."
+        "a": "Hurdacı ayrılmadan önce kapınızda nakit olarak. Luma.Green ödemeyi kaydeder ama paranızı asla tutmaz."
       },
       "recyclePoints": {
         "q": "Geri dönüşüm puanları nedir?",
@@ -1297,7 +1297,7 @@
       },
       "payHousehold": {
         "q": "Luma.Green haneye benim yerime ödeme yapar mı?",
-        "a": "Hayır. Kapıda nakit veya UPI ile siz ödersiniz. Uygulama tutarı ve ödeme yöntemini kaydeder."
+        "a": "Hayır. Kapıda nakit olarak siz ödersiniz. Uygulama tutarı ve ödeme yöntemini kaydeder."
       },
       "paidByYard": {
         "q": "Bir ön işleme işletmesine satış yaptığımda ödememi nasıl alırım?",
@@ -1734,7 +1734,7 @@
       "dropoff": "Dükkâna siz götürürsünüz",
       "whenValue": "{day} · {window}, {time}",
       "youGet": "Yaklaşık {amount} alırsınız",
-      "payNote": "Dükkân malzemenizi tartar ve nakit veya UPI ile öder.",
+      "payNote": "Dükkân malzemenizi tartar ve nakit olarak öder.",
       "notYou": "Başka numara kullan",
       "title": "Kontrol et ve ayırt",
       "change": "Değiştir",
@@ -1753,7 +1753,7 @@
     "metaDescription": "Geri dönüştürülebilirleri çıkar. Para kazan. Fotoğraflar, evden alım veya dükkâna teslim ve tartım sonrası ödeme.",
     "eyebrow": "Hindistan",
     "title": "Evden toplama planlayın",
-    "lead": "Malzemelerinizi ve yakındaki dükkânı seçin; tartıldığında nakit veya UPI alın.",
+    "lead": "Malzemelerinizi ve yakındaki dükkânı seçin; tartıldığında nakit alın.",
     "promises": {
       "label": "Neden burada satmalı",
       "noAccount": "Rezervasyon için telefonu doğrulayın",
@@ -1894,7 +1894,7 @@
       "requested": "{mode, select, pickup {{shop} kabulü bekleniyor} other {{shop} onayı bekleniyor}}",
       "requestedBody": "Talebiniz gönderildi. Yanıt verdiklerinde sayfa güncellenir.",
       "accepted": "{mode, select, pickup {{shop} alımınızı kabul etti} other {{shop} sizi bekliyor}}",
-      "acceptedBody": "Malzemenizi hazır tutun. Tartılır, ardından nakit veya UPI ile ödenir.",
+      "acceptedBody": "Malzemenizi hazır tutun. Tartılır, ardından nakit olarak ödenir.",
       "on_the_way": "{shop} yolda",
       "on_the_wayBody": "Malzemenizi kapı yakınında hazır tutun.",
       "completed": "Tamamlandı! {amount} aldınız",
@@ -1926,7 +1926,7 @@
     "money": {
       "title": "Paranız ve puanlarınız",
       "estimate": "Yaklaşık {amount} alırsınız",
-      "estimateNote": "Dükkân malzemenizi tartar ve nakit veya UPI ile öder.",
+      "estimateNote": "Dükkân malzemenizi tartar ve nakit olarak öder.",
       "paid": "{amount} aldınız",
       "paidBy": "{method, select, upi {UPI} other {Nakit}} ile ödendi · {date}",
       "estimateWas": "Tahmin {amount} idi",
@@ -2452,6 +2452,7 @@
     "description": "PostHog ve Google Analytics’in herkese açık sayfa ziyaretlerini ölçmesine izin verin. Formları, özel sayfaları veya oturum tekrarlarını kaydetmeyiz. Seçiminiz platforma erişimi değiştirmez.",
     "accept": "Analize izin ver",
     "decline": "Analizi kapalı tut",
+    "withdraw": "Analitiği kapat",
     "settings": "Analiz ayarları",
     "saved": "Seçiminiz bu cihazda kaydedildi.",
     "unavailable": "Tarayıcı seçiminizi kaydedemedi. Analiz kapalı kalacak."
@@ -2510,7 +2511,7 @@
         "title": "Haneler",
         "one": "Rezervasyondan önce malzemenizin değerini görün.",
         "two": "Kapıdan alım veya dükkâna teslim.",
-        "three": "Makbuzla nakit veya UPI ödemesi.",
+        "three": "Makbuzla nakit ödemesi.",
         "cta": "Geri dönüştür"
       },
       "kabadiwala": {
@@ -2784,7 +2785,7 @@
     "title": "Luma.Green kimler için",
     "lead": "Malzemeyi evden fabrikaya taşıyan herkes ve aradaki işleri yapan kişiler.",
     "householdHeading": "Ve her hane için",
-    "householdBody": "Cep telefonu numaranızla evden toplama için rezervasyon yapın: malzemeleri seçin, dükkânların tekliflerini karşılaştırın ve dükkândan makbuzla birlikte nakit veya UPI ödemesi alın."
+    "householdBody": "Cep telefonu numaranızla evden toplama için rezervasyon yapın: malzemeleri seçin, dükkânların tekliflerini karşılaştırın ve dükkândan makbuzla birlikte nakit ödemesi alın."
   },
   "join": {
     "consent": {
@@ -3070,6 +3071,7 @@
       "fileType": "Bu dosya türü burada kullanılamaz",
       "fileTooBig": "Dosya çok büyük",
       "uploadFailed": "Yükleme başarısız. Tekrar deneyin.",
+      "uploadUnavailable": "Özel dosya yükleme şu anda kullanılamıyor.",
       "generic": "Bir sorun oluştu. Tekrar deneyin.",
       "pan": "GST numaranızı arayıp işletmenizi onaylayın.",
       "city": "2–60 karakterlik bir şehir veya yerleşim yeri girin."
@@ -3803,6 +3805,79 @@
     "qualityReleaseRequired": "Kabul edilmiş testler gerekli"
   },
   "carbonProjects": {
+    "industry": {
+      "title": "Sektör",
+      "other": "Diğer proje",
+      "assign": "Sektörü belirle",
+      "assignmentHint": "Projenin yöntemine uygun bir sektör seçin. Sektörü yalnızca bir kez belirleyebilirsiniz.",
+      "labels": {
+        "pet_plastics": "PET plastikleri",
+        "metals_recycling": "Metal geri dönüşümü",
+        "e_waste_recovery": "Elektronik atıkların geri kazanımı",
+        "compressed_biogas": "Sıkıştırılmış biyogaz",
+        "industrial_manufacturing": "Endüstriyel üretim verimliliği"
+      }
+    },
+    "screening": {
+      "title": "Çerçeve ön değerlendirmesi",
+      "framework": "Çerçeve",
+      "notice": "Tüm kontrol sonuçlarını kullanıcılar beyan eder. Resmî kararları harici program verir.",
+      "petExample": "PET örneğine uygunluk",
+      "source": "Resmî yöntemler",
+      "process": "Resmî süreç",
+      "check": "Gereklilik",
+      "result": "Kontrol sonucu",
+      "save": "Sonucu kaydet",
+      "conflict": "Bu değerlendirme değişti. Kaydetmeden önce en güncel sonuçları inceleyin.",
+      "useLatest": "En güncel sürümü kullan",
+      "fit": {
+        "candidate": "Olası yöntem. Projenin koşulları karşıladığını doğrulayın.",
+        "unconfirmed": "Yürürlükteki bir yöntemin uygunluğu henüz doğrulanmadı.",
+        "no_listed_method": "Yayımlanan listede uygun bir yöntem bulunamadı.",
+        "out_of_scope": "Kalıcı karbon giderimi kapsamı dışında.",
+        "accounting_only": "Yalnızca emisyon muhasebesi."
+      },
+      "status": {
+        "missing": "Eksik",
+        "supported": "Gerekliliği destekliyor",
+        "contradicted": "Gereklilikle çelişiyor"
+      },
+      "gates": {
+        "method_and_version": "Yöntem ve sürüm",
+        "site_and_operator": "Tesis ve işletmeci",
+        "baseline_and_additionality": "Baz senaryo ve ilave olma koşulu",
+        "claim_rights_and_overlap": "Hak sahipliği ve çakışan talepler",
+        "monitoring_and_calculation": "İzleme ve hesaplama",
+        "validation": "Proje tasarımının geçerli kılınması",
+        "registration": "Proje kaydı",
+        "verification": "Sonuçların doğrulanması",
+        "issuance": "Kredi ihracı",
+        "transfer_and_settlement": "Devir ve takas",
+        "retirement": "Kredilerin emekliye ayrılması veya teslimi",
+        "municipal_waste_origin": "Belediye atığının kaynağı",
+        "collection_scope": "Toplama kapsamı ve istisnalar",
+        "material_and_mass_balance": "Malzeme ve kütle dengesi",
+        "process_energy": "Süreçte kullanılan enerji",
+        "buyer_end_use": "Alıcının nihai kullanımı",
+        "virgin_material_displacement": "Birincil hammaddenin ikamesi",
+        "indian_entity_and_authorized_venue": "Hindistan’daki tüzel kişi ve yetkili işlem platformu",
+        "safeguards_and_consultation": "Koruyucu önlemler ve istişare",
+        "jurisdiction": "Uygun yargı alanı",
+        "durable_removal_and_storage": "Kalıcı giderim ve depolama",
+        "inventory_boundary_and_scopes": "Envanter sınırı ve kapsamları",
+        "scenario_and_capacity": "Tesis senaryosu ve uygun kapasite",
+        "dry_mass_and_pet_grade": "Kuru ağırlık ve PET ürününün kalite sınıfı",
+        "recovered_metal_and_grade": "Geri kazanılan metal ve ürün sınıfı",
+        "equipment_categories_and_custody": "Ekipman kategorileri ve gözetim zinciri",
+        "residue_destination": "Kalıntıların gönderildiği yer",
+        "feedstock_and_prior_treatment": "Tartılan hammadde ve önceki işleme",
+        "gas_metering_and_methane_leakage": "Gaz ölçümü ve metan sızıntısı",
+        "digestate_and_offtake": "Çürütme artığının yönetimi ve alımı",
+        "equipment_and_commissioning": "Ekipman ve devreye alma",
+        "meter_calibration": "Sayaç kalibrasyonu",
+        "comparable_output_and_feedstock": "Karşılaştırılabilir üretim ve hammadde"
+      }
+    },
     "name": "Proje adı",
     "referenceHint": "Yalnızca belge kimliğini girin. Kişisel veri ve parolaları yazmayın.",
     "title": "Karbon projeleri",
@@ -3875,8 +3950,8 @@
   },
   "industry": {
     "title": "Sektör referansları",
-    "lead": "Sağlanan çalışma kitabında arayın. Bu referanslar doğrulanmamıştır; malzeme ticareti veya işleme izni vermez.",
-    "sourceNote": "Kaynak metin çalışma kitabının özgün İngilizcesiyle gösterilir.",
+    "lead": "Sağlanan kaynaklarda arayın. Bu referanslar doğrulanmamıştır; malzeme ticareti veya işleme izni vermez.",
+    "sourceNote": "Kaynak metinleri İngilizce gösterilir.",
     "sectors": "Sektör kayıtları",
     "industries": "Endüstri matrisi",
     "lifecycles": "Malzeme yaşam döngüsü",
@@ -3982,6 +4057,10 @@
     "note": "Bunlar üretici beyanlarıdır; bağımsız kalite, mülkiyet veya mevzuat doğrulaması değildir. Kaydedilen kayıtlar düzenlenemez."
   },
   "tradeLifecycle": {
+    "cashRecord": "Alınan nakdi kaydet",
+    "cashReported": "Nakit alındığı bildirildi",
+    "cashNote": "Alıcı doğrudan satıcıya ödeme yapar. Luma satıcının beyanını kaydeder.",
+    "cashReference": "Nakit makbuz referansı",
     "title": "Ödeme ve teslimat",
     "collectionLabel": "Alıcı ödemesi",
     "settlementLabel": "Satıcıya ödeme aktarımı",
@@ -4488,6 +4567,11 @@
     "loadSaved": "Kayıtlı sürümü aç"
   },
   "businessSubscriptions": {
+    "draftsTitle": "Fatura taslakları",
+    "draftsEmpty": "Henüz taslak yok.",
+    "draftTotal": "Vergi öncesi taslak ara toplamı",
+    "draftBook": "Fiyat listesi {version}",
+    "draftUsage": "{count} nakit sipariş",
     "title": "Tesis planı",
     "lead": "Bu tesis için bir plan tercihi kaydedin.",
     "off": "Faturalandırma kapalıdır. Tercih kaydetmek ücretli abonelik başlatmaz.",
@@ -4543,6 +4627,25 @@
     "localDraft": "Önceki kaydedilmemiş metin",
     "savedText": "Son kayıtlı metin"
   },
+  "collectionPrivacy": {
+    "phone": "Telefon numaranızı giriş yapmanız ve hizmetle ilgili bilgileri SMS ile almanız için kullanırız.",
+    "email": "Hesabınızı oluşturmak için adınızı, e-posta adresinizi ve şifrenizi kullanırız. E-posta adresinizi doğrulamak için bir bağlantı göndeririz.",
+    "booking": "Geri dönüşümü düzenlemek için adınızı, telefon numaranızı, fotoğrafları, şehrinizi ve seçtiğiniz saati kullanırız. Teslim almak için adresinizi ve paylaştığınız konumu da kullanırız."
+  },
+  "privacyRequests": {
+    "title": "Gizlilik talepleri",
+    "lead": "Bir talep seçin. Gizlilik ekibi talebi inceleyip yanıtlayacak. Talep numarasını saklayın.",
+    "kind": "Talep türü",
+    "submit": "Talebi gönder",
+    "received": "Talep alındı",
+    "responded": "Ekip yanıtladı",
+    "access": "Verilerime eriş",
+    "correction": "Verilerimi düzelt",
+    "erasure": "Verilerimi sil",
+    "grievance": "Gizlilik şikâyetinde bulun",
+    "nomination": "Temsilci belirle",
+    "withdrawal": "Onayı geri çek"
+  },
   "privacy": {
     "title": "Gizlilik politikası",
     "lead": "Bu politika Luma.Green web sitesi ile Android, iOS, Windows ve macOS uygulamalarını kapsar.",
@@ -4556,5 +4659,124 @@
     "requestsBody": "Aşağıdan hesabınızı kaldırın veya erişim, düzeltme ya da silme için desteğe e-posta gönderin. Sahipliği doğrulayın; kimlik belgelerini e-posta ile göndermeyin. Önce açık işleri veya sahiplik konularını çözün.",
     "retentionTitle": "Kapatma sonrası kalanlar",
     "retentionBody": "Kapatma, giriş erişimini ve kimlik bilgilerini kaldırır. İşletme, ödeme, güvenlik ve denetim kanıtları inceleme için kalabilir. Her kayıt silinmez. Saklama ve süreler için desteğe danışın."
+  },
+  "participantDirectory": {
+    "title": "Rolünüzü seçin",
+    "search": "Rol ara",
+    "empty": "Eşleşen rol yok",
+    "continue": "Devam et",
+    "apply": "Bu role başvur",
+    "roles": {
+      "household": "Hane",
+      "small_business": "Dükkân veya küçük işletme",
+      "industrial_seller": "Endüstriyel hurda satıcısı",
+      "institution": "Kurum",
+      "kabadiwala": "Kabadiwala",
+      "saathi": "Saathi",
+      "dry_waste_centre": "Kuru atık merkezi veya toplayıcı kooperatifi",
+      "large_yard": "Büyük toplama sahası",
+      "collection_contractor": "Kapıdan toplama yüklenicisi",
+      "rural_collector": "Kırsal yerel yönetim veya öz yardım grubu",
+      "trader": "Tüccar, aracı veya ihracatçı",
+      "preprocessor": "Ön işleyici",
+      "recycler": "Geri dönüşüm işletmesi",
+      "e_waste_operator": "Elektronik atık toplayıcısı, sökümcüsü veya yenileyicisi",
+      "wet_waste_processor": "Islak atık işleyicisi",
+      "intermediary_manufacturer": "Ara mal üreticisi",
+      "end_goods_manufacturer": "Nihai ürün üreticisi",
+      "epr_brand": "GÜS yükümlülüğü olan marka",
+      "pro": "Üretici sorumluluğu kuruluşu",
+      "epr_trading": "GÜS ticareti",
+      "carbon_trading": "Karbon ticareti",
+      "transporter": "Taşımacı ve sevk belgeleri",
+      "equipment_supplier": "Ekipman tedarikçisi",
+      "boiler_water_supplier": "Kazan, arıtma tesisi veya tanker tedarikçisi",
+      "weighing_vendor": "Terazi veya kantar tedarikçisi",
+      "solar_provider": "Güneş enerjisi sağlayıcısı",
+      "environmental_engineer": "Çevre mühendisliği",
+      "hr_provider": "İnsan kaynakları hizmet sağlayıcısı",
+      "accounting_provider": "Muhasebe ve mevzuata uyum",
+      "employee_tracking": "Çalışan takibi",
+      "waste_picker_union": "STK veya atık toplayıcıları sendikası",
+      "city_official": "Belediye görevlisi",
+      "csr_lender_auditor": "KSS ekibi, kredi veren veya denetçi",
+      "luma_team": "Luma.Green ekibi",
+      "ward_official": "Mahalle görevlisi",
+      "community_champion": "Topluluk temsilcisi",
+      "payment_partner": "Ödeme iş ortağı",
+      "rewards_partner": "Ödül iş ortağı",
+      "welfare_partner": "Sigorta veya sosyal destek ortağı",
+      "society_partner": "Site veya tesis yönetimi iş ortağı",
+      "voice_partner": "Sesli hizmet veya dil hizmeti ortağı"
+    },
+    "groups": {
+      "generators": "Haneler ve malzeme satıcıları",
+      "collection": "Toplama ve birleştirme",
+      "processing": "İşleme ve imalat",
+      "markets": "Markalar ve çevre piyasaları",
+      "services": "Lojistik ve hizmetler",
+      "partners": "Topluluk, kamu ve iş ortakları"
+    }
+  },
+  "apartmentCollection": {
+    "pickup": "Apartmandan toplama",
+    "code": "Site kodu",
+    "noRoute": "Bu apartman için incelenmiş bir toplama seçeneği yok. Toplama düzenlemek için bina yöneticinize veya site sakinleri derneğine başvurun."
+  },
+  "householdFamily": {
+    "title": "Aile üyeleri",
+    "description": "Aile üyeleri paylaştığınız toplama işlemlerinin durumunu görebilir. Makbuzlarınız, fotoğraflarınız ve karbon ayak iziniz gizli kalır.",
+    "phone": "Aile üyesinin cep telefonu numarası",
+    "invite": "Davet oluştur",
+    "code": "Davet kodu",
+    "codeHelp": "Kodu özel olarak paylaşın. 7 gün sonra süresi dolar. Luma mesaj göndermez.",
+    "join": "Haneye katıl",
+    "joinedAt": "Katılım tarihi {date}",
+    "leave": "Haneden ayrıl",
+    "collections": "Aileyle paylaşılan toplamalar",
+    "share": "Durumu paylaş",
+    "makePrivate": "Paylaşımı durdur",
+    "recent": "Devam etmeden önce çıkış yapıp tekrar giriş yapın.",
+    "invalid": "Kod geçersiz, süresi dolmuş veya başka bir numaraya ait.",
+    "verified": "Davetleri kullanmak için cep telefonu numaranızı doğrulayın."
+  },
+  "householdTools": {
+    "navigation": "Ev araçları",
+    "recycle": "Geri dönüştür",
+    "activity": "Etkinlik",
+    "services": "Hizmetler",
+    "footprint": "Ayak izi",
+    "settings": "Ayarlar",
+    "loading": "Randevular yükleniyor…",
+    "noBookings": "Henüz randevu yok.",
+    "electricityTitle": "Elektrik tüketiminin ayak izi",
+    "electricityReading": "Şebekeden kullanılan elektrik (kWh)",
+    "invalidReading": "Fatura veya sayaçtaki kWh değerini girin. En fazla üç ondalık basamak kullanın.",
+    "calculate": "Tahmini hesapla",
+    "estimate": "Tahmini şebeke emisyonu: {amount} kg CO₂",
+    "privateCalculation": "Sayaç değeriniz bu ekranda kalır. Sonuç yalnızca elektrik tüketimini kapsar.",
+    "gridSource": "Hindistan şebeke katsayısı, CEA 2025–26",
+    "airQuality": "Hava kalitesi",
+    "roofSolar": "Çatı güneş enerjisi kontrolü",
+    "roofPrecision": "Çatı kontrolü için kesin konum gerekir.",
+    "lookupConsent": "Bu kontrol için konumumu Google Maps ile paylaş. Luma konumu kaydetmez.",
+    "lookupUnavailable": "Sonuç bulunamadı.",
+    "locationUnavailable": "Uygun konum alınamadı.",
+    "lookupLimit": "Sorgu sınırına ulaşıldı. Daha sonra tekrar deneyin.",
+    "airScore": "Evrensel hava kalitesi endeksi: 100 üzerinden {score}. Yüksek değer daha iyidir.",
+    "roofEstimate": "Tahmini çatı üretimi: {panels} panel ile yılda {energy} kWh (DC)."
+  },
+  "homeReminder": {
+    "title": "Evden çıkış hatırlatıcısı",
+    "consent": "Evdeyken ayarlayın. Cihaz, evden ne zaman çıktığınızı algılamak için konumunuzu arka planda kullanır. Luma konum geçmişinizi almaz.",
+    "enable": "Çıkış hatırlatıcısını aç",
+    "disable": "Çıkış hatırlatıcısını kapat",
+    "notificationTitle": "Çıkmadan önce",
+    "notificationBody": "Kapatabileceğiniz ışıkları ve cihazları kontrol edin.",
+    "unavailable": "Çıkış hatırlatıcısı kullanılamıyor. Cihaz izinlerini kontrol edip evde yeniden deneyin.",
+    "dailyTitle": "Günlük hatırlatıcı",
+    "time": "Hatırlatma saati",
+    "add": "Takvime ekle",
+    "calendarHelp": "Günlük uyarı ayarlamak için takvim dosyasını açın."
   }
 }

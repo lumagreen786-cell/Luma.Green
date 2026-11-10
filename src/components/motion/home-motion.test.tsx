@@ -21,7 +21,9 @@ describe("optional home motion", () => {
     vi.spyOn(window, "matchMedia").mockReturnValue({
       media: "(prefers-reduced-motion: reduce)",
       onchange: null,
+      // eslint-disable-next-line @typescript-eslint/no-deprecated -- MediaQueryList fixtures include the required legacy browser methods.
       addListener: vi.fn(),
+      // eslint-disable-next-line @typescript-eslint/no-deprecated -- MediaQueryList fixtures include the required legacy browser methods.
       removeListener: vi.fn(),
       dispatchEvent: vi.fn(),
       get matches() {

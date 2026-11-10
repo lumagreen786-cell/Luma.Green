@@ -19,6 +19,12 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { WebView, type WebViewNavigation } from "react-native-webview";
 
 import { localeDirection } from "../../../src/i18n/locales";
+import {
+  enableHomeReminder,
+  hasHomeReminder,
+  removeHomeReminder,
+} from "./home-reminder";
+import { isHouseholdSettings } from "./home-reminder-policy";
 import { LocaleProvider, useTranslations } from "./i18n";
 import { messageBridgeScript, parseNativeMessage } from "./message-bridge";
 import {
@@ -36,6 +42,8 @@ import { useNativeUpdates } from "./use-native-updates";
 import { usePushNotifications } from "./use-push-notifications";
 
 const origin = runtimeOrigin(Constants.expoConfig?.extra, __DEV__);
+const areRemindersEnabled =
+  Constants.expoConfig?.extra?.areRemindersEnabled === true;
 const initialLocale = localeFromLanguage(getLocales()[0].languageTag);
 
 function NativeButton({
@@ -93,6 +101,10 @@ function Shell({
   const styles = themedStyles[appearance];
   const t = useTranslations("native");
   const common = useTranslations("common");
+  const reminder = useTranslations("homeReminder");
+  const [reminderScreen, setReminderScreen] = useState(false);
+  const [reminderOn, setReminderOn] = useState(false);
+  const [reminderBusy, setReminderBusy] = useState(false);
   const webView = useRef<WebView>(null);
   const currentUrl = useRef(`${origin}/${initialLocale}`);
   const handoffOpen = useRef(false);
@@ -211,10 +223,77 @@ function Shell({
           invalidateLocation();
         }
         currentUrl.current = trusted.url;
+        if (areRemindersEnabled) {
+          setReminderScreen(isHouseholdSettings(trusted.url, origin));
+        }
         setCanGoBack(trusted.canGoBack);
         onLocale(localeFromUrl(trusted.url, locale));
       },
     });
+  };
+
+  useEffect(() => {
+    if (!areRemindersEnabled) return;
+    let isOpen = true;
+    const refresh = () => {
+      void hasHomeReminder()
+        .then((enabled) => {
+          if (isOpen) setReminderOn(enabled);
+        })
+        .catch(() => {
+          if (isOpen) setReminderOn(false);
+        });
+    };
+    refresh();
+    const subscription = AppState.addEventListener("change", (state) => {
+      if (state === "active") refresh();
+    });
+    return () => {
+      isOpen = false;
+      subscription.remove();
+    };
+  }, []);
+
+  const changeReminder = async (shouldEnable: boolean) => {
+    setReminderBusy(true);
+    try {
+      if (shouldEnable) {
+        const result = await enableHomeReminder(
+          reminder("notificationTitle"),
+          reminder("notificationBody"),
+        );
+        setReminderOn(result === "enabled");
+        if (result !== "enabled") Alert.alert(reminder("unavailable"));
+      } else {
+        await removeHomeReminder();
+        setReminderOn(false);
+      }
+    } catch {
+      Alert.alert(reminder("unavailable"));
+    } finally {
+      setReminderBusy(false);
+    }
+  };
+
+  const promptReminder = () => {
+    if (reminderOn) {
+      void changeReminder(false);
+      return;
+    }
+    Alert.alert(
+      reminder("title"),
+      reminder("consent"),
+      [
+        { text: common("cancel"), style: "cancel" },
+        {
+          text: reminder("enable"),
+          onPress: () => {
+            void changeReminder(true);
+          },
+        },
+      ],
+      { cancelable: true },
+    );
   };
 
   const reload = () => {
@@ -365,6 +444,13 @@ function Shell({
           </View>
         )}
       </View>
+      {reminderScreen && !failed && !loading ? (
+        <NativeButton
+          label={reminder(reminderOn ? "disable" : "enable")}
+          disabled={reminderBusy}
+          onPress={promptReminder}
+        />
+      ) : null}
     </SafeAreaView>
   );
 }

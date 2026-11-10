@@ -117,6 +117,11 @@ vi.mock("react-native-webview", async () => {
     }),
   };
 });
+vi.mock("../src/home-reminder", () => ({
+  hasHomeReminder: vi.fn().mockResolvedValue(false),
+  enableHomeReminder: vi.fn().mockResolvedValue("enabled"),
+  removeHomeReminder: vi.fn().mockResolvedValue(undefined),
+}));
 vi.mock("../src/use-native-location", () => ({
   useNativeLocation: () => ({
     script: "true;",

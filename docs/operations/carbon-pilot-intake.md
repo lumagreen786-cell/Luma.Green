@@ -105,3 +105,42 @@ SHA-256 digests. It contains no source file paths or document contents. A
 match checks file integrity against the supplied manifest. The verifier must
 still confirm the documents' identity, authority and relationship to the
 project. This tool has no upload or sharing permissions.
+
+## Screen evidence by industry
+
+Run `node scripts/carbon/industry-readiness.mjs intake.json` with a private
+JSON file that contains a `program` and an `evidenceReferences` object. Start
+with an empty object to get the program checklist. Fill its keys with short
+internal document identifiers. Keep document contents and personal data out of
+this file.
+
+Supported programs are `pet`, `non_pet_plastics`, `container_glass`, `metals`,
+`e_waste`, `compressed_biogas` and `industrial_efficiency`. Run a separate
+screen for each facility, process line and activity. A complete checklist is
+ready for internal review. A reviewer still has to inspect each document and
+confirm the method applies. The Verra recycling activities all require a
+reference for virgin material displacement. For PET, the checklist also asks
+for collection scope, dry mass and PET output grade, and the applicable
+facility scenario and capacity. Apply the collection conditions in
+[AMS-III.AJ. v9](https://cdm.unfccc.int/UserManagement/FileStorage/WDFQ1I93T5S7J2EXHC84LOZUBPKM0G).
+This tool does not create a registry filing.
+
+The representative approves a specific evidence pack and signs any required
+declarations. An independent verifier makes its own findings. Before enabling
+registry automation, obtain written confirmation of Verra's allowed actions,
+customer delegation and revocation, commercial terms, fees, testing access,
+and duplicate-submission recovery. Treat India's BEE route as a separate
+integration. A customer-facing preparation API can use the evidence checklist
+without accessing either registry.
+
+To assemble a local filing preparation index, run
+`node scripts/carbon/filing-pack.mjs PRIVATE_DIRECTORY INDEX.json`. The index
+contains the same `program` and `evidenceReferences` fields, plus a `files`
+object in the evidence manifest format. Use a frozen workspace review export
+as the snapshot. The tool checks the method against the chosen program and
+fingerprints the snapshot and its four review documents. If the snapshot
+has a workspace industry, it must match the chosen activity. An unassigned
+snapshot can be used for internal review and needs separate confirmation of
+the activity. Non-PET plastics and container glass use unassigned snapshots.
+The index lists additional program references separately. Those references need their own evidence review.
+The index is an internal preparation document, with no submission function.

@@ -42,7 +42,7 @@ describe("optional analytics controls", () => {
     expect(screen.getByText("Analytics active")).toBeInTheDocument();
     expect(localStorage.getItem(analyticsChoiceKey)).toBe("granted");
     expect(
-      screen.getByRole("button", { name: "Analytics settings" }),
+      screen.getByRole("button", { name: "Turn off analytics" }),
     ).toBeVisible();
   });
   it("keeps the page usable when declined and lets the visitor change the choice", async () => {
@@ -87,6 +87,24 @@ describe("optional analytics controls", () => {
   });
   it("shows no consent panel in booking or private routes", () => {
     state.path = "/t/private-token";
+    render(controls());
+    expect(screen.queryByRole("complementary")).not.toBeInTheDocument();
+  });
+  it("offers direct withdrawal from the privacy notice", async () => {
+    state.path = "/privacy";
+    saveAnalyticsChoice("granted");
+    const user = userEvent.setup();
+    render(controls());
+    await user.click(
+      screen.getByRole("button", { name: "Turn off analytics" }),
+    );
+    expect(localStorage.getItem(analyticsChoiceKey)).toBe("denied");
+    expect(screen.queryByText("Analytics active")).not.toBeInTheDocument();
+    expect(state.stop).toHaveBeenCalled();
+    expect(screen.queryByRole("complementary")).not.toBeInTheDocument();
+  });
+  it("does not ask for a new choice on the privacy notice", () => {
+    state.path = "/privacy";
     render(controls());
     expect(screen.queryByRole("complementary")).not.toBeInTheDocument();
   });

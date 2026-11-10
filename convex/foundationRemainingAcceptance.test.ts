@@ -11,6 +11,7 @@ import {
   signInAs,
 } from "./lib/auth.testing";
 import { OFFER_TIMEOUT_MS } from "./lib/dispatch";
+import { mockR2 } from "./lib/r2.testing";
 import schema from "./schema";
 
 const modules = convexModules(import.meta.glob("./**/*.*s"));
@@ -39,6 +40,7 @@ afterEach(() => {
 });
 
 async function world() {
+  mockR2();
   const t = convexTest(schema, modules);
   registerAuth(t);
   await seedDemo(t);
@@ -102,6 +104,7 @@ it("combines current radius, slot capacity, one acceptance and the unassigned de
   const photoIds = await Promise.all(
     [1, 2, 3].map((number) =>
       w.household.action(api.householdPhotos.upload, {
+        adultConfirmed: true,
         name: `synthetic-scrap-${String(number)}.jpg`,
         bytes: new Uint8Array([0xff, 0xd8, 0xff, 0xe0, 0, 16, 1, 2, 3]).buffer,
       }),
@@ -109,11 +112,13 @@ it("combines current radius, slot capacity, one acceptance and the unassigned de
   );
   const tokens = await Promise.all([
     w.household.mutation(api.households.book, {
+      adultConfirmed: true,
       ...bookingValues,
       orgId: w.org._id,
       photoIds: [photoIds[0]],
     }),
     w.household.mutation(api.households.book, {
+      adultConfirmed: true,
       ...bookingValues,
       orgId: w.org._id,
       photoIds: [photoIds[1]],
@@ -121,6 +126,7 @@ it("combines current radius, slot capacity, one acceptance and the unassigned de
   ]);
   await expect(
     w.household.mutation(api.households.book, {
+      adultConfirmed: true,
       ...bookingValues,
       orgId: w.org._id,
       photoIds: [photoIds[2]],

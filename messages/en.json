@@ -139,7 +139,7 @@
         "title": "Households",
         "one": "Compare offers for your materials before you book.",
         "two": "Pickup at your door, or drop it at a shop.",
-        "three": "Paid in cash or UPI, with a receipt.",
+        "three": "Paid in cash, with a receipt.",
         "cta": "Recycle"
       },
       "kabadiwala": {
@@ -611,7 +611,7 @@
       "body": "Take paid pickups, sorting work and shifts near home, and see what you've earned."
     },
     "householdHeading": "And every household",
-    "householdBody": "Book a collection from home with your mobile number: choose your materials, compare shop offers, and receive cash or UPI payment from the shop with a receipt."
+    "householdBody": "Book a collection from home with your mobile number: choose your materials, compare shop offers, and receive cash payment from the shop with a receipt."
   },
   "contact": {
     "metaTitle": "Contact",
@@ -1079,7 +1079,7 @@
           },
           "pay": {
             "title": "Get paid on the spot",
-            "body": "In cash or UPI, before they leave. Luma.Green never holds your money."
+            "body": "In cash, before they leave. Luma.Green never holds your money."
           },
           "receipt": {
             "title": "Check your receipt",
@@ -1218,7 +1218,7 @@
             "body": "The app works it out from your prices. Show the screen to the household."
           },
           "pay": {
-            "title": "Pay in cash or UPI",
+            "title": "Pay in cash",
             "body": "Pay before you leave, and choose how you paid."
           },
           "save": {
@@ -1569,7 +1569,7 @@
       },
       "howPaid": {
         "q": "How do I get paid?",
-        "a": "At your door, in cash or UPI, before the kabadiwala leaves. Luma.Green records the payment but never holds your money."
+        "a": "At your door, in cash, before the kabadiwala leaves. Luma.Green records the payment but never holds your money."
       },
       "recyclePoints": {
         "q": "What are recycle points?",
@@ -1621,7 +1621,7 @@
       },
       "payHousehold": {
         "q": "Does Luma.Green pay the household for me?",
-        "a": "No. You pay them in cash or UPI at the door. The app records how much and how."
+        "a": "No. You pay them in cash at the door. The app records how much and how."
       },
       "paidByYard": {
         "q": "How am I paid when I sell to a preprocessor?",
@@ -2217,6 +2217,7 @@
       "fileType": "This kind of file can't be used here",
       "fileTooBig": "This file is too big",
       "uploadFailed": "Upload failed. Try again.",
+      "uploadUnavailable": "Private file uploads are unavailable right now.",
       "generic": "Something went wrong. Try again.",
       "pan": "Look up your GST number and confirm your business.",
       "city": "Enter a city or locality using 2–60 letters and spaces."
@@ -2531,7 +2532,7 @@
     "metaDescription": "Clear out recyclables. Get paid. Photos, pickup or drop-off, and payment after weighing.",
     "eyebrow": "India",
     "title": "Book a collection from home",
-    "lead": "Pick what you have, choose a shop near you, and get paid in cash or UPI when it's weighed.",
+    "lead": "Pick what you have, choose a shop near you, and get paid in cash when it's weighed.",
     "promises": {
       "label": "Why sell here",
       "noAccount": "Verify your phone to book",
@@ -2650,7 +2651,7 @@
       "dropoff": "You drop it at the shop",
       "whenValue": "{day} · {window}, {time}",
       "youGet": "You'll get about {amount}",
-      "payNote": "The shop weighs your materials and pays you in cash or UPI.",
+      "payNote": "The shop weighs your materials and pays you in cash.",
       "phoneTitle": "Confirm your mobile number",
       "phoneLead": "We'll send a 6-digit code by SMS. Your booking is saved to this number, so you can follow it on any phone.",
       "bookingAs": "Booking as {phone}",
@@ -2780,7 +2781,7 @@
       "requested": "{mode, select, pickup {Waiting for {shop} to accept} other {Waiting for {shop} to confirm}}",
       "requestedBody": "We've sent your request. This page updates as soon as they answer.",
       "accepted": "{mode, select, pickup {{shop} accepted your pickup} other {{shop} is expecting you}}",
-      "acceptedBody": "Keep your materials ready. The shop weighs them, then pays you in cash or UPI.",
+      "acceptedBody": "Keep your materials ready. The shop weighs them, then pays you in cash.",
       "on_the_way": "{shop} is on the way",
       "on_the_wayBody": "Keep your materials ready near the door.",
       "completed": "Done! You got {amount}",
@@ -2821,7 +2822,7 @@
     "money": {
       "title": "Your money and points",
       "estimate": "You'll get about {amount}",
-      "estimateNote": "The shop weighs your materials and pays you in cash or UPI.",
+      "estimateNote": "The shop weighs your materials and pays you in cash.",
       "paid": "You got {amount}",
       "paidBy": "Paid by {method, select, upi {UPI} other {cash}} · {date}",
       "estimateWas": "Estimate was {amount}",
@@ -3413,6 +3414,7 @@
     "description": "Allow PostHog and Google Analytics to measure visits to public pages. We do not record forms, private pages or session replays. Your choice does not change access to the platform.",
     "accept": "Allow analytics",
     "decline": "Keep analytics off",
+    "withdraw": "Turn off analytics",
     "settings": "Analytics settings",
     "saved": "Your choice is saved on this device.",
     "unavailable": "Your browser could not save this choice. Analytics will stay off.",
@@ -3803,6 +3805,79 @@
     "qualityReleaseRequired": "Accepted tests required"
   },
   "carbonProjects": {
+    "industry": {
+      "title": "Industry",
+      "other": "Other project",
+      "assign": "Set industry",
+      "assignmentHint": "Choose an industry that matches this project's method. You can set it once.",
+      "labels": {
+        "pet_plastics": "PET plastics",
+        "metals_recycling": "Metals recycling",
+        "e_waste_recovery": "E-waste recovery",
+        "compressed_biogas": "Compressed biogas",
+        "industrial_manufacturing": "Industrial manufacturing efficiency"
+      }
+    },
+    "screening": {
+      "title": "Framework screening",
+      "framework": "Framework",
+      "notice": "All checks are self-reported. The external program makes official decisions.",
+      "petExample": "Fit for the PET example",
+      "source": "Official methods",
+      "process": "Official process",
+      "check": "Requirement",
+      "result": "Check result",
+      "save": "Save check",
+      "conflict": "This screening changed. Review the latest checks before saving.",
+      "useLatest": "Use latest version",
+      "fit": {
+        "candidate": "Candidate method. Confirm that the project qualifies.",
+        "unconfirmed": "Current method fit is unconfirmed.",
+        "no_listed_method": "No matching method found in the published list.",
+        "out_of_scope": "Outside the scope of durable carbon removal.",
+        "accounting_only": "Emissions accounting only."
+      },
+      "status": {
+        "missing": "Missing",
+        "supported": "Supported",
+        "contradicted": "Contradicted"
+      },
+      "gates": {
+        "method_and_version": "Method and version",
+        "site_and_operator": "Site and operator",
+        "baseline_and_additionality": "Baseline and additionality",
+        "claim_rights_and_overlap": "Claim rights and overlap",
+        "monitoring_and_calculation": "Monitoring and calculation",
+        "validation": "Design validation",
+        "registration": "Project registration",
+        "verification": "Results verification",
+        "issuance": "Credit issuance",
+        "transfer_and_settlement": "Transfer and settlement",
+        "retirement": "Retirement or surrender",
+        "municipal_waste_origin": "Municipal waste origin",
+        "collection_scope": "Collection scope and exclusions",
+        "material_and_mass_balance": "Material and mass balance",
+        "process_energy": "Process energy",
+        "buyer_end_use": "Buyer's end use",
+        "virgin_material_displacement": "Virgin material displacement",
+        "indian_entity_and_authorized_venue": "Indian entity and authorized venue",
+        "safeguards_and_consultation": "Safeguards and consultation",
+        "jurisdiction": "Eligible jurisdiction",
+        "durable_removal_and_storage": "Durable removal and storage",
+        "inventory_boundary_and_scopes": "Inventory boundary and scopes",
+        "scenario_and_capacity": "Facility scenario and eligible capacity",
+        "dry_mass_and_pet_grade": "Dry weight and PET output grade",
+        "recovered_metal_and_grade": "Recovered metal and output grade",
+        "equipment_categories_and_custody": "Equipment categories and chain of custody",
+        "residue_destination": "Residue destination",
+        "feedstock_and_prior_treatment": "Weighed feedstock and prior treatment",
+        "gas_metering_and_methane_leakage": "Gas metering and methane leakage",
+        "digestate_and_offtake": "Digestate handling and offtake",
+        "equipment_and_commissioning": "Equipment and commissioning",
+        "meter_calibration": "Meter calibration",
+        "comparable_output_and_feedstock": "Comparable output and feedstock"
+      }
+    },
     "name": "Project name",
     "referenceHint": "Enter the document ID only. Keep personal data and passwords out.",
     "title": "Carbon projects",
@@ -3875,8 +3950,8 @@
   },
   "industry": {
     "title": "Industry references",
-    "lead": "Search the supplied workbook. These references are unverified and do not grant approval to trade or process material.",
-    "sourceNote": "Source text is shown in the workbook's original English.",
+    "lead": "Search the supplied references. These references are unverified and do not grant approval to trade or process material.",
+    "sourceNote": "Reference text is shown in English.",
     "sectors": "Sector references",
     "industries": "Industry matrix",
     "lifecycles": "Material lifecycle",
@@ -3982,6 +4057,10 @@
     "note": "These are manufacturer declarations, not independent quality, ownership or regulatory verification. Records cannot be edited after saving."
   },
   "tradeLifecycle": {
+    "cashRecord": "Record cash received",
+    "cashReported": "Cash reported received",
+    "cashNote": "The buyer pays the seller directly. Luma records the seller’s report.",
+    "cashReference": "Cash receipt reference",
     "title": "Payment and delivery",
     "collectionLabel": "Buyer payment",
     "settlementLabel": "Seller settlement",
@@ -4488,6 +4567,11 @@
     "loadSaved": "Load saved version"
   },
   "businessSubscriptions": {
+    "draftsTitle": "Draft invoices",
+    "draftsEmpty": "No drafts yet.",
+    "draftTotal": "Draft subtotal before tax",
+    "draftBook": "Price book {version}",
+    "draftUsage": "Cash orders ({count})",
     "title": "Site plan",
     "lead": "Save a plan preference for this site.",
     "off": "Billing is off. A preference does not start a paid subscription.",
@@ -4543,6 +4627,25 @@
     "localDraft": "Previous unsaved text",
     "savedText": "Latest saved text"
   },
+  "collectionPrivacy": {
+    "phone": "We use your phone number to sign you in and send you service updates by SMS.",
+    "email": "To create your account, we use your name, email address and password. We send a link to verify your email address.",
+    "booking": "We use your name, phone number, photos, city and chosen time to arrange recycling. For pickup, we also use your address and any location you share."
+  },
+  "privacyRequests": {
+    "title": "Privacy requests",
+    "lead": "Choose a request. The privacy team will review it and reply. Keep the request number for your records.",
+    "kind": "Request type",
+    "submit": "Send request",
+    "received": "Request received",
+    "responded": "Team replied",
+    "access": "Access my data",
+    "correction": "Correct my data",
+    "erasure": "Erase my data",
+    "grievance": "Raise a privacy grievance",
+    "nomination": "Nominate a representative",
+    "withdrawal": "Withdraw consent"
+  },
   "privacy": {
     "title": "Privacy policy",
     "lead": "This policy covers the Luma.Green website and Android, iOS, Windows and macOS apps.",
@@ -4556,5 +4659,124 @@
     "requestsBody": "Remove your account below, or email support for access, correction or deletion. Verify ownership; do not email identity documents. Resolve open work or ownership first.",
     "retentionTitle": "What remains after closure",
     "retentionBody": "Closure removes login access and credentials. Business, payment, safety and audit evidence can remain for review. It does not erase every record. Ask support about retention and timing."
+  },
+  "participantDirectory": {
+    "title": "Choose your role",
+    "search": "Search roles",
+    "empty": "No matching roles",
+    "continue": "Continue",
+    "apply": "Apply for this role",
+    "roles": {
+      "household": "Household",
+      "small_business": "Shop or small business",
+      "industrial_seller": "Industrial scrap seller",
+      "institution": "Institution",
+      "kabadiwala": "Kabadiwala",
+      "saathi": "Saathi",
+      "dry_waste_centre": "Dry waste centre or picker cooperative",
+      "large_yard": "Large yard",
+      "collection_contractor": "Door-to-door collection contractor",
+      "rural_collector": "Rural local body or self-help group",
+      "trader": "Trader, broker or exporter",
+      "preprocessor": "Preprocessor",
+      "recycler": "Recycler",
+      "e_waste_operator": "E-waste collector, dismantler or refurbisher",
+      "wet_waste_processor": "Wet waste processor",
+      "intermediary_manufacturer": "Intermediate goods manufacturer",
+      "end_goods_manufacturer": "End goods manufacturer",
+      "epr_brand": "Brand with EPR duties",
+      "pro": "Producer responsibility organisation",
+      "epr_trading": "EPR trading",
+      "carbon_trading": "Carbon trading",
+      "transporter": "Transporter and manifests",
+      "equipment_supplier": "Equipment supplier",
+      "boiler_water_supplier": "Boiler, treatment plant or tanker supplier",
+      "weighing_vendor": "Scale or weighbridge vendor",
+      "solar_provider": "Solar provider",
+      "environmental_engineer": "Environmental engineering",
+      "hr_provider": "Human resources provider",
+      "accounting_provider": "Accounting and compliance",
+      "employee_tracking": "Employee tracking",
+      "waste_picker_union": "NGO or waste picker union",
+      "city_official": "City official",
+      "csr_lender_auditor": "CSR team, lender or auditor",
+      "luma_team": "Luma.Green team",
+      "ward_official": "Ward official",
+      "community_champion": "Community champion",
+      "payment_partner": "Payment partner",
+      "rewards_partner": "Rewards partner",
+      "welfare_partner": "Insurance or welfare partner",
+      "society_partner": "Society or facility management partner",
+      "voice_partner": "Voice or language partner"
+    },
+    "groups": {
+      "generators": "Households and material sellers",
+      "collection": "Collection and aggregation",
+      "processing": "Processing and manufacturing",
+      "markets": "Brands and environmental markets",
+      "services": "Logistics and services",
+      "partners": "Community, government and partners"
+    }
+  },
+  "apartmentCollection": {
+    "pickup": "Apartment pickup",
+    "code": "Community code",
+    "noRoute": "There is no reviewed apartment pickup. Ask your building manager or residents’ association to arrange collection."
+  },
+  "householdFamily": {
+    "title": "Family members",
+    "description": "Family members can see the progress of collections you share. Your receipts, photos and footprint stay private.",
+    "phone": "Family member’s mobile number",
+    "invite": "Create invitation",
+    "code": "Invitation code",
+    "codeHelp": "Share this code privately. It expires in 7 days. Luma sends no message.",
+    "join": "Join household",
+    "joinedAt": "Joined on {date}",
+    "leave": "Leave household",
+    "collections": "Shared family collections",
+    "share": "Share progress",
+    "makePrivate": "Make private",
+    "recent": "Sign out and sign in again before you continue.",
+    "invalid": "This code is invalid, expired or for a different mobile number.",
+    "verified": "Verify your mobile number to use invitations."
+  },
+  "householdTools": {
+    "navigation": "Household tools",
+    "recycle": "Recycle",
+    "activity": "Activity",
+    "services": "Services",
+    "footprint": "Footprint",
+    "settings": "Settings",
+    "loading": "Loading bookings…",
+    "noBookings": "No bookings yet.",
+    "electricityTitle": "Electricity footprint",
+    "electricityReading": "Grid electricity used (kWh)",
+    "invalidReading": "Enter the kWh from your bill or meter. Use up to three decimal places.",
+    "calculate": "Calculate estimate",
+    "estimate": "Estimated grid emissions: {amount} kg CO₂",
+    "privateCalculation": "Your reading stays on this screen. The result covers electricity only.",
+    "gridSource": "India grid factor, CEA 2025–26",
+    "airQuality": "Air quality",
+    "roofSolar": "Rooftop solar check",
+    "roofPrecision": "The roof check needs precise location.",
+    "lookupConsent": "Send my location to Google Maps for this check. Luma does not save it.",
+    "lookupUnavailable": "No result is available.",
+    "locationUnavailable": "Couldn’t get a suitable location.",
+    "lookupLimit": "Lookup limit reached. Try again later.",
+    "airScore": "Universal AQI: {score} out of 100. Higher is better.",
+    "roofEstimate": "Modeled roof output: {energy} kWh/year (DC) with {panels} panels."
+  },
+  "homeReminder": {
+    "title": "Home exit reminder",
+    "consent": "Set this up while you are at home. This device uses your location in the background to detect when you leave. Luma receives no location history.",
+    "enable": "Turn on home exit reminder",
+    "disable": "Turn off home exit reminder",
+    "notificationTitle": "Before you leave",
+    "notificationBody": "Check lights and appliances you can switch off.",
+    "unavailable": "The home exit reminder is unavailable. Check your device permissions and try while you are at home.",
+    "dailyTitle": "Daily reminder",
+    "time": "Reminder time",
+    "add": "Add to calendar",
+    "calendarHelp": "Open the calendar file to set a daily alert."
   }
 }

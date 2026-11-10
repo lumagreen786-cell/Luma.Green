@@ -43,3 +43,9 @@ description = "Fixed removal enquiry operation identifier in its test and scanne
 condition = "AND"
 paths = ['''^convex/accountRemoval\.test\.ts$''', '''^\.github/workflows/security\.yml$''']
 regexes = ['''^removal-enquiry-0001$''']
+
+[[rules.allowlists]]
+description = "Fixed no-photo booking retry identifier in its isolated test"
+condition = "AND"
+paths = ['''^convex/households\.test\.ts$''', '''^\.github/workflows/security\.yml$''']
+regexes = ['''^b779389e\-30a9\-498f\-b7ed\-3c0fa182a997$''']

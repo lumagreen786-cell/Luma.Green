@@ -39,7 +39,11 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm apps:check
-      - run: pnpm --filter @luma/mobile exec expo install --check
+      - name: Check compatibility with the pinned Expo SDK
+        run: pnpm --filter @luma/mobile exec expo install --check
+        env:
+          # Use the compatibility map shipped with the installed SDK.
+          EXPO_OFFLINE: "1"
       - run: pnpm mobile:export
       - uses: actions/upload-artifact@v7
         with:

@@ -1,9 +1,14 @@
+import type { FunctionReturnType } from "convex/server";
 import { v } from "convex/values";
 
 import { internal } from "./_generated/api";
-import { httpAction, internalQuery } from "./_generated/server";
+import { type ActionCtx, httpAction, internalQuery } from "./_generated/server";
 import { openAuthUser } from "./lib/access";
 import { isAdminEmail } from "./lib/admin";
+import { hasApplicationFileBytes } from "./lib/applicationAccess";
+import { FILE_RULES } from "./lib/onboarding";
+import { vR2Reference } from "./lib/qualityFilesSchema";
+import { getR2 } from "./lib/r2";
 
 /**
  * Private files — docs/architecture/auth.md#private-files. Certificates,
@@ -130,7 +135,11 @@ export const lookup = internalQuery({
   returns: v.union(
     v.null(),
     v.object({
-      storageId: v.id("_storage"),
+      storageId: v.optional(v.id("_storage")),
+      r2: v.optional(vR2Reference),
+      sha256: v.optional(v.string()),
+      size: v.number(),
+      maxBytes: v.number(),
       name: v.string(),
       contentType: v.string(),
       ownerAuthUserId: v.union(v.string(), v.null()),
@@ -139,10 +148,22 @@ export const lookup = internalQuery({
   handler: async (ctx, args) => {
     const id = ctx.db.normalizeId("applicationFiles", args.fileId);
     const file = id ? await ctx.db.get("applicationFiles", id) : null;
-    if (!file) return null;
+    if (
+      !file ||
+      !hasApplicationFileBytes(file) ||
+      (file.removedAt !== undefined && file.firstSubmittedVersion === undefined)
+    )
+      return null;
     const owner = await ctx.db.get("profiles", file.profileId);
     return {
       storageId: file.storageId,
+      r2: file.r2,
+      sha256: file.sha256,
+      size: file.size,
+      maxBytes:
+        FILE_RULES[file.type].accept.find(
+          (rule) => rule.type === file.contentType,
+        )?.maxBytes ?? 0,
       name: file.name,
       contentType: file.contentType,
       ownerAuthUserId: owner?.authUserId ?? null,
@@ -154,6 +175,7 @@ const ERROR_CODES = {
   401: "NOT_SIGNED_IN",
   403: "FORBIDDEN",
   404: "NOT_FOUND",
+  503: "STORAGE_UNAVAILABLE",
 } as const;
 
 /** A refusal: the status says it all; the body names it for the logs. */
@@ -171,14 +193,12 @@ function errorResponse(
   });
 }
 
-/** `GET /files/{fileId}`: the file itself, if this caller may see it. */
-export const serve = httpAction(async (ctx, request) => {
-  const cors = corsHeaders(request.headers.get("Origin"), siteOrigins());
-
-  let caller: FileCaller | null = null;
+async function authenticatedFileCaller(
+  ctx: ActionCtx,
+): Promise<FileCaller | null> {
   try {
     const user = await openAuthUser(ctx);
-    caller = user
+    return user
       ? {
           id: user._id,
           email: user.email,
@@ -186,21 +206,47 @@ export const serve = httpAction(async (ctx, request) => {
         }
       : null;
   } catch {
-    caller = null; // A token that can't be checked is no token at all.
+    return null;
   }
+}
+
+async function readFileBlob(
+  ctx: ActionCtx,
+  file: NonNullable<FunctionReturnType<typeof internal.files.lookup>>,
+) {
+  if (file.r2 && file.sha256)
+    return getR2(file.r2, file.size, file.sha256, file.maxBytes);
+  return file.storageId ? ctx.storage.get(file.storageId) : null;
+}
+
+/** `GET /files/{fileId}`: the file itself, if this caller may see it. */
+export const serve = httpAction(async (ctx: ActionCtx, request) => {
+  const cors = corsHeaders(request.headers.get("Origin"), siteOrigins());
+  const caller = await authenticatedFileCaller(ctx);
   if (!caller) return errorResponse(401, cors);
 
   const fileId = fileIdFromPath(new URL(request.url).pathname);
-  const file = fileId
-    ? await ctx.runQuery(internal.files.lookup, { fileId })
-    : null;
+  if (!fileId) return errorResponse(404, cors);
+  const file = await ctx.runQuery(internal.files.lookup, { fileId });
   if (!file) return errorResponse(404, cors);
-  if (fileAccess(caller, file.ownerAuthUserId) !== "allowed") {
+  if (fileAccess(caller, file.ownerAuthUserId) !== "allowed")
     return errorResponse(403, cors);
-  }
 
-  const blob = await ctx.storage.get(file.storageId);
+  let blob: Blob | null;
+  try {
+    blob = await readFileBlob(ctx, file);
+  } catch {
+    return errorResponse(503, cors);
+  }
   if (!blob) return errorResponse(404, cors);
+  if (file.r2) {
+    const currentCaller = await authenticatedFileCaller(ctx);
+    if (!currentCaller) return errorResponse(401, cors);
+    const current = await ctx.runQuery(internal.files.lookup, { fileId });
+    if (!current) return errorResponse(404, cors);
+    if (fileAccess(currentCaller, current.ownerAuthUserId) !== "allowed")
+      return errorResponse(403, cors);
+  }
   return new Response(blob, {
     status: 200,
     headers: {

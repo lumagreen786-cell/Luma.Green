@@ -240,6 +240,7 @@ it("isolates same-name cities by state for household shops, quotes and direct pi
   await person.mutation(api.identity.ensureProfile, { locale: "en" });
   await expect(
     person.mutation(api.households.book, {
+      adultConfirmed: true,
       orgId: ids.second,
       mode: "pickup",
       items: [{ materialCode: "PAPER-NEWS", kg: 1 }],

@@ -2,13 +2,14 @@
 
 import { useQuery } from "convex/react";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
-import { LockIcon } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import { type SyntheticEvent, useEffect, useId, useRef, useState } from "react";
 import { toast } from "sonner";
 
 import type { CodeErrorKey } from "@/components/auth/errors";
 import { FactorChallenge } from "@/components/auth/factor-challenge";
+import { AgeConfirmation } from "@/components/site/age-confirmation";
+import { CollectionPrivacy } from "@/components/site/collection-privacy";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -93,10 +94,11 @@ function NumberForm({
   const [value, setValue] = useState(initialNumber);
   const [error, setError] = useState<"invalid" | SendCodeErrorKey | null>(null);
   const [isSending, setSending] = useState(false);
+  const [isAdult, setIsAdult] = useState(false);
 
   async function send(event: SyntheticEvent) {
     event.preventDefault();
-    if (!canSend) return;
+    if (!canSend || !isAdult) return;
     const phone = normalizeIndianMobile(value);
     if (!phone) {
       setError("invalid");
@@ -125,6 +127,7 @@ function NumberForm({
       {canSend === false ? (
         <p role="status">{auth("unavailableBody")}</p>
       ) : null}
+      <CollectionPrivacy purpose="phone" />
       <Label htmlFor={id} className="text-base">
         {t("label")}
       </Label>
@@ -156,18 +159,15 @@ function NumberForm({
       >
         {error === "sendRateLimited" ? auth(error) : t(error ?? "hint")}
       </p>
+      <AgeConfirmation checked={isAdult} onChange={setIsAdult} />
       <Button
         type="submit"
         size="lg"
         className="h-12 text-base"
-        disabled={isSending || !canSend}
+        disabled={isSending || !canSend || !isAdult}
       >
         {t(isSending ? "sending" : "sendCode")}
       </Button>
-      <p className="flex gap-2 text-sm text-muted-foreground">
-        <LockIcon aria-hidden className="mt-0.5 size-4 shrink-0 text-primary" />
-        {t("privacy")}
-      </p>
     </form>
   );
 }
@@ -227,7 +227,7 @@ function CodeForm({
     requestPending.current = true;
     setChecking(true);
     setError(null);
-    const result = await verifyPhoneCode(phone, value);
+    const result = await verifyPhoneCode(phone, value, true);
     if (!isMounted()) return;
     requestPending.current = false;
     if (result.kind === "error") {
