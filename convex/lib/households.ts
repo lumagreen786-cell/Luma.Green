@@ -211,3 +211,8 @@ export const OPEN_BOOKING_STATUSES: readonly BookingStatus[] = [
 export function isOpenBooking(status: BookingStatus): boolean {
   return OPEN_BOOKING_STATUSES.includes(status);
 }
+
+export function apartmentCode(value: string) {
+  const code = value.trim().toUpperCase();
+  return /^[A-Z0-9][A-Z0-9-]{5,31}$/.test(code) ? code : null;
+}

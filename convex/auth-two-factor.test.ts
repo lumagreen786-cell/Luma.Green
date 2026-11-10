@@ -111,10 +111,11 @@ async function signedIn() {
   await seedCode(t);
   expect(
     await responseStatus(
-      browser.request("/phone-number/verify", {
-        phoneNumber: PHONE,
-        code: SMS_CODE,
-      }),
+      browser.request(
+        "/phone-number/verify",
+        { phoneNumber: PHONE, code: SMS_CODE },
+        { "x-luma-adult-declaration": "1" },
+      ),
     ),
   ).toBe(200);
   return { t, browser };

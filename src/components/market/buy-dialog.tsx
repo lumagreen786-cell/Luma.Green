@@ -120,6 +120,9 @@ function BuyForm({
   isRecycledPet: boolean;
 }) {
   const t = useTranslations("market");
+  const paymentNote = listing.directCashAvailable
+    ? undefined
+    : t("trades.gatewayPending");
   const locale = useLocale();
   const format = useFormat();
   const router = useRouter();
@@ -174,7 +177,7 @@ function BuyForm({
     try {
       await requestTrade({ listingId: listing.id, grams: wanted });
       toast.success(t("buy.sent", { seller: listing.seller.name }), {
-        description: t("trades.gatewayPending"),
+        description: paymentNote,
         action: {
           label: t("buy.seeTrades"),
           onClick: () => {
@@ -287,10 +290,15 @@ function BuyForm({
       </div>
 
       <OfferComparison listing={listing} />
-      <p className="flex gap-2 text-sm text-muted-foreground">
-        <InfoIcon aria-hidden className="mt-0.5 size-4 shrink-0 text-primary" />
-        {t("trades.gatewayPending")}
-      </p>
+      {paymentNote ? (
+        <p className="flex gap-2 text-sm text-muted-foreground">
+          <InfoIcon
+            aria-hidden
+            className="mt-0.5 size-4 shrink-0 text-primary"
+          />
+          {paymentNote}
+        </p>
+      ) : null}
       {total !== null && requiresEwayBill(total) ? (
         <p className="flex gap-2 border-s-2 border-primary ps-3 text-sm text-muted-foreground">
           <FileTextIcon aria-hidden className="mt-0.5 size-4 shrink-0" />

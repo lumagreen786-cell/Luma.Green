@@ -420,7 +420,7 @@
             "body": "Aplikasi menghitung berdasarkan harga Anda. Perlihatkan layar kepada rumah tangga."
           },
           "pay": {
-            "title": "Bayar tunai atau melalui UPI",
+            "title": "Bayar tunai",
             "body": "Bayar sebelum pergi, lalu pilih cara pembayaran."
           }
         },
@@ -701,7 +701,7 @@
           },
           "pay": {
             "title": "Terima pembayaran langsung",
-            "body": "Tunai atau UPI sebelum mereka pergi. Luma.Green tidak pernah menahan uang Anda."
+            "body": "Tunai sebelum mereka pergi. Luma.Green tidak pernah menahan uang Anda."
           },
           "receipt": {
             "title": "Periksa tanda terima",
@@ -1245,7 +1245,7 @@
       },
       "howPaid": {
         "q": "Bagaimana saya dibayar?",
-        "a": "Di depan pintu, tunai atau UPI, sebelum pengepul pergi. Luma.Green mencatat pembayaran tetapi tidak pernah menahan uang Anda."
+        "a": "Di depan pintu, tunai, sebelum pengepul pergi. Luma.Green mencatat pembayaran tetapi tidak pernah menahan uang Anda."
       },
       "recyclePoints": {
         "q": "Apa itu poin daur ulang?",
@@ -1297,7 +1297,7 @@
       },
       "payHousehold": {
         "q": "Apakah Luma.Green membayar rumah tangga untuk saya?",
-        "a": "Tidak. Anda membayar tunai atau UPI di depan pintu. Aplikasi mencatat jumlah dan caranya."
+        "a": "Tidak. Anda membayar tunai di depan pintu. Aplikasi mencatat jumlah dan caranya."
       },
       "paidByYard": {
         "q": "Bagaimana saya dibayar saat menjual ke pengolah awal?",
@@ -1734,7 +1734,7 @@
       "dropoff": "Anda mengantar ke toko",
       "whenValue": "{day} · {window}, {time}",
       "youGet": "Anda menerima sekitar {amount}",
-      "payNote": "Toko menimbang bahan daur ulang dan membayar tunai atau melalui UPI.",
+      "payNote": "Toko menimbang bahan daur ulang dan membayar tunai.",
       "notYou": "Gunakan nomor lain",
       "title": "Periksa dan pesan",
       "change": "Ubah",
@@ -1753,7 +1753,7 @@
     "metaDescription": "Singkirkan barang daur ulang. Terima pembayaran. Foto, penjemputan atau pengantaran, dan pembayaran setelah ditimbang.",
     "eyebrow": "India",
     "title": "Pesan penjemputan dari rumah",
-    "lead": "Pilih barang, pilih toko terdekat, dan terima pembayaran tunai atau UPI setelah ditimbang.",
+    "lead": "Pilih barang, pilih toko terdekat, dan terima pembayaran tunai setelah ditimbang.",
     "promises": {
       "label": "Mengapa menjual di sini",
       "noAccount": "Verifikasi ponsel untuk memesan",
@@ -1894,7 +1894,7 @@
       "requested": "{mode, select, pickup {Menunggu {shop} menerima} other {Menunggu {shop} mengonfirmasi}}",
       "requestedBody": "Permintaan Anda telah dikirim. Halaman ini diperbarui segera setelah mereka menjawab.",
       "accepted": "{mode, select, pickup {{shop} menerima penjemputan Anda} other {{shop} menunggu kedatangan Anda}}",
-      "acceptedBody": "Siapkan bahan daur ulang. Barang ditimbang, lalu Anda dibayar tunai atau melalui UPI.",
+      "acceptedBody": "Siapkan bahan daur ulang. Barang ditimbang, lalu Anda dibayar tunai.",
       "on_the_way": "{shop} dalam perjalanan",
       "on_the_wayBody": "Siapkan bahan daur ulang di dekat pintu.",
       "completed": "Selesai! Anda menerima {amount}",
@@ -1926,7 +1926,7 @@
     "money": {
       "title": "Uang dan poin Anda",
       "estimate": "Anda menerima sekitar {amount}",
-      "estimateNote": "Toko menimbang bahan daur ulang dan membayar tunai atau melalui UPI.",
+      "estimateNote": "Toko menimbang bahan daur ulang dan membayar tunai.",
       "paid": "Anda menerima {amount}",
       "paidBy": "Dibayar melalui {method, select, upi {UPI} other {tunai}} · {date}",
       "estimateWas": "Perkiraan sebelumnya {amount}",
@@ -2452,6 +2452,7 @@
     "description": "Izinkan PostHog dan Google Analytics mengukur kunjungan ke halaman publik. Kami tidak merekam formulir, halaman pribadi, atau pemutaran ulang sesi. Pilihan Anda tidak mengubah akses ke platform.",
     "accept": "Izinkan analitik",
     "decline": "Tetap nonaktifkan analitik",
+    "withdraw": "Nonaktifkan analitik",
     "settings": "Pengaturan analitik",
     "saved": "Pilihan Anda disimpan di perangkat ini.",
     "unavailable": "Peramban gagal menyimpan pilihan ini. Analitik akan tetap nonaktif."
@@ -2510,7 +2511,7 @@
         "title": "Rumah tangga",
         "one": "Lihat nilai bahan daur ulang sebelum memesan.",
         "two": "Dijemput di depan pintu atau diantar ke toko.",
-        "three": "Dibayar tunai atau melalui UPI, disertai tanda terima.",
+        "three": "Dibayar tunai, disertai tanda terima.",
         "cta": "Daur ulang"
       },
       "kabadiwala": {
@@ -2784,7 +2785,7 @@
     "title": "Untuk siapa Luma.Green dibuat",
     "lead": "Semua yang memindahkan bahan daur ulang dari rumah ke pabrik, serta orang yang bekerja di antaranya.",
     "householdHeading": "Serta setiap rumah tangga",
-    "householdBody": "Pesan penjemputan dari rumah dengan nomor ponsel Anda: pilih bahan, bandingkan penawaran toko, lalu terima pembayaran tunai atau melalui UPI dari toko beserta tanda terima."
+    "householdBody": "Pesan penjemputan dari rumah dengan nomor ponsel Anda: pilih bahan, bandingkan penawaran toko, lalu terima pembayaran tunai dari toko beserta tanda terima."
   },
   "join": {
     "consent": {
@@ -3070,6 +3071,7 @@
       "fileType": "Jenis berkas ini tidak dapat digunakan di sini",
       "fileTooBig": "Berkas ini terlalu besar",
       "uploadFailed": "Unggahan gagal. Coba lagi.",
+      "uploadUnavailable": "Unggahan berkas privat belum tersedia.",
       "generic": "Terjadi kesalahan. Coba lagi.",
       "pan": "Cari nomor GST dan konfirmasikan usaha Anda.",
       "city": "Masukkan kota atau daerah dengan 2–60 karakter."
@@ -3803,6 +3805,79 @@
     "qualityReleaseRequired": "Hasil uji yang diterima diperlukan"
   },
   "carbonProjects": {
+    "industry": {
+      "title": "Industri",
+      "other": "Proyek lain",
+      "assign": "Tetapkan industri",
+      "assignmentHint": "Pilih industri yang sesuai dengan metode proyek ini. Anda hanya dapat menetapkannya satu kali.",
+      "labels": {
+        "pet_plastics": "Plastik PET",
+        "metals_recycling": "Daur ulang logam",
+        "e_waste_recovery": "Pemulihan limbah elektronik",
+        "compressed_biogas": "Biogas terkompresi",
+        "industrial_manufacturing": "Efisiensi manufaktur industri"
+      }
+    },
+    "screening": {
+      "title": "Penapisan kerangka kerja",
+      "framework": "Kerangka kerja",
+      "notice": "Semua pemeriksaan dilaporkan sendiri. Program eksternal menetapkan keputusan resmi.",
+      "petExample": "Kesesuaian untuk contoh PET",
+      "source": "Metode resmi",
+      "process": "Proses resmi",
+      "check": "Persyaratan",
+      "result": "Hasil pemeriksaan",
+      "save": "Simpan pemeriksaan",
+      "conflict": "Hasil penapisan ini telah berubah. Tinjau pemeriksaan terbaru sebelum menyimpan.",
+      "useLatest": "Gunakan versi terbaru",
+      "fit": {
+        "candidate": "Metode kandidat. Pastikan proyek memenuhi syarat.",
+        "unconfirmed": "Kesesuaian metode saat ini belum dikonfirmasi.",
+        "no_listed_method": "Tidak ada metode yang cocok pada daftar yang dipublikasikan.",
+        "out_of_scope": "Di luar cakupan penghilangan karbon jangka panjang.",
+        "accounting_only": "Khusus akuntansi emisi."
+      },
+      "status": {
+        "missing": "Belum tersedia",
+        "supported": "Didukung bukti",
+        "contradicted": "Bertentangan dengan bukti"
+      },
+      "gates": {
+        "method_and_version": "Metode dan versi",
+        "site_and_operator": "Lokasi dan operator",
+        "baseline_and_additionality": "Skenario dasar dan adisionalitas",
+        "claim_rights_and_overlap": "Hak klaim dan tumpang tindih",
+        "monitoring_and_calculation": "Pemantauan dan perhitungan",
+        "validation": "Validasi rancangan",
+        "registration": "Pendaftaran proyek",
+        "verification": "Verifikasi hasil",
+        "issuance": "Penerbitan kredit",
+        "transfer_and_settlement": "Transfer dan penyelesaian transaksi",
+        "retirement": "Penghentian penggunaan atau penyerahan kredit",
+        "municipal_waste_origin": "Asal sampah perkotaan",
+        "collection_scope": "Cakupan pengumpulan dan pengecualian",
+        "material_and_mass_balance": "Material dan neraca massa",
+        "process_energy": "Energi proses",
+        "buyer_end_use": "Penggunaan akhir oleh pembeli",
+        "virgin_material_displacement": "Penggantian bahan baku murni",
+        "indian_entity_and_authorized_venue": "Badan hukum di India dan tempat perdagangan resmi",
+        "safeguards_and_consultation": "Perlindungan dan konsultasi",
+        "jurisdiction": "Yurisdiksi yang memenuhi syarat",
+        "durable_removal_and_storage": "Penghilangan dan penyimpanan karbon jangka panjang",
+        "inventory_boundary_and_scopes": "Batas inventaris dan cakupan emisi",
+        "scenario_and_capacity": "Skenario fasilitas dan kapasitas yang memenuhi syarat",
+        "dry_mass_and_pet_grade": "Bobot kering dan mutu PET hasil produksi",
+        "recovered_metal_and_grade": "Logam yang dipulihkan dan mutu hasil",
+        "equipment_categories_and_custody": "Kategori peralatan dan rantai pengawasan",
+        "residue_destination": "Tujuan residu",
+        "feedstock_and_prior_treatment": "Bahan baku tertimbang dan pengolahan sebelumnya",
+        "gas_metering_and_methane_leakage": "Pengukuran gas dan kebocoran metana",
+        "digestate_and_offtake": "Penanganan digestat dan penyerapan produk",
+        "equipment_and_commissioning": "Peralatan dan pengoperasian awal",
+        "meter_calibration": "Kalibrasi meter",
+        "comparable_output_and_feedstock": "Hasil dan bahan baku yang dapat dibandingkan"
+      }
+    },
     "name": "Nama proyek",
     "referenceHint": "Masukkan ID dokumen saja. Jangan sertakan data pribadi atau kata sandi.",
     "title": "Proyek karbon",
@@ -3875,8 +3950,8 @@
   },
   "industry": {
     "title": "Referensi industri",
-    "lead": "Cari buku kerja yang diberikan. Referensi ini belum diverifikasi dan tidak memberi izin perdagangan atau pemrosesan material.",
-    "sourceNote": "Teks sumber ditampilkan dalam bahasa Inggris asli buku kerja.",
+    "lead": "Cari dalam referensi yang tersedia. Referensi ini belum diverifikasi dan tidak memberi izin perdagangan atau pemrosesan material.",
+    "sourceNote": "Teks referensi ditampilkan dalam bahasa Inggris.",
     "sectors": "Referensi sektor",
     "industries": "Matriks industri",
     "lifecycles": "Siklus hidup material",
@@ -3982,6 +4057,10 @@
     "note": "Ini pernyataan produsen, bukan verifikasi independen atas mutu, kepemilikan atau kepatuhan. Catatan tersimpan tidak dapat diubah."
   },
   "tradeLifecycle": {
+    "cashRecord": "Catat penerimaan tunai",
+    "cashReported": "Penerimaan tunai dilaporkan",
+    "cashNote": "Pembeli membayar langsung kepada penjual. Luma mencatat laporan penjual.",
+    "cashReference": "Referensi tanda terima tunai",
     "title": "Pembayaran dan pengiriman",
     "collectionLabel": "Pembayaran pembeli",
     "settlementLabel": "Penyelesaian dana penjual",
@@ -4488,6 +4567,11 @@
     "loadSaved": "Buka versi tersimpan"
   },
   "businessSubscriptions": {
+    "draftsTitle": "Draf tagihan",
+    "draftsEmpty": "Belum ada draf.",
+    "draftTotal": "Subtotal draf sebelum pajak",
+    "draftBook": "Daftar harga {version}",
+    "draftUsage": "{count} pesanan tunai",
     "title": "Paket lokasi",
     "lead": "Simpan preferensi paket untuk lokasi ini.",
     "off": "Penagihan nonaktif. Preferensi tidak memulai langganan berbayar.",
@@ -4543,6 +4627,25 @@
     "localDraft": "Teks sebelumnya yang belum disimpan",
     "savedText": "Teks tersimpan terbaru"
   },
+  "collectionPrivacy": {
+    "phone": "Kami menggunakan nomor telepon Anda untuk masuk dan mengirim kabar layanan melalui SMS.",
+    "email": "Untuk membuat akun, kami menggunakan nama, alamat email, dan kata sandi Anda. Kami mengirim tautan untuk memverifikasi alamat email Anda.",
+    "booking": "Kami menggunakan nama, nomor telepon, foto, kota, dan waktu pilihan Anda untuk mengatur daur ulang. Untuk penjemputan, kami juga menggunakan alamat dan lokasi yang Anda bagikan."
+  },
+  "privacyRequests": {
+    "title": "Permintaan privasi",
+    "lead": "Pilih satu permintaan. Tim privasi akan meninjau dan membalasnya. Simpan nomor permintaan.",
+    "kind": "Jenis permintaan",
+    "submit": "Kirim permintaan",
+    "received": "Permintaan diterima",
+    "responded": "Tim telah membalas",
+    "access": "Akses data saya",
+    "correction": "Koreksi data saya",
+    "erasure": "Hapus data saya",
+    "grievance": "Ajukan keluhan privasi",
+    "nomination": "Tunjuk perwakilan",
+    "withdrawal": "Tarik persetujuan"
+  },
   "privacy": {
     "title": "Kebijakan privasi",
     "lead": "Kebijakan ini mencakup situs Luma.Green serta aplikasi Android, iOS, Windows dan macOS.",
@@ -4556,5 +4659,124 @@
     "requestsBody": "Hapus akun di bawah atau kirim email ke dukungan untuk akses, perbaikan atau penghapusan. Verifikasi kepemilikan; jangan kirim dokumen identitas melalui email. Selesaikan pekerjaan atau kepemilikan yang masih terbuka dahulu.",
     "retentionTitle": "Yang tersisa setelah penutupan",
     "retentionBody": "Penutupan menghapus akses masuk dan kredensial. Bukti usaha, pembayaran, keamanan dan audit dapat disimpan untuk ditinjau. Tidak semua catatan dihapus. Tanyakan masa penyimpanan dan waktunya kepada dukungan."
+  },
+  "participantDirectory": {
+    "title": "Pilih peran Anda",
+    "search": "Cari peran",
+    "empty": "Tidak ada peran yang cocok",
+    "continue": "Lanjutkan",
+    "apply": "Ajukan peran ini",
+    "roles": {
+      "household": "Rumah tangga",
+      "small_business": "Toko atau usaha kecil",
+      "industrial_seller": "Penjual skrap industri",
+      "institution": "Institusi",
+      "kabadiwala": "Kabadiwala",
+      "saathi": "Saathi",
+      "dry_waste_centre": "Pusat sampah kering atau koperasi pemulung",
+      "large_yard": "Lapak pengumpulan besar",
+      "collection_contractor": "Kontraktor pengumpulan dari rumah ke rumah",
+      "rural_collector": "Pemerintah desa atau kelompok swadaya",
+      "trader": "Pedagang, perantara, atau eksportir",
+      "preprocessor": "Pengolah awal",
+      "recycler": "Pendaur ulang",
+      "e_waste_operator": "Pengumpul, pembongkar, atau pemulih limbah elektronik",
+      "wet_waste_processor": "Pengolah limbah basah",
+      "intermediary_manufacturer": "Produsen barang antara",
+      "end_goods_manufacturer": "Produsen barang jadi",
+      "epr_brand": "Merek dengan kewajiban EPR",
+      "pro": "Organisasi tanggung jawab produsen",
+      "epr_trading": "Perdagangan EPR",
+      "carbon_trading": "Perdagangan karbon",
+      "transporter": "Pengangkut dan manifes",
+      "equipment_supplier": "Pemasok peralatan",
+      "boiler_water_supplier": "Pemasok ketel, instalasi pengolahan, atau mobil tangki",
+      "weighing_vendor": "Pemasok timbangan atau jembatan timbang",
+      "solar_provider": "Penyedia energi surya",
+      "environmental_engineer": "Teknik lingkungan",
+      "hr_provider": "Penyedia layanan sumber daya manusia",
+      "accounting_provider": "Akuntansi dan kepatuhan",
+      "employee_tracking": "Pemantauan pegawai",
+      "waste_picker_union": "LSM atau serikat pemulung",
+      "city_official": "Pejabat kota",
+      "csr_lender_auditor": "Tim CSR, pemberi pinjaman, atau auditor",
+      "luma_team": "Tim Luma.Green",
+      "ward_official": "Pejabat wilayah",
+      "community_champion": "Penggerak masyarakat",
+      "payment_partner": "Mitra pembayaran",
+      "rewards_partner": "Mitra program hadiah",
+      "welfare_partner": "Mitra asuransi atau kesejahteraan",
+      "society_partner": "Mitra pengelolaan kawasan hunian atau fasilitas",
+      "voice_partner": "Mitra layanan suara atau bahasa"
+    },
+    "groups": {
+      "generators": "Rumah tangga dan penjual bahan",
+      "collection": "Pengumpulan dan penggabungan",
+      "processing": "Pengolahan dan produksi",
+      "markets": "Merek dan pasar lingkungan",
+      "services": "Logistik dan layanan",
+      "partners": "Masyarakat, pemerintah, dan mitra"
+    }
+  },
+  "apartmentCollection": {
+    "pickup": "Pengambilan di apartemen",
+    "code": "Kode komunitas",
+    "noRoute": "Belum ada jalur pengambilan apartemen yang ditinjau. Minta pengelola gedung atau paguyuban penghuni mengatur pengambilan."
+  },
+  "householdFamily": {
+    "title": "Anggota keluarga",
+    "description": "Anggota keluarga dapat melihat status pengambilan yang Anda bagikan. Tanda terima, foto, dan jejak karbon Anda tetap pribadi.",
+    "phone": "Nomor ponsel anggota keluarga",
+    "invite": "Buat undangan",
+    "code": "Kode undangan",
+    "codeHelp": "Bagikan kode ini secara pribadi. Kode berlaku 7 hari. Luma tidak mengirim pesan.",
+    "join": "Gabung rumah tangga",
+    "joinedAt": "Bergabung pada {date}",
+    "leave": "Keluar dari rumah tangga",
+    "collections": "Pengambilan yang dibagikan keluarga",
+    "share": "Bagikan status",
+    "makePrivate": "Hentikan berbagi",
+    "recent": "Keluar dan masuk kembali sebelum melanjutkan.",
+    "invalid": "Kode tidak valid, kedaluwarsa, atau untuk nomor ponsel lain.",
+    "verified": "Verifikasi nomor ponsel Anda untuk menggunakan undangan."
+  },
+  "householdTools": {
+    "navigation": "Fitur rumah tangga",
+    "recycle": "Daur ulang",
+    "activity": "Aktivitas",
+    "services": "Layanan",
+    "footprint": "Jejak karbon",
+    "settings": "Setelan",
+    "loading": "Memuat pemesanan…",
+    "noBookings": "Belum ada pemesanan.",
+    "electricityTitle": "Jejak karbon listrik",
+    "electricityReading": "Listrik yang digunakan dari jaringan (kWh)",
+    "invalidReading": "Masukkan kWh dari tagihan atau meteran. Gunakan hingga tiga angka desimal.",
+    "calculate": "Hitung perkiraan",
+    "estimate": "Perkiraan emisi jaringan: {amount} kg CO₂",
+    "privateCalculation": "Angka Anda tetap di layar ini. Hasil hanya mencakup listrik.",
+    "gridSource": "Faktor emisi jaringan India, CEA 2025–26",
+    "airQuality": "Kualitas udara",
+    "roofSolar": "Periksa potensi surya di atap",
+    "roofPrecision": "Pemeriksaan atap memerlukan lokasi yang akurat.",
+    "lookupConsent": "Kirim lokasi saya ke Google Maps untuk pemeriksaan ini. Luma tidak menyimpannya.",
+    "lookupUnavailable": "Tidak ada hasil yang tersedia.",
+    "locationUnavailable": "Lokasi yang sesuai tidak dapat diperoleh.",
+    "lookupLimit": "Batas pemeriksaan tercapai. Coba lagi nanti.",
+    "airScore": "Indeks kualitas udara universal: {score} dari 100. Semakin tinggi, semakin baik.",
+    "roofEstimate": "Perkiraan produksi atap: {energy} kWh/tahun (DC) dengan {panels} panel."
+  },
+  "homeReminder": {
+    "title": "Pengingat saat keluar rumah",
+    "consent": "Atur saat berada di rumah. Perangkat ini memakai lokasi di latar belakang untuk mendeteksi saat Anda keluar. Luma tidak menerima riwayat lokasi.",
+    "enable": "Aktifkan pengingat keluar rumah",
+    "disable": "Nonaktifkan pengingat keluar rumah",
+    "notificationTitle": "Sebelum Anda keluar",
+    "notificationBody": "Periksa lampu dan peralatan yang dapat dimatikan.",
+    "unavailable": "Pengingat keluar rumah tidak tersedia. Periksa izin perangkat dan coba lagi saat di rumah.",
+    "dailyTitle": "Pengingat harian",
+    "time": "Waktu pengingat",
+    "add": "Tambahkan ke kalender",
+    "calendarHelp": "Buka berkas kalender untuk mengatur pengingat harian."
   }
 }

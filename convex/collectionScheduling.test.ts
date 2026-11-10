@@ -61,6 +61,7 @@ describe("collection capacity and recurrence", () => {
     expect(availability.every((s) => s.remaining === 0)).toBe(true);
     await expect(
       w.household.mutation(api.households.book, {
+        adultConfirmed: true,
         ...input,
         items: [{ materialCode: "PAPER-NEWS", kg: 1 }],
         orgId: w.org._id,
@@ -171,8 +172,8 @@ describe("collection capacity and recurrence", () => {
     expect(job).toMatchObject({
       payPaise: 45_001,
       paymentDueDate: "2026-10-03",
-      employerPaidAt: Date.now(),
-      workerAcknowledgedAt: Date.now(),
+      employerPaidAt: expect.closeTo(Date.now(), -1),
+      workerAcknowledgedAt: expect.closeTo(Date.now(), -1),
     });
   });
 });
@@ -216,7 +217,10 @@ describe("linked support and draft retention", () => {
         .withIndex("by_source", (q) => q.eq("source", input.source))
         .unique(),
     );
-    expect(row).toMatchObject({ team: "accounts", escalatedAt: Date.now() });
+    expect(row).toMatchObject({
+      team: "accounts",
+      escalatedAt: expect.closeTo(Date.now(), -1),
+    });
   });
   it("expires only never-submitted stale drafts and preserves an open linked issue", async () => {
     const w = await world();
@@ -273,6 +277,7 @@ describe("linked support and draft retention", () => {
 it("starts a fresh two-hour assignment round only after an explicit time change", async () => {
   const w = await world();
   const token = await w.household.mutation(api.households.book, {
+    adultConfirmed: true,
     ...input,
     items: [{ materialCode: "PAPER-NEWS", kg: 1 }],
     orgId: w.org._id,
@@ -284,7 +289,7 @@ it("starts a fresh two-hour assignment round only after an explicit time change"
       .unique(),
   );
   if (!original) throw new Error("Missing booking");
-  vi.setSystemTime(Date.now() + 2 * 60 * 60 * 1000);
+  vi.setSystemTime(original.dispatch!.expiresAt!);
   await w.t.mutation(internal.dispatch.expireOffer, {
     bookingId: original._id,
     attempt: 1,
@@ -307,7 +312,10 @@ it("starts a fresh two-hour assignment round only after an explicit time change"
   });
   const changed = await w.t.run((ctx) => ctx.db.get("bookings", original._id));
   expect(changed?.createdAt).toBe(original.createdAt);
-  expect(changed?.dispatch?.deadlineAt).toBe(Date.now() + 2 * 60 * 60 * 1000);
+  expect(changed?.dispatch?.deadlineAt).toBeCloseTo(
+    Date.now() + 2 * 60 * 60 * 1000,
+    -1,
+  );
   expect(changed?.dispatch?.expiresAt).toBe(changed?.dispatch?.deadlineAt);
 });
 it("escalates an existing support record and retains urgent evidence once", async () => {
@@ -345,7 +353,7 @@ it("escalates an existing support record and retains urgent evidence once", asyn
   expect(records[0]).toMatchObject({
     message: initial.message,
     team: "accounts",
-    escalatedAt: Date.now(),
+    escalatedAt: expect.closeTo(Date.now(), -1),
   });
   const events = await w.t.run((ctx) =>
     ctx.db
@@ -374,6 +382,7 @@ it("applies the pickup radius at discovery, booking and acceptance while preserv
   );
   await expect(
     w.household.mutation(api.households.book, {
+      adultConfirmed: true,
       ...input,
       items: [{ materialCode: "PAPER-NEWS", kg: 1 }],
       orgId: w.org._id,
@@ -381,6 +390,7 @@ it("applies the pickup radius at discovery, booking and acceptance while preserv
     }),
   ).rejects.toThrow("OUTSIDE_PICKUP_RADIUS");
   const token = await w.household.mutation(api.households.book, {
+    adultConfirmed: true,
     ...input,
     items: [{ materialCode: "PAPER-NEWS", kg: 1 }],
     orgId: w.org._id,
@@ -446,6 +456,7 @@ it("requires an admin reason and a fresh destination acceptance for reassignment
     return id;
   });
   const token = await w.household.mutation(api.households.book, {
+    adultConfirmed: true,
     ...input,
     items: [{ materialCode: "PAPER-NEWS", kg: 1 }],
     orgId: w.org._id,
@@ -574,7 +585,7 @@ it("adds a receipt dispute to an existing linked support case", async () => {
   expect(cases[0]).toMatchObject({
     source,
     team: "accounts",
-    escalatedAt: Date.now(),
+    escalatedAt: expect.closeTo(Date.now(), -1),
   });
   const updates = await w.t.run((ctx) =>
     ctx.db

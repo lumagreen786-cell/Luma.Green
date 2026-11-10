@@ -83,7 +83,44 @@ afterEach(() => {
   vi.unstubAllEnvs();
   vi.restoreAllMocks();
 });
-async function reportWorld() {
+async function testAttachment(
+  w: Awaited<ReturnType<typeof world>>,
+  provider: "convex" | "r2",
+  isSharedWithBuyer = true,
+) {
+  const { bytes, ...args } = {
+    ...w.uploadArgs,
+    shareWithBuyer: isSharedWithBuyer,
+  };
+  if (provider === "r2")
+    return w.owner.action(api.qualityFiles.upload, { ...args, bytes });
+
+  // Historical rows exercise legacy reads without reintroducing an upload path.
+  const hash = new Uint8Array(await crypto.subtle.digest("SHA-256", bytes));
+  const sha256 = [...hash].map((n) => n.toString(16).padStart(2, "0")).join("");
+  return w.t.run(async (ctx) => {
+    const inspection = await ctx.db.get("lotInspections", args.inspectionId);
+    const org = inspection ? await ctx.db.get("orgs", inspection.orgId) : null;
+    if (!inspection || !org?.ownerProfileId) throw new Error("fixture");
+    const storageId = await ctx.storage.store(
+      new Blob([bytes], { type: args.contentType }),
+    );
+    return ctx.db.insert("qualityAttachments", {
+      orgId: org._id,
+      inspectionId: inspection._id,
+      buyerOrgId: isSharedWithBuyer ? inspection.buyerOrgId : undefined,
+      kind: args.kind,
+      name: args.name,
+      contentType: args.contentType,
+      size: bytes.byteLength,
+      sha256,
+      storageId,
+      createdBy: org.ownerProfileId,
+      createdAt: Date.now(),
+    });
+  });
+}
+async function reportWorld(provider: "convex" | "r2") {
   const w = await world();
   const recipient = await signIn(w.t, {
     email: "auditor@luma.test",
@@ -102,10 +139,7 @@ async function reportWorld() {
   await w.t.run((ctx) =>
     ctx.db.patch("stakeholderAccounts", recipientId, { status: "approved" }),
   );
-  const fileId = await w.owner.action(api.qualityFiles.upload, {
-    ...w.uploadArgs,
-    shareWithBuyer: false,
-  });
+  const fileId = await testAttachment(w, provider, false);
   const args = {
     inspectionId: w.inspectionId,
     recipientId,
@@ -121,10 +155,7 @@ describe("application upload isolation", () => {
     "does not let application %s claim or delete a quality attachment",
     async (operation) => {
       const w = await world();
-      const fileId = await w.owner.action(
-        api.qualityFiles.upload,
-        w.uploadArgs,
-      );
+      const fileId = await testAttachment(w, "convex");
       const file = await w.t.run((ctx) =>
         ctx.db.get("qualityAttachments", fileId),
       );
@@ -162,7 +193,7 @@ describe("application upload isolation", () => {
   );
 });
 
-describe.each(["convex", "r2"])("quality storage: %s", (provider) => {
+describe.each(["convex", "r2"] as const)("quality storage: %s", (provider) => {
   beforeEach(() => {
     if (provider === "r2") mockR2();
   });
@@ -172,7 +203,7 @@ describe.each(["convex", "r2"])("quality storage: %s", (provider) => {
       const before = await w.t.run((ctx) =>
         ctx.db.get("lotInspections", w.inspectionId),
       );
-      const id = await w.owner.action(api.qualityFiles.upload, w.uploadArgs);
+      const id = await testAttachment(w, provider);
       const board = await w.buyer.query(api.qualityFiles.board, {});
       expect(board.incoming).toHaveLength(1);
       expect(board.incoming[0]).not.toHaveProperty("storageId");
@@ -196,10 +227,7 @@ describe.each(["convex", "r2"])("quality storage: %s", (provider) => {
     });
     it("does not share files with a buyer unless explicitly selected, and rejects foreign uploads", async () => {
       const w = await world();
-      const id = await w.owner.action(api.qualityFiles.upload, {
-        ...w.uploadArgs,
-        shareWithBuyer: false,
-      });
+      const id = await testAttachment(w, provider, false);
       expect(
         await w.buyer.query(internal.qualityFiles.readFile, { fileId: id }),
       ).toBeNull();
@@ -217,7 +245,7 @@ describe.each(["convex", "r2"])("quality storage: %s", (provider) => {
     });
     it("withdrawal blocks future buyer downloads and decisions but preserves audit evidence", async () => {
       const w = await world();
-      const id = await w.owner.action(api.qualityFiles.upload, w.uploadArgs);
+      const id = await testAttachment(w, provider);
       await w.owner.mutation(api.qualityFiles.withdraw, { fileId: id });
       expect(
         await w.buyer.query(internal.qualityFiles.readFile, { fileId: id }),
@@ -236,7 +264,7 @@ describe.each(["convex", "r2"])("quality storage: %s", (provider) => {
     });
     it("removal of workspace membership revokes downloads", async () => {
       const w = await world();
-      const id = await w.owner.action(api.qualityFiles.upload, w.uploadArgs);
+      const id = await testAttachment(w, provider);
       await w.t.run(async (ctx) => {
         const org = await ctx.db
           .query("orgs")
@@ -270,46 +298,6 @@ describe.each(["convex", "r2"])("quality storage: %s", (provider) => {
         w.owner.action(api.qualityFiles.upload, w.uploadArgs),
       ).rejects.toThrow("WORKSPACE_PERMISSION_DENIED");
     });
-    it("rejects unsafe content before storing and only discards unattached blobs", async () => {
-      const w = await world();
-      await expect(
-        w.owner.action(api.qualityFiles.upload, {
-          ...w.uploadArgs,
-          bytes: new TextEncoder().encode("%PDF-1.4 /JavaScript evil %%EOF")
-            .buffer,
-        }),
-      ).rejects.toThrow("UNSAFE_DOCUMENT");
-      const id = await w.owner.action(api.qualityFiles.upload, w.uploadArgs);
-      const file = await w.t.run((ctx) => ctx.db.get("qualityAttachments", id));
-      if (!file) throw new Error("fixture");
-      if (file.storageId) {
-        const storageId = file.storageId;
-        await w.t.mutation(internal.qualityFiles.discard, { storageId });
-        expect(
-          await w.t.run(async (ctx) =>
-            Boolean(await ctx.storage.get(storageId)),
-          ),
-        ).toBe(true);
-      } else {
-        expect(file.r2).toBeDefined();
-        expect(await w.t.action(internal.qualityFiles.cleanupR2, {})).toEqual({
-          deleted: 0,
-          failed: 0,
-        });
-        const response1 = await w.owner.fetch(`/quality-files/${id}`);
-        expect(response1.status).toBe(200);
-      }
-      const orphan = await w.t.run((ctx) =>
-        ctx.storage.store(new Blob([pdf()])),
-      );
-      await w.t.mutation(internal.qualityFiles.discard, { storageId: orphan });
-      expect(
-        await w.t.run(async (ctx) => {
-          const blob = await ctx.storage.get(orphan);
-          return Boolean(blob);
-        }),
-      ).toBe(false);
-    });
   });
   describe("file validation", () => {
     it.each(["text/html", "image/svg+xml", "application/zip"])(
@@ -340,7 +328,7 @@ describe.each(["convex", "r2"])("quality storage: %s", (provider) => {
   });
   describe("scoped audit reports", () => {
     it("shares only effective inspections after independent correction approval", async () => {
-      const w = await reportWorld();
+      const w = await reportWorld(provider);
       const original = await w.t.run((ctx) =>
         ctx.db.get("lotInspections", w.inspectionId),
       );
@@ -421,7 +409,7 @@ describe.each(["convex", "r2"])("quality storage: %s", (provider) => {
     });
 
     it("shares only a frozen whitelist with the exact recipient, then revokes bytes and view", async () => {
-      const w = await reportWorld();
+      const w = await reportWorld(provider);
       const reportId = await w.owner.mutation(api.auditShares.create, w.args);
       const read = await w.recipient.query(api.auditShares.read, { reportId });
       expect(read?.snapshot.materialCode).toBe("PLASTIC-PET");
@@ -453,7 +441,7 @@ describe.each(["convex", "r2"])("quality storage: %s", (provider) => {
       ).toBeNull();
     });
     it("denies expired grants and suspended stakeholder approval", async () => {
-      const w = await reportWorld();
+      const w = await reportWorld(provider);
       const reportId = await w.owner.mutation(api.auditShares.create, w.args);
       await w.t.run((ctx) =>
         ctx.db.patch("stakeholderAccounts", w.recipientId, {
@@ -476,7 +464,7 @@ describe.each(["convex", "r2"])("quality storage: %s", (provider) => {
       ).toBeNull();
     });
     it("rejects cross-org sharing and non-approved recipients", async () => {
-      const w = await reportWorld();
+      const w = await reportWorld(provider);
       await expect(
         w.stranger.mutation(api.auditShares.create, w.args),
       ).rejects.toThrow("INSPECTION_NOT_FOUND");
@@ -493,7 +481,7 @@ describe.each(["convex", "r2"])("quality storage: %s", (provider) => {
 
   describe("authenticated quality HTTP downloads", () => {
     it("serves exact bytes as private attachments and denies another recipient or revoked grant", async () => {
-      const w = await reportWorld();
+      const w = await reportWorld(provider);
       vi.stubEnv("SITE_URL", "http://localhost:3100");
       const reportId = await w.owner.mutation(api.auditShares.create, w.args);
       const path = `/quality-files/${w.fileId}?report=${reportId}`;
@@ -514,7 +502,7 @@ describe.each(["convex", "r2"])("quality storage: %s", (provider) => {
       expect(revoked.status).toBe(404);
     });
     it("denies suspended source, withdrawn file and expired session through HTTP", async () => {
-      const w = await reportWorld();
+      const w = await reportWorld(provider);
       const reportId = await w.owner.mutation(api.auditShares.create, w.args);
       const path = `/quality-files/${w.fileId}?report=${reportId}`;
       const lot = await w.t.run((ctx) => ctx.db.get("materialLots", w.lotId));
@@ -557,7 +545,7 @@ describe.each(["convex", "r2"])("quality storage: %s", (provider) => {
       expect(withdrawn.status).toBe(404);
     });
     it("refuses anonymous requests and untrusted CORS preflight", async () => {
-      const w = await reportWorld();
+      const w = await reportWorld(provider);
       const anonymous = await w.t.fetch(`/quality-files/${w.fileId}`);
       expect(anonymous.status).toBe(403);
       const preflight = await w.t.fetch(`/quality-files/${w.fileId}`, {
@@ -567,11 +555,8 @@ describe.each(["convex", "r2"])("quality storage: %s", (provider) => {
       expect(preflight.status).toBe(403);
     });
     it("snapshots actual buyer decisions without inferring acceptance or changing later", async () => {
-      const w = await reportWorld();
-      const shared = await w.owner.action(
-        api.qualityFiles.upload,
-        w.uploadArgs,
-      );
+      const w = await reportWorld(provider);
+      const shared = await testAttachment(w, provider);
       await w.buyer.mutation(api.qualityFiles.decide, {
         inspectionId: w.inspectionId,
         attachmentIds: [shared],
@@ -597,11 +582,70 @@ describe.each(["convex", "r2"])("quality storage: %s", (provider) => {
 });
 
 describe("R2 lifecycle", () => {
+  it("rejects unsafe content before reserving or writing an R2 file", async () => {
+    const w = await world();
+    const provider = mockR2();
+    await expect(
+      w.owner.action(api.qualityFiles.upload, {
+        ...w.uploadArgs,
+        bytes: new TextEncoder().encode("%PDF-1.4 /JavaScript evil %%EOF")
+          .buffer,
+      }),
+    ).rejects.toThrow("UNSAFE_DOCUMENT");
+    expect(provider.fetcher).not.toHaveBeenCalled();
+    expect(
+      await w.t.run((ctx) => ctx.db.query("qualityUploads").first()),
+    ).toBeNull();
+  });
+  it("blocks a keyless upload without writing a Convex file or R2 reservation", async () => {
+    const w = await world();
+    vi.stubEnv("R2_ENABLED", "false");
+    const stored = () =>
+      w.t.run((ctx) => ctx.db.system.query("_storage").collect());
+    const before = await stored();
+    await expect(
+      w.owner.action(api.qualityFiles.upload, w.uploadArgs),
+    ).rejects.toThrow("STORAGE_UNAVAILABLE");
+    expect(await stored()).toEqual(before);
+    expect(
+      await w.t.run((ctx) => ctx.db.query("qualityUploads").first()),
+    ).toBeNull();
+    expect(await w.owner.query(api.qualityFiles.board, {})).toMatchObject({
+      canOperate: true,
+      uploadAvailable: false,
+      own: [],
+    });
+  });
+  it("withholds R2 bytes when a report grant is revoked during the read", async () => {
+    const provider = mockR2();
+    const w = await reportWorld("r2");
+    const reportId = await w.owner.mutation(api.auditShares.create, w.args);
+    const original = provider.fetcher.getMockImplementation();
+    if (!original) throw new Error("fixture");
+    provider.fetcher.mockImplementationOnce(async (input) => {
+      const response = await original(input);
+      await w.owner.mutation(api.auditShares.revoke, { reportId });
+      return response;
+    });
+    const response = await w.recipient.fetch(
+      `/quality-files/${w.fileId}?report=${reportId}`,
+    );
+    expect(response.status).toBe(404);
+    expect(await response.text()).toBe("UNAVAILABLE");
+  });
   it("keeps old files readable, and R2 reads work with new writes off", async () => {
     const w = await world();
-    const oldId = await w.owner.action(api.qualityFiles.upload, w.uploadArgs);
+    const oldId = await testAttachment(w, "convex");
     const provider = mockR2();
     const newId = await w.owner.action(api.qualityFiles.upload, w.uploadArgs);
+    const file = await w.t.run((ctx) =>
+      ctx.db.get("qualityAttachments", newId),
+    );
+    expect(file?.r2).toBeDefined();
+    expect(file?.storageId).toBeUndefined();
+    expect(await w.owner.query(api.qualityFiles.board, {})).toMatchObject({
+      uploadAvailable: true,
+    });
     expect(provider.objects.size).toBe(1);
     vi.stubEnv("R2_ENABLED", "false");
     for (const id of [oldId, newId]) {

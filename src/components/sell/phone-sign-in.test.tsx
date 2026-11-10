@@ -35,9 +35,20 @@ async function openCodeForm(shouldWaitForResend = true) {
       <PhoneSignIn verifyLabel="Confirm" onVerified={calls.onVerified} />
     </NextIntlClientProvider>,
   );
+  expect(screen.getByText(messages.collectionPrivacy.phone)).toBeVisible();
+  expect(
+    screen.getByRole("link", { name: messages.privacy.title }),
+  ).toHaveAttribute("href", "/privacy");
+  expect(calls.sendOtp).not.toHaveBeenCalled();
   fireEvent.change(screen.getByLabelText(messages.sell.phone.label), {
     target: { value: "9876543210" },
   });
+  expect(
+    screen.getByRole("button", { name: messages.sell.phone.sendCode }),
+  ).toBeDisabled();
+  fireEvent.click(
+    screen.getByRole("checkbox", { name: messages.join.consent.age }),
+  );
   await act(async () => {
     fireEvent.click(
       screen.getByRole("button", { name: messages.sell.phone.sendCode }),

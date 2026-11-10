@@ -1,6 +1,39 @@
 import { defineTable } from "convex/server";
 import { v } from "convex/values";
 
+import {
+  carbonFrameworkIds,
+  carbonGateIds,
+  carbonGateStates,
+  carbonIndustryIds,
+} from "../../src/lib/carbon-frameworks";
+
+export const vCarbonFramework = v.union(
+  ...carbonFrameworkIds.map((framework) => v.literal(framework)),
+);
+
+export const vCarbonIndustry = v.union(
+  ...carbonIndustryIds.map((industry) => v.literal(industry)),
+);
+
+export const carbonFrameworkCheckFields = {
+  gate: v.union(...carbonGateIds.map((gate) => v.literal(gate))),
+  status: v.union(...carbonGateStates.map((status) => v.literal(status))),
+  reference: v.string(),
+};
+
+export const carbonFrameworkChangeFields = {
+  ...carbonFrameworkCheckFields,
+  revision: v.number(),
+  recordedAt: v.number(),
+};
+
+export const carbonFrameworkScreeningFields = {
+  framework: vCarbonFramework,
+  revision: v.number(),
+  checks: v.array(v.object(carbonFrameworkCheckFields)),
+};
+
 export const vCarbonMethod = v.union(
   v.literal("verra_vmr0007"),
   v.literal("bee_wa03_003"),
@@ -41,6 +74,7 @@ export const carbonReviewSnapshotFields = {
   projectId: v.id("carbonProjects"),
   facilityId: v.id("industrialFacilities"),
   method: vCarbonMethod,
+  industry: v.optional(vCarbonIndustry),
   revision: v.number(),
   reviewedAt: v.number(),
   references: v.array(v.object(carbonEvidenceFields)),
@@ -54,6 +88,19 @@ export const carbonReviewSnapshotFields = {
 };
 
 export const carbonProjectTables = {
+  carbonFrameworkChanges: defineTable({
+    projectId: v.id("carbonProjects"),
+    framework: vCarbonFramework,
+    ...carbonFrameworkChangeFields,
+  }).index("by_project_framework_revision", [
+    "projectId",
+    "framework",
+    "revision",
+  ]),
+  carbonFrameworkScreenings: defineTable({
+    projectId: v.id("carbonProjects"),
+    ...carbonFrameworkScreeningFields,
+  }).index("by_project_framework", ["projectId", "framework"]),
   carbonReviewSnapshots: defineTable(carbonReviewSnapshotFields).index(
     "by_project_revision",
     ["projectId", "revision"],
@@ -71,6 +118,7 @@ export const carbonProjectTables = {
     facilityId: v.id("industrialFacilities"),
     facilityName: v.string(),
     method: vCarbonMethod,
+    industry: v.optional(vCarbonIndustry),
     name: v.string(),
     status: vCarbonProjectStatus,
     evidence: v.array(

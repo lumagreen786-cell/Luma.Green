@@ -1,7 +1,7 @@
 import { ConvexError, v } from "convex/values";
 
 import { components, internal } from "./_generated/api";
-import type { Id } from "./_generated/dataModel";
+import type { Doc, Id } from "./_generated/dataModel";
 import {
   internalAction,
   internalMutation,
@@ -42,6 +42,12 @@ function assertDemoAllowed() {
   if (process.env.AUTH_DEV_MODE !== "true") {
     throw new ConvexError("DEMO_ONLY_ON_DEV");
   }
+}
+
+function legacyDemoStorageId(file: Doc<"applicationFiles">) {
+  // R2 cleanup is outside the Convex-only fixture reset.
+  if (file.r2 || !file.storageId) throw new ConvexError("DEMO_RESET_R2_FILE");
+  return file.storageId;
 }
 
 const HOUR = 60 * 60 * 1000;
@@ -155,7 +161,7 @@ export const clearData = internalMutation({
           )
           .collect();
         for (const file of files) {
-          storageIds.push(file.storageId);
+          storageIds.push(legacyDemoStorageId(file));
           await ctx.db.delete("applicationFiles", file._id);
         }
         const snapshots = await ctx.db

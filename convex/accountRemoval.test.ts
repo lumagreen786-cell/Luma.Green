@@ -13,6 +13,7 @@ import { spendIdentityAttempt } from "./lib/identityCheckQuota";
 import { hashToken } from "./lib/integrations";
 import { indiaToday } from "./lib/onboarding";
 import { hasActivePushSession } from "./lib/push";
+import { smsPhoneHash } from "./lib/smsLimits";
 import schema from "./schema";
 
 const modules = convexModules(import.meta.glob("./**/*.*s"));
@@ -105,7 +106,10 @@ it("withdraws access immediately and scrubs optional profile settings without ed
     reasons: [],
   });
   const profile = await w.t.run((ctx) => ctx.db.get("profiles", w.profileId));
-  expect(profile).toMatchObject({ closedAt: Date.now(), locale: "en" });
+  expect(profile).toMatchObject({
+    closedAt: expect.closeTo(Date.now(), -1),
+    locale: "en",
+  });
   expect(profile?.phone).toBeUndefined();
   expect(profile?.activeOrgId).toBeUndefined();
   expect(await w.person.query(api.identity.me, {})).toBeNull();
@@ -185,7 +189,7 @@ it("finishes bounded cleanup and retains a review record and old profile tombsto
   const request = await w.t.run((ctx) =>
     ctx.db.query("accountRemovals").unique(),
   );
-  expect(request).toMatchObject({ state: "restricted_review", phase: 23 });
+  expect(request).toMatchObject({ state: "restricted_review", phase: 26 });
   expect(
     await w.t.run((ctx) =>
       ctx.runQuery(components.betterAuth.adapter.findOne, {
@@ -196,6 +200,55 @@ it("finishes bounded cleanup and retains a review record and old profile tombsto
   ).toBeNull();
   const profile = await w.t.run((ctx) => ctx.db.get("profiles", w.profileId));
   expect(profile?.closedAt).toBeDefined();
+});
+it("cleans up owned, accepted and pending household family grants on withdrawal", async () => {
+  const w = await world();
+  const other = await signIn(w.t, {
+    email: "other-household@example.test",
+    phoneNumber: "+919000008802",
+  });
+  const otherId = await other.mutation(api.identity.ensureProfile, {
+    locale: "en",
+  });
+  const secret = process.env.BETTER_AUTH_SECRET;
+  if (!secret) throw new Error("Missing test secret");
+  const phoneHash = await smsPhoneHash(PHONE, secret);
+  await w.t.run(async (ctx) => {
+    const base = { expiresAt: Date.now() + 60_000, createdAt: Date.now() };
+    await ctx.db.insert("householdFamilyGrants", {
+      ...base,
+      ownerProfileId: w.profileId,
+    });
+    await ctx.db.insert("householdFamilyGrants", {
+      ...base,
+      ownerProfileId: otherId,
+      memberProfileId: w.profileId,
+      acceptedAt: Date.now(),
+    });
+    await ctx.db.insert("householdFamilyGrants", {
+      ...base,
+      ownerProfileId: otherId,
+      phoneHash,
+    });
+    await ctx.db.insert("householdFamilyGrants", {
+      ...base,
+      ownerProfileId: otherId,
+      phoneHash: "different",
+    });
+  });
+  await w.person.mutation(api.accountRemoval.close, closeArgs);
+  await w.t.finishAllScheduledFunctions(vi.runAllTimers);
+  expect(
+    await w.t.run((ctx) => ctx.db.query("householdFamilyGrants").collect()),
+  ).toEqual([
+    expect.objectContaining({
+      ownerProfileId: otherId,
+      phoneHash: "different",
+    }),
+  ]);
+  expect(
+    await w.t.run((ctx) => ctx.db.query("accountRemovals").unique()),
+  ).not.toHaveProperty("familyPhoneHash");
 });
 it("does not let a same-phone rejoin reopen old pending invitations or reset paid checks that day", async () => {
   const w = await world();

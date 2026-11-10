@@ -139,7 +139,7 @@
         "title": "家庭",
         "one": "予約する前に、資源の価値を確認。",
         "two": "玄関先で回収、または店舗へ持ち込み。",
-        "three": "現金またはUPIで受け取り、受領書も発行。",
+        "three": "現金で受け取り、受領書も発行。",
         "cta": "リサイクル"
       },
       "kabadiwala": {
@@ -611,7 +611,7 @@
       "body": "近所の回収、選別、シフト業務を受け、収入を確認できます。"
     },
     "householdHeading": "そして、すべての家庭へ",
-    "householdBody": "携帯電話番号を使って自宅での回収を予約できます。素材を選び、店舗の提示額を比較し、店舗から現金またはUPIで支払いを受け取り、領収書を受け取ります。"
+    "householdBody": "携帯電話番号を使って自宅での回収を予約できます。素材を選び、店舗の提示額を比較し、店舗から現金で支払いを受け取り、領収書を受け取ります。"
   },
   "contact": {
     "metaTitle": "お問い合わせ",
@@ -1079,7 +1079,7 @@
           },
           "pay": {
             "title": "その場で代金を受け取る",
-            "body": "担当者が帰る前に、現金またはUPIで受け取ります。Luma.Greenがお金を預かることはありません。"
+            "body": "担当者が帰る前に、現金で受け取ります。Luma.Greenがお金を預かることはありません。"
           },
           "receipt": {
             "title": "受領書を確認",
@@ -1218,7 +1218,7 @@
             "body": "設定価格からアプリが計算します。家庭の利用者に画面を見せてください。"
           },
           "pay": {
-            "title": "現金またはUPIで支払う",
+            "title": "現金で支払う",
             "body": "帰る前に支払い、支払い方法を選びます。"
           },
           "save": {
@@ -1569,7 +1569,7 @@
       },
       "howPaid": {
         "q": "代金はどう受け取りますか？",
-        "a": "資源回収店の担当者が帰る前に、玄関先で現金またはUPIで受け取ります。Luma.Greenは支払いを記録しますが、お金は預かりません。"
+        "a": "資源回収店の担当者が帰る前に、玄関先で現金で受け取ります。Luma.Greenは支払いを記録しますが、お金は預かりません。"
       },
       "recyclePoints": {
         "q": "リサイクルポイントとは？",
@@ -1621,7 +1621,7 @@
       },
       "payHousehold": {
         "q": "Luma.Greenが代わりに家庭へ支払いますか？",
-        "a": "いいえ。玄関先で現金またはUPIで支払ってください。アプリは金額と方法を記録します。"
+        "a": "いいえ。玄関先で現金で支払ってください。アプリは金額と方法を記録します。"
       },
       "paidByYard": {
         "q": "前処理業者に売った代金はどう受け取りますか？",
@@ -2217,6 +2217,7 @@
       "fileType": "この種類のファイルは使用できません",
       "fileTooBig": "ファイルが大きすぎます",
       "uploadFailed": "アップロードできませんでした。もう一度お試しください。",
+      "uploadUnavailable": "現在、非公開ファイルをアップロードできません。",
       "generic": "問題が発生しました。再度お試しください。",
       "pan": "GST番号を検索し、事業を確認してください。",
       "city": "市区町村・地域を2〜60文字で入力してください。"
@@ -2531,7 +2532,7 @@
     "metaDescription": "資源を片付けて、現金に。 写真を撮り、回収か持ち込みを選択。計量後にお支払い。",
     "eyebrow": "インド",
     "title": "自宅での回収を予約",
-    "lead": "売るものと近くの店舗を選び、計量後に現金またはUPIで代金を受け取ります。",
+    "lead": "売るものと近くの店舗を選び、計量後に現金で代金を受け取ります。",
     "promises": {
       "label": "ここで売る理由",
       "noAccount": "電話番号を認証して予約",
@@ -2650,7 +2651,7 @@
       "dropoff": "店舗へ持ち込み",
       "whenValue": "{day} · {window}、{time}",
       "youGet": "受取額は約{amount}",
-      "payNote": "店舗が資源を計量し、現金またはUPIで支払います。",
+      "payNote": "店舗が資源を計量し、現金で支払います。",
       "phoneTitle": "携帯電話番号を確認",
       "phoneLead": "SMSで6桁のコードを送ります。予約をこの番号に保存するので、どの電話からでも確認できます。",
       "bookingAs": "予約する番号：{phone}",
@@ -2807,7 +2808,7 @@
       "requested": "{mode, select, pickup {{shop}の承諾を待っています} other {{shop}の確認を待っています}}",
       "requestedBody": "依頼を送信しました。回答があるとすぐにこのページが更新されます。",
       "accepted": "{mode, select, pickup {{shop}が回収を承諾しました} other {{shop}がご来店をお待ちしています}}",
-      "acceptedBody": "資源をご準備ください。計量後、現金またはUPIで代金を受け取ります。",
+      "acceptedBody": "資源をご準備ください。計量後、現金で代金を受け取ります。",
       "on_the_way": "{shop}が向かっています",
       "on_the_wayBody": "資源を玄関の近くにご準備ください。",
       "completed": "完了しました。受取額は{amount}です",
@@ -2848,7 +2849,7 @@
     "money": {
       "title": "代金とポイント",
       "estimate": "受取額は約{amount}",
-      "estimateNote": "店舗が資源を計量し、現金またはUPIで支払います。",
+      "estimateNote": "店舗が資源を計量し、現金で支払います。",
       "paid": "受取額：{amount}",
       "paidBy": "{method, select, upi {UPI} other {現金}}で支払い · {date}",
       "estimateWas": "見積もりは{amount}でした",
@@ -3413,6 +3414,7 @@
     "description": "PostHogとGoogle Analyticsによる公開ページの訪問数計測を許可します。フォーム、非公開ページ、セッションリプレイは記録しません。選択によってプラットフォームの利用権限は変わりません。",
     "accept": "解析を許可",
     "decline": "解析を無効のままにする",
+    "withdraw": "アクセス解析をオフにする",
     "settings": "解析設定",
     "saved": "選択をこの端末に保存しました。",
     "unavailable": "ブラウザーで選択を保存できませんでした。解析は無効のままです。",
@@ -3803,6 +3805,79 @@
     "qualityReleaseRequired": "合格した試験結果が必要です"
   },
   "carbonProjects": {
+    "industry": {
+      "title": "業種",
+      "other": "その他のプロジェクト",
+      "assign": "業種を設定",
+      "assignmentHint": "このプロジェクトの方法論に合う業種を選択してください。設定できるのは一度だけです。",
+      "labels": {
+        "pet_plastics": "PETプラスチック",
+        "metals_recycling": "金属リサイクル",
+        "e_waste_recovery": "電子廃棄物の資源回収",
+        "compressed_biogas": "圧縮バイオガス",
+        "industrial_manufacturing": "製造業の効率化"
+      }
+    },
+    "screening": {
+      "title": "枠組みの適合性確認",
+      "framework": "枠組み",
+      "notice": "すべての確認結果は自己申告です。正式な判断は外部プログラムが行います。",
+      "petExample": "PET事例への適合性",
+      "source": "公式の方法論",
+      "process": "公式手続き",
+      "check": "要件",
+      "result": "確認結果",
+      "save": "確認結果を保存",
+      "conflict": "適合性の確認内容が更新されました。保存する前に最新の確認結果を確認してください。",
+      "useLatest": "最新版を使用",
+      "fit": {
+        "candidate": "候補となる方法論です。プロジェクトが要件を満たすことを確認してください。",
+        "unconfirmed": "現在の方法論への適合性は未確認です。",
+        "no_listed_method": "公開一覧に該当する方法論は見つかりませんでした。",
+        "out_of_scope": "長期的な炭素除去の対象外です。",
+        "accounting_only": "排出量算定のみ。"
+      },
+      "status": {
+        "missing": "未入力",
+        "supported": "証拠あり",
+        "contradicted": "証拠と不一致"
+      },
+      "gates": {
+        "method_and_version": "方法論と版",
+        "site_and_operator": "施設と運営者",
+        "baseline_and_additionality": "ベースラインと追加性",
+        "claim_rights_and_overlap": "クレジットの主張権と重複",
+        "monitoring_and_calculation": "モニタリングと算定",
+        "validation": "設計の妥当性確認",
+        "registration": "プロジェクト登録",
+        "verification": "結果の検証",
+        "issuance": "クレジット発行",
+        "transfer_and_settlement": "移転と決済",
+        "retirement": "クレジットの無効化または償却",
+        "municipal_waste_origin": "都市廃棄物の発生源",
+        "collection_scope": "収集範囲と除外項目",
+        "material_and_mass_balance": "材料と物質収支",
+        "process_energy": "工程のエネルギー",
+        "buyer_end_use": "購入者による最終用途",
+        "virgin_material_displacement": "バージン材の代替",
+        "indian_entity_and_authorized_venue": "インドの法人と認可取引所",
+        "safeguards_and_consultation": "セーフガードと関係者との協議",
+        "jurisdiction": "適格な法域",
+        "durable_removal_and_storage": "長期的な炭素除去と貯留",
+        "inventory_boundary_and_scopes": "排出量インベントリの境界とスコープ",
+        "scenario_and_capacity": "施設のシナリオと対象設備容量",
+        "dry_mass_and_pet_grade": "乾燥重量と再生PETの等級",
+        "recovered_metal_and_grade": "回収金属と製品の等級",
+        "equipment_categories_and_custody": "機器の種類と管理の連鎖",
+        "residue_destination": "残渣の搬出先",
+        "feedstock_and_prior_treatment": "計量済み原料と前処理",
+        "gas_metering_and_methane_leakage": "ガス計量とメタン漏出",
+        "digestate_and_offtake": "消化残渣の処理と引取契約",
+        "equipment_and_commissioning": "設備と試運転",
+        "meter_calibration": "計量器の校正",
+        "comparable_output_and_feedstock": "比較可能な生産量と原料"
+      }
+    },
     "name": "プロジェクト名",
     "referenceHint": "文書IDのみ入力してください。個人情報やパスワードは入力しないでください。",
     "title": "カーボンプロジェクト",
@@ -3875,8 +3950,8 @@
   },
   "industry": {
     "title": "産業参考情報",
-    "lead": "提供されたワークブックを検索します。これらの情報は未確認で、材料の取引や処理を許可するものではありません。",
-    "sourceNote": "出典の文章はワークブックの原文である英語で表示されます。",
+    "lead": "提供された参考資料を検索します。これらの情報は未確認で、材料の取引や処理を許可するものではありません。",
+    "sourceNote": "参考資料の本文は英語で表示されます。",
     "sectors": "部門参考情報",
     "industries": "産業マトリクス",
     "lifecycles": "材料のライフサイクル",
@@ -3982,6 +4057,10 @@
     "note": "これは製造業者の申告であり、品質・所有権・規制適合の独立した検証ではありません。保存後の記録は編集できません。"
   },
   "tradeLifecycle": {
+    "cashRecord": "現金の受領を記録",
+    "cashReported": "現金受領の申告あり",
+    "cashNote": "買い手は売り手に直接支払います。Lumaは売り手の申告を記録します。",
+    "cashReference": "現金受領書の参照番号",
     "title": "支払いと配送",
     "collectionLabel": "買い手の支払い",
     "settlementLabel": "売り手への精算",
@@ -4488,6 +4567,11 @@
     "loadSaved": "保存済みの版を開く"
   },
   "businessSubscriptions": {
+    "draftsTitle": "請求書の下書き",
+    "draftsEmpty": "下書きはまだありません。",
+    "draftTotal": "下書きの税抜小計",
+    "draftBook": "価格表 {version}",
+    "draftUsage": "現金払いの注文 {count} 件",
     "title": "拠点プラン",
     "lead": "この拠点の希望プランを保存します。",
     "off": "請求は無効です。希望の保存では有料契約は開始されません。",
@@ -4543,6 +4627,25 @@
     "localDraft": "以前の未保存の本文",
     "savedText": "最新の保存済み本文"
   },
+  "collectionPrivacy": {
+    "phone": "ログインとサービスに関するSMSの送信に、電話番号を使用します。",
+    "email": "アカウントの作成に、氏名、メールアドレス、パスワードを使用します。メールアドレスを確認するためのリンクを送信します。",
+    "booking": "リサイクルの手配に、氏名、電話番号、写真、都市、選択した日時を使用します。回収の場合は、住所と共有された位置情報も使用します。"
+  },
+  "privacyRequests": {
+    "title": "プライバシーに関する申請",
+    "lead": "申請の種類を選択してください。プライバシー担当チームが確認して回答します。申請番号を控えてください。",
+    "kind": "申請の種類",
+    "submit": "申請を送信",
+    "received": "申請を受け付けました",
+    "responded": "担当チームが回答しました",
+    "access": "自分のデータにアクセス",
+    "correction": "自分のデータを訂正",
+    "erasure": "自分のデータを削除",
+    "grievance": "プライバシーに関する苦情を申し立てる",
+    "nomination": "代理人を指名する",
+    "withdrawal": "同意を撤回する"
+  },
   "privacy": {
     "title": "プライバシーポリシー",
     "lead": "この方針はLuma.GreenのウェブサイトとAndroid、iOS、Windows、macOSアプリに適用されます。",
@@ -4556,5 +4659,124 @@
     "requestsBody": "下からアカウントを削除するか、閲覧・訂正・削除についてサポートへメールしてください。所有者確認が必要です。本人確認書類をメールで送らないでください。未完了の作業や所有権の問題を先に解決してください。",
     "retentionTitle": "閉鎖後に残るもの",
     "retentionBody": "閉鎖によりログイン権限と認証情報を削除します。事業、決済、安全、監査の証拠は確認のため残る場合があります。すべての記録が消去されるわけではありません。保管と期間についてはサポートへお問い合わせください。"
+  },
+  "participantDirectory": {
+    "title": "役割を選択",
+    "search": "役割を検索",
+    "empty": "該当する役割はありません",
+    "continue": "続ける",
+    "apply": "この役割に応募",
+    "roles": {
+      "household": "家庭",
+      "small_business": "店舗・小規模事業者",
+      "industrial_seller": "産業スクラップ販売業者",
+      "institution": "施設・機関",
+      "kabadiwala": "カバディワラ",
+      "saathi": "サーティ",
+      "dry_waste_centre": "乾燥廃棄物集積所・回収者協同組合",
+      "large_yard": "大規模集積ヤード",
+      "collection_contractor": "戸別回収業者",
+      "rural_collector": "農村自治体・自助グループ",
+      "trader": "取引業者・仲介業者・輸出業者",
+      "preprocessor": "前処理業者",
+      "recycler": "再資源化業者",
+      "e_waste_operator": "電子廃棄物の回収・解体・再生業者",
+      "wet_waste_processor": "湿潤廃棄物処理業者",
+      "intermediary_manufacturer": "中間製品メーカー",
+      "end_goods_manufacturer": "最終製品メーカー",
+      "epr_brand": "EPR義務対象のブランド",
+      "pro": "生産者責任機関",
+      "epr_trading": "EPR取引",
+      "carbon_trading": "炭素取引",
+      "transporter": "運送業者・運送管理票",
+      "equipment_supplier": "設備供給業者",
+      "boiler_water_supplier": "ボイラー・処理設備・タンク車の供給業者",
+      "weighing_vendor": "はかり・トラックスケールの供給業者",
+      "solar_provider": "太陽光発電事業者",
+      "environmental_engineer": "環境エンジニアリング",
+      "hr_provider": "人事サービス事業者",
+      "accounting_provider": "会計・法令遵守",
+      "employee_tracking": "従業員管理",
+      "waste_picker_union": "NGO・廃棄物回収者組合",
+      "city_official": "市職員",
+      "csr_lender_auditor": "CSR担当・融資機関・監査人",
+      "luma_team": "Luma.Greenチーム",
+      "ward_official": "地区職員",
+      "community_champion": "地域活動の推進役",
+      "payment_partner": "決済パートナー",
+      "rewards_partner": "特典パートナー",
+      "welfare_partner": "保険・福祉パートナー",
+      "society_partner": "住宅組合・施設管理パートナー",
+      "voice_partner": "音声・言語サービスパートナー"
+    },
+    "groups": {
+      "generators": "家庭・資材販売者",
+      "collection": "回収・集約",
+      "processing": "処理・製造",
+      "markets": "ブランド・環境市場",
+      "services": "物流・サービス",
+      "partners": "地域・行政・パートナー"
+    }
+  },
+  "apartmentCollection": {
+    "pickup": "集合住宅での回収",
+    "code": "住宅コミュニティのコード",
+    "noRoute": "この集合住宅で確認済みの回収ルートはありません。建物の管理者か住民組合に回収の手配を依頼してください。"
+  },
+  "householdFamily": {
+    "title": "家族のメンバー",
+    "description": "共有した回収の進捗を家族が確認できます。領収書、写真、カーボンフットプリントは非公開です。",
+    "phone": "家族の携帯電話番号",
+    "invite": "招待を作成",
+    "code": "招待コード",
+    "codeHelp": "コードは個別に共有してください。有効期間は7日間です。Lumaからのメッセージ送信はありません。",
+    "join": "世帯に参加",
+    "joinedAt": "参加日 {date}",
+    "leave": "世帯から退出",
+    "collections": "家族と共有した回収",
+    "share": "進捗を共有",
+    "makePrivate": "共有を停止",
+    "recent": "続行する前にログアウトして、再度ログインしてください。",
+    "invalid": "コードが無効か期限切れか、別の携帯電話番号宛てです。",
+    "verified": "招待を利用するには携帯電話番号を確認してください。"
+  },
+  "householdTools": {
+    "navigation": "家庭向けツール",
+    "recycle": "リサイクルに出す",
+    "activity": "利用履歴",
+    "services": "サービス",
+    "footprint": "排出量",
+    "settings": "設定",
+    "loading": "予約を読み込み中…",
+    "noBookings": "予約はまだありません。",
+    "electricityTitle": "電力使用の排出量",
+    "electricityReading": "系統電力の使用量 (kWh)",
+    "invalidReading": "請求書やメーターの使用量をkWhで入力してください。小数点以下は3桁まで入力できます。",
+    "calculate": "推定値を計算",
+    "estimate": "系統電力の推定排出量：{amount} kg CO₂",
+    "privateCalculation": "入力値はこの画面にのみ残ります。結果の対象は電力のみです。",
+    "gridSource": "インドの系統電力排出係数、CEA 2025–26",
+    "airQuality": "空気の質",
+    "roofSolar": "屋根の太陽光発電を確認",
+    "roofPrecision": "屋根の確認には正確な位置が必要です。",
+    "lookupConsent": "この確認のために位置情報をGoogle Mapsに送信します。Lumaには保存されません。",
+    "lookupUnavailable": "利用できる結果はありません。",
+    "locationUnavailable": "適切な位置情報を取得できませんでした。",
+    "lookupLimit": "確認回数の上限に達しました。時間をおいてお試しください。",
+    "airScore": "ユニバーサル大気質指数：100点中{score}。数値が高いほど良好です。",
+    "roofEstimate": "屋根の推定発電量：パネル{panels}枚で年間{energy} kWh（直流）。"
+  },
+  "homeReminder": {
+    "title": "外出時リマインダー",
+    "consent": "自宅にいるときに設定してください。この端末は、外出を検知するためにバックグラウンドで位置情報を使用します。Lumaに位置情報の履歴は送信されません。",
+    "enable": "外出時リマインダーをオンにする",
+    "disable": "外出時リマインダーをオフにする",
+    "notificationTitle": "外出前に",
+    "notificationBody": "消せる照明や電源を切れる家電を確認してください。",
+    "unavailable": "外出時リマインダーを利用できません。端末の権限設定を確認し、自宅で再試行してください。",
+    "dailyTitle": "毎日のリマインダー",
+    "time": "通知時刻",
+    "add": "カレンダーに追加",
+    "calendarHelp": "カレンダーファイルを開いて毎日の通知を設定してください。"
   }
 }

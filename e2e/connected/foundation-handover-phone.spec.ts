@@ -77,10 +77,12 @@ test("local phone worker and employer preserve exact handover variance after rel
       ),
     );
     const photoId = await homeClient.action(api.householdPhotos.upload, {
+      adultConfirmed: true,
       name: "Synthetic local test image.png",
       bytes: photo.buffer,
     });
     const token = await homeClient.mutation(api.households.book, {
+      adultConfirmed: true,
       photoIds: [photoId],
       orgId: scope.org.id,
       mode: "pickup",

@@ -12,6 +12,16 @@ import { BillingPage } from "./billing-page";
 const mocks = vi.hoisted(() => ({
   business: { id: "site-a" },
   canManage: true,
+  drafts: null as
+    | null
+    | {
+        id: string;
+        month: string;
+        plan: "yard";
+        priceBookVersion: string;
+        usageCount: number;
+        subtotalPaise: number;
+      }[],
   request: null as null | {
     selectedPlan: "trader";
     requestState: "selected";
@@ -45,6 +55,7 @@ vi.mock("convex/react", () => ({
       : {
           billingAvailable: false,
           request: mocks.request,
+          drafts: mocks.drafts,
           canManage: mocks.canManage,
           memberCount: 1,
           entitlement: null,
@@ -57,6 +68,7 @@ afterEach(() => {
   vi.clearAllMocks();
   mocks.canManage = true;
   mocks.request = null;
+  mocks.drafts = null;
   mocks.select.mockResolvedValue(1);
 });
 function view(locale = "en") {
@@ -151,4 +163,27 @@ it("retains the plan choice and offers a real sign-in recovery after recent-auth
     expect(mocks.signOut).toHaveBeenCalledOnce();
   });
   expect(mocks.replace).toHaveBeenCalledWith("/login?next=%2Fapp%2Fbilling");
+});
+
+it("shows the frozen draft subtotal and source without a payment action", () => {
+  mocks.drafts = [
+    {
+      id: "draft-1",
+      month: "2026-10",
+      plan: "yard",
+      priceBookVersion: "pilot-1",
+      usageCount: 2,
+      subtotalPaise: 100_050,
+    },
+  ];
+  view();
+  const history = screen.getByRole("region", {
+    name: messages.businessSubscriptions.draftsTitle,
+  });
+  expect(history).toHaveTextContent("October 2026");
+  expect(history).toHaveTextContent("Price book pilot-1");
+  expect(history).toHaveTextContent("₹1,000.50");
+  expect(
+    screen.queryByRole("button", { name: /pay/i }),
+  ).not.toBeInTheDocument();
 });

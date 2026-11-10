@@ -139,7 +139,7 @@
         "title": "Huishoudens",
         "one": "Bekijk de waarde van uw recyclebare materiaal voordat u boekt.",
         "two": "Ophalen aan de deur of inleveren bij een winkel.",
-        "three": "Contant of via UPI betaald, met een bon.",
+        "three": "Contant betaald, met een bon.",
         "cta": "Recyclen"
       },
       "kabadiwala": {
@@ -611,7 +611,7 @@
       "body": "Doe betaalde inzamelingen, sorteerwerk en diensten dicht bij huis en bekijk uw verdiensten."
     },
     "householdHeading": "En elk huishouden",
-    "householdBody": "Boek een ophaling thuis met je mobiele nummer: kies de materialen, vergelijk aanbiedingen van inzamelbedrijven en ontvang van het bedrijf contant geld of een UPI-betaling met een ontvangstbewijs."
+    "householdBody": "Boek een ophaling thuis met je mobiele nummer: kies de materialen, vergelijk aanbiedingen van inzamelbedrijven en ontvang van het bedrijf contant geld met een ontvangstbewijs."
   },
   "contact": {
     "metaTitle": "Contact",
@@ -1079,7 +1079,7 @@
           },
           "pay": {
             "title": "Krijg direct betaald",
-            "body": "Contant of via UPI, voordat de inzamelaar vertrekt. Luma.Green houdt uw geld nooit vast."
+            "body": "Contant, voordat de inzamelaar vertrekt. Luma.Green houdt uw geld nooit vast."
           },
           "receipt": {
             "title": "Controleer uw bon",
@@ -1218,7 +1218,7 @@
             "body": "De app berekent dit met uw prijzen. Toon het scherm aan het huishouden."
           },
           "pay": {
-            "title": "Betaal contant of via UPI",
+            "title": "Betaal contant",
             "body": "Betaal voordat u vertrekt en kies hoe u heeft betaald."
           },
           "save": {
@@ -1569,7 +1569,7 @@
       },
       "howPaid": {
         "q": "Hoe word ik betaald?",
-        "a": "Aan de deur, contant of via UPI, voordat de kabadiwala weggaat. Luma.Green registreert de betaling maar houdt uw geld nooit vast."
+        "a": "Aan de deur, contant, voordat de kabadiwala weggaat. Luma.Green registreert de betaling maar houdt uw geld nooit vast."
       },
       "recyclePoints": {
         "q": "Wat zijn recyclingpunten?",
@@ -1621,7 +1621,7 @@
       },
       "payHousehold": {
         "q": "Betaalt Luma.Green het huishouden voor mij?",
-        "a": "Nee. U betaalt contant of via UPI aan de deur. De app registreert hoeveel en hoe."
+        "a": "Nee. U betaalt contant aan de deur. De app registreert hoeveel en hoe."
       },
       "paidByYard": {
         "q": "Hoe word ik betaald als ik aan een voorverwerker verkoop?",
@@ -2217,6 +2217,7 @@
       "fileType": "Dit bestandstype kan hier niet worden gebruikt",
       "fileTooBig": "Dit bestand is te groot",
       "uploadFailed": "Upload mislukt. Probeer het opnieuw.",
+      "uploadUnavailable": "Privébestanden uploaden is momenteel niet beschikbaar.",
       "generic": "Er ging iets mis. Probeer het opnieuw.",
       "pan": "Zoek uw GST-nummer op en bevestig uw bedrijf.",
       "city": "Voer een stad of plaats van 2–60 tekens in."
@@ -2531,7 +2532,7 @@
     "metaDescription": "Ruim recyclebare spullen op. Ontvang geld. Foto’s, ophalen of afgeven en betaling na het wegen.",
     "eyebrow": "India",
     "title": "Inzameling aan huis boeken",
-    "lead": "Kies wat u heeft en een winkel in de buurt. U wordt na het wegen contant of via UPI betaald.",
+    "lead": "Kies wat u heeft en een winkel in de buurt. U wordt na het wegen contant betaald.",
     "promises": {
       "label": "Waarom hier verkopen",
       "noAccount": "Verifieer je mobiel om te boeken",
@@ -2650,7 +2651,7 @@
       "dropoff": "U levert in bij de winkel",
       "whenValue": "{day} · {window}, {time}",
       "youGet": "U ontvangt ongeveer {amount}",
-      "payNote": "De winkel weegt uw recyclebare materiaal en betaalt contant of via UPI.",
+      "payNote": "De winkel weegt uw recyclebare materiaal en betaalt contant.",
       "phoneTitle": "Bevestig uw mobiele nummer",
       "phoneLead": "We sturen per sms een code van 6 cijfers. Uw boeking wordt bij dit nummer opgeslagen, zodat u deze op elke telefoon kunt volgen.",
       "bookingAs": "Boeken met {phone}",
@@ -2807,7 +2808,7 @@
       "requested": "{mode, select, pickup {Wachten op acceptatie door {shop}} other {Wachten op bevestiging door {shop}}}",
       "requestedBody": "Uw verzoek is verstuurd. Deze pagina wordt bijgewerkt zodra de winkel antwoordt.",
       "accepted": "{mode, select, pickup {{shop} heeft uw inzameling geaccepteerd} other {{shop} verwacht u}}",
-      "acceptedBody": "Zet uw recyclebare materiaal klaar. Het wordt gewogen en daarna wordt u contant of via UPI betaald.",
+      "acceptedBody": "Zet uw recyclebare materiaal klaar. Het wordt gewogen en daarna wordt u contant betaald.",
       "on_the_way": "{shop} is onderweg",
       "on_the_wayBody": "Zet uw recyclebare materiaal klaar bij de deur.",
       "completed": "Klaar! U ontving {amount}",
@@ -2848,7 +2849,7 @@
     "money": {
       "title": "Uw geld en punten",
       "estimate": "U ontvangt ongeveer {amount}",
-      "estimateNote": "De winkel weegt uw recyclebare materiaal en betaalt contant of via UPI.",
+      "estimateNote": "De winkel weegt uw recyclebare materiaal en betaalt contant.",
       "paid": "U ontving {amount}",
       "paidBy": "Betaald met {method, select, upi {UPI} other {contant geld}} · {date}",
       "estimateWas": "De schatting was {amount}",
@@ -3413,6 +3414,7 @@
     "description": "Sta PostHog en Google Analytics toe bezoeken aan openbare pagina's te meten. We registreren geen formulieren, privépagina's of sessieopnamen. Uw keuze verandert uw toegang niet.",
     "accept": "Statistieken toestaan",
     "decline": "Statistieken uit laten",
+    "withdraw": "Analytics uitschakelen",
     "settings": "Instellingen voor statistieken",
     "saved": "Uw keuze is opgeslagen op dit apparaat.",
     "unavailable": "Uw browser kon de keuze niet opslaan. Statistieken blijven uit.",
@@ -3803,6 +3805,79 @@
     "qualityReleaseRequired": "Goedgekeurde tests vereist"
   },
   "carbonProjects": {
+    "industry": {
+      "title": "Sector",
+      "other": "Ander project",
+      "assign": "Sector instellen",
+      "assignmentHint": "Kies een sector die bij de projectmethode past. Je kunt die maar één keer instellen.",
+      "labels": {
+        "pet_plastics": "PET-kunststoffen",
+        "metals_recycling": "Metaalrecycling",
+        "e_waste_recovery": "Terugwinning uit elektronisch afval",
+        "compressed_biogas": "Gecomprimeerd biogas",
+        "industrial_manufacturing": "Efficiëntie van industriële productie"
+      }
+    },
+    "screening": {
+      "title": "Voorlopige beoordeling van het kader",
+      "framework": "Kader",
+      "notice": "Gebruikers rapporteren alle resultaten zelf. Het externe programma neemt de officiële besluiten.",
+      "petExample": "Toepasbaarheid op het PET-voorbeeld",
+      "source": "Officiële methoden",
+      "process": "Officiële procedure",
+      "check": "Vereiste",
+      "result": "Beoordelingsresultaat",
+      "save": "Resultaat opslaan",
+      "conflict": "Deze beoordeling is gewijzigd. Bekijk de nieuwste resultaten voordat je opslaat.",
+      "useLatest": "Nieuwste versie gebruiken",
+      "fit": {
+        "candidate": "Mogelijke methode. Controleer of het project aan de eisen voldoet.",
+        "unconfirmed": "Toepasbaarheid van een geldende methode is nog onbevestigd.",
+        "no_listed_method": "In de gepubliceerde lijst staat geen passende methode.",
+        "out_of_scope": "Valt buiten het toepassingsgebied van duurzame koolstofverwijdering.",
+        "accounting_only": "Alleen emissieboekhouding."
+      },
+      "status": {
+        "missing": "Ontbreekt",
+        "supported": "Ondersteunt de vereiste",
+        "contradicted": "Spreekt de vereiste tegen"
+      },
+      "gates": {
+        "method_and_version": "Methode en versie",
+        "site_and_operator": "Locatie en exploitant",
+        "baseline_and_additionality": "Referentiescenario en additionaliteit",
+        "claim_rights_and_overlap": "Claimrechten en overlap",
+        "monitoring_and_calculation": "Monitoring en berekening",
+        "validation": "Validatie van het ontwerp",
+        "registration": "Projectregistratie",
+        "verification": "Verificatie van resultaten",
+        "issuance": "Uitgifte van credits",
+        "transfer_and_settlement": "Overdracht en afwikkeling",
+        "retirement": "Intrekking of inlevering van credits",
+        "municipal_waste_origin": "Herkomst van huishoudelijk en gemeentelijk afval",
+        "collection_scope": "Inzamelingsbereik en uitzonderingen",
+        "material_and_mass_balance": "Materialen en massabalans",
+        "process_energy": "Procesenergie",
+        "buyer_end_use": "Eindgebruik bij de koper",
+        "virgin_material_displacement": "Vervanging van primaire grondstoffen",
+        "indian_entity_and_authorized_venue": "Indiase entiteit en erkende handelsplaats",
+        "safeguards_and_consultation": "Waarborgen en raadpleging",
+        "jurisdiction": "Toegestane jurisdictie",
+        "durable_removal_and_storage": "Duurzame verwijdering en opslag",
+        "inventory_boundary_and_scopes": "Grenzen en categorieën van de inventaris",
+        "scenario_and_capacity": "Installatiescenario en toegestane capaciteit",
+        "dry_mass_and_pet_grade": "Drooggewicht en kwaliteit van het PET-product",
+        "recovered_metal_and_grade": "Teruggewonnen metaal en productkwaliteit",
+        "equipment_categories_and_custody": "Apparatuurcategorieën en traceerbaarheidsketen",
+        "residue_destination": "Bestemming van residuen",
+        "feedstock_and_prior_treatment": "Gewogen grondstoffen en eerdere behandeling",
+        "gas_metering_and_methane_leakage": "Gasmeting en methaanlekken",
+        "digestate_and_offtake": "Beheer en afzet van digestaat",
+        "equipment_and_commissioning": "Apparatuur en inbedrijfstelling",
+        "meter_calibration": "Meterkalibratie",
+        "comparable_output_and_feedstock": "Vergelijkbare productie en grondstoffen"
+      }
+    },
     "name": "Projectnaam",
     "referenceHint": "Vul alleen de document-ID in. Laat persoonsgegevens en wachtwoorden weg.",
     "title": "Koolstofprojecten",
@@ -3875,8 +3950,8 @@
   },
   "industry": {
     "title": "Industriereferenties",
-    "lead": "Doorzoek de aangeleverde werkmap. Deze referenties zijn niet geverifieerd en geven geen toestemming voor materiaalhandel of verwerking.",
-    "sourceNote": "De brontekst verschijnt in het oorspronkelijke Engels van de werkmap.",
+    "lead": "Zoek in de beschikbare referenties. Deze referenties zijn niet geverifieerd en geven geen toestemming voor materiaalhandel of verwerking.",
+    "sourceNote": "Referentieteksten worden in het Engels weergegeven.",
     "sectors": "Sectorreferenties",
     "industries": "Industriematrix",
     "lifecycles": "Materiaallevenscyclus",
@@ -3982,6 +4057,10 @@
     "note": "Dit zijn verklaringen van de fabrikant, geen onafhankelijke controle van kwaliteit, eigendom of regelgeving. Opgeslagen registraties kunnen niet worden gewijzigd."
   },
   "tradeLifecycle": {
+    "cashRecord": "Ontvangen contant geld vastleggen",
+    "cashReported": "Contante ontvangst gemeld",
+    "cashNote": "De koper betaalt de verkoper rechtstreeks. Luma registreert de melding van de verkoper.",
+    "cashReference": "Referentie van het contante betaalbewijs",
     "title": "Betaling en levering",
     "collectionLabel": "Betaling van de koper",
     "settlementLabel": "Uitbetaling aan de verkoper",
@@ -4488,6 +4567,11 @@
     "loadSaved": "Opgeslagen versie openen"
   },
   "businessSubscriptions": {
+    "draftsTitle": "Conceptfacturen",
+    "draftsEmpty": "Nog geen concepten.",
+    "draftTotal": "Conceptsubtotaal vóór belasting",
+    "draftBook": "Prijslijst {version}",
+    "draftUsage": "{count} bestellingen met contante betaling",
     "title": "Vestigingsplan",
     "lead": "Bewaar een planvoorkeur voor deze vestiging.",
     "off": "Facturering staat uit. Een voorkeur start geen betaald abonnement.",
@@ -4543,6 +4627,25 @@
     "localDraft": "Vorige niet-opgeslagen tekst",
     "savedText": "Laatst opgeslagen tekst"
   },
+  "collectionPrivacy": {
+    "phone": "We gebruiken je telefoonnummer om je te laten inloggen en je per sms updates over de dienst te sturen.",
+    "email": "Om je account te maken gebruiken we je naam, e-mailadres en wachtwoord. We sturen een link om je e-mailadres te verifiëren.",
+    "booking": "We gebruiken je naam, telefoonnummer, foto's, plaats en gekozen tijd om de recycling te regelen. Bij ophalen gebruiken we ook je adres en de locatie die je deelt."
+  },
+  "privacyRequests": {
+    "title": "Privacyverzoeken",
+    "lead": "Kies een verzoek. Het privacyteam beoordeelt het en antwoordt. Bewaar het verzoeknummer.",
+    "kind": "Type verzoek",
+    "submit": "Verzoek versturen",
+    "received": "Verzoek ontvangen",
+    "responded": "Het team heeft geantwoord",
+    "access": "Mijn gegevens inzien",
+    "correction": "Mijn gegevens corrigeren",
+    "erasure": "Mijn gegevens verwijderen",
+    "grievance": "Een privacyklacht indienen",
+    "nomination": "Een vertegenwoordiger aanwijzen",
+    "withdrawal": "Toestemming intrekken"
+  },
   "privacy": {
     "title": "Privacybeleid",
     "lead": "Dit beleid geldt voor de Luma.Green-website en de apps voor Android, iOS, Windows en macOS.",
@@ -4556,5 +4659,124 @@
     "requestsBody": "Verwijder hieronder je account of mail de ondersteuning voor inzage, correctie of verwijdering. Bevestig het eigenaarschap; mail geen identiteitsdocumenten. Los eerst open werk of eigendomsvragen op.",
     "retentionTitle": "Wat na sluiting blijft",
     "retentionBody": "Sluiting verwijdert toegang en aanmeldgegevens. Bewijs voor zaken, betalingen, veiligheid en controle kan voor beoordeling blijven. Niet elk record wordt gewist. Vraag de ondersteuning naar bewaartermijnen en doorlooptijd."
+  },
+  "participantDirectory": {
+    "title": "Kies je rol",
+    "search": "Rollen zoeken",
+    "empty": "Geen passende rollen",
+    "continue": "Doorgaan",
+    "apply": "Meld je aan voor deze rol",
+    "roles": {
+      "household": "Huishouden",
+      "small_business": "Winkel of klein bedrijf",
+      "industrial_seller": "Verkoper van industrieel schroot",
+      "institution": "Instelling",
+      "kabadiwala": "Kabadiwala",
+      "saathi": "Saathi",
+      "dry_waste_centre": "Droogafvalcentrum of coöperatie van afvalinzamelaars",
+      "large_yard": "Groot inzamelterrein",
+      "collection_contractor": "Aannemer voor huis-aan-huisinzameling",
+      "rural_collector": "Plattelandsgemeente of zelfhulpgroep",
+      "trader": "Handelaar, bemiddelaar of exporteur",
+      "preprocessor": "Voorbewerker",
+      "recycler": "Recyclingbedrijf",
+      "e_waste_operator": "Inzamelaar, demonteur of opknapper van e-afval",
+      "wet_waste_processor": "Verwerker van nat afval",
+      "intermediary_manufacturer": "Producent van halffabricaten",
+      "end_goods_manufacturer": "Producent van eindproducten",
+      "epr_brand": "Merk met UPV-verplichtingen",
+      "pro": "Producentenorganisatie voor UPV",
+      "epr_trading": "Handel in UPV-rechten",
+      "carbon_trading": "Koolstofhandel",
+      "transporter": "Vervoerder en vrachtbrieven",
+      "equipment_supplier": "Leverancier van apparatuur",
+      "boiler_water_supplier": "Leverancier van ketels, zuiveringsinstallaties of tankwagens",
+      "weighing_vendor": "Leverancier van weegschalen of weegbruggen",
+      "solar_provider": "Leverancier van zonne-energie",
+      "environmental_engineer": "Milieutechniek",
+      "hr_provider": "HR-dienstverlener",
+      "accounting_provider": "Boekhouding en naleving",
+      "employee_tracking": "Personeelsregistratie",
+      "waste_picker_union": "Ngo of vakbond van afvalinzamelaars",
+      "city_official": "Gemeenteambtenaar",
+      "csr_lender_auditor": "MVO-team, kredietverstrekker of auditor",
+      "luma_team": "Team van Luma.Green",
+      "ward_official": "Wijkambtenaar",
+      "community_champion": "Buurtcontactpersoon",
+      "payment_partner": "Betalingspartner",
+      "rewards_partner": "Beloningspartner",
+      "welfare_partner": "Verzekerings- of welzijnspartner",
+      "society_partner": "Partner voor wooncomplex- of facilitair beheer",
+      "voice_partner": "Partner voor spraak- of taaldiensten"
+    },
+    "groups": {
+      "generators": "Huishoudens en materiaalverkopers",
+      "collection": "Inzameling en bundeling",
+      "processing": "Verwerking en productie",
+      "markets": "Merken en milieumarkten",
+      "services": "Logistiek en diensten",
+      "partners": "Gemeenschap, overheid en partners"
+    }
+  },
+  "apartmentCollection": {
+    "pickup": "Ophalen bij een appartement",
+    "code": "Code van het wooncomplex",
+    "noRoute": "Er is geen gecontroleerde ophaalroute voor dit complex. Vraag de gebouwbeheerder of bewonersvereniging om inzameling te regelen."
+  },
+  "householdFamily": {
+    "title": "Gezinsleden",
+    "description": "Gezinsleden kunnen de voortgang zien van inzamelingen die je deelt. Je bonnen, foto’s en CO₂-voetafdruk blijven privé.",
+    "phone": "Mobiel nummer van het gezinslid",
+    "invite": "Uitnodiging maken",
+    "code": "Uitnodigingscode",
+    "codeHelp": "Deel deze code privé. De code verloopt na 7 dagen. Luma stuurt geen bericht.",
+    "join": "Lid worden van huishouden",
+    "joinedAt": "Lid sinds {date}",
+    "leave": "Huishouden verlaten",
+    "collections": "Gedeelde gezinsinzamelingen",
+    "share": "Voortgang delen",
+    "makePrivate": "Delen stoppen",
+    "recent": "Meld je af en weer aan voordat je doorgaat.",
+    "invalid": "De code is ongeldig, verlopen of bedoeld voor een ander mobiel nummer.",
+    "verified": "Verifieer je mobiele nummer om uitnodigingen te gebruiken."
+  },
+  "householdTools": {
+    "navigation": "Huishoudelijke hulpmiddelen",
+    "recycle": "Recyclen",
+    "activity": "Activiteit",
+    "services": "Diensten",
+    "footprint": "Voetafdruk",
+    "settings": "Instellingen",
+    "loading": "Boekingen laden…",
+    "noBookings": "Nog geen boekingen.",
+    "electricityTitle": "Voetafdruk van stroomverbruik",
+    "electricityReading": "Verbruikte netstroom (kWh)",
+    "invalidReading": "Vul de kWh op je factuur of meter in. Gebruik maximaal drie decimalen.",
+    "calculate": "Schatting berekenen",
+    "estimate": "Geschatte uitstoot van het stroomnet: {amount} kg CO₂",
+    "privateCalculation": "Je invoer blijft op dit scherm. Het resultaat gaat alleen over stroom.",
+    "gridSource": "Uitstootfactor voor het Indiase stroomnet, CEA 2025–26",
+    "airQuality": "Luchtkwaliteit",
+    "roofSolar": "Zonnedak controleren",
+    "roofPrecision": "De dakcontrole vereist een nauwkeurige locatie.",
+    "lookupConsent": "Stuur mijn locatie voor deze controle naar Google Maps. Luma slaat die niet op.",
+    "lookupUnavailable": "Geen resultaat beschikbaar.",
+    "locationUnavailable": "Er kon geen geschikte locatie worden bepaald.",
+    "lookupLimit": "Limiet voor zoekopdrachten bereikt. Probeer het later opnieuw.",
+    "airScore": "Universele luchtkwaliteitsindex: {score} van 100. Hoger is beter.",
+    "roofEstimate": "Gemodelleerde dakopbrengst: {energy} kWh/jaar (DC) met {panels} panelen."
+  },
+  "homeReminder": {
+    "title": "Herinnering bij vertrek",
+    "consent": "Stel de herinnering thuis in. Dit apparaat gebruikt je locatie op de achtergrond om te merken wanneer je vertrekt. Luma ontvangt geen locatiegeschiedenis.",
+    "enable": "Vertrekherinnering aanzetten",
+    "disable": "Vertrekherinnering uitzetten",
+    "notificationTitle": "Voor je vertrekt",
+    "notificationBody": "Controleer welke lampen en apparaten je kunt uitschakelen.",
+    "unavailable": "De vertrekherinnering is niet beschikbaar. Controleer de apparaatrechten en probeer het thuis opnieuw.",
+    "dailyTitle": "Dagelijkse herinnering",
+    "time": "Tijd van herinnering",
+    "add": "Toevoegen aan agenda",
+    "calendarHelp": "Open het agendabestand om een dagelijkse melding in te stellen."
   }
 }

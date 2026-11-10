@@ -74,7 +74,13 @@ it.each(unavailableRoutes)(
       }),
     });
     expect(response.status).toBe(404);
-    expect(response.headers.get("set-cookie")).toBeNull();
+    expect(response.headers.getSetCookie()).toEqual(
+      route.path === "/sign-in/social"
+        ? [
+            "__Secure-better-auth.convex_jwt=; Max-Age=0; Path=/; HttpOnly; Secure; SameSite=Lax",
+          ]
+        : [],
+    );
     expect(response.headers.get("location")).toBeNull();
     if (route.path === "/sign-in/social")
       expect(await response.json()).toMatchObject({

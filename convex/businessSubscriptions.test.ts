@@ -8,8 +8,10 @@ import {
   convexModules,
   registerAuth,
   seedDemo,
+  signIn,
   signInAs,
 } from "./lib/auth.testing";
+import { billingMonth, meterDirectCashReceipt } from "./lib/draftBilling";
 import schema from "./schema";
 
 const modules = convexModules(import.meta.glob("./**/*.*s"));
@@ -175,4 +177,138 @@ it("requires recent full authentication before changing the billing request", as
     orgId: w.orgId,
   });
   expect(result.request).toBeNull();
+});
+
+it("freezes a draft price book and invoice from deduplicated cash usage only", async () => {
+  const w = await world();
+  vi.stubEnv("ADMIN_EMAIL", "billing-admin@luma.test");
+  const admin = await signIn(w.t, {
+    email: "billing-admin@luma.test",
+    twoFactorEnabled: true,
+  });
+  await admin.mutation(api.identity.ensureProfile, { locale: "en" });
+  const prior = new Date(Date.now() - 45 * 24 * 60 * 60 * 1000);
+  const month = billingMonth(prior.getTime());
+  const priceBook = {
+    version: "pilot-1",
+    startsMonth: month,
+    plans: [{ plan: "yard" as const, monthlyPaise: 1000 }],
+    feeBps: 50,
+    feeCapPaise: 200,
+  };
+  const inputs = {
+    orgId: w.orgId,
+    month,
+    priceBookVersion: "pilot-1",
+    plan: "yard" as const,
+  };
+  const roster = { paginationOpts: { numItems: 10, cursor: null } };
+  await expect(
+    w.owner.query(api.businessSubscriptions.draftSitesForAdmin, roster),
+  ).rejects.toThrow("NOT_ADMIN");
+  const sites = await admin.query(
+    api.businessSubscriptions.draftSitesForAdmin,
+    roster,
+  );
+  expect(sites.page).toEqual(
+    expect.arrayContaining([expect.objectContaining({ orgId: w.orgId })]),
+  );
+  await expect(
+    w.owner.mutation(api.businessSubscriptions.recordDraftPriceBook, priceBook),
+  ).rejects.toThrow("NOT_ADMIN");
+  await expect(
+    admin.mutation(api.businessSubscriptions.generateDraftInvoice, inputs),
+  ).rejects.toThrow("DRAFT_PRICE_BOOK_NOT_FOUND");
+  const bookId = await admin.mutation(
+    api.businessSubscriptions.recordDraftPriceBook,
+    priceBook,
+  );
+  expect(
+    await admin.mutation(
+      api.businessSubscriptions.recordDraftPriceBook,
+      priceBook,
+    ),
+  ).toBe(bookId);
+  await expect(
+    admin.mutation(api.businessSubscriptions.recordDraftPriceBook, {
+      ...priceBook,
+      feeBps: 25,
+    }),
+  ).rejects.toThrow("DRAFT_PRICE_BOOK_CONFLICT");
+
+  await w.owner.mutation(api.businessSubscriptions.selectPlan, {
+    orgId: w.orgId,
+    plan: "trader",
+    expectedVersion: 0,
+  });
+  await w.t.run(async (ctx) => {
+    const trade = await ctx.db
+      .query("trades")
+      .withIndex("by_buyer", (q) => q.eq("buyerOrgId", w.orgId))
+      .first();
+    if (!trade) throw new Error("missing order");
+    await meterDirectCashReceipt(
+      ctx,
+      { ...trade, totalPaise: 100 },
+      prior.getTime(),
+    );
+    await meterDirectCashReceipt(
+      ctx,
+      { ...trade, totalPaise: 100 },
+      prior.getTime(),
+    );
+    await expect(
+      meterDirectCashReceipt(
+        ctx,
+        { ...trade, totalPaise: 101 },
+        prior.getTime(),
+      ),
+    ).rejects.toThrow("DRAFT_USAGE_CONFLICT");
+  });
+  const invoice = await admin.mutation(
+    api.businessSubscriptions.generateDraftInvoice,
+    inputs,
+  );
+  expect(
+    await admin.mutation(
+      api.businessSubscriptions.generateDraftInvoice,
+      inputs,
+    ),
+  ).toBe(invoice);
+  await expect(
+    admin.mutation(api.businessSubscriptions.generateDraftInvoice, {
+      ...inputs,
+      month: billingMonth(Date.now()),
+    }),
+  ).rejects.toThrow("DRAFT_PERIOD_OPEN");
+  const status = await w.owner.query(api.businessSubscriptions.status, {
+    orgId: w.orgId,
+  });
+  expect(status).toMatchObject({
+    entitlement: null,
+    billingAvailable: false,
+    request: { selectedPlan: "trader" },
+    drafts: [
+      {
+        month,
+        plan: "yard",
+        priceBookVersion: "pilot-1",
+        usageCount: 1,
+        subtotalPaise: 1001,
+      },
+    ],
+  });
+  const membership = await w.t.run((ctx) =>
+    ctx.db
+      .query("memberships")
+      .withIndex("by_org", (q) => q.eq("orgId", w.orgId))
+      .unique(),
+  );
+  if (!membership) throw new Error("missing membership");
+  await w.t.run((ctx) =>
+    ctx.db.patch("memberships", membership._id, { role: "viewer" }),
+  );
+  expect(
+    await w.owner.query(api.businessSubscriptions.status, { orgId: w.orgId }),
+  ).toMatchObject({ drafts: null });
 });

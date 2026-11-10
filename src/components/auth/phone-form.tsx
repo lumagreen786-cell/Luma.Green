@@ -4,10 +4,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowRightIcon } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { AgeConfirmation } from "@/components/site/age-confirmation";
+import { CollectionPrivacy } from "@/components/site/collection-privacy";
 import { ActionButton } from "@/components/ui/action-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -36,6 +38,7 @@ export function PhoneForm({
   onSent?: (phone: string) => void;
 }) {
   const mounted = useRef(true);
+  const [isAdult, setIsAdult] = useState(false);
   useEffect(() => {
     mounted.current = true;
     return () => {
@@ -57,14 +60,14 @@ export function PhoneForm({
 
   async function onSubmit(values: Values) {
     const phone = normalizeIndianMobile(values.phone);
-    if (!phone || !canSend) return;
+    if (!phone || !canSend || !isAdult) return;
     const error = await requestPhoneCode(phone, () => mounted.current);
     if (!mounted.current) return;
     if (error) {
       setError("root", { message: error });
       return;
     }
-    rememberPhone(phone);
+    rememberPhone(phone, isAdult);
     if (onSent) {
       onSent(phone);
       return;
@@ -102,6 +105,7 @@ export function PhoneForm({
         }}
         className="flex flex-col gap-4"
       >
+        <CollectionPrivacy purpose="phone" />
         <div className="flex flex-col gap-2">
           <Label htmlFor="phone" className="text-sm">
             {t("mobileLabel")}
@@ -146,11 +150,12 @@ export function PhoneForm({
             </p>
           ) : null}
         </div>
+        <AgeConfirmation checked={isAdult} onChange={setIsAdult} />
         <ActionButton
           type="submit"
           className="w-full"
           label={t(isSubmitting ? "sending" : "sendCode")}
-          isDisabled={isSubmitting || !canSend}
+          isDisabled={isSubmitting || !canSend || !isAdult}
           endContent={
             <ArrowRightIcon
               aria-hidden
@@ -159,10 +164,6 @@ export function PhoneForm({
           }
         />
       </form>
-
-      <p className="text-xs leading-relaxed text-muted-foreground">
-        {t("privacy")}
-      </p>
     </div>
   );
 }

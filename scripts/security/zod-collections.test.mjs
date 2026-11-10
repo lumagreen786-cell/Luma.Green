@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import path from "node:path";
 import test from "node:test";
@@ -8,11 +9,29 @@ const mobileRequire = createRequire(
   new URL("../../apps/mobile/package.json", import.meta.url),
 );
 const expoRequire = createRequire(mobileRequire.resolve("expo/package.json"));
-const cliRequire = createRequire(expoRequire.resolve("@expo/cli/package.json"));
-const packageRoot = process.env.LUMA_ZOD_ARTIFACT
-  ? path.resolve(process.env.LUMA_ZOD_ARTIFACT)
-  : path.dirname(cliRequire.resolve("zod/package.json"));
+const cliPackageFile = expoRequire.resolve("@expo/cli/package.json");
+const cliRequire = createRequire(cliPackageFile);
+const cliManifest = JSON.parse(readFileSync(cliPackageFile, "utf8"));
+const explicitArtifact = process.env.LUMA_ZOD_ARTIFACT;
+const hasCliZod = Object.hasOwn(cliManifest.dependencies ?? {}, "zod");
+const hasZodArtifact = Boolean(explicitArtifact || hasCliZod);
+const cliZodFile = hasCliZod
+  ? cliRequire.resolve("zod/package.json")
+  : cliPackageFile;
+const packageRoot = explicitArtifact
+  ? path.resolve(explicitArtifact)
+  : path.dirname(cliZodFile);
 const artifactRequire = createRequire(path.join(packageRoot, "package.json"));
+
+if (!hasZodArtifact) {
+  test("the workspace lockfile contains no legacy Zod 3 package", () => {
+    const lockfile = readFileSync(
+      new URL("../../pnpm-lock.yaml", import.meta.url),
+      "utf8",
+    );
+    assert.doesNotMatch(lockfile, /^ {2}['"]?zod@3\./mu);
+  });
+}
 const families = ["", "v3", "v4", "v4-mini", "v4/mini", "v4/core"];
 
 function watchedArray() {
@@ -48,7 +67,8 @@ const custom = (fn) => ({
   _zod: { def: { check: "custom" }, onattach: [], check: fn },
 });
 
-for (const format of ["cjs", "esm"]) {
+const formats = hasZodArtifact ? ["cjs", "esm"] : [];
+for (const format of formats) {
   for (const family of families) {
     const entry = path.join(
       packageRoot,

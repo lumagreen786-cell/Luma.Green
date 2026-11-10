@@ -90,17 +90,21 @@ describe("material demand", () => {
     const actions = logs.map((row) => row.action);
     expect(actions).toEqual(["demand.posted", "demand.closed"]);
   });
-  it("expires demands and hides suspended buyers", async () => {
+  it("expires demands", async () => {
     const t = await world();
     const yard = await signInAs(t, "+919000000102");
-    const shop = await signInAs(t, "+919000000101");
-    const id = await yard.mutation(api.demand.post, INPUT);
+    await yard.mutation(api.demand.post, INPUT);
     vi.setSystemTime(new Date("2026-10-04T06:30:00Z"));
     const renewedShop = await signInAs(t, "+919000000101");
     expect(await renewedShop.query(api.demand.board, {})).toMatchObject({
       available: [],
     });
-    vi.setSystemTime(new Date("2026-10-02T06:30:00Z"));
+  });
+  it("hides suspended buyers", async () => {
+    const t = await world();
+    const yard = await signInAs(t, "+919000000102");
+    const shop = await signInAs(t, "+919000000101");
+    const id = await yard.mutation(api.demand.post, INPUT);
     await t.run(async (ctx) => {
       const row = await ctx.db.get("materialDemands", id);
       if (row) await ctx.db.patch("orgs", row.orgId, { status: "suspended" });

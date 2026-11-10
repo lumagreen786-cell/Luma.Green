@@ -1,6 +1,7 @@
 import { fireEvent, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useAction, useMutation, useQuery } from "convex/react";
+import { ConvexError } from "convex/values";
 import type { ReactNode } from "react";
 import { beforeEach, expect, it, vi } from "vitest";
 
@@ -53,6 +54,7 @@ const board = {
   orgId: "org-a",
   canOperate: true,
   canWithdraw: true,
+  uploadAvailable: true,
   inspections: [
     { id: "inspection-a", label: "PET v1", buyerName: "Test buyer" },
   ],
@@ -105,6 +107,46 @@ it("requires an inspection and file before upload", async () => {
     screen.getByRole("button", { name: en.qualityDocuments.upload }),
   ).toBeDisabled();
   expect(screen.getByText(en.qualityDocuments.fileHint)).toBeVisible();
+});
+it("explains unavailable uploads and preserves access to existing documents", async () => {
+  vi.mocked(useQuery).mockReturnValue({ ...board, uploadAvailable: false });
+  renderWithIntl(<QualityDocuments />);
+  expect(
+    screen.getByRole("button", { name: en.qualityDocuments.download }),
+  ).toBeVisible();
+  await userEvent.click(
+    screen.getByRole("tab", { name: en.qualityDocuments.upload }),
+  );
+  expect(screen.getByRole("status")).toHaveTextContent(
+    en.join.errors.uploadUnavailable,
+  );
+  expect(
+    screen.queryByLabelText(en.qualityDocuments.file),
+  ).not.toBeInTheDocument();
+  expect(mocks.upload).not.toHaveBeenCalled();
+});
+it("reports an R2 outage and keeps the selected file available for retry", async () => {
+  mocks.inspection = "inspection-a";
+  mocks.upload.mockRejectedValueOnce(new ConvexError("STORAGE_UNAVAILABLE"));
+  renderWithIntl(<QualityDocuments />);
+  const user = userEvent.setup();
+  const source = new File(["%PDF-1.4"], "sample.pdf", {
+    type: "application/pdf",
+  });
+  Object.defineProperty(source, "arrayBuffer", {
+    value: () => Promise.resolve(new ArrayBuffer(8)),
+  });
+  await user.upload(screen.getByLabelText(en.qualityDocuments.file), source);
+  const button = screen.getByRole("button", {
+    name: en.qualityDocuments.upload,
+  });
+  await user.click(button);
+  expect(await screen.findByRole("alert")).toHaveTextContent(
+    en.join.errors.uploadUnavailable,
+  );
+  expect(button).toBeEnabled();
+  await user.click(button);
+  expect(mocks.upload).toHaveBeenCalledTimes(2);
 });
 it("records a separate buyer decision with the document it reviewed", async () => {
   vi.mocked(useQuery).mockReturnValue({ ...board, own: [], incoming: [file] });

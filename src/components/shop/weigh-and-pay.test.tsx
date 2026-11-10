@@ -162,13 +162,15 @@ describe("WeighAndPay", () => {
     expect(newspaperKg()).toHaveValue("10.5");
   });
 
-  it("records the weighed grams and how the household was paid", async () => {
+  it("records the weighed grams and the direct cash payment", async () => {
     const user = userEvent.setup();
     renderScale();
 
     await user.clear(newspaperKg());
     await user.type(newspaperKg(), "11.25");
-    await user.click(screen.getByRole("radio", { name: "UPI" }));
+    expect(
+      screen.queryByRole("radio", { name: "UPI" }),
+    ).not.toBeInTheDocument();
     await user.click(screen.getByRole("button", { name: /^Confirm/ }));
 
     expect(complete).toHaveBeenCalledWith({
@@ -177,7 +179,7 @@ describe("WeighAndPay", () => {
         { materialCode: "PAPER-NEWS", grams: 11_250 },
         { materialCode: "PLASTIC-PET", grams: 3000 },
       ],
-      method: "upi",
+      method: "cash",
     });
   });
 

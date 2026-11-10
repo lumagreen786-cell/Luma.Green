@@ -34,11 +34,15 @@ export async function requestPhoneCode(
 export async function verifyPhoneCode(
   phone: string,
   code: string,
+  hasAdultDeclaration = false,
 ): Promise<VerifyPhoneResult> {
   try {
     const { data, error } = await authClient.phoneNumber.verify({
       phoneNumber: phone,
       code,
+      ...(hasAdultDeclaration && {
+        fetchOptions: { headers: { "x-luma-adult-declaration": "1" } },
+      }),
     });
     if (error) return { kind: "error", error: codeErrorKey(error) };
     if ("twoFactorRedirect" in data && data.twoFactorRedirect === true) {

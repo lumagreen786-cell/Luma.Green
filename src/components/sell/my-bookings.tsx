@@ -27,17 +27,25 @@ const SHOWN_AT_FIRST = 3;
  * "Your bookings" at the top of /sell, for a household that has confirmed
  * their number before: each one links to its tracking page.
  */
-export function MyBookings() {
-  return isConvexConfigured ? <LiveMyBookings /> : null;
+export function MyBookings({ showEmpty = false }: { showEmpty?: boolean }) {
+  return isConvexConfigured ? <LiveMyBookings showEmpty={showEmpty} /> : null;
 }
 
-function LiveMyBookings() {
+function LiveMyBookings({ showEmpty }: { showEmpty: boolean }) {
+  const household = useTranslations("householdTools");
   const t = useTranslations("sell.mine");
   const { isAuthenticated } = useConvexAuth();
   const bookings = useQuery(api.households.mine, isAuthenticated ? {} : "skip");
   const [isExpanded, setExpanded] = useState(false);
 
-  if (!bookings || bookings.length === 0) return null;
+  if (bookings === undefined)
+    return showEmpty ? <p role="status">{household("loading")}</p> : null;
+  if (!bookings || bookings.length === 0)
+    return showEmpty ? (
+      <p className="py-4 text-sm text-muted-foreground">
+        {household("noBookings")}
+      </p>
+    ) : null;
   const shown = isExpanded ? bookings : bookings.slice(0, SHOWN_AT_FIRST);
 
   return (

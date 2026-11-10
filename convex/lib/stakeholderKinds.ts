@@ -14,9 +14,11 @@ export const STAKEHOLDER_KINDS = [
   "packaging_brand",
 ] as const;
 
-export type StakeholderKind = (typeof STAKEHOLDER_KINDS)[number];
+export type StakeholderKind =
+  (typeof STAKEHOLDER_KINDS)[number] | "participant_applicant";
 
 export const vStakeholderKind = v.union(
+  v.literal("participant_applicant"),
   v.literal("material_generator"),
   v.literal("city_official"),
   v.literal("csr_sponsor"),

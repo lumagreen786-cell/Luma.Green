@@ -1,3 +1,19 @@
+## Overhaul recovery integration — 10 November 2026
+
+The recovered release branch starts from main `66c0c7f`. Read the
+[overhaul delivery record](platform-overhaul-2026-11-09.md#recovery-integration--10-november-2026)
+for preserved work, release scope, tests and remaining acceptance. The original
+source worktree and recovery snapshot remain intact. The unfinished stock-backed
+PET slice is excluded from this release. The PR owns hosted checks and the final
+backend-before-frontend Production receipt.
+
+## Luma.Green overhaul — 9 November 2026
+
+See [the overhaul delivery record](platform-overhaul-2026-11-09.md) for
+source coverage, implementation, and release gates. The current overhaul
+changes are in an isolated checkout. This entry does not establish a
+production release or native device acceptance.
+
 ## Carbon evidence preparation workspace - 8 November 2026
 
 Lot transformation history can open and download an internal JSON draft.
@@ -42,6 +58,22 @@ receipt, and payment reconciliation. Live Cashfree settlement, device-only
 Expo and Electron acceptance, and production activation remain separate.
 The maintained guide should include the new scope when the screenshot guide
 is refreshed.
+
+## DPDP readiness — 9 November 2026
+
+The owner confirmed that public account signup and household bookings are for
+adults and approved `support@luma.green` for privacy contact. The readiness
+change adds collection notices, adult declarations, a signed-in privacy case
+form, an admin queue and direct analytics withdrawal from the privacy page.
+The [data protection runbook](../operations/data-protection.md) records the
+operating checks and legal decisions still needed. The new case table starts
+empty. Existing records require no conversion. Deploy Convex before the web
+release. Reload older open signup or booking screens before retrying.
+
+The hosted pages are shared by the native shells. The change uses their
+existing navigation and permissions. Guide updates are deferred. A future
+guide refresh covers sign-in, household details, the privacy page, account
+privacy requests and the admin support queue.
 
 ## Agreed web completion - 29 October 2026
 

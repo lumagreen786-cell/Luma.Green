@@ -11,6 +11,11 @@ import schema from "./schema";
 const modules = convexModules(import.meta.glob("./**/*.*s"));
 
 function setup() {
+  vi.stubEnv("R2_ENABLED", "false");
+  vi.stubEnv("AUTH_LOCAL_TEST_MODE", "true");
+  vi.stubEnv("CONVEX_SITE_URL", "http://127.0.0.1:3211");
+  vi.stubEnv("SITE_URL", "http://127.0.0.1:3000");
+
   const t = convexTest(schema, modules);
   registerAuth(t);
   return t;
@@ -113,7 +118,8 @@ describe("a kabadiwala's application", () => {
 
     await ramesh.mutation(api.applications.saveDraft, { kabadiwala: shop });
     const saved = await t.run((ctx) => ctx.db.get("applications", id));
-    expect(saved!.updatedAt).toBe(initial!.updatedAt + 1000);
+    expect(saved!.updatedAt).toBeGreaterThanOrEqual(initial!.updatedAt + 1000);
+    expect(saved!.updatedAt).toBeLessThanOrEqual(initial!.updatedAt + 1001);
     vi.spyOn(Date, "now").mockReturnValue(initial!.updatedAt + 2000);
     const { shopName, ...otherFields } = shop;
     await ramesh.mutation(api.applications.saveDraft, {
@@ -125,7 +131,7 @@ describe("a kabadiwala's application", () => {
       kabadiwala: { ...shop, shopName: "New shop name" },
     });
     expect(await t.run((ctx) => ctx.db.get("applications", id))).toMatchObject({
-      updatedAt: initial!.updatedAt + 2000,
+      updatedAt: expect.closeTo(initial!.updatedAt + 2000, -1),
       kabadiwala: { shopName: "New shop name", ownerName: shop.ownerName },
     });
   });

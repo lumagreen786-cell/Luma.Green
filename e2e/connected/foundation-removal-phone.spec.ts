@@ -69,7 +69,10 @@ test("local phone account removal closes the real session and rejects its old pr
     if (!code) throw new Error("No local verification code was delivered.");
     const verified = await context.request.post(
       "/api/auth/phone-number/verify",
-      { data: { phoneNumber, code } },
+      {
+        data: { phoneNumber, code },
+        headers: { "x-luma-adult-declaration": "1" },
+      },
     );
     expect(verified.status()).toBe(200);
     const tokenResponse = await context.request.get("/api/auth/convex/token");
@@ -82,6 +85,24 @@ test("local phone account removal closes the real session and rejects its old pr
     client.setAuth(token);
     await client.mutation(api.identity.ensureProfile, { locale: "en" });
     const page = await context.newPage();
+    await page.goto("/account/privacy");
+    await expect(
+      page.getByRole("heading", { level: 1, name: en.privacyRequests.title }),
+    ).toBeVisible();
+    const send = page.getByRole("button", { name: en.privacyRequests.submit });
+    await expect(send).toBeDisabled();
+    await page.getByRole("radio", { name: en.privacyRequests.access }).click();
+    await send.click();
+    await expect(
+      page.getByRole("status").filter({ hasText: en.privacyRequests.received }),
+    ).toBeVisible();
+    await page.reload();
+    await expect(
+      page.getByRole("listitem").filter({
+        hasText: en.privacyRequests.access,
+      }),
+    ).toContainText(en.privacyRequests.received);
+
     await page.goto("/account/removal");
     await expect(
       page.getByRole("heading", { level: 1, name: en.accountRemoval.title }),
@@ -94,6 +115,9 @@ test("local phone account removal closes the real session and rejects its old pr
       .click();
     await expect(page).toHaveURL((url) => url.pathname === "/login");
     await expect(client.query(api.stock.mine, {})).rejects.toThrow(
+      /ACCOUNT_CLOSED|NOT_SIGNED_IN/u,
+    );
+    await expect(client.query(api.privacyRequests.mine, {})).rejects.toThrow(
       /ACCOUNT_CLOSED|NOT_SIGNED_IN/u,
     );
     await page.goto("/account/services");

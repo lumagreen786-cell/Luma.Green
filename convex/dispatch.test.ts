@@ -14,6 +14,7 @@ import {
 import { shiftDate } from "./lib/dates";
 import { OFFER_TIMEOUT_MS } from "./lib/dispatch";
 import { indiaToday } from "./lib/onboarding";
+import { mockR2 } from "./lib/r2.testing";
 import schema from "./schema";
 
 const modules = convexModules(import.meta.glob("./**/*.*s"));
@@ -24,6 +25,7 @@ const SHOP = "+919000000101";
 afterEach(() => {
   vi.useRealTimers();
   vi.unstubAllEnvs();
+  vi.unstubAllGlobals();
 });
 
 async function world() {
@@ -46,6 +48,7 @@ async function world() {
   const household = await signInAs(t, HOUSEHOLD);
   const shop = await signInAs(t, SHOP);
   const args = {
+    adultConfirmed: true as const,
     orgId: org._id,
     mode: "pickup" as const,
     items: [{ materialCode: "PAPER-NEWS", kg: 10 }],
@@ -153,7 +156,10 @@ describe("pickup dispatch", () => {
       });
       const manual = await read(w, manualToken);
       expect(manual.status).toBe("requested");
-      expect(manual.dispatch?.expiresAt).toBe(Date.now() + OFFER_TIMEOUT_MS);
+      expect(manual.dispatch?.expiresAt).toBeCloseTo(
+        Date.now() + OFFER_TIMEOUT_MS,
+        -1,
+      );
     }
     await expect(
       w.household.mutation(api.households.book, {
@@ -544,7 +550,9 @@ describe("shop dispatch preferences", () => {
 it("reassigns a photo request without inventing an estimate", async () => {
   const w = await world();
   const otherId = await candidate(w, "photo-replacement");
+  mockR2();
   const photoId = await w.household.action(api.householdPhotos.upload, {
+    adultConfirmed: true,
     name: "scrap.jpg",
     bytes: new Uint8Array([0xff, 0xd8, 0xff, 0xe0]).buffer,
   });

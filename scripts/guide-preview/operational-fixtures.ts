@@ -51,6 +51,7 @@ export const qualityFixture = {
   orgId,
   canOperate: true,
   canWithdraw: true,
+  uploadAvailable: true,
   inspections: [
     {
       id: inspectionId,
@@ -224,6 +225,7 @@ export const operationalFixtures: Record<string, unknown> = {
         facilityName: "Example recovery facility",
         name: "PET recovery pilot",
         method: "verra_vmr0007",
+        industry: "pet_plastics",
         status: "draft",
         revision: 2,
         updatedAt: NOW,
@@ -238,6 +240,43 @@ export const operationalFixtures: Record<string, unknown> = {
       },
     ],
     hasMore: false,
+  },
+  "carbonProjects:frameworkScreenings": [
+    {
+      framework: "verra",
+      revision: 2,
+      checks: [
+        {
+          gate: "municipal_waste_origin",
+          status: "supported",
+          reference: "Example municipal source record",
+        },
+        {
+          gate: "collection_scope",
+          status: "contradicted",
+          reference: "Example collection scope finding",
+        },
+      ],
+    },
+  ],
+  "carbonProjects:frameworkHistory": {
+    historyComplete: true,
+    changes: [
+      {
+        gate: "collection_scope",
+        status: "contradicted",
+        reference: "Example collection scope finding",
+        recordedAt: NOW,
+        revision: 2,
+      },
+      {
+        gate: "municipal_waste_origin",
+        status: "supported",
+        reference: "Example municipal source record",
+        recordedAt: NOW,
+        revision: 1,
+      },
+    ],
   },
   "carbonProjects:batches": {
     rows: [

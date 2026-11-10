@@ -124,6 +124,32 @@ describe("InvoicePage", () => {
     expect(print).toHaveBeenCalled();
   });
 
+  it("labels the direct cash receipt as a seller report", () => {
+    data.receipt = aReceipt({
+      status: "accepted",
+      inEscrow: false,
+      legacyReceiptNo: null,
+      legacyRecordedAt: null,
+      directCashReceipt: {
+        reference: "Cash receipt 42",
+        amountPaise: 7_000_000,
+        recordedAt: PAID,
+      },
+      paymentVerification: "reported_direct_cash",
+    });
+    render(
+      <WithIntl>
+        <InvoicePage id="trade1" />
+      </WithIntl>,
+    );
+
+    expect(screen.getByText("Cash receipt 42")).toBeVisible();
+    expect(screen.getByText("Cash reported received")).toBeVisible();
+    expect(screen.getByText(/Luma records the seller’s report/)).toBeVisible();
+    expect(screen.queryByText(/Prototype record/)).not.toBeInTheDocument();
+    expect(screen.getByText(/not a GST tax invoice/)).toBeVisible();
+  });
+
   it("does not present a prototype completion as a provider payout", () => {
     data.receipt = aReceipt({
       status: "completed",

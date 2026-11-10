@@ -243,8 +243,10 @@ export const close = mutation({
     const secret = process.env.BETTER_AUTH_SECRET;
     if (!secret) throw new ConvexError("REMOVAL_UNAVAILABLE");
     const now = Date.now();
-    if (user.phoneNumber) {
-      const phoneHash = await smsPhoneHash(user.phoneNumber, secret);
+    const phoneHash = user.phoneNumber
+      ? await smsPhoneHash(user.phoneNumber, secret)
+      : undefined;
+    if (phoneHash) {
       const block = await ctx.db
         .query("accountRemovalPhoneBlocks")
         .withIndex("by_phoneHash", (q) => q.eq("phoneHash", phoneHash))
@@ -259,6 +261,7 @@ export const close = mutation({
     const id = await ctx.db.insert("accountRemovals", {
       profileId: profile._id,
       authUserId: user._id,
+      familyPhoneHash: phoneHash,
       operationKey: args.operationKey,
       state: "access_closed",
       phase: 0,
@@ -603,6 +606,38 @@ async function cleanupBatch18(
       await ctx.db.patch(row._id, { active: false, updatedAt: now });
   return { done: p.isDone, cursor: p.isDone ? undefined : p.continueCursor };
 }
+async function cleanupFamilyGrants(
+  ctx: MutationCtx,
+  r: Doc<"accountRemovals">,
+  pagination: BatchPagination,
+): Promise<BatchResult> {
+  const phoneHash = r.familyPhoneHash;
+  if (!phoneHash && r.phase === 25) return { done: true };
+  let source = ctx.db
+    .query("householdFamilyGrants")
+    .withIndex("by_owner_created", (q) => q.eq("ownerProfileId", r.profileId));
+  if (r.phase === 24) {
+    source = ctx.db
+      .query("householdFamilyGrants")
+      .withIndex("by_member_revoked", (q) =>
+        q.eq("memberProfileId", r.profileId),
+      );
+  } else if (r.phase === 25) {
+    source = ctx.db
+      .query("householdFamilyGrants")
+      .withIndex("by_phone_hash", (q) => q.eq("phoneHash", phoneHash));
+  }
+  const page = await source.paginate(pagination);
+  for (const grant of page.page) {
+    if (r.phase !== 25 || grant.createdAt <= r.createdAt)
+      await ctx.db.delete(grant._id);
+  }
+  return {
+    done: page.isDone,
+    cursor: page.isDone ? undefined : page.continueCursor,
+  };
+}
+
 async function runBatch(
   ctx: MutationCtx,
   r: Doc<"accountRemovals">,
@@ -610,6 +645,11 @@ async function runBatch(
   user: CleanupUser,
 ): Promise<BatchResult> {
   switch (r.phase) {
+    case 23:
+    case 24:
+    case 25: {
+      return cleanupFamilyGrants(ctx, r, pagination);
+    }
     case 0: {
       return cleanupBatch0(ctx, r, pagination, user);
     }
@@ -698,9 +738,10 @@ export const cleanup = internalMutation({
       pagination = { cursor, numItems: BATCH },
       now = Date.now();
     try {
-      if (r.phase >= 23) {
+      if (r.phase >= 26) {
         await ctx.db.patch(r._id, {
           state: "restricted_review",
+          familyPhoneHash: undefined,
           updatedAt: now,
           cursor: undefined,
           lastError: undefined,

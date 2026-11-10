@@ -13,12 +13,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { api } from "../../../../convex/_generated/api";
 import type { SiteType } from "../../../../convex/lib/siteClassification";
 import type { StakeholderKind } from "../../../../convex/lib/stakeholderKinds";
+import messages from "../../../../messages/en.json";
 
 type Request = FunctionReturnType<
   typeof api.stakeholderAccounts.pending
 >[number];
 
 const kindLabel: Record<StakeholderKind, string> = {
+  participant_applicant: "Participant application",
   material_generator: "Non-household material generator",
   city_official: "City official",
   csr_sponsor: "CSR sponsor",
@@ -104,7 +106,11 @@ function ReviewRequest({ request }: { request: Request }) {
     <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,28rem)] lg:gap-8">
       <div className="flex flex-col gap-1">
         <h3 className="text-base font-semibold">{request.organizationName}</h3>
-        <p className="text-sm">{kindLabel[request.kind]}</p>
+        <p className="text-sm">
+          {request.participantType
+            ? messages.participantDirectory.roles[request.participantType]
+            : kindLabel[request.kind]}
+        </p>
         {request.siteType ? (
           <p className="text-sm text-muted-foreground">
             {siteLabel[request.siteType]}

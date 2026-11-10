@@ -22,6 +22,7 @@ export type SellStep = (typeof SELL_STEPS)[number];
 export type Mode = "pickup" | "dropoff";
 
 export interface SellDraft {
+  apartmentPickup?: boolean;
   items: BasketItem[];
   mode: Mode;
   shopId?: string;
@@ -241,6 +242,7 @@ export function parseDraft(raw: string | null): SellDraft {
   if (!isRecord(value)) return EMPTY_DRAFT;
   const slotWindow = SLOT_WINDOWS.find((window) => window === value.slotWindow);
   return {
+    ...(value.apartmentPickup === true && { apartmentPickup: true }),
     items: parseItems(value.items),
     mode: value.mode === "dropoff" ? "dropoff" : "pickup",
     shopId: optionalText(value.shopId),

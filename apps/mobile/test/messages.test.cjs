@@ -23,7 +23,7 @@ test("the native bundle contains only its shell namespaces, not the full web cop
       Object.keys(messages).toSorted((first, second) =>
         first.localeCompare(second),
       ),
-      ["brand", "common", "native", "notifications"],
+      ["brand", "common", "homeReminder", "native", "notifications"],
     );
   }
 });

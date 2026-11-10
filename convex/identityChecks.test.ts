@@ -357,9 +357,9 @@ it("gives another verified account its own20-call allowance", async () => {
   ).not.toBeNull();
 });
 it("starts a new allowance at India midnight without resetting old usage", async () => {
-  const { t, as, applicationId } = await setup();
   const now = new Date("2026-10-24T18:29:59Z").getTime();
   vi.spyOn(Date, "now").mockReturnValue(now);
+  const { t, as, applicationId } = await setup();
   const reserved = await as.mutation(internal.identityChecks.reserve, {
     applicationId,
     kind: "gst",

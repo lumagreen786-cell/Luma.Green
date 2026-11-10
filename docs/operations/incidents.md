@@ -23,12 +23,11 @@
 4. **If a key leaked** (in a commit, log, screenshot or chat), **rotate first,
    investigate second**: Convex deploy keys and environment variables, Vercel
    variables, MSG91, OpenRouter. Rewriting git history does not un-leak a key.
-5. **If personal data may have leaked,** it is a legal matter as well as a
-   technical one: **CERT-In must hear within 6 hours**, and there are further
-   deadlines for the Data Protection Board and the people affected. Follow the
-   breach steps in
-   [data-protection.md](./data-protection.md#if-personal-data-leaks) — there are
-   deadlines for telling the Data Protection Board and the people affected.
+5. **If personal data may have leaked,** page the incident owner, record when
+   Luma first became aware and preserve evidence. Follow the
+   [data breach runbook](./data-protection.md#if-personal-data-leaks) for
+   CERT-In reporting and the separate DPDP notices to affected people and the
+   Data Protection Board when those duties apply.
 
 ## Telling people
 

@@ -8,6 +8,7 @@ import { HouseholdScheduleControls } from "../collection/operations-controls";
 import { useNow } from "../sell/states";
 import { ItemsCard, MoneySection, WhenCard } from "./booking-cards";
 import { CancelBooking } from "./cancel-booking";
+import { FamilyCollectionControl } from "./family-collection-control";
 import { NextActions } from "./next-actions";
 import { CollectionSharing, ReceiptReview } from "./receipt-sharing";
 import { ShopCard } from "./shop-card";
@@ -22,6 +23,16 @@ import type { TrackedBooking } from "./types";
 export function TrackView({ booking }: { booking: TrackedBooking }) {
   const t = useTranslations("track");
   const today = indiaToday(useNow());
+
+  if (booking.familyView)
+    return (
+      <div className="flex flex-col gap-5">
+        <StatusHero booking={booking} />
+        <WhenCard booking={booking} today={today} />
+        <ShopCard shop={booking.shop} />
+        <Timeline timeline={booking.timeline} />
+      </div>
+    );
 
   return (
     <div className="flex flex-col gap-5">
@@ -53,6 +64,12 @@ export function TrackView({ booking }: { booking: TrackedBooking }) {
         owner={booking.isMine}
         open={!["completed", "cancelled", "declined"].includes(booking.status)}
       />
+      {booking.isMine && booking.sharedWithFamily !== undefined ? (
+        <FamilyCollectionControl
+          token={booking.token}
+          shared={booking.sharedWithFamily}
+        />
+      ) : null}
       <p className="flex justify-center gap-2 text-center text-sm text-muted-foreground">
         <LockIcon aria-hidden className="mt-0.5 size-4 shrink-0" />
         {t("saved")}

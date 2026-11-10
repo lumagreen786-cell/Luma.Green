@@ -31,6 +31,9 @@ describe("public privacy and deletion instructions", () => {
       );
       expect(screen.getByText(messages.privacy.retentionBody)).toBeVisible();
       expect(
+        screen.getByRole("link", { name: messages.privacyRequests.title }),
+      ).toHaveAttribute("href", "/account/privacy");
+      expect(
         screen.getByRole("link", { name: messages.accountRemoval.title }),
       ).toHaveAttribute("href", "/account/removal");
       expect(
