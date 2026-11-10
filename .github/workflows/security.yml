@@ -54,6 +54,7 @@ jobs:
           printf 'vi.stubEnv("BETTER_AUTH_SECRET", "%s%s");\n' "$fixture" "$fixture" > convex/auth-sms.test.ts
           cp convex/auth-sms.test.ts convex/auth-optional-plugins.test.ts
           printf 'operationKey: "removal-enquiry-0001"\n' > convex/accountRemoval.test.ts
+          printf 'operationKey: "b779389e-30a9-498f-b7ed-3c0fa182a997"\n' > convex/households.test.ts
           printf 'operationKey: "removal-enquiry-0001"\n' > .github/workflows/security.yml
           captures=docs/delivery/evidence/platform-foundation-2026-10-28
           mkdir -p "$captures"
@@ -68,7 +69,7 @@ jobs:
           # Fixed high entropy avoids random controls that fall below rule limits.
           probe_canary=1RNDVO9mHhGEWfPln8yI0q65w4K7FQ2bLo3piZMjUduSzeTkJtrABaCgYcXsvx
           for target in convex/auth-sms.test.ts convex/auth-optional-plugins.test.ts \
-            convex/accountRemoval.test.ts .github/workflows/security.yml \
+            convex/accountRemoval.test.ts convex/households.test.ts .github/workflows/security.yml \
             "$captures/foundation-captures.json" "$captures/approved-book-captures.json" \
             "$captures/approved-hashes.json"; do
             printf 'api_key = "%s"\n' "$probe_canary" > "$target"
