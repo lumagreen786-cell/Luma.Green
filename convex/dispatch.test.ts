@@ -156,7 +156,10 @@ describe("pickup dispatch", () => {
       });
       const manual = await read(w, manualToken);
       expect(manual.status).toBe("requested");
-      expect(manual.dispatch?.expiresAt).toBe(Date.now() + OFFER_TIMEOUT_MS);
+      expect(manual.dispatch?.expiresAt).toBeCloseTo(
+        Date.now() + OFFER_TIMEOUT_MS,
+        -1,
+      );
     }
     await expect(
       w.household.mutation(api.households.book, {

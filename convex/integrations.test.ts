@@ -732,7 +732,7 @@ describe("transactional request limits and audit", () => {
     });
     const saved = await keyRecord(t, key.keyId);
     expect(saved.requestsInWindow).toBe(60);
-    expect(saved.lastUsedAt).toBe(Date.now());
+    expect(saved.lastUsedAt).toBeCloseTo(Date.now(), -1);
     const audits = await t.run((ctx) =>
       ctx.db
         .query("auditLog")

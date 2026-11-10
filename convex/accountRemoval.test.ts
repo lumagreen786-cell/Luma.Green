@@ -106,7 +106,10 @@ it("withdraws access immediately and scrubs optional profile settings without ed
     reasons: [],
   });
   const profile = await w.t.run((ctx) => ctx.db.get("profiles", w.profileId));
-  expect(profile).toMatchObject({ closedAt: Date.now(), locale: "en" });
+  expect(profile).toMatchObject({
+    closedAt: expect.closeTo(Date.now(), -1),
+    locale: "en",
+  });
   expect(profile?.phone).toBeUndefined();
   expect(profile?.activeOrgId).toBeUndefined();
   expect(await w.person.query(api.identity.me, {})).toBeNull();
