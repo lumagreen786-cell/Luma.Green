@@ -7,7 +7,6 @@ import { useState } from "react";
 import { Logo } from "@/components/brand/logo";
 import { isConvexConfigured } from "@/components/providers/convex-provider";
 import { LanguageSwitcher } from "@/components/site/language-switcher";
-import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -28,7 +27,6 @@ import { useSignOut } from "./use-sign-out";
 export function AccountMenu() {
   const nav = useTranslations("nav");
   const common = useTranslations("common");
-  const theme = useTranslations("theme");
   const locale = useLocale();
   const [open, setOpen] = useState(false);
   const close = () => {
@@ -86,12 +84,6 @@ export function AccountMenu() {
               {common("language")}
             </span>
             <LanguageSwitcher />
-          </div>
-          <div className="flex min-h-11 items-center justify-between gap-3">
-            <span className="text-sm text-muted-foreground">
-              {theme("label")}
-            </span>
-            <ThemeToggle />
           </div>
         </div>
         <div className="mx-5 shrink-0 border-t py-4">

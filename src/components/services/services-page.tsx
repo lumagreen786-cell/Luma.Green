@@ -65,7 +65,7 @@ function ServicesContent({ data }: { data: Board }) {
   const withdraw = useMutation(api.services.revokeEnquiryRecipient);
   return (
     <>
-      <section className="flex flex-col gap-4 border-t border-border pt-6">
+      <section className="flex flex-col gap-4 rounded-xl border border-border/60 bg-card p-5">
         <h2 className="text-lg font-semibold">{t("enquiries")}</h2>
         {data.canCreate &&
         (!enquiry ||
@@ -119,7 +119,7 @@ function ServicesContent({ data }: { data: Board }) {
           </article>
         ))}
       </section>
-      <section className="flex flex-col gap-3 border-t border-border pt-6">
+      <section className="flex flex-col gap-3 rounded-xl border border-border/60 bg-card p-5">
         <h2 className="text-lg font-semibold">{t("received")}</h2>
         {data.received.length === 0 ? (
           <p className="text-sm text-muted-foreground">{t("workflow.empty")}</p>
@@ -143,7 +143,7 @@ function ServicesContent({ data }: { data: Board }) {
           </article>
         ))}
       </section>
-      <section className="flex flex-col gap-4 border-t border-border pt-6">
+      <section className="flex flex-col gap-4 rounded-xl border border-border/60 bg-card p-5">
         <h2 className="text-lg font-semibold">{t("programmes")}</h2>
         <p className="text-sm text-muted-foreground">{t("reported")}</p>
         {data.canCreate &&
@@ -184,7 +184,7 @@ function ServicesContent({ data }: { data: Board }) {
           </article>
         ))}
       </section>
-      <section className="flex flex-col gap-3 border-t border-border pt-6">
+      <section className="flex flex-col gap-3 rounded-xl border border-border/60 bg-card p-5">
         <h2 className="text-lg font-semibold">{t("sharedReports")}</h2>
         {data.reports.map((row) => (
           <article
@@ -261,7 +261,7 @@ function Conversation({ row }: { row: Enquiry }) {
   return (
     <section className="w-full min-w-0 space-y-3" aria-label={t("history")}>
       <p className="text-sm text-muted-foreground">{t("notice")}</p>
-      <ol className="divide-y border-y border-border">
+      <ol className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
         {row.history.map((entry, index) => (
           <li key={index} className="min-w-0 space-y-1 py-3 text-sm">
             <p>

@@ -509,7 +509,13 @@ function RecyclingProgress({
   const t = useTranslations("sell");
   const simple = useTranslations("sell.simple");
   return (
-    <div className="space-y-2">
+    <div className="space-y-3 border-b border-border/60 pb-5">
+      <div aria-hidden className="flex gap-2">
+        <span className="h-1.5 flex-1 rounded-full bg-primary" />
+        <span
+          className={`h-1.5 flex-1 rounded-full ${stage === "schedule" ? "bg-primary" : "bg-muted"}`}
+        />
+      </div>
       <p className="text-sm text-muted-foreground">
         {t("steps.progress", {
           current: stage === "details" ? 1 : 2,
@@ -585,7 +591,7 @@ function BookingReview({
   const time = useTimeFormat();
   return (
     <section
-      className="space-y-3 border-y py-4"
+      className="space-y-3 rounded-xl bg-muted/50 p-4"
       aria-labelledby="booking-review-title"
     >
       <h2 id="booking-review-title" className="text-lg font-semibold">
@@ -735,7 +741,7 @@ function DetailsForm({
           <Label
             key={value}
             htmlFor={`recycle-${value}`}
-            className="flex min-h-12 cursor-pointer items-center gap-3 rounded-lg bg-muted/50 px-4"
+            className="flex min-h-14 min-w-0 cursor-pointer items-center gap-3 rounded-xl border border-border/60 bg-card px-4 py-3 leading-relaxed wrap-anywhere has-[[aria-checked=true]]:border-primary has-[[aria-checked=true]]:bg-accent/40"
           >
             <RadioGroupItem id={`recycle-${value}`} value={value} />
             {simple(value)}
@@ -883,7 +889,7 @@ function ShopSelection({
         <Label
           key={shop.id}
           htmlFor={`recycle-shop-${shop.id}`}
-          className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-4 hover:bg-muted/50 has-[[data-state=checked]]:bg-accent"
+          className="flex cursor-pointer items-center gap-3 rounded-xl border border-border/60 px-4 py-4 hover:bg-muted/50 has-[[aria-checked=true]]:border-primary has-[[aria-checked=true]]:bg-accent/40"
         >
           <RadioGroupItem id={`recycle-shop-${shop.id}`} value={shop.id} />
           <span className="min-w-0 flex-1">

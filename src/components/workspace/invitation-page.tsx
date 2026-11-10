@@ -33,7 +33,7 @@ export function InvitationPage({ token: initialToken }: { token: string }) {
   return (
     <ErrorBoundary
       fallback={() => (
-        <div className="mx-auto flex w-full max-w-xl flex-col items-start gap-6">
+        <div className="mx-auto flex w-full max-w-xl flex-col items-start gap-6 rounded-xl border border-border/60 bg-card p-5 sm:p-6">
           <p role="alert">{common("error")}</p>
           <Button
             onClick={() => {
@@ -96,7 +96,7 @@ function InvitationContent({ token }: { token: string }) {
     }
   }
   return (
-    <div className="mx-auto flex w-full max-w-xl min-w-0 flex-col gap-6">
+    <div className="mx-auto flex w-full max-w-xl min-w-0 flex-col gap-6 rounded-xl border border-border/60 bg-card p-5 sm:p-6">
       <AppPageHeader title={t("inviteTitle")} />
       {isPending || (isReady && invitation === undefined) ? (
         <p>{common("loading")}</p>

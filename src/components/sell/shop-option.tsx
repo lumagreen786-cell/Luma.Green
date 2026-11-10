@@ -104,9 +104,7 @@ export function ShopOption({
           </span>
         ) : null}
         {isDisabled ? (
-          <span className="text-sm text-amber-800 dark:text-amber-200">
-            {t("noPickupHere")}
-          </span>
+          <span className="text-sm text-foreground">{t("noPickupHere")}</span>
         ) : null}
       </span>
     </Label>

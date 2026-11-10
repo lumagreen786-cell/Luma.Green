@@ -107,7 +107,7 @@ export function BasketStep({
         ))}
 
       {isFull ? (
-        <p role="status" className="text-sm text-amber-800 dark:text-amber-200">
+        <p role="status" className="text-sm text-foreground">
           {t("basket.full", { max: BASKET_MAX_ITEMS })}
         </p>
       ) : null}

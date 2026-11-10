@@ -63,7 +63,7 @@ export function ApartmentRoutes() {
 
   return (
     <section
-      className="space-y-4 border-t py-6"
+      className="space-y-4 rounded-xl bg-card p-5 sm:p-6"
       aria-labelledby="apartment-routes"
     >
       <h2 id="apartment-routes" className="text-lg font-semibold">

@@ -87,7 +87,7 @@ function EvidenceHistory({ orgId }: { orgId: Id<"orgs"> }) {
         lead={t("lead")}
         actions={canOperate ? <ReferenceForm /> : undefined}
       />
-      <section className="space-y-2 border-t border-border pt-4">
+      <section className="space-y-3 rounded-xl border border-border/60 bg-card p-5">
         <p className="text-sm text-muted-foreground">{t("export.notice")}</p>
         <div className="flex flex-wrap gap-2">
           {(["csv", "json"] as const).map((kind) => (
@@ -143,7 +143,7 @@ function EvidenceHistory({ orgId }: { orgId: Id<"orgs"> }) {
       {status === "LoadingFirstPage" ? (
         <ListSkeleton />
       ) : (
-        <ul className="divide-y border-y">
+        <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
           {results.map((row) => (
             <li
               key={row.id}

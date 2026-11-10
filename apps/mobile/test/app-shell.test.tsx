@@ -14,6 +14,7 @@ const native = vi.hoisted(() => {
   const webProps: Record<string, unknown> = {};
   return {
     webProps,
+    statusBarStyle: "",
     appState: "active",
     appStateListener: undefined as ((state: string) => void) | undefined,
     invalidateLocation: vi.fn(),
@@ -40,7 +41,12 @@ vi.mock("expo-constants", () => ({
 vi.mock("expo-localization", () => ({
   getLocales: () => [{ languageTag: "en-IN" }],
 }));
-vi.mock("expo-status-bar", () => ({ StatusBar: () => null }));
+vi.mock("expo-status-bar", () => ({
+  StatusBar: ({ style }: { style: string }) => {
+    native.statusBarStyle = style;
+    return null;
+  },
+}));
 vi.mock("react-native", async () => {
   const { createElement } = await import("react");
   return {
@@ -173,6 +179,9 @@ describe("WebView-only Android shell", () => {
     expect(screen.queryAllByRole("button")).toHaveLength(0);
     expect(native.webProps.source).toEqual({ uri: "https://luma.green/en" });
     expect(native.webProps.geolocationEnabled).toBe(true);
+    expect(native.webProps.forceDarkOn).toBe(false);
+    expect(native.webProps.style).toMatchObject({ backgroundColor: "#FFFFFF" });
+    expect(native.statusBarStyle).toBe("dark");
     expect(native.webProps.allowFileAccess).toBe(false);
     expect(native.webProps.allowUniversalAccessFromFileURLs).toBe(false);
   });

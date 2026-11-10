@@ -31,14 +31,11 @@ export function BarList({
 }) {
   const max = Math.max(0, ...rows.map((row) => row.value));
   return (
-    <ul
-      aria-label={label}
-      className="flex flex-col divide-y border-y border-border"
-    >
+    <ul aria-label={label} className="flex flex-col gap-5">
       {rows.map((row) => {
         const Icon = row.icon;
         return (
-          <li key={row.key} className="flex flex-col gap-3 py-4">
+          <li key={row.key} className="flex flex-col gap-3">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <span className="flex min-w-0 items-center gap-2 font-medium">
                 <Icon
@@ -51,12 +48,14 @@ export function BarList({
                 {row.display}
               </span>
             </div>
-            <div
-              aria-hidden
-              data-testid="bar"
-              className="h-1.5 rounded-e-sm bg-chart-1"
-              style={{ width: `${String(barPercent(row.value, max))}%` }}
-            />
+            <div className="h-3 overflow-hidden rounded-full bg-muted">
+              <div
+                aria-hidden
+                data-testid="bar"
+                className="h-3 rounded-full bg-primary"
+                style={{ width: `${String(barPercent(row.value, max))}%` }}
+              />
+            </div>
             {row.detail ? (
               <span className="text-xs text-muted-foreground">
                 {row.detail}

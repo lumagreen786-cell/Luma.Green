@@ -140,7 +140,9 @@ OS owns the standard permission text. Native-speaker/device review is still requ
 The normal screen contains the hosted web interface within native safe areas.
 Native recovery controls appear only after a load failure and use system script
 fonts. The web interface keeps its Geist/Noto fonts. Safe areas and recovery
-controls follow device appearance; manual web theme choices apply within the page.
+controls use the approved light-only palette, including on devices set to dark appearance.
+The hosted page uses the same light-only design. Native permission dialogs retain
+the operating system controls and translated purpose text.
 
 ## Shared shell translations
 
@@ -341,7 +343,8 @@ Install the resulting APK on the test phone and allow installation from the
 chosen trusted source when Android asks. USB debugging is only needed for
 computer-driven installation, captures and device diagnostics.
 
-Test public screens, device light/dark mode, Kannada/Arabic, Back, offline Retry,
+Test public screens under both device appearance settings (the app stays light),
+Kannada/Arabic, Back, offline Retry,
 photo selection/capture and location. Login must use the normal verified phone
 flow and any required authenticator. Live bookings and submissions create real
 records; use owner-approved test data. A successful bundle export does not prove

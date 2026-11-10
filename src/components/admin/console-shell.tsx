@@ -2,6 +2,7 @@
 
 import { useQuery } from "convex/react";
 import {
+  AlertCircleIcon,
   ChartNoAxesCombinedIcon,
   CreditCardIcon,
   HouseIcon,
@@ -18,7 +19,6 @@ import { type ReactNode, useEffect } from "react";
 import { Logo } from "@/components/brand/logo";
 import { QueryProvider } from "@/components/providers/query-provider";
 import { useSignedInQuery } from "@/components/providers/use-signed-in-query";
-import { ThemeToggleControl } from "@/components/theme/theme-toggle";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -110,12 +110,12 @@ export function ConsoleShell({ children }: { children: ReactNode }) {
   if (me.kind !== "admin") return <NotAdmin />;
 
   return (
-    <div className="flex min-h-dvh flex-col bg-background lg:flex-row">
-      <Sidebar name={me.adminName ?? "Admin"} />
+    <div className="flex min-h-dvh flex-col bg-background">
+      <ConsoleNavigation name={me.adminName ?? "Admin"} />
       <main
         id="main"
         tabIndex={-1}
-        className="mx-auto w-full max-w-7xl min-w-0 flex-1 px-4 py-6 sm:px-8 lg:px-12 lg:py-10"
+        className="mx-auto w-full max-w-[100rem] min-w-0 flex-1 px-4 py-6 sm:px-8 lg:px-12 lg:py-10"
       >
         <QueryProvider>{children}</QueryProvider>
       </main>
@@ -123,66 +123,55 @@ export function ConsoleShell({ children }: { children: ReactNode }) {
   );
 }
 
-function Sidebar({ name }: { name: string }) {
+function ConsoleNavigation({ name }: { name: string }) {
   const pathname = usePathname();
   const summary = useQuery(api.review.summary);
   const { signOut, busy, error } = useAdminSignOut();
 
   return (
-    <aside className="flex flex-col gap-3 border-b border-sidebar-border bg-muted/35 px-3 pt-3 pb-2 text-sidebar-foreground lg:sticky lg:top-0 lg:h-dvh lg:w-72 lg:shrink-0 lg:gap-6 lg:overflow-y-auto lg:border-e lg:border-b-0 lg:px-5 lg:py-6">
-      <div className="flex items-center justify-between gap-2">
+    <header className="bg-sidebar px-4 py-4 text-sidebar-foreground sm:px-8">
+      <div className="mx-auto flex max-w-[96rem] items-center justify-between gap-3 pb-4">
         <Link
           href="/admin"
           aria-label="Admin home"
-          className="inline-flex min-h-11 items-center rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+          className="inline-flex min-h-11 items-center rounded-full outline-none focus-visible:ring-3 focus-visible:ring-sidebar-ring"
         >
           <Logo />
         </Link>
-        <div className="flex items-center gap-2">
-          <Badge variant="outline">Admin</Badge>
-          <div className="flex items-center gap-1 lg:hidden">
-            <ThemeToggleControl
-              labels={{
-                label: "Appearance",
-                light: "Light",
-                dark: "Dark",
-                system: "System",
-              }}
-            />
-            <Button
-              variant="ghost"
-              size="icon"
-              aria-label={`Sign out ${name}`}
-              disabled={busy}
-              onClick={() => {
-                void signOut();
-              }}
-            >
-              <LogOutIcon aria-hidden />
-            </Button>
-          </div>
-        </div>
+        <Badge
+          variant="outline"
+          className="border-sidebar-border text-sidebar-foreground"
+        >
+          Admin
+        </Badge>
+        <p className="ms-auto hidden truncate text-sm font-medium sm:block">
+          {name}
+        </p>
+        <Button
+          variant="ghost"
+          className="shrink-0 text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-sidebar-ring"
+          aria-label={`Sign out ${name}`}
+          disabled={busy}
+          onClick={() => void signOut()}
+        >
+          <LogOutIcon aria-hidden />
+          <span className="hidden sm:inline">Sign out</span>
+        </Button>
       </div>
       {error ? (
-        <p role="alert" className="text-sm text-destructive">
+        <p
+          role="alert"
+          className="mx-auto mb-3 flex max-w-[96rem] items-start gap-2 rounded-xl border border-sidebar-ring bg-card p-3 text-sm text-foreground"
+        >
+          <AlertCircleIcon aria-hidden className="mt-0.5 size-4 shrink-0" />
           {error}
         </p>
       ) : null}
-      <div className="hidden items-center justify-between gap-3 border-y border-sidebar-border py-2 lg:flex">
-        <span className="text-xs font-medium text-muted-foreground">
-          Admin console
-        </span>
-        <ThemeToggleControl
-          labels={{
-            label: "Appearance",
-            light: "Light",
-            dark: "Dark",
-            system: "System",
-          }}
-        />
-      </div>
-      <nav aria-label="Admin">
-        <ul className="grid grid-cols-3 gap-x-2 sm:grid-cols-4 lg:flex lg:flex-col lg:gap-1">
+      <nav
+        aria-label="Admin"
+        className="mx-auto max-w-[96rem] overflow-x-auto overscroll-x-contain pb-1"
+      >
+        <ul className="flex w-max min-w-full items-center gap-2">
           {nav.map((item) => {
             const isActive = isCurrent(pathname, item.href);
             const count = item.count ? summary?.[item.count.key] : undefined;
@@ -192,10 +181,10 @@ function Sidebar({ name }: { name: string }) {
                   href={item.href}
                   aria-current={isActive ? "page" : undefined}
                   className={cn(
-                    "relative flex min-h-14 min-w-0 flex-col items-center justify-center gap-1 border-b-2 border-transparent px-1 py-2 text-xs transition-colors outline-none focus-visible:ring-3 focus-visible:ring-ring/50 lg:min-h-11 lg:flex-row lg:justify-start lg:gap-3 lg:border-s-2 lg:border-b-0 lg:px-3 lg:text-sm",
+                    "relative flex min-h-11 items-center justify-center gap-2 rounded-full px-4 py-2 text-sm whitespace-nowrap transition-colors outline-none focus-visible:ring-3 focus-visible:ring-sidebar-ring",
                     isActive
-                      ? "border-b-primary bg-background font-semibold text-primary lg:border-s-primary"
-                      : "text-muted-foreground hover:bg-muted/50 hover:text-foreground",
+                      ? "bg-accent font-semibold text-accent-foreground"
+                      : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
                   )}
                 >
                   <item.icon
@@ -222,22 +211,7 @@ function Sidebar({ name }: { name: string }) {
           })}
         </ul>
       </nav>
-      <div className="mt-auto hidden flex-col gap-4 border-t border-sidebar-border pt-4 lg:flex">
-        <p className="truncate text-sm font-medium">{name}</p>
-        <Button
-          variant="outline"
-          size="sm"
-          className="min-h-11 text-foreground"
-          disabled={busy}
-          onClick={() => {
-            void signOut();
-          }}
-        >
-          <LogOutIcon aria-hidden />
-          Sign out
-        </Button>
-      </div>
-    </aside>
+    </header>
   );
 }
 
@@ -275,10 +249,7 @@ function NotAdmin() {
 
 function ConsoleSkeleton() {
   return (
-    <div
-      className="flex min-h-dvh flex-col bg-background lg:flex-row"
-      aria-busy="true"
-    >
+    <div className="flex min-h-dvh flex-col bg-background" aria-busy="true">
       <div className="border-b bg-background p-4 lg:w-72 lg:border-e lg:border-b-0">
         <Skeleton className="h-8 w-40" />
       </div>

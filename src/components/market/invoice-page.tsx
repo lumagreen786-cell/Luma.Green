@@ -184,7 +184,7 @@ function ReceiptDocument({
 
       <article
         id="trade-receipt"
-        className="flex flex-col gap-6 border-y border-border py-6 print:border-0 print:p-0"
+        className="flex flex-col gap-6 rounded-xl border border-border/60 bg-card p-5 sm:p-6 print:border-0 print:p-0"
       >
         <div className="flex flex-wrap items-start justify-between gap-4 border-b pb-5">
           <div className="flex flex-col gap-3">
@@ -288,7 +288,7 @@ function ReceiptDocument({
             <p className="flex gap-2">
               <FileTextIcon
                 aria-hidden
-                className="mt-0.5 size-4 shrink-0 text-sky-700 dark:text-sky-300"
+                className="mt-0.5 size-4 shrink-0 text-primary"
               />
               {t("receipt.ewayBill")}
             </p>

@@ -66,7 +66,7 @@ export function ParticipantDirectory() {
           }}
         />
       </div>
-      <fieldset className="min-w-0 divide-y divide-border border-y border-border">
+      <fieldset className="min-w-0 divide-y divide-border/60 rounded-xl border border-border/60 px-4">
         <legend className="sr-only">{t("title")}</legend>
         {groups.map(({ group, roles }) => (
           <details key={group} open={term ? true : undefined}>
@@ -76,7 +76,7 @@ export function ParticipantDirectory() {
             <ul className="pb-2">
               {roles.map((role) => (
                 <li key={role}>
-                  <label className="flex min-h-12 cursor-pointer items-center gap-3 px-2 py-2">
+                  <label className="flex min-h-12 min-w-0 cursor-pointer items-center gap-3 rounded-xl px-3 py-3 has-[:checked]:bg-accent/40">
                     <input
                       type="radio"
                       name="participant"

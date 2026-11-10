@@ -8,7 +8,7 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-/* A stored preference controls the class; system mode follows the device. */
+/* Legacy dark utilities are inert: the light-only bootstrap removes the class. */
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -16,19 +16,21 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  /* Noto body and script coverage; Geist for Latin display. `--font-noto-script` is attached to <html> only for
+  /* Plus Jakarta Sans for Latin UI; Noto for script coverage. `--font-noto-script` is attached to <html> only for
      locales whose script Noto Sans itself does not cover (Tamil, Arabic, …),
      so the stack stays one declaration for all supported locales. System
      fallbacks must stay after the script face, never inside the earlier variables. */
   --font-sans:
+    var(--font-jakarta, "Plus Jakarta Sans"),
     var(--font-noto-sans, "Noto Sans"), var(--font-noto-script, sans-serif),
     system-ui, "Segoe UI", sans-serif;
   --font-mono:
     var(--font-noto-mono, "Noto Sans Mono"), ui-monospace, SFMono-Regular,
     monospace;
   --font-display:
-    var(--font-geist, "Geist"), var(--font-noto-sans, "Noto Sans"),
-    var(--font-noto-script, sans-serif), system-ui, sans-serif;
+    var(--font-jakarta, "Plus Jakarta Sans"),
+    var(--font-noto-sans, "Noto Sans"), var(--font-noto-script, sans-serif),
+    system-ui, sans-serif;
   --font-heading: var(--font-display);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -63,8 +65,8 @@
   --radius-md: var(--radius);
   --radius-lg: calc(var(--radius) + 0.125rem);
   --radius-xl: calc(var(--radius) + 0.25rem);
-  --radius-2xl: calc(var(--radius) + 0.5rem);
-  --radius-3xl: calc(var(--radius) + 0.75rem);
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.25rem;
   --radius-4xl: calc(var(--radius) + 1rem);
   --animate-shimmer-slide: shimmer-slide var(--speed) ease-in-out infinite
     alternate;
@@ -92,93 +94,58 @@
   }
 }
 
-/* Luma.Green brand scale, sampled from the mark. Use `brand-*` utilities for
-   anything that must stay green regardless of light/dark theme (the logo,
-   carbon-credit accents, material-recovered states). Everything else should
-   use the semantic tokens below so dark mode keeps working. */
+/* Approved five-colour light-only system. See docs/design/luma-design-system. */
 @theme {
-  --color-brand-50: #f1fae9;
-  --color-brand-100: #dff3cc;
-  --color-brand-200: #c3e99b;
-  --color-brand-300: #a6dc7f;
-  --color-brand-400: #8fd073;
-  --color-brand-500: #6fbe63;
-  --color-brand-600: #4ca96b;
-  --color-brand-700: #2e8b57;
-  --color-brand-800: #1f7a5a;
-  --color-brand-900: #145c43;
-  --color-brand-950: #0b3326;
+  --color-brand-50: color-mix(in srgb, #a8e665 8%, #ffffff);
+  --color-brand-100: color-mix(in srgb, #a8e665 20%, #ffffff);
+  --color-brand-200: color-mix(in srgb, #a8e665 45%, #ffffff);
+  --color-brand-300: #a8e665;
+  --color-brand-400: #a8e665;
+  --color-brand-500: #317f38;
+  --color-brand-600: #317f38;
+  --color-brand-700: #317f38;
+  --color-brand-800: #144419;
+  --color-brand-900: #144419;
+  --color-brand-950: #144419;
+  --color-attention: #ebff00;
+  --color-attention-foreground: #144419;
 }
 
 :root {
+  color-scheme: light;
   --google-attribution: #1f1f1f;
-  --background: oklch(0.985 0.002 250);
-  --foreground: oklch(0.22 0.008 250);
-  --card: oklch(1 0 0);
+  --background: color-mix(in srgb, #144419 7%, #ffffff);
+  --foreground: #144419;
+  --card: #ffffff;
   --card-foreground: var(--foreground);
-  --popover: oklch(1 0 0);
+  --popover: #ffffff;
   --popover-foreground: var(--foreground);
-  --primary: oklch(0.39 0.075 163);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.952 0.004 250);
-  --secondary-foreground: var(--foreground);
-  --muted: oklch(0.955 0.004 250);
-  --muted-foreground: oklch(0.46 0.013 250);
-  --accent: oklch(0.95 0.016 163);
-  --accent-foreground: oklch(0.31 0.058 163);
-  --destructive: oklch(0.54 0.2 27);
-  --border: oklch(0.902 0.006 250);
-  --input: oklch(0.82 0.012 250);
-  --ring: oklch(0.46 0.085 163);
-  --chart-1: oklch(0.46 0.09 163);
-  --chart-2: oklch(0.57 0.1 240);
-  --chart-3: oklch(0.66 0.13 75);
-  --chart-4: oklch(0.61 0.08 180);
-  --chart-5: oklch(0.47 0.018 250);
-  --radius: 0.5rem;
-  --sidebar: oklch(1 0 0);
-  --sidebar-foreground: var(--foreground);
-  --sidebar-primary: var(--primary);
-  --sidebar-primary-foreground: var(--primary-foreground);
-  --sidebar-accent: var(--accent);
-  --sidebar-accent-foreground: var(--accent-foreground);
-  --sidebar-border: var(--border);
-  --sidebar-ring: var(--ring);
-}
-
-.dark {
-  --google-attribution: #ffffff;
-  --background: oklch(0.165 0.004 250);
-  --foreground: oklch(0.956 0.003 250);
-  --card: oklch(0.21 0.005 250);
-  --card-foreground: var(--foreground);
-  --popover: oklch(0.235 0.006 250);
-  --popover-foreground: var(--foreground);
-  --primary: oklch(0.77 0.1 163);
-  --primary-foreground: oklch(0.18 0.018 163);
-  --secondary: oklch(0.265 0.006 250);
-  --secondary-foreground: var(--foreground);
-  --muted: oklch(0.25 0.006 250);
-  --muted-foreground: oklch(0.725 0.009 250);
-  --accent: oklch(0.285 0.028 163);
-  --accent-foreground: oklch(0.84 0.06 163);
-  --destructive: oklch(0.73 0.16 25);
-  --border: oklch(0.32 0.007 250);
-  --input: oklch(0.43 0.012 250);
-  --ring: oklch(0.75 0.1 163);
-  --chart-1: oklch(0.76 0.11 163);
-  --chart-2: oklch(0.72 0.1 240);
-  --chart-3: oklch(0.79 0.13 75);
-  --chart-4: oklch(0.7 0.08 180);
-  --chart-5: oklch(0.7 0.014 250);
-  --sidebar: oklch(0.19 0.004 250);
-  --sidebar-foreground: var(--foreground);
-  --sidebar-primary: var(--primary);
-  --sidebar-primary-foreground: var(--primary-foreground);
-  --sidebar-accent: var(--accent);
-  --sidebar-accent-foreground: var(--accent-foreground);
-  --sidebar-border: var(--border);
-  --sidebar-ring: var(--ring);
+  --primary: #317f38;
+  --primary-foreground: #ffffff;
+  --secondary: #a8e665;
+  --secondary-foreground: #144419;
+  --muted: color-mix(in srgb, #144419 7%, #ffffff);
+  --muted-foreground: color-mix(in srgb, #144419 75%, #ffffff);
+  --accent: #a8e665;
+  --accent-foreground: #144419;
+  --destructive: #144419;
+  --border: color-mix(in srgb, #144419 13%, #ffffff);
+  --input: color-mix(in srgb, #144419 30%, #ffffff);
+  --ring: #317f38;
+  --chart-1: #317f38;
+  --chart-2: #144419;
+  --chart-3: #a8e665;
+  --chart-4: #ebff00;
+  --chart-5: color-mix(in srgb, #317f38 60%, #ffffff);
+  --radius: 0.75rem;
+  --sidebar: #144419;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #a8e665;
+  --sidebar-primary-foreground: #144419;
+  --sidebar-accent: #a8e665;
+  --sidebar-accent-foreground: #144419;
+  --sidebar-border: color-mix(in srgb, #ffffff 22%, #144419);
+  --sidebar-ring: #a8e665;
 }
 
 @layer base {
@@ -303,8 +270,7 @@ html:is(
   stroke-width: 1.75;
 }
 
-/* Astryx components use Luma's original light/dark palette. The existing
-   semantic tokens above remain the colour owner for both component systems. */
+/* Retained compound Astryx controls inherit the approved semantic tokens. */
 [data-astryx-theme="matcha"] {
   --font-family-body: var(--font-sans);
   --font-family-heading: var(--font-display);
@@ -328,9 +294,6 @@ html:is(
   --focus-outline-color: var(--ring);
   --radius: 0.75rem;
 }
-html.dark [data-astryx-theme] {
-  color-scheme: dark;
-}
-html:not(.dark) [data-astryx-theme] {
+html [data-astryx-theme] {
   color-scheme: light;
 }

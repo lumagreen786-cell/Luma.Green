@@ -41,7 +41,9 @@ module.exports = function buildConfig() {
         },
       ]),
     ),
-    userInterfaceStyle: "automatic",
+    userInterfaceStyle: "light",
+    backgroundColor: "#FFFFFF",
+    splash: { backgroundColor: "#FFFFFF" },
     runtimeVersion: { policy: "fingerprint" },
     ios: {
       bundleIdentifier: "green.luma.app",
@@ -64,7 +66,7 @@ module.exports = function buildConfig() {
       allowBackup: false,
       adaptiveIcon: {
         foregroundImage: "../../public/brand/app-icon-foreground.png",
-        backgroundColor: "#ffffff",
+        backgroundColor: "#FFFFFF",
       },
       permissions: [
         "ACCESS_COARSE_LOCATION",

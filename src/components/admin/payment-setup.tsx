@@ -98,7 +98,7 @@ export function PaymentSetup() {
 
   return (
     <div className="mx-auto flex w-full max-w-5xl flex-col gap-6">
-      <header className="flex flex-col gap-2 border-b pb-6">
+      <header className="flex flex-col gap-2 pb-2">
         <h1 className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">
           Payment setup
         </h1>
@@ -161,7 +161,7 @@ export function PaymentSetup() {
         </p>
       ) : null}
       {status !== "LoadingFirstPage" && results.length > 0 ? (
-        <ul className="divide-y border-y">
+        <ul className="divide-y rounded-xl bg-card px-5 sm:px-6">
           {results.map((org) => {
             const vendor = org.vendors.find((item) => item.mode === mode);
             return (

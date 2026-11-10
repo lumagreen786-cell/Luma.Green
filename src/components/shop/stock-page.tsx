@@ -76,9 +76,7 @@ function StockBody() {
   if (stock === undefined) return <ListSkeleton rows={4} />;
   return (
     <>
-      <StockReport />
-      <StockClosing />
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         <StatCard
           label={t("totalWeight")}
           value={format.weight(stock.totalGrams)}
@@ -131,6 +129,10 @@ function StockBody() {
       ) : (
         <StockList stock={stock} />
       )}
+      <div className="grid items-start gap-4 xl:grid-cols-2">
+        <StockReport />
+        <StockClosing />
+      </div>
     </>
   );
 }
@@ -164,7 +166,7 @@ function StockList({ stock }: { stock: Stock }) {
     }))
     .filter((group) => group.rows.length > 0);
   const list = (rows: StockRow[]) => (
-    <ul className="flex flex-col border-y border-border">
+    <ul className="flex flex-col divide-y divide-border">
       {rows.map((row) => (
         <StockItem
           key={row.material.code}
@@ -176,8 +178,11 @@ function StockList({ stock }: { stock: Stock }) {
   );
   if (groups.length === 1) {
     return (
-      <section aria-labelledby="stock-list" className="flex flex-col gap-3">
-        <h2 id="stock-list" className="sr-only">
+      <section
+        aria-labelledby="stock-list"
+        className="flex flex-col gap-4 rounded-2xl bg-card p-5 sm:p-6"
+      >
+        <h2 id="stock-list" className="text-base font-semibold">
           {t(groups[0]?.stage ?? "scrap")}
         </h2>
         {list(stock.rows)}
@@ -200,8 +205,8 @@ function StockItem({ row, totalGrams }: { row: StockRow; totalGrams: number }) {
   const format = useFormat();
   const share = totalGrams > 0 ? Math.round((row.grams / totalGrams) * 100) : 0;
   return (
-    <li className="flex flex-col gap-3 border-b border-border py-4 last:border-b-0">
-      <div className="flex items-center gap-3">
+    <li className="flex flex-col gap-3 py-5">
+      <div className="flex flex-wrap items-center gap-3">
         <MaterialIcon family={row.material.family} />
         <div className="flex min-w-0 flex-1 flex-col">
           <span className="font-medium">
@@ -213,7 +218,7 @@ function StockItem({ row, totalGrams }: { row: StockRow; totalGrams: number }) {
               : t("atPrice", { price: format.perKg(row.marketPaise) })}
           </span>
         </div>
-        <div className="flex shrink-0 flex-col items-end">
+        <div className="ms-auto flex flex-col items-end">
           <span className="text-xl font-semibold tabular-nums">
             {format.weight(row.grams)}
           </span>
@@ -231,7 +236,7 @@ function StockItem({ row, totalGrams }: { row: StockRow; totalGrams: number }) {
       <div aria-hidden className="h-2 overflow-hidden rounded-full bg-muted">
         <div
           className="h-full rounded-full bg-primary"
-          style={{ width: `${String(Math.max(share, 2))}%` }}
+          style={{ width: `${String(share)}%` }}
         />
       </div>
     </li>

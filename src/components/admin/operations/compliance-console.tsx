@@ -77,7 +77,7 @@ export function FacilityReviewConsole() {
   });
   const facility = data?.facilities.find((f) => f.id === facilityId);
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 rounded-xl bg-card p-5 sm:p-6">
       <details>
         <summary className="min-h-11 cursor-pointer py-3 font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring">
           Find India regulatory references
@@ -276,7 +276,7 @@ export function DestinationConsole() {
     },
   });
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 rounded-xl bg-card p-5 sm:p-6">
       <p className="text-sm text-muted-foreground">
         Record a destination only after checking its authorisation and exact
         material/process scope. This directory cannot prove a collection,

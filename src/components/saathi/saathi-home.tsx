@@ -24,13 +24,13 @@ import { splitByDay } from "./job-day";
 import { WeekEarnings } from "./week-earnings";
 
 function JobGrid({ children }: { children: ReactNode }) {
-  return <div className="flex flex-col">{children}</div>;
+  return <div className="flex flex-col divide-y divide-border">{children}</div>;
 }
 
 function BoardSkeleton() {
   return (
     <div className="flex flex-col gap-6" aria-busy="true">
-      <Skeleton className="h-28 w-full rounded-none" />
+      <Skeleton className="h-28 w-full rounded-2xl" />
       <ListSkeleton rows={2} />
     </div>
   );
@@ -44,73 +44,75 @@ function SaathiBoard() {
   const { now, later } = splitByDay(board.mine, board.today);
   return (
     <>
-      <Section title={t("today.title")}>
-        {now.length > 0 ? (
-          <JobGrid>
-            {now.map((job) => (
-              <JobCard
-                key={job.id}
-                job={job}
-                today={board.today}
-                action={<FinishJobButton job={job} />}
-              />
-            ))}
-          </JobGrid>
-        ) : (
-          <EmptyState
-            icon={CalendarCheckIcon}
-            title={t("today.empty")}
-            body={t("today.emptyBody")}
-          />
-        )}
-      </Section>
-
-      {later.length > 0 ? (
-        <Section title={t("upcoming.title")}>
-          <JobGrid>
-            {later.map((job) => (
-              <JobCard
-                key={job.id}
-                job={job}
-                today={board.today}
-                action={
-                  <p className="text-sm text-muted-foreground">
-                    {t("upcoming.hint")}
-                  </p>
-                }
-              />
-            ))}
-          </JobGrid>
-        </Section>
-      ) : null}
-
-      <Section title={t("open.title")}>
-        {board.open.length > 0 ? (
-          <>
-            <p className="-mt-1 text-sm text-muted-foreground">
-              {t("open.lead")}
-            </p>
-            <JobGrid>
-              {board.open.map((job) => (
-                <JobCard
-                  key={job.id}
-                  job={job}
-                  today={board.today}
-                  action={<TakeJobButton job={job} />}
-                />
-              ))}
-            </JobGrid>
-          </>
-        ) : (
-          <EmptyState
-            icon={SearchIcon}
-            title={t("open.empty")}
-            body={t("open.emptyBody")}
-          />
-        )}
-      </Section>
-
       <WeekEarnings earnings={board.earnings} />
+      <div className="grid items-start gap-4 xl:grid-cols-2">
+        <div className="min-w-0 space-y-4">
+          <Section title={t("today.title")}>
+            {now.length > 0 ? (
+              <JobGrid>
+                {now.map((job) => (
+                  <JobCard
+                    key={job.id}
+                    job={job}
+                    today={board.today}
+                    action={<FinishJobButton job={job} />}
+                  />
+                ))}
+              </JobGrid>
+            ) : (
+              <EmptyState
+                icon={CalendarCheckIcon}
+                title={t("today.empty")}
+                body={t("today.emptyBody")}
+              />
+            )}
+          </Section>
+
+          {later.length > 0 ? (
+            <Section title={t("upcoming.title")}>
+              <JobGrid>
+                {later.map((job) => (
+                  <JobCard
+                    key={job.id}
+                    job={job}
+                    today={board.today}
+                    action={
+                      <p className="text-sm text-muted-foreground">
+                        {t("upcoming.hint")}
+                      </p>
+                    }
+                  />
+                ))}
+              </JobGrid>
+            </Section>
+          ) : null}
+        </div>
+        <Section title={t("open.title")}>
+          {board.open.length > 0 ? (
+            <>
+              <p className="-mt-1 text-sm text-muted-foreground">
+                {t("open.lead")}
+              </p>
+              <JobGrid>
+                {board.open.map((job) => (
+                  <JobCard
+                    key={job.id}
+                    job={job}
+                    today={board.today}
+                    action={<TakeJobButton job={job} />}
+                  />
+                ))}
+              </JobGrid>
+            </>
+          ) : (
+            <EmptyState
+              icon={SearchIcon}
+              title={t("open.empty")}
+              body={t("open.emptyBody")}
+            />
+          )}
+        </Section>
+      </div>
       <WorkerHandovers />
       <DemoNote>{t("demoNote")}</DemoNote>
     </>

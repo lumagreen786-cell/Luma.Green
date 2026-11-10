@@ -18,9 +18,9 @@ export async function SiteFooter() {
     getTranslations(),
   ]);
   return (
-    <footer className="mt-auto bg-muted/40">
+    <footer className="mt-auto border-t border-border/60 bg-card">
       <Container>
-        <div className="flex flex-col items-start gap-6 py-10 sm:flex-row sm:items-center sm:justify-between lg:py-14">
+        <div className="flex flex-col items-start gap-6 border-b border-border/60 py-10 sm:flex-row sm:items-center sm:justify-between lg:py-14">
           <p className="max-w-2xl font-display text-3xl leading-tight font-semibold tracking-tight sm:text-4xl">
             {brand("tagline")}
           </p>

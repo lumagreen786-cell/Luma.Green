@@ -9,7 +9,7 @@ export function GuideSteps({ guide }: { guide: Guide }) {
   const format = useFormatter();
   const total = guide.steps.length;
   return (
-    <ol className="divide-y border-y">
+    <ol className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
       {guide.steps.map((step, index) => {
         const base = `guides.${guide.key}.steps.${step.key}`;
         return (

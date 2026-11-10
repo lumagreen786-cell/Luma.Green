@@ -11,7 +11,7 @@ import { DefinitionConsole } from "./definition-console";
 export function OperationsConsole() {
   return (
     <div className="space-y-6">
-      <div className="space-y-2 border-b pb-5">
+      <div className="space-y-2 pb-2">
         <h1 className="font-display text-2xl font-semibold">
           Material and facility review
         </h1>

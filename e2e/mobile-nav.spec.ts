@@ -80,7 +80,8 @@ for (const { locale, copy } of [
         exact: true,
       });
 
-      for (const control of [language, appearance, login, sell]) {
+      await expect(appearance).toHaveCount(0);
+      for (const control of [language, login, sell]) {
         await expect(control).toBeInViewport();
         expect(
           await control.evaluate(
@@ -88,7 +89,6 @@ for (const { locale, copy } of [
           ),
         ).toBeLessThanOrEqual(2);
       }
-      const appearanceBox = await bounds(appearance);
       const languageBox = await bounds(language);
       const loginBox = await bounds(login);
       const sellBox = await bounds(sell);
@@ -103,7 +103,6 @@ for (const { locale, copy } of [
         sellBox.y - loginBox.y - loginBox.height,
         firstLinkBox.y - sellBox.y - sellBox.height,
         languageBox.y - lastLinkBox.y - lastLinkBox.height,
-        appearanceBox.y - languageBox.y - languageBox.height,
       ]) {
         expect(gap).toBeGreaterThanOrEqual(0);
         expect(gap).toBeLessThanOrEqual(32);

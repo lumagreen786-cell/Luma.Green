@@ -157,7 +157,7 @@ function Upload({
     return <p role="status">{uploadErrors("uploadUnavailable")}</p>;
   return (
     <form
-      className="flex max-w-2xl flex-col gap-4 border-t pt-6"
+      className="flex max-w-2xl flex-col gap-4 rounded-xl border border-border/60 bg-card p-5"
       onSubmit={(e) => {
         e.preventDefault();
         void action.run(async () => {
@@ -256,7 +256,7 @@ function FileItem({
   const withdraw = useMutation(api.qualityFiles.withdraw);
   const action = useQualityAction();
   return (
-    <div className="flex flex-col justify-between gap-3 border-b pb-4 sm:flex-row">
+    <div className="flex flex-col justify-between gap-3 rounded-xl border border-border/60 bg-card p-4 sm:flex-row">
       <div className="min-w-0">
         <p className="font-medium break-words">{file.name}</p>
         <p className="text-sm text-muted-foreground">

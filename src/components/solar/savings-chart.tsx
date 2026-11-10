@@ -1,9 +1,10 @@
 "use client";
 
 import { useFormatter, useLocale, useTranslations } from "next-intl";
-import { useMemo } from "react";
+import { useId, useMemo } from "react";
 
 import { numberLocale, useFormat } from "@/components/app/format";
+import { areaPath, linePath } from "@/components/site/chart-kit";
 import { useChartCursor } from "@/components/site/use-chart-cursor";
 import { useElementWidth } from "@/components/site/use-element-width";
 import {
@@ -35,7 +36,7 @@ function LegendItem({ swatch, label }: { swatch: string; label: string }) {
 
 /**
  * Savings so far, year by year, against what the system costs after the
- * subsidy (a band, as the cost is a range). Columns turn deep green once
+ * subsidy (a band, as the cost is a range). Points turn deep green once
  * they clear the band. Hover, tap or use the arrow keys for each year.
  */
 export function SavingsChart({
@@ -45,6 +46,8 @@ export function SavingsChart({
   savingsByYear: readonly { year: number; saved: number }[];
   netCost: Range;
 }) {
+  const patternId = useId();
+  const titleId = useId();
   const t = useTranslations("solar.chart");
   const format = useFormat();
   const intl = useFormatter();
@@ -77,12 +80,9 @@ export function SavingsChart({
   const last = bars.at(-1);
 
   return (
-    <figure
-      aria-labelledby="solar-savings-title"
-      className="flex flex-col gap-4"
-    >
+    <figure aria-labelledby={titleId} className="flex flex-col gap-4">
       <figcaption className="flex flex-col gap-2">
-        <span id="solar-savings-title" className="font-semibold">
+        <span id={titleId} className="font-semibold">
           {t("title", { years: bars.length })}
         </span>
         <ul className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
@@ -118,6 +118,25 @@ export function SavingsChart({
             height={SAVINGS_CHART.height}
             className="block"
           >
+            <defs>
+              <pattern
+                id={patternId}
+                width="7"
+                height="7"
+                patternUnits="userSpaceOnUse"
+                patternTransform="rotate(35)"
+              >
+                <rect width="7" height="7" className="fill-primary/5" />
+                <line
+                  x1="0"
+                  y1="0"
+                  x2="0"
+                  y2="7"
+                  className="stroke-primary/25"
+                  strokeWidth="1"
+                />
+              </pattern>
+            </defs>
             {yTicks.map((tick) => (
               <g key={tick.value}>
                 <line
@@ -160,14 +179,31 @@ export function SavingsChart({
               />
             ))}
 
+            <path
+              d={areaPath(
+                bars.map((bar) => ({ x: bar.centre, y: bar.topY })),
+                plot.bottom,
+              )}
+              fill={`url(#${patternId})`}
+            />
+            <path
+              d={linePath(bars.map((bar) => ({ x: bar.centre, y: bar.topY })))}
+              fill="none"
+              strokeWidth={1.5}
+              strokeLinejoin="round"
+              strokeLinecap="round"
+              className="stroke-primary"
+            />
             {bars.map((bar, index) => (
-              <path
+              <circle
                 key={bar.year}
-                d={bar.path}
+                cx={bar.centre}
+                cy={bar.topY}
+                r={active === index ? 5 : 3}
+                strokeWidth={2}
                 className={cn(
-                  "motion-safe:transition-opacity",
+                  "stroke-primary",
                   bar.paidBack ? "fill-primary" : "fill-chart-3",
-                  active !== null && active !== index && "opacity-50",
                 )}
               />
             ))}

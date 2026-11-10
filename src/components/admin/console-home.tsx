@@ -37,7 +37,7 @@ export function ConsoleHome() {
 
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 lg:gap-8">
-      <div className="flex flex-wrap items-end justify-between gap-4 border-b pb-6">
+      <div className="flex flex-wrap items-end justify-between gap-4 pb-2">
         <div className="flex min-w-0 flex-col gap-2">
           <h1 className="font-display text-[1.75rem] leading-tight font-semibold tracking-tight sm:text-[2rem]">
             Work queue
@@ -51,7 +51,10 @@ export function ConsoleHome() {
       </div>
 
       <div className="grid min-w-0 gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(15rem,1fr)]">
-        <section aria-labelledby="next-reviews" className="min-w-0">
+        <section
+          aria-labelledby="next-reviews"
+          className="min-w-0 rounded-2xl bg-card p-5 sm:p-6"
+        >
           <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-4">
             <h2
               id="next-reviews"
@@ -113,7 +116,7 @@ export function ConsoleHome() {
         </section>
         <section
           aria-label="Other tasks"
-          className="flex min-w-0 flex-col border-t lg:border-s lg:border-t-0 lg:ps-8"
+          className="flex min-w-0 flex-col rounded-2xl bg-card p-5 sm:p-6"
         >
           <StatLink
             href="/admin/support"
@@ -141,7 +144,7 @@ export function ConsoleHome() {
         </section>
       </div>
 
-      <section className="flex min-w-0 flex-col gap-4 border-t border-border pt-6">
+      <section className="flex min-w-0 flex-col gap-4 rounded-2xl bg-card p-5 sm:p-6">
         <header className="flex flex-col gap-1.5">
           <h2 className="font-display text-lg font-semibold tracking-tight">
             Recent accounts

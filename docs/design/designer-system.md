@@ -83,6 +83,13 @@ labelled fixtures. The delivery handoff owns verification and release status.
 
 ## Current UI contract
 
+**11 November 2026 owner approval:** The current contract is now
+[Luma design system](luma-design-system/README.md). Its approved Ship X-inspired
+layouts, five-colour palette, light-only appearance, shadcn controls and resumed
+Expo iOS/Android UI work supersede the dated visual rules below. The following
+sections remain historical context, not permission to restore dark mode or the
+rejected visual direction. Authentication, privacy and exact-data rules remain.
+
 ### Astryx redesign — 16 October 2026
 
 The owner rejected the previous pass and authorized a substantial remake of all

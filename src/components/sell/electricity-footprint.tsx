@@ -19,7 +19,7 @@ export function ElectricityFootprint() {
   const [estimate, setEstimate] = useState<number | null>();
   return (
     <form
-      className="flex flex-col gap-5"
+      className="flex flex-col gap-5 rounded-xl border border-border/60 bg-card p-5"
       onSubmit={(event) => {
         event.preventDefault();
         setEstimate(gridElectricityFootprint(reading, locale));
@@ -55,7 +55,7 @@ export function ElectricityFootprint() {
         className={
           estimate === undefined || estimate === null
             ? "sr-only"
-            : "border-y border-border py-4 text-lg font-medium"
+            : "rounded-xl bg-muted/50 p-4 text-lg font-medium"
         }
       >
         {estimate === undefined || estimate === null

@@ -60,7 +60,7 @@ function RateCardBody() {
         <section
           key={family}
           aria-labelledby={`family-${family}`}
-          className="flex flex-col gap-3"
+          className="flex flex-col gap-3 rounded-xl border border-border/60 bg-card p-4 sm:p-5"
         >
           <h2
             id={`family-${family}`}

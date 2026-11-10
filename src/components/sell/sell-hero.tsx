@@ -14,7 +14,7 @@ export async function SellHero() {
       <Image
         src={recycleIllustration}
         alt=""
-        className="w-24 rounded-lg sm:w-32"
+        className="w-24 rounded-xl sm:w-32"
         sizes="128px"
       />
     </header>

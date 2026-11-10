@@ -47,7 +47,7 @@ export function ReceiptView({
   return (
     <section
       aria-labelledby="receipt-title"
-      className="flex flex-col gap-5 border-y border-border py-6"
+      className="flex flex-col gap-5 rounded-xl bg-card p-5 sm:p-6"
     >
       <div className="flex flex-col items-center gap-2 text-center">
         <span className="flex size-12 items-center justify-center text-primary">

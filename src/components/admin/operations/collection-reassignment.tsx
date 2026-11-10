@@ -41,7 +41,7 @@ export function CollectionReassignment() {
     choices.shops.length === 0;
   return (
     <form
-      className="flex max-w-2xl flex-col gap-4 border-t py-6"
+      className="flex max-w-2xl flex-col gap-4 rounded-xl bg-card p-5 sm:p-6"
       onSubmit={(event) => {
         event.preventDefault();
         if (

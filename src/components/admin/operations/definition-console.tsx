@@ -109,7 +109,7 @@ export function DefinitionConsole() {
     },
   });
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 rounded-xl bg-card p-5 sm:p-6">
       <p className="text-sm text-muted-foreground">
         Review source evidence before activation. An active definition does not
         approve hazard handling, quality, emissions or regulatory scope.

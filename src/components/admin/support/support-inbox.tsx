@@ -99,7 +99,7 @@ function RequestList({
     );
   }
   return (
-    <ul className="flex flex-col divide-y border-b">
+    <ul className="flex flex-col divide-y rounded-xl bg-card px-5 sm:px-6">
       {requests.map((request) => (
         <li key={request.id}>
           <RequestRow request={request} />

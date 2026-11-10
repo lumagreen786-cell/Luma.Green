@@ -10,14 +10,14 @@ const css = readFileSync(
 
 // The interactive theme behavior is tested beside ThemeProvider. These checks
 // guard the CSS contract that JavaScript alone cannot exercise in jsdom.
-describe("shared light and dark theme", () => {
+describe("approved light-only theme", () => {
   it("keeps component dark styles under the chosen root class", () => {
     expect(css).toContain("@custom-variant dark (&:is(.dark *));");
   });
 
-  it("supplies the semantic surfaces and readable text for both modes", () => {
+  it("supplies semantic surfaces without a dark override", () => {
     const light = /:root\s*\{([^}]+)\}/.exec(css)?.[1] ?? "";
-    const dark = /\.dark\s*\{([^}]+)\}/.exec(css)?.[1] ?? "";
+    expect(css).not.toMatch(/\.dark\s*\{/);
     for (const token of [
       "background",
       "foreground",
@@ -36,7 +36,6 @@ describe("shared light and dark theme", () => {
       "sidebar-foreground",
     ]) {
       expect(light, `Light theme is missing ${token}`).toContain(`--${token}:`);
-      expect(dark, `Dark theme is missing ${token}`).toContain(`--${token}:`);
     }
   });
 });

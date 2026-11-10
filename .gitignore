@@ -96,3 +96,8 @@ Thumbs.db
 # Local guide tooling
 /.venv-guide/
 __pycache__/
+
+# Generated Ship X review images/PDF; manifests and capture scripts are retained.
+/docs/delivery/evidence/ship-x-2026-11-11/*.png
+/docs/delivery/evidence/ship-x-public-2026-11-11/*.png
+/output/pdf/Luma-Green-Ship-X-UI-Review.pdf

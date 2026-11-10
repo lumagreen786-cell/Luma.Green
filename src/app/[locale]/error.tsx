@@ -10,7 +10,7 @@ import { reloadCurrentPage } from "@/lib/reload-current-page";
 export default function LocaleError() {
   const t = useTranslations("common");
   return (
-    <main className="mx-auto flex w-full max-w-xl flex-1 flex-col items-start justify-center gap-6 px-4 py-16 sm:px-8">
+    <main className="mx-auto my-6 flex w-[calc(100%-2rem)] max-w-xl flex-1 flex-col items-start justify-center gap-6 rounded-xl border border-border/60 bg-card px-5 py-10 sm:px-8">
       <h1 className="font-display text-2xl leading-tight font-semibold tracking-tight sm:text-3xl">
         {t("error")}
       </h1>

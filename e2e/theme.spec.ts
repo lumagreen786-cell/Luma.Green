@@ -3,49 +3,50 @@ import { expect, test } from "@playwright/test";
 import arabic from "../messages/ar.json";
 
 // Full document navigation to admin exercises the second root layout.
-test("theme choice survives reload and the admin boundary", async ({
+test("light appearance replaces a stored dark preference across reload and admin", async ({
   page,
 }) => {
-  await page.goto("/");
-  await page.getByRole("button", { name: "Appearance", exact: true }).click();
-  await page.getByRole("menuitemradio", { name: "Dark", exact: true }).click();
-  await expect(page.locator("html")).toHaveClass(/dark/);
-  await page.reload();
-  await expect(page.locator("html")).toHaveClass(/dark/);
-  await page.goto("/admin/login");
-  await expect(page.locator("html")).toHaveClass(/dark/);
+  await page.addInitScript(() => {
+    localStorage.setItem("luma-theme", "dark");
+  });
+  await page.emulateMedia({ colorScheme: "dark" });
+  for (const route of ["/", "/admin/login"]) {
+    await page.goto(route);
+    await expect(page.locator("html")).not.toHaveClass(/dark/);
+    await expect(page.locator("html")).toHaveCSS("color-scheme", "light");
+    await expect(
+      page.getByRole("button", { name: "Appearance", exact: true }),
+    ).toHaveCount(0);
+    await page.reload();
+    await expect(page.locator("html")).not.toHaveClass(/dark/);
+  }
 });
 
-test("system mode responds to the device and a fixed choice overrides it", async ({
+test("light appearance stays fixed when device appearance changes", async ({
   page,
 }) => {
-  await page.emulateMedia({ colorScheme: "dark" });
   await page.goto("/");
-  await expect(page.locator("html")).toHaveClass(/dark/);
-  await page.emulateMedia({ colorScheme: "light" });
-  await expect(page.locator("html")).not.toHaveClass(/dark/);
-  await page.getByRole("button", { name: "Appearance", exact: true }).click();
-  await page.getByRole("menuitemradio", { name: "Light", exact: true }).click();
-  await page.emulateMedia({ colorScheme: "dark" });
-  await expect(page.locator("html")).not.toHaveClass(/dark/);
+  for (const colorScheme of ["dark", "light", "dark"] as const) {
+    await page.emulateMedia({ colorScheme });
+    await expect(page.locator("html")).not.toHaveClass(/dark/);
+    await expect(page.locator("html")).toHaveCSS("color-scheme", "light");
+  }
 });
 
 test("Arabic mobile controls fit and the menu reaches sign-in", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 360, height: 800 });
+  await page.emulateMedia({ colorScheme: "dark" });
   await page.goto("/ar");
   await page
     .getByRole("button", { name: arabic.nav.openMenu, exact: true })
     .click();
   const menu = page.getByRole("dialog");
-  await menu
-    .getByRole("button", { name: arabic.theme.label, exact: true })
-    .click();
-  await page
-    .getByRole("menuitemradio", { name: arabic.theme.dark, exact: true })
-    .click();
-  await expect(page.locator("html")).toHaveClass(/dark/);
+  await expect(
+    menu.getByRole("button", { name: arabic.theme.label, exact: true }),
+  ).toHaveCount(0);
+  await expect(page.locator("html")).not.toHaveClass(/dark/);
   await expect(
     menu.getByRole("link", { name: arabic.auth.metaTitle, exact: true }),
   ).toHaveAttribute("href", "/ar/login");
@@ -59,7 +60,7 @@ test("Arabic mobile controls fit and the menu reaches sign-in", async ({
   ).toBe(true);
 });
 
-test("blocked browser storage does not prevent a theme change", async ({
+test("blocked browser storage does not prevent light appearance or sign-in access", async ({
   page,
 }) => {
   await page.addInitScript(() => {
@@ -67,10 +68,14 @@ test("blocked browser storage does not prevent a theme change", async ({
       throw new DOMException("Blocked", "SecurityError");
     };
   });
-  await page.goto("/");
-  await page.getByRole("button", { name: "Appearance", exact: true }).click();
-  await page.getByRole("menuitemradio", { name: "Dark", exact: true }).click();
-  await expect(page.locator("html")).toHaveClass(/dark/);
+  await page.emulateMedia({ colorScheme: "dark" });
+  await page.goto("/en/login");
+  await expect(page.locator("html")).not.toHaveClass(/dark/);
+  await expect(page.locator("html")).toHaveCSS("color-scheme", "light");
+  await expect(
+    page.getByRole("button", { name: "Appearance", exact: true }),
+  ).toHaveCount(0);
+  await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
 });
 
 test("long translated navigation stays separate from header controls", async ({

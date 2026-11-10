@@ -28,7 +28,7 @@ export function HouseholdFamily() {
   return (
     <section
       aria-labelledby="household-family"
-      className="space-y-4 border-y py-5"
+      className="space-y-4 rounded-xl border border-border/60 bg-card p-5"
     >
       <h2 id="household-family" className="text-lg font-semibold">
         {t("title")}
@@ -287,7 +287,7 @@ function LiveSharedFamilyCollections() {
   if (!rows?.length) return null;
   return (
     <section
-      className="space-y-2 border-t py-4"
+      className="space-y-2 rounded-xl border border-border/60 bg-card p-5"
       aria-labelledby="family-collections"
     >
       <h2 id="family-collections" className="text-lg font-semibold">

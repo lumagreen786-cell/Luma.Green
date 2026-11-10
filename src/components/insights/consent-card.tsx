@@ -20,13 +20,13 @@ type Tone = "good" | "warn" | "bad";
 
 const LOOK: Record<Tone, { card: string; badge: string; icon: LucideIcon }> = {
   good: {
-    card: "border-primary bg-transparent",
+    card: "border-primary bg-card",
     badge: "bg-primary/10 text-primary",
     icon: ShieldCheckIcon,
   },
   warn: {
-    card: "border-amber-500/30 bg-amber-500/10",
-    badge: "bg-background text-amber-800 dark:text-amber-300",
+    card: "border-accent bg-card",
+    badge: "bg-accent text-accent-foreground",
     icon: ShieldAlertIcon,
   },
   bad: {
@@ -53,7 +53,10 @@ function Frame({
     <section
       aria-labelledby={headingId}
       role={tone === "good" ? undefined : "alert"}
-      className={cn("flex flex-col gap-3 border-s-2 p-4", card)}
+      className={cn(
+        "flex flex-col gap-3 rounded-2xl border-s-2 p-5 sm:p-6",
+        card,
+      )}
     >
       <div className="flex items-start gap-3">
         <span

@@ -1,79 +1,32 @@
-## Overhaul recovery integration — 10 November 2026
+## Approved Ship X design rollout — 11 November 2026
 
-The recovered release branch starts from main `66c0c7f`. Read the
-[overhaul delivery record](platform-overhaul-2026-11-09.md#recovery-integration--10-november-2026)
-for preserved work, release scope, tests and remaining acceptance. The original
-source worktree and recovery snapshot remain intact. The unfinished stock-backed
-PET slice is excluded from this release. The PR owns hosted checks and the final
-backend-before-frontend Production receipt.
+The owner approved the five light-only Ship X-inspired samples and requested
+all web and Expo surfaces, then authorized a checked release to Vercel Production.
+The canonical rules are [the Luma design system](../design/luma-design-system/README.md).
+This resumes mobile UI work and supersedes older dark-mode/Astryx/no-panel rules.
+It does not publish a native binary or OTA update.
 
-## Luma.Green overhaul — 9 November 2026
+Work is on `feat/ship-x-design-system`. The redesign was first prepared against
+local `c25d59e`, then current main `71baa08` was integrated before release. Preserve
+its security/privacy, private storage, carbon, household and reminder changes.
+All 79 page entries are inventoried in [route coverage](ship-x-route-coverage.md).
+Source coverage is not proof of every role/state/device combination.
 
-See [the overhaul delivery record](platform-overhaul-2026-11-09.md) for
-source coverage, implementation, and release gates. The current overhaul
-changes are in an isolated checkout. This entry does not establish a
-production release or native device acceptance.
+Local release checks passed: lint (zero errors), web/backend types, 3,251 unit
+tests, 28 security tests and mobile/desktop compatibility checks. Security's
+loopback test required execution outside the restricted process environment.
+The final build generated 3,582 localized pages. The public browser run passed
+114 checks; the final tab change passed 26 relevant tests and 267 fixture
+captures. Both Expo JavaScript exports passed after main integration.
 
-## Carbon evidence preparation workspace - 8 November 2026
+The route evidence records source/CSS hashes and review limits. The requested
+PDF is generated from labelled sample records and disconnected public views;
+no Production database seed, provider execution or native publication occurred.
+Physical iOS/Android and hidden state acceptance remain separate. The guide/Word
+source was not rebuilt; the owner requested this screenshot PDF only.
 
-Lot transformation history can open and download an internal JSON draft.
-The existing Convex query checks the current workspace and transformation
-ownership. The draft preserves measured grams and incomplete legacy input
-history. Operator-entered material and state labels are excluded. The file
-does not grant verifier access or establish eligibility, issuance or a trade.
-Do not use demonstration batches in an external evidence pack.
-
-The shop request detail can link an accepted receipt line to a lot. The
-Compliance workspace now has a Carbon projects page with a facility, candidate
-method, measured batch links and document references. Workspace managers can
-mark the current references internally reviewed. A reference or internal review
-does not authorize a claim. See the [preparation API](../api/carbon-project-preparation.md)
-and the [implementation plan](../plans/2026-11-08-carbon-evidence-and-trading.md).
-
-A manager's internal review now freezes the references and linked batches at
-that revision. Workspace readers can download the current review. Corrections
-leave old snapshots available by revision and require a new review. The
-[carbon pilot intake](../operations/carbon-pilot-intake.md) lists facility
-documents, account access and two offline checks for monitoring and trade
-reconciliation. Both checks use supplied records and do not contact providers.
-
-Still required for official carbon trading: actual pilot facility records and
-signed claim rights, method-specific monitoring and claim allocation, secure
-verifier exchange and independent reports, official registry reconciliation
-and an authorized trading channel. Refresh the investor walkthrough after
-the complete feature is merged and its tested screenshots can be labelled
-accurately.
-
-## Recycled PET procurement workspace - 8 November 2026
-
-The market and trade history have a linked PET scope for recycled flakes and
-pellets. They reuse the existing approved offer window, trade history, purchase
-request and Cashfree lifecycle. Raw PET and other resins stay in the general
-views. The feature does not create a second payment record. The current
-scope filters the existing bounded market and history results.
-
-The local lifecycle test uses seeded offers and simulated provider evidence.
-It covers purchase request, seller acceptance, authorization, dispatch,
-receipt, and payment reconciliation. Live Cashfree settlement, device-only
-Expo and Electron acceptance, and production activation remain separate.
-The maintained guide should include the new scope when the screenshot guide
-is refreshed.
-
-## DPDP readiness — 9 November 2026
-
-The owner confirmed that public account signup and household bookings are for
-adults and approved `support@luma.green` for privacy contact. The readiness
-change adds collection notices, adult declarations, a signed-in privacy case
-form, an admin queue and direct analytics withdrawal from the privacy page.
-The [data protection runbook](../operations/data-protection.md) records the
-operating checks and legal decisions still needed. The new case table starts
-empty. Existing records require no conversion. Deploy Convex before the web
-release. Reload older open signup or booking screens before retrying.
-
-The hosted pages are shared by the native shells. The change uses their
-existing navigation and permissions. Guide updates are deferred. A future
-guide refresh covers sign-in, household details, the privacy page, account
-privacy requests and the admin support queue.
+Push, checked PR merge and Vercel Production confirmation are the remaining
+release steps at this checkpoint. Update the release receipt when observed.
 
 ## Agreed web completion - 29 October 2026
 

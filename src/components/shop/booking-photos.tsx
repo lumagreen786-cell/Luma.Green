@@ -44,7 +44,7 @@ function PhotoList({ bookingId }: { bookingId: Id<"bookings"> }) {
   return (
     <section
       aria-label={t("attachedPhotos")}
-      className="space-y-4 border-t pt-6"
+      className="space-y-4 rounded-2xl bg-card p-5 sm:p-6"
     >
       <h2 className="text-lg font-semibold">{t("attachedPhotos")}</h2>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

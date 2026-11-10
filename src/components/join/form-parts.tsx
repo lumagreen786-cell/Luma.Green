@@ -76,7 +76,7 @@ export function SubmitBar({
     generic: "errors.generic",
   } as const;
   return (
-    <div className="flex flex-col gap-4 border-t border-border bg-background pt-6">
+    <div className="flex flex-col gap-4 border-t border-border bg-card pt-6">
       {failure ? (
         <p role="alert" className="text-sm text-destructive">
           {t(failureKeys[failure])}

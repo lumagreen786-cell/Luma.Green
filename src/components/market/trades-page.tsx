@@ -227,7 +227,7 @@ function TradeList({
       <h2 id={headingId} className="sr-only">
         {t(tab)}
       </h2>
-      <ul className="flex flex-col">
+      <ul className="flex flex-col gap-3">
         {trades.toSorted(byUrgency).map((trade) => (
           <li key={trade.id}>
             <TradeCard

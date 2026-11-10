@@ -126,7 +126,7 @@ function PaperBoard({ orgId }: { orgId: Id<"orgs"> }) {
         <p role="status">{t("unavailable")}</p>
       ) : null}
       {available?.canOperate ? (
-        <section className="flex flex-col gap-3 border-t pt-6">
+        <section className="flex flex-col gap-3 rounded-xl border border-border/60 bg-card p-5">
           <label htmlFor={`${id}-upload`}>{t("upload")}</label>
           <Input
             id={`${id}-upload`}
@@ -416,7 +416,10 @@ export function PaperEditor({
     }
   }
   return (
-    <section className="space-y-6 border-t pt-6" aria-label={paper.name}>
+    <section
+      className="space-y-6 rounded-xl border border-border/60 bg-card p-5"
+      aria-label={paper.name}
+    >
       <h2 className="text-lg font-semibold break-words">{paper.name}</h2>
       <section className="grid min-w-0 gap-6 lg:grid-cols-2">
         <PrivatePaper draftId={paper.id} />

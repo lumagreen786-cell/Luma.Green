@@ -31,12 +31,12 @@ export function WorkflowTabs({
       }}
       dir={isLocale(locale) ? localeDirection(locale) : "ltr"}
     >
-      <TabsList className="h-auto w-full flex-wrap justify-start gap-x-5 gap-y-1 rounded-none border-b bg-transparent p-0 pb-2">
+      <TabsList className="h-auto w-full flex-wrap justify-start gap-2 rounded-2xl bg-card p-2">
         {items.map((item) => (
           <TabsTrigger
             key={item.value}
             value={item.value}
-            className="min-h-11 flex-none rounded-none px-0 shadow-none data-[state=active]:bg-transparent data-[state=active]:text-primary data-[state=active]:shadow-none"
+            className="min-h-11 flex-none rounded-full px-4 shadow-none data-[state=active]:bg-accent data-[state=active]:text-accent-foreground data-[state=active]:shadow-none"
           >
             {item.label}
           </TabsTrigger>

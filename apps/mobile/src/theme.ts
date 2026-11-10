@@ -1,35 +1,23 @@
-import type { ColorSchemeName } from "react-native";
-
-/** sRGB equivalents of the semantic tokens in src/app/globals.css.
- * The drift test checks conversion from the owning web tokens.
- */
+/** Native equivalents of the approved light-only Luma palette. */
 export const themes = {
   light: {
-    background: "#f9fafb",
-    foreground: "#181b1e",
-    primary: "#125139",
-    primaryForeground: "#fcfcfc",
-    muted: "#eef0f3",
-    border: "#dcdfe2",
-  },
-  dark: {
-    background: "#0d0e10",
-    foreground: "#eff1f2",
-    primary: "#74c8a2",
-    primaryForeground: "#0a140f",
-    muted: "#1f2224",
-    border: "#303336",
+    background: "#FFFFFF",
+    foreground: "#144419",
+    primary: "#317F38",
+    primaryForeground: "#FFFFFF",
+    muted: "rgba(20, 68, 25, 0.07)",
+    border: "rgba(20, 68, 25, 0.13)",
+    indicator: "#317F38",
   },
 };
 
 export type NativeTheme = typeof themes.light;
 
-/** Native chrome follows the OS; a manual web theme stays inside the WebView. */
-export function shellAppearance(scheme: ColorSchemeName | null | undefined) {
-  const appearance: keyof typeof themes = scheme === "dark" ? "dark" : "light";
+/** Keep shell chrome light, including when the device uses dark appearance. */
+export function shellAppearance() {
   return {
-    colors: themes[appearance],
-    statusBar: appearance === "dark" ? ("light" as const) : ("dark" as const),
-    appearance,
+    colors: themes.light,
+    statusBar: "dark" as const,
+    appearance: "light" as const,
   };
 }

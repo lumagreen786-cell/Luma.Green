@@ -12,7 +12,6 @@ import {
   Pressable,
   StyleSheet,
   Text,
-  useColorScheme,
   View,
 } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
@@ -50,12 +49,14 @@ function NativeButton({
   label,
   onPress,
   disabled = false,
+  secondary = false,
 }: {
   label: string;
   onPress: () => void;
   disabled?: boolean;
+  secondary?: boolean;
 }) {
-  const { appearance } = shellAppearance(useColorScheme());
+  const { appearance } = shellAppearance();
   const styles = themedStyles[appearance];
   return (
     <Pressable
@@ -66,11 +67,16 @@ function NativeButton({
       onPress={onPress}
       style={({ pressed }) => [
         styles.button,
+        secondary && styles.secondaryButton,
         pressed && styles.pressed,
         disabled && styles.disabled,
       ]}
     >
-      <Text style={styles.buttonText}>{label}</Text>
+      <Text
+        style={[styles.buttonText, secondary && styles.secondaryButtonText]}
+      >
+        {label}
+      </Text>
     </Pressable>
   );
 }
@@ -93,11 +99,7 @@ function Shell({
   locale: ReturnType<typeof localeFromLanguage>;
   onLocale: (locale: ReturnType<typeof localeFromLanguage>) => void;
 }) {
-  const {
-    colors: theme,
-    statusBar,
-    appearance,
-  } = shellAppearance(useColorScheme());
+  const { colors: theme, statusBar, appearance } = shellAppearance();
   const styles = themedStyles[appearance];
   const t = useTranslations("native");
   const common = useTranslations("common");
@@ -323,6 +325,7 @@ function Shell({
           ref={webView}
           source={{ uri: sourceUrl }}
           style={styles.webView}
+          forceDarkOn={false}
           // All requests reach our handler; the library must not auto-open unknown schemes.
           originWhitelist={["*"]}
           onShouldStartLoadWithRequest={(request) =>
@@ -423,7 +426,7 @@ function Shell({
             accessibilityLiveRegion="polite"
           >
             <ActivityIndicator
-              color={theme.primary}
+              color={theme.indicator}
               accessibilityLabel={common("loading")}
             />
           </View>
@@ -437,6 +440,7 @@ function Shell({
             <NativeButton label={common("retry")} onPress={reload} />
             <NativeButton
               label={t("openBrowser")}
+              secondary
               onPress={() => {
                 openExternal(currentUrl.current);
               }}
@@ -459,19 +463,29 @@ const createStyles = (theme: NativeTheme) =>
   StyleSheet.create({
     screen: { flex: 1, backgroundColor: theme.background },
     button: {
-      minHeight: 44,
+      minHeight: 48,
+      width: "100%",
+      maxWidth: 360,
+      backgroundColor: theme.primary,
+      borderWidth: 1,
+      borderColor: theme.primary,
       justifyContent: "center",
-      paddingHorizontal: 12,
-      paddingVertical: 8,
-      borderRadius: 8,
+      paddingHorizontal: 20,
+      paddingVertical: 12,
+      borderRadius: 999,
+    },
+    secondaryButton: {
+      backgroundColor: theme.background,
+      borderColor: theme.border,
     },
     buttonText: {
-      color: theme.primary,
-      fontSize: 14,
+      color: theme.primaryForeground,
+      fontSize: 16,
       fontWeight: "600",
       textAlign: "center",
     },
-    pressed: { backgroundColor: theme.muted },
+    secondaryButtonText: { color: theme.foreground },
+    pressed: { opacity: 0.76 },
     disabled: { opacity: 0.45 },
     content: { flex: 1 },
     webView: { flex: 1, backgroundColor: theme.background },
@@ -480,7 +494,9 @@ const createStyles = (theme: NativeTheme) =>
       top: 8,
       end: 12,
       padding: 8,
-      borderRadius: 20,
+      borderRadius: 999,
+      borderWidth: 1,
+      borderColor: theme.border,
       backgroundColor: theme.background,
     },
     error: {
@@ -493,13 +509,15 @@ const createStyles = (theme: NativeTheme) =>
     },
     errorTitle: {
       color: theme.foreground,
-      fontSize: 22,
+      fontSize: 26,
       fontWeight: "700",
       textAlign: "center",
     },
     errorText: {
       color: theme.foreground,
       fontSize: 16,
+      lineHeight: 25,
+      marginBottom: 12,
       textAlign: "center",
       maxWidth: 420,
     },
@@ -507,5 +525,4 @@ const createStyles = (theme: NativeTheme) =>
 
 const themedStyles = {
   light: createStyles(themes.light),
-  dark: createStyles(themes.dark),
 };

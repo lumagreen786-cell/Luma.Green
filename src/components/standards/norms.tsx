@@ -160,7 +160,7 @@ export async function EscrowSteps() {
     { key: "released", icon: BadgeCheckIcon },
   ] as const;
   return (
-    <ol className="divide-y border-y">
+    <ol className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
       {steps.map(({ key, icon: Icon }, index) => (
         <li key={key} className="flex items-start gap-4 py-4">
           <span className="flex items-center gap-2">

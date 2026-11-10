@@ -99,7 +99,7 @@ function IncomingLots() {
           {incoming.rows.length === 0 ? (
             <p className="text-muted-foreground">{t("empty")}</p>
           ) : (
-            <ul className="divide-y border-y">
+            <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
               {incoming.rows.map((lot) => (
                 <li
                   key={lot.id}
@@ -143,7 +143,7 @@ function HeldLots() {
           {held.rows.length === 0 ? (
             <p className="text-muted-foreground">{t("empty")}</p>
           ) : (
-            <ul className="divide-y border-y">
+            <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
               {held.rows.map((lot) => (
                 <li
                   key={lot.id}
@@ -197,7 +197,7 @@ function SentLots() {
           {sent.rows.length === 0 ? (
             <p className="text-muted-foreground">{t("empty")}</p>
           ) : (
-            <ul className="divide-y border-y">
+            <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
               {sent.rows.map((event) => (
                 <li key={event.id} className="flex flex-col gap-2 py-4">
                   <div className="flex flex-wrap justify-between gap-3">

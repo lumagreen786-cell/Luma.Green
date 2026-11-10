@@ -21,7 +21,7 @@ export default async function ActivityPage({
   await requireSession(locale, "/sell/activity");
   const t = await getTranslations("householdTools");
   return (
-    <Container className="max-w-xl py-8">
+    <Container className="max-w-2xl py-8">
       <h1 className="font-display text-2xl font-semibold">{t("activity")}</h1>
       <MyBookings showEmpty />
       <SharedFamilyCollections />

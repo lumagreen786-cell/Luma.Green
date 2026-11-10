@@ -27,7 +27,7 @@ export default async function HouseholdLayout({
   return (
     <div className="flex min-h-dvh flex-col bg-background">
       <SkipLink />
-      <header className="flex min-h-16 items-center justify-between gap-2 border-b border-border bg-background px-4 py-2">
+      <header className="flex min-h-16 items-center justify-between gap-2 border-b border-border/60 bg-card px-4 py-2">
         <Link
           href="/"
           aria-label={t("home")}
@@ -40,7 +40,7 @@ export default async function HouseholdLayout({
       <main
         id="main"
         tabIndex={-1}
-        className="mx-auto flex w-full max-w-3xl flex-1 flex-col px-5 py-6 sm:px-10 sm:py-10"
+        className="mx-auto my-6 flex w-[calc(100%-2rem)] max-w-3xl flex-1 flex-col rounded-xl border border-border/60 bg-card px-5 py-6 sm:my-8 sm:px-8 sm:py-8"
       >
         {children}
       </main>

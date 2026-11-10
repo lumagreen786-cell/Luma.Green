@@ -392,3 +392,26 @@ not evidence that every menu entry fits a normal phone screen without scrolling.
 The sign-out failure examples also use a tall 1800px documentation viewport. This keeps the long navigation, retry control, provenance label and error toast visible together. It is not a claim that the whole menu fits a normal phone viewport.
 
 API access tablet screenshots use a 1600px tall documentation viewport. This keeps fixed navigation below the complete form; it is not evidence that the form fits a normal tablet screen without scrolling. Phone captures retain 844px height and include separate lower-control and dialog views.
+
+## Light-only design coverage — 11 November 2026
+
+The existing isolated entry now also maps `/en/app/billing`, `/en/app/evidence`
+and `/en/app/facility` (replace `en` with a built locale). Use `?role=kabadiwala`
+for a synthetic business workspace. Billing uses the current source plan
+definitions but has no subscription, entitlement or payment. Evidence starts
+empty. The facility is explicitly synthetic, has no process capabilities or
+registrations, and its industry-reference result is an empty fixture. All
+mutations and actions still reject. These routes are visual fixtures, not proof
+of live access, provider approval or legal eligibility.
+
+Run `node scripts/guide-preview/ship-x-acceptance.mjs` after the final local build
+and start the isolated Vite preview on `http://127.0.0.1:3231`. The script derives
+all explicitly mapped routes, adds role homes and individual request/track/auth
+examples, and checks desktop (1280), tablet (768), and phone (390) widths. Selected
+shop and Saathi routes also cover Arabic, Urdu and Kannada. It uses dark OS
+preference to check that the app stays light, rejects external requests and
+non-read HTTP methods, and records fonts, page errors and horizontal overflow.
+PNG captures and their source/build hashes go to
+`docs/delivery/evidence/ship-x-2026-11-11/layout-manifest.json`. Review the actual
+PNGs before claiming visual acceptance. Unmapped routes now throw instead of
+rendering the home screen.

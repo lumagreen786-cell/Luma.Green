@@ -90,11 +90,15 @@ function RequestTabs({ city, scope }: { city: string; scope: string }) {
       dir={localeDirection(isLocale(locale) ? locale : defaultLocale)}
       value={tab}
       onValueChange={showTab}
-      className="gap-4"
+      className="gap-5 rounded-2xl bg-card p-4 sm:p-6"
     >
-      <TabsList variant="line" className="w-full">
+      <TabsList className="h-auto w-full flex-wrap justify-start gap-2 bg-transparent p-0">
         {TABS.map((value) => (
-          <TabsTrigger key={value} value={value} className="gap-2">
+          <TabsTrigger
+            key={value}
+            value={value}
+            className="min-h-11 flex-none gap-2 rounded-full border border-border px-4 data-[state=active]:bg-accent data-[state=active]:text-accent-foreground"
+          >
             {t(`tabs.${value}`)}
             <TabCount count={countFor(requests, value)} />
           </TabsTrigger>
@@ -175,7 +179,7 @@ function CardList({
 }) {
   if (bookings.length === 0) return <>{empty}</>;
   return (
-    <ul className="flex flex-col">
+    <ul className="flex flex-col divide-y divide-border">
       {bookings.map((booking) => (
         <li key={booking.id}>{card(booking)}</li>
       ))}

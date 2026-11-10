@@ -1,3 +1,7 @@
+"use client";
+
+import { useId } from "react";
+
 import { areaPath, linearScale, linePath } from "@/components/site/chart-kit";
 import { cn } from "@/lib/utils";
 
@@ -20,6 +24,7 @@ export function Sparkline({
   height?: number;
   className?: string;
 }) {
+  const patternId = useId();
   const range = seriesRange(series);
   const first = series.at(0);
   const last = series.at(-1);
@@ -52,11 +57,30 @@ export function Sparkline({
       viewBox={`0 0 ${String(width)} ${String(height)}`}
       className={cn("block shrink-0 overflow-visible", className)}
     >
-      <path d={areaPath(points, height - PAD)} className="fill-primary/10" />
+      <defs>
+        <pattern
+          id={patternId}
+          width="7"
+          height="7"
+          patternUnits="userSpaceOnUse"
+          patternTransform="rotate(35)"
+        >
+          <rect width="7" height="7" className="fill-primary/5" />
+          <line
+            x1="0"
+            y1="0"
+            x2="0"
+            y2="7"
+            className="stroke-primary/25"
+            strokeWidth="1"
+          />
+        </pattern>
+      </defs>
+      <path d={areaPath(points, height - PAD)} fill={`url(#${patternId})`} />
       <path
         d={linePath(points)}
         fill="none"
-        strokeWidth={2}
+        strokeWidth={1.5}
         strokeLinejoin="round"
         strokeLinecap="round"
         className="stroke-primary"

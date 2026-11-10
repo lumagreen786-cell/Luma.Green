@@ -118,7 +118,7 @@ export function RecyclingPhotos({
       <Button
         type="button"
         variant="outline"
-        className="min-h-14 w-full justify-center"
+        className="min-h-24 w-full justify-center rounded-xl border-dashed bg-muted/30"
         onClick={() => {
           input.current?.click();
         }}

@@ -59,9 +59,9 @@ export function AccountLinks({
       onClick={onNavigate}
       aria-current={pathname === href ? "page" : undefined}
       className={cn(
-        "flex min-h-12 items-center gap-3 py-3 text-sm outline-none focus-visible:ring-3 focus-visible:ring-ring/50",
-        pathname === href && "font-semibold text-primary",
+        "flex min-h-12 items-center gap-3 rounded-full px-4 py-3 text-sm outline-none focus-visible:ring-3 focus-visible:ring-ring/50",
         className,
+        pathname === href && "bg-accent font-semibold text-accent-foreground",
       )}
     >
       <Icon aria-hidden className="size-5 shrink-0" />

@@ -20,7 +20,7 @@ export function PrivacyRequests() {
   const common = useTranslations("common");
   const { isReady, isPending, userId } = useVerifiedSession();
   return (
-    <section className="mx-auto w-full max-w-2xl space-y-6">
+    <section className="mx-auto w-full max-w-2xl space-y-6 rounded-xl border border-border/60 bg-card p-5 sm:p-6">
       <header className="space-y-2">
         <h1 className="font-display text-2xl font-semibold">{t("title")}</h1>
         <p className="text-muted-foreground">{t("lead")}</p>
@@ -88,7 +88,7 @@ function RequestForm() {
               <Label
                 key={option}
                 htmlFor={`request-${option}`}
-                className="min-h-11 cursor-pointer gap-4 px-3 font-normal"
+                className="min-h-12 min-w-0 cursor-pointer gap-4 rounded-xl px-3 py-3 leading-relaxed font-normal has-[[aria-checked=true]]:bg-accent/40"
               >
                 <RadioGroupItem id={`request-${option}`} value={option} />
                 {t(option)}

@@ -54,7 +54,7 @@ export function IndustryExplorer({
   return (
     <section
       aria-labelledby={`${id}-title`}
-      className="flex min-w-0 flex-col gap-4 border-t pt-6"
+      className="flex min-w-0 flex-col gap-4 rounded-xl border border-border/60 bg-card p-5"
     >
       <div className="space-y-2">
         <h2 id={`${id}-title`} className="text-lg font-semibold">
@@ -100,7 +100,7 @@ export function IndustryExplorer({
           {result.items.length === 0 ? (
             <p>{t("empty")}</p>
           ) : (
-            <ul className="divide-y border-y">
+            <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
               {result.items.map((item) => (
                 <li key={item.id} className="flex min-w-0 flex-col gap-2 py-4">
                   <h3 className="font-medium break-words" lang="en" dir="ltr">

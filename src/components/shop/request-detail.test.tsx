@@ -112,6 +112,12 @@ beforeEach(() => {
 });
 
 describe("RequestDetail", () => {
+  it("shows the recorded progress without opening a disclosure", () => {
+    renderDetail(detail(booking()));
+    const history = screen.getByRole("region", { name: "History" });
+    expect(history).toBeVisible();
+    expect(history.closest("details")).toBeNull();
+  });
   it("keeps the household private until the shop accepts", () => {
     renderDetail(detail(booking()));
 

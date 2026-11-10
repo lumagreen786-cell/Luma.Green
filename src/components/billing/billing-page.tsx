@@ -124,7 +124,7 @@ function BillingDetails({
       <p role="status" className="text-sm text-muted-foreground">
         {t("off")}
       </p>
-      <section className="flex min-w-0 flex-col gap-4 border-t pt-6">
+      <section className="flex min-w-0 flex-col gap-4 rounded-xl border border-border/60 bg-card p-5">
         <p>
           {t(status.request ? status.request.requestState : "none")}
           {status.request ? (
@@ -215,7 +215,7 @@ function BillingDetails({
         ) : null}
       </section>
       {status.drafts ? <DraftHistory drafts={status.drafts} /> : null}
-      <section className="min-w-0 border-t">
+      <section className="min-w-0 rounded-xl border border-border/60 bg-card px-5">
         {catalogue.plans.map((plan) => {
           const minimum = formatPaise(plan.monthlyMinPaise, locale),
             maximum =
@@ -286,7 +286,7 @@ function DraftHistory({ drafts }: { drafts: NonNullable<Status["drafts"]> }) {
   return (
     <section
       aria-labelledby={heading}
-      className="flex min-w-0 flex-col gap-3 border-t pt-6"
+      className="flex min-w-0 flex-col gap-3 rounded-xl border border-border/60 bg-card p-5"
     >
       <h2 id={heading} className="font-medium">
         {t("draftsTitle")}

@@ -41,8 +41,7 @@ export function PriceChange({
       className={cn(
         "inline-flex items-center gap-0.5 rounded-md px-2 py-0.5 text-xs font-medium whitespace-nowrap tabular-nums",
         trend === "up" && "bg-accent text-accent-foreground",
-        trend === "down" &&
-          "bg-amber-50 text-amber-900 dark:bg-amber-950/50 dark:text-amber-200",
+        trend === "down" && "bg-attention/40 text-attention-foreground",
         (trend === "flat" || trend === "unknown") &&
           "bg-muted text-muted-foreground",
         className,

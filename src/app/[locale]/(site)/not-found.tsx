@@ -8,7 +8,7 @@ export default async function NotFound() {
   const t = await getTranslations("notFound");
 
   return (
-    <Container className="flex flex-1 flex-col items-start justify-center gap-4 py-24">
+    <Container className="my-6 flex max-w-3xl flex-1 flex-col items-start justify-center gap-4 rounded-xl border border-border/60 bg-card py-12 sm:my-8">
       <p className="font-mono text-sm text-muted-foreground">404</p>
       <h1 className="font-display text-4xl font-semibold tracking-tight">
         {t("title")}

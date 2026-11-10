@@ -21,6 +21,8 @@ export const authClient = {
       user: {
         id: "guide-fictional-user",
         email: "guide-fictional@example.test",
+        ...(new URLSearchParams(window.location.search).get("phone") ===
+          "verified" && { phoneNumber: "+919000000109" }),
         emailVerified: new URLSearchParams(window.location.search).has("phone"),
         phoneNumberVerified:
           new URLSearchParams(window.location.search).get("phone") ===

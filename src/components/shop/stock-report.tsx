@@ -82,7 +82,7 @@ function ReportBody() {
   return (
     <section
       aria-label={t("prepare")}
-      className="flex flex-col gap-3 border-t border-border pt-5"
+      className="flex min-w-0 flex-col gap-3 rounded-2xl bg-card p-5 sm:p-6"
     >
       <p className="text-sm text-muted-foreground">{t("notice")}</p>
       <div className="flex flex-wrap items-center gap-3">

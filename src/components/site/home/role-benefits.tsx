@@ -44,7 +44,7 @@ export async function RoleBenefits({
           title={businessOnly ? hero("join") : t("heading")}
           intro={businessOnly ? undefined : t("intro")}
         />
-        <ul className="grid gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {roles
             .filter((role) => !businessOnly || role.key !== "household")
             .map(({ key, icon: Icon, href }) => (
@@ -52,11 +52,11 @@ export async function RoleBenefits({
                 <Link
                   href={href}
                   aria-label={t(`${key}.cta`)}
-                  className="group grid h-full min-w-0 content-start gap-4 outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+                  className="group grid h-full min-w-0 content-start gap-4 rounded-xl border border-border/60 bg-card p-4 outline-none hover:border-primary/40 focus-visible:ring-3 focus-visible:ring-ring/50"
                 >
                   <RoleStoryImage
                     scene={key}
-                    frameClassName="aspect-[4/3]"
+                    frameClassName="aspect-[4/3] rounded-xl"
                     sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                   />
                   <div className="flex min-w-0 items-center gap-3">
