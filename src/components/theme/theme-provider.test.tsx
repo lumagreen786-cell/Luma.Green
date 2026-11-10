@@ -117,7 +117,9 @@ describe("theme selection", () => {
       ) => {
         listeners.delete(listener as () => void);
       },
+      // eslint-disable-next-line @typescript-eslint/no-deprecated -- MediaQueryList fixtures include the required legacy browser methods.
       addListener: vi.fn(),
+      // eslint-disable-next-line @typescript-eslint/no-deprecated -- MediaQueryList fixtures include the required legacy browser methods.
       removeListener: vi.fn(),
       dispatchEvent: vi.fn(),
     }));
