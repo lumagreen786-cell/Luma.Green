@@ -8,6 +8,7 @@ import { StatusPill } from "@/components/app/page-parts";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
+import { DirectCash } from "./direct-cash";
 import { FinancialLifecycle } from "./financial-lifecycle";
 import { isAvailableTradeAction, isOpenTrade, reachedAt } from "./logic";
 import { MaterialIcon } from "./material-icon";
@@ -42,6 +43,8 @@ export function TradeCard({
   const isHistorical = ["paid_to_escrow", "dispatched", "completed"].includes(
     trade.status,
   );
+  const hasDirectCash =
+    Boolean(trade.directCashReceipt) || trade.directCashAvailable;
   const hasFinancialView = [
     "accepted",
     "dispatched",
@@ -71,6 +74,16 @@ export function TradeCard({
       </p>
     </>
   );
+  const financialContent = hasFinancialView ? (
+    <FinancialLifecycle
+      key={trade.id}
+      tradeId={trade.id}
+      compact={compact}
+      legacyContent={legacyContent}
+    />
+  ) : (
+    legacyContent
+  );
   return (
     <article className="flex h-full flex-col gap-3 border-b border-border py-4">
       <TradeHeading trade={trade} side={side} showSide={showSide} />
@@ -87,15 +100,17 @@ export function TradeCard({
       {compact || isHistorical || trade.status === "declined" ? null : (
         <TradeSteps status={trade.status} />
       )}
-      {hasFinancialView ? (
-        <FinancialLifecycle
-          key={trade.id}
-          tradeId={trade.id}
-          compact={compact}
-          legacyContent={legacyContent}
-        />
+      {hasDirectCash ? (
+        <>
+          <DirectCash trade={trade} side={side} compact={compact} />
+          {!compact &&
+          trade.status === "accepted" &&
+          trade.directCashAvailable ? (
+            <FinancialLifecycle tradeId={trade.id} actionsOnly />
+          ) : null}
+        </>
       ) : (
-        legacyContent
+        financialContent
       )}
       <TradeNotes trade={trade} />
       <TradeActions trade={trade} />
@@ -179,18 +194,22 @@ function TradeNotes({ trade }: { trade: TradeView }) {
 function TradeFooter({ trade }: { trade: TradeView }) {
   const t = useTranslations("market.trades.card");
   const format = useFormat();
-  const lastStep = trade.timeline.at(-1)?.at ?? trade.createdAt;
-  const legacyReceiptNo = trade.legacyReceiptNo;
+  const lastStep =
+    trade.directCashReceipt?.recordedAt ??
+    trade.timeline.at(-1)?.at ??
+    trade.createdAt;
+  const receiptReference =
+    trade.directCashReceipt?.reference ?? trade.legacyReceiptNo;
   return (
     <div className="flex flex-wrap items-center justify-between gap-2 border-t pt-3 text-sm text-muted-foreground">
       <span>{t("updated", { when: format.dateTime(lastStep) })}</span>
-      {legacyReceiptNo ? (
+      {receiptReference ? (
         <Link
           href={`/app/trades/${trade.id}/invoice`}
           className="inline-flex min-h-11 items-center gap-1.5 rounded-md font-medium text-primary underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
         >
           <ReceiptTextIcon aria-hidden className="size-4" />
-          {t("receipt", { number: legacyReceiptNo })}
+          {t("receipt", { number: receiptReference })}
         </Link>
       ) : null}
     </div>

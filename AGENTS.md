@@ -324,6 +324,21 @@ docs/                product, architecture, decisions (ADRs), operations,
 
 ## 4. Rules that always apply
 
+**Include PostHog and Sentry in every feature review.** For a new or changed
+journey, identify its useful product events, expected failures and release
+checks. Use the shared PostHog and Sentry code. Add tests for new capture and
+redaction rules. If the change needs no new event or error hook, record why in
+the PR. Keep [the monitoring runbook](docs/operations/observability.md) current.
+
+Use explicit event names and approved properties. Never send credentials,
+verification codes, identity documents, exact locations, form values, or
+private records. Respect the visitor's analytics choice and stop capture on
+withdrawal. Replay and heatmaps require their own approved capture scope,
+consent and masking checks before activation. Keep protected screens out of
+recordings. Sanitize Sentry errors, traces and logs before export. Treat trade
+value, reported cash and draft invoices as separate from collected Luma
+revenue. Use `Asia/Kolkata` for India reporting and preserve recorded event times.
+
 **Never hardcode user-facing copy.** Every string goes in `messages/en.json`
 and is read with `useTranslations` / `getTranslations`. A PR that adds English
 text to a component is wrong even if it looks fine — see

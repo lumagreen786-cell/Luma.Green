@@ -755,7 +755,7 @@
           },
           "pay": {
             "title": "Terima bayaran serta-merta",
-            "body": "Secara tunai atau UPI, sebelum mereka pergi. Luma.Green tidak pernah memegang wang anda."
+            "body": "Secara tunai, sebelum mereka pergi. Luma.Green tidak pernah memegang wang anda."
           },
           "receipt": {
             "title": "Periksa resit",
@@ -894,7 +894,7 @@
             "body": "Aplikasi mengira berdasarkan harga anda. Tunjukkan skrin kepada isi rumah."
           },
           "pay": {
-            "title": "Bayar secara tunai atau UPI",
+            "title": "Bayar secara tunai",
             "body": "Bayar sebelum pergi dan pilih cara bayaran."
           },
           "save": {
@@ -1245,7 +1245,7 @@
       },
       "howPaid": {
         "q": "Bagaimana saya dibayar?",
-        "a": "Di depan pintu, tunai atau UPI, sebelum peniaga pergi. Luma.Green merekodkan bayaran tetapi tidak pernah menahan wang anda."
+        "a": "Di depan pintu, tunai, sebelum peniaga pergi. Luma.Green merekodkan bayaran tetapi tidak pernah menahan wang anda."
       },
       "recyclePoints": {
         "q": "Apakah mata kitar semula?",
@@ -1297,7 +1297,7 @@
       },
       "payHousehold": {
         "q": "Adakah Luma.Green membayar isi rumah bagi pihak saya?",
-        "a": "Tidak. Anda membayar tunai atau UPI di depan pintu. Aplikasi merekodkan amaun dan caranya."
+        "a": "Tidak. Anda membayar tunai di depan pintu. Aplikasi merekodkan amaun dan caranya."
       },
       "paidByYard": {
         "q": "Bagaimana saya dibayar apabila menjual ke pemproses awal?",
@@ -1734,7 +1734,7 @@
       "dropoff": "Anda menghantar ke kedai",
       "whenValue": "{day} · {window}, {time}",
       "youGet": "Anda menerima kira-kira {amount}",
-      "payNote": "Kedai menimbang bahan kitar semula dan membayar tunai atau melalui UPI.",
+      "payNote": "Kedai menimbang bahan kitar semula dan membayar tunai.",
       "notYou": "Gunakan nombor lain",
       "title": "Semak dan tempah",
       "change": "Tukar",
@@ -1753,7 +1753,7 @@
     "metaDescription": "Kosongkan bahan kitar semula. Terima bayaran. Foto, kutipan atau penghantaran, dan bayaran selepas ditimbang.",
     "eyebrow": "India",
     "title": "Tempah kutipan dari rumah",
-    "lead": "Pilih barang anda, pilih kedai berhampiran dan terima tunai atau UPI selepas ditimbang.",
+    "lead": "Pilih barang anda, pilih kedai berhampiran dan terima tunai selepas ditimbang.",
     "promises": {
       "label": "Mengapa jual di sini",
       "noAccount": "Sahkan telefon untuk menempah",
@@ -1894,7 +1894,7 @@
       "requested": "{mode, select, pickup {Menunggu {shop} menerima} other {Menunggu {shop} mengesahkan}}",
       "requestedBody": "Permintaan anda telah dihantar. Halaman ini dikemas kini sebaik sahaja mereka menjawab.",
       "accepted": "{mode, select, pickup {{shop} menerima kutipan anda} other {{shop} menunggu anda}}",
-      "acceptedBody": "Sediakan bahan kitar semula. Ia ditimbang, kemudian anda dibayar tunai atau melalui UPI.",
+      "acceptedBody": "Sediakan bahan kitar semula. Ia ditimbang, kemudian anda dibayar tunai.",
       "on_the_way": "{shop} dalam perjalanan",
       "on_the_wayBody": "Sediakan bahan kitar semula berhampiran pintu.",
       "completed": "Selesai! Anda menerima {amount}",
@@ -1926,7 +1926,7 @@
     "money": {
       "title": "Wang dan mata anda",
       "estimate": "Anda menerima kira-kira {amount}",
-      "estimateNote": "Kedai menimbang bahan kitar semula dan membayar tunai atau melalui UPI.",
+      "estimateNote": "Kedai menimbang bahan kitar semula dan membayar tunai.",
       "paid": "Anda menerima {amount}",
       "paidBy": "Dibayar melalui {method, select, upi {UPI} other {tunai}} · {date}",
       "estimateWas": "Anggaran asal {amount}",
@@ -3000,6 +3000,7 @@
       "fileType": "Jenis fail ini tidak boleh digunakan di sini",
       "fileTooBig": "Fail ini terlalu besar",
       "uploadFailed": "Muat naik gagal. Cuba lagi.",
+      "uploadUnavailable": "Muat naik fail peribadi tidak tersedia buat masa ini.",
       "generic": "Ralat berlaku. Cuba lagi.",
       "pan": "Cari nombor GST dan sahkan perniagaan anda.",
       "city": "Masukkan bandar atau kawasan dengan 2–60 aksara."
@@ -3194,7 +3195,7 @@
         "title": "Isi rumah",
         "one": "Lihat nilai bahan kitar semula sebelum membuat tempahan.",
         "two": "Dikutip di depan pintu atau dihantar ke kedai.",
-        "three": "Dibayar tunai atau melalui UPI, berserta resit.",
+        "three": "Dibayar tunai, berserta resit.",
         "cta": "Kitar semula"
       },
       "kabadiwala": {
@@ -3332,7 +3333,7 @@
     "title": "Untuk siapa Luma.Green dibina",
     "lead": "Semua yang memindahkan bahan kitar semula dari rumah ke kilang, serta orang yang melakukan kerja di antaranya.",
     "householdHeading": "Serta setiap isi rumah",
-    "householdBody": "Tempah pengambilan dari rumah dengan nombor telefon bimbit anda: pilih bahan, bandingkan tawaran kedai dan terima bayaran tunai atau melalui UPI daripada kedai berserta resit."
+    "householdBody": "Tempah pengambilan dari rumah dengan nombor telefon bimbit anda: pilih bahan, bandingkan tawaran kedai dan terima bayaran tunai daripada kedai berserta resit."
   },
   "saathi": {
     "days": {
@@ -3949,8 +3950,8 @@
   },
   "industry": {
     "title": "Rujukan industri",
-    "lead": "Cari buku kerja yang diberikan. Rujukan ini belum disahkan dan tidak memberi kelulusan untuk berdagang atau memproses bahan.",
-    "sourceNote": "Teks sumber ditunjukkan dalam bahasa Inggeris asal buku kerja.",
+    "lead": "Cari dalam rujukan yang diberikan. Rujukan ini belum disahkan dan tidak memberi kelulusan untuk berdagang atau memproses bahan.",
+    "sourceNote": "Teks rujukan dipaparkan dalam bahasa Inggeris.",
     "sectors": "Rujukan sektor",
     "industries": "Matriks industri",
     "lifecycles": "Kitar hayat bahan",
@@ -4056,6 +4057,10 @@
     "note": "Ini pengisytiharan pengilang, bukan pengesahan bebas tentang kualiti, pemilikan atau pematuhan. Rekod yang disimpan tidak boleh disunting."
   },
   "tradeLifecycle": {
+    "cashRecord": "Rekod penerimaan tunai",
+    "cashReported": "Penerimaan tunai dilaporkan",
+    "cashNote": "Pembeli membayar terus kepada penjual. Luma merekodkan laporan penjual.",
+    "cashReference": "Rujukan resit tunai",
     "title": "Pembayaran dan penghantaran",
     "collectionLabel": "Bayaran pembeli",
     "settlementLabel": "Penyelesaian dana penjual",
@@ -4562,6 +4567,11 @@
     "loadSaved": "Buka versi disimpan"
   },
   "businessSubscriptions": {
+    "draftsTitle": "Draf invois",
+    "draftsEmpty": "Belum ada draf.",
+    "draftTotal": "Subjumlah draf sebelum cukai",
+    "draftBook": "Senarai harga {version}",
+    "draftUsage": "{count} pesanan tunai",
     "title": "Pelan tapak",
     "lead": "Simpan pilihan pelan untuk tapak ini.",
     "off": "Pengebilan dimatikan. Pilihan tidak memulakan langganan berbayar.",
@@ -4649,5 +4659,124 @@
     "requestsBody": "Alih keluar akaun di bawah atau e-mel sokongan untuk akses, pembetulan atau pemadaman. Sahkan pemilikan; jangan e-mel dokumen pengenalan. Selesaikan kerja atau pemilikan tertunggak dahulu.",
     "retentionTitle": "Yang kekal selepas penutupan",
     "retentionBody": "Penutupan membuang akses log masuk dan kelayakan. Bukti perniagaan, pembayaran, keselamatan dan audit boleh disimpan untuk semakan. Bukan semua rekod dipadam. Tanya sokongan tentang penyimpanan dan tempoh."
+  },
+  "participantDirectory": {
+    "title": "Pilih peranan anda",
+    "search": "Cari peranan",
+    "empty": "Tiada peranan yang sepadan",
+    "continue": "Teruskan",
+    "apply": "Mohon peranan ini",
+    "roles": {
+      "household": "Isi rumah",
+      "small_business": "Kedai atau perniagaan kecil",
+      "industrial_seller": "Penjual sekerap industri",
+      "institution": "Institusi",
+      "kabadiwala": "Kabadiwala",
+      "saathi": "Saathi",
+      "dry_waste_centre": "Pusat sisa kering atau koperasi pengutip",
+      "large_yard": "Tapak pengumpulan besar",
+      "collection_contractor": "Kontraktor kutipan dari rumah ke rumah",
+      "rural_collector": "Pihak berkuasa tempatan luar bandar atau kumpulan bantuan kendiri",
+      "trader": "Peniaga, broker atau pengeksport",
+      "preprocessor": "Pengendali prapemprosesan",
+      "recycler": "Pengitar semula",
+      "e_waste_operator": "Pengumpul, peleraian komponen atau pembaik pulih e-sisa",
+      "wet_waste_processor": "Pemproses sisa basah",
+      "intermediary_manufacturer": "Pengilang barang perantaraan",
+      "end_goods_manufacturer": "Pengilang barang siap",
+      "epr_brand": "Jenama dengan kewajipan EPR",
+      "pro": "Organisasi tanggungjawab pengeluar",
+      "epr_trading": "Perdagangan EPR",
+      "carbon_trading": "Perdagangan karbon",
+      "transporter": "Pengangkut dan manifes",
+      "equipment_supplier": "Pembekal peralatan",
+      "boiler_water_supplier": "Pembekal dandang, loji rawatan atau lori tangki",
+      "weighing_vendor": "Pembekal penimbang atau jambatan timbang",
+      "solar_provider": "Pembekal tenaga solar",
+      "environmental_engineer": "Kejuruteraan alam sekitar",
+      "hr_provider": "Pembekal perkhidmatan sumber manusia",
+      "accounting_provider": "Perakaunan dan pematuhan",
+      "employee_tracking": "Pemantauan pekerja",
+      "waste_picker_union": "NGO atau kesatuan pengutip sisa",
+      "city_official": "Pegawai bandar",
+      "csr_lender_auditor": "Pasukan CSR, pemberi pinjaman atau juruaudit",
+      "luma_team": "Pasukan Luma.Green",
+      "ward_official": "Pegawai kawasan",
+      "community_champion": "Penggerak komuniti",
+      "payment_partner": "Rakan pembayaran",
+      "rewards_partner": "Rakan program ganjaran",
+      "welfare_partner": "Rakan insurans atau kebajikan",
+      "society_partner": "Rakan pengurusan kediaman atau kemudahan",
+      "voice_partner": "Rakan perkhidmatan suara atau bahasa"
+    },
+    "groups": {
+      "generators": "Isi rumah dan penjual bahan",
+      "collection": "Kutipan dan pengumpulan",
+      "processing": "Pemprosesan dan pembuatan",
+      "markets": "Jenama dan pasaran alam sekitar",
+      "services": "Logistik dan perkhidmatan",
+      "partners": "Komuniti, kerajaan dan rakan kongsi"
+    }
+  },
+  "apartmentCollection": {
+    "pickup": "Kutipan di pangsapuri",
+    "code": "Kod komuniti",
+    "noRoute": "Tiada laluan kutipan pangsapuri yang telah disemak. Minta pengurus bangunan atau persatuan penduduk mengatur kutipan."
+  },
+  "householdFamily": {
+    "title": "Ahli keluarga",
+    "description": "Ahli keluarga boleh melihat status kutipan yang anda kongsi. Resit, foto dan jejak karbon anda kekal peribadi.",
+    "phone": "Nombor telefon ahli keluarga",
+    "invite": "Cipta jemputan",
+    "code": "Kod jemputan",
+    "codeHelp": "Kongsi kod secara peribadi. Kod tamat tempoh selepas 7 hari. Luma tidak menghantar mesej.",
+    "join": "Sertai isi rumah",
+    "joinedAt": "Menyertai pada {date}",
+    "leave": "Tinggalkan isi rumah",
+    "collections": "Kutipan yang dikongsi keluarga",
+    "share": "Kongsi status",
+    "makePrivate": "Hentikan perkongsian",
+    "recent": "Log keluar dan log masuk semula sebelum meneruskan.",
+    "invalid": "Kod tidak sah, telah tamat tempoh atau untuk nombor lain.",
+    "verified": "Sahkan nombor telefon untuk menggunakan jemputan."
+  },
+  "householdTools": {
+    "navigation": "Alat untuk isi rumah",
+    "recycle": "Kitar semula",
+    "activity": "Aktiviti",
+    "services": "Perkhidmatan",
+    "footprint": "Jejak karbon",
+    "settings": "Tetapan",
+    "loading": "Memuatkan tempahan…",
+    "noBookings": "Belum ada tempahan.",
+    "electricityTitle": "Jejak karbon elektrik",
+    "electricityReading": "Elektrik yang digunakan daripada grid (kWh)",
+    "invalidReading": "Masukkan kWh daripada bil atau meter. Gunakan sehingga tiga tempat perpuluhan.",
+    "calculate": "Kira anggaran",
+    "estimate": "Anggaran pelepasan grid: {amount} kg CO₂",
+    "privateCalculation": "Bacaan anda kekal pada skrin ini. Hasil hanya meliputi elektrik.",
+    "gridSource": "Faktor pelepasan grid India, CEA 2025–26",
+    "airQuality": "Kualiti udara",
+    "roofSolar": "Semak potensi solar bumbung",
+    "roofPrecision": "Semakan bumbung memerlukan lokasi tepat.",
+    "lookupConsent": "Hantar lokasi saya ke Google Maps untuk semakan ini. Luma tidak menyimpannya.",
+    "lookupUnavailable": "Tiada hasil yang tersedia.",
+    "locationUnavailable": "Lokasi yang sesuai tidak dapat diperoleh.",
+    "lookupLimit": "Had semakan dicapai. Cuba lagi kemudian.",
+    "airScore": "Indeks kualiti udara sejagat: {score} daripada 100. Lebih tinggi lebih baik.",
+    "roofEstimate": "Anggaran hasil bumbung: {energy} kWh setahun (DC) dengan {panels} panel."
+  },
+  "homeReminder": {
+    "title": "Peringatan apabila meninggalkan rumah",
+    "consent": "Tetapkan semasa anda berada di rumah. Peranti ini menggunakan lokasi di latar belakang untuk mengesan apabila anda keluar. Luma tidak menerima sejarah lokasi.",
+    "enable": "Hidupkan peringatan keluar rumah",
+    "disable": "Matikan peringatan keluar rumah",
+    "notificationTitle": "Sebelum anda keluar",
+    "notificationBody": "Periksa lampu dan perkakas yang boleh dimatikan.",
+    "unavailable": "Peringatan keluar rumah tidak tersedia. Semak kebenaran peranti dan cuba lagi semasa berada di rumah.",
+    "dailyTitle": "Peringatan harian",
+    "time": "Masa peringatan",
+    "add": "Tambah pada kalendar",
+    "calendarHelp": "Buka fail kalendar untuk menetapkan peringatan harian."
   }
 }

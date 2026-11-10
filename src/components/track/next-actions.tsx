@@ -18,9 +18,20 @@ import type { TrackedBooking } from "./types";
  */
 export function NextActions({ booking }: { booking: TrackedBooking }) {
   const t = useTranslations("track");
+  const apartment = useTranslations("apartmentCollection");
+  const nav = useTranslations("nav");
   const router = useRouter();
 
   if (booking.status === "declined") {
+    if (booking.isApartmentCollection)
+      return (
+        <div className="space-y-3">
+          <p>{apartment("noRoute")}</p>
+          <Button asChild variant="outline">
+            <Link href="/contact">{nav("contact")}</Link>
+          </Button>
+        </div>
+      );
     return (
       <div className="space-y-3">
         <p className="text-sm text-muted-foreground">{t("retryDetails")}</p>

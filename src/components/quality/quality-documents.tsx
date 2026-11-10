@@ -1,6 +1,7 @@
 "use client";
 import { useAction, useMutation, useQuery } from "convex/react";
 import type { FunctionReturnType } from "convex/server";
+import { ConvexError } from "convex/values";
 import { useSearchParams } from "next/navigation";
 import { useFormatter, useTranslations } from "next-intl";
 import { Suspense, useId, useRef, useState } from "react";
@@ -141,6 +142,7 @@ function Upload({
   inspectionId?: string;
 }) {
   const t = useTranslations("qualityDocuments");
+  const uploadErrors = useTranslations("join.errors");
   const upload = useAction(api.qualityFiles.upload);
   const action = useQualityAction();
   const id = useId();
@@ -149,23 +151,38 @@ function Upload({
   const [kind, setKind] = useState<"coa" | "photo" | "sample_report">("coa");
   const [file, setFile] = useState<File | null>(null);
   const [share, setShare] = useState(false);
+  const [storageUnavailable, setStorageUnavailable] = useState(false);
   const selected = data.inspections.find((i) => i.id === inspection);
+  if (!data.uploadAvailable)
+    return <p role="status">{uploadErrors("uploadUnavailable")}</p>;
   return (
     <form
       className="flex max-w-2xl flex-col gap-4 border-t pt-6"
       onSubmit={(e) => {
         e.preventDefault();
         void action.run(async () => {
+          setStorageUnavailable(false);
           if (!selected || !file || file.size > QUALITY_MAX_BYTES)
             throw new Error("INVALID_FILE");
-          await upload({
-            inspectionId: selected.id,
-            shareWithBuyer: share,
-            kind,
-            name: file.name,
-            contentType: file.type,
-            bytes: await file.arrayBuffer(),
-          });
+          try {
+            await upload({
+              inspectionId: selected.id,
+              shareWithBuyer: share,
+              kind,
+              name: file.name,
+              contentType: file.type,
+              bytes: await file.arrayBuffer(),
+            });
+          } catch (error) {
+            if (
+              error instanceof ConvexError &&
+              error.data === "STORAGE_UNAVAILABLE"
+            ) {
+              setStorageUnavailable(true);
+              return;
+            }
+            throw error;
+          }
           setFile(null);
           if (input.current) input.current.value = "";
         });
@@ -220,9 +237,9 @@ function Upload({
       >
         {t("upload")}
       </Button>
-      {action.failed ? (
+      {storageUnavailable || action.failed ? (
         <p role="alert" className="text-destructive">
-          {t("error")}
+          {storageUnavailable ? uploadErrors("uploadUnavailable") : t("error")}
         </p>
       ) : null}
     </form>

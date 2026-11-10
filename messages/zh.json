@@ -139,7 +139,7 @@
         "title": "家庭",
         "one": "预约前先了解可回收材料价值。",
         "two": "上门收取，或送到回收店。",
-        "three": "通过现金或UPI收款，并获得收据。",
+        "three": "通过现金收款，并获得收据。",
         "cta": "回收"
       },
       "kabadiwala": {
@@ -611,7 +611,7 @@
       "body": "承接家附近有偿的收取、分拣和轮班工作，查看收入。"
     },
     "householdHeading": "也面向每个家庭",
-    "householdBody": "使用手机号预约上门回收：选择材料，比较商家的报价，并从商家收取现金或UPI付款及收据。"
+    "householdBody": "使用手机号预约上门回收：选择材料，比较商家的报价，并从商家收取现金付款及收据。"
   },
   "contact": {
     "metaTitle": "联系我们",
@@ -1079,7 +1079,7 @@
           },
           "pay": {
             "title": "当场收款",
-            "body": "在对方离开前，以现金或UPI收款。Luma.Green不会保管你的钱。"
+            "body": "在对方离开前，以现金收款。Luma.Green不会保管你的钱。"
           },
           "receipt": {
             "title": "检查收据",
@@ -1218,7 +1218,7 @@
             "body": "应用按你的价格计算。向家庭用户展示屏幕。"
           },
           "pay": {
-            "title": "以现金或UPI付款",
+            "title": "以现金付款",
             "body": "离开前付款，并选择付款方式。"
           },
           "save": {
@@ -1569,7 +1569,7 @@
       },
       "howPaid": {
         "q": "如何收款？",
-        "a": "回收店人员离开前，在门口通过现金或UPI收款。Luma.Green记录付款，但不会保管你的钱。"
+        "a": "回收店人员离开前，在门口通过现金收款。Luma.Green记录付款，但不会保管你的钱。"
       },
       "recyclePoints": {
         "q": "什么是回收积分？",
@@ -1621,7 +1621,7 @@
       },
       "payHousehold": {
         "q": "Luma.Green会代我给家庭付款吗？",
-        "a": "不会。你需在门口以现金或UPI付款。应用记录金额和方式。"
+        "a": "不会。你需在门口以现金付款。应用记录金额和方式。"
       },
       "paidByYard": {
         "q": "卖给预处理商后如何收款？",
@@ -2217,6 +2217,7 @@
       "fileType": "此处不支持这种文件类型",
       "fileTooBig": "文件过大",
       "uploadFailed": "上传失败，请重试。",
+      "uploadUnavailable": "暂时无法上传私密文件。",
       "generic": "发生问题，请重试。",
       "pan": "请查询 GST 号码并确认您的企业。",
       "city": "请输入2至60个字符的城市或地区名称。"
@@ -2531,7 +2532,7 @@
     "metaDescription": "清理可回收物，换取报酬。 拍照、上门取件或送到店内，称重后付款。",
     "eyebrow": "印度",
     "title": "预约上门回收",
-    "lead": "选择材料和附近店铺，称重后通过现金或UPI收款。",
+    "lead": "选择材料和附近店铺，称重后通过现金收款。",
     "promises": {
       "label": "为什么在这里出售",
       "noAccount": "验证手机号后预约",
@@ -2650,7 +2651,7 @@
       "dropoff": "你送到店铺",
       "whenValue": "{day} · {window}，{time}",
       "youGet": "你将收到约{amount}",
-      "payNote": "店铺称重后，通过现金或UPI付款。",
+      "payNote": "店铺称重后，通过现金付款。",
       "phoneTitle": "验证手机号码",
       "phoneLead": "我们会发送6位短信验证码。预约保存在此号码下，方便你在任何手机上查看。",
       "bookingAs": "预约号码：{phone}",
@@ -2807,7 +2808,7 @@
       "requested": "{mode, select, pickup {等待{shop}接受} other {等待{shop}确认}}",
       "requestedBody": "请求已发送。对方回复后，此页面会立即更新。",
       "accepted": "{mode, select, pickup {{shop}已接受回收预约} other {{shop}正在等你到店}}",
-      "acceptedBody": "请准备好可回收材料。称重后通过现金或UPI收款。",
+      "acceptedBody": "请准备好可回收材料。称重后通过现金收款。",
       "on_the_way": "{shop}正在前往",
       "on_the_wayBody": "请将可回收材料准备在门口附近。",
       "completed": "完成！你收到{amount}",
@@ -2848,7 +2849,7 @@
     "money": {
       "title": "你的金额和积分",
       "estimate": "你将收到约{amount}",
-      "estimateNote": "店铺称重后，通过现金或UPI付款。",
+      "estimateNote": "店铺称重后，通过现金付款。",
       "paid": "你收到{amount}",
       "paidBy": "通过{method, select, upi {UPI} other {现金}}支付 · {date}",
       "estimateWas": "原估算为{amount}",
@@ -3949,8 +3950,8 @@
   },
   "industry": {
     "title": "行业参考资料",
-    "lead": "搜索提供的工作簿。这些参考资料未经核实，不构成材料交易或处理许可。",
-    "sourceNote": "源文本按工作簿原始英文显示。",
+    "lead": "搜索所提供的参考资料。这些参考资料未经核实，不构成材料交易或处理许可。",
+    "sourceNote": "参考资料以英语显示。",
     "sectors": "行业分类参考",
     "industries": "行业矩阵",
     "lifecycles": "材料生命周期",
@@ -4056,6 +4057,10 @@
     "note": "这些是制造商的声明，并非对质量、所有权或合规性的独立验证。保存后无法编辑记录。"
   },
   "tradeLifecycle": {
+    "cashRecord": "记录收到的现金",
+    "cashReported": "已申报收到现金",
+    "cashNote": "买家直接向卖家付款。Luma 记录卖家的申报。",
+    "cashReference": "现金收据编号",
     "title": "付款与交付",
     "collectionLabel": "买方付款",
     "settlementLabel": "卖方结算",
@@ -4562,6 +4567,11 @@
     "loadSaved": "打开已保存的版本"
   },
   "businessSubscriptions": {
+    "draftsTitle": "发票草稿",
+    "draftsEmpty": "暂无草稿。",
+    "draftTotal": "草稿税前小计",
+    "draftBook": "价目表 {version}",
+    "draftUsage": "{count} 笔现金订单",
     "title": "场地方案",
     "lead": "保存此场地的方案意向。",
     "off": "计费已关闭。保存意向不会开始付费订阅。",
@@ -4649,5 +4659,124 @@
     "requestsBody": "您可在下方移除账户，或通过电子邮件向支持团队申请访问、更正或删除数据。需要核实所有权，请勿通过邮件发送身份证明。请先处理未完成的工作或所有权事项。",
     "retentionTitle": "关闭后保留的内容",
     "retentionBody": "关闭会移除登录权限和凭证。业务、支付、安全及审计证据可能保留以供审查，并非每条记录都会删除。请向支持团队咨询保留情况和处理时间。"
+  },
+  "participantDirectory": {
+    "title": "选择您的角色",
+    "search": "搜索角色",
+    "empty": "没有匹配的角色",
+    "continue": "继续",
+    "apply": "申请此角色",
+    "roles": {
+      "household": "家庭",
+      "small_business": "店铺或小型企业",
+      "industrial_seller": "工业废料卖家",
+      "institution": "机构",
+      "kabadiwala": "卡巴迪瓦拉",
+      "saathi": "萨蒂",
+      "dry_waste_centre": "干废物中心或拾荒者合作社",
+      "large_yard": "大型集散场",
+      "collection_contractor": "上门回收承包商",
+      "rural_collector": "农村地方机构或互助小组",
+      "trader": "贸易商、中介或出口商",
+      "preprocessor": "预处理企业",
+      "recycler": "回收企业",
+      "e_waste_operator": "电子废物收集商、拆解商或翻新商",
+      "wet_waste_processor": "湿废物处理企业",
+      "intermediary_manufacturer": "中间产品制造商",
+      "end_goods_manufacturer": "终端产品制造商",
+      "epr_brand": "承担 EPR 义务的品牌",
+      "pro": "生产者责任组织",
+      "epr_trading": "EPR 交易",
+      "carbon_trading": "碳交易",
+      "transporter": "运输商及运单",
+      "equipment_supplier": "设备供应商",
+      "boiler_water_supplier": "锅炉、处理厂或罐车供应商",
+      "weighing_vendor": "秤具或地磅供应商",
+      "solar_provider": "太阳能供应商",
+      "environmental_engineer": "环境工程",
+      "hr_provider": "人力资源服务商",
+      "accounting_provider": "会计及合规",
+      "employee_tracking": "员工管理",
+      "waste_picker_union": "非政府组织或拾荒者工会",
+      "city_official": "市政官员",
+      "csr_lender_auditor": "企业社会责任团队、贷款方或审计方",
+      "luma_team": "Luma.Green 团队",
+      "ward_official": "辖区官员",
+      "community_champion": "社区带头人",
+      "payment_partner": "支付合作伙伴",
+      "rewards_partner": "奖励合作伙伴",
+      "welfare_partner": "保险或福利合作伙伴",
+      "society_partner": "住宅小区或设施管理合作伙伴",
+      "voice_partner": "语音或语言服务合作伙伴"
+    },
+    "groups": {
+      "generators": "家庭及材料卖家",
+      "collection": "收集与集散",
+      "processing": "处理与制造",
+      "markets": "品牌及环境市场",
+      "services": "物流与服务",
+      "partners": "社区、政府及合作伙伴"
+    }
+  },
+  "apartmentCollection": {
+    "pickup": "公寓上门回收",
+    "code": "社区代码",
+    "noRoute": "此公寓没有经过审核的上门回收路线。请联系物业管理方或居民协会安排回收。"
+  },
+  "householdFamily": {
+    "title": "家庭成员",
+    "description": "家庭成员可以查看你分享的回收进度。你的收据、照片和碳足迹仍为私密信息。",
+    "phone": "家庭成员的手机号码",
+    "invite": "创建邀请",
+    "code": "邀请码",
+    "codeHelp": "请私下分享此代码。代码将在 7 天后失效。Luma 不会发送消息。",
+    "join": "加入家庭",
+    "joinedAt": "加入日期为 {date}",
+    "leave": "退出家庭",
+    "collections": "家庭共享的回收",
+    "share": "共享进度",
+    "makePrivate": "停止共享",
+    "recent": "请退出登录后重新登录，再继续操作。",
+    "invalid": "代码无效、已过期或用于其他手机号码。",
+    "verified": "验证手机号码后即可使用邀请。"
+  },
+  "householdTools": {
+    "navigation": "家庭工具",
+    "recycle": "回收",
+    "activity": "活动",
+    "services": "服务",
+    "footprint": "碳足迹",
+    "settings": "设置",
+    "loading": "正在加载预约…",
+    "noBookings": "暂无预约。",
+    "electricityTitle": "用电碳足迹",
+    "electricityReading": "电网用电量 (kWh)",
+    "invalidReading": "输入账单或电表上的用电量，单位为 kWh，最多保留三位小数。",
+    "calculate": "计算估算值",
+    "estimate": "电网排放估算值：{amount} 千克二氧化碳",
+    "privateCalculation": "读数仅保留在此页面。结果仅涵盖用电。",
+    "gridSource": "印度电网排放因子，CEA 2025–26",
+    "airQuality": "空气质量",
+    "roofSolar": "查看屋顶太阳能潜力",
+    "roofPrecision": "屋顶查询需要精确位置。",
+    "lookupConsent": "将我的位置发送至 Google Maps 进行此次查询。Luma 不保存位置。",
+    "lookupUnavailable": "没有可用结果。",
+    "locationUnavailable": "无法获取合适的位置。",
+    "lookupLimit": "已达到查询上限。请稍后重试。",
+    "airScore": "通用空气质量指数：{score} / 100。分数越高越好。",
+    "roofEstimate": "屋顶模拟发电量：{panels} 块面板每年发电 {energy} 千瓦时（直流）。"
+  },
+  "homeReminder": {
+    "title": "离家提醒",
+    "consent": "请在家时设置。此设备在后台使用位置信息来检测您何时离家。Luma 不会收到您的位置历史。",
+    "enable": "开启离家提醒",
+    "disable": "关闭离家提醒",
+    "notificationTitle": "离家前",
+    "notificationBody": "检查哪些灯和电器可以关闭。",
+    "unavailable": "离家提醒不可用。请检查设备权限，并在家时重试。",
+    "dailyTitle": "每日提醒",
+    "time": "提醒时间",
+    "add": "添加到日历",
+    "calendarHelp": "打开日历文件以设置每日提醒。"
   }
 }

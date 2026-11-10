@@ -5,6 +5,7 @@ import type { Doc, Id } from "./_generated/dataModel";
 import type { MutationCtx } from "./_generated/server";
 import { internalMutation, mutation, query } from "./_generated/server";
 import { isProfileOpen } from "./lib/accountClosure";
+import { requireApartmentCollection } from "./lib/apartmentCollections";
 import {
   availableCapacity,
   canServeCollection,
@@ -102,6 +103,12 @@ export const reschedule = mutation({
     const org = await ctx.db.get("orgs", booking.orgId);
     if (!org || (booking.mode === "pickup" && !org.offersPickup))
       throw new ConvexError("NOT_FOUND");
+    await requireApartmentCollection(
+      ctx,
+      booking.apartmentRouteId,
+      org._id,
+      args.date,
+    );
     await requireCollectionCapacity(
       ctx,
       org,
@@ -437,6 +444,12 @@ export const approveReschedule = mutation({
     if (!booking.rescheduleRequest || booking.status !== "on_the_way")
       throw new ConvexError("WRONG_STATUS");
     const request = booking.rescheduleRequest;
+    await requireApartmentCollection(
+      ctx,
+      booking.apartmentRouteId,
+      org._id,
+      request.slotDate,
+    );
     await requireCollectionCapacity(
       ctx,
       org,

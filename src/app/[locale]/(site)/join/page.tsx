@@ -25,9 +25,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 /** Public: what each role is and a way in — docs/architecture/urls.md. */
 export default async function JoinPage() {
-  const [t, stakeholder, nav] = await Promise.all([
+  const [t, participant, nav] = await Promise.all([
     getTranslations("join"),
-    getTranslations("stakeholder"),
+    getTranslations("participantDirectory"),
     getTranslations("nav"),
   ]);
 
@@ -48,10 +48,10 @@ export default async function JoinPage() {
           {nav("sellScrap")}
         </Link>
         <Link
-          href="/join/stakeholder"
+          href="/join/roles"
           className="inline-flex min-h-11 items-center font-medium text-primary underline-offset-4 hover:underline"
         >
-          {stakeholder("title")}
+          {participant("title")}
         </Link>
       </aside>
     </Container>

@@ -11,6 +11,7 @@ import {
   signInAs,
 } from "./lib/auth.testing";
 import { OFFER_TIMEOUT_MS } from "./lib/dispatch";
+import { mockR2 } from "./lib/r2.testing";
 import schema from "./schema";
 
 const modules = convexModules(import.meta.glob("./**/*.*s"));
@@ -39,6 +40,7 @@ afterEach(() => {
 });
 
 async function world() {
+  mockR2();
   const t = convexTest(schema, modules);
   registerAuth(t);
   await seedDemo(t);

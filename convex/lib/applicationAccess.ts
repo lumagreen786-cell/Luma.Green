@@ -1,5 +1,6 @@
 import { ConvexError } from "convex/values";
 
+import { internal } from "../_generated/api";
 import type { Doc, Id } from "../_generated/dataModel";
 import type { MutationCtx, QueryCtx } from "../_generated/server";
 import { requireUser } from "./access";
@@ -93,7 +94,32 @@ export async function activeFiles(
     .query("applicationFiles")
     .withIndex("by_application", (q) => q.eq("applicationId", applicationId))
     .collect();
-  return files.filter((file) => file.removedAt === undefined);
+  return files.filter(
+    (file) => file.removedAt === undefined && hasApplicationFileBytes(file),
+  );
+}
+
+export function hasApplicationFileBytes(file: Doc<"applicationFiles">) {
+  return file.r2
+    ? file.storageId === undefined &&
+        file.uploadedAt !== undefined &&
+        Boolean(file.sha256)
+    : file.storageId !== undefined;
+}
+
+export async function discardDraftFile(
+  ctx: MutationCtx,
+  file: Doc<"applicationFiles">,
+) {
+  if (file.r2) {
+    await ctx.db.patch("applicationFiles", file._id, { removedAt: Date.now() });
+    await ctx.scheduler.runAfter(0, internal.applicationFiles.expireR2, {
+      fileId: file._id,
+    });
+    return;
+  }
+  if (file.storageId) await ctx.storage.delete(file.storageId);
+  await ctx.db.delete("applicationFiles", file._id);
 }
 
 export function countByType(
@@ -113,8 +139,7 @@ export async function removeFile(
   file: Doc<"applicationFiles">,
 ): Promise<void> {
   if (file.firstSubmittedVersion === undefined) {
-    await ctx.storage.delete(file.storageId);
-    await ctx.db.delete("applicationFiles", file._id);
+    await discardDraftFile(ctx, file);
   } else {
     await ctx.db.patch("applicationFiles", file._id, { removedAt: Date.now() });
   }

@@ -214,6 +214,7 @@ function BillingDetails({
           </div>
         ) : null}
       </section>
+      {status.drafts ? <DraftHistory drafts={status.drafts} /> : null}
       <section className="min-w-0 border-t">
         {catalogue.plans.map((plan) => {
           const minimum = formatPaise(plan.monthlyMinPaise, locale),
@@ -273,6 +274,60 @@ function BillingDetails({
           </ul>
         </section>
       ) : null}
+    </section>
+  );
+}
+
+function DraftHistory({ drafts }: { drafts: NonNullable<Status["drafts"]> }) {
+  const t = useTranslations("businessSubscriptions");
+  const locale = useLocale();
+  const format = useFormatter();
+  const heading = useId();
+  return (
+    <section
+      aria-labelledby={heading}
+      className="flex min-w-0 flex-col gap-3 border-t pt-6"
+    >
+      <h2 id={heading} className="font-medium">
+        {t("draftsTitle")}
+      </h2>
+      {drafts.length === 0 ? (
+        <p className="text-sm text-muted-foreground">{t("draftsEmpty")}</p>
+      ) : (
+        <ul className="divide-y">
+          {drafts.map((draft) => (
+            <li
+              key={draft.id}
+              className="flex flex-wrap justify-between gap-3 py-3 text-sm"
+            >
+              <div className="min-w-0">
+                <p className="font-medium">
+                  <time dateTime={draft.month}>
+                    {format.dateTime(new Date(`${draft.month}-01T12:00:00Z`), {
+                      month: "long",
+                      year: "numeric",
+                      timeZone: "Asia/Kolkata",
+                    })}
+                  </time>
+                  {" · "}
+                  {t(`plans.${draft.plan}`)}
+                </p>
+                <p className="text-muted-foreground">
+                  {t("draftBook", { version: draft.priceBookVersion })}
+                  {" · "}
+                  {t("draftUsage", { count: format.number(draft.usageCount) })}
+                </p>
+              </div>
+              <div className="text-start sm:text-end">
+                <p className="text-muted-foreground">{t("draftTotal")}</p>
+                <p className="font-medium tabular-nums">
+                  {formatPaise(draft.subtotalPaise, locale)}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
     </section>
   );
 }

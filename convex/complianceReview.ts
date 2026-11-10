@@ -8,6 +8,7 @@ import {
   vProcessKind,
 } from "./lib/industrialClassification";
 import { requiredLabel } from "./lib/lotEvidence";
+import { isOrdinaryMaterial } from "./lib/materialEligibility";
 import { indiaToday } from "./lib/onboarding";
 import { requireOrg } from "./lib/workspace";
 
@@ -32,6 +33,7 @@ const reviewView = v.object({
   validUntil: v.string(),
   createdAt: v.number(),
   current: v.boolean(),
+  ordinaryTradeCustody: v.optional(v.literal(true)),
 });
 const destinationView = v.object({
   id: v.id("controlledDestinations"),
@@ -123,6 +125,9 @@ export const queue = query({
           materialCodes: r.materialCodes,
           processes: r.processes,
           decision: r.decision,
+          ...(r.ordinaryTradeCustody && {
+            ordinaryTradeCustody: r.ordinaryTradeCustody,
+          }),
           evidenceReference: r.evidenceReference,
           validUntil: r.validUntil,
           createdAt: r.createdAt,
@@ -152,6 +157,7 @@ export const reviewFacility = mutation({
     ),
     evidenceReference: v.string(),
     validUntil: v.string(),
+    ordinaryTradeCustody: v.optional(v.literal(true)),
   },
   returns: v.id("facilityScopeReviews"),
   handler: async (ctx, args) => {
@@ -178,6 +184,12 @@ export const reviewFacility = mutation({
       processes.some((x) => !facility.capabilities.includes(x))
     )
       throw new ConvexError("INVALID_REVIEW_SCOPE");
+    if (
+      args.ordinaryTradeCustody &&
+      (args.decision !== "approved" ||
+        registration.kind !== "consent_to_operate")
+    )
+      throw new ConvexError("ORDINARY_CUSTODY_REQUIRES_CONSENT");
     registrationDates(indiaToday(), args.validUntil);
     if (args.decision === "approved") {
       const successor = await ctx.db
@@ -199,7 +211,11 @@ export const reviewFacility = mutation({
           .query("materials")
           .withIndex("by_code", (q) => q.eq("code", code))
           .unique();
-        if (!material?.active || !org.families.includes(material.family))
+        if (
+          !material?.active ||
+          !org.families.includes(material.family) ||
+          (args.ordinaryTradeCustody && !isOrdinaryMaterial(material))
+        )
           throw new ConvexError("MATERIAL_NOT_ALLOWED");
       }
     }
@@ -223,6 +239,7 @@ export const reviewFacility = mutation({
       metadata: {
         adminUserId: admin._id,
         decision: args.decision,
+        ordinaryTradeCustody: args.ordinaryTradeCustody ?? false,
         portalAction: false,
       },
       createdAt: Date.now(),
@@ -397,6 +414,9 @@ export const myReviews = query({
           materialCodes: r.materialCodes,
           processes: r.processes,
           decision: r.decision,
+          ...(r.ordinaryTradeCustody && {
+            ordinaryTradeCustody: r.ordinaryTradeCustody,
+          }),
           evidenceReference: r.evidenceReference,
           validUntil: r.validUntil,
           createdAt: r.createdAt,

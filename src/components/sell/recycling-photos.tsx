@@ -59,6 +59,7 @@ export function RecyclingPhotos({
 }) {
   const t = useTranslations("sell.simple");
   const join = useTranslations("join.errors");
+  const form = useTranslations("join.form");
   const input = useRef<HTMLInputElement>(null);
   const [problem, setProblem] = useState<string | null>(null);
   return (
@@ -68,7 +69,10 @@ export function RecyclingPhotos({
         htmlFor="recycling-photos"
         className="text-base font-semibold"
       >
-        {t("photos")}
+        {t("photos")}{" "}
+        <span className="text-sm font-normal text-muted-foreground">
+          ({form("optional")})
+        </span>
       </Label>
       <p className="text-sm text-muted-foreground">{t("photoHint")}</p>
       <Input

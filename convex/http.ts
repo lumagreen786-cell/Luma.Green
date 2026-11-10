@@ -1,5 +1,10 @@
 import { httpRouter } from "convex/server";
 
+import {
+  APPLICATION_UPLOAD_PATH,
+  preflightR2,
+  uploadR2,
+} from "./applicationFiles";
 import { authComponent, createAuth } from "./auth";
 import { serve as serveCashfree } from "./cashfreeHttp";
 import { FILES_PATH, preflight, serve } from "./files";
@@ -38,6 +43,17 @@ authComponent.registerRoutes(http, createAuth);
 // Private files, checked on every request (convex/files.ts).
 http.route({ pathPrefix: FILES_PATH, method: "GET", handler: serve });
 http.route({ pathPrefix: FILES_PATH, method: "OPTIONS", handler: preflight });
+
+http.route({
+  path: APPLICATION_UPLOAD_PATH,
+  method: "POST",
+  handler: uploadR2,
+});
+http.route({
+  path: APPLICATION_UPLOAD_PATH,
+  method: "OPTIONS",
+  handler: preflightR2,
+});
 
 // REST v1 uses scoped machine credentials, independent of browser sessions.
 for (const method of [

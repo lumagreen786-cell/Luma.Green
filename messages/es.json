@@ -139,7 +139,7 @@
         "title": "Hogares",
         "one": "Consulta el valor de tus materiales antes de reservar.",
         "two": "Recogida en tu puerta o entrega en una tienda.",
-        "three": "Pago en efectivo o por UPI, con recibo.",
+        "three": "Pago en efectivo, con recibo.",
         "cta": "Reciclar"
       },
       "kabadiwala": {
@@ -611,7 +611,7 @@
       "body": "Acepta recogidas, trabajos de clasificación y turnos remunerados cerca de casa, y consulta tus ingresos."
     },
     "householdHeading": "Y para todos los hogares",
-    "householdBody": "Reserva una recogida en casa con tu número de móvil: elige los materiales, compara las ofertas de las tiendas y recibe de la tienda el pago en efectivo o por UPI, con recibo."
+    "householdBody": "Reserva una recogida en casa con tu número de móvil: elige los materiales, compara las ofertas de las tiendas y recibe de la tienda el pago en efectivo, con recibo."
   },
   "contact": {
     "metaTitle": "Contacto",
@@ -1079,7 +1079,7 @@
           },
           "pay": {
             "title": "Cobra en el momento",
-            "body": "En efectivo o por UPI, antes de que se vayan. Luma.Green nunca retiene tu dinero."
+            "body": "En efectivo, antes de que se vayan. Luma.Green nunca retiene tu dinero."
           },
           "receipt": {
             "title": "Comprueba tu recibo",
@@ -1218,7 +1218,7 @@
             "body": "La aplicación lo calcula con tus precios. Enseña la pantalla al hogar."
           },
           "pay": {
-            "title": "Paga en efectivo o por UPI",
+            "title": "Paga en efectivo",
             "body": "Paga antes de irte y selecciona cómo pagaste."
           },
           "save": {
@@ -1569,7 +1569,7 @@
       },
       "howPaid": {
         "q": "¿Cómo cobro?",
-        "a": "En tu puerta, en efectivo o por UPI, antes de que se vaya el kabadiwala. Luma.Green registra el pago, pero nunca retiene tu dinero."
+        "a": "En tu puerta, en efectivo, antes de que se vaya el kabadiwala. Luma.Green registra el pago, pero nunca retiene tu dinero."
       },
       "recyclePoints": {
         "q": "¿Qué son los puntos de reciclaje?",
@@ -1621,7 +1621,7 @@
       },
       "payHousehold": {
         "q": "¿Luma.Green paga al hogar por mí?",
-        "a": "No. Tú pagas en efectivo o por UPI en la puerta. La aplicación registra el importe y la forma de pago."
+        "a": "No. Tú pagas en efectivo en la puerta. La aplicación registra el importe y la forma de pago."
       },
       "paidByYard": {
         "q": "¿Cómo cobro al vender a un preprocesador?",
@@ -2217,6 +2217,7 @@
       "fileType": "Este tipo de archivo no se puede usar aquí",
       "fileTooBig": "El archivo es demasiado grande",
       "uploadFailed": "Error al subir. Vuelve a intentarlo.",
+      "uploadUnavailable": "La carga de archivos privados no está disponible ahora.",
       "generic": "Algo ha fallado. Inténtalo de nuevo.",
       "pan": "Busque su número GST y confirme su negocio.",
       "city": "Introduce una ciudad o localidad de 2 a 60 caracteres."
@@ -2531,7 +2532,7 @@
     "metaDescription": "Despeja tus reciclables. Recibe dinero. Fotos, recogida o entrega y pago después del pesaje.",
     "eyebrow": "India",
     "title": "Reserva una recogida en casa",
-    "lead": "Selecciona lo que tienes, elige una tienda cercana y cobra en efectivo o por UPI tras el pesaje.",
+    "lead": "Selecciona lo que tienes, elige una tienda cercana y cobra en efectivo tras el pesaje.",
     "promises": {
       "label": "Por qué vender aquí",
       "noAccount": "Verifica tu móvil para reservar",
@@ -2650,7 +2651,7 @@
       "dropoff": "Los entregas en la tienda",
       "whenValue": "{day} · {window}, {time}",
       "youGet": "Recibirás aproximadamente {amount}",
-      "payNote": "La tienda pesa los materiales y te paga en efectivo o por UPI.",
+      "payNote": "La tienda pesa los materiales y te paga en efectivo.",
       "phoneTitle": "Confirma tu número de móvil",
       "phoneLead": "Enviaremos un código de 6 dígitos por SMS. La reserva queda vinculada a este número para seguirla desde cualquier teléfono.",
       "bookingAs": "Reservando con {phone}",
@@ -2807,7 +2808,7 @@
       "requested": "{mode, select, pickup {Esperando a que {shop} acepte} other {Esperando a que {shop} confirme}}",
       "requestedBody": "Hemos enviado tu solicitud. Esta página se actualiza en cuanto respondan.",
       "accepted": "{mode, select, pickup {{shop} aceptó tu recogida} other {{shop} te espera}}",
-      "acceptedBody": "Ten los materiales preparados. Primero se pesan y después cobras en efectivo o por UPI.",
+      "acceptedBody": "Ten los materiales preparados. Primero se pesan y después cobras en efectivo.",
       "on_the_way": "{shop} está de camino",
       "on_the_wayBody": "Deja los materiales preparados cerca de la puerta.",
       "completed": "¡Completado! Has recibido {amount}",
@@ -2848,7 +2849,7 @@
     "money": {
       "title": "Tu dinero y tus puntos",
       "estimate": "Recibirás aproximadamente {amount}",
-      "estimateNote": "La tienda pesa los materiales y te paga en efectivo o por UPI.",
+      "estimateNote": "La tienda pesa los materiales y te paga en efectivo.",
       "paid": "Has recibido {amount}",
       "paidBy": "Pago {method, select, upi {por UPI} other {en efectivo}} · {date}",
       "estimateWas": "La estimación era {amount}",
@@ -3949,8 +3950,8 @@
   },
   "industry": {
     "title": "Referencias industriales",
-    "lead": "Busque en el libro proporcionado. Estas referencias no están verificadas ni autorizan el comercio o procesamiento de materiales.",
-    "sourceNote": "El texto fuente se muestra en el inglés original del libro.",
+    "lead": "Busca en las referencias proporcionadas. Estas referencias no están verificadas ni autorizan el comercio o procesamiento de materiales.",
+    "sourceNote": "Los textos de referencia se muestran en inglés.",
     "sectors": "Referencias sectoriales",
     "industries": "Matriz industrial",
     "lifecycles": "Ciclo de vida del material",
@@ -4056,6 +4057,10 @@
     "note": "Son declaraciones del fabricante, no verificaciones independientes de calidad, propiedad o cumplimiento. Los registros guardados no se pueden editar."
   },
   "tradeLifecycle": {
+    "cashRecord": "Registrar efectivo recibido",
+    "cashReported": "Recepción de efectivo declarada",
+    "cashNote": "El comprador paga directamente al vendedor. Luma registra lo que declara el vendedor.",
+    "cashReference": "Referencia del recibo de efectivo",
     "title": "Pago y entrega",
     "collectionLabel": "Pago del comprador",
     "settlementLabel": "Liquidación al vendedor",
@@ -4562,6 +4567,11 @@
     "loadSaved": "Abrir versión guardada"
   },
   "businessSubscriptions": {
+    "draftsTitle": "Borradores de facturas",
+    "draftsEmpty": "Aún no hay borradores.",
+    "draftTotal": "Subtotal del borrador antes de impuestos",
+    "draftBook": "Tarifario {version}",
+    "draftUsage": "{count} pedidos en efectivo",
     "title": "Plan del centro",
     "lead": "Guarda una preferencia de plan para este centro.",
     "off": "La facturación está desactivada. Guardar una preferencia no inicia una suscripción de pago.",
@@ -4649,5 +4659,124 @@
     "requestsBody": "Elimina tu cuenta abajo o escribe a soporte para acceder, corregir o borrar datos. Verifica la titularidad; no envíes documentos de identidad por correo. Resuelve primero el trabajo o la titularidad pendientes.",
     "retentionTitle": "Qué queda tras el cierre",
     "retentionBody": "El cierre elimina el acceso y las credenciales. Pueden conservarse pruebas comerciales, de pagos, seguridad y auditoría para revisión. No se borra cada registro. Consulta a soporte sobre conservación y plazos."
+  },
+  "participantDirectory": {
+    "title": "Elige tu función",
+    "search": "Buscar funciones",
+    "empty": "No hay funciones que coincidan",
+    "continue": "Continuar",
+    "apply": "Solicitar esta función",
+    "roles": {
+      "household": "Hogar",
+      "small_business": "Tienda o pequeña empresa",
+      "industrial_seller": "Vendedor de chatarra industrial",
+      "institution": "Entidad",
+      "kabadiwala": "Kabadiwala",
+      "saathi": "Saathi",
+      "dry_waste_centre": "Centro de residuos secos o cooperativa de recolectores",
+      "large_yard": "Patio de acopio grande",
+      "collection_contractor": "Contratista de recogida a domicilio",
+      "rural_collector": "Entidad local rural o grupo de autoayuda",
+      "trader": "Comerciante, intermediario o exportador",
+      "preprocessor": "Preprocesador",
+      "recycler": "Empresa de reciclaje",
+      "e_waste_operator": "Recolector, desmontador o reacondicionador de residuos electrónicos",
+      "wet_waste_processor": "Procesador de residuos húmedos",
+      "intermediary_manufacturer": "Fabricante de bienes intermedios",
+      "end_goods_manufacturer": "Fabricante de productos finales",
+      "epr_brand": "Marca con obligaciones de RAP",
+      "pro": "Organización de responsabilidad del productor",
+      "epr_trading": "Comercio de RAP",
+      "carbon_trading": "Comercio de carbono",
+      "transporter": "Transportista y manifiestos",
+      "equipment_supplier": "Proveedor de equipos",
+      "boiler_water_supplier": "Proveedor de calderas, plantas de tratamiento o cisternas",
+      "weighing_vendor": "Proveedor de básculas o puentes de pesaje",
+      "solar_provider": "Proveedor de energía solar",
+      "environmental_engineer": "Ingeniería ambiental",
+      "hr_provider": "Proveedor de recursos humanos",
+      "accounting_provider": "Contabilidad y cumplimiento",
+      "employee_tracking": "Seguimiento del personal",
+      "waste_picker_union": "ONG o sindicato de recolectores",
+      "city_official": "Funcionario municipal",
+      "csr_lender_auditor": "Equipo de RSC, prestamista o auditor",
+      "luma_team": "Equipo de Luma.Green",
+      "ward_official": "Funcionario de distrito",
+      "community_champion": "Representante comunitario",
+      "payment_partner": "Socio de pagos",
+      "rewards_partner": "Socio de recompensas",
+      "welfare_partner": "Socio de seguros o asistencia social",
+      "society_partner": "Socio de gestión de comunidades o instalaciones",
+      "voice_partner": "Socio de servicios de voz o idiomas"
+    },
+    "groups": {
+      "generators": "Hogares y vendedores de materiales",
+      "collection": "Recogida y acopio",
+      "processing": "Procesamiento y fabricación",
+      "markets": "Marcas y mercados ambientales",
+      "services": "Logística y servicios",
+      "partners": "Comunidad, gobierno y socios"
+    }
+  },
+  "apartmentCollection": {
+    "pickup": "Recogida en apartamento",
+    "code": "Código de la comunidad",
+    "noRoute": "No hay una recogida verificada para tu apartamento. Pide al administrador del edificio o a la asociación vecinal que organice la recogida."
+  },
+  "householdFamily": {
+    "title": "Familiares",
+    "description": "Tus familiares pueden ver el progreso de las recogidas que compartes. Tus recibos, fotos y huella de carbono siguen siendo privados.",
+    "phone": "Número de móvil del familiar",
+    "invite": "Crear invitación",
+    "code": "Código de invitación",
+    "codeHelp": "Comparte el código en privado. Caduca en 7 días. Luma no envía ningún mensaje.",
+    "join": "Unirse al hogar",
+    "joinedAt": "Se unió el {date}",
+    "leave": "Salir del hogar",
+    "collections": "Recogidas familiares compartidas",
+    "share": "Compartir progreso",
+    "makePrivate": "Dejar de compartir",
+    "recent": "Cierra sesión y vuelve a iniciarla antes de continuar.",
+    "invalid": "El código es inválido, ha caducado o corresponde a otro móvil.",
+    "verified": "Verifica tu móvil para usar las invitaciones."
+  },
+  "householdTools": {
+    "navigation": "Herramientas del hogar",
+    "recycle": "Reciclar",
+    "activity": "Actividad",
+    "services": "Servicios",
+    "footprint": "Huella",
+    "settings": "Ajustes",
+    "loading": "Cargando reservas…",
+    "noBookings": "Aún no hay reservas.",
+    "electricityTitle": "Huella del consumo eléctrico",
+    "electricityReading": "Consumo de electricidad de la red (kWh)",
+    "invalidReading": "Introduce los kWh de la factura o del contador. Usa hasta tres decimales.",
+    "calculate": "Calcular estimación",
+    "estimate": "Emisiones estimadas de la red: {amount} kg de CO₂",
+    "privateCalculation": "Tu lectura se queda en esta pantalla. El resultado solo abarca la electricidad.",
+    "gridSource": "Factor de la red de India, CEA 2025–26",
+    "airQuality": "Calidad del aire",
+    "roofSolar": "Comprobar energía solar en el tejado",
+    "roofPrecision": "La comprobación del tejado requiere una ubicación precisa.",
+    "lookupConsent": "Enviar mi ubicación a Google Maps para esta comprobación. Luma no la guarda.",
+    "lookupUnavailable": "No hay resultados disponibles.",
+    "locationUnavailable": "No se pudo obtener una ubicación adecuada.",
+    "lookupLimit": "Se alcanzó el límite de consultas. Inténtalo más tarde.",
+    "airScore": "Índice universal de calidad del aire: {score} de 100. Cuanto más alto, mejor.",
+    "roofEstimate": "Producción estimada del tejado: {energy} kWh/año (CC) con {panels} paneles."
+  },
+  "homeReminder": {
+    "title": "Aviso al salir de casa",
+    "consent": "Configúralo en casa. Este dispositivo usa tu ubicación en segundo plano para detectar cuándo sales. Luma no recibe tu historial de ubicación.",
+    "enable": "Activar aviso al salir de casa",
+    "disable": "Desactivar aviso al salir de casa",
+    "notificationTitle": "Antes de salir",
+    "notificationBody": "Comprueba qué luces y aparatos puedes apagar.",
+    "unavailable": "El aviso al salir de casa no está disponible. Revisa los permisos del dispositivo e inténtalo en casa.",
+    "dailyTitle": "Aviso diario",
+    "time": "Hora del aviso",
+    "add": "Añadir al calendario",
+    "calendarHelp": "Abre el archivo de calendario para programar un aviso diario."
   }
 }

@@ -1,7 +1,7 @@
 import { v } from "convex/values";
 
 import { vSaathiTime } from "./drafts";
-import { vPaymentVerification } from "./gatewayPayments";
+import { vDirectCashReceipt, vPaymentVerification } from "./gatewayPayments";
 import { vMaterialOfferSpecification } from "./materialOfferSpecification";
 import { vBookingStatus, vFamily, vOrgKind, vTradeStatus } from "./validators";
 
@@ -85,6 +85,8 @@ export const vTradeView = v.object({
   invoiceNo: v.optional(v.string()),
   /** Old internal receipt number; it is not a verified GST invoice. */
   legacyReceiptNo: v.optional(v.string()),
+  directCashReceipt: v.optional(vDirectCashReceipt),
+  directCashAvailable: v.optional(v.boolean()),
   paymentVerification: vPaymentVerification,
   needsEwayBill: v.boolean(),
   inEscrow: v.boolean(),
@@ -107,5 +109,6 @@ export const vListingView = v.object({
   note: v.optional(v.string()),
   status: v.union(v.literal("open"), v.literal("sold"), v.literal("withdrawn")),
   isMine: v.boolean(),
+  directCashAvailable: v.optional(v.boolean()),
   createdAt: v.number(),
 });

@@ -95,14 +95,11 @@ export const recordUpload = internalMutation({
     contentType: v.string(),
     size: v.number(),
     sha256: v.string(),
-    storageId: v.optional(v.id("_storage")),
-    uploadId: v.optional(v.id("qualityUploads")),
+    uploadId: v.id("qualityUploads"),
   },
   returns: v.id("qualityAttachments"),
   handler: async (ctx, args) => {
-    const reservation = args.uploadId
-      ? await ctx.db.get("qualityUploads", args.uploadId)
-      : null;
+    const reservation = await ctx.db.get("qualityUploads", args.uploadId);
     if (reservation?.state === "attached" && reservation.fileId) {
       const scope = await requireOrg(ctx);
       if (
@@ -117,17 +114,7 @@ export const recordUpload = internalMutation({
       args.inspectionId,
       args.shareWithBuyer,
     );
-    if (Boolean(args.storageId) === Boolean(args.uploadId))
-      throw new ConvexError("INVALID_STORAGE");
-    if (args.storageId) {
-      const metadata = await ctx.db.system.get("_storage", args.storageId);
-      if (metadata?.size !== args.size) throw new ConvexError("FILE_NOT_FOUND");
-      const used = await ctx.db
-        .query("qualityAttachments")
-        .withIndex("by_storage", (q) => q.eq("storageId", args.storageId))
-        .first();
-      if (used) throw new ConvexError("FILE_IN_USE");
-    } else if (
+    if (
       reservation?.state !== "pending" ||
       reservation.cleanupAt <= Date.now() ||
       reservation.profileId !== profile._id ||
@@ -149,16 +136,14 @@ export const recordUpload = internalMutation({
       contentType: args.contentType,
       size: args.size,
       sha256: args.sha256,
-      storageId: args.storageId,
-      r2: reservation?.r2,
+      r2: reservation.r2,
       createdBy: profile._id,
       createdAt: now,
     });
-    if (reservation)
-      await ctx.db.patch("qualityUploads", reservation._id, {
-        state: "attached",
-        fileId: id,
-      });
+    await ctx.db.patch("qualityUploads", reservation._id, {
+      state: "attached",
+      fileId: id,
+    });
     await ctx.db.insert("auditLog", {
       orgId: org._id,
       actorProfileId: profile._id,
@@ -173,18 +158,6 @@ export const recordUpload = internalMutation({
       },
     });
     return id;
-  },
-});
-export const discard = internalMutation({
-  args: { storageId: v.id("_storage") },
-  returns: v.null(),
-  handler: async (ctx, args) => {
-    const used = await ctx.db
-      .query("qualityAttachments")
-      .withIndex("by_storage", (q) => q.eq("storageId", args.storageId))
-      .first();
-    if (!used) await ctx.storage.delete(args.storageId);
-    return null;
   },
 });
 /** Server accepts bytes, never a client-chosen storage ID or public download URL. */
@@ -203,6 +176,9 @@ export const upload = action({
       inspectionId: args.inspectionId,
       shareWithBuyer: args.shareWithBuyer,
     });
+    const settings = r2Env();
+    if (settings.writes !== "on" || !settings.config)
+      throw new ConvexError("STORAGE_UNAVAILABLE");
     const name = qualityText(args.name, 120);
     const contentType = validateQualityContent(args.bytes, args.contentType);
     if (contentType === "application/pdf" && args.kind === "photo")
@@ -211,53 +187,30 @@ export const upload = action({
     const sha256 = [...new Uint8Array(digest)]
       .map((n) => n.toString(16).padStart(2, "0"))
       .join("");
-    const settings = r2Env();
-    if (settings.writes === "invalid")
-      throw new ConvexError("STORAGE_UNAVAILABLE");
-    if (settings.writes === "on" && settings.config) {
-      const r2 = {
-        accountId: settings.config.accountId,
-        bucket: settings.config.bucket,
-        key: `quality/${crypto.randomUUID()}`,
-      };
-      const uploadId = await ctx.runMutation(internal.qualityFiles.reserveR2, {
-        inspectionId: args.inspectionId,
-        shareWithBuyer: args.shareWithBuyer,
-        r2,
-        size: args.bytes.byteLength,
-        sha256,
-      });
-      // Reservation survives action crashes and ambiguous provider responses.
-      await putR2(r2, args.bytes, contentType);
-      return ctx.runMutation(internal.qualityFiles.recordUpload, {
-        inspectionId: args.inspectionId,
-        shareWithBuyer: args.shareWithBuyer,
-        kind: args.kind,
-        name,
-        contentType,
-        size: args.bytes.byteLength,
-        sha256,
-        uploadId,
-      });
-    }
-    const storageId = await ctx.storage.store(
-      new Blob([args.bytes], { type: contentType }),
-    );
-    try {
-      return await ctx.runMutation(internal.qualityFiles.recordUpload, {
-        inspectionId: args.inspectionId,
-        shareWithBuyer: args.shareWithBuyer,
-        kind: args.kind,
-        name,
-        contentType,
-        size: args.bytes.byteLength,
-        sha256,
-        storageId,
-      });
-    } catch (error) {
-      await ctx.runMutation(internal.qualityFiles.discard, { storageId });
-      throw error;
-    }
+    const r2 = {
+      accountId: settings.config.accountId,
+      bucket: settings.config.bucket,
+      key: `quality/${crypto.randomUUID()}`,
+    };
+    const uploadId = await ctx.runMutation(internal.qualityFiles.reserveR2, {
+      inspectionId: args.inspectionId,
+      shareWithBuyer: args.shareWithBuyer,
+      r2,
+      size: args.bytes.byteLength,
+      sha256,
+    });
+    // Reservation survives action crashes and ambiguous provider responses.
+    await putR2(r2, args.bytes, contentType, sha256);
+    return ctx.runMutation(internal.qualityFiles.recordUpload, {
+      inspectionId: args.inspectionId,
+      shareWithBuyer: args.shareWithBuyer,
+      kind: args.kind,
+      name,
+      contentType,
+      size: args.bytes.byteLength,
+      sha256,
+      uploadId,
+    });
   },
 });
 export const withdraw = mutation({
@@ -288,6 +241,7 @@ export const board = query({
     orgId: v.id("orgs"),
     canOperate: v.boolean(),
     canWithdraw: v.boolean(),
+    uploadAvailable: v.boolean(),
     inspections: v.array(
       v.object({
         id: v.id("lotInspections"),
@@ -351,6 +305,7 @@ export const board = query({
       orgId: org._id,
       canOperate: role !== "viewer",
       canWithdraw: role === "owner",
+      uploadAvailable: r2Env().writes === "on",
       inspections,
       own: own.map((row) => qualityFileView(row)),
       incoming: incoming
@@ -480,13 +435,13 @@ export const serve = httpAction(async (ctx, request) => {
     "Content-Security-Policy": "sandbox; default-src 'none'",
   };
   const url = new URL(request.url);
-  const fileId = url.pathname.slice("/quality-files/".length);
+  const accessArgs = {
+    fileId: url.pathname.slice("/quality-files/".length),
+    reportId: url.searchParams.get("report") ?? undefined,
+  };
   let file;
   try {
-    file = await ctx.runQuery(internal.qualityFiles.readFile, {
-      fileId,
-      reportId: url.searchParams.get("report") ?? undefined,
-    });
+    file = await ctx.runQuery(internal.qualityFiles.readFile, accessArgs);
   } catch {
     return new Response("UNAVAILABLE", { status: 403, headers });
   }
@@ -502,6 +457,14 @@ export const serve = httpAction(async (ctx, request) => {
     return new Response("UNAVAILABLE", { status: 503, headers });
   }
   if (!blob) return new Response("UNAVAILABLE", { status: 404, headers });
+  if (file.r2) {
+    try {
+      if (!(await ctx.runQuery(internal.qualityFiles.readFile, accessArgs)))
+        return new Response("UNAVAILABLE", { status: 404, headers });
+    } catch {
+      return new Response("UNAVAILABLE", { status: 403, headers });
+    }
+  }
   return new Response(blob, {
     headers: {
       ...headers,

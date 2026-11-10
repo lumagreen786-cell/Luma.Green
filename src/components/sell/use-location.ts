@@ -20,7 +20,10 @@ function coarse(value: number): number {
  * page until booking. Pickup confirmation explains that the approximate
  * point is saved with the booking for nearby-shop dispatch.
  */
-export function useLocation() {
+export function useLocation(
+  precision: "nearby" | "building" = "nearby",
+  onLocation?: (point: Point) => void,
+) {
   const [state, setState] = useState<LocationState>({ status: "off" });
 
   const generation = useRef(0);
@@ -37,24 +40,40 @@ export function useLocation() {
     }
     const current = ++generation.current;
     setState({ status: "locating" });
+    const requiresPreciseLocation = precision === "building";
     navigator.geolocation.getCurrentPosition(
       (position) => {
         if (current !== generation.current) return;
-        setState({
-          status: "on",
-          point: {
-            lat: coarse(position.coords.latitude),
-            lng: coarse(position.coords.longitude),
-          },
-        });
+        const { latitude, longitude, accuracy } = position.coords;
+        if (
+          requiresPreciseLocation &&
+          (!Number.isFinite(accuracy) || accuracy < 0 || accuracy > 30)
+        ) {
+          setState({ status: "failed" });
+          return;
+        }
+        const point = {
+          lat: requiresPreciseLocation ? latitude : coarse(latitude),
+          lng: requiresPreciseLocation ? longitude : coarse(longitude),
+        };
+        if (onLocation) {
+          setState({ status: "off" });
+          onLocation(point);
+        } else {
+          setState({ status: "on", point });
+        }
       },
       () => {
         if (current !== generation.current) return;
         setState({ status: "failed" });
       },
-      { enableHighAccuracy: false, timeout: 15_000, maximumAge: 300_000 },
+      {
+        enableHighAccuracy: requiresPreciseLocation,
+        timeout: 15_000,
+        maximumAge: requiresPreciseLocation ? 0 : 300_000,
+      },
     );
-  }, []);
+  }, [onLocation, precision]);
 
   const stop = useCallback(() => {
     generation.current += 1;

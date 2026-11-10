@@ -68,6 +68,19 @@
         "application_rejected": "Application not approved",
         "stock_low": "Low stock alert"
       }
+    },
+    "homeReminder": {
+      "title": "Home exit reminder",
+      "consent": "Set this up while you are at home. This device uses your location in the background to detect when you leave. Luma receives no location history.",
+      "enable": "Turn on home exit reminder",
+      "disable": "Turn off home exit reminder",
+      "notificationTitle": "Before you leave",
+      "notificationBody": "Check lights and appliances you can switch off.",
+      "unavailable": "The home exit reminder is unavailable. Check your device permissions and try while you are at home.",
+      "dailyTitle": "Daily reminder",
+      "time": "Reminder time",
+      "add": "Add to calendar",
+      "calendarHelp": "Open the calendar file to set a daily alert."
     }
   },
   "hi": {
@@ -139,6 +152,19 @@
         "application_rejected": "आवेदन स्वीकृत नहीं हुआ",
         "stock_low": "कम स्टॉक की सूचना"
       }
+    },
+    "homeReminder": {
+      "title": "घर से निकलते समय रिमाइंडर",
+      "consent": "इसे घर पर रहते हुए सेट करें। डिवाइस पृष्ठभूमि में आपकी लोकेशन का उपयोग करके पता लगाता है कि आप कब निकलते हैं। Luma को आपकी लोकेशन का इतिहास नहीं मिलता।",
+      "enable": "घर से निकलने का रिमाइंडर चालू करें",
+      "disable": "घर से निकलने का रिमाइंडर बंद करें",
+      "notificationTitle": "निकलने से पहले",
+      "notificationBody": "देखें कि कौन-सी लाइटें और उपकरण बंद कर सकते हैं।",
+      "unavailable": "घर से निकलने का रिमाइंडर उपलब्ध नहीं है। डिवाइस की अनुमतियाँ जाँचें और घर पर फिर कोशिश करें।",
+      "dailyTitle": "रोज़ का रिमाइंडर",
+      "time": "रिमाइंडर का समय",
+      "add": "कैलेंडर में जोड़ें",
+      "calendarHelp": "रोज़ का अलर्ट सेट करने के लिए कैलेंडर फ़ाइल खोलें।"
     }
   },
   "bn": {
@@ -210,6 +236,19 @@
         "application_rejected": "আবেদন অনুমোদিত হয়নি",
         "stock_low": "কম মজুতের সতর্কতা"
       }
+    },
+    "homeReminder": {
+      "title": "বাড়ি ছাড়ার সময় মনে করানো",
+      "consent": "বাড়িতে থাকতেই সেট করুন। কখন বের হন তা বুঝতে ডিভাইস ব্যাকগ্রাউন্ডে অবস্থান ব্যবহার করে। Luma আপনার অবস্থানের ইতিহাস পায় না।",
+      "enable": "বাড়ি ছাড়ার স্মরণ চালু করুন",
+      "disable": "বাড়ি ছাড়ার স্মরণ বন্ধ করুন",
+      "notificationTitle": "বের হওয়ার আগে",
+      "notificationBody": "কোন আলো ও যন্ত্র বন্ধ করতে পারেন দেখুন।",
+      "unavailable": "বাড়ি ছাড়ার স্মরণ পাওয়া যাচ্ছে না। ডিভাইসের অনুমতি দেখে বাড়িতে থাকাকালীন আবার চেষ্টা করুন।",
+      "dailyTitle": "দৈনিক স্মরণ",
+      "time": "স্মরণের সময়",
+      "add": "ক্যালেন্ডারে যোগ করুন",
+      "calendarHelp": "প্রতিদিনের সতর্কতা সেট করতে ক্যালেন্ডার ফাইল খুলুন।"
     }
   },
   "mr": {
@@ -281,6 +320,19 @@
         "application_rejected": "अर्ज मंजूर झाला नाही",
         "stock_low": "कमी साठ्याची सूचना"
       }
+    },
+    "homeReminder": {
+      "title": "घराबाहेर पडताना स्मरणपत्र",
+      "consent": "घरी असताना हे सेट करा. तुम्ही कधी बाहेर पडता ते ओळखण्यासाठी डिव्हाइस पार्श्वभूमीत तुमचे स्थान वापरते. Luma ला स्थानाचा इतिहास मिळत नाही.",
+      "enable": "घराबाहेर पडण्याचे स्मरणपत्र सुरू करा",
+      "disable": "घराबाहेर पडण्याचे स्मरणपत्र बंद करा",
+      "notificationTitle": "बाहेर पडण्यापूर्वी",
+      "notificationBody": "कोणते दिवे आणि उपकरणे बंद करू शकता ते पाहा.",
+      "unavailable": "घराबाहेर पडण्याचे स्मरणपत्र उपलब्ध नाही. डिव्हाइसच्या परवानग्या तपासा आणि घरी असताना पुन्हा प्रयत्न करा.",
+      "dailyTitle": "दररोजचे स्मरणपत्र",
+      "time": "स्मरणपत्राची वेळ",
+      "add": "कॅलेंडरमध्ये जोडा",
+      "calendarHelp": "दररोज सूचना मिळवण्यासाठी कॅलेंडर फाइल उघडा."
     }
   },
   "ta": {
@@ -352,6 +404,19 @@
         "application_rejected": "விண்ணப்பம் அங்கீகரிக்கப்படவில்லை",
         "stock_low": "குறைந்த இருப்பு எச்சரிக்கை"
       }
+    },
+    "homeReminder": {
+      "title": "வீட்டைவிட்டு வெளியேறும்போது நினைவூட்டல்",
+      "consent": "வீட்டில் இருக்கும்போது அமைக்கவும். நீங்கள் வெளியேறுவதைக் கண்டறிய சாதனம் பின்னணியில் உங்கள் இருப்பிடத்தைப் பயன்படுத்தும். Luma உங்கள் இருப்பிட வரலாற்றைப் பெறாது.",
+      "enable": "வெளியேறும் நினைவூட்டலை இயக்கவும்",
+      "disable": "வெளியேறும் நினைவூட்டலை முடக்கவும்",
+      "notificationTitle": "வெளியேறுவதற்கு முன்",
+      "notificationBody": "அணைக்கக்கூடிய விளக்குகளையும் சாதனங்களையும் சரிபார்க்கவும்.",
+      "unavailable": "வெளியேறும் நினைவூட்டல் கிடைக்கவில்லை. சாதன அனுமதிகளைச் சரிபார்த்து வீட்டில் இருக்கும்போது மீண்டும் முயலவும்.",
+      "dailyTitle": "தினசரி நினைவூட்டல்",
+      "time": "நினைவூட்டல் நேரம்",
+      "add": "நாட்காட்டியில் சேர்க்கவும்",
+      "calendarHelp": "தினசரி அறிவிப்பை அமைக்க நாட்காட்டிக் கோப்பைத் திறக்கவும்."
     }
   },
   "te": {
@@ -423,6 +488,19 @@
         "application_rejected": "దరఖాస్తు ఆమోదించబడలేదు",
         "stock_low": "తక్కువ నిల్వ హెచ్చరిక"
       }
+    },
+    "homeReminder": {
+      "title": "ఇంటి నుంచి బయలుదేరే ముందు గుర్తుచేసే సూచన",
+      "consent": "ఇంట్లో ఉన్నప్పుడే దీన్ని అమర్చండి. మీరు బయలుదేరినప్పుడు తెలుసుకోవడానికి పరికరం నేపథ్యంలో మీ స్థానాన్ని వాడుతుంది. Luma మీ స్థాన చరిత్రను పొందదు.",
+      "enable": "బయలుదేరే సూచనను ఆన్ చేయండి",
+      "disable": "బయలుదేరే సూచనను ఆఫ్ చేయండి",
+      "notificationTitle": "బయలుదేరే ముందు",
+      "notificationBody": "ఆర్పగల లైట్లు, పరికరాలను చూసుకోండి.",
+      "unavailable": "బయలుదేరే సూచన అందుబాటులో లేదు. పరికర అనుమతులను చూసి ఇంట్లో ఉన్నప్పుడు మళ్లీ ప్రయత్నించండి.",
+      "dailyTitle": "రోజువారీ గుర్తుచేసే సూచన",
+      "time": "సూచన సమయం",
+      "add": "క్యాలెండర్‌కు జోడించండి",
+      "calendarHelp": "రోజువారీ హెచ్చరికను అమర్చడానికి క్యాలెండర్ ఫైల్ తెరవండి."
     }
   },
   "kn": {
@@ -494,6 +572,19 @@
         "application_rejected": "ಅರ್ಜಿ ಅನುಮೋದನೆಯಾಗಿಲ್ಲ",
         "stock_low": "ಕಡಿಮೆ ದಾಸ್ತಾನು ಎಚ್ಚರಿಕೆ"
       }
+    },
+    "homeReminder": {
+      "title": "ಮನೆಯಿಂದ ಹೊರಡುವ ಜ್ಞಾಪನೆ",
+      "consent": "ಮನೆಯಲ್ಲಿರುವಾಗ ಇದನ್ನು ಹೊಂದಿಸಿ. ನೀವು ಮನೆಯಿಂದ ಹೊರಡುವುದನ್ನು ಗುರುತಿಸಲು ಸಾಧನವು ಹಿನ್ನಲೆಯಲ್ಲಿ ನಿಮ್ಮ ಸ್ಥಳವನ್ನು ಬಳಸುತ್ತದೆ. ಲುಮಾಗೆ ನಿಮ್ಮ ಸ್ಥಳದ ಇತಿಹಾಸ ಸಿಗುವುದಿಲ್ಲ.",
+      "enable": "ಹೊರಡುವ ಜ್ಞಾಪನೆ ಆರಂಭಿಸಿ",
+      "disable": "ಹೊರಡುವ ಜ್ಞಾಪನೆ ನಿಲ್ಲಿಸಿ",
+      "notificationTitle": "ಹೊರಡುವ ಮೊದಲು",
+      "notificationBody": "ಆರಿಸಬಹುದಾದ ದೀಪಗಳು ಮತ್ತು ಉಪಕರಣಗಳನ್ನು ಪರಿಶೀಲಿಸಿ.",
+      "unavailable": "ಹೊರಡುವ ಜ್ಞಾಪನೆ ಲಭ್ಯವಿಲ್ಲ. ಸಾಧನದ ಅನುಮತಿಗಳನ್ನು ಪರಿಶೀಲಿಸಿ ಮತ್ತು ಮನೆಯಲ್ಲಿರುವಾಗ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
+      "dailyTitle": "ದೈನಂದಿನ ಜ್ಞಾಪನೆ",
+      "time": "ಜ್ಞಾಪನೆಯ ಸಮಯ",
+      "add": "ಕ್ಯಾಲೆಂಡರ್‌ಗೆ ಸೇರಿಸಿ",
+      "calendarHelp": "ದೈನಂದಿನ ಜ್ಞಾಪನೆ ಹೊಂದಿಸಲು ಕ್ಯಾಲೆಂಡರ್ ಕಡತ ತೆರೆಯಿರಿ."
     }
   },
   "ml": {
@@ -565,6 +656,19 @@
         "application_rejected": "അപേക്ഷ അംഗീകരിച്ചില്ല",
         "stock_low": "കുറഞ്ഞ സ്റ്റോക്ക് മുന്നറിയിപ്പ്"
       }
+    },
+    "homeReminder": {
+      "title": "വീട്ടിൽനിന്ന് ഇറങ്ങുമ്പോഴുള്ള ഓർമപ്പെടുത്തൽ",
+      "consent": "വീട്ടിലുള്ളപ്പോൾ ഇത് സജ്ജീകരിക്കുക. നിങ്ങൾ പുറത്തിറങ്ങുന്നത് തിരിച്ചറിയാൻ ഉപകരണം പശ്ചാത്തലത്തിൽ ലൊക്കേഷൻ ഉപയോഗിക്കുന്നു. Luma ലൊക്കേഷൻ ചരിത്രം സ്വീകരിക്കുന്നില്ല.",
+      "enable": "പുറത്തിറങ്ങുമ്പോഴുള്ള ഓർമപ്പെടുത്തൽ ഓൺ ചെയ്യുക",
+      "disable": "പുറത്തിറങ്ങുമ്പോഴുള്ള ഓർമപ്പെടുത്തൽ ഓഫ് ചെയ്യുക",
+      "notificationTitle": "ഇറങ്ങും മുമ്പ്",
+      "notificationBody": "ഓഫ് ചെയ്യാവുന്ന ലൈറ്റുകളും ഉപകരണങ്ങളും പരിശോധിക്കുക.",
+      "unavailable": "പുറത്തിറങ്ങുമ്പോഴുള്ള ഓർമപ്പെടുത്തൽ ലഭ്യമല്ല. ഉപകരണ അനുമതികൾ പരിശോധിച്ച് വീട്ടിലുള്ളപ്പോൾ വീണ്ടും ശ്രമിക്കുക.",
+      "dailyTitle": "ദിവസേനയുള്ള ഓർമപ്പെടുത്തൽ",
+      "time": "ഓർമപ്പെടുത്തൽ സമയം",
+      "add": "കലണ്ടറിൽ ചേർക്കുക",
+      "calendarHelp": "ദിവസേന അറിയിപ്പ് സജ്ജീകരിക്കാൻ കലണ്ടർ ഫയൽ തുറക്കുക."
     }
   },
   "gu": {
@@ -636,6 +740,19 @@
         "application_rejected": "અરજી મંજૂર થઈ નથી",
         "stock_low": "ઓછા જથ્થાની સૂચના"
       }
+    },
+    "homeReminder": {
+      "title": "ઘર છોડતી વખતની યાદ",
+      "consent": "ઘરે હો ત્યારે સેટ કરો. તમે ઘર છોડો ત્યારે તે જાણવા ઉપકરણ પૃષ્ઠભૂમિમાં તમારું સ્થાન વાપરે છે. Luma ને તમારા સ્થાનનો ઇતિહાસ મળતો નથી.",
+      "enable": "ઘર છોડતી વખતની યાદ ચાલુ કરો",
+      "disable": "ઘર છોડતી વખતની યાદ બંધ કરો",
+      "notificationTitle": "નીકળતાં પહેલાં",
+      "notificationBody": "કઈ લાઇટો અને ઉપકરણો બંધ કરી શકો તે જુઓ.",
+      "unavailable": "ઘર છોડતી વખતની યાદ ઉપલબ્ધ નથી. ઉપકરણની પરવાનગીઓ તપાસો અને ઘરે હો ત્યારે ફરી પ્રયાસ કરો.",
+      "dailyTitle": "દૈનિક યાદ",
+      "time": "યાદનો સમય",
+      "add": "કૅલેન્ડરમાં ઉમેરો",
+      "calendarHelp": "દરરોજની સૂચના સેટ કરવા કૅલેન્ડર ફાઇલ ખોલો."
     }
   },
   "pa": {
@@ -707,6 +824,19 @@
         "application_rejected": "ਅਰਜ਼ੀ ਮਨਜ਼ੂਰ ਨਹੀਂ ਹੋਈ",
         "stock_low": "ਘੱਟ ਸਟਾਕ ਦੀ ਸੂਚਨਾ"
       }
+    },
+    "homeReminder": {
+      "title": "ਘਰੋਂ ਨਿਕਲਣ ਦੀ ਯਾਦ",
+      "consent": "ਘਰ ਹੋਣ ਵੇਲੇ ਇਸ ਨੂੰ ਸੈੱਟ ਕਰੋ। ਤੁਹਾਡੇ ਨਿਕਲਣ ਦਾ ਪਤਾ ਲਗਾਉਣ ਲਈ ਡਿਵਾਈਸ ਪਿਛੋਕੜ ਵਿੱਚ ਤੁਹਾਡੀ ਟਿਕਾਣਾ ਜਾਣਕਾਰੀ ਵਰਤਦਾ ਹੈ। Luma ਨੂੰ ਟਿਕਾਣੇ ਦਾ ਇਤਿਹਾਸ ਨਹੀਂ ਮਿਲਦਾ।",
+      "enable": "ਘਰੋਂ ਨਿਕਲਣ ਦੀ ਯਾਦ ਚਾਲੂ ਕਰੋ",
+      "disable": "ਘਰੋਂ ਨਿਕਲਣ ਦੀ ਯਾਦ ਬੰਦ ਕਰੋ",
+      "notificationTitle": "ਨਿਕਲਣ ਤੋਂ ਪਹਿਲਾਂ",
+      "notificationBody": "ਦੇਖੋ ਕਿਹੜੀਆਂ ਬੱਤੀਆਂ ਅਤੇ ਉਪਕਰਨ ਬੰਦ ਕਰ ਸਕਦੇ ਹੋ।",
+      "unavailable": "ਘਰੋਂ ਨਿਕਲਣ ਦੀ ਯਾਦ ਉਪਲਬਧ ਨਹੀਂ ਹੈ। ਡਿਵਾਈਸ ਦੀਆਂ ਇਜਾਜ਼ਤਾਂ ਦੇਖੋ ਅਤੇ ਘਰ ਹੋਣ ਵੇਲੇ ਫਿਰ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+      "dailyTitle": "ਰੋਜ਼ਾਨਾ ਯਾਦ",
+      "time": "ਯਾਦ ਦਾ ਸਮਾਂ",
+      "add": "ਕੈਲੰਡਰ ਵਿੱਚ ਜੋੜੋ",
+      "calendarHelp": "ਰੋਜ਼ਾਨਾ ਸੂਚਨਾ ਲਗਾਉਣ ਲਈ ਕੈਲੰਡਰ ਫਾਈਲ ਖੋਲ੍ਹੋ।"
     }
   },
   "ur": {
@@ -778,6 +908,19 @@
         "application_rejected": "درخواست منظور نہیں ہوئی",
         "stock_low": "کم ذخیرے کی اطلاع"
       }
+    },
+    "homeReminder": {
+      "title": "گھر سے نکلنے کی یاد دہانی",
+      "consent": "گھر پر رہتے ہوئے اسے ترتیب دیں۔ آلہ پس منظر میں آپ کا مقام استعمال کرتا ہے تاکہ آپ کے نکلنے کا پتا چلے۔ لوما کو آپ کے مقامات کی تاریخ نہیں ملتی۔",
+      "enable": "گھر سے نکلنے کی یاد دہانی فعال کریں",
+      "disable": "گھر سے نکلنے کی یاد دہانی بند کریں",
+      "notificationTitle": "جانے سے پہلے",
+      "notificationBody": "وہ بتیاں اور آلات دیکھیں جنہیں بند کر سکتے ہیں۔",
+      "unavailable": "گھر سے نکلنے کی یاد دہانی دستیاب نہیں۔ آلے کی اجازتیں دیکھیں اور گھر سے دوبارہ کوشش کریں۔",
+      "dailyTitle": "روزانہ یاد دہانی",
+      "time": "یاد دہانی کا وقت",
+      "add": "کیلنڈر میں شامل کریں",
+      "calendarHelp": "روزانہ یاد دہانی کے لیے کیلنڈر فائل کھولیں۔"
     }
   },
   "ar": {
@@ -849,6 +992,19 @@
         "application_rejected": "لم تتم الموافقة على الطلب",
         "stock_low": "تنبيه انخفاض المخزون"
       }
+    },
+    "homeReminder": {
+      "title": "تذكير عند مغادرة المنزل",
+      "consent": "اضبط التذكير وأنت في المنزل. يستخدم الجهاز موقعك في الخلفية لمعرفة وقت المغادرة. لا تستلم لوما سجل مواقعك.",
+      "enable": "فعّل تذكير مغادرة المنزل",
+      "disable": "أوقف تذكير مغادرة المنزل",
+      "notificationTitle": "قبل المغادرة",
+      "notificationBody": "تحقق من الأضواء والأجهزة التي يمكنك إطفاؤها.",
+      "unavailable": "تذكير المغادرة غير متاح. تحقق من أذونات الجهاز وحاول مرة أخرى من المنزل.",
+      "dailyTitle": "تذكير يومي",
+      "time": "وقت التذكير",
+      "add": "أضف إلى التقويم",
+      "calendarHelp": "افتح ملف التقويم لتعيين تنبيه يومي."
     }
   },
   "as": {
@@ -920,6 +1076,19 @@
         "application_rejected": "আবেদন অনুমোদিত হোৱা নাই",
         "stock_low": "কম মজুতৰ সতৰ্কতা"
       }
+    },
+    "homeReminder": {
+      "title": "ঘৰৰ পৰা ওলোৱাৰ সোঁৱৰণী",
+      "consent": "ঘৰত থাকোঁতে ছেট কৰক। আপুনি কেতিয়া ওলায় জানিবলৈ ডিভাইচে পটভূমিত আপোনাৰ অৱস্থান ব্যৱহাৰ কৰে। Luma-এ অৱস্থানৰ ইতিহাস নাপায়।",
+      "enable": "ঘৰৰ পৰা ওলোৱাৰ সোঁৱৰণী অন কৰক",
+      "disable": "ঘৰৰ পৰা ওলোৱাৰ সোঁৱৰণী অফ কৰক",
+      "notificationTitle": "ওলোৱাৰ আগতে",
+      "notificationBody": "কোনবোৰ লাইট আৰু সঁজুলি বন্ধ কৰিব পাৰে চাওক।",
+      "unavailable": "ঘৰৰ পৰা ওলোৱাৰ সোঁৱৰণী উপলব্ধ নহয়। ডিভাইচৰ অনুমতি পৰীক্ষা কৰক আৰু ঘৰত থাকোঁতে পুনৰ চেষ্টা কৰক।",
+      "dailyTitle": "দৈনিক সোঁৱৰণী",
+      "time": "সোঁৱৰণীৰ সময়",
+      "add": "কেলেণ্ডাৰত যোগ কৰক",
+      "calendarHelp": "দৈনিক জাননী ছেট কৰিবলৈ কেলেণ্ডাৰৰ ফাইল খুলক।"
     }
   },
   "ne": {
@@ -991,6 +1160,19 @@
         "application_rejected": "आवेदन स्वीकृत भएन",
         "stock_low": "कम मौज्दातको सूचना"
       }
+    },
+    "homeReminder": {
+      "title": "घरबाट निस्कँदाको सम्झना",
+      "consent": "घरमै हुँदा सेट गर्नुहोस्। तपाईं निस्किएको पत्ता लगाउन उपकरणले पृष्ठभूमिमा स्थान प्रयोग गर्छ। Luma ले स्थानको इतिहास पाउँदैन।",
+      "enable": "निस्कँदाको सम्झना चालु गर्नुहोस्",
+      "disable": "निस्कँदाको सम्झना बन्द गर्नुहोस्",
+      "notificationTitle": "निस्कनुअघि",
+      "notificationBody": "बन्द गर्न सकिने बत्ती र उपकरण जाँच्नुहोस्।",
+      "unavailable": "घरबाट निस्कँदाको सम्झना उपलब्ध छैन। उपकरणको अनुमति जाँच्नुहोस् र घरमा हुँदा फेरि प्रयास गर्नुहोस्।",
+      "dailyTitle": "दैनिक सम्झना",
+      "time": "सम्झनाको समय",
+      "add": "क्यालेन्डरमा थप्नुहोस्",
+      "calendarHelp": "दैनिक सूचना सेट गर्न क्यालेन्डर फाइल खोल्नुहोस्।"
     }
   },
   "es": {
@@ -1062,6 +1244,19 @@
         "application_rejected": "Solicitud no aprobada",
         "stock_low": "Aviso de existencias bajas"
       }
+    },
+    "homeReminder": {
+      "title": "Aviso al salir de casa",
+      "consent": "Configúralo en casa. Este dispositivo usa tu ubicación en segundo plano para detectar cuándo sales. Luma no recibe tu historial de ubicación.",
+      "enable": "Activar aviso al salir de casa",
+      "disable": "Desactivar aviso al salir de casa",
+      "notificationTitle": "Antes de salir",
+      "notificationBody": "Comprueba qué luces y aparatos puedes apagar.",
+      "unavailable": "El aviso al salir de casa no está disponible. Revisa los permisos del dispositivo e inténtalo en casa.",
+      "dailyTitle": "Aviso diario",
+      "time": "Hora del aviso",
+      "add": "Añadir al calendario",
+      "calendarHelp": "Abre el archivo de calendario para programar un aviso diario."
     }
   },
   "fr": {
@@ -1133,6 +1328,19 @@
         "application_rejected": "Candidature non approuvée",
         "stock_low": "Alerte de stock faible"
       }
+    },
+    "homeReminder": {
+      "title": "Rappel au départ du domicile",
+      "consent": "Configurez le rappel chez vous. Cet appareil utilise votre position en arrière-plan pour détecter votre départ. Luma ne reçoit aucun historique de position.",
+      "enable": "Activer le rappel au départ",
+      "disable": "Désactiver le rappel au départ",
+      "notificationTitle": "Avant de partir",
+      "notificationBody": "Vérifiez les lumières et les appareils que vous pouvez éteindre.",
+      "unavailable": "Le rappel au départ est indisponible. Vérifiez les autorisations de l’appareil et réessayez chez vous.",
+      "dailyTitle": "Rappel quotidien",
+      "time": "Heure du rappel",
+      "add": "Ajouter au calendrier",
+      "calendarHelp": "Ouvrez le fichier de calendrier pour programmer une alerte quotidienne."
     }
   },
   "vi": {
@@ -1204,6 +1412,19 @@
         "application_rejected": "Đơn chưa được duyệt",
         "stock_low": "Cảnh báo tồn kho thấp"
       }
+    },
+    "homeReminder": {
+      "title": "Nhắc nhở khi rời nhà",
+      "consent": "Thiết lập khi bạn ở nhà. Thiết bị dùng vị trí trong nền để nhận biết lúc bạn rời đi. Luma không nhận lịch sử vị trí của bạn.",
+      "enable": "Bật nhắc nhở khi rời nhà",
+      "disable": "Tắt nhắc nhở khi rời nhà",
+      "notificationTitle": "Trước khi bạn rời đi",
+      "notificationBody": "Kiểm tra đèn và thiết bị có thể tắt.",
+      "unavailable": "Tính năng nhắc khi rời nhà không khả dụng. Kiểm tra quyền trên thiết bị và thử lại khi ở nhà.",
+      "dailyTitle": "Nhắc nhở hằng ngày",
+      "time": "Giờ nhắc",
+      "add": "Thêm vào lịch",
+      "calendarHelp": "Mở tệp lịch để thiết lập thông báo hằng ngày."
     }
   },
   "si": {
@@ -1275,6 +1496,19 @@
         "application_rejected": "අයදුම්පත අනුමත නොවීය",
         "stock_low": "අඩු තොග අනතුරු ඇඟවීම"
       }
+    },
+    "homeReminder": {
+      "title": "නිවසින් පිටවන විට සිහිකැඳවීම",
+      "consent": "නිවසේ සිටින විට මෙය සකසන්න. ඔබ පිටවන වේලාව හඳුනා ගැනීමට උපාංගය පසුබිමේ ඔබේ ස්ථානය භාවිත කරයි. Luma වෙත ස්ථාන ඉතිහාසය නොලැබේ.",
+      "enable": "පිටවන විට සිහිකැඳවීම සක්‍රිය කරන්න",
+      "disable": "පිටවන විට සිහිකැඳවීම අක්‍රිය කරන්න",
+      "notificationTitle": "පිටවීමට පෙර",
+      "notificationBody": "නිවා දැමිය හැකි විදුලි පහන් සහ උපකරණ පරීක්ෂා කරන්න.",
+      "unavailable": "නිවසින් පිටවන විට සිහිකැඳවීම ලබාගත නොහැක. උපාංග අවසර පරීක්ෂා කර නිවසේ සිටින විට නැවත උත්සාහ කරන්න.",
+      "dailyTitle": "දෛනික සිහිකැඳවීම",
+      "time": "සිහිකැඳවීමේ වේලාව",
+      "add": "දින දර්ශනයට එක් කරන්න",
+      "calendarHelp": "දෛනික දැනුම්දීමක් සැකසීමට දින දර්ශන ගොනුව විවෘත කරන්න."
     }
   },
   "th": {
@@ -1346,6 +1580,19 @@
         "application_rejected": "ใบสมัครไม่ได้รับอนุมัติ",
         "stock_low": "แจ้งเตือนสต็อกต่ำ"
       }
+    },
+    "homeReminder": {
+      "title": "เตือนเมื่อออกจากบ้าน",
+      "consent": "ตั้งค่าขณะอยู่บ้าน อุปกรณ์ใช้ตำแหน่งในเบื้องหลังเพื่อตรวจจับเมื่อคุณออกจากบ้าน Luma ไม่ได้รับประวัติตำแหน่ง",
+      "enable": "เปิดการเตือนเมื่อออกจากบ้าน",
+      "disable": "ปิดการเตือนเมื่อออกจากบ้าน",
+      "notificationTitle": "ก่อนออกจากบ้าน",
+      "notificationBody": "ตรวจดูไฟและเครื่องใช้ที่ปิดได้",
+      "unavailable": "การเตือนเมื่อออกจากบ้านใช้ไม่ได้ ตรวจสอบสิทธิ์ของอุปกรณ์และลองใหม่เมื่ออยู่บ้าน",
+      "dailyTitle": "การเตือนรายวัน",
+      "time": "เวลาเตือน",
+      "add": "เพิ่มลงในปฏิทิน",
+      "calendarHelp": "เปิดไฟล์ปฏิทินเพื่อตั้งการเตือนรายวัน"
     }
   },
   "ru": {
@@ -1417,6 +1664,19 @@
         "application_rejected": "Заявка не одобрена",
         "stock_low": "Оповещение о низком запасе"
       }
+    },
+    "homeReminder": {
+      "title": "Напоминание при выходе из дома",
+      "consent": "Настройте напоминание дома. Устройство использует геолокацию в фоновом режиме, чтобы определить момент выхода. Luma не получает историю перемещений.",
+      "enable": "Включить напоминание при выходе",
+      "disable": "Выключить напоминание при выходе",
+      "notificationTitle": "Перед выходом",
+      "notificationBody": "Проверьте, какие лампы и приборы можно выключить.",
+      "unavailable": "Напоминание недоступно. Проверьте разрешения устройства и повторите попытку дома.",
+      "dailyTitle": "Ежедневное напоминание",
+      "time": "Время напоминания",
+      "add": "Добавить в календарь",
+      "calendarHelp": "Откройте файл календаря, чтобы настроить ежедневное напоминание."
     }
   },
   "de": {
@@ -1488,6 +1748,19 @@
         "application_rejected": "Antrag nicht genehmigt",
         "stock_low": "Warnung bei niedrigem Bestand"
       }
+    },
+    "homeReminder": {
+      "title": "Erinnerung beim Verlassen des Hauses",
+      "consent": "Richten Sie die Erinnerung zu Hause ein. Dieses Gerät nutzt Ihren Standort im Hintergrund, um zu erkennen, wann Sie gehen. Luma erhält keinen Standortverlauf.",
+      "enable": "Erinnerung einschalten",
+      "disable": "Erinnerung ausschalten",
+      "notificationTitle": "Bevor Sie gehen",
+      "notificationBody": "Prüfen Sie, welche Lampen und Geräte Sie ausschalten können.",
+      "unavailable": "Die Erinnerung ist nicht verfügbar. Prüfen Sie die Geräteberechtigungen und versuchen Sie es zu Hause erneut.",
+      "dailyTitle": "Tägliche Erinnerung",
+      "time": "Uhrzeit der Erinnerung",
+      "add": "Zum Kalender hinzufügen",
+      "calendarHelp": "Öffnen Sie die Kalenderdatei für eine tägliche Erinnerung."
     }
   },
   "or": {
@@ -1559,6 +1832,19 @@
         "application_rejected": "ଆବେଦନ ଅନୁମୋଦିତ ହୋଇନାହିଁ",
         "stock_low": "କମ୍ ମହଜୁଦ ସୂଚନା"
       }
+    },
+    "homeReminder": {
+      "title": "ଘରୁ ବାହାରିବାର ସ୍ମାରକ",
+      "consent": "ଘରେ ଥିବାବେଳେ ସେଟ୍ କରନ୍ତୁ। ଆପଣ କେବେ ବାହାରୁଛନ୍ତି ଜାଣିବା ପାଇଁ ଡିଭାଇସ୍ ପୃଷ୍ଠଭୂମିରେ ଆପଣଙ୍କ ଅବସ୍ଥାନ ବ୍ୟବହାର କରେ। Luma ଅବସ୍ଥାନ ଇତିହାସ ପାଏ ନାହିଁ।",
+      "enable": "ଘରୁ ବାହାରିବାର ସ୍ମାରକ ଚାଲୁ କରନ୍ତୁ",
+      "disable": "ଘରୁ ବାହାରିବାର ସ୍ମାରକ ବନ୍ଦ କରନ୍ତୁ",
+      "notificationTitle": "ବାହାରିବା ପୂର୍ବରୁ",
+      "notificationBody": "କେଉଁ ଲାଇଟ୍ ଓ ଯନ୍ତ୍ର ବନ୍ଦ କରିପାରିବେ ଦେଖନ୍ତୁ।",
+      "unavailable": "ଘରୁ ବାହାରିବାର ସ୍ମାରକ ଉପଲବ୍ଧ ନାହିଁ। ଡିଭାଇସ୍‌ର ଅନୁମତି ଯାଞ୍ଚ କରନ୍ତୁ ଏବଂ ଘରେ ଥିବାବେଳେ ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ।",
+      "dailyTitle": "ଦୈନିକ ସ୍ମାରକ",
+      "time": "ସ୍ମାରକ ସମୟ",
+      "add": "କ୍ୟାଲେଣ୍ଡରରେ ଯୋଡ଼ନ୍ତୁ",
+      "calendarHelp": "ଦୈନିକ ସୂଚନା ସେଟ୍ କରିବାକୁ କ୍ୟାଲେଣ୍ଡର ଫାଇଲ୍ ଖୋଲନ୍ତୁ।"
     }
   },
   "ja": {
@@ -1630,6 +1916,19 @@
         "application_rejected": "申請は承認されませんでした",
         "stock_low": "在庫不足の通知"
       }
+    },
+    "homeReminder": {
+      "title": "外出時リマインダー",
+      "consent": "自宅にいるときに設定してください。この端末は、外出を検知するためにバックグラウンドで位置情報を使用します。Lumaに位置情報の履歴は送信されません。",
+      "enable": "外出時リマインダーをオンにする",
+      "disable": "外出時リマインダーをオフにする",
+      "notificationTitle": "外出前に",
+      "notificationBody": "消せる照明や電源を切れる家電を確認してください。",
+      "unavailable": "外出時リマインダーを利用できません。端末の権限設定を確認し、自宅で再試行してください。",
+      "dailyTitle": "毎日のリマインダー",
+      "time": "通知時刻",
+      "add": "カレンダーに追加",
+      "calendarHelp": "カレンダーファイルを開いて毎日の通知を設定してください。"
     }
   },
   "uk": {
@@ -1701,6 +2000,19 @@
         "application_rejected": "Заявку не схвалено",
         "stock_low": "Сповіщення про низький запас"
       }
+    },
+    "homeReminder": {
+      "title": "Нагадування при виході з дому",
+      "consent": "Налаштуйте нагадування вдома. Пристрій використовує місцезнаходження у фоновому режимі, щоб визначити момент виходу. Luma не отримує історію місцезнаходжень.",
+      "enable": "Увімкнути нагадування при виході",
+      "disable": "Вимкнути нагадування при виході",
+      "notificationTitle": "Перед виходом",
+      "notificationBody": "Перевірте, які лампи та прилади можна вимкнути.",
+      "unavailable": "Нагадування недоступне. Перевірте дозволи пристрою та спробуйте знову вдома.",
+      "dailyTitle": "Щоденне нагадування",
+      "time": "Час нагадування",
+      "add": "Додати в календар",
+      "calendarHelp": "Відкрийте файл календаря, щоб налаштувати щоденне сповіщення."
     }
   },
   "ko": {
@@ -1772,6 +2084,19 @@
         "application_rejected": "신청 미승인",
         "stock_low": "재고 부족 알림"
       }
+    },
+    "homeReminder": {
+      "title": "외출 알림",
+      "consent": "집에 있을 때 설정하세요. 기기가 백그라운드에서 위치를 사용해 외출을 감지합니다. Luma는 위치 기록을 받지 않습니다.",
+      "enable": "외출 알림 켜기",
+      "disable": "외출 알림 끄기",
+      "notificationTitle": "외출하기 전에",
+      "notificationBody": "끌 수 있는 조명과 가전제품을 확인하세요.",
+      "unavailable": "외출 알림을 사용할 수 없습니다. 기기 권한을 확인하고 집에서 다시 시도하세요.",
+      "dailyTitle": "매일 알림",
+      "time": "알림 시간",
+      "add": "캘린더에 추가",
+      "calendarHelp": "캘린더 파일을 열어 매일 알림을 설정하세요."
     }
   },
   "it": {
@@ -1843,6 +2168,19 @@
         "application_rejected": "Domanda non approvata",
         "stock_low": "Avviso scorte basse"
       }
+    },
+    "homeReminder": {
+      "title": "Promemoria quando esci di casa",
+      "consent": "Configuralo quando sei a casa. Il dispositivo usa la posizione in background per rilevare quando esci. Luma non riceve la cronologia delle posizioni.",
+      "enable": "Attiva il promemoria di uscita",
+      "disable": "Disattiva il promemoria di uscita",
+      "notificationTitle": "Prima di uscire",
+      "notificationBody": "Controlla quali luci e apparecchi puoi spegnere.",
+      "unavailable": "Il promemoria di uscita non è disponibile. Controlla le autorizzazioni del dispositivo e riprova a casa.",
+      "dailyTitle": "Promemoria giornaliero",
+      "time": "Ora del promemoria",
+      "add": "Aggiungi al calendario",
+      "calendarHelp": "Apri il file del calendario per impostare un avviso giornaliero."
     }
   },
   "pl": {
@@ -1914,6 +2252,19 @@
         "application_rejected": "Wniosek niezatwierdzony",
         "stock_low": "Alert niskiego zapasu"
       }
+    },
+    "homeReminder": {
+      "title": "Przypomnienie przy wyjściu z domu",
+      "consent": "Skonfiguruj przypomnienie w domu. Urządzenie używa lokalizacji w tle, aby wykryć wyjście. Luma nie otrzymuje historii lokalizacji.",
+      "enable": "Włącz przypomnienie o wyjściu",
+      "disable": "Wyłącz przypomnienie o wyjściu",
+      "notificationTitle": "Przed wyjściem",
+      "notificationBody": "Sprawdź, które światła i urządzenia możesz wyłączyć.",
+      "unavailable": "Przypomnienie jest niedostępne. Sprawdź uprawnienia urządzenia i spróbuj ponownie w domu.",
+      "dailyTitle": "Codzienne przypomnienie",
+      "time": "Godzina przypomnienia",
+      "add": "Dodaj do kalendarza",
+      "calendarHelp": "Otwórz plik kalendarza, aby ustawić codzienny alert."
     }
   },
   "tr": {
@@ -1985,6 +2336,19 @@
         "application_rejected": "Başvuru onaylanmadı",
         "stock_low": "Düşük stok uyarısı"
       }
+    },
+    "homeReminder": {
+      "title": "Evden çıkış hatırlatıcısı",
+      "consent": "Evdeyken ayarlayın. Cihaz, evden ne zaman çıktığınızı algılamak için konumunuzu arka planda kullanır. Luma konum geçmişinizi almaz.",
+      "enable": "Çıkış hatırlatıcısını aç",
+      "disable": "Çıkış hatırlatıcısını kapat",
+      "notificationTitle": "Çıkmadan önce",
+      "notificationBody": "Kapatabileceğiniz ışıkları ve cihazları kontrol edin.",
+      "unavailable": "Çıkış hatırlatıcısı kullanılamıyor. Cihaz izinlerini kontrol edip evde yeniden deneyin.",
+      "dailyTitle": "Günlük hatırlatıcı",
+      "time": "Hatırlatma saati",
+      "add": "Takvime ekle",
+      "calendarHelp": "Günlük uyarı ayarlamak için takvim dosyasını açın."
     }
   },
   "zh": {
@@ -2056,6 +2420,19 @@
         "application_rejected": "申请未获批准",
         "stock_low": "低库存提醒"
       }
+    },
+    "homeReminder": {
+      "title": "离家提醒",
+      "consent": "请在家时设置。此设备在后台使用位置信息来检测您何时离家。Luma 不会收到您的位置历史。",
+      "enable": "开启离家提醒",
+      "disable": "关闭离家提醒",
+      "notificationTitle": "离家前",
+      "notificationBody": "检查哪些灯和电器可以关闭。",
+      "unavailable": "离家提醒不可用。请检查设备权限，并在家时重试。",
+      "dailyTitle": "每日提醒",
+      "time": "提醒时间",
+      "add": "添加到日历",
+      "calendarHelp": "打开日历文件以设置每日提醒。"
     }
   },
   "pt": {
@@ -2127,6 +2504,19 @@
         "application_rejected": "Candidatura não aprovada",
         "stock_low": "Alerta de estoque baixo"
       }
+    },
+    "homeReminder": {
+      "title": "Lembrete ao sair de casa",
+      "consent": "Configure o lembrete em casa. O aparelho usa sua localização em segundo plano para detectar quando você sai. A Luma não recebe seu histórico de localização.",
+      "enable": "Ativar lembrete ao sair de casa",
+      "disable": "Desativar lembrete ao sair de casa",
+      "notificationTitle": "Antes de sair",
+      "notificationBody": "Confira as luzes e os aparelhos que você pode desligar.",
+      "unavailable": "O lembrete de saída não está disponível. Confira as permissões do aparelho e tente novamente em casa.",
+      "dailyTitle": "Lembrete diário",
+      "time": "Horário do lembrete",
+      "add": "Adicionar ao calendário",
+      "calendarHelp": "Abra o arquivo de calendário para programar um alerta diário."
     }
   },
   "id": {
@@ -2198,6 +2588,19 @@
         "application_rejected": "Pendaftaran tidak disetujui",
         "stock_low": "Peringatan stok rendah"
       }
+    },
+    "homeReminder": {
+      "title": "Pengingat saat keluar rumah",
+      "consent": "Atur saat berada di rumah. Perangkat ini memakai lokasi di latar belakang untuk mendeteksi saat Anda keluar. Luma tidak menerima riwayat lokasi.",
+      "enable": "Aktifkan pengingat keluar rumah",
+      "disable": "Nonaktifkan pengingat keluar rumah",
+      "notificationTitle": "Sebelum Anda keluar",
+      "notificationBody": "Periksa lampu dan peralatan yang dapat dimatikan.",
+      "unavailable": "Pengingat keluar rumah tidak tersedia. Periksa izin perangkat dan coba lagi saat di rumah.",
+      "dailyTitle": "Pengingat harian",
+      "time": "Waktu pengingat",
+      "add": "Tambahkan ke kalender",
+      "calendarHelp": "Buka berkas kalender untuk mengatur pengingat harian."
     }
   },
   "nl": {
@@ -2269,6 +2672,19 @@
         "application_rejected": "Aanvraag niet goedgekeurd",
         "stock_low": "Waarschuwing voor lage voorraad"
       }
+    },
+    "homeReminder": {
+      "title": "Herinnering bij vertrek",
+      "consent": "Stel de herinnering thuis in. Dit apparaat gebruikt je locatie op de achtergrond om te merken wanneer je vertrekt. Luma ontvangt geen locatiegeschiedenis.",
+      "enable": "Vertrekherinnering aanzetten",
+      "disable": "Vertrekherinnering uitzetten",
+      "notificationTitle": "Voor je vertrekt",
+      "notificationBody": "Controleer welke lampen en apparaten je kunt uitschakelen.",
+      "unavailable": "De vertrekherinnering is niet beschikbaar. Controleer de apparaatrechten en probeer het thuis opnieuw.",
+      "dailyTitle": "Dagelijkse herinnering",
+      "time": "Tijd van herinnering",
+      "add": "Toevoegen aan agenda",
+      "calendarHelp": "Open het agendabestand om een dagelijkse melding in te stellen."
     }
   },
   "ms": {
@@ -2340,6 +2756,19 @@
         "application_rejected": "Permohonan tidak diluluskan",
         "stock_low": "Amaran stok rendah"
       }
+    },
+    "homeReminder": {
+      "title": "Peringatan apabila meninggalkan rumah",
+      "consent": "Tetapkan semasa anda berada di rumah. Peranti ini menggunakan lokasi di latar belakang untuk mengesan apabila anda keluar. Luma tidak menerima sejarah lokasi.",
+      "enable": "Hidupkan peringatan keluar rumah",
+      "disable": "Matikan peringatan keluar rumah",
+      "notificationTitle": "Sebelum anda keluar",
+      "notificationBody": "Periksa lampu dan perkakas yang boleh dimatikan.",
+      "unavailable": "Peringatan keluar rumah tidak tersedia. Semak kebenaran peranti dan cuba lagi semasa berada di rumah.",
+      "dailyTitle": "Peringatan harian",
+      "time": "Masa peringatan",
+      "add": "Tambah pada kalendar",
+      "calendarHelp": "Buka fail kalendar untuk menetapkan peringatan harian."
     }
   }
 }

@@ -136,6 +136,41 @@ it("requires explicit live mode, activation and an approved policy", async () =>
   vi.stubEnv("CASHFREE_LIVE_POLICY_VERSION", "missing");
   await expect(prepare(w)).rejects.toThrow("GATEWAY_REQUIRED");
 });
+it("keeps a prepared provider order on its original payment rail", async () => {
+  const w = await world();
+  await prepare(w);
+  vi.stubEnv("CASHFREE_LIVE_CHECKOUT_ENABLED", "false");
+  await expect(
+    w.seller.mutation(api.market.recordDirectCash, {
+      tradeId: w.tradeId,
+      amountPaise: 17_001,
+      reference: "Reported cash 482",
+    }),
+  ).rejects.toThrow("CASH_RECEIPT_NOT_AVAILABLE");
+  expect(
+    await w.buyer.query(api.market.receipt, { tradeId: w.tradeId }),
+  ).not.toHaveProperty("directCashReceipt");
+});
+
+it("keeps an accepted order available to the provider when cash cannot be recorded", async () => {
+  const w = await world();
+  vi.stubEnv("CASHFREE_LIVE_CHECKOUT_ENABLED", "false");
+  await expect(
+    w.seller.mutation(api.market.recordDirectCash, {
+      tradeId: w.tradeId,
+      amountPaise: 17_001,
+      reference: "Reported cash 482",
+    }),
+  ).rejects.toThrow("CASH_RECEIPT_NOT_AVAILABLE");
+  vi.stubEnv("CASHFREE_LIVE_CHECKOUT_ENABLED", "true");
+  expect(
+    await w.buyer.query(api.cashfreePayments.availability, {
+      tradeId: w.tradeId,
+    }),
+  ).toMatchObject({ liveCanCheckout: true });
+  expect(await prepare(w)).toMatchObject({ tradeId: w.tradeId, mode: "live" });
+});
+
 it("freezes policy versions and denies nonadmin and missing TOTP policy changes", async () => {
   const w = await world();
   const policy = {

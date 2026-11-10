@@ -5,6 +5,7 @@ import { ConvexHttpClient } from "convex/browser";
 import { z } from "zod";
 
 import { api } from "../../convex/_generated/api";
+import type { Id } from "../../convex/_generated/dataModel";
 import ar from "../../messages/ar.json" with { type: "json" };
 import en from "../../messages/en.json" with { type: "json" };
 const accountSchema = z.object({
@@ -59,6 +60,71 @@ async function signIn(page: Page, key: string) {
   };
 }
 
+const testPdf = "%PDF-1.4\n1 0 obj << /Type /Catalog >> endobj\n%%EOF";
+
+async function recordInspection(
+  client: ConvexHttpClient,
+  label: string,
+  buyerOrgId?: Id<"orgs">,
+) {
+  const lotId = await client.mutation(api.traceability.declareLot, {
+    materialCode: "PLASTIC-PET",
+    state: "Local test bale",
+    grams: 1000,
+    streamClass: "main_product",
+    handlingClass: "non_hazardous",
+  });
+  return client.mutation(api.quality.recordInspection, {
+    lotId,
+    buyerOrgId,
+    specificationReference: label,
+    specificationVersion: "v1",
+    sampleMethod: "Synthetic measured sample",
+    results: [{ parameter: "Moisture", unit: "percent", value: "1" }],
+    decision: "accepted",
+  });
+}
+
+test("quality uploads show unavailable and reject file writes without R2", async ({
+  browser,
+}) => {
+  const context = await browser.newContext({ baseURL: origin.origin });
+  try {
+    const page = await context.newPage();
+    const { client } = await signIn(page, "manufacturer");
+    const board = await client.query(api.qualityFiles.board, {});
+    // eslint-disable-next-line playwright/no-skipped-test -- The next test covers the mutually exclusive R2-configured environment.
+    test.skip(board.uploadAvailable, "Requires a keyless local deployment");
+    const inspectionId = await recordInspection(
+      client,
+      `LOCAL-QC-OFF-${String(Date.now())}`,
+    );
+    await page.goto(`/en/app/quality-documents?inspection=${inspectionId}`);
+    await expect(
+      page.getByText(en.join.errors.uploadUnavailable, { exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByLabel(en.qualityDocuments.file, { exact: true }),
+    ).toHaveCount(0);
+    await expect(
+      client.action(api.qualityFiles.upload, {
+        inspectionId,
+        shareWithBuyer: false,
+        kind: "coa",
+        name: "unavailable.pdf",
+        contentType: "application/pdf",
+        bytes: new TextEncoder().encode(testPdf).buffer,
+      }),
+    ).rejects.toThrow("STORAGE_UNAVAILABLE");
+    const after = await client.query(api.qualityFiles.board, {});
+    expect(after.own.some((file) => file.inspectionId === inspectionId)).toBe(
+      false,
+    );
+  } finally {
+    await context.close();
+  }
+});
+
 test("quality upload, separate buyer decision, scoped audit view and revoked download", async ({
   browser,
 }) => {
@@ -92,28 +158,20 @@ test("quality upload, separate buyer decision, scoped audit view and revoked dow
   const decisionReason = `Synthetic buyer requires resampling ${stamp}`;
   try {
     const seller = await signIn(owner, "manufacturer");
+    const sellerBoard = await seller.client.query(api.qualityFiles.board, {});
+    // eslint-disable-next-line playwright/no-skipped-test -- A keyless deployment exercises the unavailable test instead of writing bytes.
+    test.skip(
+      !sellerBoard.uploadAvailable,
+      "Requires private R2 on the local test deployment",
+    );
     const purchaser = await signIn(buyer, "preprocessor");
     const recipient = await signIn(auditor, "auditor");
     const other = await signIn(outsider, "unrelated-owner");
     const buyerBoard = await purchaser.client.query(api.qualityFiles.board, {});
-    const lotId = await seller.client.mutation(api.traceability.declareLot, {
-      materialCode: "PLASTIC-PET",
-      state: "Local test bale",
-      grams: 1000,
-      streamClass: "main_product",
-      handlingClass: "non_hazardous",
-    });
-    const inspectionId = await seller.client.mutation(
-      api.quality.recordInspection,
-      {
-        lotId,
-        buyerOrgId: buyerBoard.orgId,
-        specificationReference: label,
-        specificationVersion: "v1",
-        sampleMethod: "Synthetic measured sample",
-        results: [{ parameter: "Moisture", unit: "percent", value: "1" }],
-        decision: "accepted",
-      },
+    const inspectionId = await recordInspection(
+      seller.client,
+      label,
+      buyerBoard.orgId,
     );
     await owner.goto("/en/app/quality-documents");
     await expect(
@@ -136,9 +194,7 @@ test("quality upload, separate buyer decision, scoped audit view and revoked dow
       .setInputFiles({
         name: filename,
         mimeType: "application/pdf",
-        buffer: Buffer.from(
-          "%PDF-1.4\n1 0 obj << /Type /Catalog >> endobj\n%%EOF",
-        ),
+        buffer: Buffer.from(testPdf),
       });
     await owner.getByRole("checkbox").check();
     await owner

@@ -177,6 +177,7 @@ async function recipient(
   const row = await ctx.db.get("stakeholderAccounts", id);
   if (
     row?.status !== "approved" ||
+    row.participantType !== undefined ||
     !(await isProfileOpen(ctx, row.ownerProfileId))
   )
     throw new ConvexError("RECIPIENT_UNAVAILABLE");
@@ -213,7 +214,11 @@ async function canReceive(
   )
     return false;
   const target = await ctx.db.get("stakeholderAccounts", row.recipientId);
-  return target?.status === "approved" && target.ownerProfileId === profileId;
+  return (
+    target?.status === "approved" &&
+    target.participantType === undefined &&
+    target.ownerProfileId === profileId
+  );
 }
 async function audit(
   ctx: MutationCtx,
@@ -504,7 +509,9 @@ export const board = query({
       );
     const accounts = await ctx.db
       .query("stakeholderAccounts")
-      .withIndex("by_status_createdAt", (q) => q.eq("status", "approved"))
+      .withIndex("by_status_participant_createdAt", (q) =>
+        q.eq("status", "approved").eq("participantType", undefined),
+      )
       .take(PAGE);
     const openAccounts = await openStakeholders(ctx, accounts);
     const materialLots =

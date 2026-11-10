@@ -139,7 +139,7 @@
         "title": "가정",
         "one": "예약 전에 재활용품의 가치를 확인합니다.",
         "two": "문 앞에서 수거하거나 매장에 가져갑니다.",
-        "three": "현금 또는 UPI로 받고 영수증을 확인합니다.",
+        "three": "현금으로 받고 영수증을 확인합니다.",
         "cta": "재활용하기"
       },
       "kabadiwala": {
@@ -611,7 +611,7 @@
       "body": "집 근처의 유급 수거, 선별, 교대 근무를 맡고 수입을 확인합니다."
     },
     "householdHeading": "모든 가정도 함께",
-    "householdBody": "휴대폰 번호로 가정 방문 수거를 예약하세요. 자재를 선택하고 매장의 제안을 비교한 뒤 매장에서 현금 또는 UPI로 대금과 영수증을 받으세요."
+    "householdBody": "휴대폰 번호로 가정 방문 수거를 예약하세요. 자재를 선택하고 매장의 제안을 비교한 뒤 매장에서 현금으로 대금과 영수증을 받으세요."
   },
   "contact": {
     "metaTitle": "문의",
@@ -1079,7 +1079,7 @@
           },
           "pay": {
             "title": "그 자리에서 대금 받기",
-            "body": "수거자가 떠나기 전에 현금 또는 UPI로 받습니다. Luma.Green은 대금을 보관하지 않습니다."
+            "body": "수거자가 떠나기 전에 현금으로 받습니다. Luma.Green은 대금을 보관하지 않습니다."
           },
           "receipt": {
             "title": "영수증 확인",
@@ -1218,7 +1218,7 @@
             "body": "설정한 가격으로 앱이 계산합니다. 가정 이용자에게 화면을 보여 주세요."
           },
           "pay": {
-            "title": "현금 또는 UPI로 지급",
+            "title": "현금으로 지급",
             "body": "떠나기 전에 지급하고 결제 방법을 선택하세요."
           },
           "save": {
@@ -1569,7 +1569,7 @@
       },
       "howPaid": {
         "q": "대금은 어떻게 받나요?",
-        "a": "고물상 담당자가 떠나기 전에 문 앞에서 현금 또는 UPI로 받습니다. Luma.Green은 결제를 기록하지만 대금을 보관하지 않습니다."
+        "a": "고물상 담당자가 떠나기 전에 문 앞에서 현금으로 받습니다. Luma.Green은 결제를 기록하지만 대금을 보관하지 않습니다."
       },
       "recyclePoints": {
         "q": "재활용 포인트는 무엇인가요?",
@@ -1621,7 +1621,7 @@
       },
       "payHousehold": {
         "q": "Luma.Green이 대신 가정에 지급하나요?",
-        "a": "아니요. 문 앞에서 현금 또는 UPI로 직접 지급하세요. 앱은 금액과 방법을 기록합니다."
+        "a": "아니요. 문 앞에서 현금으로 직접 지급하세요. 앱은 금액과 방법을 기록합니다."
       },
       "paidByYard": {
         "q": "전처리업체에 팔면 어떻게 대금을 받나요?",
@@ -2217,6 +2217,7 @@
       "fileType": "이 파일 형식은 사용할 수 없습니다",
       "fileTooBig": "파일이 너무 큽니다",
       "uploadFailed": "업로드하지 못했습니다. 다시 시도하세요.",
+      "uploadUnavailable": "지금은 비공개 파일을 업로드할 수 없습니다.",
       "generic": "문제가 발생했습니다. 재시도하세요.",
       "pan": "GST 번호를 조회하고 사업을 확인하세요.",
       "city": "도시 또는 지역을 2~60자로 입력하세요."
@@ -2531,7 +2532,7 @@
     "metaDescription": "재활용품을 정리하고 돈을 받으세요. 사진, 방문 수거 또는 직접 전달, 계량 후 지급.",
     "eyebrow": "인도",
     "title": "가정 방문 수거 예약",
-    "lead": "가진 물품과 가까운 매장을 고르고 계량 후 현금 또는 UPI로 받으세요.",
+    "lead": "가진 물품과 가까운 매장을 고르고 계량 후 현금으로 받으세요.",
     "promises": {
       "label": "여기서 파는 이유",
       "noAccount": "휴대폰 인증 후 예약",
@@ -2650,7 +2651,7 @@
       "dropoff": "매장에 직접 전달",
       "whenValue": "{day} · {window}, {time}",
       "youGet": "약 {amount}를 받습니다",
-      "payNote": "매장이 재활용품을 계량하고 현금 또는 UPI로 지급합니다.",
+      "payNote": "매장이 재활용품을 계량하고 현금으로 지급합니다.",
       "phoneTitle": "휴대전화 번호 확인",
       "phoneLead": "SMS로 6자리 코드를 보냅니다. 예약을 이 번호에 저장해 어떤 휴대전화에서도 확인할 수 있습니다.",
       "bookingAs": "예약 번호: {phone}",
@@ -2807,7 +2808,7 @@
       "requested": "{mode, select, pickup {{shop}의 수락을 기다립니다} other {{shop}의 확인을 기다립니다}}",
       "requestedBody": "요청을 보냈습니다. 답변하면 이 페이지가 바로 업데이트됩니다.",
       "accepted": "{mode, select, pickup {{shop}에서 수거를 수락했습니다} other {{shop}에서 방문을 기다립니다}}",
-      "acceptedBody": "재활용품을 준비하세요. 계량한 뒤 현금 또는 UPI로 받습니다.",
+      "acceptedBody": "재활용품을 준비하세요. 계량한 뒤 현금으로 받습니다.",
       "on_the_way": "{shop}에서 오고 있습니다",
       "on_the_wayBody": "재활용품을 문 가까이에 준비하세요.",
       "completed": "완료! {amount}를 받았습니다",
@@ -2848,7 +2849,7 @@
     "money": {
       "title": "대금과 포인트",
       "estimate": "약 {amount}를 받습니다",
-      "estimateNote": "매장이 재활용품을 계량하고 현금 또는 UPI로 지급합니다.",
+      "estimateNote": "매장이 재활용품을 계량하고 현금으로 지급합니다.",
       "paid": "받은 금액 {amount}",
       "paidBy": "{method, select, upi {UPI} other {현금}} 지급 · {date}",
       "estimateWas": "추정액은 {amount}였습니다",
@@ -3949,8 +3950,8 @@
   },
   "industry": {
     "title": "산업 참고 자료",
-    "lead": "제공된 통합 문서를 검색합니다. 이 자료는 미검증 상태이며 자재 거래나 처리를 허가하지 않습니다.",
-    "sourceNote": "원문은 통합 문서의 원래 영어로 표시됩니다.",
+    "lead": "제공된 참고 자료를 검색하세요. 이 자료는 미검증 상태이며 자재 거래나 처리를 허가하지 않습니다.",
+    "sourceNote": "참고 자료의 본문은 영어로 표시됩니다.",
     "sectors": "업종 참고 자료",
     "industries": "산업 매트릭스",
     "lifecycles": "자재 수명 주기",
@@ -4056,6 +4057,10 @@
     "note": "제조업체의 신고이며 품질, 소유권 또는 규정 준수에 대한 독립적인 검증이 아닙니다. 저장한 기록은 수정할 수 없습니다."
   },
   "tradeLifecycle": {
+    "cashRecord": "현금 수령 기록",
+    "cashReported": "현금 수령 신고됨",
+    "cashNote": "구매자가 판매자에게 직접 지급합니다. Luma는 판매자의 신고를 기록합니다.",
+    "cashReference": "현금 영수증 참조 번호",
     "title": "결제 및 배송",
     "collectionLabel": "구매자 결제",
     "settlementLabel": "판매자 정산",
@@ -4562,6 +4567,11 @@
     "loadSaved": "저장된 버전 열기"
   },
   "businessSubscriptions": {
+    "draftsTitle": "청구서 초안",
+    "draftsEmpty": "아직 초안이 없습니다.",
+    "draftTotal": "세전 초안 소계",
+    "draftBook": "가격표 {version}",
+    "draftUsage": "현금 결제 주문 {count}건",
     "title": "사업장 요금제",
     "lead": "이 사업장의 희망 요금제를 저장하세요.",
     "off": "결제가 꺼져 있습니다. 희망 요금제를 저장해도 유료 구독이 시작되지 않습니다.",
@@ -4649,5 +4659,124 @@
     "requestsBody": "아래에서 계정을 삭제하거나 지원팀에 접근, 수정 또는 삭제를 이메일로 요청하세요. 소유권 확인이 필요하며 신분증을 이메일로 보내지 마세요. 미완료 작업이나 소유권 문제를 먼저 해결하세요.",
     "retentionTitle": "계정 폐쇄 후 남는 항목",
     "retentionBody": "폐쇄하면 로그인 접근과 인증 정보가 삭제됩니다. 사업, 결제, 안전 및 감사 증거는 검토를 위해 남을 수 있습니다. 모든 기록이 삭제되는 것은 아닙니다. 보관 및 처리 기간은 지원팀에 문의하세요."
+  },
+  "participantDirectory": {
+    "title": "역할 선택",
+    "search": "역할 검색",
+    "empty": "일치하는 역할 없음",
+    "continue": "계속",
+    "apply": "이 역할 신청",
+    "roles": {
+      "household": "가정",
+      "small_business": "상점 또는 소규모 사업체",
+      "industrial_seller": "산업 폐자재 판매업체",
+      "institution": "기관",
+      "kabadiwala": "카바디왈라",
+      "saathi": "사티",
+      "dry_waste_centre": "건조 폐기물 센터 또는 수거인 협동조합",
+      "large_yard": "대규모 집하장",
+      "collection_contractor": "방문 수거 계약업체",
+      "rural_collector": "농촌 지방 기관 또는 자조 모임",
+      "trader": "상인, 중개인 또는 수출업체",
+      "preprocessor": "전처리 업체",
+      "recycler": "재활용 업체",
+      "e_waste_operator": "전자 폐기물 수거·해체·재생 업체",
+      "wet_waste_processor": "습식 폐기물 처리 업체",
+      "intermediary_manufacturer": "중간재 제조업체",
+      "end_goods_manufacturer": "완제품 제조업체",
+      "epr_brand": "EPR 의무 대상 브랜드",
+      "pro": "생산자 책임 기관",
+      "epr_trading": "EPR 거래",
+      "carbon_trading": "탄소 거래",
+      "transporter": "운송업체 및 운송 명세서",
+      "equipment_supplier": "장비 공급업체",
+      "boiler_water_supplier": "보일러·처리 시설·탱크로리 공급업체",
+      "weighing_vendor": "저울 또는 차량 계근대 공급업체",
+      "solar_provider": "태양광 공급업체",
+      "environmental_engineer": "환경 엔지니어링",
+      "hr_provider": "인사 서비스 업체",
+      "accounting_provider": "회계 및 규정 준수",
+      "employee_tracking": "직원 관리",
+      "waste_picker_union": "NGO 또는 폐기물 수거인 노동조합",
+      "city_official": "시 공무원",
+      "csr_lender_auditor": "CSR 담당팀, 대출기관 또는 감사인",
+      "luma_team": "Luma.Green 팀",
+      "ward_official": "지역 공무원",
+      "community_champion": "지역사회 대표",
+      "payment_partner": "결제 파트너",
+      "rewards_partner": "보상 파트너",
+      "welfare_partner": "보험 또는 복지 파트너",
+      "society_partner": "주거단지 또는 시설 관리 파트너",
+      "voice_partner": "음성 또는 언어 서비스 파트너"
+    },
+    "groups": {
+      "generators": "가정과 자재 판매자",
+      "collection": "수거 및 집하",
+      "processing": "처리 및 제조",
+      "markets": "브랜드 및 환경 시장",
+      "services": "물류 및 서비스",
+      "partners": "지역사회, 정부 및 파트너"
+    }
+  },
+  "apartmentCollection": {
+    "pickup": "공동주택 수거",
+    "code": "단지 코드",
+    "noRoute": "이 공동주택에는 검토된 수거 경로가 없습니다. 건물 관리자나 입주자 대표회의에 수거를 요청하세요."
+  },
+  "householdFamily": {
+    "title": "가족 구성원",
+    "description": "가족 구성원은 공유된 수거 진행 상태를 볼 수 있습니다. 영수증, 사진, 탄소 발자국은 비공개입니다.",
+    "phone": "가족 구성원의 휴대전화 번호",
+    "invite": "초대 만들기",
+    "code": "초대 코드",
+    "codeHelp": "이 코드를 비공개로 공유하세요. 7일 후 만료됩니다. Luma는 메시지를 보내지 않습니다.",
+    "join": "가구에 가입",
+    "joinedAt": "{date}에 가입",
+    "leave": "가구에서 나가기",
+    "collections": "가족이 공유한 수거",
+    "share": "진행 상태 공유",
+    "makePrivate": "공유 중단",
+    "recent": "계속하기 전에 로그아웃한 뒤 다시 로그인하세요.",
+    "invalid": "코드가 유효하지 않거나 만료되었거나 다른 휴대전화 번호용입니다.",
+    "verified": "초대를 사용하려면 휴대전화 번호를 인증하세요."
+  },
+  "householdTools": {
+    "navigation": "가정용 도구",
+    "recycle": "재활용하기",
+    "activity": "활동",
+    "services": "서비스",
+    "footprint": "탄소발자국",
+    "settings": "설정",
+    "loading": "예약을 불러오는 중…",
+    "noBookings": "아직 예약이 없습니다.",
+    "electricityTitle": "전기 사용 탄소발자국",
+    "electricityReading": "사용한 계통 전력량(kWh)",
+    "invalidReading": "청구서 또는 계량기의 kWh를 입력하세요. 소수점 아래 세 자리까지 입력할 수 있습니다.",
+    "calculate": "추정치 계산",
+    "estimate": "계통 전력의 추정 배출량: {amount} kg CO₂",
+    "privateCalculation": "입력한 값은 이 화면에만 남습니다. 결과에는 전력만 포함됩니다.",
+    "gridSource": "인도 전력망 배출계수, CEA 2025–26",
+    "airQuality": "대기질",
+    "roofSolar": "지붕 태양광 확인",
+    "roofPrecision": "지붕을 확인하려면 정확한 위치가 필요합니다.",
+    "lookupConsent": "이 확인을 위해 내 위치를 Google Maps로 보냅니다. Luma는 위치를 저장하지 않습니다.",
+    "lookupUnavailable": "이용 가능한 결과가 없습니다.",
+    "locationUnavailable": "적합한 위치를 가져올 수 없습니다.",
+    "lookupLimit": "조회 한도에 도달했습니다. 나중에 다시 시도하세요.",
+    "airScore": "범용 대기질 지수: 100점 중 {score}점. 높을수록 좋습니다.",
+    "roofEstimate": "예상 지붕 발전량: 패널 {panels}개로 연간 {energy} kWh(직류)."
+  },
+  "homeReminder": {
+    "title": "외출 알림",
+    "consent": "집에 있을 때 설정하세요. 기기가 백그라운드에서 위치를 사용해 외출을 감지합니다. Luma는 위치 기록을 받지 않습니다.",
+    "enable": "외출 알림 켜기",
+    "disable": "외출 알림 끄기",
+    "notificationTitle": "외출하기 전에",
+    "notificationBody": "끌 수 있는 조명과 가전제품을 확인하세요.",
+    "unavailable": "외출 알림을 사용할 수 없습니다. 기기 권한을 확인하고 집에서 다시 시도하세요.",
+    "dailyTitle": "매일 알림",
+    "time": "알림 시간",
+    "add": "캘린더에 추가",
+    "calendarHelp": "캘린더 파일을 열어 매일 알림을 설정하세요."
   }
 }

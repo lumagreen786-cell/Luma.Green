@@ -11,6 +11,11 @@ import schema from "./schema";
 const modules = convexModules(import.meta.glob("./**/*.*s"));
 
 function setup() {
+  vi.stubEnv("R2_ENABLED", "false");
+  vi.stubEnv("AUTH_LOCAL_TEST_MODE", "true");
+  vi.stubEnv("CONVEX_SITE_URL", "http://127.0.0.1:3211");
+  vi.stubEnv("SITE_URL", "http://127.0.0.1:3000");
+
   const t = convexTest(schema, modules);
   registerAuth(t);
   return t;
