@@ -30,15 +30,22 @@ export function FinancialLifecycle({
   tradeId,
   compact = false,
   legacyContent,
+  actionsOnly = false,
 }: {
   tradeId: Id<"trades">;
   compact?: boolean;
   legacyContent?: ReactNode;
+  actionsOnly?: boolean;
 }) {
   const t = useTranslations("tradeLifecycle");
   const common = useTranslations("common");
   const trades = useTranslations("market.trades");
   const status = useQuery(api.cashfreeLifecycle.status, { tradeId });
+  if (actionsOnly) {
+    return status?.state === "awaiting_payment" ? (
+      <FinancialActions tradeId={tradeId} status={status} />
+    ) : null;
+  }
   if (status === undefined) return <p role="status">{common("loading")}</p>;
   if (status === null)
     return (

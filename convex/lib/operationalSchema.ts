@@ -80,6 +80,7 @@ export const operationalTables = {
     registrationId: v.id("facilityRegistrations"),
     facilityUpdatedAt: v.number(),
     facilityRevision: v.optional(v.number()),
+    ordinaryTradeCustody: v.optional(v.literal(true)),
     materialCodes: v.array(v.string()),
     processes: v.array(vProcessKind),
     decision: v.union(

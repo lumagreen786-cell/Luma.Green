@@ -407,6 +407,46 @@ describe("browse", () => {
   });
 });
 
+describe("direct cash trade receipts", () => {
+  it("keeps an unsupported accepted order unpaid and cancellable", async () => {
+    const t = await demoWorld();
+    const seller = await signInAs(t, SHOP);
+    const buyer = await signInAs(t, YARD);
+    const lot = await lotOf(buyer, RAMESH, "PAPER-NEWS");
+    const tradeId = await buyer.mutation(api.market.requestTrade, {
+      listingId: lot.id,
+      grams: 1000,
+    });
+    await seller.mutation(api.market.act, { tradeId, action: "accept" });
+    expect(
+      await seller.query(api.market.directCashFulfillment, { tradeId }),
+    ).toBeNull();
+    await expect(
+      seller.mutation(api.market.recordDirectCash, {
+        tradeId,
+        amountPaise: lot.askPaisePerKg,
+        reference: "Cash receipt 14",
+      }),
+    ).rejects.toThrow("CASH_RECEIPT_NOT_AVAILABLE");
+    await buyer.mutation(api.cashfreeLifecycle.requestCancellation, {
+      tradeId,
+      reason: "Unsupported order without physical custody",
+    });
+    expect(await buyer.query(api.market.receipt, { tradeId })).toMatchObject({
+      status: "declined",
+      number: null,
+    });
+    expect(
+      await t.run((ctx) =>
+        ctx.db
+          .query("businessBillingUsage")
+          .withIndex("by_trade", (q) => q.eq("tradeId", tradeId))
+          .take(1),
+      ),
+    ).toEqual([]);
+  });
+});
+
 describe("a trade awaiting the payment gateway", () => {
   it("accepts a request but cannot claim payment, dispatch, or delivery", async () => {
     const t = await demoWorld();

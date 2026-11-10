@@ -1,6 +1,6 @@
 "use client";
 
-import { useAction, useMutation } from "convex/react";
+import { useMutation } from "convex/react";
 import {
   CameraIcon,
   FileIcon,
@@ -13,6 +13,9 @@ import { useRef, useState } from "react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
+import { authClient } from "@/lib/auth-client";
+import { convexSiteUrlFrom } from "@/lib/convex-urls";
+import { clientEnv } from "@/lib/env";
 import { prepareUpload } from "@/lib/upload-image";
 
 import { api } from "../../../convex/_generated/api";
@@ -27,15 +30,22 @@ import { describedBy, FieldSet } from "./fields";
 import type { FileSummary } from "./use-mine";
 
 const MB = 1024 * 1024;
-const SHOWN_ERRORS = new Set(["fileType", "fileTooBig", "uploadFailed"]);
+const convexUrl = clientEnv.NEXT_PUBLIC_CONVEX_URL;
+const siteUrl =
+  clientEnv.NEXT_PUBLIC_CONVEX_SITE_URL ??
+  (convexUrl ? convexSiteUrlFrom(convexUrl) : undefined);
+const SHOWN_ERRORS = new Set([
+  "fileType",
+  "fileTooBig",
+  "uploadFailed",
+  "uploadUnavailable",
+]);
 
 /**
- * Uploads go straight from the phone to Convex storage, then get attached —
- * the server checks the real type and size before keeping them.
+ * The private upload route checks the draft, actual type and size before
+ * keeping the file in R2.
  */
 function useUploader(type: FileType) {
-  const generateUploadUrl = useMutation(api.applicationFiles.generateUploadUrl);
-  const attach = useAction(api.applicationFiles.attach);
   const [uploading, setUploading] = useState(0);
   const [problem, setProblem] = useState<string | null>(null);
 
@@ -49,17 +59,27 @@ function useUploader(type: FileType) {
     if (early) return early;
     try {
       const prepared = await prepareUpload(file, type);
-      const url = await generateUploadUrl({});
-      const response = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": prepared.type },
-        body: prepared,
+      if (!siteUrl) return "uploadUnavailable";
+      const { data } = await authClient.convex.token({
+        fetchOptions: { throw: false },
       });
-      if (!response.ok) return "uploadFailed";
-      const { storageId } = (await response.json()) as {
-        storageId: Id<"_storage">;
-      };
-      const result = await attach({ storageId, type, name: prepared.name });
+      if (!data?.token) return "uploadFailed";
+      const response = await fetch(
+        `${siteUrl}/application-uploads?type=${type}`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${data.token}`,
+            "Content-Type": "application/octet-stream",
+            "X-Luma-File-Name": encodeURIComponent(prepared.name),
+            "X-Luma-File-Size": String(prepared.size),
+          },
+          body: prepared,
+          cache: "no-store",
+        },
+      );
+      const result = (await response.json()) as
+        { ok: true } | { ok: false; error: string };
       if (result.ok) return null;
       return SHOWN_ERRORS.has(result.error) ? result.error : "uploadFailed";
     } catch {

@@ -11,6 +11,7 @@ export const accountRemovalTables = {
   accountRemovals: defineTable({
     profileId: v.id("profiles"),
     authUserId: v.string(),
+    familyPhoneHash: v.optional(v.string()),
     operationKey: v.string(),
     state: vRemovalState,
     phase: v.number(),

@@ -4,7 +4,13 @@ const path = require("node:path");
 const { locales } = require("../../../src/i18n/locales.ts");
 
 const outputPath = path.resolve(__dirname, "../src/messages.json");
-const namespaces = ["native", "common", "brand", "notifications"];
+const namespaces = [
+  "native",
+  "common",
+  "brand",
+  "notifications",
+  "homeReminder",
+];
 
 /** The root catalogues remain the sole editable source of translated copy. */
 function createShellCatalogue() {
@@ -20,6 +26,14 @@ function createShellCatalogue() {
         locale,
         Object.fromEntries(
           namespaces.map((namespace) => {
+            if (
+              namespace === "homeReminder" &&
+              !Object.hasOwn(source, namespace)
+            )
+              return [
+                namespace,
+                require("../../../messages/en.json").homeReminder,
+              ];
             if (!Object.hasOwn(source, namespace))
               throw new Error(`Missing ${locale}.${namespace}`);
             return [namespace, source[namespace]];

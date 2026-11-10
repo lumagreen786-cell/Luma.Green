@@ -1,3 +1,19 @@
+## Overhaul recovery integration — 10 November 2026
+
+The recovered release branch starts from main `66c0c7f`. Read the
+[overhaul delivery record](platform-overhaul-2026-11-09.md#recovery-integration--10-november-2026)
+for preserved work, release scope, tests and remaining acceptance. The original
+source worktree and recovery snapshot remain intact. The unfinished stock-backed
+PET slice is excluded from this release. The PR owns hosted checks and the final
+backend-before-frontend Production receipt.
+
+## Luma.Green overhaul — 9 November 2026
+
+See [the overhaul delivery record](platform-overhaul-2026-11-09.md) for
+source coverage, implementation, and release gates. The current overhaul
+changes are in an isolated checkout. This entry does not establish a
+production release or native device acceptance.
+
 ## Carbon evidence preparation workspace - 8 November 2026
 
 Lot transformation history can open and download an internal JSON draft.

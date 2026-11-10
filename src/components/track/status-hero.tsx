@@ -92,6 +92,17 @@ export function StatusHero({ booking }: { booking: TrackedBooking }) {
   const shop = booking.shop.name;
   const paid = format.money(booking.receipt?.totalPaise ?? 0);
 
+  let heading = t(`status.${booking.status}`);
+  if (!booking.familyView) {
+    heading =
+      booking.status === "completed"
+        ? tReview("title")
+        : t(`hero.${booking.status}`, {
+            shop,
+            mode: booking.mode,
+            amount: paid,
+          });
+  }
   return (
     <section
       aria-labelledby="track-title"
@@ -114,19 +125,15 @@ export function StatusHero({ booking }: { booking: TrackedBooking }) {
             id="track-title"
             className="font-display text-2xl leading-tight font-semibold tracking-tight text-balance wrap-anywhere sm:text-3xl"
           >
-            {booking.status === "completed"
-              ? tReview("title")
-              : t(`hero.${booking.status}`, {
-                  shop,
-                  mode: booking.mode,
-                  amount: paid,
-                })}
+            {heading}
           </h1>
-          <p className="text-sm leading-relaxed text-muted-foreground">
-            {booking.status === "completed"
-              ? tReview(receiptStatusKey(booking.receiptReview))
-              : t(`hero.${booking.status}Body`)}
-          </p>
+          {booking.familyView ? null : (
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              {booking.status === "completed"
+                ? tReview(receiptStatusKey(booking.receiptReview))
+                : t(`hero.${booking.status}Body`)}
+            </p>
+          )}
         </div>
       </div>
       <Progress booking={booking} />

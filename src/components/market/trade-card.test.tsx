@@ -8,7 +8,11 @@ import { TradeCard } from "./trade-card";
 
 const { act, toast, lifecycle } = vi.hoisted(() => ({
   act: vi.fn(),
-  lifecycle: { legacy: false, state: "awaiting_payment" },
+  lifecycle: {
+    legacy: false,
+    state: "awaiting_payment",
+    actions: [] as string[],
+  },
   toast: { success: vi.fn(), error: vi.fn() },
 }));
 
@@ -23,7 +27,7 @@ vi.mock("convex/react", () => ({
           collection: "pending",
           settlement: "pending",
           refund: "none",
-          actions: [],
+          actions: lifecycle.actions,
           policyReady: false,
           totalPaise: 175_000,
           grams: 100_000,
@@ -50,11 +54,79 @@ beforeEach(() => {
   act.mockReset();
   lifecycle.legacy = false;
   lifecycle.state = "awaiting_payment";
+  lifecycle.actions = [];
   toast.success.mockReset();
   toast.error.mockReset();
 });
 
 describe("TradeCard", () => {
+  it("records seller-reported cash at the locked order amount after delivery", async () => {
+    act.mockResolvedValue({ reference: "Cash 59", amountPaise: 175_000 });
+    const user = userEvent.setup();
+    render(
+      <WithIntl>
+        <TradeCard
+          trade={aTrade({ status: "completed", directCashAvailable: true })}
+          side="seller"
+        />
+      </WithIntl>,
+    );
+    await user.click(screen.getByText("Record cash received"));
+    await user.type(screen.getByLabelText("Cash receipt reference"), "Cash 59");
+    await user.click(screen.getByRole("button", { name: "Confirm" }));
+    expect(act).toHaveBeenCalledWith({
+      tradeId: "trade1",
+      reference: "Cash 59",
+      amountPaise: 175_000,
+    });
+    expect(
+      screen.queryByText("Waiting for gateway payment"),
+    ).not.toBeInTheDocument();
+  });
+
+  it("keeps an accepted direct order cancellable without offering early cash", () => {
+    lifecycle.actions = ["cancel"];
+    render(
+      <WithIntl>
+        <TradeCard
+          trade={aTrade({ status: "accepted", directCashAvailable: true })}
+          side="seller"
+        />
+      </WithIntl>,
+    );
+    expect(
+      screen.getByRole("button", { name: "Request cancellation" }),
+    ).toBeVisible();
+    expect(screen.queryByText("Record cash received")).not.toBeInTheDocument();
+    expect(
+      screen.queryByText("Waiting for gateway payment"),
+    ).not.toBeInTheDocument();
+  });
+
+  it("offers the recorded cash receipt to the buyer without a payment action", () => {
+    render(
+      <WithIntl>
+        <TradeCard
+          trade={aTrade({
+            status: "completed",
+            directCashReceipt: {
+              reference: "Cash 59",
+              amountPaise: 175_000,
+              recordedAt: 1000,
+            },
+            paymentVerification: "reported_direct_cash",
+          })}
+          side="buyer"
+        />
+      </WithIntl>,
+    );
+    expect(screen.getByText("Cash reported received")).toBeVisible();
+    expect(
+      screen.getByRole("link", { name: "Receipt Cash 59" }),
+    ).toHaveAttribute("href", "/app/trades/trade1/invoice");
+    expect(screen.queryByText("Record cash received")).not.toBeInTheDocument();
+  });
+
   it("keeps a late payment hold visible after an order was cancelled", () => {
     lifecycle.state = "hold";
     render(

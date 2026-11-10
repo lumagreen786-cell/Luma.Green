@@ -139,7 +139,7 @@
         "title": "Ménages",
         "one": "Découvrez la valeur de vos matériaux avant de réserver.",
         "two": "Collecte à domicile ou dépôt en boutique.",
-        "three": "Paiement en espèces ou par UPI, avec un reçu.",
+        "three": "Paiement en espèces, avec un reçu.",
         "cta": "Recycler"
       },
       "kabadiwala": {
@@ -611,7 +611,7 @@
       "body": "Acceptez des collectes, des travaux de tri et des postes rémunérés près de chez vous, et suivez vos gains."
     },
     "householdHeading": "Et chaque ménage",
-    "householdBody": "Réservez une collecte à domicile avec votre numéro de mobile : choisissez les matériaux, comparez les offres des commerces et recevez leur paiement en espèces ou par UPI, avec un reçu."
+    "householdBody": "Réservez une collecte à domicile avec votre numéro de mobile : choisissez les matériaux, comparez les offres des commerces et recevez leur paiement en espèces, avec un reçu."
   },
   "contact": {
     "metaTitle": "Nous contacter",
@@ -1079,7 +1079,7 @@
           },
           "pay": {
             "title": "Recevoir le paiement sur place",
-            "body": "En espèces ou par UPI, avant le départ. Luma.Green ne détient jamais votre argent."
+            "body": "En espèces, avant le départ. Luma.Green ne détient jamais votre argent."
           },
           "receipt": {
             "title": "Vérifier votre reçu",
@@ -1218,7 +1218,7 @@
             "body": "L’application calcule le total selon vos prix. Montrez l’écran au ménage."
           },
           "pay": {
-            "title": "Payer en espèces ou par UPI",
+            "title": "Payer en espèces",
             "body": "Payez avant de partir et choisissez le moyen de paiement utilisé."
           },
           "save": {
@@ -1569,7 +1569,7 @@
       },
       "howPaid": {
         "q": "Comment suis-je payé ?",
-        "a": "À domicile, en espèces ou par UPI, avant le départ du kabadiwala. Luma.Green enregistre le paiement sans détenir votre argent."
+        "a": "À domicile, en espèces, avant le départ du kabadiwala. Luma.Green enregistre le paiement sans détenir votre argent."
       },
       "recyclePoints": {
         "q": "Que sont les points de recyclage ?",
@@ -1621,7 +1621,7 @@
       },
       "payHousehold": {
         "q": "Luma.Green paie-t-il le ménage à ma place ?",
-        "a": "Non. Vous le payez en espèces ou par UPI à domicile. L’application enregistre le montant et le moyen de paiement."
+        "a": "Non. Vous le payez en espèces à domicile. L’application enregistre le montant et le moyen de paiement."
       },
       "paidByYard": {
         "q": "Comment suis-je payé quand je vends à un opérateur de prétraitement ?",
@@ -2217,6 +2217,7 @@
       "fileType": "Ce type de fichier n’est pas accepté ici",
       "fileTooBig": "Ce fichier est trop volumineux",
       "uploadFailed": "Échec de l’importation. Réessayez.",
+      "uploadUnavailable": "L’envoi de fichiers privés est indisponible pour le moment.",
       "generic": "Une erreur est survenue. Réessayez.",
       "pan": "Recherchez votre numéro GST et confirmez votre entreprise.",
       "city": "Saisissez une ville ou localité de 2 à 60 caractères."
@@ -2531,7 +2532,7 @@
     "metaDescription": "Faites place nette. Vos recyclables vous rapportent. Photos, collecte ou dépôt, puis paiement après la pesée.",
     "eyebrow": "Inde",
     "title": "Réservez une collecte à domicile",
-    "lead": "Sélectionnez vos matériaux, choisissez une boutique voisine et recevez un paiement en espèces ou par UPI après la pesée.",
+    "lead": "Sélectionnez vos matériaux, choisissez une boutique voisine et recevez un paiement en espèces après la pesée.",
     "promises": {
       "label": "Pourquoi vendre ici",
       "noAccount": "Vérifiez votre mobile pour réserver",
@@ -2650,7 +2651,7 @@
       "dropoff": "Dépôt à la boutique",
       "whenValue": "{day} · {window}, {time}",
       "youGet": "Vous recevrez environ {amount}",
-      "payNote": "La boutique pèse vos matériaux et vous paie en espèces ou par UPI.",
+      "payNote": "La boutique pèse vos matériaux et vous paie en espèces.",
       "phoneTitle": "Confirmez votre portable",
       "phoneLead": "Nous enverrons un code à 6 chiffres par SMS. La réservation sera liée à ce numéro pour la suivre depuis tout téléphone.",
       "bookingAs": "Réservation avec {phone}",
@@ -2807,7 +2808,7 @@
       "requested": "{mode, select, pickup {En attente de l’acceptation de {shop}} other {En attente de la confirmation de {shop}}}",
       "requestedBody": "Votre demande a été envoyée. Cette page se met à jour dès leur réponse.",
       "accepted": "{mode, select, pickup {{shop} a accepté votre collecte} other {{shop} attend votre visite}}",
-      "acceptedBody": "Préparez vos matériaux. Ils seront pesés, puis payés en espèces ou par UPI.",
+      "acceptedBody": "Préparez vos matériaux. Ils seront pesés, puis payés en espèces.",
       "on_the_way": "{shop} est en route",
       "on_the_wayBody": "Préparez vos matériaux près de la porte.",
       "completed": "Terminé ! Vous avez reçu {amount}",
@@ -2848,7 +2849,7 @@
     "money": {
       "title": "Votre paiement et vos points",
       "estimate": "Vous recevrez environ {amount}",
-      "estimateNote": "La boutique pèse vos matériaux et vous paie en espèces ou par UPI.",
+      "estimateNote": "La boutique pèse vos matériaux et vous paie en espèces.",
       "paid": "Vous avez reçu {amount}",
       "paidBy": "Payé par {method, select, upi {UPI} other {espèces}} · {date}",
       "estimateWas": "Estimation initiale : {amount}",
@@ -3949,8 +3950,8 @@
   },
   "industry": {
     "title": "Références industrielles",
-    "lead": "Recherchez dans le classeur fourni. Ces références ne sont pas vérifiées et n’autorisent ni le commerce ni le traitement de matières.",
-    "sourceNote": "Le texte source est affiché dans l’anglais original du classeur.",
+    "lead": "Recherchez dans les références fournies. Ces références ne sont pas vérifiées et n’autorisent ni le commerce ni le traitement de matières.",
+    "sourceNote": "Le texte des références est affiché en anglais.",
     "sectors": "Références sectorielles",
     "industries": "Matrice industrielle",
     "lifecycles": "Cycle de vie des matières",
@@ -4056,6 +4057,10 @@
     "note": "Ce sont des déclarations du fabricant, sans vérification indépendante de qualité, propriété ou conformité. Les enregistrements sauvegardés ne sont pas modifiables."
   },
   "tradeLifecycle": {
+    "cashRecord": "Enregistrer les espèces reçues",
+    "cashReported": "Réception d’espèces déclarée",
+    "cashNote": "L’acheteur paie directement le vendeur. Luma enregistre la déclaration du vendeur.",
+    "cashReference": "Référence du reçu de paiement en espèces",
     "title": "Paiement et livraison",
     "collectionLabel": "Paiement de l’acheteur",
     "settlementLabel": "Versement au vendeur",
@@ -4562,6 +4567,11 @@
     "loadSaved": "Ouvrir la version enregistrée"
   },
   "businessSubscriptions": {
+    "draftsTitle": "Brouillons de factures",
+    "draftsEmpty": "Aucun brouillon pour le moment.",
+    "draftTotal": "Sous-total du brouillon hors taxes",
+    "draftBook": "Grille tarifaire {version}",
+    "draftUsage": "{count} commandes en espèces",
     "title": "Offre du site",
     "lead": "Enregistrez une préférence pour ce site.",
     "off": "La facturation est désactivée. Une préférence ne démarre pas un abonnement payant.",
@@ -4649,5 +4659,124 @@
     "requestsBody": "Supprimez votre compte ci-dessous ou écrivez au support pour un accès, une correction ou une suppression. Vérifiez votre identité ; n’envoyez pas de pièce d’identité par courriel. Réglez d’abord les tâches ou la propriété en attente.",
     "retentionTitle": "Ce qui reste après la fermeture",
     "retentionBody": "La fermeture supprime l’accès et les identifiants. Des preuves commerciales, de paiement, de sécurité et d’audit peuvent rester pour examen. Tous les registres ne sont pas effacés. Interrogez le support sur la conservation et les délais."
+  },
+  "participantDirectory": {
+    "title": "Choisissez votre rôle",
+    "search": "Rechercher des rôles",
+    "empty": "Aucun rôle correspondant",
+    "continue": "Continuer",
+    "apply": "Postuler pour ce rôle",
+    "roles": {
+      "household": "Foyer",
+      "small_business": "Commerce ou petite entreprise",
+      "industrial_seller": "Vendeur de ferraille industrielle",
+      "institution": "Établissement",
+      "kabadiwala": "Kabadiwala",
+      "saathi": "Saathi",
+      "dry_waste_centre": "Centre de déchets secs ou coopérative de collecteurs",
+      "large_yard": "Grand site de collecte",
+      "collection_contractor": "Prestataire de collecte à domicile",
+      "rural_collector": "Collectivité rurale ou groupe d’entraide",
+      "trader": "Négociant, courtier ou exportateur",
+      "preprocessor": "Préparateur de matières",
+      "recycler": "Entreprise de recyclage",
+      "e_waste_operator": "Collecteur, démanteleur ou reconditionneur de déchets électroniques",
+      "wet_waste_processor": "Entreprise de traitement des déchets humides",
+      "intermediary_manufacturer": "Fabricant de biens intermédiaires",
+      "end_goods_manufacturer": "Fabricant de produits finis",
+      "epr_brand": "Marque soumise à la REP",
+      "pro": "Organisme de responsabilité des producteurs",
+      "epr_trading": "Échanges liés à la REP",
+      "carbon_trading": "Marché du carbone",
+      "transporter": "Transporteur et bordereaux",
+      "equipment_supplier": "Fournisseur d’équipements",
+      "boiler_water_supplier": "Fournisseur de chaudières, de stations de traitement ou de citernes",
+      "weighing_vendor": "Fournisseur de balances ou de ponts-bascules",
+      "solar_provider": "Fournisseur d’énergie solaire",
+      "environmental_engineer": "Ingénierie environnementale",
+      "hr_provider": "Prestataire en ressources humaines",
+      "accounting_provider": "Comptabilité et conformité",
+      "employee_tracking": "Suivi du personnel",
+      "waste_picker_union": "ONG ou syndicat de collecteurs",
+      "city_official": "Agent municipal",
+      "csr_lender_auditor": "Équipe RSE, prêteur ou auditeur",
+      "luma_team": "Équipe Luma.Green",
+      "ward_official": "Agent de quartier",
+      "community_champion": "Référent de quartier",
+      "payment_partner": "Partenaire de paiement",
+      "rewards_partner": "Partenaire de récompenses",
+      "welfare_partner": "Partenaire d’assurance ou d’aide sociale",
+      "society_partner": "Partenaire de gestion de copropriétés ou de sites",
+      "voice_partner": "Partenaire de services vocaux ou linguistiques"
+    },
+    "groups": {
+      "generators": "Foyers et vendeurs de matières",
+      "collection": "Collecte et regroupement",
+      "processing": "Traitement et fabrication",
+      "markets": "Marques et marchés environnementaux",
+      "services": "Logistique et services",
+      "partners": "Collectivités, pouvoirs publics et partenaires"
+    }
+  },
+  "apartmentCollection": {
+    "pickup": "Collecte en immeuble",
+    "code": "Code de la résidence",
+    "noRoute": "Aucune collecte vérifiée n’est disponible pour cet immeuble. Demandez au gestionnaire ou à l’association des résidents d’organiser la collecte."
+  },
+  "householdFamily": {
+    "title": "Membres de la famille",
+    "description": "Votre famille peut suivre les collectes que vous partagez. Vos reçus, photos et votre empreinte carbone restent privés.",
+    "phone": "Numéro de mobile du proche",
+    "invite": "Créer une invitation",
+    "code": "Code d’invitation",
+    "codeHelp": "Partagez ce code en privé. Il expire dans 7 jours. Luma n’envoie aucun message.",
+    "join": "Rejoindre le foyer",
+    "joinedAt": "Membre depuis le {date}",
+    "leave": "Quitter le foyer",
+    "collections": "Collectes partagées en famille",
+    "share": "Partager le suivi",
+    "makePrivate": "Arrêter le partage",
+    "recent": "Déconnectez-vous et reconnectez-vous avant de continuer.",
+    "invalid": "Ce code est invalide, a expiré ou correspond à un autre numéro.",
+    "verified": "Vérifiez votre numéro de mobile pour utiliser les invitations."
+  },
+  "householdTools": {
+    "navigation": "Outils du foyer",
+    "recycle": "Recycler",
+    "activity": "Activité",
+    "services": "Prestations",
+    "footprint": "Empreinte",
+    "settings": "Réglages",
+    "loading": "Chargement des réservations…",
+    "noBookings": "Aucune réservation pour le moment.",
+    "electricityTitle": "Empreinte de la consommation électrique",
+    "electricityReading": "Électricité du réseau consommée (kWh)",
+    "invalidReading": "Saisissez les kWh de votre facture ou compteur. Utilisez jusqu’à trois décimales.",
+    "calculate": "Calculer l’estimation",
+    "estimate": "Émissions estimées du réseau : {amount} kg de CO₂",
+    "privateCalculation": "Votre relevé reste sur cet écran. Le résultat couvre uniquement l’électricité.",
+    "gridSource": "Facteur du réseau indien, CEA 2025–26",
+    "airQuality": "Qualité de l’air",
+    "roofSolar": "Évaluer le potentiel solaire du toit",
+    "roofPrecision": "Cette vérification exige une position précise.",
+    "lookupConsent": "Envoyer ma position à Google Maps pour cette vérification. Luma ne la conserve pas.",
+    "lookupUnavailable": "Aucun résultat disponible.",
+    "locationUnavailable": "Impossible d’obtenir une position adaptée.",
+    "lookupLimit": "Limite de requêtes atteinte. Réessayez plus tard.",
+    "airScore": "Indice universel de qualité de l’air : {score} sur 100. Plus il est élevé, mieux c’est.",
+    "roofEstimate": "Production modélisée du toit : {energy} kWh/an en courant continu avec {panels} panneaux."
+  },
+  "homeReminder": {
+    "title": "Rappel au départ du domicile",
+    "consent": "Configurez le rappel chez vous. Cet appareil utilise votre position en arrière-plan pour détecter votre départ. Luma ne reçoit aucun historique de position.",
+    "enable": "Activer le rappel au départ",
+    "disable": "Désactiver le rappel au départ",
+    "notificationTitle": "Avant de partir",
+    "notificationBody": "Vérifiez les lumières et les appareils que vous pouvez éteindre.",
+    "unavailable": "Le rappel au départ est indisponible. Vérifiez les autorisations de l’appareil et réessayez chez vous.",
+    "dailyTitle": "Rappel quotidien",
+    "time": "Heure du rappel",
+    "add": "Ajouter au calendrier",
+    "calendarHelp": "Ouvrez le fichier de calendrier pour programmer une alerte quotidienne."
   }
 }

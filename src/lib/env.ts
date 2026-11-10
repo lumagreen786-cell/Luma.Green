@@ -61,6 +61,10 @@ const serverSchema = z.object({
   GOOGLE_GEOCODING_ENABLED: z.string().optional(),
   GOOGLE_GEOCODING_API_KEY: z.string().optional(),
   GOOGLE_GEOCODING_ADDRESS_SAVE_ENABLED: z.string().optional(),
+  GOOGLE_HOUSEHOLD_AQI_ENABLED: z.string().optional(),
+  GOOGLE_HOUSEHOLD_AQI_API_KEY: z.string().optional(),
+  GOOGLE_HOUSEHOLD_SOLAR_ENABLED: z.string().optional(),
+  GOOGLE_HOUSEHOLD_SOLAR_API_KEY: z.string().optional(),
   TRIGGER_SECRET_KEY: z.string().optional(),
   TRIGGER_PROJECT_REF: z.string().optional(),
   TRIGGER_CONVEX_URL: optionalUrl,
@@ -552,4 +556,17 @@ export function geocodingEnv() {
 /** Paid limits require separate verified server evidence; billing remains off. */
 export function isBusinessSubscriptionsEnforced(): boolean {
   return process.env.BUSINESS_SUBSCRIPTIONS_ENFORCEMENT_ENABLED === "true";
+}
+
+/** Convex-only keys. Each location service is independently off by default. */
+export function householdLookupEnv(kind: "air" | "solar"): string | null {
+  const enabled =
+    kind === "air"
+      ? process.env.GOOGLE_HOUSEHOLD_AQI_ENABLED
+      : process.env.GOOGLE_HOUSEHOLD_SOLAR_ENABLED;
+  const key =
+    kind === "air"
+      ? process.env.GOOGLE_HOUSEHOLD_AQI_API_KEY
+      : process.env.GOOGLE_HOUSEHOLD_SOLAR_API_KEY;
+  return enabled === "true" && key?.trim() ? key.trim() : null;
 }

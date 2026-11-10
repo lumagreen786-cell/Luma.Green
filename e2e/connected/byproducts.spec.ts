@@ -67,13 +67,18 @@ test("an unpaid accepted order can be cancelled without losing stock or inventin
     );
     expect(reserved?.stockGrams).toBe(before.stockGrams);
     expect(reserved?.availableGrams).toBe(before.availableGrams - 1000);
+    await expect(
+      makerApi.mutation(api.market.recordDirectCash, {
+        tradeId,
+        amountPaise: 1250,
+        reference: "Synthetic rejected cash receipt",
+      }),
+    ).rejects.toThrow("CASH_RECEIPT_NOT_AVAILABLE");
     await shop.goto("/en/app/trades?tab=buying");
     const order = shop.getByRole("article").filter({ hasText: grade });
-    await expect(
-      order.getByText(en.tradeLifecycle.state.awaiting_payment, {
-        exact: true,
-      }),
-    ).toBeVisible();
+    await expect(order.getByText(en.tradeLifecycle.cashReported)).toHaveCount(
+      0,
+    );
     await expect(
       order.getByRole("button", {
         name: en.sandboxPayment.liveTitle,

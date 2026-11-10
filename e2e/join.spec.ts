@@ -31,8 +31,8 @@ test("/join lists every role with a way in", async ({ page }) => {
     ).toHaveAttribute("href", href);
   }
   await expect(
-    main.getByRole("link", { name: "Request an account" }),
-  ).toHaveAttribute("href", "/join/stakeholder");
+    main.getByRole("link", { name: en.participantDirectory.title }),
+  ).toHaveAttribute("href", "/join/roles");
 });
 
 test("/join is indexed, per language", async ({ page, request }) => {
@@ -56,6 +56,8 @@ for (const path of [
   "/join/yard/documents",
   "/join/status",
   "/join/stakeholder",
+  "/join/roles",
+  "/join/stakeholder?participant=trader",
 ]) {
   test(`${path} asks for a sign-in first and comes back after`, async ({
     page,

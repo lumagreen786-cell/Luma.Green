@@ -14,6 +14,7 @@ import {
 import { shiftDate } from "./lib/dates";
 import { OFFER_TIMEOUT_MS } from "./lib/dispatch";
 import { indiaToday } from "./lib/onboarding";
+import { mockR2 } from "./lib/r2.testing";
 import schema from "./schema";
 
 const modules = convexModules(import.meta.glob("./**/*.*s"));
@@ -24,6 +25,7 @@ const SHOP = "+919000000101";
 afterEach(() => {
   vi.useRealTimers();
   vi.unstubAllEnvs();
+  vi.unstubAllGlobals();
 });
 
 async function world() {
@@ -545,6 +547,7 @@ describe("shop dispatch preferences", () => {
 it("reassigns a photo request without inventing an estimate", async () => {
   const w = await world();
   const otherId = await candidate(w, "photo-replacement");
+  mockR2();
   const photoId = await w.household.action(api.householdPhotos.upload, {
     adultConfirmed: true,
     name: "scrap.jpg",

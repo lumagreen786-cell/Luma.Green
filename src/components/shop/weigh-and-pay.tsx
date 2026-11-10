@@ -1,7 +1,7 @@
 "use client";
 
 import { useMutation } from "convex/react";
-import { CheckIcon, PlusIcon } from "lucide-react";
+import { BanknoteIcon, CheckIcon, PlusIcon } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { type SubmitEvent, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
@@ -23,7 +23,6 @@ import type { Id } from "../../../convex/_generated/dataModel";
 import { kgToGrams } from "../../../convex/lib/chain";
 import { actionErrorKey } from "./bookings";
 import { MaterialIcon } from "./material-icon";
-import { type PayMethod, PayMethodChoice } from "./pay-method";
 import type { BookingView, MaterialRef } from "./types";
 import { kgInput, parseKg, priceLines } from "./weigh";
 import { WeighRow, type WeighRowValue } from "./weigh-row";
@@ -39,7 +38,7 @@ const PROBLEM_KEYS: Record<Problem, string> = {
 
 /**
  * Weigh and pay: one row per material, prefilled with the household's guess;
- * the amount at the shop's prices as they type; cash or UPI; confirm. The
+ * the amount at the shop's prices as they type; direct cash; confirm. The
  * weight, not the guess, is what's paid and what goes into stock.
  */
 export function WeighAndPay({
@@ -69,7 +68,6 @@ export function WeighAndPay({
       estGrams: kgToGrams(item.estKg),
     })),
   );
-  const [method, setMethod] = useState<PayMethod>("cash");
   const [problem, setProblem] = useState<Problem | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [added, setAdded] = useState<string | null>(null);
@@ -135,7 +133,7 @@ export function WeighAndPay({
     setProblem(null);
     setIsSaving(true);
     try {
-      await complete({ bookingId, lines, method });
+      await complete({ bookingId, lines, method: "cash" });
       toast.success(t("weigh.done"));
     } catch (error) {
       setProblem(actionErrorKey(error));
@@ -216,7 +214,10 @@ export function WeighAndPay({
               {format.money(totalPaise)}
             </output>
           </div>
-          <PayMethodChoice value={method} onChange={setMethod} />
+          <p className="flex items-center gap-2 text-sm font-medium">
+            <BanknoteIcon aria-hidden className="size-5" />
+            {t("methods.cash")}
+          </p>
           {problem ? (
             <p role="alert" className="text-sm font-medium text-destructive">
               {t(PROBLEM_KEYS[problem])}

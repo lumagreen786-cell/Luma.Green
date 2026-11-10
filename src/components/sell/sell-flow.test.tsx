@@ -138,7 +138,9 @@ function photo() {
   });
   return file;
 }
-async function details(hasMultiplePhotos = false) {
+const photosLabel = `${messages.sell.simple.photos} (${messages.join.form.optional})`;
+
+async function details(photoCount = 1) {
   const user = userEvent.setup();
   await user.click(
     screen.getByRole("checkbox", { name: messages.join.consent.age }),
@@ -152,12 +154,9 @@ async function details(hasMultiplePhotos = false) {
     screen.getByLabelText(messages.sell.when.addressLabel),
     "12 Test Street, Bengaluru",
   );
-  fireEvent.change(
-    screen.getByLabelText(messages.sell.simple.photos, { selector: "input" }),
-    {
-      target: { files: hasMultiplePhotos ? [photo(), photo()] : [photo()] },
-    },
-  );
+  fireEvent.change(screen.getByLabelText(photosLabel, { selector: "input" }), {
+    target: { files: Array.from({ length: photoCount }, () => photo()) },
+  });
   await user.click(
     screen.getByRole("button", { name: messages.sell.simple.next }),
   );
@@ -193,7 +192,7 @@ it("shows what the recycling request uses before collecting any booking details"
 it("starts with photos and personal details, without a material or weight questionnaire", () => {
   show();
   expect(
-    screen.getByLabelText(messages.sell.simple.photos, { selector: "input" }),
+    screen.getByLabelText(photosLabel, { selector: "input" }),
   ).toBeInTheDocument();
   expect(screen.getByLabelText(messages.sell.when.nameLabel)).toBeVisible();
   expect(
@@ -202,7 +201,7 @@ it("starts with photos and personal details, without a material or weight questi
   expect(calls.locate).not.toHaveBeenCalled();
   expect(calls.upload).not.toHaveBeenCalled();
 });
-it("requires photos and a pickup address, while drop-off can omit the address", () => {
+it("requires a pickup address, while drop-off can omit it", () => {
   expect(
     recyclingDetailsSchema.safeParse({
       city: "Bengaluru",
@@ -257,6 +256,26 @@ it("submits owned photos without invented materials, weights or prices", async (
     }),
   );
 });
+it("books without adding photos or estimating weight", async () => {
+  show();
+  const user = await details(0);
+  await schedule(user);
+  await user.click(
+    screen.getByRole("button", { name: messages.sell.simple.confirm }),
+  );
+  await waitFor(() => {
+    expect(calls.book).toHaveBeenCalledWith(
+      expect.objectContaining({
+        items: [],
+        photoIds: [],
+        adultConfirmed: true,
+        operationKey: expect.any(String),
+      }),
+    );
+  });
+  expect(calls.upload).not.toHaveBeenCalled();
+});
+
 it("retains the details and uploaded photo for retry after booking fails", async () => {
   calls.book.mockRejectedValueOnce(new Error("temporary"));
   show();
@@ -349,7 +368,7 @@ it.each(["preparation", "bytes", "first-upload"])(
     const bytes = Promise.withResolvers<ArrayBuffer>();
     const upload = Promise.withResolvers<string>();
     const view = show();
-    const user = await details(true);
+    const user = await details(2);
     const first = photo();
     Object.defineProperty(first, "arrayBuffer", {
       value: () => bytes.promise,

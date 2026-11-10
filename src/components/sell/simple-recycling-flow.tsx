@@ -11,7 +11,13 @@ import {
   MapPinIcon,
 } from "lucide-react";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
-import { type RefObject, useEffect, useRef, useState } from "react";
+import {
+  type ReactNode,
+  type RefObject,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import {
   Controller,
   useForm,
@@ -20,12 +26,14 @@ import {
 } from "react-hook-form";
 import { z } from "zod";
 
+import { useFormat } from "@/components/app/format";
 import { CityField } from "@/components/location/city-field";
 import { ReverseAddress } from "@/components/location/reverse-address";
 import { isConvexConfigured } from "@/components/providers/convex-provider";
 import { AgeConfirmation } from "@/components/site/age-confirmation";
 import { CollectionPrivacy } from "@/components/site/collection-privacy";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -37,7 +45,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { isLocale, localeDirection } from "@/i18n/locales";
-import { useRouter } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
 import { prepareUpload } from "@/lib/upload-image";
 import { assertMounted, useMounted } from "@/lib/use-mounted";
 
@@ -45,6 +53,7 @@ import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
 import { canonicalCity } from "../../../convex/lib/geography";
 import {
+  apartmentCode,
   bookableDates,
   cleanAddress,
   isValidAddress,
@@ -56,7 +65,7 @@ import {
 import { citySchema } from "../../../convex/lib/onboarding";
 import { indiaToday } from "../../../convex/lib/onboarding";
 import type { SellDraft } from "./draft";
-import { sellErrorKey } from "./errors";
+import { type SellErrorKey, sellErrorKey } from "./errors";
 import { PhoneSignIn } from "./phone-sign-in";
 import { RecyclingPhotos } from "./recycling-photos";
 import {
@@ -114,6 +123,7 @@ function RecyclingFlow({
   const t = useTranslations("sell");
   const simple = useTranslations("sell.simple");
   const common = useTranslations("common");
+  const apartment = useTranslations("apartmentCollection");
   const locale = useLocale();
   const router = useRouter();
   const isMounted = useMounted();
@@ -123,7 +133,10 @@ function RecyclingFlow({
   const [isAdult, setIsAdult] = useState(false);
   const [stage, setStage] = useState<"details" | "schedule">("details");
   const [files, setFiles] = useState<File[]>([]);
-  const [photoError, setPhotoError] = useState<string>();
+  const [apartmentPickup, setApartmentPickup] = useState(
+    initial.apartmentPickup === true,
+  );
+  const [communityCode, setCommunityCode] = useState("");
   const [shopId, setShopId] = useState(initial.shopId);
   const [slotDate, setSlotDate] = useState(initial.slotDate ?? "");
   const [slotWindow, setSlotWindow] = useState<SlotWindow | undefined>(
@@ -152,11 +165,14 @@ function RecyclingFlow({
   });
   const mode = useWatch({ control: form.control, name: "mode" });
   const city = useWatch({ control: form.control, name: "city" });
-  const shops = useQuery(
-    api.households.shops,
-    shopQueryArgs(stage, location.point, city),
+  const { reviewed, available, isUnavailable } = usePickupShops(
+    stage,
+    location.point,
+    city,
+    mode,
+    apartmentPickup,
+    communityCode,
   );
-  const available = shopsForMode(shops, mode);
   const selectedShop = available?.find((shop) => shop.id === shopId);
   const days = bookableDates(today).filter((day) =>
     SLOT_WINDOWS.some((window) => isWindowOpen(day, window, today, now)),
@@ -165,9 +181,7 @@ function RecyclingFlow({
     days.includes(slotDate) &&
     slotWindow !== undefined &&
     isWindowOpen(slotDate, slotWindow, today, now);
-  const canBook =
-    isAdult &&
-    Boolean(retryRequest ?? (selectedShop && hasSlot && files.length > 0));
+  const canBook = isAdult && Boolean(retryRequest ?? (selectedShop && hasSlot));
 
   const isLocked = status !== "idle" || retryRequest !== null;
   const heading = useRef<HTMLHeadingElement>(null);
@@ -177,12 +191,10 @@ function RecyclingFlow({
 
   function next(values: Details) {
     if (!isAdult) return;
-    if (files.length === 0) {
-      setPhotoError(simple("photoRequired"));
-      return;
-    }
-    setPhotoError(undefined);
-    save(values);
+    save({
+      ...values,
+      apartmentPickup: values.mode === "pickup" && apartmentPickup,
+    });
     setStage("schedule");
     setError(null);
   }
@@ -205,8 +217,10 @@ function RecyclingFlow({
         request = {
           adultConfirmed: true,
           orgId: selectedShop.id,
+          apartmentRouteId: reviewed?.routeId,
           mode: values.mode,
           items: [],
+          operationKey: crypto.randomUUID(),
           photoIds,
           name: values.name,
           ...pickupDetails(values, location.point),
@@ -226,11 +240,12 @@ function RecyclingFlow({
         setRetryRequest(null);
         if (error_.data === "PHOTO_NOT_AVAILABLE") clearUploads();
       }
-      const key = sellErrorKey(error_);
       setError(
-        isRecyclingPhotoError(error_)
-          ? simple("uploadFailed")
-          : t(`errors.${key}`),
+        bookingErrorMessage(error_, {
+          apartmentUnavailable: apartment("noRoute"),
+          photoError: simple("uploadFailed"),
+          sellError: (key) => t(`errors.${key}`),
+        }),
       );
       setStatus("idle");
       pending.current = false;
@@ -250,13 +265,25 @@ function RecyclingFlow({
           mode={mode}
           location={location}
           files={files}
-          photoError={photoError}
           next={next}
           setFiles={setFiles}
-          setPhotoError={setPhotoError}
           clearShop={() => {
             setShopId(undefined);
           }}
+          apartmentFields={
+            <ApartmentPickupField
+              isApartmentPickup={apartmentPickup}
+              communityCode={communityCode}
+              onCheckedChange={(value) => {
+                setApartmentPickup(value);
+                setShopId(undefined);
+              }}
+              onCodeChange={(value) => {
+                setCommunityCode(value);
+                setShopId(undefined);
+              }}
+            />
+          }
         />
       ) : (
         <div className="space-y-7">
@@ -271,29 +298,33 @@ function RecyclingFlow({
             <ArrowLeftIcon aria-hidden className="rtl:rotate-180" />
             {t("back")}
           </Button>
-          <section className="space-y-3" aria-labelledby="recycling-step-title">
-            <ShopSelection
-              shops={available}
-              shopId={shopId}
-              setShopId={setShopId}
-              isDisabled={isLocked}
-            />
-          </section>
+          <PickupShopSection
+            routeKind={reviewed?.kind}
+            isUnavailable={isUnavailable}
+            shops={available}
+            shopId={shopId}
+            setShopId={setShopId}
+            isDisabled={isLocked}
+          />
           {selectedShop ? (
-            <ScheduleFields
-              selectedShop={selectedShop}
-              mode={mode}
-              days={days}
-              today={today}
-              now={now}
-              slotDate={slotDate}
-              slotWindow={slotWindow}
-              setSlotDate={setSlotDate}
-              setSlotWindow={setSlotWindow}
-              isDisabled={isLocked}
-            />
+            <>
+              <CollectorRates orgId={selectedShop.id} />
+              <ScheduleFields
+                selectedShop={selectedShop}
+                mode={mode}
+                days={days}
+                today={today}
+                now={now}
+                slotDate={slotDate}
+                slotWindow={slotWindow}
+                setSlotDate={setSlotDate}
+                setSlotWindow={setSlotWindow}
+                isDisabled={isLocked}
+              />
+            </>
           ) : null}
           <MissingSchedule
+            isUnavailable={isUnavailable}
             hasShop={Boolean(selectedShop)}
             slotDate={slotDate}
             hasSlot={hasSlot}
@@ -340,6 +371,134 @@ function RecyclingFlow({
   );
 }
 
+function usePickupShops(
+  stage: "details" | "schedule",
+  point: ReturnType<typeof useLocation>["point"],
+  city: string,
+  mode: Details["mode"],
+  isApartmentPickup: boolean,
+  communityCode: string,
+) {
+  const requiresApartmentRoute = mode === "pickup" && isApartmentPickup;
+  const selection = shopQueryArgs(stage, point, city);
+  const code = apartmentCode(communityCode);
+  const shops = useQuery(
+    api.households.shops,
+    requiresApartmentRoute ? "skip" : selection,
+  );
+  const reviewed = useQuery(
+    api.households.apartmentShop,
+    requiresApartmentRoute && selection !== "skip" && code
+      ? { city: selection.city, near: selection.near, code }
+      : "skip",
+  );
+  if (!requiresApartmentRoute)
+    return { available: shopsForMode(shops, mode), isUnavailable: false };
+  return {
+    reviewed,
+    available: reviewed ? [reviewed.shop] : undefined,
+    isUnavailable: !code || reviewed === null,
+  };
+}
+
+function ApartmentPickupField({
+  isApartmentPickup,
+  communityCode,
+  onCheckedChange,
+  onCodeChange,
+}: {
+  isApartmentPickup: boolean;
+  communityCode: string;
+  onCheckedChange: (isChecked: boolean) => void;
+  onCodeChange: (value: string) => void;
+}) {
+  const apartment = useTranslations("apartmentCollection");
+  return (
+    <div className="space-y-2">
+      <Label className="min-h-11 cursor-pointer gap-3 font-normal">
+        <Checkbox
+          checked={isApartmentPickup}
+          onCheckedChange={(value) => {
+            onCheckedChange(value === true);
+          }}
+        />
+        {apartment("pickup")}
+      </Label>
+      {isApartmentPickup ? (
+        <>
+          <Label htmlFor="apartment-code">{apartment("code")}</Label>
+          <Input
+            id="apartment-code"
+            dir="ltr"
+            autoComplete="off"
+            spellCheck={false}
+            maxLength={32}
+            value={communityCode}
+            onChange={(event) => {
+              onCodeChange(event.target.value);
+            }}
+          />
+        </>
+      ) : null}
+    </div>
+  );
+}
+
+function PickupShopSection({
+  routeKind,
+  isUnavailable,
+  ...selection
+}: Parameters<typeof ShopSelection>[0] & {
+  routeKind?: "society_partner" | "community_champion";
+  isUnavailable: boolean;
+}) {
+  const apartment = useTranslations("apartmentCollection");
+  const nav = useTranslations("nav");
+  const role = useTranslations("participantDirectory.roles");
+  return (
+    <section className="space-y-3" aria-labelledby="recycling-step-title">
+      {isUnavailable ? (
+        <div className="space-y-2">
+          <p role="status" className="text-muted-foreground">
+            {apartment("noRoute")}
+          </p>
+          <Link
+            href="/contact"
+            className="inline-flex min-h-11 items-center font-medium text-primary underline"
+          >
+            {nav("contact")}
+          </Link>
+        </div>
+      ) : (
+        <>
+          {routeKind ? (
+            <p className="text-sm text-muted-foreground">{role(routeKind)}</p>
+          ) : null}
+          <ShopSelection {...selection} />
+        </>
+      )}
+    </section>
+  );
+}
+
+function bookingErrorMessage(
+  error: unknown,
+  copy: {
+    apartmentUnavailable: string;
+    photoError: string;
+    sellError: (key: SellErrorKey) => string;
+  },
+) {
+  if (
+    error instanceof ConvexError &&
+    error.data === "APARTMENT_ROUTE_UNAVAILABLE"
+  )
+    return copy.apartmentUnavailable;
+  return isRecyclingPhotoError(error)
+    ? copy.photoError
+    : copy.sellError(sellErrorKey(error));
+}
+
 function RecyclingProgress({
   stage,
   heading,
@@ -369,15 +528,18 @@ function RecyclingProgress({
   );
 }
 function MissingSchedule({
+  isUnavailable,
   hasShop,
   slotDate,
   hasSlot,
 }: {
+  isUnavailable: boolean;
   hasShop: boolean;
   slotDate: string;
   hasSlot: boolean;
 }) {
   const t = useTranslations("sell");
+  if (isUnavailable) return null;
   let key:
     "simple.chooseShop" | "when.errors.day" | "when.errors.window" | null =
     null;
@@ -520,11 +682,10 @@ function DetailsForm({
   mode,
   location,
   files,
-  photoError,
   next,
   setFiles,
-  setPhotoError,
   clearShop,
+  apartmentFields,
 }: {
   form: UseFormReturn<Details>;
   isAdult: boolean;
@@ -532,11 +693,10 @@ function DetailsForm({
   mode: Details["mode"];
   location: ReturnType<typeof useLocation>;
   files: File[];
-  photoError: string | undefined;
   next: (values: Details) => void;
   setFiles: (files: File[]) => void;
-  setPhotoError: (error: string | undefined) => void;
   clearShop: () => void;
+  apartmentFields: ReactNode;
 }) {
   const t = useTranslations("sell");
   const simple = useTranslations("sell.simple");
@@ -549,7 +709,6 @@ function DetailsForm({
       noValidate
       className="space-y-7"
       onSubmit={(event) => {
-        if (files.length === 0) setPhotoError(simple("photoRequired"));
         void form.handleSubmit(next)(event);
       }}
     >
@@ -557,14 +716,7 @@ function DetailsForm({
         <CollectionPrivacy purpose="booking" />
         <AgeConfirmation checked={isAdult} onChange={setIsAdult} />
       </div>
-      <RecyclingPhotos
-        files={files}
-        onChange={(value) => {
-          setFiles(value);
-          setPhotoError(undefined);
-        }}
-        error={photoError}
-      />
+      <RecyclingPhotos files={files} onChange={setFiles} />
       <RadioGroup
         dir={isLocale(locale) ? localeDirection(locale) : "ltr"}
         value={mode}
@@ -605,6 +757,7 @@ function DetailsForm({
           />
         )}
       />
+      {mode === "pickup" ? apartmentFields : null}
       <div className="space-y-2">
         <Label htmlFor="recycle-name">{t("when.nameLabel")}</Label>
         <Input
@@ -711,6 +864,7 @@ function ShopSelection({
   const t = useTranslations("sell");
   const common = useTranslations("common");
   const locale = useLocale();
+  const format = useFormat();
   if (!shops) return <p role="status">{common("loading")}</p>;
   if (shops.length === 0)
     return (
@@ -738,10 +892,67 @@ function ShopSelection({
               <MapPinIcon aria-hidden className="size-4" />
               {shop.area}
             </span>
+            {shop.distanceKm === undefined ? null : (
+              <span className="block text-sm text-muted-foreground">
+                {t("shop.distance", { km: format.number(shop.distanceKm, 1) })}
+              </span>
+            )}
           </span>
         </Label>
       ))}
     </RadioGroup>
+  );
+}
+
+function CollectorRates({ orgId }: { orgId: Id<"orgs"> }) {
+  const nav = useTranslations("nav");
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <details
+      className="border-y border-border"
+      onToggle={(event) => {
+        setIsOpen(event.currentTarget.open);
+      }}
+    >
+      <summary className="min-h-11 cursor-pointer py-3 font-medium">
+        {nav("prices")}
+      </summary>
+      {isOpen ? <CollectorRateList orgId={orgId} /> : null}
+    </details>
+  );
+}
+
+function CollectorRateList({ orgId }: { orgId: Id<"orgs"> }) {
+  const common = useTranslations("common");
+  const t = useTranslations("sell");
+  const format = useFormat();
+  const rates = useQuery(api.households.shopRates, { orgId });
+  if (rates === undefined)
+    return (
+      <p className="py-2 text-sm" role="status">
+        {common("loading")}
+      </p>
+    );
+  if (rates.length === 0)
+    return (
+      <p className="py-2 text-sm text-muted-foreground">
+        {t("simple.estimateLater")}
+      </p>
+    );
+  return (
+    <dl className="divide-y divide-border">
+      {rates.map(({ material, paisePerKg }) => (
+        <div
+          key={material.code}
+          className="flex justify-between gap-3 py-2 text-sm"
+        >
+          <dt>{format.material(material.names, material.code)}</dt>
+          <dd className="shrink-0">
+            {t("perKg", { price: format.money(paisePerKg) })}
+          </dd>
+        </div>
+      ))}
+    </dl>
   );
 }
 

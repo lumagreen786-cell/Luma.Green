@@ -21,6 +21,7 @@ export default defineConfig({
     "foundation-carbon-project-phone.spec.ts",
     "foundation-handover-phone.spec.ts",
     "foundation-removal-phone.spec.ts",
+    "foundation-household-access-phone.spec.ts",
   ],
   fullyParallel: false,
   workers: 1,

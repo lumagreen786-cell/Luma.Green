@@ -27,6 +27,11 @@ const shop = {
 };
 afterEach(() => vi.unstubAllEnvs());
 async function world() {
+  vi.stubEnv("R2_ENABLED", "false");
+  vi.stubEnv("AUTH_LOCAL_TEST_MODE", "true");
+  vi.stubEnv("CONVEX_SITE_URL", "http://127.0.0.1:3211");
+  vi.stubEnv("SITE_URL", "http://127.0.0.1:3000");
+
   const w = await teamWorld(modules);
   const organizationId = await w.owner.mutation(api.organizations.create, {
     name: "Demo company",

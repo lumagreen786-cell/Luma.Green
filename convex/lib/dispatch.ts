@@ -3,6 +3,7 @@ import { ConvexError } from "convex/values";
 import { internal } from "../_generated/api";
 import type { Doc, Id } from "../_generated/dataModel";
 import type { MutationCtx, QueryCtx } from "../_generated/server";
+import { requireApartmentCollection } from "./apartmentCollections";
 import { kgToGrams, paiseFor } from "./chain";
 import {
   availableCapacity,
@@ -103,6 +104,12 @@ export async function acceptOffer(
   const org = await ctx.db.get("orgs", booking.orgId);
   if (!org || (booking.mode === "pickup" && !org.offersPickup))
     throw new ConvexError("SHOP_NOT_FOUND");
+  await requireApartmentCollection(
+    ctx,
+    booking.apartmentRouteId,
+    org._id,
+    booking.slotDate,
+  );
   if (
     booking.mode === "pickup" &&
     !isPickupLocationEligible(org, knownCollectionPoint(booking))
@@ -186,6 +193,12 @@ export async function beginDispatch(
   location?: Point,
 ): Promise<void> {
   if (booking.mode !== "pickup") return;
+  await requireApartmentCollection(
+    ctx,
+    booking.apartmentRouteId,
+    org._id,
+    booking.slotDate,
+  );
   const origin = location ?? knownCollectionPoint(booking);
   if (!isPickupLocationEligible(org, origin))
     throw new ConvexError("OUTSIDE_PICKUP_RADIUS");
@@ -296,7 +309,7 @@ async function nextShop(
       )) < 1
     )
       continue;
-    if (booking.requestKind === "photo_request")
+    if (booking.requestKind !== undefined)
       return { org, estimatePaise: undefined };
     const estimatePaise = await candidateQuote(ctx, booking, org);
     if (estimatePaise !== null) return { org, estimatePaise };
@@ -329,6 +342,15 @@ export async function advanceOffer(
     indiaToday(now),
     now,
   );
+  if (booking.apartmentRouteId) {
+    await ctx.db.patch(booking._id, {
+      status: "declined",
+      dispatch: { ...booking.dispatch, expiresAt: undefined },
+      timeline: [...booking.timeline, { status: "declined", at: now }],
+      updatedAt: now,
+    });
+    return;
+  }
   const replacement =
     isWindowOpenNow &&
     now < (booking.dispatch.deadlineAt ?? booking.createdAt + OFFER_TIMEOUT_MS)
@@ -398,6 +420,8 @@ export async function reassignCollection(
   reason: string,
   now: number,
 ): Promise<void> {
+  if (booking.apartmentRouteId)
+    throw new ConvexError("APARTMENT_ROUTE_UNAVAILABLE");
   if (
     booking.mode !== "pickup" ||
     !["requested", "accepted"].includes(booking.status)
@@ -422,9 +446,9 @@ export async function reassignCollection(
     booking._id,
   );
   const estimatePaise =
-    booking.requestKind === "photo_request"
-      ? undefined
-      : await candidateQuote(ctx, booking, org);
+    booking.requestKind === undefined
+      ? await candidateQuote(ctx, booking, org)
+      : undefined;
   if (estimatePaise === null)
     throw new ConvexError("SHOP_CANNOT_SERVE_REQUEST");
   const dispatch = {

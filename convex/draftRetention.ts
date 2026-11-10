@@ -2,6 +2,7 @@ import { v } from "convex/values";
 
 import { internal } from "./_generated/api";
 import { internalMutation } from "./_generated/server";
+import { discardDraftFile } from "./lib/applicationAccess";
 
 export const expire = internalMutation({
   args: { cursor: v.optional(v.union(v.string(), v.null())) },
@@ -30,11 +31,12 @@ export const expire = internalMutation({
         .query("applicationFiles")
         .withIndex("by_application", (q) => q.eq("applicationId", row._id))
         .take(100);
-      if (files.length === 100) continue;
-      for (const file of files) {
-        await ctx.storage.delete(file.storageId);
-        await ctx.db.delete("applicationFiles", file._id);
-      }
+      if (
+        files.length === 100 ||
+        files.some((file) => file.firstSubmittedVersion !== undefined)
+      )
+        continue;
+      for (const file of files) await discardDraftFile(ctx, file);
       await ctx.db.delete("applications", row._id);
       await ctx.db.insert("auditLog", {
         action: "application.draft_expired",

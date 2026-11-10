@@ -1,6 +1,7 @@
 "use client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
+import { ApartmentRoutes } from "./apartment-routes";
 import { CollectionReassignment } from "./collection-reassignment";
 import {
   DestinationConsole,
@@ -36,6 +37,7 @@ export function OperationsConsole() {
         </TabsContent>
       </Tabs>
       <CollectionReassignment />
+      <ApartmentRoutes />
     </div>
   );
 }

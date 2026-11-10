@@ -1,10 +1,12 @@
 const { withInfoPlist } = require("expo/config-plugins");
 
 /** Remove descriptions for capabilities the shell never uses. */
-function trimIosPermissions(plist, isDevelopment) {
+function trimIosPermissions(plist, isDevelopment, areRemindersEnabled = false) {
   const blocked = new Set([
     "NSLocationAlwaysUsageDescription",
-    "NSLocationAlwaysAndWhenInUseUsageDescription",
+    ...(areRemindersEnabled
+      ? []
+      : ["NSLocationAlwaysAndWhenInUseUsageDescription"]),
     "NSMotionUsageDescription",
     "NSMicrophoneUsageDescription",
     ...(isDevelopment
@@ -17,19 +19,27 @@ function trimIosPermissions(plist, isDevelopment) {
   if (Array.isArray(next.UIBackgroundModes)) {
     next.UIBackgroundModes = next.UIBackgroundModes.filter(
       (mode) =>
-        mode !== "location" &&
+        (mode !== "location" || areRemindersEnabled) &&
         mode !== "audio" &&
-        mode !== "remote-notification",
+        mode !== "remote-notification" &&
+        mode !== "fetch",
     );
     if (next.UIBackgroundModes.length === 0) delete next.UIBackgroundModes;
   }
   return next;
 }
 
-function withAppPermissions(config, { isDevelopment = false } = {}) {
+function withAppPermissions(
+  config,
+  { isDevelopment = false, areRemindersEnabled = false } = {},
+) {
   return withInfoPlist(config, (mod) => ({
     ...mod,
-    modResults: trimIosPermissions(mod.modResults, isDevelopment),
+    modResults: trimIosPermissions(
+      mod.modResults,
+      isDevelopment,
+      areRemindersEnabled,
+    ),
   }));
 }
 module.exports = withAppPermissions;

@@ -168,6 +168,7 @@ async function view(
   orgId?: Id<"orgs">,
   isViewer = true,
 ) {
+  if (trade.directCashReceipt) return null;
   const row = await financial(ctx, trade._id);
   if (!row && trade.status !== "accepted") return null;
   const isPolicyReady = await isLiveReady(ctx);
@@ -291,6 +292,7 @@ export const requestCancellation = mutation({
     if (row?.state === "cancelled" || row?.state === "cancellation_pending")
       return null;
     if (
+      trade.directCashReceipt ||
       trade.status !== "accepted" ||
       row?.collection === "live_confirmed" ||
       row?.state === "hold"

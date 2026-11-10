@@ -3,16 +3,22 @@ const en = require("../../messages/en.json");
 
 const { locales } = require("../../src/i18n/locales.ts");
 
-function permissionStrings(messages) {
+function permissionStrings(messages, areRemindersEnabled) {
   return {
     NSCameraUsageDescription: messages.native.cameraPermission,
     NSPhotoLibraryUsageDescription: messages.native.photoPermission,
     NSLocationWhenInUseUsageDescription: messages.native.locationBody,
+    ...(areRemindersEnabled && {
+      NSLocationAlwaysAndWhenInUseUsageDescription:
+        messages.homeReminder?.consent ?? en.homeReminder.consent,
+    }),
   };
 }
 
 module.exports = function buildConfig() {
   const settings = resolveSettings(process.env);
+  const areRemindersEnabled =
+    process.env.EXPO_PUBLIC_HOME_REMINDERS_ENABLED === "true";
   const isDevelopment =
     process.env.EAS_BUILD_PROFILE === "development" ||
     (!process.env.EAS_BUILD_PROFILE && process.env.NODE_ENV !== "production");
@@ -27,7 +33,12 @@ module.exports = function buildConfig() {
     locales: Object.fromEntries(
       locales.map((locale) => [
         locale,
-        { ios: permissionStrings(require(`../../messages/${locale}.json`)) },
+        {
+          ios: permissionStrings(
+            require(`../../messages/${locale}.json`),
+            areRemindersEnabled,
+          ),
+        },
       ]),
     ),
     userInterfaceStyle: "automatic",
@@ -36,7 +47,7 @@ module.exports = function buildConfig() {
       bundleIdentifier: "green.luma.app",
       supportsTablet: true,
       infoPlist: {
-        ...permissionStrings(en),
+        ...permissionStrings(en, areRemindersEnabled),
         ...(settings.allowLocalHttp && {
           NSAppTransportSecurity: {
             NSAllowsLocalNetworking: true,
@@ -55,19 +66,27 @@ module.exports = function buildConfig() {
         foregroundImage: "../../public/brand/app-icon-foreground.png",
         backgroundColor: "#ffffff",
       },
-      permissions: ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION"],
+      permissions: [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        ...(areRemindersEnabled
+          ? ["ACCESS_BACKGROUND_LOCATION", "POST_NOTIFICATIONS"]
+          : []),
+      ],
       blockedPermissions: [
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE",
         "android.permission.CAMERA",
         "android.permission.RECORD_AUDIO",
-        "android.permission.ACCESS_BACKGROUND_LOCATION",
+        ...(areRemindersEnabled
+          ? []
+          : ["android.permission.ACCESS_BACKGROUND_LOCATION"]),
         "android.permission.ACTIVITY_RECOGNITION",
         "com.google.android.gms.permission.ACTIVITY_RECOGNITION",
         "android.permission.FOREGROUND_SERVICE",
         "android.permission.FOREGROUND_SERVICE_LOCATION",
         ...(isDevelopment ? [] : ["android.permission.SYSTEM_ALERT_WINDOW"]),
-        ...(settings.pushEnabled
+        ...(areRemindersEnabled || settings.pushEnabled
           ? []
           : [
               "android.permission.POST_NOTIFICATIONS",
@@ -76,7 +95,10 @@ module.exports = function buildConfig() {
       ],
     },
     plugins: [
-      ["./plugins/with-app-permissions.cjs", { isDevelopment }],
+      [
+        "./plugins/with-app-permissions.cjs",
+        { isDevelopment, areRemindersEnabled },
+      ],
       "./plugins/with-camera-capture.cjs",
       [
         "expo-notifications",
@@ -93,11 +115,12 @@ module.exports = function buildConfig() {
         "expo-location",
         {
           locationWhenInUsePermission: en.native.locationBody,
-          locationAlwaysAndWhenInUsePermission: false,
+          locationAlwaysAndWhenInUsePermission:
+            areRemindersEnabled && en.homeReminder.consent,
           locationAlwaysPermission: false,
           motionUsagePermission: false,
-          isIosBackgroundLocationEnabled: false,
-          isAndroidBackgroundLocationEnabled: false,
+          isIosBackgroundLocationEnabled: areRemindersEnabled,
+          isAndroidBackgroundLocationEnabled: areRemindersEnabled,
           isAndroidForegroundServiceEnabled: false,
           isAndroidMotionActivityEnabled: false,
         },
@@ -116,6 +139,7 @@ module.exports = function buildConfig() {
       appOrigin: settings.origin,
       allowLocalHttp: settings.allowLocalHttp,
       pushEnabled: settings.pushEnabled,
+      areRemindersEnabled,
       // Project linking is independent of opting in to OTA updates.
       eas: {
         projectId: settings.projectId ?? "f0e526e7-20d3-4657-8c45-78afb801cfdf",

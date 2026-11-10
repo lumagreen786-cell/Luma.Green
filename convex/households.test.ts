@@ -15,6 +15,7 @@ import {
 } from "./lib/auth.testing";
 import { shiftDate } from "./lib/dates";
 import { indiaToday } from "./lib/onboarding";
+import { mockR2 } from "./lib/r2.testing";
 import schema from "./schema";
 
 const modules = convexModules(import.meta.glob("./**/*.*s"));
@@ -26,6 +27,7 @@ const HOME = "Flat 12, 4th Cross, Mathikere, Bengaluru";
 afterEach(() => {
   vi.useRealTimers();
   vi.unstubAllEnvs();
+  vi.unstubAllGlobals();
 });
 
 async function demoWorld() {
@@ -108,6 +110,22 @@ async function statusOf(t: World, token: string) {
   const booking = await bookingByToken(t, token);
   return booking?.status;
 }
+
+it("shows current rates published by the selected collector without requesting weights", async () => {
+  const t = await demoWorld();
+  const id = await orgId(t, "ramesh-kabadi-store");
+  const rows = await t.query(api.households.shopRates, { orgId: id });
+  expect(rows).toEqual(
+    expect.arrayContaining([
+      expect.objectContaining({
+        material: expect.objectContaining({ code: "PAPER-NEWS" }),
+        paisePerKg: await rate(t, "ramesh-kabadi-store", "PAPER-NEWS"),
+      }),
+    ]),
+  );
+  await t.run((ctx) => ctx.db.patch("orgs", id, { status: "suspended" }));
+  expect(await t.query(api.households.shopRates, { orgId: id })).toEqual([]);
+});
 
 describe("households.shops", () => {
   it("prices the basket at each shop's own rates, the city fallback for gaps", async () => {
@@ -617,9 +635,47 @@ const imageBytes = () =>
   new Uint8Array([0xff, 0xd8, 0xff, 0xe0, 0, 16, 1, 2, 3]).buffer;
 
 describe("photo-only household requests", () => {
+  it("accepts a collection with no photos or estimated weight and keeps its retry idempotent", async () => {
+    const t = await demoWorld();
+    const as = await newHousehold(t);
+    const args = {
+      ...(await pickupAt(t)),
+      items: [],
+      operationKey: "b779389e-30a9-498f-b7ed-3c0fa182a997",
+    };
+    const token = await as.mutation(api.households.book, args);
+    expect(await as.mutation(api.households.book, args)).toBe(token);
+    const saved = await bookingByToken(t, token);
+    expect(saved).toMatchObject({
+      requestKind: "unweighed_request",
+      items: [],
+    });
+    expect(saved?.estimatePaise).toBeUndefined();
+    await expect(
+      as.mutation(api.households.book, { ...args, name: "Other name" }),
+    ).rejects.toThrow("INVALID_REQUEST");
+  });
+
+  it("leaves no photo or Convex file when private object storage is unavailable", async () => {
+    const t = await demoWorld();
+    const as = await newHousehold(t);
+    vi.stubEnv("R2_ENABLED", "false");
+    await expect(
+      as.action(api.householdPhotos.upload, {
+        adultConfirmed: true,
+        name: "scrap.jpg",
+        bytes: imageBytes(),
+      }),
+    ).rejects.toThrow("STORAGE_UNAVAILABLE");
+    expect(
+      await t.run((ctx) => ctx.db.query("householdPhotos").take(1)),
+    ).toEqual([]);
+  });
+
   it("stores owned photos without invented quantities or estimates and keeps bytes private", async () => {
     const t = await demoWorld();
     const as = await newHousehold(t);
+    mockR2();
     const photoId = await as.action(api.householdPhotos.upload, {
       adultConfirmed: true,
       name: "scrap.jpg",
@@ -638,7 +694,7 @@ describe("photo-only household requests", () => {
         createdAt: Date.now() - 25 * 60 * 60 * 1000,
       }),
     );
-    await t.mutation(internal.householdPhotos.expire, { photoId });
+    await t.action(internal.householdPhotos.expire, { photoId });
     expect(
       await t.run((ctx) => ctx.db.get("householdPhotos", photoId)),
     ).not.toBeNull();
@@ -673,11 +729,11 @@ describe("photo-only household requests", () => {
       ctx.db.get("householdPhotos", photoId),
     );
     expect(attached?.bookingId).toBe(booking?._id);
-    if (!attached?.storageId) throw new Error("Missing photo storage");
-    await t.mutation(internal.householdPhotos.discardUnattached, {
-      photoId,
-      storageId: attached.storageId,
-    });
+    expect(attached?.storageId).toBeUndefined();
+    expect(attached?.r2?.key).toMatch(/^household\//);
+    await expect(
+      t.action(internal.householdPhotos.expire, { photoId }),
+    ).resolves.toBe(false);
     expect(
       await as.action(api.householdPhotos.read, { photoId }),
     ).toMatchObject({ bytes: imageBytes() });
@@ -708,6 +764,7 @@ describe("photo-only household requests", () => {
     const t = await demoWorld();
     const as = await newHousehold(t);
     const other = await newHousehold(t, "+919876500002");
+    mockR2();
     const photoId = await as.action(api.householdPhotos.upload, {
       adultConfirmed: true,
       name: "scrap.jpg",
@@ -759,6 +816,7 @@ describe("photo-only household requests", () => {
         bytes: new Uint8Array(2 * 1024 * 1024 + 1).buffer,
       }),
     ).rejects.toThrow("PHOTO_SIZE");
+    mockR2();
     const photoId = await as.action(api.householdPhotos.upload, {
       adultConfirmed: true,
       name: "scrap.jpg",
@@ -769,7 +827,7 @@ describe("photo-only household requests", () => {
         createdAt: Date.now() - 25 * 60 * 60 * 1000,
       }),
     );
-    await t.mutation(internal.householdPhotos.expire, { photoId });
+    await t.action(internal.householdPhotos.expire, { photoId });
     expect(
       await t.run((ctx) => ctx.db.get("householdPhotos", photoId)),
     ).toBeNull();
@@ -779,11 +837,18 @@ describe("photo-only household requests", () => {
 it("limits photo upload reservations atomically per phone profile", async () => {
   const t = await demoWorld();
   const as = await newHousehold(t);
+  mockR2();
   for (let index = 0; index < 20; index++) {
     await as.mutation(internal.householdPhotos.reserve, {
       name: "scrap.jpg",
       contentType: "image/jpeg",
       size: 10,
+      r2: {
+        accountId: "a".repeat(32),
+        bucket: "luma-test",
+        key: `household/${crypto.randomUUID()}`,
+      },
+      sha256: "0".repeat(64),
     });
   }
   await expect(
@@ -804,6 +869,7 @@ it.each([false, true])(
     const t = await demoWorld();
     vi.stubEnv("ADMIN_EMAIL", "photo-admin@example.test");
     const as = await newHousehold(t);
+    mockR2();
     const photoId = await as.action(api.householdPhotos.upload, {
       adultConfirmed: true,
       name: "scrap.jpg",

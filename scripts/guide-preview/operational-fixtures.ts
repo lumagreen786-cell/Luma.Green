@@ -51,6 +51,7 @@ export const qualityFixture = {
   orgId,
   canOperate: true,
   canWithdraw: true,
+  uploadAvailable: true,
   inspections: [
     {
       id: inspectionId,

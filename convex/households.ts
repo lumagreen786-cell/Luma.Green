@@ -3,6 +3,10 @@ import { ConvexError, type Infer, v } from "convex/values";
 import type { Doc, Id } from "./_generated/dataModel";
 import { mutation, query, type QueryCtx } from "./_generated/server";
 import { requireUser } from "./lib/access";
+import {
+  eligibleApartmentRoute,
+  requireApartmentCollection,
+} from "./lib/apartmentCollections";
 import { findProfile } from "./lib/applicationAccess";
 import { bookingToken, canMoveBooking, kgToGrams } from "./lib/chain";
 import {
@@ -14,8 +18,10 @@ import { requireCollectionCapacity } from "./lib/collectionScheduling";
 import { beginDispatch, isPickupLocationEligible } from "./lib/dispatch";
 import { vSaathiTime } from "./lib/drafts";
 import { canonicalCity } from "./lib/geography";
+import { canFamilyRead } from "./lib/householdFamily";
 import { preparePhotoRequest } from "./lib/householdPhotos";
 import {
+  apartmentCode,
   basketError,
   type BasketItem,
   basketPaise,
@@ -222,6 +228,85 @@ export const shops = query({
   },
 });
 
+/** Apartment codes are shared by the community. No resident data is used in lookup. */
+export const apartmentShop = query({
+  args: {
+    city: v.string(),
+    code: v.string(),
+    near: v.optional(v.object({ lat: v.number(), lng: v.number() })),
+  },
+  returns: v.union(
+    v.null(),
+    v.object({
+      routeId: v.id("apartmentCollectionRoutes"),
+      kind: v.union(
+        v.literal("community_champion"),
+        v.literal("society_partner"),
+      ),
+      shop: vShopOffer,
+    }),
+  ),
+  handler: async (ctx, args) => {
+    const city = canonicalCity(args.city);
+    const code = apartmentCode(args.code);
+    if (!city || !code || (args.near && !isValidPoint(args.near))) return null;
+    const route = await ctx.db
+      .query("apartmentCollectionRoutes")
+      .withIndex("by_city_code_active", (q) =>
+        q.eq("city", city).eq("code", code).eq("active", true),
+      )
+      .unique();
+    if (!route) return null;
+    const eligible = await eligibleApartmentRoute(ctx, route);
+    if (!eligible || !isPickupLocationEligible(eligible.org, args.near))
+      return null;
+    const { org, kind } = eligible;
+    return {
+      routeId: route._id,
+      kind,
+      shop: {
+        id: org._id,
+        name: org.name,
+        area: org.area,
+        address: org.address,
+        offersPickup: true,
+        hours: org.hours,
+        distanceKm:
+          args.near && org.location
+            ? distanceKm(args.near, org.location)
+            : undefined,
+        fallbackCodes: [],
+      },
+    };
+  },
+});
+
+/** Current posted rates from one active collector, without a weight or quote. */
+export const shopRates = query({
+  args: { orgId: v.id("orgs") },
+  returns: v.array(
+    v.object({ material: vMaterialRef, paisePerKg: v.number() }),
+  ),
+  handler: async (ctx, { orgId }) => {
+    const org = await ctx.db.get("orgs", orgId);
+    if (org?.kind !== "kabadiwala" || org.status !== "active") return [];
+    const [rates, materials] = await Promise.all([
+      rateCard(ctx, orgId),
+      materialIndex(ctx),
+    ]);
+    const result = [];
+    for (const [code, paisePerKg] of rates) {
+      const material = materials.get(code);
+      if (isOrdinaryMaterial(material) && material.stage === "scrap") {
+        result.push({ material: materialRef(materials, code), paisePerKg });
+      }
+    }
+    return result.toSorted((a, b) =>
+      a.material.code.localeCompare(b.material.code),
+    );
+  },
+});
+
 // --- Booking ----------------------------------------------------------------------
 
 /** A tracking token no other booking has. */
@@ -263,10 +348,39 @@ async function bookableShop(
   return org;
 }
 
+async function validateApartmentBooking(
+  ctx: QueryCtx,
+  args: {
+    apartmentRouteId?: Id<"apartmentCollectionRoutes">;
+    mode: "pickup" | "dropoff";
+    slotDate: string;
+    items: readonly BasketItem[];
+  },
+  org: Doc<"orgs">,
+  materials: Materials,
+) {
+  if (!args.apartmentRouteId) return;
+  if (args.mode !== "pickup")
+    throw new ConvexError("APARTMENT_ROUTE_UNAVAILABLE");
+  await requireApartmentCollection(
+    ctx,
+    args.apartmentRouteId,
+    org._id,
+    args.slotDate,
+  );
+  for (const item of args.items) {
+    const material = materials.get(item.materialCode);
+    if (!material || !org.families.includes(material.family))
+      throw new ConvexError("APARTMENT_ROUTE_UNAVAILABLE");
+  }
+}
+
 export const book = mutation({
   args: {
     adultConfirmed: v.literal(true),
+    apartmentRouteId: v.optional(v.id("apartmentCollectionRoutes")),
     photoIds: v.optional(v.array(v.id("householdPhotos"))),
+    operationKey: v.optional(v.string()),
     orgId: v.id("orgs"),
     mode: vMode,
     items: v.array(vItem),
@@ -287,12 +401,15 @@ export const book = mutation({
     );
     if (!phone) throw new ConvexError("NO_PHONE");
 
-    const { photoIds, isPhotosOnly, photoRequestKey, existingToken } =
+    const { photoIds, requestKind, photoRequestKey, existingToken } =
       await preparePhotoRequest(ctx, profile._id, args);
     if (existingToken) return existingToken;
-    await checkedBasket(ctx, args.items, { allowEmpty: isPhotosOnly });
+    const materials = await checkedBasket(ctx, args.items, {
+      allowEmpty: requestKind !== undefined,
+    });
     checkLocation(args.location);
     const org = await bookableShop(ctx, args.orgId, args.mode, args.location);
+    await validateApartmentBooking(ctx, args, org, materials);
 
     const now = Date.now();
     const today = indiaToday(now);
@@ -331,14 +448,17 @@ export const book = mutation({
       org.city,
       args.items.map((item) => item.materialCode),
     );
-    const estimatePaise = isPhotosOnly
-      ? undefined
-      : offerFor(args.items, await rateCard(ctx, org._id), fallback)
-          .estimatePaise;
+    const estimatePaise =
+      requestKind === undefined
+        ? offerFor(args.items, await rateCard(ctx, org._id), fallback)
+            .estimatePaise
+        : undefined;
     const token = await uniqueToken(ctx);
     const bookingId = await ctx.db.insert("bookings", {
       token,
-      requestKind: isPhotosOnly ? "photo_request" : undefined,
+      apartmentRouteId: args.apartmentRouteId,
+      requestKind,
+      householdOperationKey: args.operationKey,
       photoRequestKey,
       householdProfileId: profile._id,
       phone,
@@ -368,6 +488,7 @@ export const book = mutation({
       entityId: bookingId,
       metadata: {
         adultConfirmed: args.adultConfirmed,
+        apartmentRouteId: args.apartmentRouteId,
         mode: args.mode,
         items: args.items.length,
         photoCount: photoIds.length,
@@ -449,6 +570,9 @@ const vTrackView = v.object({
   }),
   /** Whether the signed-in person is the household that booked it. */
   isMine: v.boolean(),
+  sharedWithFamily: v.optional(v.boolean()),
+  isApartmentCollection: v.optional(v.literal(true)),
+  familyView: v.optional(v.literal(true)),
   /** Whether the booking can still be cancelled (by the household). */
   canCancel: v.boolean(),
   dispatch: v.optional(
@@ -462,6 +586,47 @@ const vTrackView = v.object({
   createdAt: v.number(),
 });
 
+async function trackingAudience(ctx: QueryCtx, booking: Doc<"bookings">) {
+  const viewer = await currentProfile(ctx);
+  if (!viewer) return null;
+  if (booking.householdProfileId === viewer._id) return "owner";
+  const { phone } = await collectionActor(ctx);
+  const grants = await collectionGrants(ctx, booking);
+  const isHelper = grants.some(
+    (grant) =>
+      grant.helperProfileId === viewer._id &&
+      grant.phone === phone &&
+      isGrantActive(grant, booking),
+  );
+  if (isHelper) return "helper";
+  return (await canFamilyRead(ctx, booking, viewer._id)) ? "family" : null;
+}
+
+function ownerTrackingDetails(booking: Doc<"bookings">, materials: Materials) {
+  const receipt = booking.receipt;
+  return {
+    failedVisitReason: booking.failedVisitReason,
+    estimatePaise: booking.estimatePaise,
+    receipt: receipt && {
+      lines: receipt.lines.map((line) => ({
+        material: materialRef(materials, line.materialCode),
+        grams: line.grams,
+        paisePerKg: line.paisePerKg,
+        paise: line.paise,
+      })),
+      totalPaise: receipt.totalPaise,
+      method: receipt.method,
+      paidAt: receipt.paidAt,
+    },
+    receiptReview: booking.receiptReview,
+    points: booking.points,
+    sharedWithFamily: Boolean(booking.sharedWithFamily),
+    isApartmentCollection: booking.apartmentRouteId
+      ? (true as const)
+      : undefined,
+  };
+}
+
 /**
  * Private collection tracking. The token locates a record; the current session
  * and an active collection grant authorize access.
@@ -472,28 +637,19 @@ export const track = query({
   handler: async (ctx, args): Promise<Infer<typeof vTrackView> | null> => {
     const booking = await findBooking(ctx, args.token);
     if (!booking) return null;
-    const viewer = await currentProfile(ctx);
-    if (!viewer) return null;
-    const isMine = booking.householdProfileId === viewer._id;
-    if (!isMine) {
-      const { phone } = await collectionActor(ctx);
-      const grants = await collectionGrants(ctx, booking);
-      const isGrant = grants.some(
-        (g) =>
-          g.helperProfileId === viewer._id &&
-          g.phone === phone &&
-          isGrantActive(g, booking),
-      );
-      if (!isGrant) return null;
-    }
+    const audience = await trackingAudience(ctx, booking);
+    if (!audience) return null;
     const org = await ctx.db.get("orgs", booking.orgId);
     if (!org) return null;
-    const materials = await materialIndex(ctx);
-    const receipt = isMine ? booking.receipt : undefined;
-
+    const isFamily = audience === "family";
+    const materials = isFamily ? null : await materialIndex(ctx);
+    const ownerDetails =
+      audience === "owner" && materials
+        ? ownerTrackingDetails(booking, materials)
+        : {};
     return {
+      ...ownerDetails,
       token: booking.token,
-      failedVisitReason: isMine ? booking.failedVisitReason : undefined,
       dispatch: booking.dispatch && {
         attempt: booking.dispatch.attempt,
         offeredAt: booking.dispatch.offeredAt,
@@ -505,33 +661,22 @@ export const track = query({
       slotDate: booking.slotDate,
       slotWindow: booking.slotWindow,
       timeline: booking.timeline,
-      items: booking.items.map((item) => ({
-        material: materialRef(materials, item.materialCode),
-        estKg: item.estKg,
-      })),
-      estimatePaise: isMine ? booking.estimatePaise : undefined,
-      receipt: receipt && {
-        lines: receipt.lines.map((line) => ({
-          material: materialRef(materials, line.materialCode),
-          grams: line.grams,
-          paisePerKg: line.paisePerKg,
-          paise: line.paise,
-        })),
-        totalPaise: receipt.totalPaise,
-        method: receipt.method,
-        paidAt: receipt.paidAt,
-      },
-      receiptReview: isMine ? booking.receiptReview : undefined,
-      points: isMine ? booking.points : undefined,
+      items: materials
+        ? booking.items.map((item) => ({
+            material: materialRef(materials, item.materialCode),
+            estKg: item.estKg,
+          }))
+        : [],
       shop: {
         name: org.name,
         area: org.area,
         address: org.address,
-        phone: await shopPhone(ctx, org),
+        phone: isFamily ? undefined : await shopPhone(ctx, org),
         hours: org.hours,
       },
-      isMine,
-      canCancel: isMine && canHouseholdCancel(booking.status),
+      isMine: audience === "owner",
+      familyView: isFamily || undefined,
+      canCancel: audience === "owner" && canHouseholdCancel(booking.status),
       createdAt: booking.createdAt,
     };
   },

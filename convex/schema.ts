@@ -45,6 +45,7 @@ import { operationalTables } from "./lib/operationalSchema";
 import { organizationTables } from "./lib/organizationsSchema";
 import { paperAssistTables } from "./lib/paperAssistSchema";
 import { paperTables } from "./lib/paperSchema";
+import { vParticipantType } from "./lib/participantTypes";
 import {
   vPrivacyRequestKind,
   vPrivacyRequestStatus,
@@ -56,7 +57,7 @@ import {
   transformationInputCostFields,
 } from "./lib/processingCostSchema";
 import { publicDataFields } from "./lib/publicData";
-import { qualityFileTables } from "./lib/qualityFilesSchema";
+import { qualityFileTables, vR2Reference } from "./lib/qualityFilesSchema";
 import { vReportStatus, vStockRow } from "./lib/reportJobs";
 import { returnClaimsTables } from "./lib/returnClaimsSchema";
 import { routePlanningTables } from "./lib/routePlanningSchema";
@@ -98,6 +99,14 @@ export default defineSchema({
   ...businessSubscriptionTables,
   ...returnClaimsTables,
   ...geocodingTables,
+  // Location provider quotas retain usage only, never coordinates or results.
+  householdLookupUsage: defineTable({
+    kind: v.union(v.literal("air"), v.literal("solar")),
+    profileId: v.optional(v.id("profiles")),
+    day: v.string(),
+    used: v.number(),
+    lastAt: v.number(),
+  }).index("by_kind_profile", ["kind", "profileId"]),
   ...stockClosingTables,
   ...accountRemovalTables,
   ...workerHandoverTables,
@@ -343,6 +352,7 @@ export default defineSchema({
     ageConfirmedAt: v.optional(v.number()),
     privacyAcceptedAt: v.optional(v.number()),
     kind: vStakeholderKind,
+    participantType: v.optional(vParticipantType),
     /** Required for material generators; optional for earlier stakeholders. */
     siteType: v.optional(vSiteType),
     organizationName: v.string(),
@@ -353,6 +363,13 @@ export default defineSchema({
     ...timestamps,
   })
     .index("by_owner", ["ownerProfileId"])
+    .index("by_owner_participant", ["ownerProfileId", "participantType"])
+    .index("by_owner_kind_status", ["ownerProfileId", "kind", "status"])
+    .index("by_status_participant_createdAt", [
+      "status",
+      "participantType",
+      "createdAt",
+    ])
     .index("by_status_createdAt", ["status", "createdAt"]),
 
   /** What was sent at each version, so the admin can see what changed. */
@@ -374,7 +391,10 @@ export default defineSchema({
     applicationId: v.id("applications"),
     profileId: v.id("profiles"),
     type: vFileType,
-    storageId: v.id("_storage"),
+    storageId: v.optional(v.id("_storage")),
+    r2: v.optional(vR2Reference),
+    sha256: v.optional(v.string()),
+    uploadedAt: v.optional(v.number()),
     name: v.string(),
     contentType: v.string(),
     size: v.number(),
@@ -384,6 +404,12 @@ export default defineSchema({
   })
     .index("by_application", ["applicationId"])
     .index("by_storageId", ["storageId"]),
+
+  /** Short-lived attempt counts, including malformed bodies. No file data. */
+  applicationUploadLimits: defineTable({
+    profileId: v.id("profiles"),
+    attemptedAt: v.array(v.number()),
+  }).index("by_profile", ["profileId"]),
 
   // --- Catalogue and prices ------------------------------------------------
 
@@ -584,11 +610,51 @@ export default defineSchema({
 
   // --- Household pickups ------------------------------------------------------
 
+  apartmentCollectionRoutes: defineTable({
+    city: v.string(),
+    code: v.string(),
+    orgId: v.id("orgs"),
+    partnerId: v.id("stakeholderAccounts"),
+    reviewReference: v.string(),
+    validUntil: v.string(),
+    reviewedBy: v.string(),
+    active: v.boolean(),
+    createdAt: v.number(),
+  })
+    .index("by_city_code_active", ["city", "code", "active"])
+    .index("by_active_created", ["active", "createdAt"]),
+
+  householdFamilyGrants: defineTable({
+    ownerProfileId: v.id("profiles"),
+    memberProfileId: v.optional(v.id("profiles")),
+    phoneHash: v.optional(v.string()),
+    phoneLastFour: v.optional(v.string()),
+    tokenHash: v.optional(v.string()),
+    expiresAt: v.number(),
+    acceptedAt: v.optional(v.number()),
+    revokedAt: v.optional(v.number()),
+    createdAt: v.number(),
+  })
+    .index("by_owner_created", ["ownerProfileId", "createdAt"])
+    .index("by_owner_revoked", ["ownerProfileId", "revokedAt"])
+    .index("by_member_revoked", ["memberProfileId", "revokedAt"])
+    .index("by_member_owner_revoked", [
+      "memberProfileId",
+      "ownerProfileId",
+      "revokedAt",
+    ])
+    .index("by_token_hash", ["tokenHash"])
+    .index("by_phone_hash", ["phoneHash"]),
+
   /** A household's pickup or drop-off, tracked at /t/{token}. */
   householdPhotos: defineTable({
     profileId: v.id("profiles"),
     bookingId: v.optional(v.id("bookings")),
     storageId: v.optional(v.id("_storage")),
+    r2: v.optional(vR2Reference),
+    sha256: v.optional(v.string()),
+    uploadedAt: v.optional(v.number()),
+    cleanupStartedAt: v.optional(v.number()),
     name: v.string(),
     contentType: v.string(),
     size: v.number(),
@@ -629,6 +695,8 @@ export default defineSchema({
   }).index("by_booking", ["bookingId"]),
 
   bookings: defineTable({
+    apartmentRouteId: v.optional(v.id("apartmentCollectionRoutes")),
+    sharedWithFamily: v.optional(v.boolean()),
     recurringCollectionId: v.optional(v.id("recurringCollections")),
     recurringDateKey: v.optional(v.string()),
     rescheduleRequest: v.optional(
@@ -646,7 +714,10 @@ export default defineSchema({
     mode: v.union(v.literal("pickup"), v.literal("dropoff")),
     items: v.array(v.object({ materialCode: v.string(), estKg: v.number() })),
     estimatePaise: v.optional(v.number()),
-    requestKind: v.optional(v.literal("photo_request")),
+    requestKind: v.optional(
+      v.union(v.literal("photo_request"), v.literal("unweighed_request")),
+    ),
+    householdOperationKey: v.optional(v.string()),
     photoRequestKey: v.optional(v.string()),
     orgId: v.id("orgs"),
     slotDate: v.string(), // YYYY-MM-DD
@@ -703,7 +774,12 @@ export default defineSchema({
     .index("by_org_status", ["orgId", "status"])
     .index("by_status_createdAt", ["status", "createdAt"])
     .index("by_household", ["householdProfileId"])
+    .index("by_household_family", ["householdProfileId", "sharedWithFamily"])
     .index("by_household_status", ["householdProfileId", "status"])
+    .index("by_household_operation", [
+      "householdProfileId",
+      "householdOperationKey",
+    ])
     .index("by_createdAt", ["createdAt"]),
 
   /** Immutable offer events; a booking can pass through several shops. */
@@ -884,6 +960,7 @@ export default defineSchema({
     toOrgId: v.id("orgs"),
     grams: v.number(),
     dispatchId: v.optional(v.id("lotCustodyEvents")),
+    tradeId: v.optional(v.id("trades")),
     actorProfileId: v.id("profiles"),
     createdAt: v.number(),
   })
@@ -1005,11 +1082,42 @@ export default defineSchema({
     status: vTradeStatus,
     timeline: v.array(v.object({ status: vTradeStatus, at: v.number() })),
     invoiceNo: v.optional(v.string()),
+    directCashReceipt: v.optional(
+      v.object({
+        amountPaise: v.number(),
+        reference: v.string(),
+        recordedAt: v.number(),
+        recordedByProfileId: v.id("profiles"),
+      }),
+    ),
+    directCashDispatch: v.optional(
+      v.object({
+        eventId: v.id("lotCustodyEvents"),
+        reference: v.string(),
+        sellerFacilityId: v.id("industrialFacilities"),
+        buyerFacilityId: v.id("industrialFacilities"),
+        sellerReviewId: v.id("facilityScopeReviews"),
+        buyerReviewId: v.id("facilityScopeReviews"),
+      }),
+    ),
+    directCashDelivery: v.optional(
+      v.object({
+        eventId: v.id("lotCustodyEvents"),
+        reference: v.string(),
+        sellerReviewId: v.id("facilityScopeReviews"),
+        buyerReviewId: v.id("facilityScopeReviews"),
+      }),
+    ),
     ...timestamps,
   })
     .index("by_seller", ["sellerOrgId"])
     .index("by_buyer", ["buyerOrgId"])
-    .index("by_listing", ["listingId"]),
+    .index("by_listing", ["listingId"])
+    .index("by_lot_seller_status", [
+      "specification.lotId",
+      "sellerOrgId",
+      "status",
+    ]),
 
   /**
    * User-reported references to documents issued outside Luma. A correction

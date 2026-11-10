@@ -1,9 +1,12 @@
 import { ConvexError, v } from "convex/values";
 
-import { mutation, query } from "./_generated/server";
-import { requireAdmin } from "./lib/access";
+import type { Id } from "./_generated/dataModel";
+import { mutation, query, type QueryCtx } from "./_generated/server";
+import { requireAdmin, requireUser } from "./lib/access";
 import { isProfileOpen, openStakeholders } from "./lib/accountClosure";
 import { findProfile, requireMember } from "./lib/applicationAccess";
+import { type ParticipantType, vParticipantType } from "./lib/participantTypes";
+import { verifiedIndianMobile } from "./lib/phone";
 import { vSiteType } from "./lib/siteClassification";
 import {
   isGeneratorSiteType,
@@ -16,6 +19,7 @@ const vAccountId = v.id("stakeholderAccounts");
 const vSelfView = v.object({
   id: vAccountId,
   kind: vStakeholderKind,
+  participantType: v.optional(vParticipantType),
   siteType: v.optional(vSiteType),
   organizationName: v.string(),
   status: vStakeholderStatus,
@@ -24,10 +28,29 @@ const vSelfView = v.object({
   reviewNote: v.optional(v.string()),
 });
 
-/** One application per member. Repeating an identical request is safe. */
+async function checkInitialReview(ctx: QueryCtx, profileId: Id<"profiles">) {
+  const requests = (status: "pending" | "approved") =>
+    ctx.db
+      .query("stakeholderAccounts")
+      .withIndex("by_owner_kind_status", (q) =>
+        q
+          .eq("ownerProfileId", profileId)
+          .eq("kind", "participant_applicant")
+          .eq("status", status),
+      )
+      .first();
+  const [pending, approved] = await Promise.all([
+    requests("pending"),
+    requests("approved"),
+  ]);
+  if (pending && !approved) throw new ConvexError("INITIAL_ROLE_PENDING");
+}
+
+/** One request per member and participant type. An identical retry is safe. */
 export const request = mutation({
   args: {
     kind: vStakeholderKind,
+    participantType: v.optional(vParticipantType),
     siteType: v.optional(vSiteType),
     organizationName: v.string(),
     ageConfirmed: v.literal(true),
@@ -36,6 +59,18 @@ export const request = mutation({
   returns: vAccountId,
   handler: async (ctx, args) => {
     const profile = await requireMember(ctx);
+    if (
+      (args.kind === "participant_applicant") !==
+      (args.participantType !== undefined)
+    ) {
+      throw new ConvexError("INVALID_PARTICIPANT_TYPE");
+    }
+    if (args.participantType) {
+      const user = await requireUser(ctx);
+      if (!verifiedIndianMobile(user.phoneNumber, user.phoneNumberVerified)) {
+        throw new ConvexError("PHONE_NOT_VERIFIED");
+      }
+    }
     const name = organizationNameOrNull(args.organizationName);
     if (!name) throw new ConvexError("INVALID_ORGANIZATION_NAME");
     if (
@@ -47,7 +82,11 @@ export const request = mutation({
     }
     const existing = await ctx.db
       .query("stakeholderAccounts")
-      .withIndex("by_owner", (q) => q.eq("ownerProfileId", profile._id))
+      .withIndex("by_owner_participant", (q) =>
+        q
+          .eq("ownerProfileId", profile._id)
+          .eq("participantType", args.participantType),
+      )
       .unique();
     if (existing) {
       if (
@@ -60,12 +99,15 @@ export const request = mutation({
       throw new ConvexError("ALREADY_REQUESTED");
     }
 
+    if (args.participantType) await checkInitialReview(ctx, profile._id);
+
     const now = Date.now();
     const id = await ctx.db.insert("stakeholderAccounts", {
       ownerProfileId: profile._id,
       ageConfirmedAt: now,
       privacyAcceptedAt: now,
       kind: args.kind,
+      participantType: args.participantType,
       siteType: args.siteType,
       organizationName: name,
       status: "pending",
@@ -88,26 +130,38 @@ export const request = mutation({
 export const mine = query({
   args: {},
   returns: v.union(v.null(), vSelfView),
-  handler: async (ctx) => {
-    const profile = await requireMember(ctx);
-    const account = await ctx.db
-      .query("stakeholderAccounts")
-      .withIndex("by_owner", (q) => q.eq("ownerProfileId", profile._id))
-      .unique();
-    if (!account) return null;
-    return {
-      id: account._id,
-      kind: account.kind,
-      siteType: account.siteType,
-      organizationName: account.organizationName,
-      status: account.status,
-      requestedAt: account.createdAt,
-      reviewedAt: account.reviewedAt,
-      reviewNote:
-        account.status === "rejected" ? account.reviewNote : undefined,
-    };
-  },
+  handler: (ctx) => ownRequest(ctx),
 });
+
+export const mineForParticipant = query({
+  args: { participantType: vParticipantType },
+  returns: v.union(v.null(), vSelfView),
+  handler: (ctx, args) => ownRequest(ctx, args.participantType),
+});
+
+async function ownRequest(ctx: QueryCtx, participantType?: ParticipantType) {
+  const profile = await requireMember(ctx);
+  const account = await ctx.db
+    .query("stakeholderAccounts")
+    .withIndex("by_owner_participant", (q) =>
+      q
+        .eq("ownerProfileId", profile._id)
+        .eq("participantType", participantType),
+    )
+    .unique();
+  if (!account) return null;
+  return {
+    id: account._id,
+    kind: account.kind,
+    participantType: account.participantType,
+    siteType: account.siteType,
+    organizationName: account.organizationName,
+    status: account.status,
+    requestedAt: account.createdAt,
+    reviewedAt: account.reviewedAt,
+    reviewNote: account.status === "rejected" ? account.reviewNote : undefined,
+  };
+}
 
 /** The admin's bounded review queue. This does not grant data access. */
 export const pending = query({
@@ -116,6 +170,7 @@ export const pending = query({
     v.object({
       id: vAccountId,
       kind: vStakeholderKind,
+      participantType: v.optional(vParticipantType),
       siteType: v.optional(vSiteType),
       organizationName: v.string(),
       requestedAt: v.number(),
@@ -135,6 +190,7 @@ export const pending = query({
         return {
           id: account._id,
           kind: account.kind,
+          participantType: account.participantType,
           siteType: account.siteType,
           organizationName: account.organizationName,
           requestedAt: account.createdAt,

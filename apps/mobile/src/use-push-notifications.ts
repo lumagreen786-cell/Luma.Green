@@ -5,6 +5,7 @@ import { Alert, Platform } from "react-native";
 import type { WebView } from "react-native-webview";
 
 import type { Locale } from "../../../src/i18n/locales";
+import { HOME_REMINDER_NOTIFICATION } from "./home-reminder-policy";
 import { useTranslations } from "./i18n";
 import { classifyNavigation } from "./navigation";
 import {
@@ -88,20 +89,29 @@ export function usePushNotifications({
   );
 
   useEffect(() => {
-    if (!projectId) return;
-    // The in-app inbox owns foreground updates; avoid a second OS banner.
+    const areRemindersEnabled =
+      Constants.expoConfig?.extra?.areRemindersEnabled === true;
+    if (!projectId && !areRemindersEnabled) return;
+    const isReminder = (notification: Notifications.Notification) =>
+      notification.request.content.data?.kind === HOME_REMINDER_NOTIFICATION;
+    // The inbox owns foreground push. Local reminders can display an OS alert.
     Notifications.setNotificationHandler({
-      handleNotification: () =>
-        Promise.resolve({
-          shouldShowBanner: false,
-          shouldShowList: false,
+      handleNotification: (notification) => {
+        const shouldShow = areRemindersEnabled && isReminder(notification);
+        return Promise.resolve({
+          shouldShowBanner: shouldShow,
+          shouldShowList: shouldShow,
           shouldPlaySound: false,
           shouldSetBadge: false,
-        }),
+        });
+      },
     });
-    const openInbox = () => {
+    if (!projectId) return;
+    const openInbox = (event: Notifications.NotificationResponse) => {
       if (!alive.current) return;
-      onOpenInbox(notificationDestination(origin, localeRef.current));
+      if (!isReminder(event.notification)) {
+        onOpenInbox(notificationDestination(origin, localeRef.current));
+      }
       try {
         Notifications.clearLastNotificationResponse();
       } catch {
@@ -114,7 +124,8 @@ export function usePushNotifications({
       signal("changed");
     });
     try {
-      if (Notifications.getLastNotificationResponse()) openInbox();
+      const previous = Notifications.getLastNotificationResponse();
+      if (previous) openInbox(previous);
     } catch {
       console.warn("Could not read the initial notification response.");
     }

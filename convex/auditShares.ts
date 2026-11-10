@@ -33,6 +33,7 @@ export async function canReadAuditReport(
   const recipient = await ctx.db.get("stakeholderAccounts", report.recipientId);
   return (
     recipient?.status === "approved" &&
+    recipient.participantType === undefined &&
     recipient.ownerProfileId === profileId &&
     report.recipientProfileId === profileId
   );
@@ -121,7 +122,9 @@ export const board = query({
     const accounts = orgId
       ? await ctx.db
           .query("stakeholderAccounts")
-          .withIndex("by_status_createdAt", (q) => q.eq("status", "approved"))
+          .withIndex("by_status_participant_createdAt", (q) =>
+            q.eq("status", "approved").eq("participantType", undefined),
+          )
           .take(100)
       : [];
     const openAccounts = await openStakeholders(ctx, accounts);
@@ -195,6 +198,7 @@ export const create = mutation({
     const recipient = await ctx.db.get("stakeholderAccounts", args.recipientId);
     if (
       recipient?.status !== "approved" ||
+      recipient.participantType !== undefined ||
       !(await isProfileOpen(ctx, recipient.ownerProfileId))
     )
       throw new ConvexError("RECIPIENT_NOT_APPROVED");

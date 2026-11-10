@@ -52,6 +52,16 @@ describe("BuyButton", () => {
     expect(screen.getByText("100 kg × ₹17.50/kg")).toBeInTheDocument();
   });
 
+  it("does not present payment instructions before a direct order is delivered", async () => {
+    await openDialog(aListing({ directCashAvailable: true }));
+    expect(
+      screen.queryByText(/The buyer pays the seller directly/),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(/use the payment gateway/),
+    ).not.toBeInTheDocument();
+  });
+
   it("won't ask for more than the lot holds", async () => {
     await openDialog();
     await userEvent.type(screen.getByLabelText("How many kg?"), "200");

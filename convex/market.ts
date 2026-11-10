@@ -1,5 +1,6 @@
 import { ConvexError, type Infer, v } from "convex/values";
 
+import { cashfreeEnv } from "../src/lib/env";
 import type { Doc, Id } from "./_generated/dataModel";
 import {
   mutation,
@@ -7,6 +8,10 @@ import {
   query,
   type QueryCtx,
 } from "./_generated/server";
+import {
+  financial,
+  reference as financialReference,
+} from "./lib/cashfreeLifecycle";
 import {
   buyerKindFor,
   isInEscrow,
@@ -19,15 +24,25 @@ import {
   tradeActionsFor,
   tradeStep,
 } from "./lib/chain";
+import { meterDirectCashReceipt } from "./lib/draftBilling";
+import { currentOrdinaryCustodyReview } from "./lib/facilityCustodyScope";
 import {
   requiresGatewayEvent,
+  vDirectCashReceipt,
   vPaymentVerification,
 } from "./lib/gatewayPayments";
 import { distanceKm } from "./lib/households";
 import { assertOrdinaryRoute } from "./lib/industrialClassification";
 import { recordInventoryMovement } from "./lib/inventoryLedger";
-import { optionalReference, requiredLabel } from "./lib/lotEvidence";
 import {
+  isMatchingDispatch,
+  recordLotDispatch,
+  recordLotReceipt,
+} from "./lib/lotCustody";
+import { optionalReference, requiredLabel } from "./lib/lotEvidence";
+import { requireUnreservedLot } from "./lib/lotReservations";
+import {
+  requireCurrentTradeMaterial,
   requireEligibleByproduct,
   requireOrdinaryTradeMaterial,
 } from "./lib/marketEligibility";
@@ -37,7 +52,10 @@ import {
   hasOfferLotClassification,
   vOfferSpecificationInput,
 } from "./lib/materialOfferSpecification";
-import { requireQualityRelease } from "./lib/qualityRelease";
+import {
+  requireQualityRelease,
+  requireTradeQualityRelease,
+} from "./lib/qualityRelease";
 import {
   isListingOfferCurrent,
   OFFER_MAX_VALIDITY_MS,
@@ -145,6 +163,7 @@ const vTradeReceipt = v.object({
   legacyReceiptNo: v.union(v.string(), v.null()),
   legacyRecordedAt: v.union(v.number(), v.null()),
   paymentVerification: vPaymentVerification,
+  directCashReceipt: v.optional(vDirectCashReceipt),
   needsEwayBill: v.boolean(),
 });
 
@@ -222,9 +241,42 @@ function toListingView(
     specification: listing.specification,
     status: listing.status,
     isMine: listing.orgId === myOrgId,
+    ...(!cashfreeEnv()?.checkoutEnabled && { directCashAvailable: true }),
     createdAt: listing.createdAt,
     ...(listing.expiresAt !== undefined && { expiresAt: listing.expiresAt }),
   };
+}
+
+function cashReceiptOf(trade: Doc<"trades">) {
+  const receipt = trade.directCashReceipt;
+  return (
+    receipt && {
+      amountPaise: receipt.amountPaise,
+      reference: receipt.reference,
+      recordedAt: receipt.recordedAt,
+    }
+  );
+}
+
+/** Query the same order range that payment preparation writes, in the same transaction. */
+async function hasGatewayEvidence(ctx: QueryCtx, tradeId: Id<"trades">) {
+  const order = await ctx.db
+    .query("cashfreeOrders")
+    .withIndex("by_trade_mode", (q) => q.eq("tradeId", tradeId))
+    .first();
+  return order !== null || (await financial(ctx, tradeId)) !== null;
+}
+
+async function canStartDirectCashCustody(ctx: QueryCtx, tradeId: Id<"trades">) {
+  return (
+    !cashfreeEnv()?.checkoutEnabled && !(await hasGatewayEvidence(ctx, tradeId))
+  );
+}
+
+function tradePaymentVerification(trade: Doc<"trades">) {
+  return trade.directCashReceipt
+    ? ("reported_direct_cash" as const)
+    : paymentVerificationFor(trade.status);
 }
 
 function toTradeView(
@@ -233,6 +285,7 @@ function toTradeView(
   counterparty: Doc<"orgs">,
   materials: Materials,
 ) {
+  const directCashReceipt = cashReceiptOf(trade);
   return {
     id: trade._id,
     material: materialRef(materials, trade.materialCode),
@@ -256,7 +309,8 @@ function toTradeView(
     // Old LG numbers were issued by a simulated transition, not by GST.
     invoiceNo: undefined,
     legacyReceiptNo: trade.invoiceNo,
-    paymentVerification: paymentVerificationFor(trade.status),
+    paymentVerification: tradePaymentVerification(trade),
+    ...(directCashReceipt && { directCashReceipt }),
     needsEwayBill: requiresEwayBill(trade.totalPaise),
     inEscrow: isInEscrow(trade.status),
     actions: tradeActionsFor(trade.status, side),
@@ -463,14 +517,16 @@ async function takeFromListing(
   if (listing.grams < trade.grams) throw new ConvexError("NOT_ENOUGH_LEFT");
   if (!(await isListingStockBacked(ctx, listing, trade.grams)))
     throw new ConvexError("NOT_ENOUGH_STOCK");
-  if (listing.specification?.lotId)
-    await requireOfferLot(
+  if (listing.specification?.lotId) {
+    const lot = await requireOfferLot(
       ctx,
       listing.specification.lotId,
       listing.orgId,
       listing.materialCode,
       trade.grams,
     );
+    await requireUnreservedLot(ctx, lot);
+  }
   const grams = listing.grams - trade.grams;
   await ctx.db.patch("listings", listing._id, {
     grams,
@@ -1038,7 +1094,17 @@ export const trades = query({
           if (!listing || !isListingOfferCurrent(listing))
             view.actions = view.actions.filter((action) => action !== "accept");
         }
-        result.push(role === "viewer" ? { ...view, actions: [] } : view);
+        const isDirectCashAvailable =
+          Boolean(trade.directCashDispatch) ||
+          (trade.status === "accepted" &&
+            (await canStartDirectCashCustody(ctx, trade._id)));
+        result.push({
+          ...view,
+          actions: role === "viewer" ? [] : view.actions,
+          ...(isDirectCashAvailable && {
+            directCashAvailable: isDirectCashAvailable,
+          }),
+        });
       }
       return result;
     };
@@ -1097,6 +1163,353 @@ export const act = mutation({
 });
 
 /**
+ * Record the seller's report of cash after direct delivery is recorded.
+ * A receipt never changes stock, dispatch, gateway collection or GST evidence.
+ */
+export const recordDirectCash = mutation({
+  args: {
+    tradeId: v.id("trades"),
+    amountPaise: v.number(),
+    reference: v.string(),
+  },
+  returns: vDirectCashReceipt,
+  handler: async (ctx, args) => {
+    const { profile, org } = await requireOrg(ctx);
+    const trade = await ctx.db.get("trades", args.tradeId);
+    if (trade?.sellerOrgId !== org._id) throw new ConvexError("NOT_FOUND");
+    const reference = financialReference(args.reference);
+    const prior = cashReceiptOf(trade);
+    if (prior) {
+      if (
+        prior.amountPaise !== args.amountPaise ||
+        prior.reference !== reference
+      )
+        throw new ConvexError("CASH_RECEIPT_CONFLICT");
+      return prior;
+    }
+    if (
+      trade.status !== "completed" ||
+      !trade.directCashDelivery ||
+      (await hasGatewayEvidence(ctx, trade._id))
+    )
+      throw new ConvexError("CASH_RECEIPT_NOT_AVAILABLE");
+    const buyer = await ctx.db.get("orgs", trade.buyerOrgId);
+    if (buyer?.status !== "active" || buyer._id === org._id)
+      throw new ConvexError("TRADE_NOT_AVAILABLE");
+    const amountPaise = args.amountPaise;
+    if (
+      !isPositiveInteger(amountPaise) ||
+      amountPaise !== trade.totalPaise ||
+      safePaiseFor(trade.grams, trade.paisePerKg) !== amountPaise
+    )
+      throw new ConvexError("INVALID_PAYMENT_AMOUNT");
+    const now = Date.now();
+    const receipt = { amountPaise, reference, recordedAt: now };
+    await ctx.db.patch("trades", trade._id, {
+      directCashReceipt: { ...receipt, recordedByProfileId: profile._id },
+      updatedAt: now,
+    });
+    await meterDirectCashReceipt(ctx, trade, now);
+    await audit(ctx, {
+      orgId: org._id,
+      actorProfileId: profile._id,
+      action: "trade.direct_cash_reported",
+      entityTable: "trades",
+      entityId: trade._id,
+      metadata: { amountPaise },
+    });
+    return receipt;
+  },
+});
+
+const vDirectCashMovement = v.union(
+  v.object({
+    kind: v.literal("dispatch"),
+    sellerFacilityId: v.id("industrialFacilities"),
+    buyerFacilityId: v.id("industrialFacilities"),
+    reference: v.string(),
+    grams: v.number(),
+  }),
+  v.object({
+    kind: v.literal("receive"),
+    reference: v.string(),
+    grams: v.number(),
+  }),
+);
+
+type DirectCashMovement = Infer<typeof vDirectCashMovement>;
+
+function previousCashCustody(
+  trade: Doc<"trades">,
+  movement: DirectCashMovement,
+  reference: string,
+) {
+  if (movement.kind === "dispatch") {
+    const prior = trade.directCashDispatch;
+    if (!prior) return null;
+    if (
+      prior.reference !== reference ||
+      prior.sellerFacilityId !== movement.sellerFacilityId ||
+      prior.buyerFacilityId !== movement.buyerFacilityId
+    )
+      throw new ConvexError("MOVEMENT_CONFLICT");
+    return prior.eventId;
+  }
+  const prior = trade.directCashDelivery;
+  if (!prior) return null;
+  if (prior.reference !== reference) throw new ConvexError("MOVEMENT_CONFLICT");
+  return prior.eventId;
+}
+
+async function linkedOrdinaryCashLot(ctx: QueryCtx, trade: Doc<"trades">) {
+  const lotId = trade.specification?.lotId;
+  const lot = lotId ? await ctx.db.get("materialLots", lotId) : null;
+  return lot?.orgId !== trade.sellerOrgId ||
+    lot.materialCode !== trade.materialCode ||
+    lot.availableGrams !== trade.grams ||
+    !hasOfferLotClassification(lot)
+    ? null
+    : lot;
+}
+
+async function recordCashCustodyEvent(
+  ctx: MutationCtx,
+  args: {
+    trade: Doc<"trades">;
+    lot: Doc<"materialLots">;
+    movement: DirectCashMovement;
+    actor: Actor;
+    now: number;
+  },
+) {
+  const { trade, lot, movement, actor, now } = args;
+  if (movement.kind === "dispatch") {
+    if (lot.status !== "available") throw new ConvexError("LOT_NOT_ELIGIBLE");
+    if (lot.parentTransformationId) {
+      const transformation = await ctx.db.get(
+        "lotTransformations",
+        lot.parentTransformationId,
+      );
+      if (transformation?.facilityId !== movement.sellerFacilityId)
+        throw new ConvexError("LOT_SITE_MISMATCH");
+    }
+    return recordLotDispatch(ctx, {
+      lot,
+      receiverOrgId: trade.buyerOrgId,
+      actorProfileId: actor.profileId,
+      now,
+      tradeId: trade._id,
+    });
+  }
+  const dispatchId = trade.directCashDispatch?.eventId;
+  const dispatch = dispatchId
+    ? await ctx.db.get("lotCustodyEvents", dispatchId)
+    : null;
+  if (
+    !isMatchingDispatch(dispatch, lot, actor.orgId) ||
+    dispatch.tradeId !== trade._id
+  )
+    throw new ConvexError("DISPATCH_NOT_FOUND");
+  return recordLotReceipt(ctx, {
+    lot,
+    dispatch,
+    actorProfileId: actor.profileId,
+    now,
+  });
+}
+
+async function cashCustodyScope(
+  ctx: QueryCtx,
+  trade: Doc<"trades">,
+  sites: {
+    sellerFacilityId: Id<"industrialFacilities">;
+    buyerFacilityId: Id<"industrialFacilities">;
+  },
+) {
+  const sellerReview = await currentOrdinaryCustodyReview(ctx, {
+    facilityId: sites.sellerFacilityId,
+    orgId: trade.sellerOrgId,
+    materialCode: trade.materialCode,
+  });
+  const buyerReview = await currentOrdinaryCustodyReview(ctx, {
+    facilityId: sites.buyerFacilityId,
+    orgId: trade.buyerOrgId,
+    materialCode: trade.materialCode,
+  });
+  return sellerReview && buyerReview
+    ? { sellerReviewId: sellerReview._id, buyerReviewId: buyerReview._id }
+    : null;
+}
+
+/** Release one whole ordinary lot. Cash evidence alone never authorizes movement. */
+export const moveDirectCashTrade = mutation({
+  args: { tradeId: v.id("trades"), movement: vDirectCashMovement },
+  returns: v.id("lotCustodyEvents"),
+  handler: async (ctx, { tradeId, movement }) => {
+    const { profile, org } = await requireOrg(ctx);
+    const trade = await ctx.db.get("trades", tradeId);
+    const isDispatch = movement.kind === "dispatch";
+    if (
+      !trade ||
+      (isDispatch ? trade.sellerOrgId : trade.buyerOrgId) !== org._id
+    )
+      throw new ConvexError("NOT_FOUND");
+    const reference = financialReference(movement.reference);
+    if (!isPositiveInteger(movement.grams) || movement.grams !== trade.grams)
+      throw new ConvexError("WEIGHT_DISPUTE");
+
+    const prior = previousCashCustody(trade, movement, reference);
+    if (prior) return prior;
+    if (
+      trade.status !== (isDispatch ? "accepted" : "dispatched") ||
+      requiresEwayBill(trade.totalPaise) ||
+      !(await canStartDirectCashCustody(ctx, tradeId))
+    )
+      throw new ConvexError("CASH_CUSTODY_NOT_AVAILABLE");
+    const sites = isDispatch ? movement : trade.directCashDispatch;
+    if (!sites) throw new ConvexError("DISPATCH_NOT_FOUND");
+    const reviewIds = await cashCustodyScope(ctx, trade, sites);
+    if (!reviewIds) throw new ConvexError("CUSTODY_REVIEW_REQUIRED");
+    await requireCurrentTradeMaterial(ctx, trade);
+    await requireTradeQualityRelease(ctx, trade);
+
+    const lot = await linkedOrdinaryCashLot(ctx, trade);
+    if (!lot) throw new ConvexError("LOT_NOT_ELIGIBLE");
+    assertOrdinaryRoute(lot);
+    const now = Date.now();
+    const actor = { orgId: org._id, profileId: profile._id };
+    const eventId = await recordCashCustodyEvent(ctx, {
+      trade,
+      lot,
+      movement,
+      actor,
+      now,
+    });
+    await moveStock(
+      ctx,
+      actor,
+      trade,
+      isDispatch ? -trade.grams : trade.grams,
+      now,
+    );
+    const status = isDispatch ? "dispatched" : "completed";
+    await ctx.db.patch("trades", tradeId, {
+      status,
+      timeline: [...trade.timeline, { status, at: now }],
+      updatedAt: now,
+      ...(isDispatch
+        ? {
+            directCashDispatch: {
+              eventId,
+              reference,
+              sellerFacilityId: movement.sellerFacilityId,
+              buyerFacilityId: movement.buyerFacilityId,
+              ...reviewIds,
+            },
+          }
+        : { directCashDelivery: { eventId, reference, ...reviewIds } }),
+    });
+    await audit(ctx, {
+      orgId: org._id,
+      actorProfileId: profile._id,
+      action: isDispatch
+        ? "trade.direct_cash_dispatched"
+        : "trade.direct_cash_received",
+      entityTable: "trades",
+      entityId: tradeId,
+      metadata: { eventId, grams: trade.grams, ...reviewIds },
+    });
+    return eventId;
+  },
+});
+
+const vCashFacilityOption = v.object({
+  id: v.id("industrialFacilities"),
+  name: v.string(),
+});
+
+async function reviewedCashFacilities(
+  ctx: QueryCtx,
+  orgId: Id<"orgs">,
+  materialCode: string,
+  requiredFacilityId?: Id<"industrialFacilities">,
+) {
+  const facilities = await ctx.db
+    .query("industrialFacilities")
+    .withIndex("by_org_created", (q) => q.eq("orgId", orgId))
+    .take(100);
+  const candidates = requiredFacilityId
+    ? facilities.filter((facility) => facility._id === requiredFacilityId)
+    : facilities;
+  const result = await Promise.all(
+    candidates.map(async (facility) => {
+      const review = await currentOrdinaryCustodyReview(ctx, {
+        facilityId: facility._id,
+        orgId,
+        materialCode,
+      });
+      return review ? { id: facility._id, name: facility.name } : null;
+    }),
+  );
+  return result.filter((facility) => facility !== null);
+}
+
+/** Only trade parties can see the options for this order. Permit evidence stays private. */
+export const directCashFulfillment = query({
+  args: { tradeId: v.id("trades") },
+  returns: v.union(
+    v.null(),
+    v.object({
+      action: v.literal("dispatch"),
+      sellerFacilities: v.array(vCashFacilityOption),
+      buyerFacilities: v.array(vCashFacilityOption),
+    }),
+    v.object({ action: v.literal("receive") }),
+    v.object({ action: v.literal("renewScope") }),
+  ),
+  handler: async (ctx, { tradeId }) => {
+    const { org, role } = await requireOrg(ctx, undefined, "read");
+    const trade = await ctx.db.get("trades", tradeId);
+    const side = trade && sideOf(trade, org._id);
+    if (!trade || !side) throw new ConvexError("NOT_FOUND");
+    if (
+      role === "viewer" ||
+      org.status !== "active" ||
+      requiresEwayBill(trade.totalPaise) ||
+      !(await canStartDirectCashCustody(ctx, tradeId))
+    )
+      return null;
+    if (side === "buyer") {
+      if (trade.status !== "dispatched" || !trade.directCashDispatch)
+        return null;
+      const scope = await cashCustodyScope(
+        ctx,
+        trade,
+        trade.directCashDispatch,
+      );
+      return { action: scope ? ("receive" as const) : ("renewScope" as const) };
+    }
+    if (trade.status !== "accepted") return null;
+    const lot = await linkedOrdinaryCashLot(ctx, trade);
+    if (lot?.status !== "available") return null;
+    const transformation = lot.parentTransformationId
+      ? await ctx.db.get("lotTransformations", lot.parentTransformationId)
+      : null;
+    if (lot.parentTransformationId && !transformation?.facilityId) return null;
+    const [sellerFacilities, buyerFacilities] = await Promise.all([
+      reviewedCashFacilities(
+        ctx,
+        trade.sellerOrgId,
+        trade.materialCode,
+        transformation?.facilityId,
+      ),
+      reviewedCashFacilities(ctx, trade.buyerOrgId, trade.materialCode),
+    ]);
+    return { action: "dispatch" as const, sellerFacilities, buyerFacilities };
+  },
+});
+
+/**
  * A read-only record for either trade party. It retains old numbers as
  * unverified legacy references, not as payment or tax-invoice proof.
  */
@@ -1113,6 +1526,7 @@ export const receipt = query({
     const buyer = await ctx.db.get("orgs", trade.buyerOrgId);
     if (!seller || !buyer) return null;
     const materials = await materialIndex(ctx);
+    const directCashReceipt = cashReceiptOf(trade);
     return {
       id: trade._id,
       number: null,
@@ -1121,7 +1535,8 @@ export const receipt = query({
         ? (trade.timeline.find((entry) => entry.status === "paid_to_escrow")
             ?.at ?? trade.updatedAt)
         : null,
-      paymentVerification: paymentVerificationFor(trade.status),
+      paymentVerification: tradePaymentVerification(trade),
+      ...(directCashReceipt && { directCashReceipt }),
       status: trade.status,
       side,
       issuedAt: null,
