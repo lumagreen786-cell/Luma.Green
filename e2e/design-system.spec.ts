@@ -81,7 +81,7 @@ for (const { locale, copy } of [
         content: copy.home.hero,
         labels: [
           actionName(copy.nav.sellScrap, copy.home.hero.sell),
-          copy.home.hero.prices,
+          actionName(copy.nav.prices, copy.home.hero.prices),
           copy.home.hero.join,
         ],
       },

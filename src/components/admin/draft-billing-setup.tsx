@@ -313,7 +313,7 @@ export function DraftBillingSetup() {
   return (
     <section
       aria-labelledby="draft-billing-setup"
-      className="mx-auto flex w-full max-w-5xl flex-col gap-6 border-t pt-6"
+      className="mx-auto mt-6 flex w-full max-w-5xl flex-col gap-6 rounded-xl bg-card p-5 sm:p-6"
     >
       <div className="space-y-2">
         <h2 id="draft-billing-setup" className="text-xl font-semibold">

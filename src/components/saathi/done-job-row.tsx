@@ -23,7 +23,7 @@ export function DoneJobRow({ job }: { job: Job }) {
 
   return (
     <li className="flex flex-wrap items-center gap-3 border-b border-border py-4">
-      <span className="flex size-10 shrink-0 items-center justify-center text-primary">
+      <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-accent text-accent-foreground">
         <Icon aria-hidden className="size-5" />
       </span>
       <div className="flex min-w-0 flex-1 flex-col">

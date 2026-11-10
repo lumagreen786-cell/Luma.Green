@@ -53,9 +53,9 @@ export function NewRequestCard({ booking, today, city }: CardProps) {
   return (
     <article
       aria-labelledby={`request-${booking.id}`}
-      className="flex flex-col gap-3 border-b border-border py-4"
+      className="grid min-w-0 gap-4 py-5 lg:grid-cols-[minmax(0,1fr)_minmax(14rem,0.65fr)]"
     >
-      <div className="flex flex-wrap items-start justify-between gap-2">
+      <div className="flex flex-wrap items-start justify-between gap-3 lg:col-span-2">
         <div className="flex min-w-0 flex-col gap-1">
           <CardName booking={booking} />
           <PlaceLine booking={booking} city={city} />
@@ -69,7 +69,7 @@ export function NewRequestCard({ booking, today, city }: CardProps) {
         </span>
       </div>
       <ItemChips items={booking.items} />
-      <div className="flex items-baseline justify-between gap-2 border-t pt-3">
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
         <span className="text-sm text-muted-foreground">
           {t("requests.estimate")}
         </span>
@@ -79,7 +79,9 @@ export function NewRequestCard({ booking, today, city }: CardProps) {
             : t("about", { amount: format.money(booking.estimatePaise) })}
         </span>
       </div>
-      <AcceptDecline bookingId={booking.id} />
+      <div className="lg:col-span-2 lg:max-w-xl">
+        <AcceptDecline bookingId={booking.id} />
+      </div>
     </article>
   );
 }
@@ -91,9 +93,9 @@ export function ActiveRequestCard({ booking, today, city }: CardProps) {
   return (
     <article
       aria-labelledby={`request-${booking.id}`}
-      className="flex flex-col gap-3 border-b border-border py-4"
+      className="grid min-w-0 gap-4 py-5 lg:grid-cols-[minmax(0,1fr)_minmax(14rem,0.65fr)]"
     >
-      <div className="flex flex-wrap items-start justify-between gap-2">
+      <div className="flex flex-wrap items-start justify-between gap-3 lg:col-span-2">
         <div className="flex min-w-0 flex-col gap-1">
           <CardName booking={booking} />
           <p className="text-sm font-medium">
@@ -108,7 +110,12 @@ export function ActiveRequestCard({ booking, today, city }: CardProps) {
       </div>
       <PlaceLine booking={booking} city={city} />
       <ItemChips items={booking.items} />
-      <div className={cn("grid gap-3", canStartTrip && "sm:grid-cols-2")}>
+      <div
+        className={cn(
+          "grid gap-3 lg:col-span-2 lg:max-w-xl",
+          canStartTrip && "sm:grid-cols-2",
+        )}
+      >
         {canStartTrip ? <StartTripButton bookingId={booking.id} /> : null}
         <Button asChild size="lg" className="h-12 text-base">
           <Link href={requestHref(booking.id, "weigh")}>
@@ -134,7 +141,7 @@ export function DoneRequestCard({ booking }: { booking: BookingView }) {
   return (
     <article
       aria-labelledby={`request-${booking.id}`}
-      className="flex flex-wrap items-center gap-3 border-b border-border py-4"
+      className="flex flex-wrap items-center gap-4 py-5"
     >
       <span
         aria-hidden

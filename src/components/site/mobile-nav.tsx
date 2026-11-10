@@ -5,7 +5,6 @@ import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState, useSyncExternalStore } from "react";
 
 import { Logo } from "@/components/brand/logo";
-import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -30,7 +29,6 @@ const subscribeToHydration = () => unsubscribeFromHydration;
 export function MobileNav({ className }: { className?: string }) {
   const t = useTranslations("nav");
   const common = useTranslations("common");
-  const theme = useTranslations("theme");
   const locale = useLocale();
   const [open, setOpen] = useState(false);
   const isHydrated = useSyncExternalStore(
@@ -107,7 +105,7 @@ export function MobileNav({ className }: { className?: string }) {
           </Button>
         </div>
         <SiteNav
-          className="flex shrink-0 flex-col gap-0 px-5 py-1 [&>a]:min-h-12 [&>a]:rounded-none [&>a]:px-0 [&>a]:py-3 [&>a]:text-base [&>a]:whitespace-nowrap"
+          className="flex shrink-0 flex-col gap-1 px-5 py-1 [&>a]:min-h-12 [&>a]:rounded-xl [&>a]:px-3 [&>a]:py-3 [&>a]:text-base [&>a]:whitespace-nowrap"
           onNavigate={close}
         />
         <div className="mx-5 grid shrink-0 py-2">
@@ -116,12 +114,6 @@ export function MobileNav({ className }: { className?: string }) {
               {common("language")}
             </span>
             <LanguageSwitcher />
-          </div>
-          <div className="flex min-h-11 items-center justify-between gap-3">
-            <span className="text-sm text-muted-foreground">
-              {theme("label")}
-            </span>
-            <ThemeToggle />
           </div>
         </div>
       </SheetContent>

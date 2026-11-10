@@ -16,7 +16,7 @@ export function AppPageHeader({
   actions?: ReactNode;
 }) {
   return (
-    <header className="grid min-w-0 gap-5 border-b border-border pb-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+    <header className="grid min-w-0 gap-5 pb-2 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
       <div className="flex min-w-0 flex-1 flex-col gap-2">
         <h1 className="font-display text-[1.75rem] leading-tight font-semibold tracking-tight sm:text-[2rem]">
           {title}
@@ -50,7 +50,7 @@ export function StatCard({
   tone?: "neutral" | "good" | "warn";
 }) {
   return (
-    <div className="flex min-w-0 flex-col gap-3 border-t border-border pt-5 pb-3">
+    <div className="flex min-w-0 flex-col gap-3 rounded-2xl bg-card p-5">
       <div className="flex items-start justify-between gap-2">
         <p className="min-w-0 flex-1 text-sm font-medium wrap-anywhere text-muted-foreground">
           {label}
@@ -61,7 +61,7 @@ export function StatCard({
             className={cn(
               "size-5 shrink-0",
               tone === "good" && "text-primary",
-              tone === "warn" && "text-amber-700 dark:text-amber-300",
+              tone === "warn" && "text-primary",
               tone === "neutral" && "text-muted-foreground",
             )}
           />
@@ -85,7 +85,7 @@ export function Section({
   children: ReactNode;
 }) {
   return (
-    <section className="flex min-w-0 flex-col gap-5">
+    <section className="flex min-w-0 flex-col gap-5 rounded-2xl bg-card p-5 sm:p-6">
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border pb-4">
         <h2 className="font-display text-lg font-semibold tracking-tight">
           {title}
@@ -109,7 +109,7 @@ export function EmptyState({
   action?: ReactNode;
 }) {
   return (
-    <div className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-x-4 gap-y-2 border-b border-border py-8">
+    <div className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-x-4 gap-y-2 rounded-2xl bg-card p-6">
       <span className="row-span-2 text-muted-foreground">
         <Icon aria-hidden className="size-6" strokeWidth={1.75} />
       </span>
@@ -130,7 +130,7 @@ export function ListSkeleton({ rows = 3 }: { rows?: number }) {
   return (
     <div className="flex flex-col gap-3" aria-busy="true">
       {Array.from({ length: rows }, (_, index) => (
-        <Skeleton key={index} className="h-16 w-full rounded-none" />
+        <Skeleton key={index} className="h-16 w-full rounded-2xl" />
       ))}
     </div>
   );
@@ -149,7 +149,7 @@ export function SettingsSection({
   return (
     <section
       aria-labelledby={id}
-      className="grid min-w-0 gap-5 border-t border-border pt-8 xl:grid-cols-[minmax(0,1fr)_minmax(0,3fr)] xl:gap-12"
+      className="grid min-w-0 gap-5 rounded-2xl bg-card p-6 xl:grid-cols-[minmax(0,1fr)_minmax(0,3fr)] xl:gap-12"
     >
       <h2 id={id} className="font-display text-lg font-semibold tracking-tight">
         {title}
@@ -170,11 +170,11 @@ export function StatusPill({
   return (
     <span
       className={cn(
-        "inline-flex max-w-full items-center rounded-md px-2 py-1 text-xs leading-5 font-medium",
+        "inline-flex max-w-full items-center rounded-full px-3 py-1 text-xs leading-5 font-medium",
         tone === "neutral" && "bg-muted text-muted-foreground",
-        tone === "info" && "bg-sky-500/10 text-sky-800 dark:text-sky-300",
+        tone === "info" && "bg-secondary text-secondary-foreground",
         tone === "good" && "bg-primary/10 text-primary",
-        tone === "warn" && "bg-amber-500/10 text-amber-800 dark:text-amber-300",
+        tone === "warn" && "bg-accent text-accent-foreground",
         tone === "bad" && "bg-destructive/10 text-destructive",
       )}
     >
@@ -186,7 +186,7 @@ export function StatusPill({
 /** "Sample data" ribbon for prototype-only numbers. */
 export function DemoNote({ children }: { children: ReactNode }) {
   return (
-    <p className="border-s-2 border-amber-500/50 ps-3 text-xs leading-relaxed text-muted-foreground">
+    <p className="border-s-2 border-primary/50 ps-3 text-xs leading-relaxed text-muted-foreground">
       {children}
     </p>
   );

@@ -102,7 +102,10 @@ export function VerificationQueue({
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-8">
       {header}
-      <section aria-labelledby="in-review" className="flex flex-col gap-3">
+      <section
+        aria-labelledby="in-review"
+        className="flex flex-col gap-3 rounded-xl bg-card p-5 sm:p-6"
+      >
         <div className="flex flex-wrap items-baseline justify-between gap-2">
           <h2
             id="in-review"
@@ -130,7 +133,7 @@ export function VerificationQueue({
       {withApplicant.length > 0 ? (
         <section
           aria-labelledby="with-applicant"
-          className="flex flex-col gap-3"
+          className="flex flex-col gap-3 rounded-xl bg-card p-5 sm:p-6"
         >
           <div className="flex flex-col gap-1">
             <h2

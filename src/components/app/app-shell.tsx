@@ -18,7 +18,6 @@ import { Logo } from "@/components/brand/logo";
 import { LanguageSwitcher } from "@/components/site/language-switcher";
 import { isCurrentSection } from "@/components/site/site-nav";
 import { SkipLink } from "@/components/site/skip-link";
-import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -48,7 +47,7 @@ function isActive(pathname: string, href: string) {
 
 /**
  * The business app's frame: who you are, where you can go, a way out. Phones
- * get a bottom bar; wider screens a sidebar. People without an approved
+ * get a bottom bar; wider screens a horizontal navigation bar. People without an approved
  * business or Saathi profile are sent to their application.
  */
 export function AppShell({ children }: { children: ReactNode }) {
@@ -63,7 +62,6 @@ export function AppShell({ children }: { children: ReactNode }) {
   const services = useTranslations("serviceRecords");
   const returnClaims = useTranslations("returnClaims");
   const common = useTranslations("common");
-  const theme = useTranslations("theme");
   const navigation = useTranslations("nav");
   const locale = useLocale();
   const mobileNavRef = useRef<HTMLElement>(null);
@@ -235,8 +233,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         aria-current={isCurrent ? "page" : undefined}
         className={cn(
           className,
-          isCurrent &&
-            "border-s-primary bg-background font-semibold text-primary",
+          isCurrent && "bg-accent font-semibold text-accent-foreground",
         )}
       >
         <Icon aria-hidden className="size-5 shrink-0" />
@@ -250,75 +247,29 @@ export function AppShell({ children }: { children: ReactNode }) {
   };
 
   return (
-    <div className="flex min-h-dvh flex-col bg-background xl:flex-row">
+    <div className="flex min-h-dvh flex-col bg-background">
       <SkipLink />
-      <aside className="sticky top-0 hidden h-dvh w-72 shrink-0 flex-col gap-6 border-e border-sidebar-border bg-muted/35 px-5 py-6 text-sidebar-foreground xl:flex">
-        <Link
-          href="/"
-          className="inline-flex min-h-11 items-center rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
-        >
-          <Logo />
-        </Link>
-        <div className="shrink-0 border-y border-sidebar-border px-2 py-5">
-          <p className="font-display text-lg leading-tight font-semibold break-words">
-            {name}
-          </p>
-          <p className="mt-1 text-xs text-muted-foreground">
-            {t(`roles.${role}`)}
-          </p>
-        </div>
-        <Input
-          type="search"
-          aria-label={common("search")}
-          placeholder={common("search")}
-          value={navSearch}
-          onChange={(event) => {
-            setNavSearch(event.target.value);
-          }}
-        />
-        <nav
-          aria-label={t("navLabel")}
-          className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto overscroll-contain pe-1"
-        >
-          {primary
-            .filter((item) => isSearchMatch(item))
-            .map((item) =>
-              link(
-                item,
-                "flex min-h-11 items-center gap-3 border-s-2 border-transparent px-3 text-sm font-medium outline-none transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-3 focus-visible:ring-ring/50",
-              ),
-            )}
-          {more.length > 0 ? (
-            <div className="mt-2 flex flex-col gap-1 border-t border-sidebar-border pt-2">
-              {more
-                .filter((item) => isSearchMatch(item))
-                .map((item) =>
-                  link(
-                    item,
-                    "flex min-h-11 items-center gap-3 border-s-2 border-transparent px-3 text-sm text-muted-foreground outline-none transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-3 focus-visible:ring-ring/50",
-                  ),
-                )}
-            </div>
-          ) : null}
+      <div className="hidden bg-sidebar text-sidebar-foreground xl:block">
+        <div className="mx-auto flex max-w-[100rem] items-center justify-between gap-6 px-8 py-4">
           <Link
-            href={help}
-            className="mt-2 flex min-h-11 items-center gap-3 border-s-2 border-transparent px-3 text-sm font-medium transition-colors outline-none hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
+            href="/"
+            className="inline-flex min-h-11 shrink-0 items-center rounded-full outline-none focus-visible:ring-3 focus-visible:ring-sidebar-ring"
           >
-            <LifeBuoyIcon aria-hidden className="size-5" />
-            {t("nav.help")}
+            <Logo />
           </Link>
-          <AccountLinks className="border-s-2 border-transparent px-3 hover:bg-sidebar-accent" />
-        </nav>
-        <div className="flex shrink-0 flex-col gap-2 border-t border-sidebar-border pt-4">
+          <div className="min-w-0 flex-1 border-s border-sidebar-border ps-6">
+            <p className="truncate text-sm font-semibold">{name}</p>
+            <p className="text-xs text-sidebar-foreground/70">
+              {t(`roles.${role}`)}
+            </p>
+          </div>
           <NativeUpdateControl compact />
-          <div className="flex items-center justify-between gap-2">
+          <div className="[&_button]:focus-visible:ring-sidebar-ring [&_svg]:text-current">
             <LanguageSwitcher />
-            <ThemeToggle />
           </div>
           <Button
-            variant="outline"
-            size="sm"
-            className="min-h-11 text-foreground"
+            variant="ghost"
+            className="text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-sidebar-ring"
             disabled={signingOut}
             onClick={() => void signOut()}
           >
@@ -326,14 +277,48 @@ export function AppShell({ children }: { children: ReactNode }) {
             {t("signOut")}
           </Button>
         </div>
-      </aside>
+        <div className="mx-auto flex max-w-[100rem] items-center gap-4 px-8 pb-4">
+          <nav
+            aria-label={t("navLabel")}
+            className="flex min-w-0 flex-1 items-center gap-2 overflow-x-auto overscroll-x-contain pb-1"
+          >
+            {[...primary, ...more]
+              .filter((item) => isSearchMatch(item))
+              .map((item) =>
+                link(
+                  item,
+                  "flex min-h-11 shrink-0 items-center gap-2 rounded-full px-4 text-sm font-medium outline-none transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-3 focus-visible:ring-sidebar-ring",
+                  true,
+                ),
+              )}
+            <Link
+              href={help}
+              className="flex min-h-11 shrink-0 items-center gap-2 rounded-full px-4 text-sm hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+            >
+              <LifeBuoyIcon aria-hidden className="size-5" />
+              {t("nav.help")}
+            </Link>
+            <AccountLinks className="shrink-0 rounded-full px-4 whitespace-nowrap text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground" />
+          </nav>
+          <Input
+            className="w-40 shrink-0 border-sidebar-border bg-sidebar-accent text-sidebar-accent-foreground placeholder:text-sidebar-accent-foreground/70"
+            type="search"
+            aria-label={common("search")}
+            placeholder={common("search")}
+            value={navSearch}
+            onChange={(event) => {
+              setNavSearch(event.target.value);
+            }}
+          />
+        </div>
+      </div>
 
       <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
-        <header className="sticky top-0 z-30 flex h-14 items-center justify-between gap-2 border-b border-border bg-background px-4 xl:hidden">
+        <header className="sticky top-0 z-30 flex h-14 items-center justify-between gap-2 border-b border-sidebar-border bg-sidebar px-4 text-sidebar-foreground xl:hidden [&_button]:focus-visible:ring-sidebar-ring">
           <Link
             href="/"
             aria-label={t("homeLink")}
-            className="inline-flex min-h-11 items-center rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+            className="inline-flex min-h-11 items-center rounded-md outline-none focus-visible:ring-3 focus-visible:ring-sidebar-ring"
           >
             <Logo idPrefix="lg-bar" className="[&>svg]:size-7" />
           </Link>
@@ -427,12 +412,6 @@ export function AppShell({ children }: { children: ReactNode }) {
               </span>
               <LanguageSwitcher />
             </div>
-            <div className="flex min-h-11 items-center justify-between gap-3">
-              <span className="text-sm text-muted-foreground">
-                {theme("label")}
-              </span>
-              <ThemeToggle />
-            </div>
           </div>
           <div className="mx-5 shrink-0 border-t py-4">
             <Button
@@ -483,7 +462,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       <main
         id="main"
         tabIndex={-1}
-        className="mx-auto flex w-full max-w-7xl min-w-0 flex-1 flex-col gap-8 px-4 pt-6 pb-28 sm:px-8 xl:px-12 xl:pt-10 xl:pb-16"
+        className="mx-auto flex w-full max-w-[100rem] min-w-0 flex-1 flex-col gap-6 px-4 pt-6 pb-28 sm:px-8 xl:pt-8 xl:pb-16"
       >
         <WorkspacePermissions
           key={

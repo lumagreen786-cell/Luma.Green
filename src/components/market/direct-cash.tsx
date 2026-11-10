@@ -98,7 +98,7 @@ function DirectCashForm({ trade }: { trade: TradeView }) {
         {t("cashRecord")}
       </summary>
       <form
-        className="flex flex-col gap-2 border-s-2 border-border ps-3"
+        className="flex flex-col gap-2 rounded-xl border border-border/60 bg-muted/30 p-4"
         onSubmit={(event) => {
           event.preventDefault();
           void submit();

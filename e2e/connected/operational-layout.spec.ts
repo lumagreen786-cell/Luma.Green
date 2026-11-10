@@ -95,7 +95,7 @@ for (const locale of ["en", "ar", "kn"] as const) {
         await expect(tabs.first()).toBeVisible();
         await expect(page.getByRole("tablist")).toHaveAttribute(
           "data-variant",
-          "line",
+          "default",
         );
         for (const theme of ["light", "dark"] as const) {
           await page.emulateMedia({ colorScheme: theme });
@@ -105,7 +105,7 @@ for (const locale of ["en", "ar", "kn"] as const) {
                 document.documentElement.classList.contains("dark"),
               ),
             )
-            .toBe(theme === "dark");
+            .toBe(false);
           for (const width of [390, 768, 1440]) {
             await page.setViewportSize({
               width,

@@ -1,0 +1,900 @@
+{
+  "capturedAt": "2026-11-10T22:06:23.128Z",
+  "baseURL": "http://127.0.0.1:3011",
+  "head": "71baa089acf7fc686ddfc4e4b5c9f83beb8cfda2",
+  "buildId": "nlvOnFLGs0CWUhYW3Uz-Y",
+  "trackedDiffSha256": "710cf3ba68692f0b6a670d714b75428d3a10e282c211d57a9ac8ee4f73f2efdd",
+  "context": "Actual disconnected production build in isolated Chromium. No seed records, signed-in session, OTP, provider requests or production acceptance. Redirects are recorded, not represented as private page coverage.",
+  "captures": [
+    {
+      "route": "/en",
+      "width": 1440,
+      "height": 1000,
+      "file": "en-1440.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/",
+      "redirected": false,
+      "heading": "Clear out recyclables. Get paid.",
+      "sha256": "7f4e99acb2afadcea54962592ec42fe61a559b08c2037de9cbf160d4cd68b675",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 4853
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "Locale canonicalization"
+    },
+    {
+      "route": "/en/how-it-works",
+      "width": 1440,
+      "height": 1000,
+      "file": "en-how-it-works-1440.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/how-it-works",
+      "redirected": false,
+      "heading": "How Luma.Green works",
+      "sha256": "99e7fcf4660d34f882430206981e29282cd7c6061b56602a1ffad64a1e3df70a",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 2601
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "Locale canonicalization"
+    },
+    {
+      "route": "/en/participants",
+      "width": 1440,
+      "height": 1000,
+      "file": "en-participants-1440.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/participants",
+      "redirected": false,
+      "heading": "Who Luma.Green is for",
+      "sha256": "72a31e047c70b97e7a7fc44020ea4c61b330f5bd7a8b6c12d1ab5ef9e6e580b9",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 2558
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "Locale canonicalization"
+    },
+    {
+      "route": "/en/prices",
+      "width": 1440,
+      "height": 1000,
+      "file": "en-prices-1440.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/prices",
+      "redirected": false,
+      "heading": "Material prices",
+      "sha256": "4e936f8d7eaa89cc1360da804cc6b3d918fd248e67b00836eddf4563d804592b",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1425
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "Locale canonicalization"
+    },
+    {
+      "route": "/en/standards",
+      "width": 1440,
+      "height": 1000,
+      "file": "en-standards-1440.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/standards",
+      "redirected": false,
+      "heading": "The Luma.Green standard",
+      "sha256": "bfe428144dfa2f4796158efdfea4c5e0d5454f3dff0fe28a78b8763f8380eb55",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 2284
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "Locale canonicalization"
+    },
+    {
+      "route": "/en/solar",
+      "width": 1440,
+      "height": 1000,
+      "file": "en-solar-1440.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/solar",
+      "redirected": false,
+      "heading": "Rooftop solar for your home or business",
+      "sha256": "6f84da77384f7f4e64d72008c0438759f990d9fa8975fc54b9f930bbec9bc76c",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 2006
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "Locale canonicalization"
+    },
+    {
+      "route": "/en/join",
+      "width": 1440,
+      "height": 1000,
+      "file": "en-join-1440.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/join",
+      "redirected": false,
+      "heading": "Join Luma.Green",
+      "sha256": "4ef4ce60d32ac9e0d2351999c97b71b4513e468e90f44b3f937fb269dcf09dcb",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1732
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "Locale canonicalization"
+    },
+    {
+      "route": "/en/contact",
+      "width": 1440,
+      "height": 1000,
+      "file": "en-contact-1440.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/contact",
+      "redirected": false,
+      "heading": "Talk to us",
+      "sha256": "62350387176945a1f8f7c9936d18bac63283d73b5378e0b0ec3e811deec302d3",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1017
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "Locale canonicalization"
+    },
+    {
+      "route": "/en/help",
+      "width": 1440,
+      "height": 1000,
+      "file": "en-help-1440.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/help",
+      "redirected": false,
+      "heading": "How can we help?",
+      "sha256": "db41902cf39345cc15a8dd2d7d1c14a15ba360108d8a4da84c7ffb6e7d72fbea",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1896
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "Locale canonicalization"
+    },
+    {
+      "route": "/en/help/contact",
+      "width": 1440,
+      "height": 1000,
+      "file": "en-help-contact-1440.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/help/contact",
+      "redirected": false,
+      "heading": "Contact us",
+      "sha256": "40ae4fc4f6379222531036fd4e394b1cd2d71095fd84cb0bf1c4bcaa4cbddc31",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1218
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "Locale canonicalization"
+    },
+    {
+      "route": "/en/help/kabadiwala",
+      "width": 1440,
+      "height": 1000,
+      "file": "en-help-kabadiwala-1440.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/help/kabadiwala",
+      "redirected": false,
+      "heading": "Help for kabadiwalas",
+      "sha256": "2e450f679d2c7e764267d6dc9516cd07e67f74df54e0d00ec15e15b17fc4e55a",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 3252
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "Locale canonicalization"
+    },
+    {
+      "route": "/en/privacy",
+      "width": 1440,
+      "height": 1000,
+      "file": "en-privacy-1440.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/privacy",
+      "redirected": false,
+      "heading": "Privacy policy",
+      "sha256": "41456896c682120d8224e6b709cbee4d9d6108e576a0e9d18374a7941f9f2160",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1696
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "Locale canonicalization"
+    },
+    {
+      "route": "/en/sell",
+      "width": 1440,
+      "height": 1000,
+      "file": "en-sell-1440.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/sell",
+      "redirected": false,
+      "heading": "Recycle",
+      "sha256": "2c14c1331dcfe35cd8d95285625e1e03c6038294453e53a21d6ec30981f4bba5",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1041
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "Locale canonicalization"
+    },
+    {
+      "route": "/en/sell/activity",
+      "width": 1440,
+      "height": 1000,
+      "file": "en-sell-activity-1440.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/login?next=%2Fsell%2Factivity",
+      "redirected": true,
+      "heading": "Log in",
+      "sha256": "f18e1319d228c18549981cb891597aade5ed48f6f7d2c9f50eb152c7e888e4b8",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "Authentication or route redirect"
+    },
+    {
+      "route": "/en/sell/services",
+      "width": 1440,
+      "height": 1000,
+      "file": "en-sell-services-1440.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/sell/services",
+      "redirected": false,
+      "heading": "Services",
+      "sha256": "4dd47a2f553547b0ee41235dc0d19ba162d0b887e3e399c08ec54b279b381667",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1042
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "Locale canonicalization"
+    },
+    {
+      "route": "/en/sell/footprint",
+      "width": 1440,
+      "height": 1000,
+      "file": "en-sell-footprint-1440.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/sell/footprint",
+      "redirected": false,
+      "heading": "Electricity footprint",
+      "sha256": "bed5e5cd7ab8c68ad47e20095230e211ec16878aa850c7e5d0644e3c3b90b3cd",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1052
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "Locale canonicalization"
+    },
+    {
+      "route": "/en/sell/settings",
+      "width": 1440,
+      "height": 1000,
+      "file": "en-sell-settings-1440.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/sell/settings",
+      "redirected": false,
+      "heading": "Settings",
+      "sha256": "6bb283e78c595a9c4418169bcc37fd26631478f2b841e7d9e2577610693a85bb",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1286
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "Locale canonicalization"
+    },
+    {
+      "route": "/en/login",
+      "width": 1440,
+      "height": 1000,
+      "file": "en-login-1440.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/login",
+      "redirected": false,
+      "heading": "Log in",
+      "sha256": "f18e1319d228c18549981cb891597aade5ed48f6f7d2c9f50eb152c7e888e4b8",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "Locale canonicalization"
+    },
+    {
+      "route": "/en/login/verify",
+      "width": 1440,
+      "height": 1000,
+      "file": "en-login-verify-1440.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/login/verify",
+      "redirected": false,
+      "heading": "Log in",
+      "sha256": "f5fa6443e0ee3ecf5a580956fbd4046ec74ab0891e385c6f0b20254d57ec3384",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "Locale canonicalization"
+    },
+    {
+      "route": "/en",
+      "width": 390,
+      "height": 844,
+      "file": "en-390.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/",
+      "redirected": false,
+      "heading": "Clear out recyclables. Get paid.",
+      "sha256": "66a7a82083337c696b6269981d8386537a2c53019e6234442f88dd4646d5b69d",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 7298
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "Locale canonicalization"
+    },
+    {
+      "route": "/en/login",
+      "width": 390,
+      "height": 844,
+      "file": "en-login-390.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/login",
+      "redirected": false,
+      "heading": "Log in",
+      "sha256": "547405ea6f4f75c8748bbc6b1e14afcd03e3e41d02fd395a1f89bf0882005b6b",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 844
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "Locale canonicalization"
+    },
+    {
+      "route": "/en/sell",
+      "width": 390,
+      "height": 844,
+      "file": "en-sell-390.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/sell",
+      "redirected": false,
+      "heading": "Recycle",
+      "sha256": "1aaaf0347221c1a81f16bbb01791ace39f51ed38d844bf9a9417d9a0a71f0b41",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1195
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "Locale canonicalization"
+    },
+    {
+      "route": "/en/sell/services",
+      "width": 390,
+      "height": 844,
+      "file": "en-sell-services-390.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/sell/services",
+      "redirected": false,
+      "heading": "Services",
+      "sha256": "0668fffef1300414f1ab4b1ff77a27612b3ca0326494d88aefbf87e87d46b7ef",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1227
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "Locale canonicalization"
+    },
+    {
+      "route": "/en/sell/footprint",
+      "width": 390,
+      "height": 844,
+      "file": "en-sell-footprint-390.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/sell/footprint",
+      "redirected": false,
+      "heading": "Electricity footprint",
+      "sha256": "ac82ec6283660dac7a52209123d35ad9979b4f1c6e150c1fc07d4db025dd99a4",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1257
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "Locale canonicalization"
+    },
+    {
+      "route": "/en/sell/settings",
+      "width": 390,
+      "height": 844,
+      "file": "en-sell-settings-390.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/sell/settings",
+      "redirected": false,
+      "heading": "Settings",
+      "sha256": "8fd00c10895343f26fa08cdee807698da09bbc5eda1ca3fab4a2a4640ba8edb9",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1491
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "Locale canonicalization"
+    },
+    {
+      "route": "/en/join",
+      "width": 390,
+      "height": 844,
+      "file": "en-join-390.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/join",
+      "redirected": false,
+      "heading": "Join Luma.Green",
+      "sha256": "51b5249ba10d31be8e70192fe9a8114e35e548cb5540f9a735c74af9fd4fc139",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 2991
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "Locale canonicalization"
+    },
+    {
+      "route": "/en/help/contact",
+      "width": 390,
+      "height": 844,
+      "file": "en-help-contact-390.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/help/contact",
+      "redirected": false,
+      "heading": "Contact us",
+      "sha256": "9a140933a8f333d1671b214ab9a17c53fe96a25c8423db3c9e49beac0a175dd2",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1567
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "Locale canonicalization"
+    },
+    {
+      "route": "/ar",
+      "width": 390,
+      "height": 844,
+      "file": "ar-390.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/ar",
+      "redirected": false,
+      "heading": "تخلّص من المواد القابلة للتدوير. واحصل على مقابل.",
+      "sha256": "35cb0c92ea38430e692409673bbc37f3e7c138de31e2a79e76d3cc9ab87615ce",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 7015
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "None"
+    },
+    {
+      "route": "/ar/login",
+      "width": 390,
+      "height": 844,
+      "file": "ar-login-390.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/ar/login",
+      "redirected": false,
+      "heading": "تسجيل الدخول",
+      "sha256": "ab4eadc6029ed8eff129ccaba65c9976cd4a3d09243137575523fd00e4254d99",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 844
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "None"
+    },
+    {
+      "route": "/ar/sell",
+      "width": 390,
+      "height": 844,
+      "file": "ar-sell-390.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/ar/sell",
+      "redirected": false,
+      "heading": "إعادة التدوير",
+      "sha256": "7f4f6011982bc2a59504fa014042b18eaf47ddbfc5353bc0627a6f79930d2470",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1135
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "None"
+    },
+    {
+      "route": "/ta",
+      "width": 390,
+      "height": 844,
+      "file": "ta-390.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/ta",
+      "redirected": false,
+      "heading": "மறுசுழற்சிப் பொருட்களை அகற்றுங்கள். பணம் பெறுங்கள்.",
+      "sha256": "17eaefa323b056e95f35635d995afdfa5a06c8e62ee71e59d1d04a238db7d921",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 8317
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "None"
+    },
+    {
+      "route": "/ta/sell",
+      "width": 390,
+      "height": 844,
+      "file": "ta-sell-390.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/ta/sell",
+      "redirected": false,
+      "heading": "மறுசுழற்சி செய்க",
+      "sha256": "1645f19652249d59936a37524149014868034e9e155c34f539a747df28160a6c",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1283
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "None"
+    },
+    {
+      "route": "/en",
+      "width": 768,
+      "height": 1024,
+      "file": "en-768.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/",
+      "redirected": false,
+      "heading": "Clear out recyclables. Get paid.",
+      "sha256": "109df9f2181d8511282679c03e12ca70eeeb7ad98bf4782193fb956c47740a11",
+      "bounds": {
+        "innerWidth": 768,
+        "scrollWidth": 768,
+        "height": 6260
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "Locale canonicalization"
+    },
+    {
+      "route": "/en/sell",
+      "width": 768,
+      "height": 1024,
+      "file": "en-sell-768.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/sell",
+      "redirected": false,
+      "heading": "Recycle",
+      "sha256": "5363c683abac575cadb496a23a463c2b73104f580cbc5b2ebfdd9865b332406e",
+      "bounds": {
+        "innerWidth": 768,
+        "scrollWidth": 768,
+        "height": 1104
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "Locale canonicalization"
+    },
+    {
+      "route": "/ar/sell",
+      "width": 768,
+      "height": 1024,
+      "file": "ar-sell-768.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/ar/sell",
+      "redirected": false,
+      "heading": "إعادة التدوير",
+      "sha256": "ac72dc1fb59959d7f0117e452f5c5ea13557fecf22459a5a807477efdb04f2c1",
+      "bounds": {
+        "innerWidth": 768,
+        "scrollWidth": 768,
+        "height": 1104
+      },
+      "visualInspection": "Overview contact sheets inspected; no visual blocker found. This is not authenticated/provider acceptance.",
+      "evidenceLabel": "Actual disconnected public UI",
+      "redirectKind": "None"
+    },
+    {
+      "route": "/en/solar",
+      "width": 1440,
+      "height": 1000,
+      "file": "en-solar-example-1440.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/solar",
+      "context": "Synthetic local calculator example: home, monthly electricity bill INR3000, available roof400sqft. Uses current calculator assumptions. Not an actual bill, quotation, subsidy decision or measured savings. No form submitted; external network blocked.",
+      "sha256": "c48022fa44a75b823dc6d5af259904f16d0ce895c9caaaf6c05bdafb42e963bb",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 2691
+      },
+      "visualInspection": "Solar hatch chart inspected; full-page examples available for document review.",
+      "evidenceLabel": "Synthetic local solar estimate",
+      "redirected": false,
+      "redirectKind": "Locale canonicalization"
+    },
+    {
+      "route": "/en/solar",
+      "width": 1440,
+      "height": 1000,
+      "file": "en-solar-example-chart-1440.png",
+      "context": "Cropped savings figure from synthetic local home example: monthly bill INR3000, roof400sqft; illustrative estimate only, not operational evidence.",
+      "sha256": "0f7a83b132ae0aeaa02d2f0d1aaa914501a20324cdbc6456686af00ca6df8c5d",
+      "visualInspection": "Solar hatch chart inspected; full-page examples available for document review.",
+      "evidenceLabel": "Synthetic local solar estimate"
+    },
+    {
+      "route": "/en/solar",
+      "width": 390,
+      "height": 1000,
+      "file": "en-solar-example-390.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/solar",
+      "context": "Synthetic local calculator example: home, monthly electricity bill INR3000, available roof400sqft. Uses current calculator assumptions. Not an actual bill, quotation, subsidy decision or measured savings. No form submitted; external network blocked.",
+      "sha256": "a8a4b0cde3fb64ca4a36012d4d7ae3f8f0c8d26e2c8ce73b985a17665451b838",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 4095
+      },
+      "visualInspection": "Solar hatch chart inspected; full-page examples available for document review.",
+      "evidenceLabel": "Synthetic local solar estimate",
+      "redirected": false,
+      "redirectKind": "Locale canonicalization"
+    },
+    {
+      "route": "/admin/login",
+      "width": 1440,
+      "height": 1000,
+      "file": "admin-login-1440.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/admin/login",
+      "redirected": false,
+      "heading": "Admin sign-in",
+      "sha256": "a00dbc7379ab7d82677a897837052c3b3998b2ddf29cffff8fb16a9421d2da16",
+      "evidenceLabel": "Actual disconnected public UI",
+      "context": "Empty authentication or safe redirected entry. No credentials, OTP, setup data or reset token supplied. No form submitted.",
+      "visualInspection": "Empty admin login/setup inspected; legacy recovery routes correctly show the login target.",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/admin/setup",
+      "width": 1440,
+      "height": 1000,
+      "file": "admin-setup-1440.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/admin/setup",
+      "redirected": false,
+      "heading": "Set up the admin account",
+      "sha256": "6e02418126778fb6a8a4afc37f13280c0ba63816099702b119d2894d0bd967c0",
+      "evidenceLabel": "Actual disconnected public UI",
+      "context": "Empty authentication or safe redirected entry. No credentials, OTP, setup data or reset token supplied. No form submitted.",
+      "visualInspection": "Empty admin login/setup inspected; legacy recovery routes correctly show the login target.",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/admin/forgot-password",
+      "width": 1440,
+      "height": 1000,
+      "file": "admin-forgot-password-1440.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/admin/login",
+      "redirected": true,
+      "heading": "Admin sign-in",
+      "sha256": "a00dbc7379ab7d82677a897837052c3b3998b2ddf29cffff8fb16a9421d2da16",
+      "evidenceLabel": "Actual disconnected public UI",
+      "context": "Empty authentication or safe redirected entry. No credentials, OTP, setup data or reset token supplied. No form submitted.",
+      "visualInspection": "Empty admin login/setup inspected; legacy recovery routes correctly show the login target.",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/admin/reset-password",
+      "width": 1440,
+      "height": 1000,
+      "file": "admin-reset-password-1440.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/admin/login",
+      "redirected": true,
+      "heading": "Admin sign-in",
+      "sha256": "a00dbc7379ab7d82677a897837052c3b3998b2ddf29cffff8fb16a9421d2da16",
+      "evidenceLabel": "Actual disconnected public UI",
+      "context": "Empty authentication or safe redirected entry. No credentials, OTP, setup data or reset token supplied. No form submitted.",
+      "visualInspection": "Empty admin login/setup inspected; legacy recovery routes correctly show the login target.",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/login/email/reset",
+      "width": 1440,
+      "height": 1000,
+      "file": "en-login-email-reset-1440.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/login",
+      "redirected": true,
+      "heading": "Log in",
+      "sha256": "f18e1319d228c18549981cb891597aade5ed48f6f7d2c9f50eb152c7e888e4b8",
+      "evidenceLabel": "Actual disconnected public UI",
+      "context": "Empty authentication or safe redirected entry. No credentials, OTP, setup data or reset token supplied. No form submitted.",
+      "visualInspection": "Redirect target is the same previously inspected empty login page.",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/login/email/verify",
+      "width": 1440,
+      "height": 1000,
+      "file": "en-login-email-verify-1440.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/login",
+      "redirected": true,
+      "heading": "Log in",
+      "sha256": "f18e1319d228c18549981cb891597aade5ed48f6f7d2c9f50eb152c7e888e4b8",
+      "evidenceLabel": "Actual disconnected public UI",
+      "context": "Empty authentication or safe redirected entry. No credentials, OTP, setup data or reset token supplied. No form submitted.",
+      "visualInspection": "Redirect target is the same previously inspected empty login page.",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/login/email/complete",
+      "width": 1440,
+      "height": 1000,
+      "file": "en-login-email-complete-1440.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/login",
+      "redirected": true,
+      "heading": "Log in",
+      "sha256": "f18e1319d228c18549981cb891597aade5ed48f6f7d2c9f50eb152c7e888e4b8",
+      "evidenceLabel": "Actual disconnected public UI",
+      "context": "Empty authentication or safe redirected entry. No credentials, OTP, setup data or reset token supplied. No form submitted.",
+      "visualInspection": "Redirect target is the same previously inspected empty login page.",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/admin/login",
+      "width": 390,
+      "height": 844,
+      "file": "admin-login-390.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/admin/login",
+      "redirected": false,
+      "heading": "Admin sign-in",
+      "sha256": "52ef7c382cae99517041970f21fa3c16c9337d32c60f23eacf710745b1e9b73d",
+      "evidenceLabel": "Actual disconnected public UI",
+      "context": "Empty authentication or safe redirected entry. No credentials, OTP, setup data or reset token supplied. No form submitted.",
+      "visualInspection": "Empty admin login/setup inspected; legacy recovery routes correctly show the login target.",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 844
+      }
+    },
+    {
+      "route": "/admin/setup",
+      "width": 390,
+      "height": 844,
+      "file": "admin-setup-390.png",
+      "status": 200,
+      "finalURL": "http://127.0.0.1:3011/admin/setup",
+      "redirected": false,
+      "heading": "Set up the admin account",
+      "sha256": "196399685e2a4a269c87288d1c15a592dd50c5588d23d506bd7e22a47e4e8ce2",
+      "evidenceLabel": "Actual disconnected public UI",
+      "context": "Empty authentication or safe redirected entry. No credentials, OTP, setup data or reset token supplied. No form submitted.",
+      "visualInspection": "Empty admin login/setup inspected; legacy recovery routes correctly show the login target.",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 844
+      }
+    }
+  ],
+  "verification": {
+    "browserSuite": "114 passed (2.0m)",
+    "log": "/tmp/luma-ship-e2e-integrated.log",
+    "scope": "theme, astryx-brand, mobile-nav, responsive, privacy; Chromium against integrated disconnected build",
+    "limitation": "Browser assertions are separate from complete visual, protected role, device and provider acceptance."
+  }
+}

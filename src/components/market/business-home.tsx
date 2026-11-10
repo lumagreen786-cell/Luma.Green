@@ -205,7 +205,7 @@ function WaitingForYou({
         />
       ) : null}
       {waiting.length > 0 ? (
-        <ul className="flex flex-col">
+        <ul className="flex flex-col gap-3">
           {waiting.slice(0, HOME_LIMIT).map(({ trade, side }) => (
             <li key={trade.id}>
               <TradeCard
@@ -256,7 +256,7 @@ function LatestOffers({
         />
       ) : null}
       {shown.length > 0 ? (
-        <ul className="flex flex-col">
+        <ul className="flex flex-col gap-3">
           {shown.map((listing) => (
             <li key={listing.id}>
               <ListingCard

@@ -211,8 +211,8 @@ describe("workspace navigation", () => {
       menu.getByRole("button", { name: "Language: English" }),
     ).toBeInTheDocument();
     expect(
-      menu.getByRole("button", { name: "Appearance" }),
-    ).toBeInTheDocument();
+      menu.queryByRole("button", { name: "Appearance" }),
+    ).not.toBeInTheDocument();
     await userEvent.click(
       menu.getByRole("button", { name: messages.app.signOut }),
     );

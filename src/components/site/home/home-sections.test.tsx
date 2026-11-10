@@ -58,7 +58,7 @@ describe("home page", () => {
       screen.getByRole("link", { name: "For businesses" }),
     ).toHaveAttribute("href", "/join");
     expect(
-      screen.getByRole("link", { name: "View material prices" }),
+      screen.getByRole("link", { name: "Prices: View material prices" }),
     ).toHaveAttribute("href", "/prices");
     expect(
       screen

@@ -114,7 +114,7 @@ function CreateReport({
   const [files, setFiles] = useState<Id<"qualityAttachments">[]>([]);
   return (
     <form
-      className="flex max-w-2xl flex-col gap-4 border-t pt-6"
+      className="flex max-w-2xl flex-col gap-4 rounded-xl border border-border/60 bg-card p-5"
       onSubmit={(e) => {
         e.preventDefault();
         void action.run(async () => {
@@ -217,7 +217,7 @@ function ReportList({
   const revoke = useMutation(api.auditShares.revoke);
   const action = useQualityAction();
   return (
-    <section className="space-y-4 border-t pt-6">
+    <section className="space-y-4 rounded-xl border border-border/60 bg-card p-5">
       <h2 className="text-lg font-semibold">{t(own ? "sent" : "received")}</h2>
       {rows.length === 0 ? (
         <p>{t("empty")}</p>
@@ -281,7 +281,7 @@ function ReportDetail({ reportId }: { reportId: Id<"auditReports"> }) {
     return <p role="status">{t("unavailable")}</p>;
   const s = report.snapshot;
   return (
-    <section className="space-y-4 border-t pt-6">
+    <section className="space-y-4 rounded-xl border border-border/60 bg-card p-5">
       <h2 className="text-lg font-semibold">{report.purpose}</h2>
       <p>{t("snapshot")}</p>
       <p className="break-words">

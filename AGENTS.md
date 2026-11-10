@@ -15,6 +15,22 @@ how to do one job well.
 
 ---
 
+## Approved design system and mobile resumption — 11 November 2026
+
+The owner approved the five Ship X-inspired Luma samples and authorized the full
+UI rollout with multiple agents, including Expo iOS and Android. Before every UI
+change, read [the Luma design system](docs/design/luma-design-system/README.md).
+It owns palette, typography, layout, components, charts and acceptance rules.
+Use only the approved five base colours and white/forest mixes. The app is now
+light-only; remove dark-mode controls and ignore old/system dark preferences.
+Use shadcn controls, horizontal workspace navigation and rounded functional white
+panels on a quiet green canvas. This supersedes older Astryx-only, original-palette,
+dual-theme, no-panel and native-pause rules for this redesign. Preserve real
+authentication, access, consent, exact units, i18n, native permissions and safe
+updates. Keep existing native architecture. This is implementation authority,
+not authorization for paid services, signed releases, OTA/store publication or
+unchecked deployment. Track every route and acceptance gap in the delivery record.
+
 ## Environment, HTTP and storage rules — 3 November 2026
 
 This section supersedes older environment and file-storage instructions.

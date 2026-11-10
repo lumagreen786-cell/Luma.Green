@@ -12,8 +12,12 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
     <div className="flex min-h-dvh flex-col bg-background">
       <SkipLink />
       <SiteHeader />
-      <div className="mx-auto flex w-full max-w-lg flex-1 flex-col justify-center px-5 py-8 sm:px-8 sm:py-12">
-        <main id="main" tabIndex={-1} className="flex w-full min-w-0 flex-col">
+      <div className="mx-auto flex w-full max-w-xl flex-1 flex-col justify-center px-5 py-8 sm:px-8 sm:py-12">
+        <main
+          id="main"
+          tabIndex={-1}
+          className="flex w-full min-w-0 flex-col rounded-xl border border-border/60 bg-card p-5 sm:p-8"
+        >
           {children}
         </main>
       </div>

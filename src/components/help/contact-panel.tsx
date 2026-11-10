@@ -30,7 +30,7 @@ export function ContactPanel() {
   return (
     <aside
       aria-labelledby="contact-other-ways"
-      className="flex flex-col gap-6 self-start border-t py-6 md:border-s md:border-t-0 md:py-0 md:ps-6"
+      className="flex flex-col gap-6 self-start rounded-xl border border-border/60 bg-card p-5"
     >
       <h2 id="contact-other-ways" className="text-lg font-semibold">
         {t("contact.otherWays")}

@@ -22,7 +22,7 @@ export async function BusinessTrade() {
       className="py-12 sm:py-16 lg:py-24"
     >
       <Container className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-16">
-        <div className="relative aspect-[3/2] min-w-0 overflow-hidden bg-muted">
+        <div className="relative aspect-[3/2] min-w-0 overflow-hidden rounded-xl bg-muted">
           <Image
             src={pellets}
             alt=""

@@ -55,7 +55,7 @@ export default function GlobalError({
         <header className="border-b px-6 py-5">
           <Logo />
         </header>
-        <main className="mx-auto flex min-h-[70dvh] max-w-xl flex-col items-start justify-center gap-6 px-6 py-16">
+        <main className="mx-auto my-6 flex min-h-[50dvh] w-[calc(100%-2rem)] max-w-xl flex-col items-start justify-center gap-6 rounded-xl border border-border/60 bg-card px-6 py-10">
           <h1 className="text-3xl leading-tight font-semibold tracking-tight sm:text-4xl">
             {copy.error}
           </h1>

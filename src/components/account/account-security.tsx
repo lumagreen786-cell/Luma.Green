@@ -317,7 +317,7 @@ function SetupKey({ uri, label }: { uri: string; label: string }) {
     };
   }, [uri]);
   return (
-    <div className="flex flex-col items-start gap-3 border-y py-4">
+    <div className="flex flex-col items-start gap-3 rounded-xl border border-border/60 bg-card p-5">
       {qr ? (
         <Image src={qr} alt="" width={208} height={208} unoptimized />
       ) : null}

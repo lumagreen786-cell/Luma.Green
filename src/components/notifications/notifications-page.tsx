@@ -78,7 +78,7 @@ function DeviceSettings() {
   return (
     <section
       aria-labelledby="notification-device"
-      className="flex flex-col gap-3 border-t border-border py-4 lg:border-t-0 lg:pt-0"
+      className="flex flex-col gap-3 rounded-xl border border-border/60 bg-card p-5"
     >
       <div className="min-w-0">
         <h2 id="notification-device" className="font-semibold">
@@ -164,7 +164,10 @@ function AuthenticatedInbox() {
     }
   }
   return (
-    <section aria-labelledby="notification-inbox" className="pt-6">
+    <section
+      aria-labelledby="notification-inbox"
+      className="rounded-xl border border-border/60 bg-card p-5"
+    >
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h2 id="notification-inbox" className="text-lg font-semibold">
           {t("inboxTitle")}

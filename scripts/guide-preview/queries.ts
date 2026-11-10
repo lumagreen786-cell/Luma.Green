@@ -2,6 +2,7 @@ import { type FunctionReference, getFunctionName } from "convex/server";
 import { ConvexError } from "convex/values";
 
 import { inboxFixture, securityFixture } from "./account-fixtures";
+import { designFixtures } from "./design-fixtures";
 import { financeFixture } from "./finance-fixtures";
 import {
   complianceFixture,
@@ -89,6 +90,11 @@ function recyclingQuery(name: string): { matched: boolean; value?: unknown } {
     : { matched: false };
 }
 
+const removalFixtures = new Map<
+  string,
+  ReturnType<typeof removalStatusFixture>
+>();
+
 /** No Convex client or connection is created in this documentation-only process. */
 export function useQuery(
   query: FunctionReference<"query">,
@@ -96,8 +102,12 @@ export function useQuery(
 ): unknown {
   if (args === "skip") return undefined;
   const name = getFunctionName(query);
-  if (name === "accountRemoval:status")
-    return removalStatusFixture(window.location.search);
+  if (name === "accountRemoval:status") {
+    const search = window.location.search;
+    if (!removalFixtures.has(search))
+      removalFixtures.set(search, removalStatusFixture(search));
+    return removalFixtures.get(search);
+  }
   const failure = failureQuery(name);
   if (failure.matched) return failure.value;
   // Legacy synthetic trades have no financial lifecycle or provider evidence.
@@ -128,11 +138,14 @@ function impactScenario() {
     ? unknownFactorImpactFixture
     : impactFixture;
 }
-const extendedFixtures = {
-  ...operationalFixtures,
-  ...foundationFixtures,
-  ...releaseGapFixtures,
-};
+const extendedFixtures = new Map(
+  Object.entries({
+    ...operationalFixtures,
+    ...foundationFixtures,
+    ...releaseGapFixtures,
+    ...designFixtures,
+  }),
+);
 function tradeFixture() {
   return new URLSearchParams(window.location.search).get("procurement") ===
     "pet"
@@ -141,7 +154,7 @@ function tradeFixture() {
 }
 
 function readFixture(name: string): unknown {
-  if (Object.hasOwn(extendedFixtures, name)) return extendedFixtures[name];
+  if (extendedFixtures.has(name)) return extendedFixtures.get(name);
   switch (name) {
     case "householdPhotos:list": {
       return [];
@@ -187,7 +200,19 @@ export function useConvexAuth() {
 }
 export function usePaginatedQuery(query: FunctionReference<"query">) {
   const name = getFunctionName(query);
-  if (name === "stockIntake:mine")
+  if (
+    [
+      "stockIntake:mine",
+      "cashfreePayments:vendorsForAdmin",
+      "cashfreeLifecycle:adminList",
+      "businessSubscriptions:draftSitesForAdmin",
+      "commercialEvidence:mine",
+      "paperDrafts:list",
+      "sourcing:plans",
+      "sourcing:qualifications",
+      "sourcing:agreements",
+    ].includes(name)
+  )
     return {
       results: [],
       status: "Exhausted",

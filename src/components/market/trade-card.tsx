@@ -85,7 +85,7 @@ export function TradeCard({
     legacyContent
   );
   return (
-    <article className="flex h-full flex-col gap-3 border-b border-border py-4">
+    <article className="flex h-full min-w-0 flex-col gap-4 rounded-xl border border-border/60 bg-card p-4 sm:p-5">
       <TradeHeading trade={trade} side={side} showSide={showSide} />
       {compact ? null : <OfferSpecification value={trade.specification} />}
       {compact ? null : (
@@ -152,11 +152,11 @@ function TradeHeading({
           })}
         </p>
       </div>
-      <div className="flex shrink-0 flex-col items-end gap-0.5 text-end">
-        <p className="font-semibold whitespace-nowrap tabular-nums">
+      <div className="flex max-w-full shrink-0 flex-col items-end gap-0.5 text-end">
+        <p className="max-w-full overflow-x-auto font-semibold whitespace-nowrap tabular-nums">
           {format.money(trade.totalPaise)}
         </p>
-        <p className="text-xs whitespace-nowrap text-muted-foreground tabular-nums">
+        <p className="max-w-full overflow-x-auto text-xs whitespace-nowrap text-muted-foreground tabular-nums">
           {t("rate", { price: format.perKg(trade.paisePerKg) })}
         </p>
       </div>

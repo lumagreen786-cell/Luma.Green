@@ -82,7 +82,12 @@ export function ApplicationReview({
             : "grid gap-6 xl:grid-cols-[minmax(0,1fr)_22rem]"
         }
       >
-        <Tabs defaultValue="application" className="min-w-0">
+        <Tabs
+          defaultValue="application"
+          className={
+            onBack ? "min-w-0" : "min-w-0 rounded-xl bg-card p-5 sm:p-6"
+          }
+        >
           <TabsList className="h-auto flex-wrap justify-start gap-2">
             <TabsTrigger value="application">Application</TabsTrigger>
             <TabsTrigger value="documents">Documents</TabsTrigger>
@@ -113,7 +118,7 @@ export function ApplicationReview({
           className={
             onBack
               ? "flex min-w-0 flex-col gap-6 border-t pt-6"
-              : "flex min-w-0 flex-col gap-6 xl:sticky xl:top-6 xl:self-start xl:border-s xl:ps-6"
+              : "flex min-w-0 flex-col gap-6 rounded-xl bg-card p-5 sm:p-6 xl:sticky xl:top-6 xl:self-start"
           }
         >
           {application.status === "submitted" ? (

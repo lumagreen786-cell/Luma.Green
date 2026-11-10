@@ -76,7 +76,7 @@ function LogisticsWorkspace({
             {status === "LoadingFirstPage" ? (
               <ListSkeleton />
             ) : (
-              <ul className="divide-y border-y">
+              <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
                 {results.map((plan) => (
                   <li
                     key={plan._id}
@@ -137,7 +137,7 @@ function Version({ version }: { version: Doc<"routePlanVersions"> }) {
   const t = useTranslations("logistics");
   const format = useFormatter();
   return (
-    <section className="space-y-3 border-t py-5">
+    <section className="space-y-3 rounded-xl border border-border/60 bg-card p-5">
       <h3 className="font-medium">
         {t("revision", { number: version.revision })} · {version.title}
       </h3>

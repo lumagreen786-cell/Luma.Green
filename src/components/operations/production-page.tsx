@@ -97,7 +97,7 @@ function ProductionWorkspace({ canOperate }: { canOperate: boolean }) {
                 {data === undefined ? (
                   <ListSkeleton />
                 ) : (
-                  <ul className="divide-y border-y">
+                  <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
                     {data.recipes.map((r) => (
                       <li key={r.id} className="space-y-3 py-4">
                         <h2 className="font-display text-lg font-semibold">
@@ -141,7 +141,7 @@ function ProductionWorkspace({ canOperate }: { canOperate: boolean }) {
                 {data === undefined ? (
                   <ListSkeleton />
                 ) : (
-                  <ul className="divide-y border-y">
+                  <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
                     {data.batches.map((b) => (
                       <li key={b.id} className="space-y-3 py-4">
                         <h2 className="font-display text-lg font-semibold">

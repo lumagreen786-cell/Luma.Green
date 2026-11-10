@@ -35,7 +35,7 @@ export function CatalogueSetup() {
     }
   }
   return (
-    <section className="flex min-w-0 flex-col gap-4 border-t border-border pt-6">
+    <section className="flex min-w-0 flex-col gap-4 rounded-xl bg-card p-5 sm:p-6">
       <header className="flex flex-col gap-1.5">
         <h2 className="font-display text-lg font-semibold tracking-tight">
           Material catalogue setup

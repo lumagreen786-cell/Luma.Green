@@ -25,15 +25,15 @@ export function HouseholdNavigation() {
   return (
     <nav
       aria-label={t("navigation")}
-      className="overflow-x-auto border-y border-border"
+      className="overflow-x-auto overscroll-x-contain border-b border-border/60 bg-card px-4 py-2"
     >
-      <ul className="mx-auto grid max-w-xl grid-cols-[repeat(5,minmax(max-content,1fr))]">
+      <ul className="mx-auto grid w-max min-w-full grid-cols-[repeat(5,minmax(max-content,1fr))] gap-2 sm:max-w-2xl sm:min-w-0">
         {tabs.map(({ label, href, icon: Icon }) => (
           <li key={href} className="min-w-0">
             <Link
               href={href}
               aria-current={pathname === href ? "page" : undefined}
-              className="flex min-h-12 min-w-0 flex-col items-center justify-center gap-1 border-b-2 border-transparent px-2 py-2 text-center text-xs font-medium outline-none hover:text-primary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset aria-[current=page]:border-primary aria-[current=page]:text-primary"
+              className="flex min-h-12 min-w-0 flex-col items-center justify-center gap-1 rounded-full px-4 py-2 text-center text-xs font-medium outline-none hover:text-primary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset aria-[current=page]:bg-accent aria-[current=page]:text-accent-foreground"
             >
               <Icon aria-hidden className="size-5 shrink-0" />
               <span className="whitespace-nowrap">{t(label)}</span>

@@ -12,8 +12,8 @@ import effects from "./public-effects.module.css";
 const headerLayout = cva("grid min-w-0 lg:items-center", {
   variants: {
     variant: {
-      editorial: "gap-4 py-6 sm:py-8",
-      task: "gap-5 py-6 sm:py-8 lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-12",
+      editorial: "gap-4 py-8 sm:py-10",
+      task: "gap-5 py-8 sm:py-10 lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-12",
     },
   },
   defaultVariants: { variant: "editorial" },
@@ -49,7 +49,7 @@ export function PageHeader({
   variant?: "editorial" | "task";
 }) {
   return (
-    <div className="border-b bg-background">
+    <div className="bg-background">
       <Container className={headerLayout({ variant })}>
         <div
           className={cn(
@@ -80,7 +80,7 @@ export function PageHeader({
           <RoleStoryImage
             scene={scene}
             className="hidden lg:block"
-            frameClassName="h-24 aspect-auto"
+            frameClassName="h-24 aspect-auto rounded-xl"
             sizes="256px"
           />
         ) : null}

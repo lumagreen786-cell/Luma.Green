@@ -181,3 +181,29 @@ describe("isolated operational documentation fixtures", () => {
     );
   });
 });
+
+describe("isolated light-only design fixtures", () => {
+  it("does not invent payment, entitlement, facility approval or evidence", () => {
+    window.history.replaceState(null, "", "/en/app/billing?role=kabadiwala");
+    expect(
+      useQuery(api.businessSubscriptions.status, { orgId: "guide-shop" }),
+    ).toMatchObject({
+      billingAvailable: false,
+      request: null,
+      entitlement: null,
+      events: [],
+    });
+    expect(useQuery(api.industrialProfiles.mine)).toMatchObject([
+      { name: "Synthetic facility — design fixture", capabilities: [] },
+    ]);
+    expect(useQuery(api.industrialProfiles.registrations)).toEqual({
+      rows: [],
+      hasMore: false,
+    });
+    expect(usePaginatedQuery(api.commercialEvidence.mine)).toMatchObject({
+      results: [],
+      status: "Exhausted",
+    });
+    window.history.replaceState(null, "", "/");
+  });
+});

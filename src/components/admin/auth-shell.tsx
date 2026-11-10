@@ -3,7 +3,6 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 
 import { Logo } from "@/components/brand/logo";
-import { ThemeToggleControl } from "@/components/theme/theme-toggle";
 
 /** A narrow, distraction-free form; setup and sign-in share the same frame. */
 export function AdminAuthShell({
@@ -17,7 +16,7 @@ export function AdminAuthShell({
 }) {
   return (
     <div className="flex min-h-dvh flex-col bg-background">
-      <header className="flex min-h-16 items-center justify-between gap-4 border-b px-5 sm:min-h-20 sm:px-8">
+      <header className="flex min-h-16 items-center justify-between gap-4 bg-sidebar px-5 text-sidebar-foreground sm:min-h-20 sm:px-8">
         <Link
           href="/"
           aria-label="Luma.Green home"
@@ -25,21 +24,13 @@ export function AdminAuthShell({
         >
           <Logo />
         </Link>
-        <ThemeToggleControl
-          labels={{
-            label: "Appearance",
-            light: "Light",
-            dark: "Dark",
-            system: "System",
-          }}
-        />
       </header>
       <main
         id="main"
         tabIndex={-1}
         className="mx-auto flex w-full max-w-lg flex-1 flex-col px-5 py-8 sm:px-8 sm:py-16"
       >
-        <div>
+        <div className="rounded-2xl bg-card p-6 sm:p-8">
           <div className="mb-6 flex flex-col gap-3 border-b border-border pb-6">
             <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
               {title}

@@ -18,8 +18,8 @@ export async function HomeHero() {
   ]);
   return (
     <section aria-labelledby="hero-heading" className="bg-background">
-      <Container className="py-6 sm:py-10">
-        <div className="grid min-w-0 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-12">
+      <Container className="py-5 sm:py-8">
+        <div className="grid min-w-0 gap-6 rounded-xl border border-border/60 bg-card p-5 sm:p-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-12">
           <div className="order-1 flex min-w-0 flex-col items-start gap-4 py-2 lg:justify-center">
             <div className="grid min-w-0 gap-3 pb-5">
               <p className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
@@ -60,8 +60,12 @@ export async function HomeHero() {
                 size="lg"
                 className="w-full max-w-full justify-between gap-4 sm:w-auto"
               >
-                <Link href="/prices">
-                  {t("prices")}
+                <Link
+                  href="/prices"
+                  aria-label={actionName(nav("prices"), t("prices"))}
+                >
+                  <span className="sm:hidden">{nav("prices")}</span>
+                  <span className="hidden sm:inline">{t("prices")}</span>
                   <MoveUpRightIcon
                     aria-hidden
                     className="size-4 rtl:-scale-x-100"
@@ -77,7 +81,7 @@ export async function HomeHero() {
               <ArrowRightIcon aria-hidden className="size-4 rtl:rotate-180" />
             </Link>
           </div>
-          <div className="relative order-2 aspect-[3/2] min-w-0 overflow-hidden bg-muted">
+          <div className="relative order-2 aspect-[3/2] min-w-0 overflow-hidden rounded-xl bg-muted">
             <Image
               src={preparation}
               alt=""
@@ -89,7 +93,7 @@ export async function HomeHero() {
           </div>
         </div>
       </Container>
-      <div className="bg-muted/30">
+      <div className="bg-card/60">
         <Container className="py-5 sm:py-6">
           <PriceTeaser />
         </Container>

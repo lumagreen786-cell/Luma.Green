@@ -11,13 +11,13 @@ for (const { locale, copy } of [
   { locale: "kn", copy: kn },
 ]) {
   for (const width of [390, 768, 1440]) {
-    for (const theme of ["light", "dark"] as const) {
-      test(`${locale} entry forms fit ${String(width)}px in ${theme}`, async ({
+    for (const systemScheme of ["light", "dark"] as const) {
+      test(`${locale} entry forms fit ${String(width)}px with ${systemScheme} system preference`, async ({
         page,
       }, testInfo) => {
         await page.setViewportSize({ width, height: 900 });
         await page.emulateMedia({
-          colorScheme: theme,
+          colorScheme: systemScheme,
           reducedMotion: "reduce",
         });
         await page.addInitScript(() => {
@@ -26,6 +26,9 @@ for (const { locale, copy } of [
         await page.goto(`/${locale}/login`);
         const phone = page.getByLabel(copy.auth.mobileLabel, { exact: true });
         await expect(phone).toBeVisible();
+        // The approved palette stays light even when the OS prefers dark.
+        await expect(page.locator("html")).toHaveCSS("color-scheme", "light");
+        await expect(page.locator("html")).not.toHaveClass(/\bdark\b/);
         await page.evaluate(async () => document.fonts.ready);
         await expect(page.getByRole("complementary")).toHaveCount(0);
         const formBounds = await page.getByRole("main").boundingBox();
@@ -43,8 +46,12 @@ for (const { locale, copy } of [
         const main = page.getByRole("main");
         const box = await main.boundingBox();
         if (!box) throw new Error("Centered login content is missing");
+        const banner = await page.getByRole("banner").boundingBox();
+        if (!banner) throw new Error("Login header is missing");
+        // Center the form in the space below the actual responsive header.
+        const contentTop = banner.y + banner.height;
         expect(
-          Math.abs(box.y + box.height / 2 - (900 + 80) / 2),
+          Math.abs(box.y + box.height / 2 - (900 + contentTop) / 2),
         ).toBeLessThanOrEqual(2);
         expect(
           await page.evaluate(

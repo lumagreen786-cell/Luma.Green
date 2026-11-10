@@ -32,11 +32,8 @@ export function HelpHero({
   children?: ReactNode;
 }) {
   return (
-    <div
-      data-parallax-scene
-      className="relative isolate overflow-hidden border-b border-border bg-background"
-    >
-      <Container className="relative flex flex-col gap-5 py-6 sm:py-8">
+    <div data-parallax-scene className="relative isolate bg-background">
+      <Container className="relative flex flex-col gap-5 py-8 sm:py-10">
         {breadcrumbs}
         <div
           data-reveal

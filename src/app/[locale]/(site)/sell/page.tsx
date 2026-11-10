@@ -30,9 +30,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default function SellPage() {
   return (
     <div className="flex flex-1 flex-col bg-background">
-      <Container className="flex max-w-xl flex-col gap-5 pt-6 pb-12 sm:pt-8">
+      <Container className="flex max-w-2xl flex-col gap-5 pt-6 pb-12 sm:pt-8">
         <SellHero />
-        <div className="flex min-w-0 flex-col gap-6">
+        <div className="flex min-w-0 flex-col gap-6 rounded-xl border border-border/60 bg-card p-5 sm:p-8">
           <SellFlow />
           <MyBookings />
         </div>

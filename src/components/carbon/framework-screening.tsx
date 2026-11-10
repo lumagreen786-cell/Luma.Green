@@ -64,7 +64,7 @@ export function FrameworkScreening({
 
   return (
     <section
-      className="max-w-2xl space-y-4 border-y border-border py-4"
+      className="max-w-2xl space-y-4 border-t border-border pt-5"
       aria-labelledby={`${id}-heading`}
     >
       <h3 id={`${id}-heading`} className="font-medium">

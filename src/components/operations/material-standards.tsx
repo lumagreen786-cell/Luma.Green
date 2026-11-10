@@ -67,7 +67,7 @@ function StandardsContent() {
             <ListSkeleton />
           ) : (
             <>
-              <ul className="divide-y border-y">
+              <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
                 {data.rows.map((row) => (
                   <li key={row.id} className="space-y-2 py-5">
                     <h2 className="font-display text-lg font-semibold">
@@ -140,7 +140,7 @@ function StandardsContent() {
           {destinations === undefined ? (
             <ListSkeleton />
           ) : (
-            <ul className="divide-y border-y">
+            <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
               {destinations.map((d) => (
                 <li key={d.id} className="space-y-2 py-4">
                   <h2 className="font-display text-lg font-semibold">

@@ -618,7 +618,10 @@ export const unknownFactorImpactFixture: OrgImpact = {
 /** Draft values are already present on mount; captures never change or save them. */
 export function onboardingFixture(): Mine {
   const path = window.location.pathname;
-  const kind = path.endsWith("/yard") ? "yard" : "kabadiwala";
+  const kind =
+    (["yard", "recycler", "manufacturer", "saathi"] as const).find((role) =>
+      path.includes(`/join/${role}`),
+    ) ?? "kabadiwala";
   const isSubmitted = path.endsWith("/status");
   return {
     loginPhone: undefined,
@@ -645,23 +648,25 @@ export function onboardingFixture(): Mine {
               weeklyOff: ["sun"],
             }
           : undefined,
-      business:
-        kind === "yard"
-          ? {
-              businessName: "Demo sorting yard",
-              gstRegistered: false,
-              materials: ["paper", "plastic"],
-              address: "Sample yard address, Peenya, Bengaluru",
-              locationTags: ["Peenya"],
-              collectsFromSuppliers: true,
-              phones: [],
-              opens: "09:00",
-              closes: "18:00",
-              weeklyOff: ["sun"],
-            }
-          : undefined,
+      business: ["yard", "recycler", "manufacturer"].includes(kind)
+        ? {
+            businessName: "Demo sorting yard",
+            gstRegistered: false,
+            materials: ["paper", "plastic"],
+            address: "Sample yard address, Peenya, Bengaluru",
+            locationTags: ["Peenya"],
+            collectsFromSuppliers: true,
+            phones: [],
+            opens: "09:00",
+            closes: "18:00",
+            weeklyOff: ["sun"],
+          }
+        : undefined,
       documents: undefined,
-      saathi: undefined,
+      saathi:
+        kind === "saathi"
+          ? { name: "Synthetic worker", area: "Sample neighbourhood" }
+          : undefined,
       files: [],
     },
   };

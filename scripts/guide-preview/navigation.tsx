@@ -50,3 +50,8 @@ export function redirect(): never {
   throw new Error("Server redirects are unavailable in the isolated preview.");
 }
 export default Link;
+
+/** Invalid server routes remain errors in the isolated preview. */
+export function notFound(): never {
+  throw new Error("Page not found in the isolated preview.");
+}

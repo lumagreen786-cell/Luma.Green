@@ -76,7 +76,7 @@ function FacilityWorkspace({ canManage }: { canManage: boolean }) {
                 {rows === undefined ? (
                   <ListSkeleton />
                 ) : (
-                  <ul className="divide-y border-y">
+                  <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
                     {rows.map((facility) => (
                       <li
                         key={facility._id}

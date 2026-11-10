@@ -2,23 +2,16 @@ import { expect, test } from "@playwright/test";
 
 import english from "../messages/en.json";
 
-// The owner retained the pre-redesign palette. Test rendered colours, including
-// the new library's primary button, rather than only checking token declarations.
-const palettes = {
-  light: {
-    background: "oklch(0.985 0.002 250)",
-    foreground: "oklch(0.22 0.008 250)",
-    primary: "oklch(0.39 0.075 163)",
-  },
-  dark: {
-    background: "oklch(0.165 0.004 250)",
-    foreground: "oklch(0.956 0.003 250)",
-    primary: "oklch(0.77 0.1 163)",
-  },
-} as const;
+// Compare rendered colours for the approved light-only system, including
+// a stored legacy dark preference and the sign-in submit action.
+const palette = {
+  background: "color-mix(in srgb, #144419 7%, #FFFFFF)",
+  foreground: "#144419",
+  primary: "#317F38",
+};
 
 for (const mode of ["light", "dark"] as const) {
-  test(`Astryx actions retain Luma's original ${mode} colours`, async ({
+  test(`Actions use the approved palette with a stored ${mode} preference`, async ({
     page,
   }) => {
     await page.addInitScript((theme) => {
@@ -63,7 +56,7 @@ for (const mode of ["light", "dark"] as const) {
           channels(palette.primary),
         ],
       ];
-    }, palettes[mode]);
+    }, palette);
     for (const [actual, expected] of colours) {
       expect(actual).toBeDefined();
       expect(expected).toBeDefined();

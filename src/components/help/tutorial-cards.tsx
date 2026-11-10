@@ -7,7 +7,7 @@ import { type HelpRole, tutorialsFor } from "./content";
 export function TutorialCards({ role }: { role: HelpRole }) {
   const t = useTranslations("help");
   return (
-    <ul className="divide-y border-y">
+    <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
       {tutorialsFor(role).map(({ key, minutes }) => (
         <li
           key={key}

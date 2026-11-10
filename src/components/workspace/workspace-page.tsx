@@ -199,7 +199,7 @@ function TeamSection({ orgId }: { orgId: Id<"orgs"> }) {
             {team.role === "viewer" ? (
               <p className="mb-3 text-muted-foreground">{t("readOnly")}</p>
             ) : null}
-            <ul className="divide-y border-b">
+            <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
               {team.members.map((member) => (
                 <MemberRow
                   key={`${member.id}-${member.role}`}
@@ -423,7 +423,7 @@ function Invitations({
   } as const;
   return (
     <SettingsSection id="pending-invites" title={t("pending")}>
-      <ul className="divide-y border-b">
+      <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
         {invitations.map((invitation) => (
           <li
             key={invitation.id}

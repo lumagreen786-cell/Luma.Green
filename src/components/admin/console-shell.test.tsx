@@ -73,6 +73,9 @@ describe("admin navigation", () => {
       within(navigation).getByText("waiting for review"),
     ).toBeInTheDocument();
     expect(screen.getByRole("main")).toHaveTextContent("Review workspace");
+    expect(
+      screen.queryByRole("button", { name: "Appearance" }),
+    ).not.toBeInTheDocument();
   });
 
   it("gives the compact sign-out control a name and returns to sign-in", async () => {

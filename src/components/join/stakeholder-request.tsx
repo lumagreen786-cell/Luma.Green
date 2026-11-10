@@ -222,7 +222,7 @@ function RequestForm({
           }}
         />
       </div>
-      <div className="flex flex-col divide-y divide-border border-y border-border">
+      <div className="flex flex-col divide-y divide-border/60 rounded-xl border border-border/60 px-4">
         <div className="flex items-start gap-3 py-4">
           <Checkbox
             id="stakeholder-age"
@@ -275,7 +275,7 @@ function ApplicationStatus({ account }: { account: NonNullable<Account> }) {
     rejected: join("status.rejected.title"),
   }[account.status];
   return (
-    <section className="flex flex-col gap-5 border-t border-border py-6">
+    <section className="flex flex-col gap-5 rounded-xl bg-muted/40 p-5">
       <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
         {title}
       </h1>

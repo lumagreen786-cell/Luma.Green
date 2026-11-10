@@ -24,10 +24,10 @@ function Chip({
       aria-pressed={isPressed}
       onClick={onPress}
       className={cn(
-        "min-h-11 shrink-0 gap-2 rounded-none border-0 border-b-2 px-3 text-sm whitespace-nowrap",
+        "min-h-11 shrink-0 gap-2 rounded-full border border-transparent px-4 text-sm whitespace-nowrap",
         isPressed
-          ? "border-b-primary text-primary"
-          : "border-transparent text-muted-foreground",
+          ? "border-primary/20 bg-accent text-accent-foreground"
+          : "border-transparent bg-card text-muted-foreground",
       )}
     >
       {children}

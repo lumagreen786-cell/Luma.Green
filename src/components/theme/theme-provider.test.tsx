@@ -1,7 +1,6 @@
 import { runInNewContext } from "node:vm";
 
-import { act, fireEvent, render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { parseTheme, themeBootstrap, themeStorageKey } from "./theme";
@@ -47,116 +46,52 @@ afterEach(() => {
   clearPreference();
 });
 
-describe("theme selection", () => {
-  it("restores a saved preference on a new screen", () => {
+describe("light-only appearance", () => {
+  it("ignores a saved dark preference and removes a stale dark class", () => {
     localStorage.setItem(themeStorageKey, "dark");
+    document.documentElement.classList.add("dark");
     renderTheme();
     expect(screen.getByLabelText("Current theme")).toHaveTextContent(
-      "dark:dark",
+      "light:light",
     );
-    expect(document.documentElement).toHaveClass("dark");
+    expect(document.documentElement).not.toHaveClass("dark");
+    expect(
+      screen.queryByRole("button", { name: "Appearance" }),
+    ).not.toBeInTheDocument();
   });
 
-  it("lets a keyboard user select a theme and keeps it after remount", async () => {
-    const user = userEvent.setup();
-    const view = renderTheme();
-    await user.tab();
-    await user.keyboard("{Enter}");
-    await user.keyboard("{ArrowDown}{Enter}");
-    expect(screen.getByLabelText("Current theme")).toHaveTextContent(
-      "dark:dark",
-    );
-    expect(localStorage.getItem(themeStorageKey)).toBe("dark");
-    view.unmount();
-    renderTheme();
-    expect(document.documentElement).toHaveClass("dark");
-  });
-
-  it("still changes theme when the browser refuses persistence", async () => {
-    vi.spyOn(Storage.prototype, "setItem").mockImplementation(() => {
+  it("works when persistent storage is denied", () => {
+    vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => {
       throw new DOMException("Blocked", "SecurityError");
     });
-    const user = userEvent.setup();
     renderTheme();
-    await user.click(screen.getByRole("button", { name: "Appearance" }));
-    await user.click(screen.getByRole("menuitemradio", { name: "Dark" }));
-    expect(document.documentElement).toHaveClass("dark");
-    expect(screen.getByLabelText("Current theme")).toHaveTextContent(
-      "dark:dark",
-    );
+    expect(document.documentElement).toHaveStyle({ colorScheme: "light" });
   });
 
-  it("responds to a preference set in another tab", () => {
+  it("does not restore dark mode from another tab", () => {
     renderTheme();
     localStorage.setItem(themeStorageKey, "dark");
     fireEvent(
       window,
       new StorageEvent("storage", { key: themeStorageKey, newValue: "dark" }),
     );
-    expect(document.documentElement).toHaveClass("dark");
-  });
-
-  it("follows device changes only in system mode", () => {
-    let isDark = false;
-    const listeners = new Set<() => void>();
-    vi.spyOn(window, "matchMedia").mockImplementation((media) => ({
-      media,
-      get matches() {
-        return isDark;
-      },
-      onchange: null,
-      addEventListener: (
-        _event: string,
-        listener: EventListenerOrEventListenerObject,
-      ) => {
-        listeners.add(listener as () => void);
-      },
-      removeEventListener: (
-        _event: string,
-        listener: EventListenerOrEventListenerObject,
-      ) => {
-        listeners.delete(listener as () => void);
-      },
-      // eslint-disable-next-line @typescript-eslint/no-deprecated -- MediaQueryList fixtures include the required legacy browser methods.
-      addListener: vi.fn(),
-      // eslint-disable-next-line @typescript-eslint/no-deprecated -- MediaQueryList fixtures include the required legacy browser methods.
-      removeListener: vi.fn(),
-      dispatchEvent: vi.fn(),
-    }));
-    renderTheme();
-    act(() => {
-      isDark = true;
-      for (const listener of listeners) listener();
-    });
-    expect(screen.getByLabelText("Current theme")).toHaveTextContent(
-      "system:dark",
-    );
-    localStorage.setItem(themeStorageKey, "light");
-    fireEvent(window, new StorageEvent("storage", { key: themeStorageKey }));
     expect(document.documentElement).not.toHaveClass("dark");
-    act(() => {
-      for (const listener of listeners) listener();
-    });
     expect(screen.getByLabelText("Current theme")).toHaveTextContent(
       "light:light",
     );
   });
 
-  it("uses system mode for missing or unrecognised settings", () => {
-    expect(parseTheme(null)).toBe("system");
-    expect(parseTheme("sepia")).toBe("system");
+  it("resolves all historical settings to light", () => {
+    for (const preference of [null, "system", "dark", "light", "sepia"]) {
+      expect(parseTheme(preference)).toBe("light");
+    }
   });
 
-  it("sets a saved dark theme before React renders", () => {
-    localStorage.setItem(themeStorageKey, "dark");
-    // Execute the exact static head script to check the first-paint behavior.
+  it("forces light before React without storage or device APIs", () => {
+    document.documentElement.classList.add("dark");
     // eslint-disable-next-line sonarjs/code-eval -- Runs only the repository-owned static bootstrap in an isolated test context.
-    runInNewContext(themeBootstrap, {
-      localStorage,
-      document,
-      matchMedia: (query: string) => window.matchMedia(query),
-    });
-    expect(document.documentElement).toHaveClass("dark");
-    expect(document.documentElement).toHaveStyle({ colorScheme: "dark" });
+    runInNewContext(themeBootstrap, { document });
+    expect(document.documentElement).not.toHaveClass("dark");
+    expect(document.documentElement).toHaveStyle({ colorScheme: "light" });
   });
 });

@@ -22,7 +22,7 @@ import type { TrackedBooking } from "./types";
 const HERO: Record<BookingStatus, { icon: LucideIcon; tone: string }> = {
   requested: {
     icon: HourglassIcon,
-    tone: "bg-amber-50 text-amber-800 dark:bg-amber-950/50 dark:text-amber-200",
+    tone: "bg-attention/40 text-attention-foreground",
   },
   accepted: {
     icon: CircleCheckBigIcon,
@@ -30,7 +30,7 @@ const HERO: Record<BookingStatus, { icon: LucideIcon; tone: string }> = {
   },
   on_the_way: {
     icon: TruckIcon,
-    tone: "bg-sky-50 text-sky-800 dark:bg-sky-950/50 dark:text-sky-200",
+    tone: "bg-primary/10 text-foreground",
   },
   completed: {
     icon: PartyPopperIcon,

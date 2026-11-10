@@ -81,7 +81,7 @@ export function SolarResultView({
 
   if (result.status === "roofTooSmall") {
     return (
-      <div className="flex items-start gap-3 border-s-2 border-amber-300 bg-amber-50 p-5 text-amber-900 dark:border-amber-800 dark:bg-amber-950/30 dark:text-amber-100">
+      <div className="flex items-start gap-3 border-s-2 border-attention bg-attention/20 p-5 text-attention-foreground">
         <TriangleAlertIcon aria-hidden className="mt-0.5 size-5 shrink-0" />
         <div className="flex flex-col gap-1">
           <p className="font-semibold">{t("roofTooSmallTitle")}</p>
@@ -142,7 +142,7 @@ function Estimate({
           </p>
         ) : null}
         {estimate.limitedByRoof ? (
-          <p className="mt-1 flex items-start gap-2 rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-900 dark:bg-amber-950/30 dark:text-amber-100">
+          <p className="mt-1 flex items-start gap-2 rounded-lg bg-attention/20 px-3 py-2 text-sm text-attention-foreground">
             <InfoIcon aria-hidden className="mt-0.5 size-4 shrink-0" />
             {t("limitedByRoof")}
           </p>

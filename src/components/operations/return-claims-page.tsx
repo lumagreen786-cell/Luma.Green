@@ -102,7 +102,7 @@ function ReturnClaimsBody({
             options={options.filter((option) => option.canReturn)}
           />
         ) : null}
-        <ul className="divide-y border-y">
+        <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
           {returns.rows.map((row) => (
             <li key={row.id}>
               <ReturnRecord
@@ -123,7 +123,7 @@ function ReturnClaimsBody({
         {canManage ? (
           <DeclareClaim options={options.filter((row) => row.canClaim)} />
         ) : null}
-        <ul className="divide-y border-y">
+        <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
           {claims.rows.map((row) => (
             <li key={row.id}>
               <ClaimRecord row={row} canManage={canManage} />

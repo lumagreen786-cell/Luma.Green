@@ -25,7 +25,7 @@ export function HouseholdLocationLookups() {
   const t = useTranslations("householdTools");
   if (isConvexConfigured) return <ConnectedLookups />;
   return (
-    <div className="divide-y divide-border border-y border-border">
+    <div className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4">
       <LookupSection title={t("airQuality")}>
         <p>{t("lookupUnavailable")}</p>
       </LookupSection>
@@ -63,7 +63,7 @@ function ConnectedLookups() {
   const t = useTranslations("householdTools");
   const availability = useQuery(api.householdLookups.availability);
   return (
-    <div className="divide-y divide-border border-y border-border">
+    <div className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4">
       <LookupSection title={t("airQuality")}>
         <LookupControls kind="air" available={availability?.air} />
       </LookupSection>

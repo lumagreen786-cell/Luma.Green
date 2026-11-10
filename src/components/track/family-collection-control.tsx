@@ -42,7 +42,7 @@ export function FamilyCollectionControl({
 
   return (
     <section
-      className="space-y-3 border-t pt-5"
+      className="space-y-3 rounded-xl bg-muted/40 p-4"
       aria-labelledby="family-collection-access"
     >
       <h2 id="family-collection-access" className="text-lg font-semibold">

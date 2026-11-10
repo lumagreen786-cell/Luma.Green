@@ -49,7 +49,7 @@ export function BookingOutcomeChart({ rows }: { rows: OutcomeDatum[] }) {
         <Bar
           dataKey="count"
           fill="var(--color-count)"
-          radius={[0, 3, 3, 0]}
+          radius={[9, 9, 9, 9]}
           barSize={18}
           isAnimationActive={false}
         />
@@ -79,22 +79,24 @@ export function MaterialWeightChart({ rows }: { rows: MaterialWeightDatum[] }) {
     >
       <BarChart
         data={rows}
+        layout="vertical"
         margin={{ top: 8, right: 4, bottom: 4, left: 0 }}
         accessibilityLayer={false}
       >
-        <CartesianGrid vertical={false} strokeDasharray="3 3" />
+        <CartesianGrid horizontal={false} strokeDasharray="3 3" />
         <XAxis
-          dataKey="code"
-          axisLine={false}
-          tickLine={false}
-          tick={{ fontSize: 10 }}
-          interval="preserveStartEnd"
-        />
-        <YAxis
-          width={48}
+          type="number"
           axisLine={false}
           tickLine={false}
           tickFormatter={(grams: number) => kilograms.format(grams / 1000)}
+        />
+        <YAxis
+          type="category"
+          dataKey="code"
+          width={96}
+          axisLine={false}
+          tickLine={false}
+          tick={{ fontSize: 10 }}
         />
         <ChartTooltip
           cursor={{ fill: "var(--muted)" }}
@@ -112,15 +114,15 @@ export function MaterialWeightChart({ rows }: { rows: MaterialWeightDatum[] }) {
         <Bar
           dataKey="estimatedGrams"
           fill="var(--color-estimatedGrams)"
-          radius={[3, 3, 0, 0]}
-          maxBarSize={32}
+          radius={[9, 9, 9, 9]}
+          maxBarSize={18}
           isAnimationActive={false}
         />
         <Bar
           dataKey="weighedGrams"
           fill="var(--color-weighedGrams)"
-          radius={[3, 3, 0, 0]}
-          maxBarSize={32}
+          radius={[9, 9, 9, 9]}
+          maxBarSize={18}
           isAnimationActive={false}
         />
       </BarChart>

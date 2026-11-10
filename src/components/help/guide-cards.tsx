@@ -10,7 +10,7 @@ import { IconTile } from "./help-art";
 export function GuideCards({ role }: { role: HelpRole }) {
   const t = useTranslations("help");
   return (
-    <ul className="divide-y border-y">
+    <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
       {guidesFor(role).map(({ key, slug, icon, steps }) => (
         <li
           key={key}

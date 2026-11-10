@@ -20,7 +20,7 @@ export function PrivacyContent() {
   const removal = useTranslations("accountRemoval");
   const requests = useTranslations("privacyRequests");
   return (
-    <Container className="max-w-3xl space-y-8 py-8 sm:py-12">
+    <Container className="my-6 max-w-3xl space-y-8 rounded-xl border border-border/60 bg-card py-6 sm:my-8 sm:py-8">
       <header className="space-y-4">
         <h1 className="font-display text-4xl font-semibold tracking-tight">
           {t("title")}

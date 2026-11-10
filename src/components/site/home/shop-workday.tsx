@@ -95,7 +95,7 @@ export async function ShopWorkday() {
         </div>
         <div
           data-parallax-scene
-          className="relative aspect-[3/2] overflow-hidden bg-muted sm:aspect-[2.6/1]"
+          className="relative aspect-[3/2] overflow-hidden rounded-xl bg-muted sm:aspect-[2.6/1]"
         >
           <Image
             data-parallax="-20"

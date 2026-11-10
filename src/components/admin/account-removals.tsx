@@ -45,7 +45,7 @@ function RemovalQueue({ queue }: { queue: Removal[] | undefined }) {
   if (queue === undefined) return <p role="status">Loading requests…</p>;
   if (queue.length === 0) return <p>No requests waiting for review.</p>;
   return (
-    <div className="divide-y divide-border">
+    <div className="space-y-4">
       {queue.map((request) => (
         <RemovalReview key={request.id} request={request} />
       ))}
@@ -97,7 +97,7 @@ function RemovalReview({ request }: { request: Removal }) {
     }
   }
   return (
-    <article className="space-y-4 py-6">
+    <article className="space-y-4 rounded-xl bg-card p-5 sm:p-6">
       <header className="space-y-1">
         <h2 className="font-semibold">Request {request.id.slice(0, 12)}</h2>
         <p className="text-sm">{labels[request.state]}</p>

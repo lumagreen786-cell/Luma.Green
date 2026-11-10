@@ -106,9 +106,12 @@ function Projects({
       {rows.rows.length === 0 ? (
         <p>{lots("empty")}</p>
       ) : (
-        <ul className="divide-y divide-border border-t border-border">
+        <ul className="space-y-4">
           {rows.rows.map((project) => (
-            <li key={project.id} className="space-y-4 py-4">
+            <li
+              key={project.id}
+              className="space-y-4 rounded-xl bg-card p-5 sm:p-6"
+            >
               <ProjectSummary project={project} />
               {canOperate && !project.industry ? (
                 <AssignIndustry orgId={orgId} project={project} />
@@ -533,7 +536,7 @@ function CreateProject({ orgId }: { orgId: Id<"orgs"> }) {
       onSubmit={(event) => {
         void submit(event);
       }}
-      className="max-w-xl space-y-4 border-t border-border pt-4"
+      className="max-w-2xl space-y-4 rounded-xl bg-card p-5 sm:p-6"
     >
       <div className="space-y-2">
         <Label htmlFor={`${id}-name`}>{t("name")}</Label>

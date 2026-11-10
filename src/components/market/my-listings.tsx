@@ -41,7 +41,7 @@ export function MyListings() {
             body={t("emptyBody")}
           />
         ) : (
-          <ul className="flex flex-col">
+          <ul className="flex flex-col gap-3">
             {open.map((listing) => (
               <li key={listing.id}>
                 <OpenListing listing={listing} />
@@ -52,7 +52,7 @@ export function MyListings() {
       </Section>
       {past.length > 0 ? (
         <Section title={t("past")}>
-          <ul className="divide-y divide-border border-y border-border">
+          <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
             {past.map((listing) => (
               <li key={listing.id}>
                 <PastListing listing={listing} />

@@ -283,7 +283,7 @@ export function AccountPhone({
     );
   return (
     <section
-      className="space-y-4 border-t pt-6"
+      className="space-y-4 rounded-xl border border-border/60 bg-card p-5"
       aria-labelledby={`${id}-title`}
     >
       <h2 id={`${id}-title`} className="text-lg font-semibold">

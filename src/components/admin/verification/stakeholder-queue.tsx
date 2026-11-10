@@ -48,7 +48,7 @@ export function StakeholderQueue() {
   return (
     <section
       aria-labelledby="stakeholder-requests"
-      className="mx-auto flex w-full max-w-6xl flex-col gap-4 border-t border-border pt-8"
+      className="mx-auto flex w-full max-w-6xl flex-col gap-4 rounded-xl bg-card p-5 sm:p-6"
     >
       <div className="flex flex-col gap-1">
         <h2

@@ -16,7 +16,8 @@ import { localeMeta, locales } from "../src/i18n/locales";
 const headerSizes = [320, 390, 640, 768, 1024, 1280, 1440].map((width) => ({
   width,
   links: width < 1280 ? 1 : 7,
-  buttons: width < 1280 ? 1 : 2,
+  // The mobile menu or desktop language picker; appearance is light-only.
+  buttons: 1,
   navigation: width < 1280 ? 0 : 1,
 }));
 const publicRoutes = [
@@ -277,7 +278,6 @@ for (const { locale, copy } of [
       for (const control of [
         menu.getByRole("link", { name: copy.auth.metaTitle, exact: true }),
         menu.getByRole("link", { name: copy.nav.sellScrap, exact: true }),
-        theme,
         language,
       ]) {
         await expectControlTextToFit(control);
@@ -287,11 +287,9 @@ for (const { locale, copy } of [
           (element) => element.scrollWidth - element.clientWidth,
         ),
       ).toBeLessThanOrEqual(1);
-      await theme.click();
-      await page
-        .getByRole("menuitemradio", { name: copy.theme.dark, exact: true })
-        .click();
-      await expect(page.locator("html")).toHaveClass(/dark/u);
+      await expect(theme).toHaveCount(0);
+      await page.emulateMedia({ colorScheme: "dark" });
+      await expect(page.locator("html")).not.toHaveClass(/dark/u);
       await language.click();
       await expect(page.getByRole("menuitemradio")).toHaveCount(locales.length);
       await page.keyboard.press("Escape");

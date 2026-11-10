@@ -13,16 +13,16 @@ import { APPLICATION_KINDS } from "../../../convex/lib/onboarding";
 export function RoleCards() {
   const t = useTranslations("join");
   return (
-    <ul className="grid gap-x-6 gap-y-10 sm:grid-cols-2 xl:grid-cols-3">
+    <ul className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
       {APPLICATION_KINDS.map((kind) => (
         <li key={kind} className="min-w-0">
           <Link
             href={`/join/${kind}`}
-            className="group flex h-full min-w-0 flex-col gap-4 rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:ring-offset-4 focus-visible:ring-offset-background"
+            className="group flex h-full min-w-0 flex-col gap-4 rounded-xl border border-border/60 bg-card p-4 transition-colors outline-none hover:border-primary/40 focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:ring-offset-4 focus-visible:ring-offset-background"
           >
             <RoleStoryImage
               scene={roleProcessScenes[kind]}
-              frameClassName="aspect-[4/3] rounded-md"
+              frameClassName="aspect-[4/3] rounded-xl"
               sizes="(min-width: 1280px) 380px, (min-width: 640px) 45vw, 92vw"
             />
             <span className="flex min-w-0 items-start justify-between gap-4">

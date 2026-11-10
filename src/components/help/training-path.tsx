@@ -75,7 +75,7 @@ export function TrainingPath({ role }: { role: HelpRole }) {
         ) : null}
       </div>
 
-      <ol className="divide-y border-y">
+      <ol className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
         {lessons.map((lesson, index) => (
           <li key={lesson.key}>
             <LessonCard

@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useMemo } from "react";
+import { useId, useMemo } from "react";
 
 import { useFormat } from "@/components/app/format";
 import { useChartCursor } from "@/components/site/use-chart-cursor";
@@ -35,6 +35,7 @@ export function PriceChart({
   floorPaise: number | null;
   material: string;
 }) {
+  const patternId = useId();
   const t = useTranslations("prices.chart");
   const format = useFormat();
   const [ref, width] = useElementWidth<HTMLDivElement>(560);
@@ -84,6 +85,25 @@ export function PriceChart({
             height={PRICE_CHART.height}
             className="block"
           >
+            <defs>
+              <pattern
+                id={patternId}
+                width="7"
+                height="7"
+                patternUnits="userSpaceOnUse"
+                patternTransform="rotate(35)"
+              >
+                <rect width="7" height="7" className="fill-primary/5" />
+                <line
+                  x1="0"
+                  y1="0"
+                  x2="0"
+                  y2="7"
+                  className="stroke-primary/25"
+                  strokeWidth="1"
+                />
+              </pattern>
+            </defs>
             {yTicks.map((tick) => (
               <g key={tick.paise}>
                 <line
@@ -127,11 +147,11 @@ export function PriceChart({
               </g>
             )}
 
-            <path d={geometry.area} className="fill-primary/10" />
+            <path d={geometry.area} fill={`url(#${patternId})`} />
             <path
               d={geometry.line}
               fill="none"
-              strokeWidth={2}
+              strokeWidth={1.5}
               strokeLinejoin="round"
               strokeLinecap="round"
               className="stroke-primary"
@@ -222,7 +242,7 @@ export function PriceChart({
       </div>
 
       <details className="rounded-lg border px-3 py-2 text-sm">
-        <summary className="cursor-pointer font-medium outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
+        <summary className="min-h-11 cursor-pointer py-3 font-medium outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
           {t("table")}
         </summary>
         <Table className="mt-2">

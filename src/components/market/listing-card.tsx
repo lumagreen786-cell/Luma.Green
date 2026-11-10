@@ -47,7 +47,7 @@ export function ListingCard({
   const name = format.material(listing.material.names, listing.material.code);
 
   return (
-    <article className="flex h-full flex-col gap-3 border-b border-border py-4">
+    <article className="flex h-full min-w-0 flex-col gap-4 rounded-xl border border-border/60 bg-card p-4 sm:p-5">
       <div className="flex flex-wrap items-start gap-4">
         <MaterialIcon family={listing.material.family} />
         <div className="flex min-w-32 flex-1 flex-col gap-1">
@@ -74,7 +74,7 @@ export function ListingCard({
             </p>
           )}
         </div>
-        <p className="shrink-0 text-lg font-semibold whitespace-nowrap tabular-nums">
+        <p className="max-w-full shrink-0 overflow-x-auto text-lg font-semibold whitespace-nowrap tabular-nums">
           {isCurrent
             ? t("perKg", { price: format.perKg(listing.askPaisePerKg) })
             : unavailable("noPrice")}
@@ -82,7 +82,7 @@ export function ListingCard({
       </div>
 
       <div className="grid items-end gap-4 sm:grid-cols-[minmax(0,1fr)_auto]">
-        <dl className="grid grid-cols-2 gap-6 border-s border-border ps-4 text-sm sm:max-w-md">
+        <dl className="grid grid-cols-2 gap-4 rounded-xl bg-muted/50 p-3 text-sm sm:max-w-md">
           <div className="flex flex-col gap-0.5">
             <dt className="text-muted-foreground">{t("listing.available")}</dt>
             <dd className="font-medium tabular-nums">

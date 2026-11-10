@@ -23,7 +23,7 @@ export function ShopCard({ shop }: { shop: TrackedBooking["shop"] }) {
   return (
     <section
       aria-labelledby="shop-title"
-      className="flex flex-col gap-3 border-b border-border pb-5"
+      className="flex flex-col gap-3 rounded-xl bg-muted/40 p-4"
     >
       <h2 id="shop-title" className="text-sm text-muted-foreground">
         {t("title")}

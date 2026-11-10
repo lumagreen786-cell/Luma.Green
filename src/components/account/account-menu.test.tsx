@@ -149,7 +149,9 @@ it("does not read an auth session when opening the disconnected menu", async () 
   expect(
     screen.getByRole("button", { name: "Language control" }),
   ).toBeVisible();
-  expect(screen.getByRole("button", { name: "Theme control" })).toBeVisible();
+  expect(
+    screen.queryByRole("button", { name: "Theme control" }),
+  ).not.toBeInTheDocument();
   await userEvent.click(signIn);
   expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   expect(state.useSession).not.toHaveBeenCalled();

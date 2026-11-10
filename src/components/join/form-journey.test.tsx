@@ -65,6 +65,9 @@ function Fixture({
 it("blocks incomplete stages, preserves values on Back, and submits only the complete form", async () => {
   const finish = vi.fn();
   render(<Fixture finish={finish} />);
+  expect(
+    screen.getByRole("list").querySelector('[aria-current="step"]'),
+  ).toHaveTextContent("Identity");
   await userEvent.click(screen.getByRole("button", { name: "Continue" }));
   expect(screen.getByRole("heading", { name: "Identity" })).toBeVisible();
   expect(finish).not.toHaveBeenCalled();
@@ -75,6 +78,9 @@ it("blocks incomplete stages, preserves values on Back, and submits only the com
   expect(
     await screen.findByRole("heading", { name: "Location" }),
   ).toHaveFocus();
+  expect(
+    screen.getByRole("list").querySelector('[aria-current="step"]'),
+  ).toHaveTextContent("Location");
   await userEvent.type(
     screen.getByRole("textbox", { name: "Address" }),
     "Demo street",

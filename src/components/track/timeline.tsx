@@ -20,7 +20,7 @@ export function Timeline({
   return (
     <section
       aria-labelledby="timeline-title"
-      className="flex flex-col gap-3 border-t border-border py-5"
+      className="flex flex-col gap-4 rounded-xl border border-border/60 p-4"
     >
       <h2 id="timeline-title" className="text-lg font-semibold">
         {t("title")}
@@ -36,7 +36,7 @@ export function Timeline({
               <span aria-hidden className="flex flex-col items-center">
                 <span
                   className={cn(
-                    "mt-1.5 size-2.5 rounded-full",
+                    "mt-1.5 size-3 rounded-full",
                     isLast ? "bg-primary" : "bg-border",
                   )}
                 />

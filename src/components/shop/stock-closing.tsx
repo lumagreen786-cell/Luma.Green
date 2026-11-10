@@ -56,10 +56,10 @@ function ClosingBody() {
   const day = new Date(now.getTime() + 330 * 60_000).toISOString().slice(0, 10);
   return (
     <details
-      className="flex flex-col gap-4 border-t border-border pt-5"
+      className="flex min-w-0 flex-col gap-4 rounded-2xl bg-card p-5 sm:p-6"
       aria-label={t("title")}
     >
-      <summary className="cursor-pointer text-lg font-semibold">
+      <summary className="min-h-11 cursor-pointer text-base font-semibold">
         {t("title")}
       </summary>
       <div className="flex flex-col gap-4 pt-4">

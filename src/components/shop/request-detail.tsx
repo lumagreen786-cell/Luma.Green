@@ -23,6 +23,7 @@ import {
 } from "@/components/app/page-parts";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
+import { cn } from "@/lib/utils";
 
 import { api } from "../../../convex/_generated/api";
 import { type BookingStatus, kgToGrams } from "../../../convex/lib/chain";
@@ -86,7 +87,7 @@ function RequestBody({ id }: { id: string }) {
   if (detail === null) {
     return (
       <>
-        <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
+        <h1 className="font-display text-[1.75rem] leading-[1.25] font-semibold tracking-tight">
           {t("requests.title")}
         </h1>
         <EmptyState
@@ -112,9 +113,9 @@ function RequestView({ detail }: { detail: BookingDetail }) {
 
   return (
     <>
-      <header className="flex flex-col gap-2 border-b border-border pb-6">
+      <header className="flex flex-col gap-3 rounded-2xl bg-card p-5 sm:p-6">
         <div className="flex flex-wrap items-center gap-3">
-          <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
+          <h1 className="font-display text-[1.75rem] leading-[1.25] font-semibold tracking-tight">
             {booking.name ?? t("household")}
           </h1>
           <BookingStatusPill status={booking.status} />
@@ -138,7 +139,13 @@ function RequestView({ detail }: { detail: BookingDetail }) {
         />
       ) : null}
 
-      <div className="grid items-start gap-8 xl:grid-cols-[minmax(16rem,1fr)_minmax(0,2fr)]">
+      <div
+        className={cn(
+          "grid items-start gap-4",
+          booking.status !== "completed" &&
+            "xl:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)]",
+        )}
+      >
         <div className="min-w-0 space-y-6">
           <BookingFacts
             booking={booking}
@@ -146,29 +153,28 @@ function RequestView({ detail }: { detail: BookingDetail }) {
             isRevealed={isRevealed}
           />
           <BookingPhotos bookingId={booking.id} />
+          <div className="rounded-2xl bg-card p-5 sm:p-6">
+            <History timeline={timeline} />
+          </div>
         </div>
-        <div className="min-w-0 space-y-6">
-          {booking.status === "requested" ? (
-            <AcceptDecline bookingId={booking.id} />
-          ) : null}
-          {canStartTrip ? (
-            <StartTripButton
-              bookingId={booking.id}
-              className="h-12 w-full text-base"
-            />
-          ) : null}
-          {canWeigh ? (
-            <WeighSection booking={booking} rates={detail.rates} />
-          ) : null}
-          <ClosedNote status={booking.status} />
-        </div>
+        {booking.status === "completed" ? null : (
+          <div className="order-first min-w-0 space-y-5 rounded-2xl bg-card p-5 sm:p-6 xl:order-none">
+            {booking.status === "requested" ? (
+              <AcceptDecline bookingId={booking.id} />
+            ) : null}
+            {canStartTrip ? (
+              <StartTripButton
+                bookingId={booking.id}
+                className="h-12 w-full text-base"
+              />
+            ) : null}
+            {canWeigh ? (
+              <WeighSection booking={booking} rates={detail.rates} />
+            ) : null}
+            <ClosedNote status={booking.status} />
+          </div>
+        )}
       </div>
-      <details className="border-t py-4">
-        <summary className="min-h-11 cursor-pointer py-2 font-medium">
-          {t("request.history")}
-        </summary>
-        <History timeline={timeline} />
-      </details>
       <DemoNote>{t("sampleNote")}</DemoNote>
     </>
   );
@@ -242,9 +248,9 @@ function BookingFacts({
   return (
     <section
       aria-labelledby="facts-title"
-      className="flex flex-col gap-4 border-y border-border py-4"
+      className="flex flex-col gap-4 rounded-2xl bg-card p-5 sm:p-6"
     >
-      <h2 id="facts-title" className="sr-only">
+      <h2 id="facts-title" className="text-base font-semibold">
         {t("request.details")}
       </h2>
       <div className="flex flex-col gap-4">
@@ -362,7 +368,7 @@ function History({ timeline }: { timeline: BookingDetail["timeline"] }) {
       <h2 id="history-title" className="text-lg font-semibold">
         {t("request.history")}
       </h2>
-      <ol className="flex flex-col gap-3">
+      <ol className="flex flex-col gap-4 border-s border-border ps-4">
         {timeline.map((step) => (
           <li key={`${step.status}-${String(step.at)}`} className="flex gap-3">
             <span

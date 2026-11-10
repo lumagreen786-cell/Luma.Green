@@ -42,3 +42,39 @@ for (const [locale, messages] of [
     });
   });
 }
+
+it("keeps chart labels and hatch references local to each instance", () => {
+  const { container } = render(
+    <NextIntlClientProvider locale="en" messages={en}>
+      {[1, 2].map((key) => (
+        <SavingsChart
+          key={key}
+          savingsByYear={[
+            { year: 1, saved: 12_000 },
+            { year: 2, saved: 24_000 },
+          ]}
+          netCost={{ low: 20_000, high: 30_000 }}
+        />
+      ))}
+    </NextIntlClientProvider>,
+  );
+  const figures = [...container.querySelectorAll("figure")];
+  const ids = figures.map((figure) => {
+    const pattern = figure.querySelector("pattern");
+    expect(pattern).not.toBeNull();
+    const id = pattern?.id ?? "";
+    expect(id).not.toBe("");
+    expect(
+      [...figure.querySelectorAll("path")].some(
+        (path) => path.getAttribute("fill") === `url(#${id})`,
+      ),
+    ).toBe(true);
+    expect(
+      [...figure.querySelectorAll("[id]")].some(
+        (element) => element.id === figure.getAttribute("aria-labelledby"),
+      ),
+    ).toBe(true);
+    return id;
+  });
+  expect(new Set(ids).size).toBe(2);
+});
