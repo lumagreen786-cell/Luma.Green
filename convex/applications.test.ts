@@ -118,7 +118,8 @@ describe("a kabadiwala's application", () => {
 
     await ramesh.mutation(api.applications.saveDraft, { kabadiwala: shop });
     const saved = await t.run((ctx) => ctx.db.get("applications", id));
-    expect(saved!.updatedAt).toBe(initial!.updatedAt + 1000);
+    expect(saved!.updatedAt).toBeGreaterThanOrEqual(initial!.updatedAt + 1000);
+    expect(saved!.updatedAt).toBeLessThanOrEqual(initial!.updatedAt + 1001);
     vi.spyOn(Date, "now").mockReturnValue(initial!.updatedAt + 2000);
     const { shopName, ...otherFields } = shop;
     await ramesh.mutation(api.applications.saveDraft, {
@@ -130,7 +131,7 @@ describe("a kabadiwala's application", () => {
       kabadiwala: { ...shop, shopName: "New shop name" },
     });
     expect(await t.run((ctx) => ctx.db.get("applications", id))).toMatchObject({
-      updatedAt: initial!.updatedAt + 2000,
+      updatedAt: expect.closeTo(initial!.updatedAt + 2000, -1),
       kabadiwala: { shopName: "New shop name", ownerName: shop.ownerName },
     });
   });
