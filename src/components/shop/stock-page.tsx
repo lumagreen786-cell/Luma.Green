@@ -111,27 +111,31 @@ function StockBody() {
           </Link>
         </Button>
       ) : null}
-      {stock.kind === "manufacturer" ? (
-        <WorkflowTabs
-          items={[
-            {
-              value: "stock",
-              label: t("title"),
-              content: <StockList stock={stock} />,
-            },
-            {
-              value: "intake",
-              label: intake("title"),
-              content: <StockIntake />,
-            },
-          ]}
-        />
-      ) : (
-        <StockList stock={stock} />
-      )}
-      <div className="grid items-start gap-4 xl:grid-cols-2">
-        <StockReport />
-        <StockClosing />
+      <div className="grid min-w-0 items-start gap-4 xl:grid-cols-[minmax(0,1.7fr)_minmax(19rem,1fr)]">
+        <div className="min-w-0 space-y-4">
+          {stock.kind === "manufacturer" ? (
+            <WorkflowTabs
+              items={[
+                {
+                  value: "stock",
+                  label: t("title"),
+                  content: <StockList stock={stock} />,
+                },
+                {
+                  value: "intake",
+                  label: intake("title"),
+                  content: <StockIntake />,
+                },
+              ]}
+            />
+          ) : (
+            <StockList stock={stock} />
+          )}
+        </div>
+        <aside className="min-w-0 space-y-4">
+          <StockReport />
+          <StockClosing />
+        </aside>
       </div>
     </>
   );
@@ -205,7 +209,7 @@ function StockItem({ row, totalGrams }: { row: StockRow; totalGrams: number }) {
   const format = useFormat();
   const share = totalGrams > 0 ? Math.round((row.grams / totalGrams) * 100) : 0;
   return (
-    <li className="flex flex-col gap-3 py-5">
+    <li className="grid min-w-0 items-center gap-4 py-4 md:grid-cols-[minmax(0,1fr)_8rem]">
       <div className="flex flex-wrap items-center gap-3">
         <MaterialIcon family={row.material.family} />
         <div className="flex min-w-0 flex-1 flex-col">

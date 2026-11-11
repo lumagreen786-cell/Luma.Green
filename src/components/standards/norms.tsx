@@ -36,19 +36,26 @@ export function NormSection({
   return (
     <section
       aria-labelledby={`${id}-title`}
-      className="scroll-mt-24 border-t py-5"
+      className="scroll-mt-24 rounded-xl bg-card p-5 sm:p-6"
     >
       <details id={id} open={id === "codes"} className="group">
-        <summary className="flex min-h-12 cursor-pointer items-center gap-3 font-display text-xl font-semibold outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
+        <summary className="flex min-h-12 cursor-pointer items-center gap-3 font-display text-lg font-semibold outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
           <Icon aria-hidden className="size-5 shrink-0 text-primary" />
           <h2 id={`${id}-title`}>{title}</h2>
         </summary>
-        <div className="grid gap-6 pt-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-10">
+        <div
+          className={
+            scene
+              ? "grid gap-4 pt-4 xl:grid-cols-[10rem_minmax(0,1fr)]"
+              : "min-w-0 pt-4"
+          }
+        >
           {scene ? (
             <RoleStoryImage
               scene={scene}
-              frameClassName="aspect-[3/2]"
-              sizes="(min-width: 1024px) 30vw, 92vw"
+              placement={`standards-${id}`}
+              frameClassName="aspect-[3/2] rounded-lg"
+              sizes="(min-width: 1280px) 160px, 92vw"
             />
           ) : null}
           <div className="min-w-0">{children}</div>

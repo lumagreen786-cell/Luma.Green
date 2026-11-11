@@ -25,7 +25,7 @@ export function HouseholdLocationLookups() {
   const t = useTranslations("householdTools");
   if (isConvexConfigured) return <ConnectedLookups />;
   return (
-    <div className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4">
+    <div className="grid items-start gap-4 sm:grid-cols-2">
       <LookupSection title={t("airQuality")}>
         <p>{t("lookupUnavailable")}</p>
       </LookupSection>
@@ -44,7 +44,7 @@ function LookupSection({
   children: React.ReactNode;
 }) {
   return (
-    <details className="group py-3">
+    <details open className="group min-w-0 rounded-2xl bg-card p-5">
       <summary className="flex min-h-11 cursor-pointer items-center justify-between gap-3 font-medium">
         {title}
         <ChevronDownIcon
@@ -63,7 +63,7 @@ function ConnectedLookups() {
   const t = useTranslations("householdTools");
   const availability = useQuery(api.householdLookups.availability);
   return (
-    <div className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4">
+    <div className="grid items-start gap-4 sm:grid-cols-2">
       <LookupSection title={t("airQuality")}>
         <LookupControls kind="air" available={availability?.air} />
       </LookupSection>

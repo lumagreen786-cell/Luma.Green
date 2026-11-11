@@ -106,15 +106,18 @@ export default async function GuidePage({ params }: Props) {
         </p>
       </HelpHero>
 
-      <Container className="grid gap-10 py-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-12 lg:py-16">
-        <section aria-labelledby="guide-steps">
+      <Container className="grid items-start gap-4 pb-8 lg:grid-cols-[minmax(0,1fr)_20rem]">
+        <section
+          aria-labelledby="guide-steps"
+          className="min-w-0 rounded-xl bg-card p-5 sm:p-6"
+        >
           <h2 id="guide-steps" className="sr-only">
             {t("guide.stepsHeading")}
           </h2>
           <GuideSteps guide={guide} />
         </section>
 
-        <div className="flex flex-col gap-10">
+        <div className="flex min-w-0 flex-col gap-4 lg:sticky lg:top-24">
           {related.length > 0 ? (
             <HelpSection id="related" title={t("guide.relatedHeading")}>
               <FaqList faqs={related} />
@@ -154,7 +157,7 @@ export default async function GuidePage({ params }: Props) {
         </div>
       </Container>
 
-      <Container className="pb-16">
+      <Container className="pb-8">
         <ContactStrip role={role} topic={supportTopicFor(guide.topic, role)} />
       </Container>
     </>

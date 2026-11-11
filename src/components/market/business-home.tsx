@@ -72,10 +72,16 @@ function Home({ org }: { org: OrgWorkspace }) {
           actions={<QuickActions />}
         />
       </div>
-      <EmployerPaymentControls />
-      <WaitingForYou trades={trades} showSide />
       <Stats trades={trades} listings={mine} />
-      <LatestOffers offers={offers} recycled={recycled} isMaker={isMaker} />
+      <div className="grid min-w-0 items-start gap-4 xl:grid-cols-[minmax(0,1.7fr)_minmax(19rem,1fr)]">
+        <div className="min-w-0 space-y-4">
+          <WaitingForYou trades={trades} showSide />
+          <LatestOffers offers={offers} recycled={recycled} isMaker={isMaker} />
+        </div>
+        <aside className="min-w-0 rounded-xl bg-card p-5 xl:sticky xl:top-6">
+          <EmployerPaymentControls />
+        </aside>
+      </div>
     </>
   );
 }
@@ -118,9 +124,12 @@ function Stats({
 
   if (trades === undefined || listings === undefined) {
     return (
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-3" aria-busy="true">
+      <div
+        className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+        aria-busy="true"
+      >
         {[0, 1, 2].map((index) => (
-          <Skeleton key={index} className="h-24 rounded-none" />
+          <Skeleton key={index} className="h-28 rounded-xl" />
         ))}
       </div>
     );
@@ -132,7 +141,7 @@ function Stats({
       <h2 id="home-stats" className="sr-only">
         {t("home.statsTitle")}
       </h2>
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <StatCard
           label={t("home.stats.gatewayPending")}
           value={format.number(totals.pendingGateway)}

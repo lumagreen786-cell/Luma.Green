@@ -53,9 +53,9 @@ export function NewRequestCard({ booking, today, city }: CardProps) {
   return (
     <article
       aria-labelledby={`request-${booking.id}`}
-      className="grid min-w-0 gap-4 py-5 lg:grid-cols-[minmax(0,1fr)_minmax(14rem,0.65fr)]"
+      className="grid min-w-0 gap-4 py-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(12rem,0.8fr)]"
     >
-      <div className="flex flex-wrap items-start justify-between gap-3 lg:col-span-2">
+      <div className="flex flex-wrap items-start justify-between gap-3 lg:row-span-2">
         <div className="flex min-w-0 flex-col gap-1">
           <CardName booking={booking} />
           <PlaceLine booking={booking} city={city} />
@@ -79,7 +79,7 @@ export function NewRequestCard({ booking, today, city }: CardProps) {
             : t("about", { amount: format.money(booking.estimatePaise) })}
         </span>
       </div>
-      <div className="lg:col-span-2 lg:max-w-xl">
+      <div className="lg:col-start-3 lg:row-span-2 lg:row-start-1">
         <AcceptDecline bookingId={booking.id} />
       </div>
     </article>
@@ -93,9 +93,9 @@ export function ActiveRequestCard({ booking, today, city }: CardProps) {
   return (
     <article
       aria-labelledby={`request-${booking.id}`}
-      className="grid min-w-0 gap-4 py-5 lg:grid-cols-[minmax(0,1fr)_minmax(14rem,0.65fr)]"
+      className="grid min-w-0 gap-4 py-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(12rem,0.8fr)]"
     >
-      <div className="flex flex-wrap items-start justify-between gap-3 lg:col-span-2">
+      <div className="flex flex-wrap items-start justify-between gap-3 lg:row-span-2">
         <div className="flex min-w-0 flex-col gap-1">
           <CardName booking={booking} />
           <p className="text-sm font-medium">
@@ -112,7 +112,7 @@ export function ActiveRequestCard({ booking, today, city }: CardProps) {
       <ItemChips items={booking.items} />
       <div
         className={cn(
-          "grid gap-3 lg:col-span-2 lg:max-w-xl",
+          "grid gap-3 lg:row-span-2 lg:max-w-xl",
           canStartTrip && "sm:grid-cols-2",
         )}
       >

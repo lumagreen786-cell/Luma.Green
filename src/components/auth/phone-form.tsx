@@ -85,13 +85,13 @@ export function PhoneForm({
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-2">
-        <h1 className="font-display text-3xl leading-tight font-semibold tracking-tight wrap-anywhere sm:text-4xl">
+        <h1 className="font-display text-[1.75rem] leading-tight font-semibold tracking-tight wrap-anywhere">
           {t("metaTitle")}
         </h1>
         {canSend ? null : (
           <p
             role="status"
-            className="text-sm leading-relaxed text-muted-foreground"
+            className="rounded-lg border border-border bg-attention/20 p-3 text-sm leading-relaxed text-foreground"
           >
             {t("unavailableBody")}
           </p>

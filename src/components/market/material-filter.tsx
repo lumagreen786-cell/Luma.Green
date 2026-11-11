@@ -24,7 +24,7 @@ function Chip({
       aria-pressed={isPressed}
       onClick={onPress}
       className={cn(
-        "min-h-11 shrink-0 gap-2 rounded-full border border-transparent px-4 text-sm whitespace-nowrap",
+        "h-auto min-h-11 max-w-full gap-2 rounded-full border border-transparent px-4 py-2 text-sm break-words whitespace-normal",
         isPressed
           ? "border-primary/20 bg-accent text-accent-foreground"
           : "border-transparent bg-card text-muted-foreground",
@@ -37,7 +37,7 @@ function Chip({
 
 /**
  * Material filters above the lots: "All", then each material on sale with how
- * many lots it has. Scrolls sideways on a phone; wraps on wider screens.
+ * many lots it has. Wraps into rows on every screen width.
  */
 export function MaterialFilter({
   options,
@@ -53,7 +53,7 @@ export function MaterialFilter({
     <div
       role="group"
       aria-label={t("filterLabel")}
-      className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 md:mx-0 md:flex-wrap md:overflow-visible md:px-0"
+      className="flex min-w-0 flex-wrap items-start gap-2"
     >
       <Chip
         isPressed={value === null}

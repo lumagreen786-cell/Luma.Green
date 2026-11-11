@@ -105,9 +105,11 @@ export function HelpSearch() {
             const Icon = TOPIC_ICONS[key];
             const isPressed = topic === key;
             return (
-              <li key={key}>
+              <li key={key} className="max-w-full min-w-0">
                 <Button
                   type="button"
+                  data-help-topic
+                  className="h-auto min-h-11 max-w-full justify-start py-2 text-start whitespace-normal"
                   variant={isPressed ? "default" : "outline"}
                   aria-pressed={isPressed}
                   onClick={() => {
@@ -115,8 +117,10 @@ export function HelpSearch() {
                     setShowAll(false);
                   }}
                 >
-                  <Icon aria-hidden className="size-4" />
-                  {t(`topics.${key}`)}
+                  <Icon aria-hidden className="size-4 shrink-0" />
+                  <span className="min-w-0 wrap-anywhere">
+                    {t(`topics.${key}`)}
+                  </span>
                 </Button>
               </li>
             );

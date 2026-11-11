@@ -15,15 +15,17 @@ export function isCurrentSection(pathname: string, href: string): boolean {
 export function SiteNav({
   className,
   onNavigate,
+  tone = "default",
 }: {
   className?: string;
   onNavigate?: () => void;
+  tone?: "default" | "forest";
 }) {
   const t = useTranslations("nav");
   const pathname = usePathname();
 
   return (
-    <nav aria-label={t("label")} className={cn("gap-1", className)}>
+    <nav aria-label={t("label")} className={cn("flex-wrap gap-1", className)}>
       {navItems.map((item) => {
         const isCurrent = isCurrentSection(pathname, item.href);
         return (
@@ -33,8 +35,10 @@ export function SiteNav({
             aria-current={isCurrent ? "page" : undefined}
             onClick={onNavigate}
             className={cn(
-              "flex min-h-11 items-center rounded-full px-3 py-2 text-sm font-medium whitespace-nowrap text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50",
-              isCurrent && "bg-accent text-accent-foreground",
+              "flex min-h-11 max-w-full items-center rounded-full px-3 py-2 text-sm font-medium break-words whitespace-normal text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50",
+              tone === "forest" &&
+                "text-sidebar-foreground/80 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-sidebar-ring",
+              isCurrent && "bg-secondary text-secondary-foreground",
             )}
           >
             {t(item.key)}

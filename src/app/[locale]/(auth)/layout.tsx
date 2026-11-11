@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import { FocusedPageCanvas } from "@/components/site/focused-page-canvas";
 import { SiteHeader } from "@/components/site/site-header";
 import { SkipLink } from "@/components/site/skip-link";
 
@@ -9,18 +10,18 @@ import { SkipLink } from "@/components/site/skip-link";
  */
 export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="flex min-h-dvh flex-col bg-background">
+    <FocusedPageCanvas image="/images/ship-x/login-background.webp">
       <SkipLink />
       <SiteHeader />
-      <div className="mx-auto flex w-full max-w-xl flex-1 flex-col justify-center px-5 py-8 sm:px-8 sm:py-12">
+      <div className="mx-auto flex w-full max-w-lg flex-1 flex-col justify-center px-4 py-6 sm:px-6 sm:py-8">
         <main
           id="main"
           tabIndex={-1}
-          className="flex w-full min-w-0 flex-col rounded-xl border border-border/60 bg-card p-5 sm:p-8"
+          className="flex w-full min-w-0 flex-col rounded-xl bg-card p-5 sm:p-6"
         >
           {children}
         </main>
       </div>
-    </div>
+    </FocusedPageCanvas>
   );
 }

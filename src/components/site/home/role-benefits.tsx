@@ -36,15 +36,15 @@ export async function RoleBenefits({
   return (
     <section
       aria-labelledby="roles-heading"
-      className="bg-background py-10 sm:py-12 lg:py-16"
+      className="bg-background py-6 sm:py-8"
     >
-      <Container className="space-y-8">
+      <Container className="grid gap-4">
         <SectionHeading
           id="roles-heading"
           title={businessOnly ? hero("join") : t("heading")}
           intro={businessOnly ? undefined : t("intro")}
         />
-        <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {roles
             .filter((role) => !businessOnly || role.key !== "household")
             .map(({ key, icon: Icon, href }) => (
@@ -52,26 +52,28 @@ export async function RoleBenefits({
                 <Link
                   href={href}
                   aria-label={t(`${key}.cta`)}
-                  className="group grid h-full min-w-0 content-start gap-4 rounded-xl border border-border/60 bg-card p-4 outline-none hover:border-primary/40 focus-visible:ring-3 focus-visible:ring-ring/50"
+                  className="group flex h-full min-w-0 flex-col gap-3 rounded-xl bg-card p-4 outline-none hover:bg-secondary/15 focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:ring-inset sm:p-5"
                 >
                   <RoleStoryImage
                     scene={key}
-                    frameClassName="aspect-[4/3] rounded-xl"
-                    sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                    placement={`home-role-${key}`}
+                    className="w-full"
+                    frameClassName="aspect-[2/1] rounded-lg"
+                    sizes="(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw"
                   />
-                  <div className="flex min-w-0 items-center gap-3">
+                  <div className="flex min-w-0 items-center gap-2">
                     <Icon
                       aria-hidden
-                      className="size-5 shrink-0 text-primary"
+                      className="size-4 shrink-0 text-primary"
                     />
-                    <h3 className="font-display text-2xl font-semibold tracking-tight">
+                    <h3 className="font-display text-base font-semibold tracking-tight">
                       {t(`${key}.title`)}
                     </h3>
                   </div>
                   <p className="text-sm leading-relaxed text-muted-foreground">
                     {t(`${key}.one`)}
                   </p>
-                  <span className="inline-flex min-h-11 max-w-full min-w-0 items-center justify-between gap-4 py-2 text-sm font-semibold wrap-anywhere underline-offset-4 outline-none hover:text-primary hover:underline focus-visible:ring-3 focus-visible:ring-ring/50">
+                  <span className="mt-auto inline-flex min-h-11 max-w-full min-w-0 items-center justify-between gap-3 py-2 text-sm font-semibold wrap-anywhere">
                     <span className="min-w-0">{t(`${key}.cta`)}</span>
                     <ArrowRightIcon
                       aria-hidden

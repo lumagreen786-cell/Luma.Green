@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRightIcon } from "lucide-react";
+import { ArrowRightIcon, ChartNoAxesCombinedIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
@@ -10,9 +10,13 @@ export function PriceTeaser() {
   const t = useTranslations("home.teaser");
   const prices = useTranslations("prices");
   return (
-    <div className="grid gap-4 py-1 lg:grid-cols-[1fr_2fr] lg:gap-x-12">
-      <h2 className="text-xl font-semibold tracking-tight">{t("title")}</h2>
-      <div className="flex min-w-0 flex-col items-start gap-3">
+    <div className="grid items-center gap-4 rounded-xl border border-border/60 bg-card px-5 py-4 sm:grid-cols-[auto_minmax(0,1fr)] lg:grid-cols-[auto_minmax(0,1fr)_minmax(0,2fr)]">
+      <ChartNoAxesCombinedIcon
+        aria-hidden
+        className="size-10 rounded-lg bg-secondary/35 p-2 text-primary"
+      />
+      <h2 className="text-base font-semibold tracking-tight">{t("title")}</h2>
+      <div className="flex min-w-0 flex-col items-start gap-2 sm:col-span-2 lg:col-span-1">
         <p className="text-sm text-muted-foreground">{prices("lead")}</p>
         <Link
           href="/prices"

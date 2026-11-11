@@ -58,7 +58,9 @@ it("waits for consent and a user gesture and shows the returned AQI with attribu
       <HouseholdLocationLookups />
     </NextIntlClientProvider>,
   );
-  fireEvent.click(screen.getByText(en.householdTools.airQuality));
+  expect(
+    screen.getByText(en.householdTools.airQuality).closest("details"),
+  ).toHaveAttribute("open");
   const button = screen.getByRole("button", { name: en.sell.shop.useLocation });
   expect(button).toBeDisabled();
   expect(mocks.locate).not.toHaveBeenCalled();

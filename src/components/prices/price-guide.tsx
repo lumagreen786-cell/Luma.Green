@@ -1,12 +1,22 @@
-import { ArrowRightIcon } from "lucide-react";
+import {
+  ArrowRightIcon,
+  CalculatorIcon,
+  PackageIcon,
+  ReceiptTextIcon,
+  ScaleIcon,
+} from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import { RoleStoryImage } from "@/components/showcase/role-story-image";
 import { actionName } from "@/components/site/action-name";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 
-const weighingSteps = ["zero", "each", "amount", "receipt"] as const;
+const weighingSteps = [
+  { key: "zero", icon: ScaleIcon },
+  { key: "each", icon: PackageIcon },
+  { key: "amount", icon: CalculatorIcon },
+  { key: "receipt", icon: ReceiptTextIcon },
+] as const;
 
 /** The board is a price reference; measured weight still determines payment. */
 export function PriceGuide() {
@@ -16,14 +26,9 @@ export function PriceGuide() {
   return (
     <section
       aria-labelledby="price-guide-heading"
-      className="grid gap-6 border-t pt-8 lg:grid-cols-2 lg:gap-12 lg:pt-12"
+      className="grid min-w-0 gap-4 border-t pt-4"
     >
       <div className="min-w-0 space-y-5">
-        <RoleStoryImage
-          scene="sorting"
-          frameClassName="aspect-[3/2]"
-          sizes="(min-width: 1280px) 568px, (min-width: 1024px) 48vw, (min-width: 640px) calc(100vw - 64px), calc(100vw - 40px)"
-        />
         <p className="max-w-prose text-base leading-relaxed">
           {prices("floorHelp")}
         </p>
@@ -35,7 +40,7 @@ export function PriceGuide() {
         <div className="space-y-2">
           <h2
             id="price-guide-heading"
-            className="font-display text-3xl font-medium tracking-tight text-balance sm:text-4xl"
+            className="font-display text-lg font-semibold tracking-tight text-balance"
           >
             {help("guides.weighingAtDoor.title")}
           </h2>
@@ -44,9 +49,13 @@ export function PriceGuide() {
           </p>
         </div>
         <ol className="divide-y border-y">
-          {weighingSteps.map((step) => (
+          {weighingSteps.map(({ key: step, icon: Icon }) => (
             <li key={step} className="space-y-1 py-4">
-              <h3 className="font-semibold">
+              <h3 className="flex items-start gap-2 font-semibold">
+                <Icon
+                  aria-hidden
+                  className="mt-0.5 size-4 shrink-0 text-primary"
+                />
                 {help(`guides.weighingAtDoor.steps.${step}.title`)}
               </h3>
               <p className="text-sm leading-relaxed text-muted-foreground">

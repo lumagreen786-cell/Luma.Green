@@ -8,9 +8,19 @@ import { defineConfig } from "vite";
 const directory = path.dirname(fileURLToPath(import.meta.url));
 const repository = path.resolve(directory, "../..");
 const staticDirectory = path.resolve(repository, ".next/static");
-const styles = readdirSync(path.resolve(staticDirectory, "css")).filter(
-  (file) => file.endsWith(".css"),
-);
+// Webpack emits static/css; Turbopack emits static/chunks. Preserve the
+// relative path so both stylesheet URLs and their font references resolve.
+const styles = readdirSync(staticDirectory, {
+  recursive: true,
+  encoding: "utf8",
+  withFileTypes: false,
+})
+  .filter((file) => file.endsWith(".css"))
+  .toSorted((left, right) => left.localeCompare(right));
+if (styles.length === 0)
+  throw new Error(
+    "No built CSS found. Build the app before starting review fixtures.",
+  );
 // Reuse the exact font classes emitted for each locale by this build.
 // This includes its script face, rather than relying on the host OS fallback.
 const builtPages = path.resolve(repository, ".next/server/app");
@@ -39,7 +49,10 @@ export default defineConfig({
         return html
           .replace("<!-- APP_STYLES -->", () =>
             styles
-              .map((file) => `<link rel="stylesheet" href="/css/${file}">`)
+              .map(
+                (file) =>
+                  `<link rel="stylesheet" href="/${file.split(path.sep).join("/")}">`,
+              )
               .join("\n"),
           )
           .replace("APP_LOCALE_FONTS", () =>

@@ -94,7 +94,7 @@ test("public motion keeps headings readable and collection actions usable", asyn
 });
 
 for (const locale of locales) {
-  test(`${locale} public buttons keep complete labels on one line`, async ({
+  test(`${locale} public actions keep complete labels and topic filters fit`, async ({
     page,
   }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
@@ -138,7 +138,12 @@ for (const locale of locales) {
                     isClipped = true;
                 }
               }
-              return isClipped || lines.length > 1
+              // Topic filters may wrap at normal size in narrow task panels.
+              // Their complete text must still stay inside the control.
+              const isTopicFilter =
+                button instanceof HTMLElement &&
+                button.dataset.helpTopic !== undefined;
+              return isClipped || (!isTopicFilter && lines.length > 1)
                 ? [button.getAttribute("aria-label") ?? button.textContent]
                 : [];
             }),

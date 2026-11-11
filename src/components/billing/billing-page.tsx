@@ -124,156 +124,163 @@ function BillingDetails({
       <p role="status" className="text-sm text-muted-foreground">
         {t("off")}
       </p>
-      <section className="flex min-w-0 flex-col gap-4 rounded-xl border border-border/60 bg-card p-5">
-        <p>
-          {t(status.request ? status.request.requestState : "none")}
-          {status.request ? (
-            <> · {t(`plans.${status.request.selectedPlan}`)}</>
-          ) : null}
-        </p>
-        <p className="text-sm text-muted-foreground">
-          {t("members", { count: format.number(status.memberCount) })}
-        </p>
-        {status.entitlement ? (
-          <p>
-            {t("verified", {
-              count: format.number(status.entitlement.memberLimit),
-            })}
-          </p>
-        ) : null}
-        {status.canManage ? (
-          <div className="flex min-w-0 flex-col items-start gap-3">
-            <Label htmlFor={id}>{t("plan")}</Label>
-            <Select
-              value={choice ?? ""}
-              onValueChange={(value) => {
-                const selected = catalogue.plans.find(
-                  (plan) => plan.id === value,
-                );
-                if (selected) setChoice(selected.id);
-              }}
-              disabled={isBusy}
-            >
-              <SelectTrigger
-                id={id}
-                className="h-auto min-h-11 w-full max-w-md min-w-0 [&_[data-slot=select-value]]:text-start [&_[data-slot=select-value]]:whitespace-normal"
-              >
-                <SelectValue placeholder={t("plan")} />
-              </SelectTrigger>
-              <SelectContent>
-                {catalogue.plans.map((plan) => (
-                  <SelectItem key={plan.id} value={plan.id}>
-                    {t(`plans.${plan.id}`)}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <div className="flex flex-wrap gap-3">
-              <ActionButton
-                label={t("save")}
-                isDisabled={
-                  !choice ||
-                  isBusy ||
-                  (status.request?.requestState === "selected" &&
-                    status.request.selectedPlan === choice)
-                }
-                onClick={() => {
-                  void write("save");
-                }}
-              />
-              {status.request?.requestState === "selected" ? (
-                <ActionButton
-                  label={t("cancel")}
-                  variant="secondary"
-                  isDisabled={isBusy}
-                  onClick={() => {
-                    void write("cancel");
-                  }}
-                />
+      <div className="grid min-w-0 items-start gap-4 xl:grid-cols-[minmax(0,1.6fr)_minmax(19rem,1fr)]">
+        <div className="min-w-0 space-y-4 xl:col-start-2 xl:row-start-1">
+          <section className="flex min-w-0 flex-col gap-4 rounded-xl bg-card p-5">
+            <p>
+              {t(status.request ? status.request.requestState : "none")}
+              {status.request ? (
+                <> · {t(`plans.${status.request.selectedPlan}`)}</>
               ) : null}
-            </div>
-          </div>
-        ) : (
-          <p>{t("ownerOnly")}</p>
-        )}
-        {error ? (
-          <div className="flex flex-col items-start gap-3">
-            <p role="alert" className="text-destructive">
-              {errorMessage}
             </p>
-            {error === "reauth" ? (
-              <ActionButton
-                label={security("signInAgain")}
-                variant="secondary"
-                isDisabled={isBusy}
-                onClick={() => {
-                  void signOut();
-                }}
-              />
+            <p className="text-sm text-muted-foreground">
+              {t("members", { count: format.number(status.memberCount) })}
+            </p>
+            {status.entitlement ? (
+              <p>
+                {t("verified", {
+                  count: format.number(status.entitlement.memberLimit),
+                })}
+              </p>
             ) : null}
-          </div>
-        ) : null}
-      </section>
-      {status.drafts ? <DraftHistory drafts={status.drafts} /> : null}
-      <section className="min-w-0 rounded-xl border border-border/60 bg-card px-5">
-        {catalogue.plans.map((plan) => {
-          const minimum = formatPaise(plan.monthlyMinPaise, locale),
-            maximum =
-              plan.monthlyMaxPaise === null
-                ? null
-                : formatPaise(plan.monthlyMaxPaise, locale);
-          const fixedOrRange =
-            maximum !== null && plan.priceKind === "range"
-              ? `${minimum}–${maximum}`
-              : minimum;
-          const price =
-            plan.priceKind === "from"
-              ? t("from", { price: minimum })
-              : fixedOrRange;
-          return (
-            <div
-              key={plan.id}
-              className="grid min-w-0 gap-2 border-b py-4 sm:grid-cols-[1fr_1fr]"
-            >
-              <h2 className="font-medium">{t(`plans.${plan.id}`)}</h2>
-              <div className="flex min-w-0 flex-col gap-1 text-sm">
-                <p>
-                  {t("monthly")}: <span className="tabular-nums">{price}</span>
-                </p>
-                <p className="text-muted-foreground">
-                  {plan.memberLimit === null
-                    ? t("agreed")
-                    : t("members", { count: format.number(plan.memberLimit) })}
-                </p>
+            {status.canManage ? (
+              <div className="flex min-w-0 flex-col items-start gap-3">
+                <Label htmlFor={id}>{t("plan")}</Label>
+                <Select
+                  value={choice ?? ""}
+                  onValueChange={(value) => {
+                    const selected = catalogue.plans.find(
+                      (plan) => plan.id === value,
+                    );
+                    if (selected) setChoice(selected.id);
+                  }}
+                  disabled={isBusy}
+                >
+                  <SelectTrigger
+                    id={id}
+                    className="h-auto min-h-11 w-full max-w-md min-w-0 [&_[data-slot=select-value]]:text-start [&_[data-slot=select-value]]:whitespace-normal"
+                  >
+                    <SelectValue placeholder={t("plan")} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {catalogue.plans.map((plan) => (
+                      <SelectItem key={plan.id} value={plan.id}>
+                        {t(`plans.${plan.id}`)}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <div className="flex flex-wrap gap-3">
+                  <ActionButton
+                    label={t("save")}
+                    isDisabled={
+                      !choice ||
+                      isBusy ||
+                      (status.request?.requestState === "selected" &&
+                        status.request.selectedPlan === choice)
+                    }
+                    onClick={() => {
+                      void write("save");
+                    }}
+                  />
+                  {status.request?.requestState === "selected" ? (
+                    <ActionButton
+                      label={t("cancel")}
+                      variant="secondary"
+                      isDisabled={isBusy}
+                      onClick={() => {
+                        void write("cancel");
+                      }}
+                    />
+                  ) : null}
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </section>
-      {status.events.length > 0 ? (
-        <section className="flex flex-col gap-3">
-          <h2 className="font-medium">{t("history")}</h2>
-          <ul className="divide-y">
-            {status.events.map((event) => (
-              <li
-                key={event.version}
-                className="flex flex-wrap justify-between gap-2 py-3 text-sm"
+            ) : (
+              <p>{t("ownerOnly")}</p>
+            )}
+            {error ? (
+              <div className="flex flex-col items-start gap-3">
+                <p role="alert" className="text-destructive">
+                  {errorMessage}
+                </p>
+                {error === "reauth" ? (
+                  <ActionButton
+                    label={security("signInAgain")}
+                    variant="secondary"
+                    isDisabled={isBusy}
+                    onClick={() => {
+                      void signOut();
+                    }}
+                  />
+                ) : null}
+              </div>
+            ) : null}
+          </section>
+          {status.drafts ? <DraftHistory drafts={status.drafts} /> : null}
+        </div>
+        <section className="min-w-0 rounded-xl bg-card px-5 xl:col-start-1 xl:row-start-1">
+          {catalogue.plans.map((plan) => {
+            const minimum = formatPaise(plan.monthlyMinPaise, locale),
+              maximum =
+                plan.monthlyMaxPaise === null
+                  ? null
+                  : formatPaise(plan.monthlyMaxPaise, locale);
+            const fixedOrRange =
+              maximum !== null && plan.priceKind === "range"
+                ? `${minimum}–${maximum}`
+                : minimum;
+            const price =
+              plan.priceKind === "from"
+                ? t("from", { price: minimum })
+                : fixedOrRange;
+            return (
+              <div
+                key={plan.id}
+                className="grid min-w-0 gap-2 border-b py-4 sm:grid-cols-[1fr_1fr]"
               >
-                <span>
-                  {t(event.action === "cancelled" ? "cancelled" : "selected")} ·{" "}
-                  {t(`plans.${event.plan}`)}
-                </span>
-                <time dateTime={new Date(event.createdAt).toISOString()}>
-                  {format.dateTime(event.createdAt, {
-                    dateStyle: "medium",
-                    timeStyle: "short",
-                  })}
-                </time>
-              </li>
-            ))}
-          </ul>
+                <h2 className="font-medium">{t(`plans.${plan.id}`)}</h2>
+                <div className="flex min-w-0 flex-col gap-1 text-sm">
+                  <p>
+                    {t("monthly")}:{" "}
+                    <span className="tabular-nums">{price}</span>
+                  </p>
+                  <p className="text-muted-foreground">
+                    {plan.memberLimit === null
+                      ? t("agreed")
+                      : t("members", {
+                          count: format.number(plan.memberLimit),
+                        })}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
         </section>
-      ) : null}
+        {status.events.length > 0 ? (
+          <section className="flex min-w-0 flex-col gap-3 rounded-xl bg-card p-5 xl:col-span-2">
+            <h2 className="font-medium">{t("history")}</h2>
+            <ul className="divide-y">
+              {status.events.map((event) => (
+                <li
+                  key={event.version}
+                  className="flex flex-wrap justify-between gap-2 py-3 text-sm"
+                >
+                  <span>
+                    {t(event.action === "cancelled" ? "cancelled" : "selected")}{" "}
+                    · {t(`plans.${event.plan}`)}
+                  </span>
+                  <time dateTime={new Date(event.createdAt).toISOString()}>
+                    {format.dateTime(event.createdAt, {
+                      dateStyle: "medium",
+                      timeStyle: "short",
+                    })}
+                  </time>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
+      </div>
     </section>
   );
 }
@@ -286,7 +293,7 @@ function DraftHistory({ drafts }: { drafts: NonNullable<Status["drafts"]> }) {
   return (
     <section
       aria-labelledby={heading}
-      className="flex min-w-0 flex-col gap-3 rounded-xl border border-border/60 bg-card p-5"
+      className="flex min-w-0 flex-col gap-3 rounded-xl bg-card p-5"
     >
       <h2 id={heading} className="font-medium">
         {t("draftsTitle")}

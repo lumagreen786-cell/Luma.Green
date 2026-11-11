@@ -36,16 +36,20 @@ export default async function HelpPage() {
         title={t("title")}
         lead={t("lead")}
         banner="preparation"
+        imagePlacement="help-search"
       >
         <HelpSearch />
       </HelpHero>
 
-      <Container className="flex flex-col gap-8 py-6 lg:py-8">
-        <section aria-labelledby="help-roles" className="flex flex-col gap-5">
+      <Container className="grid items-start gap-4 pb-8 lg:grid-cols-[minmax(0,1fr)_19rem]">
+        <section
+          aria-labelledby="help-roles"
+          className="flex min-w-0 flex-col gap-4"
+        >
           <div className="flex flex-col gap-1">
             <h2
               id="help-roles"
-              className="font-display text-2xl font-semibold tracking-tight"
+              className="font-display text-lg font-semibold tracking-tight"
             >
               {t("rolesHeading")}
             </h2>

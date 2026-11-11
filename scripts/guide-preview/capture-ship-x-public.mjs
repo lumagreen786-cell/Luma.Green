@@ -10,7 +10,9 @@ const baseURL = process.env.PLAYWRIGHT_BASE_URL ?? "http://127.0.0.1:3011";
 if (!["127.0.0.1", "localhost", "[::1]"].includes(new URL(baseURL).hostname)) {
   throw new Error("Capture requires a local server.");
 }
-const output = path.resolve("docs/delivery/evidence/ship-x-public-2026-11-11");
+const output = path.resolve(
+  "docs/delivery/evidence/ship-x-redo-public-2026-11-11",
+);
 fs.mkdirSync(output, { recursive: true });
 const digest = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const publicRoutes = [
@@ -95,6 +97,39 @@ try {
   const page = await context.newPage();
   async function capture(entry, file, selector) {
     const imagePath = path.join(output, file);
+    // Keep sticky navigation at the document top in full-page evidence.
+    if (!selector) {
+      await page.evaluate(() =>
+        window.scrollTo({ top: 0, behavior: "instant" }),
+      );
+      await page.evaluate(
+        () =>
+          new Promise((resolve) =>
+            requestAnimationFrame(() => requestAnimationFrame(resolve)),
+          ),
+      );
+    }
+    // Full-page evidence must include images below the initial viewport.
+    const brokenImages = await page.evaluate(async () => {
+      await document.fonts.ready;
+      const images = [...document.images];
+      for (const image of images) image.loading = "eager";
+      let timer;
+      await Promise.race([
+        Promise.allSettled(images.map((image) => image.decode())),
+        new Promise((resolve) => {
+          timer = setTimeout(resolve, 10_000);
+        }),
+      ]);
+      clearTimeout(timer);
+      return images
+        .filter((image) => !image.complete || image.naturalWidth === 0)
+        .map((image) => ({
+          src: image.currentSrc || image.src,
+          alt: image.alt,
+          complete: image.complete,
+        }));
+    });
     if (selector)
       await page
         .locator(selector)
@@ -117,6 +152,9 @@ try {
       finalURL,
       redirected: new URL(finalURL).pathname !== canonical,
       heading,
+      brokenImages,
+      passed:
+        brokenImages.length === 0 && entry.status >= 200 && entry.status < 400,
       sha256: digest(fs.readFileSync(imagePath)),
       visualInspection: "pending",
       bounds: await page.evaluate(() => ({
@@ -175,6 +213,15 @@ try {
       );
   }
   manifest.finishedAt = new Date().toISOString();
+  manifest.finalTrackedDiffSha256 = digest(
+    execFileSync("/usr/bin/git", ["diff", "HEAD", "--binary"]),
+  );
+  manifest.sourceUnchanged =
+    manifest.finalTrackedDiffSha256 === manifest.trackedDiffSha256;
+  manifest.passed =
+    manifest.sourceUnchanged &&
+    manifest.captures.every((capture) => capture.passed);
+  if (!manifest.passed) process.exitCode = 1;
   fs.writeFileSync(
     path.join(output, "manifest.json"),
     JSON.stringify(manifest, null, 2),

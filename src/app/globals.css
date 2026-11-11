@@ -14,6 +14,7 @@
 @theme inline {
   --color-google-attribution: var(--google-attribution);
   --color-background: var(--background);
+  --color-image-scrim: var(--image-scrim);
   --color-foreground: var(--foreground);
 
   /* Plus Jakarta Sans for Latin UI; Noto for script coverage. `--font-noto-script` is attached to <html> only for
@@ -114,6 +115,8 @@
 :root {
   color-scheme: light;
   --google-attribution: #1f1f1f;
+  /* Owner-approved exception: black only for decorative image overlays. */
+  --image-scrim: #000000;
   --background: color-mix(in srgb, #144419 7%, #ffffff);
   --foreground: #144419;
   --card: #ffffff;

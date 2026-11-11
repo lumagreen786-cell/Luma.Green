@@ -50,7 +50,6 @@ export function KabadiwalaHome() {
           </div>
         </div>
       </QueryBoundary>
-      <QuickLinks />
       <DemoNote>{t("sampleNote")}</DemoNote>
     </div>
   );
@@ -88,11 +87,16 @@ function HomeBody({ city }: { city: string }) {
   return (
     <>
       <MoneyStats payouts={payouts} stock={stock} />
-      <div className="grid items-stretch gap-4 md:grid-cols-2">
-        <NewRequestsCard count={requests?.new.length} />
-        <TodayCard active={requests?.active} today={today} city={city} />
+      <div className="grid min-w-0 items-start gap-4 xl:grid-cols-[minmax(0,1.7fr)_minmax(19rem,1fr)]">
+        <div className="min-w-0 space-y-4">
+          <TodayCard active={requests?.active} today={today} city={city} />
+          <PriceCheck card={card} stock={stock} />
+        </div>
+        <aside className="min-w-0 space-y-4 xl:sticky xl:top-6">
+          <NewRequestsCard count={requests?.new.length} />
+          <QuickLinks />
+        </aside>
       </div>
-      <PriceCheck card={card} stock={stock} />
     </>
   );
 }
@@ -131,7 +135,7 @@ function QuickLink({
 function QuickLinks() {
   const t = useTranslations("shop.home");
   return (
-    <nav aria-label={t("quickLinks")} className="grid gap-4 sm:grid-cols-2">
+    <nav aria-label={t("quickLinks")} className="grid gap-3">
       <QuickLink
         href="/app/sell"
         icon={TagIcon}

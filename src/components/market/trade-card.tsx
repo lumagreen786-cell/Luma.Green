@@ -87,33 +87,49 @@ export function TradeCard({
   return (
     <article className="flex h-full min-w-0 flex-col gap-4 rounded-xl border border-border/60 bg-card p-4 sm:p-5">
       <TradeHeading trade={trade} side={side} showSide={showSide} />
-      {compact ? null : <OfferSpecification value={trade.specification} />}
-      {compact ? null : (
-        <OfferComparison
-          listing={{
-            askPaisePerKg: trade.paisePerKg,
-            freightPaisePerKg: trade.freightPaisePerKg,
-            deliveryAvailableAt: trade.deliveryAvailableAt,
-          }}
-        />
-      )}
-      {compact || isHistorical || trade.status === "declined" ? null : (
-        <TradeSteps status={trade.status} />
-      )}
-      {hasDirectCash ? (
-        <>
-          <DirectCash trade={trade} side={side} compact={compact} />
-          {!compact &&
-          trade.status === "accepted" &&
-          trade.directCashAvailable ? (
-            <FinancialLifecycle tradeId={trade.id} actionsOnly />
-          ) : null}
-        </>
-      ) : (
-        financialContent
-      )}
+      <div
+        className={cn(
+          "grid min-w-0 gap-5",
+          !compact && "xl:grid-cols-[minmax(0,1.2fr)_minmax(16rem,1fr)]",
+        )}
+      >
+        <div className={cn("min-w-0 space-y-4", { hidden: compact })}>
+          {compact ? null : <OfferSpecification value={trade.specification} />}
+          {compact ? null : (
+            <OfferComparison
+              listing={{
+                askPaisePerKg: trade.paisePerKg,
+                freightPaisePerKg: trade.freightPaisePerKg,
+                deliveryAvailableAt: trade.deliveryAvailableAt,
+              }}
+            />
+          )}
+          {compact || isHistorical || trade.status === "declined" ? null : (
+            <TradeSteps status={trade.status} />
+          )}
+        </div>
+        <div
+          className={cn(
+            "min-w-0 space-y-4",
+            !compact && "rounded-lg bg-muted/60 p-4",
+          )}
+        >
+          {hasDirectCash ? (
+            <>
+              <DirectCash trade={trade} side={side} compact={compact} />
+              {!compact &&
+              trade.status === "accepted" &&
+              trade.directCashAvailable ? (
+                <FinancialLifecycle tradeId={trade.id} actionsOnly />
+              ) : null}
+            </>
+          ) : (
+            financialContent
+          )}
+          <TradeActions trade={trade} />
+        </div>
+      </div>
       <TradeNotes trade={trade} />
-      <TradeActions trade={trade} />
       {compact ? null : <TradeFooter trade={trade} />}
     </article>
   );

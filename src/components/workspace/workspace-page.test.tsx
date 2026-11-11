@@ -95,6 +95,14 @@ it("lets an owner submit a member invitation with the current org and locale", a
       <WorkspacePage />
     </NextIntlClientProvider>,
   );
+  const teamTab = screen.getByRole("tab", { name: en.workspace.team });
+  const invitationEmail = screen.getByRole("textbox", {
+    name: en.workspace.email,
+  });
+  expect(
+    teamTab.compareDocumentPosition(invitationEmail) &
+      Node.DOCUMENT_POSITION_FOLLOWING,
+  ).toBeTruthy();
   expect(screen.getByLabelText(en.workspace.role)).toHaveRole("combobox");
   await userEvent.type(
     screen.getByRole("textbox", { name: en.workspace.email }),

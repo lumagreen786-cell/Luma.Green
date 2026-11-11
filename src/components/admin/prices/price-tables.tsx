@@ -46,21 +46,28 @@ export function PriceTables() {
         lead="Select a city to manage its dated indicative prices."
       />
       <DemoNote>Sample prices for the prototype, not market rates.</DemoNote>
-      <PriceRules />
-      <CityField
-        value={input}
-        onChange={setInput}
-        labels={{
-          city: "City or locality",
-          state: "State or union territory",
-          choose: "Choose one",
-          cityError: "Enter a city or locality using 2–60 letters and spaces.",
-        }}
-      />
-      {city ? <PriceGroups rows={rows} city={city} /> : null}
-      <CatalogueSetup />
-      <CatalogueNames />
-      <MaterialClassification />
+      <div className="grid min-w-0 items-start gap-4 xl:grid-cols-[minmax(16rem,0.7fr)_minmax(0,1.8fr)]">
+        <aside className="min-w-0 space-y-4 xl:sticky xl:top-6">
+          <PriceRules />
+          <CityField
+            value={input}
+            onChange={setInput}
+            labels={{
+              city: "City or locality",
+              state: "State or union territory",
+              choose: "Choose one",
+              cityError:
+                "Enter a city or locality using 2–60 letters and spaces.",
+            }}
+          />
+        </aside>
+        <div className="min-w-0 space-y-4">
+          {city ? <PriceGroups rows={rows} city={city} /> : null}
+          <CatalogueSetup />
+          <CatalogueNames />
+          <MaterialClassification />
+        </div>
+      </div>
     </div>
   );
 }
@@ -79,7 +86,7 @@ function PriceRules() {
     },
   ];
   return (
-    <ul className="grid gap-4 rounded-xl bg-card p-5 sm:grid-cols-2 sm:gap-6 sm:p-6">
+    <ul className="grid gap-4 rounded-xl bg-card p-5 sm:gap-6 sm:p-6">
       {rules.map((rule) => (
         <li key={rule.title} className="flex gap-3">
           <rule.icon

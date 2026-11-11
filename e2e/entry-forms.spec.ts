@@ -119,7 +119,7 @@ for (const { locale, copy } of [
           name: copy.home.hero.title,
           exact: true,
         });
-        const heroImage = hero.locator("img");
+        const heroImage = hero.locator("[data-recycling-illustration]");
         await page.evaluate(async () => document.fonts.ready);
         const collection = hero.locator('a[href$="/sell"]');
         await expect(collection).toBeInViewport();
@@ -142,7 +142,7 @@ for (const { locale, copy } of [
             expect(
               Math.min(picture.y + picture.height, heading.y + heading.height) -
                 Math.max(picture.y, heading.y),
-              "The photo and title share the desktop row",
+              "The illustration and title share the desktop row",
             ).toBeGreaterThan(0);
             // Desktop actions fit their labels and share one row.
             const action = await hero.locator('a[href$="/sell"]').boundingBox();

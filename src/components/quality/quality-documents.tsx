@@ -63,8 +63,10 @@ function QualityBoard() {
             value: "own",
             label: t("own"),
             content: (
-              <section className="space-y-4">
-                <h2 className="text-lg font-semibold">{t("own")}</h2>
+              <section className="grid min-w-0 items-start gap-5 lg:grid-cols-2">
+                <h2 className="text-lg font-semibold lg:col-span-2">
+                  {t("own")}
+                </h2>
                 {data.own.length === 0 ? (
                   <p>{t("empty")}</p>
                 ) : (
@@ -89,7 +91,10 @@ function QualityBoard() {
                   <p>{t("empty")}</p>
                 ) : (
                   data.incoming.map((file) => (
-                    <div className="space-y-4 border-b pb-4" key={file.id}>
+                    <div
+                      className="grid min-w-0 items-start gap-5 rounded-xl bg-card p-5 lg:grid-cols-[minmax(0,1.4fr)_minmax(16rem,1fr)]"
+                      key={file.id}
+                    >
                       <FileItem file={file} canWithdraw={false} />
                       {data.canOperate ? <BuyerDecision file={file} /> : null}
                     </div>

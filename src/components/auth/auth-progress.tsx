@@ -7,10 +7,10 @@ import { cn } from "@/lib/utils";
 export function AuthProgress({ step }: { step: "phone" | "code" }) {
   const t = useTranslations("auth");
   return (
-    <ol className="flex items-center gap-3 rounded-xl bg-muted/50 p-3 text-sm">
+    <ol className="grid grid-cols-[minmax(0,1fr)_1rem_minmax(0,1fr)] items-center gap-2 text-sm">
       <li
         aria-current={step === "phone" ? "step" : undefined}
-        className="flex min-w-0 items-center gap-2 rounded-full bg-card px-3 py-2 font-medium wrap-anywhere"
+        className="flex min-w-0 items-center justify-center gap-2 rounded-full bg-accent px-3 py-2 font-medium wrap-anywhere"
       >
         {step === "code" ? (
           <CheckIcon aria-hidden className="size-4 shrink-0 text-primary" />
@@ -26,7 +26,7 @@ export function AuthProgress({ step }: { step: "phone" | "code" }) {
       <li
         aria-current={step === "code" ? "step" : undefined}
         className={cn(
-          "min-w-0 rounded-full px-3 py-2 wrap-anywhere",
+          "min-w-0 rounded-full px-3 py-2 text-center wrap-anywhere",
           step === "code"
             ? "bg-accent font-medium text-accent-foreground"
             : "text-muted-foreground",

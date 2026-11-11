@@ -40,7 +40,7 @@ export default async function HouseholdLayout({
       <main
         id="main"
         tabIndex={-1}
-        className="mx-auto my-6 flex w-[calc(100%-2rem)] max-w-3xl flex-1 flex-col rounded-xl border border-border/60 bg-card px-5 py-6 sm:my-8 sm:px-8 sm:py-8"
+        className="mx-auto my-6 flex w-[calc(100%-2rem)] max-w-6xl flex-1 flex-col py-2 sm:my-8"
       >
         {children}
       </main>

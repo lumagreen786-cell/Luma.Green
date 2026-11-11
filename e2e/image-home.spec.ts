@@ -23,8 +23,12 @@ for (const locale of ["en", "ar"]) {
           expect(Math.abs(recycle.y - prices.y)).toBeLessThanOrEqual(1);
           expect(recycle.width).toBeLessThan(width / 2);
         }
-        const image = hero.locator("img");
+        const image = hero.locator("[data-recycling-illustration]");
         await image.scrollIntoViewIfNeeded();
+        await expect(image).toBeVisible();
+        await expect(image).toHaveAttribute("aria-hidden", "true");
+        await expect(image).toHaveAttribute("alt", "");
+        await expect(image).toHaveAttribute("src", /home-journey\.webp/);
         await expect
           .poll(() =>
             image.evaluate(
@@ -33,6 +37,9 @@ for (const locale of ["en", "ar"]) {
             ),
           )
           .toBe(true);
+        const artworkBounds = await image.boundingBox();
+        expect(artworkBounds?.width).toBeGreaterThan(200);
+        expect(artworkBounds?.height).toBeGreaterThan(100);
         await expect(page.locator("[data-product-preview]")).toHaveCount(0);
         await expect(
           page.locator('section[aria-labelledby="roles-heading"] img'),

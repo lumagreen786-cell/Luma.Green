@@ -11,9 +11,9 @@ for (const [locale, copy] of [
   ["kn", kn],
   ["ur", ur],
 ] as const) {
-  for (const width of [390, 768, 1440]) {
+  for (const width of [320, 390, 768, 1440]) {
     for (const colorScheme of ["light", "dark"] as const) {
-      test(`household navigation keeps ${locale} labels on one line at ${String(width)}px in ${colorScheme}`, async ({
+      test(`household navigation keeps ${locale} labels visible in wrapped rows at ${String(width)}px in ${colorScheme}`, async ({
         page,
       }, testInfo) => {
         await page.setViewportSize({ width, height: 900 });
@@ -24,15 +24,26 @@ for (const [locale, copy] of [
           name: copy.householdTools.navigation,
         });
         await expect(navigation.getByRole("link")).toHaveCount(5);
-        const isFits = await navigation
-          .locator("a span")
-          .evaluateAll((labels) =>
-            labels.every((label) => {
-              const range = document.createRange();
-              range.selectNodeContents(label);
-              return range.getClientRects().length === 1;
-            }),
+        await expect(
+          page
+            .locator("header")
+            .first()
+            .getByText("Luma.Green", { exact: true }),
+        ).toBeVisible();
+        const isFits = await navigation.evaluate((nav) => {
+          const bounds = nav.getBoundingClientRect();
+          return (
+            nav.scrollWidth <= nav.clientWidth &&
+            [...nav.querySelectorAll("a")].every((link) => {
+              const box = link.getBoundingClientRect();
+              return (
+                box.left >= bounds.left &&
+                box.right <= bounds.right &&
+                box.height >= 44
+              );
+            })
           );
+        });
         expect(isFits).toBe(true);
         expect(
           await page.evaluate(
@@ -87,7 +98,9 @@ test("keeps the manual solar calculator available when location lookups are off"
   page,
 }) => {
   await page.goto("/sell/services");
-  await page.getByText(en.householdTools.airQuality, { exact: true }).click();
+  await expect(
+    page.getByText(en.householdTools.airQuality, { exact: true }),
+  ).toBeVisible();
   await expect(
     page
       .getByText(en.householdTools.lookupUnavailable, { exact: true })

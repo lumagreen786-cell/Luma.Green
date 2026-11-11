@@ -286,7 +286,7 @@ function RecyclingFlow({
           }
         />
       ) : (
-        <div className="space-y-7">
+        <div className="space-y-5">
           <Button
             variant="ghost"
             type="button"
@@ -508,14 +508,26 @@ function RecyclingProgress({
 }) {
   const t = useTranslations("sell");
   const simple = useTranslations("sell.simple");
+  const format = useFormatter();
   return (
     <div className="space-y-3 border-b border-border/60 pb-5">
-      <div aria-hidden className="flex gap-2">
-        <span className="h-1.5 flex-1 rounded-full bg-primary" />
-        <span
-          className={`h-1.5 flex-1 rounded-full ${stage === "schedule" ? "bg-primary" : "bg-muted"}`}
-        />
-      </div>
+      <ol className="grid grid-cols-2 gap-2">
+        {(["details", "schedule"] as const).map((step, index) => (
+          <li
+            key={step}
+            aria-current={stage === step ? "step" : undefined}
+            className="flex items-center gap-2 rounded-xl bg-muted px-3 py-3 text-sm aria-[current=step]:bg-accent aria-[current=step]:font-semibold"
+          >
+            <span
+              aria-hidden
+              className="flex size-6 shrink-0 items-center justify-center rounded-full bg-card text-xs"
+            >
+              {format.number(index + 1)}
+            </span>
+            {simple(step === "details" ? "details" : "chooseShop")}
+          </li>
+        ))}
+      </ol>
       <p className="text-sm text-muted-foreground">
         {t("steps.progress", {
           current: stage === "details" ? 1 : 2,
@@ -713,12 +725,12 @@ function DetailsForm({
   return (
     <form
       noValidate
-      className="space-y-7"
+      className="space-y-5"
       onSubmit={(event) => {
         void form.handleSubmit(next)(event);
       }}
     >
-      <div className="space-y-2">
+      <div className="space-y-3 rounded-xl bg-muted/50 p-4">
         <CollectionPrivacy purpose="booking" />
         <AgeConfirmation checked={isAdult} onChange={setIsAdult} />
       </div>
@@ -741,7 +753,7 @@ function DetailsForm({
           <Label
             key={value}
             htmlFor={`recycle-${value}`}
-            className="flex min-h-14 min-w-0 cursor-pointer items-center gap-3 rounded-xl border border-border/60 bg-card px-4 py-3 leading-relaxed wrap-anywhere has-[[aria-checked=true]]:border-primary has-[[aria-checked=true]]:bg-accent/40"
+            className="flex min-h-14 min-w-0 cursor-pointer items-center gap-3 rounded-xl border border-border/60 bg-card px-4 py-3 leading-relaxed wrap-anywhere has-[[aria-checked=true]]:border-primary has-[[aria-checked=true]]:bg-accent"
           >
             <RadioGroupItem id={`recycle-${value}`} value={value} />
             {simple(value)}
@@ -889,7 +901,7 @@ function ShopSelection({
         <Label
           key={shop.id}
           htmlFor={`recycle-shop-${shop.id}`}
-          className="flex cursor-pointer items-center gap-3 rounded-xl border border-border/60 px-4 py-4 hover:bg-muted/50 has-[[aria-checked=true]]:border-primary has-[[aria-checked=true]]:bg-accent/40"
+          className="flex cursor-pointer items-center gap-3 rounded-xl border border-border/60 px-4 py-4 hover:bg-muted/50 has-[[aria-checked=true]]:border-primary has-[[aria-checked=true]]:bg-accent"
         >
           <RadioGroupItem id={`recycle-shop-${shop.id}`} value={shop.id} />
           <span className="min-w-0 flex-1">

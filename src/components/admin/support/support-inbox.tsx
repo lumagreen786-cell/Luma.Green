@@ -99,9 +99,12 @@ function RequestList({
     );
   }
   return (
-    <ul className="flex flex-col divide-y rounded-xl bg-card px-5 sm:px-6">
+    <ul className="grid min-w-0 items-start gap-4 xl:grid-cols-2">
       {requests.map((request) => (
-        <li key={request.id}>
+        <li
+          key={request.id}
+          className="min-w-0 rounded-xl bg-card px-5 sm:px-6"
+        >
           <RequestRow request={request} />
         </li>
       ))}

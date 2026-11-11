@@ -26,50 +26,70 @@ export function TrackView({ booking }: { booking: TrackedBooking }) {
 
   if (booking.familyView)
     return (
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-4">
         <StatusHero booking={booking} />
-        <WhenCard booking={booking} today={today} />
-        <ShopCard shop={booking.shop} />
-        <Timeline timeline={booking.timeline} />
+        <div className="grid items-start gap-4 lg:grid-cols-2">
+          <div className="rounded-2xl bg-card p-5">
+            <WhenCard booking={booking} today={today} />
+          </div>
+          <div className="space-y-4 rounded-2xl bg-card p-5">
+            <ShopCard shop={booking.shop} />
+            <Timeline timeline={booking.timeline} />
+          </div>
+        </div>
       </div>
     );
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-4">
       <StatusHero booking={booking} />
-      <WhenCard booking={booking} today={today} />
-      {booking.failedVisitReason ? (
-        <p role="status" className="border-s-2 border-border ps-4 text-sm">
-          {booking.failedVisitReason}
-        </p>
-      ) : null}
-      {booking.dispatch && booking.dispatch.attempt > 1 ? (
-        <p
-          role="status"
-          className="border-s-2 border-primary py-2 ps-4 text-sm text-accent-foreground"
-        >
-          {t("dispatchChanged")}
-        </p>
-      ) : null}
-      <ShopCard shop={booking.shop} />
-      {booking.isMine ? <MoneySection booking={booking} /> : null}
-      <ReceiptReview booking={booking} />
-      <ItemsCard booking={booking} />
-      <Timeline timeline={booking.timeline} />
-      <CancelBooking booking={booking} />
-      {booking.isMine ? <HouseholdScheduleControls /> : null}
-      <NextActions booking={booking} />
-      <CollectionSharing
-        token={booking.token}
-        owner={booking.isMine}
-        open={!["completed", "cancelled", "declined"].includes(booking.status)}
-      />
-      {booking.isMine && booking.sharedWithFamily !== undefined ? (
-        <FamilyCollectionControl
-          token={booking.token}
-          shared={booking.sharedWithFamily}
-        />
-      ) : null}
+      <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
+        <div className="min-w-0 space-y-4">
+          <div className="rounded-2xl bg-card p-5 sm:p-6">
+            <NextActions booking={booking} />
+            <WhenCard booking={booking} today={today} />
+          </div>
+          {booking.failedVisitReason ? (
+            <p role="status" className="border-s-2 border-border ps-4 text-sm">
+              {booking.failedVisitReason}
+            </p>
+          ) : null}
+          {booking.dispatch && booking.dispatch.attempt > 1 ? (
+            <p
+              role="status"
+              className="border-s-2 border-primary py-2 ps-4 text-sm text-accent-foreground"
+            >
+              {t("dispatchChanged")}
+            </p>
+          ) : null}
+          {booking.isMine ? <MoneySection booking={booking} /> : null}
+          <ReceiptReview booking={booking} />
+          <ItemsCard booking={booking} />
+        </div>
+        <aside className="min-w-0 space-y-4">
+          <div className="rounded-2xl bg-card p-5 sm:p-6">
+            <ShopCard shop={booking.shop} />
+            <Timeline timeline={booking.timeline} />
+          </div>
+          <div className="space-y-4 rounded-2xl bg-card p-5 sm:p-6">
+            <CancelBooking booking={booking} />
+            {booking.isMine ? <HouseholdScheduleControls /> : null}
+            <CollectionSharing
+              token={booking.token}
+              owner={booking.isMine}
+              open={
+                !["completed", "cancelled", "declined"].includes(booking.status)
+              }
+            />
+            {booking.isMine && booking.sharedWithFamily !== undefined ? (
+              <FamilyCollectionControl
+                token={booking.token}
+                shared={booking.sharedWithFamily}
+              />
+            ) : null}
+          </div>
+        </aside>
+      </div>
       <p className="flex justify-center gap-2 text-center text-sm text-muted-foreground">
         <LockIcon aria-hidden className="mt-0.5 size-4 shrink-0" />
         {t("saved")}

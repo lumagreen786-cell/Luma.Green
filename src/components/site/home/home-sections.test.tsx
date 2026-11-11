@@ -63,8 +63,13 @@ describe("home page", () => {
     expect(
       screen
         .getByRole("region", { name: messages.home.hero.title })
-        .querySelector("img"),
-    ).toHaveAttribute("alt", "");
+        .querySelector("img[data-recycling-illustration]"),
+    ).toHaveAttribute("aria-hidden", "true");
+    expect(
+      screen
+        .getByRole("region", { name: messages.home.hero.title })
+        .querySelector("img[data-recycling-illustration]"),
+    ).toHaveAttribute("src", expect.stringContaining("home-journey.webp"));
     // Home directs people to explicit locality selection without assuming a city.
     expect(screen.getByText(messages.prices.lead)).toBeInTheDocument();
   });

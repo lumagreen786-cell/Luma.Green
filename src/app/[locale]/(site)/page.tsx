@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 /**
- * A direct public path: book a pickup, choose materials, understand the process
+ * A direct public path: book recycling, understand the process
  * and find the right role. Detailed stories stay on their dedicated pages.
  */
 export default async function HomePage() {

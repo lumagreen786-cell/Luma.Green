@@ -20,24 +20,28 @@ export function OperationsConsole() {
           permission separate from commercial listings.
         </p>
       </div>
-      <Tabs defaultValue="definitions">
-        <TabsList>
-          <TabsTrigger value="definitions">Material definitions</TabsTrigger>
-          <TabsTrigger value="facilities">Facility scope</TabsTrigger>
-          <TabsTrigger value="destinations">Destinations</TabsTrigger>
-        </TabsList>
-        <TabsContent value="definitions">
-          <DefinitionConsole />
-        </TabsContent>
-        <TabsContent value="facilities">
-          <FacilityReviewConsole />
-        </TabsContent>
-        <TabsContent value="destinations">
-          <DestinationConsole />
-        </TabsContent>
-      </Tabs>
-      <CollectionReassignment />
-      <ApartmentRoutes />
+      <div className="grid min-w-0 items-start gap-4 2xl:grid-cols-[minmax(0,1.6fr)_minmax(20rem,1fr)]">
+        <Tabs defaultValue="definitions" className="min-w-0">
+          <TabsList>
+            <TabsTrigger value="definitions">Material definitions</TabsTrigger>
+            <TabsTrigger value="facilities">Facility scope</TabsTrigger>
+            <TabsTrigger value="destinations">Destinations</TabsTrigger>
+          </TabsList>
+          <TabsContent value="definitions">
+            <DefinitionConsole />
+          </TabsContent>
+          <TabsContent value="facilities">
+            <FacilityReviewConsole />
+          </TabsContent>
+          <TabsContent value="destinations">
+            <DestinationConsole />
+          </TabsContent>
+        </Tabs>
+        <aside className="min-w-0 space-y-4">
+          <CollectionReassignment />
+          <ApartmentRoutes />
+        </aside>
+      </div>
     </div>
   );
 }

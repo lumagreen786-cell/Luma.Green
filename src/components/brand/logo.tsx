@@ -148,7 +148,7 @@ export function Logo({
       <LogoMark className="size-8 shrink-0" idPrefix={idPrefix} />
       <span
         aria-hidden="true"
-        className="hidden font-display text-xl font-semibold tracking-tight sm:inline"
+        className="inline font-display text-lg font-semibold tracking-tight whitespace-nowrap sm:text-xl"
       >
         {site.name}
       </span>

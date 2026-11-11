@@ -39,29 +39,30 @@ export default async function ContactPage() {
     <>
       <PageHeader
         variant="task"
+        imagePlacement="contact-support"
         title={t("title")}
         lead={t("lead")}
         scene={imageRole}
       />
 
-      <Container className="grid gap-8 py-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-12 lg:py-8">
-        <section className="space-y-3 border-t pt-5">
+      <Container className="grid items-start gap-4 pb-8 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
+        <section className="grid gap-4 rounded-xl bg-card p-5 sm:p-6">
           <div className="flex items-center gap-3">
             <MailIcon aria-hidden className="size-6 text-primary" />
 
-            <h2 className="text-2xl">{t("emailHeading")}</h2>
+            <h2 className="text-lg font-semibold">{t("emailHeading")}</h2>
           </div>
-          <div>
+          <div className="rounded-xl bg-accent/40 px-4 py-2">
             <a href={`mailto:${site.supportEmail}`} className={emailLink}>
               {site.supportEmail}
             </a>
           </div>
         </section>
-        <section className="space-y-3 border-t pt-5">
+        <section className="grid gap-4 rounded-xl bg-card p-5 sm:p-6">
           <div className="flex items-center gap-3">
             <ShieldAlertIcon aria-hidden className="size-6 text-primary" />
 
-            <h2 className="text-2xl">{t("securityHeading")}</h2>
+            <h2 className="text-lg font-semibold">{t("securityHeading")}</h2>
           </div>
           <div className="space-y-4">
             <p className="text-sm text-muted-foreground">{t("securityBody")}</p>

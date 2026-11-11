@@ -124,14 +124,14 @@ test("business choices remain static, readable and keyboard accessible", async (
   }
 });
 
-test("mobile navigation shows the brand mark and puts language in the side menu", async ({
+test("mobile navigation shows the brand name and puts language in the side menu", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/kn");
   const header = page.locator("header").first();
   await expect(header.getByRole("img", { name: "Luma.Green" })).toBeVisible();
-  await expect(header.getByText("Luma.Green", { exact: true })).toBeHidden();
+  await expect(header.getByText("Luma.Green", { exact: true })).toBeVisible();
   await expect(header.getByRole("button", { name: /ಕನ್ನಡ/ })).toHaveCount(0);
   await header.getByRole("button", { name: kannada.nav.openMenu }).click();
   const menu = page.getByRole("dialog");

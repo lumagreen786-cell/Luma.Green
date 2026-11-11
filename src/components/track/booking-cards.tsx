@@ -67,7 +67,7 @@ export function ItemsCard({ booking }: { booking: TrackedBooking }) {
   return (
     <section
       aria-labelledby="items-title"
-      className="flex flex-col rounded-xl border border-border/60 px-4"
+      className="flex flex-col rounded-2xl bg-card px-5"
     >
       <h2 id="items-title" className="pt-4 text-lg font-semibold">
         {t("title")}
@@ -135,7 +135,10 @@ export function MoneySection({ booking }: { booking: TrackedBooking }) {
   const receipt = booking.receipt;
 
   return (
-    <section aria-labelledby="money-title" className="flex flex-col gap-2">
+    <section
+      aria-labelledby="money-title"
+      className="flex flex-col gap-2 rounded-2xl bg-card p-5"
+    >
       <h2 id="money-title" className="sr-only">
         {t("title")}
       </h2>

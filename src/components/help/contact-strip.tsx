@@ -22,16 +22,16 @@ export function ContactStrip({
     <section
       data-reveal
       aria-labelledby="contact-strip-heading"
-      className="flex flex-col gap-6 border-y py-8 text-foreground lg:flex-row lg:items-center lg:justify-between lg:gap-10"
+      className="flex min-w-0 flex-col gap-4 rounded-xl bg-accent/40 p-5 text-foreground"
     >
       <div className="flex max-w-md flex-col gap-3">
         <h2
           id="contact-strip-heading"
-          className="font-display text-3xl font-semibold tracking-tight"
+          className="font-display text-lg font-semibold tracking-tight"
         >
           {t("contactStrip.title")}
         </h2>
-        <p className="leading-relaxed text-muted-foreground">
+        <p className="text-sm leading-relaxed text-muted-foreground">
           {t("contactStrip.body")}
         </p>
         <p className="text-sm text-muted-foreground">{t("hours")}</p>
@@ -42,7 +42,7 @@ export function ContactStrip({
             asChild
             size="lg"
             variant="outline"
-            className="min-h-12 rounded-lg border-border bg-transparent px-5 py-3 whitespace-nowrap text-foreground hover:bg-accent hover:text-accent-foreground"
+            className="min-h-11 max-w-full border-border bg-card px-4 py-2 text-foreground hover:bg-accent hover:text-accent-foreground"
           >
             <Link href={contactHref(role, topic)}>
               <PencilLineIcon aria-hidden />

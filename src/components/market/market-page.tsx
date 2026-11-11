@@ -137,8 +137,8 @@ function Lots({
   return (
     <>
       <DemoNote>{t("sampleData")}</DemoNote>
-      <div className="grid min-w-0 items-start gap-4">
-        <div className="min-w-0">
+      <div className="grid min-w-0 items-start gap-5 lg:grid-cols-[13rem_minmax(0,1fr)]">
+        <div className="min-w-0 rounded-xl bg-card p-4 lg:sticky lg:top-24">
           <MaterialFilter
             options={options}
             value={selected?.code ?? null}
@@ -146,7 +146,7 @@ function Lots({
           />
         </div>
         <Section title={t("browse.count", { count: shown.length })}>
-          <ul className="flex flex-col gap-3">
+          <ul className="grid min-w-0 gap-4 2xl:grid-cols-2">
             {shown.map((listing) => (
               <li key={listing.id}>
                 <ListingCard

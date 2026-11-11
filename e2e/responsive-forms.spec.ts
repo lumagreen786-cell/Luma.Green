@@ -15,7 +15,7 @@ const languages = locales.map((locale) => ({
 }));
 
 for (const width of [390, 768, 1024, 1440]) {
-  test(`join role gallery keeps large images above readable choices at ${String(width)}px`, async ({
+  test(`join role directory keeps clear images beside readable choices at ${String(width)}px`, async ({
     page,
   }) => {
     await page.setViewportSize({ width, height: 900 });
@@ -32,8 +32,25 @@ for (const width of [390, 768, 1024, 1440]) {
     expect(image).not.toBeNull();
     expect(title).not.toBeNull();
     if (!image || !title) throw new Error("Role image and title must render");
-    expect(image.width).toBeGreaterThan(200);
-    expect(title.y).toBeGreaterThanOrEqual(image.y + image.height);
+    expect(image.width).toBeGreaterThanOrEqual(width < 640 ? 80 : 144);
+    expect(image.height).toBeGreaterThanOrEqual(80);
+    expect(title.x).toBeGreaterThanOrEqual(image.x + image.width);
+    expect(title.y).toBeLessThan(image.y + image.height);
+    expect(title.y + title.height).toBeGreaterThan(image.y);
+    await expect
+      .poll(() =>
+        recycler.locator("img").evaluate((element: HTMLImageElement) => {
+          const bounds = element.getBoundingClientRect();
+          return (
+            element.complete &&
+            element.naturalWidth >= bounds.width &&
+            element.naturalHeight >= bounds.height
+          );
+        }),
+      )
+      .toBe(true);
+    await recycler.focus();
+    await expect(recycler).toBeFocused();
     await expect(recycler).toHaveAttribute("href", /\/join\/recycler$/);
     await expect(recycler).toContainText(en.join.roles.recycler.body);
     await expectFormToFit(page);

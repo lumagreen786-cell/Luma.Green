@@ -1,6 +1,7 @@
 "use client";
 
 import { useMutation, useQuery } from "convex/react";
+import { UsersIcon } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
@@ -9,6 +10,7 @@ import { useSignOut } from "@/components/account/use-sign-out";
 import { AppPageHeader } from "@/components/app/page-parts";
 import { useVerifiedSession } from "@/components/providers/use-signed-in-query";
 import { ErrorBoundary } from "@/components/sell/states";
+import { FocusedPageCanvas } from "@/components/site/focused-page-canvas";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "@/i18n/navigation";
 import { reloadCurrentPage } from "@/lib/reload-current-page";
@@ -53,7 +55,12 @@ export function InvitationPage({ token: initialToken }: { token: string }) {
         </div>
       )}
     >
-      <InvitationContent token={token} />
+      <FocusedPageCanvas
+        compact
+        image="/images/ship-x/invitation-background.webp"
+      >
+        <InvitationContent token={token} />
+      </FocusedPageCanvas>
     </ErrorBoundary>
   );
 }
@@ -97,20 +104,36 @@ function InvitationContent({ token }: { token: string }) {
   }
   return (
     <div className="mx-auto flex w-full max-w-xl min-w-0 flex-col gap-6 rounded-xl border border-border/60 bg-card p-5 sm:p-6">
-      <AppPageHeader title={t("inviteTitle")} />
+      <div className="flex items-center gap-3">
+        <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-accent">
+          <UsersIcon aria-hidden className="size-5" />
+        </span>
+        <AppPageHeader title={t("inviteTitle")} />
+      </div>
       {isPending || (isReady && invitation === undefined) ? (
         <p>{common("loading")}</p>
       ) : null}
       {!isPending && !isReady ? <p role="alert">{t("unavailable")}</p> : null}
       {invitation?.status === "ready" ? (
         <>
-          <p>
-            {t("join", { name: invitation.orgName, role: t(invitation.role) })}
-          </p>
+          <div className="space-y-3 rounded-xl bg-accent/30 p-4">
+            <p className="text-lg font-semibold break-words">
+              {invitation.orgName}
+            </p>
+            <p>
+              {t("join", {
+                name: invitation.orgName,
+                role: t(invitation.role),
+              })}
+            </p>
+            <p className="text-sm text-muted-foreground">
+              {t("emailBody", { name: invitation.orgName })}
+            </p>
+          </div>
           <Button
             disabled={busy}
             onClick={() => void join()}
-            className="self-start"
+            className="w-full"
           >
             {t("accept")}
           </Button>
@@ -118,7 +141,10 @@ function InvitationContent({ token }: { token: string }) {
       ) : null}
       {invitation && invitation.status !== "ready" ? (
         <>
-          <p role="alert">
+          <p
+            role="alert"
+            className="rounded-xl border border-border bg-attention/20 p-4"
+          >
             {t(
               invitation.status === "verifyEmail"
                 ? "verifyEmail"
@@ -129,7 +155,7 @@ function InvitationContent({ token }: { token: string }) {
           <Button
             disabled={signingOut}
             onClick={() => void signOut()}
-            className="self-start"
+            className="w-full"
           >
             {t("switchAccount")}
           </Button>

@@ -66,6 +66,7 @@ export const roleProcessScenes = {
 /** Decorative editorial art, separate from the localized app preview. */
 export function RoleStoryImage({
   scene,
+  placement,
   compact = false,
   className,
   frameClassName,
@@ -73,6 +74,8 @@ export function RoleStoryImage({
   sizes = "(min-width: 1280px) 560px, (min-width: 768px) 45vw, 92vw",
 }: {
   scene: StoryScene;
+  /** A fresh route-specific illustration; fallback is for unmounted legacy examples. */
+  placement?: string;
   compact?: boolean;
   className?: string;
   frameClassName?: string;
@@ -89,7 +92,7 @@ export function RoleStoryImage({
         )}
       >
         <Image
-          src={scenes[scene]}
+          src={placement ? `/images/ship-x/${placement}.webp` : scenes[scene]}
           alt=""
           fill
           sizes={sizes}

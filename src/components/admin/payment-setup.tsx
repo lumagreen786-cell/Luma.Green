@@ -97,7 +97,7 @@ export function PaymentSetup() {
   }
 
   return (
-    <div className="mx-auto flex w-full max-w-5xl flex-col gap-6">
+    <div className="mx-auto flex w-full max-w-7xl flex-col gap-6">
       <header className="flex flex-col gap-2 pb-2">
         <h1 className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">
           Payment setup
@@ -108,152 +108,157 @@ export function PaymentSetup() {
           or a payment.
         </p>
       </header>
-      <section
-        aria-labelledby="payment-release-boundary"
-        className="space-y-2 border-s-2 border-primary ps-4 text-sm"
-      >
-        <h2 id="payment-release-boundary" className="font-semibold">
-          Payment activation requires approved setup
-        </h2>
-        <p className="max-w-2xl text-muted-foreground">
-          Vendor references and approved terms do not prove payment. Server
-          activation and provider verification control checkout. Refund requests
-          and reconciliation use the provider; there is no manual paid flag.
-        </p>
-        <p>{configurationMessage(configuration)}</p>
-      </section>
-      <Tabs
-        value={mode}
-        onValueChange={(value) => {
-          if (!(value === "sandbox" || value === "live")) {
-            return;
-          }
-
-          setMode(value);
-          setError(null);
-          setNotice(null);
-        }}
-      >
-        <TabsList variant="line" aria-label="Payment environment">
-          <TabsTrigger value="sandbox" disabled={checking !== null}>
-            Sandbox
-          </TabsTrigger>
-          <TabsTrigger value="live" disabled={checking !== null}>
-            Live references
-          </TabsTrigger>
-        </TabsList>
-      </Tabs>
-      {error ? (
-        <p role="alert" className="text-sm text-destructive">
-          {error}
-        </p>
-      ) : null}
-      {notice ? (
-        <p role="status" className="text-sm">
-          {notice}
-        </p>
-      ) : null}
-      {status === "LoadingFirstPage" ? <Skeleton className="h-32" /> : null}
-      {status !== "LoadingFirstPage" && results.length === 0 ? (
-        <p className="py-6 text-muted-foreground">
-          No businesses yet. Approve a business application before adding its
-          vendor reference.
-        </p>
-      ) : null}
-      {status !== "LoadingFirstPage" && results.length > 0 ? (
-        <ul className="divide-y rounded-xl bg-card px-5 sm:px-6">
-          {results.map((org) => {
-            const vendor = org.vendors.find((item) => item.mode === mode);
-            return (
-              <li
-                key={org.orgId}
-                className="flex flex-wrap items-start justify-between gap-4 py-5"
-              >
-                <div className="min-w-0 flex-1 space-y-1">
-                  <h2 className="font-semibold break-words">{org.name}</h2>
-                  {org.active ? null : (
-                    <p className="text-sm text-destructive">
-                      Business suspended
-                    </p>
-                  )}
-                  {vendor ? (
-                    <>
-                      <p className="text-sm break-all">
-                        Vendor reference: {vendor.vendorId}
-                      </p>
-                      <p className="text-sm">
-                        Provider status:{" "}
-                        <strong>{vendor.providerStatus}</strong>
-                      </p>
-                      <p className="text-xs text-muted-foreground">
-                        {vendor.checkedAt === 0
-                          ? "No provider lookup has completed."
-                          : `Last checked: ${formatWhen(vendor.checkedAt)} IST. Status can change; checkout checks it again.`}
-                      </p>
-                    </>
-                  ) : (
-                    <p className="text-sm text-muted-foreground">
-                      No vendor reference for this environment.
-                    </p>
-                  )}
-                </div>
-                {vendor ? (
-                  <Button
-                    variant="outline"
-                    disabled={
-                      checking !== null ||
-                      !org.active ||
-                      configuration?.mode !== mode
-                    }
-                    onClick={() => {
-                      void checkVendor(org);
-                    }}
-                  >
-                    {checking === org.orgId
-                      ? "Checking…"
-                      : "Check with Cashfree"}
-                  </Button>
-                ) : (
-                  <Button
-                    variant="outline"
-                    disabled={!org.active || checking !== null}
-                    onClick={() => {
-                      setSelected(org);
-                      setError(null);
-                      setNotice(null);
-                    }}
-                  >
-                    Add vendor reference
-                  </Button>
-                )}
-              </li>
-            );
-          })}
-        </ul>
-      ) : null}
-      {status === "CanLoadMore" || status === "LoadingMore" ? (
-        <Button
-          variant="outline"
-          className="self-start"
-          disabled={status === "LoadingMore"}
-          onClick={() => {
-            loadMore(20);
-          }}
+      <div className="grid min-w-0 items-start gap-6 lg:grid-cols-[18rem_minmax(0,1fr)]">
+        <section
+          aria-labelledby="payment-release-boundary"
+          className="space-y-2 border-s-2 border-primary ps-4 text-sm"
         >
-          {status === "LoadingMore" ? "Loading…" : "Load more businesses"}
-        </Button>
-      ) : null}
-      <PaymentLifecycleSetup />
-      {selected ? (
-        <VendorDialog
-          key={`${selected.orgId}-${mode}`}
-          org={selected}
-          mode={mode}
-          close={() => {
-            setSelected(null);
-          }}
-        />
-      ) : null}
+          <h2 id="payment-release-boundary" className="font-semibold">
+            Payment activation requires approved setup
+          </h2>
+          <p className="max-w-2xl text-muted-foreground">
+            Vendor references and approved terms do not prove payment. Server
+            activation and provider verification control checkout. Refund
+            requests and reconciliation use the provider; there is no manual
+            paid flag.
+          </p>
+          <p>{configurationMessage(configuration)}</p>
+        </section>
+        <div className="min-w-0 space-y-5">
+          <Tabs
+            value={mode}
+            onValueChange={(value) => {
+              if (!(value === "sandbox" || value === "live")) {
+                return;
+              }
+
+              setMode(value);
+              setError(null);
+              setNotice(null);
+            }}
+          >
+            <TabsList variant="line" aria-label="Payment environment">
+              <TabsTrigger value="sandbox" disabled={checking !== null}>
+                Sandbox
+              </TabsTrigger>
+              <TabsTrigger value="live" disabled={checking !== null}>
+                Live references
+              </TabsTrigger>
+            </TabsList>
+          </Tabs>
+          {error ? (
+            <p role="alert" className="text-sm text-destructive">
+              {error}
+            </p>
+          ) : null}
+          {notice ? (
+            <p role="status" className="text-sm">
+              {notice}
+            </p>
+          ) : null}
+          {status === "LoadingFirstPage" ? <Skeleton className="h-32" /> : null}
+          {status !== "LoadingFirstPage" && results.length === 0 ? (
+            <p className="py-6 text-muted-foreground">
+              No businesses yet. Approve a business application before adding
+              its vendor reference.
+            </p>
+          ) : null}
+          {status !== "LoadingFirstPage" && results.length > 0 ? (
+            <ul className="divide-y rounded-xl bg-card px-5 sm:px-6">
+              {results.map((org) => {
+                const vendor = org.vendors.find((item) => item.mode === mode);
+                return (
+                  <li
+                    key={org.orgId}
+                    className="flex flex-wrap items-start justify-between gap-4 py-5"
+                  >
+                    <div className="min-w-0 flex-1 space-y-1">
+                      <h2 className="font-semibold break-words">{org.name}</h2>
+                      {org.active ? null : (
+                        <p className="text-sm text-destructive">
+                          Business suspended
+                        </p>
+                      )}
+                      {vendor ? (
+                        <>
+                          <p className="text-sm break-all">
+                            Vendor reference: {vendor.vendorId}
+                          </p>
+                          <p className="text-sm">
+                            Provider status:{" "}
+                            <strong>{vendor.providerStatus}</strong>
+                          </p>
+                          <p className="text-xs text-muted-foreground">
+                            {vendor.checkedAt === 0
+                              ? "No provider lookup has completed."
+                              : `Last checked: ${formatWhen(vendor.checkedAt)} IST. Status can change; checkout checks it again.`}
+                          </p>
+                        </>
+                      ) : (
+                        <p className="text-sm text-muted-foreground">
+                          No vendor reference for this environment.
+                        </p>
+                      )}
+                    </div>
+                    {vendor ? (
+                      <Button
+                        variant="outline"
+                        disabled={
+                          checking !== null ||
+                          !org.active ||
+                          configuration?.mode !== mode
+                        }
+                        onClick={() => {
+                          void checkVendor(org);
+                        }}
+                      >
+                        {checking === org.orgId
+                          ? "Checking…"
+                          : "Check with Cashfree"}
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="outline"
+                        disabled={!org.active || checking !== null}
+                        onClick={() => {
+                          setSelected(org);
+                          setError(null);
+                          setNotice(null);
+                        }}
+                      >
+                        Add vendor reference
+                      </Button>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          ) : null}
+          {status === "CanLoadMore" || status === "LoadingMore" ? (
+            <Button
+              variant="outline"
+              className="self-start"
+              disabled={status === "LoadingMore"}
+              onClick={() => {
+                loadMore(20);
+              }}
+            >
+              {status === "LoadingMore" ? "Loading…" : "Load more businesses"}
+            </Button>
+          ) : null}
+          <PaymentLifecycleSetup />
+          {selected ? (
+            <VendorDialog
+              key={`${selected.orgId}-${mode}`}
+              org={selected}
+              mode={mode}
+              close={() => {
+                setSelected(null);
+              }}
+            />
+          ) : null}
+        </div>
+      </div>
     </div>
   );
 }

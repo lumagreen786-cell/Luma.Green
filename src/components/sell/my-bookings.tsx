@@ -42,7 +42,7 @@ function LiveMyBookings({ showEmpty }: { showEmpty: boolean }) {
     return showEmpty ? <p role="status">{household("loading")}</p> : null;
   if (!bookings || bookings.length === 0)
     return showEmpty ? (
-      <p className="py-4 text-sm text-muted-foreground">
+      <p className="rounded-2xl bg-card p-6 text-sm text-muted-foreground">
         {household("noBookings")}
       </p>
     ) : null;
@@ -51,12 +51,12 @@ function LiveMyBookings({ showEmpty }: { showEmpty: boolean }) {
   return (
     <section
       aria-labelledby="my-bookings-title"
-      className="flex flex-col gap-2 border-b border-border py-4"
+      className="flex min-w-0 flex-col gap-3 rounded-2xl bg-card p-5 sm:p-6"
     >
       <h2 id="my-bookings-title" className="text-lg font-semibold">
         {t("title")}
       </h2>
-      <ul className="-mx-2 flex flex-col">
+      <ul className="flex flex-col divide-y divide-border">
         {shown.map((booking) => (
           <li key={booking.token}>
             <BookingRow booking={booking} />
@@ -106,7 +106,7 @@ function BookingRow({ booking }: { booking: MyBooking }) {
       </span>
       <span className="flex min-w-0 flex-1 flex-col gap-0.5">
         <span className="flex flex-wrap items-center gap-2">
-          <span className="truncate font-medium">{booking.shopName}</span>
+          <span className="font-medium break-words">{booking.shopName}</span>
           <StatusPill tone={statusTone(booking.status)}>
             {tStatus(booking.status)}
           </StatusPill>

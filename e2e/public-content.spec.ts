@@ -54,7 +54,6 @@ test("Arabic help topics preserve the locale on phones", async ({ page }) => {
 
 for (const [route, selector] of [
   ["/how-it-works", 'section[aria-labelledby="sorting-guide-heading"] img'],
-  ["/prices", 'section[aria-labelledby="price-guide-heading"] img'],
   ["/join", 'main a[href="/join/yard"] img'],
   ["/participants", 'section[aria-labelledby="participant-yard"] img'],
 ] as const) {
@@ -63,11 +62,6 @@ for (const [route, selector] of [
   }) => {
     await page.setViewportSize({ width: 768, height: 1024 });
     await page.goto(route);
-    if (route === "/prices")
-      await page
-        .locator("summary")
-        .filter({ hasText: en.help.guides.weighingAtDoor.title })
-        .click();
     const image = page.locator(selector);
     await image.scrollIntoViewIfNeeded();
     await expect
@@ -89,6 +83,45 @@ for (const [route, selector] of [
       .toBe(true);
   });
 }
+
+test("tablet price guidance keeps the four pictorial steps and payment limits readable", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 768, height: 1024 });
+  await page.goto("/prices");
+  await page
+    .locator("summary")
+    .filter({ hasText: en.help.guides.weighingAtDoor.title })
+    .click();
+  const guide = page.getByRole("region", {
+    name: en.help.guides.weighingAtDoor.title,
+  });
+  await expect(guide.locator("img")).toHaveCount(0);
+  await expect(guide.getByText(en.prices.floorHelp)).toBeVisible();
+  await expect(guide.getByText(en.sell.basket.weighNote)).toBeVisible();
+  const steps = guide.getByRole("listitem");
+  await expect(steps).toHaveCount(4);
+  for (const key of ["zero", "each", "amount", "receipt"] as const) {
+    const heading = guide.getByRole("heading", {
+      name: en.help.guides.weighingAtDoor.steps[key].title,
+      exact: true,
+    });
+    await expect(heading).toBeVisible();
+    await expect(heading.locator('svg[aria-hidden="true"]')).toHaveCount(1);
+    await expect(
+      guide.getByText(en.help.guides.weighingAtDoor.steps[key].body, {
+        exact: true,
+      }),
+    ).toBeVisible();
+  }
+  await expect(guide.getByRole("link")).toHaveAttribute(
+    "href",
+    "/help/household/weighing-at-door",
+  );
+  expect(
+    await page.evaluate(() => document.documentElement.scrollWidth),
+  ).toBeLessThanOrEqual(768);
+});
 
 for (const [locale, width, prefix, copy] of [
   ["en", 768, "", en],

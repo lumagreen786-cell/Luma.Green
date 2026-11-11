@@ -96,43 +96,47 @@ function ReturnClaimsBody({
         title={t("returnClaims.title")}
         lead={t("returnClaims.notice")}
       />
-      <Section title={t("returnClaims.returnTitle")}>
-        {canOperate ? (
-          <ProposeReturn
-            options={options.filter((option) => option.canReturn)}
-          />
-        ) : null}
-        <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
-          {returns.rows.map((row) => (
-            <li key={row.id}>
-              <ReturnRecord
-                row={row}
-                orgId={orgId}
-                canManage={canManage}
-                canOperate={canOperate}
-              />
-            </li>
-          ))}
-        </ul>
-        {returns.rows.length === 0 ? (
-          <p>{t("qualityDocuments.empty")}</p>
-        ) : null}
-        {returns.hasMore ? <p>{t("lots.limit")}</p> : null}
-      </Section>
-      <Section title={t("returnClaims.scheme")}>
-        {canManage ? (
-          <DeclareClaim options={options.filter((row) => row.canClaim)} />
-        ) : null}
-        <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
-          {claims.rows.map((row) => (
-            <li key={row.id}>
-              <ClaimRecord row={row} canManage={canManage} />
-            </li>
-          ))}
-        </ul>
-        {claims.rows.length === 0 ? <p>{t("qualityDocuments.empty")}</p> : null}
-        {claims.hasMore ? <p>{t("lots.limit")}</p> : null}
-      </Section>
+      <div className="grid min-w-0 items-start gap-6 xl:grid-cols-2">
+        <Section title={t("returnClaims.returnTitle")}>
+          {canOperate ? (
+            <ProposeReturn
+              options={options.filter((option) => option.canReturn)}
+            />
+          ) : null}
+          <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
+            {returns.rows.map((row) => (
+              <li key={row.id}>
+                <ReturnRecord
+                  row={row}
+                  orgId={orgId}
+                  canManage={canManage}
+                  canOperate={canOperate}
+                />
+              </li>
+            ))}
+          </ul>
+          {returns.rows.length === 0 ? (
+            <p>{t("qualityDocuments.empty")}</p>
+          ) : null}
+          {returns.hasMore ? <p>{t("lots.limit")}</p> : null}
+        </Section>
+        <Section title={t("returnClaims.scheme")}>
+          {canManage ? (
+            <DeclareClaim options={options.filter((row) => row.canClaim)} />
+          ) : null}
+          <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
+            {claims.rows.map((row) => (
+              <li key={row.id}>
+                <ClaimRecord row={row} canManage={canManage} />
+              </li>
+            ))}
+          </ul>
+          {claims.rows.length === 0 ? (
+            <p>{t("qualityDocuments.empty")}</p>
+          ) : null}
+          {claims.hasMore ? <p>{t("lots.limit")}</p> : null}
+        </Section>
+      </div>
     </div>
   );
 }

@@ -49,15 +49,21 @@ function StatusSection({
     bad: "text-destructive",
   }[tone];
   return (
-    <section className="flex flex-col gap-6">
-      <span className={`flex size-8 items-center ${toneClass}`}>{icon}</span>
-      <div className="flex flex-col gap-1">
-        <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
-          {title}
-        </h1>
-        <p className="text-muted-foreground">{lead}</p>
+    <section className="flex flex-col gap-5">
+      <div className="flex items-start gap-4 rounded-xl bg-accent/30 p-4">
+        <span
+          className={`flex size-11 shrink-0 items-center justify-center rounded-full bg-card ${toneClass}`}
+        >
+          {icon}
+        </span>
+        <div className="flex flex-col gap-1">
+          <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
+            {title}
+          </h1>
+          <p className="text-muted-foreground">{lead}</p>
+        </div>
       </div>
-      {children}
+      <div className="flex flex-col gap-4">{children}</div>
     </section>
   );
 }
@@ -98,7 +104,7 @@ export function StatusView() {
           </h1>
           <p className="text-muted-foreground">{t("none.lead")}</p>
         </div>
-        <RoleCards />
+        <RoleCards placement="join-status" />
       </div>
     );
   }

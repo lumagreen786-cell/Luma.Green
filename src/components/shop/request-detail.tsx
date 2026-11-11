@@ -143,7 +143,7 @@ function RequestView({ detail }: { detail: BookingDetail }) {
         className={cn(
           "grid items-start gap-4",
           booking.status !== "completed" &&
-            "xl:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)]",
+            "lg:grid-cols-[minmax(0,1.5fr)_minmax(17rem,1fr)]",
         )}
       >
         <div className="min-w-0 space-y-6">
@@ -158,7 +158,7 @@ function RequestView({ detail }: { detail: BookingDetail }) {
           </div>
         </div>
         {booking.status === "completed" ? null : (
-          <div className="order-first min-w-0 space-y-5 rounded-2xl bg-card p-5 sm:p-6 xl:order-none">
+          <div className="order-first min-w-0 space-y-5 rounded-2xl bg-card p-5 sm:p-6 lg:sticky lg:top-24 lg:order-none">
             {booking.status === "requested" ? (
               <AcceptDecline bookingId={booking.id} />
             ) : null}

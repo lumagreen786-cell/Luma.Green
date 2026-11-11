@@ -76,11 +76,17 @@ function LogisticsWorkspace({
             {status === "LoadingFirstPage" ? (
               <ListSkeleton />
             ) : (
-              <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
+              <ul
+                className={
+                  selected
+                    ? "divide-y divide-border/60 rounded-xl bg-card px-4"
+                    : "grid min-w-0 items-start gap-4 md:grid-cols-2 xl:grid-cols-3"
+                }
+              >
                 {results.map((plan) => (
                   <li
                     key={plan._id}
-                    className="flex flex-wrap items-center justify-between gap-3 py-4"
+                    className="flex min-w-0 flex-wrap items-center justify-between gap-4 rounded-xl bg-card p-4"
                   >
                     <div className="min-w-0">
                       <p className="font-medium break-words">{plan.title}</p>

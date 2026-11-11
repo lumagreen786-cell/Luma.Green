@@ -119,154 +119,165 @@ function PaperBoard({ orgId }: { orgId: Id<"orgs"> }) {
   return (
     <section className="flex min-w-0 flex-col gap-6">
       <AppPageHeader title={t("title")} lead={t("lead")} />
-      <Link href="/app/stock" className="underline underline-offset-4">
-        {t("manual")}
-      </Link>
-      {available && !available.assisted ? (
-        <p role="status">{t("unavailable")}</p>
-      ) : null}
-      {available?.canOperate ? (
-        <section className="flex flex-col gap-3 rounded-xl border border-border/60 bg-card p-5">
-          <label htmlFor={`${id}-upload`}>{t("upload")}</label>
-          <Input
-            id={`${id}-upload`}
-            type="file"
-            accept="image/png,image/jpeg"
-            disabled={busy}
-            onChange={(event) => {
-              const file = event.currentTarget.files?.[0];
-              const picker = event.currentTarget;
-              picker.value = "";
-              if (!file) return;
-              setFailure(undefined);
-              if (
-                file.size > 2 * 1024 * 1024 ||
-                !["image/jpeg", "image/png"].includes(file.type)
-              ) {
-                setFailure("invalid");
-                return;
-              }
-              setBusy(true);
-              void (async () => {
-                try {
-                  const bitmap = await createImageBitmap(file);
-                  const isValid =
-                    bitmap.width > 0 &&
-                    bitmap.height > 0 &&
-                    bitmap.width <= 2400 &&
-                    bitmap.height <= 2400;
-                  bitmap.close();
-                  if (!isCurrent()) return;
-                  if (!isValid) {
-                    if (isCurrent()) setFailure("invalid");
+      <div className="grid min-w-0 items-start gap-6 xl:grid-cols-[19rem_minmax(0,1fr)]">
+        <div className="min-w-0 space-y-4 xl:sticky xl:top-24">
+          <Link href="/app/stock" className="underline underline-offset-4">
+            {t("manual")}
+          </Link>
+          {available && !available.assisted ? (
+            <p role="status">{t("unavailable")}</p>
+          ) : null}
+          {available?.canOperate ? (
+            <section className="flex flex-col gap-3 rounded-xl border border-border/60 bg-card p-5">
+              <label htmlFor={`${id}-upload`}>{t("upload")}</label>
+              <Input
+                id={`${id}-upload`}
+                type="file"
+                accept="image/png,image/jpeg"
+                disabled={busy}
+                onChange={(event) => {
+                  const file = event.currentTarget.files?.[0];
+                  const picker = event.currentTarget;
+                  picker.value = "";
+                  if (!file) return;
+                  setFailure(undefined);
+                  if (
+                    file.size > 2 * 1024 * 1024 ||
+                    !["image/jpeg", "image/png"].includes(file.type)
+                  ) {
+                    setFailure("invalid");
                     return;
                   }
-                  const bytes = await file.arrayBuffer();
-                  if (!isCurrent()) return;
-                  const result = await upload({
-                    expectedOrgId: orgId,
-                    name: file.name,
-                    contentType: file.type,
-                    bytes,
-                  });
-                  if (isCurrent()) setSelected(result.draftId);
-                } catch (error) {
-                  if (isCurrent()) setFailure(paperUploadProblem(error));
-                } finally {
-                  if (isCurrent()) setBusy(false);
-                }
-              })();
-            }}
-          />
-          <p className="text-sm text-muted-foreground">{t("invalid")}</p>
-          {busy ? <p role="status">{common("loading")}</p> : null}
-          {failure ? (
-            <p role="alert">
-              {failure === "error" ? common("error") : t(failure)}
-            </p>
+                  setBusy(true);
+                  void (async () => {
+                    try {
+                      const bitmap = await createImageBitmap(file);
+                      const isValid =
+                        bitmap.width > 0 &&
+                        bitmap.height > 0 &&
+                        bitmap.width <= 2400 &&
+                        bitmap.height <= 2400;
+                      bitmap.close();
+                      if (!isCurrent()) return;
+                      if (!isValid) {
+                        if (isCurrent()) setFailure("invalid");
+                        return;
+                      }
+                      const bytes = await file.arrayBuffer();
+                      if (!isCurrent()) return;
+                      const result = await upload({
+                        expectedOrgId: orgId,
+                        name: file.name,
+                        contentType: file.type,
+                        bytes,
+                      });
+                      if (isCurrent()) setSelected(result.draftId);
+                    } catch (error) {
+                      if (isCurrent()) setFailure(paperUploadProblem(error));
+                    } finally {
+                      if (isCurrent()) setBusy(false);
+                    }
+                  })();
+                }}
+              />
+              <p className="text-sm text-muted-foreground">{t("invalid")}</p>
+              {busy ? <p role="status">{common("loading")}</p> : null}
+              {failure ? (
+                <p role="alert">
+                  {failure === "error" ? common("error") : t(failure)}
+                </p>
+              ) : null}
+            </section>
           ) : null}
-        </section>
-      ) : null}
-      <ol className="divide-y">
-        {results.map((paper) => (
-          <li
-            key={paper.id}
-            className="flex flex-wrap items-center justify-between gap-3 py-3"
-          >
+          <ol className="divide-y">
+            {results.map((paper) => (
+              <li
+                key={paper.id}
+                className="flex flex-wrap items-center justify-between gap-3 py-3"
+              >
+                <Button
+                  className="h-auto min-h-11 max-w-full text-start break-all whitespace-normal"
+                  variant="ghost"
+                  onClick={() => {
+                    setSelected(paper.id);
+                  }}
+                >
+                  {paper.name}
+                </Button>
+                {paper.status === "confirmed" ? (
+                  <span>{t("confirmed")}</span>
+                ) : null}
+              </li>
+            ))}
+          </ol>
+          {status === "LoadingFirstPage" ? (
+            <p role="status">{common("loading")}</p>
+          ) : null}
+          {status !== "LoadingFirstPage" && results.length === 0 ? (
+            <p>{t("empty")}</p>
+          ) : null}
+          {status === "CanLoadMore" ? (
             <Button
-              className="h-auto min-h-11 max-w-full text-start break-all whitespace-normal"
-              variant="ghost"
+              variant="outline"
               onClick={() => {
-                setSelected(paper.id);
+                loadMore(20);
               }}
             >
-              {paper.name}
+              {t("more")}
             </Button>
-            {paper.status === "confirmed" ? (
-              <span>{t("confirmed")}</span>
-            ) : null}
-          </li>
-        ))}
-      </ol>
-      {status === "LoadingFirstPage" ? (
-        <p role="status">{common("loading")}</p>
-      ) : null}
-      {status !== "LoadingFirstPage" && results.length === 0 ? (
-        <p>{t("empty")}</p>
-      ) : null}
-      {status === "CanLoadMore" ? (
-        <Button
-          variant="outline"
-          onClick={() => {
-            loadMore(20);
-          }}
-        >
-          {t("more")}
-        </Button>
-      ) : null}
-      {selected ? (
-        <>
-          <PaperDetail
-            key={selected}
-            draftId={selected}
-            memory={draftMemory[selected]}
-            onDraftChange={(revision, content, submitted, savedRevision) => {
-              setDraftMemory((current) => {
-                const previous = current[selected];
-                if (
-                  submitted &&
-                  (previous?.revision !== revision ||
-                    previous.content !== submitted)
-                )
-                  return current;
-                let next: PaperBuffer | undefined;
-                if (submitted && savedRevision !== undefined)
-                  next = {
-                    revision: savedRevision,
-                    content: submitted,
-                    dirty: false,
-                  };
-                else if (content) next = { revision, content, dirty: true };
-                return { ...current, [selected]: next };
-              });
-            }}
-            assisted={Boolean(available?.assisted)}
-            canOperate={Boolean(available?.canOperate)}
-            onDiscard={() => {
-              setSelected(undefined);
-            }}
-          />
-          <PaperAssistance
-            key={`assist:${selected}`}
-            draftId={selected}
-            orgId={orgId}
-            memory={assistMemory}
-            remember={(id, draft) => {
-              setAssistMemory((current) => ({ ...current, [id]: draft }));
-            }}
-          />
-        </>
-      ) : null}
+          ) : null}
+        </div>
+        <div className="min-w-0 space-y-5">
+          {selected ? (
+            <>
+              <PaperDetail
+                key={selected}
+                draftId={selected}
+                memory={draftMemory[selected]}
+                onDraftChange={(
+                  revision,
+                  content,
+                  submitted,
+                  savedRevision,
+                ) => {
+                  setDraftMemory((current) => {
+                    const previous = current[selected];
+                    if (
+                      submitted &&
+                      (previous?.revision !== revision ||
+                        previous.content !== submitted)
+                    )
+                      return current;
+                    let next: PaperBuffer | undefined;
+                    if (submitted && savedRevision !== undefined)
+                      next = {
+                        revision: savedRevision,
+                        content: submitted,
+                        dirty: false,
+                      };
+                    else if (content) next = { revision, content, dirty: true };
+                    return { ...current, [selected]: next };
+                  });
+                }}
+                assisted={Boolean(available?.assisted)}
+                canOperate={Boolean(available?.canOperate)}
+                onDiscard={() => {
+                  setSelected(undefined);
+                }}
+              />
+              <PaperAssistance
+                key={`assist:${selected}`}
+                draftId={selected}
+                orgId={orgId}
+                memory={assistMemory}
+                remember={(id, draft) => {
+                  setAssistMemory((current) => ({ ...current, [id]: draft }));
+                }}
+              />
+            </>
+          ) : null}
+        </div>
+      </div>
     </section>
   );
 }
@@ -421,7 +432,7 @@ export function PaperEditor({
       aria-label={paper.name}
     >
       <h2 className="text-lg font-semibold break-words">{paper.name}</h2>
-      <section className="grid min-w-0 gap-6 lg:grid-cols-2">
+      <section className="grid min-w-0 gap-6 2xl:grid-cols-2">
         <PrivatePaper draftId={paper.id} />
         <section className="min-w-0 space-y-4">
           <PaperDraftNotice paper={paper} />

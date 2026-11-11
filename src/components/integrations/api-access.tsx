@@ -57,27 +57,31 @@ export function ApiAccess({ data, onCreate, onRevoke }: Props) {
   return (
     <>
       <AppPageHeader title={t("title")} lead={t("lead")} />
-      <section
-        aria-labelledby="api-connection-title"
-        className="flex flex-col gap-3 rounded-xl border border-border/60 bg-card p-5"
-      >
-        <h2 id="api-connection-title" className="text-lg font-semibold">
-          {t("connection")}
-        </h2>
-        <p className="max-w-2xl text-sm text-muted-foreground">
-          {t("readOnly")}
-        </p>
-        <p className="text-sm">
-          {t("baseUrl")}{" "}
-          <code dir="ltr" className="font-mono">
-            /api/v1
-          </code>
-        </p>
-        <Button asChild variant="outline" className="self-start">
-          <a href="/api/v1/openapi.json">{t("openApi")}</a>
-        </Button>
-      </section>
-      <AccessControls data={data} onCreate={onCreate} onRevoke={onRevoke} />
+      <div className="grid min-w-0 items-start gap-6 lg:grid-cols-[18rem_minmax(0,1fr)]">
+        <section
+          aria-labelledby="api-connection-title"
+          className="flex flex-col gap-3 rounded-xl border border-border/60 bg-card p-5"
+        >
+          <h2 id="api-connection-title" className="text-lg font-semibold">
+            {t("connection")}
+          </h2>
+          <p className="max-w-2xl text-sm text-muted-foreground">
+            {t("readOnly")}
+          </p>
+          <p className="text-sm">
+            {t("baseUrl")}{" "}
+            <code dir="ltr" className="font-mono">
+              /api/v1
+            </code>
+          </p>
+          <Button asChild variant="outline" className="self-start">
+            <a href="/api/v1/openapi.json">{t("openApi")}</a>
+          </Button>
+        </section>
+        <div className="min-w-0 space-y-6">
+          <AccessControls data={data} onCreate={onCreate} onRevoke={onRevoke} />
+        </div>
+      </div>
     </>
   );
 }

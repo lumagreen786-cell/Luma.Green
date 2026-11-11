@@ -169,7 +169,7 @@ test("hero image stays stable while scrolling and booking remains available", as
   const hero = page.getByRole("region", {
     name: english.home.hero.title,
   });
-  const artwork = hero.locator("img");
+  const artwork = hero.locator("[data-recycling-illustration]");
   await expect(artwork).toBeVisible();
   await expect(artwork).toHaveCSS("transform", "none");
   await page.evaluate(() => {

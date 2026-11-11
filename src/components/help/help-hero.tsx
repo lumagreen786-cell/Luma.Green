@@ -19,6 +19,7 @@ export function HelpHero({
   breadcrumbs,
   art,
   banner,
+  imagePlacement,
   children,
 }: {
   eyebrow?: string;
@@ -29,17 +30,18 @@ export function HelpHero({
   art?: ReactNode;
   /** A compact process image beside the help task on large screens. */
   banner?: StoryScene;
+  imagePlacement?: string;
   children?: ReactNode;
 }) {
   return (
     <div data-parallax-scene className="relative isolate bg-background">
-      <Container className="relative flex flex-col gap-5 py-8 sm:py-10">
+      <Container className="relative flex flex-col gap-4 py-6">
         {breadcrumbs}
         <div
           data-reveal
           className={cn(
-            "grid items-start gap-5 lg:gap-10",
-            banner && "lg:grid-cols-[minmax(0,1fr)_16rem]",
+            "grid items-center gap-4 rounded-xl bg-card p-5 sm:p-6",
+            banner && "lg:grid-cols-[minmax(0,1fr)_7rem]",
             !banner && art && "md:grid-cols-[1fr_auto]",
           )}
         >
@@ -49,20 +51,25 @@ export function HelpHero({
                 {eyebrow}
               </p>
             ) : null}
-            <h1 className="max-w-3xl font-display text-3xl leading-[1.1] font-semibold tracking-tight text-balance sm:text-4xl">
+            <h1 className="max-w-3xl font-display text-[1.75rem] leading-tight font-semibold tracking-tight text-balance sm:text-3xl">
               {title}
             </h1>
             <p className="max-w-2xl text-sm leading-relaxed text-pretty text-muted-foreground">
               {lead}
             </p>
-            {children}
+            {children ? (
+              <div className="mt-2 min-w-0 rounded-xl bg-muted p-3">
+                {children}
+              </div>
+            ) : null}
           </div>
           {banner ? (
             <RoleStoryImage
               scene={banner}
+              placement={imagePlacement}
               className="hidden lg:block"
-              frameClassName="h-28 aspect-auto"
-              sizes="(min-width: 1024px) 256px, 100vw"
+              frameClassName="h-24 aspect-auto"
+              sizes="(min-width: 1024px) 112px, 100vw"
             />
           ) : null}
           {!banner && art ? (

@@ -36,15 +36,16 @@ export default async function SolarPage() {
     <>
       <PageHeader
         variant="task"
+        imagePlacement="solar-rooftop"
         eyebrow={t("eyebrow")}
         title={t("title")}
         lead={t("lead")}
         scene={imageRole}
       />
-      <Container className="py-8 lg:py-12">
+      <Container className="pb-8">
         <SolarPlanner
           between={
-            <details className="border-y py-4">
+            <details className="rounded-xl bg-card p-5">
               <summary className="cursor-pointer py-2 font-semibold outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
                 {t("subsidy.title")}
               </summary>

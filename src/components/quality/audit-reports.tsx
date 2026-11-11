@@ -38,8 +38,11 @@ function ReportsContent({ data }: { data: Board }) {
   const requested = useSearchParams().get("inspection");
   const inspection = data.inspections.find((row) => row.id === requested);
   return (
-    <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 p-4 sm:p-8">
+    <div className="flex w-full min-w-0 flex-col gap-4">
       <AppPageHeader title={t("title")} lead={t("lead")} />
+      <p className="rounded-xl bg-accent/30 px-5 py-3 text-sm text-foreground">
+        {t("limit")}
+      </p>
       <RecordWorkspace
         detailKey={selected ?? undefined}
         onBack={() => {
@@ -92,7 +95,6 @@ function ReportsContent({ data }: { data: Board }) {
           ) : undefined
         }
       />
-      <p className="text-sm text-muted-foreground">{t("limit")}</p>
     </div>
   );
 }
@@ -170,7 +172,9 @@ function CreateReport({
           setExpiry(e.target.value);
         }}
       />
-      <p className="text-sm text-muted-foreground">{t("warning")}</p>
+      <p className="rounded-xl bg-attention/20 p-4 text-sm text-foreground">
+        {t("warning")}
+      </p>
       {data.files
         .filter((f) => f.inspectionId === inspection)
         .map((file) => (
@@ -283,14 +287,16 @@ function ReportDetail({ reportId }: { reportId: Id<"auditReports"> }) {
   return (
     <section className="space-y-4 rounded-xl border border-border/60 bg-card p-5">
       <h2 className="text-lg font-semibold">{report.purpose}</h2>
-      <p>{t("snapshot")}</p>
-      <p className="break-words">
-        {s.materialCode} · {s.state} · {format.number(s.declaredGrams)} g
-      </p>
-      <p className="break-words">
-        {s.specificationReference} · {s.specificationVersion}
-      </p>
-      <p className="break-words">{s.sampleMethod}</p>
+      <p className="rounded-xl bg-attention/20 p-4 text-sm">{t("snapshot")}</p>
+      <div className="grid gap-3 rounded-xl bg-muted/50 p-4 sm:grid-cols-2">
+        <p className="break-words">
+          {s.materialCode} · {s.state} · {format.number(s.declaredGrams)} g
+        </p>
+        <p className="break-words">
+          {s.specificationReference} · {s.specificationVersion}
+        </p>
+        <p className="break-words">{s.sampleMethod}</p>
+      </div>
       <ul className="divide-y">
         {s.results.map((result, index) => (
           <li className="flex justify-between gap-4 py-3" key={index}>
@@ -304,20 +310,26 @@ function ReportDetail({ reportId }: { reportId: Id<"auditReports"> }) {
       <p>
         {q(s.inspectingDecision as "accepted" | "rejected" | "conditional")}
       </p>
-      <h3 className="font-semibold">{q("decisions")}</h3>
-      {s.buyerDecisions.length === 0 ? (
-        <p>{q("empty")}</p>
-      ) : (
-        s.buyerDecisions.map((decision, index) => (
-          <div className="border-b py-3" key={index}>
-            <p>
-              {q(decision.decision as "accepted" | "rejected" | "conditional")}{" "}
-              · {format.dateTime(decision.createdAt, { dateStyle: "medium" })}
-            </p>
-            <p className="break-words">{decision.note}</p>
-          </div>
-        ))
-      )}
+      <details className="rounded-xl border border-border p-4">
+        <summary className="min-h-11 cursor-pointer py-2 font-semibold">
+          {q("decisions")}
+        </summary>
+        {s.buyerDecisions.length === 0 ? (
+          <p>{q("empty")}</p>
+        ) : (
+          s.buyerDecisions.map((decision, index) => (
+            <div className="border-b py-3" key={index}>
+              <p>
+                {q(
+                  decision.decision as "accepted" | "rejected" | "conditional",
+                )}{" "}
+                · {format.dateTime(decision.createdAt, { dateStyle: "medium" })}
+              </p>
+              <p className="break-words">{decision.note}</p>
+            </div>
+          ))
+        )}
+      </details>
       {report.files.map((file) => (
         <div
           key={file.id}

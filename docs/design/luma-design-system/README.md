@@ -13,6 +13,45 @@ Keep the real Luma features and data. Samples are layout references, not a sourc
 of operational values or permissions. The owner resumed mobile UI development;
 this does not authorize paid services, store submission or signed publication.
 
+## Composition correction — 11 November 2026
+
+The owner rejected the first rollout because page structures still resembled the
+previous design. Future work must change the task hierarchy and composition,
+not only palette, corners or shared controls. Use compact title/action bands,
+useful record grids, focused work areas and subordinate context. Avoid tall
+empty columns and oversized gaps; align short panels to their content.
+
+The owner also requested artwork behind focused screens such as login. Use a
+shared decorative recycling-art background with a soft static blur and black
+overlay; keep form text and controls crisp on an opaque white panel. Decorative
+art is not evidence of a real collection. Keep consent and provider limits
+visible. This replaces the older plain-background/no-art rule for these screens.
+Do not add background blur to data tables or blur the actual form.
+
+The owner explicitly requires black image overlays, not white or pale overlays.
+Use the semantic image-scrim token at 40% opacity over focused-screen art, with
+2px static blur on the image only. Black is a narrow exception to the five-colour
+palette for this decorative scrim; it does not add a general UI colour or dark
+mode. Keep the form card opaque white and its text crisp. Do not apply the scrim
+to actual customer photos, documents or data imagery.
+
+## Fresh pictorial artwork — 11 November 2026
+
+The owner requires fresh generated artwork for this revision. Do not reuse old
+site photos, illustrations or the same scene across unrelated page placements.
+Create a distinct asset for each mounted context (for example, homepage role,
+join role, participant directory and role help), sized for its actual frame.
+The four focused backgrounds for login, onboarding, administration and workspace
+invitations also use distinct artwork. Shared rendering components are encouraged;
+sharing one image across unrelated contexts is not. Do not generate unused assets.
+
+Use pictures to explain the recycling action with less reading. Keep required
+labels, consent and boundaries in translated text. Use the approved palette and
+keep decorative artwork clearly separate from real records, receipts or app
+screenshots. Never invent a customer, permit, payment or operational event in
+artwork. Preserve the brand logo and mandatory provider marks. Put current
+assets under public/images/ship-x and retain their generation/placement record.
+
 ## Colours and appearance
 
 Only five base colours are approved:
@@ -53,8 +92,8 @@ agreement. Do not invert photos or add a system-dark alternative.
 - Inventory: exact quantities, clear material groups and actual movements.
 - Forms: short stages when useful, visible labels, retained values, meaningful
   validation, required consent/verification, and a clear primary next action.
-- Public pages may use existing recycling photos and illustration. A library
-  photo is never evidence of a user's request, facility or certification.
+- Public pages use fresh, placement-specific recycling artwork for this revision.
+  Generated art is never evidence of a user's request, facility or certification.
 
 ## Components and type
 

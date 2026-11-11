@@ -25,18 +25,18 @@ export function HouseholdNavigation() {
   return (
     <nav
       aria-label={t("navigation")}
-      className="overflow-x-auto overscroll-x-contain border-b border-border/60 bg-card px-4 py-2"
+      className="bg-foreground px-4 py-3 text-background"
     >
-      <ul className="mx-auto grid w-max min-w-full grid-cols-[repeat(5,minmax(max-content,1fr))] gap-2 sm:max-w-2xl sm:min-w-0">
+      <ul className="mx-auto flex max-w-6xl flex-wrap items-center gap-2">
         {tabs.map(({ label, href, icon: Icon }) => (
-          <li key={href} className="min-w-0">
+          <li key={href} className="max-w-full min-w-0">
             <Link
               href={href}
               aria-current={pathname === href ? "page" : undefined}
-              className="flex min-h-12 min-w-0 flex-col items-center justify-center gap-1 rounded-full px-4 py-2 text-center text-xs font-medium outline-none hover:text-primary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset aria-[current=page]:bg-accent aria-[current=page]:text-accent-foreground"
+              className="flex min-h-12 min-w-0 items-center justify-center gap-2 rounded-full px-4 py-2 text-center text-sm font-medium outline-none hover:bg-background/10 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset aria-[current=page]:bg-accent aria-[current=page]:text-accent-foreground"
             >
               <Icon aria-hidden className="size-5 shrink-0" />
-              <span className="whitespace-nowrap">{t(label)}</span>
+              <span className="break-words">{t(label)}</span>
             </Link>
           </li>
         ))}

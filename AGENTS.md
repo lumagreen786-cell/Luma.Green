@@ -1,3 +1,20 @@
+## Current composition correction — 11 November 2026
+
+The owner requires page-specific layout rebuilding, not inherited layouts with
+new colours. Follow `docs/design/luma-design-system/README.md`, including the
+focused-screen recycling artwork, soft background blur and crisp form panels.
+Use black overlays on decorative images, not white or pale overlays. The semantic
+image-scrim token is an explicit, narrow exception to the five-colour palette.
+Keep opaque white form panels and never darken actual customer/data photos.
+The owner now requires fresh generated, pictorial artwork for each mounted page
+context. Do not reuse old site artwork or repeat a scene across unrelated
+placements. Use distinct login, onboarding, admin and invitation backgrounds.
+Preserve the brand logo and required provider marks. Artwork explains a task; it
+never proves a real collection, payment, permit or customer record. Follow the
+canonical design contract and retain an asset-to-placement record.
+The complete layout rebuild is tracked on `feat/ship-x-homepage`. Preserve all
+workflow, consent, authentication, data and native distribution boundaries.
+
 # AGENTS.md — Luma.Green
 
 **Cleaner Tomorrow in Motion.**

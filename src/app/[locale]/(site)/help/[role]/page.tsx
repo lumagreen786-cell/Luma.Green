@@ -78,12 +78,14 @@ export default async function RoleHelpPage({ params }: Props) {
         title={t(`roles.${role}.title`)}
         lead={t(`roles.${role}.lead`)}
         banner={role}
+        imagePlacement={`help-${role}`}
       >
         <JumpLinks label={t("role.onThisPage")} links={sections} />
       </HelpHero>
 
-      <Container className="flex flex-col gap-8 py-8 lg:gap-14 lg:py-16">
+      <Container className="grid items-start gap-4 pb-8 lg:grid-cols-2">
         <HelpSection
+          className="lg:col-span-2"
           id="guides"
           title={t("role.guidesHeading")}
           lead={t("role.guidesLead")}

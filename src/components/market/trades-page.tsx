@@ -156,8 +156,7 @@ function Trades({
     >
       <TabsList
         aria-label={t("trades.tabsLabel")}
-        variant="line"
-        className="w-full"
+        className="w-full rounded-xl bg-card p-2"
       >
         {(["buying", "selling"] as const).map((value) => (
           <TabsTrigger key={value} value={value}>

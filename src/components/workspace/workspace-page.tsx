@@ -116,7 +116,7 @@ export function WorkspacePage() {
     }
   }
   return (
-    <div className="flex min-w-0 flex-col gap-8">
+    <div className="flex min-w-0 flex-col gap-4">
       <AppPageHeader
         title={t("title")}
         actions={
@@ -137,7 +137,7 @@ export function WorkspacePage() {
       {workspaces?.length === 0 ? <p>{t("empty")}</p> : null}
       {workspaces && workspaces.length > 0 ? (
         <>
-          <div className="flex min-w-0 flex-col gap-2 sm:max-w-lg">
+          <div className="flex min-w-0 flex-col gap-2 rounded-xl bg-card p-5 sm:flex-row sm:items-center sm:gap-5">
             <Label htmlFor="workspace-choice">{t("choose")}</Label>
             <Select
               dir={isLocale(locale) ? localeDirection(locale) : "ltr"}
@@ -148,7 +148,10 @@ export function WorkspacePage() {
                 if (target && !target.selected) void choose(target.org.id);
               }}
             >
-              <SelectTrigger id="workspace-choice" className="min-h-12 w-full">
+              <SelectTrigger
+                id="workspace-choice"
+                className="min-h-12 w-full sm:max-w-lg"
+              >
                 <SelectValue placeholder={t("choose")} />
               </SelectTrigger>
               <SelectContent>
@@ -179,9 +182,15 @@ function TeamSection({ orgId }: { orgId: Id<"orgs"> }) {
   if (!team) return <ListSkeleton />;
   const canManage = team.role === "owner" || team.role === "admin";
   return (
-    <div className="flex min-w-0 flex-col gap-8">
-      {canManage ? <InviteForm orgId={orgId} actorRole={team.role} /> : null}
+    <div
+      className={
+        canManage
+          ? "grid min-w-0 items-start gap-4 xl:grid-cols-[minmax(0,1fr)_22rem]"
+          : "grid min-w-0 items-start gap-4"
+      }
+    >
       <Tabs
+        className="min-w-0 rounded-xl bg-card p-5"
         defaultValue="team"
         dir={isLocale(locale) ? localeDirection(locale) : "ltr"}
       >
@@ -199,7 +208,7 @@ function TeamSection({ orgId }: { orgId: Id<"orgs"> }) {
             {team.role === "viewer" ? (
               <p className="mb-3 text-muted-foreground">{t("readOnly")}</p>
             ) : null}
-            <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
+            <ul className="divide-y divide-border/60">
               {team.members.map((member) => (
                 <MemberRow
                   key={`${member.id}-${member.role}`}
@@ -217,6 +226,11 @@ function TeamSection({ orgId }: { orgId: Id<"orgs"> }) {
           </TabsContent>
         ) : null}
       </Tabs>
+      {canManage ? (
+        <div className="min-w-0 rounded-xl bg-card p-5">
+          <InviteForm orgId={orgId} actorRole={team.role} />
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -353,7 +367,7 @@ function InviteForm({
           event.preventDefault();
           void submit();
         }}
-        className="grid min-w-0 gap-4 md:grid-cols-[minmax(0,1fr)_minmax(9rem,0.5fr)_auto] md:items-end"
+        className="grid min-w-0 gap-4"
       >
         <div className="flex min-w-0 flex-col gap-2">
           <Label htmlFor="invite-email">{t("email")}</Label>
@@ -423,7 +437,7 @@ function Invitations({
   } as const;
   return (
     <SettingsSection id="pending-invites" title={t("pending")}>
-      <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
+      <ul className="divide-y divide-border/60">
         {invitations.map((invitation) => (
           <li
             key={invitation.id}

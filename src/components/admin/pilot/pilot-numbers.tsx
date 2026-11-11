@@ -112,11 +112,11 @@ function Report({ summary }: { summary: Summary }) {
     { label: "Cancelled", count: bookings.outcomes.cancelled },
   ];
   return (
-    <>
+    <div className="grid min-w-0 items-start gap-4 xl:grid-cols-2">
       {isTruncated ? (
         <p
           role="alert"
-          className="rounded-lg border border-destructive p-4 text-sm"
+          className="rounded-lg border border-destructive p-4 text-sm xl:col-span-2"
         >
           Partial report: only the latest {number.format(summary.sampleLimit)}{" "}
           records from each group are included. Choose a shorter period before
@@ -128,7 +128,7 @@ function Report({ summary }: { summary: Summary }) {
           No bookings or submitted applications in this period.
         </p>
       ) : null}
-      <dl className="grid grid-cols-2 gap-x-5 gap-y-6 lg:grid-cols-4">
+      <dl className="grid grid-cols-2 gap-x-5 gap-y-6 rounded-xl bg-card p-5 lg:grid-cols-4 xl:col-span-2">
         <Metric
           label="Bookings"
           value={number.format(bookings.count)}
@@ -164,7 +164,7 @@ function Report({ summary }: { summary: Summary }) {
             the booking ends as declined.
           </p>
         </header>
-        <div className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-center">
+        <div className="grid gap-6">
           {bookings.count > 0 ? (
             <BookingOutcomeChart rows={outcomeRows} />
           ) : null}
@@ -291,7 +291,7 @@ function Report({ summary }: { summary: Summary }) {
           </dl>
         </div>
       </section>
-    </>
+    </div>
   );
 }
 

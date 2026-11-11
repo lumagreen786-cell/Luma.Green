@@ -48,11 +48,19 @@ export function RecordWorkspace({
   return (
     <div
       className={cn(
-        "grid min-w-0 gap-5",
+        "grid min-w-0 items-start gap-5",
         detail && "lg:grid-cols-[18rem_minmax(0,1fr)]",
       )}
     >
-      <div className={cn("min-w-0", detail && "hidden lg:block")}>{list}</div>
+      <div
+        className={cn(
+          "min-w-0",
+          detail &&
+            "hidden lg:sticky lg:top-24 lg:block lg:max-h-[calc(100dvh-8rem)] lg:overflow-y-auto lg:pe-2",
+        )}
+      >
+        {list}
+      </div>
       {detail ? (
         <section
           ref={detailRegion}

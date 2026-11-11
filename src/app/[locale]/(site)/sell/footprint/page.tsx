@@ -12,7 +12,7 @@ export async function generateMetadata() {
 export default async function FootprintPage() {
   const t = await getTranslations("householdTools");
   return (
-    <Container className="flex max-w-2xl flex-col gap-6 py-8">
+    <Container className="flex max-w-6xl flex-col gap-6 py-8">
       <h1 className="font-display text-2xl font-semibold">
         {t("electricityTitle")}
       </h1>

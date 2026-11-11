@@ -28,10 +28,16 @@ function ComplianceBody() {
 
   return (
     <>
-      <ConsentCard consent={record.consent} orgKind={record.orgKind} />
-      <Checklist record={record} />
-      <Receipts receipts={record.receipts} />
-      {record.epr ? <EprSummary epr={record.epr} /> : null}
+      <div className="grid min-w-0 items-start gap-6 lg:grid-cols-[minmax(0,1.5fr)_minmax(17rem,1fr)]">
+        <div className="min-w-0 space-y-6">
+          <Checklist record={record} />
+          <Receipts receipts={record.receipts} />
+        </div>
+        <div className="min-w-0 space-y-6">
+          <ConsentCard consent={record.consent} orgKind={record.orgKind} />
+          {record.epr ? <EprSummary epr={record.epr} /> : null}
+        </div>
+      </div>
       <DemoNote>{t("demoNote")}</DemoNote>
     </>
   );

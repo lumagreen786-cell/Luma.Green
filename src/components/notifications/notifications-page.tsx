@@ -23,7 +23,7 @@ export function NotificationsPage() {
       <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
         {t("title")}
       </h1>
-      <div className="mt-6 grid min-w-0 gap-8 lg:grid-cols-[minmax(0,1fr)_18rem]">
+      <div className="mt-4 grid min-w-0 gap-4">
         <div className="min-w-0">
           {isConvexConfigured ? (
             <NotificationErrorBoundary
@@ -39,12 +39,12 @@ export function NotificationsPage() {
               <Inbox />
             </NotificationErrorBoundary>
           ) : (
-            <p className="py-6 text-muted-foreground">{t("unavailable")}</p>
+            <p className="rounded-xl bg-card p-6 text-muted-foreground">
+              {t("unavailable")}
+            </p>
           )}
         </div>
-        <aside className="min-w-0 lg:border-s lg:ps-6">
-          <DeviceSettings />
-        </aside>
+        <DeviceSettings />
       </div>
     </div>
   );
@@ -78,7 +78,7 @@ function DeviceSettings() {
   return (
     <section
       aria-labelledby="notification-device"
-      className="flex flex-col gap-3 rounded-xl border border-border/60 bg-card p-5"
+      className="flex min-w-0 flex-col gap-4 rounded-xl bg-accent/30 p-5 sm:flex-row sm:items-center sm:justify-between"
     >
       <div className="min-w-0">
         <h2 id="notification-device" className="font-semibold">
@@ -89,14 +89,14 @@ function DeviceSettings() {
         </p>
         <p
           role={failed || device?.status === "error" ? "alert" : "status"}
-          className="mt-2 text-sm text-muted-foreground"
+          className="mt-2 inline-flex rounded-full bg-card px-3 py-1 text-xs font-medium text-foreground"
         >
           {status}
         </p>
       </div>
       <Button
         variant={isEnabled ? "outline" : "default"}
-        className="shrink-0 self-start"
+        className="shrink-0 self-start sm:self-center"
         disabled={
           !device ||
           device.signingOut ||
@@ -166,7 +166,7 @@ function AuthenticatedInbox() {
   return (
     <section
       aria-labelledby="notification-inbox"
-      className="rounded-xl border border-border/60 bg-card p-5"
+      className="rounded-xl bg-card p-5 sm:p-6"
     >
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h2 id="notification-inbox" className="text-lg font-semibold">

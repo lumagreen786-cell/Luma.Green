@@ -31,12 +31,12 @@ export default async function AccountLayout({
         </Link>
         <AccountMenu />
       </header>
-      <div className="mx-auto grid w-full max-w-6xl flex-1 content-start gap-5 px-4 py-6 sm:px-8 lg:py-8">
+      <div className="mx-auto grid w-full max-w-7xl flex-1 content-start gap-5 px-4 py-5 sm:px-8">
         <nav
           aria-label={account("title")}
-          className="flex min-w-0 flex-wrap gap-1 rounded-xl border border-border/60 bg-card p-2"
+          className="flex min-w-0 flex-wrap gap-1 rounded-xl bg-foreground p-2 text-background"
         >
-          <AccountLinks className="font-medium hover:bg-muted hover:text-foreground" />
+          <AccountLinks className="font-medium hover:bg-background/15 hover:text-background aria-[current=page]:hover:bg-accent aria-[current=page]:hover:text-accent-foreground" />
         </nav>
         <main id="main" tabIndex={-1} className="flex min-w-0 flex-col">
           {children}

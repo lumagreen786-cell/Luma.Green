@@ -193,7 +193,7 @@ function RemovalForAccount({ sessionId }: { sessionId: string | undefined }) {
   const state = useRemovalForm(sessionId);
   const id = useId();
   return (
-    <section className="max-w-2xl space-y-6 rounded-xl border border-border/60 bg-card p-5 sm:p-6">
+    <section className="mx-auto max-w-3xl space-y-5 rounded-xl bg-card p-5 sm:p-6">
       {!state.pending && !state.closed ? (
         <RemovalStatus onStatus={state.setStatus} />
       ) : null}
@@ -201,10 +201,12 @@ function RemovalForAccount({ sessionId }: { sessionId: string | undefined }) {
         <h1 className="font-display text-3xl font-semibold">{t("title")}</h1>
         <p>{t("intro")}</p>
       </header>
-      <p id={`${id}-retained`} className="text-sm text-muted-foreground">
-        {t("retained")}
-      </p>
-      <p className="text-sm text-muted-foreground">{t("checkLimit")}</p>
+      <div className="space-y-3 rounded-xl bg-attention/20 p-4">
+        <p id={`${id}-retained`} className="text-sm text-foreground">
+          {t("retained")}
+        </p>
+        <p className="text-sm text-muted-foreground">{t("checkLimit")}</p>
+      </div>
       {state.closed ? (
         <ClosedRemoval state={state} />
       ) : (

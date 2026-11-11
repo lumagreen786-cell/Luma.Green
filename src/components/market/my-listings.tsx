@@ -32,7 +32,7 @@ export function MyListings() {
   const past = listings.filter((listing) => listing.status !== "open");
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="grid min-w-0 items-start gap-6 xl:grid-cols-[minmax(0,1.6fr)_minmax(18rem,1fr)]">
       <Section title={t("title")}>
         {open.length === 0 ? (
           <EmptyState

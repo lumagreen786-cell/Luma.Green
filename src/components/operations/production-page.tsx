@@ -97,9 +97,12 @@ function ProductionWorkspace({ canOperate }: { canOperate: boolean }) {
                 {data === undefined ? (
                   <ListSkeleton />
                 ) : (
-                  <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
+                  <ul className="grid items-start gap-4 lg:grid-cols-2">
                     {data.recipes.map((r) => (
-                      <li key={r.id} className="space-y-3 py-4">
+                      <li
+                        key={r.id}
+                        className="min-w-0 space-y-4 rounded-xl border border-border/60 bg-card p-5"
+                      >
                         <h2 className="font-display text-lg font-semibold">
                           {r.name} · {r.version}
                         </h2>
@@ -141,13 +144,16 @@ function ProductionWorkspace({ canOperate }: { canOperate: boolean }) {
                 {data === undefined ? (
                   <ListSkeleton />
                 ) : (
-                  <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
+                  <ul className="grid items-start gap-4 lg:grid-cols-2">
                     {data.batches.map((b) => (
-                      <li key={b.id} className="space-y-3 py-4">
+                      <li
+                        key={b.id}
+                        className="min-w-0 space-y-4 rounded-xl border border-border/60 bg-card p-5"
+                      >
                         <h2 className="font-display text-lg font-semibold">
                           {b.reference}
                         </h2>
-                        <dl className="space-y-2 text-sm">
+                        <dl className="grid gap-4 text-sm sm:grid-cols-2">
                           <div>
                             <dt className="text-muted-foreground">
                               {t("recipe")}

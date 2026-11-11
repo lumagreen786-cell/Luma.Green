@@ -9,14 +9,14 @@ export function GuideSteps({ guide }: { guide: Guide }) {
   const format = useFormatter();
   const total = guide.steps.length;
   return (
-    <ol className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
+    <ol className="divide-y divide-border/60">
       {guide.steps.map((step, index) => {
         const base = `guides.${guide.key}.steps.${step.key}`;
         return (
           <li key={step.key} className="flex gap-4 py-3 sm:gap-6">
             <span
               aria-hidden
-              className="w-9 shrink-0 pt-1 font-mono text-xl text-muted-foreground tabular-nums"
+              className="mt-2 flex size-9 shrink-0 items-center justify-center rounded-full bg-accent text-sm font-semibold text-accent-foreground tabular-nums"
             >
               {format.number(index + 1, { minimumIntegerDigits: 2 })}
             </span>

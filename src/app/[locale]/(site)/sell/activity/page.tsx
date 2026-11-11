@@ -21,10 +21,12 @@ export default async function ActivityPage({
   await requireSession(locale, "/sell/activity");
   const t = await getTranslations("householdTools");
   return (
-    <Container className="max-w-2xl py-8">
+    <Container className="max-w-6xl space-y-5 py-8">
       <h1 className="font-display text-2xl font-semibold">{t("activity")}</h1>
-      <MyBookings showEmpty />
-      <SharedFamilyCollections />
+      <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
+        <MyBookings showEmpty />
+        <SharedFamilyCollections />
+      </div>
     </Container>
   );
 }

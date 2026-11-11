@@ -280,7 +280,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         <div className="mx-auto flex max-w-[100rem] items-center gap-4 px-8 pb-4">
           <nav
             aria-label={t("navLabel")}
-            className="flex min-w-0 flex-1 items-center gap-2 overflow-x-auto overscroll-x-contain pb-1"
+            className="flex min-w-0 flex-1 flex-wrap items-center gap-2 pb-1"
           >
             {[...primary, ...more]
               .filter((item) => isSearchMatch(item))

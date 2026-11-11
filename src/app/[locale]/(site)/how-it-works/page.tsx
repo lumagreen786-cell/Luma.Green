@@ -50,17 +50,17 @@ export default async function HowItWorksPage() {
         atmosphere
       />
 
-      <Container className="py-8 sm:py-10 lg:py-16">
-        <ol className="grid gap-8 lg:grid-cols-3">
+      <Container className="pb-8">
+        <ol className="grid gap-4">
           {loopSteps.map(({ key, icon: Icon }, index) => (
             <li
               key={key}
               data-reveal
               aria-labelledby={`step-${key}`}
-              className="flex min-w-0 flex-col gap-4 border-t pt-5"
+              className="grid min-w-0 gap-5 rounded-xl bg-card p-5 sm:p-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)]"
             >
-              <div className="min-w-0 space-y-3 lg:space-y-5">
-                <span className="inline-flex size-8 items-center text-primary">
+              <div className="grid min-w-0 grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 gap-y-2">
+                <span className="row-span-2 inline-flex size-11 items-center justify-center rounded-full bg-accent text-accent-foreground">
                   <Icon aria-hidden className="size-6" />
                 </span>
                 <p className="text-sm font-medium text-primary">
@@ -68,17 +68,18 @@ export default async function HowItWorksPage() {
                 </p>
                 <h2
                   id={`step-${key}`}
-                  className="font-display text-2xl font-semibold tracking-tight"
+                  className="font-display text-lg font-semibold tracking-tight"
                 >
                   {loop(`${key}.title`)}
                 </h2>
                 <RoleStoryImage
                   scene={storyRoles[key]}
-                  className="w-full"
-                  frameClassName="aspect-[4/3]"
+                  placement={`how-${key}`}
+                  className="col-span-2 mt-2 w-full"
+                  frameClassName="h-40 aspect-auto"
                 />
               </div>
-              <div className="space-y-4">
+              <div className="space-y-4 lg:self-center">
                 <p className="text-sm leading-relaxed text-pretty text-muted-foreground">
                   {t(`${key}.body`)}
                 </p>

@@ -126,8 +126,12 @@ function DemandBoard() {
   const isCan = useCanOperate();
   if (!board) return <ListSkeleton />;
   return (
-    <div className="space-y-6 py-4">
-      {isCan && board.canPost ? <NewRecord kind="demand" /> : null}
+    <div className="grid min-w-0 items-start gap-6 py-4 lg:grid-cols-2">
+      {isCan && board.canPost ? (
+        <div className="lg:col-span-2">
+          <NewRecord kind="demand" />
+        </div>
+      ) : null}
       {(["mine", "available"] as const).map((side) => (
         <section key={side} className="space-y-3">
           <h2 className="font-heading text-lg font-medium">

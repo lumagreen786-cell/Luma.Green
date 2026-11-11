@@ -1,3 +1,16 @@
+## Composition rebuild verification — 11 November 2026
+
+The first Ship X rollout shipped through PR #52 as `6a762d0`; Vercel Production
+reported success and selected public pages were inspected. The owner then
+rejected the inherited page structures and requested a full composition rebuild,
+plus recycling artwork with a blurred overlay behind focused login-style pages.
+Current work is on `feat/ship-x-homepage`, based on that deployed commit.
+Do not treat the first rollout's screenshots/PDF as evidence of this new pass.
+See the [current redesign delivery record](ship-x-redesign-2026-11-11.md) for
+the 73-page source audit, six routing exceptions, fresh artwork and bounded
+390px visual review. The final combined checks and browser results remain
+pending at this checkpoint; this is not a deployment receipt.
+
 ## Approved Ship X design rollout — 11 November 2026
 
 The owner approved the five light-only Ship X-inspired samples and requested

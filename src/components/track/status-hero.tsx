@@ -106,7 +106,7 @@ export function StatusHero({ booking }: { booking: TrackedBooking }) {
   return (
     <section
       aria-labelledby="track-title"
-      className="flex flex-col gap-5 border-b border-border pb-5"
+      className="flex flex-col gap-5 rounded-2xl bg-card p-5 sm:p-6"
     >
       <div className="flex items-start gap-4">
         <span
