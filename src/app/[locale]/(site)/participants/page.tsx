@@ -105,7 +105,6 @@ export default async function ParticipantsPage() {
                   </div>
                   <RoleStoryImage
                     scene={roleProcessScenes[key]}
-                    placement={`participants-${key}`}
                     sizes="80px"
                     frameClassName="aspect-square rounded-lg"
                     className="order-1 w-full min-w-0"

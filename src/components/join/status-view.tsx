@@ -104,7 +104,7 @@ export function StatusView() {
           </h1>
           <p className="text-muted-foreground">{t("none.lead")}</p>
         </div>
-        <RoleCards placement="join-status" />
+        <RoleCards />
       </div>
     );
   }

@@ -74,7 +74,6 @@ export default async function HowItWorksPage() {
                 </h2>
                 <RoleStoryImage
                   scene={storyRoles[key]}
-                  placement={`how-${key}`}
                   className="col-span-2 mt-2 w-full"
                   frameClassName="h-40 aspect-auto"
                 />

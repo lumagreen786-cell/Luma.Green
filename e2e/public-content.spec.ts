@@ -96,7 +96,22 @@ test("tablet price guidance keeps the four pictorial steps and payment limits re
   const guide = page.getByRole("region", {
     name: en.help.guides.weighingAtDoor.title,
   });
-  await expect(guide.locator("img")).toHaveCount(0);
+  const image = guide.locator("img");
+  await expect(image).toHaveCount(1);
+  await expect(image).toHaveAttribute("src", /material-sorting/);
+  await image.scrollIntoViewIfNeeded();
+  await expect
+    .poll(() =>
+      image.evaluate((element: HTMLImageElement) => {
+        const bounds = element.getBoundingClientRect();
+        return (
+          element.complete &&
+          element.naturalWidth >= bounds.width &&
+          element.naturalHeight >= bounds.height
+        );
+      }),
+    )
+    .toBe(true);
   await expect(guide.getByText(en.prices.floorHelp)).toBeVisible();
   await expect(guide.getByText(en.sell.basket.weighNote)).toBeVisible();
   const steps = guide.getByRole("listitem");

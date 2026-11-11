@@ -28,7 +28,10 @@ for (const locale of ["en", "ar"]) {
         await expect(image).toBeVisible();
         await expect(image).toHaveAttribute("aria-hidden", "true");
         await expect(image).toHaveAttribute("alt", "");
-        await expect(image).toHaveAttribute("src", /home-journey\.webp/);
+        await expect(image).toHaveAttribute(
+          "src",
+          /recycle-household-illustration\.webp/,
+        );
         await expect
           .poll(() =>
             image.evaluate(

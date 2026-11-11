@@ -74,7 +74,7 @@ export function RoleStoryImage({
   sizes = "(min-width: 1280px) 560px, (min-width: 768px) 45vw, 92vw",
 }: {
   scene: StoryScene;
-  /** A fresh route-specific illustration; fallback is for unmounted legacy examples. */
+  /** Use a new illustration only for a newly added visual context. Existing scenes keep their original artwork. */
   placement?: string;
   compact?: boolean;
   className?: string;

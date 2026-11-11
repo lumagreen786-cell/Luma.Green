@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
+import { RoleStoryImage } from "@/components/showcase/role-story-image";
 import { actionName } from "@/components/site/action-name";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
@@ -29,6 +30,11 @@ export function PriceGuide() {
       className="grid min-w-0 gap-4 border-t pt-4"
     >
       <div className="min-w-0 space-y-5">
+        <RoleStoryImage
+          scene="sorting"
+          frameClassName="aspect-[3/2] rounded-lg"
+          sizes="(min-width: 1024px) 264px, (min-width: 640px) calc(100vw - 104px), calc(100vw - 80px)"
+        />
         <p className="max-w-prose text-base leading-relaxed">
           {prices("floorHelp")}
         </p>

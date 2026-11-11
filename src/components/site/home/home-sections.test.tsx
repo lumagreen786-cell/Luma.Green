@@ -69,7 +69,10 @@ describe("home page", () => {
       screen
         .getByRole("region", { name: messages.home.hero.title })
         .querySelector("img[data-recycling-illustration]"),
-    ).toHaveAttribute("src", expect.stringContaining("home-journey.webp"));
+    ).toHaveAttribute(
+      "src",
+      expect.stringContaining("recycle-household-illustration.webp"),
+    );
     // Home directs people to explicit locality selection without assuming a city.
     expect(screen.getByText(messages.prices.lead)).toBeInTheDocument();
   });

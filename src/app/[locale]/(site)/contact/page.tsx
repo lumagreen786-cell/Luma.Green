@@ -39,7 +39,6 @@ export default async function ContactPage() {
     <>
       <PageHeader
         variant="task"
-        imagePlacement="contact-support"
         title={t("title")}
         lead={t("lead")}
         scene={imageRole}

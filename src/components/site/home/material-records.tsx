@@ -5,6 +5,7 @@ import {
   ScaleIcon,
   UserCheckIcon,
 } from "lucide-react";
+import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 
 import { Button } from "@/components/ui/button";
@@ -45,6 +46,15 @@ export async function MaterialRecords() {
           <p className="text-sm leading-relaxed text-muted-foreground">
             {how("body")}
           </p>
+        </div>
+        <div className="relative aspect-[3/1] overflow-hidden rounded-xl bg-muted sm:aspect-[5/1]">
+          <Image
+            src="/images/showcase/recycling-line.webp"
+            alt=""
+            fill
+            sizes="(min-width: 1280px) 1152px, 100vw"
+            className="object-cover"
+          />
         </div>
         <dl className="grid gap-px overflow-hidden rounded-xl border border-border/60 bg-border/60 sm:grid-cols-2 lg:grid-cols-4">
           {facts.map(({ key, icon: Icon }) => (

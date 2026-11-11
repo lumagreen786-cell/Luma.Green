@@ -38,7 +38,6 @@ export function PageHeader({
   lead,
   eyebrow,
   scene,
-  imagePlacement,
   atmosphere = false,
   variant = "editorial",
 }: {
@@ -46,7 +45,6 @@ export function PageHeader({
   lead: string;
   eyebrow?: string;
   scene: StoryScene;
-  imagePlacement?: string;
   atmosphere?: boolean;
   variant?: "editorial" | "task";
 }) {
@@ -80,7 +78,6 @@ export function PageHeader({
         {variant === "task" ? (
           <RoleStoryImage
             scene={scene}
-            placement={imagePlacement}
             className="hidden lg:block"
             frameClassName="h-18 aspect-auto rounded-xl"
             sizes="96px"

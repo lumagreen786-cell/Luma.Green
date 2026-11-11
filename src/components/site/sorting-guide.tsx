@@ -18,7 +18,6 @@ export function SortingGuide() {
       <Container className="grid items-start gap-4 lg:grid-cols-[14rem_minmax(0,1fr)]">
         <RoleStoryImage
           scene="electronics"
-          placement="how-sorting-guide"
           sizes="(min-width: 1280px) 512px, (min-width: 1024px) 45vw, (min-width: 640px) calc(100vw - 64px), calc(100vw - 40px)"
           frameClassName="aspect-[3/2] rounded-xl"
         />

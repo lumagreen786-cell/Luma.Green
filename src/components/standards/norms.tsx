@@ -53,7 +53,6 @@ export function NormSection({
           {scene ? (
             <RoleStoryImage
               scene={scene}
-              placement={`standards-${id}`}
               frameClassName="aspect-[3/2] rounded-lg"
               sizes="(min-width: 1280px) 160px, 92vw"
             />

@@ -36,7 +36,6 @@ export default async function SolarPage() {
     <>
       <PageHeader
         variant="task"
-        imagePlacement="solar-rooftop"
         eyebrow={t("eyebrow")}
         title={t("title")}
         lead={t("lead")}

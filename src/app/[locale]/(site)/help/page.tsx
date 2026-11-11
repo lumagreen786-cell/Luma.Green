@@ -36,7 +36,6 @@ export default async function HelpPage() {
         title={t("title")}
         lead={t("lead")}
         banner="preparation"
-        imagePlacement="help-search"
       >
         <HelpSearch />
       </HelpHero>

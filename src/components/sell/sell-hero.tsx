@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 
+import recycleIllustration from "../../../public/images/showcase/recycle-household-illustration.webp";
+
 /** A compact page label leaves the current collection question in focus. */
 export async function SellHero() {
   const t = await getTranslations("sell.simple");
@@ -13,9 +15,7 @@ export async function SellHero() {
         {t("estimateLater")}
       </p>
       <Image
-        src="/images/ship-x/booking.webp"
-        width={1536}
-        height={1024}
+        src={recycleIllustration}
         alt=""
         className="aspect-[4/3] max-h-48 w-full rounded-xl object-cover lg:max-h-none"
         sizes="(min-width: 1024px) 40vw, 100vw"

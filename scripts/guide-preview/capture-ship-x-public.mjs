@@ -15,6 +15,27 @@ const output = path.resolve(
 );
 fs.mkdirSync(output, { recursive: true });
 const digest = (bytes) => createHash("sha256").update(bytes).digest("hex");
+// Exclude generated manifests: the capture writes them while it runs.
+const sourceDiff = () =>
+  execFileSync(
+    "/usr/bin/git",
+    [
+      "diff",
+      "HEAD",
+      "--binary",
+      "--",
+      "src",
+      "apps",
+      "messages",
+      "public",
+      "scripts",
+      "next.config.ts",
+      "package.json",
+      "pnpm-lock.yaml",
+      "tsconfig.json",
+    ],
+    { maxBuffer: 64 * 1024 * 1024 },
+  );
 const publicRoutes = [
   "/en",
   "/en/how-it-works",
@@ -78,9 +99,7 @@ const manifest = {
     encoding: "utf8",
   }).trim(),
   buildId: fs.readFileSync(".next/BUILD_ID", "utf8").trim(),
-  trackedDiffSha256: digest(
-    execFileSync("/usr/bin/git", ["diff", "HEAD", "--binary"]),
-  ),
+  trackedDiffSha256: digest(sourceDiff()),
   context:
     "Actual disconnected production build in isolated Chromium. No sign-in, OTP, provider submission or production acceptance. Redirects are recorded. Solar examples use clearly synthetic local inputs.",
   captures: [],
@@ -213,9 +232,7 @@ try {
       );
   }
   manifest.finishedAt = new Date().toISOString();
-  manifest.finalTrackedDiffSha256 = digest(
-    execFileSync("/usr/bin/git", ["diff", "HEAD", "--binary"]),
-  );
+  manifest.finalTrackedDiffSha256 = digest(sourceDiff());
   manifest.sourceUnchanged =
     manifest.finalTrackedDiffSha256 === manifest.trackedDiffSha256;
   manifest.passed =

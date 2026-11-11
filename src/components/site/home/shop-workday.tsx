@@ -99,7 +99,7 @@ export async function ShopWorkday() {
           >
             <Image
               data-parallax="-20"
-              src="/images/ship-x/home-shop.webp"
+              src="/images/showcase/material-yard.webp"
               alt=""
               fill
               sizes="(min-width: 1024px) 420px, 100vw"

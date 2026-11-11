@@ -24,7 +24,7 @@ export async function BusinessTrade() {
         <div className="grid grid-cols-1 gap-0 overflow-hidden rounded-xl border border-border/60 bg-card lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)]">
           <div className="relative aspect-[2/1] min-w-0 overflow-hidden bg-muted lg:aspect-auto">
             <Image
-              src="/images/ship-x/home-trade.webp"
+              src="/images/showcase/recycle-chain-illustration.webp"
               alt=""
               fill
               sizes="(min-width: 1024px) 568px, 100vw"

@@ -10,11 +10,7 @@ import { Link } from "@/i18n/navigation";
 import { APPLICATION_KINDS } from "../../../convex/lib/onboarding";
 
 /** An image-led directory: choose a role before completing its requirements. */
-export function RoleCards({
-  placement = "join",
-}: {
-  placement?: "join" | "join-status";
-}) {
+export function RoleCards() {
   const t = useTranslations("join");
   return (
     <ul className="grid gap-3">
@@ -26,7 +22,6 @@ export function RoleCards({
           >
             <RoleStoryImage
               scene={roleProcessScenes[kind]}
-              placement={`${placement}-${kind}`}
               frameClassName="aspect-square rounded-lg sm:aspect-[3/2]"
               sizes="(min-width: 640px) 144px, 80px"
             />

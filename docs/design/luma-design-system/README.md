@@ -35,22 +35,27 @@ palette for this decorative scrim; it does not add a general UI colour or dark
 mode. Keep the form card opaque white and its text crisp. Do not apply the scrim
 to actual customer photos, documents or data imagery.
 
-## Fresh pictorial artwork — 11 November 2026
+## Preserve existing artwork — latest owner correction, 11 November 2026
 
-The owner requires fresh generated artwork for this revision. Do not reuse old
-site photos, illustrations or the same scene across unrelated page placements.
-Create a distinct asset for each mounted context (for example, homepage role,
-join role, participant directory and role help), sized for its actual frame.
-The four focused backgrounds for login, onboarding, administration and workspace
-invitations also use distinct artwork. Shared rendering components are encouraged;
-sharing one image across unrelated contexts is not. Do not generate unused assets.
+Keep the original photos and illustrations in their existing sections. This
+correction supersedes the earlier request to replace all artwork or prohibit
+reuse. Preserve the improved layouts, mobile wrapping and readable controls;
+restoring an image does not restore the old page composition.
 
-Use pictures to explain the recycling action with less reading. Keep required
-labels, consent and boundaries in translated text. Use the approved palette and
-keep decorative artwork clearly separate from real records, receipts or app
-screenshots. Never invent a customer, permit, payment or operational event in
-artwork. Preserve the brand logo and mandatory provider marks. Put current
-assets under public/images/ship-x and retain their generation/placement record.
+Add newly generated pictorial artwork only where a new visual is needed. Keep
+the four new focused backgrounds for login, onboarding, administration and
+workspace invitations because those surfaces were previously blank. Keep their
+black image scrims and crisp, opaque white form panels. Do not generate or swap
+images merely to make every placement different.
+
+Use pictures to explain a task with less reading, while retaining translated
+labels, consent and boundaries. Art is never evidence of a real collection,
+customer, permit, payment or measured result. Preserve the brand logo and
+mandatory provider marks. Retain new assets and their generation/placement
+record; do not delete existing artwork as part of this correction. Keep the four
+active new backgrounds under public/images/ship-x. Preserve the 44 unused
+generated replacement scenes in docs/design/inspiration/generated-unused with
+their provenance; they are reference material, not active site images.
 
 ## Colours and appearance
 
@@ -92,7 +97,7 @@ agreement. Do not invert photos or add a system-dark alternative.
 - Inventory: exact quantities, clear material groups and actual movements.
 - Forms: short stages when useful, visible labels, retained values, meaningful
   validation, required consent/verification, and a clear primary next action.
-- Public pages use fresh, placement-specific recycling artwork for this revision.
+- Public pages preserve their existing recycling artwork; add new art only where needed.
   Generated art is never evidence of a user's request, facility or certification.
 
 ## Components and type

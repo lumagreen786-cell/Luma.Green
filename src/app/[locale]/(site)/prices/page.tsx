@@ -38,7 +38,6 @@ export default async function PricesPage() {
     <>
       <PageHeader
         variant="task"
-        imagePlacement="prices-weighing"
         eyebrow={t("eyebrow")}
         title={t("title")}
         lead={t("lead")}

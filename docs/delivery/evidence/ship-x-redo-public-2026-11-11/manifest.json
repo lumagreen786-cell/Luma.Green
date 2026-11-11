@@ -1,9 +1,9 @@
 {
-  "capturedAt": "2026-11-11T00:49:11.550Z",
+  "capturedAt": "2026-11-11T11:37:11.014Z",
   "baseURL": "http://127.0.0.1:3011",
-  "head": "6a762d0772df6a86876aa632d0a51b7e05938975",
-  "buildId": "twNkVebb4CH2aVFSCQrrx",
-  "trackedDiffSha256": "35536649a59bdd6146d527ac648caa9e00db54e40758647e196baa100ec2ef8e",
+  "head": "18436e8b100c3c107671c0fab6e434b0b563f074",
+  "buildId": "nR1RO2auOhdJphY_B-mv-",
+  "trackedDiffSha256": "963dc20441748422fcc0f5141c1eb91e02c3ec5503ba1abef04cb681a5dc61e4",
   "context": "Actual disconnected production build in isolated Chromium. No sign-in, OTP, provider submission or production acceptance. Redirects are recorded. Solar examples use clearly synthetic local inputs.",
   "captures": [
     {
@@ -18,12 +18,12 @@
       "heading": "Clear out recyclables. Get paid.",
       "brokenImages": [],
       "passed": true,
-      "sha256": "1509894b7af52859a58ca24729aaf0746250d33f5d81a8b716437b199cc3abf4",
+      "sha256": "8ecbc7b090f7a22a472ed7352513db2cca339246b5f69963bd904bef5b0365ba",
       "visualInspection": "pending",
       "bounds": {
         "innerWidth": 1440,
         "scrollWidth": 1440,
-        "height": 3753
+        "height": 4010
       }
     },
     {
@@ -38,7 +38,7 @@
       "heading": "How Luma.Green works",
       "brokenImages": [],
       "passed": true,
-      "sha256": "e5b6455fb92e87486d2e73156ac4f5788257d883aff5f7795c51e01de14691fb",
+      "sha256": "677d7880033ecc945d817eb376636d688d48f2f9964c1586131c5bb4e111b968",
       "visualInspection": "pending",
       "bounds": {
         "innerWidth": 1440,
@@ -58,7 +58,7 @@
       "heading": "Who Luma.Green is for",
       "brokenImages": [],
       "passed": true,
-      "sha256": "d28e7b050ae4c17c512771a4721e8f4898071d28a571c1b8a72086cf601a8954",
+      "sha256": "5f17f5ef28c182e242d5b0633f1d5b57ae015db94ad9d49d0fae40d6b629490d",
       "visualInspection": "pending",
       "bounds": {
         "innerWidth": 1440,
@@ -78,7 +78,7 @@
       "heading": "Material prices",
       "brokenImages": [],
       "passed": true,
-      "sha256": "73ace2ec78386a203160eb67c4a52e8cb173be7fc71eddec86481643ab10d941",
+      "sha256": "8844173a17a6f7473bfaa1014bfb4dd133adc7a67f5b5c676d77c4bcff84e115",
       "visualInspection": "pending",
       "bounds": {
         "innerWidth": 1440,
@@ -118,7 +118,7 @@
       "heading": "Rooftop solar for your home or business",
       "brokenImages": [],
       "passed": true,
-      "sha256": "dc88dd7fe3f2683f8ef4be0fbdf0c62d629f3680fdac58401dc2a7bc017bb77c",
+      "sha256": "67ada4847175fb514b94b673c35b5b181a00ed21d9c6f969759932eaabcbabec",
       "visualInspection": "pending",
       "bounds": {
         "innerWidth": 1440,
@@ -138,7 +138,7 @@
       "heading": "Join Luma.Green",
       "brokenImages": [],
       "passed": true,
-      "sha256": "956bb50a21e1bbbde4e555779e9c662fd3cf3dc6a924d255968a6c174320c026",
+      "sha256": "ed61a573c4a4f5f8aaf31db3f7dbeb693819349345fca22dff78a49ffb5d4e84",
       "visualInspection": "pending",
       "bounds": {
         "innerWidth": 1440,
@@ -158,7 +158,7 @@
       "heading": "Talk to us",
       "brokenImages": [],
       "passed": true,
-      "sha256": "9fdef6d910253a1e67ad606279c7f0359e05d520e41847812a943a38454d0576",
+      "sha256": "529c7e32310a4eb98be2a8b012fa5b81e1fc1942c70889db34dfaba045edeebc",
       "visualInspection": "pending",
       "bounds": {
         "innerWidth": 1440,
@@ -178,7 +178,7 @@
       "heading": "How can we help?",
       "brokenImages": [],
       "passed": true,
-      "sha256": "6840f5743d4d78cbd0f305b6979ce555e0c5f5314a4f556483fc2935dad37819",
+      "sha256": "dd6033e5e0bad0a1a3e3f3809202c5a609a465bccba8b8681d249d468a1ae72a",
       "visualInspection": "pending",
       "bounds": {
         "innerWidth": 1440,
@@ -198,7 +198,7 @@
       "heading": "Contact us",
       "brokenImages": [],
       "passed": true,
-      "sha256": "99348ce00d689af3af0d651c14bcf94104964cf5a24dd272ac2cf76f8b297983",
+      "sha256": "eb28f5af59e67c13fc427bb20ba8c264dca6447c29026176b6b5778a80093168",
       "visualInspection": "pending",
       "bounds": {
         "innerWidth": 1440,
@@ -218,7 +218,7 @@
       "heading": "Help for kabadiwalas",
       "brokenImages": [],
       "passed": true,
-      "sha256": "ba0e9ef36247bd8054a3f061a902fe8b4a1edd89b6dbb7e7c8b4856c14ed2bcf",
+      "sha256": "f5dbd68301291b95b50098e77138840540e9121f6140f843e983403fbaa1fe02",
       "visualInspection": "pending",
       "bounds": {
         "innerWidth": 1440,
@@ -258,7 +258,7 @@
       "heading": "Recycle",
       "brokenImages": [],
       "passed": true,
-      "sha256": "505db0bffd02c9bc001a91680791665373b78cdc425a1e3ca9b506f7d538165f",
+      "sha256": "c7651671e1299638e9bcdc5b3c014f7f2981d9ed3174e5454488735de037da69",
       "visualInspection": "pending",
       "bounds": {
         "innerWidth": 1440,
@@ -398,12 +398,12 @@
       "heading": "Clear out recyclables. Get paid.",
       "brokenImages": [],
       "passed": true,
-      "sha256": "9fe4dca58d0a368fa36045a9e4a7c64c98224723ff9b1592614347f483767141",
+      "sha256": "b210ba81ee325f8d6ecb14b50b0b3dca29731bd618f7f87c6e9cd86ea6f2f47a",
       "visualInspection": "pending",
       "bounds": {
         "innerWidth": 390,
         "scrollWidth": 390,
-        "height": 6704
+        "height": 6840
       }
     },
     {
@@ -438,7 +438,7 @@
       "heading": "Recycle",
       "brokenImages": [],
       "passed": true,
-      "sha256": "c85388066584c17f91b46c27056c6b518353b43035665e5a06563a2d308ab77a",
+      "sha256": "7a15eccd6c7e344eb1d6c6cf7cc15b1dc5097e29fbc05f2e15dae677198f670d",
       "visualInspection": "pending",
       "bounds": {
         "innerWidth": 390,
@@ -518,7 +518,7 @@
       "heading": "Join Luma.Green",
       "brokenImages": [],
       "passed": true,
-      "sha256": "932194db1031bd90d88e7d2fc516c6cfad6089ea5946ae674ce896f7a7363816",
+      "sha256": "9428207520c842709f6eae349bcec01459e1a9bc7e5310158e3b22c94dafb742",
       "visualInspection": "pending",
       "bounds": {
         "innerWidth": 390,
@@ -558,12 +558,12 @@
       "heading": "تخلّص من المواد القابلة للتدوير. واحصل على مقابل.",
       "brokenImages": [],
       "passed": true,
-      "sha256": "85cb002af7a4c3afb553176ea4f70023a3b598dfbc0c22a44597467830d6a7b9",
+      "sha256": "8a02b248e5be0154cb2080aecdc6e838767759ab45b1553d3e68df5a6b168cd6",
       "visualInspection": "pending",
       "bounds": {
         "innerWidth": 390,
         "scrollWidth": 390,
-        "height": 6329
+        "height": 6465
       }
     },
     {
@@ -598,7 +598,7 @@
       "heading": "إعادة التدوير",
       "brokenImages": [],
       "passed": true,
-      "sha256": "9856d1606a6f8e584cc5dcbbdfedb874c1f72f9df3171e6bb6dc3213cbf350c2",
+      "sha256": "75af4bea9a631cc60a407d35d9c678809ca980ecb1c26c0947920d4695690ada",
       "visualInspection": "pending",
       "bounds": {
         "innerWidth": 390,
@@ -618,12 +618,12 @@
       "heading": "மறுசுழற்சிப் பொருட்களை அகற்றுங்கள். பணம் பெறுங்கள்.",
       "brokenImages": [],
       "passed": true,
-      "sha256": "befd6522b8ec4214b35938ded01e6edfba2aed98910ac89ced9ef12fffc2f81e",
+      "sha256": "ad6db4832d0dff2c989aae270b9b2a00690b9c6b61b52d38073bdbfac588177e",
       "visualInspection": "pending",
       "bounds": {
         "innerWidth": 390,
         "scrollWidth": 390,
-        "height": 7800
+        "height": 7936
       }
     },
     {
@@ -638,7 +638,7 @@
       "heading": "மறுசுழற்சி செய்க",
       "brokenImages": [],
       "passed": true,
-      "sha256": "e75351f612de176d0e558f51ad1825110fee8f5c6b892631ebc1a00d8ed4718c",
+      "sha256": "77e5f53a1805a84be7783b1776d41cf0de5dd7f37b898e6545cd19af70f059c4",
       "visualInspection": "pending",
       "bounds": {
         "innerWidth": 390,
@@ -658,12 +658,12 @@
       "heading": "Clear out recyclables. Get paid.",
       "brokenImages": [],
       "passed": true,
-      "sha256": "5762b9810a24ea8d16f835e81818be10dfd332e55e792da3cfd87a940cfd5de9",
+      "sha256": "c6f7e3134390f9c9517eda78a279d703ec95c9d41531bbaf7095774b53e312ac",
       "visualInspection": "pending",
       "bounds": {
         "innerWidth": 768,
         "scrollWidth": 768,
-        "height": 5647
+        "height": 5808
       }
     },
     {
@@ -678,7 +678,7 @@
       "heading": "Recycle",
       "brokenImages": [],
       "passed": true,
-      "sha256": "cb3a6098e8dc1561b4e43f9fa81ebfa431694edf13e30edf72879c628f44f1bc",
+      "sha256": "88df6abb0c6af024c232e1cca11951626fea88268651d4a92773ac27ca40912e",
       "visualInspection": "pending",
       "bounds": {
         "innerWidth": 768,
@@ -698,7 +698,7 @@
       "heading": "إعادة التدوير",
       "brokenImages": [],
       "passed": true,
-      "sha256": "7890614ab1ec884b76633b49bcb8bc2587d66c80d69155c54c03e284a8d3928a",
+      "sha256": "81ed23b28af360c1253d1fcd48b9ee6e6b55d9c246cd171e15e09a54de0cabbe",
       "visualInspection": "pending",
       "bounds": {
         "innerWidth": 768,
@@ -899,7 +899,7 @@
       "heading": "Rooftop solar for your home or business",
       "brokenImages": [],
       "passed": true,
-      "sha256": "fa6f466319ad0033b0d939dbac6cf9a1b4288e6faa6fccf6032bc14b6e7bd775",
+      "sha256": "c76fda9efd7280fa4cd658330cc2e92507c29b29e0adfc7296ba0af538cba908",
       "visualInspection": "pending",
       "bounds": {
         "innerWidth": 1440,
@@ -950,8 +950,8 @@
       }
     }
   ],
-  "finishedAt": "2026-11-11T00:49:43.894Z",
-  "finalTrackedDiffSha256": "35536649a59bdd6146d527ac648caa9e00db54e40758647e196baa100ec2ef8e",
+  "finishedAt": "2026-11-11T11:37:43.731Z",
+  "finalTrackedDiffSha256": "963dc20441748422fcc0f5141c1eb91e02c3ec5503ba1abef04cb681a5dc61e4",
   "sourceUnchanged": true,
   "passed": true
 }

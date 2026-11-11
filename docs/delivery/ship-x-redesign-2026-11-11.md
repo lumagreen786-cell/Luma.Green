@@ -5,6 +5,20 @@ This record covers the new page composition pass. Earlier release receipts and
 screenshots do not establish acceptance of this revision. No deployment result
 is claimed here.
 
+## Preserved artwork
+
+Original section images remain in their existing page contexts. Four new images
+fill previously empty login, onboarding, admin and invitation backgrounds. Their
+black overlays preserve readable white form panels. The 44 unused generated
+replacement concepts are saved in `docs/design/inspiration/generated-unused/`;
+the application does not use them. The original price-guide and material-record
+images are also restored.
+
+The preserved-image build passed, followed by 95 focused browser cases and 47
+public plus 267 fixture captures. Fresh English, Arabic and Tamil home/household
+phone captures were inspected after 17:07 IST. Original artwork, the Luma.Green
+wordmark and wrapping chips remain visible without clipping in those views.
+
 ## Implementation scope
 
 The independent [route audit](ship-x-route-coverage.md) covers 79 page entries:
@@ -22,11 +36,9 @@ team controls come before invitations in both DOM and visual order; non-managers
 have no empty invitation column. Authentication, exact units, provider limits and
 private record access remain in place.
 
-The pass uses 48 fresh generated illustrations in `public/images/ship-x/`, with
-`provenance.json` as their source record. Art explains a process; it does not
-prove an actual collection or provider result. The old price-guide raster was
-removed while its weighing instructions and actions were retained. Private
-user-selected photos and required brand/provider marks remain source content.
+Artwork explains a process; it does not prove an actual collection or provider
+result. Private user-selected photos and required brand/provider marks remain
+unchanged. New background provenance is in `public/images/ship-x/provenance.json`.
 
 The approved [design contract](../design/luma-design-system/README.md) permits a
 black image scrim at 40% opacity on focused-screen backgrounds. This is a narrow
@@ -41,7 +53,7 @@ can wrap rather than clip. The browser matrix includes 320px and 390px checks.
 
 ## Inspected current screenshots
 
-The following captures were inspected after 06:03 IST on 11 November. All are
+The public home and household captures below were rechecked after 17:07 IST on 11 November. Other listed layouts were reviewed in the earlier 06:03 pass and remain unchanged. All are
 390px wide. The reviewer found no brand clipping, overlapping actions or clipped
 selection chips in these views. This is a bounded visual review, not acceptance
 of all routes, widths, locales or states.
@@ -86,9 +98,8 @@ Release validation completed locally:
 - Security: 28 passed. Desktop policy: 34 passed. Expo policy: 67 passed; Expo
   UI: 20 passed. These do not establish physical-device acceptance.
 - All 47 public captures and 267 isolated fixture captures passed, with loaded
-  images and fonts. One suspended-network fixture was recaptured against the
-  same source hash; its original failure is retained in retryHistory.
-- The new PDF contains 314 captures over 451 readable pages, with sample/legacy
+  images and fonts. The final preserved-image capture pass has no failed fixtures.
+- The new PDF contains 314 captures over 452 readable pages, with sample/legacy
   boundaries and clickable contents. Image references and extracted text passed;
   cover, evidence notes and a screenshot body page were rendered and inspected.
 

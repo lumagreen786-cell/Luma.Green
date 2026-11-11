@@ -56,7 +56,6 @@ export async function RoleBenefits({
                 >
                   <RoleStoryImage
                     scene={key}
-                    placement={`home-role-${key}`}
                     className="w-full"
                     frameClassName="aspect-[2/1] rounded-lg"
                     sizes="(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw"

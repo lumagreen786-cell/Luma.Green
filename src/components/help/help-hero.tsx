@@ -19,7 +19,6 @@ export function HelpHero({
   breadcrumbs,
   art,
   banner,
-  imagePlacement,
   children,
 }: {
   eyebrow?: string;
@@ -30,7 +29,6 @@ export function HelpHero({
   art?: ReactNode;
   /** A compact process image beside the help task on large screens. */
   banner?: StoryScene;
-  imagePlacement?: string;
   children?: ReactNode;
 }) {
   return (
@@ -66,7 +64,6 @@ export function HelpHero({
           {banner ? (
             <RoleStoryImage
               scene={banner}
-              placement={imagePlacement}
               className="hidden lg:block"
               frameClassName="h-24 aspect-auto"
               sizes="(min-width: 1024px) 112px, 100vw"
