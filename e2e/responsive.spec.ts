@@ -363,6 +363,11 @@ for (const { route, panel, action } of [
       await page.evaluate(async () => document.fonts.ready);
       const sheet = page.locator(panel);
       const button = sheet.locator(action);
+      // Exercise larger glyph metrics than the local font rasterizer provides.
+      // CI's Linux shaping is wider than macOS for these scripts.
+      await button.evaluate((element) => {
+        element.style.setProperty("font-size", "16px");
+      });
       await expectControlTextToFit(button);
       const bounds = await sheet.boundingBox();
       const buttonBounds = await button.boundingBox();

@@ -136,3 +136,29 @@ Repair verification: the rebuilt disconnected Production bundle passed all
 the four new action-bound checks. Selected repaired phone panels/actions were
 visually inspected in both themes. The existing viewport tolerance is unchanged.
 Fresh `pnpm check`, formatting and `git diff --check` passed after this repair.
+
+### Linux panel-padding follow-up
+
+At `3473642`, all original viewport-overflow cases passed. The two new Sinhala
+panel-bound checks still failed in Linux: the button ended at 285px, while its
+panel content ended at 280px. The prior label-only repair did not leave enough
+space for Linux glyph metrics. The SortingGuide component now uses 8px phone
+horizontal action padding, retaining 24px from the small breakpoint upward.
+The label, icon, font size and 52px touch height remain intact. The four bound
+checks also exercise 16px action text; this reproduced both Sinhala failures
+locally before the padding repair. No clipping or assertion tolerance change
+was made. This is a presentation-only change with no new telemetry or native
+permission behavior.
+
+The final Production build and all **37 targeted browser cases** passed,
+including the larger-text panel checks. Selected phone, tablet and desktop
+captures were inspected; the final phone action was checked in both themes.
+An initial full lint attempt exhausted Node's default heap; the required-check
+rerun uses an 8 GiB heap. This infrastructure failure is separate from browser
+layout acceptance.
+
+The 8 GiB `pnpm check` rerun passed, including 396 suites / 3,258 web/backend
+cases, security checks and mobile/desktop compatibility. Both isolated OTP
+browser cases passed. Focused lint, formatting and `git diff --check` passed.
+The configured test-key analytics build and all five intercepted-provider
+consent browser cases also passed.

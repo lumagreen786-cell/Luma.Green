@@ -45,7 +45,7 @@ export function SortingGuide() {
               </div>
             ))}
           </dl>
-          <Button asChild variant="outline" size="lg">
+          <Button asChild variant="outline" size="lg" className="px-2 sm:px-6">
             <Link
               href="/help/household/get-ready"
               aria-label={actionName(
