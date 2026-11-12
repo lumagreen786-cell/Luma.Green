@@ -80,7 +80,7 @@ function Receipt({ id }: { id: string }) {
     return (
       <div className="flex flex-col gap-4" aria-busy="true">
         <Skeleton className="h-10 w-48" />
-        <Skeleton className="h-96 w-full rounded-xl" />
+        <Skeleton className="h-96 w-full rounded-panel" />
       </div>
     );
   }
@@ -163,7 +163,12 @@ function ReceiptDocument({
   return (
     <>
       <style>{PRINT_CSS}</style>
-      <div className="flex flex-wrap items-center justify-between gap-2 print:hidden">
+      <div className="grid items-center gap-4 py-4 sm:grid-cols-[minmax(0,1fr)_auto_auto] print:hidden">
+        <div className="min-w-0">
+          <p className="font-display text-4xl font-medium tracking-tight sm:text-5xl">
+            {t("receipt.title")}
+          </p>
+        </div>
         <Button asChild variant="ghost" size="lg" className="h-11 px-2">
           <Link href="/app/trades">
             <ArrowLeftIcon aria-hidden className="rtl:rotate-180" />
@@ -184,9 +189,9 @@ function ReceiptDocument({
 
       <article
         id="trade-receipt"
-        className="flex flex-col gap-6 rounded-xl border border-border/60 bg-card p-5 sm:p-6 print:border-0 print:p-0"
+        className="record-sheet flex min-w-0 flex-col gap-8 rounded-panel p-5 shadow-panel sm:p-8 lg:p-10 print:border-0 print:p-0 print:shadow-none"
       >
-        <div className="flex flex-wrap items-start justify-between gap-4 border-b pb-5">
+        <div className="flex flex-wrap items-start justify-between gap-4 border-b pb-5 lg:col-span-2">
           <div className="flex flex-col gap-3">
             <Logo idPrefix="lg-receipt" />
             <h1 className="font-display text-3xl font-semibold tracking-tight">
@@ -197,7 +202,9 @@ function ReceiptDocument({
             <dt className="text-muted-foreground">
               {t("receipt.numberLabel")}
             </dt>
-            <dd className="font-mono font-medium">{number}</dd>
+            <dd className="font-display text-2xl font-medium tracking-tight">
+              {number}
+            </dd>
             <dt className="text-muted-foreground">{t("receipt.dateLabel")}</dt>
             <dd>{fullDate(recordedAt)}</dd>
             <dt className="text-muted-foreground">
@@ -213,64 +220,68 @@ function ReceiptDocument({
           </dl>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-6 sm:grid-cols-2 print:grid-cols-2">
           <Party title={t("receipt.seller")} party={receipt.seller} />
           <Party title={t("receipt.buyer")} party={receipt.buyer} />
         </div>
 
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>{t("receipt.material")}</TableHead>
-              <TableHead className="hidden text-end sm:table-cell print:table-cell">
-                {t("receipt.quantity")}
-              </TableHead>
-              <TableHead className="hidden text-end sm:table-cell print:table-cell">
-                {t("receipt.rate")}
-              </TableHead>
-              <TableHead className="text-end">{t("receipt.amount")}</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            <TableRow>
-              <TableCell className="whitespace-normal">
-                <span className="font-medium">
-                  {format.material(line.material.names, line.material.code)}
-                </span>
-                <span className="block text-muted-foreground tabular-nums sm:hidden print:hidden">
-                  {t("receipt.lineSummary", { weight, rate })}
-                </span>
-              </TableCell>
-              <TableCell className="hidden text-end tabular-nums sm:table-cell print:table-cell">
-                {weight}
-              </TableCell>
-              <TableCell className="hidden text-end tabular-nums sm:table-cell print:table-cell">
-                {rate}
-              </TableCell>
-              <TableCell className="text-end tabular-nums">
-                {format.money(line.paise)}
-              </TableCell>
-            </TableRow>
-          </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TableCell className="sm:hidden print:hidden">
-                {t("receipt.total")}
-              </TableCell>
-              <TableCell
-                colSpan={3}
-                className="hidden text-end sm:table-cell print:table-cell"
-              >
-                {t("receipt.total")}
-              </TableCell>
-              <TableCell className="text-end text-base font-semibold tabular-nums">
-                {format.money(receipt.totalPaise)}
-              </TableCell>
-            </TableRow>
-          </TableFooter>
-        </Table>
+        <div className="min-w-0 lg:col-start-1 lg:row-start-2 print:contents">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>{t("receipt.material")}</TableHead>
+                <TableHead className="hidden text-end sm:table-cell print:table-cell">
+                  {t("receipt.quantity")}
+                </TableHead>
+                <TableHead className="hidden text-end sm:table-cell print:table-cell">
+                  {t("receipt.rate")}
+                </TableHead>
+                <TableHead className="text-end">
+                  {t("receipt.amount")}
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell className="whitespace-normal">
+                  <span className="font-medium">
+                    {format.material(line.material.names, line.material.code)}
+                  </span>
+                  <span className="block text-muted-foreground tabular-nums sm:hidden print:hidden">
+                    {t("receipt.lineSummary", { weight, rate })}
+                  </span>
+                </TableCell>
+                <TableCell className="hidden text-end tabular-nums sm:table-cell print:table-cell">
+                  {weight}
+                </TableCell>
+                <TableCell className="hidden text-end tabular-nums sm:table-cell print:table-cell">
+                  {rate}
+                </TableCell>
+                <TableCell className="text-end tabular-nums">
+                  {format.money(line.paise)}
+                </TableCell>
+              </TableRow>
+            </TableBody>
+            <TableFooter className="record-detail border-0">
+              <TableRow>
+                <TableCell className="sm:hidden print:hidden">
+                  {t("receipt.total")}
+                </TableCell>
+                <TableCell
+                  colSpan={3}
+                  className="hidden text-end sm:table-cell print:table-cell"
+                >
+                  {t("receipt.total")}
+                </TableCell>
+                <TableCell className="text-end text-2xl font-medium tabular-nums">
+                  {format.money(receipt.totalPaise)}
+                </TableCell>
+              </TableRow>
+            </TableFooter>
+          </Table>
+        </div>
 
-        <div className="flex flex-col gap-2 text-sm">
+        <div className="flex flex-col gap-2 text-sm lg:col-start-1 lg:row-start-3">
           <div className="flex gap-2">
             <InfoIcon
               aria-hidden
@@ -288,14 +299,14 @@ function ReceiptDocument({
             <p className="flex gap-2">
               <FileTextIcon
                 aria-hidden
-                className="mt-0.5 size-4 shrink-0 text-primary"
+                className="mt-0.5 size-4 shrink-0 text-foreground"
               />
               {t("receipt.ewayBill")}
             </p>
           ) : null}
         </div>
 
-        <div className="flex flex-col gap-1 border-t pt-4 text-xs text-muted-foreground">
+        <div className="flex flex-col gap-1 border-t pt-4 text-xs text-muted-foreground lg:col-span-2">
           <p>{t("receipt.notTaxInvoice")}</p>
         </div>
       </article>

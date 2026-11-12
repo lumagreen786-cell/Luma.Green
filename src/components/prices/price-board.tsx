@@ -89,7 +89,10 @@ export function BoardView({ board }: { board: PriceBoardData }) {
         <div className="flex flex-col gap-2 text-sm text-muted-foreground sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6">
           {board.date ? (
             <p className="flex items-center gap-2 font-medium text-foreground">
-              <CalendarDaysIcon aria-hidden className="size-4 text-primary" />
+              <CalendarDaysIcon
+                aria-hidden
+                className="size-4 text-foreground"
+              />
               {t("date", { date: format.date(board.date) })}
             </p>
           ) : null}

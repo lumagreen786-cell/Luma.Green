@@ -1,0 +1,212 @@
+Browser tab: 16, Title: "Reports | Florin", URL: "https://ui.cortexcn.dev/previews/florin/reports".
+1 AXWebArea Reports | Florin, URL: ui.cortexcn.dev/previews/florin/reports
+	2 container
+		3 link Description: Skip to content, Value: ui.cortexcn.dev/previews/florin/reports#main
+		4 link Description: Florin, invoices, Value: ui.cortexcn.dev/previews/florin/
+		5 pop up button (collapsed) Description: All pages, Secondary Actions: Expand
+		6 pop up button (collapsed) Description: Notifications, Secondary Actions: Expand
+		7 link Description: Settings, Value: ui.cortexcn.dev/previews/florin/settings/
+		8 pop up button (collapsed) Description: Account menu, ID: radix-_R_tb5tlb_, Secondary Actions: Expand
+		9 container Billing
+			10 content list
+				11 link Description: Estimates, Value: ui.cortexcn.dev/previews/florin/estimates/
+				12 link Description: Invoices, Value: ui.cortexcn.dev/previews/florin/
+				13 link Description: Payments, Value: ui.cortexcn.dev/previews/florin/payments/
+				14 link Description: Recurring Invoices, Value: ui.cortexcn.dev/previews/florin/recurring/
+				15 link Description: Checkouts, Value: ui.cortexcn.dev/previews/florin/checkouts/
+		16 container main
+			17 container
+				18 heading Reports, Value: 1
+					19 text Reports
+				20 combo box (collapsed) Description: Period, Value: Last 12 months, Secondary Actions: Expand
+					21 text Last 12 months
+			22 container
+				23 text Invoiced $834,510.00 Collected $702,980.00 Collected of invoiced 84 % Owed today $170,460.00
+			24 container
+				25 heading Invoiced and collected, Value: 2
+					26 text Invoiced and collected
+				27 content list
+					28 text Invoiced
+					29 text Collected
+				30 container
+					31 text Dec Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov
+				32 table Invoiced and collected by month
+					33 text Invoiced and collected by month
+					34 row
+						35 cell
+							36 text Month
+						37 cell
+							38 text Invoiced
+						39 cell
+							40 text Collected
+					41 row
+						42 cell
+							43 text December 2025
+						44 cell
+							45 text $83,640.00
+						46 cell
+							47 text $47,480.00
+					48 row
+						49 cell
+							50 text January 2026
+						51 cell
+							52 text $47,300.00
+						53 cell
+							54 text $86,820.00
+					55 row
+						56 cell
+							57 text February 2026
+						58 cell
+							59 text $78,200.00
+						60 cell
+							61 text $31,520.00
+					62 row
+						63 cell
+							64 text March 2026
+						65 cell
+							66 text $70,260.00
+						67 cell
+							68 text $91,100.00
+					69 row
+						70 cell
+							71 text April 2026
+						72 cell
+							73 text $86,080.00
+						74 cell
+							75 text $72,560.00
+					76 row
+						77 cell
+							78 text May 2026
+						79 cell
+							80 text $50,500.00
+						81 cell
+							82 text $89,440.00
+					83 row
+						84 cell
+							85 text June 2026
+						86 cell
+							87 text $56,120.00
+						88 cell
+							89 text $32,360.00
+					90 row
+						91 cell
+							92 text July 2026
+						93 cell
+							94 text $45,560.00
+						95 cell
+							96 text $64,160.00
+					97 row
+						98 cell
+							99 text August 2026
+						100 cell
+							101 text $90,880.00
+						102 cell
+							103 text $60,920.00
+					104 row
+						105 cell
+							106 text September 2026
+						107 cell
+							108 text $35,140.00
+						109 cell
+							110 text $85,790.00
+					111 row
+						112 cell
+							113 text October 2026
+						114 cell
+							115 text $106,730.00
+						116 cell
+							117 text $33,100.00
+					118 row
+						119 cell
+							120 text November 2026
+						121 cell
+							122 text $84,100.00
+						123 cell
+							124 text $7,730.00
+			125 container
+				126 heading Money owed by age, Value: 2
+					127 text Money owed by age
+				128 text Open invoices, by days past their due date.
+				129 content list
+					130 container
+						131 text Not yet due ,  7 invoices $138,930.00
+						132 progress indicator Description: Not yet due: $138,930.00, 82% of what is owed, Value: 82
+					133 container
+						134 text 1 to 30 days late ,  2 invoices $31,530.00
+						135 progress indicator Description: 1 to 30 days late: $31,530.00, 18% of what is owed, Value: 18
+					136 container
+						137 text 31 to 60 days late ,  0 invoices $0.00
+						138 progress indicator Description: 31 to 60 days late: $0.00, 0% of what is owed, Value: 0
+					139 container
+						140 text 61 to 90 days late ,  0 invoices $0.00
+						141 progress indicator Description: 61 to 90 days late: $0.00, 0% of what is owed, Value: 0
+					142 container
+						143 text Over 90 days late ,  0 invoices $0.00
+						144 progress indicator Description: Over 90 days late: $0.00, 0% of what is owed, Value: 0
+				145 text Owed in all $170,460.00
+			146 container
+				147 heading Top customers, Value: 2
+					148 text Top customers
+				149 text By money received in the period.
+				150 content list
+					151 link Description: Fernway Legal, $138,120.00, Value: ui.cortexcn.dev/previews/florin/customer/?id=fernway
+					152 link Description: Lumora Health, $97,940.00, Value: ui.cortexcn.dev/previews/florin/customer/?id=lumora
+					153 link Description: Halden Works, $89,340.00, Value: ui.cortexcn.dev/previews/florin/customer/?id=halden
+					154 link Description: Copperline Energy, $70,850.00, Value: ui.cortexcn.dev/previews/florin/customer/?id=copperline
+					155 link Description: Tallgrass Farms, $70,340.00, Value: ui.cortexcn.dev/previews/florin/customer/?id=tallgrass
+			156 container
+				157 heading Days to get paid, Value: 2
+					158 text Days to get paid
+				159 text 15 days on average across the period. 9 days in Nov
+				160 container
+					161 text 10 20
+				162 container
+					163 text Dec 15 Apr 15 Aug 15 Nov 15
+				164 content list
+					165 container
+						166 text December 2025 :  14 days
+					167 container
+						168 text January 2026 :  20 days
+					169 container
+						170 text February 2026 :  13 days
+					171 container
+						172 text March 2026 :  13 days
+					173 container
+						174 text April 2026 :  13 days
+					175 container
+						176 text May 2026 :  23 days
+					177 container
+						178 text June 2026 :  13 days
+					179 container
+						180 text July 2026 :  21 days
+					181 container
+						182 text August 2026 :  10 days
+					183 container
+						184 text September 2026 :  13 days
+					185 container
+						186 text October 2026 :  12 days
+					187 container
+						188 text November 2026 :  9 days
+			189 container
+				190 heading Payment methods, Value: 2
+					191 text Payment methods
+				192 text Money received, by how it was paid.
+				193 container 100%
+					194 container
+						195 text 1
+						196 text 0
+						197 text 0
+					198 container
+						199 text %
+				200 text by bank
+				201 content list
+					202 container
+						203 text Bank transfer 32 payments $428,680 61 %
+					204 container
+						205 text Card 51 payments $237,740 34 %
+					206 container
+						207 text Wallet 10 payments $36,560 5 %
+				208 text Received in all $702,980.00
+		209 container Notifications alt+T
+
+The focused UI element is 1 AXWebArea Reports | Florin, URL: ui.cortexcn.dev/previews/florin/reports

@@ -1,3 +1,48 @@
+## Florin local closeout — 12 November 2026
+
+Resumed the unfinished Florin changes on `feat/ship-x-homepage`. The local
+implementation includes dual themes, page compositions, compact daily workspace
+navigation with a More panel, appearance access in workspace/admin screens,
+short translated signup actions and the previously missed recovery layouts.
+See [the delivery record](florin-redesign-2026-11-11.md) for checks and evidence.
+No PDF, backend setting, production record, binary or provider action changed.
+
+The separate historical `luma-overhaul` worktree has a verified private recovery
+archive at `/Users/syedabdulmuqeeth/Developer/Archives/luma-overhaul-2026-11-12`.
+Its 3,843 archived files match their source bytes and its Git bundle verifies.
+The old worktree was removed after a second backup comparison confirmed Git
+status, both patches and all 3,843 file contents still matched. The primary
+checkout and private archive remain intact.
+
+UI commit: `44b449812041571507db6517b223a1d9a20a3342`. Required local checks
+passed, with 534 fixture captures and 112 public captures passing. The browser
+suite passed 934/936 cases; both selector failures were fixed and the 8-test
+motion suite passed afterward. A further 98 focused browser checks passed.
+See the delivery record for limits and receipt links. PR #53 remains draft;
+no push, merge, deployment or native publication was performed.
+
+## Florin redesign in progress — 11 November 2026
+
+Latest owner decision replaces Ship X with all Florin pages and both modes.
+Read `.agents/skills/luma-florin-ui/SKILL.md` and the canonical design contract.
+Reference captures/tokens: `docs/design/inspiration/florin`. No further PDFs.
+PR #53 remains draft until this new implementation and checks are complete.
+Previous Ship X checks/captures do not establish Florin acceptance.
+
+## Composition rebuild verification — 11 November 2026
+
+The first Ship X rollout shipped through PR #52 as `6a762d0`; Vercel Production
+reported success and selected public pages were inspected. The owner then
+rejected the inherited page structures and requested a full composition rebuild,
+plus recycling artwork with a blurred overlay behind focused login-style pages.
+Current work is on `feat/ship-x-homepage`, based on that deployed commit.
+Do not treat the first rollout's screenshots/PDF as evidence of this new pass.
+See the [current redesign delivery record](ship-x-redesign-2026-11-11.md) for
+the 73-page source audit, six routing exceptions, preserved original imagery,
+four new black-overlay backgrounds, mobile fixes and validation receipts.
+The refreshed PDF contains 314 captures over 452 pages. Local verification is
+complete; checked PR merge and Production deployment are next.
+
 ## Approved Ship X design rollout — 11 November 2026
 
 The owner approved the five light-only Ship X-inspired samples and requested

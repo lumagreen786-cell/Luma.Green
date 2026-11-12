@@ -90,8 +90,8 @@ describe("workspace navigation", () => {
       state.pathname = "/app/lots/test-lot";
       view();
       expect(
-        screen.getByRole("link", { name: messages.lots.title }),
-      ).toHaveAttribute("aria-current", "page");
+        screen.queryByRole("link", { name: messages.lots.title }),
+      ).not.toBeInTheDocument();
       await userEvent.click(
         within(screen.getByRole("banner")).getByRole("button", {
           name: messages.app.more,
@@ -102,6 +102,11 @@ describe("workspace navigation", () => {
           name: messages.lots.title,
         }),
       ).toHaveAttribute("href", "/app/lots");
+      expect(
+        within(screen.getByRole("dialog")).getByRole("link", {
+          name: messages.lots.title,
+        }),
+      ).toHaveAttribute("aria-current", "page");
     },
   );
   it.each([
@@ -112,10 +117,9 @@ describe("workspace navigation", () => {
     async ({ kind, label, href }) => {
       state.workspace = { kind: "org", org: { kind, name: "Test business" } };
       view();
-      expect(screen.getByRole("link", { name: label })).toHaveAttribute(
-        "href",
-        href,
-      );
+      expect(
+        screen.queryByRole("link", { name: label }),
+      ).not.toBeInTheDocument();
       await userEvent.click(
         within(screen.getByRole("banner")).getByRole("button", {
           name: messages.app.more,
@@ -211,8 +215,8 @@ describe("workspace navigation", () => {
       menu.getByRole("button", { name: "Language: English" }),
     ).toBeInTheDocument();
     expect(
-      menu.queryByRole("button", { name: "Appearance" }),
-    ).not.toBeInTheDocument();
+      menu.getByRole("button", { name: "Appearance" }),
+    ).toBeInTheDocument();
     await userEvent.click(
       menu.getByRole("button", { name: messages.app.signOut }),
     );
@@ -302,6 +306,23 @@ it("finds secondary operational destinations without hiding current page content
   ).toBeVisible();
   await userEvent.clear(search);
   expect(
-    screen.getByRole("link", { name: messages.app.nav.buy }),
+    screen.queryByRole("link", { name: messages.app.nav.buy }),
+  ).not.toBeInTheDocument();
+  const desktop = screen.getAllByRole("navigation", {
+    name: messages.app.navLabel,
+  })[0];
+  expect(
+    within(desktop).getByRole("link", { name: messages.app.nav.home }),
   ).toBeVisible();
+  await userEvent.click(
+    within(desktop).getByRole("button", { name: messages.app.more }),
+  );
+  const menu = within(screen.getByRole("dialog"));
+  expect(
+    menu.getByRole("link", { name: messages.app.nav.buy }),
+  ).toHaveAttribute("href", "/app/market");
+  expect(
+    menu.getByRole("link", { name: messages.workspace.title }),
+  ).toHaveAttribute("href", "/account/workspaces");
+  expect(menu.getByRole("button", { name: "Appearance" })).toBeVisible();
 });

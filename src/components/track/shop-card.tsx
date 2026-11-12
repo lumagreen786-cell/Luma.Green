@@ -34,7 +34,7 @@ export function ShopCard({ shop }: { shop: TrackedBooking["shop"] }) {
         </span>
         <div className="flex min-w-0 flex-1 flex-col gap-1">
           <p className="text-lg leading-snug font-semibold">{shop.name}</p>
-          <p className="flex items-center gap-1 text-sm font-medium text-primary">
+          <p className="flex items-center gap-1 text-sm font-medium text-foreground">
             <BadgeCheckIcon aria-hidden className="size-4" />
             {t("verified")}
           </p>

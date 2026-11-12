@@ -10,14 +10,14 @@ const css = readFileSync(
 
 // The interactive theme behavior is tested beside ThemeProvider. These checks
 // guard the CSS contract that JavaScript alone cannot exercise in jsdom.
-describe("approved light-only theme", () => {
+describe("Florin dual theme", () => {
   it("keeps component dark styles under the chosen root class", () => {
     expect(css).toContain("@custom-variant dark (&:is(.dark *));");
   });
 
-  it("supplies semantic surfaces without a dark override", () => {
+  it("supplies semantic surfaces and a dark override", () => {
     const light = /:root\s*\{([^}]+)\}/.exec(css)?.[1] ?? "";
-    expect(css).not.toMatch(/\.dark\s*\{/);
+    expect(css).toMatch(/\.dark\s*\{/);
     for (const token of [
       "background",
       "foreground",

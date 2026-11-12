@@ -1,0 +1,79 @@
+HIT src/app/[locale]/(account)/account/notifications/page.tsx :: src/components/notifications/notifications-page.tsx
+HIT src/app/[locale]/(account)/account/privacy/page.tsx :: src/components/account/privacy-requests.tsx
+HIT src/app/[locale]/(account)/account/removal/page.tsx :: src/components/account/account-removal.tsx
+HIT src/app/[locale]/(account)/account/reports/page.tsx :: src/components/app/record-workspace.tsx, src/components/app/workflow-tabs.tsx, src/components/quality/audit-reports.tsx
+HIT src/app/[locale]/(account)/account/security/page.tsx :: src/components/account/account-security.tsx
+HIT src/app/[locale]/(account)/account/services/page.tsx :: src/components/services/services-page.tsx
+HIT src/app/[locale]/(account)/account/workspaces/invite/page.tsx :: src/components/workspace/invitation-page.tsx
+HIT src/app/[locale]/(account)/account/workspaces/page.tsx :: src/components/workspace/workspace-page.tsx
+HIT src/app/[locale]/(app)/app/billing/page.tsx :: src/components/billing/billing-page.tsx
+HIT src/app/[locale]/(app)/app/carbon-projects/page.tsx :: src/components/carbon/carbon-projects-page.tsx, src/components/carbon/framework-screening.tsx
+HIT src/app/[locale]/(app)/app/compliance/page.tsx :: src/components/insights/checklist.tsx, src/components/insights/compliance-page.tsx, src/components/insights/consent-card.tsx, src/components/insights/epr-summary.tsx, src/components/insights/receipts.tsx
+HIT src/app/[locale]/(app)/app/evidence/page.tsx :: src/components/evidence/evidence-page.tsx
+HIT src/app/[locale]/(app)/app/facility/page.tsx :: src/components/app/workflow-tabs.tsx, src/components/facility/facility-page.tsx
+HIT src/app/[locale]/(app)/app/impact/page.tsx :: src/components/insights/bar-list.tsx, src/components/insights/ledger-explainer.tsx
+HIT src/app/[locale]/(app)/app/integrations/page.tsx :: src/components/integrations/api-access.tsx
+HIT src/app/[locale]/(app)/app/logistics/page.tsx :: src/components/app/record-workspace.tsx, src/components/logistics/logistics-page.tsx
+HIT src/app/[locale]/(app)/app/lots/[id]/page.tsx :: src/components/app/workflow-tabs.tsx, src/components/lots/inspections.tsx, src/components/lots/lots-page.tsx
+HIT src/app/[locale]/(app)/app/lots/page.tsx :: src/components/app/workflow-tabs.tsx, src/components/lots/inspections.tsx, src/components/lots/lots-page.tsx
+HIT src/app/[locale]/(app)/app/market/page.tsx :: src/components/market/buy-dialog.tsx, src/components/market/listing-card.tsx, src/components/market/market-page.tsx
+HIT src/app/[locale]/(app)/app/material-standards/page.tsx :: src/components/operations/material-standards.tsx
+HIT src/app/[locale]/(app)/app/page.tsx :: src/components/market/business-home.tsx, src/components/market/buy-dialog.tsx, src/components/market/direct-cash-custody.tsx, src/components/market/direct-cash.tsx, src/components/market/listing-card.tsx, src/components/market/trade-card.tsx, src/components/saathi/saathi-home.tsx, src/components/saathi/week-earnings.tsx, src/components/shop/dispatch-settings.tsx, src/components/shop/home-cards.tsx, src/components/shop/kabadiwala-home.tsx, src/components/shop/price-check.tsx
+HIT src/app/[locale]/(app)/app/papers/page.tsx :: src/components/papers/paper-page.tsx
+HIT src/app/[locale]/(app)/app/prices/page.tsx :: src/components/shop/rate-card-page.tsx
+HIT src/app/[locale]/(app)/app/production/page.tsx :: src/components/app/workflow-tabs.tsx, src/components/operations/production-page.tsx
+HIT src/app/[locale]/(app)/app/quality-documents/page.tsx :: src/components/app/workflow-tabs.tsx, src/components/quality/quality-documents.tsx
+HIT src/app/[locale]/(app)/app/requests/[id]/page.tsx :: src/components/shop/receipt-view.tsx, src/components/shop/request-detail.tsx, src/components/shop/weigh-and-pay.tsx
+HIT src/app/[locale]/(app)/app/requests/page.tsx :: src/components/shop/requests-page.tsx
+HIT src/app/[locale]/(app)/app/returns/page.tsx :: src/components/operations/return-claims-page.tsx
+HIT src/app/[locale]/(app)/app/sell/page.tsx :: src/components/app/workflow-tabs.tsx, src/components/market/listing-card.tsx, src/components/market/listing-fields.tsx, src/components/market/my-listings.tsx
+HIT src/app/[locale]/(app)/app/services/page.tsx :: src/components/services/services-page.tsx
+HIT src/app/[locale]/(app)/app/sourcing/page.tsx :: src/components/app/workflow-tabs.tsx, src/components/sourcing/sourcing-page.tsx
+HIT src/app/[locale]/(app)/app/stock/page.tsx :: src/components/app/workflow-tabs.tsx, src/components/shop/stock-page.tsx
+HIT src/app/[locale]/(app)/app/trades/[id]/invoice/page.tsx :: src/components/market/invoice-page.tsx
+HIT src/app/[locale]/(app)/app/trades/page.tsx :: src/components/market/direct-cash-custody.tsx, src/components/market/direct-cash.tsx, src/components/market/trade-card.tsx, src/components/market/trades-page.tsx
+REDIRECT src/app/[locale]/(auth)/login/email/complete/page.tsx :: retired route; redirects to /login
+REDIRECT src/app/[locale]/(auth)/login/email/reset/page.tsx :: retired route; redirects to /login
+REDIRECT src/app/[locale]/(auth)/login/email/verify/page.tsx :: retired route; redirects to /login
+HIT src/app/[locale]/(auth)/login/page.tsx :: src/components/auth/auth-progress.tsx, src/components/auth/login-flow.tsx, src/components/auth/phone-form.tsx, src/components/auth/verify-flow.tsx, src/components/site/collection-privacy.tsx
+HIT src/app/[locale]/(auth)/login/verify/page.tsx :: src/components/auth/auth-progress.tsx, src/components/auth/login-flow.tsx, src/components/auth/phone-form.tsx, src/components/auth/verify-flow.tsx, src/components/site/collection-privacy.tsx
+HIT src/app/[locale]/(household)/t/[token]/page.tsx :: src/components/site/collection-privacy.tsx, src/components/track/booking-cards.tsx, src/components/track/shop-card.tsx, src/components/track/status-hero.tsx, src/components/track/track-view.tsx
+HIT src/app/[locale]/(join)/join/[business]/documents/page.tsx :: src/components/join/fields.tsx, src/components/join/file-slot.tsx, src/components/join/form-journey.tsx, src/components/join/form-parts.tsx
+HIT src/app/[locale]/(join)/join/[business]/page.tsx :: src/components/join/fields.tsx, src/components/join/file-slot.tsx, src/components/join/form-journey.tsx, src/components/join/form-parts.tsx
+HIT src/app/[locale]/(join)/join/kabadiwala/page.tsx :: src/components/join/fields.tsx, src/components/join/file-slot.tsx, src/components/join/form-journey.tsx, src/components/join/form-parts.tsx
+HIT src/app/[locale]/(join)/join/roles/page.tsx :: src/components/join/participant-directory.tsx, src/components/join/participant-phone-gate.tsx
+HIT src/app/[locale]/(join)/join/saathi/page.tsx :: src/components/join/fields.tsx, src/components/join/file-slot.tsx, src/components/join/form-journey.tsx, src/components/join/form-parts.tsx
+HIT src/app/[locale]/(join)/join/stakeholder/page.tsx :: src/components/join/participant-phone-gate.tsx, src/components/join/stakeholder-request.tsx
+HIT src/app/[locale]/(join)/join/status/page.tsx :: src/components/join/role-cards.tsx, src/components/join/status-view.tsx
+HIT src/app/[locale]/(site)/[...rest]/page.tsx :: src/app/[locale]/(site)/not-found.tsx (localized 404 in the shared public shell)
+HIT src/app/[locale]/(site)/contact/page.tsx :: src/app/[locale]/(site)/contact/page.tsx
+HIT src/app/[locale]/(site)/help/[role]/[guide]/page.tsx :: src/app/[locale]/(site)/help/[role]/[guide]/page.tsx, src/components/help/faq-list.tsx, src/components/help/help-art.tsx, src/components/help/help-breadcrumbs.tsx, src/components/help/help-hero.tsx, src/components/help/help-section.tsx
+HIT src/app/[locale]/(site)/help/[role]/page.tsx :: src/components/help/faq-list.tsx, src/components/help/guide-cards.tsx, src/components/help/help-art.tsx, src/components/help/help-breadcrumbs.tsx, src/components/help/help-hero.tsx, src/components/help/help-section.tsx, src/components/help/role-cards.tsx, src/components/help/training-path.tsx
+HIT src/app/[locale]/(site)/help/contact/page.tsx :: src/app/[locale]/(site)/help/contact/page.tsx, src/components/help/contact-form.tsx, src/components/help/contact-panel.tsx, src/components/help/help-breadcrumbs.tsx, src/components/help/help-hero.tsx
+HIT src/app/[locale]/(site)/help/page.tsx :: src/components/help/help-art.tsx, src/components/help/help-hero.tsx, src/components/help/help-search.tsx, src/components/help/role-cards.tsx
+HIT src/app/[locale]/(site)/how-it-works/page.tsx :: src/app/[locale]/(site)/how-it-works/page.tsx, src/components/site/sorting-guide.tsx
+HIT src/app/[locale]/(site)/join/page.tsx :: src/app/[locale]/(site)/join/page.tsx, src/components/join/role-cards.tsx
+HIT src/app/[locale]/(site)/page.tsx :: src/components/site/home/hero.tsx, src/components/site/home/role-benefits.tsx, src/components/site/home/role-explorer.tsx, src/components/site/home/resource-grid.tsx
+HIT src/app/[locale]/(site)/participants/page.tsx :: src/app/[locale]/(site)/participants/page.tsx
+HIT src/app/[locale]/(site)/prices/page.tsx :: src/app/[locale]/(site)/prices/page.tsx, src/components/prices/price-board.tsx, src/components/prices/price-guide.tsx
+HIT src/app/[locale]/(site)/privacy/page.tsx :: src/components/site/privacy-content.tsx
+HIT src/app/[locale]/(site)/sell/activity/page.tsx :: src/components/sell/household-family.tsx, src/components/sell/my-bookings.tsx
+HIT src/app/[locale]/(site)/sell/footprint/page.tsx :: src/components/sell/electricity-footprint.tsx
+HIT src/app/[locale]/(site)/sell/page.tsx :: src/app/[locale]/(site)/sell/page.tsx, src/components/sell/my-bookings.tsx, src/components/sell/sell-hero.tsx, src/components/sell/simple-recycling-flow.tsx, src/components/site/collection-privacy.tsx
+HIT src/app/[locale]/(site)/sell/services/page.tsx :: src/app/[locale]/(site)/sell/services/page.tsx, src/components/sell/household-location-lookups.tsx
+HIT src/app/[locale]/(site)/sell/settings/page.tsx :: src/app/[locale]/(site)/sell/settings/page.tsx, src/components/sell/daily-reminder.tsx, src/components/sell/household-family.tsx
+HIT src/app/[locale]/(site)/solar/page.tsx :: src/app/[locale]/(site)/solar/page.tsx, src/components/solar/choice-group.tsx, src/components/solar/solar-contact-form.tsx, src/components/solar/solar-planner.tsx, src/components/solar/subsidy-explainer.tsx
+HIT src/app/[locale]/(site)/standards/page.tsx :: src/app/[locale]/(site)/standards/page.tsx, src/components/standards/norms.tsx
+HIT src/app/admin/(console)/account-removals/page.tsx :: src/components/admin/account-removals.tsx
+HIT src/app/admin/(console)/operations/page.tsx :: src/components/admin/operations/operations-console.tsx
+HIT src/app/admin/(console)/page.tsx :: src/components/admin/console-home.tsx
+HIT src/app/admin/(console)/payments/page.tsx :: src/components/admin/draft-billing-setup.tsx, src/components/admin/payment-lifecycle.tsx, src/components/admin/payment-setup.tsx
+HIT src/app/admin/(console)/pilot/page.tsx :: src/components/admin/pilot/pilot-numbers.tsx
+HIT src/app/admin/(console)/prices/page.tsx :: src/components/admin/prices/price-tables.tsx
+HIT src/app/admin/(console)/support/page.tsx :: src/components/admin/support/support-inbox.tsx
+HIT src/app/admin/(console)/verification/[id]/page.tsx :: src/components/admin/verification/application-details.tsx, src/components/admin/verification/application-review.tsx, src/components/admin/verification/checklist-card.tsx
+HIT src/app/admin/(console)/verification/page.tsx :: src/components/admin/verification/application-details.tsx, src/components/admin/verification/application-review.tsx, src/components/admin/verification/checklist-card.tsx, src/components/admin/verification/queue.tsx, src/components/admin/verification/verification-workspace.tsx
+REDIRECT src/app/admin/forgot-password/page.tsx :: retired route; redirects to /admin/login
+HIT src/app/admin/login/page.tsx :: src/components/admin/admin-login.tsx, src/components/admin/auth-shell.tsx
+REDIRECT src/app/admin/reset-password/page.tsx :: retired route; redirects to /admin/login
+HIT src/app/admin/setup/page.tsx :: src/components/admin/auth-shell.tsx

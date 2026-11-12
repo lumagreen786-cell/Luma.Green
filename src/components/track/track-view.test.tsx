@@ -165,6 +165,26 @@ describe("TrackView", () => {
     expect(screen.queryByText("You'll get about ₹174")).not.toBeInTheDocument();
   });
 
+  it("retains the sharing region for a completed non-owner record", () => {
+    render(
+      withIntl(
+        <TrackView
+          booking={booking({
+            status: "completed",
+            isMine: false,
+            canCancel: false,
+          })}
+        />,
+      ),
+    );
+    expect(
+      screen.getByRole("region", { name: "Collection helpers" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Invite helper" }),
+    ).not.toBeInTheDocument();
+  });
+
   it("hides cancelling from someone else who is signed in", () => {
     auth.isAuthenticated = true;
     render(

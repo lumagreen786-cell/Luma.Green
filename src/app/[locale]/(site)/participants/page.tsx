@@ -68,23 +68,23 @@ export default async function ParticipantsPage() {
     <>
       <PageHeader title={t("title")} lead={t("lead")} scene="pellets" />
 
-      <Container className="py-8 lg:py-12">
-        <ul className="grid gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
+      <Container className="pb-8">
+        <ul className="grid gap-3 md:grid-cols-2">
           {participants.map(
             ({ key, icon: Icon, title, body, href, action }) => (
               <li key={key}>
                 <section
                   aria-labelledby={`participant-${key}`}
-                  className="flex min-w-0 flex-col gap-4"
+                  className="grid h-full min-w-0 grid-cols-[5rem_minmax(0,1fr)] gap-4 rounded-panel bg-card p-5 shadow-panel"
                 >
-                  <div className="order-2 min-w-0 space-y-3">
+                  <div className="order-2 min-w-0 space-y-2 wrap-anywhere">
                     <div className="flex items-center gap-4">
-                      <span className="inline-flex size-8 shrink-0 items-center text-primary">
+                      <span className="hidden size-8 shrink-0 items-center text-foreground sm:inline-flex">
                         <Icon aria-hidden className="size-5" />
                       </span>
                       <h2
                         id={`participant-${key}`}
-                        className="text-xl font-semibold tracking-tight"
+                        className="min-w-0 text-base font-semibold tracking-tight"
                       >
                         {title}
                       </h2>
@@ -94,19 +94,19 @@ export default async function ParticipantsPage() {
                     </p>
                     <Link
                       href={href}
-                      className="inline-flex min-h-11 items-center gap-3 text-sm font-semibold text-primary underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
+                      className="inline-flex min-h-11 max-w-full items-center gap-3 text-sm font-semibold text-foreground underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
                     >
-                      {action}
+                      <span className="min-w-0">{action}</span>
                       <ArrowRightIcon
                         aria-hidden
-                        className="size-4 rtl:rotate-180"
+                        className="size-4 shrink-0 rtl:rotate-180"
                       />
                     </Link>
                   </div>
                   <RoleStoryImage
                     scene={roleProcessScenes[key]}
-                    sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, (min-width: 640px) calc(100vw - 64px), calc(100vw - 40px)"
-                    frameClassName="aspect-[3/2] lg:aspect-[4/3]"
+                    sizes="80px"
+                    frameClassName="aspect-square rounded-lg"
                     className="order-1 w-full min-w-0"
                   />
                 </section>

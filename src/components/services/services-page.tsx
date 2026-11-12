@@ -49,7 +49,7 @@ export function ServicesPage() {
   if (data === undefined) return <ListSkeleton />;
   if (!data) return null;
   return (
-    <section className="mx-auto flex w-full max-w-5xl flex-col gap-6">
+    <section className="mx-auto flex w-full max-w-7xl flex-col gap-6">
       <AppPageHeader title={t("title")} lead={t("unavailable")} />
       <ServicesContent key={data.orgId ?? "personal"} data={data} />
     </section>
@@ -64,152 +64,158 @@ function ServicesContent({ data }: { data: Board }) {
   const revoke = useMutation(api.services.revokeProgrammeShare);
   const withdraw = useMutation(api.services.revokeEnquiryRecipient);
   return (
-    <>
-      <section className="flex flex-col gap-4 rounded-xl border border-border/60 bg-card p-5">
-        <h2 className="text-lg font-semibold">{t("enquiries")}</h2>
-        {data.canCreate &&
-        (!enquiry ||
-          data.enquiries.some(
-            (row) => row.id === enquiry.id && row.canEdit,
-          )) ? (
-          <EnquiryForm
-            key={enquiry?.id ?? "new"}
-            data={data}
-            row={enquiry}
-            onDone={() => {
-              setEnquiry(null);
-            }}
-          />
-        ) : null}
-        {data.enquiries.map((row) => (
-          <article
-            key={row.id}
-            className="flex flex-wrap items-start justify-between gap-3 border-b border-border py-4"
-          >
-            <section className="space-y-1">
+    <div className="flex min-w-0 flex-col gap-6">
+      <div className="grid w-full min-w-0 items-start gap-5 xl:grid-cols-2">
+        <section className="flex min-w-0 flex-col gap-4 rounded-panel border border-border/60 bg-card p-5 text-card-foreground">
+          <h2 className="text-lg font-semibold">{t("enquiries")}</h2>
+          {data.canCreate &&
+          (!enquiry ||
+            data.enquiries.some(
+              (row) => row.id === enquiry.id && row.canEdit,
+            )) ? (
+            <EnquiryForm
+              key={enquiry?.id ?? "new"}
+              data={data}
+              row={enquiry}
+              onDone={() => {
+                setEnquiry(null);
+              }}
+            />
+          ) : null}
+          {data.enquiries.map((row) => (
+            <article
+              key={row.id}
+              className="flex flex-wrap items-start justify-between gap-3 border-b border-border py-4"
+            >
+              <section className="space-y-1">
+                <h3 className="font-semibold">{row.title}</h3>
+                <p className="text-sm">
+                  {t(`kinds.${row.kind}`)} · {t(row.state)}
+                </p>
+                <p className="text-sm whitespace-pre-line">{row.details}</p>
+                <p className="text-sm text-muted-foreground">
+                  {t(`models.${row.commercialModel}`)} ·{" "}
+                  {t(`directions.${row.paymentDirection}`)}
+                </p>
+              </section>
+              {row.canEdit && row.recipientId ? (
+                <ActionButton
+                  label={t("revoke")}
+                  onClick={() => {
+                    void withdraw({ id: row.id }).catch(() =>
+                      toast.error(common("error")),
+                    );
+                  }}
+                />
+              ) : null}
+              {!row.canEdit || row.state !== "draft" ? null : (
+                <ActionButton
+                  label={t("edit")}
+                  onClick={() => {
+                    setEnquiry(row);
+                  }}
+                />
+              )}
+              <Conversation row={row} />
+            </article>
+          ))}
+        </section>
+        <section className="flex min-w-0 flex-col gap-4 rounded-panel border border-border/60 bg-card p-5 text-card-foreground">
+          <h2 className="text-lg font-semibold">{t("programmes")}</h2>
+          <p className="text-sm text-muted-foreground">{t("reported")}</p>
+          {data.canCreate &&
+          (!programme ||
+            data.programmes.some(
+              (row) => row.id === programme.id && row.canEdit,
+            )) ? (
+            <ProgrammeForm
+              key={programme?.id ?? "new"}
+              data={data}
+              row={programme}
+              onDone={() => {
+                setProgramme(null);
+              }}
+            />
+          ) : null}
+          {data.programmes.map((row) => (
+            <article
+              key={row.id}
+              className="flex flex-col gap-3 border-b border-border py-4"
+            >
               <h3 className="font-semibold">{row.title}</h3>
-              <p className="text-sm">
-                {t(`kinds.${row.kind}`)} · {t(row.state)}
-              </p>
-              <p className="text-sm whitespace-pre-line">{row.details}</p>
-              <p className="text-sm text-muted-foreground">
-                {t(`models.${row.commercialModel}`)} ·{" "}
-                {t(`directions.${row.paymentDirection}`)}
-              </p>
-            </section>
-            {row.canEdit && row.recipientId ? (
-              <ActionButton
-                label={t("revoke")}
-                onClick={() => {
-                  void withdraw({ id: row.id }).catch(() =>
-                    toast.error(common("error")),
-                  );
-                }}
-              />
-            ) : null}
-            {!row.canEdit || row.state !== "draft" ? null : (
-              <ActionButton
-                label={t("edit")}
-                onClick={() => {
-                  setEnquiry(row);
-                }}
-              />
-            )}
-            <Conversation row={row} />
-          </article>
-        ))}
-      </section>
-      <section className="flex flex-col gap-3 rounded-xl border border-border/60 bg-card p-5">
-        <h2 className="text-lg font-semibold">{t("received")}</h2>
-        {data.received.length === 0 ? (
-          <p className="text-sm text-muted-foreground">{t("workflow.empty")}</p>
-        ) : null}
-        {data.received.map((row) => (
-          <article
-            key={row.id}
-            className="space-y-2 border-b border-border py-3"
-          >
-            <h3 className="font-semibold">{row.title}</h3>
-            <p className="whitespace-pre-line">{row.details}</p>
-            <p>{t(`directions.${row.paymentDirection}`)}</p>
-            <p className="text-sm">{t(row.state)}</p>
-            <Conversation row={row} />
-            {row.materialSnapshot ? (
               <p>
-                {row.materialSnapshot.materialCode} · {t("quantityGrams")}:{" "}
-                {format.number(row.materialSnapshot.declaredGrams)}
+                {row.area} · {row.stream}
               </p>
-            ) : null}
-          </article>
-        ))}
-      </section>
-      <section className="flex flex-col gap-4 rounded-xl border border-border/60 bg-card p-5">
-        <h2 className="text-lg font-semibold">{t("programmes")}</h2>
-        <p className="text-sm text-muted-foreground">{t("reported")}</p>
-        {data.canCreate &&
-        (!programme ||
-          data.programmes.some(
-            (row) => row.id === programme.id && row.canEdit,
-          )) ? (
-          <ProgrammeForm
-            key={programme?.id ?? "new"}
-            data={data}
-            row={programme}
-            onDone={() => {
-              setProgramme(null);
-            }}
-          />
-        ) : null}
-        {data.programmes.map((row) => (
-          <article
-            key={row.id}
-            className="flex flex-col gap-3 border-b border-border py-4"
-          >
-            <h3 className="font-semibold">{row.title}</h3>
-            <p>
-              {row.area} · {row.stream}
+              <ProgrammeTotals row={row} />
+              {!row.canEdit || row.state === "closed" ? null : (
+                <ActionButton
+                  label={t("edit")}
+                  onClick={() => {
+                    setProgramme(row);
+                  }}
+                />
+              )}
+              {row.canEdit ? (
+                <ShareForm programmeId={row.id} recipients={data.recipients} />
+              ) : null}
+            </article>
+          ))}
+        </section>
+      </div>
+      <div className="record-sheet grid w-full min-w-0 items-start gap-5 rounded-panel p-5 shadow-panel xl:grid-cols-2 [&>section]:border-0 [&>section]:bg-transparent [&>section]:p-0">
+        <section className="flex min-w-0 flex-col gap-3 rounded-panel border border-border/60 bg-card p-5 text-card-foreground">
+          <h2 className="text-lg font-semibold">{t("received")}</h2>
+          {data.received.length === 0 ? (
+            <p className="text-sm text-muted-foreground">
+              {t("workflow.empty")}
             </p>
-            <ProgrammeTotals row={row} />
-            {!row.canEdit || row.state === "closed" ? null : (
-              <ActionButton
-                label={t("edit")}
-                onClick={() => {
-                  setProgramme(row);
-                }}
-              />
-            )}
-            {row.canEdit ? (
-              <ShareForm programmeId={row.id} recipients={data.recipients} />
-            ) : null}
-          </article>
-        ))}
-      </section>
-      <section className="flex flex-col gap-3 rounded-xl border border-border/60 bg-card p-5">
-        <h2 className="text-lg font-semibold">{t("sharedReports")}</h2>
-        {data.reports.map((row) => (
-          <article
-            key={row.id}
-            className="space-y-3 border-b border-border py-4"
-          >
-            <h3 className="font-semibold">
-              {row.area} · {row.stream}
-            </h3>
-            <p className="text-sm">{row.purpose}</p>
-            <ProgrammeTotals row={row} />
-            {row.canRevoke && !row.revokedAt ? (
-              <ActionButton
-                label={t("revoke")}
-                onClick={() => {
-                  void revoke({ id: row.id }).catch(() =>
-                    toast.error(common("error")),
-                  );
-                }}
-              />
-            ) : null}
-          </article>
-        ))}
-      </section>
-    </>
+          ) : null}
+          {data.received.map((row) => (
+            <article
+              key={row.id}
+              className="space-y-2 border-b border-border py-3"
+            >
+              <h3 className="font-semibold">{row.title}</h3>
+              <p className="whitespace-pre-line">{row.details}</p>
+              <p>{t(`directions.${row.paymentDirection}`)}</p>
+              <p className="text-sm">{t(row.state)}</p>
+              <Conversation row={row} />
+              {row.materialSnapshot ? (
+                <p>
+                  {row.materialSnapshot.materialCode} · {t("quantityGrams")}:{" "}
+                  {format.number(row.materialSnapshot.declaredGrams)}
+                </p>
+              ) : null}
+            </article>
+          ))}
+        </section>
+        <section className="flex flex-col gap-3 rounded-panel border border-border/60 bg-card p-5 text-card-foreground">
+          <h2 className="text-lg font-semibold">{t("sharedReports")}</h2>
+          {data.reports.map((row) => (
+            <article
+              key={row.id}
+              className="space-y-3 border-b border-border py-4"
+            >
+              <h3 className="font-semibold">
+                {row.area} · {row.stream}
+              </h3>
+              <p className="text-sm">{row.purpose}</p>
+              <ProgrammeTotals row={row} />
+              {row.canRevoke && !row.revokedAt ? (
+                <ActionButton
+                  label={t("revoke")}
+                  onClick={() => {
+                    void revoke({ id: row.id }).catch(() =>
+                      toast.error(common("error")),
+                    );
+                  }}
+                />
+              ) : null}
+            </article>
+          ))}
+        </section>
+      </div>
+    </div>
   );
 }
 function Conversation({ row }: { row: Enquiry }) {
@@ -261,7 +267,7 @@ function Conversation({ row }: { row: Enquiry }) {
   return (
     <section className="w-full min-w-0 space-y-3" aria-label={t("history")}>
       <p className="text-sm text-muted-foreground">{t("notice")}</p>
-      <ol className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
+      <ol className="divide-y divide-border/60 rounded-panel border border-border/60 bg-card px-4 text-card-foreground sm:px-5">
         {row.history.map((entry, index) => (
           <li key={index} className="min-w-0 space-y-1 py-3 text-sm">
             <p>

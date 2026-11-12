@@ -111,12 +111,12 @@ describe("BusinessHome", () => {
     expect(within(stats).queryByText("₹76,000")).not.toBeInTheDocument();
   });
 
-  it("places work waiting for a decision before summary figures", () => {
+  it("places summary figures before the decision workspace", () => {
     renderHome();
     const waiting = screen.getByRole("heading", { name: "Waiting for you" });
     const stats = screen.getByRole("region", { name: "At a glance" });
     expect(
-      waiting.compareDocumentPosition(stats) & Node.DOCUMENT_POSITION_FOLLOWING,
+      stats.compareDocumentPosition(waiting) & Node.DOCUMENT_POSITION_FOLLOWING,
     ).toBeTruthy();
   });
 

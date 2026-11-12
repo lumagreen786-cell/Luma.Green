@@ -90,20 +90,22 @@ function RequestTabs({ city, scope }: { city: string; scope: string }) {
       dir={localeDirection(isLocale(locale) ? locale : defaultLocale)}
       value={tab}
       onValueChange={showTab}
-      className="gap-5 rounded-2xl bg-card p-4 sm:p-6"
+      className="record-sheet gap-5 rounded-panel p-4 shadow-panel sm:p-6"
     >
-      <TabsList className="h-auto w-full flex-wrap justify-start gap-2 bg-transparent p-0">
-        {TABS.map((value) => (
-          <TabsTrigger
-            key={value}
-            value={value}
-            className="min-h-11 flex-none gap-2 rounded-full border border-border px-4 data-[state=active]:bg-accent data-[state=active]:text-accent-foreground"
-          >
-            {t(`tabs.${value}`)}
-            <TabCount count={countFor(requests, value)} />
-          </TabsTrigger>
-        ))}
-      </TabsList>
+      <div className="-mt-4 flex justify-center sm:-mt-6">
+        <TabsList className="h-auto w-fit max-w-full flex-wrap justify-center gap-2 rounded-t-none rounded-b-[28px] bg-[var(--shell)] p-2 pt-0">
+          {TABS.map((value) => (
+            <TabsTrigger
+              key={value}
+              value={value}
+              className="min-h-11 flex-none gap-2 rounded-full bg-card px-4 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+            >
+              {t(`tabs.${value}`)}
+              <TabCount count={countFor(requests, value)} />
+            </TabsTrigger>
+          ))}
+        </TabsList>
+      </div>
       <TabsContent value="new">
         <h2 className="sr-only">{t("tabs.new")}</h2>
         {requests ? (
@@ -162,7 +164,7 @@ function countFor(requests: Requests | undefined, tab: Tab): number {
 function TabCount({ count }: { count: number }) {
   if (count === 0) return null;
   return (
-    <span className="min-w-5 rounded-full bg-primary px-1.5 text-xs leading-5 font-semibold text-primary-foreground tabular-nums">
+    <span className="inline-flex size-7 shrink-0 items-center justify-center rounded-full bg-muted text-xs font-medium text-muted-foreground tabular-nums">
       {count}
     </span>
   );

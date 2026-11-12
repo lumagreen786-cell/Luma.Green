@@ -74,8 +74,8 @@ describe("admin navigation", () => {
     ).toBeInTheDocument();
     expect(screen.getByRole("main")).toHaveTextContent("Review workspace");
     expect(
-      screen.queryByRole("button", { name: "Appearance" }),
-    ).not.toBeInTheDocument();
+      screen.getByRole("button", { name: "Appearance" }),
+    ).toBeInTheDocument();
   });
 
   it("gives the compact sign-out control a name and returns to sign-in", async () => {

@@ -1,0 +1,115 @@
+Browser tab: 16, Title: "Settings | Florin", URL: "https://ui.cortexcn.dev/previews/florin/settings".
+1 AXWebArea Settings | Florin, URL: ui.cortexcn.dev/previews/florin/settings
+	2 link Description: Skip to content, Value: ui.cortexcn.dev/previews/florin/settings#main
+	3 container
+		4 link Description: Florin, invoices, Value: ui.cortexcn.dev/previews/florin/
+		5 pop up button (collapsed) Description: All pages, Secondary Actions: Expand
+		6 pop up button (collapsed) Description: Notifications, Secondary Actions: Expand
+		7 link Description: Settings, Value: ui.cortexcn.dev/previews/florin/settings/
+		8 pop up button (collapsed) Description: Account menu, ID: radix-_R_tb5tlb_, Secondary Actions: Expand
+		9 container Billing
+			10 content list
+				11 link Description: Estimates, Value: ui.cortexcn.dev/previews/florin/estimates/
+				12 link Description: Invoices, Value: ui.cortexcn.dev/previews/florin/
+				13 link Description: Payments, Value: ui.cortexcn.dev/previews/florin/payments/
+				14 link Description: Recurring Invoices, Value: ui.cortexcn.dev/previews/florin/recurring/
+				15 link Description: Checkouts, Value: ui.cortexcn.dev/previews/florin/checkouts/
+	16 container main
+		17 heading Settings, Value: 1
+			18 text Settings
+		19 container Settings sections
+			20 content list
+				21 link Description: Business, Value: ui.cortexcn.dev/previews/florin/settings#business
+				22 link Description: Invoices, Value: ui.cortexcn.dev/previews/florin/settings#invoices
+				23 link Description: Reminders, Value: ui.cortexcn.dev/previews/florin/settings#reminders
+				24 link Description: Payments, Value: ui.cortexcn.dev/previews/florin/settings#payments
+				25 link Description: Payouts, Value: ui.cortexcn.dev/previews/florin/settings#payouts
+				26 link Description: Appearance, Value: ui.cortexcn.dev/previews/florin/settings#appearance
+		27 container Business, ID: business
+			28 container
+				29 heading Business, Value: 2, ID: business-title
+					30 text Business
+				31 text Clients see these on every invoice, estimate, and receipt. Business name
+				32 text field (settable) Business name, Value: Kiln & Co.
+				33 text Legal name
+				34 text field (settable) Legal name Printed in small type at the foot of invoices., Value: Kiln and Company LLC
+				35 text Printed in small type at the foot of invoices. Billing email
+				36 text field (settable) Billing email Replies from clients come here., Value: <redacted>
+				37 text Replies from clients come here. Tax ID
+				38 text field (settable) Tax ID, Value: US 93-4410287
+				39 text Address
+				40 text entry area (settable) Address, Value: 418 Alder Street, Suite 300, Portland, OR 97204
+				41 button (disabled) Save
+		42 container Invoices, ID: invoices
+			43 container
+				44 heading Invoices, Value: 2, ID: invoices-title
+					45 text Invoices
+				46 text New invoices start with these. A client's own terms win over the default. Payment terms
+				47 text field (settable) Payment terms Days to pay, from 0 to 120., Value: 14
+				48 text Days to pay, from 0 to 120. Tax rate
+				49 text field (settable) Tax rate A percent, such as 8.25., Value: 0
+				50 text A percent, such as 8.25. First invoice number
+				51 text field (settable) First invoice number Where a new client's numbers begin., Value: 1
+				52 text Where a new client's numbers begin. Footer
+				53 text entry area (settable) Footer A short line at the bottom of every invoice., Value: Thank you for working with Kiln & Co.
+				54 text A short line at the bottom of every invoice.
+				55 button (disabled) Save
+		56 container Reminders, ID: reminders
+			57 container
+				58 heading Reminders, Value: 2, ID: reminders-title
+					59 text Reminders
+				60 text Florin emails the client a link to pay. Paid invoices never get a reminder. Before the due date A friendly note while there is still time.
+				61 text field (settable) Description: Days before the due date, Value: 3
+				62 text days
+				63 switch Description: Before the due date, Value: 1
+				64 text On the due date On the morning the invoice is due.
+				65 switch Description: On the due date, Value: 1
+				66 text After the due date Repeats every few days until the invoice is paid.
+				67 text field (settable) Description: Days after the due date, Value: 3
+				68 text days
+				69 switch Description: After the due date, Value: 1
+				70 button (disabled) Save
+		71 container Payments, ID: payments
+			72 container
+				73 heading Payments, Value: 2, ID: payments-title
+					74 text Payments
+				75 text The ways to pay shown on every invoice and payment link. Cards Credit and debit cards. 2.9% plus $0.30 a payment.
+				76 switch Description: Cards, Value: 1
+				77 text Bank transfers ACH and SEPA transfers. 0.8%, at most $5 a payment.
+				78 switch Description: Bank transfers, Value: 1
+				79 text Wallets Phone and browser wallets. 3.49% plus $0.49 a payment.
+				80 switch Description: Wallets, Value: 1
+				81 text Clients cover the fees Adds the processing fee to what the client pays, so you keep the full amount.
+				82 switch Description: Clients cover the fees, Value: 0
+				83 button (disabled) Save
+		84 container Payouts, ID: payouts
+			85 container
+				86 heading Payouts, Value: 2, ID: payouts-title
+					87 text Payouts
+				88 text Instant payouts from the Payouts page work on any schedule. Schedule
+				89 pop up button (collapsed, settable) Schedule Cleared money goes out every Monday., Value: Weekly, Secondary Actions: Expand
+					90 menu
+						91 Daily
+						92 (selected) Weekly
+						93 Monthly
+						94 Manual
+				95 text Cleared money goes out every Monday. Default method
+				96 pop up button (collapsed, settable) Default method Scheduled payouts land here., Value: Business checking #177210, Harbor Federal, Secondary Actions: Expand
+					97 menu
+						98 Debit card *4443, Northbank
+						99 (selected) Business checking #177210, Harbor Federal
+						100 Tax savings #711221, Harbor Federal
+				101 text Scheduled payouts land here.
+				102 button (disabled) Save
+		103 container Appearance, ID: appearance
+			104 container
+				105 heading Appearance, Value: 2, ID: appearance-title
+					106 text Appearance
+				107 text Saved in this browser. Everyone on your team picks their own.
+				108 Theme
+					109 radio button Dark Deep navy, as the kit was drawn., Value: 1
+					110 radio button Light Pale gray with white cards., Value: 0
+				111 button (disabled) Save
+	112 container Notifications alt+T
+
+The focused UI element is 1 AXWebArea Settings | Florin, URL: ui.cortexcn.dev/previews/florin/settings

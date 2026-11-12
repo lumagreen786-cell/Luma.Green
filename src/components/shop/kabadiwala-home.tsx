@@ -40,17 +40,16 @@ export function KabadiwalaHome() {
       <QueryBoundary>
         <HomeBody city={shop.city} />
         <div className="grid items-start gap-4 xl:grid-cols-2">
-          <div className="min-w-0 space-y-4 rounded-2xl bg-card p-5 sm:p-6">
+          <div className="min-w-0 space-y-4 rounded-panel bg-card p-5 text-card-foreground sm:p-6">
             <DispatchSettings />
             <CollectionAvailabilityControls />
           </div>
-          <div className="min-w-0 space-y-4 rounded-2xl bg-card p-5 sm:p-6">
+          <div className="min-w-0 space-y-4 rounded-panel bg-card p-5 text-card-foreground sm:p-6">
             <CollectionVisitControls />
             <EmployerPaymentControls />
           </div>
         </div>
       </QueryBoundary>
-      <QuickLinks />
       <DemoNote>{t("sampleNote")}</DemoNote>
     </div>
   );
@@ -62,10 +61,10 @@ function Greeting({ name }: { name: string }) {
   const now = useNow();
   return (
     <header className="grid gap-2 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
-      <h1 className="font-display text-[1.75rem] leading-[1.25] font-semibold tracking-tight">
+      <h1 className="font-display text-4xl leading-tight font-medium tracking-tight sm:text-5xl">
         {name}
       </h1>
-      <p className="text-sm font-medium text-primary sm:col-start-1 sm:row-start-2">
+      <p className="text-sm font-medium text-muted-foreground sm:col-start-1 sm:row-start-2">
         {t("greeting")}
       </p>
       <p className="text-sm text-muted-foreground sm:col-start-2 sm:row-start-1">
@@ -88,11 +87,16 @@ function HomeBody({ city }: { city: string }) {
   return (
     <>
       <MoneyStats payouts={payouts} stock={stock} />
-      <div className="grid items-stretch gap-4 md:grid-cols-2">
-        <NewRequestsCard count={requests?.new.length} />
-        <TodayCard active={requests?.active} today={today} city={city} />
+      <div className="grid min-w-0 items-start gap-4 xl:grid-cols-[minmax(0,1.7fr)_minmax(19rem,1fr)]">
+        <div className="min-w-0 space-y-4">
+          <TodayCard active={requests?.active} today={today} city={city} />
+          <PriceCheck card={card} stock={stock} />
+        </div>
+        <aside className="min-w-0 space-y-4 xl:sticky xl:top-6">
+          <NewRequestsCard count={requests?.new.length} />
+          <QuickLinks />
+        </aside>
       </div>
-      <PriceCheck card={card} stock={stock} />
     </>
   );
 }
@@ -111,9 +115,9 @@ function QuickLink({
   return (
     <Link
       href={href}
-      className="flex min-h-16 items-center gap-3 rounded-2xl bg-card p-5 outline-none hover:bg-muted/40 focus-visible:ring-3 focus-visible:ring-ring/50"
+      className="flex min-h-16 items-center gap-3 rounded-panel bg-card p-5 text-card-foreground outline-none hover:bg-muted/40 focus-visible:ring-3 focus-visible:ring-ring/50"
     >
-      <span className="flex size-10 shrink-0 items-center justify-center text-primary">
+      <span className="flex size-10 shrink-0 items-center justify-center text-foreground">
         <Icon aria-hidden className="size-6" />
       </span>
       <span className="flex min-w-0 flex-1 flex-col">
@@ -131,7 +135,7 @@ function QuickLink({
 function QuickLinks() {
   const t = useTranslations("shop.home");
   return (
-    <nav aria-label={t("quickLinks")} className="grid gap-4 sm:grid-cols-2">
+    <nav aria-label={t("quickLinks")} className="grid gap-3">
       <QuickLink
         href="/app/sell"
         icon={TagIcon}

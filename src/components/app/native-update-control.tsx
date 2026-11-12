@@ -77,7 +77,7 @@ export function NativeUpdateControl({
         icon={
           <DownloadIcon
             aria-hidden
-            className={isReady ? "size-5 text-primary" : "size-5"}
+            className={isReady ? "size-5 text-foreground" : "size-5"}
           />
         }
         tooltip={t(isReady ? "updateReady" : "updates")}

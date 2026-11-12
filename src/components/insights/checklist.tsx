@@ -34,7 +34,7 @@ const TONES: Record<CheckItem["status"], Tone> = {
 };
 
 const BADGES: Record<Tone, string> = {
-  good: "bg-primary/10 text-primary",
+  good: "bg-primary/10 text-foreground",
   warn: "bg-accent text-accent-foreground",
   bad: "bg-destructive/10 text-destructive",
   neutral: "bg-muted text-muted-foreground",

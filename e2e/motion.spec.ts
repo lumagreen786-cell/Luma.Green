@@ -40,7 +40,11 @@ test("the logo mark spins once on hover and keyboard focus while its name stays 
   const header = page.getByRole("banner");
   const mark = header.getByRole("img", { name: "Luma.Green", exact: true });
   const wordmark = header.getByText("Luma.Green", { exact: true });
-  const homeLink = header.getByRole("link", { name: "Home", exact: true });
+  const homeLink = header
+    .getByRole("link", { name: "Home", exact: true })
+    .filter({
+      has: page.getByRole("img", { name: "Luma.Green", exact: true }),
+    });
   await expect(mark).toHaveCSS("transform", "none");
   await mark.hover();
   await pauseLogoAtMidSpin(mark);
@@ -70,7 +74,11 @@ test("reduced motion prevents logo spins and cancels one already in progress", a
   await page.goto("/en");
   const header = page.getByRole("banner");
   const mark = header.getByRole("img", { name: "Luma.Green", exact: true });
-  const homeLink = header.getByRole("link", { name: "Home", exact: true });
+  const homeLink = header
+    .getByRole("link", { name: "Home", exact: true })
+    .filter({
+      has: page.getByRole("img", { name: "Luma.Green", exact: true }),
+    });
   await mark.hover();
   await expect(mark).toHaveCSS("animation-name", "none");
   await expect(mark).toHaveCSS("transform", "none");
@@ -169,7 +177,7 @@ test("hero image stays stable while scrolling and booking remains available", as
   const hero = page.getByRole("region", {
     name: english.home.hero.title,
   });
-  const artwork = hero.locator("img");
+  const artwork = hero.locator("[data-recycling-illustration]");
   await expect(artwork).toBeVisible();
   await expect(artwork).toHaveCSS("transform", "none");
   await page.evaluate(() => {

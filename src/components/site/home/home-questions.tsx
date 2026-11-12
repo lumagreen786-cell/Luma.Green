@@ -50,7 +50,7 @@ export async function HomeQuestions() {
               <Link
                 key={role}
                 href={`/help/${role}`}
-                className="group flex min-h-16 items-center gap-3 py-4 text-sm font-medium outline-none hover:text-primary focus-visible:ring-3 focus-visible:ring-ring/50"
+                className="group flex min-h-16 items-center gap-3 py-4 text-sm font-medium outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
               >
                 <Icon
                   aria-hidden
@@ -67,7 +67,7 @@ export async function HomeQuestions() {
             ))}
             <Link
               href="/help"
-              className="flex min-h-16 items-center gap-3 py-4 text-sm font-medium outline-none hover:text-primary focus-visible:ring-3 focus-visible:ring-ring/50"
+              className="flex min-h-16 items-center gap-3 py-4 text-sm font-medium outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
             >
               <BookOpenIcon
                 aria-hidden

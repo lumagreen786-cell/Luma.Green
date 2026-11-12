@@ -51,7 +51,7 @@ export function ChoiceGroup<T extends string>({
           <RadioGroupPrimitive.Item
             key={option.value}
             value={option.value}
-            className="flex min-h-11 items-center justify-center border-b-2 border-transparent px-2 text-center text-sm font-medium whitespace-nowrap text-muted-foreground outline-none hover:bg-muted/40 hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 data-[state=checked]:border-primary data-[state=checked]:text-primary"
+            className="flex min-h-11 items-center justify-center border-b-2 border-transparent px-2 text-center text-sm font-medium whitespace-nowrap text-muted-foreground outline-none hover:bg-muted/40 hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 data-[state=checked]:border-primary data-[state=checked]:text-foreground"
           >
             {option.label}
           </RadioGroupPrimitive.Item>

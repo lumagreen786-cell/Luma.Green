@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const emailLink =
-  "inline-flex min-h-11 items-center font-medium text-primary underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50 rounded-sm";
+  "inline-flex min-h-11 items-center font-medium text-foreground underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50 rounded-sm";
 
 /**
  * Email only for now: a form needs Resend wired (AGENTS.md §9), and a form that
@@ -44,24 +44,24 @@ export default async function ContactPage() {
         scene={imageRole}
       />
 
-      <Container className="grid gap-8 py-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-12 lg:py-8">
-        <section className="space-y-3 border-t pt-5">
+      <Container className="grid items-start gap-4 pb-8 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
+        <section className="grid gap-4 rounded-panel bg-card p-5 shadow-panel sm:p-6">
           <div className="flex items-center gap-3">
-            <MailIcon aria-hidden className="size-6 text-primary" />
+            <MailIcon aria-hidden className="size-6 text-foreground" />
 
-            <h2 className="text-2xl">{t("emailHeading")}</h2>
+            <h2 className="text-lg font-semibold">{t("emailHeading")}</h2>
           </div>
-          <div>
+          <div className="rounded-xl bg-accent/40 px-4 py-2">
             <a href={`mailto:${site.supportEmail}`} className={emailLink}>
               {site.supportEmail}
             </a>
           </div>
         </section>
-        <section className="space-y-3 border-t pt-5">
+        <section className="grid gap-4 rounded-panel bg-card p-5 shadow-panel sm:p-6">
           <div className="flex items-center gap-3">
-            <ShieldAlertIcon aria-hidden className="size-6 text-primary" />
+            <ShieldAlertIcon aria-hidden className="size-6 text-foreground" />
 
-            <h2 className="text-2xl">{t("securityHeading")}</h2>
+            <h2 className="text-lg font-semibold">{t("securityHeading")}</h2>
           </div>
           <div className="space-y-4">
             <p className="text-sm text-muted-foreground">{t("securityBody")}</p>

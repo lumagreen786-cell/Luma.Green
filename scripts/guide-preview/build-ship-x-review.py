@@ -8,13 +8,16 @@ from reportlab.lib.utils import ImageReader
 from pypdf import PdfReader
 
 ROOT=Path.cwd()
-PUBLIC=ROOT/'docs/delivery/evidence/ship-x-public-2026-11-11'
-PROTECTED=ROOT/'docs/delivery/evidence/ship-x-2026-11-11'
-OUT=ROOT/'output/pdf/Luma-Green-Ship-X-UI-Review.pdf'
+PUBLIC=ROOT/'docs/delivery/evidence/ship-x-redo-public-2026-11-11'
+PROTECTED=ROOT/'docs/delivery/evidence/ship-x-redo-2026-11-11'
+OUT=ROOT/'output/pdf/Luma-Green-Ship-X-Redesign-Review.pdf'
 FOREST=HexColor('#144419');GREEN=HexColor('#317F38');LIME=HexColor('#A8E665');YELLOW=HexColor('#EBFF00');WHITE=HexColor('#FFFFFF');PALE=HexColor('#EEF2EF')
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def clean(s):return str(s).replace('\u2014','-').replace('\u2013','-').encode('ascii','replace').decode()
 pub=json.loads((PUBLIC/'manifest.json').read_text());prot=json.loads((PROTECTED/'layout-manifest.json').read_text())
+assert pub.get('finishedAt'), 'Public capture pass must finish before authoring'
+assert pub.get('passed') is True, 'Public capture checks must pass before authoring'
+assert prot.get('passed') is True, 'Protected capture checks must pass before authoring'
 assert prot.get('finishedAt'), 'Protected capture pass must finish before authoring'
 assert prot.get('sourceUnchanged') is True, 'Protected sources changed during capture'
 entries=[]
@@ -48,8 +51,10 @@ for i,c in enumerate(entries,1):
 rows_per_page=24;contents_pages=math.ceil(len(entries)/rows_per_page);nextpage=3+contents_pages
 for c in entries:c['startPage']=nextpage;nextpage+=len(c['segments'])
 total=nextpage-1
+OUT.parent.mkdir(parents=True, exist_ok=True)
+(ROOT/'tmp/pdfs').mkdir(parents=True, exist_ok=True)
 pdf=canvas.Canvas(str(OUT),pagesize=(960,640),pageCompression=1)
-pdf.setTitle('Luma.Green - Ship X UI Review')
+pdf.setTitle('Luma.Green - Ship X Redesign Review')
 pdf.setAuthor('Luma.Green')
 pdf.setSubject('Current interface review: disconnected public screens and isolated seeded fixtures')
 page_no=0
@@ -96,7 +101,7 @@ for label,body in [
 text(40,200,'Read at a comfortable scale',15,True)
 lines(40,177,'Long screenshots continue over multiple pages with a small repeated strip at each split. Screenshot pixels are retained. Each page identifies the route, viewport, evidence type and image part. Bookmarks and the capture index link to each screen.',width=137,size=11)
 text(40,112,'Build and boundaries',15,True)
-lines(40,90,f'Public build {pub["buildId"]}; main {pub["head"][:12]}. Protected source hash {prot["sourceHash"][:12]}. Public browser checks: 114 passed. Included isolated fixtures passed capture checks. Native shells here are browser compositions, not physical-device or signed-release proof.',width=137,size=10,leading=14)
+lines(40,90,f'Public build {pub["buildId"]}; baseline {pub["head"][:12]}. Protected source hash {prot["sourceHash"][:12]}. Public captures: {len(pub["captures"])} passed automated capture checks. Included isolated fixtures passed capture checks. Native shells here are browser compositions, not physical-device or signed-release proof.',width=137,size=10,leading=14)
 footer(960,960)
 
 # Index has a row for every capture, including duplicate viewport variants.
@@ -141,5 +146,5 @@ for record in page_records:
  assert '/XObject' in reader.pages[record['page']-1]['/Resources']
 assert len({r['capture'] for r in page_records})==len(entries)
 validation={'pdf':str(OUT),'pages':total,'captures':len(entries),'publicCaptures':sum(c['kind']=='public' for c in entries),'solarCaptures':sum(c['kind']=='solar' for c in entries),'seededCaptures':sum(c['kind'] in ('seeded','example','legacy') for c in entries),'currentRouteSeededCaptures':sum(c['kind']=='seeded' for c in entries),'standaloneComponentCaptures':sum(c['kind']=='example' for c in entries),'legacyComponentCaptures':sum(c['kind']=='legacy' for c in entries),'excludedFailedFixtures':sum(not c.get('passed',False) for c in prot['captures']),'publicManifestSha256':sha(PUBLIC/'manifest.json'),'protectedManifestSha256':sha(PROTECTED/'layout-manifest.json'),'pdfSha256':sha(OUT),'imageReferencesVerified':True,'textExtractionVerified':True,'pageRecords':page_records}
-(ROOT/'tmp/pdfs/ship-x-pdf-validation.json').write_text(json.dumps(validation,indent=2))
+(ROOT/'tmp/pdfs/ship-x-redo-pdf-validation.json').write_text(json.dumps(validation,indent=2))
 print(json.dumps({k:v for k,v in validation.items() if k!='pageRecords'},indent=2))

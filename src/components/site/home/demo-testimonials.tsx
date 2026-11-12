@@ -38,7 +38,10 @@ export async function DemoTestimonials() {
             {voices.map((role) => (
               <li key={role} className="py-6">
                 <figure className="grid grid-cols-[1.5rem_minmax(0,1fr)] gap-x-4 gap-y-3">
-                  <QuoteIcon aria-hidden className="mt-1 size-5 text-primary" />
+                  <QuoteIcon
+                    aria-hidden
+                    className="mt-1 size-5 text-foreground"
+                  />
                   <blockquote
                     className={cn(
                       "max-w-2xl font-display text-xl leading-relaxed font-medium sm:text-2xl",

@@ -10,10 +10,9 @@ const repository = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   "../..",
 );
-const origin = "http://127.0.0.1:3231";
 const output = path.join(
   repository,
-  "docs/delivery/evidence/ship-x-2026-11-11",
+  "docs/delivery/evidence/ship-x-redo-2026-11-11",
 );
 const entry = "scripts/guide-preview/main.tsx";
 const source = await readFile(path.join(repository, entry), "utf8");
@@ -182,11 +181,15 @@ for (const file of files)
   hash.update(file).update(await readFile(path.join(repository, file)));
 const sourceHash = hash.digest("hex");
 const buildStyles = [];
-const styleDirectory = path.join(repository, ".next/static/css");
-const styleFiles = await readdir(styleDirectory);
+const styleDirectory = path.join(repository, ".next/static");
+const styleFiles = await readdir(styleDirectory, { recursive: true });
 const styles = styleFiles
   .filter((file) => file.endsWith(".css"))
   .toSorted((left, right) => left.localeCompare(right));
+if (styles.length === 0)
+  throw new Error(
+    "No built CSS found. Build the app before capturing review fixtures.",
+  );
 for (const file of styles) {
   const bytes = await readFile(path.join(styleDirectory, file));
   buildStyles.push({
@@ -194,6 +197,7 @@ for (const file of styles) {
     sha256: createHash("sha256").update(bytes).digest("hex"),
   });
 }
+const origin = "http://127.0.0.1:3231";
 const manifest = {
   provenance:
     "Isolated synthetic component fixtures; no live account, provider or operational proof. Automated checks do not replace visual review.",
@@ -294,9 +298,16 @@ try {
         );
         await page.evaluate(async () => {
           await document.fonts.ready;
-          await Promise.allSettled(
-            [...document.images].map((image) => image.decode()),
-          );
+          const images = [...document.images];
+          for (const image of images) image.loading = "eager";
+          let timer;
+          await Promise.race([
+            Promise.allSettled(images.map((image) => image.decode())),
+            new Promise((resolve) => {
+              timer = setTimeout(resolve, 10_000);
+            }),
+          ]);
+          clearTimeout(timer);
         });
         record.layout = await page.evaluate(() => ({
           matchedRoute: document.documentElement.dataset.previewRoute,
@@ -333,8 +344,8 @@ try {
               text: element.textContent.trim().slice(0, 100),
             })),
           brokenImages: [...document.images]
-            .filter((image) => image.complete && image.naturalWidth === 0)
-            .map((image) => image.currentSrc),
+            .filter((image) => !image.complete || image.naturalWidth === 0)
+            .map((image) => image.currentSrc || image.src),
         }));
         if (record.layout.headings.length === 0)
           record.errors.push("No page heading rendered");

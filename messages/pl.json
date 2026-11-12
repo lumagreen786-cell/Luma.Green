@@ -634,7 +634,7 @@
     "replyTime": "Odpowiadamy w ciągu jednego dnia roboczego.",
     "search": {
       "label": "Szukaj w pomocy",
-      "placeholder": "Oczekiwanie na bramkę",
+      "placeholder": "Szukaj",
       "clear": "Wyczyść wyszukiwanie",
       "summary": "{count, plural, =0 {Brak odpowiedzi} one {# odpowiedź} few {# odpowiedzi} many {# odpowiedzi} other {# odpowiedzi}} dla „{query}”",
       "topicSummary": "{count, plural, =0 {Brak odpowiedzi} one {# odpowiedź} few {# odpowiedzi} many {# odpowiedzi} other {# odpowiedzi}} na temat {topic}",
@@ -1905,7 +1905,7 @@
     "homeTitle": "Oddajesz surowce z domu?",
     "homeLink": "Zobacz, jak to działa",
     "privacy": "Używamy numeru tylko do logowania i wysyłania informacji o Twojej pracy w Luma.Green.",
-    "unavailableTitle": "Logowanie telefonem będzie wkrótce dostępne",
+    "unavailableTitle": "Zaloguj się numerem telefonu",
     "unavailableBody": "Logowanie przez SMS jest niedostępne. Spróbuj ponownie później.",
     "verifyTitle": "Wpisz 6-cyfrowy kod",
     "sentTo": "Wysłano SMS-em na {phone}",

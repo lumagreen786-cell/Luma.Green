@@ -83,12 +83,14 @@ labelled fixtures. The delivery handoff owns verification and release status.
 
 ## Current UI contract
 
-**11 November 2026 owner approval:** The current contract is now
-[Luma design system](luma-design-system/README.md). Its approved Ship X-inspired
-layouts, five-colour palette, light-only appearance, shadcn controls and resumed
-Expo iOS/Android UI work supersede the dated visual rules below. The following
-sections remain historical context, not permission to restore dark mode or the
-rejected visual direction. Authentication, privacy and exact-data rules remain.
+**11 November 2026 latest owner direction:** The active contract is
+[Luma design system](luma-design-system/README.md), applied through the reusable
+[Florin skill](../../.agents/skills/luma-florin-ui/SKILL.md). Clone the full Florin
+page patterns, both light and dark modes, Urbanist type, lime accents, pill top
+navigation, inset tab counters and large rounded panels. This replaces Ship X,
+the five-colour palette and light-only mode. Preserve original imagery and mobile
+fixes. Do not create or update PDFs. Older visual sections below are historical;
+authentication, privacy and exact-data requirements still apply.
 
 ### Astryx redesign — 16 October 2026
 

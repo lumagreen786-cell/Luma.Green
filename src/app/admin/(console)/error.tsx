@@ -28,11 +28,11 @@ export default function ConsoleError({
   const code = convexErrorCode(error);
   const isSessionOver = code !== undefined && SESSION_CODES.has(code);
   return (
-    <div className="mx-auto my-8 flex max-w-lg flex-col items-start gap-4 border-y py-6 sm:py-8">
+    <div className="mx-auto my-8 flex max-w-lg flex-col items-start gap-4 rounded-panel border border-border/60 bg-card p-6 text-card-foreground shadow-panel sm:p-8">
       <span className="flex size-8 items-center text-destructive">
         <TriangleAlertIcon aria-hidden className="size-6" />
       </span>
-      <h1 className="text-2xl font-semibold tracking-tight">
+      <h1 className="font-display text-2xl font-normal tracking-tight">
         {isSessionOver ? "Your session has ended" : "This page didn't load"}
       </h1>
       <p className="text-muted-foreground">

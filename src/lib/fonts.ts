@@ -15,13 +15,13 @@ import {
   Noto_Sans_Tamil,
   Noto_Sans_Telugu,
   Noto_Sans_Thai,
-  Plus_Jakarta_Sans,
+  Urbanist,
 } from "next/font/google";
 
 import type { Locale } from "@/i18n/locales";
 
 /**
- * Noto supplies body copy and all script fallbacks; Plus Jakarta Sans supplies Latin UI/display type.
+ * Noto supplies body copy and all script fallbacks; Urbanist supplies Latin UI/display type.
  *
  * Noto is the only widely available family with full, visually consistent
  * coverage of every script we ship, so the wordmark and the UI never fall back
@@ -36,8 +36,8 @@ import type { Locale } from "@/i18n/locales";
  * time and rejects spreads or computed values.
  */
 
-export const fontDisplay = Plus_Jakarta_Sans({
-  variable: "--font-jakarta",
+export const fontDisplay = Urbanist({
+  variable: "--font-urbanist",
   subsets: ["latin"],
   display: "swap",
   preload: false,

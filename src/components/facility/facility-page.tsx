@@ -70,17 +70,18 @@ function FacilityWorkspace({ canManage }: { canManage: boolean }) {
           {
             value: "facilities",
             label: t("title"),
+            count: rows?.length,
             content: (
               <div className="space-y-5">
                 {" "}
                 {rows === undefined ? (
                   <ListSkeleton />
                 ) : (
-                  <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
+                  <ul className="record-sheet divide-y divide-border/60 rounded-panel px-4 sm:px-5">
                     {rows.map((facility) => (
                       <li
                         key={facility._id}
-                        className="flex min-w-0 flex-col gap-3 py-5"
+                        className="grid min-w-0 items-start gap-5 py-5 lg:grid-cols-[minmax(12rem,1fr)_minmax(0,2fr)]"
                       >
                         <div className="min-w-0 space-y-2">
                           <h2 className="font-medium break-words">
@@ -103,13 +104,15 @@ function FacilityWorkspace({ canManage }: { canManage: boolean }) {
                               <li key={kind}>{t(`processKinds.${kind}`)}</li>
                             ))}
                           </ul>
+                          {canManage ? (
+                            <div className="shrink-0">
+                              <FacilityForm facility={facility} />
+                            </div>
+                          ) : null}
                         </div>
-                        {canManage ? (
-                          <div className="shrink-0">
-                            <FacilityForm facility={facility} />
-                          </div>
-                        ) : null}
-                        <FacilityRegistrations facilityId={facility._id} />
+                        <div className="min-w-0 lg:border-s lg:ps-5">
+                          <FacilityRegistrations facilityId={facility._id} />
+                        </div>
                       </li>
                     ))}
                   </ul>

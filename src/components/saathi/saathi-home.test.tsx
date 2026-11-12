@@ -157,7 +157,7 @@ describe("SaathiHome", () => {
 
     const later = screen.getByRole("article", { name: /^Factory shift/ });
     expect(within(later).queryByRole("button")).not.toBeInTheDocument();
-    expect(later).toHaveTextContent("You can mark it done on the day.");
+    expect(later).toHaveTextContent(messages.saathi.upcoming.hint);
 
     const takeButtons = screen.getAllByRole("button", {
       name: /Take this job/,
@@ -180,9 +180,7 @@ describe("SaathiHome", () => {
     const [first] = screen.getAllByRole("button", { name: /Take this job/ });
     await userEvent.click(first);
     expect(take).toHaveBeenCalledWith({ jobId: "open-1" });
-    expect(toast.success).toHaveBeenCalledWith(
-      "Job taken. It's on your list now.",
-    );
+    expect(toast.success).toHaveBeenCalledWith("Job added to your schedule.");
   });
 
   it("says why a job couldn't be taken, next to the button", async () => {
@@ -214,7 +212,7 @@ describe("SaathiHome", () => {
     );
     expect(finish).toHaveBeenCalledWith({ jobId: "mine-1" });
     expect(toast.success).toHaveBeenCalledWith(
-      "Well done! ₹350 added to your earnings.",
+      "Job completed. ₹350 added to your earnings.",
     );
   });
 

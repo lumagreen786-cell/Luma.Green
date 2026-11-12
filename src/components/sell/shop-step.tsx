@@ -52,7 +52,7 @@ function LocationControl({
   if (state.status === "on") {
     return (
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
-        <span className="flex items-center gap-1.5 font-medium text-primary">
+        <span className="flex items-center gap-1.5 font-medium text-foreground">
           <LocateFixedIcon aria-hidden className="size-4" />
           {t("nearestFirst")}
         </span>

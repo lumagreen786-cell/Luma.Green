@@ -50,10 +50,10 @@ export function ReceiptView({
       className="flex flex-col gap-5 rounded-xl bg-card p-5 sm:p-6"
     >
       <div className="flex flex-col items-center gap-2 text-center">
-        <span className="flex size-12 items-center justify-center text-primary">
+        <span className="flex size-12 items-center justify-center text-foreground">
           <CircleCheckBigIcon aria-hidden className="size-6" />
         </span>
-        <p className="font-medium text-primary">
+        <p className="font-medium text-foreground">
           {first
             ? t("receipt.thanksNamed", { name: first })
             : t("receipt.thanks")}
@@ -72,7 +72,7 @@ export function ReceiptView({
         </p>
         {points === null ? null : (
           <div className="mt-2 flex flex-col items-center gap-1">
-            <p className="inline-flex items-center gap-2 py-2 font-medium text-primary">
+            <p className="inline-flex items-center gap-2 py-2 font-medium text-foreground">
               <StarIcon aria-hidden className="size-4" />
               {t("receipt.points", {
                 name: first ?? t("household"),
@@ -113,7 +113,7 @@ export function ReceiptView({
               </div>
               {lotLink?.lotId ? (
                 <Link
-                  className="inline-flex min-h-11 items-center self-start text-sm text-primary underline"
+                  className="inline-flex min-h-11 items-center self-start text-sm text-foreground underline"
                   href={`/app/lots/${lotLink.lotId}`}
                 >
                   {t("receipt.lotLinked")}
@@ -144,7 +144,7 @@ export function ReceiptView({
         <span className="tabular-nums">{total}</span>
       </div>
       <p className="flex items-center gap-2 text-sm text-muted-foreground">
-        <PackageIcon aria-hidden className="size-4 shrink-0 text-primary" />
+        <PackageIcon aria-hidden className="size-4 shrink-0 text-foreground" />
         {t("receipt.stock")}
       </p>
       <Button asChild variant="outline" size="lg" className="h-12 text-base">

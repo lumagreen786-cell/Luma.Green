@@ -1,0 +1,957 @@
+{
+  "capturedAt": "2026-11-11T11:37:11.014Z",
+  "baseURL": "http://127.0.0.1:3011",
+  "head": "18436e8b100c3c107671c0fab6e434b0b563f074",
+  "buildId": "nR1RO2auOhdJphY_B-mv-",
+  "trackedDiffSha256": "963dc20441748422fcc0f5141c1eb91e02c3ec5503ba1abef04cb681a5dc61e4",
+  "context": "Actual disconnected production build in isolated Chromium. No sign-in, OTP, provider submission or production acceptance. Redirects are recorded. Solar examples use clearly synthetic local inputs.",
+  "captures": [
+    {
+      "route": "/en",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-1440.png",
+      "finalURL": "http://127.0.0.1:3011/",
+      "redirected": false,
+      "heading": "Clear out recyclables. Get paid.",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "8ecbc7b090f7a22a472ed7352513db2cca339246b5f69963bd904bef5b0365ba",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 4010
+      }
+    },
+    {
+      "route": "/en/how-it-works",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-how-it-works-1440.png",
+      "finalURL": "http://127.0.0.1:3011/how-it-works",
+      "redirected": false,
+      "heading": "How Luma.Green works",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "677d7880033ecc945d817eb376636d688d48f2f9964c1586131c5bb4e111b968",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 2346
+      }
+    },
+    {
+      "route": "/en/participants",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-participants-1440.png",
+      "finalURL": "http://127.0.0.1:3011/participants",
+      "redirected": false,
+      "heading": "Who Luma.Green is for",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "5f17f5ef28c182e242d5b0633f1d5b57ae015db94ad9d49d0fae40d6b629490d",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1820
+      }
+    },
+    {
+      "route": "/en/prices",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-prices-1440.png",
+      "finalURL": "http://127.0.0.1:3011/prices",
+      "redirected": false,
+      "heading": "Material prices",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "8844173a17a6f7473bfaa1014bfb4dd133adc7a67f5b5c676d77c4bcff84e115",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1247
+      }
+    },
+    {
+      "route": "/en/standards",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-standards-1440.png",
+      "finalURL": "http://127.0.0.1:3011/standards",
+      "redirected": false,
+      "heading": "The Luma.Green standard",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "94bae8cd2fc6391b1912e010dd13271a493821ee5d0df230a5c0e019974d401e",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1941
+      }
+    },
+    {
+      "route": "/en/solar",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-solar-1440.png",
+      "finalURL": "http://127.0.0.1:3011/solar",
+      "redirected": false,
+      "heading": "Rooftop solar for your home or business",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "67ada4847175fb514b94b673c35b5b181a00ed21d9c6f969759932eaabcbabec",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1831
+      }
+    },
+    {
+      "route": "/en/join",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-join-1440.png",
+      "finalURL": "http://127.0.0.1:3011/join",
+      "redirected": false,
+      "heading": "Join Luma.Green",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "ed61a573c4a4f5f8aaf31db3f7dbeb693819349345fca22dff78a49ffb5d4e84",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1501
+      }
+    },
+    {
+      "route": "/en/contact",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-contact-1440.png",
+      "finalURL": "http://127.0.0.1:3011/contact",
+      "redirected": false,
+      "heading": "Talk to us",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "529c7e32310a4eb98be2a8b012fa5b81e1fc1942c70889db34dfaba045edeebc",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/help",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-help-1440.png",
+      "finalURL": "http://127.0.0.1:3011/help",
+      "redirected": false,
+      "heading": "How can we help?",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "dd6033e5e0bad0a1a3e3f3809202c5a609a465bccba8b8681d249d468a1ae72a",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1520
+      }
+    },
+    {
+      "route": "/en/help/contact",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-help-contact-1440.png",
+      "finalURL": "http://127.0.0.1:3011/help/contact",
+      "redirected": false,
+      "heading": "Contact us",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "eb28f5af59e67c13fc427bb20ba8c264dca6447c29026176b6b5778a80093168",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1142
+      }
+    },
+    {
+      "route": "/en/help/kabadiwala",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-help-kabadiwala-1440.png",
+      "finalURL": "http://127.0.0.1:3011/help/kabadiwala",
+      "redirected": false,
+      "heading": "Help for kabadiwalas",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "f5dbd68301291b95b50098e77138840540e9121f6140f843e983403fbaa1fe02",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 2844
+      }
+    },
+    {
+      "route": "/en/privacy",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-privacy-1440.png",
+      "finalURL": "http://127.0.0.1:3011/privacy",
+      "redirected": false,
+      "heading": "Privacy policy",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "b837f97080c2b53f4bf2b5f8c130cbd83a6d95378a74a277964e81c713470d55",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1527
+      }
+    },
+    {
+      "route": "/en/sell",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-sell-1440.png",
+      "finalURL": "http://127.0.0.1:3011/sell",
+      "redirected": false,
+      "heading": "Recycle",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "c7651671e1299638e9bcdc5b3c014f7f2981d9ed3174e5454488735de037da69",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1185
+      }
+    },
+    {
+      "route": "/en/sell/activity",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-sell-activity-1440.png",
+      "finalURL": "http://127.0.0.1:3011/login?next=%2Fsell%2Factivity",
+      "redirected": true,
+      "heading": "Log in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "ab95c0142b5a772677e4859db142f9976dee32d34f52127882d27b5ac1275c15",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/sell/services",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-sell-services-1440.png",
+      "finalURL": "http://127.0.0.1:3011/sell/services",
+      "redirected": false,
+      "heading": "Services",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "410aaf947e836cb8f97af8331272c53608d2685f65993140f215e31d97181665",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/sell/footprint",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-sell-footprint-1440.png",
+      "finalURL": "http://127.0.0.1:3011/sell/footprint",
+      "redirected": false,
+      "heading": "Electricity footprint",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "85ce0003db8fab8eba149958c80511220743ea0399cbad570ccdda4f9f1b4004",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/sell/settings",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-sell-settings-1440.png",
+      "finalURL": "http://127.0.0.1:3011/sell/settings",
+      "redirected": false,
+      "heading": "Settings",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "4d8519793c222e520536aaaaa7fa5e638df6e662e0c56b46edcec4d042933ebd",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1111
+      }
+    },
+    {
+      "route": "/en/login",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-login-1440.png",
+      "finalURL": "http://127.0.0.1:3011/login",
+      "redirected": false,
+      "heading": "Log in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "ab95c0142b5a772677e4859db142f9976dee32d34f52127882d27b5ac1275c15",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/login/verify",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-login-verify-1440.png",
+      "finalURL": "http://127.0.0.1:3011/login/verify",
+      "redirected": false,
+      "heading": "Log in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "778a3cf6a904b000791809089357f92ec5fbda624a9edae6c05269c933bc512b",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-390.png",
+      "finalURL": "http://127.0.0.1:3011/",
+      "redirected": false,
+      "heading": "Clear out recyclables. Get paid.",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "b210ba81ee325f8d6ecb14b50b0b3dca29731bd618f7f87c6e9cd86ea6f2f47a",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 6840
+      }
+    },
+    {
+      "route": "/en/login",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-login-390.png",
+      "finalURL": "http://127.0.0.1:3011/login",
+      "redirected": false,
+      "heading": "Log in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "323a9e49a204b883d11e96a8fa5d4909b399d10157922de7a5dcc65a9be4154a",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 844
+      }
+    },
+    {
+      "route": "/en/sell",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-sell-390.png",
+      "finalURL": "http://127.0.0.1:3011/sell",
+      "redirected": false,
+      "heading": "Recycle",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "7a15eccd6c7e344eb1d6c6cf7cc15b1dc5097e29fbc05f2e15dae677198f670d",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1526
+      }
+    },
+    {
+      "route": "/en/sell/services",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-sell-services-390.png",
+      "finalURL": "http://127.0.0.1:3011/sell/services",
+      "redirected": false,
+      "heading": "Services",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "71d9b5ae419046bc174eeb101120b658567255b36ca698e4a849cf9ab169ef2b",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1383
+      }
+    },
+    {
+      "route": "/en/sell/footprint",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-sell-footprint-390.png",
+      "finalURL": "http://127.0.0.1:3011/sell/footprint",
+      "redirected": false,
+      "heading": "Electricity footprint",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "5e2fcf9d07e629f8fa59b3f3c4853b864b5e700983a3ca67feaef3e568991cee",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1334
+      }
+    },
+    {
+      "route": "/en/sell/settings",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-sell-settings-390.png",
+      "finalURL": "http://127.0.0.1:3011/sell/settings",
+      "redirected": false,
+      "heading": "Settings",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "7974cb2be2a1ddc2126ffbc583f577ef224e8e0ecda376bf8e752100c4c8380a",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1542
+      }
+    },
+    {
+      "route": "/en/join",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-join-390.png",
+      "finalURL": "http://127.0.0.1:3011/join",
+      "redirected": false,
+      "heading": "Join Luma.Green",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "9428207520c842709f6eae349bcec01459e1a9bc7e5310158e3b22c94dafb742",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1896
+      }
+    },
+    {
+      "route": "/en/help/contact",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-help-contact-390.png",
+      "finalURL": "http://127.0.0.1:3011/help/contact",
+      "redirected": false,
+      "heading": "Contact us",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "c1d4f1e2be862243cf743caff7620866d0986469fdebbd78ec8a4ba166a8ddf9",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1585
+      }
+    },
+    {
+      "route": "/ar",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "ar-390.png",
+      "finalURL": "http://127.0.0.1:3011/ar",
+      "redirected": false,
+      "heading": "تخلّص من المواد القابلة للتدوير. واحصل على مقابل.",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "8a02b248e5be0154cb2080aecdc6e838767759ab45b1553d3e68df5a6b168cd6",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 6465
+      }
+    },
+    {
+      "route": "/ar/login",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "ar-login-390.png",
+      "finalURL": "http://127.0.0.1:3011/ar/login",
+      "redirected": false,
+      "heading": "تسجيل الدخول",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "ae75f156bed4a5df47b2b691812b5ef49fa4dd46005a8a21ac8b83047c612aa6",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 844
+      }
+    },
+    {
+      "route": "/ar/sell",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "ar-sell-390.png",
+      "finalURL": "http://127.0.0.1:3011/ar/sell",
+      "redirected": false,
+      "heading": "إعادة التدوير",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "75af4bea9a631cc60a407d35d9c678809ca980ecb1c26c0947920d4695690ada",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1423
+      }
+    },
+    {
+      "route": "/ta",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "ta-390.png",
+      "finalURL": "http://127.0.0.1:3011/ta",
+      "redirected": false,
+      "heading": "மறுசுழற்சிப் பொருட்களை அகற்றுங்கள். பணம் பெறுங்கள்.",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "ad6db4832d0dff2c989aae270b9b2a00690b9c6b61b52d38073bdbfac588177e",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 7936
+      }
+    },
+    {
+      "route": "/ta/sell",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "ta-sell-390.png",
+      "finalURL": "http://127.0.0.1:3011/ta/sell",
+      "redirected": false,
+      "heading": "மறுசுழற்சி செய்க",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "77e5f53a1805a84be7783b1776d41cf0de5dd7f37b898e6545cd19af70f059c4",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1658
+      }
+    },
+    {
+      "route": "/en",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-768.png",
+      "finalURL": "http://127.0.0.1:3011/",
+      "redirected": false,
+      "heading": "Clear out recyclables. Get paid.",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "c6f7e3134390f9c9517eda78a279d703ec95c9d41531bbaf7095774b53e312ac",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 768,
+        "scrollWidth": 768,
+        "height": 5808
+      }
+    },
+    {
+      "route": "/en/sell",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-sell-768.png",
+      "finalURL": "http://127.0.0.1:3011/sell",
+      "redirected": false,
+      "heading": "Recycle",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "88df6abb0c6af024c232e1cca11951626fea88268651d4a92773ac27ca40912e",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 768,
+        "scrollWidth": 768,
+        "height": 1335
+      }
+    },
+    {
+      "route": "/ar/sell",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "ar-sell-768.png",
+      "finalURL": "http://127.0.0.1:3011/ar/sell",
+      "redirected": false,
+      "heading": "إعادة التدوير",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "81ed23b28af360c1253d1fcd48b9ee6e6b55d9c246cd171e15e09a54de0cabbe",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 768,
+        "scrollWidth": 768,
+        "height": 1338
+      }
+    },
+    {
+      "route": "/admin/login",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "admin-login-1440.png",
+      "finalURL": "http://127.0.0.1:3011/admin/login",
+      "redirected": false,
+      "heading": "Admin sign-in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "0b9c8a57bb744a41a55a3845df2b724d91bd847dd57fa064a480d7456b4ef7b7",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/admin/setup",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "admin-setup-1440.png",
+      "finalURL": "http://127.0.0.1:3011/admin/setup",
+      "redirected": false,
+      "heading": "Set up the admin account",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "176badf5e60dcfab21281e768b3d4cbd16e89b45a1037be29ccade55515e9bf1",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/admin/forgot-password",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "admin-forgot-password-1440.png",
+      "finalURL": "http://127.0.0.1:3011/admin/login",
+      "redirected": true,
+      "heading": "Admin sign-in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "0b9c8a57bb744a41a55a3845df2b724d91bd847dd57fa064a480d7456b4ef7b7",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/admin/reset-password",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "admin-reset-password-1440.png",
+      "finalURL": "http://127.0.0.1:3011/admin/login",
+      "redirected": true,
+      "heading": "Admin sign-in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "0b9c8a57bb744a41a55a3845df2b724d91bd847dd57fa064a480d7456b4ef7b7",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/login/email/reset",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-login-email-reset-1440.png",
+      "finalURL": "http://127.0.0.1:3011/login",
+      "redirected": true,
+      "heading": "Log in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "ab95c0142b5a772677e4859db142f9976dee32d34f52127882d27b5ac1275c15",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/login/email/verify",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-login-email-verify-1440.png",
+      "finalURL": "http://127.0.0.1:3011/login",
+      "redirected": true,
+      "heading": "Log in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "ab95c0142b5a772677e4859db142f9976dee32d34f52127882d27b5ac1275c15",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/login/email/complete",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "en-login-email-complete-1440.png",
+      "finalURL": "http://127.0.0.1:3011/login",
+      "redirected": true,
+      "heading": "Log in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "ab95c0142b5a772677e4859db142f9976dee32d34f52127882d27b5ac1275c15",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/admin/login",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "admin-login-390.png",
+      "finalURL": "http://127.0.0.1:3011/admin/login",
+      "redirected": false,
+      "heading": "Admin sign-in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "27ce7045dbfc4d5d7e7dd795c0c7f034547138d448de007d120e38bb3e662f30",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 844
+      }
+    },
+    {
+      "route": "/admin/setup",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "file": "admin-setup-390.png",
+      "finalURL": "http://127.0.0.1:3011/admin/setup",
+      "redirected": false,
+      "heading": "Set up the admin account",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "21cdf5c04b6b38209f0352692b1f193a11b1add093fb10c5a4593bce93881f65",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 844
+      }
+    },
+    {
+      "route": "/en/solar",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Synthetic local solar estimate",
+      "context": "Synthetic home example: monthly electricity bill INR 3000, roof 400 sq ft. Existing calculator assumptions; not an actual bill, quote, subsidy decision or measured savings. No submission; external network blocked.",
+      "file": "en-solar-example-1440.png",
+      "finalURL": "http://127.0.0.1:3011/solar",
+      "redirected": false,
+      "heading": "Rooftop solar for your home or business",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "c76fda9efd7280fa4cd658330cc2e92507c29b29e0adfc7296ba0af538cba908",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 2547
+      }
+    },
+    {
+      "route": "/en/solar",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Synthetic local solar estimate",
+      "context": "Synthetic home example: monthly electricity bill INR 3000, roof 400 sq ft. Existing calculator assumptions; not an actual bill, quote, subsidy decision or measured savings. No submission; external network blocked. Cropped calculated chart.",
+      "file": "en-solar-example-chart-1440.png",
+      "finalURL": "http://127.0.0.1:3011/solar",
+      "redirected": false,
+      "heading": "Rooftop solar for your home or business",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "94194544830befdbbf51571b4a1b07656ee21d1e9ef709465bbba3aa47aad562",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 2547
+      }
+    },
+    {
+      "route": "/en/solar",
+      "width": 390,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Synthetic local solar estimate",
+      "context": "Synthetic home example: monthly electricity bill INR 3000, roof 400 sq ft. Existing calculator assumptions; not an actual bill, quote, subsidy decision or measured savings. No submission; external network blocked.",
+      "file": "en-solar-example-390.png",
+      "finalURL": "http://127.0.0.1:3011/solar",
+      "redirected": false,
+      "heading": "Rooftop solar for your home or business",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "0200d259862283f248a914a2a39c596300ae25b5c55b7a10d627dba63fa22cc1",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 3977
+      }
+    }
+  ],
+  "finishedAt": "2026-11-11T11:37:43.731Z",
+  "finalTrackedDiffSha256": "963dc20441748422fcc0f5141c1eb91e02c3ec5503ba1abef04cb681a5dc61e4",
+  "sourceUnchanged": true,
+  "passed": true
+}

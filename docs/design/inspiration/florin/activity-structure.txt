@@ -1,0 +1,251 @@
+Browser tab: 16, Title: "Activity | Florin", URL: "https://ui.cortexcn.dev/previews/florin/activity".
+1 AXWebArea Activity | Florin, URL: ui.cortexcn.dev/previews/florin/activity
+	2 link Description: Skip to content, Value: ui.cortexcn.dev/previews/florin/activity#main
+	3 container
+		4 link Description: Florin, invoices, Value: ui.cortexcn.dev/previews/florin/
+		5 pop up button (collapsed) Description: All pages, Secondary Actions: Expand
+		6 pop up button (collapsed) Description: Notifications, Secondary Actions: Expand
+		7 link Description: Settings, Value: ui.cortexcn.dev/previews/florin/settings/
+		8 pop up button (collapsed) Description: Account menu, ID: radix-_R_tb5tlb_, Secondary Actions: Expand
+		9 container Billing
+			10 content list
+				11 link Description: Estimates, Value: ui.cortexcn.dev/previews/florin/estimates/
+				12 link Description: Invoices, Value: ui.cortexcn.dev/previews/florin/
+				13 link Description: Payments, Value: ui.cortexcn.dev/previews/florin/payments/
+				14 link Description: Recurring Invoices, Value: ui.cortexcn.dev/previews/florin/recurring/
+				15 link Description: Checkouts, Value: ui.cortexcn.dev/previews/florin/checkouts/
+	16 container main
+		17 container
+			18 button Back
+			19 heading Activity, Value: 1
+				20 text Activity
+			21 text What happened to your invoices, payments, and estimates.
+		22 container
+			23 text Events this week 12 Received this week $1,850.00 Reminders sent 2 this week
+		24 container
+			25 tab group Activity by kind
+				26 tab (selected, settable, boolean) All, Value: 1
+				27 tab (selectable, settable, boolean) Payments 8, Value: 0
+				28 tab (selectable, settable, boolean) Sent 7, Value: 0
+				29 tab (selectable, settable, boolean) Reminders 2, Value: 0
+				30 tab (selectable, settable, boolean) Estimates 4, Value: 0
+			31 heading All activity, Value: 2
+				32 text All activity
+			33 text 24 events
+			34 container activity-feed
+				35 container Today
+					36 heading Today, Value: 3, ID: day-2026-11-11
+						37 text Today
+					38 container
+						39 text November 11, 2026,  1 event
+					40 content list
+						41 container
+							42 text Draft 418-015 started for Halden Works Draft started  ·
+							43 text 9:12 AM
+							44 link Description: Invoice 418-015, Value: ui.cortexcn.dev/previews/florin/?invoice=inv-418-015
+							45 link Description: Halden Works, Value: ui.cortexcn.dev/previews/florin/customer/?id=halden
+							46 text $7,448.60
+				47 container Yesterday
+					48 heading Yesterday, Value: 3, ID: day-2026-11-10
+						49 text Yesterday
+					50 container
+						51 text November 10, 2026,  3 events
+					52 content list
+						53 container
+							54 text Nora Lindqvist opened invoice 439-002 Viewed  ·
+							55 text 4:40 PM
+							56 link Description: Invoice 439-002, Value: ui.cortexcn.dev/previews/florin/?invoice=inv-439-002
+							57 link Description: Solace Hotels, Value: ui.cortexcn.dev/previews/florin/customer/?id=solace
+						58 container
+							59 text Invoice 439-002 sent to Solace Hotels Sent  ·
+							60 text 3:05 PM
+							61 link Description: Invoice 439-002, Value: ui.cortexcn.dev/previews/florin/?invoice=inv-439-002
+							62 link Description: Solace Hotels, Value: ui.cortexcn.dev/previews/florin/customer/?id=solace
+							63 text $15,760.00
+						64 container
+							65 text Draft 412-008 started for Tallgrass Farms Draft started  ·
+							66 text 11:18 AM
+							67 link Description: Invoice 412-008, Value: ui.cortexcn.dev/previews/florin/?invoice=inv-412-008
+							68 link Description: Tallgrass Farms, Value: ui.cortexcn.dev/previews/florin/customer/?id=tallgrass
+							69 text $9,750.00
+				70 container Nov 9
+					71 heading Nov 9, Value: 3, ID: day-2026-11-09
+						72 text Nov 9
+					73 text 3 events
+					74 content list
+						75 container
+							76 text Tallgrass Farms accepted estimate EST-1040 Accepted  ·
+							77 text 5:02 PM
+							78 link Description: Tallgrass Farms, Value: ui.cortexcn.dev/previews/florin/customer/?id=tallgrass
+							79 text $23,100.00
+						80 container
+							81 text Weekly payout sent to Business checking Payout  ·
+							82 text 10:30 AM
+						83 container
+							84 text Invoice 435-003 sent to Orbitly Sent  ·
+							85 text 9:45 AM
+							86 link Description: Invoice 435-003, Value: ui.cortexcn.dev/previews/florin/?invoice=inv-435-003
+							87 link Description: Orbitly, Value: ui.cortexcn.dev/previews/florin/customer/?id=orbitly
+							88 text $20,400.00
+				89 container Nov 8
+					90 heading Nov 8, Value: 3, ID: day-2026-11-08
+						91 text Nov 8
+					92 text 1 event
+					93 content list
+						94 container
+							95 text Reminder sent for 431-007, three days past due Reminder  ·
+							96 text 8:00 AM
+							97 link Description: Invoice 431-007, Value: ui.cortexcn.dev/previews/florin/?invoice=inv-431-007
+							98 link Description: Quayside Freight, Value: ui.cortexcn.dev/previews/florin/customer/?id=quayside
+							99 text $24,650.00
+				100 container Nov 6
+					101 heading Nov 6, Value: 3, ID: day-2026-11-06
+						102 text Nov 6
+					103 text 2 events
+					104 content list
+						105 container
+							106 text Card payment for 431-007 was declined Failed  ·
+							107 text 2:22 PM
+							108 link Description: Invoice 431-007, Value: ui.cortexcn.dev/previews/florin/?invoice=inv-431-007
+							109 link Description: Quayside Freight, Value: ui.cortexcn.dev/previews/florin/customer/?id=quayside
+							110 text $24,650.00
+						111 container
+							112 text Orbitly accepted estimate EST-1039 Accepted  ·
+							113 text 8:00 AM
+							114 link Description: Orbitly, Value: ui.cortexcn.dev/previews/florin/customer/?id=orbitly
+							115 text $20,400.00
+				116 container Nov 5
+					117 heading Nov 5, Value: 3, ID: day-2026-11-05
+						118 text Nov 5
+					119 text 2 events
+					120 content list
+						121 container
+							122 text Milkweed Bakery paid invoice 402-004 Paid  ·
+							123 text 1:51 PM
+							124 link Description: Invoice 402-004, Value: ui.cortexcn.dev/previews/florin/?invoice=inv-402-004
+							125 link Description: Milkweed Bakery, Value: ui.cortexcn.dev/previews/florin/customer/?id=milkweed
+							126 text $1,850.00
+						127 container
+							128 text Reminder sent for 409-014, three days past due Reminder  ·
+							129 text 8:00 AM
+							130 link Description: Invoice 409-014, Value: ui.cortexcn.dev/previews/florin/?invoice=inv-409-014
+							131 link Description: Fernway Legal, Value: ui.cortexcn.dev/previews/florin/customer/?id=fernway
+							132 text $6,880.00
+				133 container Nov 2
+					134 heading Nov 2, Value: 3, ID: day-2026-11-02
+						135 text Nov 2
+					136 text 1 event
+					137 content list
+						138 container
+							139 text Estimate EST-1035 sent to Brightwell Studio Sent  ·
+							140 text 9:04 AM
+							141 link Description: Brightwell Studio, Value: ui.cortexcn.dev/previews/florin/customer/?id=brightwell
+							142 text $7,450.00
+				143 container Nov 1
+					144 heading Nov 1, Value: 3, ID: day-2026-11-01
+						145 text Nov 1
+					146 text 2 events
+					147 content list
+						148 container
+							149 text Lumora Health paid invoice 427-011 Paid  ·
+							150 text 6:33 PM
+							151 link Description: Invoice 427-011, Value: ui.cortexcn.dev/previews/florin/?invoice=inv-427-011
+							152 link Description: Lumora Health, Value: ui.cortexcn.dev/previews/florin/customer/?id=lumora
+							153 text $3,200.00
+						154 container
+							155 text Schedule issued 417-020 to Copperline Energy Scheduled  ·
+							156 text 6:00 AM
+							157 link Description: Invoice 417-020, Value: ui.cortexcn.dev/previews/florin/?invoice=inv-417-020
+							158 link Description: Copperline Energy, Value: ui.cortexcn.dev/previews/florin/customer/?id=copperline
+							159 text $6,480.00
+				160 container Oct 31
+					161 heading Oct 31, Value: 3, ID: day-2026-10-31
+						162 text Oct 31
+					163 text 1 event
+					164 content list
+						165 container
+							166 text Theo Okafor opened invoice 404-011 Viewed  ·
+							167 text 10:16 AM
+							168 link Description: Invoice 404-011, Value: ui.cortexcn.dev/previews/florin/?invoice=inv-404-011
+							169 link Description: Brightwell Studio, Value: ui.cortexcn.dev/previews/florin/customer/?id=brightwell
+				170 container Oct 30
+					171 heading Oct 30, Value: 3, ID: day-2026-10-30
+						172 text Oct 30
+					173 text 1 event
+					174 content list
+						175 container
+							176 text Invoice 404-011 sent to Brightwell Studio Sent  ·
+							177 text 3:47 PM
+							178 link Description: Invoice 404-011, Value: ui.cortexcn.dev/previews/florin/?invoice=inv-404-011
+							179 link Description: Brightwell Studio, Value: ui.cortexcn.dev/previews/florin/customer/?id=brightwell
+							180 text $14,270.00
+				181 container Oct 29
+					182 heading Oct 29, Value: 3, ID: day-2026-10-29
+						183 text Oct 29
+					184 text 1 event
+					185 content list
+						186 container
+							187 text Priya Raman opened invoice 426-004 Viewed  ·
+							188 text 12:09 PM
+							189 link Description: Invoice 426-004, Value: ui.cortexcn.dev/previews/florin/?invoice=inv-426-004
+							190 link Description: Northpine Labs, Value: ui.cortexcn.dev/previews/florin/customer/?id=northpine
+				191 container Oct 27
+					192 heading Oct 27, Value: 3, ID: day-2026-10-27
+						193 text Oct 27
+					194 text 1 event
+					195 content list
+						196 container
+							197 text Solace Hotels paid invoice 439-001 Paid  ·
+							198 text 4:55 PM
+							199 link Description: Invoice 439-001, Value: ui.cortexcn.dev/previews/florin/?invoice=inv-439-001
+							200 link Description: Solace Hotels, Value: ui.cortexcn.dev/previews/florin/customer/?id=solace
+							201 text $5,840.00
+				202 container Oct 26
+					203 heading Oct 26, Value: 3, ID: day-2026-10-26
+						204 text Oct 26
+					205 text 1 event
+					206 content list
+						207 container
+							208 text Ridgeway Robotics accepted estimate EST-1041 Accepted  ·
+							209 text 11:02 AM
+							210 link Description: Ridgeway Robotics, Value: ui.cortexcn.dev/previews/florin/customer/?id=ridgeway
+							211 text $23,800.00
+				212 container Oct 21
+					213 heading Oct 21, Value: 3, ID: day-2026-10-21
+						214 text Oct 21
+					215 text 2 events
+					216 content list
+						217 container
+							218 text Solace Hotels declined estimate EST-1037 Declined  ·
+							219 text 5:40 PM
+							220 link Description: Solace Hotels, Value: ui.cortexcn.dev/previews/florin/customer/?id=solace
+							221 text $25,440.00
+						222 container
+							223 text Instant payout sent to Debit card Payout  ·
+							224 text 9:15 AM
+							225 text $12,500.00
+				226 container Oct 20
+					227 heading Oct 20, Value: 3, ID: day-2026-10-20
+						228 text Oct 20
+					229 text 1 event
+					230 content list
+						231 container
+							232 text Fernway Legal paid $3,000.00 of invoice 409-014 Part paid  ·
+							233 text 2:03 PM
+							234 link Description: Invoice 409-014, Value: ui.cortexcn.dev/previews/florin/?invoice=inv-409-014
+							235 link Description: Fernway Legal, Value: ui.cortexcn.dev/previews/florin/customer/?id=fernway
+							236 text $3,000.00
+				237 container Oct 12
+					238 heading Oct 12, Value: 3, ID: day-2026-10-12
+						239 text Oct 12
+					240 text 1 event
+					241 content list
+						242 container
+							243 text Copperline Energy paid invoice 417-019 by auto-charge Paid  ·
+							244 text 7:30 AM
+							245 link Description: Invoice 417-019, Value: ui.cortexcn.dev/previews/florin/?invoice=inv-417-019
+							246 link Description: Copperline Energy, Value: ui.cortexcn.dev/previews/florin/customer/?id=copperline
+							247 text $6,480.00
+	248 container Notifications alt+T
+
+The focused UI element is 1 AXWebArea Activity | Florin, URL: ui.cortexcn.dev/previews/florin/activity

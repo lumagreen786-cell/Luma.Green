@@ -50,7 +50,7 @@ export function WhenCard({
         </div>
       </div>
       <p className="flex items-center gap-2 text-sm text-muted-foreground">
-        <ModeIcon aria-hidden className="size-4 text-primary" />
+        <ModeIcon aria-hidden className="size-4 text-foreground" />
         {t(`mode.${booking.mode}`)}
       </p>
     </section>
@@ -67,7 +67,7 @@ export function ItemsCard({ booking }: { booking: TrackedBooking }) {
   return (
     <section
       aria-labelledby="items-title"
-      className="flex flex-col rounded-xl border border-border/60 px-4"
+      className="flex flex-col rounded-[1.75rem] bg-card px-5 text-card-foreground"
     >
       <h2 id="items-title" className="pt-4 text-lg font-semibold">
         {t("title")}
@@ -135,7 +135,10 @@ export function MoneySection({ booking }: { booking: TrackedBooking }) {
   const receipt = booking.receipt;
 
   return (
-    <section aria-labelledby="money-title" className="flex flex-col gap-2">
+    <section
+      aria-labelledby="money-title"
+      className="flex flex-col gap-2 rounded-[1.75rem] bg-card p-5 text-card-foreground"
+    >
       <h2 id="money-title" className="sr-only">
         {t("title")}
       </h2>

@@ -101,3 +101,11 @@ __pycache__/
 /docs/delivery/evidence/ship-x-2026-11-11/*.png
 /docs/delivery/evidence/ship-x-public-2026-11-11/*.png
 /output/pdf/Luma-Green-Ship-X-UI-Review.pdf
+/docs/delivery/evidence/ship-x-redo-2026-11-11/*.png
+/docs/delivery/evidence/ship-x-redo-public-2026-11-11/*.png
+/output/pdf/Luma-Green-Ship-X-Redesign-Review.pdf
+
+# Generated Florin review captures; keep reference images and JSON receipts.
+/docs/delivery/evidence/florin-2026-11-11/*.png
+/docs/delivery/evidence/florin-public-2026-11-11/*.png
+/docs/delivery/evidence/florin-manual-2026-11-11/*.jpg

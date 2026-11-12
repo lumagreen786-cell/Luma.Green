@@ -20,6 +20,7 @@ import { WorkspacePermissions } from "@/components/workspace/permissions";
 import type { Id } from "../../convex/_generated/dataModel";
 import ar from "../../messages/ar.json";
 import en from "../../messages/en.json";
+import { fixtureFontClasses } from "./appearance";
 
 const params = new URLSearchParams(window.location.search);
 const scenario = params.get("scenario");
@@ -31,7 +32,10 @@ const fontClasses = JSON.parse(
 ) as Partial<Record<string, string>>;
 const localeFonts = fontClasses[locale];
 if (!localeFonts) throw new Error(`Build the ${locale} locale before capture.`);
-document.documentElement.className = localeFonts;
+document.documentElement.className = fixtureFontClasses(
+  localeFonts,
+  document.documentElement.classList.contains("dark"),
+);
 const catalogue = locale === "ar" ? ar : en;
 const extremeListing: ListingView = {
   specification: undefined,

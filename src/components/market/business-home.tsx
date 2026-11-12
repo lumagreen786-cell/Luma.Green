@@ -72,10 +72,16 @@ function Home({ org }: { org: OrgWorkspace }) {
           actions={<QuickActions />}
         />
       </div>
-      <EmployerPaymentControls />
-      <WaitingForYou trades={trades} showSide />
       <Stats trades={trades} listings={mine} />
-      <LatestOffers offers={offers} recycled={recycled} isMaker={isMaker} />
+      <div className="grid min-w-0 items-start gap-4 xl:grid-cols-[minmax(0,1.7fr)_minmax(19rem,1fr)]">
+        <div className="min-w-0 space-y-4">
+          <WaitingForYou trades={trades} showSide />
+          <LatestOffers offers={offers} recycled={recycled} isMaker={isMaker} />
+        </div>
+        <aside className="min-w-0 rounded-panel bg-card p-5 text-card-foreground xl:sticky xl:top-6">
+          <EmployerPaymentControls />
+        </aside>
+      </div>
     </>
   );
 }
@@ -118,9 +124,12 @@ function Stats({
 
   if (trades === undefined || listings === undefined) {
     return (
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-3" aria-busy="true">
+      <div
+        className="grid grid-cols-1 gap-0 divide-y divide-border/50 rounded-panel bg-card text-card-foreground shadow-panel sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-3 [&>div]:border-0 [&>div]:bg-transparent [&>div]:shadow-none"
+        aria-busy="true"
+      >
         {[0, 1, 2].map((index) => (
-          <Skeleton key={index} className="h-24 rounded-none" />
+          <Skeleton key={index} className="h-28 rounded-panel" />
         ))}
       </div>
     );
@@ -132,7 +141,7 @@ function Stats({
       <h2 id="home-stats" className="sr-only">
         {t("home.statsTitle")}
       </h2>
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-0 divide-y divide-border/50 rounded-panel bg-card text-card-foreground shadow-panel sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-3 [&>div]:border-0 [&>div]:bg-transparent [&>div]:shadow-none">
         <StatCard
           label={t("home.stats.gatewayPending")}
           value={format.number(totals.pendingGateway)}
@@ -276,7 +285,7 @@ function SeeAll({ href, label }: { href: string; label: string }) {
   return (
     <Link
       href={href}
-      className="inline-flex min-h-11 items-center gap-1 rounded-md text-sm font-medium text-primary underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
+      className="inline-flex min-h-11 items-center gap-1 rounded-md text-sm font-medium text-foreground underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
     >
       {label}
       <ArrowRightIcon aria-hidden className="size-4 rtl:rotate-180" />

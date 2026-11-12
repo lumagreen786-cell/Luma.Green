@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { NextIntlClientProvider } from "next-intl";
 import type { ComponentProps } from "react";
 import { describe, expect, it, vi } from "vitest";
@@ -42,7 +42,19 @@ describe("public privacy and deletion instructions", () => {
       expect(
         screen.getByRole("region", { name: messages.privacy.requestsTitle }),
       ).toHaveAttribute("id", "requests");
-      expect(screen.getAllByRole("region")).toHaveLength(5);
+      const sections = screen.getAllByRole("region");
+      expect(sections).toHaveLength(5);
+      const index = screen.getByRole("navigation", {
+        name: messages.privacy.title,
+      });
+      const links = within(index).getAllByRole("link");
+      expect(links).toHaveLength(sections.length);
+      for (const section of sections) {
+        const heading = within(section).getByRole("heading");
+        expect(
+          within(index).getByRole("link", { name: heading.textContent }),
+        ).toHaveAttribute("href", `#${section.id}`);
+      }
     },
   );
 });

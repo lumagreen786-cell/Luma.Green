@@ -55,7 +55,7 @@ export function ParticipantDirectory() {
       <h1 className="font-display text-2xl font-semibold tracking-tight">
         {t("title")}
       </h1>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 rounded-xl bg-muted p-4">
         <Label htmlFor="participant-search">{t("search")}</Label>
         <Input
           id="participant-search"
@@ -66,10 +66,14 @@ export function ParticipantDirectory() {
           }}
         />
       </div>
-      <fieldset className="min-w-0 divide-y divide-border/60 rounded-xl border border-border/60 px-4">
+      <fieldset className="grid min-w-0 gap-3 sm:grid-cols-2">
         <legend className="sr-only">{t("title")}</legend>
         {groups.map(({ group, roles }) => (
-          <details key={group} open={term ? true : undefined}>
+          <details
+            key={group}
+            open={term ? true : undefined}
+            className="min-w-0 rounded-panel border border-border/60 px-4"
+          >
             <summary className="min-h-12 cursor-pointer py-3 font-medium">
               {t(`groups.${group}`)}
             </summary>
@@ -100,7 +104,7 @@ export function ParticipantDirectory() {
         ) : null}
       </fieldset>
       {selected ? (
-        <p className="text-sm text-muted-foreground">
+        <p className="rounded-xl bg-accent p-3 text-sm font-medium text-accent-foreground">
           {t(`roles.${selected}`)}
         </p>
       ) : null}

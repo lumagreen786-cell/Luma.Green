@@ -51,7 +51,7 @@ function FieldError({ id, message }: { id: string; message?: string }) {
 function choiceClass(isSelected: boolean, isDisabled: boolean) {
   return cn(
     "border-b font-normal",
-    isSelected ? "border-primary text-primary" : "border-border",
+    isSelected ? "border-primary text-foreground" : "border-border",
     isDisabled
       ? "cursor-not-allowed opacity-50"
       : "cursor-pointer hover:bg-muted/40",
@@ -200,7 +200,7 @@ export function WhenStep({
                   value={window}
                   disabled={isDisabled}
                 />
-                <Icon aria-hidden className="size-5 shrink-0 text-primary" />
+                <Icon aria-hidden className="size-5 shrink-0 text-foreground" />
                 <span className="flex flex-col">
                   <span className="text-base font-semibold">
                     {t(`windows.${window}`)}
@@ -244,7 +244,7 @@ export function WhenStep({
           <p className="flex gap-2 text-sm text-muted-foreground">
             <ShieldCheckIcon
               aria-hidden
-              className="mt-0.5 size-4 shrink-0 text-primary"
+              className="mt-0.5 size-4 shrink-0 text-foreground"
             />
             {t("when.privacy")}
           </p>
@@ -256,7 +256,7 @@ export function WhenStep({
           <p className="flex gap-2 text-sm">
             <MapPinIcon
               aria-hidden
-              className="mt-0.5 size-4 shrink-0 text-primary"
+              className="mt-0.5 size-4 shrink-0 text-foreground"
             />
             {shop?.address}
           </p>
@@ -264,7 +264,7 @@ export function WhenStep({
             <p className="flex gap-2 text-sm">
               <ClockIcon
                 aria-hidden
-                className="mt-0.5 size-4 shrink-0 text-primary"
+                className="mt-0.5 size-4 shrink-0 text-foreground"
               />
               {t("shop.hours", { hours })}
             </p>

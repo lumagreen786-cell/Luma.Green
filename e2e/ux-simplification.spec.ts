@@ -3,6 +3,7 @@ import { expect, test } from "@playwright/test";
 import ar from "../messages/ar.json";
 import en from "../messages/en.json";
 import kn from "../messages/kn.json";
+import { actionName } from "../src/components/site/action-name";
 
 for (const [locale, copy] of [
   ["en", en],
@@ -11,21 +12,22 @@ for (const [locale, copy] of [
 ] as const) {
   for (const width of [390, 768, 1440]) {
     for (const colorScheme of ["light", "dark"] as const) {
-      test(`${locale} direct entry and whole-card navigation at ${String(width)}px ${colorScheme}`, async ({
+      test(`${locale} role selection and signup entry at ${String(width)}px ${colorScheme}`, async ({
         page,
       }, info) => {
         await page.setViewportSize({ width, height: 900 });
         await page.emulateMedia({ colorScheme, reducedMotion: "reduce" });
         await page.goto(`/${locale}`);
-        const role = page.getByRole("link", {
-          name: copy.home.roles.kabadiwala.cta,
+        const panel = page.getByRole("tabpanel");
+        const role = panel.getByRole("link", {
+          name: actionName(copy.join.start, copy.home.roles.kabadiwala.cta),
           exact: true,
         });
         await expect(role).toHaveCount(1);
-        await expect(role.getByRole("heading")).toHaveText(
+        await expect(panel.getByRole("heading")).toHaveText(
           copy.home.roles.kabadiwala.title,
         );
-        const image = role.locator("img");
+        const image = panel.locator("img");
         await image.scrollIntoViewIfNeeded();
         await page.evaluate(async () => document.fonts.ready);
         await expect
@@ -37,7 +39,9 @@ for (const [locale, copy] of [
           )
           .toBe(true);
         await page.screenshot({ path: info.outputPath("role-card.png") });
-        await image.click();
+        await role.focus();
+        await expect(role).toBeFocused();
+        await page.keyboard.press("Enter");
         await expect(page).toHaveURL(/\/login\?next=/u);
         await expect(
           page.getByLabel(copy.auth.mobileLabel, { exact: true }),

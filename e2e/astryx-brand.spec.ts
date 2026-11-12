@@ -2,12 +2,10 @@ import { expect, test } from "@playwright/test";
 
 import english from "../messages/en.json";
 
-// Compare rendered colours for the approved light-only system, including
-// a stored legacy dark preference and the sign-in submit action.
-const palette = {
-  background: "color-mix(in srgb, #144419 7%, #FFFFFF)",
-  foreground: "#144419",
-  primary: "#317F38",
+// Compare actual rendered Florin colours in both saved modes.
+const palettes = {
+  light: { background: "#e7e9ee", foreground: "#14161c", primary: "#9bf80f" },
+  dark: { background: "#080b14", foreground: "#f5f6f8", primary: "#9bf80f" },
 };
 
 for (const mode of ["light", "dark"] as const) {
@@ -56,7 +54,7 @@ for (const mode of ["light", "dark"] as const) {
           channels(palette.primary),
         ],
       ];
-    }, palette);
+    }, palettes[mode]);
     for (const [actual, expected] of colours) {
       expect(actual).toBeDefined();
       expect(expected).toBeDefined();

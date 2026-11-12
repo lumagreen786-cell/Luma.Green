@@ -171,7 +171,7 @@ export function OptionCards<T extends string>({
             htmlFor={id}
             className={cn(
               "flex min-h-12 cursor-pointer items-center gap-3 border-b px-2 py-3 text-sm font-normal",
-              isSelected ? "border-primary text-primary" : "border-border",
+              isSelected ? "border-primary text-foreground" : "border-border",
             )}
           >
             <RadioGroupItem
@@ -241,7 +241,7 @@ export function ToggleChips<T extends string>({
             htmlFor={id}
             className={cn(
               "flex min-h-11 max-w-full cursor-pointer items-center gap-2.5 py-2 text-sm leading-normal font-normal",
-              isChecked && "text-primary",
+              isChecked && "text-foreground",
             )}
           >
             <Checkbox
@@ -520,7 +520,7 @@ export function LocationButton({
       </Button>
       <p aria-live="polite" className="text-sm">
         {value && state !== "failed" ? (
-          <span className="inline-flex items-center gap-1.5 text-primary">
+          <span className="inline-flex items-center gap-1.5 text-foreground">
             <CheckIcon aria-hidden className="size-4" />
             {t("locationSaved")}
           </span>

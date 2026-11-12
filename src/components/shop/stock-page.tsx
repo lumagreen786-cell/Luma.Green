@@ -76,7 +76,7 @@ function StockBody() {
   if (stock === undefined) return <ListSkeleton rows={4} />;
   return (
     <>
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+      <div className="grid gap-0 rounded-panel bg-card text-card-foreground shadow-panel sm:grid-cols-2 xl:grid-cols-3 [&>div]:border-0 [&>div]:bg-transparent [&>div]:shadow-none">
         <StatCard
           label={t("totalWeight")}
           value={format.weight(stock.totalGrams)}
@@ -111,27 +111,31 @@ function StockBody() {
           </Link>
         </Button>
       ) : null}
-      {stock.kind === "manufacturer" ? (
-        <WorkflowTabs
-          items={[
-            {
-              value: "stock",
-              label: t("title"),
-              content: <StockList stock={stock} />,
-            },
-            {
-              value: "intake",
-              label: intake("title"),
-              content: <StockIntake />,
-            },
-          ]}
-        />
-      ) : (
-        <StockList stock={stock} />
-      )}
-      <div className="grid items-start gap-4 xl:grid-cols-2">
-        <StockReport />
-        <StockClosing />
+      <div className="grid min-w-0 items-start gap-4 xl:grid-cols-[minmax(0,1.7fr)_minmax(19rem,1fr)]">
+        <div className="min-w-0 space-y-4">
+          {stock.kind === "manufacturer" ? (
+            <WorkflowTabs
+              items={[
+                {
+                  value: "stock",
+                  label: t("title"),
+                  content: <StockList stock={stock} />,
+                },
+                {
+                  value: "intake",
+                  label: intake("title"),
+                  content: <StockIntake />,
+                },
+              ]}
+            />
+          ) : (
+            <StockList stock={stock} />
+          )}
+        </div>
+        <aside className="min-w-0 space-y-4">
+          <StockReport />
+          <StockClosing />
+        </aside>
       </div>
     </>
   );
@@ -180,7 +184,7 @@ function StockList({ stock }: { stock: Stock }) {
     return (
       <section
         aria-labelledby="stock-list"
-        className="flex flex-col gap-4 rounded-2xl bg-card p-5 sm:p-6"
+        className="record-sheet flex flex-col gap-4 rounded-panel p-5 shadow-panel sm:p-6"
       >
         <h2 id="stock-list" className="text-base font-semibold">
           {t(groups[0]?.stage ?? "scrap")}
@@ -205,7 +209,7 @@ function StockItem({ row, totalGrams }: { row: StockRow; totalGrams: number }) {
   const format = useFormat();
   const share = totalGrams > 0 ? Math.round((row.grams / totalGrams) * 100) : 0;
   return (
-    <li className="flex flex-col gap-3 py-5">
+    <li className="grid min-w-0 items-center gap-4 py-4 md:grid-cols-[minmax(0,1fr)_8rem]">
       <div className="flex flex-wrap items-center gap-3">
         <MaterialIcon family={row.material.family} />
         <div className="flex min-w-0 flex-1 flex-col">
@@ -235,7 +239,7 @@ function StockItem({ row, totalGrams }: { row: StockRow; totalGrams: number }) {
       </div>
       <div aria-hidden className="h-2 overflow-hidden rounded-full bg-muted">
         <div
-          className="h-full rounded-full bg-primary"
+          className="florin-bar h-full rounded-full bg-primary"
           style={{ width: `${String(share)}%` }}
         />
       </div>

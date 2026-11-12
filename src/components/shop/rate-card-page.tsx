@@ -60,16 +60,16 @@ function RateCardBody() {
         <section
           key={family}
           aria-labelledby={`family-${family}`}
-          className="flex flex-col gap-3 rounded-xl border border-border/60 bg-card p-4 sm:p-5"
+          className="grid min-w-0 items-start gap-4 rounded-panel bg-card p-4 text-card-foreground sm:p-5 xl:grid-cols-[10rem_minmax(0,1fr)]"
         >
           <h2
             id={`family-${family}`}
-            className="flex items-center gap-2 text-lg font-semibold"
+            className="flex min-w-0 items-center gap-2 text-lg font-semibold xl:sticky xl:top-24"
           >
             <MaterialIcon family={family} size="sm" />
             {t(`families.${family}`)}
           </h2>
-          <ul className="flex flex-col">
+          <ul className="flex min-w-0 flex-col xl:border-s xl:ps-5">
             {rows.map((row) => (
               <RateRow key={row.material.code} row={row} />
             ))}

@@ -36,7 +36,7 @@ export function EntryStory({
           <p className="text-sm text-muted-foreground">{caption}</p>
           <ArrowDownRightIcon
             aria-hidden
-            className="size-5 shrink-0 text-primary rtl:-scale-x-100"
+            className="size-5 shrink-0 text-foreground rtl:-scale-x-100"
           />
         </div>
       </div>

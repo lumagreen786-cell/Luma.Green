@@ -39,14 +39,17 @@ export function SolarContactForm({
   if (!isConvexConfigured) {
     return (
       <p className="flex items-start gap-3 rounded-xl bg-muted/60 p-4">
-        <MailIcon aria-hidden className="mt-0.5 size-5 shrink-0 text-primary" />
+        <MailIcon
+          aria-hidden
+          className="mt-0.5 size-5 shrink-0 text-foreground"
+        />
         <span>
           {t.rich("unavailable", {
             email: site.supportEmail,
             link: (chunks) => (
               <a
                 href={`mailto:${site.supportEmail}`}
-                className="rounded-sm font-medium text-primary underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
+                className="rounded-sm font-medium text-foreground underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
               >
                 {chunks}
               </a>
@@ -136,7 +139,7 @@ function LiveContactForm({
         role="status"
         className="flex flex-col items-start gap-3 border-y border-border py-5"
       >
-        <CircleCheckIcon aria-hidden className="size-7 text-primary" />
+        <CircleCheckIcon aria-hidden className="size-7 text-foreground" />
         <p className="text-lg font-semibold">
           {t("sentTitle", { name: sentTo })}
         </p>
@@ -248,7 +251,7 @@ function LiveContactForm({
         <p className="flex gap-2 text-sm text-muted-foreground">
           <LockIcon
             aria-hidden
-            className="mt-0.5 size-4 shrink-0 text-primary"
+            className="mt-0.5 size-4 shrink-0 text-foreground"
           />
           {t("privacy")}
         </p>

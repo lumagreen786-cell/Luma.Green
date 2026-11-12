@@ -12,20 +12,20 @@ import effects from "./public-effects.module.css";
 const headerLayout = cva("grid min-w-0 lg:items-center", {
   variants: {
     variant: {
-      editorial: "gap-4 py-8 sm:py-10",
-      task: "gap-5 py-8 sm:py-10 lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-12",
+      editorial: "gap-3 py-7 sm:py-9",
+      task: "gap-4 py-7 sm:py-9 lg:grid-cols-[minmax(0,1fr)_6rem]",
     },
   },
   defaultVariants: { variant: "editorial" },
 });
 
 const headerTitle = cva(
-  "max-w-2xl font-display leading-[1.1] font-semibold tracking-tight text-balance",
+  "max-w-2xl font-display leading-[1.1] font-normal tracking-tight text-balance",
   {
     variants: {
       variant: {
-        editorial: "text-3xl sm:text-4xl",
-        task: "text-2xl leading-tight sm:text-3xl",
+        editorial: "text-3xl sm:text-5xl",
+        task: "text-3xl leading-tight sm:text-5xl",
       },
     },
     defaultVariants: { variant: "editorial" },
@@ -53,9 +53,8 @@ export function PageHeader({
       <Container className={headerLayout({ variant })}>
         <div
           className={cn(
-            "min-w-0 space-y-4",
-            variant === "editorial" &&
-              "lg:grid lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:items-end lg:space-y-0 lg:gap-x-16",
+            "min-w-0 space-y-2",
+            variant === "editorial" && "max-w-3xl",
           )}
         >
           <h1
@@ -67,7 +66,7 @@ export function PageHeader({
           >
             {title}
           </h1>
-          <p className="max-w-xl text-base leading-relaxed text-pretty text-muted-foreground sm:text-lg">
+          <p className="max-w-3xl text-sm leading-relaxed text-pretty text-muted-foreground">
             {lead}
           </p>
           {eyebrow ? (
@@ -80,8 +79,8 @@ export function PageHeader({
           <RoleStoryImage
             scene={scene}
             className="hidden lg:block"
-            frameClassName="h-24 aspect-auto rounded-xl"
-            sizes="256px"
+            frameClassName="h-18 aspect-auto rounded-xl"
+            sizes="96px"
           />
         ) : null}
       </Container>

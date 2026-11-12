@@ -14,7 +14,7 @@ export function CollectionPrivacy({
       {t(purpose)}{" "}
       <Link
         href="/privacy"
-        className="font-medium text-primary underline underline-offset-4"
+        className="font-medium text-foreground underline underline-offset-4"
       >
         {privacy("title")}
       </Link>

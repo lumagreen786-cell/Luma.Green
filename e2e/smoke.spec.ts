@@ -1,21 +1,24 @@
 import { expect, test } from "@playwright/test";
 
+import english from "../messages/en.json";
+import tamil from "../messages/ta.json";
+
 /**
  * Smoke suite: the app boots, serves every locale, and gets the direction and
  * language attributes right. Feature suites go in their own files.
  */
 
-test("English root renders the brand and tagline", async ({ page }) => {
+test("English root renders the brand and primary task", async ({ page }) => {
   await page.goto("/");
 
   await expect(page.getByRole("banner").getByText("Luma.Green")).toBeVisible();
   await expect(
     page
       .getByRole("contentinfo")
-      .getByRole("paragraph")
-      .filter({ hasText: "Cleaner Tomorrow in Motion" }),
+      .getByRole("link", { name: english.privacy.title, exact: true }),
   ).toBeVisible();
   const hero = page.getByRole("heading", { level: 1 });
+  await expect(hero).toHaveText(english.home.hero.title);
   await expect
     .poll(() =>
       hero.evaluate((node) =>
@@ -34,9 +37,11 @@ test("Tamil locale serves translated copy", async ({ page }) => {
   await expect(
     page
       .getByRole("contentinfo")
-      .getByRole("paragraph")
-      .filter({ hasText: "தூய்மையான நாளை நோக்கி நகர்வு" }),
+      .getByRole("link", { name: tamil.privacy.title, exact: true }),
   ).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    tamil.home.hero.title,
+  );
 });
 
 test("Arabic locale renders right-to-left", async ({ page }) => {

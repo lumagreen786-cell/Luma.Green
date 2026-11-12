@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { Suspense, useId, useState } from "react";
 
+import { useFormat } from "@/components/app/format";
 import {
   AppPageHeader,
   EmptyState,
@@ -18,6 +19,7 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { defaultLocale, isLocale, localeDirection } from "@/i18n/locales";
 import { Link } from "@/i18n/navigation";
+import { cn } from "@/lib/utils";
 
 import { api } from "../../../convex/_generated/api";
 import { byUrgency, isAvailableTradeAction } from "./logic";
@@ -152,32 +154,33 @@ function Trades({
         params.set("tab", value);
         window.history.replaceState(null, "", `?${params.toString()}`);
       }}
-      className="gap-4"
+      className="record-sheet gap-4 rounded-panel p-3 shadow-panel sm:p-5"
     >
-      <TabsList
-        aria-label={t("trades.tabsLabel")}
-        variant="line"
-        className="w-full"
-      >
-        {(["buying", "selling"] as const).map((value) => (
-          <TabsTrigger key={value} value={value}>
-            {t(`trades.${value}`)}
-            {waiting[value] > 0 ? (
-              <>
-                <span
-                  aria-hidden
-                  className="rounded-full bg-primary px-1.5 text-xs text-primary-foreground tabular-nums"
-                >
-                  {waiting[value]}
-                </span>
-                <span className="sr-only">
-                  {t("trades.waitingBadge", { count: waiting[value] })}
-                </span>
-              </>
-            ) : null}
-          </TabsTrigger>
-        ))}
-      </TabsList>
+      <div className="-mt-3 flex justify-center sm:-mt-5">
+        <TabsList
+          aria-label={t("trades.tabsLabel")}
+          className="w-fit max-w-full rounded-t-none rounded-b-[28px] bg-[var(--shell)] p-2 pt-0"
+        >
+          {(["buying", "selling"] as const).map((value) => (
+            <TabsTrigger key={value} value={value}>
+              {t(`trades.${value}`)}
+              {waiting[value] > 0 ? (
+                <>
+                  <span
+                    aria-hidden
+                    className="inline-flex size-7 shrink-0 items-center justify-center rounded-full bg-muted text-xs text-muted-foreground tabular-nums"
+                  >
+                    {waiting[value]}
+                  </span>
+                  <span className="sr-only">
+                    {t("trades.waitingBadge", { count: waiting[value] })}
+                  </span>
+                </>
+              ) : null}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+      </div>
       {(["buying", "selling"] as const).map((value) => (
         <TabsContent key={value} value={value}>
           <TradeList
@@ -202,6 +205,10 @@ function TradeList({
 }) {
   const t = useTranslations("market.trades");
   const headingId = useId();
+  const format = useFormat();
+  const ordered = trades.toSorted(byUrgency);
+  const [selection, setSelection] = useState<string | null>(null);
+  const [visited, setVisited] = useState<ReadonlySet<string>>(() => new Set());
   if (trades.length === 0) {
     const isBuying = tab === "buying";
     const marketHref = isRecycledPet
@@ -222,21 +229,63 @@ function TradeList({
       />
     );
   }
+  const active =
+    ordered.find((trade) => trade.id === selection) ?? ordered.at(0);
   return (
     <section aria-labelledby={headingId}>
       <h2 id={headingId} className="sr-only">
         {t(tab)}
       </h2>
-      <ul className="flex flex-col gap-3">
-        {trades.toSorted(byUrgency).map((trade) => (
-          <li key={trade.id}>
-            <TradeCard
-              trade={trade}
-              side={tab === "buying" ? "buyer" : "seller"}
-            />
-          </li>
-        ))}
-      </ul>
+      <div className="grid min-w-0 items-start gap-4 xl:grid-cols-[minmax(18rem,0.9fr)_minmax(0,1.5fr)]">
+        <ul className="min-w-0 space-y-1">
+          {ordered.map((trade) => (
+            <li key={trade.id}>
+              <button
+                type="button"
+                aria-pressed={active?.id === trade.id}
+                onClick={() => {
+                  setSelection(trade.id);
+                  setVisited(
+                    (previous) =>
+                      new Set([
+                        ...previous,
+                        trade.id,
+                        ...(active ? [active.id] : []),
+                      ]),
+                  );
+                }}
+                className={cn(
+                  "grid min-h-16 w-full min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 gap-y-1 rounded-[24px] px-4 py-3 text-start outline-none focus-visible:ring-3 focus-visible:ring-ring/50",
+                  active?.id === trade.id ? "record-detail" : "hover:bg-muted",
+                )}
+              >
+                <span className="min-w-0 font-medium break-words">
+                  {format.material(trade.material.names, trade.material.code)}
+                </span>
+                <span className="font-display text-lg tabular-nums">
+                  {format.money(trade.totalPaise)}
+                </span>
+                <span className="col-span-2 min-w-0 text-sm break-words text-muted-foreground">
+                  {trade.counterparty.name} · {format.weight(trade.grams)}
+                </span>
+              </button>
+            </li>
+          ))}
+        </ul>
+        <div className="min-w-0">
+          {ordered
+            .filter((trade) => trade.id === active?.id || visited.has(trade.id))
+            .map((trade) => (
+              <div key={trade.id} hidden={trade.id !== active?.id}>
+                <TradeCard
+                  trade={trade}
+                  side={tab === "buying" ? "buyer" : "seller"}
+                  selected
+                />
+              </div>
+            ))}
+        </div>
+      </div>
     </section>
   );
 }

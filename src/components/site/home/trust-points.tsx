@@ -39,7 +39,7 @@ export async function TrustPoints() {
         <ul className="divide-y border-y">
           {points.map(({ key, icon: Icon }) => (
             <li data-reveal key={key} className="flex items-start gap-5 py-6">
-              <span className="flex size-8 shrink-0 items-center justify-center pt-1 text-primary">
+              <span className="flex size-8 shrink-0 items-center justify-center pt-1 text-foreground">
                 <Icon aria-hidden className="size-5" />
               </span>
               <div className="flex flex-col gap-3">

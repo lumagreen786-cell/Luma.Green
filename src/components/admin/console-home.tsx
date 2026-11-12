@@ -39,8 +39,8 @@ export function ConsoleHome() {
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 lg:gap-8">
       <div className="flex flex-wrap items-end justify-between gap-4 pb-2">
         <div className="flex min-w-0 flex-col gap-2">
-          <h1 className="font-display text-[1.75rem] leading-tight font-semibold tracking-tight sm:text-[2rem]">
-            Work queue
+          <h1 className="font-display text-4xl leading-tight font-medium tracking-tight sm:text-5xl lg:text-[3.5rem]">
+            Review and resolve
           </h1>
         </div>
         <Button asChild variant="outline">
@@ -50,84 +50,100 @@ export function ConsoleHome() {
         </Button>
       </div>
 
-      <div className="grid min-w-0 gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(15rem,1fr)]">
-        <section
-          aria-labelledby="next-reviews"
-          className="min-w-0 rounded-2xl bg-card p-5 sm:p-6"
-        >
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-4">
-            <h2
-              id="next-reviews"
-              className="font-display text-xl font-semibold"
-            >
-              Next reviews
-            </h2>
-            <Button asChild>
-              <Link href="/admin/verification">
-                Review applications <ArrowRightIcon aria-hidden />
-              </Link>
-            </Button>
-          </div>
-          {nextReviews === undefined ? (
-            <Skeleton className="mt-4 h-32 w-full" />
-          ) : null}
-          {nextReviews?.length === 0 ? (
-            <p className="py-8 text-muted-foreground">
-              No applications waiting for review.
-            </p>
-          ) : null}
-          <ol className="divide-y border-b">
-            {nextReviews?.map((item) => (
-              <li key={item.id}>
-                <Link
-                  href={`/admin/verification/${item.id}`}
-                  className="flex min-h-20 items-center justify-between gap-4 py-4 outline-none hover:text-primary focus-visible:ring-3 focus-visible:ring-ring/50"
-                >
-                  <span className="min-w-0">
-                    <span className="block font-semibold break-words">
-                      {item.name}
-                    </span>{" "}
-                    <span className="block text-sm text-muted-foreground">
-                      {item.area}
-                    </span>
-                  </span>
-                  <ArrowRightIcon aria-hidden className="size-5 shrink-0" />
+      <div
+        className="grid gap-4 rounded-panel bg-card p-5 text-card-foreground sm:grid-cols-3 sm:p-6"
+        aria-busy={!summary}
+      >
+        <StatLink
+          href="/admin/verification"
+          icon={ShieldCheckIcon}
+          label="Applications to review"
+          value={summary?.waiting}
+          hint="Decide within 24 hours"
+        />
+        <StatLink
+          href="/admin/verification"
+          icon={AlarmClockIcon}
+          label="Reviews overdue"
+          value={summary?.overdue}
+          hint="Waiting more than 24 hours"
+          isUrgent={Boolean(summary?.overdue)}
+        />
+        <StatLink
+          href="/admin/support"
+          icon={LifeBuoyIcon}
+          label="Open support requests"
+          value={summary?.openSupport}
+          hint="Open support inbox"
+        />
+      </div>
+
+      <div className="grid min-w-0 items-start gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(16rem,1fr)]">
+        <div className="min-w-0 space-y-4">
+          <section
+            aria-labelledby="next-reviews"
+            className="record-sheet min-w-0 rounded-panel p-5 shadow-panel sm:p-6"
+          >
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-4">
+              <h2
+                id="next-reviews"
+                className="font-display text-xl font-semibold"
+              >
+                Start with these applications
+              </h2>
+              <Button asChild>
+                <Link href="/admin/verification">
+                  Review applications <ArrowRightIcon aria-hidden />
                 </Link>
-              </li>
-            ))}
-          </ol>
-          <div className="grid grid-cols-2 gap-6 pt-4" aria-busy={!summary}>
-            <StatLink
-              href="/admin/verification"
-              icon={ShieldCheckIcon}
-              label="Waiting for review"
-              value={summary?.waiting}
-              hint="Decide within 24 hours"
-            />
-            <StatLink
-              href="/admin/verification"
-              icon={AlarmClockIcon}
-              label="Overdue"
-              value={summary?.overdue}
-              hint="Waiting more than 24 hours"
-              isUrgent={Boolean(summary?.overdue)}
-            />
-          </div>
-        </section>
+              </Button>
+            </div>
+            {nextReviews === undefined ? (
+              <Skeleton className="mt-4 h-32 w-full" />
+            ) : null}
+            {nextReviews?.length === 0 ? (
+              <p className="py-8 text-muted-foreground">
+                No applications waiting for review.
+              </p>
+            ) : null}
+            <ol className="divide-y border-b">
+              {nextReviews?.map((item) => (
+                <li key={item.id}>
+                  <Link
+                    href={`/admin/verification/${item.id}`}
+                    className="flex min-h-20 items-center justify-between gap-4 py-4 outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
+                  >
+                    <span className="min-w-0">
+                      <span className="block font-semibold break-words">
+                        {item.name}
+                      </span>{" "}
+                      <span className="block text-sm text-muted-foreground">
+                        {item.area}
+                      </span>
+                    </span>
+                    <ArrowRightIcon aria-hidden className="size-5 shrink-0" />
+                  </Link>
+                </li>
+              ))}
+            </ol>
+          </section>
+          <section className="record-sheet flex min-w-0 flex-col gap-4 rounded-panel p-5 shadow-panel sm:p-6">
+            <header className="flex flex-col gap-1.5">
+              <h2 className="font-display text-lg font-semibold tracking-tight">
+                Recent accounts
+              </h2>
+            </header>
+            <div>
+              <RecentSignIns people={overview?.recentSignIns} />
+            </div>
+          </section>
+        </div>
         <section
           aria-label="Other tasks"
-          className="flex min-w-0 flex-col rounded-2xl bg-card p-5 sm:p-6"
+          className="flex min-w-0 flex-col rounded-panel bg-card p-5 text-card-foreground sm:p-6"
         >
-          <StatLink
-            href="/admin/support"
-            icon={LifeBuoyIcon}
-            label="Open support requests"
-            value={summary?.openSupport}
-            hint="Open support inbox"
-          />
           <Link
             href="/admin/prices"
-            className="flex min-h-16 items-center gap-3 border-t py-4 font-medium outline-none hover:text-primary focus-visible:ring-3 focus-visible:ring-ring/50"
+            className="flex min-h-16 items-center gap-3 border-t py-4 font-medium outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
           >
             <IndianRupeeIcon aria-hidden className="size-5" />
             Price tables
@@ -135,7 +151,7 @@ export function ConsoleHome() {
           </Link>
           <Link
             href="/admin/operations"
-            className="flex min-h-16 items-center gap-3 border-t py-4 font-medium outline-none hover:text-primary focus-visible:ring-3 focus-visible:ring-ring/50"
+            className="flex min-h-16 items-center gap-3 border-t py-4 font-medium outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
           >
             <ShieldCheckIcon aria-hidden className="size-5" />
             Material review
@@ -143,17 +159,6 @@ export function ConsoleHome() {
           </Link>
         </section>
       </div>
-
-      <section className="flex min-w-0 flex-col gap-4 rounded-2xl bg-card p-5 sm:p-6">
-        <header className="flex flex-col gap-1.5">
-          <h2 className="font-display text-lg font-semibold tracking-tight">
-            Recent accounts
-          </h2>
-        </header>
-        <div>
-          <RecentSignIns people={overview?.recentSignIns} />
-        </div>
-      </section>
     </div>
   );
 }
@@ -177,7 +182,7 @@ function StatLink({
   return (
     <Link
       href={href}
-      className="flex h-full flex-col gap-2 py-4 transition-colors outline-none hover:text-primary focus-visible:ring-3 focus-visible:ring-ring/50"
+      className="flex h-full flex-col gap-2 py-4 transition-colors outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
     >
       <span className="flex items-center justify-between gap-2 text-sm text-muted-foreground">
         {label}
@@ -194,7 +199,7 @@ function StatLink({
       ) : (
         <span
           className={cn(
-            "text-3xl font-semibold tracking-tight tabular-nums",
+            "text-4xl font-medium tracking-tight tabular-nums",
             isUrgent && "text-destructive",
           )}
         >

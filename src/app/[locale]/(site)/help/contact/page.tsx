@@ -49,14 +49,14 @@ export default async function HelpContactPage() {
         lead={t("contact.lead")}
       />
 
-      <Container className="grid gap-8 py-6 lg:grid-cols-[minmax(0,1fr)_18rem] lg:py-8">
+      <Container className="grid items-start gap-4 pb-8 lg:grid-cols-[minmax(0,1fr)_20rem]">
         <section
           aria-labelledby="contact-form-heading"
-          className="flex flex-col gap-5"
+          className="flex min-w-0 flex-col gap-5 rounded-panel bg-card p-5 shadow-panel sm:p-6"
         >
           <h2
             id="contact-form-heading"
-            className="font-display text-2xl font-semibold tracking-tight"
+            className="font-display text-lg font-semibold tracking-tight"
           >
             {t("contact.formHeading")}
           </h2>

@@ -54,7 +54,7 @@ export function EprSummary({ epr }: { epr: Epr }) {
                 className="flex flex-col gap-3 border-b border-border py-4 sm:flex-row sm:items-center sm:justify-between"
               >
                 <div className="flex items-start gap-3">
-                  <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-foreground">
                     <Icon aria-hidden className="size-5" />
                   </span>
                   <div className="flex flex-col gap-0.5">

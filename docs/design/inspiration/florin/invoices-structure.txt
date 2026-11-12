@@ -1,0 +1,169 @@
+Browser tab: 16, Title: "Invoices | Florin", URL: "https://ui.cortexcn.dev/previews/florin".
+1 AXWebArea Invoices | Florin, URL: ui.cortexcn.dev/previews/florin
+	2 container
+		3 link Description: Skip to content, Value: ui.cortexcn.dev/previews/florin#main
+		4 link Description: Florin, invoices, Value: ui.cortexcn.dev/previews/florin/
+		5 pop up button (collapsed) Description: All pages, Secondary Actions: Expand
+		6 pop up button (collapsed) Description: Notifications, Secondary Actions: Expand
+		7 link Description: Settings, Value: ui.cortexcn.dev/previews/florin/settings/
+		8 pop up button (collapsed) Description: Account menu, ID: radix-_R_tb5tlb_, Secondary Actions: Expand
+		9 container Billing
+			10 content list
+				11 link Description: Estimates, Value: ui.cortexcn.dev/previews/florin/estimates/
+				12 link Description: Invoices, Value: ui.cortexcn.dev/previews/florin/
+				13 link Description: Payments, Value: ui.cortexcn.dev/previews/florin/payments/
+				14 link Description: Recurring Invoices, Value: ui.cortexcn.dev/previews/florin/recurring/
+				15 link Description: Checkouts, Value: ui.cortexcn.dev/previews/florin/checkouts/
+		16 container main
+			17 container
+				18 button Back
+				19 heading Invoices, Value: 1
+					20 text Invoices
+				21 button Jump to filters
+				22 link Description: Create an invoice, Value: ui.cortexcn.dev/previews/florin/new/
+			23 container
+				24 text Overdue $31,530.00 Due within next month $138,930.00 Average time to get paid 11 days
+				25 content list Collected by due month
+					26 container
+						27 text Sep
+						28 image September 2026: $92,000.00 of $92,000.00 collected
+						29 image Elena Marsh, Jonas Weber, Priya Raman, Daniel Kim, Sofia Alvarez, Marcus Reed, Omar Haddad, Theo Okafor
+					30 container
+						31 text Oct
+						32 image October 2026: $26,520.00 of $26,520.00 collected
+						33 image Hana Sato, Daniel Kim, Aisha Bello
+					34 container
+						35 text Nov
+						36 image November 2026: $13,890.00 of $148,190.00 collected
+						37 image Sofia Alvarez, Jonas Weber, Omar Haddad, Priya Raman, Theo Okafor, Daniel Kim, Aisha Bello, Nora Lindqvist, Grace Liu
+					38 container
+						39 text Dec
+						40 image December 2026: $0.00 of $36,160.00 collected
+						41 image Hana Sato, Nora Lindqvist
+			42 container
+				43 text Available for Instant Payout $128,746.20
+				44 checkbox Expected, Value: 0
+				45 link Description: Open payouts, Value: ui.cortexcn.dev/previews/florin/payouts/
+				46 Pay out to
+					47 radio button *4443 Debit, Value: 0
+					48 radio button #177210 Checking, Value: 1
+					49 radio button #711221 Savings, Value: 0
+				50 button Pay out now
+			51 container Filters
+				52 heading Active filters, Value: 2
+					53 text Active filters
+				54 button Clear 2 filters
+				55 container
+					56 combo box (collapsed) Description: Customer, Value: All customers, Secondary Actions: Expand
+						57 text All customers
+					58 combo box (collapsed) Description: Status, Value: All statuses, Secondary Actions: Expand
+						59 text All statuses
+					60 combo box (collapsed) Description: Due from, Value: November 2026, Secondary Actions: Expand
+						61 text November 2026
+					62 combo box (collapsed) Description: Due until, Value: December 2026, Secondary Actions: Expand
+						63 text December 2026
+					64 text Invoice number
+					65 search text field (settable) Invoice number
+			66 container
+				67 tab group Invoices by state
+					68 tab (selectable, settable, boolean) All Invoices, Value: 0
+					69 tab (selectable, settable, boolean) Draft 3, Value: 0
+					70 tab (selected, settable, boolean) Unpaid 9, Value: 1
+				71 heading Unpaid Invoices, Value: 2
+					72 text Unpaid Invoices
+				73 button Export as CSV
+				74 pop up button (collapsed) Description: More actions, ID: radix-_r_2l_, Secondary Actions: Expand
+				75 content list
+					76 checkbox Description: Invoice 409-014, Fernway Legal, 9 days late, Value: 0
+						77 text #
+						78 text 409-014
+						79 text 9 days late
+						80 text Part paid
+						81 text $6,880.00
+					82 checkbox Description: Invoice 431-007, Quayside Freight, 6 days late, Value: 0
+						83 text #
+						84 text 431-007
+						85 text 6 days late
+						86 text Viewed
+						87 text $24,650.00
+					88 checkbox Description: Invoice 404-011, Brightwell Studio, In 2 days, Value: 0
+						89 text #
+						90 text 404-011
+						91 text In 2 days
+						92 text Viewed
+						93 text $14,270.00
+					94 checkbox Description: Invoice 427-012, Lumora Health, In 4 days, Value: 1
+						95 text #
+						96 text 427-012
+						97 text In 4 days
+						98 text Unsent
+						99 text $41,460.00
+					100 checkbox Description: Invoice 426-004, Northpine Labs, In 6 days, Value: 0
+						101 text #
+						102 text 426-004
+						103 text In 6 days
+						104 text Viewed
+						105 text $16,760.00
+					106 checkbox Description: Invoice 424-009, Ridgeway Robotics, In 15 days, Value: 0
+						107 text #
+						108 text 424-009
+						109 text In 15 days
+						110 text Unsent
+						111 text $23,800.00
+					112 checkbox Description: Invoice 417-020, Copperline Energy, In 19 days, Value: 0
+						113 text #
+						114 text 417-020
+						115 text In 19 days
+						116 text Sent
+						117 text $6,480.00
+					118 checkbox Description: Invoice 439-002, Solace Hotels, In 20 days, Value: 0
+						119 text #
+						120 text 439-002
+						121 text In 20 days
+						122 text Viewed
+						123 text $15,760.00
+					124 checkbox Description: Invoice 435-003, Orbitly, In 28 days, Value: 0
+						125 text #
+						126 text 435-003
+						127 text In 28 days
+						128 text Sent
+						129 text $20,400.00
+				130 container Invoice 427-012
+					131 text Invoice details
+					132 container
+						133 text # 427-012
+					134 text Unsent
+					135 text Company
+					136 text Lumora Health
+					137 text Customer
+					138 link Description: Sofia Alvarez Marketing Director, Lumora Health, Value: ui.cortexcn.dev/previews/florin/customer/?id=lumora
+					139 content list Line items
+						140 container
+							141 text $8,640.00
+							142 button Change Concept development
+							143 text Concept development
+						144 container
+							145 text $24,180.00
+							146 button Change Patient app design
+							147 text Patient app design
+						148 container
+							149 text $8,640.00
+							150 button Change CRM integration
+							151 text CRM integration
+						152 button Add a line item
+					153 definition list
+						154 container Sub Total
+							155 text Sub Total
+						156 text $41,460.00
+						157 container Total
+							158 text Total
+						159 text $41,460.00
+						160 container Balance Due
+							161 text Balance Due
+						162 text $41,460.00
+					163 pop up button (collapsed) Description: 1 attached, Secondary Actions: Expand
+					164 pop up button (collapsed) Description: Due Nov 15, 2026, Secondary Actions: Expand
+					165 button Send now
+		166 container Notifications alt+T
+
+The focused UI element is 1 AXWebArea Invoices | Florin, URL: ui.cortexcn.dev/previews/florin

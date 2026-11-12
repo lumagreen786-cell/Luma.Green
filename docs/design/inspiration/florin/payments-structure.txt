@@ -1,0 +1,764 @@
+Browser tab: 16, Title: "Payments | Florin", URL: "https://ui.cortexcn.dev/previews/florin/payments".
+1 AXWebArea Payments | Florin, URL: ui.cortexcn.dev/previews/florin/payments
+	2 link Description: Skip to content, Value: ui.cortexcn.dev/previews/florin/payments#main
+	3 container
+		4 link Description: Florin, invoices, Value: ui.cortexcn.dev/previews/florin/
+		5 pop up button (collapsed) Description: All pages, Secondary Actions: Expand
+		6 pop up button (collapsed) Description: Notifications, Secondary Actions: Expand
+		7 link Description: Settings, Value: ui.cortexcn.dev/previews/florin/settings/
+		8 pop up button (collapsed) Description: Account menu, ID: radix-_R_tb5tlb_, Secondary Actions: Expand
+		9 container Billing
+			10 content list
+				11 link Description: Estimates, Value: ui.cortexcn.dev/previews/florin/estimates/
+				12 link Description: Invoices, Value: ui.cortexcn.dev/previews/florin/
+				13 link Description: Payments, Value: ui.cortexcn.dev/previews/florin/payments/
+				14 link Description: Recurring Invoices, Value: ui.cortexcn.dev/previews/florin/recurring/
+				15 link Description: Checkouts, Value: ui.cortexcn.dev/previews/florin/checkouts/
+	16 container main
+		17 container
+			18 heading Payments, Value: 1
+				19 text Payments
+			20 button Export CSV
+		21 container
+			22 text Collected this month $7,504.63 Fees this month $225.37 Refunded this month $2,500.00
+			23 container
+				24 text Received, last 30 days $21,150.00
+			25 text Received over the last 30 days: $21,150.00, the most on Oct 27 with $5,840.00.
+			26 container
+				27 text Oct 13 Oct 19 Oct 25 Oct 31 Nov 6
+		28 container
+			29 text Received this month $7,730.00 1 failed payment
+			30 link Description: Open payouts, Value: ui.cortexcn.dev/previews/florin/payouts/
+			31 content list By payment method
+				32 container
+					33 text Bank transfer 0%
+					34 progress indicator Description: Bank transfer: 0%, Value: 0
+				35 container
+					36 text Card 100%
+					37 progress indicator Description: Card: 100%, Value: 100
+				38 container
+					39 text Wallet 0%
+					40 progress indicator Description: Wallet: 0%, Value: 0
+		41 container
+			42 tab group Payments by state
+				43 tab (selected, settable, boolean) All, Value: 1
+				44 tab (selectable, settable, boolean) Succeeded 95, Value: 0
+				45 tab (selectable, settable, boolean) Refunded 2, Value: 0
+				46 tab (selectable, settable, boolean) Failed 1, Value: 0
+			47 heading All Payments, Value: 2
+				48 text All Payments
+			49 text Search payments
+			50 search text field (settable) Search payments
+			51 content list
+				52 checkbox Description: Pending payment of $480.00 from Milkweed Bakery on Nov 10, Value: 1
+					53 text Milkweed Bakery
+					54 text Nov 10
+					55 text Website care plan
+					56 text ACH 4410
+					57 text Pending
+					58 text $480.00
+				59 checkbox Description: Failed payment of $24,650.00 from Quayside Freight on Nov 6, Value: 0
+					60 text Quayside Freight
+					61 text Nov 6
+					62 text Invoice 431-007
+					63 text Visa 0077
+					64 text Failed
+					65 text $24,650.00
+				66 checkbox Description: Succeeded payment of $1,850.00 from Milkweed Bakery on Nov 5, Value: 0
+					67 text Milkweed Bakery
+					68 text Nov 5
+					69 text Invoice 402-004
+					70 text Visa 4242
+					71 text Succeeded
+					72 text $1,850.00
+				73 checkbox Description: Refunded payment of $2,500.00 from Copperline Energy on Nov 3, Value: 0
+					74 text Copperline Energy
+					75 text Nov 3
+					76 text Design sprint deposit
+					77 text Visa 0077
+					78 text Refunded
+					79 text $2,500.00
+				80 checkbox Description: Succeeded payment of $2,500.00 from Solace Hotels on Nov 2, Value: 0
+					81 text Solace Hotels
+					82 text Nov 2
+					83 text Design sprint deposit
+					84 text Amex 1005
+					85 text Succeeded
+					86 text $2,500.00
+				87 checkbox Description: Succeeded payment of $180.00 from Orbitly on Nov 1, Value: 0
+					88 text Orbitly
+					89 text Nov 1
+					90 text Office hours, one hour
+					91 text Mastercard 5100
+					92 text Succeeded
+					93 text $180.00
+				94 checkbox Description: Succeeded payment of $3,200.00 from Lumora Health on Nov 1, Value: 0
+					95 text Lumora Health
+					96 text Nov 1
+					97 text Invoice 427-011
+					98 text Visa 4242
+					99 text Succeeded
+					100 text $3,200.00
+				101 checkbox Description: Succeeded payment of $180.00 from Quayside Freight on Oct 29, Value: 0
+					102 text Quayside Freight
+					103 text Oct 29
+					104 text Office hours, one hour
+					105 text Wallet 8812
+					106 text Succeeded
+					107 text $180.00
+				108 checkbox Description: Succeeded payment of $5,840.00 from Solace Hotels on Oct 27, Value: 0
+					109 text Solace Hotels
+					110 text Oct 27
+					111 text Invoice 439-001
+					112 text Mastercard 5100
+					113 text Succeeded
+					114 text $5,840.00
+				115 checkbox Description: Succeeded payment of $180.00 from Solace Hotels on Oct 26, Value: 0
+					116 text Solace Hotels
+					117 text Oct 26
+					118 text Office hours, one hour
+					119 text Wallet 2045
+					120 text Succeeded
+					121 text $180.00
+				122 checkbox Description: Succeeded payment of $700.00 from Tallgrass Farms on Oct 25, Value: 0
+					123 text Tallgrass Farms
+					124 text Oct 25
+					125 text Workshop seat
+					126 text Mastercard 5100
+					127 text Succeeded
+					128 text $700.00
+				129 checkbox Description: Succeeded payment of $480.00 from Northpine Labs on Oct 23, Value: 0
+					130 text Northpine Labs
+					131 text Oct 23
+					132 text Website care plan
+					133 text Visa 4242
+					134 text Succeeded
+					135 text $480.00
+				136 checkbox Description: Succeeded payment of $3,000.00 from Fernway Legal on Oct 20, Value: 0
+					137 text Fernway Legal
+					138 text Oct 20
+					139 text Invoice 409-014
+					140 text Amex 1005
+					141 text Succeeded
+					142 text $3,000.00
+				143 checkbox Description: Succeeded payment of $2,500.00 from Fernway Legal on Oct 15, Value: 0
+					144 text Fernway Legal
+					145 text Oct 15
+					146 text Design sprint deposit
+					147 text Mastercard 5100
+					148 text Succeeded
+					149 text $2,500.00
+				150 checkbox Description: Succeeded payment of $540.00 from Solace Hotels on Oct 14, Value: 0
+					151 text Solace Hotels
+					152 text Oct 14
+					153 text Office hours, one hour
+					154 text Amex 1005
+					155 text Succeeded
+					156 text $540.00
+				157 checkbox Description: Succeeded payment of $480.00 from Ridgeway Robotics on Oct 12, Value: 0
+					158 text Ridgeway Robotics
+					159 text Oct 12
+					160 text Website care plan
+					161 text Amex 1005
+					162 text Succeeded
+					163 text $480.00
+				164 checkbox Description: Succeeded payment of $6,480.00 from Copperline Energy on Oct 12, Value: 0
+					165 text Copperline Energy
+					166 text Oct 12
+					167 text Invoice 417-019
+					168 text Visa 0077
+					169 text Succeeded
+					170 text $6,480.00
+				171 checkbox Description: Succeeded payment of $180.00 from Lumora Health on Oct 9, Value: 0
+					172 text Lumora Health
+					173 text Oct 9
+					174 text Office hours, one hour
+					175 text Mastercard 5100
+					176 text Succeeded
+					177 text $180.00
+				178 checkbox Description: Succeeded payment of $12,000.00 from Orbitly on Oct 8, Value: 0
+					179 text Orbitly
+					180 text Oct 8
+					181 text Invoice 435-002
+					182 text ACH 0981
+					183 text Succeeded
+					184 text $12,000.00
+				185 checkbox Description: Succeeded payment of $540.00 from Fernway Legal on Oct 2, Value: 0
+					186 text Fernway Legal
+					187 text Oct 2
+					188 text Office hours, one hour
+					189 text Amex 1005
+					190 text Succeeded
+					191 text $540.00
+				192 checkbox Description: Succeeded payment of $480.00 from Fernway Legal on Sep 25, Value: 0
+					193 text Fernway Legal
+					194 text Sep 25
+					195 text Website care plan
+					196 text Mastercard 5100
+					197 text Succeeded
+					198 text $480.00
+				199 checkbox Description: Succeeded payment of $2,500.00 from Brightwell Studio on Sep 24, Value: 0
+					200 text Brightwell Studio
+					201 text Sep 24
+					202 text Design sprint deposit
+					203 text Visa 4242
+					204 text Succeeded
+					205 text $2,500.00
+				206 checkbox Description: Succeeded payment of $8,040.00 from Fernway Legal on Sep 24, Value: 0
+					207 text Fernway Legal
+					208 text Sep 24
+					209 text Invoice 409-012
+					210 text Visa 4242
+					211 text Succeeded
+					212 text $8,040.00
+				213 checkbox Description: Succeeded payment of $2,500.00 from Copperline Energy on Sep 23, Value: 0
+					214 text Copperline Energy
+					215 text Sep 23
+					216 text Design sprint deposit
+					217 text Visa 4242
+					218 text Succeeded
+					219 text $2,500.00
+				220 checkbox Description: Succeeded payment of $2,500.00 from Fernway Legal on Sep 21, Value: 0
+					221 text Fernway Legal
+					222 text Sep 21
+					223 text Design sprint deposit
+					224 text Mastercard 5100
+					225 text Succeeded
+					226 text $2,500.00
+				227 checkbox Description: Succeeded payment of $6,900.00 from Tallgrass Farms on Sep 19, Value: 0
+					228 text Tallgrass Farms
+					229 text Sep 19
+					230 text Invoice 412-006
+					231 text Mastercard 5100
+					232 text Succeeded
+					233 text $6,900.00
+				234 checkbox Description: Succeeded payment of $480.00 from Orbitly on Sep 16, Value: 0
+					235 text Orbitly
+					236 text Sep 16
+					237 text Website care plan
+					238 text Wallet 8812
+					239 text Succeeded
+					240 text $480.00
+				241 checkbox Description: Succeeded payment of $8,200.00 from Lumora Health on Sep 12, Value: 0
+					242 text Lumora Health
+					243 text Sep 12
+					244 text Invoice 427-010
+					245 text Mastercard 5100
+					246 text Succeeded
+					247 text $8,200.00
+				248 checkbox Description: Succeeded payment of $2,500.00 from Brightwell Studio on Sep 11, Value: 0
+					249 text Brightwell Studio
+					250 text Sep 11
+					251 text Design sprint deposit
+					252 text Wallet 2045
+					253 text Succeeded
+					254 text $2,500.00
+				255 checkbox Description: Succeeded payment of $480.00 from Fernway Legal on Sep 9, Value: 0
+					256 text Fernway Legal
+					257 text Sep 9
+					258 text Website care plan
+					259 text Wallet 8812
+					260 text Succeeded
+					261 text $480.00
+				262 checkbox Description: Succeeded payment of $2,500.00 from Tallgrass Farms on Sep 8, Value: 0
+					263 text Tallgrass Farms
+					264 text Sep 8
+					265 text Design sprint deposit
+					266 text Mastercard 5100
+					267 text Succeeded
+					268 text $2,500.00
+				269 checkbox Description: Succeeded payment of $1,050.00 from Copperline Energy on Sep 5, Value: 0
+					270 text Copperline Energy
+					271 text Sep 5
+					272 text Workshop seat
+					273 text Mastercard 5100
+					274 text Succeeded
+					275 text $1,050.00
+				276 checkbox Description: Succeeded payment of $4,560.00 from Brightwell Studio on Sep 5, Value: 0
+					277 text Brightwell Studio
+					278 text Sep 5
+					279 text Invoice 404-009
+					280 text Wire 3318
+					281 text Succeeded
+					282 text $4,560.00
+				283 checkbox Description: Succeeded payment of $11,880.00 from Northpine Labs on Sep 4, Value: 0
+					284 text Northpine Labs
+					285 text Sep 4
+					286 text Invoice 426-002
+					287 text SEPA 7720
+					288 text Succeeded
+					289 text $11,880.00
+				290 checkbox Description: Succeeded payment of $540.00 from Orbitly on Sep 3, Value: 0
+					291 text Orbitly
+					292 text Sep 3
+					293 text Office hours, one hour
+					294 text Amex 1005
+					295 text Succeeded
+					296 text $540.00
+				297 checkbox Description: Succeeded payment of $13,400.00 from Halden Works on Sep 3, Value: 0
+					298 text Halden Works
+					299 text Sep 3
+					300 text Invoice 418-012
+					301 text SEPA 7720
+					302 text Succeeded
+					303 text $13,400.00
+				304 checkbox Description: Succeeded payment of $17,280.00 from Halden Works on Sep 2, Value: 0
+					305 text Halden Works
+					306 text Sep 2
+					307 text Invoice 418-013
+					308 text SEPA 7720
+					309 text Succeeded
+					310 text $17,280.00
+				311 checkbox Description: Refunded payment of $350.00 from Halden Works on Aug 29, Value: 0
+					312 text Halden Works
+					313 text Aug 29
+					314 text Workshop seat
+					315 text Mastercard 5100
+					316 text Refunded
+					317 text $350.00
+				318 checkbox Description: Succeeded payment of $14,880.00 from Quayside Freight on Aug 29, Value: 0
+					319 text Quayside Freight
+					320 text Aug 29
+					321 text Invoice 431-005
+					322 text ACH 4410
+					323 text Succeeded
+					324 text $14,880.00
+				325 checkbox Description: Succeeded payment of $10,040.00 from Fernway Legal on Aug 23, Value: 0
+					326 text Fernway Legal
+					327 text Aug 23
+					328 text Invoice 409-011
+					329 text SEPA 7720
+					330 text Succeeded
+					331 text $10,040.00
+				332 checkbox Description: Succeeded payment of $360.00 from Tallgrass Farms on Aug 20, Value: 0
+					333 text Tallgrass Farms
+					334 text Aug 20
+					335 text Office hours, one hour
+					336 text Amex 1005
+					337 text Succeeded
+					338 text $360.00
+				339 checkbox Description: Succeeded payment of $7,500.00 from Lumora Health on Aug 20, Value: 0
+					340 text Lumora Health
+					341 text Aug 20
+					342 text Invoice 427-009
+					343 text Visa 4242
+					344 text Succeeded
+					345 text $7,500.00
+				346 checkbox Description: Succeeded payment of $4,860.00 from Ridgeway Robotics on Aug 16, Value: 0
+					347 text Ridgeway Robotics
+					348 text Aug 16
+					349 text Invoice 424-008
+					350 text Wire 3318
+					351 text Succeeded
+					352 text $4,860.00
+				353 checkbox Description: Succeeded payment of $360.00 from Ridgeway Robotics on Aug 15, Value: 0
+					354 text Ridgeway Robotics
+					355 text Aug 15
+					356 text Office hours, one hour
+					357 text Mastercard 5100
+					358 text Succeeded
+					359 text $360.00
+				360 checkbox Description: Succeeded payment of $360.00 from Milkweed Bakery on Aug 13, Value: 0
+					361 text Milkweed Bakery
+					362 text Aug 13
+					363 text Office hours, one hour
+					364 text Mastercard 5100
+					365 text Succeeded
+					366 text $360.00
+				367 checkbox Description: Succeeded payment of $6,480.00 from Copperline Energy on Aug 13, Value: 0
+					368 text Copperline Energy
+					369 text Aug 13
+					370 text Invoice 417-018
+					371 text Wallet 8812
+					372 text Succeeded
+					373 text $6,480.00
+				374 checkbox Description: Succeeded payment of $2,500.00 from Copperline Energy on Aug 12, Value: 0
+					375 text Copperline Energy
+					376 text Aug 12
+					377 text Design sprint deposit
+					378 text Wallet 8812
+					379 text Succeeded
+					380 text $2,500.00
+				381 checkbox Description: Succeeded payment of $1,200.00 from Halden Works on Aug 5, Value: 0
+					382 text Halden Works
+					383 text Aug 5
+					384 text Brand audit
+					385 text Mastercard 5100
+					386 text Succeeded
+					387 text $1,200.00
+				388 checkbox Description: Succeeded payment of $12,380.00 from Halden Works on Aug 2, Value: 0
+					389 text Halden Works
+					390 text Aug 2
+					391 text Invoice 418-011
+					392 text Wire 3318
+					393 text Succeeded
+					394 text $12,380.00
+				395 checkbox Description: Succeeded payment of $3,980.00 from Fernway Legal on Jul 31, Value: 0
+					396 text Fernway Legal
+					397 text Jul 31
+					398 text Invoice 409-010
+					399 text Amex 1005
+					400 text Succeeded
+					401 text $3,980.00
+				402 checkbox Description: Succeeded payment of $6,800.00 from Halden Works on Jul 21, Value: 0
+					403 text Halden Works
+					404 text Jul 21
+					405 text Invoice 418-010
+					406 text Mastercard 5100
+					407 text Succeeded
+					408 text $6,800.00
+				409 checkbox Description: Succeeded payment of $1,620.00 from Quayside Freight on Jul 20, Value: 0
+					410 text Quayside Freight
+					411 text Jul 20
+					412 text Invoice 431-003
+					413 text Mastercard 5100
+					414 text Succeeded
+					415 text $1,620.00
+				416 checkbox Description: Succeeded payment of $8,640.00 from Fernway Legal on Jul 16, Value: 0
+					417 text Fernway Legal
+					418 text Jul 16
+					419 text Invoice 409-009
+					420 text Wallet 2045
+					421 text Succeeded
+					422 text $8,640.00
+				423 checkbox Description: Succeeded payment of $15,920.00 from Lumora Health on Jul 14, Value: 0
+					424 text Lumora Health
+					425 text Jul 14
+					426 text Invoice 427-008
+					427 text Visa 4242
+					428 text Succeeded
+					429 text $15,920.00
+				430 checkbox Description: Succeeded payment of $6,480.00 from Copperline Energy on Jul 14, Value: 0
+					431 text Copperline Energy
+					432 text Jul 14
+					433 text Invoice 417-017
+					434 text Visa 4242
+					435 text Succeeded
+					436 text $6,480.00
+				437 checkbox Description: Succeeded payment of $7,200.00 from Lumora Health on Jul 5, Value: 0
+					438 text Lumora Health
+					439 text Jul 5
+					440 text Invoice 427-007
+					441 text SEPA 7720
+					442 text Succeeded
+					443 text $7,200.00
+				444 checkbox Description: Succeeded payment of $13,520.00 from Quayside Freight on Jul 3, Value: 0
+					445 text Quayside Freight
+					446 text Jul 3
+					447 text Invoice 431-004
+					448 text SEPA 7720
+					449 text Succeeded
+					450 text $13,520.00
+				451 checkbox Description: Succeeded payment of $9,240.00 from Lumora Health on Jun 18, Value: 0
+					452 text Lumora Health
+					453 text Jun 18
+					454 text Invoice 427-006
+					455 text Visa 0077
+					456 text Succeeded
+					457 text $9,240.00
+				458 checkbox Description: Succeeded payment of $6,480.00 from Copperline Energy on Jun 10, Value: 0
+					459 text Copperline Energy
+					460 text Jun 10
+					461 text Invoice 417-016
+					462 text Visa 0077
+					463 text Succeeded
+					464 text $6,480.00
+				465 checkbox Description: Succeeded payment of $9,420.00 from Tallgrass Farms on Jun 8, Value: 0
+					466 text Tallgrass Farms
+					467 text Jun 8
+					468 text Invoice 412-005
+					469 text Visa 0077
+					470 text Succeeded
+					471 text $9,420.00
+				472 checkbox Description: Succeeded payment of $7,220.00 from Lumora Health on Jun 2, Value: 0
+					473 text Lumora Health
+					474 text Jun 2
+					475 text Invoice 427-004
+					476 text Mastercard 5100
+					477 text Succeeded
+					478 text $7,220.00
+				479 checkbox Description: Succeeded payment of $9,600.00 from Ridgeway Robotics on May 31, Value: 0
+					480 text Ridgeway Robotics
+					481 text May 31
+					482 text Invoice 424-007
+					483 text Amex 1005
+					484 text Succeeded
+					485 text $9,600.00
+				486 checkbox Description: Succeeded payment of $22,640.00 from Fernway Legal on May 27, Value: 0
+					487 text Fernway Legal
+					488 text May 27
+					489 text Invoice 409-008
+					490 text ACH 0981
+					491 text Succeeded
+					492 text $22,640.00
+				493 checkbox Description: Succeeded payment of $18,560.00 from Lumora Health on May 26, Value: 0
+					494 text Lumora Health
+					495 text May 26
+					496 text Invoice 427-005
+					497 text ACH 0981
+					498 text Succeeded
+					499 text $18,560.00
+				500 checkbox Description: Succeeded payment of $11,820.00 from Ridgeway Robotics on May 24, Value: 0
+					501 text Ridgeway Robotics
+					502 text May 24
+					503 text Invoice 424-005
+					504 text Wire 3318
+					505 text Succeeded
+					506 text $11,820.00
+				507 checkbox Description: Succeeded payment of $8,640.00 from Brightwell Studio on May 16, Value: 0
+					508 text Brightwell Studio
+					509 text May 16
+					510 text Invoice 404-008
+					511 text Visa 0077
+					512 text Succeeded
+					513 text $8,640.00
+				514 checkbox Description: Succeeded payment of $6,480.00 from Copperline Energy on May 14, Value: 0
+					515 text Copperline Energy
+					516 text May 14
+					517 text Invoice 417-015
+					518 text Visa 4242
+					519 text Succeeded
+					520 text $6,480.00
+				521 checkbox Description: Succeeded payment of $11,700.00 from Ridgeway Robotics on May 10, Value: 0
+					522 text Ridgeway Robotics
+					523 text May 10
+					524 text Invoice 424-006
+					525 text Visa 0077
+					526 text Succeeded
+					527 text $11,700.00
+				528 checkbox Description: Succeeded payment of $15,200.00 from Fernway Legal on Apr 28, Value: 0
+					529 text Fernway Legal
+					530 text Apr 28
+					531 text Invoice 409-007
+					532 text ACH 4410
+					533 text Succeeded
+					534 text $15,200.00
+				535 checkbox Description: Succeeded payment of $8,640.00 from Lumora Health on Apr 20, Value: 0
+					536 text Lumora Health
+					537 text Apr 20
+					538 text Invoice 427-003
+					539 text Wallet 8812
+					540 text Succeeded
+					541 text $8,640.00
+				542 checkbox Description: Succeeded payment of $9,600.00 from Halden Works on Apr 10, Value: 0
+					543 text Halden Works
+					544 text Apr 10
+					545 text Invoice 418-009
+					546 text ACH 0981
+					547 text Succeeded
+					548 text $9,600.00
+				549 checkbox Description: Succeeded payment of $6,480.00 from Copperline Energy on Apr 9, Value: 0
+					550 text Copperline Energy
+					551 text Apr 9
+					552 text Invoice 417-014
+					553 text Mastercard 5100
+					554 text Succeeded
+					555 text $6,480.00
+				556 checkbox Description: Succeeded payment of $17,640.00 from Halden Works on Apr 6, Value: 0
+					557 text Halden Works
+					558 text Apr 6
+					559 text Invoice 418-008
+					560 text ACH 0981
+					561 text Succeeded
+					562 text $17,640.00
+				563 checkbox Description: Succeeded payment of $11,640.00 from Brightwell Studio on Apr 4, Value: 0
+					564 text Brightwell Studio
+					565 text Apr 4
+					566 text Invoice 404-007
+					567 text Mastercard 5100
+					568 text Succeeded
+					569 text $11,640.00
+				570 checkbox Description: Succeeded payment of $3,360.00 from Fernway Legal on Apr 1, Value: 0
+					571 text Fernway Legal
+					572 text Apr 1
+					573 text Invoice 409-006
+					574 text Visa 0077
+					575 text Succeeded
+					576 text $3,360.00
+				577 checkbox Description: Succeeded payment of $18,220.00 from Milkweed Bakery on Mar 29, Value: 0
+					578 text Milkweed Bakery
+					579 text Mar 29
+					580 text Invoice 402-003
+					581 text SEPA 7720
+					582 text Succeeded
+					583 text $18,220.00
+				584 checkbox Description: Succeeded payment of $12,080.00 from Lumora Health on Mar 21, Value: 0
+					585 text Lumora Health
+					586 text Mar 21
+					587 text Invoice 427-002
+					588 text Wire 3318
+					589 text Succeeded
+					590 text $12,080.00
+				591 checkbox Description: Succeeded payment of $4,200.00 from Milkweed Bakery on Mar 13, Value: 0
+					592 text Milkweed Bakery
+					593 text Mar 13
+					594 text Invoice 402-002
+					595 text ACH 4410
+					596 text Succeeded
+					597 text $4,200.00
+				598 checkbox Description: Succeeded payment of $6,480.00 from Copperline Energy on Mar 11, Value: 0
+					599 text Copperline Energy
+					600 text Mar 11
+					601 text Invoice 417-013
+					602 text Amex 1005
+					603 text Succeeded
+					604 text $6,480.00
+				605 checkbox Description: Succeeded payment of $11,040.00 from Tallgrass Farms on Mar 6, Value: 0
+					606 text Tallgrass Farms
+					607 text Mar 6
+					608 text Invoice 412-004
+					609 text Wire 3318
+					610 text Succeeded
+					611 text $11,040.00
+				612 checkbox Description: Succeeded payment of $21,440.00 from Fernway Legal on Mar 4, Value: 0
+					613 text Fernway Legal
+					614 text Mar 4
+					615 text Invoice 409-005
+					616 text ACH 4410
+					617 text Succeeded
+					618 text $21,440.00
+				619 checkbox Description: Succeeded payment of $17,640.00 from Quayside Freight on Mar 2, Value: 0
+					620 text Quayside Freight
+					621 text Mar 2
+					622 text Invoice 431-002
+					623 text SEPA 7720
+					624 text Succeeded
+					625 text $17,640.00
+				626 checkbox Description: Succeeded payment of $18,240.00 from Northpine Labs on Feb 27, Value: 0
+					627 text Northpine Labs
+					628 text Feb 27
+					629 text Invoice 426-001
+					630 text SEPA 7720
+					631 text Succeeded
+					632 text $18,240.00
+				633 checkbox Description: Succeeded payment of $6,480.00 from Copperline Energy on Feb 12, Value: 0
+					634 text Copperline Energy
+					635 text Feb 12
+					636 text Invoice 417-012
+					637 text Wallet 2045
+					638 text Succeeded
+					639 text $6,480.00
+				640 checkbox Description: Succeeded payment of $6,800.00 from Orbitly on Feb 8, Value: 0
+					641 text Orbitly
+					642 text Feb 8
+					643 text Invoice 435-001
+					644 text Amex 1005
+					645 text Succeeded
+					646 text $6,800.00
+				647 checkbox Description: Succeeded payment of $12,640.00 from Tallgrass Farms on Jan 30, Value: 0
+					648 text Tallgrass Farms
+					649 text Jan 30
+					650 text Invoice 412-003
+					651 text ACH 4410
+					652 text Succeeded
+					653 text $12,640.00
+				654 checkbox Description: Succeeded payment of $21,380.00 from Tallgrass Farms on Jan 24, Value: 0
+					655 text Tallgrass Farms
+					656 text Jan 24
+					657 text Invoice 412-002
+					658 text SEPA 7720
+					659 text Succeeded
+					660 text $21,380.00
+				661 checkbox Description: Succeeded payment of $15,840.00 from Fernway Legal on Jan 20, Value: 0
+					662 text Fernway Legal
+					663 text Jan 20
+					664 text Invoice 409-003
+					665 text SEPA 7720
+					666 text Succeeded
+					667 text $15,840.00
+				668 checkbox Description: Succeeded payment of $11,040.00 from Halden Works on Jan 19, Value: 0
+					669 text Halden Works
+					670 text Jan 19
+					671 text Invoice 418-007
+					672 text ACH 4410
+					673 text Succeeded
+					674 text $11,040.00
+				675 checkbox Description: Succeeded payment of $19,440.00 from Fernway Legal on Jan 18, Value: 0
+					676 text Fernway Legal
+					677 text Jan 18
+					678 text Invoice 409-004
+					679 text ACH 4410
+					680 text Succeeded
+					681 text $19,440.00
+				682 checkbox Description: Succeeded payment of $6,480.00 from Copperline Energy on Jan 12, Value: 0
+					683 text Copperline Energy
+					684 text Jan 12
+					685 text Invoice 417-011
+					686 text SEPA 7720
+					687 text Succeeded
+					688 text $6,480.00
+				689 checkbox Description: Succeeded payment of $9,300.00 from Ridgeway Robotics on Dec 19, Value: 0
+					690 text Ridgeway Robotics
+					691 text Dec 19
+					692 text Invoice 424-004
+					693 text Amex 1005
+					694 text Succeeded
+					695 text $9,300.00
+				696 checkbox Description: Succeeded payment of $18,120.00 from Ridgeway Robotics on Dec 16, Value: 0
+					697 text Ridgeway Robotics
+					698 text Dec 16
+					699 text Invoice 424-003
+					700 text ACH 4410
+					701 text Succeeded
+					702 text $18,120.00
+				703 checkbox Description: Succeeded payment of $5,400.00 from Tallgrass Farms on Dec 13, Value: 0
+					704 text Tallgrass Farms
+					705 text Dec 13
+					706 text Invoice 412-001
+					707 text Visa 4242
+					708 text Succeeded
+					709 text $5,400.00
+				710 checkbox Description: Succeeded payment of $6,480.00 from Copperline Energy on Dec 12, Value: 0
+					711 text Copperline Energy
+					712 text Dec 12
+					713 text Invoice 417-010
+					714 text Mastercard 5100
+					715 text Succeeded
+					716 text $6,480.00
+				717 checkbox Description: Succeeded payment of $4,760.00 from Brightwell Studio on Dec 12, Value: 0
+					718 text Brightwell Studio
+					719 text Dec 12
+					720 text Invoice 404-006
+					721 text Mastercard 5100
+					722 text Succeeded
+					723 text $4,760.00
+				724 checkbox Description: Succeeded payment of $3,420.00 from Milkweed Bakery on Dec 9, Value: 0
+					725 text Milkweed Bakery
+					726 text Dec 9
+					727 text Invoice 402-001
+					728 text SEPA 7720
+					729 text Succeeded
+					730 text $3,420.00
+				731 checkbox Description: Succeeded payment of $8,400.00 from Halden Works on Nov 21, Value: 0
+					732 text Halden Works
+					733 text Nov 21
+					734 text Invoice 418-006
+					735 text Visa 4242
+					736 text Succeeded
+					737 text $8,400.00
+				738 checkbox Description: Succeeded payment of $6,480.00 from Copperline Energy on Nov 13, Value: 0
+					739 text Copperline Energy
+					740 text Nov 13
+					741 text Invoice 417-009
+					742 text Visa 0077
+					743 text Succeeded
+					744 text $6,480.00
+			745 container Payment details
+				746 text Payment details
+				747 text $480.00 Pending
+				748 container
+					749 text Nov 10, 2026 ,  bank transfer  ( ACH 4410 )
+				750 text Paid by
+				751 link Description: Milkweed Bakery Grace Liu, Value: ui.cortexcn.dev/previews/florin/customer/?id=milkweed
+				752 content list Breakdown
+					753 container
+						754 text $480.00 Amount
+					755 container
+						756 text $3.84 Processing fee
+					757 container
+						758 text $476.16 You keep
+				759 text For
+				760 text Website care plan
+	761 container Notifications alt+T
+
+The focused UI element is 1 AXWebArea Payments | Florin, URL: ui.cortexcn.dev/previews/florin/payments

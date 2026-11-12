@@ -17,7 +17,7 @@ import { isLocale, localeMeta, locales } from "@/i18n/locales";
 import { usePathname, useRouter } from "@/i18n/navigation";
 
 /** Switches language in place: `/how-it-works` → `/ta/how-it-works`. */
-export function LanguageSwitcher() {
+export function LanguageSwitcher({ className }: { className?: string } = {}) {
   const t = useTranslations("common");
   const locale = useLocale();
   const pathname = usePathname();
@@ -42,17 +42,14 @@ export function LanguageSwitcher() {
         <Button
           variant="ghost"
           size="sm"
-          className="min-h-11 gap-1.5 px-2 text-sm font-medium"
+          className={`min-h-11 gap-1.5 px-2 text-sm font-medium ${className ?? ""}`}
           aria-label={`${t("language")}: ${current.label}`}
           disabled={isPending}
         >
           <span lang={current.hreflang} dir={current.dir}>
             {current.label}
           </span>
-          <ChevronDownIcon
-            aria-hidden="true"
-            className="size-3.5 text-muted-foreground"
-          />
+          <ChevronDownIcon aria-hidden="true" className="size-3.5 opacity-70" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent

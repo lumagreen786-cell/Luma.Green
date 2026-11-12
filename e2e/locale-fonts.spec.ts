@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 
 // Assert actual rendered web fonts, including Latin and both RTL locales.
 const scriptFaces = {
-  en: "Plus Jakarta Sans",
+  en: "Urbanist",
   kn: "Noto Sans Kannada",
   ur: "Noto Sans Arabic",
   as: "Noto Sans Bengali",

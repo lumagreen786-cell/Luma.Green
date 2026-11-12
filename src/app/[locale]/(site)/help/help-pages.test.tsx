@@ -97,7 +97,7 @@ describe("/help", () => {
   it("offers search, topics, every role and a way to talk to us", async () => {
     show(await HelpPage());
     expect(
-      screen.getByRole("heading", { level: 1, name: "How can we help?" }),
+      screen.getByRole("heading", { level: 1, name: messages.help.title }),
     ).toBeInTheDocument();
     expect(
       screen.getByRole("searchbox", { name: "Search help" }),
@@ -120,10 +120,9 @@ describe("/help", () => {
     expect(
       screen.queryByRole("link", { name: /WhatsApp/ }),
     ).not.toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /Write to us/ })).toHaveAttribute(
-      "href",
-      "/help/contact",
-    );
+    expect(
+      screen.getByRole("link", { name: messages.help.contactStrip.write }),
+    ).toHaveAttribute("href", "/help/contact");
     expect(
       screen.getByText("Phone and WhatsApp support are not available."),
     ).toBeInTheDocument();
@@ -165,10 +164,9 @@ describe("/help/[role]", () => {
     expect(
       screen.getAllByRole("checkbox", { name: "Mark as done" }),
     ).toHaveLength(5);
-    expect(screen.getByRole("link", { name: /Write to us/ })).toHaveAttribute(
-      "href",
-      "/help/contact?role=kabadiwala",
-    );
+    expect(
+      screen.getByRole("link", { name: messages.help.contactStrip.write }),
+    ).toHaveAttribute("href", "/help/contact?role=kabadiwala");
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
   });
 });
@@ -213,10 +211,9 @@ describe("/help/[role]/[guide]", () => {
         name: "Demo guide: Sort your stock and sell to preprocessors",
       }),
     ).toHaveAttribute("href", "/help/kabadiwala/stock-and-sell");
-    expect(screen.getByRole("link", { name: /Write to us/ })).toHaveAttribute(
-      "href",
-      "/help/contact?role=kabadiwala&topic=prices",
-    );
+    expect(
+      screen.getByRole("link", { name: messages.help.contactStrip.write }),
+    ).toHaveAttribute("href", "/help/contact?role=kabadiwala&topic=prices");
   });
 
   it("wraps from the last guide back to the first", async () => {
@@ -239,7 +236,10 @@ describe("/help/contact", () => {
   it("keeps the message form and marks unconfigured phone contacts unavailable", async () => {
     show(await HelpContactPage());
     expect(
-      screen.getByRole("heading", { level: 1, name: "Contact us" }),
+      screen.getByRole("heading", {
+        level: 1,
+        name: messages.help.contact.title,
+      }),
     ).toBeInTheDocument();
     expect(
       screen.queryByRole("link", { name: /Call/ }),

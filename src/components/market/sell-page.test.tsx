@@ -56,7 +56,9 @@ it("lets a manufacturer choose server-approved byproducts and manage its offers"
     </WithIntl>,
   );
   expect(screen.getByRole("heading", { name: "Newspaper" })).toBeVisible();
-  await userEvent.click(screen.getByRole("tab", { name: "New listing" }));
+  await userEvent.click(
+    screen.getByRole("tab", { name: "List material for sale" }),
+  );
   expect(screen.getByRole("radio", { name: /Paper offcuts/ })).toBeVisible();
   expect(screen.getByRole("button", { name: "Put on sale" })).toBeVisible();
   await userEvent.click(screen.getByRole("tab", { name: "On sale now" }));

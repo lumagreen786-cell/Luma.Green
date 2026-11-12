@@ -1,100 +1,98 @@
-# Luma design system — approved 11 November 2026
+# Luma design system — Florin, 11 November 2026
 
-This is the current visual contract for all Luma interfaces. Read this file
-before a UI change. It supersedes older Astryx/Matcha palette, dark-mode,
-no-panel, sidebar and native-pause rules for this approved redesign.
+This is the active UI contract. The owner selected the full Florin application,
+including light and dark modes, replacing the Ship X palette and light-only rule.
+Use the project skill [luma-florin-ui](../../../.agents/skills/luma-florin-ui/SKILL.md)
+for every UI change. Do not create or update PDFs for this rollout.
 
-## Approved direction
+## Source and evidence
 
-The owner approved the five Ship X-inspired Luma samples: Dashboard,
-Collections, Collection Detail, Materials and Household Recycling. Apply this
-system to every web route, admin route and Expo iOS/Android shell surface.
-Keep the real Luma features and data. Samples are layout references, not a source
-of operational values or permissions. The owner resumed mobile UI development;
-this does not authorize paid services, store submission or signed publication.
+Reference: https://ui.cortexcn.dev/previews/florin/estimates/
+Saved reference captures and computed tokens: [Florin board](../inspiration/florin/README.md).
+These are third-party sample screens, not Luma data or acceptance evidence.
+Inspect the corresponding reference before editing a Luma page. Match composition,
+not just colours. All billing pages, customers, products, reports, activity,
+settings and the invoice editor inform their equivalent Luma workflows.
 
-## Colours and appearance
+## Appearance
 
-Only five base colours are approved:
+| Role                      | Light   | Dark    |
+| ------------------------- | ------- | ------- |
+| Page canvas               | #e7e9ee | #080b14 |
+| Foreground                | #14161c | #f5f6f8 |
+| Panel                     | #ffffff | #23262f |
+| Muted text                | #5d616c | #a3a6b1 |
+| Primary                   | #9bf80f | #9bf80f |
+| Primary text              | #10130a | #10130a |
+| Record sheet / navigation | #fffffd | #fffffd |
+| Selected record / detail  | #20232c | #20232c |
 
-| Token  | Value     | Use                                    |
-| ------ | --------- | -------------------------------------- |
-| Forest | `#144419` | Text, navigation, strong outlines      |
-| Green  | `#317F38` | Primary actions, chart lines           |
-| Lime   | `#A8E665` | Selected navigation, secondary actions |
-| Yellow | `#EBFF00` | Attention accents, with a text label   |
-| White  | `#FFFFFF` | Panels, fields, text on forest/green   |
+Use semantic tokens. Preserve the reference's deliberately white record sheets
+and white navigation capsule in dark mode; dark selected rows and detail panels
+have light text. Other panels follow the active theme. Errors use labelled red
+feedback; charts use the saved reference colour roles. Photos are not inverted.
+Support a stored Light/Dark/System preference, first-paint bootstrap and native
+system appearance. Keep unreadable lime text off light surfaces.
 
-Use white/forest mixes for the page canvas (7% forest), borders (13% forest)
-and secondary text (75% forest). Do not invent another base colour. Photo and
-unchanged brand-logo pixels are source artwork, not UI tokens. Mandatory provider
-attribution retains its required mark/colour. Errors use a strong forest label,
-an error icon, a border and accessible text; do not rely on green/yellow alone
-to convey error or success. Green and white are the primary button pair. Never
-use white text on lime/yellow.
+## Geometry and typography
 
-Light mode is the only appearance. Remove the appearance picker. Ignore old dark
-preferences, force light before first paint and keep native/web appearance in
-agreement. Do not invert photos or add a system-dark alternative.
+Urbanist is the Latin UI/display font, with Noto script fallbacks. Titles use
+regular weight, tight Latin tracking, approximately 52px desktop / 36px phone;
+section titles 18–22px; body 14–16px. Script fallbacks keep normal tracking.
+Panels have 28px corners and 24–32px desktop padding (16–24px phone).
+Buttons, inputs, search, navigation and status controls are pills; menus use
+16px corners. Targets remain at least 44px. Keep local labels visible.
 
-## Layout
+## Composition
 
-- Desktop workspace/admin: horizontal forest navigation, lime selected action,
-  clear workspace/role context, and a compact title/action row.
-- Mobile: reflow navigation into reachable controls and preserve role routes,
-  search, language, logout and account access. Never clip translated actions.
-- Page canvas: pale green. Functional white panels have 12–16 px corners,
-  modest 16–24 px padding and 12–16 px gaps. Avoid deep nesting and filler tiles.
-- Dashboard: recorded-data summaries, a clear activity graph, a useful record
-  list, and secondary task context. No invented trends or counts.
-- Collections: filters/search next to a real list; selected detail has the next
-  permitted action. Preserve entered values when changing view or recovering.
-- Detail: concise facts, a labelled progress sequence and material records.
-- Inventory: exact quantities, clear material groups and actual movements.
-- Forms: short stages when useful, visible labels, retained values, meaningful
-  validation, required consent/verification, and a clear primary next action.
-- Public pages may use existing recycling photos and illustration. A library
-  photo is never evidence of a user's request, facility or certification.
+- Top bar: visible Luma wordmark, page switcher, white pill section navigation
+  with lime selected segment, then compact circular utility actions. Reflow at
+  tablet widths; keep language, account, appearance and mobile access reachable.
+- Operational page: title/action row, useful summary panels, filter strip,
+  record sheet and adjacent selected-record detail. Stack these on phones.
+- Workspace navigation keeps daily tasks in one desktop pill row. More opens
+  the existing keyboard-accessible panel for secondary routes and account
+  settings. Search can find secondary tasks without hiding the current page.
+  Keep appearance selection available in workspaces and both admin shells.
+- Tabs sit in a canvas-colour dock inset into the upper edge of the record
+  panel. Each real count is a separate round badge. The active tab is lime
+  with a dark count badge. Never invent counters or replace labels with icons.
+- Finance/invoice screens retain exact amounts, statuses, actions and records.
+  Use an editor/preview split only when a real supported workflow needs it.
+- Charts use lime lines or striped rounded progress bars, quiet grids,
+  readable selected values and accessible data equivalents. No invented metrics.
+- Public pages translate this visual system into clear recycling tasks, preserve
+  original photos/illustrations, and retain concise meaningful copy.
+- Forms follow settings/editor grouping, visible labels, short useful sections,
+  retained values and readable consent. Keep black scrims on retained decorative
+  background images; never dim actual customer records or documents.
 
-## Components and type
+## Boundaries and acceptance
 
-Use existing shadcn/Radix primitives. New ordinary actions use the shared Button;
-the ActionButton adapter must preserve existing call sites while using that
-primitive. Do not blindly replace compound controls or weaken keyboard support.
-The approved reference uses Plus Jakarta Sans for Latin UI; use Noto fallbacks
-for all registered scripts and keep font declarations in `src/lib/fonts.ts`.
-Use 26–30 px page titles, 14–16 px section labels and legible 12–14 px operational
-copy. All interactive targets are at least 44 px. Pills identify actions and
-states; panels use the shared radius. Lucide is the control icon family.
+Preserve all existing workflows, authentication/TOTP, authorization, private files,
+provider limits, exact grams/paise, audit records and unavailable states. Do not
+add pretend billing, payment, invoice or credit operations just to match a demo.
+Use existing shadcn/Radix APIs and locale catalogues; admin retains its English
+exception. Keep RTL, wrapping chips, visible mobile wordmark and native safe areas.
+Expo uses shared hosted screens, not duplicated native pages. No native binary,
+OTA or store publication is authorized by this design task.
 
-## Graphs
+Track every route, empty/loading/error/detail state and acceptance gap. Run
+pnpm check, production build and relevant browser tests. Inspect actual Luma
+screens at phone/tablet/desktop widths in both modes and affected scripts/RTL.
+Save screenshots, with isolated sample fixtures clearly labelled. Historical
+Ship X evidence does not prove Florin acceptance. Release only through a checked
+PR and Vercel Production; no Preview deployments. No PDF updates.
 
-Use a thin green line, light diagonal-hatch area, quiet grid and a precise
-selected-value label. Use rounded horizontal bars for material breakdowns.
-Source every value from the actual query or clearly isolated test fixture.
-Keep accessible labels/data equivalents and exact units. Pattern IDs must be
-unique per chart instance. Do not add live maps or tracking without real data.
+## Dashboard and wording correction — 11 November, 18:07 onward
 
-## Safety and coverage
-
-Preserve backend access, roles, real authentication, admin TOTP, phone checks,
-provider limits, audit records and exact grams/paise. Household users must not
-estimate material weights. Keep private file access and unavailable services
-honest. All product strings use the existing locale catalogues; admin is the
-documented English-only exception. Support RTL and long script labels.
-
-Expo uses the hosted web workflows and native recovery/loading controls. Keep
-safe areas, Android Back, camera/file/location permission boundaries and safe
-update restart checks. Do not duplicate the website into native screens.
-Electron remains a compatibility consumer; preserve its controls and security.
-
-Before declaring completion: run `pnpm check`, production build and relevant
-browser checks; inspect actual pages across desktop/tablet/phone and affected
-scripts. Record route coverage and any device-only gaps in the delivery record.
-Passing a test or changing tokens is not proof of 100% visual acceptance.
-
-## References
-
-- [Source reference board](../inspiration/ship-x.md)
-- [Implementation plan](../../plans/2026-11-11-design-system-rollout.md)
-- Approved sample source: `reference.html` in this folder (sample data only).
+The owner rejected inherited home blocks and requested a dashboard home, new top
+and bottom navigation, fresh useful wording and stronger contrast across the
+platform. Use a compact task header, action/price/business panels, short process
+steps, bounded role detail images and a compact resource grid. Keep native/public
+navigation distinct. Public phone navigation is a four-route safe-area dock and
+hides during text entry. Do not invent personal activity or dashboard metrics.
+Reset retained Astryx text tokens inside white/ink panels; check actual computed
+heading colour, not only the class name. Dark detail headings must be light.
+Copy may change where it helps the next action, but consent, units, provider
+limits and records must remain accurate. New guidance must describe real tasks.

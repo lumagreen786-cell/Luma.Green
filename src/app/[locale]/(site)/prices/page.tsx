@@ -44,38 +44,46 @@ export default async function PricesPage() {
         scene="fairWeighing"
       />
 
-      <Container className="flex flex-col gap-8 py-8 lg:py-12">
-        <PriceBoard />
-
-        <p className="text-sm text-muted-foreground">{t("floorHelp")}</p>
-        <p className="text-sm text-muted-foreground">
-          {sell("basket.weighNote")}
-        </p>
-        <details className="border-t py-4">
-          <summary className="cursor-pointer py-2 font-semibold outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
-            {help("guides.weighingAtDoor.title")}
-          </summary>
-          <PriceGuide />
-        </details>
-
-        <aside className="flex flex-col gap-4 border-y py-6 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-start gap-3">
-            <PackageOpenIcon
-              aria-hidden
-              className="mt-0.5 size-6 shrink-0 text-primary"
-            />
-            <div>
-              <p className="text-lg font-semibold">{t("sellCta.title")}</p>
-              <p className="text-muted-foreground">{t("sellCta.body")}</p>
-            </div>
+      <Container className="grid items-start gap-4 pb-8 lg:grid-cols-[minmax(0,1fr)_19rem]">
+        <section
+          aria-label={t("title")}
+          className="min-w-0 rounded-panel bg-card p-5 shadow-panel sm:p-6"
+        >
+          <PriceBoard />
+        </section>
+        <div className="grid min-w-0 gap-4">
+          <div className="space-y-3 rounded-xl bg-accent/40 p-5">
+            <p className="text-sm text-muted-foreground">{t("floorHelp")}</p>
+            <p className="text-sm text-muted-foreground">
+              {sell("basket.weighNote")}
+            </p>
           </div>
-          <Button asChild size="lg" className="h-12 px-5 text-base">
-            <Link href="/sell">
-              {nav("sellScrap")}
-              <ArrowRightIcon aria-hidden className="rtl:rotate-180" />
-            </Link>
-          </Button>
-        </aside>
+          <details className="rounded-panel bg-card p-5 shadow-panel">
+            <summary className="cursor-pointer py-2 font-semibold outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
+              {help("guides.weighingAtDoor.title")}
+            </summary>
+            <PriceGuide />
+          </details>
+
+          <aside className="flex flex-col gap-4 rounded-panel bg-card p-5 shadow-panel">
+            <div className="flex items-start gap-3">
+              <PackageOpenIcon
+                aria-hidden
+                className="mt-0.5 size-6 shrink-0 text-foreground"
+              />
+              <div>
+                <p className="text-lg font-semibold">{t("sellCta.title")}</p>
+                <p className="text-muted-foreground">{t("sellCta.body")}</p>
+              </div>
+            </div>
+            <Button asChild size="lg" className="h-12 px-5 text-base">
+              <Link href="/sell">
+                {nav("sellScrap")}
+                <ArrowRightIcon aria-hidden className="rtl:rotate-180" />
+              </Link>
+            </Button>
+          </aside>
+        </div>
       </Container>
     </>
   );

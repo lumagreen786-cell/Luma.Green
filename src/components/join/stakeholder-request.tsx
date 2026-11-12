@@ -145,11 +145,13 @@ function RequestForm({
         void send();
       }}
     >
-      <header className="border-b border-border pb-5">
+      <header className="space-y-2">
         <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
           {participantType ? participants("apply") : t("title")}
         </h1>
-        <p className="mt-2 text-sm text-muted-foreground">{t("note")}</p>
+        <p className="rounded-xl bg-accent/30 p-4 text-sm text-muted-foreground">
+          {t("note")}
+        </p>
       </header>
       {participantType ? (
         <p className="font-medium">
@@ -222,7 +224,7 @@ function RequestForm({
           }}
         />
       </div>
-      <div className="flex flex-col divide-y divide-border/60 rounded-xl border border-border/60 px-4">
+      <div className="flex flex-col divide-y divide-border/60 rounded-xl bg-muted/60 px-4">
         <div className="flex items-start gap-3 py-4">
           <Checkbox
             id="stakeholder-age"
@@ -296,7 +298,7 @@ function ApplicationStatus({ account }: { account: NonNullable<Account> }) {
       {account.participantType && account.status === "approved" ? (
         <Link
           href={isManufacturer ? "/join/manufacturer" : "/join/roles"}
-          className="inline-flex min-h-11 items-center self-start text-primary underline"
+          className="inline-flex min-h-11 items-center self-start text-foreground underline"
         >
           {participants(isManufacturer ? "continue" : "title")}
         </Link>

@@ -634,7 +634,7 @@
     "replyTime": "Respondemos em até um dia útil.",
     "search": {
       "label": "Buscar ajuda",
-      "placeholder": "A aguardar o gateway",
+      "placeholder": "Buscar",
       "clear": "Limpar busca",
       "summary": "{count, plural, =0 {Nenhuma resposta} one {# resposta} other {# respostas}} para “{query}”",
       "topicSummary": "{count, plural, =0 {Nenhuma resposta} one {# resposta} other {# respostas}} sobre {topic}",
@@ -1905,7 +1905,7 @@
     "homeTitle": "Vai reciclar de casa?",
     "homeLink": "Veja como funciona",
     "privacy": "Usamos seu número só para entrar e enviar atualizações sobre seu trabalho na Luma.Green.",
-    "unavailableTitle": "O acesso por telefone estará disponível em breve",
+    "unavailableTitle": "Entre com seu número de celular",
     "unavailableBody": "O início de sessão por SMS está indisponível. Tente novamente mais tarde.",
     "verifyTitle": "Informe o código de 6 dígitos",
     "sentTo": "Enviado por SMS para {phone}",

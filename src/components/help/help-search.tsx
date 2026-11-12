@@ -105,9 +105,11 @@ export function HelpSearch() {
             const Icon = TOPIC_ICONS[key];
             const isPressed = topic === key;
             return (
-              <li key={key}>
+              <li key={key} className="max-w-full min-w-0">
                 <Button
                   type="button"
+                  data-help-topic
+                  className="h-auto min-h-11 max-w-full justify-start py-2 text-start whitespace-normal"
                   variant={isPressed ? "default" : "outline"}
                   aria-pressed={isPressed}
                   onClick={() => {
@@ -115,8 +117,10 @@ export function HelpSearch() {
                     setShowAll(false);
                   }}
                 >
-                  <Icon aria-hidden className="size-4" />
-                  {t(`topics.${key}`)}
+                  <Icon aria-hidden className="size-4 shrink-0" />
+                  <span className="min-w-0 wrap-anywhere">
+                    {t(`topics.${key}`)}
+                  </span>
                 </Button>
               </li>
             );
@@ -205,7 +209,7 @@ function NoResults() {
   const t = useTranslations("help");
   return (
     <div className="flex flex-col items-center gap-2 px-4 py-8 text-center">
-      <span className="flex size-12 items-center justify-center rounded-full bg-accent text-primary">
+      <span className="flex size-12 items-center justify-center rounded-full bg-accent text-foreground">
         <MessageCircleQuestionIcon aria-hidden className="size-6" />
       </span>
       <p className="font-medium">{t("search.emptyTitle")}</p>

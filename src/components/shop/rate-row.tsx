@@ -101,13 +101,13 @@ export function RateRow({ row }: { row: RateCardRow }) {
         onSubmit={(event) => void onSubmit(event)}
         className="grid items-center gap-3 border-b border-border py-5 sm:grid-cols-[minmax(0,1fr)_minmax(15rem,1fr)]"
       >
-        <div className="flex items-center gap-3">
+        <div className="flex min-w-0 items-center gap-3 sm:row-span-2 sm:self-start sm:pt-3">
           <MaterialIcon family={row.material.family} />
           <Label htmlFor={id} className="flex-1 text-base font-medium">
             {name}
           </Label>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex min-w-0 items-center gap-2">
           <div className="relative flex-1">
             <span
               aria-hidden
@@ -163,14 +163,14 @@ export function RateRow({ row }: { row: RateCardRow }) {
           <p
             id={`${id}-error`}
             role="alert"
-            className="text-sm font-medium text-destructive sm:col-span-2"
+            className="text-sm font-medium text-destructive sm:col-start-2"
           >
             {messages[problem]}
           </p>
         ) : null}
         <p
           id={`${id}-hint`}
-          className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground sm:col-span-2"
+          className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground sm:col-start-2"
         >
           {row.offerExpiresAt === undefined ? null : (
             <time dateTime={new Date(row.offerExpiresAt).toISOString()}>

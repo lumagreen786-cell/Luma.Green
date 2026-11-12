@@ -1,0 +1,3044 @@
+{
+  "capturedAt": "2026-11-12T10:26:32.061Z",
+  "baseURL": "http://127.0.0.1:3011",
+  "head": "527960ef90e4f6f8a999b775c292b34f63723fbc",
+  "buildId": "-Oa3vrhloPzV2WQYXT9UC",
+  "trackedDiffSha256": "1857186c2499c1ae31896ae72e6cc5d1f957bef7cd38c0da9625c5aa3accaf65",
+  "context": "Actual disconnected production build in isolated Chromium. No sign-in, OTP, provider submission or production acceptance. Redirects are recorded. Solar examples use clearly synthetic local inputs.",
+  "captures": [
+    {
+      "route": "/en",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-1440.png",
+      "finalURL": "http://127.0.0.1:3011/",
+      "redirected": false,
+      "heading": "Your recycling starts here.",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "36d4c5fc9b7b35ddb6c5a6e8e7cd28082cd7074cc6eac28a8d2d7294c86866d3",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1969
+      }
+    },
+    {
+      "route": "/en/how-it-works",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-how-it-works-1440.png",
+      "finalURL": "http://127.0.0.1:3011/how-it-works",
+      "redirected": false,
+      "heading": "How Luma.Green works",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "d34c18e8e88cb881a7db20ca482d1516d1cac118ea3156ade3884b2abc45ad1b",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 2031
+      }
+    },
+    {
+      "route": "/en/participants",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-participants-1440.png",
+      "finalURL": "http://127.0.0.1:3011/participants",
+      "redirected": false,
+      "heading": "Who Luma.Green is for",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "6486f9d1d565719752789e5c2db63a0c3cba0bb3ddfae2b86f604de9f17ded8d",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1482
+      }
+    },
+    {
+      "route": "/en/prices",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-prices-1440.png",
+      "finalURL": "http://127.0.0.1:3011/prices",
+      "redirected": false,
+      "heading": "Material prices",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "45eda5fefc4b27afbccf61eb0432be901439301a1cbc8bbd0261c7f6cbf8a0b0",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/standards",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-standards-1440.png",
+      "finalURL": "http://127.0.0.1:3011/standards",
+      "redirected": false,
+      "heading": "The Luma.Green standard",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "f3357c566780784370a428b7db96b42da948aba6baf1ca2538a6e4796f88b7dc",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1624
+      }
+    },
+    {
+      "route": "/en/solar",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-solar-1440.png",
+      "finalURL": "http://127.0.0.1:3011/solar",
+      "redirected": false,
+      "heading": "Rooftop solar for your home or business",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "168eb0ef0a6380f2804b5bd2e6b53a857ad14f56fa05b63618b4e4448a611f5b",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1557
+      }
+    },
+    {
+      "route": "/en/join",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-join-1440.png",
+      "finalURL": "http://127.0.0.1:3011/join",
+      "redirected": false,
+      "heading": "Choose your work on Luma.Green",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "2608c1b87d5d5aabb2fb6d2d5746d8c55dec2645afc3b10a9984f78dbb84c01f",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1240
+      }
+    },
+    {
+      "route": "/en/contact",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-contact-1440.png",
+      "finalURL": "http://127.0.0.1:3011/contact",
+      "redirected": false,
+      "heading": "Talk to us",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "586cf2af09ffbdb9b0164940deb1057b28934651012b15ca2d45283a414a71fc",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/help",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-help-1440.png",
+      "finalURL": "http://127.0.0.1:3011/help",
+      "redirected": false,
+      "heading": "Find your next step",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "276b113448814cea03d2b15ce12a4bb67d431d8e754411c94fe9d3ae9e19d901",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1359
+      }
+    },
+    {
+      "route": "/en/help/contact",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-help-contact-1440.png",
+      "finalURL": "http://127.0.0.1:3011/help/contact",
+      "redirected": false,
+      "heading": "Ask the support team",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "27480e0ccc49416fdbad53ab6faee5acbadf361c02b3644af4c9b469e8a9406d",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/help/kabadiwala",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-help-kabadiwala-1440.png",
+      "finalURL": "http://127.0.0.1:3011/help/kabadiwala",
+      "redirected": false,
+      "heading": "Help for kabadiwalas",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "5901587e4032ce5a01cb1b815c9c571ee357053b10dd1f5824f7504e1a336f46",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 2495
+      }
+    },
+    {
+      "route": "/en/privacy",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-privacy-1440.png",
+      "finalURL": "http://127.0.0.1:3011/privacy",
+      "redirected": false,
+      "heading": "Privacy policy",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "d76bd8eea29bd2d2b5c8323e06f72cbc822c46b5eb5de14b7cdb1a5cb491fbc3",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1192
+      }
+    },
+    {
+      "route": "/en/sell",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-sell-1440.png",
+      "finalURL": "http://127.0.0.1:3011/sell",
+      "redirected": false,
+      "heading": "Recycle",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "752b39974e7bd92e7fcc11480cf8469aa4333f06931592a888fca5be72737284",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/sell/activity",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-sell-activity-1440.png",
+      "finalURL": "http://127.0.0.1:3011/login?next=%2Fsell%2Factivity",
+      "redirected": true,
+      "heading": "Log in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "12086cc3af54fed79e125ab203195384cda5141a778fc7154feb0835d47e4a05",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/sell/services",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-sell-services-1440.png",
+      "finalURL": "http://127.0.0.1:3011/sell/services",
+      "redirected": false,
+      "heading": "Services",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "a51b8fc0beffd8e2b0f43c6f94f8efbf45cbaa83439b448ee12cc168e07e6636",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/sell/footprint",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-sell-footprint-1440.png",
+      "finalURL": "http://127.0.0.1:3011/sell/footprint",
+      "redirected": false,
+      "heading": "Check your electricity footprint",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "958c74a0630849aed06682b6bda244871c8d55b137ab967704fbd850efc8585f",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/sell/settings",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-sell-settings-1440.png",
+      "finalURL": "http://127.0.0.1:3011/sell/settings",
+      "redirected": false,
+      "heading": "Settings",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "331ae3e0695726dc3e4c9d53f6159260e0a7cd8e6b9dbb175a4e288afe557738",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/login",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-login-1440.png",
+      "finalURL": "http://127.0.0.1:3011/login",
+      "redirected": false,
+      "heading": "Log in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "12086cc3af54fed79e125ab203195384cda5141a778fc7154feb0835d47e4a05",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/login/verify",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-login-verify-1440.png",
+      "finalURL": "http://127.0.0.1:3011/login/verify",
+      "redirected": false,
+      "heading": "Log in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "34c30c5d1ccd4be69d37a463851ede610230ccfeca64e023dac686ba00c42b5f",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-390.png",
+      "finalURL": "http://127.0.0.1:3011/",
+      "redirected": false,
+      "heading": "Your recycling starts here.",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "f49eb939ed80b585b6f7b44b98a785337c116d85e403fd8bf9107f606f26ac2f",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 3720
+      }
+    },
+    {
+      "route": "/en/login",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-login-390.png",
+      "finalURL": "http://127.0.0.1:3011/login",
+      "redirected": false,
+      "heading": "Log in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "174ece5d2c19caaa2a4e8c0b0b11dc4bcefad643c1e7c7c59c64331f3153d65f",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 844
+      }
+    },
+    {
+      "route": "/en/sell",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-sell-390.png",
+      "finalURL": "http://127.0.0.1:3011/sell",
+      "redirected": false,
+      "heading": "Recycle",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "03b7096293f62a8a32f68c16f216d56b451f995a7733168170a6f6a5a6c31c6a",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1220
+      }
+    },
+    {
+      "route": "/en/sell/services",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-sell-services-390.png",
+      "finalURL": "http://127.0.0.1:3011/sell/services",
+      "redirected": false,
+      "heading": "Services",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "26ada734fea506498fe6cd9e3fa8fb447f91f3dd52001e02a4dd93b56533b83d",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1076
+      }
+    },
+    {
+      "route": "/en/sell/footprint",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-sell-footprint-390.png",
+      "finalURL": "http://127.0.0.1:3011/sell/footprint",
+      "redirected": false,
+      "heading": "Check your electricity footprint",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "0ae36b17e68b45a1badf45112c77e62a76bba1724174c01fc011282af5854b53",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1027
+      }
+    },
+    {
+      "route": "/en/sell/settings",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-sell-settings-390.png",
+      "finalURL": "http://127.0.0.1:3011/sell/settings",
+      "redirected": false,
+      "heading": "Settings",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "8ac216c1c6a583d53260fa1644002e66ba30d2df364516eafca48fdc74ffbf7c",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1235
+      }
+    },
+    {
+      "route": "/en/join",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-join-390.png",
+      "finalURL": "http://127.0.0.1:3011/join",
+      "redirected": false,
+      "heading": "Choose your work on Luma.Green",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "2d5aa99b72e8051c86e417f64db631c174f45fdd126ee0c1fb7cb719e433f073",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1592
+      }
+    },
+    {
+      "route": "/en/participants",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-participants-390.png",
+      "finalURL": "http://127.0.0.1:3011/participants",
+      "redirected": false,
+      "heading": "Who Luma.Green is for",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "c45fb2f5960e5dd6d36a5f58c4ba2bf90bb2830a7264c7bce96bc75f7646968d",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 2429
+      }
+    },
+    {
+      "route": "/en/help",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-help-390.png",
+      "finalURL": "http://127.0.0.1:3011/help",
+      "redirected": false,
+      "heading": "Find your next step",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "ed532689d0cdb581de391a8e552456e05532a29eb2ea38bf52b040e11eb511c7",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 2311
+      }
+    },
+    {
+      "route": "/en/help/contact",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-help-contact-390.png",
+      "finalURL": "http://127.0.0.1:3011/help/contact",
+      "redirected": false,
+      "heading": "Ask the support team",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "8dbe26ceedf5c2b01dd9b26d84eb14d599c05927c06f24bd62edadb68e8ba84f",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1184
+      }
+    },
+    {
+      "route": "/ar",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", \"Noto Sans Arabic\", \"Noto Sans Arabic Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-ar-390.png",
+      "finalURL": "http://127.0.0.1:3011/ar",
+      "redirected": false,
+      "heading": "تخلّص من المواد القابلة للتدوير. واحصل على مقابل.",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "0a4a98c728ea012ba1db6eced56bf3db4dcd69176f249a5c6011810ff9e163c7",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 3653
+      }
+    },
+    {
+      "route": "/ar/login",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", \"Noto Sans Arabic\", \"Noto Sans Arabic Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-ar-login-390.png",
+      "finalURL": "http://127.0.0.1:3011/ar/login",
+      "redirected": false,
+      "heading": "تسجيل الدخول",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "f9b1ba463e5084382ec8653d752ce19edb5662906ed9cec71b5347f23b61e338",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 844
+      }
+    },
+    {
+      "route": "/ar/sell",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", \"Noto Sans Arabic\", \"Noto Sans Arabic Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-ar-sell-390.png",
+      "finalURL": "http://127.0.0.1:3011/ar/sell",
+      "redirected": false,
+      "heading": "إعادة التدوير",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "534d99273840b6b47907fad161e8d3ada3657a24a321b7445e076201cd8a237e",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1178
+      }
+    },
+    {
+      "route": "/ta",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", \"Noto Sans Tamil\", \"Noto Sans Tamil Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-ta-390.png",
+      "finalURL": "http://127.0.0.1:3011/ta",
+      "redirected": false,
+      "heading": "மறுசுழற்சிப் பொருட்களை அகற்றுங்கள். பணம் பெறுங்கள்.",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "1df5a179cf7f60996157e40c1319ddaa1363c4e8112364743467bec3d7ffc360",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 4501
+      }
+    },
+    {
+      "route": "/ta/sell",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", \"Noto Sans Tamil\", \"Noto Sans Tamil Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-ta-sell-390.png",
+      "finalURL": "http://127.0.0.1:3011/ta/sell",
+      "redirected": false,
+      "heading": "மறுசுழற்சி செய்க",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "45ab110b21d82abf1971acf280393f8e414913ea9aac871b584a2a00ca134aec",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1413
+      }
+    },
+    {
+      "route": "/ta/participants",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", \"Noto Sans Tamil\", \"Noto Sans Tamil Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-ta-participants-390.png",
+      "finalURL": "http://127.0.0.1:3011/ta/participants",
+      "redirected": false,
+      "heading": "Luma.Green யாருக்கானது",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "fd3bda1c6999831f2a661ead7d40e3fa9c874881e8691aaf23ad6f8b3bc724fa",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 3440
+      }
+    },
+    {
+      "route": "/ta/help",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", \"Noto Sans Tamil\", \"Noto Sans Tamil Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-ta-help-390.png",
+      "finalURL": "http://127.0.0.1:3011/ta/help",
+      "redirected": false,
+      "heading": "உங்களுக்கு எப்படி உதவலாம்?",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "ba52186eaa8ca7b7ec164e96501edec5e694e1fc59c4e43ccfb414b2f50ccbca",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 2778
+      }
+    },
+    {
+      "route": "/ar/help",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", \"Noto Sans Arabic\", \"Noto Sans Arabic Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-ar-help-390.png",
+      "finalURL": "http://127.0.0.1:3011/ar/help",
+      "redirected": false,
+      "heading": "كيف يمكننا مساعدتك؟",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "40f043e2c06983f7da22c8b253304a0e355f55eda980980259cf129ef4186334",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 2186
+      }
+    },
+    {
+      "route": "/ar/join",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", \"Noto Sans Arabic\", \"Noto Sans Arabic Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-ar-join-390.png",
+      "finalURL": "http://127.0.0.1:3011/ar/join",
+      "redirected": false,
+      "heading": "انضم إلى Luma.Green",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "9446a40dd485b4cce5968fdd2d93dbeade5af568ca9ffedfd036d44e9bd56d9c",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1510
+      }
+    },
+    {
+      "route": "/en",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-768.png",
+      "finalURL": "http://127.0.0.1:3011/",
+      "redirected": false,
+      "heading": "Your recycling starts here.",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "6c28ff11f84c4828f4d1794e4ef36f4dbbad733ad83b2cd09bd790d04e6d2388",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 768,
+        "scrollWidth": 768,
+        "height": 2345
+      }
+    },
+    {
+      "route": "/en/sell",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-sell-768.png",
+      "finalURL": "http://127.0.0.1:3011/sell",
+      "redirected": false,
+      "heading": "Recycle",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "cf2e370b21d2616db061374fa02bd354bd77aefedfeaceb0b8e636ea3eed9d9a",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 768,
+        "scrollWidth": 768,
+        "height": 1028
+      }
+    },
+    {
+      "route": "/ar/sell",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", \"Noto Sans Arabic\", \"Noto Sans Arabic Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-ar-sell-768.png",
+      "finalURL": "http://127.0.0.1:3011/ar/sell",
+      "redirected": false,
+      "heading": "إعادة التدوير",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "63ba57464c3a8b82357e381407a7fe173f50ccd8cc1964dc0a41e3fabd738bd3",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 768,
+        "scrollWidth": 768,
+        "height": 1079
+      }
+    },
+    {
+      "route": "/en/help",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-help-768.png",
+      "finalURL": "http://127.0.0.1:3011/help",
+      "redirected": false,
+      "heading": "Find your next step",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "fd1ce07c2690590868cc001c321af42a9bdd7d8871cbf29565191f13cfb06e26",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 768,
+        "scrollWidth": 768,
+        "height": 1842
+      }
+    },
+    {
+      "route": "/en/join",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-join-768.png",
+      "finalURL": "http://127.0.0.1:3011/join",
+      "redirected": false,
+      "heading": "Choose your work on Luma.Green",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "84297b67bddd0afd5dbfe9a60c4f2984b624fc52cef4a3f7dd357ae741e01cbf",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 768,
+        "scrollWidth": 768,
+        "height": 1343
+      }
+    },
+    {
+      "route": "/en/participants",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-participants-768.png",
+      "finalURL": "http://127.0.0.1:3011/participants",
+      "redirected": false,
+      "heading": "Who Luma.Green is for",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "74b1ceefeec9d184d2a7a267f947a79939494364e45037ff93a81fafa8f18f18",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 768,
+        "scrollWidth": 768,
+        "height": 1731
+      }
+    },
+    {
+      "route": "/admin/login",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-admin-login-1440.png",
+      "finalURL": "http://127.0.0.1:3011/admin/login",
+      "redirected": false,
+      "heading": "Admin sign-in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "0915d2d94e444ad4baa168a8ae56ce46984ed808b2bfe31b5a3be8c2d40a531b",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/admin/setup",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-admin-setup-1440.png",
+      "finalURL": "http://127.0.0.1:3011/admin/setup",
+      "redirected": false,
+      "heading": "Set up the admin account",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "cf0fbb3926a59f12c019c9ff3b57ec48874b4e0d21d6ec3e8bb480adbf3bc434",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/admin/forgot-password",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-admin-forgot-password-1440.png",
+      "finalURL": "http://127.0.0.1:3011/admin/login",
+      "redirected": true,
+      "heading": "Admin sign-in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "0915d2d94e444ad4baa168a8ae56ce46984ed808b2bfe31b5a3be8c2d40a531b",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/admin/reset-password",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-admin-reset-password-1440.png",
+      "finalURL": "http://127.0.0.1:3011/admin/login",
+      "redirected": true,
+      "heading": "Admin sign-in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "0915d2d94e444ad4baa168a8ae56ce46984ed808b2bfe31b5a3be8c2d40a531b",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/login/email/reset",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-login-email-reset-1440.png",
+      "finalURL": "http://127.0.0.1:3011/login",
+      "redirected": true,
+      "heading": "Log in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "12086cc3af54fed79e125ab203195384cda5141a778fc7154feb0835d47e4a05",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/login/email/verify",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-login-email-verify-1440.png",
+      "finalURL": "http://127.0.0.1:3011/login",
+      "redirected": true,
+      "heading": "Log in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "12086cc3af54fed79e125ab203195384cda5141a778fc7154feb0835d47e4a05",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/login/email/complete",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-login-email-complete-1440.png",
+      "finalURL": "http://127.0.0.1:3011/login",
+      "redirected": true,
+      "heading": "Log in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "12086cc3af54fed79e125ab203195384cda5141a778fc7154feb0835d47e4a05",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/admin/login",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-admin-login-390.png",
+      "finalURL": "http://127.0.0.1:3011/admin/login",
+      "redirected": false,
+      "heading": "Admin sign-in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "75e8610770a7976add96a8f38a36b3bbd335c7e533e5d7cedd7f30769d872433",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 844
+      }
+    },
+    {
+      "route": "/admin/setup",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-admin-setup-390.png",
+      "finalURL": "http://127.0.0.1:3011/admin/setup",
+      "redirected": false,
+      "heading": "Set up the admin account",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "657e304bf9900fb94f535e5824a893614ec494ea59747485190763e1f5feb006",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 844
+      }
+    },
+    {
+      "route": "/en/solar",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Synthetic local solar estimate",
+      "context": "Synthetic home example: monthly electricity bill INR 3000, roof 400 sq ft. Existing calculator assumptions; not an actual bill, quote, subsidy decision or measured savings. No submission; external network blocked.",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-solar-example-1440.png",
+      "finalURL": "http://127.0.0.1:3011/solar",
+      "redirected": false,
+      "heading": "Rooftop solar for your home or business",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "7477bc7fbbd01cf3377c647878b09588b509312d41edeaf7dd307fdf44238860",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 2259
+      }
+    },
+    {
+      "route": "/en/solar",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Synthetic local solar estimate",
+      "context": "Synthetic home example: monthly electricity bill INR 3000, roof 400 sq ft. Existing calculator assumptions; not an actual bill, quote, subsidy decision or measured savings. No submission; external network blocked. Cropped calculated chart.",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-solar-example-chart-1440.png",
+      "finalURL": "http://127.0.0.1:3011/solar",
+      "redirected": false,
+      "heading": "Rooftop solar for your home or business",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "faeb7785c6cd22a30d9472d228cb65bc9ce491e7488f1bf3756bec31d1929aa4",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 2259
+      }
+    },
+    {
+      "route": "/en/solar",
+      "width": 390,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Synthetic local solar estimate",
+      "context": "Synthetic home example: monthly electricity bill INR 3000, roof 400 sq ft. Existing calculator assumptions; not an actual bill, quote, subsidy decision or measured savings. No submission; external network blocked.",
+      "mode": "light",
+      "appearance": {
+        "colorScheme": "light",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "light-en-solar-example-390.png",
+      "finalURL": "http://127.0.0.1:3011/solar",
+      "redirected": false,
+      "heading": "Rooftop solar for your home or business",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "ac6ddd8b751dd532834a30c1ac0d1f3a4cdea6db8ef1555b8ea3c336b6f91fd3",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 3678
+      }
+    },
+    {
+      "route": "/en",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-1440.png",
+      "finalURL": "http://127.0.0.1:3011/",
+      "redirected": false,
+      "heading": "Your recycling starts here.",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "7d1648ba7ff2b2a185fcd3e28b9417a279ed08bb9838a570892dac2126db4898",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1969
+      }
+    },
+    {
+      "route": "/en/how-it-works",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-how-it-works-1440.png",
+      "finalURL": "http://127.0.0.1:3011/how-it-works",
+      "redirected": false,
+      "heading": "How Luma.Green works",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "6bbf6d265b81264eebbb99d804a03c334f65f952bc1a6cead1a9f35012572d72",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 2031
+      }
+    },
+    {
+      "route": "/en/participants",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-participants-1440.png",
+      "finalURL": "http://127.0.0.1:3011/participants",
+      "redirected": false,
+      "heading": "Who Luma.Green is for",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "bbffb069647e814743aa1779e22ae38cadb1da20e4798ac828fa43cbcd25c04f",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1482
+      }
+    },
+    {
+      "route": "/en/prices",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-prices-1440.png",
+      "finalURL": "http://127.0.0.1:3011/prices",
+      "redirected": false,
+      "heading": "Material prices",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "4916d848d1e9e8f99f9c1e284324d2aebf9e8a7781e0dee7f325ab9c2719d33a",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/standards",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-standards-1440.png",
+      "finalURL": "http://127.0.0.1:3011/standards",
+      "redirected": false,
+      "heading": "The Luma.Green standard",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "b988988036591512413acd0d7dfa6b86223d402f6fee91c7b6d58a7586c53a36",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1624
+      }
+    },
+    {
+      "route": "/en/solar",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-solar-1440.png",
+      "finalURL": "http://127.0.0.1:3011/solar",
+      "redirected": false,
+      "heading": "Rooftop solar for your home or business",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "be48e3103bafc72acd4c5bb613e573e46d070cf89f06d630b20c5ceabb730216",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1557
+      }
+    },
+    {
+      "route": "/en/join",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-join-1440.png",
+      "finalURL": "http://127.0.0.1:3011/join",
+      "redirected": false,
+      "heading": "Choose your work on Luma.Green",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "c504fe44bed467cf6c2540cb8d2d2c4ac30c4102fbeb0ed39c32776f0c546c82",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1240
+      }
+    },
+    {
+      "route": "/en/contact",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-contact-1440.png",
+      "finalURL": "http://127.0.0.1:3011/contact",
+      "redirected": false,
+      "heading": "Talk to us",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "ce29c53aaebf2dabca26fe09d6dc2cd84e8367d1f8a7e3e6473aee9990eef282",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/help",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-help-1440.png",
+      "finalURL": "http://127.0.0.1:3011/help",
+      "redirected": false,
+      "heading": "Find your next step",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "179ea6e9d5b344f45408fdeebefc97d8e2d80d0cd61d1fd51655db5c0f8514e9",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1359
+      }
+    },
+    {
+      "route": "/en/help/contact",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-help-contact-1440.png",
+      "finalURL": "http://127.0.0.1:3011/help/contact",
+      "redirected": false,
+      "heading": "Ask the support team",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "df8eba6f76462b2d2a88df9c27bdd2414e85c3f18b5eccfff5f463b9dc8c53f2",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/help/kabadiwala",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-help-kabadiwala-1440.png",
+      "finalURL": "http://127.0.0.1:3011/help/kabadiwala",
+      "redirected": false,
+      "heading": "Help for kabadiwalas",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "c9266dce410af6f208b757314ba53a8712517c309ea013867759312239d1a5ea",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 2495
+      }
+    },
+    {
+      "route": "/en/privacy",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-privacy-1440.png",
+      "finalURL": "http://127.0.0.1:3011/privacy",
+      "redirected": false,
+      "heading": "Privacy policy",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "0c51372ae54136dbaeefa5f49680b434efb7b6fe4f9cd7c965d42e97d9d1aeb7",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1192
+      }
+    },
+    {
+      "route": "/en/sell",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-sell-1440.png",
+      "finalURL": "http://127.0.0.1:3011/sell",
+      "redirected": false,
+      "heading": "Recycle",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "825117819f8c1c07e5de80feb60820377da7fa3ebb9d16dd77bc98ef3ceb79b7",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/sell/activity",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-sell-activity-1440.png",
+      "finalURL": "http://127.0.0.1:3011/login?next=%2Fsell%2Factivity",
+      "redirected": true,
+      "heading": "Log in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "5357e133fea75e10c766bea63d0b004b80d3dd9d01dbcb3ee436bbd4a4238fa6",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/sell/services",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-sell-services-1440.png",
+      "finalURL": "http://127.0.0.1:3011/sell/services",
+      "redirected": false,
+      "heading": "Services",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "fd8eb3cc590668c1e337c9a91079a9d32afd5ed3a13934997dc9918c68eb726f",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/sell/footprint",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-sell-footprint-1440.png",
+      "finalURL": "http://127.0.0.1:3011/sell/footprint",
+      "redirected": false,
+      "heading": "Check your electricity footprint",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "9520663df9f30ec854c169d6db552834184920cd93cd99ef11f2c6ecf42ee89e",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/sell/settings",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-sell-settings-1440.png",
+      "finalURL": "http://127.0.0.1:3011/sell/settings",
+      "redirected": false,
+      "heading": "Settings",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "524994784a88389797751b713a78bb78364404bb958786f9b7373afc403574e9",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/login",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-login-1440.png",
+      "finalURL": "http://127.0.0.1:3011/login",
+      "redirected": false,
+      "heading": "Log in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "5357e133fea75e10c766bea63d0b004b80d3dd9d01dbcb3ee436bbd4a4238fa6",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/login/verify",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-login-verify-1440.png",
+      "finalURL": "http://127.0.0.1:3011/login/verify",
+      "redirected": false,
+      "heading": "Log in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "e60dd9ce0152b7779fe177afb1e5b1fc74af63ad9f7a0cad3f09e5bc1b2da6c8",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-390.png",
+      "finalURL": "http://127.0.0.1:3011/",
+      "redirected": false,
+      "heading": "Your recycling starts here.",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "8dbaed49356c3c496513ea0648f9a2e9681c94db14cf4a4be9a3133698cc0f36",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 3720
+      }
+    },
+    {
+      "route": "/en/login",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-login-390.png",
+      "finalURL": "http://127.0.0.1:3011/login",
+      "redirected": false,
+      "heading": "Log in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "85a5b7bd20ad74370d7f7b02dd7bca4c6021fb8574909cba6ce69a424b76779f",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 844
+      }
+    },
+    {
+      "route": "/en/sell",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-sell-390.png",
+      "finalURL": "http://127.0.0.1:3011/sell",
+      "redirected": false,
+      "heading": "Recycle",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "e3291636530dd1d07f68c614270e59d617f7fe5f331042f8842d5aea0f693bc4",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1220
+      }
+    },
+    {
+      "route": "/en/sell/services",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-sell-services-390.png",
+      "finalURL": "http://127.0.0.1:3011/sell/services",
+      "redirected": false,
+      "heading": "Services",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "c2b2bdc4fe886942850026e04dd7929c70ac5698101a626340fa0350fb0829ab",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1076
+      }
+    },
+    {
+      "route": "/en/sell/footprint",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-sell-footprint-390.png",
+      "finalURL": "http://127.0.0.1:3011/sell/footprint",
+      "redirected": false,
+      "heading": "Check your electricity footprint",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "079b8a4c83750560258b2f33804eaa1646af6ffa5b9ce5f4313a9173d6f45f03",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1027
+      }
+    },
+    {
+      "route": "/en/sell/settings",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-sell-settings-390.png",
+      "finalURL": "http://127.0.0.1:3011/sell/settings",
+      "redirected": false,
+      "heading": "Settings",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "2c6f63d890da7f0e1d7a201d6baf60176768cc19c7a98af951af5cbea3756366",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1235
+      }
+    },
+    {
+      "route": "/en/join",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-join-390.png",
+      "finalURL": "http://127.0.0.1:3011/join",
+      "redirected": false,
+      "heading": "Choose your work on Luma.Green",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "3872615203fc6635799ce1b3d07c3eb4026d9996cd27b9ddb5415e809d070af0",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1592
+      }
+    },
+    {
+      "route": "/en/participants",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-participants-390.png",
+      "finalURL": "http://127.0.0.1:3011/participants",
+      "redirected": false,
+      "heading": "Who Luma.Green is for",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "64371becaf4133347e6f3dd0db6c3b8ac2920bfc97703ae24e75326535d8088b",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 2429
+      }
+    },
+    {
+      "route": "/en/help",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-help-390.png",
+      "finalURL": "http://127.0.0.1:3011/help",
+      "redirected": false,
+      "heading": "Find your next step",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "bed7ea548ed62b179882cda3b75d5a7ab08a09335a9b7c26501b82787fa8ae08",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 2311
+      }
+    },
+    {
+      "route": "/en/help/contact",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-help-contact-390.png",
+      "finalURL": "http://127.0.0.1:3011/help/contact",
+      "redirected": false,
+      "heading": "Ask the support team",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "5d88858d35ae5157f60c50ff974d7a0d925ddd357013c46f2f2b29549e822e03",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1184
+      }
+    },
+    {
+      "route": "/ar",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", \"Noto Sans Arabic\", \"Noto Sans Arabic Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-ar-390.png",
+      "finalURL": "http://127.0.0.1:3011/ar",
+      "redirected": false,
+      "heading": "تخلّص من المواد القابلة للتدوير. واحصل على مقابل.",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "a659c41bc94f850f2e4d8848399dda204a43f4288d3f728937249553c28589c9",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 3653
+      }
+    },
+    {
+      "route": "/ar/login",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", \"Noto Sans Arabic\", \"Noto Sans Arabic Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-ar-login-390.png",
+      "finalURL": "http://127.0.0.1:3011/ar/login",
+      "redirected": false,
+      "heading": "تسجيل الدخول",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "9bd59b252b746a27f6f44265981ef15e4c8dfabafde45d94ba5f4a83317641ba",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 844
+      }
+    },
+    {
+      "route": "/ar/sell",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", \"Noto Sans Arabic\", \"Noto Sans Arabic Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-ar-sell-390.png",
+      "finalURL": "http://127.0.0.1:3011/ar/sell",
+      "redirected": false,
+      "heading": "إعادة التدوير",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "95c3b9b291c7394783803aa571966da3d37cb0eeea812717c1543d595476b7ca",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1178
+      }
+    },
+    {
+      "route": "/ta",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", \"Noto Sans Tamil\", \"Noto Sans Tamil Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-ta-390.png",
+      "finalURL": "http://127.0.0.1:3011/ta",
+      "redirected": false,
+      "heading": "மறுசுழற்சிப் பொருட்களை அகற்றுங்கள். பணம் பெறுங்கள்.",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "2356a225e81ce4b1a698e8bdc5b47193a709fa60a2338670c013032339ec7c9c",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 4501
+      }
+    },
+    {
+      "route": "/ta/sell",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", \"Noto Sans Tamil\", \"Noto Sans Tamil Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-ta-sell-390.png",
+      "finalURL": "http://127.0.0.1:3011/ta/sell",
+      "redirected": false,
+      "heading": "மறுசுழற்சி செய்க",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "db6fc90dea1149ca61accc8980737d1ee49bd0563bfce29113ab457e7d31f138",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1413
+      }
+    },
+    {
+      "route": "/ta/participants",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", \"Noto Sans Tamil\", \"Noto Sans Tamil Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-ta-participants-390.png",
+      "finalURL": "http://127.0.0.1:3011/ta/participants",
+      "redirected": false,
+      "heading": "Luma.Green யாருக்கானது",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "fcfda88b10af6b3312c299f7cc11b44214476615bd44410571148bb2215f0ebc",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 3440
+      }
+    },
+    {
+      "route": "/ta/help",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", \"Noto Sans Tamil\", \"Noto Sans Tamil Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-ta-help-390.png",
+      "finalURL": "http://127.0.0.1:3011/ta/help",
+      "redirected": false,
+      "heading": "உங்களுக்கு எப்படி உதவலாம்?",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "fb4793de305c8f94e85eb32492543cf9fd15bbfadde01b57248d718246ab28cf",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 2778
+      }
+    },
+    {
+      "route": "/ar/help",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", \"Noto Sans Arabic\", \"Noto Sans Arabic Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-ar-help-390.png",
+      "finalURL": "http://127.0.0.1:3011/ar/help",
+      "redirected": false,
+      "heading": "كيف يمكننا مساعدتك؟",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "381cd0a3fccd66b87cca5e6fdbe28cf6167787cd5cf0a265004be60a9346986e",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 2186
+      }
+    },
+    {
+      "route": "/ar/join",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", \"Noto Sans Arabic\", \"Noto Sans Arabic Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-ar-join-390.png",
+      "finalURL": "http://127.0.0.1:3011/ar/join",
+      "redirected": false,
+      "heading": "انضم إلى Luma.Green",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "5450e1aea346b9632acce391aad0dcc8947f7cbd90b382e1221439f3a90570b4",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 1510
+      }
+    },
+    {
+      "route": "/en",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-768.png",
+      "finalURL": "http://127.0.0.1:3011/",
+      "redirected": false,
+      "heading": "Your recycling starts here.",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "876f12d243cc2231838da05ee187788ff0af69793a195a51b32a23ccb528fe87",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 768,
+        "scrollWidth": 768,
+        "height": 2345
+      }
+    },
+    {
+      "route": "/en/sell",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-sell-768.png",
+      "finalURL": "http://127.0.0.1:3011/sell",
+      "redirected": false,
+      "heading": "Recycle",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "d7dd5a3046a7d7eceb15703e3e53b6f2fd00f9854516751e8331e005242cc462",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 768,
+        "scrollWidth": 768,
+        "height": 1028
+      }
+    },
+    {
+      "route": "/ar/sell",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", \"Noto Sans Arabic\", \"Noto Sans Arabic Fallback\", system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-ar-sell-768.png",
+      "finalURL": "http://127.0.0.1:3011/ar/sell",
+      "redirected": false,
+      "heading": "إعادة التدوير",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "7d966d2078069d4f2c143346942b98c6d7e5ca91089e5fa94fbc6ec9be406a4b",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 768,
+        "scrollWidth": 768,
+        "height": 1079
+      }
+    },
+    {
+      "route": "/en/help",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-help-768.png",
+      "finalURL": "http://127.0.0.1:3011/help",
+      "redirected": false,
+      "heading": "Find your next step",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "0e435cbc6e915959fa225bc9d3371268857393e8438a56930287e489daf0b316",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 768,
+        "scrollWidth": 768,
+        "height": 1842
+      }
+    },
+    {
+      "route": "/en/join",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-join-768.png",
+      "finalURL": "http://127.0.0.1:3011/join",
+      "redirected": false,
+      "heading": "Choose your work on Luma.Green",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "a7d03618c321324f76f3674ed0694262d0eb2f33e1a8ad53bf68deb22a1df7e7",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 768,
+        "scrollWidth": 768,
+        "height": 1343
+      }
+    },
+    {
+      "route": "/en/participants",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-participants-768.png",
+      "finalURL": "http://127.0.0.1:3011/participants",
+      "redirected": false,
+      "heading": "Who Luma.Green is for",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "887cc17b7f3d4bf713aaa520108726ba89e5fbaed5518b9179ae655f04eb64ca",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 768,
+        "scrollWidth": 768,
+        "height": 1731
+      }
+    },
+    {
+      "route": "/admin/login",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-admin-login-1440.png",
+      "finalURL": "http://127.0.0.1:3011/admin/login",
+      "redirected": false,
+      "heading": "Admin sign-in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "e5af19c3e2af1d979b10f978c76026d49bde0ee19151acd6f39aba153d54daf6",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/admin/setup",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-admin-setup-1440.png",
+      "finalURL": "http://127.0.0.1:3011/admin/setup",
+      "redirected": false,
+      "heading": "Set up the admin account",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "11365a906b33caa002b117bf5b7d566d9a8f4047136cc51d72f912c635e7088a",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/admin/forgot-password",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-admin-forgot-password-1440.png",
+      "finalURL": "http://127.0.0.1:3011/admin/login",
+      "redirected": true,
+      "heading": "Admin sign-in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "e5af19c3e2af1d979b10f978c76026d49bde0ee19151acd6f39aba153d54daf6",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/admin/reset-password",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-admin-reset-password-1440.png",
+      "finalURL": "http://127.0.0.1:3011/admin/login",
+      "redirected": true,
+      "heading": "Admin sign-in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "e5af19c3e2af1d979b10f978c76026d49bde0ee19151acd6f39aba153d54daf6",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/login/email/reset",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-login-email-reset-1440.png",
+      "finalURL": "http://127.0.0.1:3011/login",
+      "redirected": true,
+      "heading": "Log in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "5357e133fea75e10c766bea63d0b004b80d3dd9d01dbcb3ee436bbd4a4238fa6",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/login/email/verify",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-login-email-verify-1440.png",
+      "finalURL": "http://127.0.0.1:3011/login",
+      "redirected": true,
+      "heading": "Log in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "5357e133fea75e10c766bea63d0b004b80d3dd9d01dbcb3ee436bbd4a4238fa6",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/en/login/email/complete",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-login-email-complete-1440.png",
+      "finalURL": "http://127.0.0.1:3011/login",
+      "redirected": true,
+      "heading": "Log in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "5357e133fea75e10c766bea63d0b004b80d3dd9d01dbcb3ee436bbd4a4238fa6",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 1000
+      }
+    },
+    {
+      "route": "/admin/login",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-admin-login-390.png",
+      "finalURL": "http://127.0.0.1:3011/admin/login",
+      "redirected": false,
+      "heading": "Admin sign-in",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "4971fa2ab3bac0cc10c605228d82f7c85d81d571fdedb37ffb4b61552c30e741",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 844
+      }
+    },
+    {
+      "route": "/admin/setup",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "evidenceLabel": "Actual disconnected public UI",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-admin-setup-390.png",
+      "finalURL": "http://127.0.0.1:3011/admin/setup",
+      "redirected": false,
+      "heading": "Set up the admin account",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "c24518027a9ba1b2b0f23a827bb121f3191bf6455a02a06af0d0504c450397bc",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 844
+      }
+    },
+    {
+      "route": "/en/solar",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Synthetic local solar estimate",
+      "context": "Synthetic home example: monthly electricity bill INR 3000, roof 400 sq ft. Existing calculator assumptions; not an actual bill, quote, subsidy decision or measured savings. No submission; external network blocked.",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-solar-example-1440.png",
+      "finalURL": "http://127.0.0.1:3011/solar",
+      "redirected": false,
+      "heading": "Rooftop solar for your home or business",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "305b432403a8b90a789a8a09fb947b1f8a26c7c1e008c44a1e0dd7fcbd590e94",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 2259
+      }
+    },
+    {
+      "route": "/en/solar",
+      "width": 1440,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Synthetic local solar estimate",
+      "context": "Synthetic home example: monthly electricity bill INR 3000, roof 400 sq ft. Existing calculator assumptions; not an actual bill, quote, subsidy decision or measured savings. No submission; external network blocked. Cropped calculated chart.",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-solar-example-chart-1440.png",
+      "finalURL": "http://127.0.0.1:3011/solar",
+      "redirected": false,
+      "heading": "Rooftop solar for your home or business",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "d0bdb4cffa83fae8434c7b6aa9cbba3dd0230c84ecd039bbca2aa13172f14cfc",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 1440,
+        "scrollWidth": 1440,
+        "height": 2259
+      }
+    },
+    {
+      "route": "/en/solar",
+      "width": 390,
+      "height": 1000,
+      "status": 200,
+      "evidenceLabel": "Synthetic local solar estimate",
+      "context": "Synthetic home example: monthly electricity bill INR 3000, roof 400 sq ft. Existing calculator assumptions; not an actual bill, quote, subsidy decision or measured savings. No submission; external network blocked.",
+      "mode": "dark",
+      "appearance": {
+        "colorScheme": "dark",
+        "fontFamily": "Urbanist, \"Noto Sans\", sans-serif, system-ui, \"Segoe UI\", sans-serif",
+        "displayFont": "\"Urbanist\""
+      },
+      "isFontPassed": true,
+      "file": "dark-en-solar-example-390.png",
+      "finalURL": "http://127.0.0.1:3011/solar",
+      "redirected": false,
+      "heading": "Rooftop solar for your home or business",
+      "brokenImages": [],
+      "passed": true,
+      "sha256": "fec9efbca54c13cd7c7667646c84d498f4dda832a3f8c3ea4c8284ec10cc1780",
+      "visualInspection": "pending",
+      "bounds": {
+        "innerWidth": 390,
+        "scrollWidth": 390,
+        "height": 3678
+      }
+    }
+  ],
+  "finishedAt": "2026-11-12T10:27:48.998Z",
+  "finalTrackedDiffSha256": "1857186c2499c1ae31896ae72e6cc5d1f957bef7cd38c0da9625c5aa3accaf65",
+  "sourceUnchanged": true,
+  "passed": true
+}

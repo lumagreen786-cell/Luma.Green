@@ -172,7 +172,7 @@ export function PasswordRecovery({ reset = false }: { reset?: boolean }) {
       <div className="flex flex-col items-start gap-1">
         <Link
           href="/admin/login"
-          className="inline-flex min-h-11 items-center text-sm font-medium text-primary underline underline-offset-4"
+          className="inline-flex min-h-11 items-center text-sm font-medium text-foreground underline underline-offset-4"
         >
           Back to sign-in
         </Link>

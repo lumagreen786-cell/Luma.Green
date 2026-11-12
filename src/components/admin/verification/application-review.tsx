@@ -71,7 +71,7 @@ export function ApplicationReview({
   };
 
   return (
-    <div className="mx-auto flex w-full max-w-6xl flex-col gap-6">
+    <div className="mx-auto flex w-full max-w-7xl flex-col gap-6">
       <BackLink onBack={onBack} />
       <ReviewHeader application={application} now={now} />
       <ResubmissionNote application={application} />
@@ -79,13 +79,15 @@ export function ApplicationReview({
         className={
           onBack
             ? "grid gap-6"
-            : "grid gap-6 xl:grid-cols-[minmax(0,1fr)_22rem]"
+            : "grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_20rem]"
         }
       >
         <Tabs
           defaultValue="application"
           className={
-            onBack ? "min-w-0" : "min-w-0 rounded-xl bg-card p-5 sm:p-6"
+            onBack
+              ? "min-w-0"
+              : "record-sheet min-w-0 rounded-panel p-5 shadow-panel sm:p-6"
           }
         >
           <TabsList className="h-auto flex-wrap justify-start gap-2">
@@ -118,7 +120,7 @@ export function ApplicationReview({
           className={
             onBack
               ? "flex min-w-0 flex-col gap-6 border-t pt-6"
-              : "flex min-w-0 flex-col gap-6 rounded-xl bg-card p-5 sm:p-6 xl:sticky xl:top-6 xl:self-start"
+              : "record-detail flex min-w-0 flex-col gap-6 rounded-panel p-5 shadow-panel sm:p-6 lg:sticky lg:top-24 lg:self-start"
           }
         >
           {application.status === "submitted" ? (
@@ -181,8 +183,8 @@ function ReviewHeader({
     ? localeMeta[application.locale].english
     : application.locale;
   return (
-    <div className="flex flex-col gap-4 border-b pb-6">
-      <div className="flex flex-wrap items-center gap-2">
+    <div className="grid min-w-0 gap-4 rounded-panel bg-card p-5 text-card-foreground sm:p-6 lg:grid-cols-[minmax(0,1fr)_auto]">
+      <div className="flex flex-wrap items-center gap-2 lg:col-start-2 lg:row-start-1 lg:justify-end">
         <StatusPill tone="neutral">{KIND_LABELS[application.kind]}</StatusPill>
         <StatusPill tone={STATUS_TONES[application.status]}>
           {STATUS_LABELS[application.status]}
@@ -191,10 +193,10 @@ function ReviewHeader({
           <StatusPill tone="info">Version {application.version}</StatusPill>
         ) : null}
       </div>
-      <h1 className="font-display text-2xl leading-tight font-semibold tracking-tight break-words">
+      <h1 className="font-display text-2xl leading-tight font-semibold tracking-tight break-words lg:col-start-1 lg:row-start-1">
         {application.name}
       </h1>
-      <dl className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
+      <dl className="flex flex-wrap items-center gap-x-6 gap-y-3 border-t pt-4 text-sm lg:col-span-2">
         {application.submittedAt === undefined ? null : (
           <div className="flex items-center gap-1.5">
             <dt className="text-muted-foreground">Sent</dt>
@@ -215,7 +217,7 @@ function ReviewHeader({
             {application.phone ? (
               <a
                 href={`tel:${application.phone}`}
-                className="inline-flex min-h-11 items-center rounded-lg font-mono text-primary underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
+                className="inline-flex min-h-11 items-center rounded-lg font-mono text-foreground underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
               >
                 {formatPhone(application.phone)}
               </a>
@@ -338,9 +340,9 @@ function ReviewSkeleton() {
         <Skeleton className="h-8 w-72" />
         <Skeleton className="h-4 w-96 max-w-full" />
       </div>
-      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_22rem]">
-        <Skeleton className="h-96 w-full rounded-xl" />
-        <Skeleton className="h-72 w-full rounded-xl" />
+      <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_20rem]">
+        <Skeleton className="h-96 w-full rounded-panel" />
+        <Skeleton className="h-72 w-full rounded-panel" />
       </div>
     </div>
   );

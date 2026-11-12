@@ -1,4 +1,4 @@
-import { render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import { NextIntlClientProvider } from "next-intl";
 import type { ReactNode } from "react";
 import { describe, expect, it, vi } from "vitest";
@@ -55,7 +55,7 @@ describe("home page", () => {
       screen.getByRole("link", { name: messages.home.hero.sell }),
     ).toHaveAttribute("href", "/sell");
     expect(
-      screen.getByRole("link", { name: "For businesses" }),
+      screen.getByRole("link", { name: messages.home.hero.join }),
     ).toHaveAttribute("href", "/join");
     expect(
       screen.getByRole("link", { name: "Prices: View material prices" }),
@@ -63,8 +63,16 @@ describe("home page", () => {
     expect(
       screen
         .getByRole("region", { name: messages.home.hero.title })
-        .querySelector("img"),
-    ).toHaveAttribute("alt", "");
+        .querySelector("img[data-recycling-illustration]"),
+    ).toHaveAttribute("aria-hidden", "true");
+    expect(
+      screen
+        .getByRole("region", { name: messages.home.hero.title })
+        .querySelector("img[data-recycling-illustration]"),
+    ).toHaveAttribute(
+      "src",
+      expect.stringContaining("recycle-household-illustration.webp"),
+    );
     // Home directs people to explicit locality selection without assuming a city.
     expect(screen.getByText(messages.prices.lead)).toBeInTheDocument();
   });
@@ -92,39 +100,42 @@ describe("home page", () => {
     ).toBeInTheDocument();
   });
 
-  it("gives every role a way in: households sell, the rest join", async () => {
+  it("opens each role detail and its correct entry action", async () => {
     await renderSection(RoleBenefits());
-
-    const links = screen.getAllByRole("link");
-    expect(links.map((link) => link.getAttribute("href"))).toEqual([
+    const tabs = screen.getAllByRole("tab");
+    const destinations = [
       "/sell",
       "/join/kabadiwala",
       "/join/yard",
       "/join/recycler",
       "/join/manufacturer",
       "/join/saathi",
-    ]);
+    ];
+    expect(tabs).toHaveLength(destinations.length);
+    for (const [index, tab] of tabs.entries()) {
+      fireEvent.mouseDown(tab, { button: 0, ctrlKey: false });
+      expect(tab).toHaveAttribute("aria-selected", "true");
+      expect(
+        within(screen.getByRole("tabpanel")).getByRole("link"),
+      ).toHaveAttribute("href", destinations[index]);
+    }
+  });
+
+  it("offers five business choices without repeating household booking", async () => {
+    await renderSection(RoleBenefits({ businessOnly: true }));
+    expect(screen.getAllByRole("tab")).toHaveLength(5);
+    expect(screen.getByRole("link")).toHaveAttribute(
+      "href",
+      "/join/kabadiwala",
+    );
     expect(
-      screen.getByRole("link", { name: "Join as a Saathi" }),
-    ).toBeVisible();
-  });
-
-  it("opens a role from its image, title or action through one link", async () => {
-    await renderSection(RoleBenefits({ businessOnly: true }));
-    for (const item of screen.getAllByRole("listitem")) {
-      const link = within(item).getByRole("link");
-      expect(within(item).getByRole("heading").closest("a")).toBe(link);
-      expect(item.querySelector("img")?.closest("a")).toBe(link);
-      expect(within(item).getAllByRole("link")).toHaveLength(1);
-    }
-  });
-
-  it("offers five business paths without repeating household booking", async () => {
-    await renderSection(RoleBenefits({ businessOnly: true }));
-    expect(screen.getAllByRole("link")).toHaveLength(5);
-    for (const link of screen.getAllByRole("link")) {
-      expect(link).toHaveAttribute("href", expect.stringMatching(/^\/join\//));
-    }
+      screen.getByRole("link", {
+        name: `${messages.join.start}: ${messages.home.roles.kabadiwala.cta}`,
+      }),
+    ).toHaveTextContent(messages.join.start);
+    expect(
+      screen.queryByRole("tab", { name: "Households" }),
+    ).not.toBeInTheDocument();
   });
 
   it("keeps trade boundaries visible beside the manufacturer path", async () => {

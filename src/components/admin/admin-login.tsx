@@ -58,7 +58,7 @@ function LoginSteps() {
           First time here?{" "}
           <Link
             href="/admin/setup"
-            className="font-medium text-primary underline-offset-4 hover:underline"
+            className="font-medium text-foreground underline-offset-4 hover:underline"
           >
             Set up the admin account
           </Link>

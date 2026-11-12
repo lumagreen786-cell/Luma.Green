@@ -5,8 +5,10 @@ import type { ReactNode } from "react";
 import { AccountMenu } from "@/components/account/account-menu";
 import { Logo } from "@/components/brand/logo";
 import { SignOutButton } from "@/components/join/sign-out-button";
+import { FocusedPageCanvas } from "@/components/site/focused-page-canvas";
 import { LanguageSwitcher } from "@/components/site/language-switcher";
 import { SkipLink } from "@/components/site/skip-link";
+import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { Link } from "@/i18n/navigation";
 
 /** Fallback for new applicant pages; public /join uses the site layout. */
@@ -29,7 +31,7 @@ export default async function JoinLayout({
   const t = await getTranslations("nav");
 
   return (
-    <div className="flex min-h-dvh flex-col bg-background">
+    <FocusedPageCanvas image="/images/ship-x/onboarding-background.webp">
       <SkipLink />
       <header className="sticky top-0 z-30 flex min-h-16 items-center justify-between gap-2 border-b border-border/60 bg-card/95 px-4 py-2 backdrop-blur sm:px-8">
         <Link
@@ -39,10 +41,12 @@ export default async function JoinLayout({
         >
           <Logo />
         </Link>
-        <div className="xl:hidden">
+        <div className="flex items-center gap-2 xl:hidden">
+          <ThemeToggle />
           <AccountMenu />
         </div>
         <div className="hidden items-center gap-1 xl:flex">
+          <ThemeToggle />
           <LanguageSwitcher />
           <SignOutButton />
         </div>
@@ -50,10 +54,10 @@ export default async function JoinLayout({
       <main
         id="main"
         tabIndex={-1}
-        className="mx-auto my-6 w-[calc(100%-2rem)] max-w-2xl min-w-0 flex-1 rounded-xl border border-border/60 bg-card p-5 sm:my-8 sm:p-8"
+        className="mx-auto my-6 w-[calc(100%-2rem)] max-w-4xl min-w-0 rounded-panel bg-card p-5 shadow-panel sm:p-6"
       >
         {children}
       </main>
-    </div>
+    </FocusedPageCanvas>
   );
 }

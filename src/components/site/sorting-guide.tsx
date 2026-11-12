@@ -14,21 +14,18 @@ const preparationSteps = ["paper", "bottles", "metal", "ewaste"] as const;
 export function SortingGuide() {
   const t = useTranslations("help");
   return (
-    <section
-      aria-labelledby="sorting-guide-heading"
-      className="border-t py-8 sm:py-10 lg:py-16"
-    >
-      <Container className="grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center lg:gap-12">
+    <section aria-labelledby="sorting-guide-heading" className="pb-8">
+      <Container className="grid items-start gap-4 lg:grid-cols-[14rem_minmax(0,1fr)]">
         <RoleStoryImage
           scene="electronics"
           sizes="(min-width: 1280px) 512px, (min-width: 1024px) 45vw, (min-width: 640px) calc(100vw - 64px), calc(100vw - 40px)"
-          frameClassName="aspect-[3/2] lg:aspect-[4/5]"
+          frameClassName="aspect-[3/2] rounded-xl"
         />
-        <div className="min-w-0 space-y-5">
+        <div className="min-w-0 space-y-4 rounded-panel bg-card p-5 shadow-panel sm:p-6">
           <div className="space-y-2">
             <h2
               id="sorting-guide-heading"
-              className="font-display text-3xl font-medium tracking-tight text-balance sm:text-4xl"
+              className="font-display text-lg font-semibold tracking-tight text-balance"
             >
               {t("guides.getReady.title")}
             </h2>
@@ -36,9 +33,9 @@ export function SortingGuide() {
               {t("guides.getReady.summary")}
             </p>
           </div>
-          <dl className="divide-y border-y">
+          <dl className="grid gap-x-5 sm:grid-cols-2">
             {preparationSteps.map((step) => (
-              <div key={step} className="space-y-1 py-4">
+              <div key={step} className="space-y-1 border-t py-3">
                 <dt className="font-semibold">
                   {t(`guides.getReady.steps.${step}.title`)}
                 </dt>
@@ -48,7 +45,7 @@ export function SortingGuide() {
               </div>
             ))}
           </dl>
-          <Button asChild variant="outline" size="lg">
+          <Button asChild variant="outline" size="lg" className="px-2 sm:px-6">
             <Link
               href="/help/household/get-ready"
               aria-label={actionName(

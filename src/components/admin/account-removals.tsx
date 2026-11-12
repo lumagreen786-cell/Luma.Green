@@ -25,7 +25,7 @@ const labels = {
 export function AccountRemovals() {
   const queue = useQuery(api.accountRemoval.reviewQueue);
   return (
-    <section className="max-w-3xl space-y-6">
+    <section className="w-full space-y-6">
       <header className="space-y-2">
         <h1 className="font-display text-3xl font-semibold">
           Account access and evidence review
@@ -45,7 +45,7 @@ function RemovalQueue({ queue }: { queue: Removal[] | undefined }) {
   if (queue === undefined) return <p role="status">Loading requests…</p>;
   if (queue.length === 0) return <p>No requests waiting for review.</p>;
   return (
-    <div className="space-y-4">
+    <div className="grid min-w-0 items-start gap-4 xl:grid-cols-2">
       {queue.map((request) => (
         <RemovalReview key={request.id} request={request} />
       ))}
@@ -97,7 +97,7 @@ function RemovalReview({ request }: { request: Removal }) {
     }
   }
   return (
-    <article className="space-y-4 rounded-xl bg-card p-5 sm:p-6">
+    <article className="space-y-4 rounded-panel bg-card p-5 text-card-foreground sm:p-6">
       <header className="space-y-1">
         <h2 className="font-semibold">Request {request.id.slice(0, 12)}</h2>
         <p className="text-sm">{labels[request.state]}</p>

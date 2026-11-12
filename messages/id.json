@@ -1183,7 +1183,7 @@
     "replyTime": "Kami membalas dalam satu hari kerja.",
     "search": {
       "label": "Cari bantuan",
-      "placeholder": "Menunggu gateway",
+      "placeholder": "Cari",
       "clear": "Hapus pencarian",
       "summary": "{count, plural, =0 {Tidak ada jawaban} one {# jawaban} other {# jawaban}} untuk “{query}”",
       "topicSummary": "{count, plural, =0 {Tidak ada jawaban} one {# jawaban} other {# jawaban}} tentang {topic}",
@@ -3369,7 +3369,7 @@
     "homeTitle": "Mendaur ulang dari rumah?",
     "homeLink": "Lihat cara kerjanya",
     "privacy": "Kami hanya menggunakan nomor Anda untuk masuk dan mengirim kabar tentang pekerjaan Anda di Luma.Green.",
-    "unavailableTitle": "Masuk melalui ponsel segera tersedia",
+    "unavailableTitle": "Masuk dengan nomor ponsel",
     "unavailableBody": "Login melalui SMS tidak tersedia. Coba lagi nanti.",
     "verifyTitle": "Masukkan kode 6 digit",
     "sentTo": "Dikirim melalui SMS ke {phone}",

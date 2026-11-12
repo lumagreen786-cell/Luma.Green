@@ -294,7 +294,7 @@ function BuyForm({
         <p className="flex gap-2 text-sm text-muted-foreground">
           <InfoIcon
             aria-hidden
-            className="mt-0.5 size-4 shrink-0 text-primary"
+            className="mt-0.5 size-4 shrink-0 text-foreground"
           />
           {paymentNote}
         </p>

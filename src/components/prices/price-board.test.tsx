@@ -167,7 +167,7 @@ describe("PriceBoard", () => {
     renderBoard();
 
     expect(
-      screen.getByText("Prices aren't available right now"),
+      screen.getByText(messages.prices.unavailable.title),
     ).toBeInTheDocument();
     expect(
       screen.getByRole("status", { name: messages.prices.unavailable.title }),
@@ -205,7 +205,7 @@ describe("PriceBoard", () => {
     const user = userEvent.setup();
     renderBoard();
 
-    expect(screen.getByText("Prices couldn't load")).toBeInTheDocument();
+    expect(screen.getByText(messages.prices.error.title)).toBeInTheDocument();
     vi.mocked(useQuery).mockReturnValue(sampleBoard);
     await user.click(screen.getByRole("button", { name: "Try again" }));
     expect(screen.getByRole("region", { name: "Paper" })).toBeInTheDocument();

@@ -22,7 +22,7 @@ test("/join lists every role with a way in", async ({ page }) => {
 
   await expect(page).toHaveTitle("Join Luma.Green · Luma.Green");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "Join Luma.Green",
+    en.join.title,
   );
   const main = page.getByRole("main");
   for (const { title, href } of roles) {

@@ -61,29 +61,38 @@ export function SaathiEarnings({ impact }: { impact: SaathiImpact }) {
         />
       </div>
 
-      {impact.byKind.length > 1 ? (
-        <Section title={t("byKind")}>
-          <BarList
-            label={t("byKind")}
-            rows={impact.byKind.map((row) => ({
-              key: row.kind,
-              label: work(row.kind),
-              icon: WORK_ICONS[row.kind],
-              value: row.paise,
-              display: format.money(row.paise),
-              detail: t("jobs", { count: row.jobs }),
-            }))}
-          />
-        </Section>
-      ) : null}
+      <div className="grid min-w-0 items-start gap-4 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
+        <div className="min-w-0">
+          <Section title={t("history")}>
+            <ul className="flex min-w-0 flex-col">
+              {impact.recent.map((job) => (
+                <DoneJobRow key={job.id} job={job} />
+              ))}
+            </ul>
+          </Section>
+        </div>
+        <div className="min-w-0 space-y-4">
+          {impact.byKind.length > 1 ? (
+            <Section title={t("byKind")}>
+              <BarList
+                label={t("byKind")}
+                rows={impact.byKind.map((row) => ({
+                  key: row.kind,
+                  label: work(row.kind),
+                  icon: WORK_ICONS[row.kind],
+                  value: row.paise,
+                  display: format.money(row.paise),
+                  detail: t("jobs", { count: row.jobs }),
+                }))}
+              />
+            </Section>
+          ) : null}
 
-      <Section title={t("history")}>
-        <ul className="flex flex-col gap-2">
-          {impact.recent.map((job) => (
-            <DoneJobRow key={job.id} job={job} />
-          ))}
-        </ul>
-      </Section>
+          <Button asChild className="w-full">
+            <Link href="/app">{t("findJob")}</Link>
+          </Button>
+        </div>
+      </div>
 
       <DemoNote>{t("demoNote")}</DemoNote>
     </>

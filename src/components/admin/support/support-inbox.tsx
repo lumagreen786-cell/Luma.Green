@@ -54,18 +54,38 @@ export function SupportInbox() {
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 lg:gap-8">
       <AppPageHeader title="Support" lead="Call back, then mark answered." />
       <Tabs
+        className="record-sheet gap-5 rounded-panel p-4 shadow-panel sm:p-6"
         value={filter}
         onValueChange={(value) => {
           if (isFilter(value)) setFilter(value);
         }}
       >
-        <TabsList>
-          <TabsTrigger value="open" className="tabular-nums">
-            {openCount === undefined ? "Open" : `Open (${String(openCount)})`}
-          </TabsTrigger>
-          <TabsTrigger value="answered">Answered</TabsTrigger>
-          <TabsTrigger value="all">All</TabsTrigger>
-        </TabsList>
+        <div className="-mt-4 flex justify-center sm:-mt-6">
+          <TabsList className="max-w-full rounded-t-none rounded-b-[28px] bg-[var(--shell)] pt-0">
+            <TabsTrigger
+              value="open"
+              className="tabular-nums"
+              count={openCount}
+              aria-label={
+                openCount === undefined ? "Open" : `Open (${String(openCount)})`
+              }
+            >
+              Open
+            </TabsTrigger>
+            <TabsTrigger
+              value="answered"
+              aria-label="Answered"
+              count={
+                requests?.filter((item) => item.status === "answered").length
+              }
+            >
+              Answered
+            </TabsTrigger>
+            <TabsTrigger value="all" aria-label="All" count={requests?.length}>
+              All
+            </TabsTrigger>
+          </TabsList>
+        </div>
         {FILTERS.map((value) => (
           <TabsContent key={value} value={value}>
             <RequestList
@@ -99,9 +119,12 @@ function RequestList({
     );
   }
   return (
-    <ul className="flex flex-col divide-y rounded-xl bg-card px-5 sm:px-6">
+    <ul className="grid min-w-0 items-start gap-4 xl:grid-cols-2">
       {requests.map((request) => (
-        <li key={request.id}>
+        <li
+          key={request.id}
+          className="min-w-0 rounded-panel bg-card px-5 text-card-foreground sm:px-6"
+        >
           <RequestRow request={request} />
         </li>
       ))}

@@ -99,11 +99,11 @@ function IncomingLots() {
           {incoming.rows.length === 0 ? (
             <p className="text-muted-foreground">{t("empty")}</p>
           ) : (
-            <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
+            <ul className="grid min-w-0 items-start gap-4 xl:grid-cols-2">
               {incoming.rows.map((lot) => (
                 <li
                   key={lot.id}
-                  className="flex flex-wrap items-center justify-between gap-4 py-4"
+                  className="grid min-w-0 items-start gap-4 rounded-panel bg-card p-5 text-card-foreground sm:grid-cols-[minmax(0,1fr)_auto]"
                 >
                   <div className="min-w-0 flex-1">
                     <Link
@@ -116,7 +116,9 @@ function IncomingLots() {
                       {t("from", { name: lot.fromName })}
                     </p>
                   </div>
-                  <Mass grams={lot.grams} />
+                  <div className="space-y-1 sm:text-end">
+                    <Mass grams={lot.grams} />
+                  </div>
                 </li>
               ))}
             </ul>
@@ -143,11 +145,11 @@ function HeldLots() {
           {held.rows.length === 0 ? (
             <p className="text-muted-foreground">{t("empty")}</p>
           ) : (
-            <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
+            <ul className="grid min-w-0 items-start gap-4 xl:grid-cols-2">
               {held.rows.map((lot) => (
                 <li
                   key={lot.id}
-                  className="flex flex-wrap items-center justify-between gap-4 py-4"
+                  className="grid min-w-0 items-start gap-4 rounded-panel bg-card p-5 text-card-foreground sm:grid-cols-[minmax(0,1fr)_auto]"
                 >
                   <div className="min-w-0 flex-1">
                     <Link
@@ -162,8 +164,13 @@ function HeldLots() {
                       {t(`handling.${lot.handlingClass}`)}
                     </p>
                   </div>
-                  <div className="space-y-1 text-end">
-                    <Mass grams={lot.availableGrams} />
+                  <div className="space-y-2 rounded-lg bg-muted/50 p-3 sm:text-end">
+                    <div>
+                      <p className="text-xs text-muted-foreground">
+                        {t("remaining")}
+                      </p>
+                      <Mass grams={lot.availableGrams} />
+                    </div>
                     <p className="text-sm">
                       <span className="text-muted-foreground">
                         {costs("remaining")}:{" "}
@@ -197,9 +204,12 @@ function SentLots() {
           {sent.rows.length === 0 ? (
             <p className="text-muted-foreground">{t("empty")}</p>
           ) : (
-            <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
+            <ul className="grid min-w-0 items-start gap-4 xl:grid-cols-2">
               {sent.rows.map((event) => (
-                <li key={event.id} className="flex flex-col gap-2 py-4">
+                <li
+                  key={event.id}
+                  className="grid min-w-0 gap-3 rounded-panel bg-card p-5 text-card-foreground"
+                >
                   <div className="flex flex-wrap justify-between gap-3">
                     <span className="font-medium break-words">
                       {event.materialCode} · {event.state}
@@ -295,7 +305,7 @@ function LotDetail({ lotId }: { lotId: Id<"materialLots"> }) {
       {requiresControlledRoute(lot) ? (
         <p className="border-s-2 ps-4 text-sm">{t("controlledBlocked")}</p>
       ) : null}
-      <dl className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+      <dl className="grid grid-cols-2 gap-4 rounded-panel bg-card p-5 text-card-foreground sm:grid-cols-3 xl:grid-cols-6">
         <div>
           <dt className="text-sm text-muted-foreground">{t("streamClass")}</dt>
           <dd>{t(`streams.${lot.streamClass}`)}</dd>
@@ -348,45 +358,47 @@ function LotDetail({ lotId }: { lotId: Id<"materialLots"> }) {
           {t("sourceReference")}: {lot.sourceReference}
         </p>
       ) : null}
-      <section
-        className="flex flex-col gap-3 border-t pt-4"
-        aria-labelledby="custody-history"
-      >
-        <h2 id="custody-history" className="text-lg font-semibold">
-          {t("custody")}
-        </h2>
-        {history.custody.length === 0 ? (
-          <p>{t("empty")}</p>
-        ) : (
-          <ol className="divide-y">
-            {history.custody.map((event) => (
-              <li key={event.id} className="flex flex-col gap-2 py-4">
-                <div className="flex flex-wrap justify-between gap-3">
-                  <span className="font-medium">{t(event.kind)}</span>
-                  <Mass grams={event.grams} />
-                </div>
-                <p className="break-words">
-                  {t("handoff", { from: event.fromName, to: event.toName })}
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  {format.dateTime(event.createdAt, {
-                    dateStyle: "medium",
-                    timeStyle: "short",
-                  })}
-                </p>
-              </li>
-            ))}
-          </ol>
-        )}
-        {history.hasMoreCustody ? <p>{t("limit")}</p> : null}
-      </section>
-      {isHolder ? (
-        <>
-          <Transformations history={history} orgId={business.id} />
-          <Dispositions history={history} />
-          <Inspections lotId={lot.id} city={business.city} />
-        </>
-      ) : null}
+      <div className="grid min-w-0 items-start gap-6 xl:grid-cols-[minmax(18rem,1fr)_minmax(0,2fr)]">
+        <section
+          className="flex min-w-0 flex-col gap-3 rounded-panel bg-card p-5 text-card-foreground"
+          aria-labelledby="custody-history"
+        >
+          <h2 id="custody-history" className="text-lg font-semibold">
+            {t("custody")}
+          </h2>
+          {history.custody.length === 0 ? (
+            <p>{t("empty")}</p>
+          ) : (
+            <ol className="divide-y">
+              {history.custody.map((event) => (
+                <li key={event.id} className="flex flex-col gap-2 py-4">
+                  <div className="flex flex-wrap justify-between gap-3">
+                    <span className="font-medium">{t(event.kind)}</span>
+                    <Mass grams={event.grams} />
+                  </div>
+                  <p className="break-words">
+                    {t("handoff", { from: event.fromName, to: event.toName })}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    {format.dateTime(event.createdAt, {
+                      dateStyle: "medium",
+                      timeStyle: "short",
+                    })}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          )}
+          {history.hasMoreCustody ? <p>{t("limit")}</p> : null}
+        </section>
+        {isHolder ? (
+          <div className="min-w-0 space-y-6">
+            <Transformations history={history} orgId={business.id} />
+            <Dispositions history={history} />
+            <Inspections lotId={lot.id} city={business.city} />
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 }
@@ -488,9 +500,9 @@ function Transformations({
                 {event.outputs.map((output) => (
                   <li
                     key={output.id}
-                    className="flex flex-wrap items-center justify-between gap-3 border-t py-3"
+                    className="grid min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-3 border-t py-3 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto]"
                   >
-                    <span className="min-w-0 flex-1 break-words">
+                    <span className="col-span-2 min-w-0 break-words md:col-span-1">
                       {output.canOpen ? (
                         <Link
                           href={`/app/lots/${output.id}`}
@@ -504,7 +516,7 @@ function Transformations({
                         </>
                       )}
                     </span>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="min-w-0 text-sm break-words text-muted-foreground">
                       {t(`streams.${output.streamClass}`)} ·{" "}
                       {t(`handling.${output.handlingClass}`)}
                     </p>

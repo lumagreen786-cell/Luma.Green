@@ -1,0 +1,114 @@
+Browser tab: 16, Title: "Customer | Florin", URL: "https://ui.cortexcn.dev/previews/florin/customer?id=brightwell".
+1 AXWebArea Customer | Florin, URL: ui.cortexcn.dev/previews/florin/customer?id=brightwell
+	2 link Description: Skip to content, Value: ui.cortexcn.dev/previews/florin/customer?id=brightwell#main
+	3 container
+		4 link Description: Florin, invoices, Value: ui.cortexcn.dev/previews/florin/
+		5 pop up button (collapsed) Description: All pages, Secondary Actions: Expand
+		6 pop up button (collapsed) Description: Notifications, Secondary Actions: Expand
+		7 link Description: Settings, Value: ui.cortexcn.dev/previews/florin/settings/
+		8 pop up button (collapsed) Description: Account menu, ID: radix-_R_tb5tlb_, Secondary Actions: Expand
+		9 container Billing
+			10 content list
+				11 link Description: Estimates, Value: ui.cortexcn.dev/previews/florin/estimates/
+				12 link Description: Invoices, Value: ui.cortexcn.dev/previews/florin/
+				13 link Description: Payments, Value: ui.cortexcn.dev/previews/florin/payments/
+				14 link Description: Recurring Invoices, Value: ui.cortexcn.dev/previews/florin/recurring/
+				15 link Description: Checkouts, Value: ui.cortexcn.dev/previews/florin/checkouts/
+	16 container main
+		17 container
+			18 link Description: Back, Value: ui.cortexcn.dev/previews/florin/customers/
+			19 heading Theo Okafor, Value: 1
+				20 text Theo Okafor
+			21 text Founder, Brightwell Studio
+			22 link Description: Email Theo Okafor, Value: mailto:theo@brightwell.studio
+			23 button Edit customer
+		24 container
+			25 text Billed this year $39,110.00 Paid this year $24,840.00 Owes now $14,270.00 Average time to pay 14 days
+			26 container
+				27 text Billed by month
+				28 content list
+					29 text Billed
+					30 text Paid
+			31 container
+				32 text Jun Jul Aug Sep Oct Nov
+			33 content list
+				34 container
+					35 text June 2026 :  $0.00  billed,  $0.00  paid
+				36 container
+					37 text July 2026 :  $0.00  billed,  $0.00  paid
+				38 container
+					39 text August 2026 :  $4,560.00  billed,  $4,560.00  paid
+				40 container
+					41 text September 2026 :  $0.00  billed,  $0.00  paid
+				42 container
+					43 text October 2026 :  $14,270.00  billed,  $0.00  paid
+				44 container
+					45 text November 2026 :  $0.00  billed,  $0.00  paid
+			46 text Paid  64 %  of this year's billing Nothing overdue
+			47 progress indicator Description: Paid 64% of this year's billing, Value: 64
+		48 container
+			49 text Company Brightwell Studio Account  404
+			50 content list
+				51 link Description: theo@brightwell.studio, Value: mailto:theo@brightwell.studio
+				52 link Description: +234 802 555 0147, Value: tel:+2348025550147
+				53 text Lagos, Nigeria
+			54 text A client since  Jan 20, 2025 . Pays in  14  days.
+		55 container
+			56 tab group Records for this customer
+				57 tab (selected, settable, boolean) Invoices 5, Value: 1
+				58 tab (selectable, settable, boolean) Payments 6, Value: 0
+				59 tab (selectable, settable, boolean) Estimates 1, Value: 0
+				60 tab (selectable, settable, boolean) Schedules 0, Value: 0
+			61 heading Invoices, Value: 2
+				62 text Invoices
+			63 content list
+				64 checkbox Description: Invoice 404-011, Brightwell Studio, In 2 days, Value: 0
+					65 text #
+					66 text 404-011
+					67 text In 2 days
+					68 text Viewed
+					69 text $14,270.00
+				70 checkbox Description: Invoice 404-009, Brightwell Studio, Paid 67 days ago, Value: 0
+					71 text #
+					72 text 404-009
+					73 text Paid 67 days ago
+					74 text Paid
+					75 text $4,560.00
+				76 checkbox Description: Invoice 404-008, Brightwell Studio, Paid 179 days ago, Value: 0
+					77 text #
+					78 text 404-008
+					79 text Paid 179 days ago
+					80 text Paid
+					81 text $8,640.00
+				82 checkbox Description: Invoice 404-007, Brightwell Studio, Paid 221 days ago, Value: 0
+					83 text #
+					84 text 404-007
+					85 text Paid 221 days ago
+					86 text Paid
+					87 text $11,640.00
+				88 checkbox Description: Invoice 404-006, Brightwell Studio, Paid 334 days ago, Value: 0
+					89 text #
+					90 text 404-006
+					91 text Paid 334 days ago
+					92 text Paid
+					93 text $4,760.00
+			94 text Balance due
+			95 text $14,270.00
+			96 text Nothing is overdue.
+			97 definition list
+				98 container Due next
+					99 text Due next
+				100 link Description: #404-011, in 2 days, Value: ui.cortexcn.dev/previews/florin/?invoice=inv-404-011
+				101 container Next scheduled
+					102 text Next scheduled
+				103 text No schedule
+				104 container Invoices sent
+					105 text Invoices sent
+				106 text 5
+				107 container Payment terms
+					108 text Payment terms
+				109 text 14 days
+			110 link Description: New invoice for Theo, Value: ui.cortexcn.dev/previews/florin/new/?customer=brightwell
+	111 container Notifications alt+T
+
+The focused UI element is 1 AXWebArea Customer | Florin, URL: ui.cortexcn.dev/previews/florin/customer?id=brightwell

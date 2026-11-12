@@ -13,7 +13,7 @@ function Row({
 }) {
   return (
     <div className="flex gap-3">
-      <span className="flex size-8 shrink-0 items-start justify-center pt-1 text-primary">
+      <span className="flex size-8 shrink-0 items-start justify-center pt-1 text-foreground">
         <Icon aria-hidden className="size-5" />
       </span>
       <div className="flex min-w-0 flex-col gap-0.5">

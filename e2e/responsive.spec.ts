@@ -16,8 +16,8 @@ import { localeMeta, locales } from "../src/i18n/locales";
 const headerSizes = [320, 390, 640, 768, 1024, 1280, 1440].map((width) => ({
   width,
   links: width < 1280 ? 1 : 7,
-  // The mobile menu or desktop language picker; appearance is light-only.
-  buttons: 1,
+  // Appearance plus menu/language; tablet and desktop also expose page switcher.
+  buttons: width < 640 ? 2 : 3,
   navigation: width < 1280 ? 0 : 1,
 }));
 const publicRoutes = [
@@ -289,7 +289,7 @@ for (const { locale, copy } of [
       ).toBeLessThanOrEqual(1);
       await expect(theme).toHaveCount(0);
       await page.emulateMedia({ colorScheme: "dark" });
-      await expect(page.locator("html")).not.toHaveClass(/dark/u);
+      await expect(page.locator("html")).toHaveClass(/dark/u);
       await language.click();
       await expect(page.getByRole("menuitemradio")).toHaveCount(locales.length);
       await page.keyboard.press("Escape");
@@ -340,3 +340,46 @@ test("resizing an open compact menu restores desktop navigation", async ({
   await trigger.click();
   await expect(page.getByRole("dialog")).toBeVisible();
 });
+
+for (const { route, panel, action } of [
+  {
+    route: "/ml/standards",
+    panel: 'section[aria-labelledby="adopt-heading"]',
+    action: 'a[href="/ml/help"]',
+  },
+  {
+    route: "/si/how-it-works",
+    panel: 'section[aria-labelledby="sorting-guide-heading"] div.bg-card',
+    action: 'a[href="/si/help/household/get-ready"]',
+  },
+]) {
+  for (const colorScheme of ["light", "dark"] as const) {
+    test(`${route} action stays inside its phone panel in ${colorScheme}`, async ({
+      page,
+    }) => {
+      await page.setViewportSize({ width: 320, height: 900 });
+      await page.emulateMedia({ colorScheme, reducedMotion: "reduce" });
+      await page.goto(route);
+      await page.evaluate(async () => document.fonts.ready);
+      const sheet = page.locator(panel);
+      const button = sheet.locator(action);
+      // Exercise larger glyph metrics than the local font rasterizer provides.
+      // CI's Linux shaping is wider than macOS for these scripts.
+      await button.evaluate((element) => {
+        element.style.setProperty("font-size", "16px");
+      });
+      await expectControlTextToFit(button);
+      const bounds = await sheet.boundingBox();
+      const buttonBounds = await button.boundingBox();
+      expect(bounds).not.toBeNull();
+      expect(buttonBounds).not.toBeNull();
+      if (!bounds || !buttonBounds) return;
+      expect(bounds.x + bounds.width).toBeLessThanOrEqual(301);
+      expect(buttonBounds.x).toBeGreaterThanOrEqual(bounds.x + 19);
+      expect(buttonBounds.x + buttonBounds.width).toBeLessThanOrEqual(
+        bounds.x + bounds.width - 19,
+      );
+      await expectPageToFit(page);
+    });
+  }
+}

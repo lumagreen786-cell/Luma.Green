@@ -215,6 +215,10 @@ describe("ImpactPage for a Saathi", () => {
     expect(
       screen.getByRole("heading", { level: 1, name: "Your earnings" }),
     ).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Find a job" })).toHaveAttribute(
+      "href",
+      "/app",
+    );
     expect(kpi("Earned so far")).toHaveTextContent("₹1,100");
     expect(kpi("Earned so far")).toHaveTextContent("2 jobs done");
     expect(

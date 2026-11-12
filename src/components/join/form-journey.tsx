@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import {
   type ReactNode,
   type SubmitEvent,
@@ -37,6 +37,7 @@ export function FormJourney<T extends FieldValues>({
   initialStage?: number;
 }) {
   const t = useTranslations("auth");
+  const format = useFormatter();
   const join = useTranslations("join.form");
   const progress = useTranslations("sell.steps");
   const [stage, setStage] = useState(Math.min(initialStage, stages.length - 1));
@@ -83,7 +84,7 @@ export function FormJourney<T extends FieldValues>({
       }}
     >
       {header}
-      <div className="flex items-center justify-between gap-3 rounded-xl bg-muted/50 px-4 py-2 text-sm text-muted-foreground">
+      <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-muted-foreground">
         <span>
           {progress("progress", { current: stage + 1, total: stages.length })}
         </span>
@@ -91,6 +92,7 @@ export function FormJourney<T extends FieldValues>({
           <Button
             type="button"
             variant="ghost"
+            className="rounded-full border border-border bg-card text-foreground hover:bg-muted"
             disabled={busy}
             onClick={() => {
               setStage((current) => current - 1);
@@ -100,31 +102,35 @@ export function FormJourney<T extends FieldValues>({
           </Button>
         ) : null}
       </div>
-      <ol aria-label={progress("label")} className="flex gap-2">
+      <ol aria-label={progress("label")} className="flex flex-wrap gap-2">
         {stages.map((item, index) => (
           <li
             key={item.title}
             aria-current={index === stage ? "step" : undefined}
-            className="min-w-0 flex-1"
+            className={`flex min-h-11 max-w-full min-w-0 items-center gap-2 rounded-full px-3 py-2 text-sm ${index === stage ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"}`}
           >
-            <span className="sr-only">{item.title}</span>
             <span
               aria-hidden
-              className={`block h-1.5 rounded-full ${index <= stage ? "bg-primary" : "bg-muted"}`}
-            />
+              className="flex size-6 shrink-0 items-center justify-center rounded-full bg-card/70 text-xs text-foreground"
+            >
+              {format.number(index + 1)}
+            </span>
+            <span className="min-w-0 wrap-anywhere">{item.title}</span>
           </li>
         ))}
       </ol>
       <h2
         ref={heading}
         tabIndex={-1}
-        className="text-xl font-semibold outline-none"
+        className="text-lg font-medium outline-none"
       >
         {stages[stage]?.title}
       </h2>
       {stages.map((item, index) => (
         <div key={item.title} hidden={index !== stage}>
-          <div className="flex flex-col gap-5">{item.content}</div>
+          <div className="flex flex-col gap-5 border-t border-border pt-5">
+            {item.content}
+          </div>
         </div>
       ))}
       {isLast ? (

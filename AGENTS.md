@@ -1,3 +1,35 @@
+## Active Florin design — latest owner decision, 11 November 2026
+
+Use the full Florin reference, including **light and dark modes**, Urbanist,
+lime accents, pill navigation, round tab counters and 28px panels. This replaces
+all older Ship X/five-colour/light-only/Astryx composition rules below.
+Before UI work read `.agents/skills/luma-florin-ui/SKILL.md` and
+`docs/design/luma-design-system/README.md`. Saved reference screenshots live in
+`docs/design/inspiration/florin`. Match each page composition, not only tokens.
+Preserve original images, mobile wordmark/wrapping, workflows and security.
+Do not create or update any PDFs. Multiple agents and checked Production release
+remain authorized; native binaries, OTA and store submission remain separate.
+
+## Current composition correction — 11 November 2026
+
+The owner requires page-specific layout rebuilding, not inherited layouts with
+new colours. Follow `docs/design/luma-design-system/README.md`, including the
+focused-screen recycling artwork, soft background blur and crisp form panels.
+Use black overlays on decorative images, not white or pale overlays. The semantic
+image-scrim token is an explicit, narrow exception to the five-colour palette.
+Keep opaque white form panels and never darken actual customer/data photos.
+Latest owner correction: preserve original images in their existing sections.
+This supersedes the earlier no-reuse/all-new-art instruction. Add new pictorial
+art only where needed, including the four previously blank focused backgrounds
+for login, onboarding, admin and invitations. Preserve improved layouts, mobile
+fixes and black image scrims. Preserve the brand logo and required provider
+marks. Artwork explains a task; it never proves a real collection, payment,
+permit or customer record. Keep the canonical design and asset records current.
+Preserve unused generated replacements as reference artifacts; only the four
+new focused backgrounds remain active from that generation batch.
+The complete layout rebuild is tracked on `feat/ship-x-homepage`. Preserve all
+workflow, consent, authentication, data and native distribution boundaries.
+
 # AGENTS.md — Luma.Green
 
 **Cleaner Tomorrow in Motion.**

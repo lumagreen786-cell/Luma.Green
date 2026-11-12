@@ -25,7 +25,7 @@ export function HouseholdLocationLookups() {
   const t = useTranslations("householdTools");
   if (isConvexConfigured) return <ConnectedLookups />;
   return (
-    <div className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4">
+    <div className="grid items-start gap-4 sm:grid-cols-2">
       <LookupSection title={t("airQuality")}>
         <p>{t("lookupUnavailable")}</p>
       </LookupSection>
@@ -44,7 +44,10 @@ function LookupSection({
   children: React.ReactNode;
 }) {
   return (
-    <details className="group py-3">
+    <details
+      open
+      className="group min-w-0 rounded-[1.75rem] bg-card p-5 text-card-foreground"
+    >
       <summary className="flex min-h-11 cursor-pointer items-center justify-between gap-3 font-medium">
         {title}
         <ChevronDownIcon
@@ -63,7 +66,7 @@ function ConnectedLookups() {
   const t = useTranslations("householdTools");
   const availability = useQuery(api.householdLookups.availability);
   return (
-    <div className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4">
+    <div className="grid items-start gap-4 sm:grid-cols-2">
       <LookupSection title={t("airQuality")}>
         <LookupControls kind="air" available={availability?.air} />
       </LookupSection>
@@ -96,7 +99,7 @@ function LookupControls({
     return (
       <Link
         href={{ pathname: "/login", query: { next: "/sell/services" } }}
-        className="inline-flex min-h-11 items-center font-medium text-primary underline"
+        className="inline-flex min-h-11 items-center font-medium text-foreground underline"
       >
         {signIn("metaTitle")}
       </Link>
@@ -105,7 +108,7 @@ function LookupControls({
     return (
       <Link
         href="/account/security"
-        className="inline-flex min-h-11 items-center font-medium text-primary underline"
+        className="inline-flex min-h-11 items-center font-medium text-foreground underline"
       >
         {phone("title")}
       </Link>

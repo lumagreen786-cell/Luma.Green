@@ -8,29 +8,28 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-/* Legacy dark utilities are inert: the light-only bootstrap removes the class. */
+/* Both appearances follow the approved Florin reference. */
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-google-attribution: var(--google-attribution);
   --color-background: var(--background);
+  --color-image-scrim: var(--image-scrim);
   --color-foreground: var(--foreground);
 
-  /* Plus Jakarta Sans for Latin UI; Noto for script coverage. `--font-noto-script` is attached to <html> only for
+  /* Urbanist for Latin UI; Noto for script coverage. `--font-noto-script` is attached to <html> only for
      locales whose script Noto Sans itself does not cover (Tamil, Arabic, …),
      so the stack stays one declaration for all supported locales. System
      fallbacks must stay after the script face, never inside the earlier variables. */
   --font-sans:
-    var(--font-jakarta, "Plus Jakarta Sans"),
-    var(--font-noto-sans, "Noto Sans"), var(--font-noto-script, sans-serif),
-    system-ui, "Segoe UI", sans-serif;
+    var(--font-urbanist, "Urbanist"), var(--font-noto-sans, "Noto Sans"),
+    var(--font-noto-script, sans-serif), system-ui, "Segoe UI", sans-serif;
   --font-mono:
     var(--font-noto-mono, "Noto Sans Mono"), ui-monospace, SFMono-Regular,
     monospace;
   --font-display:
-    var(--font-jakarta, "Plus Jakarta Sans"),
-    var(--font-noto-sans, "Noto Sans"), var(--font-noto-script, sans-serif),
-    system-ui, sans-serif;
+    var(--font-urbanist, "Urbanist"), var(--font-noto-sans, "Noto Sans"),
+    var(--font-noto-script, sans-serif), system-ui, sans-serif;
   --font-heading: var(--font-display);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -65,8 +64,10 @@
   --radius-md: var(--radius);
   --radius-lg: calc(var(--radius) + 0.125rem);
   --radius-xl: calc(var(--radius) + 0.25rem);
-  --radius-2xl: 1rem;
-  --radius-3xl: 1.25rem;
+  --radius-panel: 1.75rem;
+  --shadow-panel: var(--panel-shadow);
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 1.75rem;
   --radius-4xl: calc(var(--radius) + 1rem);
   --animate-shimmer-slide: shimmer-slide var(--speed) ease-in-out infinite
     alternate;
@@ -94,58 +95,134 @@
   }
 }
 
-/* Approved five-colour light-only system. See docs/design/luma-design-system. */
+/* Florin palette. Source measurements: docs/design/inspiration/florin. */
 @theme {
-  --color-brand-50: color-mix(in srgb, #a8e665 8%, #ffffff);
-  --color-brand-100: color-mix(in srgb, #a8e665 20%, #ffffff);
-  --color-brand-200: color-mix(in srgb, #a8e665 45%, #ffffff);
-  --color-brand-300: #a8e665;
-  --color-brand-400: #a8e665;
-  --color-brand-500: #317f38;
-  --color-brand-600: #317f38;
-  --color-brand-700: #317f38;
-  --color-brand-800: #144419;
-  --color-brand-900: #144419;
-  --color-brand-950: #144419;
-  --color-attention: #ebff00;
-  --color-attention-foreground: #144419;
+  --color-brand-50: #f4f8ee;
+  --color-brand-100: #e8f7d2;
+  --color-brand-200: #d6f6a6;
+  --color-brand-300: #b9ed77;
+  --color-brand-400: #9bf80f;
+  --color-brand-500: #5a9600;
+  --color-brand-600: #4b7d00;
+  --color-brand-700: #3d6500;
+  --color-brand-800: #283d12;
+  --color-brand-900: #20232c;
+  --color-brand-950: #10130a;
+  --color-attention: #9bf80f;
+  --color-attention-foreground: #10130a;
 }
 
 :root {
   color-scheme: light;
   --google-attribution: #1f1f1f;
-  --background: color-mix(in srgb, #144419 7%, #ffffff);
-  --foreground: #144419;
+  --image-scrim: #000000;
+  --background: #e7e9ee;
+  --shell: #e7e9ee;
+  --foreground: #14161c;
   --card: #ffffff;
   --card-foreground: var(--foreground);
   --popover: #ffffff;
   --popover-foreground: var(--foreground);
-  --primary: #317f38;
-  --primary-foreground: #ffffff;
-  --secondary: #a8e665;
-  --secondary-foreground: #144419;
-  --muted: color-mix(in srgb, #144419 7%, #ffffff);
-  --muted-foreground: color-mix(in srgb, #144419 75%, #ffffff);
-  --accent: #a8e665;
-  --accent-foreground: #144419;
-  --destructive: #144419;
-  --border: color-mix(in srgb, #144419 13%, #ffffff);
-  --input: color-mix(in srgb, #144419 30%, #ffffff);
-  --ring: #317f38;
-  --chart-1: #317f38;
-  --chart-2: #144419;
-  --chart-3: #a8e665;
-  --chart-4: #ebff00;
-  --chart-5: color-mix(in srgb, #317f38 60%, #ffffff);
-  --radius: 0.75rem;
-  --sidebar: #144419;
-  --sidebar-foreground: #ffffff;
-  --sidebar-primary: #a8e665;
-  --sidebar-primary-foreground: #144419;
-  --sidebar-accent: #a8e665;
-  --sidebar-accent-foreground: #144419;
-  --sidebar-border: color-mix(in srgb, #ffffff 22%, #144419);
-  --sidebar-ring: #a8e665;
+  --primary: #9bf80f;
+  --primary-foreground: #10130a;
+  --secondary: #eff1f4;
+  --secondary-foreground: #14161c;
+  --muted: #eff1f4;
+  --muted-foreground: #5d616c;
+  --accent: #e5e7eb;
+  --accent-foreground: #14161c;
+  --destructive: #b23148;
+  --border: #14161c17;
+  --input: #14161c26;
+  --ring: #5a9600;
+  --chart-1: #5a9600;
+  --chart-2: #8c919e;
+  --chart-3: #3d6cb3;
+  --chart-4: #af690e;
+  --chart-5: #7954b6;
+  --radius: 0.625rem;
+  --panel-shadow: 0 8px 24px #14161c08, 0 1px 2px #14161c05;
+  --sidebar: #e7e9ee;
+  --sidebar-foreground: #14161c;
+  --sidebar-primary: #9bf80f;
+  --sidebar-primary-foreground: #10130a;
+  --sidebar-accent: #ffffff;
+  --sidebar-accent-foreground: #14161c;
+  --sidebar-border: #14161c17;
+  --sidebar-ring: #5a9600;
+}
+
+.dark {
+  color-scheme: dark;
+  --background: #080b14;
+  --shell: #080b14;
+  --foreground: #f5f6f8;
+  --card: #23262f;
+  --card-foreground: #f5f6f8;
+  --popover: #23262f;
+  --popover-foreground: #f5f6f8;
+  --secondary: #30313c;
+  --secondary-foreground: #f5f6f8;
+  --muted: #1d1f29;
+  --muted-foreground: #a3a6b1;
+  --accent: #30313c;
+  --accent-foreground: #f5f6f8;
+  --destructive: #ff8597;
+  --border: #ffffff14;
+  --input: #ffffff26;
+  --ring: #9bf80f;
+  --chart-1: #9bf80f;
+  --chart-2: #a3a6b1;
+  --chart-3: #8db9ff;
+  --chart-4: #ffb35c;
+  --chart-5: #b9a3ff;
+  --panel-shadow: 0 1px 0 #ffffff08;
+  --sidebar: #080b14;
+  --sidebar-foreground: #f5f6f8;
+  --sidebar-accent: #23262f;
+  --sidebar-accent-foreground: #f5f6f8;
+  --sidebar-border: #ffffff14;
+  --sidebar-ring: #9bf80f;
+}
+
+/* White record sheets and ink details are intentional in both appearances. */
+.record-sheet {
+  --background: #fffffd;
+  --foreground: #16181d;
+  --card: #fffffd;
+  --card-foreground: #16181d;
+  --muted: #eff1f4;
+  --muted-foreground: #6b6f7a;
+  --accent: #eff1f4;
+  --accent-foreground: #16181d;
+  --secondary: #eff1f4;
+  --secondary-foreground: #16181d;
+  --border: #16181d14;
+  --input: #16181d26;
+  --popover: #fff;
+  --popover-foreground: #16181d;
+  color: var(--foreground);
+  background: var(--card);
+  color-scheme: light;
+}
+.record-detail {
+  --background: #20232c;
+  --foreground: #f5f6f8;
+  --card: #292c36;
+  --card-foreground: #f5f6f8;
+  --muted: #30313c;
+  --muted-foreground: #b0b2be;
+  --accent: #30313c;
+  --accent-foreground: #f5f6f8;
+  --secondary: #30313c;
+  --secondary-foreground: #f5f6f8;
+  --border: #ffffff14;
+  --input: #ffffff26;
+  --popover: #292c36;
+  --popover-foreground: #f5f6f8;
+  color: var(--foreground);
+  background: var(--background);
+  color-scheme: dark;
 }
 
 @layer base {
@@ -283,7 +360,7 @@ html:is(
   --color-text-primary: var(--foreground);
   --color-text-secondary: var(--muted-foreground);
   --color-text-disabled: var(--muted-foreground);
-  --color-text-accent: var(--primary);
+  --color-text-accent: var(--chart-1);
   --color-accent: var(--primary);
   --color-on-accent: var(--primary-foreground);
   --color-neutral: var(--secondary);
@@ -295,5 +372,34 @@ html:is(
   --radius: 0.75rem;
 }
 html [data-astryx-theme] {
-  color-scheme: light;
+  color-scheme: inherit;
+}
+
+/* Encode a real proportion; the caller supplies its width and accessible value. */
+.florin-bar {
+  border-radius: 999px;
+  background-color: var(--primary);
+  background-image: repeating-linear-gradient(
+    130deg,
+    transparent 0 4px,
+    #5a960033 4px 7px
+  );
+  box-shadow: 0 0 8px #9bf80f33;
+}
+
+/* Nested white/ink panels must also reset retained Astryx typography tokens. */
+.record-sheet,
+.record-detail {
+  --color-text-primary: var(--foreground);
+  --color-text-secondary: var(--muted-foreground);
+  --color-text-disabled: var(--muted-foreground);
+  --color-text-accent: var(--foreground);
+  --color-background-body: var(--background);
+  --color-background-surface: var(--card);
+  --color-background-elevated: var(--popover);
+  --color-background-muted: var(--muted);
+}
+.record-sheet :is(h1, h2, h3, h4),
+.record-detail :is(h1, h2, h3, h4) {
+  color: var(--foreground);
 }

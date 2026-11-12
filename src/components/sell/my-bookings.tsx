@@ -3,7 +3,7 @@
 import { useConvexAuth, useQuery } from "convex/react";
 import type { FunctionReturnType } from "convex/server";
 import { ChevronRightIcon, StoreIcon, TruckIcon } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { useFormat } from "@/components/app/format";
@@ -33,6 +33,7 @@ export function MyBookings({ showEmpty = false }: { showEmpty?: boolean }) {
 
 function LiveMyBookings({ showEmpty }: { showEmpty: boolean }) {
   const household = useTranslations("householdTools");
+  const number = useFormatter();
   const t = useTranslations("sell.mine");
   const { isAuthenticated } = useConvexAuth();
   const bookings = useQuery(api.households.mine, isAuthenticated ? {} : "skip");
@@ -42,7 +43,7 @@ function LiveMyBookings({ showEmpty }: { showEmpty: boolean }) {
     return showEmpty ? <p role="status">{household("loading")}</p> : null;
   if (!bookings || bookings.length === 0)
     return showEmpty ? (
-      <p className="py-4 text-sm text-muted-foreground">
+      <p className="rounded-[1.75rem] bg-card p-6 text-sm text-card-foreground text-muted-foreground">
         {household("noBookings")}
       </p>
     ) : null;
@@ -51,12 +52,17 @@ function LiveMyBookings({ showEmpty }: { showEmpty: boolean }) {
   return (
     <section
       aria-labelledby="my-bookings-title"
-      className="flex flex-col gap-2 border-b border-border py-4"
+      className="flex min-w-0 flex-col gap-3 rounded-[1.75rem] bg-card p-5 text-card-foreground sm:p-6"
     >
-      <h2 id="my-bookings-title" className="text-lg font-semibold">
-        {t("title")}
-      </h2>
-      <ul className="-mx-2 flex flex-col">
+      <div className="flex items-center justify-between gap-3">
+        <h2 id="my-bookings-title" className="text-lg font-medium">
+          {t("title")}
+        </h2>
+        <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-muted text-sm tabular-nums">
+          {number.number(bookings.length)}
+        </span>
+      </div>
+      <ul className="flex flex-col divide-y divide-border">
         {shown.map((booking) => (
           <li key={booking.token}>
             <BookingRow booking={booking} />
@@ -101,12 +107,12 @@ function BookingRow({ booking }: { booking: MyBooking }) {
       href={`/t/${booking.token}`}
       className="flex items-center gap-3 rounded-xl px-2 py-3 outline-none hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50"
     >
-      <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-accent text-accent-foreground">
+      <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-muted text-foreground">
         <ModeIcon aria-hidden className="size-5" />
       </span>
       <span className="flex min-w-0 flex-1 flex-col gap-0.5">
         <span className="flex flex-wrap items-center gap-2">
-          <span className="truncate font-medium">{booking.shopName}</span>
+          <span className="font-medium break-words">{booking.shopName}</span>
           <StatusPill tone={statusTone(booking.status)}>
             {tStatus(booking.status)}
           </StatusPill>

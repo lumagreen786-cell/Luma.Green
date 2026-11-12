@@ -634,7 +634,7 @@
     "replyTime": "我们会在一个工作日内回复。",
     "search": {
       "label": "搜索帮助",
-      "placeholder": "等待支付网关",
+      "placeholder": "搜索",
       "clear": "清空搜索",
       "summary": "“{query}”的结果：{count, plural, =0 {无解答} one {#条解答} other {#条解答}}",
       "topicSummary": "关于{topic}：{count, plural, =0 {无解答} one {#条解答} other {#条解答}}",
@@ -1905,7 +1905,7 @@
     "homeTitle": "在家回收材料？",
     "homeLink": "了解使用流程",
     "privacy": "手机号码仅用于登录及发送Luma.Green工作相关通知。",
-    "unavailableTitle": "手机号登录即将开放",
+    "unavailableTitle": "用手机号码登录",
     "unavailableBody": "暂时无法通过短信登录，请稍后重试。",
     "verifyTitle": "输入6位验证码",
     "sentTo": "已通过短信发送至{phone}",

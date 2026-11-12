@@ -1,0 +1,196 @@
+Browser tab: 16, Title: "Checkouts | Florin", URL: "https://ui.cortexcn.dev/previews/florin/checkouts".
+1 AXWebArea Checkouts | Florin, URL: ui.cortexcn.dev/previews/florin/checkouts
+	2 link Description: Skip to content, Value: ui.cortexcn.dev/previews/florin/checkouts#main
+	3 container
+		4 link Description: Florin, invoices, Value: ui.cortexcn.dev/previews/florin/
+		5 pop up button (collapsed) Description: All pages, Secondary Actions: Expand
+		6 pop up button (collapsed) Description: Notifications, Secondary Actions: Expand
+		7 link Description: Settings, Value: ui.cortexcn.dev/previews/florin/settings/
+		8 pop up button (collapsed) Description: Account menu, ID: radix-_R_tb5tlb_, Secondary Actions: Expand
+		9 container Billing
+			10 content list
+				11 link Description: Estimates, Value: ui.cortexcn.dev/previews/florin/estimates/
+				12 link Description: Invoices, Value: ui.cortexcn.dev/previews/florin/
+				13 link Description: Payments, Value: ui.cortexcn.dev/previews/florin/payments/
+				14 link Description: Recurring Invoices, Value: ui.cortexcn.dev/previews/florin/recurring/
+				15 link Description: Checkouts, Value: ui.cortexcn.dev/previews/florin/checkouts/
+	16 container main
+		17 container
+			18 heading Checkouts, Value: 1
+				19 text Checkouts
+			20 button New payment link
+		21 container
+			22 text Paid through links $28,770.00 Payments 26 from 1,826 visits Conversion 1.4%
+			23 content list Revenue by link
+				24 container
+					25 text Brand audit $1,200
+					26 progress indicator Description: Brand audit: $1,200, Value: 4
+				27 container
+					28 text Design sprint deposit $20,000
+					29 progress indicator Description: Design sprint deposit: $20,000, Value: 70
+				30 container
+					31 text Website care plan $2,400
+					32 progress indicator Description: Website care plan: $2,400, Value: 8
+				33 container
+					34 text Office hours, one hour $3,420
+					35 progress indicator Description: Office hours, one hour: $3,420, Value: 12
+				36 container
+					37 text Workshop seat $1,750
+					38 progress indicator Description: Workshop seat: $1,750, Value: 6
+		39 container
+			40 text Best link , Design sprint deposit $20,000.00
+			41 link Description: Open payments, Value: ui.cortexcn.dev/previews/florin/payments/
+			42 definition list
+				43 container Visits
+					44 text Visits
+				45 text 228
+				46 container Payments
+					47 text Payments
+				48 text 8
+				49 container Conversion
+					50 text Conversion
+				51 text 3.5%
+			52 button Copy florin.link/kiln/design-sprint
+		53 container
+			54 tab group Links by state
+				55 tab (selected, settable, boolean) All, Value: 1
+				56 tab (selectable, settable, boolean) Live 4, Value: 0
+				57 tab (selectable, settable, boolean) Off 1, Value: 0
+			58 heading All Links, Value: 2
+				59 text All Links
+			60 button New payment link
+			61 content list
+				62 container Brand audit
+					63 checkbox Brand audit, Value: 1
+					64 text A written review of your brand, site, and messaging.
+					65 container
+						66 text $1,200.00
+						67 switch Description: Turn off Brand audit, Value: 1
+					68 container
+						69 text florin.link/kiln/brand-audit
+						70 button Copy link
+						71 button Edit link
+						72 button Delete link
+					73 definition list
+						74 container Visits
+							75 text Visits
+						76 text 412
+						77 container Payments
+							78 text Payments
+						79 text 1
+						80 container Conversion
+							81 text Conversion
+						82 text 0.2%
+						83 container Revenue
+							84 text Revenue
+						85 text $1,200
+				86 container Design sprint deposit
+					87 checkbox Design sprint deposit, Value: 0
+					88 text Holds a five-day design sprint on our calendar.
+					89 container
+						90 text $2,500.00
+						91 switch Description: Turn off Design sprint deposit, Value: 1
+					92 container
+						93 text florin.link/kiln/design-sprint
+						94 button Copy link
+						95 button Edit link
+						96 button Delete link
+					97 definition list
+						98 container Visits
+							99 text Visits
+						100 text 228
+						101 container Payments
+							102 text Payments
+						103 text 8
+						104 container Conversion
+							105 text Conversion
+						106 text 3.5%
+						107 container Revenue
+							108 text Revenue
+						109 text $20,000
+				110 container Website care plan
+					111 checkbox Website care plan, Value: 0
+					112 text Hosting, backups, updates, and two hours of fixes a month.
+					113 container
+						114 text $480.00
+						115 text /mo
+						116 switch Description: Turn off Website care plan, Value: 1
+					117 container
+						118 text florin.link/kiln/care-plan
+						119 button Copy link
+						120 button Edit link
+						121 button Delete link
+					122 definition list
+						123 container Visits
+							124 text Visits
+						125 text 356
+						126 container Payments
+							127 text Payments
+						128 text 5
+						129 container Conversion
+							130 text Conversion
+						131 text 1.4%
+						132 container Revenue
+							133 text Revenue
+						134 text $2,400
+				135 container Office hours, one hour
+					136 checkbox Office hours, one hour, Value: 0
+					137 text A call with a designer or engineer, booked by the hour.
+					138 container
+						139 text $180.00
+						140 switch Description: Turn off Office hours, one hour, Value: 1
+					141 container
+						142 text florin.link/kiln/office-hours
+						143 button Copy link
+						144 button Edit link
+						145 button Delete link
+					146 definition list
+						147 container Visits
+							148 text Visits
+						149 text 640
+						150 container Payments
+							151 text Payments
+						152 text 10
+						153 container Conversion
+							154 text Conversion
+						155 text 1.6%
+						156 container Revenue
+							157 text Revenue
+						158 text $3,420
+				159 container Workshop seat
+					160 checkbox Workshop seat, Value: 0
+					161 text One seat at our quarterly product workshop.
+					162 container
+						163 text $350.00
+						164 switch Description: Turn on Workshop seat, Value: 0
+					165 container
+						166 text florin.link/kiln/workshop-seat
+						167 button Copy link
+						168 button Edit link
+						169 button Delete link
+					170 definition list
+						171 container Visits
+							172 text Visits
+						173 text 190
+						174 container Payments
+							175 text Payments
+						176 text 2
+						177 container Conversion
+							178 text Conversion
+						179 text 1.1%
+						180 container Revenue
+							181 text Revenue
+						182 text $1,750
+			183 container Preview of Brand audit
+				184 text What buyers see
+				185 text Live Kiln & Co.
+				186 heading Brand audit, Value: 3
+					187 text Brand audit
+				188 text A written review of your brand, site, and messaging.
+				189 text $1,200.00
+				190 text Email for the receipt Billing address Pay $1,200.00
+				191 text Card, bank, or wallet. Paid through Florin.
+				192 text florin.link/kiln/brand-audit
+	193 container Notifications alt+T
+
+The focused UI element is 1 AXWebArea Checkouts | Florin, URL: ui.cortexcn.dev/previews/florin/checkouts

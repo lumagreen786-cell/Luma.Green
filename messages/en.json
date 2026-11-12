@@ -89,10 +89,10 @@
     "metaDescription": "Luma.Green connects India's recycling network: households, kabadiwalas, preprocessors, recyclers and manufacturers, with fair prices, verified businesses and a receipt at every step.",
     "hero": {
       "eyebrow": "India",
-      "title": "Clear out recyclables. Get paid.",
-      "lead": "Photos, pickup or drop-off, and payment after weighing.",
+      "title": "Your recycling starts here.",
+      "lead": "Book a collection, check material prices or set up your business workspace.",
       "sell": "Recycle",
-      "join": "For businesses",
+      "join": "Business workspace",
       "prices": "View material prices"
     },
     "teaser": {
@@ -227,8 +227,8 @@
     "expansion": {
       "materialsTitle": "What would you like to recycle?",
       "pickupTitle": "A pickup, step by step",
-      "shopTitle": "Your collection shop, connected",
-      "recordsTitle": "A record that follows the material",
+      "shopTitle": "Run your collection desk",
+      "recordsTitle": "Follow each material hand-off",
       "paymentTitle": "Clear weights. Clear payments.",
       "questionsTitle": "Before you start"
     },
@@ -250,7 +250,7 @@
     "metaDescription": "Dated reference prices per kilogram. Each business sets its own offers. Choose a material to view available history.",
     "eyebrow": "India",
     "title": "Material prices",
-    "lead": "Dated reference prices per kilogram. Each business sets its own offers. Choose a material to view available history.",
+    "lead": "Choose a material to check dated reference prices and available history. Each business sets its own offers.",
     "demoNote": "Sample prices for the prototype, not live market rates.",
     "date": "Prices for {date}",
     "floorHelp": "Reference price: dated information, not a required minimum or a shop offer.",
@@ -296,13 +296,13 @@
       "label": "{material}: price per kilo, day by day. Use the arrow keys to move between days.",
       "point": "{date}: {price}",
       "floor": "Reference {price}",
-      "table": "Show the numbers",
+      "table": "View price data",
       "tableCaption": "{material}, price per kilo by day",
       "date": "Date",
       "price": "Price per kg"
     },
     "unavailable": {
-      "title": "Prices aren't available right now",
+      "title": "Price data unavailable",
       "body": "The price board is being connected. Please check back soon."
     },
     "empty": {
@@ -310,7 +310,7 @@
       "body": "Today's prices will show here once they're published."
     },
     "error": {
-      "title": "Prices couldn't load",
+      "title": "Could not load prices",
       "body": "Check your connection and try again.",
       "retry": "Try again"
     },
@@ -626,21 +626,21 @@
     "metaTitle": "Help centre",
     "metaDescription": "Simple guides, answers and training for households, kabadiwalas, preprocessors, recyclers, manufacturers and Saathis on Luma.Green.",
     "eyebrow": "Help centre",
-    "title": "How can we help?",
-    "lead": "Short guides, plain answers and quick training for everyone on Luma.Green.",
+    "title": "Find your next step",
+    "lead": "Search for an answer or choose your role for guides and training.",
     "home": "Help",
     "breadcrumb": "You are here",
     "hours": "Monday to Saturday, 9 am to 7 pm",
     "replyTime": "We reply within one working day.",
     "search": {
       "label": "Search help",
-      "placeholder": "Awaiting gateway",
+      "placeholder": "Search pickups, prices or documents",
       "clear": "Clear search",
       "summary": "{count, plural, =0 {No answers} one {# answer} other {# answers}} for “{query}”",
       "topicSummary": "{count, plural, =0 {No answers} one {# answer} other {# answers}} about {topic}",
-      "emptyTitle": "Nothing found",
-      "emptyBody": "Try one short word, pick a topic, or ask us directly.",
-      "ask": "Ask us",
+      "emptyTitle": "No matching answers",
+      "emptyBody": "Try a shorter search, choose a topic or contact support.",
+      "ask": "Contact support",
       "guide": "Guide",
       "question": "Question",
       "forRoles": "For {roles}",
@@ -661,8 +661,8 @@
       "disputes": "Problems and disputes",
       "privacy": "Privacy"
     },
-    "rolesHeading": "Help for you",
-    "rolesLead": "Choose who you are to see your guides, questions and training.",
+    "rolesHeading": "Choose guides for your work",
+    "rolesLead": "Select your role to find the steps, answers and training you need.",
     "guideCount": "{count, plural, one {# guide} other {# guides}}",
     "roles": {
       "household": {
@@ -705,14 +705,14 @@
     "role": {
       "onThisPage": "On this page",
       "guidesHeading": "Guides",
-      "guidesLead": "Step by step, with pictures.",
+      "guidesLead": "Follow each step and its picture.",
       "steps": "{count, plural, one {# step} other {# steps}}",
       "faqsHeading": "Common questions",
-      "faqsLead": "Tap a question to see the answer.",
+      "faqsLead": "Open a question to read its answer.",
       "tutorialsHeading": "Videos",
       "tutorialsLead": "Short videos in your language.",
       "trainingHeading": "Training",
-      "trainingLead": "Short lessons. Mark each one done as you go.",
+      "trainingLead": "Open a lesson, then mark it done when you finish.",
       "otherRoles": "Help for someone else"
     },
     "guide": {
@@ -733,22 +733,22 @@
       "markDone": "Mark as done",
       "openGuide": "Open the guide",
       "badgeTitle": "Training complete",
-      "badgeBody": "Well done! You finished every lesson. Come back any time for a refresher.",
+      "badgeBody": "All lessons are complete. Open any lesson to review it.",
       "reset": "Start again",
       "savedHere": "Your progress is saved on this device."
     },
     "contactStrip": {
-      "title": "Still need help?",
+      "title": "Need an answer from the team?",
       "body": "Talk to a person. We reply within one working day.",
       "call": "Call",
       "whatsapp": "WhatsApp",
-      "write": "Write to us"
+      "write": "Message support"
     },
     "contact": {
       "metaTitle": "Contact support",
       "metaDescription": "Send the Luma.Green team a message. We reply within one working day.",
-      "title": "Contact us",
-      "lead": "A real person reads every message. Ask in your own words.",
+      "title": "Ask the support team",
+      "lead": "Describe what you need help with in your own words.",
       "formHeading": "Send a message",
       "name": "Your name",
       "phone": "Mobile number",
@@ -757,7 +757,7 @@
       "topic": "What is it about?",
       "choose": "Choose one",
       "message": "Your message",
-      "messageHint": "What happened, and when? Add your booking or trade number if you have one.",
+      "messageHint": "Tell us what happened and when. Include a booking or trade number if you have one.",
       "messageCount": "{count, number} of {max, number}",
       "roles": {
         "household": "A household",
@@ -795,7 +795,7 @@
         "generic": "We couldn't send that. Check your connection and try again.",
         "rateLimited": "Too many messages from this number. Please try again in an hour."
       },
-      "unavailableTitle": "Messages are switched off here",
+      "unavailableTitle": "Messaging is unavailable",
       "unavailableBody": "Please try again later.",
       "otherWays": "Other ways to reach us",
       "callTitle": "Call us",
@@ -1892,30 +1892,30 @@
     "metaTitle": "Log in",
     "verifyMetaTitle": "Enter your code",
     "chooseLanguage": "Choose your language",
-    "chooseLanguageHint": "You can change it any time from the top of the screen.",
+    "chooseLanguageHint": "You can change the language from the top of the screen.",
     "continue": "Continue",
-    "title": "Log in with your mobile number",
+    "title": "Sign in with your phone",
     "lead": "For kabadiwalas, preprocessors, recyclers, manufacturers and Saathis.",
     "mobileLabel": "Mobile number",
-    "mobileHint": "We'll send a 6-digit code to this number.",
+    "mobileHint": "Enter your number to receive a 6-digit code.",
     "mobileInvalid": "Enter a 10-digit Indian mobile number.",
-    "sendCode": "Send OTP",
+    "sendCode": "Send code",
     "sending": "Sending…",
     "sendFailed": "We couldn't send the code. Please try again in a minute.",
     "homeTitle": "Recycling from home?",
     "homeLink": "See how it works",
     "privacy": "We use your number only to sign you in and to send you updates about your work on Luma.Green.",
-    "unavailableTitle": "Phone sign-in opens soon",
+    "unavailableTitle": "Phone sign-in unavailable",
     "unavailableBody": "SMS sign-in is unavailable. Please try again later.",
     "verifyTitle": "Enter the 6-digit code",
     "sentTo": "Sent by SMS to {phone}",
     "codeLabel": "6-digit code",
-    "verify": "Verify",
+    "verify": "Confirm code",
     "verifying": "Checking…",
     "resendIn": "You can ask for a new code in {seconds, plural, one {# second} other {# seconds}}",
     "resend": "Send a new code",
     "resent": "We've sent a new code.",
-    "changeNumber": "Change number",
+    "changeNumber": "Use a different number",
     "errorInvalid": "That code isn't right. Check the SMS and try again.",
     "errorExpired": "That code has expired. Ask for a new one.",
     "errorTooMany": "Too many tries. Ask for a new code.",
@@ -1930,16 +1930,16 @@
     "twoFactorBackupDescription": "Enter one saved recovery code. Each code works once.",
     "twoFactorBackupLabel": "Recovery code",
     "twoFactorExpired": "Your sign-in has expired. Start again with a new phone code.",
-    "twoFactorRestart": "Start again",
+    "twoFactorRestart": "Restart sign-in",
     "resendCountdown": "Resend OTP in {time}"
   },
   "join": {
     "metaTitle": "Join Luma.Green",
     "metaDescription": "Choose your role and complete signup.",
-    "title": "Join Luma.Green",
-    "lead": "Choose your role and complete signup.",
-    "start": "Start",
-    "youNeed": "You'll need",
+    "title": "Choose your work on Luma.Green",
+    "lead": "Select your role to start signup.",
+    "start": "Start signup",
+    "youNeed": "Prepare these details",
     "homeTitle": "Recycling from home?",
     "homeBody": "You don't need to join. Book a pickup whenever you have something to sell.",
     "homeLink": "See how it works",
@@ -1974,8 +1974,8 @@
       "signOut": "Sign out"
     },
     "consent": {
-      "title": "Before you start",
-      "lead": "What we'll ask for, and why.",
+      "title": "Prepare your application",
+      "lead": "Check the details we need and how we use them.",
       "why": {
         "kabadiwala": "Your shop's address and opening hours. Your GST number if you have one.",
         "business": "Your GST number, pollution-control documents and machine photos.",
@@ -1995,7 +1995,7 @@
       "submitting": "Sending…",
       "next": "Next: documents",
       "back": "Back",
-      "fixErrors": "Some answers need a look. They're marked below.",
+      "fixErrors": "Check the marked answers before you continue.",
       "yes": "Yes",
       "no": "No",
       "optional": "optional",
@@ -2008,7 +2008,7 @@
       "locationFailed": "Couldn't get your location. Allow location for this site, or just type the address. We'll confirm it when we call.",
       "locationWhy": "So nearby homes and buyers can find you.",
       "loginPhone": "Your login number",
-      "otherPhones": "Other numbers",
+      "otherPhones": "Additional contact numbers",
       "otherPhonesHint": "Up to two more, like a helper or partner. We only call them about your work.",
       "addPhone": "Add a number",
       "remove": "Remove",
@@ -2029,7 +2029,7 @@
         "sat": "Sat",
         "sun": "Sun"
       },
-      "changesTitle": "What to fix",
+      "changesTitle": "Update these details",
       "city": "City or locality",
       "stateUT": "State or union territory"
     },
@@ -2058,7 +2058,7 @@
       "step": "Step {step} of 2",
       "businessName": "Business name",
       "materials": "Materials you handle",
-      "materialsHint": "So we can connect you with the right sellers and buyers.",
+      "materialsHint": "Choose materials to help match you with sellers and buyers.",
       "materialNames": {
         "paper": "Paper",
         "plastic": "Plastic",
@@ -2069,7 +2069,7 @@
       "address": "Address",
       "addressHint": "Plot, street and area",
       "locationTags": "Area names",
-      "locationTagsHint": "Help others find you, like Peenya Industrial Area. Up to five.",
+      "locationTagsHint": "Add up to five area names, such as Peenya Industrial Area.",
       "addTag": "Add",
       "collects": "Do you collect from your suppliers?",
       "hours": "Working hours"
@@ -2078,7 +2078,7 @@
       "title": "Documents and photos",
       "lead": "We check your consent on the pollution control board's public register.",
       "notRequired": "Our unit doesn't need a consent",
-      "notRequiredHint": "Tell us a little more",
+      "notRequiredHint": "Explain why consent is not required.",
       "reason": "Why it isn't needed",
       "board": "Which board issued it?",
       "boards": {
@@ -2103,7 +2103,7 @@
       "areaHint": "Your area, like Malleshwaram",
       "radius": "How far can you travel?",
       "radiusOption": "{km} km",
-      "workTypes": "Work you want",
+      "workTypes": "Choose your work",
       "work": {
         "home_pickups": "Pickups from homes",
         "shop_help": "Help at a kabadiwala shop",
@@ -2213,8 +2213,8 @@
       "expired": "This consent has expired. Upload the renewed one.",
       "explainMore": "Tell us a little more",
       "declaration": "Please confirm this",
-      "fileMissing": "Please add this",
-      "fileType": "This kind of file can't be used here",
+      "fileMissing": "Add the required file.",
+      "fileType": "Choose a supported file type.",
       "fileTooBig": "This file is too big",
       "uploadFailed": "Upload failed. Try again.",
       "uploadUnavailable": "Private file uploads are unavailable right now.",
@@ -2279,7 +2279,7 @@
   },
   "saathi": {
     "greeting": "Hello, {name}",
-    "lead": "Paid work around {area}. Take a job, do it, mark it done.",
+    "lead": "Find work around {area}. Choose a job and mark it done after you finish.",
     "demoNote": "Sample data: the jobs, businesses and pay here are examples for the prototype.",
     "week": {
       "label": "Earned this week",
@@ -2289,17 +2289,17 @@
     "today": {
       "title": "Your jobs today",
       "empty": "No jobs for today",
-      "emptyBody": "Take an open job below. It shows up here on its day."
+      "emptyBody": "Choose an open job below. It will appear here on the scheduled day."
     },
     "upcoming": {
       "title": "Coming up",
-      "hint": "You can mark it done on the day."
+      "hint": "Mark each job done after you finish, on its scheduled day."
     },
     "open": {
       "title": "Open jobs",
       "lead": "Jobs in your area come first.",
       "empty": "No open jobs right now",
-      "emptyBody": "New jobs from shops, preprocessors and factories show up here."
+      "emptyBody": "Check here for new jobs from shops, preprocessors and factories."
     },
     "work": {
       "home_pickups": "Pickups from homes",
@@ -2325,10 +2325,10 @@
     "pay": "Pay",
     "take": "Take this job",
     "taking": "Taking…",
-    "taken": "Job taken. It's on your list now.",
+    "taken": "Job added to your schedule.",
     "markDone": "Mark done",
     "saving": "Saving…",
-    "doneToast": "Well done! {pay} added to your earnings.",
+    "doneToast": "Job completed. {pay} added to your earnings.",
     "confirm": {
       "title": "Finished this job?",
       "body": "{title} in {area}. {pay} will be added to your earnings.",
@@ -2419,10 +2419,10 @@
   },
   "compliance": {
     "title": "Compliance",
-    "lead": "Your licences and records in one place.",
+    "lead": "Review your licences, consent status and supporting records.",
     "demoNote": "Sample data: the documents, receipts and amounts here are examples for the prototype.",
     "checklist": {
-      "title": "Checklist",
+      "title": "Records to review",
       "whatThisMeans": "What this means:"
     },
     "status": {
@@ -2531,8 +2531,8 @@
     "metaTitle": "Book a collection",
     "metaDescription": "Clear out recyclables. Get paid. Photos, pickup or drop-off, and payment after weighing.",
     "eyebrow": "India",
-    "title": "Book a collection from home",
-    "lead": "Pick what you have, choose a shop near you, and get paid in cash when it's weighed.",
+    "title": "Plan your next collection",
+    "lead": "Choose a nearby shop and a collection time. The shop weighs your materials before payment.",
     "promises": {
       "label": "Why sell here",
       "noAccount": "Verify your phone to book",
@@ -2540,8 +2540,8 @@
       "verified": "Verified shops"
     },
     "unavailable": {
-      "title": "Booking opens soon",
-      "body": "We're setting up bookings for homes. Please check back shortly."
+      "title": "Booking is unavailable",
+      "body": "We cannot accept a household booking right now. Please check again later."
     },
     "demoNote": "Sample prices for the prototype, not live market rates.",
     "loadError": "We couldn't load this. Check your connection and try again.",
@@ -2741,7 +2741,7 @@
     "simple": {
       "title": "Recycle",
       "photos": "Add photos",
-      "photoHint": "Show us what you want to recycle.",
+      "photoHint": "Show the materials you want to recycle. The shop records their weight later.",
       "details": "Your details",
       "next": "Find nearby shops",
       "location": "Use my location",
@@ -2779,11 +2779,11 @@
     },
     "hero": {
       "requested": "{mode, select, pickup {Waiting for {shop} to accept} other {Waiting for {shop} to confirm}}",
-      "requestedBody": "We've sent your request. This page updates as soon as they answer.",
+      "requestedBody": "Your request is with the shop. Check this page for its response.",
       "accepted": "{mode, select, pickup {{shop} accepted your pickup} other {{shop} is expecting you}}",
       "acceptedBody": "Keep your materials ready. The shop weighs them, then pays you in cash.",
       "on_the_way": "{shop} is on the way",
-      "on_the_wayBody": "Keep your materials ready near the door.",
+      "on_the_wayBody": "Keep your materials near the door for collection.",
       "completed": "Done! You got {amount}",
       "completedBody": "Thank you for recycling. Your points are added to your number.",
       "declined": "{shop} couldn't take this booking",
@@ -2943,12 +2943,12 @@
     },
     "browse": {
       "title": "Buy",
-      "lead": "Browse offers from approved suppliers for the materials you handle.",
+      "lead": "Find material you handle. Compare offers from approved suppliers.",
       "filterLabel": "Filter by material",
       "all": "All",
       "count": "{count, plural, =0 {No lots} one {# lot on sale} other {# lots on sale}}",
-      "emptyTitle": "Nothing on sale right now",
-      "emptyBody": "New lots show up here as soon as they're listed.",
+      "emptyTitle": "No material listed yet",
+      "emptyBody": "New lots appear here when suppliers list them.",
       "notForYouTitle": "Kabadiwalas buy from households",
       "notForYouBody": "On the market you sell: offer your sorted stock to preprocessors.",
       "goSell": "Sell to preprocessors"
@@ -2960,7 +2960,7 @@
       "notForYouBody": "Find recycled material from verified recyclers.",
       "goBuy": "Buy material",
       "form": {
-        "title": "New listing",
+        "title": "List material for sale",
         "material": "What are you selling?",
         "free": "{weight} free to sell",
         "allPromised": "All listed or sold",
@@ -3480,7 +3480,7 @@
     "description": "Add an authenticator code after your phone code.",
     "enabled": "On",
     "disabled": "Off",
-    "enable": "Set up",
+    "enable": "Set up authenticator",
     "disable": "Turn off",
     "recentSignIn": "Sign in again before changing security settings.",
     "signInAgain": "Sign in again",
@@ -3490,7 +3490,7 @@
     "backupTitle": "Save your recovery codes",
     "backupDescription": "Save these codes privately. Each works once after your phone code.",
     "savedCodes": "I saved my codes",
-    "regenerate": "Get new codes",
+    "regenerate": "Replace recovery codes",
     "regenerateDescription": "Your old recovery codes will stop working. Save the new codes before you leave.",
     "disableDescription": "Sign-in will use phone codes only. Your authenticator and recovery codes will stop working.",
     "errorCode": "That code did not work. Please try again.",
@@ -3668,7 +3668,7 @@
   "lots": {
     "carbonEvidenceDraft": "Internal carbon evidence draft",
     "title": "Lots and quality",
-    "lead": "Record measured material, processing and physical hand-offs.",
+    "lead": "Track measured material through processing and each physical hand-off.",
     "evidenceNote": "These records describe physical evidence. They do not change stock, payment, legal ownership or certificates.",
     "notBusiness": "Select an active business workspace to use lot records.",
     "readOnly": "Your workspace role can read these records.",
@@ -3678,7 +3678,7 @@
     "empty": "No records yet.",
     "limit": "Only the first 100 records are shown.",
     "declare": "Declare a lot",
-    "detail": "Lot detail",
+    "detail": "Selected lot",
     "back": "All lots",
     "material": "Material code or name",
     "state": "Physical state",
@@ -3985,7 +3985,7 @@
   },
   "facility": {
     "title": "Facilities and processes",
-    "lead": "Record the sites and processes your business declares. This profile does not verify a facility or permit a material trade.",
+    "lead": "Add your sites and declared processes. A profile does not verify a facility or permit a material trade.",
     "add": "Add facility",
     "edit": "Edit facility",
     "name": "Facility name",
@@ -4271,11 +4271,11 @@
   },
   "qualityDocuments": {
     "title": "Quality documents",
-    "lead": "Attach evidence to an inspection. Buyer decisions are separate from the inspector’s observations and do not move stock or payment.",
+    "lead": "Add inspection evidence, then review buyer decisions. Decisions are separate from inspector observations and do not move stock or payment.",
     "businessRequired": "Select an active business workspace.",
     "inspections": "Open lot inspections",
     "readOnly": "Your workspace role can read these records.",
-    "own": "Your documents",
+    "own": "Documents you hold",
     "incoming": "Shared with your business",
     "empty": "No records yet.",
     "decisions": "Buyer decision history",
@@ -4354,8 +4354,8 @@
   "serviceRecords": {
     "title": "Services and programmes",
     "unavailable": "Provider execution and redemption are unavailable. Records do not approve loans, insurance, welfare or payments.",
-    "enquiries": "Service enquiries",
-    "programmes": "Programme records",
+    "enquiries": "Enquiries and responses",
+    "programmes": "Programmes and reports",
     "edit": "Edit",
     "reported": "Reported figures. Evidence is not verified. No municipal agreement or funded reward is implied.",
     "area": "Area",
@@ -4534,7 +4534,7 @@
   },
   "papers": {
     "title": "Paper records",
-    "lead": "Confirmation saves evidence only. Stock and money stay unchanged.",
+    "lead": "Check the original and confirm the text. Confirmation saves evidence only; stock and money stay unchanged.",
     "upload": "Add paper image",
     "source": "Original image",
     "text": "Transcribed text",
@@ -4573,7 +4573,7 @@
     "draftBook": "Price book {version}",
     "draftUsage": "Cash orders ({count})",
     "title": "Site plan",
-    "lead": "Save a plan preference for this site.",
+    "lead": "Compare site plans and save your preference.",
     "off": "Billing is off. A preference does not start a paid subscription.",
     "plan": "Plan",
     "monthly": "Target monthly price",
@@ -4634,7 +4634,7 @@
   },
   "privacyRequests": {
     "title": "Privacy requests",
-    "lead": "Choose a request. The privacy team will review it and reply. Keep the request number for your records.",
+    "lead": "Select a request for the privacy team to review. Keep its number so you can track the reply.",
     "kind": "Request type",
     "submit": "Send request",
     "received": "Request received",
@@ -4748,8 +4748,8 @@
     "footprint": "Footprint",
     "settings": "Settings",
     "loading": "Loading bookings…",
-    "noBookings": "No bookings yet.",
-    "electricityTitle": "Electricity footprint",
+    "noBookings": "Your collection bookings will appear here.",
+    "electricityTitle": "Check your electricity footprint",
     "electricityReading": "Grid electricity used (kWh)",
     "invalidReading": "Enter the kWh from your bill or meter. Use up to three decimal places.",
     "calculate": "Calculate estimate",
@@ -4760,7 +4760,7 @@
     "roofSolar": "Rooftop solar check",
     "roofPrecision": "The roof check needs precise location.",
     "lookupConsent": "Send my location to Google Maps for this check. Luma does not save it.",
-    "lookupUnavailable": "No result is available.",
+    "lookupUnavailable": "This check is unavailable. Try again later.",
     "locationUnavailable": "Couldn’t get a suitable location.",
     "lookupLimit": "Lookup limit reached. Try again later.",
     "airScore": "Universal AQI: {score} out of 100. Higher is better.",

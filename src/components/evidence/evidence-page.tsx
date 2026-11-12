@@ -87,119 +87,123 @@ function EvidenceHistory({ orgId }: { orgId: Id<"orgs"> }) {
         lead={t("lead")}
         actions={canOperate ? <ReferenceForm /> : undefined}
       />
-      <section className="space-y-3 rounded-xl border border-border/60 bg-card p-5">
-        <p className="text-sm text-muted-foreground">{t("export.notice")}</p>
-        <div className="flex flex-wrap gap-2">
-          {(["csv", "json"] as const).map((kind) => (
-            <ActionButton
-              key={kind}
-              label={t(kind === "csv" ? "export.download" : "export.json")}
-              isDisabled={
-                status === "LoadingFirstPage" ||
-                status === "LoadingMore" ||
-                results.some((row) => row.orgId !== orgId)
-              }
-              onClick={() => {
-                let url: string | undefined;
-                try {
-                  const input = {
-                    orgId,
-                    generatedAt: Date.now(),
-                    complete: status === "Exhausted",
-                    references: results,
-                  };
-                  const content =
-                    kind === "csv"
-                      ? evidencePreparationCsv(input)
-                      : evidencePreparationExport(input);
-                  url = URL.createObjectURL(
-                    new Blob([content], {
-                      type:
-                        kind === "csv"
-                          ? "text/csv;charset=utf-8"
-                          : "application/json",
-                    }),
-                  );
-                  const anchor = document.createElement("a");
-                  anchor.href = url;
-                  anchor.download = `luma-unfiled-evidence.${kind}`;
-                  anchor.click();
-                } catch {
-                  toast.error(common("error"));
-                } finally {
-                  if (url) URL.revokeObjectURL(url);
+      <div className="grid min-w-0 items-start gap-5 lg:grid-cols-[minmax(0,1fr)_18rem]">
+        <section className="space-y-3 rounded-panel border border-border/60 bg-card p-5 text-card-foreground lg:sticky lg:top-24 lg:col-start-2 lg:row-start-1">
+          <p className="text-sm text-muted-foreground">{t("export.notice")}</p>
+          <div className="flex flex-wrap gap-2">
+            {(["csv", "json"] as const).map((kind) => (
+              <ActionButton
+                key={kind}
+                label={t(kind === "csv" ? "export.download" : "export.json")}
+                isDisabled={
+                  status === "LoadingFirstPage" ||
+                  status === "LoadingMore" ||
+                  results.some((row) => row.orgId !== orgId)
                 }
+                onClick={() => {
+                  let url: string | undefined;
+                  try {
+                    const input = {
+                      orgId,
+                      generatedAt: Date.now(),
+                      complete: status === "Exhausted",
+                      references: results,
+                    };
+                    const content =
+                      kind === "csv"
+                        ? evidencePreparationCsv(input)
+                        : evidencePreparationExport(input);
+                    url = URL.createObjectURL(
+                      new Blob([content], {
+                        type:
+                          kind === "csv"
+                            ? "text/csv;charset=utf-8"
+                            : "application/json",
+                      }),
+                    );
+                    const anchor = document.createElement("a");
+                    anchor.href = url;
+                    anchor.download = `luma-unfiled-evidence.${kind}`;
+                    anchor.click();
+                  } catch {
+                    toast.error(common("error"));
+                  } finally {
+                    if (url) URL.revokeObjectURL(url);
+                  }
+                }}
+              />
+            ))}
+          </div>
+          <p className="text-sm">
+            {t(status === "Exhausted" ? "export.complete" : "export.partial")}
+          </p>
+        </section>
+        <div className="min-w-0 space-y-5 lg:col-start-1 lg:row-start-1">
+          {canOperate ? null : (
+            <p className="text-sm text-muted-foreground">{lots("readOnly")}</p>
+          )}
+          {status === "LoadingFirstPage" ? (
+            <ListSkeleton />
+          ) : (
+            <ul className="record-sheet divide-y divide-border/60 rounded-panel px-4 sm:px-5">
+              {results.map((row) => (
+                <li
+                  key={row.id}
+                  className="flex min-w-0 flex-col gap-3 py-5 sm:flex-row sm:justify-between"
+                >
+                  <div className="min-w-0 space-y-2">
+                    <h2 className="font-medium break-words">{row.reference}</h2>
+                    <p className="text-sm">
+                      {t(row.kind)} · {row.issuerName}
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      {t("unverified")} ·{" "}
+                      {format.dateTime(row.createdAt, { dateStyle: "medium" })}
+                    </p>
+                    {row.supersedesId ? (
+                      <p className="text-sm">
+                        {t("replacement", {
+                          reference:
+                            results.find((item) => item.id === row.supersedesId)
+                              ?.reference ?? row.supersedesId,
+                        })}
+                      </p>
+                    ) : null}
+                    {row.tradeId ? (
+                      <Link
+                        className="inline-flex min-h-11 items-center text-sm underline underline-offset-4"
+                        href="/app/trades"
+                      >
+                        {t("trade")}
+                      </Link>
+                    ) : null}
+                  </div>
+                  {canOperate && !replaced.has(row.id) ? (
+                    <div className="shrink-0">
+                      <ReferenceForm previous={row} />
+                    </div>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+          )}
+          {status === "Exhausted" && results.length === 0 ? (
+            <p className="text-muted-foreground">{lots("empty")}</p>
+          ) : null}
+          {status === "CanLoadMore" || status === "LoadingMore" ? (
+            <Button
+              variant="outline"
+              className="self-start"
+              disabled={status === "LoadingMore"}
+              onClick={() => {
+                loadMore(20);
               }}
-            />
-          ))}
-        </div>
-        <p className="text-sm">
-          {t(status === "Exhausted" ? "export.complete" : "export.partial")}
-        </p>
-      </section>
-      {canOperate ? null : (
-        <p className="text-sm text-muted-foreground">{lots("readOnly")}</p>
-      )}
-      {status === "LoadingFirstPage" ? (
-        <ListSkeleton />
-      ) : (
-        <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
-          {results.map((row) => (
-            <li
-              key={row.id}
-              className="flex min-w-0 flex-col gap-3 py-5 sm:flex-row sm:justify-between"
             >
-              <div className="min-w-0 space-y-2">
-                <h2 className="font-medium break-words">{row.reference}</h2>
-                <p className="text-sm">
-                  {t(row.kind)} · {row.issuerName}
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  {t("unverified")} ·{" "}
-                  {format.dateTime(row.createdAt, { dateStyle: "medium" })}
-                </p>
-                {row.supersedesId ? (
-                  <p className="text-sm">
-                    {t("replacement", {
-                      reference:
-                        results.find((item) => item.id === row.supersedesId)
-                          ?.reference ?? row.supersedesId,
-                    })}
-                  </p>
-                ) : null}
-                {row.tradeId ? (
-                  <Link
-                    className="inline-flex min-h-11 items-center text-sm underline underline-offset-4"
-                    href="/app/trades"
-                  >
-                    {t("trade")}
-                  </Link>
-                ) : null}
-              </div>
-              {canOperate && !replaced.has(row.id) ? (
-                <div className="shrink-0">
-                  <ReferenceForm previous={row} />
-                </div>
-              ) : null}
-            </li>
-          ))}
-        </ul>
-      )}
-      {status === "Exhausted" && results.length === 0 ? (
-        <p className="text-muted-foreground">{lots("empty")}</p>
-      ) : null}
-      {status === "CanLoadMore" || status === "LoadingMore" ? (
-        <Button
-          variant="outline"
-          className="self-start"
-          disabled={status === "LoadingMore"}
-          onClick={() => {
-            loadMore(20);
-          }}
-        >
-          {status === "LoadingMore" ? common("loading") : inbox("loadMore")}
-        </Button>
-      ) : null}
+              {status === "LoadingMore" ? common("loading") : inbox("loadMore")}
+            </Button>
+          ) : null}
+        </div>
+      </div>
     </div>
   );
 }

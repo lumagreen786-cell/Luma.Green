@@ -30,18 +30,18 @@ const roleIcons = {
 export function RoleCards() {
   const t = useTranslations("help");
   return (
-    <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
+    <ul className="divide-y divide-border rounded-panel bg-card px-5 shadow-panel sm:px-7">
       {HELP_ROLES.map((role) => (
         <li
           key={role}
           data-reveal
-          className="group relative flex gap-3 py-5 transition-colors hover:bg-muted/30 has-[a:focus-visible]:ring-3 has-[a:focus-visible]:ring-ring/50 sm:gap-5 sm:py-6"
+          className="group relative flex min-w-0 gap-4 py-5 transition-colors has-[a:focus-visible]:ring-3 has-[a:focus-visible]:ring-ring/50"
         >
           <div className="pt-0.5">
             <IconTile icon={roleIcons[role]} size="sm" />
           </div>
-          <div className="grid min-w-0 flex-1 gap-2 md:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)_auto] md:items-center md:gap-6">
-            <h3 className="text-lg font-semibold tracking-tight sm:text-xl">
+          <div className="grid min-w-0 flex-1 gap-2 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
+            <h3 className="text-base font-semibold tracking-tight">
               <Link
                 href={`/help/${role}`}
                 className="outline-none after:absolute after:inset-0"
@@ -49,10 +49,10 @@ export function RoleCards() {
                 {t(`roles.${role}.name`)}
               </Link>
             </h3>
-            <p className="text-sm leading-relaxed text-muted-foreground">
+            <p className="text-sm leading-relaxed text-muted-foreground sm:col-start-1">
               {t(`roles.${role}.who`)}
             </p>
-            <p className="flex items-center justify-between gap-5 text-sm font-medium text-primary">
+            <p className="flex items-center justify-between gap-5 text-sm font-medium text-foreground sm:col-start-2 sm:row-span-2 sm:row-start-1">
               {t("guideCount", { count: ROLE_HELP[role].guides.length })}
               <ArrowRightIcon
                 aria-hidden
@@ -76,8 +76,8 @@ export function OtherRoleLinks({ current }: { current: HelpRole }) {
           <Link
             href={`/help/${role}`}
             className={cn(
-              "inline-flex min-h-11 items-center border-b px-2 text-sm font-medium outline-none",
-              "hover:border-primary hover:text-primary focus-visible:ring-3 focus-visible:ring-ring/50",
+              "inline-flex min-h-11 items-center rounded-full bg-card px-4 text-sm font-medium outline-none",
+              "hover:border-primary hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50",
             )}
           >
             {t(`roles.${role}.name`)}

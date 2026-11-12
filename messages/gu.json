@@ -634,7 +634,7 @@
     "replyTime": "અમે એક કામકાજના દિવસમાં જવાબ આપીએ છીએ.",
     "search": {
       "label": "મદદમાં શોધો",
-      "placeholder": "ગેટવેની રાહમાં",
+      "placeholder": "શોધો",
       "clear": "શોધ ભૂંસો",
       "summary": "“{query}” માટે {count, plural, =0 {કોઈ જવાબ નથી} one {# જવાબ} other {# જવાબ}}",
       "topicSummary": "{topic} વિશે {count, plural, =0 {કોઈ જવાબ નથી} one {# જવાબ} other {# જવાબ}}",
@@ -1905,7 +1905,7 @@
     "homeTitle": "ઘરેથી પુનઃચક્રણ માટે સામાન આપો છો?",
     "homeLink": "તે કેવી રીતે કામ કરે છે તે જુઓ",
     "privacy": "તમારો નંબર ફક્ત લૉગ ઇન કરવા અને Luma.Green પર તમારા કામની માહિતી મોકલવા માટે જ વપરાય છે.",
-    "unavailableTitle": "ફોનથી લૉગ ઇન જલદી શરૂ થશે",
+    "unavailableTitle": "તમારા મોબાઇલ નંબરથી લૉગ ઇન કરો",
     "unavailableBody": "SMS દ્વારા લૉગિન ઉપલબ્ધ નથી. કૃપા કરીને પછી ફરી પ્રયાસ કરો.",
     "verifyTitle": "6 અંકનો કોડ દાખલ કરો",
     "sentTo": "{phone} પર SMS થી મોકલ્યો છે",

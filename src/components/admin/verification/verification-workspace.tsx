@@ -45,7 +45,7 @@ export function VerificationWorkspace() {
     <div
       className={
         selected
-          ? "grid min-w-0 gap-6 xl:grid-cols-[20rem_minmax(0,1fr)]"
+          ? "grid min-w-0 items-start gap-4 xl:grid-cols-[19rem_minmax(0,1fr)]"
           : "min-w-0"
       }
     >
@@ -54,7 +54,11 @@ export function VerificationWorkspace() {
         tabIndex={-1}
         role="region"
         aria-label="Verification queue"
-        className={selected ? "hidden min-w-0 xl:block" : "min-w-0"}
+        className={
+          selected
+            ? "hidden min-w-0 xl:sticky xl:top-6 xl:block xl:max-h-[calc(100dvh-3rem)] xl:overflow-y-auto"
+            : "min-w-0"
+        }
       >
         <VerificationQueue onSelect={select} compact={Boolean(selected)} />
       </div>
@@ -63,7 +67,7 @@ export function VerificationWorkspace() {
           ref={detail}
           tabIndex={-1}
           aria-label="Application review"
-          className="min-w-0 space-y-4 rounded-xl bg-card p-5 outline-none sm:p-6"
+          className="record-detail min-w-0 space-y-4 rounded-panel p-5 outline-none sm:p-6"
         >
           {decided ? (
             <div

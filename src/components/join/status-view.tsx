@@ -44,20 +44,26 @@ function StatusSection({
   children?: ReactNode;
 }) {
   const toneClass = {
-    neutral: "text-primary",
-    good: "text-primary",
+    neutral: "text-foreground",
+    good: "text-foreground",
     bad: "text-destructive",
   }[tone];
   return (
-    <section className="flex flex-col gap-6">
-      <span className={`flex size-8 items-center ${toneClass}`}>{icon}</span>
-      <div className="flex flex-col gap-1">
-        <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
-          {title}
-        </h1>
-        <p className="text-muted-foreground">{lead}</p>
+    <section className="flex flex-col gap-5">
+      <div className="flex items-start gap-4 rounded-xl bg-accent/30 p-4">
+        <span
+          className={`flex size-11 shrink-0 items-center justify-center rounded-full bg-card ${toneClass}`}
+        >
+          {icon}
+        </span>
+        <div className="flex flex-col gap-1">
+          <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
+            {title}
+          </h1>
+          <p className="text-muted-foreground">{lead}</p>
+        </div>
       </div>
-      {children}
+      <div className="flex flex-col gap-4">{children}</div>
     </section>
   );
 }
@@ -110,7 +116,7 @@ function ApplicationStatus({ application }: { application: Application }) {
   const format = useFormatter();
   const role = t(`roles.${application.kind}.title`);
   const roleLine = (
-    <p className="text-sm font-medium text-primary">
+    <p className="text-sm font-medium text-foreground">
       {t("status.roleLabel", { role })}
     </p>
   );
@@ -161,7 +167,7 @@ function ApplicationStatus({ application }: { application: Application }) {
                 <li key={key} className="flex gap-2 text-sm">
                   <CircleCheckIcon
                     aria-hidden
-                    className="mt-0.5 size-4 shrink-0 text-primary"
+                    className="mt-0.5 size-4 shrink-0 text-foreground"
                   />
                   {t(`status.checks.${checks}.${key}`)}
                 </li>

@@ -36,7 +36,7 @@ function InvoiceLink({
       href={invoicePath(receipt)}
       aria-label={t("view", { number: receipt.legacyReceiptNo })}
       className={cn(
-        "rounded font-mono text-sm font-medium text-primary underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50",
+        "rounded font-mono text-sm font-medium text-foreground underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50",
         className,
       )}
     >

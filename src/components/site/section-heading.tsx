@@ -21,7 +21,7 @@ export function SectionHeading({
     >
       <h2
         id={id}
-        className="scroll-mt-24 font-display text-3xl leading-[1.15] font-semibold tracking-tight text-balance sm:text-4xl lg:text-[2.75rem]"
+        className="scroll-mt-24 font-display text-3xl leading-[1.15] font-normal tracking-tight text-balance sm:text-4xl lg:text-[2.75rem]"
       >
         {title}
       </h2>

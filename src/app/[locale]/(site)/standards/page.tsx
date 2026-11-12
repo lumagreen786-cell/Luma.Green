@@ -75,17 +75,20 @@ export default async function StandardsPage() {
         scene="electronics"
       />
 
-      <Container className="flex flex-col gap-10 py-8 lg:py-12">
-        <nav aria-label={t("onThisPage")} className="flex flex-col gap-3">
+      <Container className="grid gap-4 pb-8 lg:grid-cols-[14rem_minmax(0,1fr)] lg:items-start">
+        <nav
+          aria-label={t("onThisPage")}
+          className="flex flex-col gap-3 rounded-panel bg-card p-4 shadow-panel lg:sticky lg:top-24"
+        >
           <p className="text-sm font-medium text-muted-foreground">
             {t("onThisPage")}
           </p>
-          <ul className="flex flex-wrap gap-2">
+          <ul className="flex flex-wrap gap-2 lg:flex-col">
             {sections.map((id) => (
               <li key={id}>
                 <a
                   href={`#${id}`}
-                  className="inline-flex min-h-11 items-center border-b px-3 text-sm font-medium outline-none hover:border-primary hover:text-primary focus-visible:ring-3 focus-visible:ring-ring/50"
+                  className="inline-flex min-h-11 w-full items-center rounded-full px-3 text-sm font-medium outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
                 >
                   {t(`${id}.nav`)}
                 </a>
@@ -93,134 +96,135 @@ export default async function StandardsPage() {
             ))}
           </ul>
         </nav>
-
-        <NormSection
-          id="codes"
-          icon={TagsIcon}
-          title={t("codes.title")}
-          body={t("codes.body")}
-        >
-          <MaterialCodes />
-        </NormSection>
-
-        <NormSection
-          id="grading"
-          icon={LayersIcon}
-          title={t("grading.title")}
-          body={t("grading.body")}
-          scene="sorting"
-        >
-          <RuleCards
-            rules={[
-              {
-                key: "dry",
-                icon: DropletOffIcon,
-                title: t("grading.dry.title"),
-                body: t("grading.dry.body"),
-              },
-              {
-                key: "sorted",
-                icon: LayersIcon,
-                title: t("grading.sorted.title"),
-                body: t("grading.sorted.body"),
-              },
-              {
-                key: "clean",
-                icon: SparklesIcon,
-                title: t("grading.clean.title"),
-                body: t("grading.clean.body"),
-              },
-            ]}
-          />
-        </NormSection>
-
-        <NormSection
-          id="weighing"
-          icon={ScaleIcon}
-          title={t("weighing.title")}
-          body={t("weighing.body")}
-          scene="fairWeighing"
-        >
-          <RuleCards
-            rules={[
-              {
-                key: "stamped",
-                icon: StampIcon,
-                title: t("weighing.stamped.title"),
-                body: t("weighing.stamped.body"),
-              },
-              {
-                key: "shown",
-                icon: EyeIcon,
-                title: t("weighing.shown.title"),
-                body: t("weighing.shown.body"),
-              },
-              {
-                key: "receipt",
-                icon: FileCheckIcon,
-                title: t("weighing.receipt.title"),
-                body: t("weighing.receipt.body"),
-              },
-            ]}
-          />
-        </NormSection>
-
-        <NormSection
-          id="custody"
-          icon={ReceiptTextIcon}
-          title={t("custody.title")}
-          body={t("custody.body")}
-          scene="dispatch"
-        >
-          <ReceiptAnatomy />
-        </NormSection>
-
-        <NormSection
-          id="verification"
-          icon={ShieldCheckIcon}
-          title={t("verification.title")}
-          body={t("verification.body")}
-        >
-          <VerificationList />
-        </NormSection>
-
-        <NormSection
-          id="escrow"
-          icon={LockIcon}
-          title={t("escrow.title")}
-          body={t("escrow.body")}
-        >
-          <EscrowSteps />
-        </NormSection>
-
-        <section
-          aria-labelledby="adopt-heading"
-          className="flex flex-col items-start gap-5 border-y py-8 text-foreground md:flex-row md:items-center md:justify-between"
-        >
-          <div className="flex max-w-2xl items-start gap-4">
-            <BookOpenCheckIcon aria-hidden className="mt-1 size-7 shrink-0" />
-            <div className="flex flex-col gap-2">
-              <h2
-                id="adopt-heading"
-                className="font-display text-2xl font-semibold tracking-tight"
-              >
-                {t("adopt.title")}
-              </h2>
-              <p className="text-muted-foreground">{t("adopt.body")}</p>
-            </div>
-          </div>
-          <Button
-            asChild
-            size="lg"
-            variant="default"
-            className="h-12 px-5 text-base"
+        <div className="grid min-w-0 gap-3">
+          <NormSection
+            id="codes"
+            icon={TagsIcon}
+            title={t("codes.title")}
+            body={t("codes.body")}
           >
-            <Link href="/help">
-              {t("adopt.cta")}
-              <ArrowRightIcon aria-hidden className="rtl:rotate-180" />
-            </Link>
-          </Button>
-        </section>
+            <MaterialCodes />
+          </NormSection>
+
+          <NormSection
+            id="grading"
+            icon={LayersIcon}
+            title={t("grading.title")}
+            body={t("grading.body")}
+            scene="sorting"
+          >
+            <RuleCards
+              rules={[
+                {
+                  key: "dry",
+                  icon: DropletOffIcon,
+                  title: t("grading.dry.title"),
+                  body: t("grading.dry.body"),
+                },
+                {
+                  key: "sorted",
+                  icon: LayersIcon,
+                  title: t("grading.sorted.title"),
+                  body: t("grading.sorted.body"),
+                },
+                {
+                  key: "clean",
+                  icon: SparklesIcon,
+                  title: t("grading.clean.title"),
+                  body: t("grading.clean.body"),
+                },
+              ]}
+            />
+          </NormSection>
+
+          <NormSection
+            id="weighing"
+            icon={ScaleIcon}
+            title={t("weighing.title")}
+            body={t("weighing.body")}
+            scene="fairWeighing"
+          >
+            <RuleCards
+              rules={[
+                {
+                  key: "stamped",
+                  icon: StampIcon,
+                  title: t("weighing.stamped.title"),
+                  body: t("weighing.stamped.body"),
+                },
+                {
+                  key: "shown",
+                  icon: EyeIcon,
+                  title: t("weighing.shown.title"),
+                  body: t("weighing.shown.body"),
+                },
+                {
+                  key: "receipt",
+                  icon: FileCheckIcon,
+                  title: t("weighing.receipt.title"),
+                  body: t("weighing.receipt.body"),
+                },
+              ]}
+            />
+          </NormSection>
+
+          <NormSection
+            id="custody"
+            icon={ReceiptTextIcon}
+            title={t("custody.title")}
+            body={t("custody.body")}
+            scene="dispatch"
+          >
+            <ReceiptAnatomy />
+          </NormSection>
+
+          <NormSection
+            id="verification"
+            icon={ShieldCheckIcon}
+            title={t("verification.title")}
+            body={t("verification.body")}
+          >
+            <VerificationList />
+          </NormSection>
+
+          <NormSection
+            id="escrow"
+            icon={LockIcon}
+            title={t("escrow.title")}
+            body={t("escrow.body")}
+          >
+            <EscrowSteps />
+          </NormSection>
+
+          <section
+            aria-labelledby="adopt-heading"
+            className="flex flex-col items-start gap-4 rounded-panel bg-card p-5 text-card-foreground shadow-panel"
+          >
+            <div className="flex max-w-2xl items-start gap-4">
+              <BookOpenCheckIcon aria-hidden className="mt-1 size-7 shrink-0" />
+              <div className="flex flex-col gap-2">
+                <h2
+                  id="adopt-heading"
+                  className="font-display text-xl font-medium tracking-tight"
+                >
+                  {t("adopt.title")}
+                </h2>
+                <p className="text-muted-foreground">{t("adopt.body")}</p>
+              </div>
+            </div>
+            <Button
+              asChild
+              size="lg"
+              variant="default"
+              className="h-12 px-5 text-base"
+            >
+              <Link href="/help">
+                {t("adopt.cta")}
+                <ArrowRightIcon aria-hidden className="rtl:rotate-180" />
+              </Link>
+            </Button>
+          </section>
+        </div>
       </Container>
     </>
   );

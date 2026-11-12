@@ -634,7 +634,7 @@
     "replyTime": "Nous répondons sous un jour ouvré.",
     "search": {
       "label": "Rechercher dans l’aide",
-      "placeholder": "En attente de la passerelle",
+      "placeholder": "Rechercher",
       "clear": "Effacer la recherche",
       "summary": "{count, plural, =0 {Aucune réponse} one {# réponse} other {# réponses}} pour « {query} »",
       "topicSummary": "{count, plural, =0 {Aucune réponse} one {# réponse} other {# réponses}} sur {topic}",
@@ -1905,7 +1905,7 @@
     "homeTitle": "Vous recyclez depuis chez vous ?",
     "homeLink": "Découvrir le fonctionnement",
     "privacy": "Nous utilisons votre numéro uniquement pour vous connecter et vous informer de votre activité sur Luma.Green.",
-    "unavailableTitle": "La connexion par téléphone sera bientôt disponible",
+    "unavailableTitle": "Connectez-vous avec votre portable",
     "unavailableBody": "La connexion par SMS est indisponible. Réessayez plus tard.",
     "verifyTitle": "Saisissez le code à 6 chiffres",
     "sentTo": "Envoyé par SMS au {phone}",

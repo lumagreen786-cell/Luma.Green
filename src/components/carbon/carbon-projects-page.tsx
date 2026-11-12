@@ -101,82 +101,90 @@ function Projects({
   >(() => new Set());
   if (!rows) return <ListSkeleton />;
   return (
-    <>
-      {canOperate ? <CreateProject orgId={orgId} /> : <p>{lots("readOnly")}</p>}
-      {rows.rows.length === 0 ? (
-        <p>{lots("empty")}</p>
-      ) : (
-        <ul className="space-y-4">
-          {rows.rows.map((project) => (
-            <li
-              key={project.id}
-              className="space-y-4 rounded-xl bg-card p-5 sm:p-6"
-            >
-              <ProjectSummary project={project} />
-              {canOperate && !project.industry ? (
-                <AssignIndustry orgId={orgId} project={project} />
-              ) : null}
-              {project.snapshotRevision === project.revision ? (
-                <DownloadReview orgId={orgId} project={project} />
-              ) : null}
-              <Button
-                type="button"
-                variant="outline"
-                aria-expanded={openBatchProject === project.id}
-                onClick={() => {
-                  setOpenBatchProject(
-                    openBatchProject === project.id ? null : project.id,
-                  );
-                }}
+    <div className="grid min-w-0 items-start gap-4 xl:grid-cols-[minmax(18rem,0.85fr)_minmax(0,1.6fr)]">
+      <aside className="min-w-0 xl:sticky xl:top-6">
+        {canOperate ? (
+          <CreateProject orgId={orgId} />
+        ) : (
+          <p>{lots("readOnly")}</p>
+        )}
+      </aside>
+      <div className="min-w-0">
+        {rows.rows.length === 0 ? (
+          <p>{lots("empty")}</p>
+        ) : (
+          <ul className="space-y-4">
+            {rows.rows.map((project) => (
+              <li
+                key={project.id}
+                className="space-y-4 rounded-panel bg-card p-5 text-card-foreground sm:p-6"
               >
-                {operations("batches")}
-              </Button>
-              {openBatchProject === project.id ? (
-                <ProjectBatches
-                  orgId={orgId}
-                  project={project}
-                  canOperate={canOperate}
-                />
-              ) : null}
-              <Button
-                type="button"
-                variant="outline"
-                aria-expanded={openScreeningProject === project.id}
-                onClick={() => {
-                  if (!visitedScreeningProjects.has(project.id)) {
-                    setVisitedScreeningProjects((previous) =>
-                      new Set(previous).add(project.id),
+                <ProjectSummary project={project} />
+                {canOperate && !project.industry ? (
+                  <AssignIndustry orgId={orgId} project={project} />
+                ) : null}
+                {project.snapshotRevision === project.revision ? (
+                  <DownloadReview orgId={orgId} project={project} />
+                ) : null}
+                <Button
+                  type="button"
+                  variant="outline"
+                  aria-expanded={openBatchProject === project.id}
+                  onClick={() => {
+                    setOpenBatchProject(
+                      openBatchProject === project.id ? null : project.id,
                     );
-                  }
-                  setOpenScreeningProject(
-                    openScreeningProject === project.id ? null : project.id,
-                  );
-                }}
-              >
-                {t("title")}
-              </Button>
-              {visitedScreeningProjects.has(project.id) ? (
-                <FrameworkScreening
-                  orgId={orgId}
-                  projectId={project.id}
-                  industry={project.industry}
-                  canOperate={canOperate}
-                  isOpen={openScreeningProject === project.id}
-                />
-              ) : null}
-              {canOperate ? (
-                <ProjectActions
-                  orgId={orgId}
-                  project={project}
-                  canReview={canReview}
-                />
-              ) : null}
-            </li>
-          ))}
-        </ul>
-      )}
-      {rows.hasMore ? <p>{evidence("export.partial")}</p> : null}
-    </>
+                  }}
+                >
+                  {operations("batches")}
+                </Button>
+                {openBatchProject === project.id ? (
+                  <ProjectBatches
+                    orgId={orgId}
+                    project={project}
+                    canOperate={canOperate}
+                  />
+                ) : null}
+                <Button
+                  type="button"
+                  variant="outline"
+                  aria-expanded={openScreeningProject === project.id}
+                  onClick={() => {
+                    if (!visitedScreeningProjects.has(project.id)) {
+                      setVisitedScreeningProjects((previous) =>
+                        new Set(previous).add(project.id),
+                      );
+                    }
+                    setOpenScreeningProject(
+                      openScreeningProject === project.id ? null : project.id,
+                    );
+                  }}
+                >
+                  {t("title")}
+                </Button>
+                {visitedScreeningProjects.has(project.id) ? (
+                  <FrameworkScreening
+                    orgId={orgId}
+                    projectId={project.id}
+                    industry={project.industry}
+                    canOperate={canOperate}
+                    isOpen={openScreeningProject === project.id}
+                  />
+                ) : null}
+                {canOperate ? (
+                  <ProjectActions
+                    orgId={orgId}
+                    project={project}
+                    canReview={canReview}
+                  />
+                ) : null}
+              </li>
+            ))}
+          </ul>
+        )}
+        {rows.hasMore ? <p>{evidence("export.partial")}</p> : null}
+      </div>
+    </div>
   );
 }
 
@@ -536,7 +544,7 @@ function CreateProject({ orgId }: { orgId: Id<"orgs"> }) {
       onSubmit={(event) => {
         void submit(event);
       }}
-      className="max-w-2xl space-y-4 rounded-xl bg-card p-5 sm:p-6"
+      className="max-w-2xl space-y-4 rounded-panel bg-card p-5 text-card-foreground sm:p-6"
     >
       <div className="space-y-2">
         <Label htmlFor={`${id}-name`}>{t("name")}</Label>

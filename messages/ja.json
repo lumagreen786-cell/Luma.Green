@@ -634,7 +634,7 @@
     "replyTime": "1営業日以内に返信します。",
     "search": {
       "label": "ヘルプを検索",
-      "placeholder": "決済ゲートウェイ待ち",
+      "placeholder": "検索",
       "clear": "検索をクリア",
       "summary": "「{query}」の回答：{count, plural, =0 {なし} one {#件} other {#件}}",
       "topicSummary": "{topic}の回答：{count, plural, =0 {なし} one {#件} other {#件}}",
@@ -1905,7 +1905,7 @@
     "homeTitle": "自宅からリサイクルしますか？",
     "homeLink": "仕組みを見る",
     "privacy": "電話番号はログインと、Luma.Greenでのお仕事に関するお知らせにのみ使用します。",
-    "unavailableTitle": "電話番号でのログインは準備中です",
+    "unavailableTitle": "携帯電話番号でログイン",
     "unavailableBody": "SMSでのログインは利用できません。後でもう一度お試しください。",
     "verifyTitle": "6桁のコードを入力",
     "sentTo": "{phone}にSMSで送信しました",

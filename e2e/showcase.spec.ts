@@ -44,10 +44,14 @@ async function expectStoryImages(region: Locator, count: number) {
     await image.scrollIntoViewIfNeeded();
     await expect
       .poll(async () =>
-        image.evaluate(
-          (element: HTMLImageElement) =>
-            element.complete && element.naturalWidth > 0,
-        ),
+        image.evaluate((element: HTMLImageElement) => {
+          const bounds = element.getBoundingClientRect();
+          return (
+            element.complete &&
+            element.naturalWidth >= bounds.width &&
+            element.naturalHeight >= bounds.height
+          );
+        }),
       )
       .toBe(true);
   }
@@ -87,8 +91,12 @@ for (const width of [390, 1440]) {
           await expectStoryImages(artwork, 1);
           await expect(artwork).toBeVisible();
           const bounds = await artwork.boundingBox();
-          expect(bounds?.height).toBeLessThanOrEqual(112);
-          expect(bounds?.width).toBeCloseTo(256, 0);
+          if (!bounds) throw new Error("Task artwork must have visible bounds");
+          const isHelp = route.includes("/help");
+          expect(bounds.width).toBeCloseTo(isHelp ? 112 : 96, 0);
+          expect(bounds.height).toBeCloseTo(isHelp ? 96 : 72, 0);
+          expect(bounds.x).toBeGreaterThanOrEqual(0);
+          expect(bounds.x + bounds.width).toBeLessThanOrEqual(width);
         }
       }
       await expectNoDevicePreviews(page);
@@ -123,7 +131,7 @@ test("home puts collection ahead of supporting content on a 360px phone", async 
   await page.setViewportSize({ width: 360, height: 800 });
   await page.goto("/en");
   const hero = page.getByRole("region", { name: english.home.hero.title });
-  await expect(hero.locator("img")).toBeVisible();
+  await expect(hero.locator("[data-recycling-illustration]")).toBeVisible();
   const action = hero.getByRole("link", {
     name: english.home.hero.sell,
     exact: true,

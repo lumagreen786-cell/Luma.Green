@@ -85,13 +85,13 @@ export function PhoneForm({
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-2">
-        <h1 className="font-display text-3xl leading-tight font-semibold tracking-tight wrap-anywhere sm:text-4xl">
+        <h1 className="font-display text-3xl leading-tight font-normal tracking-tight wrap-anywhere">
           {t("metaTitle")}
         </h1>
         {canSend ? null : (
           <p
             role="status"
-            className="text-sm leading-relaxed text-muted-foreground"
+            className="rounded-lg border border-border bg-attention/20 p-3 text-sm leading-relaxed text-foreground"
           >
             {t("unavailableBody")}
           </p>
@@ -111,7 +111,7 @@ export function PhoneForm({
             {t("mobileLabel")}
           </Label>
           <div
-            className="flex rounded-md border border-input bg-background transition-colors focus-within:border-ring focus-within:ring-3 focus-within:ring-ring/20"
+            className="flex rounded-full border border-input bg-muted/50 transition-colors focus-within:border-ring focus-within:ring-3 focus-within:ring-ring/20"
             dir="ltr"
           >
             <span className="flex h-12 items-center border-e border-input px-4 text-base font-medium text-muted-foreground tabular-nums">

@@ -28,10 +28,12 @@ export function TradeCard({
   side,
   compact = false,
   showSide = false,
+  selected = false,
 }: {
   trade: TradeView;
   side: TradeSide;
   compact?: boolean;
+  selected?: boolean;
   /** Label the card Buying or Selling, where both sides are mixed. */
   showSide?: boolean;
 }) {
@@ -85,35 +87,56 @@ export function TradeCard({
     legacyContent
   );
   return (
-    <article className="flex h-full min-w-0 flex-col gap-4 rounded-xl border border-border/60 bg-card p-4 sm:p-5">
+    <article
+      className={cn(
+        "flex h-full min-w-0 flex-col gap-4 rounded-panel border border-border/60 p-4 sm:p-5",
+        { "record-sheet": !selected, "record-detail": selected },
+      )}
+    >
       <TradeHeading trade={trade} side={side} showSide={showSide} />
-      {compact ? null : <OfferSpecification value={trade.specification} />}
-      {compact ? null : (
-        <OfferComparison
-          listing={{
-            askPaisePerKg: trade.paisePerKg,
-            freightPaisePerKg: trade.freightPaisePerKg,
-            deliveryAvailableAt: trade.deliveryAvailableAt,
-          }}
-        />
-      )}
-      {compact || isHistorical || trade.status === "declined" ? null : (
-        <TradeSteps status={trade.status} />
-      )}
-      {hasDirectCash ? (
-        <>
-          <DirectCash trade={trade} side={side} compact={compact} />
-          {!compact &&
-          trade.status === "accepted" &&
-          trade.directCashAvailable ? (
-            <FinancialLifecycle tradeId={trade.id} actionsOnly />
-          ) : null}
-        </>
-      ) : (
-        financialContent
-      )}
+      <div
+        className={cn(
+          "grid min-w-0 gap-5",
+          !compact && "xl:grid-cols-[minmax(0,1.2fr)_minmax(16rem,1fr)]",
+        )}
+      >
+        <div className={cn("min-w-0 space-y-4", { hidden: compact })}>
+          {compact ? null : <OfferSpecification value={trade.specification} />}
+          {compact ? null : (
+            <OfferComparison
+              listing={{
+                askPaisePerKg: trade.paisePerKg,
+                freightPaisePerKg: trade.freightPaisePerKg,
+                deliveryAvailableAt: trade.deliveryAvailableAt,
+              }}
+            />
+          )}
+          {compact || isHistorical || trade.status === "declined" ? null : (
+            <TradeSteps status={trade.status} />
+          )}
+        </div>
+        <div
+          className={cn(
+            "min-w-0 space-y-4",
+            !compact && "record-detail rounded-panel p-5",
+          )}
+        >
+          {hasDirectCash ? (
+            <>
+              <DirectCash trade={trade} side={side} compact={compact} />
+              {!compact &&
+              trade.status === "accepted" &&
+              trade.directCashAvailable ? (
+                <FinancialLifecycle tradeId={trade.id} actionsOnly />
+              ) : null}
+            </>
+          ) : (
+            financialContent
+          )}
+          <TradeActions trade={trade} />
+        </div>
+      </div>
       <TradeNotes trade={trade} />
-      <TradeActions trade={trade} />
       {compact ? null : <TradeFooter trade={trade} />}
     </article>
   );
@@ -206,7 +229,7 @@ function TradeFooter({ trade }: { trade: TradeView }) {
       {receiptReference ? (
         <Link
           href={`/app/trades/${trade.id}/invoice`}
-          className="inline-flex min-h-11 items-center gap-1.5 rounded-md font-medium text-primary underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
+          className="inline-flex min-h-11 items-center gap-1.5 rounded-md font-medium text-foreground underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
         >
           <ReceiptTextIcon aria-hidden className="size-4" />
           {t("receipt", { number: receiptReference })}

@@ -11,7 +11,6 @@ import { actionName } from "@/components/site/action-name";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 
-import materialYard from "../../../../public/images/showcase/material-yard.webp";
 import { Container } from "../container";
 import { SectionHeading } from "../section-heading";
 
@@ -43,10 +42,10 @@ export async function ShopWorkday() {
   return (
     <section
       aria-labelledby="shop-workday-heading"
-      className="bg-muted/35 py-10 sm:py-12 lg:py-24"
+      className="bg-background py-6 sm:py-8"
     >
-      <Container className="space-y-10">
-        <div className="grid min-w-0 grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-end lg:gap-16">
+      <Container className="space-y-5">
+        <div className="grid min-w-0 grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-end lg:gap-8">
           <SectionHeading
             id="shop-workday-heading"
             title={home("expansion.shopTitle")}
@@ -93,36 +92,41 @@ export async function ShopWorkday() {
             </Button>
           </div>
         </div>
-        <div
-          data-parallax-scene
-          className="relative aspect-[3/2] overflow-hidden rounded-xl bg-muted sm:aspect-[2.6/1]"
-        >
-          <Image
-            data-parallax="-20"
-            src={materialYard}
-            alt=""
-            fill
-            sizes="(min-width: 1280px) 1200px, 100vw"
-            className="object-cover object-center"
-          />
+        <div className="grid gap-4 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)]">
+          <div
+            data-parallax-scene
+            className="relative aspect-[2/1] overflow-hidden rounded-panel bg-muted lg:order-2 lg:aspect-auto"
+          >
+            <Image
+              data-parallax="-20"
+              src="/images/showcase/material-yard.webp"
+              alt=""
+              fill
+              sizes="(min-width: 1024px) 420px, 100vw"
+              className="object-cover object-center"
+            />
+          </div>
+          <ol className="record-sheet min-w-0 divide-y divide-border/60 overflow-hidden rounded-panel shadow-panel">
+            {tasks.map(({ icon: Icon, title, body }) => (
+              <li
+                key={title}
+                data-reveal
+                className="grid min-w-0 grid-cols-[2.75rem_minmax(0,1fr)] gap-x-4 gap-y-1 p-5 sm:p-6"
+              >
+                <Icon
+                  aria-hidden
+                  className="row-span-2 size-11 rounded-full bg-secondary/35 p-2.5 text-foreground"
+                />
+                <h3 className="font-display text-base font-normal tracking-tight">
+                  {title}
+                </h3>
+                <p className="col-start-2 text-sm leading-relaxed text-muted-foreground">
+                  {body}
+                </p>
+              </li>
+            ))}
+          </ol>
         </div>
-        <ol className="grid min-w-0 grid-flow-dense grid-cols-1 gap-8 md:grid-cols-3 md:gap-0">
-          {tasks.map(({ icon: Icon, title, body }) => (
-            <li
-              key={title}
-              data-reveal
-              className="flex min-w-0 flex-col gap-4 md:px-6 md:first:ps-0 md:last:pe-0"
-            >
-              <Icon aria-hidden className="size-6 text-primary" />
-              <h3 className="font-display text-xl font-semibold tracking-tight">
-                {title}
-              </h3>
-              <p className="text-sm leading-relaxed text-muted-foreground">
-                {body}
-              </p>
-            </li>
-          ))}
-        </ol>
       </Container>
     </section>
   );

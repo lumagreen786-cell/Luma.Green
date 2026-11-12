@@ -46,21 +46,28 @@ export function PriceTables() {
         lead="Select a city to manage its dated indicative prices."
       />
       <DemoNote>Sample prices for the prototype, not market rates.</DemoNote>
-      <PriceRules />
-      <CityField
-        value={input}
-        onChange={setInput}
-        labels={{
-          city: "City or locality",
-          state: "State or union territory",
-          choose: "Choose one",
-          cityError: "Enter a city or locality using 2–60 letters and spaces.",
-        }}
-      />
-      {city ? <PriceGroups rows={rows} city={city} /> : null}
-      <CatalogueSetup />
-      <CatalogueNames />
-      <MaterialClassification />
+      <div className="grid min-w-0 items-start gap-4 xl:grid-cols-[minmax(16rem,0.7fr)_minmax(0,1.8fr)]">
+        <aside className="min-w-0 space-y-4 xl:sticky xl:top-6">
+          <PriceRules />
+          <CityField
+            value={input}
+            onChange={setInput}
+            labels={{
+              city: "City or locality",
+              state: "State or union territory",
+              choose: "Choose one",
+              cityError:
+                "Enter a city or locality using 2–60 letters and spaces.",
+            }}
+          />
+        </aside>
+        <div className="min-w-0 space-y-4">
+          {city ? <PriceGroups rows={rows} city={city} /> : null}
+          <CatalogueSetup />
+          <CatalogueNames />
+          <MaterialClassification />
+        </div>
+      </div>
     </div>
   );
 }
@@ -79,12 +86,12 @@ function PriceRules() {
     },
   ];
   return (
-    <ul className="grid gap-4 rounded-xl bg-card p-5 sm:grid-cols-2 sm:gap-6 sm:p-6">
+    <ul className="grid gap-4 rounded-panel bg-card p-5 text-card-foreground sm:gap-6 sm:p-6">
       {rules.map((rule) => (
         <li key={rule.title} className="flex gap-3">
           <rule.icon
             aria-hidden
-            className="mt-0.5 size-4 shrink-0 text-primary"
+            className="mt-0.5 size-4 shrink-0 text-foreground"
           />
           <span className="flex flex-col gap-0.5 text-sm">
             <span className="font-medium">{rule.title}</span>
@@ -119,7 +126,7 @@ function PriceGroups({
         <section
           key={family}
           aria-labelledby={`family-${family}`}
-          className="min-w-0 rounded-xl bg-card px-5 pb-3 sm:px-6"
+          className="min-w-0 rounded-panel bg-card px-5 pb-3 text-card-foreground sm:px-6"
         >
           <div className="flex items-baseline justify-between gap-2 border-b py-4">
             <h2 id={`family-${family}`} className="font-semibold">

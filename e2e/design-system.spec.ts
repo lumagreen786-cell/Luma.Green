@@ -105,33 +105,58 @@ for (const { locale, copy } of [
   });
 }
 
-test("business choices remain static, readable and keyboard accessible", async ({
+test("business role tabs expose one readable detail and support keyboard navigation", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
-  const region = page.getByRole("region", {
-    name: english.home.hero.join,
+  const region = page.getByRole("region", { name: english.home.hero.join });
+  await expect(region.getByRole("tab")).toHaveCount(5);
+  const first = region.getByRole("tab", {
+    name: english.home.roles.kabadiwala.title,
+    exact: true,
   });
-  const links = region.getByRole("link");
-  await expect(links).toHaveCount(5);
-  const materialLinks = await links.all();
-  for (const link of materialLinks) {
+  await first.focus();
+  await expect(first).toBeFocused();
+  await page.keyboard.press("ArrowDown");
+  const second = region.getByRole("tab", {
+    name: english.home.roles.yard.title,
+    exact: true,
+  });
+  await expect(second).toBeFocused();
+  await expect(second).toHaveAttribute("aria-selected", "true");
+  for (const role of [
+    "kabadiwala",
+    "yard",
+    "recycler",
+    "manufacturer",
+    "saathi",
+  ] as const) {
+    const tab = region.getByRole("tab", {
+      name: english.home.roles[role].title,
+      exact: true,
+    });
+    await tab.focus();
+    await page.keyboard.press("Enter");
+    await expect(tab).toHaveAttribute("aria-selected", "true");
+    const link = region.getByRole("tabpanel").getByRole("link");
+    await expect(region.getByRole("link")).toHaveCount(1);
+    await expect(link).toHaveAttribute("href", `/join/${role}`);
+    await expectActionTextToFit(link);
     await expect(link).toHaveCSS("animation-name", "none");
     await link.focus();
     await expect(link).toBeFocused();
-    await expect(link).toHaveAttribute("href", /\/join\//);
   }
 });
 
-test("mobile navigation shows the brand mark and puts language in the side menu", async ({
+test("mobile navigation shows the brand name and puts language in the side menu", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/kn");
   const header = page.locator("header").first();
   await expect(header.getByRole("img", { name: "Luma.Green" })).toBeVisible();
-  await expect(header.getByText("Luma.Green", { exact: true })).toBeHidden();
+  await expect(header.getByText("Luma.Green", { exact: true })).toBeVisible();
   await expect(header.getByRole("button", { name: /ಕನ್ನಡ/ })).toHaveCount(0);
   await header.getByRole("button", { name: kannada.nav.openMenu }).click();
   const menu = page.getByRole("dialog");
