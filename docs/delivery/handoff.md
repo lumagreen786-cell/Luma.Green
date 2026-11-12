@@ -10,8 +10,16 @@ No PDF, backend setting, production record, binary or provider action changed.
 The separate historical `luma-overhaul` worktree has a verified private recovery
 archive at `/Users/syedabdulmuqeeth/Developer/Archives/luma-overhaul-2026-11-12`.
 Its 3,843 archived files match their source bytes and its Git bundle verifies.
-Cleanup follows the checked local commit. Keep the primary checkout and the
-archive. PR #53 remains draft; this task does not claim a push, merge or release.
+The old worktree was removed after a second backup comparison confirmed Git
+status, both patches and all 3,843 file contents still matched. The primary
+checkout and private archive remain intact.
+
+UI commit: `44b449812041571507db6517b223a1d9a20a3342`. Required local checks
+passed, with 534 fixture captures and 112 public captures passing. The browser
+suite passed 934/936 cases; both selector failures were fixed and the 8-test
+motion suite passed afterward. A further 98 focused browser checks passed.
+See the delivery record for limits and receipt links. PR #53 remains draft;
+no push, merge, deployment or native publication was performed.
 
 ## Florin redesign in progress — 11 November 2026
 

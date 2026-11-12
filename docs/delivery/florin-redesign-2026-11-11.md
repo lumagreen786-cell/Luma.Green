@@ -1,6 +1,6 @@
 # Florin UI rebuild — 11 November 2026
 
-Status: local implementation complete; final capture closeout in progress. PR #53 is draft.
+Status: local implementation, verification and worktree cleanup complete. PR #53 is draft.
 No Florin production acceptance is claimed at this checkpoint.
 
 The owner replaced Ship X with the full Florin reference, including invoices,
@@ -35,7 +35,7 @@ Initial targeted theme/home tests passed 36 cases. Native types, 68 policy and
 21 UI tests passed. Initial public checks passed 436 cases plus a 122-case
 composition recheck. Under concurrent workload, later runs had timeouts and lint
 exhausted its default heap. Those incomplete runs are not release evidence.
-Coordinated required checks and final rendered acceptance remain in progress.
+These initial results are superseded by the completed local checks below.
 No PDF changed and no production data/provider action was performed.
 
 Coordinated full unit run: **395 suites / 3,254 cases passed**, 187.87s.
@@ -82,3 +82,35 @@ A private recovery archive was saved under
 Its Git bundle verified, and all 3,843 archived files matched their source bytes.
 The source archive preserves local settings; dependency and generated build
 trees are excluded. It is not part of the Git commit.
+
+## Final local verification and cleanup
+
+UI commit: `44b449812041571507db6517b223a1d9a20a3342`
+(`feat(ui): complete Florin redesign across web and Expo`).
+
+- Final fixture capture run: **534/534 passed**; source hash unchanged.
+- Final public capture run: **112/112 passed**; tracked source unchanged.
+- Full browser run: **934/936 passed**. Two logo-selector failures were fixed;
+  all **8 motion tests** then passed. The complete 936-case suite was not rerun.
+- Further focused browser checks: **98/98 passed**, including admin phone themes.
+- Final workspace/admin unit checks: **21 passed**; material-filter checks:
+  **7 passed**. Formatting and `git diff --check` passed.
+
+The capture manifests are retained in
+[evidence/florin-2026-11-11/layout-manifest.json](evidence/florin-2026-11-11/layout-manifest.json)
+and [evidence/florin-public-2026-11-11/manifest.json](evidence/florin-public-2026-11-11/manifest.json).
+The public manifest records the pre-commit HEAD and tracked-diff hash: captures
+were made before the UI commit, with the same final source. Generated screenshots
+remain local ignored files. Selected public, workspace, admin, onboarding,
+translated and RTL views were visually inspected. The manifests retain pending
+review flags for the wider capture set; not every image was visually inspected.
+Private screens use isolated synthetic fixtures. Public pages use a disconnected
+production build. Neither proves live authentication, provider execution,
+physical-device behavior or Production acceptance.
+
+The historical worktree was checked again against the archive immediately before
+removal: Git status, both patches and all **3,843 file contents** still matched.
+`git worktree remove --force` then removed
+`/Users/syedabdulmuqeeth/.codex/worktrees/luma-overhaul/luma.green`.
+The primary checkout and private recovery archive remain intact. No push, PR
+update, merge, deployment, native binary or OTA publication was performed.
