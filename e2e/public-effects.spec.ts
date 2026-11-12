@@ -165,7 +165,7 @@ for (const locale of locales) {
                   : "",
             })),
           );
-        const expectedActions = { "": 5, "/help": 0, "/help/contact": 0 };
+        const expectedActions = { "": 2, "/help": 0, "/help/contact": 0 };
         expect(namedActions).toHaveLength(
           expectedActions[route as keyof typeof expectedActions],
         );

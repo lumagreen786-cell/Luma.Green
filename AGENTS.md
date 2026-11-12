@@ -1,3 +1,15 @@
+## Active Florin design — latest owner decision, 11 November 2026
+
+Use the full Florin reference, including **light and dark modes**, Urbanist,
+lime accents, pill navigation, round tab counters and 28px panels. This replaces
+all older Ship X/five-colour/light-only/Astryx composition rules below.
+Before UI work read `.agents/skills/luma-florin-ui/SKILL.md` and
+`docs/design/luma-design-system/README.md`. Saved reference screenshots live in
+`docs/design/inspiration/florin`. Match each page composition, not only tokens.
+Preserve original images, mobile wordmark/wrapping, workflows and security.
+Do not create or update any PDFs. Multiple agents and checked Production release
+remain authorized; native binaries, OTA and store submission remain separate.
+
 ## Current composition correction — 11 November 2026
 
 The owner requires page-specific layout rebuilding, not inherited layouts with

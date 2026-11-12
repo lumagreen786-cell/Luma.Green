@@ -140,7 +140,7 @@ function DemandBoard() {
           {board[side].length === 0 ? (
             <Empty />
           ) : (
-            <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
+            <ul className="record-sheet divide-y divide-border/60 rounded-panel px-4 sm:px-5">
               {board[side].map((row) => (
                 <li key={row.id} className="flex min-w-0 flex-col gap-3 py-5">
                   <h3 className="font-medium">
@@ -191,7 +191,7 @@ function Plans() {
       ) : (
         <>
           {rows.results.length === 0 ? <Empty /> : null}
-          <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
+          <ul className="record-sheet divide-y divide-border/60 rounded-panel px-4 sm:px-5">
             {rows.results.map((row) => (
               <li key={row._id} className="space-y-3 py-5">
                 <h2 className="font-medium">
@@ -254,7 +254,7 @@ function Qualifications() {
       ) : (
         <>
           {rows.results.length === 0 ? <Empty /> : null}
-          <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
+          <ul className="record-sheet divide-y divide-border/60 rounded-panel px-4 sm:px-5">
             {rows.results.map(({ record: r, supplierName }) => (
               <li key={r._id} className="space-y-2 py-5">
                 <h2 className="font-medium">
@@ -311,7 +311,7 @@ function AgreementList({ side }: { side: "buying" | "supplying" }) {
       ) : (
         <>
           {rows.results.length === 0 ? <Empty /> : null}
-          <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
+          <ul className="record-sheet divide-y divide-border/60 rounded-panel px-4 sm:px-5">
             {rows.results.map((item) => (
               <AgreementRow key={item.record._id} item={item} side={side} />
             ))}

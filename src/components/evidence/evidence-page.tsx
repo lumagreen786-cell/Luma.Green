@@ -88,7 +88,7 @@ function EvidenceHistory({ orgId }: { orgId: Id<"orgs"> }) {
         actions={canOperate ? <ReferenceForm /> : undefined}
       />
       <div className="grid min-w-0 items-start gap-5 lg:grid-cols-[minmax(0,1fr)_18rem]">
-        <section className="space-y-3 rounded-xl border border-border/60 bg-card p-5 lg:sticky lg:top-24 lg:col-start-2 lg:row-start-1">
+        <section className="space-y-3 rounded-panel border border-border/60 bg-card p-5 text-card-foreground lg:sticky lg:top-24 lg:col-start-2 lg:row-start-1">
           <p className="text-sm text-muted-foreground">{t("export.notice")}</p>
           <div className="flex flex-wrap gap-2">
             {(["csv", "json"] as const).map((kind) => (
@@ -145,7 +145,7 @@ function EvidenceHistory({ orgId }: { orgId: Id<"orgs"> }) {
           {status === "LoadingFirstPage" ? (
             <ListSkeleton />
           ) : (
-            <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
+            <ul className="record-sheet divide-y divide-border/60 rounded-panel px-4 sm:px-5">
               {results.map((row) => (
                 <li
                   key={row.id}

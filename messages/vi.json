@@ -634,7 +634,7 @@
     "replyTime": "Chúng tôi trả lời trong một ngày làm việc.",
     "search": {
       "label": "Tìm nội dung trợ giúp",
-      "placeholder": "Đang chờ cổng thanh toán",
+      "placeholder": "Tìm kiếm",
       "clear": "Xóa tìm kiếm",
       "summary": "{count, plural, =0 {Không có câu trả lời} one {# câu trả lời} other {# câu trả lời}} cho “{query}”",
       "topicSummary": "{count, plural, =0 {Không có câu trả lời} one {# câu trả lời} other {# câu trả lời}} về {topic}",
@@ -1905,7 +1905,7 @@
     "homeTitle": "Tái chế tại nhà?",
     "homeLink": "Xem cách hoạt động",
     "privacy": "Chúng tôi chỉ dùng số để đăng nhập và gửi cập nhật về công việc trên Luma.Green.",
-    "unavailableTitle": "Đăng nhập bằng điện thoại sắp mở",
+    "unavailableTitle": "Đăng nhập bằng số di động",
     "unavailableBody": "Không thể đăng nhập bằng SMS. Vui lòng thử lại sau.",
     "verifyTitle": "Nhập mã gồm 6 chữ số",
     "sentTo": "Đã gửi SMS đến {phone}",

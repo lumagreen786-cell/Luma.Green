@@ -52,7 +52,7 @@ export function MyListings() {
       </Section>
       {past.length > 0 ? (
         <Section title={t("past")}>
-          <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
+          <ul className="divide-y divide-border/60 rounded-panel border border-border/60 bg-card px-4 text-card-foreground sm:px-5">
             {past.map((listing) => (
               <li key={listing.id}>
                 <PastListing listing={listing} />

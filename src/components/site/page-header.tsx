@@ -12,20 +12,20 @@ import effects from "./public-effects.module.css";
 const headerLayout = cva("grid min-w-0 lg:items-center", {
   variants: {
     variant: {
-      editorial: "gap-3 py-6 sm:py-7",
-      task: "gap-4 py-6 sm:py-7 lg:grid-cols-[minmax(0,1fr)_6rem]",
+      editorial: "gap-3 py-7 sm:py-9",
+      task: "gap-4 py-7 sm:py-9 lg:grid-cols-[minmax(0,1fr)_6rem]",
     },
   },
   defaultVariants: { variant: "editorial" },
 });
 
 const headerTitle = cva(
-  "max-w-2xl font-display leading-[1.1] font-semibold tracking-tight text-balance",
+  "max-w-2xl font-display leading-[1.1] font-normal tracking-tight text-balance",
   {
     variants: {
       variant: {
-        editorial: "text-[1.75rem] sm:text-3xl",
-        task: "text-2xl leading-tight sm:text-3xl",
+        editorial: "text-3xl sm:text-5xl",
+        task: "text-3xl leading-tight sm:text-5xl",
       },
     },
     defaultVariants: { variant: "editorial" },

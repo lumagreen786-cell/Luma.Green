@@ -71,7 +71,7 @@ for (const locale of ["en", "kn", "ta", "ar", "ur", "de", "ru"]) {
               document.documentElement.classList.contains("dark"),
             ),
           )
-          .toBe(false);
+          .toBe(theme === "dark");
         await expect(page.locator("#requests")).toContainText(/\S/);
         // A document can fit while a long word still spills out of its column.
         await expect

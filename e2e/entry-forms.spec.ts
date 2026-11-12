@@ -26,9 +26,12 @@ for (const { locale, copy } of [
         await page.goto(`/${locale}/login`);
         const phone = page.getByLabel(copy.auth.mobileLabel, { exact: true });
         await expect(phone).toBeVisible();
-        // The approved palette stays light even when the OS prefers dark.
-        await expect(page.locator("html")).toHaveCSS("color-scheme", "light");
-        await expect(page.locator("html")).not.toHaveClass(/\bdark\b/);
+        // With no saved choice, the page follows the operating system.
+        await expect(page.locator("html")).toHaveCSS(
+          "color-scheme",
+          systemScheme,
+        );
+
         await page.evaluate(async () => document.fonts.ready);
         await expect(page.getByRole("complementary")).toHaveCount(0);
         const formBounds = await page.getByRole("main").boundingBox();
@@ -140,26 +143,20 @@ for (const { locale, copy } of [
           expect(picture).not.toBeNull();
           if (heading && picture) {
             expect(
-              Math.min(picture.y + picture.height, heading.y + heading.height) -
-                Math.max(picture.y, heading.y),
-              "The illustration and title share the desktop row",
-            ).toBeGreaterThan(0);
-            // Desktop actions fit their labels and share one row.
-            const action = await hero.locator('a[href$="/sell"]').boundingBox();
-            expect(action).not.toBeNull();
-            if (!action) throw new Error("Collection action must render");
+              picture.y,
+              "Dashboard content follows its title",
+            ).toBeGreaterThanOrEqual(heading.y + heading.height);
+            const action = await collection.boundingBox();
             const prices = await hero
-              .locator('a[data-slot="button"][href$="/prices"]')
+              .locator('a[href$="/prices"]')
               .boundingBox();
+            expect(action).not.toBeNull();
             expect(prices).not.toBeNull();
-            if (!prices) throw new Error("Price action must render");
-            expect(Math.abs(prices.y - action.y)).toBeLessThanOrEqual(1);
+            if (!action || !prices)
+              throw new Error("Dashboard actions must render");
             expect(action.width).toBeLessThan(picture.width);
-            expect(action.y).toBeGreaterThanOrEqual(heading.y + heading.height);
-            expect(
-              Math.min(picture.x + picture.width, action.x + action.width) -
-                Math.max(picture.x, action.x),
-            ).toBeLessThanOrEqual(0);
+            expect(action.y + action.height).toBeLessThanOrEqual(picture.y);
+            expect(Math.abs(prices.y - picture.y)).toBeLessThanOrEqual(1);
             expect(
               await page.evaluate(
                 () => document.documentElement.scrollWidth <= innerWidth,

@@ -91,6 +91,7 @@ function ProductionWorkspace({ canOperate }: { canOperate: boolean }) {
           {
             value: "recipes",
             label: t("recipes"),
+            count: data?.recipes.length,
             content: (
               <div className="space-y-5">
                 {canOperate ? <RecipeForm /> : null}
@@ -101,7 +102,7 @@ function ProductionWorkspace({ canOperate }: { canOperate: boolean }) {
                     {data.recipes.map((r) => (
                       <li
                         key={r.id}
-                        className="min-w-0 space-y-4 rounded-xl border border-border/60 bg-card p-5"
+                        className="min-w-0 space-y-4 rounded-panel border border-border/60 bg-card p-5 text-card-foreground"
                       >
                         <h2 className="font-display text-lg font-semibold">
                           {r.name} · {r.version}
@@ -138,6 +139,7 @@ function ProductionWorkspace({ canOperate }: { canOperate: boolean }) {
           {
             value: "batches",
             label: t("batches"),
+            count: data?.batches.length,
             content: (
               <div className="space-y-5">
                 {canOperate && data ? <BatchForm data={data} /> : null}
@@ -148,7 +150,7 @@ function ProductionWorkspace({ canOperate }: { canOperate: boolean }) {
                     {data.batches.map((b) => (
                       <li
                         key={b.id}
-                        className="min-w-0 space-y-4 rounded-xl border border-border/60 bg-card p-5"
+                        className="min-w-0 space-y-4 rounded-panel border border-border/60 bg-card p-5 text-card-foreground"
                       >
                         <h2 className="font-display text-lg font-semibold">
                           {b.reference}

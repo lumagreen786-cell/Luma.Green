@@ -16,8 +16,8 @@ import { localeMeta, locales } from "../src/i18n/locales";
 const headerSizes = [320, 390, 640, 768, 1024, 1280, 1440].map((width) => ({
   width,
   links: width < 1280 ? 1 : 7,
-  // The mobile menu or desktop language picker; appearance is light-only.
-  buttons: 1,
+  // Appearance plus menu/language; tablet and desktop also expose page switcher.
+  buttons: width < 640 ? 2 : 3,
   navigation: width < 1280 ? 0 : 1,
 }));
 const publicRoutes = [
@@ -289,7 +289,7 @@ for (const { locale, copy } of [
       ).toBeLessThanOrEqual(1);
       await expect(theme).toHaveCount(0);
       await page.emulateMedia({ colorScheme: "dark" });
-      await expect(page.locator("html")).not.toHaveClass(/dark/u);
+      await expect(page.locator("html")).toHaveClass(/dark/u);
       await language.click();
       await expect(page.getByRole("menuitemradio")).toHaveCount(locales.length);
       await page.keyboard.press("Escape");

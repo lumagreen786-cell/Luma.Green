@@ -25,7 +25,7 @@ export function ElectricityFootprint() {
         setEstimate(gridElectricityFootprint(reading, locale));
       }}
     >
-      <div className="flex flex-col gap-5 rounded-2xl bg-card p-5 sm:p-6">
+      <div className="flex flex-col gap-5 rounded-[1.75rem] bg-card p-5 text-card-foreground sm:p-6">
         <div className="flex flex-col gap-2">
           <Label htmlFor="electricity-reading">{t("electricityReading")}</Label>
           <Input
@@ -58,7 +58,7 @@ export function ElectricityFootprint() {
           label={t("calculate")}
         />
       </div>
-      <div className="flex flex-col gap-4 rounded-2xl bg-card p-5 sm:p-6">
+      <div className="flex flex-col gap-4 rounded-[1.75rem] bg-card p-5 text-card-foreground sm:p-6">
         <output
           aria-live="polite"
           className={
@@ -80,7 +80,7 @@ export function ElectricityFootprint() {
         </p>
         <a
           href={GRID_FACTOR_SOURCE}
-          className="self-start py-2 text-sm text-primary underline underline-offset-4"
+          className="self-start py-2 text-sm text-foreground underline underline-offset-4"
         >
           {t("gridSource")}
         </a>

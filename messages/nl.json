@@ -634,7 +634,7 @@
     "replyTime": "We antwoorden binnen één werkdag.",
     "search": {
       "label": "Hulp doorzoeken",
-      "placeholder": "Wachten op betaalprovider",
+      "placeholder": "Zoeken",
       "clear": "Zoekopdracht wissen",
       "summary": "{count, plural, =0 {Geen antwoorden} one {# antwoord} other {# antwoorden}} voor ‘{query}’",
       "topicSummary": "{count, plural, =0 {Geen antwoorden} one {# antwoord} other {# antwoorden}} over {topic}",
@@ -1905,7 +1905,7 @@
     "homeTitle": "Recyclen vanuit huis?",
     "homeLink": "Bekijk hoe het werkt",
     "privacy": "We gebruiken uw nummer alleen om in te loggen en updates over uw werk op Luma.Green te sturen.",
-    "unavailableTitle": "Inloggen via telefoon komt binnenkort",
+    "unavailableTitle": "Log in met uw mobiele nummer",
     "unavailableBody": "Inloggen via sms is niet beschikbaar. Probeer het later opnieuw.",
     "verifyTitle": "Voer de code van 6 cijfers in",
     "sentTo": "Per sms verstuurd naar {phone}",

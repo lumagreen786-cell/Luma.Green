@@ -103,7 +103,7 @@ function IncomingLots() {
               {incoming.rows.map((lot) => (
                 <li
                   key={lot.id}
-                  className="grid min-w-0 items-start gap-4 rounded-xl bg-card p-5 sm:grid-cols-[minmax(0,1fr)_auto]"
+                  className="grid min-w-0 items-start gap-4 rounded-panel bg-card p-5 text-card-foreground sm:grid-cols-[minmax(0,1fr)_auto]"
                 >
                   <div className="min-w-0 flex-1">
                     <Link
@@ -149,7 +149,7 @@ function HeldLots() {
               {held.rows.map((lot) => (
                 <li
                   key={lot.id}
-                  className="grid min-w-0 items-start gap-4 rounded-xl bg-card p-5 sm:grid-cols-[minmax(0,1fr)_auto]"
+                  className="grid min-w-0 items-start gap-4 rounded-panel bg-card p-5 text-card-foreground sm:grid-cols-[minmax(0,1fr)_auto]"
                 >
                   <div className="min-w-0 flex-1">
                     <Link
@@ -208,7 +208,7 @@ function SentLots() {
               {sent.rows.map((event) => (
                 <li
                   key={event.id}
-                  className="grid min-w-0 gap-3 rounded-xl bg-card p-5"
+                  className="grid min-w-0 gap-3 rounded-panel bg-card p-5 text-card-foreground"
                 >
                   <div className="flex flex-wrap justify-between gap-3">
                     <span className="font-medium break-words">
@@ -305,7 +305,7 @@ function LotDetail({ lotId }: { lotId: Id<"materialLots"> }) {
       {requiresControlledRoute(lot) ? (
         <p className="border-s-2 ps-4 text-sm">{t("controlledBlocked")}</p>
       ) : null}
-      <dl className="grid grid-cols-2 gap-4 rounded-xl bg-card p-5 sm:grid-cols-3 xl:grid-cols-6">
+      <dl className="grid grid-cols-2 gap-4 rounded-panel bg-card p-5 text-card-foreground sm:grid-cols-3 xl:grid-cols-6">
         <div>
           <dt className="text-sm text-muted-foreground">{t("streamClass")}</dt>
           <dd>{t(`streams.${lot.streamClass}`)}</dd>
@@ -360,7 +360,7 @@ function LotDetail({ lotId }: { lotId: Id<"materialLots"> }) {
       ) : null}
       <div className="grid min-w-0 items-start gap-6 xl:grid-cols-[minmax(18rem,1fr)_minmax(0,2fr)]">
         <section
-          className="flex min-w-0 flex-col gap-3 rounded-xl bg-card p-5"
+          className="flex min-w-0 flex-col gap-3 rounded-panel bg-card p-5 text-card-foreground"
           aria-labelledby="custody-history"
         >
           <h2 id="custody-history" className="text-lg font-semibold">

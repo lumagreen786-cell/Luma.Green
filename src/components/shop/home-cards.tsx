@@ -40,7 +40,7 @@ function BigCount({
     <p
       className={cn(
         "text-3xl font-semibold tracking-tight tabular-nums",
-        isHot && "text-primary",
+        isHot && "text-foreground",
       )}
     >
       {format.number(count)}

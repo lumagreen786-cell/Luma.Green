@@ -1,0 +1,144 @@
+Browser tab: 16, Title: "Products | Florin", URL: "https://ui.cortexcn.dev/previews/florin/products".
+1 AXWebArea Products | Florin, URL: ui.cortexcn.dev/previews/florin/products
+	2 link Description: Skip to content, Value: ui.cortexcn.dev/previews/florin/products#main
+	3 container
+		4 link Description: Florin, invoices, Value: ui.cortexcn.dev/previews/florin/
+		5 pop up button (collapsed) Description: All pages, Secondary Actions: Expand
+		6 pop up button (collapsed) Description: Notifications, Secondary Actions: Expand
+		7 link Description: Settings, Value: ui.cortexcn.dev/previews/florin/settings/
+		8 pop up button (collapsed) Description: Account menu, ID: radix-_R_tb5tlb_, Secondary Actions: Expand
+		9 container Billing
+			10 content list
+				11 link Description: Estimates, Value: ui.cortexcn.dev/previews/florin/estimates/
+				12 link Description: Invoices, Value: ui.cortexcn.dev/previews/florin/
+				13 link Description: Payments, Value: ui.cortexcn.dev/previews/florin/payments/
+				14 link Description: Recurring Invoices, Value: ui.cortexcn.dev/previews/florin/recurring/
+				15 link Description: Checkouts, Value: ui.cortexcn.dev/previews/florin/checkouts/
+	16 container main
+		17 container
+			18 button Back
+			19 heading Products, Value: 1
+				20 text Products
+			21 text The services and items your line items start from.
+			22 button New product
+		23 container
+			24 text Products 13 Most used Frontend development 11 lines Billed from the catalog this year $626,700.00
+			25 content list Billed by kind
+				26 container
+					27 text Hourly $268,300.00
+					28 progress indicator Description: Hourly: $268,300.00, Value: 43
+				29 container
+					30 text Fixed $293,600.00
+					31 progress indicator Description: Fixed: $293,600.00, Value: 47
+				32 container
+					33 text Monthly $64,800.00
+					34 progress indicator Description: Monthly: $64,800.00, Value: 10
+		35 container
+			36 tab group Products by kind
+				37 tab (selected, settable, boolean) All, Value: 1
+				38 tab (selectable, settable, boolean) Hourly 6, Value: 0
+				39 tab (selectable, settable, boolean) Fixed 5, Value: 0
+				40 tab (selectable, settable, boolean) Monthly 2, Value: 0
+			41 heading All products, Value: 2
+				42 text All products
+			43 content list
+				44 checkbox Description: Concept development, $8,640.00 /project, Value: 1
+					45 text Concept development
+					46 text $8,640.00
+					47 text /project
+					48 text 9 lines
+					49 text $77,760.00
+				50 checkbox Description: Design system, $9,600.00 /project, Value: 0
+					51 text Design system
+					52 text $9,600.00
+					53 text /project
+					54 text 8 lines
+					55 text $76,800.00
+				56 checkbox Description: Brand identity, $6,800.00 /project, Value: 0
+					57 text Brand identity
+					58 text $6,800.00
+					59 text /project
+					60 text 10 lines
+					61 text $68,000.00
+				62 checkbox Description: Frontend development, $135.00 /hr, Value: 0
+					63 text Frontend development
+					64 text $135.00
+					65 text /hr
+					66 text 11 lines
+					67 text $62,100.00
+				68 checkbox Description: Monthly retainer, $6,000.00 /mo, Value: 0
+					69 text Monthly retainer
+					70 text $6,000.00
+					71 text /mo
+					72 text 10 lines
+					73 text $60,000.00
+				74 checkbox Description: Backend development, $150.00 /hr, Value: 0
+					75 text Backend development
+					76 text $150.00
+					77 text /hr
+					78 text 7 lines
+					79 text $56,400.00
+				80 checkbox Description: CRM integration, $8,640.00 /project, Value: 0
+					81 text CRM integration
+					82 text $8,640.00
+					83 text /project
+					84 text 6 lines
+					85 text $51,840.00
+				86 checkbox Description: UX research, $140.00 /hr, Value: 0
+					87 text UX research
+					88 text $140.00
+					89 text /hr
+					90 text 9 lines
+					91 text $51,520.00
+				92 checkbox Description: Product design, $120.00 /hr, Value: 0
+					93 text Product design
+					94 text $120.00
+					95 text /hr
+					96 text 7 lines
+					97 text $37,440.00
+				98 checkbox Description: QA testing, $95.00 /hr, Value: 0
+					99 text QA testing
+					100 text $95.00
+					101 text /hr
+					102 text 10 lines
+					103 text $35,340.00
+				104 checkbox Description: Content migration, $85.00 /hr, Value: 0
+					105 text Content migration
+					106 text $85.00
+					107 text /hr
+					108 text 7 lines
+					109 text $25,500.00
+				110 checkbox Description: Discovery workshop, $2,400.00 /project, Value: 0
+					111 text Discovery workshop
+					112 text $2,400.00
+					113 text /project
+					114 text 8 lines
+					115 text $19,200.00
+				116 checkbox Description: Hosting and care, $480.00 /mo, Value: 0
+					117 text Hosting and care
+					118 text $480.00
+					119 text /mo
+					120 text 10 lines
+					121 text $4,800.00
+			122 container Concept development
+				123 text Concept development
+				124 text Early directions, flows, and a clickable prototype.
+				125 button Delete Concept development
+				126 text Rate
+				127 text $8,640.00 /project Taxable
+				128 button Edit
+				129 definition list
+					130 container Lines this year
+						131 text Lines this year
+					132 text 9
+					133 container Invoices
+						134 text Invoices
+					135 text 9
+					136 container Last billed
+						137 text Last billed
+					138 text Nov 1, 2026
+				139 text Billed this year
+				140 text $77,760.00
+	141 container Notifications alt+T
+
+The focused UI element is 1 AXWebArea Products | Florin, URL: ui.cortexcn.dev/previews/florin/products

@@ -26,12 +26,12 @@ export default async function HouseholdServicesPage() {
       <h1 className="font-display text-2xl font-semibold">{t("services")}</h1>
       <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
         <HouseholdLocationLookups />
-        <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-5">
+        <ul className="divide-y divide-border/60 rounded-[1.75rem] border border-border/60 bg-card px-5 text-card-foreground">
           {links.map(({ label, href, icon: Icon }) => (
             <li key={href}>
               <Link
                 href={href}
-                className="flex min-h-12 items-center gap-3 py-3 font-medium hover:text-primary"
+                className="flex min-h-12 items-center gap-3 py-3 font-medium hover:text-foreground"
               >
                 <Icon aria-hidden className="size-5 shrink-0" />
                 <span className="flex-1">{label}</span>

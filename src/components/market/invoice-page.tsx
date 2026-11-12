@@ -80,7 +80,7 @@ function Receipt({ id }: { id: string }) {
     return (
       <div className="flex flex-col gap-4" aria-busy="true">
         <Skeleton className="h-10 w-48" />
-        <Skeleton className="h-96 w-full rounded-xl" />
+        <Skeleton className="h-96 w-full rounded-panel" />
       </div>
     );
   }
@@ -163,9 +163,11 @@ function ReceiptDocument({
   return (
     <>
       <style>{PRINT_CSS}</style>
-      <div className="grid items-center gap-4 rounded-xl bg-card p-4 sm:grid-cols-[minmax(0,1fr)_auto_auto] print:hidden">
+      <div className="grid items-center gap-4 py-4 sm:grid-cols-[minmax(0,1fr)_auto_auto] print:hidden">
         <div className="min-w-0">
-          <p className="text-lg font-semibold">{t("receipt.title")}</p>
+          <p className="font-display text-4xl font-medium tracking-tight sm:text-5xl">
+            {t("receipt.title")}
+          </p>
         </div>
         <Button asChild variant="ghost" size="lg" className="h-11 px-2">
           <Link href="/app/trades">
@@ -187,7 +189,7 @@ function ReceiptDocument({
 
       <article
         id="trade-receipt"
-        className="grid min-w-0 gap-6 rounded-xl border border-border/60 bg-card p-5 sm:p-6 lg:grid-cols-[minmax(0,1fr)_19rem] print:flex print:flex-col print:border-0 print:p-0"
+        className="record-sheet flex min-w-0 flex-col gap-8 rounded-panel p-5 shadow-panel sm:p-8 lg:p-10 print:border-0 print:p-0 print:shadow-none"
       >
         <div className="flex flex-wrap items-start justify-between gap-4 border-b pb-5 lg:col-span-2">
           <div className="flex flex-col gap-3">
@@ -200,7 +202,9 @@ function ReceiptDocument({
             <dt className="text-muted-foreground">
               {t("receipt.numberLabel")}
             </dt>
-            <dd className="font-mono font-medium">{number}</dd>
+            <dd className="font-display text-2xl font-medium tracking-tight">
+              {number}
+            </dd>
             <dt className="text-muted-foreground">{t("receipt.dateLabel")}</dt>
             <dd>{fullDate(recordedAt)}</dd>
             <dt className="text-muted-foreground">
@@ -216,7 +220,7 @@ function ReceiptDocument({
           </dl>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:col-start-2 lg:row-span-2 lg:row-start-2 lg:grid-cols-1 print:grid-cols-2">
+        <div className="grid gap-6 sm:grid-cols-2 print:grid-cols-2">
           <Party title={t("receipt.seller")} party={receipt.seller} />
           <Party title={t("receipt.buyer")} party={receipt.buyer} />
         </div>
@@ -258,7 +262,7 @@ function ReceiptDocument({
                 </TableCell>
               </TableRow>
             </TableBody>
-            <TableFooter>
+            <TableFooter className="record-detail border-0">
               <TableRow>
                 <TableCell className="sm:hidden print:hidden">
                   {t("receipt.total")}
@@ -269,7 +273,7 @@ function ReceiptDocument({
                 >
                   {t("receipt.total")}
                 </TableCell>
-                <TableCell className="text-end text-base font-semibold tabular-nums">
+                <TableCell className="text-end text-2xl font-medium tabular-nums">
                   {format.money(receipt.totalPaise)}
                 </TableCell>
               </TableRow>
@@ -295,7 +299,7 @@ function ReceiptDocument({
             <p className="flex gap-2">
               <FileTextIcon
                 aria-hidden
-                className="mt-0.5 size-4 shrink-0 text-primary"
+                className="mt-0.5 size-4 shrink-0 text-foreground"
               />
               {t("receipt.ewayBill")}
             </p>

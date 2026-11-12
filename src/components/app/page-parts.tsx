@@ -16,9 +16,9 @@ export function AppPageHeader({
   actions?: ReactNode;
 }) {
   return (
-    <header className="grid min-w-0 gap-5 pb-2 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+    <header className="grid min-w-0 gap-5 pb-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
       <div className="flex min-w-0 flex-1 flex-col gap-2">
-        <h1 className="font-display text-[1.75rem] leading-tight font-semibold tracking-tight sm:text-[2rem]">
+        <h1 className="font-display text-4xl leading-[1.05] font-medium tracking-tight sm:text-5xl lg:text-[3.5rem]">
           {title}
         </h1>
         {lead ? (
@@ -50,7 +50,7 @@ export function StatCard({
   tone?: "neutral" | "good" | "warn";
 }) {
   return (
-    <div className="flex min-w-0 flex-col gap-3 rounded-2xl bg-card p-5">
+    <div className="flex min-w-0 flex-col gap-3 rounded-panel border border-border/50 bg-card p-5 text-card-foreground shadow-panel">
       <div className="flex items-start justify-between gap-2">
         <p className="min-w-0 flex-1 text-sm font-medium wrap-anywhere text-muted-foreground">
           {label}
@@ -60,14 +60,14 @@ export function StatCard({
             aria-hidden
             className={cn(
               "size-5 shrink-0",
-              tone === "good" && "text-primary",
-              tone === "warn" && "text-primary",
+              tone === "good" && "text-foreground",
+              tone === "warn" && "text-foreground",
               tone === "neutral" && "text-muted-foreground",
             )}
           />
         ) : null}
       </div>
-      <p className="font-display text-3xl font-semibold tracking-tight break-words tabular-nums sm:text-4xl">
+      <p className="font-display text-3xl font-medium tracking-tight break-words tabular-nums sm:text-4xl">
         {value}
       </p>
       {hint ? <p className="text-xs text-muted-foreground">{hint}</p> : null}
@@ -85,9 +85,9 @@ export function Section({
   children: ReactNode;
 }) {
   return (
-    <section className="flex min-w-0 flex-col gap-5 rounded-2xl bg-card p-5 sm:p-6">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border pb-4">
-        <h2 className="font-display text-lg font-semibold tracking-tight">
+    <section className="flex min-w-0 flex-col gap-5 rounded-panel border border-border/50 bg-card p-5 text-card-foreground shadow-panel sm:p-6">
+      <div className="flex flex-wrap items-center justify-between gap-3 pb-2">
+        <h2 className="font-display text-lg font-medium tracking-tight">
           {title}
         </h2>
         {action}
@@ -109,13 +109,11 @@ export function EmptyState({
   action?: ReactNode;
 }) {
   return (
-    <div className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-x-4 gap-y-2 rounded-2xl bg-card p-6">
+    <div className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-x-4 gap-y-2 rounded-panel border border-border/50 bg-card p-6 text-card-foreground shadow-panel">
       <span className="row-span-2 text-muted-foreground">
         <Icon aria-hidden className="size-6" strokeWidth={1.75} />
       </span>
-      <p className="font-display text-lg font-semibold tracking-tight">
-        {title}
-      </p>
+      <p className="font-display text-lg font-medium tracking-tight">{title}</p>
       {body ? (
         <p className="col-start-2 max-w-lg text-sm leading-relaxed text-muted-foreground">
           {body}
@@ -149,9 +147,9 @@ export function SettingsSection({
   return (
     <section
       aria-labelledby={id}
-      className="grid min-w-0 gap-5 rounded-2xl bg-card p-6 xl:grid-cols-[minmax(0,1fr)_minmax(0,3fr)] xl:gap-12"
+      className="grid min-w-0 gap-5 rounded-panel border border-border/50 bg-card p-6 text-card-foreground shadow-panel xl:grid-cols-[minmax(0,1fr)_minmax(0,3fr)] xl:gap-12"
     >
-      <h2 id={id} className="font-display text-lg font-semibold tracking-tight">
+      <h2 id={id} className="font-display text-lg font-medium tracking-tight">
         {title}
       </h2>
       <div className="min-w-0">{children}</div>
@@ -173,7 +171,7 @@ export function StatusPill({
         "inline-flex max-w-full items-center rounded-full px-3 py-1 text-xs leading-5 font-medium",
         tone === "neutral" && "bg-muted text-muted-foreground",
         tone === "info" && "bg-secondary text-secondary-foreground",
-        tone === "good" && "bg-primary/10 text-primary",
+        tone === "good" && "bg-primary/15 text-foreground",
         tone === "warn" && "bg-accent text-accent-foreground",
         tone === "bad" && "bg-destructive/10 text-destructive",
       )}

@@ -5,6 +5,7 @@ import {
   inboxFixture,
   securityFixture,
 } from "../scripts/guide-preview/account-fixtures";
+import { fixtureFontClasses } from "../scripts/guide-preview/appearance";
 import { authClient } from "../scripts/guide-preview/auth";
 import { redirect } from "../scripts/guide-preview/navigation";
 import {
@@ -182,7 +183,7 @@ describe("isolated operational documentation fixtures", () => {
   });
 });
 
-describe("isolated light-only design fixtures", () => {
+describe("isolated dual-theme design fixtures", () => {
   it("does not invent payment, entitlement, facility approval or evidence", () => {
     window.history.replaceState(null, "", "/en/app/billing?role=kabadiwala");
     expect(
@@ -205,5 +206,16 @@ describe("isolated light-only design fixtures", () => {
       status: "Exhausted",
     });
     window.history.replaceState(null, "", "/");
+  });
+});
+
+describe("fixture font and appearance bootstrap", () => {
+  it("preserves the selected dark appearance while replacing stale build font classes", () => {
+    expect(
+      fixtureFontClasses("urbanist-variable noto-arabic-variable light", true),
+    ).toBe("urbanist-variable noto-arabic-variable dark");
+    expect(
+      fixtureFontClasses("urbanist-variable noto-arabic-variable dark", false),
+    ).toBe("urbanist-variable noto-arabic-variable");
   });
 });

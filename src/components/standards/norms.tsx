@@ -36,11 +36,11 @@ export function NormSection({
   return (
     <section
       aria-labelledby={`${id}-title`}
-      className="scroll-mt-24 rounded-xl bg-card p-5 sm:p-6"
+      className="scroll-mt-24 rounded-panel bg-card p-5 shadow-panel sm:p-6"
     >
       <details id={id} open={id === "codes"} className="group">
         <summary className="flex min-h-12 cursor-pointer items-center gap-3 font-display text-lg font-semibold outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
-          <Icon aria-hidden className="size-5 shrink-0 text-primary" />
+          <Icon aria-hidden className="size-5 shrink-0 text-foreground" />
           <h2 id={`${id}-title`}>{title}</h2>
         </summary>
         <div
@@ -80,7 +80,7 @@ export function RuleCards({
     <ul className="grid grid-flow-dense divide-y border-y sm:grid-cols-3 sm:divide-x sm:divide-y-0 rtl:sm:divide-x-reverse">
       {rules.map(({ key, icon: Icon, title, body }) => (
         <li key={key} className="flex flex-col gap-3 py-5 sm:px-5">
-          <Icon aria-hidden className="size-6 text-primary" />
+          <Icon aria-hidden className="size-6 text-foreground" />
           <h3 className="font-semibold">{title}</h3>
           <p className="text-sm text-muted-foreground">{body}</p>
         </li>
@@ -112,7 +112,7 @@ export async function ReceiptAnatomy() {
         id="receipt-anatomy-title"
         className="mb-3 flex items-center gap-2 font-semibold"
       >
-        <ReceiptTextIcon aria-hidden className="size-5 text-primary" />
+        <ReceiptTextIcon aria-hidden className="size-5 text-foreground" />
         {t("receiptTitle")}
       </figcaption>
       <ul className="divide-y divide-dashed">
@@ -145,7 +145,10 @@ export async function VerificationList() {
     <ul className="flex flex-col divide-y border-y">
       {items.map(({ key, icon: Icon }) => (
         <li key={key} className="flex items-start gap-3 py-5">
-          <Icon aria-hidden className="mt-0.5 size-5 shrink-0 text-primary" />
+          <Icon
+            aria-hidden
+            className="mt-0.5 size-5 shrink-0 text-foreground"
+          />
           <span>{t(key)}</span>
         </li>
       ))}
@@ -166,14 +169,14 @@ export async function EscrowSteps() {
     { key: "released", icon: BadgeCheckIcon },
   ] as const;
   return (
-    <ol className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
+    <ol className="divide-y divide-border/60 rounded-panel border border-border/60 bg-card px-4 shadow-panel sm:px-5">
       {steps.map(({ key, icon: Icon }, index) => (
         <li key={key} className="flex items-start gap-4 py-4">
           <span className="flex items-center gap-2">
             <span className="flex size-7 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
               {format.number(index + 1)}
             </span>
-            <Icon aria-hidden className="size-5 text-primary" />
+            <Icon aria-hidden className="size-5 text-foreground" />
           </span>
           <p className="font-medium">{t(key)}</p>
         </li>

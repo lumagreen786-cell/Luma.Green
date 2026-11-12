@@ -94,7 +94,7 @@ function DirectCashForm({ trade }: { trade: TradeView }) {
 
   return (
     <details>
-      <summary className="min-h-11 cursor-pointer py-3 text-sm font-medium text-primary">
+      <summary className="min-h-11 cursor-pointer py-3 text-sm font-medium text-foreground">
         {t("cashRecord")}
       </summary>
       <form

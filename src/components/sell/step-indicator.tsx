@@ -8,7 +8,7 @@ import { SELL_STEPS, type SellStep } from "./draft";
 
 function labelTone(index: number, current: number): string {
   if (index === current) return "font-semibold text-foreground";
-  return index < current ? "text-primary" : "text-muted-foreground";
+  return index < current ? "text-foreground" : "text-muted-foreground";
 }
 
 /** Connected steps show current progress and completed selections. */

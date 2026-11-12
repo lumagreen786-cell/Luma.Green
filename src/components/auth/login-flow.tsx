@@ -47,7 +47,7 @@ function LoginSteps({ canSend }: { canSend: boolean }) {
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="-mx-5 -mt-5 flex justify-end rounded-t-xl bg-accent/40 px-4 py-1 sm:-mx-6 sm:-mt-6">
+      <div className="-mx-5 -mt-5 flex justify-end rounded-t-panel bg-muted/60 px-4 py-1 sm:-mx-6 sm:-mt-6">
         <LanguageSwitcher />
       </div>
       {codePhone === null ? (

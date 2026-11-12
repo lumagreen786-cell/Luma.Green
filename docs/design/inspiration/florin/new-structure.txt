@@ -1,0 +1,133 @@
+Browser tab: 16, Title: "New invoice | Florin", URL: "https://ui.cortexcn.dev/previews/florin/new".
+1 AXWebArea New invoice | Florin, URL: ui.cortexcn.dev/previews/florin/new
+	2 link Description: Skip to content, Value: ui.cortexcn.dev/previews/florin/new#main
+	3 container
+		4 link Description: Florin, invoices, Value: ui.cortexcn.dev/previews/florin/
+		5 pop up button (collapsed) Description: All pages, Secondary Actions: Expand
+		6 pop up button (collapsed) Description: Notifications, Secondary Actions: Expand
+		7 link Description: Settings, Value: ui.cortexcn.dev/previews/florin/settings/
+		8 pop up button (collapsed) Description: Account menu, ID: radix-_R_tb5tlb_, Secondary Actions: Expand
+		9 container Billing
+			10 content list
+				11 link Description: Estimates, Value: ui.cortexcn.dev/previews/florin/estimates/
+				12 link Description: Invoices, Value: ui.cortexcn.dev/previews/florin/
+				13 link Description: Payments, Value: ui.cortexcn.dev/previews/florin/payments/
+				14 link Description: Recurring Invoices, Value: ui.cortexcn.dev/previews/florin/recurring/
+				15 link Description: Checkouts, Value: ui.cortexcn.dev/previews/florin/checkouts/
+	16 container main
+		17 container
+			18 link Description: Back, Value: ui.cortexcn.dev/previews/florin/
+			19 heading New invoice, Value: 1
+				20 text New invoice
+			21 button Save draft
+			22 button Create and send
+		23 container Invoice details
+			24 container
+				25 heading Bill to, Value: 2
+					26 text Bill to
+				27 text The client and the dates on the invoice. Client
+				28 pop up button (collapsed, settable) Client, Value: Choose a client, Secondary Actions: Expand
+					29 menu
+						30 (selected) Choose a client
+						31 Brightwell Studio, Theo Okafor
+						32 Copperline Energy, Aisha Bello
+						33 Fernway Legal, Daniel Kim
+						34 Halden Works, Elena Marsh
+						35 Lumora Health, Sofia Alvarez
+						36 Milkweed Bakery, Grace Liu
+						37 Northpine Labs, Priya Raman
+						38 Orbitly, Hana Sato
+						39 Quayside Freight, Jonas Weber
+						40 Ridgeway Robotics, Omar Haddad
+						41 Solace Hotels, Nora Lindqvist
+						42 Tallgrass Farms, Marcus Reed
+				43 text Issue date
+				44 date field (settable) Issue date, Value: 2026-11-11
+					45 container
+						46 stepper
+						47 stepper
+						48 stepper
+					49 pop up button Show date picker Show date picker
+				50 text Due date
+				51 date field (settable) Due date Net 14, Value: 2026-11-25
+					52 container
+						53 stepper
+						54 stepper
+						55 stepper
+					56 pop up button Show date picker Show date picker
+				57 text Net 14
+				58 container Payment terms
+					59 checkbox Net 7, Value: 0
+					60 checkbox Net 14, Value: 1
+					61 checkbox Net 30, Value: 0
+			62 container
+				63 heading Line items, Value: 2
+					64 text Line items
+				65 text What you are billing for.
+				66 pop up button (collapsed) Add a line, ID: radix-_r_5_, Secondary Actions: Expand
+				67 content list
+					68 container
+						69 text Line  1  description
+						70 text field (settable) Line 1 description
+						71 text Line  1  quantity
+						72 stepper (settable, integer) Line 1 quantity, Value: 1
+						73 text Line  1  rate
+						74 stepper (settable) Line 1 rate
+						75 text Line  1  total $0.00
+						76 button (disabled) Remove line 1
+			77 container
+				78 heading Tax, discount, and notes, Value: 2
+					79 text Tax, discount, and notes
+				80 text Applied after the lines are added up. Tax rate (%)
+				81 stepper (settable) Tax rate (%) Charged on the total after the discount.
+				82 text Charged on the total after the discount. Discount ($)
+				83 stepper (settable) Discount ($) Taken off before tax.
+				84 text Taken off before tax. Notes
+				85 text entry area (settable) Notes, Value: Thank you for working with Kiln & Co.
+			86 button Create and send
+		87 container Preview
+			88 heading Preview, Value: 2
+				89 text Preview
+			90 text What your client gets
+			91 container Invoice preview
+				92 container
+					93 text Kiln & Co. 418 Alder Street, Suite 300, Portland, OR 97204 billing@kiln.studio Invoice Draft # 000-000
+				94 definition list
+					95 container Bill to
+						96 text Bill to
+					97 text Choose a client
+					98 container Issued
+						99 text Issued
+					100 text Nov 11, 2026
+					101 container Due
+						102 text Due
+					103 text Nov 25, 2026
+				104 table
+					105 row
+						106 cell
+							107 text Description
+						108 cell
+							109 text Qty
+						110 cell
+							111 text Rate
+						112 cell
+							113 text Amount
+					114 row
+						115 cell
+							116 text Lines you add show here.
+				117 definition list
+					118 container Sub Total
+						119 text Sub Total
+					120 text $0.00
+					121 container Total
+						122 text Total
+					123 text $0.00
+					124 container Balance Due
+						125 text Balance Due
+					126 text $0.00
+				127 text Thank you for working with Kiln & Co.
+				128 container
+					129 text Tax ID  US 93-4410287
+	130 container Notifications alt+T
+
+The focused UI element is 1 AXWebArea New invoice | Florin, URL: ui.cortexcn.dev/previews/florin/new

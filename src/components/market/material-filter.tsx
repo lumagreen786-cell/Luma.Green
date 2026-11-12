@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -26,8 +26,8 @@ function Chip({
       className={cn(
         "h-auto min-h-11 max-w-full gap-2 rounded-full border border-transparent px-4 py-2 text-sm break-words whitespace-normal",
         isPressed
-          ? "border-primary/20 bg-accent text-accent-foreground"
-          : "border-transparent bg-card text-muted-foreground",
+          ? "bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground"
+          : "bg-card text-muted-foreground hover:bg-muted hover:text-foreground",
       )}
     >
       {children}
@@ -49,6 +49,7 @@ export function MaterialFilter({
   onChange: (code: string | null) => void;
 }) {
   const t = useTranslations("market.browse");
+  const format = useFormatter();
   return (
     <div
       role="group"
@@ -72,8 +73,15 @@ export function MaterialFilter({
           }}
         >
           {option.label}
-          <span className="text-muted-foreground tabular-nums">
-            {option.count}
+          <span
+            className={cn(
+              "flex size-7 shrink-0 items-center justify-center rounded-full text-xs tabular-nums",
+              value === option.code
+                ? "bg-primary-foreground text-primary"
+                : "bg-foreground/5 text-foreground",
+            )}
+          >
+            {format.number(option.count)}
           </span>
         </Chip>
       ))}

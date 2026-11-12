@@ -75,11 +75,11 @@ export default async function ParticipantsPage() {
               <li key={key}>
                 <section
                   aria-labelledby={`participant-${key}`}
-                  className="grid h-full min-w-0 grid-cols-[5rem_minmax(0,1fr)] gap-4 rounded-xl bg-card p-5"
+                  className="grid h-full min-w-0 grid-cols-[5rem_minmax(0,1fr)] gap-4 rounded-panel bg-card p-5 shadow-panel"
                 >
                   <div className="order-2 min-w-0 space-y-2 wrap-anywhere">
                     <div className="flex items-center gap-4">
-                      <span className="hidden size-8 shrink-0 items-center text-primary sm:inline-flex">
+                      <span className="hidden size-8 shrink-0 items-center text-foreground sm:inline-flex">
                         <Icon aria-hidden className="size-5" />
                       </span>
                       <h2
@@ -94,7 +94,7 @@ export default async function ParticipantsPage() {
                     </p>
                     <Link
                       href={href}
-                      className="inline-flex min-h-11 max-w-full items-center gap-3 text-sm font-semibold text-primary underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
+                      className="inline-flex min-h-11 max-w-full items-center gap-3 text-sm font-semibold text-foreground underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
                     >
                       <span className="min-w-0">{action}</span>
                       <ArrowRightIcon

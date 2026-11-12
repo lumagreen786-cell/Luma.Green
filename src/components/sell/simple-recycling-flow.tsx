@@ -464,7 +464,7 @@ function PickupShopSection({
           </p>
           <Link
             href="/contact"
-            className="inline-flex min-h-11 items-center font-medium text-primary underline"
+            className="inline-flex min-h-11 items-center font-medium text-foreground underline"
           >
             {nav("contact")}
           </Link>
@@ -511,16 +511,16 @@ function RecyclingProgress({
   const format = useFormatter();
   return (
     <div className="space-y-3 border-b border-border/60 pb-5">
-      <ol className="grid grid-cols-2 gap-2">
+      <ol className="flex flex-wrap gap-2 rounded-[1.75rem] bg-background p-2">
         {(["details", "schedule"] as const).map((step, index) => (
           <li
             key={step}
             aria-current={stage === step ? "step" : undefined}
-            className="flex items-center gap-2 rounded-xl bg-muted px-3 py-3 text-sm aria-[current=step]:bg-accent aria-[current=step]:font-semibold"
+            className="flex min-w-0 flex-1 items-center gap-2 rounded-full bg-card px-3 py-3 text-sm aria-[current=step]:bg-primary aria-[current=step]:font-semibold aria-[current=step]:text-primary-foreground"
           >
             <span
               aria-hidden
-              className="flex size-6 shrink-0 items-center justify-center rounded-full bg-card text-xs"
+              className="flex size-7 shrink-0 items-center justify-center rounded-full bg-foreground/10 text-xs tabular-nums"
             >
               {format.number(index + 1)}
             </span>
@@ -828,7 +828,7 @@ function DetailsForm({
             </p>
           ) : null}
           {location.state.status === "on" ? (
-            <p role="status" className="text-sm text-primary">
+            <p role="status" className="text-sm text-foreground">
               {fields("locationSaved")}
             </p>
           ) : null}

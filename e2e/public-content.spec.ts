@@ -24,9 +24,7 @@ test("the price explanation stays usable when live prices cannot load", async ({
   page,
 }) => {
   await page.goto("/prices");
-  await expect(
-    page.getByText("Prices aren't available right now"),
-  ).toBeVisible();
+  await expect(page.getByText(en.prices.unavailable.title)).toBeVisible();
   await page
     .locator("summary")
     .filter({ hasText: en.help.guides.weighingAtDoor.title })

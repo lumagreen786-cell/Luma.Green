@@ -97,7 +97,7 @@ function RemovalReview({ request }: { request: Removal }) {
     }
   }
   return (
-    <article className="space-y-4 rounded-xl bg-card p-5 sm:p-6">
+    <article className="space-y-4 rounded-panel bg-card p-5 text-card-foreground sm:p-6">
       <header className="space-y-1">
         <h2 className="font-semibold">Request {request.id.slice(0, 12)}</h2>
         <p className="text-sm">{labels[request.state]}</p>

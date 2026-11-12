@@ -143,7 +143,7 @@ describe("MarketPage", () => {
     ).toBeVisible();
     expect(
       screen.getByText(
-        "Browse offers from approved suppliers for the materials you handle.",
+        "Find material you handle. Compare offers from approved suppliers.",
       ),
     ).toBeVisible();
     expect(
@@ -169,7 +169,7 @@ describe("MarketPage", () => {
   it("says so when nothing is on sale", () => {
     data.listings = [];
     renderPage();
-    expect(screen.getByText("Nothing on sale right now")).toBeInTheDocument();
+    expect(screen.getByText("No material listed yet")).toBeInTheDocument();
   });
 });
 

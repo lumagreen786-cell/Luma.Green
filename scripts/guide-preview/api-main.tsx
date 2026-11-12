@@ -11,6 +11,7 @@ import { isLocale, localeMeta } from "@/i18n/locales";
 
 import type { Id } from "../../convex/_generated/dataModel";
 import type english from "../../messages/en.json";
+import { fixtureFontClasses } from "./appearance";
 import { NOW } from "./fixtures";
 
 const segment = window.location.pathname.split("/", 2)[1] ?? "en";
@@ -30,7 +31,10 @@ const fontClasses = JSON.parse(
 ) as Partial<Record<string, string>>;
 const localeFonts = fontClasses[locale];
 if (!localeFonts) throw new Error(`Build the ${locale} locale before capture.`);
-document.documentElement.className = localeFonts;
+document.documentElement.className = fixtureFontClasses(
+  localeFonts,
+  document.documentElement.classList.contains("dark"),
+);
 
 const sample: AccessData = {
   canManage: true,

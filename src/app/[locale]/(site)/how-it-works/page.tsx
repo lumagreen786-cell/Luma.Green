@@ -57,13 +57,13 @@ export default async function HowItWorksPage() {
               key={key}
               data-reveal
               aria-labelledby={`step-${key}`}
-              className="grid min-w-0 gap-5 rounded-xl bg-card p-5 sm:p-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)]"
+              className="grid min-w-0 gap-5 rounded-panel bg-card p-5 shadow-panel sm:p-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)]"
             >
               <div className="grid min-w-0 grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 gap-y-2">
                 <span className="row-span-2 inline-flex size-11 items-center justify-center rounded-full bg-accent text-accent-foreground">
                   <Icon aria-hidden className="size-6" />
                 </span>
-                <p className="text-sm font-medium text-primary">
+                <p className="text-sm font-medium text-foreground">
                   {t("stepLabel", { number: index + 1 })}
                 </p>
                 <h2
@@ -91,7 +91,7 @@ export default async function HowItWorksPage() {
                       <li key={point} className="flex items-start gap-3">
                         <CheckIcon
                           aria-hidden
-                          className="mt-0.5 size-5 shrink-0 text-primary"
+                          className="mt-0.5 size-5 shrink-0 text-foreground"
                         />
                         <span>{t(`${key}.${point}`)}</span>
                       </li>

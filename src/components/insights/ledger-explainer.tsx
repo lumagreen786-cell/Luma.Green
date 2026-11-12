@@ -32,7 +32,7 @@ export function LedgerExplainer() {
       className="flex flex-col gap-4 rounded-2xl bg-card p-5 sm:p-6"
     >
       <summary className="flex min-h-11 cursor-pointer items-start gap-3">
-        <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-background text-primary">
+        <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-background text-foreground">
           <BookCheckIcon aria-hidden className="size-5" />
         </span>
         <div className="flex flex-col gap-1">
@@ -45,7 +45,10 @@ export function LedgerExplainer() {
       <dl className="grid gap-3 sm:grid-cols-2">
         {FACTS.map(({ key, icon: Icon }) => (
           <div key={key} className="flex gap-3 border-t border-border py-4">
-            <Icon aria-hidden className="mt-0.5 size-5 shrink-0 text-primary" />
+            <Icon
+              aria-hidden
+              className="mt-0.5 size-5 shrink-0 text-foreground"
+            />
             <div className="flex flex-col gap-0.5">
               <dt className="font-medium">{t(key)}</dt>
               <dd className="text-sm text-muted-foreground">

@@ -1,63 +1,45 @@
-import { ArrowRightIcon } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
 import { Logo } from "@/components/brand/logo";
-import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 
 import { Container } from "./container";
 import { footerGroups } from "./content";
 
-const linkClass =
-  "inline-flex min-h-11 max-w-full items-center text-muted-foreground [overflow-wrap:anywhere] outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50";
-
 export async function SiteFooter() {
-  const [t, brand, labels] = await Promise.all([
+  const [t, labels] = await Promise.all([
     getTranslations("footer"),
-    getTranslations("brand"),
     getTranslations(),
   ]);
   return (
-    <footer className="mt-auto border-t border-border/60 bg-card">
+    <footer className="mt-auto py-5">
       <Container>
-        <div className="flex flex-col items-start gap-6 border-b border-border/60 py-10 sm:flex-row sm:items-center sm:justify-between lg:py-14">
-          <p className="max-w-2xl font-display text-3xl leading-tight font-semibold tracking-tight sm:text-4xl">
-            {brand("tagline")}
-          </p>
-          <Button asChild size="lg" className="shrink-0">
-            <Link href="/sell">
-              {labels("nav.sellScrap")}
-              <ArrowRightIcon aria-hidden className="rtl:rotate-180" />
-            </Link>
-          </Button>
-        </div>
-        <div className="grid gap-10 py-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)]">
-          <div>
-            <Logo />
-            <p className="mt-5 max-w-xs text-sm text-muted-foreground">
-              {t("copyright")}
-            </p>
+        <div className="rounded-[1.75rem] border border-border/60 bg-card px-5 py-4 text-card-foreground">
+          <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
+            <Logo
+              idPrefix="site-footer"
+              className="gap-2 [&>span]:text-base [&>svg]:size-6"
+            />
+            <p className="text-xs text-muted-foreground">{t("copyright")}</p>
           </div>
           <nav
             aria-label={t("navLabel")}
-            className="grid grid-cols-2 gap-6 sm:gap-12"
+            className="mt-3 border-t border-border/60 pt-2"
           >
-            {footerGroups.map((group) => (
-              <div key={group.heading}>
-                <h2 className="mb-3 text-sm font-semibold">
-                  {t(group.heading)}
-                </h2>
-                <ul className="space-y-1 text-sm">
-                  {group.links.map((link) => (
-                    <li key={link.href}>
-                      <Link href={link.href} className={linkClass}>
-                        {labels(link.label)}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+            <ul className="flex flex-wrap gap-x-5 gap-y-1">
+              {footerGroups.map((group) =>
+                group.links.map((link) => (
+                  <li key={link.href} className="max-w-full min-w-0">
+                    <Link
+                      href={link.href}
+                      className="inline-flex min-h-11 max-w-full items-center rounded-full py-2 text-xs [overflow-wrap:anywhere] text-muted-foreground outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+                    >
+                      {labels(link.label)}
+                    </Link>
+                  </li>
+                )),
+              )}
+            </ul>
           </nav>
         </div>
       </Container>

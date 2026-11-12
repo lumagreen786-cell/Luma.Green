@@ -164,7 +164,7 @@ export function PaymentSetup() {
             </p>
           ) : null}
           {status !== "LoadingFirstPage" && results.length > 0 ? (
-            <ul className="divide-y rounded-xl bg-card px-5 sm:px-6">
+            <ul className="divide-y rounded-panel bg-card px-5 text-card-foreground sm:px-6">
               {results.map((org) => {
                 const vendor = org.vendors.find((item) => item.mode === mode);
                 return (

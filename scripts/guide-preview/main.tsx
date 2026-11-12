@@ -71,6 +71,7 @@ import { WorkspacePage } from "@/components/workspace/workspace-page";
 import { localeMeta } from "@/i18n/locales";
 
 import type { Id } from "../../convex/_generated/dataModel";
+import { fixtureFontClasses } from "./appearance";
 import { NOW, trackedBooking } from "./fixtures";
 import { receiptExample } from "./foundation-fixtures";
 import { HouseholdActivityFixture } from "./household-pages";
@@ -86,7 +87,10 @@ const fontClasses = JSON.parse(
 ) as Partial<Record<string, string>>;
 const localeFonts = fontClasses[locale];
 if (!localeFonts) throw new Error(`Build the ${locale} locale before capture.`);
-document.documentElement.className = localeFonts;
+document.documentElement.className = fixtureFontClasses(
+  localeFonts,
+  document.documentElement.classList.contains("dark"),
+);
 const adminPages: Record<string, ReactNode | undefined> = {
   "/admin": <ConsoleHome />,
   "/admin/payments": (

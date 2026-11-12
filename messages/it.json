@@ -634,7 +634,7 @@
     "replyTime": "Rispondiamo entro un giorno lavorativo.",
     "search": {
       "label": "Cerca nell'aiuto",
-      "placeholder": "In attesa del gateway",
+      "placeholder": "Cerca",
       "clear": "Cancella ricerca",
       "summary": "{count, plural, =0 {Nessuna risposta} one {# risposta} other {# risposte}} per «{query}»",
       "topicSummary": "{count, plural, =0 {Nessuna risposta} one {# risposta} other {# risposte}} su {topic}",
@@ -1905,7 +1905,7 @@
     "homeTitle": "Ricicli da casa?",
     "homeLink": "Scopri come funziona",
     "privacy": "Usiamo il numero solo per farti accedere e inviarti aggiornamenti sul tuo lavoro su Luma.Green.",
-    "unavailableTitle": "L'accesso telefonico sarà disponibile a breve",
+    "unavailableTitle": "Accedi con il tuo numero di cellulare",
     "unavailableBody": "L’accesso tramite SMS non è disponibile. Riprova più tardi.",
     "verifyTitle": "Inserisci il codice di 6 cifre",
     "sentTo": "Inviato via SMS al numero {phone}",

@@ -1,10 +1,11 @@
 import {
   ArrowRightIcon,
   CameraIcon,
+  ChartNoAxesCombinedIcon,
   MapPinIcon,
-  MoveUpRightIcon,
   ScaleIcon,
   TruckIcon,
+  UsersIcon,
 } from "lucide-react";
 import { getFormatter, getTranslations } from "next-intl/server";
 
@@ -13,16 +14,17 @@ import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 
 import { Container } from "../container";
-import { PriceTeaser } from "./price-teaser";
 import { RecyclingIllustration } from "./recycling-illustration";
 
-/** The route is an explanation of the service, never a simulated live request. */
+/** Public task dashboard. No fabricated personal activity or live totals. */
 export async function HomeHero() {
-  const [t, nav, sell, help, format] = await Promise.all([
+  const [t, nav, sell, help, prices, roles, format] = await Promise.all([
     getTranslations("home.hero"),
     getTranslations("nav"),
     getTranslations("sell.simple"),
     getTranslations("help.guides"),
+    getTranslations("prices"),
+    getTranslations("home.roles"),
     getFormatter(),
   ]);
   const steps = [
@@ -40,106 +42,117 @@ export async function HomeHero() {
   ];
   return (
     <section aria-labelledby="hero-heading" className="bg-background">
-      <Container className="py-4 sm:py-6">
-        <div className="grid min-w-0 gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-          <div className="relative flex min-w-0 flex-col items-start justify-between gap-8 overflow-hidden rounded-xl bg-sidebar p-6 text-sidebar-foreground sm:p-9 lg:p-10">
-            <div className="space-y-5">
-              <p className="inline-flex items-center gap-2 rounded-full border border-sidebar-border px-3 py-1.5 text-sm text-sidebar-foreground">
-                <MapPinIcon
+      <Container className="space-y-5 py-6 sm:py-8">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div className="min-w-0 space-y-2">
+            <div className="inline-flex items-center gap-2 text-sm text-muted-foreground">
+              <MapPinIcon aria-hidden className="size-4" />
+              {t("eyebrow")}
+            </div>
+            <h1
+              id="hero-heading"
+              className="font-display text-4xl leading-tight font-normal tracking-tight text-foreground sm:text-[3.25rem]"
+            >
+              {t("title")}
+            </h1>
+            <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
+              {t("lead")}
+            </p>
+          </div>
+          <Button asChild className="gap-3">
+            <Link
+              href="/sell"
+              aria-label={actionName(nav("sellScrap"), t("sell"))}
+            >
+              {t("sell")}
+              <ArrowRightIcon aria-hidden className="rtl:rotate-180" />
+            </Link>
+          </Button>
+        </div>
+        <div className="grid min-w-0 gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,0.6fr)]">
+          <div className="relative min-h-64 overflow-hidden rounded-panel bg-card sm:min-h-80">
+            <RecyclingIllustration />
+            <div className="absolute inset-0 bg-image-scrim/45" />
+            <div className="relative flex h-full min-h-64 flex-col justify-end gap-4 p-6 text-white sm:min-h-80 sm:p-8">
+              <span className="w-fit rounded-full border border-white/30 bg-black/20 px-3 py-1.5 text-sm text-white">
+                {nav("sellScrap")}
+              </span>
+              <p className="max-w-sm font-display text-3xl leading-tight font-normal text-white sm:text-4xl">
+                {roles("household.two")}
+              </p>
+              <p className="max-w-sm text-sm leading-relaxed text-white/90">
+                {roles("household.one")}
+              </p>
+            </div>
+          </div>
+          <div className="grid min-w-0 gap-4 sm:grid-cols-2 lg:grid-cols-1">
+            <Link
+              href="/prices"
+              aria-label={actionName(nav("prices"), t("prices"))}
+              className="group flex min-w-0 flex-col items-start gap-3 rounded-panel bg-card p-6 shadow-panel outline-none focus-visible:ring-3 focus-visible:ring-ring"
+            >
+              <div className="flex w-full items-center justify-between">
+                <ChartNoAxesCombinedIcon
                   aria-hidden
-                  className="size-4 text-sidebar-primary"
+                  className="size-11 rounded-full bg-muted p-3"
                 />
-                {t("eyebrow")}
-              </p>
-              <h1
-                id="hero-heading"
-                className="max-w-xl font-display text-[clamp(2.25rem,4.7vw,4.25rem)] leading-[1.07] font-semibold tracking-tight text-balance text-sidebar-foreground"
-              >
-                {t("title")}
-              </h1>
-              <p className="max-w-md text-base leading-relaxed text-sidebar-foreground/80">
-                {t("lead")}
-              </p>
-            </div>
-            <div className="w-full min-w-0 space-y-4">
-              <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <Button
-                  asChild
-                  size="lg"
-                  className="w-full max-w-full justify-between gap-4 bg-sidebar-primary text-sidebar-primary-foreground hover:bg-sidebar-primary/90 sm:w-auto"
-                >
-                  <Link
-                    href="/sell"
-                    aria-label={actionName(nav("sellScrap"), t("sell"))}
-                  >
-                    {t("sell")}
-                    <ArrowRightIcon
-                      aria-hidden
-                      className="size-5 rtl:rotate-180"
-                    />
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  variant="outline"
-                  size="lg"
-                  className="w-full max-w-full justify-between gap-4 border-sidebar-border bg-transparent text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground sm:w-auto"
-                >
-                  <Link
-                    href="/prices"
-                    aria-label={actionName(nav("prices"), t("prices"))}
-                  >
-                    <span className="sm:hidden">{nav("prices")}</span>
-                    <span className="hidden sm:inline">{t("prices")}</span>
-                    <MoveUpRightIcon
-                      aria-hidden
-                      className="size-4 rtl:-scale-x-100"
-                    />
-                  </Link>
-                </Button>
+                <ArrowRightIcon aria-hidden className="size-5 rtl:rotate-180" />
               </div>
-              <Link
-                href="/join"
-                className="inline-flex min-h-11 items-center gap-3 rounded-sm text-sm font-medium underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-sidebar-ring"
-              >
+              <h2 className="font-display text-2xl font-normal text-foreground">
+                {t("prices")}
+              </h2>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                {prices("lead")}
+              </p>
+            </Link>
+            <Link
+              href="/join"
+              aria-label={t("join")}
+              className="record-detail flex min-w-0 flex-col items-start gap-3 rounded-panel p-6 outline-none focus-visible:ring-3 focus-visible:ring-ring"
+            >
+              <div className="flex w-full items-center justify-between">
+                <UsersIcon
+                  aria-hidden
+                  className="size-11 rounded-full bg-muted p-3"
+                />
+                <ArrowRightIcon aria-hidden className="size-5 rtl:rotate-180" />
+              </div>
+              <h2 className="font-display text-2xl font-normal text-foreground">
                 {t("join")}
-                <ArrowRightIcon aria-hidden className="size-4 rtl:rotate-180" />
-              </Link>
-            </div>
-          </div>
-          <div className="min-w-0 overflow-hidden rounded-xl border border-border/60 bg-card">
-            <div className="relative aspect-[2/1] overflow-hidden bg-card sm:aspect-[2.3/1] lg:aspect-[2/1]">
-              <RecyclingIllustration />
-            </div>
-            <ol className="divide-y divide-border/60 px-5 sm:px-6">
-              {steps.map(({ icon: Icon, title, body }, index) => (
-                <li
-                  key={title}
-                  className="grid grid-cols-[2.75rem_minmax(0,1fr)_auto] items-center gap-3 py-4"
-                >
-                  <span className="flex size-11 items-center justify-center rounded-full bg-secondary/35 text-secondary-foreground">
-                    <Icon aria-hidden className="size-5" strokeWidth={1.5} />
-                  </span>
-                  <div className="min-w-0">
-                    <p className="text-sm font-semibold">{title}</p>
-                    <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                      {body}
-                    </p>
-                  </div>
-                  <span
-                    aria-hidden
-                    className="self-start pt-2 font-mono text-xs text-muted-foreground"
-                  >
-                    {format.number(index + 1, { minimumIntegerDigits: 2 })}
-                  </span>
-                </li>
-              ))}
-            </ol>
+              </h2>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                {roles("intro")}
+              </p>
+            </Link>
           </div>
         </div>
-        <div className="mt-4">
-          <PriceTeaser />
-        </div>
+        <ol className="grid gap-3 sm:grid-cols-3">
+          {steps.map(({ icon: Icon, title, body }, index) => (
+            <li
+              key={title}
+              className="flex min-w-0 items-start gap-3 rounded-panel bg-card p-5 shadow-panel"
+            >
+              <span
+                aria-hidden
+                className="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground"
+              >
+                {format.number(index + 1, { minimumIntegerDigits: 2 })}
+              </span>
+              <div className="min-w-0 space-y-1">
+                <h2 className="text-base font-medium text-foreground">
+                  {title}
+                </h2>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  {body}
+                </p>
+              </div>
+              <Icon
+                aria-hidden
+                className="ms-auto size-5 shrink-0 text-muted-foreground"
+              />
+            </li>
+          ))}
+        </ol>
       </Container>
     </section>
   );

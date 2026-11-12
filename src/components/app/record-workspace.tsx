@@ -48,8 +48,8 @@ export function RecordWorkspace({
   return (
     <div
       className={cn(
-        "grid min-w-0 items-start gap-5",
-        detail && "lg:grid-cols-[18rem_minmax(0,1fr)]",
+        "record-sheet grid min-w-0 items-start gap-4 rounded-panel p-3 shadow-panel sm:p-5",
+        detail && "lg:grid-cols-[minmax(16rem,0.8fr)_minmax(0,1.5fr)]",
       )}
     >
       <div
@@ -66,7 +66,7 @@ export function RecordWorkspace({
           ref={detailRegion}
           data-record-detail
           tabIndex={-1}
-          className="min-w-0 space-y-5 rounded-2xl bg-card p-5 sm:p-6"
+          className="record-detail min-w-0 space-y-5 rounded-panel p-5 shadow-panel sm:p-6"
         >
           <Button variant="ghost" onClick={onBack} className="px-0">
             <ArrowLeftIcon aria-hidden className="size-4 rtl:rotate-180" />

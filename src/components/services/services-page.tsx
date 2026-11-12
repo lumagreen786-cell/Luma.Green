@@ -64,9 +64,9 @@ function ServicesContent({ data }: { data: Board }) {
   const revoke = useMutation(api.services.revokeProgrammeShare);
   const withdraw = useMutation(api.services.revokeEnquiryRecipient);
   return (
-    <div className="grid min-w-0 items-start gap-5 xl:grid-cols-[minmax(0,1.5fr)_minmax(18rem,1fr)]">
-      <div className="min-w-0 space-y-5">
-        <section className="flex min-w-0 flex-col gap-4 rounded-xl border border-border/60 bg-card p-5">
+    <div className="flex min-w-0 flex-col gap-6">
+      <div className="grid w-full min-w-0 items-start gap-5 xl:grid-cols-2">
+        <section className="flex min-w-0 flex-col gap-4 rounded-panel border border-border/60 bg-card p-5 text-card-foreground">
           <h2 className="text-lg font-semibold">{t("enquiries")}</h2>
           {data.canCreate &&
           (!enquiry ||
@@ -120,7 +120,7 @@ function ServicesContent({ data }: { data: Board }) {
             </article>
           ))}
         </section>
-        <section className="flex min-w-0 flex-col gap-4 rounded-xl border border-border/60 bg-card p-5">
+        <section className="flex min-w-0 flex-col gap-4 rounded-panel border border-border/60 bg-card p-5 text-card-foreground">
           <h2 className="text-lg font-semibold">{t("programmes")}</h2>
           <p className="text-sm text-muted-foreground">{t("reported")}</p>
           {data.canCreate &&
@@ -162,8 +162,8 @@ function ServicesContent({ data }: { data: Board }) {
           ))}
         </section>
       </div>
-      <div className="min-w-0 space-y-5">
-        <section className="flex min-w-0 flex-col gap-3 rounded-xl border border-border/60 bg-card p-5">
+      <div className="record-sheet grid w-full min-w-0 items-start gap-5 rounded-panel p-5 shadow-panel xl:grid-cols-2 [&>section]:border-0 [&>section]:bg-transparent [&>section]:p-0">
+        <section className="flex min-w-0 flex-col gap-3 rounded-panel border border-border/60 bg-card p-5 text-card-foreground">
           <h2 className="text-lg font-semibold">{t("received")}</h2>
           {data.received.length === 0 ? (
             <p className="text-sm text-muted-foreground">
@@ -189,7 +189,7 @@ function ServicesContent({ data }: { data: Board }) {
             </article>
           ))}
         </section>
-        <section className="flex flex-col gap-3 rounded-xl border border-border/60 bg-card p-5">
+        <section className="flex flex-col gap-3 rounded-panel border border-border/60 bg-card p-5 text-card-foreground">
           <h2 className="text-lg font-semibold">{t("sharedReports")}</h2>
           {data.reports.map((row) => (
             <article
@@ -267,7 +267,7 @@ function Conversation({ row }: { row: Enquiry }) {
   return (
     <section className="w-full min-w-0 space-y-3" aria-label={t("history")}>
       <p className="text-sm text-muted-foreground">{t("notice")}</p>
-      <ol className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
+      <ol className="divide-y divide-border/60 rounded-panel border border-border/60 bg-card px-4 text-card-foreground sm:px-5">
         {row.history.map((entry, index) => (
           <li key={index} className="min-w-0 space-y-1 py-3 text-sm">
             <p>

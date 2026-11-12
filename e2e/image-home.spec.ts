@@ -14,14 +14,13 @@ for (const locale of ["en", "ar"]) {
         await page.evaluate(async () => document.fonts.ready);
         const hero = page.getByRole("main").locator("section").first();
         await expect(hero.locator('a[href$="/sell"]')).toBeInViewport();
-        if (width >= 768) {
-          const recycle = await hero.locator('a[href$="/sell"]').boundingBox();
-          const prices = await hero
-            .locator('a[data-slot="button"][href$="/prices"]')
-            .boundingBox();
-          if (!recycle || !prices) throw new Error("Hero actions must render");
-          expect(Math.abs(recycle.y - prices.y)).toBeLessThanOrEqual(1);
-          expect(recycle.width).toBeLessThan(width / 2);
+        const recycle = await hero.locator('a[href$="/sell"]').boundingBox();
+        const prices = await hero.locator('a[href$="/prices"]').boundingBox();
+        if (!recycle || !prices) throw new Error("Hero actions must render");
+        for (const box of [recycle, prices]) {
+          expect(box.x).toBeGreaterThanOrEqual(0);
+          expect(box.x + box.width).toBeLessThanOrEqual(width);
+          expect(box.height).toBeGreaterThanOrEqual(44);
         }
         const image = hero.locator("[data-recycling-illustration]");
         await image.scrollIntoViewIfNeeded();
@@ -46,17 +45,37 @@ for (const locale of ["en", "ar"]) {
         await expect(page.locator("[data-product-preview]")).toHaveCount(0);
         await expect(
           page.locator('section[aria-labelledby="roles-heading"] img'),
-        ).toHaveCount(5);
-        await expect(
-          page.locator('section[aria-labelledby="shop-workday-heading"] img'),
-        ).toHaveCount(1);
+        ).toHaveCount(6);
+        const resources = page.getByRole("main").getByRole("article");
+        await expect(resources).toHaveCount(3);
+        for (const [index, original] of [
+          "material-yard.webp",
+          "recycle-chain-illustration.webp",
+          "recycling-line.webp",
+        ].entries()) {
+          const artwork = resources.nth(index).locator("img");
+          await expect(artwork).toHaveAttribute(
+            "src",
+            new RegExp(original.replaceAll(".", String.raw`\.`)),
+          );
+          await artwork.scrollIntoViewIfNeeded();
+          await expect
+            .poll(() =>
+              artwork.evaluate(
+                (element: HTMLImageElement) =>
+                  element.complete && element.naturalWidth > 0,
+              ),
+            )
+            .toBe(true);
+          const bounds = await artwork.boundingBox();
+          expect(bounds?.width).toBeGreaterThan(100);
+          expect(bounds?.width).toBeLessThanOrEqual(width);
+        }
         expect(
           await page.evaluate(() => document.documentElement.scrollWidth),
         ).toBeLessThanOrEqual(width);
         await hero.screenshot({ path: testInfo.outputPath("home-image.png") });
-        const records = page.locator(
-          'section[aria-labelledby="material-records-heading"]',
-        );
+        const records = resources.last();
         await records.screenshot({
           path: testInfo.outputPath("material-records.png"),
         });

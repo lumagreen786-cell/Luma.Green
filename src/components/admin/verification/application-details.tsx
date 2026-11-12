@@ -199,7 +199,7 @@ function OutLink({ href, children }: { href: string; children: ReactNode }) {
       href={href}
       target="_blank"
       rel="noreferrer"
-      className="inline-flex min-h-11 items-center gap-2 self-start rounded-sm text-xs font-medium text-primary underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
+      className="inline-flex min-h-11 items-center gap-2 self-start rounded-sm text-xs font-medium text-foreground underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
     >
       {children}
       <ExternalLinkIcon aria-hidden className="size-3" />
@@ -261,7 +261,7 @@ function Phones({
           {phone.label} ·{" "}
           <a
             href={`tel:${phone.number}`}
-            className="font-mono text-primary underline-offset-4 hover:underline"
+            className="font-mono text-foreground underline-offset-4 hover:underline"
           >
             {formatPhone(phone.number)}
           </a>

@@ -1,0 +1,148 @@
+Browser tab: 16, Title: "Recurring Invoices | Florin", URL: "https://ui.cortexcn.dev/previews/florin/recurring".
+1 AXWebArea Recurring Invoices | Florin, URL: ui.cortexcn.dev/previews/florin/recurring
+	2 link Description: Skip to content, Value: ui.cortexcn.dev/previews/florin/recurring#main
+	3 container
+		4 link Description: Florin, invoices, Value: ui.cortexcn.dev/previews/florin/
+		5 pop up button (collapsed) Description: All pages, Secondary Actions: Expand
+		6 pop up button (collapsed) Description: Notifications, Secondary Actions: Expand
+		7 link Description: Settings, Value: ui.cortexcn.dev/previews/florin/settings/
+		8 pop up button (collapsed) Description: Account menu, ID: radix-_R_tb5tlb_, Secondary Actions: Expand
+		9 container Billing
+			10 content list
+				11 link Description: Estimates, Value: ui.cortexcn.dev/previews/florin/estimates/
+				12 link Description: Invoices, Value: ui.cortexcn.dev/previews/florin/
+				13 link Description: Payments, Value: ui.cortexcn.dev/previews/florin/payments/
+				14 link Description: Recurring Invoices, Value: ui.cortexcn.dev/previews/florin/recurring/
+				15 link Description: Checkouts, Value: ui.cortexcn.dev/previews/florin/checkouts/
+	16 container main
+		17 container
+			18 heading Recurring Invoices, Value: 1
+				19 text Recurring Invoices
+			20 button New schedule
+		21 container
+			22 text Monthly recurring revenue $14,899.20 Active schedules 5 Runs in the next 7 days 1 run
+			23 content list Monthly revenue by how often schedules run
+				24 container
+					25 text Weekly $6,500
+					26 progress indicator Description: Weekly: $6,500 a month, Value: 44
+				27 container
+					28 text Monthly $6,960
+					29 progress indicator Description: Monthly: $6,960 a month, Value: 47
+				30 container
+					31 text Quarterly $1,039
+					32 progress indicator Description: Quarterly: $1,039 a month, Value: 7
+				33 container
+					34 text Yearly $400
+					35 progress indicator Description: Yearly: $400 a month, Value: 3
+			36 text Charged to a saved card on the day 60% of active schedules
+		37 container
+			38 heading Upcoming runs, next 30 days, Value: 2
+				39 text Upcoming runs, next 30 days
+			40 text $17,760.00
+			41 content list
+				42 container
+					43 text NOV 16 Orbitly On-call engineering ,  in 5 days $1,500.00
+				44 container
+					45 text NOV 23 Orbitly On-call engineering ,  in 12 days $1,500.00
+				46 container
+					47 text NOV 30 Orbitly On-call engineering ,  in 19 days $1,500.00
+				48 container
+					49 text DEC 1 Copperline Energy Retainer and hosting ,  in 20 days $6,480.00
+				50 container
+					51 text DEC 1 Milkweed Bakery Hosting and care ,  in 20 days $480.00
+				52 container
+					53 text DEC 5 Solace Hotels Booking site care ,  in 24 days $4,800.00
+				54 container
+					55 text DEC 7 Orbitly On-call engineering ,  in 26 days $1,500.00
+		56 container
+			57 heading Coming up, Value: 2
+				58 text Coming up
+			59 text $69,835.20  scheduled over the next six months.
+			60 content list
+				61 text Auto-charged
+				62 text Emailed
+			63 container
+				64 text Nov Dec Jan Feb Mar Apr
+			65 content list
+				66 container
+					67 text November 2026 :  $0.00  auto-charged,  $4,500.00 emailed
+				68 container
+					69 text December 2026 :  $11,760.00  auto-charged,  $6,000.00 emailed
+				70 container
+					71 text January 2027 :  $6,960.00  auto-charged,  $9,117.60 emailed
+				72 container
+					73 text February 2027 :  $6,960.00  auto-charged,  $6,000.00 emailed
+				74 container
+					75 text March 2027 :  $6,960.00  auto-charged,  $1,500.00 emailed
+				76 container
+					77 text April 2027 :  $6,960.00  auto-charged,  $3,117.60 emailed
+		78 container Schedules
+			79 heading Schedules, Value: 2, ID: schedules-heading
+				80 text Schedules
+			81 content list
+				82 container On-call engineering for Orbitly
+					83 container
+						84 text Orbitly On-call engineering Active
+					85 text $1,500.00
+					86 text Every week
+					87 text Email a link Next run Nov 16, 2026 10 of 26
+					88 progress indicator Description: 10 of 26 invoices sent, Value: 38
+					89 container
+						90 button Run now
+						91 button Pause
+						92 button Delete schedule
+				93 container Hosting and care for Milkweed Bakery
+					94 container
+						95 text Milkweed Bakery Hosting and care Active
+					96 text $480.00
+					97 text Every month
+					98 text Auto-charge Next run Dec 1, 2026 17 sent Runs until cancelled
+					99 container
+						100 button Run now
+						101 button Pause
+						102 button Delete schedule
+				103 container Retainer and hosting for Copperline Energy
+					104 container
+						105 text Copperline Energy Retainer and hosting Active
+					106 text $6,480.00
+					107 text Every month
+					108 text Auto-charge Next run Dec 1, 2026 22 sent Runs until cancelled
+					109 container
+						110 button Run now
+						111 button Pause
+						112 button Delete schedule
+				113 container Booking site care for Solace Hotels
+					114 container
+						115 text Solace Hotels Booking site care Active
+					116 text $4,800.00
+					117 text Every year
+					118 text Auto-charge Next run Dec 5, 2026 1 sent Runs until cancelled
+					119 container
+						120 button Run now
+						121 button Pause
+						122 button Delete schedule
+				123 container Design system support for Halden Works
+					124 container
+						125 text Halden Works Design system support Active
+					126 text $3,117.60
+					127 text Every 3 months
+					128 text Email a link Next run Jan 15, 2027 12 of 16
+					129 progress indicator Description: 12 of 16 invoices sent, Value: 75
+					130 container
+						131 button Run now
+						132 button Pause
+						133 button Delete schedule
+				134 container Portal hosting and security for Fernway Legal
+					135 container
+						136 text Fernway Legal Portal hosting and security Paused
+					137 text $1,290.00
+					138 text Every month
+					139 text Email a link Next run on hold 22 of 24
+					140 progress indicator Description: 22 of 24 invoices sent, Value: 92
+					141 container
+						142 button (disabled) Run now
+						143 button Resume
+						144 button Delete schedule
+	145 container Notifications alt+T
+
+The focused UI element is 1 AXWebArea Recurring Invoices | Florin, URL: ui.cortexcn.dev/previews/florin/recurring

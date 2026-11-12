@@ -22,7 +22,7 @@ export function ParticipantPhoneGate({ children }: { children: ReactNode }) {
       <h1 className="font-display text-2xl font-semibold">{t("title")}</h1>
       <Link
         href="/account/security"
-        className="inline-flex min-h-11 items-center font-medium text-primary underline"
+        className="inline-flex min-h-11 items-center font-medium text-foreground underline"
       >
         {t("title")}
       </Link>

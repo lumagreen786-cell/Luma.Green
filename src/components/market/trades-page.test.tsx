@@ -223,3 +223,33 @@ it("keeps PET payment and delivery records in the same buying scope", () => {
     screen.getByRole("link", { name: "Recycled PET procurement" }),
   ).toHaveAttribute("href", "/app/market?procurement=pet");
 });
+
+it("switches selected trade details and keeps a visited detail mounted", async () => {
+  const user = userEvent.setup();
+  data.trades = {
+    buying: [bought, { ...sold, actions: [], status: "accepted" }],
+    selling: [],
+  };
+  renderPage();
+  const first = screen.getByRole("button", { name: /Newspaper[\s\S]*Ramesh/ });
+  const second = screen.getByRole("button", {
+    name: /PET bottles[\s\S]*GreenLoop/,
+  });
+  const firstHeading = screen.getByRole("heading", {
+    name: "Newspaper · 100 kg",
+  });
+  expect(first).toHaveAttribute("aria-pressed", "true");
+  await user.click(second);
+  expect(second).toHaveAttribute("aria-pressed", "true");
+  expect(first).toHaveAttribute("aria-pressed", "false");
+  expect(firstHeading).toBeInTheDocument();
+  expect(firstHeading).not.toBeVisible();
+  expect(
+    screen.getByRole("heading", { name: "PET bottles · 100 kg" }),
+  ).toBeVisible();
+  await user.click(first);
+  expect(screen.getByRole("heading", { name: "Newspaper · 100 kg" })).toBe(
+    firstHeading,
+  );
+  expect(firstHeading).toBeVisible();
+});

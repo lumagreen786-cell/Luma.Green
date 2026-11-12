@@ -28,7 +28,7 @@ export function HouseholdFamily() {
   return (
     <section
       aria-labelledby="household-family"
-      className="space-y-4 rounded-xl border border-border/60 bg-card p-5"
+      className="space-y-4 rounded-[1.75rem] border border-border/60 bg-card p-5 text-card-foreground"
     >
       <h2 id="household-family" className="text-lg font-semibold">
         {t("title")}
@@ -101,7 +101,7 @@ function FamilyControls() {
   if (family === null)
     return (
       <p>
-        <Link href="/account/security" className="text-primary underline">
+        <Link href="/account/security" className="text-foreground underline">
           {account("title")}
         </Link>
       </p>
@@ -111,7 +111,7 @@ function FamilyControls() {
       {family.canInvite ? null : (
         <p className="text-sm">
           {t("verified")}{" "}
-          <Link href="/account/security" className="text-primary underline">
+          <Link href="/account/security" className="text-foreground underline">
             {account("title")}
           </Link>
         </p>
@@ -287,7 +287,7 @@ function LiveSharedFamilyCollections() {
   if (!rows?.length) return null;
   return (
     <section
-      className="space-y-2 rounded-xl border border-border/60 bg-card p-5"
+      className="space-y-2 rounded-[1.75rem] border border-border/60 bg-card p-5 text-card-foreground"
       aria-labelledby="family-collections"
     >
       <h2 id="family-collections" className="text-lg font-semibold">

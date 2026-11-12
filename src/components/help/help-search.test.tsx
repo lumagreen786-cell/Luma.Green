@@ -89,11 +89,12 @@ describe("HelpSearch", () => {
     renderSearch();
     await user.type(screen.getByRole("searchbox"), "helicopter");
 
-    expect(screen.getByText("Nothing found")).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Ask us" })).toHaveAttribute(
-      "href",
-      "/help/contact",
-    );
+    expect(
+      screen.getByText(messages.help.search.emptyTitle),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: messages.help.search.ask }),
+    ).toHaveAttribute("href", "/help/contact");
   });
 
   it("clears the search with one button", async () => {

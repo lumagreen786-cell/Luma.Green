@@ -44,7 +44,7 @@ export default async function SolarPage() {
       <Container className="pb-8">
         <SolarPlanner
           between={
-            <details className="rounded-xl bg-card p-5">
+            <details className="rounded-panel bg-card p-5 shadow-panel">
               <summary className="cursor-pointer py-2 font-semibold outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
                 {t("subsidy.title")}
               </summary>

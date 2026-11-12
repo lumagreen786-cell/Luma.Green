@@ -29,7 +29,7 @@ const tabsListVariants = cva(
   {
     variants: {
       variant: {
-        default: "w-full gap-2 rounded-full bg-transparent p-0",
+        default: "w-fit gap-1.5 rounded-[1.75rem] bg-background p-2",
         line: "w-full gap-x-5 gap-y-1 border-b border-border bg-transparent p-0 group-data-vertical/tabs:w-fit group-data-vertical/tabs:gap-1 group-data-vertical/tabs:border-e group-data-vertical/tabs:border-b-0",
       },
     },
@@ -57,20 +57,35 @@ function TabsList({
 
 function TabsTrigger({
   className,
+  count,
+  children,
   ...props
-}: React.ComponentProps<typeof TabsPrimitive.Trigger>) {
+}: React.ComponentProps<typeof TabsPrimitive.Trigger> & {
+  count?: React.ReactNode;
+}) {
   return (
     <TabsPrimitive.Trigger
       data-slot="tabs-trigger"
       className={cn(
         "relative inline-flex h-auto min-h-11 max-w-full min-w-11 flex-none items-center justify-center gap-2 rounded-full px-4 py-2 text-center text-sm font-medium break-words whitespace-normal text-muted-foreground transition-colors duration-150 group-data-vertical/tabs:w-full group-data-vertical/tabs:justify-start hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 motion-reduce:transition-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-        "data-[state=active]:text-foreground group-data-[variant=default]/tabs-list:data-[state=active]:bg-secondary",
-        "group-data-[variant=line]/tabs-list:rounded-none group-data-[variant=line]/tabs-list:px-1 group-data-[variant=line]/tabs-list:data-[state=active]:text-primary",
+        "group-data-[variant=default]/tabs-list:bg-card data-[state=active]:text-foreground group-data-[variant=default]/tabs-list:data-[state=active]:bg-primary group-data-[variant=default]/tabs-list:data-[state=active]:text-primary-foreground",
+        "group-data-[variant=line]/tabs-list:rounded-none group-data-[variant=line]/tabs-list:px-1 group-data-[variant=line]/tabs-list:data-[state=active]:text-foreground",
         "after:pointer-events-none after:absolute after:bg-primary after:opacity-0 group-data-horizontal/tabs:after:inset-x-0 group-data-horizontal/tabs:after:bottom-[-1px] group-data-horizontal/tabs:after:h-0.5 group-data-vertical/tabs:after:inset-y-0 group-data-vertical/tabs:after:-end-px group-data-vertical/tabs:after:w-0.5 group-data-[variant=line]/tabs-list:data-[state=active]:after:opacity-100",
         className,
       )}
       {...props}
-    />
+    >
+      {children}
+      {count !== undefined && (
+        <span
+          data-slot="tab-count"
+          aria-hidden="true"
+          className="flex size-7 shrink-0 items-center justify-center rounded-full bg-foreground/5 text-xs text-foreground in-data-[state=active]:bg-primary-foreground in-data-[state=active]:text-primary"
+        >
+          {count}
+        </span>
+      )}
+    </TabsPrimitive.Trigger>
   );
 }
 

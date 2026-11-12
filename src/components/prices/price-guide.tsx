@@ -60,7 +60,7 @@ export function PriceGuide() {
               <h3 className="flex items-start gap-2 font-semibold">
                 <Icon
                   aria-hidden
-                  className="mt-0.5 size-4 shrink-0 text-primary"
+                  className="mt-0.5 size-4 shrink-0 text-foreground"
                 />
                 {help(`guides.weighingAtDoor.steps.${step}.title`)}
               </h3>

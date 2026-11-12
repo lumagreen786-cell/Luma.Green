@@ -62,6 +62,7 @@ function QualityBoard() {
           {
             value: "own",
             label: t("own"),
+            count: data.own.length,
             content: (
               <section className="grid min-w-0 items-start gap-5 lg:grid-cols-2">
                 <h2 className="text-lg font-semibold lg:col-span-2">
@@ -84,6 +85,7 @@ function QualityBoard() {
           {
             value: "incoming",
             label: t("incoming"),
+            count: data.incoming.length,
             content: (
               <section className="space-y-4">
                 <h2 className="text-lg font-semibold">{t("incoming")}</h2>
@@ -92,7 +94,7 @@ function QualityBoard() {
                 ) : (
                   data.incoming.map((file) => (
                     <div
-                      className="grid min-w-0 items-start gap-5 rounded-xl bg-card p-5 lg:grid-cols-[minmax(0,1.4fr)_minmax(16rem,1fr)]"
+                      className="grid min-w-0 items-start gap-5 rounded-panel bg-card p-5 text-card-foreground lg:grid-cols-[minmax(0,1.4fr)_minmax(16rem,1fr)]"
                       key={file.id}
                     >
                       <FileItem file={file} canWithdraw={false} />
@@ -106,6 +108,7 @@ function QualityBoard() {
           {
             value: "decisions",
             label: t("decisions"),
+            count: data.decisions.length,
             content: (
               <section className="space-y-3">
                 <h2 className="text-lg font-semibold">{t("decisions")}</h2>
@@ -162,7 +165,7 @@ function Upload({
     return <p role="status">{uploadErrors("uploadUnavailable")}</p>;
   return (
     <form
-      className="flex max-w-2xl flex-col gap-4 rounded-xl border border-border/60 bg-card p-5"
+      className="flex max-w-2xl flex-col gap-4 rounded-panel border border-border/60 bg-card p-5 text-card-foreground"
       onSubmit={(e) => {
         e.preventDefault();
         void action.run(async () => {
@@ -261,7 +264,7 @@ function FileItem({
   const withdraw = useMutation(api.qualityFiles.withdraw);
   const action = useQualityAction();
   return (
-    <div className="flex flex-col justify-between gap-3 rounded-xl border border-border/60 bg-card p-4 sm:flex-row">
+    <div className="flex flex-col justify-between gap-3 rounded-panel border border-border/60 bg-card p-4 text-card-foreground sm:flex-row">
       <div className="min-w-0">
         <p className="font-medium break-words">{file.name}</p>
         <p className="text-sm text-muted-foreground">

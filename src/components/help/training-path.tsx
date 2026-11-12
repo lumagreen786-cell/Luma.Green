@@ -142,7 +142,7 @@ function LessonCard({
         <span
           className={cn(
             "relative flex size-10 shrink-0 items-center justify-center",
-            isDone ? "text-primary" : "text-muted-foreground",
+            isDone ? "text-foreground" : "text-muted-foreground",
           )}
         >
           {isDone ? (
@@ -169,7 +169,7 @@ function LessonCard({
               <li key={point} className="flex items-start gap-2 text-sm">
                 <CheckIcon
                   aria-hidden
-                  className="mt-0.5 size-4 shrink-0 text-primary"
+                  className="mt-0.5 size-4 shrink-0 text-foreground"
                 />
                 <span>{t(`${base}.${point}`)}</span>
               </li>
@@ -177,7 +177,7 @@ function LessonCard({
           </ul>
           <Link
             href={`/help/${role}/${guide(lesson.guide).slug}`}
-            className="inline-flex min-h-11 items-center gap-1 self-start rounded-sm text-sm font-medium text-primary underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
+            className="inline-flex min-h-11 items-center gap-1 self-start rounded-sm text-sm font-medium text-foreground underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
           >
             {t("training.openGuide")}
             <ArrowRightIcon aria-hidden className="size-4 rtl:rotate-180" />

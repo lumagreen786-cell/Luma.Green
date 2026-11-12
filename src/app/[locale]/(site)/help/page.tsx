@@ -36,11 +36,15 @@ export default async function HelpPage() {
         title={t("title")}
         lead={t("lead")}
         banner="preparation"
-      >
-        <HelpSearch />
-      </HelpHero>
+      />
 
-      <Container className="grid items-start gap-4 pb-8 lg:grid-cols-[minmax(0,1fr)_19rem]">
+      <Container className="grid items-start gap-5 pb-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
+        <section
+          aria-label={t("search.label")}
+          className="min-w-0 rounded-panel bg-card p-5 shadow-panel sm:p-7"
+        >
+          <HelpSearch />
+        </section>
         <section
           aria-labelledby="help-roles"
           className="flex min-w-0 flex-col gap-4"
@@ -53,10 +57,13 @@ export default async function HelpPage() {
               {t("rolesHeading")}
             </h2>
           </div>
+          <p className="text-sm text-muted-foreground">{t("rolesLead")}</p>
           <RoleCards />
         </section>
 
-        <ContactStrip />
+        <div className="lg:col-span-2">
+          <ContactStrip />
+        </div>
       </Container>
     </>
   );

@@ -31,7 +31,7 @@ export function IconTile({
   return (
     <span
       className={cn(
-        "flex shrink-0 items-center justify-center text-primary",
+        "flex shrink-0 items-center justify-center text-foreground",
         size === "sm" && "size-11",
         size === "md" && "size-12",
         size === "lg" && "size-24",

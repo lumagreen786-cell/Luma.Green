@@ -36,7 +36,7 @@ export default function SellPage() {
             <SellHero />
             <MyBookings />
           </div>
-          <div className="min-w-0 rounded-2xl bg-card p-5 sm:p-6">
+          <div className="min-w-0 rounded-[1.75rem] bg-card p-5 text-card-foreground sm:p-6">
             <SellFlow />
           </div>
         </div>

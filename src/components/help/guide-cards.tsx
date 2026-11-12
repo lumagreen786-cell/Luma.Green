@@ -30,7 +30,7 @@ export function GuideCards({ role }: { role: HelpRole }) {
             <p className="text-sm leading-relaxed text-muted-foreground">
               {t(`guides.${key}.summary`)}
             </p>
-            <p className="flex items-center justify-between gap-5 text-sm font-medium text-primary">
+            <p className="flex items-center justify-between gap-5 text-sm font-medium text-foreground">
               {t("role.steps", { count: steps.length })}
               <ArrowRightIcon
                 aria-hidden

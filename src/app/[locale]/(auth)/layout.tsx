@@ -17,7 +17,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
         <main
           id="main"
           tabIndex={-1}
-          className="flex w-full min-w-0 flex-col rounded-xl bg-card p-5 sm:p-6"
+          className="flex w-full min-w-0 flex-col rounded-panel bg-card p-5 shadow-panel sm:p-6"
         >
           {children}
         </main>

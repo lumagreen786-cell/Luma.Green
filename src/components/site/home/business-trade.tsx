@@ -21,7 +21,7 @@ export async function BusinessTrade() {
       className="bg-background py-6 sm:py-8"
     >
       <Container>
-        <div className="grid grid-cols-1 gap-0 overflow-hidden rounded-xl border border-border/60 bg-card lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)]">
+        <div className="record-detail grid grid-cols-1 gap-0 overflow-hidden rounded-panel border border-border/60 shadow-panel lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)]">
           <div className="relative aspect-[2/1] min-w-0 overflow-hidden bg-muted lg:aspect-auto">
             <Image
               src="/images/showcase/recycle-chain-illustration.webp"
@@ -34,7 +34,7 @@ export async function BusinessTrade() {
           <div className="min-w-0 space-y-5 p-5 [overflow-wrap:anywhere] sm:p-8">
             <h2
               id="business-trade-heading"
-              className="font-display text-2xl leading-tight font-semibold tracking-tight sm:text-3xl"
+              className="font-display text-2xl leading-tight font-normal tracking-tight sm:text-3xl"
             >
               {roles("manufacturer.one")}
             </h2>
@@ -46,7 +46,7 @@ export async function BusinessTrade() {
                 >
                   <CheckIcon
                     aria-hidden
-                    className="mt-0.5 size-5 shrink-0 text-primary"
+                    className="mt-0.5 size-5 shrink-0 text-foreground"
                   />
                   <span className="min-w-0">{trade(point)}</span>
                 </li>

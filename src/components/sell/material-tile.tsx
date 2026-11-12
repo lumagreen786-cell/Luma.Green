@@ -62,7 +62,7 @@ export function MaterialTile({
             </span>
           ) : null}
           {isAdded ? (
-            <span className="font-semibold text-primary tabular-nums">
+            <span className="font-semibold text-foreground tabular-nums">
               {format.weight(kgToGrams(kg))}
             </span>
           ) : null}

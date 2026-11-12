@@ -19,6 +19,7 @@ const native = vi.hoisted(() => {
     appStateListener: undefined as ((state: string) => void) | undefined,
     invalidateLocation: vi.fn(),
     invalidateUpdates: vi.fn(),
+    injectJavaScript: vi.fn(),
     reload: vi.fn(),
     goBack: vi.fn(),
     stopLoading: vi.fn(),
@@ -115,6 +116,7 @@ vi.mock("react-native-webview", async () => {
     ) {
       native.webProps = props;
       useImperativeHandle(ref, () => ({
+        injectJavaScript: native.injectJavaScript,
         reload: native.reload,
         goBack: native.goBack,
         stopLoading: native.stopLoading,
@@ -164,6 +166,20 @@ function invoke(name: string, ...args: unknown[]) {
   });
 }
 
+function sendAppearance(nonce: string, data: string) {
+  invoke("onMessage", {
+    nativeEvent: {
+      url: "https://luma.green/en",
+      data: JSON.stringify({
+        type: "luma.native.message",
+        nonce,
+        url: "https://luma.green/en",
+        data,
+      }),
+    },
+  });
+}
+
 beforeEach(() => {
   vi.clearAllMocks();
   native.webProps = {};
@@ -180,10 +196,21 @@ describe("WebView-only Android shell", () => {
     expect(native.webProps.source).toEqual({ uri: "https://luma.green/en" });
     expect(native.webProps.geolocationEnabled).toBe(true);
     expect(native.webProps.forceDarkOn).toBe(false);
-    expect(native.webProps.style).toMatchObject({ backgroundColor: "#FFFFFF" });
-    expect(native.statusBarStyle).toBe("dark");
+    expect(native.webProps.style).toMatchObject({ backgroundColor: "#080b14" });
+    expect(native.statusBarStyle).toBe("light");
     expect(native.webProps.allowFileAccess).toBe(false);
     expect(native.webProps.allowUniversalAccessFromFileURLs).toBe(false);
+  });
+
+  it("syncs chrome to a trusted web appearance and rejects an untrusted change", () => {
+    render(<App />);
+    sendAppearance("wrong-session", "appearance:light");
+    expect(native.statusBarStyle).toBe("light");
+    sendAppearance("synthetic-native-session", "appearance:light");
+    expect(native.statusBarStyle).toBe("dark");
+    expect(native.webProps.style).toMatchObject({ backgroundColor: "#e7e9ee" });
+    sendAppearance("synthetic-native-session", "appearance:dark");
+    expect(native.statusBarStyle).toBe("light");
   });
 
   it("offers retry only after a load failure and preserves the hosted instance for a network retry", () => {
@@ -266,6 +293,9 @@ it("invalidates pending native work on background and ignores background command
     },
   });
   expect(native.receive).toHaveBeenCalledOnce();
+  expect(native.injectJavaScript).toHaveBeenCalledWith(
+    expect.stringContaining("__lumaAppearanceObserver"),
+  );
 });
 
 it("accepts an enveloped Android origin event as the current document", () => {

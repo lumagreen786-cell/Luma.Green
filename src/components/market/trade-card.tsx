@@ -28,10 +28,12 @@ export function TradeCard({
   side,
   compact = false,
   showSide = false,
+  selected = false,
 }: {
   trade: TradeView;
   side: TradeSide;
   compact?: boolean;
+  selected?: boolean;
   /** Label the card Buying or Selling, where both sides are mixed. */
   showSide?: boolean;
 }) {
@@ -85,7 +87,12 @@ export function TradeCard({
     legacyContent
   );
   return (
-    <article className="flex h-full min-w-0 flex-col gap-4 rounded-xl border border-border/60 bg-card p-4 sm:p-5">
+    <article
+      className={cn(
+        "flex h-full min-w-0 flex-col gap-4 rounded-panel border border-border/60 p-4 sm:p-5",
+        { "record-sheet": !selected, "record-detail": selected },
+      )}
+    >
       <TradeHeading trade={trade} side={side} showSide={showSide} />
       <div
         className={cn(
@@ -111,7 +118,7 @@ export function TradeCard({
         <div
           className={cn(
             "min-w-0 space-y-4",
-            !compact && "rounded-lg bg-muted/60 p-4",
+            !compact && "record-detail rounded-panel p-5",
           )}
         >
           {hasDirectCash ? (
@@ -222,7 +229,7 @@ function TradeFooter({ trade }: { trade: TradeView }) {
       {receiptReference ? (
         <Link
           href={`/app/trades/${trade.id}/invoice`}
-          className="inline-flex min-h-11 items-center gap-1.5 rounded-md font-medium text-primary underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
+          className="inline-flex min-h-11 items-center gap-1.5 rounded-md font-medium text-foreground underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
         >
           <ReceiptTextIcon aria-hidden className="size-4" />
           {t("receipt", { number: receiptReference })}

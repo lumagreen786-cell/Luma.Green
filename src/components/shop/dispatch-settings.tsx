@@ -93,7 +93,7 @@ function SettingsForm({
             {t("locationRequired")}{" "}
             <Link
               href="/help/kabadiwala"
-              className="inline-flex min-h-11 items-center text-primary underline underline-offset-4"
+              className="inline-flex min-h-11 items-center text-foreground underline underline-offset-4"
             >
               {nav("help")}
             </Link>

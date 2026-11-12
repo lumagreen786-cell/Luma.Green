@@ -49,7 +49,7 @@ export async function PickupJourney() {
                 data-reveal
                 className="grid grid-cols-[2.5rem_minmax(0,1fr)] gap-5 py-4"
               >
-                <span className="pt-1 font-mono text-sm text-primary">
+                <span className="pt-1 font-mono text-sm text-foreground">
                   {format.number(index + 1, { minimumIntegerDigits: 2 })}
                 </span>
                 <div className="space-y-2">
@@ -107,7 +107,7 @@ export async function PickupJourney() {
               >
                 <CheckIcon
                   aria-hidden
-                  className="mt-0.5 size-4 shrink-0 text-primary"
+                  className="mt-0.5 size-4 shrink-0 text-foreground"
                 />
                 {home(`roles.household.${point}`)}
               </li>

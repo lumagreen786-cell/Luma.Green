@@ -78,7 +78,7 @@ export default async function StandardsPage() {
       <Container className="grid gap-4 pb-8 lg:grid-cols-[14rem_minmax(0,1fr)] lg:items-start">
         <nav
           aria-label={t("onThisPage")}
-          className="flex flex-col gap-3 rounded-xl bg-card p-4 lg:sticky lg:top-24"
+          className="flex flex-col gap-3 rounded-panel bg-card p-4 shadow-panel lg:sticky lg:top-24"
         >
           <p className="text-sm font-medium text-muted-foreground">
             {t("onThisPage")}
@@ -88,7 +88,7 @@ export default async function StandardsPage() {
               <li key={id}>
                 <a
                   href={`#${id}`}
-                  className="inline-flex min-h-11 w-full items-center rounded-lg px-3 text-sm font-medium outline-none hover:border-primary hover:bg-accent hover:text-primary focus-visible:ring-3 focus-visible:ring-ring/50"
+                  className="inline-flex min-h-11 w-full items-center rounded-full px-3 text-sm font-medium outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
                 >
                   {t(`${id}.nav`)}
                 </a>
@@ -198,14 +198,14 @@ export default async function StandardsPage() {
 
           <section
             aria-labelledby="adopt-heading"
-            className="flex flex-col items-start gap-4 rounded-xl bg-accent p-5 text-accent-foreground"
+            className="flex flex-col items-start gap-4 rounded-panel bg-card p-5 text-card-foreground shadow-panel"
           >
             <div className="flex max-w-2xl items-start gap-4">
               <BookOpenCheckIcon aria-hidden className="mt-1 size-7 shrink-0" />
               <div className="flex flex-col gap-2">
                 <h2
                   id="adopt-heading"
-                  className="font-display text-2xl font-semibold tracking-tight"
+                  className="font-display text-xl font-medium tracking-tight"
                 >
                   {t("adopt.title")}
                 </h2>

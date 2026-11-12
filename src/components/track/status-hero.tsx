@@ -48,19 +48,19 @@ function Progress({ booking }: { booking: TrackedBooking }) {
   return (
     <ol
       aria-label={t("label")}
-      className="grid gap-1.5"
+      className="grid gap-2 rounded-[1.75rem] bg-background p-2"
       style={{ gridTemplateColumns: `repeat(${String(steps.length)}, 1fr)` }}
     >
       {steps.map((step, index) => (
         <li
           key={step}
           aria-current={index === current ? "step" : undefined}
-          className="flex flex-col gap-1.5"
+          className="flex min-w-0 flex-col gap-2 rounded-2xl p-2 aria-[current=step]:bg-primary aria-[current=step]:text-primary-foreground"
         >
           <span
             aria-hidden
             className={cn(
-              "h-1 rounded-sm",
+              "h-1 rounded-full",
               index <= current ? "bg-primary" : "bg-border",
             )}
           />
@@ -68,7 +68,7 @@ function Progress({ booking }: { booking: TrackedBooking }) {
             className={cn(
               "text-xs",
               index === current
-                ? "font-semibold text-foreground"
+                ? "font-semibold text-primary-foreground"
                 : "text-muted-foreground",
             )}
           >
@@ -106,7 +106,7 @@ export function StatusHero({ booking }: { booking: TrackedBooking }) {
   return (
     <section
       aria-labelledby="track-title"
-      className="flex flex-col gap-5 rounded-2xl bg-card p-5 sm:p-6"
+      className="flex flex-col gap-5 rounded-[1.75rem] bg-card p-5 text-card-foreground sm:p-6"
     >
       <div className="flex items-start gap-4">
         <span

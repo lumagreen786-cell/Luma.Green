@@ -44,7 +44,10 @@ function LookupSection({
   children: React.ReactNode;
 }) {
   return (
-    <details open className="group min-w-0 rounded-2xl bg-card p-5">
+    <details
+      open
+      className="group min-w-0 rounded-[1.75rem] bg-card p-5 text-card-foreground"
+    >
       <summary className="flex min-h-11 cursor-pointer items-center justify-between gap-3 font-medium">
         {title}
         <ChevronDownIcon
@@ -96,7 +99,7 @@ function LookupControls({
     return (
       <Link
         href={{ pathname: "/login", query: { next: "/sell/services" } }}
-        className="inline-flex min-h-11 items-center font-medium text-primary underline"
+        className="inline-flex min-h-11 items-center font-medium text-foreground underline"
       >
         {signIn("metaTitle")}
       </Link>
@@ -105,7 +108,7 @@ function LookupControls({
     return (
       <Link
         href="/account/security"
-        className="inline-flex min-h-11 items-center font-medium text-primary underline"
+        className="inline-flex min-h-11 items-center font-medium text-foreground underline"
       >
         {phone("title")}
       </Link>

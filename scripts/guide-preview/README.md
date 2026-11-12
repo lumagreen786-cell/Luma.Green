@@ -49,7 +49,7 @@ checkpoint. Component and source hashes identify the exact captured content.
 
 This harness renders the existing Luma.Green React components in Chromium.
 It does not copy their markup or change their styles. It uses the current
-production build's CSS and exact per-locale Geist/Noto font classes, read from its generated HTML. The yellow provenance banner is added
+production build's CSS and exact per-locale Urbanist/Noto font classes, read from its generated HTML. The yellow provenance banner is added
 by the documentation harness outside the application shell.
 
 All displayed accounts, applications, bookings, prices and report totals are
@@ -415,3 +415,15 @@ PNG captures and their source/build hashes go to
 `docs/delivery/evidence/ship-x-2026-11-11/layout-manifest.json`. Review the actual
 PNGs before claiming visual acceptance. Unmapped routes now throw instead of
 rendering the home screen.
+
+## Florin dual-theme acceptance — current
+
+Use `florin-acceptance.mjs` for the current Florin review. The older Ship X
+script above is historical and its forced-light assertion is not applicable.
+Build the current app and restart Vite after that build. The shared HTML harness
+runs the production theme bootstrap before the app mounts, then preserves its
+selected dark/light class while applying the exact per-locale build font classes.
+Latin UI must load Urbanist; other scripts use the matching Noto face. Verify both
+light and dark captures with fresh browser contexts, including the stored theme
+choice where relevant. Existing authentication/query adapters stay isolated and
+all writes remain rejected. No fixture image proves real access or provider work.

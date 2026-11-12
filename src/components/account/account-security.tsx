@@ -162,85 +162,87 @@ function SecurityForm() {
   const actionLabel = t(confirmation === "disable" ? "disable" : "regenerate");
 
   return (
-    <div className="mx-auto flex w-full max-w-3xl min-w-0 flex-col gap-4">
+    <div className="mx-auto flex w-full max-w-6xl min-w-0 flex-col gap-4">
       <AppPageHeader
         title={t("title")}
         lead={<SecurityHelp hasPassword={person.hasPassword} />}
       />
       <section
         aria-label={t("setupTitle")}
-        className="flex flex-col gap-5 rounded-xl bg-card p-5 sm:p-6"
+        className="grid items-start gap-6 rounded-panel bg-card p-5 shadow-panel sm:p-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)]"
       >
-        <div className="flex flex-wrap items-center gap-3 rounded-lg bg-accent/40 p-3">
+        <div className="flex flex-wrap items-center gap-3 border-b border-border pb-5 lg:border-b-0 lg:pe-6 lg:pb-0">
           <StatusIcon
             aria-hidden
-            className="mt-0.5 size-5 shrink-0 text-primary"
+            className="mt-0.5 size-5 shrink-0 text-foreground"
           />
           <span className="min-w-0 font-medium">{t("setupTitle")}</span>
-          <span className="ms-auto shrink-0 text-sm text-muted-foreground">
+          <span className="rounded-full bg-muted px-3 py-2 text-sm text-muted-foreground">
             {t(isEnabled ? "enabled" : "disabled")}
           </span>
         </div>
-        <SecurityPassword
-          active={
-            person.hasPassword &&
-            !isEnabled &&
-            person.kind !== "admin" &&
-            !setup &&
-            !codes
-          }
-          password={password}
-          onPassword={setPassword}
-          busy={busy}
-        />
-        <SecurityContent
-          setup={setup}
-          codes={codes}
-          code={code}
-          busy={busy}
-          error={error}
-          isEnabled={isEnabled}
-          isAdmin={person.kind === "admin"}
-          hasPassword={person.hasPassword}
-          onCode={setCode}
-          onVerify={() => {
-            void perform(verify);
-          }}
-          onEnable={() => {
-            void perform(enable);
-          }}
-          onChange={setConfirmation}
-          onDismiss={() => {
-            setSetup(null);
-            setCodes(null);
-            setCode("");
-            setError(null);
-          }}
-        />
-        {error ? (
-          <div className="space-y-3">
-            <p
-              id="security-error"
-              role="alert"
-              className="text-sm text-destructive"
-            >
-              {error === "generic" ? common("error") : t(error)}
-            </p>
-            {error === "recentSignIn" ? (
-              <Button
-                variant="outline"
-                className="min-h-11"
-                disabled={busy}
-                onClick={() => {
-                  void perform(signInAgain);
-                }}
+        <div className="grid min-w-0 gap-5">
+          <SecurityPassword
+            active={
+              person.hasPassword &&
+              !isEnabled &&
+              person.kind !== "admin" &&
+              !setup &&
+              !codes
+            }
+            password={password}
+            onPassword={setPassword}
+            busy={busy}
+          />
+          <SecurityContent
+            setup={setup}
+            codes={codes}
+            code={code}
+            busy={busy}
+            error={error}
+            isEnabled={isEnabled}
+            isAdmin={person.kind === "admin"}
+            hasPassword={person.hasPassword}
+            onCode={setCode}
+            onVerify={() => {
+              void perform(verify);
+            }}
+            onEnable={() => {
+              void perform(enable);
+            }}
+            onChange={setConfirmation}
+            onDismiss={() => {
+              setSetup(null);
+              setCodes(null);
+              setCode("");
+              setError(null);
+            }}
+          />
+          {error ? (
+            <div className="space-y-3">
+              <p
+                id="security-error"
+                role="alert"
+                className="text-sm text-destructive"
               >
-                {t("signInAgain")}
-              </Button>
-            ) : null}
-          </div>
-        ) : null}
-        <SecurityFooter hasPassword={person.hasPassword} />
+                {error === "generic" ? common("error") : t(error)}
+              </p>
+              {error === "recentSignIn" ? (
+                <Button
+                  variant="outline"
+                  className="min-h-11"
+                  disabled={busy}
+                  onClick={() => {
+                    void perform(signInAgain);
+                  }}
+                >
+                  {t("signInAgain")}
+                </Button>
+              ) : null}
+            </div>
+          ) : null}
+          <SecurityFooter hasPassword={person.hasPassword} />
+        </div>
       </section>
       {!setup &&
       !codes &&
@@ -322,7 +324,7 @@ function SetupKey({ uri, label }: { uri: string; label: string }) {
     };
   }, [uri]);
   return (
-    <div className="flex flex-col items-start gap-3 rounded-xl border border-border/60 bg-card p-5">
+    <div className="flex flex-col items-start gap-3 rounded-panel border border-border/60 bg-card p-5 shadow-panel">
       {qr ? (
         <Image src={qr} alt="" width={208} height={208} unoptimized />
       ) : null}
@@ -522,7 +524,7 @@ function SecurityFooter({ hasPassword }: { hasPassword: boolean }) {
       )}
       <Link
         href="/help/contact"
-        className="inline-flex min-h-11 items-center text-sm font-medium text-primary underline underline-offset-4"
+        className="inline-flex min-h-11 items-center text-sm font-medium text-foreground underline underline-offset-4"
       >
         {nav("contact")}
       </Link>

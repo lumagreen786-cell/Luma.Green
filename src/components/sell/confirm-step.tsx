@@ -57,7 +57,7 @@ function SummaryRow({
         <Button
           type="button"
           variant="ghost"
-          className="-my-1.5 -me-2 h-11 shrink-0 px-2 text-primary"
+          className="-my-1.5 -me-2 h-11 shrink-0 px-2 text-foreground"
           aria-label={t("changeLabel", { section: label })}
           onClick={onChange}
         >
@@ -171,7 +171,7 @@ export function ConfirmStep({
         <p role="status" className="flex items-center gap-2 font-medium">
           <LoaderCircleIcon
             aria-hidden
-            className="size-5 animate-spin text-primary"
+            className="size-5 animate-spin text-foreground"
           />
           {t(status === "booked" ? "confirm.booked" : "confirm.booking")}
         </p>

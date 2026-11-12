@@ -193,7 +193,7 @@ function RemovalForAccount({ sessionId }: { sessionId: string | undefined }) {
   const state = useRemovalForm(sessionId);
   const id = useId();
   return (
-    <section className="mx-auto max-w-3xl space-y-5 rounded-xl bg-card p-5 sm:p-6">
+    <section className="mx-auto max-w-3xl space-y-5 rounded-panel bg-card p-5 shadow-panel sm:p-6">
       {!state.pending && !state.closed ? (
         <RemovalStatus onStatus={state.setStatus} />
       ) : null}

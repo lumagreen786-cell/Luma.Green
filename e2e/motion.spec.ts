@@ -40,7 +40,11 @@ test("the logo mark spins once on hover and keyboard focus while its name stays 
   const header = page.getByRole("banner");
   const mark = header.getByRole("img", { name: "Luma.Green", exact: true });
   const wordmark = header.getByText("Luma.Green", { exact: true });
-  const homeLink = header.getByRole("link", { name: "Home", exact: true });
+  const homeLink = header
+    .getByRole("link", { name: "Home", exact: true })
+    .filter({
+      has: page.getByRole("img", { name: "Luma.Green", exact: true }),
+    });
   await expect(mark).toHaveCSS("transform", "none");
   await mark.hover();
   await pauseLogoAtMidSpin(mark);
@@ -70,7 +74,11 @@ test("reduced motion prevents logo spins and cancels one already in progress", a
   await page.goto("/en");
   const header = page.getByRole("banner");
   const mark = header.getByRole("img", { name: "Luma.Green", exact: true });
-  const homeLink = header.getByRole("link", { name: "Home", exact: true });
+  const homeLink = header
+    .getByRole("link", { name: "Home", exact: true })
+    .filter({
+      has: page.getByRole("img", { name: "Luma.Green", exact: true }),
+    });
   await mark.hover();
   await expect(mark).toHaveCSS("animation-name", "none");
   await expect(mark).toHaveCSS("transform", "none");

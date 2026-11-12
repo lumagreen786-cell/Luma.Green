@@ -95,7 +95,7 @@ export function FrameworkScreening({
           href={source}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex min-h-11 items-center text-sm font-medium text-primary underline underline-offset-4"
+          className="inline-flex min-h-11 items-center text-sm font-medium text-foreground underline underline-offset-4"
         >
           {t("source")}
         </a>
@@ -103,7 +103,7 @@ export function FrameworkScreening({
           href={definition.lifecycleSource}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex min-h-11 items-center text-sm font-medium text-primary underline underline-offset-4"
+          className="inline-flex min-h-11 items-center text-sm font-medium text-foreground underline underline-offset-4"
         >
           {t("process")}
         </a>

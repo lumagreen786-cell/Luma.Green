@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
-import { BusinessTrade } from "@/components/site/home/business-trade";
 import { HomeHero } from "@/components/site/home/hero";
-import { MaterialRecords } from "@/components/site/home/material-records";
+import { HomeResourceGrid } from "@/components/site/home/resource-grid";
 import { RoleBenefits } from "@/components/site/home/role-benefits";
-import { ShopWorkday } from "@/components/site/home/shop-workday";
 import { localeFromParams } from "@/i18n/paths";
 import { pageMetadata, serializeJsonLd } from "@/lib/seo";
 import { site } from "@/lib/site";
@@ -58,9 +56,7 @@ export default async function HomePage() {
       <div>
         <HomeHero />
         <RoleBenefits businessOnly />
-        <ShopWorkday />
-        <BusinessTrade />
-        <MaterialRecords />
+        <HomeResourceGrid />
       </div>
     </>
   );

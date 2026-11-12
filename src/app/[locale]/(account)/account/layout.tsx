@@ -6,6 +6,7 @@ import { AccountLinks } from "@/components/account/account-links";
 import { AccountMenu } from "@/components/account/account-menu";
 import { Logo } from "@/components/brand/logo";
 import { SkipLink } from "@/components/site/skip-link";
+import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { Link } from "@/i18n/navigation";
 
 export const metadata: Metadata = { robots: { index: false, follow: false } };
@@ -21,7 +22,7 @@ export default async function AccountLayout({
   return (
     <div className="flex min-h-dvh flex-col bg-background">
       <SkipLink />
-      <header className="flex min-h-16 items-center justify-between gap-2 border-b border-border/60 bg-card px-4 py-2 sm:px-8">
+      <header className="flex min-h-16 items-center justify-between gap-2 bg-background px-4 py-3 sm:px-8">
         <Link
           href="/"
           aria-label={t("home")}
@@ -29,14 +30,17 @@ export default async function AccountLayout({
         >
           <Logo />
         </Link>
-        <AccountMenu />
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <AccountMenu />
+        </div>
       </header>
       <div className="mx-auto grid w-full max-w-7xl flex-1 content-start gap-5 px-4 py-5 sm:px-8">
         <nav
           aria-label={account("title")}
-          className="flex min-w-0 flex-wrap gap-1 rounded-xl bg-foreground p-2 text-background"
+          className="flex min-w-0 flex-wrap gap-2 rounded-panel bg-card p-2 text-card-foreground shadow-panel sm:rounded-full"
         >
-          <AccountLinks className="font-medium hover:bg-background/15 hover:text-background aria-[current=page]:hover:bg-accent aria-[current=page]:hover:text-accent-foreground" />
+          <AccountLinks className="font-medium hover:bg-muted aria-[current=page]:hover:bg-primary aria-[current=page]:hover:text-primary-foreground" />
         </nav>
         <main id="main" tabIndex={-1} className="flex min-w-0 flex-col">
           {children}

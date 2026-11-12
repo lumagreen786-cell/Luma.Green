@@ -95,7 +95,7 @@ export async function ShopWorkday() {
         <div className="grid gap-4 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)]">
           <div
             data-parallax-scene
-            className="relative aspect-[2/1] overflow-hidden rounded-xl bg-muted lg:order-2 lg:aspect-auto"
+            className="relative aspect-[2/1] overflow-hidden rounded-panel bg-muted lg:order-2 lg:aspect-auto"
           >
             <Image
               data-parallax="-20"
@@ -106,7 +106,7 @@ export async function ShopWorkday() {
               className="object-cover object-center"
             />
           </div>
-          <ol className="min-w-0 divide-y divide-border/60 overflow-hidden rounded-xl border border-border/60 bg-card">
+          <ol className="record-sheet min-w-0 divide-y divide-border/60 overflow-hidden rounded-panel shadow-panel">
             {tasks.map(({ icon: Icon, title, body }) => (
               <li
                 key={title}
@@ -115,9 +115,9 @@ export async function ShopWorkday() {
               >
                 <Icon
                   aria-hidden
-                  className="row-span-2 size-11 rounded-full bg-secondary/35 p-2.5 text-primary"
+                  className="row-span-2 size-11 rounded-full bg-secondary/35 p-2.5 text-foreground"
                 />
-                <h3 className="font-display text-base font-semibold tracking-tight">
+                <h3 className="font-display text-base font-normal tracking-tight">
                   {title}
                 </h3>
                 <p className="col-start-2 text-sm leading-relaxed text-muted-foreground">

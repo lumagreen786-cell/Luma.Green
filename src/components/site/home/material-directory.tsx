@@ -62,9 +62,9 @@ export async function MaterialDirectory() {
               <li key={family} data-reveal className="min-w-0 border-b">
                 <Link
                   href="/sell"
-                  className="group grid min-h-28 grid-cols-[2rem_minmax(0,1fr)_1.25rem] items-center gap-4 py-5 transition-colors outline-none hover:text-primary focus-visible:ring-3 focus-visible:ring-ring/50 sm:py-6"
+                  className="group grid min-h-28 grid-cols-[2rem_minmax(0,1fr)_1.25rem] items-center gap-4 py-5 transition-colors outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 sm:py-6"
                 >
-                  <Icon aria-hidden className="size-6 text-primary" />
+                  <Icon aria-hidden className="size-6 text-foreground" />
                   <div className="min-w-0 space-y-2">
                     <h3 className="font-display text-xl font-semibold tracking-tight">
                       {prices(family)}

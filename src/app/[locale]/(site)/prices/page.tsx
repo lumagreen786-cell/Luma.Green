@@ -47,7 +47,7 @@ export default async function PricesPage() {
       <Container className="grid items-start gap-4 pb-8 lg:grid-cols-[minmax(0,1fr)_19rem]">
         <section
           aria-label={t("title")}
-          className="min-w-0 rounded-xl bg-card p-5 sm:p-6"
+          className="min-w-0 rounded-panel bg-card p-5 shadow-panel sm:p-6"
         >
           <PriceBoard />
         </section>
@@ -58,18 +58,18 @@ export default async function PricesPage() {
               {sell("basket.weighNote")}
             </p>
           </div>
-          <details className="rounded-xl bg-card p-5">
+          <details className="rounded-panel bg-card p-5 shadow-panel">
             <summary className="cursor-pointer py-2 font-semibold outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
               {help("guides.weighingAtDoor.title")}
             </summary>
             <PriceGuide />
           </details>
 
-          <aside className="flex flex-col gap-4 rounded-xl bg-card p-5">
+          <aside className="flex flex-col gap-4 rounded-panel bg-card p-5 shadow-panel">
             <div className="flex items-start gap-3">
               <PackageOpenIcon
                 aria-hidden
-                className="mt-0.5 size-6 shrink-0 text-primary"
+                className="mt-0.5 size-6 shrink-0 text-foreground"
               />
               <div>
                 <p className="text-lg font-semibold">{t("sellCta.title")}</p>

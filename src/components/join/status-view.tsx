@@ -44,8 +44,8 @@ function StatusSection({
   children?: ReactNode;
 }) {
   const toneClass = {
-    neutral: "text-primary",
-    good: "text-primary",
+    neutral: "text-foreground",
+    good: "text-foreground",
     bad: "text-destructive",
   }[tone];
   return (
@@ -116,7 +116,7 @@ function ApplicationStatus({ application }: { application: Application }) {
   const format = useFormatter();
   const role = t(`roles.${application.kind}.title`);
   const roleLine = (
-    <p className="text-sm font-medium text-primary">
+    <p className="text-sm font-medium text-foreground">
       {t("status.roleLabel", { role })}
     </p>
   );
@@ -167,7 +167,7 @@ function ApplicationStatus({ application }: { application: Application }) {
                 <li key={key} className="flex gap-2 text-sm">
                   <CircleCheckIcon
                     aria-hidden
-                    className="mt-0.5 size-4 shrink-0 text-primary"
+                    className="mt-0.5 size-4 shrink-0 text-foreground"
                   />
                   {t(`status.checks.${checks}.${key}`)}
                 </li>

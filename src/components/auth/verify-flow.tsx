@@ -304,7 +304,7 @@ export function VerifyForm({
         ) : (
           <Link
             href={{ pathname: "/login", query: { next } }}
-            className="inline-flex min-h-11 max-w-full items-center self-start py-2 text-sm font-medium text-primary underline-offset-4 hover:underline"
+            className="inline-flex min-h-11 max-w-full items-center self-start py-2 text-sm font-medium text-foreground underline-offset-4 hover:underline"
           >
             {t("changeNumber")}
           </Link>

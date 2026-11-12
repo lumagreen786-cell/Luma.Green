@@ -1,3 +1,26 @@
+## Florin local closeout — 12 November 2026
+
+Resumed the unfinished Florin changes on `feat/ship-x-homepage`. The local
+implementation includes dual themes, page compositions, compact daily workspace
+navigation with a More panel, appearance access in workspace/admin screens,
+short translated signup actions and the previously missed recovery layouts.
+See [the delivery record](florin-redesign-2026-11-11.md) for checks and evidence.
+No PDF, backend setting, production record, binary or provider action changed.
+
+The separate historical `luma-overhaul` worktree has a verified private recovery
+archive at `/Users/syedabdulmuqeeth/Developer/Archives/luma-overhaul-2026-11-12`.
+Its 3,843 archived files match their source bytes and its Git bundle verifies.
+Cleanup follows the checked local commit. Keep the primary checkout and the
+archive. PR #53 remains draft; this task does not claim a push, merge or release.
+
+## Florin redesign in progress — 11 November 2026
+
+Latest owner decision replaces Ship X with all Florin pages and both modes.
+Read `.agents/skills/luma-florin-ui/SKILL.md` and the canonical design contract.
+Reference captures/tokens: `docs/design/inspiration/florin`. No further PDFs.
+PR #53 remains draft until this new implementation and checks are complete.
+Previous Ship X checks/captures do not establish Florin acceptance.
+
 ## Composition rebuild verification — 11 November 2026
 
 The first Ship X rollout shipped through PR #52 as `6a762d0`; Vercel Production

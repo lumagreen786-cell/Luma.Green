@@ -65,7 +65,7 @@ export function MaterialMarquee() {
                   <span className="whitespace-nowrap">{material(family)}</span>
                   <CircleIcon
                     aria-hidden
-                    className="size-1.5 shrink-0 fill-primary text-primary"
+                    className="size-1.5 shrink-0 fill-primary text-foreground"
                   />
                 </li>
               ))}

@@ -3,6 +3,10 @@ name: design-system
 description: Apply Luma's approved light-only Ship X design system, semantic five-colour palette, Plus Jakarta Sans/Noto typography, horizontal navigation, functional panels and accessible multilingual controls.
 ---
 
+Latest owner direction: read `.agents/skills/luma-florin-ui/SKILL.md` and
+`docs/design/luma-design-system/README.md`. Florin both-mode styling supersedes
+the older Ship X guidance below. Do not update PDFs.
+
 # Luma design system
 
 Read [the current canonical contract](../../../docs/design/luma-design-system/README.md)

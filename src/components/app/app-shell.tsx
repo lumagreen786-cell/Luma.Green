@@ -18,6 +18,7 @@ import { Logo } from "@/components/brand/logo";
 import { LanguageSwitcher } from "@/components/site/language-switcher";
 import { isCurrentSection } from "@/components/site/site-nav";
 import { SkipLink } from "@/components/site/skip-link";
+import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -233,7 +234,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         aria-current={isCurrent ? "page" : undefined}
         className={cn(
           className,
-          isCurrent && "bg-accent font-semibold text-accent-foreground",
+          isCurrent && "bg-primary font-semibold text-primary-foreground",
         )}
       >
         <Icon aria-hidden className="size-5 shrink-0" />
@@ -247,74 +248,85 @@ export function AppShell({ children }: { children: ReactNode }) {
   };
 
   return (
-    <div className="flex min-h-dvh flex-col bg-background">
-      <SkipLink />
-      <div className="hidden bg-sidebar text-sidebar-foreground xl:block">
-        <div className="mx-auto flex max-w-[100rem] items-center justify-between gap-6 px-8 py-4">
-          <Link
-            href="/"
-            className="inline-flex min-h-11 shrink-0 items-center rounded-full outline-none focus-visible:ring-3 focus-visible:ring-sidebar-ring"
-          >
-            <Logo />
-          </Link>
-          <div className="min-w-0 flex-1 border-s border-sidebar-border ps-6">
-            <p className="truncate text-sm font-semibold">{name}</p>
-            <p className="text-xs text-sidebar-foreground/70">
-              {t(`roles.${role}`)}
-            </p>
-          </div>
-          <NativeUpdateControl compact />
-          <div className="[&_button]:focus-visible:ring-sidebar-ring [&_svg]:text-current">
-            <LanguageSwitcher />
-          </div>
-          <Button
-            variant="ghost"
-            className="text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-sidebar-ring"
-            disabled={signingOut}
-            onClick={() => void signOut()}
-          >
-            <LogOutIcon aria-hidden />
-            {t("signOut")}
-          </Button>
-        </div>
-        <div className="mx-auto flex max-w-[100rem] items-center gap-4 px-8 pb-4">
-          <nav
-            aria-label={t("navLabel")}
-            className="flex min-w-0 flex-1 flex-wrap items-center gap-2 pb-1"
-          >
-            {[...primary, ...more]
-              .filter((item) => isSearchMatch(item))
-              .map((item) =>
-                link(
-                  item,
-                  "flex min-h-11 shrink-0 items-center gap-2 rounded-full px-4 text-sm font-medium outline-none transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-3 focus-visible:ring-sidebar-ring",
-                  true,
-                ),
-              )}
+    <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
+      <div className="flex min-h-dvh flex-col bg-background">
+        <SkipLink />
+        <div className="hidden bg-background text-foreground xl:block">
+          <div className="mx-auto flex max-w-[100rem] items-center justify-between gap-6 px-8 py-4">
             <Link
-              href={help}
-              className="flex min-h-11 shrink-0 items-center gap-2 rounded-full px-4 text-sm hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+              href="/"
+              className="inline-flex min-h-11 shrink-0 items-center rounded-full outline-none focus-visible:ring-3 focus-visible:ring-sidebar-ring"
             >
-              <LifeBuoyIcon aria-hidden className="size-5" />
-              {t("nav.help")}
+              <Logo />
             </Link>
-            <AccountLinks className="shrink-0 rounded-full px-4 whitespace-nowrap text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground" />
-          </nav>
-          <Input
-            className="w-40 shrink-0 border-sidebar-border bg-sidebar-accent text-sidebar-accent-foreground placeholder:text-sidebar-accent-foreground/70"
-            type="search"
-            aria-label={common("search")}
-            placeholder={common("search")}
-            value={navSearch}
-            onChange={(event) => {
-              setNavSearch(event.target.value);
-            }}
-          />
+            <div className="min-w-0 flex-1 border-s border-border ps-6">
+              <p className="truncate text-sm font-semibold">{name}</p>
+              <p className="text-xs text-muted-foreground">
+                {t(`roles.${role}`)}
+              </p>
+            </div>
+            <NativeUpdateControl compact />
+            <ThemeToggle />
+            <div className="[&_button]:focus-visible:ring-sidebar-ring [&_svg]:text-current">
+              <LanguageSwitcher />
+            </div>
+            <Button
+              variant="ghost"
+              className="text-foreground hover:bg-muted hover:text-foreground focus-visible:ring-sidebar-ring"
+              disabled={signingOut}
+              onClick={() => void signOut()}
+            >
+              <LogOutIcon aria-hidden />
+              {t("signOut")}
+            </Button>
+          </div>
+          <div className="mx-auto flex max-w-[100rem] items-center gap-4 px-8 pb-4">
+            <nav
+              aria-label={t("navLabel")}
+              className="record-sheet flex min-w-0 flex-1 items-center gap-1 rounded-full border border-border p-2 shadow-sm"
+            >
+              <div className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto">
+                {(navSearch.trim() ? [...primary, ...more] : primary)
+                  .filter((item) => isSearchMatch(item))
+                  .map((item) =>
+                    link(
+                      item,
+                      "flex min-h-11 shrink-0 items-center gap-2 rounded-full px-4 text-sm font-medium outline-none transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-3 focus-visible:ring-sidebar-ring",
+                      true,
+                    ),
+                  )}
+              </div>
+              <SheetTrigger asChild>
+                <Button
+                  variant="ghost"
+                  className={cn(
+                    "shrink-0",
+                    more.some((item) => isActive(pathname, item.href)) &&
+                      "bg-primary text-primary-foreground",
+                  )}
+                  onClick={(event) => {
+                    menuOpener.current = event.currentTarget;
+                  }}
+                >
+                  <EllipsisIcon aria-hidden />
+                  {t("more")}
+                </Button>
+              </SheetTrigger>
+            </nav>
+            <Input
+              className="w-40 shrink-0 border-border bg-card text-card-foreground placeholder:text-muted-foreground"
+              type="search"
+              aria-label={common("search")}
+              placeholder={common("search")}
+              value={navSearch}
+              onChange={(event) => {
+                setNavSearch(event.target.value);
+              }}
+            />
+          </div>
         </div>
-      </div>
 
-      <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
-        <header className="sticky top-0 z-30 flex h-14 items-center justify-between gap-2 border-b border-sidebar-border bg-sidebar px-4 text-sidebar-foreground xl:hidden [&_button]:focus-visible:ring-sidebar-ring">
+        <header className="sticky top-0 z-30 flex h-14 items-center justify-between gap-2 border-b border-border bg-background px-4 text-foreground xl:hidden [&_button]:focus-visible:ring-sidebar-ring">
           <Link
             href="/"
             aria-label={t("homeLink")}
@@ -388,7 +400,9 @@ export function AppShell({ children }: { children: ReactNode }) {
                 }
                 className={cn(
                   "flex min-h-11 items-center gap-3 py-2 text-sm whitespace-nowrap outline-none focus-visible:ring-3 focus-visible:ring-ring/50",
-                  isActive(pathname, item.href) && "font-semibold text-primary",
+                  primary.includes(item) && "xl:hidden",
+                  isActive(pathname, item.href) &&
+                    "font-semibold text-foreground",
                 )}
               >
                 <item.icon aria-hidden className="size-5 shrink-0" />
@@ -410,7 +424,10 @@ export function AppShell({ children }: { children: ReactNode }) {
               <span className="text-sm text-muted-foreground">
                 {common("language")}
               </span>
-              <LanguageSwitcher />
+              <div className="flex items-center gap-2">
+                <ThemeToggle />
+                <LanguageSwitcher />
+              </div>
             </div>
           </div>
           <div className="mx-5 shrink-0 border-t py-4">
@@ -457,24 +474,26 @@ export function AppShell({ children }: { children: ReactNode }) {
             </Button>
           </SheetTrigger>
         </nav>
-      </Sheet>
 
-      <main
-        id="main"
-        tabIndex={-1}
-        className="mx-auto flex w-full max-w-[100rem] min-w-0 flex-1 flex-col gap-6 px-4 pt-6 pb-28 sm:px-8 xl:pt-8 xl:pb-16"
-      >
-        <WorkspacePermissions
-          key={
-            workspace.kind === "org"
-              ? `${workspace.org.id}-${workspace.role}`
-              : "saathi"
-          }
-          membershipRole={workspace.kind === "org" ? workspace.role : "member"}
+        <main
+          id="main"
+          tabIndex={-1}
+          className="mx-auto flex w-full max-w-[100rem] min-w-0 flex-1 flex-col gap-6 px-4 pt-6 pb-28 sm:px-8 xl:pt-8 xl:pb-16"
         >
-          {children}
-        </WorkspacePermissions>
-      </main>
-    </div>
+          <WorkspacePermissions
+            key={
+              workspace.kind === "org"
+                ? `${workspace.org.id}-${workspace.role}`
+                : "saathi"
+            }
+            membershipRole={
+              workspace.kind === "org" ? workspace.role : "member"
+            }
+          >
+            {children}
+          </WorkspacePermissions>
+        </main>
+      </div>
+    </Sheet>
   );
 }

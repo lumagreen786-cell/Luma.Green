@@ -116,7 +116,7 @@ export function LanguageChoice({ onDone }: { onDone: () => void }) {
               htmlFor={`language-${code}`}
               className={cn(
                 "relative min-h-12 cursor-pointer gap-3 border-b border-border px-2 py-2 last:border-b-0 focus-within:bg-accent hover:bg-accent",
-                isSelected && "bg-accent text-primary",
+                isSelected && "bg-accent text-foreground",
               )}
             >
               <RadioGroupItem

@@ -29,10 +29,10 @@ export function TrackView({ booking }: { booking: TrackedBooking }) {
       <div className="flex flex-col gap-4">
         <StatusHero booking={booking} />
         <div className="grid items-start gap-4 lg:grid-cols-2">
-          <div className="rounded-2xl bg-card p-5">
+          <div className="rounded-[1.75rem] bg-card p-5 text-card-foreground">
             <WhenCard booking={booking} today={today} />
           </div>
-          <div className="space-y-4 rounded-2xl bg-card p-5">
+          <div className="space-y-4 rounded-[1.75rem] bg-card p-5 text-card-foreground">
             <ShopCard shop={booking.shop} />
             <Timeline timeline={booking.timeline} />
           </div>
@@ -45,7 +45,7 @@ export function TrackView({ booking }: { booking: TrackedBooking }) {
       <StatusHero booking={booking} />
       <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
         <div className="min-w-0 space-y-4">
-          <div className="rounded-2xl bg-card p-5 sm:p-6">
+          <div className="rounded-[1.75rem] bg-card p-5 text-card-foreground sm:p-6">
             <NextActions booking={booking} />
             <WhenCard booking={booking} today={today} />
           </div>
@@ -67,11 +67,11 @@ export function TrackView({ booking }: { booking: TrackedBooking }) {
           <ItemsCard booking={booking} />
         </div>
         <aside className="min-w-0 space-y-4">
-          <div className="rounded-2xl bg-card p-5 sm:p-6">
+          <div className="rounded-[1.75rem] bg-card p-5 text-card-foreground sm:p-6">
             <ShopCard shop={booking.shop} />
             <Timeline timeline={booking.timeline} />
           </div>
-          <div className="space-y-4 rounded-2xl bg-card p-5 sm:p-6">
+          <div className="space-y-4 rounded-[1.75rem] bg-card p-5 text-card-foreground sm:p-6">
             <CancelBooking booking={booking} />
             {booking.isMine ? <HouseholdScheduleControls /> : null}
             <CollectionSharing

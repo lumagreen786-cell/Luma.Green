@@ -19,6 +19,7 @@ import { type ReactNode, useEffect } from "react";
 import { Logo } from "@/components/brand/logo";
 import { QueryProvider } from "@/components/providers/query-provider";
 import { useSignedInQuery } from "@/components/providers/use-signed-in-query";
+import { ThemeToggleControl } from "@/components/theme/theme-toggle";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -129,27 +130,35 @@ function ConsoleNavigation({ name }: { name: string }) {
   const { signOut, busy, error } = useAdminSignOut();
 
   return (
-    <header className="bg-sidebar px-4 py-4 text-sidebar-foreground sm:px-8">
+    <header className="border-b border-border/50 bg-background px-4 py-4 text-foreground sm:px-8">
       <div className="mx-auto flex max-w-[96rem] items-center justify-between gap-3 pb-4">
         <Link
           href="/admin"
           aria-label="Admin home"
-          className="inline-flex min-h-11 items-center rounded-full outline-none focus-visible:ring-3 focus-visible:ring-sidebar-ring"
+          className="inline-flex min-h-11 items-center rounded-full outline-none focus-visible:ring-3 focus-visible:ring-ring"
         >
           <Logo />
         </Link>
         <Badge
           variant="outline"
-          className="border-sidebar-border text-sidebar-foreground"
+          className="hidden border-border text-foreground sm:inline-flex"
         >
           Admin
         </Badge>
         <p className="ms-auto hidden truncate text-sm font-medium sm:block">
           {name}
         </p>
+        <ThemeToggleControl
+          labels={{
+            label: "Appearance",
+            light: "Light",
+            dark: "Dark",
+            system: "System",
+          }}
+        />
         <Button
           variant="ghost"
-          className="shrink-0 text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-sidebar-ring"
+          className="shrink-0 text-foreground hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring"
           aria-label={`Sign out ${name}`}
           disabled={busy}
           onClick={() => void signOut()}
@@ -167,7 +176,10 @@ function ConsoleNavigation({ name }: { name: string }) {
           {error}
         </p>
       ) : null}
-      <nav aria-label="Admin" className="mx-auto max-w-[96rem] pb-1">
+      <nav
+        aria-label="Admin"
+        className="record-sheet mx-auto max-w-[96rem] rounded-[28px] p-2 shadow-panel sm:rounded-full"
+      >
         <ul className="flex min-w-0 flex-wrap items-center gap-2">
           {nav.map((item) => {
             const isActive = isCurrent(pathname, item.href);
@@ -178,10 +190,10 @@ function ConsoleNavigation({ name }: { name: string }) {
                   href={item.href}
                   aria-current={isActive ? "page" : undefined}
                   className={cn(
-                    "relative flex min-h-11 items-center justify-center gap-2 rounded-full px-4 py-2 text-sm whitespace-normal transition-colors outline-none focus-visible:ring-3 focus-visible:ring-sidebar-ring",
+                    "relative flex min-h-11 items-center justify-center gap-2 rounded-full px-4 py-2 text-sm whitespace-normal transition-colors outline-none focus-visible:ring-3 focus-visible:ring-ring",
                     isActive
-                      ? "bg-accent font-semibold text-accent-foreground"
-                      : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+                      ? "bg-primary font-semibold text-primary-foreground"
+                      : "text-foreground hover:bg-accent hover:text-accent-foreground",
                   )}
                 >
                   <item.icon
@@ -197,7 +209,7 @@ function ConsoleNavigation({ name }: { name: string }) {
                     <span>{item.label}</span>
                   )}
                   {count && item.count ? (
-                    <span className="absolute end-0 top-0 min-w-4 rounded-full bg-primary px-1 text-center text-xs leading-4 font-medium text-primary-foreground tabular-nums lg:static lg:ms-auto lg:px-1.5 lg:leading-5">
+                    <span className="inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-muted text-xs font-medium text-muted-foreground tabular-nums">
                       {count}
                       <span className="sr-only"> {item.count.label}</span>
                     </span>

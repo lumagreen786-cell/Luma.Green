@@ -50,7 +50,7 @@ export function DirectCashCustody({ trade }: { trade: TradeView }) {
         setOpen(event.currentTarget.open);
       }}
     >
-      <summary className="min-h-11 cursor-pointer py-3 text-sm font-medium text-primary">
+      <summary className="min-h-11 cursor-pointer py-3 text-sm font-medium text-foreground">
         {t(`action.${action}`)}
       </summary>
       {isOpen ? <CustodyOptions trade={trade} options={options} /> : null}
@@ -86,12 +86,15 @@ function PermitRecovery() {
     <div className="flex flex-col gap-2 text-sm text-muted-foreground">
       <p role="status">{reviews("reviewHint")}</p>
       <div className="flex flex-wrap gap-4">
-        <Link href="/app/facility" className="min-h-11 text-primary underline">
+        <Link
+          href="/app/facility"
+          className="min-h-11 text-foreground underline"
+        >
           {facility("correct")}
         </Link>
         <Link
           href="/app/material-standards"
-          className="min-h-11 text-primary underline"
+          className="min-h-11 text-foreground underline"
         >
           {reviews("reviews")}
         </Link>

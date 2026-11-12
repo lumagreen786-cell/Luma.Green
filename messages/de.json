@@ -634,7 +634,7 @@
     "replyTime": "Wir antworten innerhalb eines Arbeitstags.",
     "search": {
       "label": "Hilfe durchsuchen",
-      "placeholder": "Warten auf Zahlungsanbieter",
+      "placeholder": "Suchen",
       "clear": "Suche löschen",
       "summary": "{count, plural, =0 {Keine Antworten} one {# Antwort} other {# Antworten}} für „{query}“",
       "topicSummary": "{count, plural, =0 {Keine Antworten} one {# Antwort} other {# Antworten}} zu {topic}",
@@ -1905,7 +1905,7 @@
     "homeTitle": "Recycling von zu Hause?",
     "homeLink": "So funktioniert es ansehen",
     "privacy": "Wir verwenden Ihre Nummer nur zur Anmeldung und für Mitteilungen zu Ihrer Arbeit auf Luma.Green.",
-    "unavailableTitle": "Anmeldung per Handy folgt bald",
+    "unavailableTitle": "Mit Mobilnummer anmelden",
     "unavailableBody": "Die SMS-Anmeldung ist nicht verfügbar. Bitte versuche es später erneut.",
     "verifyTitle": "Sechsstelligen Code eingeben",
     "sentTo": "Per SMS an {phone} gesendet",

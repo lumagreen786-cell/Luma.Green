@@ -22,7 +22,9 @@ export function PrivacyRequests() {
   return (
     <section className="w-full space-y-5">
       <header className="space-y-2">
-        <h1 className="font-display text-2xl font-semibold">{t("title")}</h1>
+        <h1 className="font-display text-3xl font-normal tracking-tight sm:text-5xl">
+          {t("title")}
+        </h1>
         <p className="max-w-3xl text-sm text-muted-foreground">{t("lead")}</p>
       </header>
       {isPending && <p role="status">{common("loading")}</p>}
@@ -64,9 +66,9 @@ function RequestForm() {
   if (rows === null) return <p role="alert">{common("error")}</p>;
 
   return (
-    <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+    <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
       <form
-        className="space-y-4 rounded-xl bg-card p-5 sm:p-6"
+        className="space-y-4 rounded-panel bg-card p-5 shadow-panel sm:p-6"
         onSubmit={(event) => {
           event.preventDefault();
           void send();
@@ -76,7 +78,7 @@ function RequestForm() {
           <legend className="font-medium">{t("kind")}</legend>
           <RadioGroup
             aria-label={t("kind")}
-            className="mt-2 gap-0"
+            className="mt-4 gap-2"
             dir={isLocale(locale) ? localeDirection(locale) : "ltr"}
             disabled={isSaving}
             value={kind ?? ""}
@@ -88,7 +90,7 @@ function RequestForm() {
               <Label
                 key={option}
                 htmlFor={`request-${option}`}
-                className="min-h-12 min-w-0 cursor-pointer gap-4 rounded-xl px-3 py-3 leading-relaxed font-normal has-[[aria-checked=true]]:bg-accent/40"
+                className="min-h-12 min-w-0 cursor-pointer gap-4 rounded-full bg-muted/50 px-4 py-3 leading-relaxed font-normal has-[[aria-checked=true]]:bg-primary has-[[aria-checked=true]]:text-primary-foreground"
               >
                 <RadioGroupItem id={`request-${option}`} value={option} />
                 {t(option)}
@@ -107,7 +109,7 @@ function RequestForm() {
       {rows.length > 0 && (
         <ul
           aria-label={t("title")}
-          className="divide-y rounded-xl bg-card px-5"
+          className="divide-y rounded-panel bg-card px-5 shadow-panel"
         >
           {rows.map((row) => (
             <li key={row.id} className="space-y-1 py-4">

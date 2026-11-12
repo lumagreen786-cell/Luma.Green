@@ -23,17 +23,14 @@ export function HouseholdNavigation() {
   const t = useTranslations("householdTools");
   const pathname = usePathname();
   return (
-    <nav
-      aria-label={t("navigation")}
-      className="bg-foreground px-4 py-3 text-background"
-    >
-      <ul className="mx-auto flex max-w-6xl flex-wrap items-center gap-2">
+    <nav aria-label={t("navigation")} className="bg-background px-4 py-3">
+      <ul className="mx-auto flex max-w-6xl flex-wrap items-center gap-1 rounded-[1.75rem] border border-border bg-card p-2 text-card-foreground shadow-sm">
         {tabs.map(({ label, href, icon: Icon }) => (
           <li key={href} className="max-w-full min-w-0">
             <Link
               href={href}
               aria-current={pathname === href ? "page" : undefined}
-              className="flex min-h-12 min-w-0 items-center justify-center gap-2 rounded-full px-4 py-2 text-center text-sm font-medium outline-none hover:bg-background/10 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset aria-[current=page]:bg-accent aria-[current=page]:text-accent-foreground"
+              className="flex min-h-12 min-w-0 items-center justify-center gap-2 rounded-full px-4 py-2 text-center text-sm font-medium outline-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset aria-[current=page]:bg-primary aria-[current=page]:text-primary-foreground"
             >
               <Icon aria-hidden className="size-5 shrink-0" />
               <span className="break-words">{t(label)}</span>

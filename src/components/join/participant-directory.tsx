@@ -72,7 +72,7 @@ export function ParticipantDirectory() {
           <details
             key={group}
             open={term ? true : undefined}
-            className="min-w-0 rounded-xl border border-border/60 px-4"
+            className="min-w-0 rounded-panel border border-border/60 px-4"
           >
             <summary className="min-h-12 cursor-pointer py-3 font-medium">
               {t(`groups.${group}`)}

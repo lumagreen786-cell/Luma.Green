@@ -34,21 +34,21 @@ export default async function JoinPage() {
   return (
     <Container className="flex max-w-6xl flex-col gap-4 py-6">
       <header className="flex max-w-2xl flex-col gap-3">
-        <h1 className="font-display text-[1.75rem] leading-tight font-semibold tracking-tight text-balance sm:text-3xl">
+        <h1 className="font-display text-3xl leading-tight font-normal tracking-tight text-balance sm:text-5xl">
           {t("title")}
         </h1>
       </header>
-      <aside className="flex flex-col gap-3 rounded-xl bg-accent px-5 py-3 sm:flex-row sm:items-center sm:justify-between">
+      <aside className="flex flex-col gap-3 rounded-full bg-card px-5 py-3 shadow-panel sm:flex-row sm:items-center sm:justify-between">
         <Link
           href="/sell"
-          className="inline-flex min-h-11 items-center gap-3 font-medium text-primary underline-offset-4 hover:underline"
+          className="inline-flex min-h-11 items-center gap-3 font-medium text-foreground underline-offset-4 hover:underline"
         >
           <HomeIcon aria-hidden className="size-5 shrink-0" />
           {nav("sellScrap")}
         </Link>
         <Link
           href="/join/roles"
-          className="inline-flex min-h-11 items-center font-medium text-primary underline-offset-4 hover:underline"
+          className="inline-flex min-h-11 items-center font-medium text-foreground underline-offset-4 hover:underline"
         >
           {participant("title")}
         </Link>

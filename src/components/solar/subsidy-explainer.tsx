@@ -56,7 +56,7 @@ export async function SubsidyExplainer() {
             href={PM_SURYA_GHAR_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex min-h-11 items-center gap-2 rounded-lg font-medium text-primary underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
+            className="inline-flex min-h-11 items-center gap-2 rounded-lg font-medium text-foreground underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
           >
             {t("link")}
             <ExternalLinkIcon aria-hidden className="size-3.5" />

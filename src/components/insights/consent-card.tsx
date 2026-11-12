@@ -21,7 +21,7 @@ type Tone = "good" | "warn" | "bad";
 const LOOK: Record<Tone, { card: string; badge: string; icon: LucideIcon }> = {
   good: {
     card: "border-primary bg-card",
-    badge: "bg-primary/10 text-primary",
+    badge: "bg-primary/10 text-foreground",
     icon: ShieldCheckIcon,
   },
   warn: {

@@ -55,7 +55,7 @@ function StandardsContent() {
           value="definitions"
           className="grid min-w-0 items-start gap-5 lg:grid-cols-[15rem_minmax(0,1fr)]"
         >
-          <div className="min-w-0 space-y-2 rounded-xl bg-card p-4 lg:sticky lg:top-24">
+          <div className="min-w-0 space-y-2 rounded-panel bg-card p-4 text-card-foreground lg:sticky lg:top-24">
             <Label htmlFor={id}>{t("search")}</Label>
             <Input
               id={id}
@@ -74,7 +74,7 @@ function StandardsContent() {
                 {data.rows.map((row) => (
                   <li
                     key={row.id}
-                    className="min-w-0 space-y-3 rounded-xl bg-card p-5"
+                    className="min-w-0 space-y-3 rounded-panel bg-card p-5 text-card-foreground"
                   >
                     <h2 className="font-display text-lg font-semibold">
                       {row.name}
@@ -146,7 +146,7 @@ function StandardsContent() {
           {destinations === undefined ? (
             <ListSkeleton />
           ) : (
-            <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
+            <ul className="divide-y divide-border/60 rounded-panel border border-border/60 bg-card px-4 text-card-foreground sm:px-5">
               {destinations.map((d) => (
                 <li key={d.id} className="space-y-2 py-4">
                   <h2 className="font-display text-lg font-semibold">

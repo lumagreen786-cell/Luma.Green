@@ -2,7 +2,7 @@
 
 import { useQuery } from "convex/react";
 import { CalendarCheckIcon, SearchIcon } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 
 import {
@@ -39,6 +39,7 @@ function BoardSkeleton() {
 function SaathiBoard() {
   const t = useTranslations("saathi");
   const board = useQuery(api.saathi.board);
+  const format = useFormatter();
   if (board === undefined) return <BoardSkeleton />;
 
   const { now, later } = splitByDay(board.mine, board.today);
@@ -46,7 +47,14 @@ function SaathiBoard() {
     <>
       <div className="grid items-start gap-4 xl:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
         <div className="min-w-0 space-y-4">
-          <Section title={t("today.title")}>
+          <Section
+            title={t("today.title")}
+            action={
+              <span className="flex size-9 items-center justify-center rounded-full bg-muted text-sm tabular-nums">
+                {format.number(now.length)}
+              </span>
+            }
+          >
             {now.length > 0 ? (
               <JobGrid>
                 {now.map((job) => (
@@ -88,7 +96,14 @@ function SaathiBoard() {
         </div>
         <div className="min-w-0 space-y-4">
           <WeekEarnings earnings={board.earnings} />
-          <Section title={t("open.title")}>
+          <Section
+            title={t("open.title")}
+            action={
+              <span className="flex size-9 items-center justify-center rounded-full bg-muted text-sm tabular-nums">
+                {format.number(board.open.length)}
+              </span>
+            }
+          >
             {board.open.length > 0 ? (
               <>
                 <p className="-mt-1 text-sm text-muted-foreground">

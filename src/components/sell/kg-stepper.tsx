@@ -131,7 +131,7 @@ export function KgStepper({
             onClick={() => {
               onChange(preset);
             }}
-            className="h-11 min-w-11 rounded-none border-0 border-b-2 border-transparent px-2 tabular-nums aria-pressed:border-b-primary aria-pressed:text-primary"
+            className="h-11 min-w-11 rounded-none border-0 border-b-2 border-transparent px-2 tabular-nums aria-pressed:border-b-primary aria-pressed:text-foreground"
           >
             {t("preset", { kg: preset })}
           </Button>

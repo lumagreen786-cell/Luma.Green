@@ -97,7 +97,7 @@ export default async function GuidePage({ params }: Props) {
       >
         <p className="flex flex-wrap items-center gap-2 text-sm">
           <span className="inline-flex items-center gap-1.5 rounded-md bg-muted px-3 py-1 font-medium">
-            <TopicIcon aria-hidden className="size-4 text-primary" />
+            <TopicIcon aria-hidden className="size-4 text-foreground" />
             {t(`topics.${guide.topic}`)}
           </span>
           <span className="rounded-md bg-muted px-3 py-1 text-muted-foreground">
@@ -109,7 +109,7 @@ export default async function GuidePage({ params }: Props) {
       <Container className="grid items-start gap-4 pb-8 lg:grid-cols-[minmax(0,1fr)_20rem]">
         <section
           aria-labelledby="guide-steps"
-          className="min-w-0 rounded-xl bg-card p-5 sm:p-6"
+          className="min-w-0 rounded-panel bg-card p-5 shadow-panel sm:p-6"
         >
           <h2 id="guide-steps" className="sr-only">
             {t("guide.stepsHeading")}
@@ -142,14 +142,14 @@ export default async function GuidePage({ params }: Props) {
               </div>
               <ArrowRightIcon
                 aria-hidden
-                className="size-5 shrink-0 self-center text-primary transition-transform group-hover:translate-x-0.5 motion-reduce:transition-none rtl:rotate-180 rtl:group-hover:-translate-x-0.5"
+                className="size-5 shrink-0 self-center text-foreground transition-transform group-hover:translate-x-0.5 motion-reduce:transition-none rtl:rotate-180 rtl:group-hover:-translate-x-0.5"
               />
             </div>
           </HelpSection>
 
           <Link
             href={`/help/${role}`}
-            className="inline-flex min-h-11 items-center gap-2 self-start rounded-sm font-medium text-primary underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
+            className="inline-flex min-h-11 items-center gap-2 self-start rounded-sm font-medium text-foreground underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
           >
             <ArrowLeftIcon aria-hidden className="size-4 rtl:rotate-180" />
             {t(`roles.${role}.title`)}

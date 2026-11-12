@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 
 import { Logo } from "@/components/brand/logo";
 import { FocusedPageCanvas } from "@/components/site/focused-page-canvas";
+import { ThemeToggleControl } from "@/components/theme/theme-toggle";
 
 /** A narrow, distraction-free form; setup and sign-in share the same frame. */
 export function AdminAuthShell({
@@ -17,7 +18,7 @@ export function AdminAuthShell({
 }) {
   return (
     <FocusedPageCanvas image="/images/ship-x/admin-background.webp">
-      <header className="flex min-h-16 items-center justify-between gap-4 bg-sidebar px-5 text-sidebar-foreground sm:min-h-20 sm:px-8">
+      <header className="flex min-h-16 items-center justify-between gap-4 bg-background/90 px-5 text-foreground sm:min-h-20 sm:px-8">
         <Link
           href="/"
           aria-label="Luma.Green home"
@@ -25,15 +26,23 @@ export function AdminAuthShell({
         >
           <Logo />
         </Link>
+        <ThemeToggleControl
+          labels={{
+            label: "Appearance",
+            light: "Light",
+            dark: "Dark",
+            system: "System",
+          }}
+        />
       </header>
       <main
         id="main"
         tabIndex={-1}
         className="mx-auto flex w-full max-w-xl flex-1 flex-col justify-center px-5 py-8 sm:px-8"
       >
-        <div className="rounded-2xl bg-card p-6 sm:p-8">
+        <div className="rounded-panel bg-card p-6 text-card-foreground shadow-panel sm:p-8">
           <div className="mb-6 flex flex-col gap-3 border-b border-border pb-6">
-            <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
+            <h1 className="font-display text-4xl leading-[1.1] font-medium tracking-tight">
               {title}
             </h1>
             {description ? (

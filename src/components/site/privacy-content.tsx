@@ -13,7 +13,7 @@ const sections = [
   "retention",
 ] as const;
 const linkClass =
-  "inline-flex min-h-11 items-center font-medium text-primary underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50";
+  "inline-flex min-h-11 items-center font-medium text-foreground underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50";
 
 export function PrivacyContent() {
   const t = useTranslations("privacy");
@@ -22,20 +22,20 @@ export function PrivacyContent() {
   return (
     <Container className="grid gap-4 py-6 lg:grid-cols-[15rem_minmax(0,1fr)]">
       <header className="space-y-2 lg:col-span-2">
-        <h1 className="font-display text-[1.75rem] font-semibold tracking-tight">
+        <h1 className="font-display text-3xl font-normal tracking-tight sm:text-5xl">
           {t("title")}
         </h1>
         <p className="text-muted-foreground">{t("lead")}</p>
       </header>
       <nav
         aria-label={t("title")}
-        className="flex flex-col self-start rounded-xl bg-card p-3 lg:sticky lg:top-24"
+        className="flex flex-col self-start rounded-panel bg-card p-3 shadow-panel lg:sticky lg:top-24"
       >
         {sections.map((section) => (
           <a
             key={section}
             href={`#${section}`}
-            className="flex min-h-11 items-center rounded-lg px-3 text-sm font-medium hover:bg-accent focus-visible:ring-3 focus-visible:ring-ring/50"
+            className="flex min-h-11 items-center rounded-full px-3 text-sm font-medium hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50"
           >
             {t(`${section}Title`)}
           </a>
@@ -47,7 +47,7 @@ export function PrivacyContent() {
             key={section}
             id={section}
             aria-labelledby={`privacy-${section}`}
-            className="scroll-mt-24 space-y-3 rounded-xl bg-card p-5 sm:p-6"
+            className="scroll-mt-24 space-y-3 rounded-panel bg-card p-5 shadow-panel sm:p-6"
           >
             <h2 id={`privacy-${section}`} className="text-lg font-semibold">
               {t(`${section}Title`)}

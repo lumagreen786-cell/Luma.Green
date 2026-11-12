@@ -34,7 +34,7 @@ export function JoinPreparation() {
             <li key={check} className="flex gap-3 py-4">
               <CheckIcon
                 aria-hidden
-                className="mt-0.5 size-5 shrink-0 text-primary"
+                className="mt-0.5 size-5 shrink-0 text-foreground"
               />
               <span className="text-sm leading-relaxed">
                 {join(`status.checks.business.${check}`)}

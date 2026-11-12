@@ -39,7 +39,7 @@ export async function MaterialRecords() {
         <div className="grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-end lg:gap-16">
           <h2
             id="material-records-heading"
-            className="max-w-3xl font-display text-2xl leading-tight font-semibold tracking-tight text-balance sm:text-3xl"
+            className="max-w-3xl font-display text-2xl leading-tight font-normal tracking-tight text-balance sm:text-3xl"
           >
             {home("expansion.recordsTitle")}
           </h2>
@@ -47,7 +47,7 @@ export async function MaterialRecords() {
             {how("body")}
           </p>
         </div>
-        <div className="relative aspect-[3/1] overflow-hidden rounded-xl bg-muted sm:aspect-[5/1]">
+        <div className="relative aspect-[3/1] overflow-hidden rounded-panel bg-muted sm:aspect-[5/1]">
           <Image
             src="/images/showcase/recycling-line.webp"
             alt=""
@@ -56,7 +56,7 @@ export async function MaterialRecords() {
             className="object-cover"
           />
         </div>
-        <dl className="grid gap-px overflow-hidden rounded-xl border border-border/60 bg-border/60 sm:grid-cols-2 lg:grid-cols-4">
+        <dl className="grid gap-px overflow-hidden rounded-panel border border-border/60 bg-border/60 sm:grid-cols-2 lg:grid-cols-4">
           {facts.map(({ key, icon: Icon }) => (
             <div
               key={key}
@@ -65,7 +65,7 @@ export async function MaterialRecords() {
             >
               <Icon
                 aria-hidden
-                className="size-12 rounded-full bg-secondary/35 p-3 text-primary"
+                className="size-12 rounded-full bg-secondary/35 p-3 text-foreground"
               />
               <dt className="text-lg font-semibold">{ledger(key)}</dt>
               <dd className="text-sm leading-relaxed text-muted-foreground">
@@ -75,7 +75,7 @@ export async function MaterialRecords() {
           ))}
         </dl>
         <div className="grid min-w-0 gap-4 lg:grid-cols-2">
-          <div className="space-y-2 rounded-xl border border-border/60 bg-card p-5">
+          <div className="space-y-2 rounded-panel border border-border/60 bg-card p-5">
             <h3 className="text-base font-semibold">
               {principles("frozen.title")}
             </h3>
@@ -83,7 +83,7 @@ export async function MaterialRecords() {
               {principles("frozen.body")}
             </p>
           </div>
-          <div className="space-y-2 rounded-xl border border-border/60 bg-card p-5">
+          <div className="space-y-2 rounded-panel border border-border/60 bg-card p-5">
             <h3 className="text-base font-semibold">
               {help("carbonCredits.q")}
             </h3>

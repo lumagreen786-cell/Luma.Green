@@ -75,7 +75,9 @@ it("puts the next submitted applications before supporting account data", () => 
     })),
   ]);
   render(<ConsoleHome />);
-  expect(screen.getByRole("heading", { name: "Work queue" })).toBeVisible();
+  expect(
+    screen.getByRole("heading", { name: "Review and resolve" }),
+  ).toBeVisible();
   expect(
     screen.getByRole("link", { name: "Review applications" }),
   ).toHaveAttribute("href", "/admin/verification");

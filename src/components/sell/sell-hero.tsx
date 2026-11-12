@@ -7,7 +7,7 @@ import recycleIllustration from "../../../public/images/showcase/recycle-househo
 export async function SellHero() {
   const t = await getTranslations("sell.simple");
   return (
-    <header className="flex flex-col items-start gap-5 rounded-2xl bg-card p-5 sm:p-6">
+    <header className="flex flex-col items-start gap-5 rounded-[1.75rem] bg-card p-5 text-card-foreground sm:p-6">
       <h1 className="font-display text-3xl font-semibold tracking-tight">
         {t("title")}
       </h1>

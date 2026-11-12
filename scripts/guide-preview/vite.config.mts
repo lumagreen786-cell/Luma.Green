@@ -5,6 +5,8 @@ import { fileURLToPath } from "node:url";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
+import { themeBootstrap } from "../../src/components/theme/theme";
+
 const directory = path.dirname(fileURLToPath(import.meta.url));
 const repository = path.resolve(directory, "../..");
 const staticDirectory = path.resolve(repository, ".next/static");
@@ -47,6 +49,10 @@ export default defineConfig({
       name: "documentation-build-style",
       transformIndexHtml(html) {
         return html
+          .replace(
+            "<!-- APP_THEME -->",
+            () => `<script>${themeBootstrap}</script>`,
+          )
           .replace("<!-- APP_STYLES -->", () =>
             styles
               .map(

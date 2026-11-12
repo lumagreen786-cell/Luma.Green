@@ -21,7 +21,7 @@ export function SortingGuide() {
           sizes="(min-width: 1280px) 512px, (min-width: 1024px) 45vw, (min-width: 640px) calc(100vw - 64px), calc(100vw - 40px)"
           frameClassName="aspect-[3/2] rounded-xl"
         />
-        <div className="min-w-0 space-y-4 rounded-xl bg-card p-5 sm:p-6">
+        <div className="min-w-0 space-y-4 rounded-panel bg-card p-5 shadow-panel sm:p-6">
           <div className="space-y-2">
             <h2
               id="sorting-guide-heading"

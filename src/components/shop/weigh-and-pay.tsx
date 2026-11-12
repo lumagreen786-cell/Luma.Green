@@ -186,7 +186,7 @@ export function WeighAndPay({
               aria-label={t("weigh.add")}
               className="h-12 w-full border-dashed text-base data-[size=default]:h-12"
             >
-              <PlusIcon aria-hidden className="size-5 text-primary" />
+              <PlusIcon aria-hidden className="size-5 text-foreground" />
               <SelectValue placeholder={t("weigh.add")} />
             </SelectTrigger>
             <SelectContent>

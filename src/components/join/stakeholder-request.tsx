@@ -298,7 +298,7 @@ function ApplicationStatus({ account }: { account: NonNullable<Account> }) {
       {account.participantType && account.status === "approved" ? (
         <Link
           href={isManufacturer ? "/join/manufacturer" : "/join/roles"}
-          className="inline-flex min-h-11 items-center self-start text-primary underline"
+          className="inline-flex min-h-11 items-center self-start text-foreground underline"
         >
           {participants(isManufacturer ? "continue" : "title")}
         </Link>

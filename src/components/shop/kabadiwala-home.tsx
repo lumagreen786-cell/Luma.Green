@@ -40,11 +40,11 @@ export function KabadiwalaHome() {
       <QueryBoundary>
         <HomeBody city={shop.city} />
         <div className="grid items-start gap-4 xl:grid-cols-2">
-          <div className="min-w-0 space-y-4 rounded-2xl bg-card p-5 sm:p-6">
+          <div className="min-w-0 space-y-4 rounded-panel bg-card p-5 text-card-foreground sm:p-6">
             <DispatchSettings />
             <CollectionAvailabilityControls />
           </div>
-          <div className="min-w-0 space-y-4 rounded-2xl bg-card p-5 sm:p-6">
+          <div className="min-w-0 space-y-4 rounded-panel bg-card p-5 text-card-foreground sm:p-6">
             <CollectionVisitControls />
             <EmployerPaymentControls />
           </div>
@@ -61,10 +61,10 @@ function Greeting({ name }: { name: string }) {
   const now = useNow();
   return (
     <header className="grid gap-2 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
-      <h1 className="font-display text-[1.75rem] leading-[1.25] font-semibold tracking-tight">
+      <h1 className="font-display text-4xl leading-tight font-medium tracking-tight sm:text-5xl">
         {name}
       </h1>
-      <p className="text-sm font-medium text-primary sm:col-start-1 sm:row-start-2">
+      <p className="text-sm font-medium text-muted-foreground sm:col-start-1 sm:row-start-2">
         {t("greeting")}
       </p>
       <p className="text-sm text-muted-foreground sm:col-start-2 sm:row-start-1">
@@ -115,9 +115,9 @@ function QuickLink({
   return (
     <Link
       href={href}
-      className="flex min-h-16 items-center gap-3 rounded-2xl bg-card p-5 outline-none hover:bg-muted/40 focus-visible:ring-3 focus-visible:ring-ring/50"
+      className="flex min-h-16 items-center gap-3 rounded-panel bg-card p-5 text-card-foreground outline-none hover:bg-muted/40 focus-visible:ring-3 focus-visible:ring-ring/50"
     >
-      <span className="flex size-10 shrink-0 items-center justify-center text-primary">
+      <span className="flex size-10 shrink-0 items-center justify-center text-foreground">
         <Icon aria-hidden className="size-6" />
       </span>
       <span className="flex min-w-0 flex-1 flex-col">

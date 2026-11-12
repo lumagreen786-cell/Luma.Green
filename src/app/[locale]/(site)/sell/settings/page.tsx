@@ -25,7 +25,7 @@ export default async function SettingsPage() {
           <DailyReminder />
           <Link
             href="/account/security"
-            className="flex min-h-14 items-center rounded-xl bg-card p-5 font-medium text-primary hover:underline"
+            className="flex min-h-14 items-center rounded-[1.75rem] bg-card p-5 font-medium text-card-foreground text-foreground hover:underline"
           >
             {account("title")}
           </Link>

@@ -55,7 +55,7 @@ export function RequestDetail({ id }: { id: string }) {
     <div className="flex flex-col gap-6">
       <Link
         href="/app/requests"
-        className="inline-flex min-h-11 w-fit items-center gap-1 rounded-md text-sm font-medium text-primary outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
+        className="inline-flex min-h-11 w-fit items-center gap-1 rounded-md text-sm font-medium text-foreground outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
       >
         <ChevronLeftIcon aria-hidden className="size-4 rtl:rotate-180" />
         {t("request.back")}
@@ -113,7 +113,7 @@ function RequestView({ detail }: { detail: BookingDetail }) {
 
   return (
     <>
-      <header className="flex flex-col gap-3 rounded-2xl bg-card p-5 sm:p-6">
+      <header className="flex flex-col gap-3 rounded-panel bg-card p-5 text-card-foreground sm:p-6">
         <div className="flex flex-wrap items-center gap-3">
           <h1 className="font-display text-[1.75rem] leading-[1.25] font-semibold tracking-tight">
             {booking.name ?? t("household")}
@@ -153,12 +153,12 @@ function RequestView({ detail }: { detail: BookingDetail }) {
             isRevealed={isRevealed}
           />
           <BookingPhotos bookingId={booking.id} />
-          <div className="rounded-2xl bg-card p-5 sm:p-6">
+          <div className="rounded-panel bg-card p-5 text-card-foreground sm:p-6">
             <History timeline={timeline} />
           </div>
         </div>
         {booking.status === "completed" ? null : (
-          <div className="order-first min-w-0 space-y-5 rounded-2xl bg-card p-5 sm:p-6 lg:sticky lg:top-24 lg:order-none">
+          <div className="order-first min-w-0 space-y-5 rounded-panel bg-card p-5 text-card-foreground sm:p-6 lg:sticky lg:top-24 lg:order-none">
             {booking.status === "requested" ? (
               <AcceptDecline bookingId={booking.id} />
             ) : null}
@@ -248,7 +248,7 @@ function BookingFacts({
   return (
     <section
       aria-labelledby="facts-title"
-      className="flex flex-col gap-4 rounded-2xl bg-card p-5 sm:p-6"
+      className="flex flex-col gap-4 rounded-panel bg-card p-5 text-card-foreground sm:p-6"
     >
       <h2 id="facts-title" className="text-base font-semibold">
         {t("request.details")}

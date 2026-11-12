@@ -60,7 +60,7 @@ function RateCardBody() {
         <section
           key={family}
           aria-labelledby={`family-${family}`}
-          className="grid min-w-0 items-start gap-4 rounded-xl bg-card p-4 sm:p-5 xl:grid-cols-[10rem_minmax(0,1fr)]"
+          className="grid min-w-0 items-start gap-4 rounded-panel bg-card p-4 text-card-foreground sm:p-5 xl:grid-cols-[10rem_minmax(0,1fr)]"
         >
           <h2
             id={`family-${family}`}

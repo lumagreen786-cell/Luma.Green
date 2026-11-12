@@ -20,7 +20,7 @@ export function NotificationsPage() {
   const common = useTranslations("common");
   return (
     <div className="mx-auto w-full max-w-6xl min-w-0">
-      <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
+      <h1 className="font-display text-3xl leading-tight font-normal tracking-tight sm:text-5xl">
         {t("title")}
       </h1>
       <div className="mt-4 grid min-w-0 gap-4">
@@ -39,7 +39,7 @@ export function NotificationsPage() {
               <Inbox />
             </NotificationErrorBoundary>
           ) : (
-            <p className="rounded-xl bg-card p-6 text-muted-foreground">
+            <p className="rounded-panel bg-card p-6 text-muted-foreground shadow-panel">
               {t("unavailable")}
             </p>
           )}
@@ -78,7 +78,7 @@ function DeviceSettings() {
   return (
     <section
       aria-labelledby="notification-device"
-      className="flex min-w-0 flex-col gap-4 rounded-xl bg-accent/30 p-5 sm:flex-row sm:items-center sm:justify-between"
+      className="flex min-w-0 flex-col gap-4 rounded-panel bg-card p-5 shadow-panel sm:flex-row sm:items-center sm:justify-between"
     >
       <div className="min-w-0">
         <h2 id="notification-device" className="font-semibold">
@@ -166,7 +166,7 @@ function AuthenticatedInbox() {
   return (
     <section
       aria-labelledby="notification-inbox"
-      className="rounded-xl bg-card p-5 sm:p-6"
+      className="rounded-panel bg-card p-5 shadow-panel sm:p-6"
     >
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h2 id="notification-inbox" className="text-lg font-semibold">

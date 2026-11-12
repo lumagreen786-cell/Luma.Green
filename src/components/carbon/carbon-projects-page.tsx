@@ -117,7 +117,7 @@ function Projects({
             {rows.rows.map((project) => (
               <li
                 key={project.id}
-                className="space-y-4 rounded-xl bg-card p-5 sm:p-6"
+                className="space-y-4 rounded-panel bg-card p-5 text-card-foreground sm:p-6"
               >
                 <ProjectSummary project={project} />
                 {canOperate && !project.industry ? (
@@ -544,7 +544,7 @@ function CreateProject({ orgId }: { orgId: Id<"orgs"> }) {
       onSubmit={(event) => {
         void submit(event);
       }}
-      className="max-w-2xl space-y-4 rounded-xl bg-card p-5 sm:p-6"
+      className="max-w-2xl space-y-4 rounded-panel bg-card p-5 text-card-foreground sm:p-6"
     >
       <div className="space-y-2">
         <Label htmlFor={`${id}-name`}>{t("name")}</Label>

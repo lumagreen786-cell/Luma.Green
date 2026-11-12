@@ -1183,7 +1183,7 @@
     "replyTime": "Bir iş günü içinde yanıtlarız.",
     "search": {
       "label": "Yardımda ara",
-      "placeholder": "Ödeme altyapısı bekleniyor",
+      "placeholder": "Ara",
       "clear": "Aramayı temizle",
       "summary": "“{query}” için {count, plural, =0 {yanıt yok} one {# yanıt} other {# yanıt}}",
       "topicSummary": "{topic} hakkında {count, plural, =0 {yanıt yok} one {# yanıt} other {# yanıt}}",
@@ -3369,7 +3369,7 @@
     "homeTitle": "Evden geri dönüşüme mi veriyorsunuz?",
     "homeLink": "Nasıl çalıştığını görün",
     "privacy": "Numaranızı yalnızca giriş yapmanız ve Luma.Green’deki işiniz hakkında bilgi göndermek için kullanırız.",
-    "unavailableTitle": "Telefonla giriş yakında açılacak",
+    "unavailableTitle": "Cep telefonu numaranızla giriş yapın",
     "unavailableBody": "SMS ile giriş kullanılamıyor. Lütfen daha sonra tekrar deneyin.",
     "verifyTitle": "6 haneli kodu girin",
     "sentTo": "{phone} numarasına SMS ile gönderildi",

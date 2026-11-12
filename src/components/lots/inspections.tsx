@@ -448,7 +448,7 @@ export function Inspections({
                         pathname: "/app/quality-documents",
                         query: { inspection: row.id },
                       }}
-                      className="inline-flex min-h-11 items-center py-2 text-sm font-medium text-primary underline underline-offset-4"
+                      className="inline-flex min-h-11 items-center py-2 text-sm font-medium text-foreground underline underline-offset-4"
                     >
                       {files("title")}
                     </Link>
@@ -457,7 +457,7 @@ export function Inspections({
                         pathname: "/account/reports",
                         query: { inspection: row.id },
                       }}
-                      className="inline-flex min-h-11 items-center py-2 text-sm font-medium text-primary underline underline-offset-4"
+                      className="inline-flex min-h-11 items-center py-2 text-sm font-medium text-foreground underline underline-offset-4"
                     >
                       {reports("title")}
                     </Link>

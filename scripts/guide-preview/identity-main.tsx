@@ -7,6 +7,7 @@ import { SaathiForm } from "@/components/join/saathi-form";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { localeMeta } from "@/i18n/locales";
 
+import { fixtureFontClasses } from "./appearance";
 import { onboardingFixture } from "./fixtures";
 import { locale, messages } from "./locale";
 
@@ -27,7 +28,10 @@ document.documentElement.dir = localeMeta[locale].dir;
 const fonts = JSON.parse(
   document.documentElement.dataset.localeFonts ?? "{}",
 ) as Record<string, string>;
-document.documentElement.className = fonts[locale] ?? "";
+document.documentElement.className = fixtureFontClasses(
+  fonts[locale] ?? "",
+  document.documentElement.classList.contains("dark"),
+);
 const root = document.querySelector("#root");
 if (!root) throw new Error("Fixture root missing");
 let form = <KabadiwalaForm application={application} loginPhone={undefined} />;

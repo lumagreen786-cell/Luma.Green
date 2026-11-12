@@ -1,0 +1,47 @@
+Browser tab: 16, Title: "Customers | Florin", URL: "https://ui.cortexcn.dev/previews/florin/customers".
+1 AXWebArea Customers | Florin, URL: ui.cortexcn.dev/previews/florin/customers
+	2 container
+		3 link Description: Skip to content, Value: ui.cortexcn.dev/previews/florin/customers#main
+		4 link Description: Florin, invoices, Value: ui.cortexcn.dev/previews/florin/
+		5 pop up button (collapsed) Description: All pages, Secondary Actions: Expand
+		6 pop up button (collapsed) Description: Notifications, Secondary Actions: Expand
+		7 link Description: Settings, Value: ui.cortexcn.dev/previews/florin/settings/
+		8 pop up button (collapsed) Description: Account menu, ID: radix-_R_tb5tlb_, Secondary Actions: Expand
+		9 container Billing
+			10 content list
+				11 link Description: Estimates, Value: ui.cortexcn.dev/previews/florin/estimates/
+				12 link Description: Invoices, Value: ui.cortexcn.dev/previews/florin/
+				13 link Description: Payments, Value: ui.cortexcn.dev/previews/florin/payments/
+				14 link Description: Recurring Invoices, Value: ui.cortexcn.dev/previews/florin/recurring/
+				15 link Description: Checkouts, Value: ui.cortexcn.dev/previews/florin/checkouts/
+		16 container main
+			17 container
+				18 heading Customers, Value: 1
+					19 text Customers
+				20 button New customer
+			21 container
+				22 text Owed to you $170,460.00 Overdue $31,530.00 Average time to get paid 11 days Active customers 12 of 12
+			23 container Find customers
+				24 heading 12 customers, Value: 2
+					25 text 12 customers
+				26 container
+					27 text Search customers
+					28 search text field (settable) Search customers
+				29 combo box (collapsed) Description: Sort by, Value: Most owed, Secondary Actions: Expand
+					30 text Most owed
+			31 content list
+				32 link Description: Sofia Alvarez, Lumora Health, owes $41,460.00, Value: ui.cortexcn.dev/previews/florin/customer/?id=lumora
+				33 link Description: Jonas Weber, Quayside Freight, owes $24,650.00, Value: ui.cortexcn.dev/previews/florin/customer/?id=quayside
+				34 link Description: Omar Haddad, Ridgeway Robotics, owes $23,800.00, Value: ui.cortexcn.dev/previews/florin/customer/?id=ridgeway
+				35 link Description: Hana Sato, Orbitly, owes $20,400.00, Value: ui.cortexcn.dev/previews/florin/customer/?id=orbitly
+				36 link Description: Priya Raman, Northpine Labs, owes $16,760.00, Value: ui.cortexcn.dev/previews/florin/customer/?id=northpine
+				37 link Description: Nora Lindqvist, Solace Hotels, owes $15,760.00, Value: ui.cortexcn.dev/previews/florin/customer/?id=solace
+				38 link Description: Theo Okafor, Brightwell Studio, owes $14,270.00, Value: ui.cortexcn.dev/previews/florin/customer/?id=brightwell
+				39 link Description: Daniel Kim, Fernway Legal, owes $6,880.00, Value: ui.cortexcn.dev/previews/florin/customer/?id=fernway
+				40 link Description: Aisha Bello, Copperline Energy, owes $6,480.00, Value: ui.cortexcn.dev/previews/florin/customer/?id=copperline
+				41 link Description: Elena Marsh, Halden Works, owes $0.00, Value: ui.cortexcn.dev/previews/florin/customer/?id=halden
+				42 link Description: Grace Liu, Milkweed Bakery, owes $0.00, Value: ui.cortexcn.dev/previews/florin/customer/?id=milkweed
+				43 link Description: Marcus Reed, Tallgrass Farms, owes $0.00, Value: ui.cortexcn.dev/previews/florin/customer/?id=tallgrass
+		44 container Notifications alt+T
+
+The focused UI element is 1 AXWebArea Customers | Florin, URL: ui.cortexcn.dev/previews/florin/customers

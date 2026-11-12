@@ -33,6 +33,11 @@ for (const { locale, copy } of [
       await page.setViewportSize(viewport);
       await page.emulateMedia({ reducedMotion: "reduce" });
       await page.goto(`/${locale}`);
+      await expect(
+        page
+          .getByRole("banner")
+          .getByRole("button", { name: copy.theme.label, exact: true }),
+      ).toBeInViewport();
       await page
         .getByRole("banner")
         .getByRole("button", { name: copy.nav.openMenu, exact: true })

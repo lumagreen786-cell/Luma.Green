@@ -60,7 +60,7 @@ export function ApiAccess({ data, onCreate, onRevoke }: Props) {
       <div className="grid min-w-0 items-start gap-6 lg:grid-cols-[18rem_minmax(0,1fr)]">
         <section
           aria-labelledby="api-connection-title"
-          className="flex flex-col gap-3 rounded-xl border border-border/60 bg-card p-5"
+          className="flex flex-col gap-3 rounded-panel border border-border/60 bg-card p-5 text-card-foreground"
         >
           <h2 id="api-connection-title" className="text-lg font-semibold">
             {t("connection")}
@@ -192,7 +192,7 @@ function OwnerAccess({
       ) : (
         <details
           open={data.keys.length === 0}
-          className="rounded-xl border border-border/60 bg-card p-5"
+          className="rounded-panel border border-border/60 bg-card p-5 text-card-foreground"
         >
           <summary className="cursor-pointer py-2 font-semibold outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
             {t("createTitle")}
@@ -370,7 +370,7 @@ function KeyList({
       {keys.length === 0 ? (
         <p className="text-sm text-muted-foreground">{t("empty")}</p>
       ) : (
-        <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
+        <ul className="divide-y divide-border/60 rounded-panel border border-border/60 bg-card px-4 text-card-foreground sm:px-5">
           {keys.map((key) => {
             const status = keyStatus(key, now);
             return (

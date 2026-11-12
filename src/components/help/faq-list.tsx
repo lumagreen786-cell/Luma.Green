@@ -15,7 +15,7 @@ export function FaqList({ faqs }: { faqs: readonly FaqKey[] }) {
     <div className="divide-y border-y">
       {faqs.map((key) => (
         <details key={key} id={faqAnchor(key)} className="group scroll-mt-20">
-          <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-4 text-start font-medium outline-none hover:text-primary focus-visible:ring-3 focus-visible:ring-ring/50 [&::-webkit-details-marker]:hidden">
+          <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-4 text-start font-medium outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 [&::-webkit-details-marker]:hidden">
             <span>{t(`faqs.${key}.q`)}</span>
             <ChevronDownIcon
               aria-hidden

@@ -70,13 +70,14 @@ function FacilityWorkspace({ canManage }: { canManage: boolean }) {
           {
             value: "facilities",
             label: t("title"),
+            count: rows?.length,
             content: (
               <div className="space-y-5">
                 {" "}
                 {rows === undefined ? (
                   <ListSkeleton />
                 ) : (
-                  <ul className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
+                  <ul className="record-sheet divide-y divide-border/60 rounded-panel px-4 sm:px-5">
                     {rows.map((facility) => (
                       <li
                         key={facility._id}

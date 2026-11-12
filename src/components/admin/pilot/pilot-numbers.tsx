@@ -83,7 +83,7 @@ export function PilotNumbers() {
       ) : (
         <Report summary={summary} />
       )}
-      <section className="flex min-w-0 flex-col gap-4 rounded-xl bg-card p-5 sm:p-6">
+      <section className="flex min-w-0 flex-col gap-4 rounded-panel bg-card p-5 text-card-foreground sm:p-6">
         <header className="flex flex-col gap-1.5">
           <h2 className="font-display text-lg font-semibold tracking-tight">
             Not measured yet
@@ -128,7 +128,7 @@ function Report({ summary }: { summary: Summary }) {
           No bookings or submitted applications in this period.
         </p>
       ) : null}
-      <dl className="grid grid-cols-2 gap-x-5 gap-y-6 rounded-xl bg-card p-5 lg:grid-cols-4 xl:col-span-2">
+      <dl className="grid grid-cols-2 gap-x-5 gap-y-6 rounded-panel bg-card p-5 text-card-foreground lg:grid-cols-4 xl:col-span-2">
         <Metric
           label="Bookings"
           value={number.format(bookings.count)}
@@ -154,7 +154,7 @@ function Report({ summary }: { summary: Summary }) {
           hint={`Estimate for the same receipts: ${formatRupees(bookings.estimatedPaise)}`}
         />
       </dl>
-      <section className="flex min-w-0 flex-col gap-4 rounded-xl bg-card p-5 sm:p-6">
+      <section className="flex min-w-0 flex-col gap-4 rounded-panel bg-card p-5 text-card-foreground sm:p-6">
         <header className="flex flex-col gap-1.5">
           <h2 className="font-display text-lg font-semibold tracking-tight">
             Booking outcomes
@@ -196,7 +196,7 @@ function Report({ summary }: { summary: Summary }) {
           </dl>
         </div>
       </section>
-      <section className="flex min-w-0 flex-col gap-4 rounded-xl bg-card p-5 sm:p-6">
+      <section className="flex min-w-0 flex-col gap-4 rounded-panel bg-card p-5 text-card-foreground sm:p-6">
         <header className="flex flex-col gap-1.5">
           <h2 className="font-display text-lg font-semibold tracking-tight">
             Estimate and weighed material
@@ -259,7 +259,7 @@ function Report({ summary }: { summary: Summary }) {
           )}
         </div>
       </section>
-      <section className="flex min-w-0 flex-col gap-4 rounded-xl bg-card p-5 sm:p-6">
+      <section className="flex min-w-0 flex-col gap-4 rounded-panel bg-card p-5 text-card-foreground sm:p-6">
         <header className="flex flex-col gap-1.5">
           <h2 className="font-display text-lg font-semibold tracking-tight">
             Application decisions

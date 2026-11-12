@@ -137,7 +137,7 @@ export function WorkspacePage() {
       {workspaces?.length === 0 ? <p>{t("empty")}</p> : null}
       {workspaces && workspaces.length > 0 ? (
         <>
-          <div className="flex min-w-0 flex-col gap-2 rounded-xl bg-card p-5 sm:flex-row sm:items-center sm:gap-5">
+          <div className="flex min-w-0 flex-col gap-2 rounded-panel bg-card p-5 shadow-panel sm:flex-row sm:items-center sm:gap-5">
             <Label htmlFor="workspace-choice">{t("choose")}</Label>
             <Select
               dir={isLocale(locale) ? localeDirection(locale) : "ltr"}
@@ -176,6 +176,7 @@ export function WorkspacePage() {
 }
 
 function TeamSection({ orgId }: { orgId: Id<"orgs"> }) {
+  const format = useFormatter();
   const locale = useLocale();
   const t = useTranslations("workspace");
   const team = useQuery(api.workspace.team, { orgId });
@@ -190,14 +191,30 @@ function TeamSection({ orgId }: { orgId: Id<"orgs"> }) {
       }
     >
       <Tabs
-        className="min-w-0 rounded-xl bg-card p-5"
+        className="min-w-0 rounded-panel bg-card p-5 shadow-panel"
         defaultValue="team"
         dir={isLocale(locale) ? localeDirection(locale) : "ltr"}
       >
         <TabsList>
-          <TabsTrigger value="team">{t("team")}</TabsTrigger>
+          <TabsTrigger
+            value="team"
+            count={
+              <span aria-hidden>{format.number(team.members.length)}</span>
+            }
+          >
+            {t("team")}
+          </TabsTrigger>
           {canManage ? (
-            <TabsTrigger value="pending">{t("pending")}</TabsTrigger>
+            <TabsTrigger
+              value="pending"
+              count={
+                <span aria-hidden>
+                  {format.number(team.invitations.length)}
+                </span>
+              }
+            >
+              {t("pending")}
+            </TabsTrigger>
           ) : null}
         </TabsList>
         <TabsContent value="team" className="pt-4">
@@ -227,7 +244,7 @@ function TeamSection({ orgId }: { orgId: Id<"orgs"> }) {
         ) : null}
       </Tabs>
       {canManage ? (
-        <div className="min-w-0 rounded-xl bg-card p-5">
+        <div className="min-w-0 rounded-panel bg-card p-5 shadow-panel">
           <InviteForm orgId={orgId} actorRole={team.role} />
         </div>
       ) : null}

@@ -86,12 +86,12 @@ function PriceRules() {
     },
   ];
   return (
-    <ul className="grid gap-4 rounded-xl bg-card p-5 sm:gap-6 sm:p-6">
+    <ul className="grid gap-4 rounded-panel bg-card p-5 text-card-foreground sm:gap-6 sm:p-6">
       {rules.map((rule) => (
         <li key={rule.title} className="flex gap-3">
           <rule.icon
             aria-hidden
-            className="mt-0.5 size-4 shrink-0 text-primary"
+            className="mt-0.5 size-4 shrink-0 text-foreground"
           />
           <span className="flex flex-col gap-0.5 text-sm">
             <span className="font-medium">{rule.title}</span>
@@ -126,7 +126,7 @@ function PriceGroups({
         <section
           key={family}
           aria-labelledby={`family-${family}`}
-          className="min-w-0 rounded-xl bg-card px-5 pb-3 sm:px-6"
+          className="min-w-0 rounded-panel bg-card px-5 pb-3 text-card-foreground sm:px-6"
         >
           <div className="flex items-baseline justify-between gap-2 border-b py-4">
             <h2 id={`family-${family}`} className="font-semibold">

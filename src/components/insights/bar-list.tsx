@@ -48,11 +48,11 @@ export function BarList({
                 {row.display}
               </span>
             </div>
-            <div className="h-3 overflow-hidden rounded-full bg-muted">
+            <div className="h-2.5 overflow-hidden rounded-full bg-muted">
               <div
                 aria-hidden
                 data-testid="bar"
-                className="h-3 rounded-full bg-primary"
+                className="florin-bar h-2.5 rounded-full bg-primary"
                 style={{ width: `${String(barPercent(row.value, max))}%` }}
               />
             </div>

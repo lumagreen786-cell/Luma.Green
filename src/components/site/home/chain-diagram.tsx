@@ -30,7 +30,7 @@ function Lane({ icon: Icon, text }: { icon: LucideIcon; text: string }) {
       data-reveal
       className="flex items-start gap-4 border-t border-border py-6"
     >
-      <Icon aria-hidden className="mt-0.5 size-5 shrink-0 text-primary" />
+      <Icon aria-hidden className="mt-0.5 size-5 shrink-0 text-foreground" />
       <span className="text-sm leading-relaxed text-muted-foreground">
         {text}
       </span>
@@ -70,7 +70,7 @@ export async function ChainDiagram() {
                 <div className="min-w-0 space-y-3 wrap-anywhere">
                   <Icon
                     aria-hidden
-                    className="mb-4 size-6 text-primary"
+                    className="mb-4 size-6 text-foreground"
                     strokeWidth={1.5}
                   />
                   <h3 className="text-lg font-semibold">
@@ -84,11 +84,11 @@ export async function ChainDiagram() {
                   <>
                     <ArrowDownIcon
                       aria-hidden
-                      className="absolute start-4 bottom-3 size-4 text-primary xl:hidden"
+                      className="absolute start-4 bottom-3 size-4 text-foreground xl:hidden"
                     />
                     <ArrowRightIcon
                       aria-hidden
-                      className="absolute end-4 top-10 hidden size-5 text-primary xl:block rtl:rotate-180"
+                      className="absolute end-4 top-10 hidden size-5 text-foreground xl:block rtl:rotate-180"
                     />
                   </>
                 ) : null}

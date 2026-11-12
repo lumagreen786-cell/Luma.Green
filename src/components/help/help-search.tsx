@@ -209,7 +209,7 @@ function NoResults() {
   const t = useTranslations("help");
   return (
     <div className="flex flex-col items-center gap-2 px-4 py-8 text-center">
-      <span className="flex size-12 items-center justify-center rounded-full bg-accent text-primary">
+      <span className="flex size-12 items-center justify-center rounded-full bg-accent text-foreground">
         <MessageCircleQuestionIcon aria-hidden className="size-6" />
       </span>
       <p className="font-medium">{t("search.emptyTitle")}</p>

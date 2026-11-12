@@ -310,7 +310,7 @@
     "replyTime": "Kami membalas dalam satu hari bekerja.",
     "search": {
       "label": "Cari bantuan",
-      "placeholder": "Menunggu gerbang pembayaran",
+      "placeholder": "Cari",
       "clear": "Kosongkan carian",
       "summary": "{count, plural, =0 {Tiada jawapan} other {# jawapan}} untuk “{query}”",
       "topicSummary": "{count, plural, =0 {Tiada jawapan} other {# jawapan}} tentang {topic}",
@@ -2474,7 +2474,7 @@
     "homeTitle": "Mengitar semula dari rumah?",
     "homeLink": "Lihat cara ia berfungsi",
     "privacy": "Kami menggunakan nombor anda hanya untuk log masuk dan menghantar perkembangan kerja anda di Luma.Green.",
-    "unavailableTitle": "Log masuk telefon dibuka tidak lama lagi",
+    "unavailableTitle": "Log masuk dengan nombor telefon bimbit",
     "unavailableBody": "Log masuk melalui SMS tidak tersedia. Sila cuba lagi nanti.",
     "verifyTitle": "Masukkan kod 6 digit",
     "sentTo": "Dihantar melalui SMS ke {phone}",

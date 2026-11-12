@@ -128,7 +128,7 @@ export function EmailTokenForm({ reset = false }: { reset?: boolean }) {
       )}
       <Link
         href="/login"
-        className="inline-flex min-h-11 items-center text-sm font-medium text-primary underline underline-offset-4"
+        className="inline-flex min-h-11 items-center text-sm font-medium text-foreground underline underline-offset-4"
       >
         {t("signin")}
       </Link>

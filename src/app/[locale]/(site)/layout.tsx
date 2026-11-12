@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 
 import { SectionMotion } from "@/components/motion/section-motion";
+import { PublicBottomNav } from "@/components/site/public-bottom-nav";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
 import { SkipLink } from "@/components/site/skip-link";
@@ -15,6 +16,7 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
         <SectionMotion>{children}</SectionMotion>
       </main>
       <SiteFooter />
+      <PublicBottomNav />
     </>
   );
 }

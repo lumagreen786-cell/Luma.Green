@@ -54,7 +54,7 @@ export async function WeightPayment() {
               <li key={key} data-reveal className="flex gap-5 py-6">
                 <Icon
                   aria-hidden
-                  className="mt-1 size-6 shrink-0 text-primary"
+                  className="mt-1 size-6 shrink-0 text-foreground"
                 />
                 <div className="space-y-2">
                   <h3 className="text-lg font-semibold">

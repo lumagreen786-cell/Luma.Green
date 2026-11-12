@@ -62,7 +62,7 @@ export function MaterialChoice({
               className={cn(
                 "flex min-h-14 cursor-pointer items-center gap-3 border-b py-3 text-base leading-normal font-normal",
                 code === value
-                  ? "border-primary text-primary"
+                  ? "border-primary text-foreground"
                   : "border-border",
                 isAllPromised && "cursor-not-allowed opacity-60",
               )}

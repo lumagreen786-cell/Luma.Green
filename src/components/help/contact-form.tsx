@@ -465,7 +465,7 @@ function ContactUnavailable() {
       role="status"
       className="flex flex-col items-start gap-3 border-y py-6"
     >
-      <span className="flex size-12 items-center justify-center rounded-full bg-accent text-primary">
+      <span className="flex size-12 items-center justify-center rounded-full bg-accent text-foreground">
         <MessageSquareOffIcon aria-hidden className="size-6" />
       </span>
       <h3 className="text-lg font-semibold">{t("unavailableTitle")}</h3>

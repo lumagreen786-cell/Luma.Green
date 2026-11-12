@@ -124,9 +124,9 @@ function BillingDetails({
       <p role="status" className="text-sm text-muted-foreground">
         {t("off")}
       </p>
-      <div className="grid min-w-0 items-start gap-4 xl:grid-cols-[minmax(0,1.6fr)_minmax(19rem,1fr)]">
-        <div className="min-w-0 space-y-4 xl:col-start-2 xl:row-start-1">
-          <section className="flex min-w-0 flex-col gap-4 rounded-xl bg-card p-5">
+      <div className="grid min-w-0 items-start gap-5">
+        <div className="grid min-w-0 items-start gap-5 xl:grid-cols-2">
+          <section className="record-detail flex min-w-0 flex-col gap-4 rounded-panel p-5">
             <p>
               {t(status.request ? status.request.requestState : "none")}
               {status.request ? (
@@ -218,7 +218,7 @@ function BillingDetails({
           </section>
           {status.drafts ? <DraftHistory drafts={status.drafts} /> : null}
         </div>
-        <section className="min-w-0 rounded-xl bg-card px-5 xl:col-start-1 xl:row-start-1">
+        <section className="record-sheet row-start-1 grid min-w-0 rounded-panel p-5 shadow-panel sm:grid-cols-2 xl:grid-cols-4">
           {catalogue.plans.map((plan) => {
             const minimum = formatPaise(plan.monthlyMinPaise, locale),
               maximum =
@@ -236,13 +236,17 @@ function BillingDetails({
             return (
               <div
                 key={plan.id}
-                className="grid min-w-0 gap-2 border-b py-4 sm:grid-cols-[1fr_1fr]"
+                className="flex min-w-0 flex-col gap-4 border-b p-4 sm:border-e"
               >
-                <h2 className="font-medium">{t(`plans.${plan.id}`)}</h2>
+                <h2 className="font-display text-2xl font-medium">
+                  {t(`plans.${plan.id}`)}
+                </h2>
                 <div className="flex min-w-0 flex-col gap-1 text-sm">
                   <p>
                     {t("monthly")}:{" "}
-                    <span className="tabular-nums">{price}</span>
+                    <span className="block font-display text-3xl font-medium tabular-nums">
+                      {price}
+                    </span>
                   </p>
                   <p className="text-muted-foreground">
                     {plan.memberLimit === null
@@ -257,7 +261,7 @@ function BillingDetails({
           })}
         </section>
         {status.events.length > 0 ? (
-          <section className="flex min-w-0 flex-col gap-3 rounded-xl bg-card p-5 xl:col-span-2">
+          <section className="record-sheet flex min-w-0 flex-col gap-3 rounded-panel p-5 shadow-panel">
             <h2 className="font-medium">{t("history")}</h2>
             <ul className="divide-y">
               {status.events.map((event) => (
@@ -293,7 +297,7 @@ function DraftHistory({ drafts }: { drafts: NonNullable<Status["drafts"]> }) {
   return (
     <section
       aria-labelledby={heading}
-      className="flex min-w-0 flex-col gap-3 rounded-xl bg-card p-5"
+      className="flex min-w-0 flex-col gap-3 rounded-panel bg-card p-5 text-card-foreground"
     >
       <h2 id={heading} className="font-medium">
         {t("draftsTitle")}

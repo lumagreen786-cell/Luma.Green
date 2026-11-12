@@ -1,0 +1,308 @@
+Browser tab: 16, Title: "Payouts | Florin", URL: "https://ui.cortexcn.dev/previews/florin/payouts".
+1 AXWebArea Payouts | Florin, URL: ui.cortexcn.dev/previews/florin/payouts
+	2 link Description: Skip to content, Value: ui.cortexcn.dev/previews/florin/payouts#main
+	3 container
+		4 link Description: Florin, invoices, Value: ui.cortexcn.dev/previews/florin/
+		5 pop up button (collapsed) Description: All pages, Secondary Actions: Expand
+		6 pop up button (collapsed) Description: Notifications, Secondary Actions: Expand
+		7 link Description: Settings, Value: ui.cortexcn.dev/previews/florin/settings/
+		8 pop up button (collapsed) Description: Account menu, ID: radix-_R_tb5tlb_, Secondary Actions: Expand
+		9 container Billing
+			10 content list
+				11 link Description: Estimates, Value: ui.cortexcn.dev/previews/florin/estimates/
+				12 link Description: Invoices, Value: ui.cortexcn.dev/previews/florin/
+				13 link Description: Payments, Value: ui.cortexcn.dev/previews/florin/payments/
+				14 link Description: Recurring Invoices, Value: ui.cortexcn.dev/previews/florin/recurring/
+				15 link Description: Checkouts, Value: ui.cortexcn.dev/previews/florin/checkouts/
+	16 container main
+		17 heading Payouts, Value: 1
+			18 text Payouts
+		19 container
+			20 text Available for Instant Payout $128,746.20 $24,310.55  more clears by Nov 13, 2026 .
+			21 button Pay out now
+			22 text Cleared 84 %
+			23 progress indicator Description: 84% of your balance has cleared, Value: 84
+			24 definition list
+				25 container Paid out this month
+					26 text Paid out this month
+				27 text $34,232.01
+				28 container In transit
+					29 text In transit
+				30 text $29,854.60
+				31 container Next payout, Nov 16
+					32 text Next payout, Nov 16
+				33 text $24,310.55
+		34 container
+			35 heading Payout schedule, Value: 2
+				36 text Payout schedule
+			37 text Cleared money goes out every Monday.
+			38 Payout schedule
+				39 radio button Daily, Value: 0
+				40 radio button Weekly, Value: 1
+				41 radio button Monthly, Value: 0
+				42 radio button Manual, Value: 0
+			43 text Instant payouts work on any schedule, for a small fee.
+		44 container
+			45 heading Payout methods, Value: 2
+				46 text Payout methods
+			47 text Pick where Pay out now sends money. Scheduled payouts go to the default.
+			48 Pay out to
+				49 radio button *4443 Debit card Northbank, instant fee 1.5%, Value: 0
+					50 text *4443
+					51 text Debit card
+					52 text Northbank
+					53 text , instant fee
+					54 text 1.5
+					55 text %
+				56 radio button #177210 Business checking DEFAULT Harbor Federal, instant fee 1%, Value: 1
+					57 text #177210
+					58 text Business checking
+					59 text DEFAULT
+					60 text Harbor Federal
+					61 text , instant fee
+					62 text 1
+					63 text %
+				64 radio button #711221 Tax savings Harbor Federal, instant fee 1%, Value: 0
+					65 text #711221
+					66 text Tax savings
+					67 text Harbor Federal
+					68 text , instant fee
+					69 text 1
+					70 text %
+		71 container
+			72 heading Paid out by week, Value: 2
+				73 text Paid out by week
+			74 text $406,305.28  paid out in  12  weeks.
+			75 content list
+				76 text Standard
+				77 text Instant
+			78 content list
+				79 container
+					80 text Week of  Aug 24, 2026 :  $38,966.53  standard,  $0.00  instant
+				81 container
+					82 text Week of  Aug 31, 2026 :  $37,053.36  standard,  $0.00  instant
+				83 container
+					84 text Week of  Sep 7, 2026 :  $30,394.60  standard,  $0.00  instant
+				85 container
+					86 text Week of  Sep 14, 2026 :  $29,656.37  standard,  $0.00  instant
+				87 container
+					88 text Week of  Sep 21, 2026 :  $31,391.71  standard,  $0.00  instant
+				89 container
+					90 text Week of  Sep 28, 2026 :  $38,240.42  standard,  $0.00  instant
+				91 container
+					92 text Week of  Oct 5, 2026 :  $32,289.98  standard,  $0.00  instant
+				93 container
+					94 text Week of  Oct 12, 2026 :  $33,167.11  standard,  $0.00  instant
+				95 container
+					96 text Week of  Oct 19, 2026 :  $29,592.30  standard,  $12,500.00  instant
+				97 container
+					98 text Week of  Oct 26, 2026 :  $28,966.29  standard,  $0.00  instant
+				99 container
+					100 text Week of  Nov 2, 2026 :  $34,232.01  standard,  $0.00  instant
+				101 container
+					102 text Week of  Nov 9, 2026 :  $29,854.60  standard,  $0.00  instant
+		103 container
+			104 tab group Payouts by status
+				105 tab (selected, settable, boolean) All, Value: 1
+				106 tab (selectable, settable, boolean) Paid 15, Value: 0
+				107 tab (selectable, settable, boolean) In transit 1, Value: 0
+				108 tab (selectable, settable, boolean) Scheduled 1, Value: 0
+			109 heading Payout history, Value: 2
+				110 text Payout history
+			111 content list
+				112 checkbox Description: Nov 16 payout to Business checking, Scheduled, Value: 1
+					113 text Nov 16
+					114 text to
+					115 text Checking
+					116 text #177210
+					117 text Standard
+					118 text ,
+					119 text lands nov 18
+					120 text Scheduled
+					121 text $24,310.55
+				122 checkbox Description: Nov 9 payout to Business checking, In transit, Value: 0
+					123 text Nov 9
+					124 text to
+					125 text Checking
+					126 text #177210
+					127 text Standard
+					128 text ,
+					129 text lands nov 11
+					130 text In transit
+					131 text $29,854.60
+				132 checkbox Description: Nov 2 payout to Business checking, Paid, Value: 0
+					133 text Nov 2
+					134 text to
+					135 text Checking
+					136 text #177210
+					137 text Standard
+					138 text ,
+					139 text landed nov 4
+					140 text Paid
+					141 text $34,232.01
+				142 checkbox Description: Oct 26 payout to Business checking, Paid, Value: 0
+					143 text Oct 26
+					144 text to
+					145 text Checking
+					146 text #177210
+					147 text Standard
+					148 text ,
+					149 text landed oct 28
+					150 text Paid
+					151 text $28,966.29
+				152 checkbox Description: Oct 21 payout to Debit card, Paid, Value: 0
+					153 text Oct 21
+					154 text to
+					155 text Debit
+					156 text *4443
+					157 text Instant
+					158 text ,
+					159 text landed oct 21
+					160 text Paid
+					161 text $12,500.00
+				162 checkbox Description: Oct 19 payout to Business checking, Paid, Value: 0
+					163 text Oct 19
+					164 text to
+					165 text Checking
+					166 text #177210
+					167 text Standard
+					168 text ,
+					169 text landed oct 21
+					170 text Paid
+					171 text $29,592.30
+				172 checkbox Description: Oct 12 payout to Business checking, Paid, Value: 0
+					173 text Oct 12
+					174 text to
+					175 text Checking
+					176 text #177210
+					177 text Standard
+					178 text ,
+					179 text landed oct 14
+					180 text Paid
+					181 text $33,167.11
+				182 checkbox Description: Oct 5 payout to Business checking, Paid, Value: 0
+					183 text Oct 5
+					184 text to
+					185 text Checking
+					186 text #177210
+					187 text Standard
+					188 text ,
+					189 text landed oct 7
+					190 text Paid
+					191 text $32,289.98
+				192 checkbox Description: Sep 28 payout to Business checking, Paid, Value: 0
+					193 text Sep 28
+					194 text to
+					195 text Checking
+					196 text #177210
+					197 text Standard
+					198 text ,
+					199 text landed sep 30
+					200 text Paid
+					201 text $38,240.42
+				202 checkbox Description: Sep 21 payout to Business checking, Paid, Value: 0
+					203 text Sep 21
+					204 text to
+					205 text Checking
+					206 text #177210
+					207 text Standard
+					208 text ,
+					209 text landed sep 23
+					210 text Paid
+					211 text $31,391.71
+				212 checkbox Description: Sep 14 payout to Business checking, Paid, Value: 0
+					213 text Sep 14
+					214 text to
+					215 text Checking
+					216 text #177210
+					217 text Standard
+					218 text ,
+					219 text landed sep 16
+					220 text Paid
+					221 text $29,656.37
+				222 checkbox Description: Sep 7 payout to Business checking, Paid, Value: 0
+					223 text Sep 7
+					224 text to
+					225 text Checking
+					226 text #177210
+					227 text Standard
+					228 text ,
+					229 text landed sep 9
+					230 text Paid
+					231 text $30,394.60
+				232 checkbox Description: Aug 31 payout to Business checking, Paid, Value: 0
+					233 text Aug 31
+					234 text to
+					235 text Checking
+					236 text #177210
+					237 text Standard
+					238 text ,
+					239 text landed sep 2
+					240 text Paid
+					241 text $37,053.36
+				242 checkbox Description: Aug 24 payout to Business checking, Paid, Value: 0
+					243 text Aug 24
+					244 text to
+					245 text Checking
+					246 text #177210
+					247 text Standard
+					248 text ,
+					249 text landed aug 26
+					250 text Paid
+					251 text $38,966.53
+				252 checkbox Description: Aug 17 payout to Business checking, Paid, Value: 0
+					253 text Aug 17
+					254 text to
+					255 text Checking
+					256 text #177210
+					257 text Standard
+					258 text ,
+					259 text landed aug 19
+					260 text Paid
+					261 text $29,466.33
+				262 checkbox Description: Aug 10 payout to Business checking, Paid, Value: 0
+					263 text Aug 10
+					264 text to
+					265 text Checking
+					266 text #177210
+					267 text Standard
+					268 text ,
+					269 text landed aug 12
+					270 text Paid
+					271 text $35,488.83
+				272 checkbox Description: Aug 3 payout to Business checking, Paid, Value: 0
+					273 text Aug 3
+					274 text to
+					275 text Checking
+					276 text #177210
+					277 text Standard
+					278 text ,
+					279 text landed aug 5
+					280 text Paid
+					281 text $28,171.34
+			282 container Payout on Nov 16, 2026
+				283 text Payout
+				284 text $24,310.55 Scheduled
+				285 definition list
+					286 container Method
+						287 text Method
+					288 text Business checking #177210
+					289 container Bank
+						290 text Bank
+					291 text Harbor Federal
+					292 container Speed
+						293 text Speed
+					294 text Standard
+					295 container Started
+						296 text Started
+					297 text Nov 16, 2026
+					298 container Lands
+						299 text Lands
+					300 text Nov 18, 2026
+					301 container Reference
+						302 text Reference
+					303 text PO-2026-11-16
+				304 text This goes out on its own with the payout schedule. Change the schedule above.
+	305 container Notifications alt+T
+
+The focused UI element is 1 AXWebArea Payouts | Florin, URL: ui.cortexcn.dev/previews/florin/payouts

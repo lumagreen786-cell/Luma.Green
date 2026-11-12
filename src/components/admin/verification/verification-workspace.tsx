@@ -67,7 +67,7 @@ export function VerificationWorkspace() {
           ref={detail}
           tabIndex={-1}
           aria-label="Application review"
-          className="min-w-0 space-y-4 rounded-xl bg-card p-5 outline-none sm:p-6"
+          className="record-detail min-w-0 space-y-4 rounded-panel p-5 outline-none sm:p-6"
         >
           {decided ? (
             <div

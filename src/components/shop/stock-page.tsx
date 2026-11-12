@@ -76,7 +76,7 @@ function StockBody() {
   if (stock === undefined) return <ListSkeleton rows={4} />;
   return (
     <>
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+      <div className="grid gap-0 rounded-panel bg-card text-card-foreground shadow-panel sm:grid-cols-2 xl:grid-cols-3 [&>div]:border-0 [&>div]:bg-transparent [&>div]:shadow-none">
         <StatCard
           label={t("totalWeight")}
           value={format.weight(stock.totalGrams)}
@@ -184,7 +184,7 @@ function StockList({ stock }: { stock: Stock }) {
     return (
       <section
         aria-labelledby="stock-list"
-        className="flex flex-col gap-4 rounded-2xl bg-card p-5 sm:p-6"
+        className="record-sheet flex flex-col gap-4 rounded-panel p-5 shadow-panel sm:p-6"
       >
         <h2 id="stock-list" className="text-base font-semibold">
           {t(groups[0]?.stage ?? "scrap")}
@@ -239,7 +239,7 @@ function StockItem({ row, totalGrams }: { row: StockRow; totalGrams: number }) {
       </div>
       <div aria-hidden className="h-2 overflow-hidden rounded-full bg-muted">
         <div
-          className="h-full rounded-full bg-primary"
+          className="florin-bar h-full rounded-full bg-primary"
           style={{ width: `${String(share)}%` }}
         />
       </div>

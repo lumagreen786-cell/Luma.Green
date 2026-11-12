@@ -634,7 +634,7 @@
     "replyTime": "Respondemos en un día laborable.",
     "search": {
       "label": "Buscar ayuda",
-      "placeholder": "Esperando la pasarela",
+      "placeholder": "Buscar",
       "clear": "Borrar búsqueda",
       "summary": "{count, plural, =0 {Sin respuestas} one {# respuesta} other {# respuestas}} para «{query}»",
       "topicSummary": "{count, plural, =0 {Sin respuestas} one {# respuesta} other {# respuestas}} sobre {topic}",
@@ -1905,7 +1905,7 @@
     "homeTitle": "¿Reciclas desde casa?",
     "homeLink": "Ver cómo funciona",
     "privacy": "Solo usamos tu número para iniciar sesión y enviarte novedades sobre tu trabajo en Luma.Green.",
-    "unavailableTitle": "El inicio de sesión por teléfono estará disponible pronto",
+    "unavailableTitle": "Inicia sesión con tu número de móvil",
     "unavailableBody": "El inicio de sesión por SMS no está disponible. Inténtalo más tarde.",
     "verifyTitle": "Introduce el código de 6 dígitos",
     "sentTo": "Enviado por SMS a {phone}",

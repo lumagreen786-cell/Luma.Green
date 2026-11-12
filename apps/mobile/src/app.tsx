@@ -1,7 +1,14 @@
 import Constants from "expo-constants";
 import { getLocales } from "expo-localization";
 import { StatusBar } from "expo-status-bar";
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import {
   ActivityIndicator,
   Alert,
@@ -12,6 +19,7 @@ import {
   Pressable,
   StyleSheet,
   Text,
+  useColorScheme,
   View,
 } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
@@ -35,7 +43,14 @@ import {
 } from "./navigation";
 import { recoveryPlan } from "./recovery";
 import { runtimeOrigin } from "./runtime-config";
-import { type NativeTheme, shellAppearance, themes } from "./theme";
+import {
+  appearanceBridgeScript,
+  appearanceMessage,
+  type NativeAppearance,
+  type NativeTheme,
+  shellAppearance,
+  themes,
+} from "./theme";
 import { useNativeLocation } from "./use-native-location";
 import { useNativeUpdates } from "./use-native-updates";
 import { usePushNotifications } from "./use-push-notifications";
@@ -44,6 +59,8 @@ const origin = runtimeOrigin(Constants.expoConfig?.extra, __DEV__);
 const areRemindersEnabled =
   Constants.expoConfig?.extra?.areRemindersEnabled === true;
 const initialLocale = localeFromLanguage(getLocales()[0].languageTag);
+
+const AppearanceContext = createContext<NativeAppearance>("light");
 
 function NativeButton({
   label,
@@ -56,7 +73,7 @@ function NativeButton({
   disabled?: boolean;
   secondary?: boolean;
 }) {
-  const { appearance } = shellAppearance();
+  const appearance = useContext(AppearanceContext);
   const styles = themedStyles[appearance];
   return (
     <Pressable
@@ -99,7 +116,15 @@ function Shell({
   locale: ReturnType<typeof localeFromLanguage>;
   onLocale: (locale: ReturnType<typeof localeFromLanguage>) => void;
 }) {
-  const { colors: theme, statusBar, appearance } = shellAppearance();
+  const systemAppearance = useColorScheme();
+  const [webAppearance, setWebAppearance] = useState<NativeAppearance | null>(
+    null,
+  );
+  const {
+    colors: theme,
+    statusBar,
+    appearance,
+  } = shellAppearance(webAppearance ?? systemAppearance);
   const styles = themedStyles[appearance];
   const t = useTranslations("native");
   const common = useTranslations("common");
@@ -147,6 +172,10 @@ function Shell({
 
   useEffect(() => {
     const subscription = AppState.addEventListener("change", (state) => {
+      if (state === "active") {
+        webView.current?.injectJavaScript(appearanceBridgeScript(origin));
+        return;
+      }
       if (state !== "background") return;
       invalidateLocation();
       invalidateUpdates();
@@ -317,145 +346,155 @@ function Shell({
   };
 
   return (
-    <SafeAreaView style={[styles.screen, { direction }]}>
-      <StatusBar style={statusBar} />
-      <View style={styles.content}>
-        <WebView
-          key={webViewKey}
-          ref={webView}
-          source={{ uri: sourceUrl }}
-          style={styles.webView}
-          forceDarkOn={false}
-          // All requests reach our handler; the library must not auto-open unknown schemes.
-          originWhitelist={["*"]}
-          onShouldStartLoadWithRequest={(request) =>
-            isBotChallengeFrame(request.url, request.isTopFrame) ||
-            isNavigationAllowed(request.url)
-          }
-          onNavigationStateChange={trackNavigation}
-          injectedJavaScriptBeforeContentLoaded={
-            messageBridgeScript(origin, Constants.sessionId) +
-            location.script +
-            updates.script
-          }
-          injectedJavaScript={
-            messageBridgeScript(origin, Constants.sessionId) +
-            location.script +
-            updates.script
-          }
-          injectedJavaScriptForMainFrameOnly
-          injectedJavaScriptBeforeContentLoadedForMainFrameOnly
-          onMessage={({ nativeEvent }) => {
-            if (AppState.currentState !== "active") return;
-            const data = parseNativeMessage(
-              nativeEvent.data,
-              nativeEvent.url,
-              currentUrl.current,
-              origin,
-              Constants.sessionId,
-              Platform.OS === "android",
-            );
-            if (data === null) return;
-            void location.receive(data, currentUrl.current);
-            void push.receive(data, currentUrl.current);
-            void updates.receive(data, currentUrl.current);
-          }}
-          onLoadStart={() => {
-            invalidateUpdates();
-            push.invalidate();
-            invalidateLocation();
-          }}
-          onOpenWindow={({ nativeEvent }) => {
-            if (isNavigationAllowed(nativeEvent.targetUrl))
-              setSourceUrl(nativeEvent.targetUrl);
-          }}
-          onLoadProgress={({ nativeEvent }) => {
-            setLoading(nativeEvent.progress < 1);
-          }}
-          onLoadEnd={() => {
-            webView.current?.injectJavaScript(
+    <AppearanceContext.Provider value={appearance}>
+      <SafeAreaView style={[styles.screen, { direction }]}>
+        <StatusBar style={statusBar} />
+        <View style={styles.content}>
+          <WebView
+            key={webViewKey}
+            ref={webView}
+            source={{ uri: sourceUrl }}
+            style={styles.webView}
+            forceDarkOn={false}
+            // All requests reach our handler; the library must not auto-open unknown schemes.
+            originWhitelist={["*"]}
+            onShouldStartLoadWithRequest={(request) =>
+              isBotChallengeFrame(request.url, request.isTopFrame) ||
+              isNavigationAllowed(request.url)
+            }
+            onNavigationStateChange={trackNavigation}
+            injectedJavaScriptBeforeContentLoaded={
               messageBridgeScript(origin, Constants.sessionId) +
-                location.script,
-            );
-            setLoading(false);
-            push.ready();
-            updates.ready();
-          }}
-          onError={() => {
-            setFailed(true);
-            setLoading(false);
-          }}
-          onHttpError={({ nativeEvent }) => {
-            if (
-              nativeEvent.url === currentUrl.current ||
-              nativeEvent.url === sourceUrl
-            )
+              appearanceBridgeScript(origin) +
+              location.script +
+              updates.script
+            }
+            injectedJavaScript={
+              messageBridgeScript(origin, Constants.sessionId) +
+              appearanceBridgeScript(origin) +
+              location.script +
+              updates.script
+            }
+            injectedJavaScriptForMainFrameOnly
+            injectedJavaScriptBeforeContentLoadedForMainFrameOnly
+            onMessage={({ nativeEvent }) => {
+              if (AppState.currentState !== "active") return;
+              const data = parseNativeMessage(
+                nativeEvent.data,
+                nativeEvent.url,
+                currentUrl.current,
+                origin,
+                Constants.sessionId,
+                Platform.OS === "android",
+              );
+              if (data === null) return;
+              const nextAppearance = appearanceMessage(data);
+              if (nextAppearance) {
+                setWebAppearance(nextAppearance);
+                return;
+              }
+              void location.receive(data, currentUrl.current);
+              void push.receive(data, currentUrl.current);
+              void updates.receive(data, currentUrl.current);
+            }}
+            onLoadStart={() => {
+              invalidateUpdates();
+              push.invalidate();
+              invalidateLocation();
+            }}
+            onOpenWindow={({ nativeEvent }) => {
+              if (isNavigationAllowed(nativeEvent.targetUrl))
+                setSourceUrl(nativeEvent.targetUrl);
+            }}
+            onLoadProgress={({ nativeEvent }) => {
+              setLoading(nativeEvent.progress < 1);
+            }}
+            onLoadEnd={() => {
+              webView.current?.injectJavaScript(
+                messageBridgeScript(origin, Constants.sessionId) +
+                  appearanceBridgeScript(origin) +
+                  location.script,
+              );
+              setLoading(false);
+              push.ready();
+              updates.ready();
+            }}
+            onError={() => {
               setFailed(true);
-          }}
-          onContentProcessDidTerminate={() => {
-            setFailed(true);
-          }}
-          onRenderProcessGone={() => {
-            rendererCrashed.current = true;
-            setFailed(true);
-          }}
-          renderError={() => <View />}
-          onFileDownload={() => {
-            openExternal(currentUrl.current);
-          }}
-          sharedCookiesEnabled
-          thirdPartyCookiesEnabled={false}
-          incognito={false}
-          javaScriptEnabled
-          domStorageEnabled
-          geolocationEnabled
-          allowsBackForwardNavigationGestures
-          allowsInlineMediaPlayback={false}
-          mediaPlaybackRequiresUserAction
-          javaScriptCanOpenWindowsAutomatically={false}
-          mixedContentMode="never"
-          allowFileAccess={false}
-          allowFileAccessFromFileURLs={false}
-          allowUniversalAccessFromFileURLs={false}
-          webviewDebuggingEnabled={__DEV__}
-        />
-        {loading && !failed && (
-          <View
-            style={styles.loading}
-            pointerEvents="none"
-            accessibilityLiveRegion="polite"
-          >
-            <ActivityIndicator
-              color={theme.indicator}
-              accessibilityLabel={common("loading")}
-            />
-          </View>
-        )}
-        {failed && (
-          <View style={styles.error}>
-            <Text accessibilityRole="header" style={styles.errorTitle}>
-              {t("offlineTitle")}
-            </Text>
-            <Text style={styles.errorText}>{t("offlineBody")}</Text>
-            <NativeButton label={common("retry")} onPress={reload} />
-            <NativeButton
-              label={t("openBrowser")}
-              secondary
-              onPress={() => {
-                openExternal(currentUrl.current);
-              }}
-            />
-          </View>
-        )}
-      </View>
-      {reminderScreen && !failed && !loading ? (
-        <NativeButton
-          label={reminder(reminderOn ? "disable" : "enable")}
-          disabled={reminderBusy}
-          onPress={promptReminder}
-        />
-      ) : null}
-    </SafeAreaView>
+              setLoading(false);
+            }}
+            onHttpError={({ nativeEvent }) => {
+              if (
+                nativeEvent.url === currentUrl.current ||
+                nativeEvent.url === sourceUrl
+              )
+                setFailed(true);
+            }}
+            onContentProcessDidTerminate={() => {
+              setFailed(true);
+            }}
+            onRenderProcessGone={() => {
+              rendererCrashed.current = true;
+              setFailed(true);
+            }}
+            renderError={() => <View />}
+            onFileDownload={() => {
+              openExternal(currentUrl.current);
+            }}
+            sharedCookiesEnabled
+            thirdPartyCookiesEnabled={false}
+            incognito={false}
+            javaScriptEnabled
+            domStorageEnabled
+            geolocationEnabled
+            allowsBackForwardNavigationGestures
+            allowsInlineMediaPlayback={false}
+            mediaPlaybackRequiresUserAction
+            javaScriptCanOpenWindowsAutomatically={false}
+            mixedContentMode="never"
+            allowFileAccess={false}
+            allowFileAccessFromFileURLs={false}
+            allowUniversalAccessFromFileURLs={false}
+            webviewDebuggingEnabled={__DEV__}
+          />
+          {loading && !failed && (
+            <View
+              style={styles.loading}
+              pointerEvents="none"
+              accessibilityLiveRegion="polite"
+            >
+              <ActivityIndicator
+                color={theme.indicator}
+                accessibilityLabel={common("loading")}
+              />
+            </View>
+          )}
+          {failed && (
+            <View style={styles.error}>
+              <Text accessibilityRole="header" style={styles.errorTitle}>
+                {t("offlineTitle")}
+              </Text>
+              <Text style={styles.errorText}>{t("offlineBody")}</Text>
+              <NativeButton label={common("retry")} onPress={reload} />
+              <NativeButton
+                label={t("openBrowser")}
+                secondary
+                onPress={() => {
+                  openExternal(currentUrl.current);
+                }}
+              />
+            </View>
+          )}
+        </View>
+        {reminderScreen && !failed && !loading ? (
+          <NativeButton
+            label={reminder(reminderOn ? "disable" : "enable")}
+            disabled={reminderBusy}
+            onPress={promptReminder}
+          />
+        ) : null}
+      </SafeAreaView>
+    </AppearanceContext.Provider>
   );
 }
 
@@ -525,4 +564,5 @@ const createStyles = (theme: NativeTheme) =>
 
 const themedStyles = {
   light: createStyles(themes.light),
+  dark: createStyles(themes.dark),
 };

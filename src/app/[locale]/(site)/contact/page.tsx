@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const emailLink =
-  "inline-flex min-h-11 items-center font-medium text-primary underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50 rounded-sm";
+  "inline-flex min-h-11 items-center font-medium text-foreground underline-offset-4 outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50 rounded-sm";
 
 /**
  * Email only for now: a form needs Resend wired (AGENTS.md §9), and a form that
@@ -45,9 +45,9 @@ export default async function ContactPage() {
       />
 
       <Container className="grid items-start gap-4 pb-8 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
-        <section className="grid gap-4 rounded-xl bg-card p-5 sm:p-6">
+        <section className="grid gap-4 rounded-panel bg-card p-5 shadow-panel sm:p-6">
           <div className="flex items-center gap-3">
-            <MailIcon aria-hidden className="size-6 text-primary" />
+            <MailIcon aria-hidden className="size-6 text-foreground" />
 
             <h2 className="text-lg font-semibold">{t("emailHeading")}</h2>
           </div>
@@ -57,9 +57,9 @@ export default async function ContactPage() {
             </a>
           </div>
         </section>
-        <section className="grid gap-4 rounded-xl bg-card p-5 sm:p-6">
+        <section className="grid gap-4 rounded-panel bg-card p-5 shadow-panel sm:p-6">
           <div className="flex items-center gap-3">
-            <ShieldAlertIcon aria-hidden className="size-6 text-primary" />
+            <ShieldAlertIcon aria-hidden className="size-6 text-foreground" />
 
             <h2 className="text-lg font-semibold">{t("securityHeading")}</h2>
           </div>
