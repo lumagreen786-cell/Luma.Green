@@ -340,3 +340,41 @@ test("resizing an open compact menu restores desktop navigation", async ({
   await trigger.click();
   await expect(page.getByRole("dialog")).toBeVisible();
 });
+
+for (const { route, panel, action } of [
+  {
+    route: "/ml/standards",
+    panel: 'section[aria-labelledby="adopt-heading"]',
+    action: 'a[href="/ml/help"]',
+  },
+  {
+    route: "/si/how-it-works",
+    panel: 'section[aria-labelledby="sorting-guide-heading"] div.bg-card',
+    action: 'a[href="/si/help/household/get-ready"]',
+  },
+]) {
+  for (const colorScheme of ["light", "dark"] as const) {
+    test(`${route} action stays inside its phone panel in ${colorScheme}`, async ({
+      page,
+    }) => {
+      await page.setViewportSize({ width: 320, height: 900 });
+      await page.emulateMedia({ colorScheme, reducedMotion: "reduce" });
+      await page.goto(route);
+      await page.evaluate(async () => document.fonts.ready);
+      const sheet = page.locator(panel);
+      const button = sheet.locator(action);
+      await expectControlTextToFit(button);
+      const bounds = await sheet.boundingBox();
+      const buttonBounds = await button.boundingBox();
+      expect(bounds).not.toBeNull();
+      expect(buttonBounds).not.toBeNull();
+      if (!bounds || !buttonBounds) return;
+      expect(bounds.x + bounds.width).toBeLessThanOrEqual(301);
+      expect(buttonBounds.x).toBeGreaterThanOrEqual(bounds.x + 19);
+      expect(buttonBounds.x + buttonBounds.width).toBeLessThanOrEqual(
+        bounds.x + bounds.width - 19,
+      );
+      await expectPageToFit(page);
+    });
+  }
+}

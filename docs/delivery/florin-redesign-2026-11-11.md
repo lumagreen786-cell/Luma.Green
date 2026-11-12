@@ -114,3 +114,25 @@ removal: Git status, both patches and all **3,843 file contents** still matched.
 `/Users/syedabdulmuqeeth/.codex/worktrees/luma-overhaul/luma.green`.
 The primary checkout and private recovery archive remain intact. No push, PR
 update, merge, deployment, native binary or OTA publication was performed.
+
+## PR browser repair — 12 November 2026
+
+CI at `81ded80` passed all checks except two 320px browser cases: Malayalam
+Standards and Sinhala How It Works. Long translated action labels caused an
+intrinsic-width button to enlarge the Standards panel or extend beyond the
+sorting-guide panel. Linux font metrics made both extend past the viewport.
+The earlier local overflow check alone missed the narrower panel boundary.
+
+The Malayalam action now uses the concise equivalent “Contact”; the Sinhala
+guide action uses “View guide”. Destinations, accessible guide context and
+single-line button behavior are preserved. Existing translation owners supply
+the labels to all consumers. No font shrinking, clipping or test tolerance change
+is used. Four new light/dark phone cases first failed against the old labels;
+they check both panel and action bounds. Existing all-locale overflow checks
+remain in place. PostHog/Sentry behavior and native shell contracts are unchanged.
+
+Repair verification: the rebuilt disconnected Production bundle passed all
+**37 targeted browser cases**: all 33 locales on public phone/tablet pages plus
+the four new action-bound checks. Selected repaired phone panels/actions were
+visually inspected in both themes. The existing viewport tolerance is unchanged.
+Fresh `pnpm check`, formatting and `git diff --check` passed after this repair.
