@@ -4802,7 +4802,7 @@
     "checking": "Controleren…",
     "down": "Service niet bereikbaar",
     "accepted": "Provider heeft geaccepteerd",
-    "failed": "Provider heeft geweigerd",
+    "failed": "Acceptatie niet bevestigd",
     "unknown": "Niet geverifieerd",
     "unavailable": "Niet ingesteld",
     "refresh": "Opnieuw controleren",

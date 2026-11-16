@@ -4802,7 +4802,7 @@
     "checking": "Menyemak…",
     "down": "Perkhidmatan tidak dapat dicapai",
     "accepted": "Pembekal menerima",
-    "failed": "Pembekal menolak",
+    "failed": "Penerimaan belum disahkan",
     "unknown": "Belum disahkan",
     "unavailable": "Belum dikonfigurasi",
     "refresh": "Semak semula",

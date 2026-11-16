@@ -309,8 +309,10 @@ can differ from the installed version.
 endpoint `/health` checks database access and returns an aggregate SMS result.
 It does not call the SMS provider. `accepted` means the provider accepted a
 recent request, not that a handset received it. After 15 minutes the result is
-`unknown`. Missing settings, rejection and an unreachable API are separate
-states. The page stays usable during a backend outage if the web host works.
+`unknown`. Missing settings, unconfirmed acceptance and an unreachable API are
+separate states. Unconfirmed acceptance can mean rejection, timeout or an unreadable
+response; it does not prove explicit rejection or non-delivery. The page stays
+usable during a backend outage if the web host works.
 A complete web-host outage also prevents this page loading; an external uptime
 monitor can probe the independent Convex endpoint. No external monitor or alert
 subscription is activated by this change.

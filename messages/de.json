@@ -4802,7 +4802,7 @@
     "checking": "Wird geprüft…",
     "down": "Dienst nicht erreichbar",
     "accepted": "Vom Anbieter angenommen",
-    "failed": "Vom Anbieter abgelehnt",
+    "failed": "Annahme nicht bestätigt",
     "unknown": "Nicht bestätigt",
     "unavailable": "Nicht eingerichtet",
     "refresh": "Erneut prüfen",

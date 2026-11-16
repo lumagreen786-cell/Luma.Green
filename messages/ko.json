@@ -4802,7 +4802,7 @@
     "checking": "확인 중…",
     "down": "서비스에 연결할 수 없음",
     "accepted": "공급자가 수락함",
-    "failed": "공급자가 거부함",
+    "failed": "접수 확인 안 됨",
     "unknown": "확인되지 않음",
     "unavailable": "설정되지 않음",
     "refresh": "다시 확인",

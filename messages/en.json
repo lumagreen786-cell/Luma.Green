@@ -4802,7 +4802,7 @@
     "checking": "Checking…",
     "down": "Cannot reach service",
     "accepted": "Provider accepted",
-    "failed": "Provider rejected",
+    "failed": "Acceptance not confirmed",
     "unknown": "Not verified",
     "unavailable": "Not configured",
     "refresh": "Check again",

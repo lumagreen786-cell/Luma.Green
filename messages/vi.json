@@ -4802,7 +4802,7 @@
     "checking": "Đang kiểm tra…",
     "down": "Không thể truy cập dịch vụ",
     "accepted": "Nhà cung cấp đã nhận",
-    "failed": "Nhà cung cấp từ chối",
+    "failed": "Chưa xác nhận tiếp nhận",
     "unknown": "Chưa xác minh",
     "unavailable": "Chưa cấu hình",
     "refresh": "Kiểm tra lại",

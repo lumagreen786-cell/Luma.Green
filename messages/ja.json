@@ -4802,7 +4802,7 @@
     "checking": "確認中…",
     "down": "サービスに接続できません",
     "accepted": "配信事業者が受け付けました",
-    "failed": "配信事業者が拒否しました",
+    "failed": "受付を確認できません",
     "unknown": "未確認",
     "unavailable": "未設定",
     "refresh": "再確認",

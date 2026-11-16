@@ -4802,7 +4802,7 @@
     "checking": "正在检查…",
     "down": "无法连接服务",
     "accepted": "服务商已接受",
-    "failed": "服务商已拒绝",
+    "failed": "尚未确认受理",
     "unknown": "未验证",
     "unavailable": "未配置",
     "refresh": "重新检查",

@@ -4802,7 +4802,7 @@
     "checking": "Verifica…",
     "down": "Servizio non raggiungibile",
     "accepted": "Accettato dal fornitore",
-    "failed": "Rifiutato dal fornitore",
+    "failed": "Accettazione non confermata",
     "unknown": "Non verificato",
     "unavailable": "Non configurato",
     "refresh": "Verifica di nuovo",

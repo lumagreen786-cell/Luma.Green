@@ -4802,7 +4802,7 @@
     "checking": "Kontrol ediliyor…",
     "down": "Hizmete erişilemiyor",
     "accepted": "Sağlayıcı kabul etti",
-    "failed": "Sağlayıcı reddetti",
+    "failed": "Kabul onaylanmadı",
     "unknown": "Doğrulanmadı",
     "unavailable": "Yapılandırılmadı",
     "refresh": "Yeniden kontrol et",
