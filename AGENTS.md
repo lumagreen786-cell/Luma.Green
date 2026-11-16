@@ -1,4 +1,34 @@
-## Active Florin design — latest owner decision, 11 November 2026
+## Active Orbit design — owner decision, 12 November 2026
+
+The owner rejected the Florin UI ("not modern or sleek") and ordered a full redo of every web page, including admin, in the spirit of NextUI/HeroUI, SpaceX and Grok. Keep the lime/forest palette. The new contract is `docs/design/luma-design-system/README.md` (Luma Orbit): dark-first with a light appearance, Geist/Geist Mono with Noto script fallbacks, lime as a signal on hairline surfaces, glass chrome. New, shorter copy is authorized. Old images may be reused; otherwise use `ImageSlot` placeholders and record their fal prompts in `docs/design/luma-design-system/image-slots.md`. This supersedes the Florin, Ship X, light-only and image-placement rules below. Workflow, auth, consent, data and native boundaries still apply. Commit, checked PR and merge are authorized for this redesign. The owner also requires the `ui-ux-pro-max` skill (`.claude/skills/ui-ux-pro-max`) for all UI work: use its Dark Mode (OLED) style, UX/stack searches and pre-delivery checklist; its palette/font picks never replace Luma’s tokens.
+
+### Radius and header controls — owner correction, 16 November 2026
+
+Use full pills only for single-row controls. Use bounded corner tokens, such as
+`rounded-2xl` or `rounded-panel`, for wrapping or stacked navigation, tabs,
+progress labels, option rows and form containers. Do not let a multi-line label
+turn its container into a large capsule. Keep circular avatars, counters and
+single-row pill controls. Header utility icons must use consistent 44px touch
+targets with a transparent or subtle background, clear hover/focus states and
+accessible labels; do not add large filled circular bubbles. Check actual pages
+in light/dark mode at phone, tablet and desktop widths, with long translations
+and RTL. Apply this rule when reviewing shared primitives and each caller that
+overrides their corner style. This correction takes priority over older blanket
+pill instructions.
+
+### Ponytail development approach — owner request, 16 November 2026
+
+Before coding or code review, read
+[the repository Ponytail skill](.claude/skills/ponytail/SKILL.md). Use its
+`full` level by default: trace the full flow, reuse existing project code and
+make the smallest change that completes the request. Fix shared causes and
+check affected callers. Do not add speculative abstractions or dependencies.
+This skill does not reduce requested scope or replace Luma's design rules,
+validation, authentication, access, privacy, exact units, accessibility,
+required tests, checked PRs or Production verification. Explain the approach
+in plain English so the owner can learn with us.
+
+## Superseded Florin design — owner decision, 11 November 2026
 
 Use the full Florin reference, including **light and dark modes**, Urbanist,
 lime accents, pill navigation, round tab counters and 28px panels. This replaces
