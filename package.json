@@ -54,7 +54,7 @@
   "dependencies": {
     "@astryxdesign/core": "0.7.1",
     "@astryxdesign/theme-matcha": "0.7.1",
-    "@convex-dev/better-auth": "0.12.7",
+    "@convex-dev/better-auth": "0.13.0",
     "@hookform/resolvers": "^5.9.1",
     "@sentry/nextjs": "^10.75.2",
     "@stylexjs/stylex": "^0.19.1",
@@ -103,7 +103,7 @@
     "@types/web-push": "^3.6.4",
     "@vitejs/plugin-react": "^6.3.0",
     "@vitest/coverage-v8": "^5.1.0",
-    "convex-test": "^0.0.67",
+    "convex-test": "^0.0.71",
     "drizzle-orm": "0.45.2",
     "eslint": "^9",
     "eslint-config-next": "16.4.6",
