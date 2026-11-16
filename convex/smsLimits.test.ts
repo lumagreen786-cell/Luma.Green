@@ -147,7 +147,10 @@ describe("SMS provider response", () => {
       code: "654321",
     });
     if (ok) await expect(sending).resolves.toBeNull();
-    else await expect(sending).rejects.toThrow(/MSG91/);
+    else
+      await expect(sending).rejects.toThrow(
+        "SMS provider did not confirm acceptance.",
+      );
     expect(fetchMock).toHaveBeenCalledWith(
       expect.any(String),
       expect.objectContaining({ signal: expect.any(AbortSignal) }),
@@ -165,7 +168,7 @@ describe("SMS provider response", () => {
         phone: "+919876543210",
         code: "654321",
       }),
-    ).rejects.toThrow("timeout");
+    ).rejects.toThrow("SMS provider did not confirm acceptance.");
     expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 });
@@ -198,7 +201,7 @@ describe("OS Digital delivery", () => {
       if (status === "OK") await expect(sending).resolves.toBeNull();
       else
         await expect(sending).rejects.toThrow(
-          "OS Digital did not confirm SMS acceptance.",
+          "SMS provider did not confirm acceptance.",
         );
       expect(fetchMock).toHaveBeenCalledTimes(1);
       expect(fetchMock).toHaveBeenCalledWith(
@@ -221,7 +224,7 @@ describe("OS Digital delivery", () => {
         phone: "+919876543210",
         code: "654321",
       }),
-    ).rejects.toThrow("OS Digital did not confirm SMS acceptance.");
+    ).rejects.toThrow("SMS provider did not confirm acceptance.");
     expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 });

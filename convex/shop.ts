@@ -631,7 +631,7 @@ export const setRate = mutation({
   },
   returns: v.null(),
   handler: async (ctx, args) => {
-    const { profile, org } = await requireOrg(ctx, SHOP);
+    const { profile, org } = await requireOrg(ctx, SHOP, "manage");
     const { materialCode, paisePerKg } = args;
     if (
       !Number.isSafeInteger(paisePerKg) ||

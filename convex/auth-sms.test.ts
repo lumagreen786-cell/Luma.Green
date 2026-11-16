@@ -26,15 +26,26 @@ it.each(["msg91", "osdigital"])(
     vi.stubEnv("TURNSTILE_HOSTNAMES", "luma.test");
     vi.stubGlobal(
       "fetch",
-      vi.fn().mockImplementation(() =>
-        Promise.resolve(
-          Response.json({
-            success: true,
-            hostname: "luma.test",
-            action: "otp_send",
-          }),
-        ),
-      ),
+      vi.fn().mockImplementation((url: string) => {
+        if (url.includes("turnstile"))
+          return Promise.resolve(
+            Response.json({
+              success: true,
+              hostname: "luma.test",
+              action: "otp_send",
+            }),
+          );
+        const result =
+          provider === "osdigital"
+            ? {
+                status: "OK",
+                data: [
+                  { id: "32-1", mobile: "919876543210", status: "SUBMITTED" },
+                ],
+              }
+            : { type: "success" };
+        return Promise.resolve(Response.json(result));
+      }),
     );
     vi.stubEnv("MSG91_AUTH_KEY", "test-key");
     vi.stubEnv("MSG91_OTP_TEMPLATE_ID", "test-template");
@@ -204,3 +215,28 @@ it.each([undefined, "0", "1"])(
     }
   },
 );
+
+it("returns an unavailable response when the SMS provider rejects the request", async () => {
+  vi.stubEnv("SITE_URL", "https://luma.test");
+  vi.stubEnv("CONVEX_SITE_URL", "https://test.convex.site");
+  vi.stubEnv("BETTER_AUTH_SECRET", "0123456789abcdef0123456789abcdef");
+  vi.stubEnv("TURNSTILE_ENABLED", "false");
+  vi.stubEnv("OSDIGITAL_API_KEY", "");
+  vi.stubEnv("MSG91_AUTH_KEY", "test-key");
+  vi.stubEnv("MSG91_OTP_TEMPLATE_ID", "test-template");
+  vi.stubGlobal(
+    "fetch",
+    vi.fn().mockResolvedValue(Response.json({ type: "error" })),
+  );
+  const t = convexTest(schema, modules);
+  registerAuth(t);
+  const response = await t.fetch("/api/auth/phone-number/send-otp", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Origin: "https://luma.test",
+    },
+    body: JSON.stringify({ phoneNumber: "+919876543210" }),
+  });
+  expect(response.status).toBe(503);
+});

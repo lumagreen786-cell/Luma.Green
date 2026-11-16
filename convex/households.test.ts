@@ -224,6 +224,7 @@ describe("households.book", () => {
     const arjun = await newHousehold(t);
     const token = await arjun.mutation(api.households.book, {
       ...(await pickupAt(t)),
+      dwellingType: "apartment",
       address: "  Flat 12, 4th Cross,\n Mathikere ",
       name: "  Arjun Nair ",
     });
@@ -233,6 +234,7 @@ describe("households.book", () => {
     expect(booking).toMatchObject({
       status: "requested",
       mode: "pickup",
+      dwellingType: "apartment",
       phone: "+919876500001",
       name: "Arjun Nair",
       address: "Flat 12, 4th Cross, Mathikere",
@@ -352,11 +354,13 @@ describe("households.book", () => {
     const token = await arjun.mutation(api.households.book, {
       ...jayanagar,
       mode: "dropoff",
+      dwellingType: "villa",
     });
     const booking = await bookingByToken(t, token);
     expect(booking?.mode).toBe("dropoff");
     // A drop-off never keeps the household's address.
     expect(booking?.address).toBeUndefined();
+    expect(booking?.dwellingType).toBeUndefined();
   });
 
   it("books only an active kabadiwala", async () => {

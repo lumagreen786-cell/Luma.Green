@@ -233,21 +233,22 @@ export const createAuthOptions = (ctx: GenericCtx<DataModel>) => {
           assertPhoneVerificationIdentity(hookCtx ?? {}, user, phone);
           return Promise.resolve();
         },
-        // Hand the code to an action through the scheduler: the request
-        // returns at once, and nothing is left as a dangling promise that
-        // Convex could drop.
+        // Await provider acceptance so a failed send cannot look successful.
         sendOTP: async ({ phoneNumber: phone, code }) => {
           if (authEmailEnv()?.kind === "local") {
             await sendLocalPhoneCode(phone, code);
             return;
           }
-          if (!("scheduler" in ctx)) {
+          if (!("runAction" in ctx)) {
             throw new Error("Sign-in codes can only be sent from an action.");
           }
-          await ctx.scheduler.runAfter(0, internal.sms.sendCode, {
-            phone,
-            code,
-          });
+          try {
+            await ctx.runAction(internal.sms.sendCode, { phone, code });
+          } catch {
+            throw new APIError("SERVICE_UNAVAILABLE", {
+              message: "SMS delivery is unavailable. Try again later.",
+            });
+          }
         },
         signUpOnVerification: {
           getTempEmail: (phone) => {

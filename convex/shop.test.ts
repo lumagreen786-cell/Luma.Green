@@ -587,6 +587,57 @@ describe("signed out and other roles", () => {
 });
 
 describe("the rate card", () => {
+  it.each(["owner", "admin", "member", "staff", "viewer"] as const)(
+    "allows only managers to change rates while retaining %s collection rights",
+    async (role) => {
+      const t = await demoWorld();
+      const shop = await signInAs(t, RAMESH);
+      const bookingId = await bookingOf(t, "Rahul Gowda", "on_the_way");
+      await t.run(async (ctx) => {
+        const booking = await ctx.db.get("bookings", bookingId);
+        if (!booking) throw new Error("Missing booking");
+        const membership = await ctx.db
+          .query("memberships")
+          .withIndex("by_org", (q) => q.eq("orgId", booking.orgId))
+          .unique();
+        if (!membership) throw new Error("Missing membership");
+        await ctx.db.patch("memberships", membership._id, { role });
+      });
+      const before = await priceRow(shop, "METAL-IRON");
+      const update = shop.mutation(api.shop.setRate, {
+        materialCode: "METAL-IRON",
+        paisePerKg: 3100,
+      });
+      if (role === "owner" || role === "admin") {
+        await expect(update).resolves.toBeNull();
+        const saved = await priceRow(shop, "METAL-IRON");
+        expect(saved?.myPaise).toBe(3100);
+      } else {
+        await expect(update).rejects.toThrow("WORKSPACE_PERMISSION_DENIED");
+        expect(await priceRow(shop, "METAL-IRON")).toEqual(before);
+        const changes = await t.run(async (ctx) => {
+          const audit = await ctx.db.query("auditLog").collect();
+          return audit.filter((entry) => entry.action === "rateCard.set");
+        });
+        expect(changes).toEqual([]);
+      }
+      const complete = shop.mutation(api.shop.complete, {
+        bookingId,
+        lines: [{ materialCode: "METAL-IRON", grams: 1000 }],
+        method: "cash",
+      });
+      if (role === "viewer")
+        await expect(complete).rejects.toThrow("WORKSPACE_PERMISSION_DENIED");
+      else {
+        const expectedRate =
+          role === "owner" || role === "admin" ? 3100 : before?.myPaise;
+        await expect(complete).resolves.toMatchObject({
+          totalPaise: expectedRate,
+        });
+      }
+    },
+  );
+
   it("lists every scrap material the shop handles, with floor and market", async () => {
     const t = await demoWorld();
     const shop = await signInAs(t, RAMESH);
