@@ -55,6 +55,8 @@ jobs:
           cp convex/auth-sms.test.ts convex/auth-optional-plugins.test.ts
           printf 'operationKey: "removal-enquiry-0001"\n' > convex/accountRemoval.test.ts
           printf 'operationKey: "b779389e-30a9-498f-b7ed-3c0fa182a997"\n' > convex/households.test.ts
+          mkdir -p docs/delivery
+          printf 'This is not a general payout API, %s/%s ledger.\n' beneficiary float > docs/delivery/stakeholder-document-audit-2026-11-16.md
           printf 'operationKey: "removal-enquiry-0001"\n' > .github/workflows/security.yml
           captures=docs/delivery/evidence/platform-foundation-2026-10-28
           mkdir -p "$captures"
@@ -70,6 +72,7 @@ jobs:
           probe_canary=1RNDVO9mHhGEWfPln8yI0q65w4K7FQ2bLo3piZMjUduSzeTkJtrABaCgYcXsvx
           for target in convex/auth-sms.test.ts convex/auth-optional-plugins.test.ts \
             convex/accountRemoval.test.ts convex/households.test.ts .github/workflows/security.yml \
+            docs/delivery/stakeholder-document-audit-2026-11-16.md \
             "$captures/foundation-captures.json" "$captures/approved-book-captures.json" \
             "$captures/approved-hashes.json"; do
             printf 'api_key = "%s"\n' "$probe_canary" > "$target"

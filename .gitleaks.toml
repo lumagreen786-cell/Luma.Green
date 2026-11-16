@@ -49,3 +49,9 @@ description = "Fixed no-photo booking retry identifier in its isolated test"
 condition = "AND"
 paths = ['''^convex/households\.test\.ts$''', '''^\.github/workflows/security\.yml$''']
 regexes = ['''^b779389e\-30a9\-498f\-b7ed\-3c0fa182a997$''']
+
+[[rules.allowlists]]
+description = "Audit prose about a beneficiary and float ledger, not a credential"
+condition = "AND"
+paths = ['''^docs/delivery/stakeholder-document-audit-2026-11-16\.md$''']
+regexes = ['''^beneficiary/float$''']
