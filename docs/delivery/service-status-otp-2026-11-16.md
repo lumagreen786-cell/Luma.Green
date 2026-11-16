@@ -49,15 +49,15 @@ repair recorded in the adjacent audit reports. The owner's requested Ponytail
 skill is vendored with its MIT license and source commit under
 `.claude/skills/ponytail`; `AGENTS.md` makes it part of coding and review.
 
-- Full lint ran with four errors; the corrected schema/test files then passed
-  focused lint. The remaining 132 warnings are pre-existing. Default Node heap
-  exhaustion required an 8 GB heap for the full lint run.
+- The final clean `pnpm check` passed with an 8 GB Node heap and two Vitest
+  workers. Full lint reported zero errors and 132 pre-existing warnings.
 - Web and Convex typechecks passed. The final webpack Production build passed
   against checked main's Next.js 16.4.6. Turbopack's local worker binding was an
   environment limitation; no Production configuration was changed for it.
-- The full unit run completed 3,290 tests: 3,282 passed and eight failed during
-  concurrent host load. All 70 tests in the three affected suites passed with
-  one worker. Focused status/auth, dwelling, rate and footprint checks passed.
+- All 3,290 unit tests passed across 404 files in the final clean check against
+  the merged dependency tree. An earlier run hit host-load timeouts; those
+  suites also passed independently. Focused status/auth, dwelling, rate and
+  footprint checks passed.
 - All 28 security checks passed. Desktop 34, mobile policy 68 and mobile
   component 21 checks passed. No signed native binary or device acceptance is
   claimed.
