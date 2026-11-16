@@ -4754,7 +4754,7 @@
     "invalidReading": "Informe os kWh da conta ou do medidor. Use até três casas decimais.",
     "calculate": "Calcular estimativa",
     "estimate": "Emissões estimadas da rede: {amount} kg de CO₂",
-    "privateCalculation": "A leitura fica nesta tela. O resultado cobre apenas a eletricidade.",
+    "privateCalculation": "A leitura só é guardada quando escolhe Guardar. O resultado abrange apenas eletricidade.",
     "gridSource": "Fator da rede indiana, CEA 2025–26",
     "airQuality": "Qualidade do ar",
     "roofSolar": "Verificar potencial solar do telhado",
@@ -4764,7 +4764,20 @@
     "locationUnavailable": "Não foi possível obter uma localização adequada.",
     "lookupLimit": "Limite de consultas atingido. Tente novamente mais tarde.",
     "airScore": "Índice universal de qualidade do ar: {score} de 100. Quanto maior, melhor.",
-    "roofEstimate": "Produção modelada do telhado: {energy} kWh/ano (CC) com {panels} painéis."
+    "roofEstimate": "Produção modelada do telhado: {energy} kWh/ano (CC) com {panels} painéis.",
+    "footprintLog": {
+      "title": "Guardar estimativa elétrica",
+      "explanation": "Indique o período da leitura. As estimativas são privadas, sem créditos ou compensações de carbono. Não some períodos sobrepostos.",
+      "start": "Início do período",
+      "end": "Fim do período",
+      "consent": "Guardar esta leitura e estimativa na minha conta.",
+      "saved": "Estimativa guardada.",
+      "history": "Últimas 30 estimativas guardadas",
+      "loading": "A carregar estimativas…",
+      "empty": "Sem estimativas guardadas.",
+      "signIn": "Inicie sessão para guardar e ver as suas estimativas elétricas privadas.",
+      "remove": "Remover estimativa"
+    }
   },
   "homeReminder": {
     "title": "Lembrete ao sair de casa",
@@ -4778,5 +4791,33 @@
     "time": "Horário do lembrete",
     "add": "Adicionar ao calendário",
     "calendarHelp": "Abra o arquivo de calendário para programar um alerta diário."
+  },
+  "serviceStatus": {
+    "title": "Estado do serviço",
+    "lead": "Verificação a cada 30 segundos.",
+    "website": "Site",
+    "api": "API e banco de dados",
+    "sms": "Códigos SMS",
+    "up": "Acessível",
+    "checking": "Verificando…",
+    "down": "Serviço inacessível",
+    "accepted": "Aceito pelo provedor",
+    "failed": "Recusado pelo provedor",
+    "unknown": "Não verificado",
+    "unavailable": "Não configurado",
+    "refresh": "Verificar novamente",
+    "checkedAt": "Verificado às {time}",
+    "note": "A aceitação do provedor não confirma a entrega ao telefone. A evidência SMS expira após 15 minutos."
+  },
+  "householdDwelling": {
+    "label": "Tipo de habitação (opcional)",
+    "unspecified": "Escolher depois",
+    "independent_home": "Casa independente",
+    "apartment": "Apartamento",
+    "condo": "Condomínio",
+    "villa": "Vila",
+    "townhouse": "Casa geminada",
+    "farmhouse": "Casa de campo",
+    "routeNote": "Para recolha comunitária, use o código comunitário revisto."
   }
 }

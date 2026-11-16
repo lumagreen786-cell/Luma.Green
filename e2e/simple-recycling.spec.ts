@@ -42,6 +42,18 @@ for (const [locale, copy] of [
         .getByRole("option", { name: "Maharashtra", exact: true })
         .click();
       await expect(page.getByLabel(copy.sell.when.nameLabel)).toBeVisible();
+      await page
+        .getByRole("combobox", { name: copy.householdDwelling.label })
+        .click();
+      await page
+        .getByRole("option", {
+          name: copy.householdDwelling.condo,
+          exact: true,
+        })
+        .click();
+      await expect(
+        page.getByRole("checkbox", { name: copy.apartmentCollection.pickup }),
+      ).not.toBeChecked();
       await expect(
         page.getByRole("button", {
           name: copy.sell.simple.photos,
@@ -72,6 +84,9 @@ for (const [locale, copy] of [
         "12 Test Street, Bengaluru",
       );
       await expect(page.getByLabel(copy.join.form.city)).toHaveValue("Mumbai");
+      await expect(
+        page.getByRole("combobox", { name: copy.householdDwelling.label }),
+      ).toContainText(copy.householdDwelling.condo);
       await expect(
         page.getByRole("combobox", { name: copy.join.form.stateUT }),
       ).toContainText("Maharashtra");

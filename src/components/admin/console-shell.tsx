@@ -178,7 +178,7 @@ function ConsoleNavigation({ name }: { name: string }) {
       ) : null}
       <nav
         aria-label="Admin"
-        className="record-sheet mx-auto max-w-[96rem] rounded-[28px] p-2 shadow-panel sm:rounded-full"
+        className="record-sheet mx-auto max-w-[96rem] rounded-panel p-2 shadow-panel"
       >
         <ul className="flex min-w-0 flex-wrap items-center gap-2">
           {nav.map((item) => {
@@ -190,7 +190,7 @@ function ConsoleNavigation({ name }: { name: string }) {
                   href={item.href}
                   aria-current={isActive ? "page" : undefined}
                   className={cn(
-                    "relative flex min-h-11 items-center justify-center gap-2 rounded-full px-4 py-2 text-sm whitespace-normal transition-colors outline-none focus-visible:ring-3 focus-visible:ring-ring",
+                    "relative flex min-h-11 items-center justify-center gap-2 rounded-2xl px-4 py-2 text-sm whitespace-normal transition-colors outline-none focus-visible:ring-3 focus-visible:ring-ring",
                     isActive
                       ? "bg-primary font-semibold text-primary-foreground"
                       : "text-foreground hover:bg-accent hover:text-accent-foreground",

@@ -11,6 +11,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { cn } from "@/lib/utils";
 
 import { parseTheme } from "./theme";
 import { useTheme } from "./theme-provider";
@@ -28,10 +29,10 @@ export function ThemeToggleControl({
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          variant="outline"
+          variant="ghost"
           size="icon"
           aria-label={labels.label}
-          className={className}
+          className={cn("rounded-xl bg-transparent text-foreground", className)}
         >
           <Icon aria-hidden="true" />
         </Button>

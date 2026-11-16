@@ -168,7 +168,7 @@ export function StatusPill({
   return (
     <span
       className={cn(
-        "inline-flex max-w-full items-center rounded-full px-3 py-1 text-xs leading-5 font-medium",
+        "inline-flex max-w-full items-center rounded-xl px-3 py-1 text-xs leading-5 font-medium",
         tone === "neutral" && "bg-muted text-muted-foreground",
         tone === "info" && "bg-secondary text-secondary-foreground",
         tone === "good" && "bg-primary/15 text-foreground",

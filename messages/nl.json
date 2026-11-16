@@ -4754,7 +4754,7 @@
     "invalidReading": "Vul de kWh op je factuur of meter in. Gebruik maximaal drie decimalen.",
     "calculate": "Schatting berekenen",
     "estimate": "Geschatte uitstoot van het stroomnet: {amount} kg CO₂",
-    "privateCalculation": "Je invoer blijft op dit scherm. Het resultaat gaat alleen over stroom.",
+    "privateCalculation": "Je meting wordt alleen opgeslagen als je Opslaan kiest. Het resultaat betreft alleen elektriciteit.",
     "gridSource": "Uitstootfactor voor het Indiase stroomnet, CEA 2025–26",
     "airQuality": "Luchtkwaliteit",
     "roofSolar": "Zonnedak controleren",
@@ -4764,7 +4764,20 @@
     "locationUnavailable": "Er kon geen geschikte locatie worden bepaald.",
     "lookupLimit": "Limiet voor zoekopdrachten bereikt. Probeer het later opnieuw.",
     "airScore": "Universele luchtkwaliteitsindex: {score} van 100. Hoger is beter.",
-    "roofEstimate": "Gemodelleerde dakopbrengst: {energy} kWh/jaar (DC) met {panels} panelen."
+    "roofEstimate": "Gemodelleerde dakopbrengst: {energy} kWh/jaar (DC) met {panels} panelen.",
+    "footprintLog": {
+      "title": "Elektriciteitsschatting opslaan",
+      "explanation": "Voer de meetperiode in. Schattingen zijn privé, geen koolstofkredieten of compensaties. Tel overlappende perioden niet op.",
+      "start": "Begin van periode",
+      "end": "Einde van periode",
+      "consent": "Deze meting en schatting in mijn account opslaan.",
+      "saved": "Schatting opgeslagen.",
+      "history": "Laatste 30 opgeslagen schattingen",
+      "loading": "Schattingen laden…",
+      "empty": "Geen opgeslagen schattingen.",
+      "signIn": "Meld je aan om privéschattingen voor elektriciteit op te slaan en te bekijken.",
+      "remove": "Schatting verwijderen"
+    }
   },
   "homeReminder": {
     "title": "Herinnering bij vertrek",
@@ -4778,5 +4791,33 @@
     "time": "Tijd van herinnering",
     "add": "Toevoegen aan agenda",
     "calendarHelp": "Open het agendabestand om een dagelijkse melding in te stellen."
+  },
+  "serviceStatus": {
+    "title": "Servicestatus",
+    "lead": "Controle elke 30 seconden.",
+    "website": "Webpagina",
+    "api": "API en database",
+    "sms": "SMS-codes",
+    "up": "Bereikbaar",
+    "checking": "Controleren…",
+    "down": "Service niet bereikbaar",
+    "accepted": "Provider heeft geaccepteerd",
+    "failed": "Provider heeft geweigerd",
+    "unknown": "Niet geverifieerd",
+    "unavailable": "Niet ingesteld",
+    "refresh": "Opnieuw controleren",
+    "checkedAt": "Gecontroleerd om {time}",
+    "note": "Acceptatie door de provider bevestigt geen ontvangst op de telefoon. SMS-bewijs verloopt na 15 minuten."
+  },
+  "householdDwelling": {
+    "label": "Woningtype (optioneel)",
+    "unspecified": "Later kiezen",
+    "independent_home": "Vrijstaand huis",
+    "apartment": "Appartement / flat",
+    "condo": "Koopappartement",
+    "villa": "Vrijstaande villa",
+    "townhouse": "Rijtjeshuis",
+    "farmhouse": "Boerderij",
+    "routeNote": "Gebruik voor gezamenlijke inzameling de gecontroleerde gemeenschapscode."
   }
 }

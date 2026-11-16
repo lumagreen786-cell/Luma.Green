@@ -53,6 +53,11 @@ import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
 import { canonicalCity } from "../../../convex/lib/geography";
 import {
+  DWELLING_TYPES,
+  type DwellingType,
+  isDwellingType,
+} from "../../../convex/lib/householdDwelling";
+import {
   apartmentCode,
   bookableDates,
   cleanAddress,
@@ -133,6 +138,9 @@ function RecyclingFlow({
   const [isAdult, setIsAdult] = useState(false);
   const [stage, setStage] = useState<"details" | "schedule">("details");
   const [files, setFiles] = useState<File[]>([]);
+  const [dwellingType, setDwellingType] = useState<DwellingType | undefined>(
+    initial.dwellingType,
+  );
   const [apartmentPickup, setApartmentPickup] = useState(
     initial.apartmentPickup === true,
   );
@@ -193,6 +201,7 @@ function RecyclingFlow({
     if (!isAdult) return;
     save({
       ...values,
+      dwellingType,
       apartmentPickup: values.mode === "pickup" && apartmentPickup,
     });
     setStage("schedule");
@@ -218,6 +227,7 @@ function RecyclingFlow({
           adultConfirmed: true,
           orgId: selectedShop.id,
           apartmentRouteId: reviewed?.routeId,
+          dwellingType: values.mode === "pickup" ? dwellingType : undefined,
           mode: values.mode,
           items: [],
           operationKey: crypto.randomUUID(),
@@ -271,18 +281,24 @@ function RecyclingFlow({
             setShopId(undefined);
           }}
           apartmentFields={
-            <ApartmentPickupField
-              isApartmentPickup={apartmentPickup}
-              communityCode={communityCode}
-              onCheckedChange={(value) => {
-                setApartmentPickup(value);
-                setShopId(undefined);
-              }}
-              onCodeChange={(value) => {
-                setCommunityCode(value);
-                setShopId(undefined);
-              }}
-            />
+            <div className="space-y-4">
+              <DwellingTypeField
+                value={dwellingType}
+                onChange={setDwellingType}
+              />
+              <ApartmentPickupField
+                isApartmentPickup={apartmentPickup}
+                communityCode={communityCode}
+                onCheckedChange={(value) => {
+                  setApartmentPickup(value);
+                  setShopId(undefined);
+                }}
+                onCodeChange={(value) => {
+                  setCommunityCode(value);
+                  setShopId(undefined);
+                }}
+              />
+            </div>
           }
         />
       ) : (
@@ -516,7 +532,7 @@ function RecyclingProgress({
           <li
             key={step}
             aria-current={stage === step ? "step" : undefined}
-            className="flex min-w-0 flex-1 items-center gap-2 rounded-full bg-card px-3 py-3 text-sm aria-[current=step]:bg-primary aria-[current=step]:font-semibold aria-[current=step]:text-primary-foreground"
+            className="flex min-w-0 flex-1 items-center gap-2 rounded-2xl bg-card px-3 py-3 text-sm aria-[current=step]:bg-primary aria-[current=step]:font-semibold aria-[current=step]:text-primary-foreground"
           >
             <span
               aria-hidden
@@ -691,6 +707,48 @@ function usePhotoUploads() {
       uploaded.current.clear();
     },
   };
+}
+
+export function DwellingTypeField({
+  value,
+  onChange,
+}: {
+  value?: DwellingType;
+  onChange: (value: DwellingType | undefined) => void;
+}) {
+  const t = useTranslations("householdDwelling");
+  const locale = useLocale();
+  return (
+    <div className="space-y-2">
+      <Label htmlFor="dwelling-type">{t("label")}</Label>
+      <Select
+        dir={isLocale(locale) ? localeDirection(locale) : "ltr"}
+        value={value ?? "unspecified"}
+        onValueChange={(next) => {
+          onChange(isDwellingType(next) ? next : undefined);
+        }}
+      >
+        <SelectTrigger
+          id="dwelling-type"
+          className="min-h-11 w-full"
+          aria-describedby="dwelling-route-note"
+        >
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="unspecified">{t("unspecified")}</SelectItem>
+          {DWELLING_TYPES.map((type) => (
+            <SelectItem key={type} value={type}>
+              {t(type)}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+      <p id="dwelling-route-note" className="text-sm text-muted-foreground">
+        {t("routeNote")}
+      </p>
+    </div>
+  );
 }
 
 function DetailsForm({

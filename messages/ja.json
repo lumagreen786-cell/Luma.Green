@@ -4754,7 +4754,7 @@
     "invalidReading": "請求書やメーターの使用量をkWhで入力してください。小数点以下は3桁まで入力できます。",
     "calculate": "推定値を計算",
     "estimate": "系統電力の推定排出量：{amount} kg CO₂",
-    "privateCalculation": "入力値はこの画面にのみ残ります。結果の対象は電力のみです。",
+    "privateCalculation": "「保存」を選んだ場合のみ読数が保存されます。結果は電力のみを対象とします。",
     "gridSource": "インドの系統電力排出係数、CEA 2025–26",
     "airQuality": "空気の質",
     "roofSolar": "屋根の太陽光発電を確認",
@@ -4764,7 +4764,20 @@
     "locationUnavailable": "適切な位置情報を取得できませんでした。",
     "lookupLimit": "確認回数の上限に達しました。時間をおいてお試しください。",
     "airScore": "ユニバーサル大気質指数：100点中{score}。数値が高いほど良好です。",
-    "roofEstimate": "屋根の推定発電量：パネル{panels}枚で年間{energy} kWh（直流）。"
+    "roofEstimate": "屋根の推定発電量：パネル{panels}枚で年間{energy} kWh（直流）。",
+    "footprintLog": {
+      "title": "電力の推計を保存",
+      "explanation": "検針の対象期間を入力してください。推計は非公開で、炭素クレジットや排出相殺ではありません。重複する期間を合計しないでください。",
+      "start": "期間の開始日",
+      "end": "期間の終了日",
+      "consent": "この使用量と推計を自分のアカウントに保存する。",
+      "saved": "推計を保存しました。",
+      "history": "保存した最新30件の推計",
+      "loading": "推計を読み込み中…",
+      "empty": "保存した推計はありません。",
+      "signIn": "非公開の電力推計を保存・表示するにはログインしてください。",
+      "remove": "推計を削除"
+    }
   },
   "homeReminder": {
     "title": "外出時リマインダー",
@@ -4778,5 +4791,33 @@
     "time": "通知時刻",
     "add": "カレンダーに追加",
     "calendarHelp": "カレンダーファイルを開いて毎日の通知を設定してください。"
+  },
+  "serviceStatus": {
+    "title": "サービス状況",
+    "lead": "30秒ごとに確認。",
+    "website": "ウェブサイト",
+    "api": "APIとデータベース",
+    "sms": "SMSコード",
+    "up": "接続可能",
+    "checking": "確認中…",
+    "down": "サービスに接続できません",
+    "accepted": "配信事業者が受け付けました",
+    "failed": "配信事業者が拒否しました",
+    "unknown": "未確認",
+    "unavailable": "未設定",
+    "refresh": "再確認",
+    "checkedAt": "確認時刻：{time}",
+    "note": "事業者の受け付けは端末への配信を保証しません。SMSの確認情報は15分後に失効します。"
+  },
+  "householdDwelling": {
+    "label": "住居の種類（任意）",
+    "unspecified": "後で選択",
+    "independent_home": "一戸建て",
+    "apartment": "アパート",
+    "condo": "分譲マンション",
+    "villa": "ヴィラ",
+    "townhouse": "タウンハウス",
+    "farmhouse": "農家住宅",
+    "routeNote": "共同回収には確認済みのコミュニティコードを使ってください。"
   }
 }

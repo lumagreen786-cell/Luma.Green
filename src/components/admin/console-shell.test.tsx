@@ -56,6 +56,8 @@ describe("admin navigation", () => {
   it("keeps all eight destinations and marks the active review section", () => {
     render(<ConsoleShell>Review workspace</ConsoleShell>);
     const navigation = screen.getByRole("navigation", { name: "Admin" });
+    expect(navigation).toHaveClass("rounded-panel");
+    expect(navigation).not.toHaveClass("sm:rounded-full");
     expect(within(navigation).getAllByRole("link")).toHaveLength(8);
     expect(
       within(navigation).getByRole("link", { name: /Account removal/ }),

@@ -14,6 +14,7 @@ export const publicRoutes = [
   "/participants",
   "/contact",
   "/privacy",
+  "/status",
   "/join",
   "/sell",
   "/prices",

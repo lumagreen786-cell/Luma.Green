@@ -4754,7 +4754,7 @@
     "invalidReading": "Masukkan kWh daripada bil atau meter. Gunakan sehingga tiga tempat perpuluhan.",
     "calculate": "Kira anggaran",
     "estimate": "Anggaran pelepasan grid: {amount} kg CO₂",
-    "privateCalculation": "Bacaan anda kekal pada skrin ini. Hasil hanya meliputi elektrik.",
+    "privateCalculation": "Bacaan disimpan hanya apabila anda memilih Simpan. Hasil hanya meliputi elektrik.",
     "gridSource": "Faktor pelepasan grid India, CEA 2025–26",
     "airQuality": "Kualiti udara",
     "roofSolar": "Semak potensi solar bumbung",
@@ -4764,7 +4764,20 @@
     "locationUnavailable": "Lokasi yang sesuai tidak dapat diperoleh.",
     "lookupLimit": "Had semakan dicapai. Cuba lagi kemudian.",
     "airScore": "Indeks kualiti udara sejagat: {score} daripada 100. Lebih tinggi lebih baik.",
-    "roofEstimate": "Anggaran hasil bumbung: {energy} kWh setahun (DC) dengan {panels} panel."
+    "roofEstimate": "Anggaran hasil bumbung: {energy} kWh setahun (DC) dengan {panels} panel.",
+    "footprintLog": {
+      "title": "Simpan anggaran elektrik",
+      "explanation": "Masukkan tempoh bacaan. Anggaran adalah peribadi, bukan kredit atau pengimbangan karbon. Jangan jumlahkan tempoh bertindih.",
+      "start": "Mula tempoh",
+      "end": "Akhir tempoh",
+      "consent": "Simpan bacaan dan anggaran ini dalam akaun saya.",
+      "saved": "Anggaran disimpan.",
+      "history": "30 anggaran tersimpan terkini",
+      "loading": "Memuatkan anggaran…",
+      "empty": "Tiada anggaran tersimpan.",
+      "signIn": "Log masuk untuk menyimpan dan melihat anggaran elektrik peribadi.",
+      "remove": "Padam anggaran"
+    }
   },
   "homeReminder": {
     "title": "Peringatan apabila meninggalkan rumah",
@@ -4778,5 +4791,33 @@
     "time": "Masa peringatan",
     "add": "Tambah pada kalendar",
     "calendarHelp": "Buka fail kalendar untuk menetapkan peringatan harian."
+  },
+  "serviceStatus": {
+    "title": "Status perkhidmatan",
+    "lead": "Semakan setiap 30 saat.",
+    "website": "Laman web",
+    "api": "API dan pangkalan data",
+    "sms": "Kod SMS",
+    "up": "Boleh dicapai",
+    "checking": "Menyemak…",
+    "down": "Perkhidmatan tidak dapat dicapai",
+    "accepted": "Pembekal menerima",
+    "failed": "Pembekal menolak",
+    "unknown": "Belum disahkan",
+    "unavailable": "Belum dikonfigurasi",
+    "refresh": "Semak semula",
+    "checkedAt": "Disemak pada {time}",
+    "note": "Penerimaan pembekal tidak mengesahkan penghantaran ke telefon. Bukti SMS luput selepas 15 minit."
+  },
+  "householdDwelling": {
+    "label": "Jenis rumah (pilihan)",
+    "unspecified": "Pilih kemudian",
+    "independent_home": "Rumah berasingan",
+    "apartment": "Pangsapuri / flat",
+    "condo": "Kondominium",
+    "villa": "Vila",
+    "townhouse": "Rumah teres",
+    "farmhouse": "Rumah ladang",
+    "routeNote": "Untuk kutipan komuniti, gunakan kod komuniti yang telah disemak."
   }
 }

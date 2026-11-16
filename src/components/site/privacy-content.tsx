@@ -35,7 +35,7 @@ export function PrivacyContent() {
           <a
             key={section}
             href={`#${section}`}
-            className="flex min-h-11 items-center rounded-full px-3 text-sm font-medium hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50"
+            className="flex min-h-11 items-center rounded-xl px-3 text-sm font-medium hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50"
           >
             {t(`${section}Title`)}
           </a>

@@ -4754,7 +4754,7 @@
     "invalidReading": "Masukkan kWh dari tagihan atau meteran. Gunakan hingga tiga angka desimal.",
     "calculate": "Hitung perkiraan",
     "estimate": "Perkiraan emisi jaringan: {amount} kg CO₂",
-    "privateCalculation": "Angka Anda tetap di layar ini. Hasil hanya mencakup listrik.",
+    "privateCalculation": "Pembacaan disimpan hanya saat Anda memilih Simpan. Hasil hanya mencakup listrik.",
     "gridSource": "Faktor emisi jaringan India, CEA 2025–26",
     "airQuality": "Kualitas udara",
     "roofSolar": "Periksa potensi surya di atap",
@@ -4764,7 +4764,20 @@
     "locationUnavailable": "Lokasi yang sesuai tidak dapat diperoleh.",
     "lookupLimit": "Batas pemeriksaan tercapai. Coba lagi nanti.",
     "airScore": "Indeks kualitas udara universal: {score} dari 100. Semakin tinggi, semakin baik.",
-    "roofEstimate": "Perkiraan produksi atap: {energy} kWh/tahun (DC) dengan {panels} panel."
+    "roofEstimate": "Perkiraan produksi atap: {energy} kWh/tahun (DC) dengan {panels} panel.",
+    "footprintLog": {
+      "title": "Simpan perkiraan listrik",
+      "explanation": "Masukkan periode pembacaan. Perkiraan bersifat pribadi, bukan kredit atau pengimbangan karbon. Jangan jumlahkan periode yang tumpang tindih.",
+      "start": "Awal periode",
+      "end": "Akhir periode",
+      "consent": "Simpan pembacaan dan perkiraan ini ke akun saya.",
+      "saved": "Perkiraan disimpan.",
+      "history": "30 perkiraan tersimpan terbaru",
+      "loading": "Memuat perkiraan…",
+      "empty": "Belum ada perkiraan tersimpan.",
+      "signIn": "Masuk untuk menyimpan dan melihat perkiraan listrik pribadi.",
+      "remove": "Hapus perkiraan"
+    }
   },
   "homeReminder": {
     "title": "Pengingat saat keluar rumah",
@@ -4778,5 +4791,33 @@
     "time": "Waktu pengingat",
     "add": "Tambahkan ke kalender",
     "calendarHelp": "Buka berkas kalender untuk mengatur pengingat harian."
+  },
+  "serviceStatus": {
+    "title": "Status layanan",
+    "lead": "Diperiksa setiap 30 detik.",
+    "website": "Situs web",
+    "api": "API dan basis data",
+    "sms": "Kode SMS",
+    "up": "Dapat diakses",
+    "checking": "Memeriksa…",
+    "down": "Layanan tidak dapat diakses",
+    "accepted": "Penyedia menerima",
+    "failed": "Penyedia menolak",
+    "unknown": "Belum diverifikasi",
+    "unavailable": "Belum dikonfigurasi",
+    "refresh": "Periksa lagi",
+    "checkedAt": "Diperiksa pukul {time}",
+    "note": "Penerimaan penyedia tidak membuktikan pengiriman ke ponsel. Bukti SMS kedaluwarsa setelah 15 menit."
+  },
+  "householdDwelling": {
+    "label": "Jenis rumah (opsional)",
+    "unspecified": "Pilih nanti",
+    "independent_home": "Rumah mandiri",
+    "apartment": "Apartemen",
+    "condo": "Kondominium",
+    "villa": "Vila",
+    "townhouse": "Rumah deret",
+    "farmhouse": "Rumah pertanian",
+    "routeNote": "Untuk penjemputan komunitas, gunakan kode komunitas yang telah ditinjau."
   }
 }

@@ -4754,7 +4754,7 @@
     "invalidReading": "输入账单或电表上的用电量，单位为 kWh，最多保留三位小数。",
     "calculate": "计算估算值",
     "estimate": "电网排放估算值：{amount} 千克二氧化碳",
-    "privateCalculation": "读数仅保留在此页面。结果仅涵盖用电。",
+    "privateCalculation": "只有选择保存时才会保存读数。结果仅涵盖用电。",
     "gridSource": "印度电网排放因子，CEA 2025–26",
     "airQuality": "空气质量",
     "roofSolar": "查看屋顶太阳能潜力",
@@ -4764,7 +4764,20 @@
     "locationUnavailable": "无法获取合适的位置。",
     "lookupLimit": "已达到查询上限。请稍后重试。",
     "airScore": "通用空气质量指数：{score} / 100。分数越高越好。",
-    "roofEstimate": "屋顶模拟发电量：{panels} 块面板每年发电 {energy} 千瓦时（直流）。"
+    "roofEstimate": "屋顶模拟发电量：{panels} 块面板每年发电 {energy} 千瓦时（直流）。",
+    "footprintLog": {
+      "title": "保存用电估算",
+      "explanation": "请输入读数对应的期间。估算为私人数据，不是碳信用或碳抵消。请勿累加重叠期间。",
+      "start": "期间开始",
+      "end": "期间结束",
+      "consent": "将此读数及估算保存到我的账户。",
+      "saved": "估算已保存。",
+      "history": "最近保存的30条估算",
+      "loading": "正在加载估算…",
+      "empty": "没有已保存的估算。",
+      "signIn": "登录以保存和查看私人用电估算。",
+      "remove": "删除估算"
+    }
   },
   "homeReminder": {
     "title": "离家提醒",
@@ -4778,5 +4791,33 @@
     "time": "提醒时间",
     "add": "添加到日历",
     "calendarHelp": "打开日历文件以设置每日提醒。"
+  },
+  "serviceStatus": {
+    "title": "服务状态",
+    "lead": "每30秒检查一次。",
+    "website": "网站",
+    "api": "API和数据库",
+    "sms": "短信验证码",
+    "up": "可访问",
+    "checking": "正在检查…",
+    "down": "无法连接服务",
+    "accepted": "服务商已接受",
+    "failed": "服务商已拒绝",
+    "unknown": "未验证",
+    "unavailable": "未配置",
+    "refresh": "重新检查",
+    "checkedAt": "检查时间：{time}",
+    "note": "服务商接受不代表手机已收到短信。短信证据在15分钟后过期。"
+  },
+  "householdDwelling": {
+    "label": "住宅类型（可选）",
+    "unspecified": "稍后选择",
+    "independent_home": "独立住宅",
+    "apartment": "公寓",
+    "condo": "共有产权公寓",
+    "villa": "别墅",
+    "townhouse": "联排住宅",
+    "farmhouse": "农舍",
+    "routeNote": "社区回收请使用已审核的社区代码。"
   }
 }

@@ -1,12 +1,14 @@
 "use client";
 
 import { useQuery } from "convex/react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { isConvexConfigured } from "@/components/providers/convex-provider";
 import { useVerifiedSession } from "@/components/providers/use-signed-in-query";
 import { LanguageSwitcher } from "@/components/site/language-switcher";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Link } from "@/i18n/navigation";
 
 import { api } from "../../../convex/_generated/api";
 import { PhoneForm } from "./phone-form";
@@ -16,10 +18,21 @@ import { VerifyForm } from "./verify-flow";
 
 /** Phone and code share one screen; language remains an optional control. */
 export function LoginFlow() {
-  return isConvexConfigured ? (
-    <ConfiguredLogin />
-  ) : (
-    <LoginSteps canSend={false} />
+  const t = useTranslations("serviceStatus");
+  return (
+    <>
+      {isConvexConfigured ? (
+        <ConfiguredLogin />
+      ) : (
+        <LoginSteps canSend={false} />
+      )}
+      <Link
+        href="/status"
+        className="mt-4 inline-flex min-h-11 items-center text-sm text-muted-foreground underline underline-offset-4 focus-visible:ring-2 focus-visible:ring-ring"
+      >
+        {t("title")}
+      </Link>
+    </>
   );
 }
 

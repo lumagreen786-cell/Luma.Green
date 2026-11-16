@@ -4754,7 +4754,7 @@
     "invalidReading": "Inserisci i kWh della bolletta o del contatore. Usa fino a tre decimali.",
     "calculate": "Calcola la stima",
     "estimate": "Emissioni stimate della rete: {amount} kg di CO₂",
-    "privateCalculation": "Il dato resta su questa schermata. Il risultato riguarda solo l’elettricità.",
+    "privateCalculation": "La lettura viene salvata solo quando scegli Salva. Il risultato riguarda solo l’elettricità.",
     "gridSource": "Fattore della rete indiana, CEA 2025–26",
     "airQuality": "Qualità dell’aria",
     "roofSolar": "Verifica solare del tetto",
@@ -4764,7 +4764,20 @@
     "locationUnavailable": "Impossibile ottenere una posizione adatta.",
     "lookupLimit": "Limite delle verifiche raggiunto. Riprova più tardi.",
     "airScore": "Indice universale della qualità dell’aria: {score} su 100. Più è alto, meglio è.",
-    "roofEstimate": "Produzione stimata del tetto: {energy} kWh/anno (CC) con {panels} pannelli."
+    "roofEstimate": "Produzione stimata del tetto: {energy} kWh/anno (CC) con {panels} pannelli.",
+    "footprintLog": {
+      "title": "Salva una stima elettrica",
+      "explanation": "Indica il periodo della lettura. Le stime sono private, senza crediti o compensazioni di carbonio. Non sommare periodi sovrapposti.",
+      "start": "Inizio del periodo",
+      "end": "Fine del periodo",
+      "consent": "Salva questa lettura e la sua stima nel mio account.",
+      "saved": "Stima salvata.",
+      "history": "Ultime 30 stime salvate",
+      "loading": "Caricamento delle stime…",
+      "empty": "Nessuna stima salvata.",
+      "signIn": "Accedi per salvare e vedere le tue stime elettriche private.",
+      "remove": "Rimuovi stima"
+    }
   },
   "homeReminder": {
     "title": "Promemoria quando esci di casa",
@@ -4778,5 +4791,33 @@
     "time": "Ora del promemoria",
     "add": "Aggiungi al calendario",
     "calendarHelp": "Apri il file del calendario per impostare un avviso giornaliero."
+  },
+  "serviceStatus": {
+    "title": "Stato del servizio",
+    "lead": "Verifica ogni 30 secondi.",
+    "website": "Sito web",
+    "api": "API e database",
+    "sms": "Codici SMS",
+    "up": "Raggiungibile",
+    "checking": "Verifica…",
+    "down": "Servizio non raggiungibile",
+    "accepted": "Accettato dal fornitore",
+    "failed": "Rifiutato dal fornitore",
+    "unknown": "Non verificato",
+    "unavailable": "Non configurato",
+    "refresh": "Verifica di nuovo",
+    "checkedAt": "Verificato alle {time}",
+    "note": "L’accettazione del fornitore non conferma la consegna al telefono. La prova SMS scade dopo 15 minuti."
+  },
+  "householdDwelling": {
+    "label": "Tipo di abitazione (facoltativo)",
+    "unspecified": "Scegli dopo",
+    "independent_home": "Casa indipendente",
+    "apartment": "Appartamento",
+    "condo": "Condominio",
+    "villa": "Villa indipendente",
+    "townhouse": "Casa a schiera",
+    "farmhouse": "Casa colonica",
+    "routeNote": "Per il ritiro condominiale, usa il codice della comunità verificato."
   }
 }

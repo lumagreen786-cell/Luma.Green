@@ -27,6 +27,14 @@ export async function SiteFooter() {
             className="mt-3 border-t border-border/60 pt-2"
           >
             <ul className="flex flex-wrap gap-x-5 gap-y-1">
+              <li>
+                <Link
+                  href="/status"
+                  className="inline-flex min-h-11 items-center text-xs text-muted-foreground hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+                >
+                  {labels("serviceStatus.title")}
+                </Link>
+              </li>
               {footerGroups.map((group) =>
                 group.links.map((link) => (
                   <li key={link.href} className="max-w-full min-w-0">

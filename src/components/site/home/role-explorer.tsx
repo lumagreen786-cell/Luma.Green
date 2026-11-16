@@ -49,7 +49,7 @@ export function RoleExplorer({
               key={item.key}
               value={item.key}
               className={cn(
-                "flex min-h-16 min-w-0 items-center gap-3 rounded-full p-2 pe-4 text-start outline-none focus-visible:ring-3 focus-visible:ring-ring",
+                "flex min-h-16 min-w-0 items-center gap-3 rounded-2xl p-2 pe-4 text-start outline-none focus-visible:ring-3 focus-visible:ring-ring",
                 item.key === role.key
                   ? "record-detail group-data-[variant=default]/tabs-list:data-[state=active]:bg-background group-data-[variant=default]/tabs-list:data-[state=active]:text-foreground"
                   : "hover:bg-muted",

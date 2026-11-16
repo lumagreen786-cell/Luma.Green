@@ -4754,7 +4754,7 @@
     "invalidReading": "Wpisz liczbę kWh z rachunku lub licznika. Użyj maksymalnie trzech miejsc po przecinku.",
     "calculate": "Oblicz szacunek",
     "estimate": "Szacowana emisja z sieci: {amount} kg CO₂",
-    "privateCalculation": "Odczyt pozostaje na tym ekranie. Wynik obejmuje tylko energię elektryczną.",
+    "privateCalculation": "Odczyt jest zapisywany tylko po wybraniu Zapisz. Wynik obejmuje wyłącznie energię elektryczną.",
     "gridSource": "Współczynnik dla sieci w Indiach, CEA 2025–26",
     "airQuality": "Jakość powietrza",
     "roofSolar": "Sprawdź potencjał solarny dachu",
@@ -4764,7 +4764,20 @@
     "locationUnavailable": "Nie udało się uzyskać odpowiedniej lokalizacji.",
     "lookupLimit": "Osiągnięto limit zapytań. Spróbuj ponownie później.",
     "airScore": "Uniwersalny indeks jakości powietrza: {score} na 100. Im wyżej, tym lepiej.",
-    "roofEstimate": "Modelowana produkcja z dachu: {energy} kWh/rok (prąd stały) przy {panels} panelach."
+    "roofEstimate": "Modelowana produkcja z dachu: {energy} kWh/rok (prąd stały) przy {panels} panelach.",
+    "footprintLog": {
+      "title": "Zapisz szacunek energii",
+      "explanation": "Podaj okres odczytu. Szacunki są prywatne, nie są kredytami ani kompensacją emisji. Nie sumuj nakładających się okresów.",
+      "start": "Początek okresu",
+      "end": "Koniec okresu",
+      "consent": "Zapisz ten odczyt i szacunek na moim koncie.",
+      "saved": "Szacunek zapisany.",
+      "history": "Ostatnie 30 zapisanych szacunków",
+      "loading": "Wczytywanie szacunków…",
+      "empty": "Brak zapisanych szacunków.",
+      "signIn": "Zaloguj się, aby zapisywać i przeglądać prywatne szacunki energii.",
+      "remove": "Usuń szacunek"
+    }
   },
   "homeReminder": {
     "title": "Przypomnienie przy wyjściu z domu",
@@ -4778,5 +4791,33 @@
     "time": "Godzina przypomnienia",
     "add": "Dodaj do kalendarza",
     "calendarHelp": "Otwórz plik kalendarza, aby ustawić codzienny alert."
+  },
+  "serviceStatus": {
+    "title": "Stan usługi",
+    "lead": "Sprawdzanie co 30 sekund.",
+    "website": "Witryna",
+    "api": "API i baza danych",
+    "sms": "Kody SMS",
+    "up": "Dostępna",
+    "checking": "Sprawdzanie…",
+    "down": "Usługa niedostępna",
+    "accepted": "Dostawca zaakceptował",
+    "failed": "Dostawca odrzucił",
+    "unknown": "Niezweryfikowane",
+    "unavailable": "Nieskonfigurowane",
+    "refresh": "Sprawdź ponownie",
+    "checkedAt": "Sprawdzono o {time}",
+    "note": "Akceptacja dostawcy nie potwierdza dostarczenia na telefon. Dowód SMS wygasa po 15 minutach."
+  },
+  "householdDwelling": {
+    "label": "Rodzaj domu (opcjonalnie)",
+    "unspecified": "Wybierz później",
+    "independent_home": "Dom wolnostojący",
+    "apartment": "Mieszkanie",
+    "condo": "Kondominium",
+    "villa": "Willa",
+    "townhouse": "Dom szeregowy",
+    "farmhouse": "Dom wiejski",
+    "routeNote": "Do odbioru wspólnotowego użyj zweryfikowanego kodu wspólnoty."
   }
 }

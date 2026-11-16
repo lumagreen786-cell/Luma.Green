@@ -57,3 +57,20 @@ it("uses vertical keyboard navigation when the tabs are vertical", async () => {
   expect(screen.getByRole("tab", { name: "First" })).toHaveFocus();
   expect(screen.getByRole("tabpanel")).toHaveTextContent("First records");
 });
+
+it("keeps bounded corners for long wrapping labels and circular record counts", () => {
+  render(
+    <Tabs defaultValue="long" dir="rtl">
+      <TabsList aria-label="سجلات">
+        <TabsTrigger value="long" count={12}>
+          سجل المواد والمجموعات الطويلة
+        </TabsTrigger>
+      </TabsList>
+      <TabsContent value="long">Records</TabsContent>
+    </Tabs>,
+  );
+  const tab = screen.getByRole("tab");
+  expect(tab).toHaveClass("rounded-2xl", "whitespace-normal");
+  expect(tab).not.toHaveClass("rounded-full");
+  expect(screen.getByText("12")).toHaveClass("rounded-full");
+});

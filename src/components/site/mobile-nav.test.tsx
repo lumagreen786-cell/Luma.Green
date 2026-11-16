@@ -41,6 +41,9 @@ it("enables the server-rendered menu only when its first click can open it", asy
   expect(trigger).toBeEnabled();
   await userEvent.click(trigger);
   expect(screen.getByRole("dialog")).toBeVisible();
+  const navigation = screen.getByRole("navigation", { name: "Main" });
+  expect(navigation).not.toHaveClass("record-sheet", "rounded-full");
+  expect(navigation).toHaveClass("flex-col");
   await userEvent.keyboard("{Escape}");
   expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   expect(trigger).toHaveFocus();

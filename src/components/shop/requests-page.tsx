@@ -98,7 +98,7 @@ function RequestTabs({ city, scope }: { city: string; scope: string }) {
             <TabsTrigger
               key={value}
               value={value}
-              className="min-h-11 flex-none gap-2 rounded-full bg-card px-4 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+              className="min-h-11 flex-none gap-2 rounded-2xl bg-card px-4 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
             >
               {t(`tabs.${value}`)}
               <TabCount count={countFor(requests, value)} />

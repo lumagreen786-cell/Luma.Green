@@ -37,6 +37,13 @@ describe("SiteNav", () => {
     pathname.current = "/";
   });
 
+  it("uses a bounded panel for the horizontal navigation when links wrap", () => {
+    renderNav();
+    const nav = screen.getByRole("navigation", { name: "Main" });
+    expect(nav).toHaveClass("rounded-panel");
+    expect(nav).not.toHaveClass("rounded-full");
+  });
+
   it("is a named landmark with the four places people go", () => {
     renderNav();
 

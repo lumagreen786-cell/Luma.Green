@@ -21,3 +21,8 @@ export function useCanOperate() {
   const role = useContext(PermissionContext);
   return role !== null && ["owner", "admin", "member"].includes(role);
 }
+/** Commercial settings belong to the owner and designated workspace admins. */
+export function useCanManage() {
+  const role = useContext(PermissionContext);
+  return role === "owner" || role === "admin";
+}

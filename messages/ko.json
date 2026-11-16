@@ -4754,7 +4754,7 @@
     "invalidReading": "청구서 또는 계량기의 kWh를 입력하세요. 소수점 아래 세 자리까지 입력할 수 있습니다.",
     "calculate": "추정치 계산",
     "estimate": "계통 전력의 추정 배출량: {amount} kg CO₂",
-    "privateCalculation": "입력한 값은 이 화면에만 남습니다. 결과에는 전력만 포함됩니다.",
+    "privateCalculation": "저장을 선택할 때만 사용량이 저장됩니다. 결과는 전력만 포함합니다.",
     "gridSource": "인도 전력망 배출계수, CEA 2025–26",
     "airQuality": "대기질",
     "roofSolar": "지붕 태양광 확인",
@@ -4764,7 +4764,20 @@
     "locationUnavailable": "적합한 위치를 가져올 수 없습니다.",
     "lookupLimit": "조회 한도에 도달했습니다. 나중에 다시 시도하세요.",
     "airScore": "범용 대기질 지수: 100점 중 {score}점. 높을수록 좋습니다.",
-    "roofEstimate": "예상 지붕 발전량: 패널 {panels}개로 연간 {energy} kWh(직류)."
+    "roofEstimate": "예상 지붕 발전량: 패널 {panels}개로 연간 {energy} kWh(직류).",
+    "footprintLog": {
+      "title": "전력 추정치 저장",
+      "explanation": "검침 기간을 입력하세요. 추정치는 비공개이며 탄소 배출권이나 상쇄가 아닙니다. 겹치는 기간을 합산하지 마세요.",
+      "start": "기간 시작",
+      "end": "기간 종료",
+      "consent": "이 사용량과 추정치를 내 계정에 저장합니다.",
+      "saved": "추정치를 저장했습니다.",
+      "history": "최근 저장된 추정치 30개",
+      "loading": "추정치 불러오는 중…",
+      "empty": "저장된 추정치가 없습니다.",
+      "signIn": "비공개 전력 추정치를 저장하고 보려면 로그인하세요.",
+      "remove": "추정치 삭제"
+    }
   },
   "homeReminder": {
     "title": "외출 알림",
@@ -4778,5 +4791,33 @@
     "time": "알림 시간",
     "add": "캘린더에 추가",
     "calendarHelp": "캘린더 파일을 열어 매일 알림을 설정하세요."
+  },
+  "serviceStatus": {
+    "title": "서비스 상태",
+    "lead": "30초마다 확인합니다.",
+    "website": "웹사이트",
+    "api": "API 및 데이터베이스",
+    "sms": "SMS 코드",
+    "up": "접속 가능",
+    "checking": "확인 중…",
+    "down": "서비스에 연결할 수 없음",
+    "accepted": "공급자가 수락함",
+    "failed": "공급자가 거부함",
+    "unknown": "확인되지 않음",
+    "unavailable": "설정되지 않음",
+    "refresh": "다시 확인",
+    "checkedAt": "확인 시간: {time}",
+    "note": "공급자 수락은 휴대전화 수신을 확인하지 않습니다. SMS 근거는 15분 후 만료됩니다."
+  },
+  "householdDwelling": {
+    "label": "주거 유형 (선택)",
+    "unspecified": "나중에 선택",
+    "independent_home": "단독주택",
+    "apartment": "아파트",
+    "condo": "콘도미니엄",
+    "villa": "빌라",
+    "townhouse": "타운하우스",
+    "farmhouse": "농가 주택",
+    "routeNote": "공동 수거에는 검토된 커뮤니티 코드를 사용하세요."
   }
 }

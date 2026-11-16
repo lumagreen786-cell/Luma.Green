@@ -9,7 +9,7 @@ import { useFormat } from "@/components/app/format";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useCanOperate } from "@/components/workspace/permissions";
+import { useCanManage } from "@/components/workspace/permissions";
 
 import { api } from "../../../convex/_generated/api";
 import { errorCode } from "./bookings";
@@ -36,7 +36,7 @@ export function priceProblem(
  * it, a Save button once it changes, and a plain message when it's too low.
  */
 export function RateRow({ row }: { row: RateCardRow }) {
-  const canOperate = useCanOperate();
+  const canManage = useCanManage();
   const t = useTranslations("shop");
   const workspace = useTranslations("workspace");
   const format = useFormat();
@@ -62,7 +62,7 @@ export function RateRow({ row }: { row: RateCardRow }) {
 
   async function onSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!isDirty) return;
+    if (!canManage || !isDirty) return;
     if (paise === null || priceProblem(text, row.floorPaise)) {
       input.current?.focus();
       return;
@@ -116,7 +116,7 @@ export function RateRow({ row }: { row: RateCardRow }) {
               {t("prices.prefix")}
             </span>
             <Input
-              disabled={!canOperate}
+              disabled={!canManage}
               ref={input}
               id={id}
               inputMode="decimal"
@@ -153,7 +153,7 @@ export function RateRow({ row }: { row: RateCardRow }) {
               type="submit"
               size="lg"
               className="h-12 px-5 text-base"
-              disabled={!canOperate || isSaving || problem !== null}
+              disabled={!canManage || isSaving || problem !== null}
             >
               {t(isSaving ? "prices.saving" : "prices.save")}
             </Button>

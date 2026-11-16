@@ -24,7 +24,7 @@ function Chip({
       aria-pressed={isPressed}
       onClick={onPress}
       className={cn(
-        "h-auto min-h-11 max-w-full gap-2 rounded-full border border-transparent px-4 py-2 text-sm break-words whitespace-normal",
+        "h-auto min-h-11 max-w-full gap-2 rounded-2xl border border-transparent px-4 py-2 text-sm break-words whitespace-normal",
         isPressed
           ? "bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground"
           : "bg-card text-muted-foreground hover:bg-muted hover:text-foreground",

@@ -90,7 +90,7 @@ function RequestForm() {
               <Label
                 key={option}
                 htmlFor={`request-${option}`}
-                className="min-h-12 min-w-0 cursor-pointer gap-4 rounded-full bg-muted/50 px-4 py-3 leading-relaxed font-normal has-[[aria-checked=true]]:bg-primary has-[[aria-checked=true]]:text-primary-foreground"
+                className="min-h-12 min-w-0 cursor-pointer gap-4 rounded-2xl bg-muted/50 px-4 py-3 leading-relaxed font-normal has-[[aria-checked=true]]:bg-primary has-[[aria-checked=true]]:text-primary-foreground"
               >
                 <RadioGroupItem id={`request-${option}`} value={option} />
                 {t(option)}

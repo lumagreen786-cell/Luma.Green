@@ -36,7 +36,7 @@ export function WeekEarnings({ earnings }: { earnings: Board["earnings"] }) {
       </p>
       <Link
         href="/app/impact"
-        className="col-start-2 row-span-2 row-start-2 inline-flex min-h-11 flex-wrap items-center justify-center gap-1 self-start rounded-full bg-primary px-4 text-sm font-medium text-primary-foreground outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+        className="col-start-2 row-span-2 row-start-2 inline-flex min-h-11 flex-wrap items-center justify-center gap-1 self-start rounded-2xl bg-primary px-4 text-sm font-medium text-primary-foreground outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
       >
         {t("all")}
         <ChevronRightIcon aria-hidden className="size-4 rtl:rotate-180" />

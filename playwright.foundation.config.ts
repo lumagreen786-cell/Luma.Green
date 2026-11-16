@@ -22,6 +22,7 @@ export default defineConfig({
     "foundation-handover-phone.spec.ts",
     "foundation-removal-phone.spec.ts",
     "foundation-household-access-phone.spec.ts",
+    "foundation-household-footprint-phone.spec.ts",
   ],
   fullyParallel: false,
   workers: 1,
