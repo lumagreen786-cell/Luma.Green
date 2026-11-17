@@ -52,6 +52,15 @@ for (const { locale, copy } of [
         name: copy.nav.label,
         exact: true,
       });
+      const navigationStyle = await navigation.evaluate((element) => {
+        const style = getComputedStyle(element);
+        return {
+          radius: style.borderTopLeftRadius,
+          background: style.backgroundColor,
+        };
+      });
+      expect(navigationStyle.radius).toBe("0px");
+      expect(navigationStyle.background).toBe("rgba(0, 0, 0, 0)");
       const navigationLinks = await navigation.getByRole("link").all();
       for (const link of navigationLinks) {
         const text = await link.evaluate((element) => {

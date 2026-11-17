@@ -184,7 +184,7 @@ function Chips({ items }: { items: readonly string[] }) {
       {items.map((item) => (
         <li
           key={item}
-          className="rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium"
+          className="rounded-xl bg-muted px-2.5 py-0.5 text-xs font-medium"
         >
           {item}
         </li>

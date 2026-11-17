@@ -26,6 +26,8 @@ import {
   vWeekday,
 } from "./lib/drafts";
 import { geocodingTables } from "./lib/geocodingSchema";
+import { vDwellingType } from "./lib/householdDwelling";
+import { householdFootprintTables } from "./lib/householdFootprintSchema";
 import {
   vHandlingClass,
   vProcessKind,
@@ -94,6 +96,7 @@ const timestamps = {
 };
 
 export default defineSchema({
+  ...householdFootprintTables,
   ...paperTables,
   ...paperAssistTables,
   ...businessSubscriptionTables,
@@ -695,6 +698,7 @@ export default defineSchema({
   }).index("by_booking", ["bookingId"]),
 
   bookings: defineTable({
+    dwellingType: v.optional(vDwellingType),
     apartmentRouteId: v.optional(v.id("apartmentCollectionRoutes")),
     sharedWithFamily: v.optional(v.boolean()),
     recurringCollectionId: v.optional(v.id("recurringCollections")),
@@ -795,6 +799,13 @@ export default defineSchema({
     ),
     createdAt: v.number(),
   }).index("by_booking", ["bookingId"]),
+
+  /** Aggregate provider observation only: no recipient, OTP or provider payload. */
+  serviceHealth: defineTable({
+    service: v.literal("sms"),
+    accepted: v.boolean(),
+    observedAt: v.number(),
+  }).index("by_service", ["service"]),
 
   /** Internal SMS send limits. Phone numbers are hashed before insertion. */
   smsRateLimits: defineTable({

@@ -17,11 +17,13 @@ export function SiteNav({
   onNavigate,
   tone = "default",
   dashboard = false,
+  layout = "horizontal",
 }: {
   className?: string;
   onNavigate?: () => void;
   tone?: "default" | "forest";
   dashboard?: boolean;
+  layout?: "horizontal" | "stacked";
 }) {
   const t = useTranslations("nav");
   const pathname = usePathname();
@@ -30,7 +32,10 @@ export function SiteNav({
     <nav
       aria-label={t("label")}
       className={cn(
-        "record-sheet flex-wrap gap-1 rounded-full p-1.5 shadow-panel",
+        "gap-1",
+        layout === "horizontal"
+          ? "record-sheet flex-wrap rounded-panel p-1.5 shadow-panel"
+          : "flex flex-col",
         className,
       )}
     >
@@ -51,7 +56,8 @@ export function SiteNav({
             aria-current={isCurrent ? "page" : undefined}
             onClick={onNavigate}
             className={cn(
-              "flex min-h-11 max-w-full items-center rounded-full px-3 py-2 text-sm font-medium break-words whitespace-normal text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50",
+              "flex min-h-11 max-w-full items-center px-3 py-2 text-sm font-medium break-words whitespace-normal text-muted-foreground transition-colors outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50",
+              "rounded-xl",
               tone === "forest" &&
                 "text-foreground hover:bg-muted focus-visible:ring-ring",
               isCurrent &&

@@ -1,5 +1,9 @@
 import { kgToGrams } from "../../../convex/lib/chain";
 import {
+  type DwellingType,
+  isDwellingType,
+} from "../../../convex/lib/householdDwelling";
+import {
   BASKET_MAX_ITEMS,
   type BasketItem,
   isValidAddress,
@@ -22,6 +26,7 @@ export type SellStep = (typeof SELL_STEPS)[number];
 export type Mode = "pickup" | "dropoff";
 
 export interface SellDraft {
+  dwellingType?: DwellingType;
   apartmentPickup?: boolean;
   items: BasketItem[];
   mode: Mode;
@@ -243,6 +248,9 @@ export function parseDraft(raw: string | null): SellDraft {
   const slotWindow = SLOT_WINDOWS.find((window) => window === value.slotWindow);
   return {
     ...(value.apartmentPickup === true && { apartmentPickup: true }),
+    ...(isDwellingType(value.dwellingType) && {
+      dwellingType: value.dwellingType,
+    }),
     items: parseItems(value.items),
     mode: value.mode === "dropoff" ? "dropoff" : "pickup",
     shopId: optionalText(value.shopId),

@@ -15,9 +15,9 @@ import { WorkspacePermissions } from "./permissions";
 
 vi.mock("convex/react", () => ({ useMutation: () => vi.fn() }));
 
-it("removes pickup actions and disables rate editing when a member becomes a viewer", () => {
+it("revokes rate editing before collection rights as an admin becomes a member then viewer", () => {
   const content = (
-    <NextIntlClientProvider locale="en" messages={en}>
+    <NextIntlClientProvider locale="en" messages={en} timeZone="Asia/Kolkata">
       <AcceptDecline bookingId={"test-booking" as Id<"bookings">} />
       <StartTripButton bookingId={"test-booking" as Id<"bookings">} />
       <ul>
@@ -35,7 +35,7 @@ it("removes pickup actions and disables rate editing when a member becomes a vie
     </NextIntlClientProvider>
   );
   const view = render(
-    <WorkspacePermissions membershipRole="member">
+    <WorkspacePermissions membershipRole="admin">
       {content}
     </WorkspacePermissions>,
   );
@@ -46,6 +46,18 @@ it("removes pickup actions and disables rate editing when a member becomes a vie
     screen.getByRole("button", { name: en.shop.requests.startTrip }),
   ).toBeVisible();
   expect(screen.getByRole("textbox")).toBeEnabled();
+  view.rerender(
+    <WorkspacePermissions membershipRole="member">
+      {content}
+    </WorkspacePermissions>,
+  );
+  expect(screen.getByRole("textbox")).toBeDisabled();
+  expect(
+    screen.getByRole("button", { name: en.shop.requests.accept }),
+  ).toBeVisible();
+  expect(
+    screen.getByRole("button", { name: en.shop.requests.startTrip }),
+  ).toBeVisible();
   view.rerender(
     <WorkspacePermissions membershipRole="viewer">
       {content}

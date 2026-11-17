@@ -74,7 +74,7 @@ export async function HomeHero() {
             <RecyclingIllustration />
             <div className="absolute inset-0 bg-image-scrim/45" />
             <div className="relative flex h-full min-h-64 flex-col justify-end gap-4 p-6 text-white sm:min-h-80 sm:p-8">
-              <span className="w-fit rounded-full border border-white/30 bg-black/20 px-3 py-1.5 text-sm text-white">
+              <span className="w-fit max-w-full rounded-xl border border-white/30 bg-black/20 px-3 py-1.5 text-sm text-white">
                 {nav("sellScrap")}
               </span>
               <p className="max-w-sm font-display text-3xl leading-tight font-normal text-white sm:text-4xl">

@@ -18,6 +18,7 @@ import { requireCollectionCapacity } from "./lib/collectionScheduling";
 import { beginDispatch, isPickupLocationEligible } from "./lib/dispatch";
 import { vSaathiTime } from "./lib/drafts";
 import { canonicalCity } from "./lib/geography";
+import { vDwellingType } from "./lib/householdDwelling";
 import { canFamilyRead } from "./lib/householdFamily";
 import { preparePhotoRequest } from "./lib/householdPhotos";
 import {
@@ -377,6 +378,7 @@ async function validateApartmentBooking(
 
 export const book = mutation({
   args: {
+    dwellingType: v.optional(vDwellingType),
     adultConfirmed: v.literal(true),
     apartmentRouteId: v.optional(v.id("apartmentCollectionRoutes")),
     photoIds: v.optional(v.array(v.id("householdPhotos"))),
@@ -455,6 +457,7 @@ export const book = mutation({
         : undefined;
     const token = await uniqueToken(ctx);
     const bookingId = await ctx.db.insert("bookings", {
+      dwellingType: args.mode === "pickup" ? args.dwellingType : undefined,
       token,
       apartmentRouteId: args.apartmentRouteId,
       requestKind,

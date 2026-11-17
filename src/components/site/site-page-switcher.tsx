@@ -19,7 +19,12 @@ export function SitePageSwitcher() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button size="icon" variant="outline" aria-label={t("label")}>
+        <Button
+          size="icon"
+          variant="ghost"
+          className="rounded-xl bg-transparent text-foreground"
+          aria-label={t("label")}
+        >
           <LayoutGrid aria-hidden />
         </Button>
       </DropdownMenuTrigger>

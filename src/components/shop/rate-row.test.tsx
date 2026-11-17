@@ -4,6 +4,9 @@ import { useMutation } from "convex/react";
 import { ConvexError } from "convex/values";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+import { WorkspacePermissions } from "@/components/workspace/permissions";
+
+import type { WorkspaceRole } from "../../../convex/lib/workspaceRoles";
 import { priceProblem, RateRow } from "./rate-row";
 import { NEWSPAPER, NOW, renderWithIntl } from "./test-helpers";
 import type { RateCardRow } from "./types";
@@ -36,11 +39,16 @@ const NEWSPAPER_ROW: RateCardRow = {
   marketDate: "2026-09-29",
 };
 
-function renderRow(row: RateCardRow = NEWSPAPER_ROW) {
+function renderRow(
+  row: RateCardRow = NEWSPAPER_ROW,
+  role: WorkspaceRole | null = "owner",
+) {
   renderWithIntl(
-    <ul>
-      <RateRow row={row} />
-    </ul>,
+    <WorkspacePermissions membershipRole={role}>
+      <ul>
+        <RateRow row={row} />
+      </ul>
+    </WorkspacePermissions>,
   );
   return screen.getByRole("textbox", {
     name: "Your price for Newspaper, in rupees per kg",
@@ -59,6 +67,27 @@ describe("priceProblem", () => {
 });
 
 describe("RateRow", () => {
+  it.each(["owner", "admin", "member", "viewer", null] as const)(
+    "uses the current %s role to limit rate editing",
+    (role) => {
+      const input = renderRow(NEWSPAPER_ROW, role);
+      if (role === "owner" || role === "admin") expect(input).toBeEnabled();
+      else expect(input).toBeDisabled();
+    },
+  );
+
+  it("cannot submit an expired rate renewal as field staff", () => {
+    const input = renderRow(
+      { ...NEWSPAPER_ROW, offerExpiresAt: NOW.getTime() - 1 },
+      "member",
+    );
+    expect(input).toBeDisabled();
+    const form = input.closest("form");
+    if (!form) throw new Error("Missing rate form");
+    fireEvent.submit(form);
+    expect(setRate).not.toHaveBeenCalled();
+  });
+
   it("renews an unchanged offer after an open screen crosses its expiry", async () => {
     vi.useFakeTimers();
     vi.setSystemTime(NOW);
@@ -141,7 +170,3 @@ describe("RateRow", () => {
     ).not.toBeInTheDocument();
   });
 });
-
-vi.mock("@/components/workspace/permissions", () => ({
-  useCanOperate: () => true,
-}));

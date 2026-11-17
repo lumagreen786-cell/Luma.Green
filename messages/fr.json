@@ -4754,7 +4754,7 @@
     "invalidReading": "Saisissez les kWh de votre facture ou compteur. Utilisez jusqu’à trois décimales.",
     "calculate": "Calculer l’estimation",
     "estimate": "Émissions estimées du réseau : {amount} kg de CO₂",
-    "privateCalculation": "Votre relevé reste sur cet écran. Le résultat couvre uniquement l’électricité.",
+    "privateCalculation": "Votre relevé est enregistré uniquement si vous choisissez Enregistrer. Le résultat couvre seulement l’électricité.",
     "gridSource": "Facteur du réseau indien, CEA 2025–26",
     "airQuality": "Qualité de l’air",
     "roofSolar": "Évaluer le potentiel solaire du toit",
@@ -4764,7 +4764,20 @@
     "locationUnavailable": "Impossible d’obtenir une position adaptée.",
     "lookupLimit": "Limite de requêtes atteinte. Réessayez plus tard.",
     "airScore": "Indice universel de qualité de l’air : {score} sur 100. Plus il est élevé, mieux c’est.",
-    "roofEstimate": "Production modélisée du toit : {energy} kWh/an en courant continu avec {panels} panneaux."
+    "roofEstimate": "Production modélisée du toit : {energy} kWh/an en courant continu avec {panels} panneaux.",
+    "footprintLog": {
+      "title": "Enregistrer une estimation électrique",
+      "explanation": "Indiquez la période du relevé. Les estimations sont privées, sans crédits ni compensation carbone. Ne cumulez pas les périodes qui se chevauchent.",
+      "start": "Début de la période",
+      "end": "Fin de la période",
+      "consent": "Enregistrer ce relevé et son estimation dans mon compte.",
+      "saved": "Estimation enregistrée.",
+      "history": "30 dernières estimations enregistrées",
+      "loading": "Chargement des estimations…",
+      "empty": "Aucune estimation enregistrée.",
+      "signIn": "Connectez-vous pour enregistrer et consulter vos estimations électriques privées.",
+      "remove": "Supprimer l’estimation"
+    }
   },
   "homeReminder": {
     "title": "Rappel au départ du domicile",
@@ -4778,5 +4791,33 @@
     "time": "Heure du rappel",
     "add": "Ajouter au calendrier",
     "calendarHelp": "Ouvrez le fichier de calendrier pour programmer une alerte quotidienne."
+  },
+  "serviceStatus": {
+    "title": "État du service",
+    "lead": "Vérification toutes les 30 secondes.",
+    "website": "Site web",
+    "api": "API et base de données",
+    "sms": "Codes SMS",
+    "up": "Accessible",
+    "checking": "Vérification…",
+    "down": "Service inaccessible",
+    "accepted": "Accepté par le fournisseur",
+    "failed": "Acceptation non confirmée",
+    "unknown": "Non vérifié",
+    "unavailable": "Non configuré",
+    "refresh": "Vérifier à nouveau",
+    "checkedAt": "Vérifié à {time}",
+    "note": "L’acceptation du fournisseur ne confirme pas la réception sur le téléphone. La preuve SMS expire après 15 minutes."
+  },
+  "householdDwelling": {
+    "label": "Type de logement (facultatif)",
+    "unspecified": "Choisir plus tard",
+    "independent_home": "Maison individuelle",
+    "apartment": "Appartement",
+    "condo": "Copropriété",
+    "villa": "Villa individuelle",
+    "townhouse": "Maison mitoyenne",
+    "farmhouse": "Ferme",
+    "routeNote": "Pour la collecte collective, utilisez le code de résidence vérifié."
   }
 }

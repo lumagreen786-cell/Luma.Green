@@ -76,7 +76,7 @@ export function OtherRoleLinks({ current }: { current: HelpRole }) {
           <Link
             href={`/help/${role}`}
             className={cn(
-              "inline-flex min-h-11 items-center rounded-full bg-card px-4 text-sm font-medium outline-none",
+              "inline-flex min-h-11 items-center rounded-xl bg-card px-4 text-sm font-medium outline-none",
               "hover:border-primary hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50",
             )}
           >

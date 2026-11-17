@@ -107,7 +107,7 @@ export function FormJourney<T extends FieldValues>({
           <li
             key={item.title}
             aria-current={index === stage ? "step" : undefined}
-            className={`flex min-h-11 max-w-full min-w-0 items-center gap-2 rounded-full px-3 py-2 text-sm ${index === stage ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"}`}
+            className={`flex min-h-11 max-w-full min-w-0 items-center gap-2 rounded-2xl px-3 py-2 text-sm ${index === stage ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"}`}
           >
             <span
               aria-hidden

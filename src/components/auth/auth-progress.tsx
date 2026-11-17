@@ -10,7 +10,7 @@ export function AuthProgress({ step }: { step: "phone" | "code" }) {
     <ol className="grid grid-cols-[minmax(0,1fr)_1rem_minmax(0,1fr)] items-center gap-2 text-sm">
       <li
         aria-current={step === "phone" ? "step" : undefined}
-        className="flex min-w-0 items-center justify-center gap-2 rounded-full bg-primary px-3 py-2 font-medium wrap-anywhere text-primary-foreground"
+        className="flex min-w-0 items-center justify-center gap-2 rounded-2xl bg-primary px-3 py-2 font-medium wrap-anywhere text-primary-foreground"
       >
         {step === "code" ? (
           <CheckIcon aria-hidden className="size-4 shrink-0" />
@@ -26,7 +26,7 @@ export function AuthProgress({ step }: { step: "phone" | "code" }) {
       <li
         aria-current={step === "code" ? "step" : undefined}
         className={cn(
-          "min-w-0 rounded-full px-3 py-2 text-center wrap-anywhere",
+          "min-w-0 rounded-2xl px-3 py-2 text-center wrap-anywhere",
           step === "code"
             ? "bg-primary font-medium text-primary-foreground"
             : "text-muted-foreground",

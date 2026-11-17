@@ -645,6 +645,17 @@ async function runBatch(
   user: CleanupUser,
 ): Promise<BatchResult> {
   switch (r.phase) {
+    case 26: {
+      const page = await ctx.db
+        .query("householdFootprints")
+        .withIndex("by_profile_created", (q) => q.eq("profileId", r.profileId))
+        .paginate(pagination);
+      for (const row of page.page) await ctx.db.delete(row._id);
+      return {
+        done: page.isDone,
+        cursor: page.isDone ? undefined : page.continueCursor,
+      };
+    }
     case 23:
     case 24:
     case 25: {
@@ -738,7 +749,7 @@ export const cleanup = internalMutation({
       pagination = { cursor, numItems: BATCH },
       now = Date.now();
     try {
-      if (r.phase >= 26) {
+      if (r.phase >= 27) {
         await ctx.db.patch(r._id, {
           state: "restricted_review",
           familyPhoneHash: undefined,

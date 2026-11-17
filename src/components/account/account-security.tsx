@@ -177,7 +177,7 @@ function SecurityForm() {
             className="mt-0.5 size-5 shrink-0 text-foreground"
           />
           <span className="min-w-0 font-medium">{t("setupTitle")}</span>
-          <span className="rounded-full bg-muted px-3 py-2 text-sm text-muted-foreground">
+          <span className="rounded-xl bg-muted px-3 py-2 text-sm text-muted-foreground">
             {t(isEnabled ? "enabled" : "disabled")}
           </span>
         </div>

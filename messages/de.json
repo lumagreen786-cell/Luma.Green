@@ -4754,7 +4754,7 @@
     "invalidReading": "Geben Sie den kWh-Wert der Rechnung oder des Zählers ein. Verwenden Sie bis zu drei Nachkommastellen.",
     "calculate": "Schätzung berechnen",
     "estimate": "Geschätzte Stromemissionen: {amount} kg CO₂",
-    "privateCalculation": "Ihre Eingabe bleibt auf diesem Bildschirm. Das Ergebnis gilt nur für Strom.",
+    "privateCalculation": "Die Ablesung wird nur gespeichert, wenn Sie Speichern wählen. Das Ergebnis umfasst nur Strom.",
     "gridSource": "Stromnetzfaktor für Indien, CEA 2025–26",
     "airQuality": "Luftqualität",
     "roofSolar": "Solardach prüfen",
@@ -4764,7 +4764,20 @@
     "locationUnavailable": "Es konnte kein geeigneter Standort ermittelt werden.",
     "lookupLimit": "Abfragelimit erreicht. Versuchen Sie es später erneut.",
     "airScore": "Universeller Luftqualitätsindex: {score} von 100. Höher ist besser.",
-    "roofEstimate": "Modellierter Dachertrag: {energy} kWh/Jahr (DC) mit {panels} Modulen."
+    "roofEstimate": "Modellierter Dachertrag: {energy} kWh/Jahr (DC) mit {panels} Modulen.",
+    "footprintLog": {
+      "title": "Stromschätzung speichern",
+      "explanation": "Zeitraum der Ablesung angeben. Schätzungen sind privat, keine CO₂-Zertifikate oder Kompensationen. Überlappende Zeiträume nicht addieren.",
+      "start": "Beginn des Zeitraums",
+      "end": "Ende des Zeitraums",
+      "consent": "Diese Ablesung und Schätzung in meinem Konto speichern.",
+      "saved": "Schätzung gespeichert.",
+      "history": "Letzte 30 gespeicherte Schätzungen",
+      "loading": "Schätzungen werden geladen…",
+      "empty": "Keine gespeicherten Schätzungen.",
+      "signIn": "Anmelden, um private Stromschätzungen zu speichern und anzusehen.",
+      "remove": "Schätzung entfernen"
+    }
   },
   "homeReminder": {
     "title": "Erinnerung beim Verlassen des Hauses",
@@ -4778,5 +4791,33 @@
     "time": "Uhrzeit der Erinnerung",
     "add": "Zum Kalender hinzufügen",
     "calendarHelp": "Öffnen Sie die Kalenderdatei für eine tägliche Erinnerung."
+  },
+  "serviceStatus": {
+    "title": "Dienststatus",
+    "lead": "Prüfung alle 30 Sekunden.",
+    "website": "Internetauftritt",
+    "api": "API und Datenbank",
+    "sms": "SMS-Codes",
+    "up": "Erreichbar",
+    "checking": "Wird geprüft…",
+    "down": "Dienst nicht erreichbar",
+    "accepted": "Vom Anbieter angenommen",
+    "failed": "Annahme nicht bestätigt",
+    "unknown": "Nicht bestätigt",
+    "unavailable": "Nicht eingerichtet",
+    "refresh": "Erneut prüfen",
+    "checkedAt": "Geprüft um {time}",
+    "note": "Die Annahme durch den Anbieter bestätigt keinen Empfang am Telefon. Der SMS-Nachweis verfällt nach 15 Minuten."
+  },
+  "householdDwelling": {
+    "label": "Wohnform (optional)",
+    "unspecified": "Später wählen",
+    "independent_home": "Einfamilienhaus",
+    "apartment": "Wohnung",
+    "condo": "Eigentumswohnung",
+    "villa": "Freistehende Villa",
+    "townhouse": "Reihenhaus",
+    "farmhouse": "Bauernhaus",
+    "routeNote": "Für die Gemeinschaftsabholung den geprüften Gemeinschaftscode verwenden."
   }
 }

@@ -65,7 +65,7 @@ export async function HomeResourceGrid() {
                 </p>
                 <Link
                   href={resource.href}
-                  className="mt-auto flex min-h-11 items-center justify-between gap-3 rounded-full border border-border px-4 py-2 text-sm font-medium text-foreground outline-none hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring"
+                  className="mt-auto flex min-h-11 items-center justify-between gap-3 rounded-2xl border border-border px-4 py-2 text-sm font-medium text-foreground outline-none hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring"
                 >
                   <span>{resource.action}</span>
                   <ArrowUpRight

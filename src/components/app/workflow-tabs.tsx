@@ -42,7 +42,7 @@ export function WorkflowTabs({
               count={
                 item.count === undefined ? undefined : format.number(item.count)
               }
-              className="min-h-11 flex-none gap-2 rounded-full bg-card px-4 shadow-none data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-none"
+              className="min-h-11 flex-none gap-2 rounded-2xl bg-card px-4 shadow-none data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-none"
             >
               {item.label}
             </TabsTrigger>

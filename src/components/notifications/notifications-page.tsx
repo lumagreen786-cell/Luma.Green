@@ -89,7 +89,7 @@ function DeviceSettings() {
         </p>
         <p
           role={failed || device?.status === "error" ? "alert" : "status"}
-          className="mt-2 inline-flex rounded-full bg-card px-3 py-1 text-xs font-medium text-foreground"
+          className="mt-2 inline-flex rounded-xl bg-card px-3 py-1 text-xs font-medium text-foreground"
         >
           {status}
         </p>

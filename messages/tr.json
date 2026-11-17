@@ -4754,7 +4754,7 @@
     "invalidReading": "Fatura veya sayaçtaki kWh değerini girin. En fazla üç ondalık basamak kullanın.",
     "calculate": "Tahmini hesapla",
     "estimate": "Tahmini şebeke emisyonu: {amount} kg CO₂",
-    "privateCalculation": "Sayaç değeriniz bu ekranda kalır. Sonuç yalnızca elektrik tüketimini kapsar.",
+    "privateCalculation": "Okumanız yalnızca Kaydet seçtiğinizde kaydedilir. Sonuç sadece elektriği kapsar.",
     "gridSource": "Hindistan şebeke katsayısı, CEA 2025–26",
     "airQuality": "Hava kalitesi",
     "roofSolar": "Çatı güneş enerjisi kontrolü",
@@ -4764,7 +4764,20 @@
     "locationUnavailable": "Uygun konum alınamadı.",
     "lookupLimit": "Sorgu sınırına ulaşıldı. Daha sonra tekrar deneyin.",
     "airScore": "Evrensel hava kalitesi endeksi: 100 üzerinden {score}. Yüksek değer daha iyidir.",
-    "roofEstimate": "Tahmini çatı üretimi: {panels} panel ile yılda {energy} kWh (DC)."
+    "roofEstimate": "Tahmini çatı üretimi: {panels} panel ile yılda {energy} kWh (DC).",
+    "footprintLog": {
+      "title": "Elektrik tahminini kaydet",
+      "explanation": "Okuma dönemini girin. Tahminler özeldir; karbon kredisi veya denkleştirme değildir. Çakışan dönemleri toplamayın.",
+      "start": "Dönem başlangıcı",
+      "end": "Dönem sonu",
+      "consent": "Bu okumayı ve tahmini hesabıma kaydet.",
+      "saved": "Tahmin kaydedildi.",
+      "history": "Son 30 kayıtlı tahmin",
+      "loading": "Tahminler yükleniyor…",
+      "empty": "Kayıtlı tahmin yok.",
+      "signIn": "Özel elektrik tahminlerini kaydetmek ve görmek için giriş yapın.",
+      "remove": "Tahmini kaldır"
+    }
   },
   "homeReminder": {
     "title": "Evden çıkış hatırlatıcısı",
@@ -4778,5 +4791,33 @@
     "time": "Hatırlatma saati",
     "add": "Takvime ekle",
     "calendarHelp": "Günlük uyarı ayarlamak için takvim dosyasını açın."
+  },
+  "serviceStatus": {
+    "title": "Hizmet durumu",
+    "lead": "Her 30 saniyede kontrol.",
+    "website": "Web sitesi",
+    "api": "API ve veritabanı",
+    "sms": "SMS kodları",
+    "up": "Erişilebilir",
+    "checking": "Kontrol ediliyor…",
+    "down": "Hizmete erişilemiyor",
+    "accepted": "Sağlayıcı kabul etti",
+    "failed": "Kabul onaylanmadı",
+    "unknown": "Doğrulanmadı",
+    "unavailable": "Yapılandırılmadı",
+    "refresh": "Yeniden kontrol et",
+    "checkedAt": "Kontrol saati: {time}",
+    "note": "Sağlayıcının kabulü telefona teslim edildiğini doğrulamaz. SMS kanıtı 15 dakika sonra geçersiz olur."
+  },
+  "householdDwelling": {
+    "label": "Konut türü (isteğe bağlı)",
+    "unspecified": "Sonra seç",
+    "independent_home": "Müstakil ev",
+    "apartment": "Daire",
+    "condo": "Kat mülkiyetli konut",
+    "villa": "Müstakil villa",
+    "townhouse": "Sıra ev",
+    "farmhouse": "Çiftlik evi",
+    "routeNote": "Topluluk toplaması için incelenmiş topluluk kodunuzu kullanın."
   }
 }

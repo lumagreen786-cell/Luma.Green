@@ -4754,7 +4754,7 @@
     "invalidReading": "Nhập số kWh trên hóa đơn hoặc công tơ. Dùng tối đa ba chữ số thập phân.",
     "calculate": "Tính mức ước tính",
     "estimate": "Phát thải ước tính từ điện lưới: {amount} kg CO₂",
-    "privateCalculation": "Chỉ số của bạn chỉ hiển thị trên màn hình này. Kết quả chỉ tính điện.",
+    "privateCalculation": "Chỉ số chỉ được lưu khi bạn chọn Lưu. Kết quả chỉ bao gồm điện.",
     "gridSource": "Hệ số điện lưới Ấn Độ, CEA 2025–26",
     "airQuality": "Chất lượng không khí",
     "roofSolar": "Kiểm tra điện mặt trời trên mái",
@@ -4764,7 +4764,20 @@
     "locationUnavailable": "Không lấy được vị trí phù hợp.",
     "lookupLimit": "Đã đến giới hạn tra cứu. Hãy thử lại sau.",
     "airScore": "Chỉ số chất lượng không khí phổ quát: {score} trên 100. Càng cao càng tốt.",
-    "roofEstimate": "Sản lượng ước tính trên mái: {energy} kWh/năm (DC) với {panels} tấm pin."
+    "roofEstimate": "Sản lượng ước tính trên mái: {energy} kWh/năm (DC) với {panels} tấm pin.",
+    "footprintLog": {
+      "title": "Lưu ước tính điện",
+      "explanation": "Nhập kỳ ghi chỉ số. Ước tính là riêng tư, không phải tín chỉ hay bù trừ carbon. Không cộng các kỳ trùng nhau.",
+      "start": "Bắt đầu kỳ",
+      "end": "Kết thúc kỳ",
+      "consent": "Lưu chỉ số và ước tính này vào tài khoản của tôi.",
+      "saved": "Đã lưu ước tính.",
+      "history": "30 ước tính đã lưu gần nhất",
+      "loading": "Đang tải ước tính…",
+      "empty": "Chưa có ước tính đã lưu.",
+      "signIn": "Đăng nhập để lưu và xem ước tính điện riêng tư.",
+      "remove": "Xóa ước tính"
+    }
   },
   "homeReminder": {
     "title": "Nhắc nhở khi rời nhà",
@@ -4778,5 +4791,33 @@
     "time": "Giờ nhắc",
     "add": "Thêm vào lịch",
     "calendarHelp": "Mở tệp lịch để thiết lập thông báo hằng ngày."
+  },
+  "serviceStatus": {
+    "title": "Trạng thái dịch vụ",
+    "lead": "Kiểm tra mỗi 30 giây.",
+    "website": "Trang web",
+    "api": "API và cơ sở dữ liệu",
+    "sms": "Mã SMS",
+    "up": "Truy cập được",
+    "checking": "Đang kiểm tra…",
+    "down": "Không thể truy cập dịch vụ",
+    "accepted": "Nhà cung cấp đã nhận",
+    "failed": "Chưa xác nhận tiếp nhận",
+    "unknown": "Chưa xác minh",
+    "unavailable": "Chưa cấu hình",
+    "refresh": "Kiểm tra lại",
+    "checkedAt": "Đã kiểm tra lúc {time}",
+    "note": "Nhà cung cấp chấp nhận không xác nhận điện thoại đã nhận. Bằng chứng SMS hết hạn sau 15 phút."
+  },
+  "householdDwelling": {
+    "label": "Loại nhà (không bắt buộc)",
+    "unspecified": "Chọn sau",
+    "independent_home": "Nhà riêng",
+    "apartment": "Căn hộ",
+    "condo": "Chung cư sở hữu",
+    "villa": "Biệt thự",
+    "townhouse": "Nhà liền kề",
+    "farmhouse": "Nhà trang trại",
+    "routeNote": "Để thu gom cộng đồng, hãy dùng mã cộng đồng đã được xét duyệt."
   }
 }

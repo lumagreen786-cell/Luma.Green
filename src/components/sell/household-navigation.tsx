@@ -30,7 +30,7 @@ export function HouseholdNavigation() {
             <Link
               href={href}
               aria-current={pathname === href ? "page" : undefined}
-              className="flex min-h-12 min-w-0 items-center justify-center gap-2 rounded-full px-4 py-2 text-center text-sm font-medium outline-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset aria-[current=page]:bg-primary aria-[current=page]:text-primary-foreground"
+              className="flex min-h-12 min-w-0 items-center justify-center gap-2 rounded-2xl px-4 py-2 text-center text-sm font-medium outline-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset aria-[current=page]:bg-primary aria-[current=page]:text-primary-foreground"
             >
               <Icon aria-hidden className="size-5 shrink-0" />
               <span className="break-words">{t(label)}</span>

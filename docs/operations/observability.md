@@ -302,3 +302,30 @@ Current primary references for the SDK controls are
 and [Sentry filtering](https://docs.sentry.io/platforms/javascript/guides/nextjs/configuration/filtering/).
 SDK upgrades must retain the privacy regression tests; current provider defaults
 can differ from the installed version.
+
+## Public service status — 16 November 2026
+
+`/status` is public and refreshes every 30 seconds. The read-only Convex HTTP
+endpoint `/health` checks database access and returns an aggregate SMS result.
+It does not call the SMS provider. `accepted` means the provider accepted a
+recent request, not that a handset received it. After 15 minutes the result is
+`unknown`. Missing settings, unconfirmed acceptance and an unreachable API are
+separate states. Unconfirmed acceptance can mean rejection, timeout or an unreadable
+response; it does not prove explicit rejection or non-delivery. The page stays
+usable during a backend outage if the web host works.
+A complete web-host outage also prevents this page loading; an external uptime
+monitor can probe the independent Convex endpoint. No external monitor or alert
+subscription is activated by this change.
+
+`serviceHealth` stores one aggregate SMS observation: service name, acceptance
+flag and time. It stores no phone, OTP, provider body or message ID. The internal
+SMS action records the result; the sign-in endpoint waits for provider
+acceptance and returns 503 on failure. Existing request limits still apply;
+ambiguous sends are never retried automatically.
+
+PostHog continues to use the existing consent-based public page view. Polls
+and provider results add no analytics event and no new Sentry capture: public
+poll failures are expected availability states, while existing sanitized error
+monitoring remains in place. Never send provider payloads or SMS arguments to
+telemetry. Native shells use the same hosted page; no native module, permission
+or release change is needed.

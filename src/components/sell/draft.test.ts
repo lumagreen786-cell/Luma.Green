@@ -29,6 +29,20 @@ const ready: SellDraft = {
   name: "Priya",
 };
 
+it("retains a supported home type without trusting arbitrary stored types or changing routing", () => {
+  const restored = parseDraft(
+    JSON.stringify({ ...ready, dwellingType: "condo" }),
+  );
+  expect(restored.dwellingType).toBe("condo");
+  expect(restored.city).toBeUndefined();
+  expect(restored.apartmentPickup).toBeUndefined();
+  expect(
+    parseDraft(JSON.stringify({ ...ready, dwellingType: "hotel" }))
+      .dwellingType,
+  ).toBeUndefined();
+  expect(parseDraft(JSON.stringify(ready)).dwellingType).toBeUndefined();
+});
+
 describe("the kilo buttons", () => {
   it("go up in steps that grow with the amount", () => {
     expect(stepUp(0.5)).toBe(1);

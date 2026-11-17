@@ -25,6 +25,7 @@ vi.mock("convex/react", () => ({
   useMutation: () => state.ensure,
 }));
 vi.mock("@/i18n/navigation", () => ({
+  Link: "a",
   useRouter: () => ({ replace: state.replace }),
 }));
 vi.mock("@/lib/admin-navigation", () => ({ navigateToAdmin: state.admin }));

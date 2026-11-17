@@ -105,7 +105,8 @@ export function MobileNav({ className }: { className?: string }) {
           </Button>
         </div>
         <SiteNav
-          className="flex shrink-0 flex-col gap-1 px-5 py-1 [&>a]:min-h-12 [&>a]:rounded-xl [&>a]:px-3 [&>a]:py-3 [&>a]:text-base [&>a]:whitespace-nowrap"
+          layout="stacked"
+          className="shrink-0 px-5 py-1 [&>a]:min-h-12 [&>a]:px-3 [&>a]:py-3 [&>a]:text-base"
           onNavigate={close}
         />
         <div className="mx-5 grid shrink-0 py-2">

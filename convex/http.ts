@@ -18,8 +18,10 @@ import {
   preflight as qualityPreflight,
   serve as serveQuality,
 } from "./qualityFiles";
+import { health } from "./serviceStatus";
 
 const http = httpRouter();
+http.route({ path: "/health", method: "GET", handler: health });
 http.route({ pathPrefix: "/paper-files/", method: "GET", handler: servePaper });
 http.route({
   pathPrefix: "/paper-files/",

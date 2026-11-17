@@ -4754,7 +4754,7 @@
     "invalidReading": "Enter the kWh from your bill or meter. Use up to three decimal places.",
     "calculate": "Calculate estimate",
     "estimate": "Estimated grid emissions: {amount} kg CO₂",
-    "privateCalculation": "Your reading stays on this screen. The result covers electricity only.",
+    "privateCalculation": "Your reading is saved only when you choose Save. The result covers electricity only.",
     "gridSource": "India grid factor, CEA 2025–26",
     "airQuality": "Air quality",
     "roofSolar": "Rooftop solar check",
@@ -4764,7 +4764,20 @@
     "locationUnavailable": "Couldn’t get a suitable location.",
     "lookupLimit": "Lookup limit reached. Try again later.",
     "airScore": "Universal AQI: {score} out of 100. Higher is better.",
-    "roofEstimate": "Modeled roof output: {energy} kWh/year (DC) with {panels} panels."
+    "roofEstimate": "Modeled roof output: {energy} kWh/year (DC) with {panels} panels.",
+    "footprintLog": {
+      "title": "Save an electricity estimate",
+      "explanation": "Enter the dates covered by this reading. Saved estimates are private. They do not issue carbon credits or offset emissions. Periods can overlap; do not add overlapping entries.",
+      "start": "Period start",
+      "end": "Period end",
+      "consent": "Save this reading and its estimate to my account.",
+      "saved": "Estimate saved.",
+      "history": "Latest 30 saved estimates",
+      "loading": "Loading estimates…",
+      "empty": "No saved estimates.",
+      "signIn": "Sign in to save and view your private electricity estimates.",
+      "remove": "Remove estimate"
+    }
   },
   "homeReminder": {
     "title": "Home exit reminder",
@@ -4778,5 +4791,33 @@
     "time": "Reminder time",
     "add": "Add to calendar",
     "calendarHelp": "Open the calendar file to set a daily alert."
+  },
+  "serviceStatus": {
+    "title": "Service status",
+    "lead": "Checks every 30 seconds.",
+    "website": "Website",
+    "api": "API and database",
+    "sms": "SMS codes",
+    "up": "Reachable",
+    "checking": "Checking…",
+    "down": "Cannot reach service",
+    "accepted": "Provider accepted",
+    "failed": "Acceptance not confirmed",
+    "unknown": "Not verified",
+    "unavailable": "Not configured",
+    "refresh": "Check again",
+    "checkedAt": "Checked at {time}",
+    "note": "Provider acceptance does not confirm phone delivery. SMS evidence expires after 15 minutes."
+  },
+  "householdDwelling": {
+    "label": "Home type (optional)",
+    "unspecified": "Choose later",
+    "independent_home": "Independent home",
+    "apartment": "Apartment / flat",
+    "condo": "Condominium",
+    "villa": "Villa",
+    "townhouse": "Townhouse",
+    "farmhouse": "Farmhouse",
+    "routeNote": "For community pickup, use your reviewed community code."
   }
 }

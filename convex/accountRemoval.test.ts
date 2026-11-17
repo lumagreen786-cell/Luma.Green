@@ -189,7 +189,7 @@ it("finishes bounded cleanup and retains a review record and old profile tombsto
   const request = await w.t.run((ctx) =>
     ctx.db.query("accountRemovals").unique(),
   );
-  expect(request).toMatchObject({ state: "restricted_review", phase: 26 });
+  expect(request).toMatchObject({ state: "restricted_review", phase: 27 });
   expect(
     await w.t.run((ctx) =>
       ctx.runQuery(components.betterAuth.adapter.findOne, {
