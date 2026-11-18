@@ -3949,6 +3949,14 @@
     "liveCollected": "Zahlung vom Anbieter bestätigt."
   },
   "industry": {
+    "jurisdictionTitle": "Referenzen zu Bundesstaaten und Unionsterritorien",
+    "jurisdictionNote": "Verzeichniseinträge bestätigen weder Genehmigungen noch die Verfügbarkeit von Dienstleistungen.",
+    "chooseJurisdiction": "Bundesstaat oder Unionsterritorium wählen",
+    "jurisdictionReview": "Prüfung erforderlich",
+    "nationalTitle": "Nationale Branchen",
+    "nationalNote": "NIC 2025 beschreibt wirtschaftliche Tätigkeiten. Sie erteilt keine Genehmigung für eine Anlage, ein Verfahren oder ein Material.",
+    "chooseActivity": "Tätigkeit wählen",
+    "clearActivity": "Tätigkeitsauswahl löschen",
     "title": "Branchenreferenzen",
     "lead": "Durchsuche die bereitgestellten Referenzen. Diese Angaben sind ungeprüft und erlauben keinen Handel oder keine Verarbeitung von Material.",
     "sourceNote": "Die Referenztexte werden auf Englisch angezeigt.",

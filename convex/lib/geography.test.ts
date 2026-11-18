@@ -3,6 +3,16 @@ import { describe, expect, it } from "vitest";
 import { canonicalCity, INDIA_STATES_AND_UTS } from "./geography";
 
 describe("explicit operational city", () => {
+  it.each(INDIA_STATES_AND_UTS)(
+    "keeps the explicitly selected %s partition through normalization",
+    (state) => {
+      const input = `  shared   CITY , ${state.toLowerCase().replaceAll(" ", "  ")} `;
+      expect(canonicalCity(input)).toBe(`Shared City, ${state}`);
+      expect(canonicalCity(`Bengaluru, ${state}`)).toBe(
+        state === "Karnataka" ? "Bengaluru" : `Bengaluru, ${state}`,
+      );
+    },
+  );
   it.each([
     [" BENGALURU ", "Bengaluru"],
     ["new   DELHI, delhi", "New Delhi, Delhi"],
@@ -49,4 +59,11 @@ it("contains exactly the current 28 states and 8 union territories without retir
   );
   expect(INDIA_STATES_AND_UTS).not.toContain("Daman and Diu");
   expect(INDIA_STATES_AND_UTS).not.toContain("Dadra and Nagar Haveli");
+  expect(
+    new Set(
+      INDIA_STATES_AND_UTS.map((state) =>
+        canonicalCity(`Shared City, ${state}`),
+      ),
+    ).size,
+  ).toBe(36);
 });

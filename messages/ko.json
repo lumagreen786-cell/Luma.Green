@@ -3949,6 +3949,14 @@
     "liveCollected": "제공자가 결제를 확인했습니다."
   },
   "industry": {
+    "jurisdictionTitle": "주 및 연방 직할지 참고 정보",
+    "jurisdictionNote": "명부 등재는 허가나 서비스 제공 여부를 확인하는 것이 아닙니다.",
+    "chooseJurisdiction": "주 또는 연방 직할지 선택",
+    "jurisdictionReview": "검토 필요",
+    "nationalTitle": "전국 산업",
+    "nationalNote": "NIC 2025는 경제 활동을 설명합니다. 시설, 공정 또는 자재에 대한 승인을 부여하지 않습니다.",
+    "chooseActivity": "활동 선택",
+    "clearActivity": "활동 선택 해제",
     "title": "산업 참고 자료",
     "lead": "제공된 참고 자료를 검색하세요. 이 자료는 미검증 상태이며 자재 거래나 처리를 허가하지 않습니다.",
     "sourceNote": "참고 자료의 본문은 영어로 표시됩니다.",

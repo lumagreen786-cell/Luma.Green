@@ -1,15 +1,21 @@
 import { ConvexError, v } from "convex/values";
 
+import type { Doc } from "./_generated/dataModel";
 import { mutation, query } from "./_generated/server";
 import {
   registrationDates,
   registrationDateStatus,
+  vIndustryActivitySnapshot,
   vProcessKind,
   vRegistrationKind,
   vSectorSnapshot,
 } from "./lib/industrialClassification";
 import { getIndustrySector } from "./lib/industryReference";
 import { optionalReference, requiredLabel } from "./lib/lotEvidence";
+import {
+  getNationalIndustry,
+  NATIONAL_INDUSTRY_SOURCE,
+} from "./lib/nationalIndustries";
 import { requireOrg } from "./lib/workspace";
 
 export const mine = query({
@@ -21,6 +27,7 @@ export const mine = query({
       siteReference: v.string(),
       sectorId: v.optional(v.string()),
       sector: v.optional(vSectorSnapshot),
+      industryActivity: v.optional(vIndustryActivitySnapshot),
       capabilities: v.array(vProcessKind),
       createdAt: v.number(),
       updatedAt: v.number(),
@@ -39,6 +46,7 @@ export const mine = query({
         siteReference,
         sectorId,
         sector,
+        industryActivity,
         capabilities,
         createdAt,
         updatedAt,
@@ -48,6 +56,7 @@ export const mine = query({
         siteReference,
         sectorId,
         sector,
+        industryActivity,
         capabilities,
         createdAt,
         updatedAt,
@@ -63,12 +72,31 @@ function nextRevision(previous: number | undefined) {
   return revision;
 }
 
+function resolveIndustryActivity(
+  code: string | null | undefined,
+  current: Doc<"industrialFacilities">["industryActivity"],
+) {
+  if (code === undefined) return current;
+  if (code === null) return;
+  const activity = getNationalIndustry(code);
+  if (activity?.level !== "subclass") throw new ConvexError("SECTOR_NOT_FOUND");
+  return {
+    code: activity.code,
+    title: activity.title,
+    sourceVersion: "NIC-2025" as const,
+    sourceQuality: "official_reference" as const,
+    workbookSha256: NATIONAL_INDUSTRY_SOURCE.workbookSha256,
+    pdfSha256: NATIONAL_INDUSTRY_SOURCE.pdfSha256,
+  };
+}
+
 export const save = mutation({
   args: {
     facilityId: v.optional(v.id("industrialFacilities")),
     name: v.string(),
     siteReference: v.string(),
     sectorId: v.optional(v.string()),
+    industryActivityCode: v.optional(v.union(v.string(), v.null())),
     capabilities: v.array(vProcessKind),
   },
   returns: v.id("industrialFacilities"),
@@ -102,6 +130,10 @@ export const save = mutation({
         }
       : undefined;
     if (!sector && args.sectorId) throw new ConvexError("SECTOR_NOT_FOUND");
+    const industryActivity = resolveIndustryActivity(
+      args.industryActivityCode,
+      existing?.industryActivity,
+    );
     if (!existing) {
       const rows = await ctx.db
         .query("industrialFacilities")
@@ -116,6 +148,7 @@ export const save = mutation({
       siteReference,
       sectorId: sector?.id,
       sector: sector ?? undefined,
+      industryActivity,
       capabilities,
       updatedByProfileId: profile._id,
       updatedAt: now,
@@ -143,10 +176,17 @@ export const save = mutation({
               name: existing.name,
               siteReference: existing.siteReference,
               sectorId: existing.sectorId,
+              industryActivity: existing.industryActivity,
               capabilities: existing.capabilities,
             }
           : null,
-        after: { name, siteReference, sectorId: sector?.id, capabilities },
+        after: {
+          name,
+          siteReference,
+          sectorId: sector?.id,
+          industryActivity,
+          capabilities,
+        },
         scope: "self_declared",
       },
       createdAt: now,

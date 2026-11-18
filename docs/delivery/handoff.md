@@ -1,3 +1,21 @@
+## India-wide completion goal — 18 November 2026
+
+The owner resumed the full overhaul across every Indian state/UT and the
+national industry taxonomy, with multiple agents and checked Production
+delivery. The active goal and branch are `codex/india-platform-completion`,
+starting from `f744e8f`. Read the
+[consolidated plan](../plans/2026-11-18-india-platform-completion.md) and
+[continuation checkpoint](overhaul-continuation-2026-11-18.md).
+Catalogue rows, operational workflows and live acceptance have separate
+coverage measures. Do not limit the work to PET or report whole-platform
+completion from catalogue imports or a single released fix.
+The first national-reference, jurisdiction-selector and named-lot reservation
+candidate has passed the final local check (3,519 application tests plus
+security/native checks), production build and 28 local browser cases.
+Checked PR and matching Production delivery remain pending. Full capability
+activation, source-backed processing, downstream orders and evidence packs
+remain open in the plan.
+
 ## Overhaul continuation and checkout recovery — 18 November 2026
 
 The historical missing checkout is restored and its archived file bytes and
@@ -6,8 +24,9 @@ Git staging are verified. Current implementation continues from `f5b360f` on
 closes a release gap where an older passing inspection could bypass an
 unresolved failure for the same buyer and specification. See the
 [recovery and delivery record](overhaul-continuation-2026-11-18.md).
-Local repository checks, the production build and the Convex dry run passed.
-The checked PR and matching backend/web release remain pending.
+Local and hosted checks passed. Convex deployed first; PR #63 merged as
+`f744e8f`. Vercel Production is Ready for that commit on deployment
+`2b9GCCmLrGE9RWHedZyrrfnWRAbG`; both domain roots return HTTP 200.
 
 ## Cookieless public analytics and domain hydration — 18 November 2026
 

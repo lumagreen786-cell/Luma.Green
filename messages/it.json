@@ -3949,6 +3949,14 @@
     "liveCollected": "Pagamento confermato dal fornitore del servizio."
   },
   "industry": {
+    "jurisdictionTitle": "Riferimenti di stati e territori dell’Unione",
+    "jurisdictionNote": "Le voci nell’elenco non verificano i permessi né la disponibilità dei servizi.",
+    "chooseJurisdiction": "Scegli stato o territorio dell’Unione",
+    "jurisdictionReview": "Da verificare",
+    "nationalTitle": "Industrie nazionali",
+    "nationalNote": "NIC 2025 descrive le attività economiche. Non autorizza impianti, processi o materiali.",
+    "chooseActivity": "Scegli attività",
+    "clearActivity": "Cancella attività",
     "title": "Riferimenti industriali",
     "lead": "Cerca nei riferimenti forniti. Questi riferimenti non sono verificati e non autorizzano commercio o lavorazione dei materiali.",
     "sourceNote": "I testi di riferimento sono mostrati in inglese.",

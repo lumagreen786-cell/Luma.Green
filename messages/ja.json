@@ -3949,6 +3949,14 @@
     "liveCollected": "決済事業者が支払いを確認しました。"
   },
   "industry": {
+    "jurisdictionTitle": "州・連邦直轄領の参考情報",
+    "jurisdictionNote": "名簿への掲載は、許可やサービスの提供状況を確認するものではありません。",
+    "chooseJurisdiction": "州または連邦直轄領を選択",
+    "jurisdictionReview": "要確認",
+    "nationalTitle": "全国の産業",
+    "nationalNote": "NIC 2025は経済活動を分類するものです。施設、工程、材料の認可を与えるものではありません。",
+    "chooseActivity": "活動を選択",
+    "clearActivity": "活動の選択を解除",
     "title": "産業参考情報",
     "lead": "提供された参考資料を検索します。これらの情報は未確認で、材料の取引や処理を許可するものではありません。",
     "sourceNote": "参考資料の本文は英語で表示されます。",

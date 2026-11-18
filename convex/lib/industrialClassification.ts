@@ -62,6 +62,16 @@ export const vSectorSnapshot = v.object({
   sourceQuality: v.literal("workbook_unverified"),
 });
 
+/** Official economic activity only; selection grants no operating permission. */
+export const vIndustryActivitySnapshot = v.object({
+  code: v.string(),
+  title: v.string(),
+  sourceVersion: v.literal("NIC-2025"),
+  sourceQuality: v.literal("official_reference"),
+  workbookSha256: v.string(),
+  pdfSha256: v.string(),
+});
+
 /** These declarations never feed marketplace approval or a legal determination. */
 export function requiresControlledRoute(lot: {
   streamClass?: string;

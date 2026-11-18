@@ -3949,6 +3949,14 @@
     "liveCollected": "Bayaran disahkan oleh penyedia."
   },
   "industry": {
+    "jurisdictionTitle": "Rujukan negeri dan wilayah kesatuan",
+    "jurisdictionNote": "Entri direktori tidak mengesahkan permit atau ketersediaan perkhidmatan.",
+    "chooseJurisdiction": "Pilih negeri atau wilayah kesatuan",
+    "jurisdictionReview": "Perlu semakan",
+    "nationalTitle": "Industri negara",
+    "nationalNote": "NIC 2025 menerangkan aktiviti ekonomi. Ia tidak memberikan kelulusan untuk kemudahan, proses atau bahan.",
+    "chooseActivity": "Pilih aktiviti",
+    "clearActivity": "Kosongkan pilihan aktiviti",
     "title": "Rujukan industri",
     "lead": "Cari dalam rujukan yang diberikan. Rujukan ini belum disahkan dan tidak memberi kelulusan untuk berdagang atau memproses bahan.",
     "sourceNote": "Teks rujukan dipaparkan dalam bahasa Inggeris.",

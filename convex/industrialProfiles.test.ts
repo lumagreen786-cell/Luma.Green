@@ -35,6 +35,98 @@ async function world() {
 
 afterEach(() => vi.unstubAllEnvs());
 
+describe("national activity selection", () => {
+  it("searches the official subclass catalogue behind current workspace access", async () => {
+    const { t, shop, orgs } = await world();
+    const all = await shop.query(api.industryReference.nationalSearch, {
+      search: "",
+    });
+    expect(all).toMatchObject({
+      sourceVersion: "NIC-2025",
+      sourceQuality: "official_reference",
+      total: 1887,
+      nextOffset: 25,
+    });
+    expect(all.items).toHaveLength(25);
+    const wheat = await shop.query(api.industryReference.nationalSearch, {
+      search: "011101",
+    });
+    expect(wheat.items).toEqual([
+      expect.objectContaining({ code: "011101", title: "Growing of wheat" }),
+    ]);
+    await expect(
+      t.query(api.industryReference.nationalSearch, { search: "" }),
+    ).rejects.toThrow("NOT_SIGNED_IN");
+    const membership = await t.run((ctx) =>
+      ctx.db
+        .query("memberships")
+        .withIndex("by_org", (q) => q.eq("orgId", orgs.shop))
+        .first(),
+    );
+    await t.run((ctx) => ctx.db.delete("memberships", membership!._id));
+    await expect(
+      shop.query(api.industryReference.nationalSearch, { search: "" }),
+    ).rejects.toThrow("NO_BUSINESS");
+  });
+
+  it("resolves activity provenance on the server without changing stock or permissions", async () => {
+    const { t, shop, yard, orgs } = await world();
+    const args = {
+      name: "Source activity site",
+      siteReference: "Recorded site",
+      sectorId: "cpcb-2025-row-5",
+      capabilities: ["sorting" as const],
+    };
+    const before = await shop.query(api.stock.mine, {});
+    const originalOrg = await t.run((ctx) => ctx.db.get("orgs", orgs.shop));
+    const id = await shop.mutation(api.industrialProfiles.save, {
+      ...args,
+      industryActivityCode: "011101",
+    });
+    const [saved] = await shop.query(api.industrialProfiles.mine, {});
+    expect(saved.industryActivity).toMatchObject({
+      code: "011101",
+      title: "Growing of wheat",
+      sourceVersion: "NIC-2025",
+      sourceQuality: "official_reference",
+      workbookSha256: expect.stringMatching(/^[a-f0-9]{64}$/u),
+      pdfSha256: expect.stringMatching(/^[a-f0-9]{64}$/u),
+    });
+    expect(saved.sector?.sourceQuality).toBe("workbook_unverified");
+    expect(await yard.query(api.industrialProfiles.mine, {})).toEqual([]);
+    const after = await shop.query(api.stock.mine, {});
+    expect(after.totalGrams).toBe(before.totalGrams);
+    expect(await t.run((ctx) => ctx.db.get("orgs", orgs.shop))).toEqual(
+      originalOrg,
+    );
+    await shop.mutation(api.industrialProfiles.save, {
+      ...args,
+      facilityId: id,
+      name: "Renamed site",
+    });
+    const [renamed] = await shop.query(api.industrialProfiles.mine, {});
+    expect(renamed.industryActivity).toEqual(saved.industryActivity);
+    await shop.mutation(api.industrialProfiles.save, {
+      ...args,
+      facilityId: id,
+      industryActivityCode: null,
+    });
+    const [cleared] = await shop.query(api.industrialProfiles.mine, {});
+    expect(cleared.industryActivity).toBeUndefined();
+    for (const code of ["01", "01110", "999999", "invented"]) {
+      await expect(
+        shop.mutation(api.industrialProfiles.save, {
+          ...args,
+          facilityId: id,
+          industryActivityCode: code,
+        }),
+      ).rejects.toThrow("SECTOR_NOT_FOUND");
+    }
+    const [unchanged] = await shop.query(api.industrialProfiles.mine, {});
+    expect(unchanged).toEqual(cleared);
+  });
+});
+
 describe("industrial facility declarations", () => {
   it("stores authoritative source provenance without granting role or market approval", async () => {
     const { t, shop, yard } = await world();

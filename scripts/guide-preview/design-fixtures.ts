@@ -133,6 +133,7 @@ export const designFixtures = {
       siteReference: "Isolated example, not an operating site",
       sectorId: undefined,
       sector: undefined,
+      industryActivity: undefined,
       capabilities: [],
       createdAt: NOW,
       updatedAt: NOW,

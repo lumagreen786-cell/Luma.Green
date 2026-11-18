@@ -1,6 +1,15 @@
-import { type FunctionReference, getFunctionName } from "convex/server";
+import {
+  type FunctionArgs,
+  type FunctionReference,
+  getFunctionName,
+} from "convex/server";
 import { ConvexError } from "convex/values";
 
+import type { api } from "../../convex/_generated/api";
+import {
+  NATIONAL_INDUSTRY_SOURCE,
+  searchNationalIndustryReference,
+} from "../../convex/lib/nationalIndustries";
 import { inboxFixture, securityFixture } from "./account-fixtures";
 import { designFixtures } from "./design-fixtures";
 import { financeFixture } from "./finance-fixtures";
@@ -102,6 +111,14 @@ export function useQuery(
 ): unknown {
   if (args === "skip") return undefined;
   const name = getFunctionName(query);
+  if (name === "industryReference:nationalSearch")
+    return {
+      ...searchNationalIndustryReference(
+        args as FunctionArgs<typeof api.industryReference.nationalSearch>,
+      ),
+      sourceWorkbookUrl: NATIONAL_INDUSTRY_SOURCE.workbookUrl,
+      sourcePublicationUrl: NATIONAL_INDUSTRY_SOURCE.pdfUrl,
+    };
   if (name === "accountRemoval:status") {
     const search = window.location.search;
     if (!removalFixtures.has(search))

@@ -263,13 +263,7 @@ it("moves an eligible reviewed whole lot once per side and prevents separate rec
 it("reserves the exact lot until the accepted trade is cancelled", async () => {
   const { t, seller, buyer, lotId, tradeId, requestOfferForLot } =
     await world();
-  const competingTradeId = await requestOfferForLot();
-  await expect(
-    seller.mutation(api.market.act, {
-      tradeId: competingTradeId,
-      action: "accept",
-    }),
-  ).rejects.toThrow("LOT_RESERVED");
+  await expect(requestOfferForLot()).rejects.toThrow("LOT_RESERVED");
   const accepted = await t.run((ctx) => ctx.db.get("trades", tradeId));
   if (!accepted) throw new Error("Expected the accepted trade");
   await expect(
@@ -291,6 +285,7 @@ it("reserves the exact lot until the accepted trade is cancelled", async () => {
     tradeId,
     reason: "Cancel before custody",
   });
+  const competingTradeId = await requestOfferForLot();
   await seller.mutation(api.market.act, {
     tradeId: competingTradeId,
     action: "accept",
@@ -307,13 +302,7 @@ it("keeps a completed sale reserved while custody still belongs to the seller", 
   await t.run((ctx) =>
     ctx.db.patch("trades", tradeId, { status: "completed" }),
   );
-  const competingTradeId = await requestOfferForLot();
-  await expect(
-    seller.mutation(api.market.act, {
-      tradeId: competingTradeId,
-      action: "accept",
-    }),
-  ).rejects.toThrow("LOT_RESERVED");
+  await expect(requestOfferForLot()).rejects.toThrow("LOT_RESERVED");
   await expect(
     seller.mutation(api.traceability.transform, {
       inputLotId: lotId,
