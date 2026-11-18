@@ -27,6 +27,8 @@ export default defineConfig({
     timeout: 120_000,
     env: {
       NEXT_PUBLIC_TELEMETRY_ENABLED: "true",
+      NEXT_PUBLIC_VERCEL_ANALYTICS_ENABLED: "true",
+      NEXT_PUBLIC_BUSINESS_SITE_ENABLED: "true",
       NEXT_PUBLIC_GA_MEASUREMENT_ID: "G-LUMATEST",
       NEXT_PUBLIC_POSTHOG_KEY: "phc_luma_test",
       NEXT_PUBLIC_POSTHOG_HOST: "https://eu.i.posthog.com",

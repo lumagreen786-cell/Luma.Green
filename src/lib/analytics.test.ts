@@ -15,12 +15,17 @@ beforeEach(() => {
 afterEach(() => vi.restoreAllMocks());
 
 describe("public analytics boundary", () => {
-  it.each(["/", "/prices", "/ar/prices", "/ur/help", "/kn"])(
-    "accepts the explicitly public route %s",
-    (path) => {
-      expect(analyticsPage(path)).toBeDefined();
-    },
-  );
+  it.each([
+    "/",
+    "/prices",
+    "/ar/prices",
+    "/ur/help",
+    "/kn",
+    "/business",
+    "/ar/business/collectors",
+  ])("accepts the explicitly public route %s", (path) => {
+    expect(analyticsPage(path)).toBeDefined();
+  });
 
   it.each([
     "/app",
@@ -37,8 +42,25 @@ describe("public analytics boundary", () => {
     "/help/contact",
     "/prices/private-id",
     "/new-public-route",
+    "/business/collectors/private-id",
+    "/business/app",
   ])("does not opt the route %s into tracking", (path) => {
     expect(analyticsPage(path)).toBeUndefined();
+  });
+
+  it("distinguishes the business homepage without collecting a hostname property", () => {
+    expect(analyticsPage("/ar", "business.luma.green")).toBe("/business");
+    expect(analyticsPage("/", "luma.green")).toBe("/");
+    expect(analyticsPage("/", "business.luma.green.attacker.invalid")).toBe(
+      "/",
+    );
+    expect(analyticsPage("/ar/business", "business.luma.green")).toBe(
+      "/business",
+    );
+    expect(analyticsPage("/ar/app", "business.luma.green")).toBeUndefined();
+    expect(analyticsPage("/?token=secret#private", "business.luma.green")).toBe(
+      "/business",
+    );
   });
 
   it("removes URL tokens before producing a public route", () => {
@@ -57,7 +79,7 @@ describe("analytics consent storage", () => {
     "does not interpret %s as permission",
     (value) => {
       if (value !== null) localStorage.setItem(analyticsChoiceKey, value);
-      expect(readAnalyticsChoice()).toBeNull();
+      expect(readAnalyticsChoice()).toBe(value === null ? null : "denied");
     },
   );
 
@@ -73,7 +95,7 @@ describe("analytics consent storage", () => {
     vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => {
       throw new DOMException("Storage is blocked", "SecurityError");
     });
-    expect(readAnalyticsChoice()).toBeNull();
+    expect(readAnalyticsChoice()).toBe("denied");
   });
 
   it("reports failed writes instead of claiming consent was saved", () => {

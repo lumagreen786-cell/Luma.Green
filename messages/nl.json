@@ -3411,7 +3411,7 @@
   },
   "analytics": {
     "title": "Optionele statistieken",
-    "description": "Sta PostHog en Google Analytics toe bezoeken aan openbare pagina's te meten. We registreren geen formulieren, privépagina's of sessieopnamen. Uw keuze verandert uw toegang niet.",
+    "description": "Bezoeken aan openbare pagina’s worden automatisch geteld zonder analysecookies. PostHog en Vercel kunnen technische netwerkgegevens verwerken. Formulieren, privépagina’s en sessieopnamen zijn uitgesloten. Je kunt de analyse hier uitschakelen.",
     "accept": "Statistieken toestaan",
     "decline": "Statistieken uit laten",
     "withdraw": "Analytics uitschakelen",
@@ -4654,7 +4654,7 @@
     "sharingTitle": "Wie gegevens ontvangt",
     "sharingBody": "Bevoegde deelnemers en ingestelde aanbieders van hosting, sms, verificatie, betalingen en optionele AI ontvangen de nodige gegevens. Verwerking kan buiten India plaatsvinden.",
     "choicesTitle": "Jouw keuzes",
-    "choicesBody": "Locatie en meldingen vereisen toestemming. Je kiest zelf bestanden. Aanmelden gebruikt sessiecookies. Analyse vereist toestemming; foutmeldingen staan daar los van. Beheer rechten in de apparaatinstellingen.",
+    "choicesBody": "Bezoeken aan openbare pagina’s worden automatisch geteld zonder analysecookies. PostHog en Vercel kunnen technische netwerkgegevens verwerken. Formulieren, privépagina’s en sessieopnamen zijn uitgesloten. Je kunt de analyse hier uitschakelen. Inloggen gebruikt sessiecookies. Foutmeldingen werken apart. Beheer locatie- en meldingsrechten in de apparaatinstellingen.",
     "requestsTitle": "Verzoeken over account en gegevens",
     "requestsBody": "Verwijder hieronder je account of mail de ondersteuning voor inzage, correctie of verwijdering. Bevestig het eigenaarschap; mail geen identiteitsdocumenten. Los eerst open werk of eigendomsvragen op.",
     "retentionTitle": "Wat na sluiting blijft",

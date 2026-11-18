@@ -17,7 +17,7 @@ export function AnalyticsProvider({ children }: { children: ReactNode }) {
   const isConfigured =
     clientEnv.NEXT_PUBLIC_TELEMETRY_ENABLED &&
     (Boolean(clientEnv.NEXT_PUBLIC_POSTHOG_KEY) ||
-      Boolean(clientEnv.NEXT_PUBLIC_GA_MEASUREMENT_ID));
+      clientEnv.NEXT_PUBLIC_VERCEL_ANALYTICS_ENABLED);
   return (
     <>
       {children}

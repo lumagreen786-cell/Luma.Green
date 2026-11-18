@@ -3411,7 +3411,7 @@
   },
   "analytics": {
     "title": "Analítica opcional",
-    "description": "Permite que PostHog y Google Analytics midan las visitas a páginas públicas. No registramos formularios, páginas privadas ni reproducciones de sesiones. Tu elección no cambia el acceso a la plataforma.",
+    "description": "Las visitas a páginas públicas se cuentan automáticamente sin cookies de análisis. PostHog y Vercel pueden procesar datos técnicos de red. Se excluyen formularios, páginas privadas y grabaciones de sesiones. Puedes desactivar el análisis aquí.",
     "accept": "Permitir analítica",
     "decline": "Mantener la analítica desactivada",
     "withdraw": "Desactivar analíticas",
@@ -4654,7 +4654,7 @@
     "sharingTitle": "Quién recibe los datos",
     "sharingBody": "Los participantes autorizados y los proveedores configurados de alojamiento, SMS, verificación, pagos e IA opcional reciben los datos necesarios. El tratamiento puede realizarse fuera de India.",
     "choicesTitle": "Tus opciones",
-    "choicesBody": "La ubicación y las notificaciones requieren permiso. Tú eliges los archivos. El acceso usa cookies de sesión. La analítica requiere consentimiento; los informes de errores son independientes. Gestiona los permisos en los ajustes del dispositivo.",
+    "choicesBody": "Las visitas a páginas públicas se cuentan automáticamente sin cookies de análisis. PostHog y Vercel pueden procesar datos técnicos de red. Se excluyen formularios, páginas privadas y grabaciones de sesiones. Puedes desactivar el análisis aquí. El inicio de sesión usa cookies de sesión. Los informes de errores son independientes. Gestiona los permisos de ubicación y notificaciones en los ajustes del dispositivo.",
     "requestsTitle": "Solicitudes de cuenta y datos",
     "requestsBody": "Elimina tu cuenta abajo o escribe a soporte para acceder, corregir o borrar datos. Verifica la titularidad; no envíes documentos de identidad por correo. Resuelve primero el trabajo o la titularidad pendientes.",
     "retentionTitle": "Qué queda tras el cierre",

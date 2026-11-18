@@ -3411,7 +3411,7 @@
   },
   "analytics": {
     "title": "Phân tích tùy chọn",
-    "description": "Cho phép PostHog và Google Analytics đo lượt truy cập trang công khai. Chúng tôi không ghi biểu mẫu, trang riêng tư hoặc phát lại phiên. Lựa chọn không ảnh hưởng quyền truy cập nền tảng.",
+    "description": "Lượt truy cập trang công khai được đếm tự động mà không dùng cookie phân tích. PostHog và Vercel có thể xử lý dữ liệu mạng kỹ thuật. Biểu mẫu, trang riêng tư và bản phát lại phiên được loại trừ. Bạn có thể tắt phân tích tại đây.",
     "accept": "Cho phép phân tích",
     "decline": "Tiếp tục tắt phân tích",
     "withdraw": "Tắt phân tích",
@@ -4654,7 +4654,7 @@
     "sharingTitle": "Bên nhận dữ liệu",
     "sharingBody": "Người tham gia được phép và nhà cung cấp lưu trữ, SMS, xác minh, thanh toán, AI tùy chọn đã cấu hình nhận dữ liệu cần thiết. Dữ liệu có thể được xử lý ngoài Ấn Độ.",
     "choicesTitle": "Lựa chọn của bạn",
-    "choicesBody": "Vị trí và thông báo cần quyền cho phép. Bạn tự chọn tệp. Đăng nhập dùng cookie phiên. Phân tích cần sự đồng ý; báo lỗi là riêng biệt. Quản lý quyền trong cài đặt thiết bị.",
+    "choicesBody": "Lượt truy cập trang công khai được đếm tự động mà không dùng cookie phân tích. PostHog và Vercel có thể xử lý dữ liệu mạng kỹ thuật. Biểu mẫu, trang riêng tư và bản phát lại phiên được loại trừ. Bạn có thể tắt phân tích tại đây. Đăng nhập dùng cookie phiên. Báo cáo lỗi hoạt động riêng. Quản lý quyền vị trí và thông báo trong cài đặt thiết bị.",
     "requestsTitle": "Yêu cầu về tài khoản và dữ liệu",
     "requestsBody": "Xóa tài khoản bên dưới hoặc gửi email hỗ trợ để truy cập, sửa hay xóa dữ liệu. Xác minh quyền sở hữu; không gửi giấy tờ định danh qua email. Giải quyết công việc hoặc quyền sở hữu còn mở trước.",
     "retentionTitle": "Dữ liệu còn lại sau khi đóng",

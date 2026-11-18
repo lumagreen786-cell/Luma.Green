@@ -24,7 +24,7 @@ const AnalyticsEnabled = dynamic(
 
 function subscribe(onChange: () => void) {
   function changed() {
-    if (readAnalyticsChoice() !== "granted") stopAnalytics();
+    if (readAnalyticsChoice() === "denied") stopAnalytics();
     onChange();
   }
   window.addEventListener("storage", changed);
@@ -32,7 +32,7 @@ function subscribe(onChange: () => void) {
     window.removeEventListener("storage", changed);
   };
 }
-const serverChoice = () => null;
+const serverChoice = () => "denied" as const;
 
 export function AnalyticsControls() {
   const t = useTranslations("analytics");
@@ -46,8 +46,7 @@ export function AnalyticsControls() {
   const [failed, setFailed] = useState(false);
   const currentChoice = failed ? "denied" : stored;
   const isVisible =
-    analyticsPage(pathname) !== undefined ||
-    (pathname === "/privacy" && (currentChoice === "granted" || failed));
+    analyticsPage(pathname) !== undefined || pathname === "/privacy";
   function choose(value: AnalyticsChoice) {
     if (value === "denied") stopAnalytics();
     const isSaved = saveAnalyticsChoice(value);
@@ -56,18 +55,24 @@ export function AnalyticsControls() {
     window.dispatchEvent(new Event("storage"));
     setOpen(!isSaved);
     // A full reload removes all vendor listeners after withdrawal of consent.
-    if (currentChoice === "granted" && value === "denied" && isSaved)
+    if (currentChoice !== "denied" && value === "denied" && isSaved)
       window.location.reload();
   }
   return (
     <>
-      {currentChoice === "granted" ? <AnalyticsEnabled /> : null}
+      {currentChoice !== "denied" && analyticsPage(pathname) !== undefined ? (
+        <AnalyticsEnabled />
+      ) : null}
       {isVisible ? (
         <aside
           aria-label={t("title")}
-          className="fixed inset-x-3 bottom-3 z-50 ms-auto max-w-md rounded-2xl border bg-card p-4 text-card-foreground shadow-lg sm:inset-x-6 sm:bottom-6"
+          className={
+            open
+              ? "fixed inset-x-3 bottom-3 z-50 ms-auto max-w-md rounded-2xl border bg-card p-4 text-card-foreground shadow-lg sm:inset-x-6 sm:bottom-6"
+              : "fixed end-3 bottom-3 z-50 rounded-xl border bg-card text-card-foreground sm:end-6 sm:bottom-6"
+          }
         >
-          {open || currentChoice === null ? (
+          {open ? (
             <>
               <h2 className="font-semibold">{t("title")}</h2>
               <p className="mt-2 text-sm text-muted-foreground">
@@ -94,31 +99,25 @@ export function AnalyticsControls() {
                 >
                   {t("accept")}
                 </Button>
-                {currentChoice === null ? null : (
-                  <Button
-                    variant="ghost"
-                    onClick={() => {
-                      setOpen(false);
-                    }}
-                  >
-                    {t("close")}
-                  </Button>
-                )}
+                <Button
+                  variant="ghost"
+                  onClick={() => {
+                    setOpen(false);
+                  }}
+                >
+                  {t("close")}
+                </Button>
               </div>
             </>
           ) : (
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <p className="text-xs text-muted-foreground">{t("saved")}</p>
-              <Button
-                variant="ghost"
-                onClick={() => {
-                  if (currentChoice === "granted") choose("denied");
-                  else setOpen(true);
-                }}
-              >
-                {t(currentChoice === "granted" ? "withdraw" : "settings")}
-              </Button>
-            </div>
+            <Button
+              variant="ghost"
+              onClick={() => {
+                setOpen(true);
+              }}
+            >
+              {t("settings")}
+            </Button>
           )}
         </aside>
       ) : null}

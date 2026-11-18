@@ -2449,7 +2449,7 @@
   "analytics": {
     "close": "Tutup",
     "title": "Analitik pilihan",
-    "description": "Benarkan PostHog dan Google Analytics mengukur lawatan ke halaman awam. Kami tidak merekodkan borang, halaman peribadi atau ulang tayang sesi. Pilihan anda tidak mengubah akses kepada platform.",
+    "description": "Lawatan halaman awam dikira secara automatik tanpa kuki analitik. PostHog dan Vercel mungkin memproses data rangkaian teknikal. Borang, halaman peribadi dan rakaman sesi dikecualikan. Anda boleh mematikan analitik di sini.",
     "accept": "Benarkan analitik",
     "decline": "Kekalkan analitik dimatikan",
     "withdraw": "Matikan analitik",
@@ -4654,7 +4654,7 @@
     "sharingTitle": "Penerima data",
     "sharingBody": "Peserta dibenarkan serta penyedia pengehosan, SMS, pengesahan, pembayaran dan AI pilihan yang dikonfigurasi menerima data diperlukan. Pemprosesan boleh berlaku di luar India.",
     "choicesTitle": "Pilihan anda",
-    "choicesBody": "Lokasi dan pemberitahuan memerlukan izin. Pilih fail sendiri. Log masuk menggunakan kuki sesi. Analitik memerlukan persetujuan; laporan ralat adalah berasingan. Urus izin dalam tetapan peranti.",
+    "choicesBody": "Lawatan halaman awam dikira secara automatik tanpa kuki analitik. PostHog dan Vercel mungkin memproses data rangkaian teknikal. Borang, halaman peribadi dan rakaman sesi dikecualikan. Anda boleh mematikan analitik di sini. Log masuk menggunakan kuki sesi. Pelaporan ralat berasingan. Urus kebenaran lokasi dan pemberitahuan dalam tetapan peranti.",
     "requestsTitle": "Permintaan akaun dan data",
     "requestsBody": "Alih keluar akaun di bawah atau e-mel sokongan untuk akses, pembetulan atau pemadaman. Sahkan pemilikan; jangan e-mel dokumen pengenalan. Selesaikan kerja atau pemilikan tertunggak dahulu.",
     "retentionTitle": "Yang kekal selepas penutupan",

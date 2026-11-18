@@ -3411,7 +3411,7 @@
   },
   "analytics": {
     "title": "Mesure d’audience facultative",
-    "description": "Autorisez PostHog et Google Analytics à mesurer les visites des pages publiques. Nous n’enregistrons ni formulaires, ni pages privées, ni relectures de sessions. Votre choix ne change pas l’accès à la plateforme.",
+    "description": "Les visites des pages publiques sont comptées automatiquement sans cookies analytiques. PostHog et Vercel peuvent traiter des données techniques réseau. Les formulaires, pages privées et enregistrements de session sont exclus. Vous pouvez désactiver les analyses ici.",
     "accept": "Autoriser la mesure d’audience",
     "decline": "Laisser la mesure désactivée",
     "withdraw": "Désactiver la mesure d’audience",
@@ -4654,7 +4654,7 @@
     "sharingTitle": "Destinataires des données",
     "sharingBody": "Les participants autorisés et les prestataires configurés d’hébergement, SMS, vérification, paiement et IA facultative reçoivent les données nécessaires. Le traitement peut avoir lieu hors de l’Inde.",
     "choicesTitle": "Vos choix",
-    "choicesBody": "La localisation et les notifications nécessitent votre autorisation. Choisissez vous-même les fichiers. La connexion utilise des cookies de session. Les statistiques nécessitent un accord ; les rapports d’erreurs sont distincts. Gérez les autorisations dans les réglages de l’appareil.",
+    "choicesBody": "Les visites des pages publiques sont comptées automatiquement sans cookies analytiques. PostHog et Vercel peuvent traiter des données techniques réseau. Les formulaires, pages privées et enregistrements de session sont exclus. Vous pouvez désactiver les analyses ici. La connexion utilise des cookies de session. Le signalement des erreurs est distinct. Gérez les autorisations de localisation et de notification dans les réglages de l’appareil.",
     "requestsTitle": "Demandes de compte et de données",
     "requestsBody": "Supprimez votre compte ci-dessous ou écrivez au support pour un accès, une correction ou une suppression. Vérifiez votre identité ; n’envoyez pas de pièce d’identité par courriel. Réglez d’abord les tâches ou la propriété en attente.",
     "retentionTitle": "Ce qui reste après la fermeture",

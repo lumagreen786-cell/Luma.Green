@@ -37,6 +37,10 @@ const clientSchema = z.object({
     .enum(["true", "false", ""])
     .optional()
     .transform((value) => value === "true"),
+  NEXT_PUBLIC_VERCEL_ANALYTICS_ENABLED: z
+    .enum(["true", "false", ""])
+    .optional()
+    .transform((value) => value === "true"),
   NEXT_PUBLIC_GA_MEASUREMENT_ID: z
     .string()
     .regex(/^G-[A-Z0-9]+$/)
@@ -58,6 +62,8 @@ export const clientEnv = clientSchema.parse({
   NEXT_PUBLIC_CONVEX_URL: process.env.NEXT_PUBLIC_CONVEX_URL,
   NEXT_PUBLIC_CONVEX_SITE_URL: process.env.NEXT_PUBLIC_CONVEX_SITE_URL,
   NEXT_PUBLIC_TELEMETRY_ENABLED: process.env.NEXT_PUBLIC_TELEMETRY_ENABLED,
+  NEXT_PUBLIC_VERCEL_ANALYTICS_ENABLED:
+    process.env.NEXT_PUBLIC_VERCEL_ANALYTICS_ENABLED,
   NEXT_PUBLIC_GA_MEASUREMENT_ID: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
   NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION:
     process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,

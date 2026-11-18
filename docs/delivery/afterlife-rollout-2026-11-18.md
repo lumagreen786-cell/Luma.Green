@@ -117,3 +117,27 @@ by the owner. The WhatsApp recipient remains unset.
 
 Hosted CI must pass on the final commit before merge. Real-account testing,
 provider delivery and native-device acceptance remain owner-deferred.
+
+## Checked production release
+
+PR #61 passed all hosted checks, including the complete Playwright job (28m1s),
+isolated OTP checks and configured analytics tests. It merged as
+`17ad1250eaac4d485032d2a1571cb3df87ef032d` on 18 November 2026.
+Vercel deployment `Ad7A6EGuJbmKNauBijm15H52R9qg` is Ready on Production and
+serves both domains from that commit.
+
+Live read-only verification: both roots return 200; apex `/business` redirects
+307 to business root; Arabic prefix and query survive the cross-host redirect;
+business Arabic root returns 200. Apex `/app` redirects to its existing login,
+both admin login URLs return 200, and the business session endpoint returns 200.
+Public and business heroes were visually inspected, including the business dark
+appearance. This does not replace the owner's deferred signed-in/device tests.
+
+The owner then requested Vercel Analytics, PostHog and Sentry. That integration
+is a separate follow-up. Sentry `luma-jb/luma-web` was created on the existing free
+Developer plan, IP storage disabled, and its public DSN plus telemetry flag saved
+in Vercel Production. A controlled local test using the application scrubber
+arrived as event `78b7eb12074940df8def3ad4ac2d253a` in environment `setup-check`;
+message and request URL were removed. Provider coarse geography remains. This
+proves provider delivery from local source, not a production browser exception.
+No private source-map upload token or paid Sentry plan was created.

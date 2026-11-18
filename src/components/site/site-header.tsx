@@ -54,12 +54,13 @@ export function SiteHeader() {
       desktop.removeEventListener("change", onResize);
     };
   }, [open]);
-  const isBusinessHost = useSyncExternalStore(
+  // Rewrites prerender /business but hydrate at /. Keep the initial nav
+  // identical; read both browser path and host only after hydration.
+  const isBusiness = useSyncExternalStore(
     subscribeHost,
-    isBusinessHostSnapshot,
+    () => pathname.startsWith("/business") || isBusinessHostSnapshot(),
     isServerBusinessHost,
   );
-  const isBusiness = pathname.startsWith("/business") || isBusinessHost;
   const isHero = ["/", "/business", "/business/collectors"].includes(pathname);
   const lang = isLocale(locale) ? locale : "en";
   return (

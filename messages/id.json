@@ -2449,7 +2449,7 @@
   "analytics": {
     "close": "Tutup",
     "title": "Analitik opsional",
-    "description": "Izinkan PostHog dan Google Analytics mengukur kunjungan ke halaman publik. Kami tidak merekam formulir, halaman pribadi, atau pemutaran ulang sesi. Pilihan Anda tidak mengubah akses ke platform.",
+    "description": "Kunjungan halaman publik dihitung otomatis tanpa cookie analitik. PostHog dan Vercel dapat memproses data jaringan teknis. Formulir, halaman pribadi, dan rekaman sesi dikecualikan. Anda dapat mematikan analitik di sini.",
     "accept": "Izinkan analitik",
     "decline": "Tetap nonaktifkan analitik",
     "withdraw": "Nonaktifkan analitik",
@@ -4654,7 +4654,7 @@
     "sharingTitle": "Penerima data",
     "sharingBody": "Peserta berwenang serta penyedia hosting, SMS, verifikasi, pembayaran dan AI opsional yang dikonfigurasi menerima data yang diperlukan. Pemrosesan dapat dilakukan di luar India.",
     "choicesTitle": "Pilihan Anda",
-    "choicesBody": "Lokasi dan notifikasi memerlukan izin. Pilih berkas sendiri. Masuk menggunakan cookie sesi. Analitik memerlukan persetujuan; pelaporan kesalahan terpisah. Kelola izin di pengaturan perangkat.",
+    "choicesBody": "Kunjungan halaman publik dihitung otomatis tanpa cookie analitik. PostHog dan Vercel dapat memproses data jaringan teknis. Formulir, halaman pribadi, dan rekaman sesi dikecualikan. Anda dapat mematikan analitik di sini. Login memakai cookie sesi. Pelaporan kesalahan terpisah. Kelola izin lokasi dan notifikasi di pengaturan perangkat.",
     "requestsTitle": "Permintaan akun dan data",
     "requestsBody": "Hapus akun di bawah atau kirim email ke dukungan untuk akses, perbaikan atau penghapusan. Verifikasi kepemilikan; jangan kirim dokumen identitas melalui email. Selesaikan pekerjaan atau kepemilikan yang masih terbuka dahulu.",
     "retentionTitle": "Yang tersisa setelah penutupan",
