@@ -201,7 +201,7 @@ function DraftInvoiceForm() {
   const planId = useId();
   return (
     <form
-      className="flex min-w-0 flex-col gap-4 border-t pt-6"
+      className="flex min-w-0 flex-col gap-4 border-t pt-6 lg:border-s lg:border-t-0 lg:ps-8 lg:pt-0"
       onSubmit={(event) => {
         event.preventDefault();
         const form = new FormData(event.currentTarget);
@@ -313,7 +313,7 @@ export function DraftBillingSetup() {
   return (
     <section
       aria-labelledby="draft-billing-setup"
-      className="mx-auto mt-6 flex w-full max-w-5xl flex-col gap-6 rounded-panel bg-card p-5 text-card-foreground sm:p-6"
+      className="mx-auto mt-12 grid w-full max-w-7xl gap-8 border-t border-border pt-8 lg:grid-cols-2 [&>div:first-child]:lg:col-span-2"
     >
       <div className="space-y-2">
         <h2 id="draft-billing-setup" className="text-xl font-semibold">

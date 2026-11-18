@@ -28,9 +28,9 @@ export function HouseholdFamily() {
   return (
     <section
       aria-labelledby="household-family"
-      className="space-y-4 rounded-[1.75rem] border border-border/60 bg-card p-5 text-card-foreground"
+      className="space-y-4 border-t border-border py-6"
     >
-      <h2 id="household-family" className="text-lg font-semibold">
+      <h2 id="household-family" className="text-2xl font-normal tracking-tight">
         {t("title")}
       </h2>
       <p className="text-sm text-muted-foreground">{t("description")}</p>
@@ -287,10 +287,13 @@ function LiveSharedFamilyCollections() {
   if (!rows?.length) return null;
   return (
     <section
-      className="space-y-2 rounded-[1.75rem] border border-border/60 bg-card p-5 text-card-foreground"
+      className="space-y-2 border-t border-border py-6"
       aria-labelledby="family-collections"
     >
-      <h2 id="family-collections" className="text-lg font-semibold">
+      <h2
+        id="family-collections"
+        className="text-2xl font-normal tracking-tight"
+      >
         {t("collections")}
       </h2>
       <ul className="divide-y">

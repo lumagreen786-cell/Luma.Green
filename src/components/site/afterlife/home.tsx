@@ -18,6 +18,7 @@ export async function AfterlifeHome() {
     <>
       <section className={styles.hero}>
         <Image
+          unoptimized
           src="/images/showcase/household-preparation.webp"
           alt=""
           fill
@@ -57,6 +58,7 @@ export async function AfterlifeHome() {
       <section className={styles.story}>
         <div className={styles.storyImage}>
           <Image
+            unoptimized
             src="/images/showcase/material-sorting.webp"
             alt={t("imageAlt")}
             fill

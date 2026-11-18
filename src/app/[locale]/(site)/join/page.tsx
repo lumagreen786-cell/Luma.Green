@@ -32,13 +32,13 @@ export default async function JoinPage() {
   ]);
 
   return (
-    <Container className="flex max-w-6xl flex-col gap-4 py-6">
+    <Container className="flex max-w-7xl flex-col gap-8 py-10 sm:py-16">
       <header className="flex max-w-2xl flex-col gap-3">
-        <h1 className="font-display text-3xl leading-tight font-normal tracking-tight text-balance sm:text-5xl">
+        <h1 className="font-display text-4xl leading-tight font-normal tracking-tight text-balance sm:text-6xl">
           {t("title")}
         </h1>
       </header>
-      <aside className="flex flex-col gap-3 rounded-full bg-card px-5 py-3 shadow-panel sm:flex-row sm:items-center sm:justify-between">
+      <aside className="flex flex-col gap-3 border-y border-border py-4 sm:flex-row sm:items-center sm:justify-between">
         <Link
           href="/sell"
           className="inline-flex min-h-11 items-center gap-3 font-medium text-foreground underline-offset-4 hover:underline"

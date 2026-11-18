@@ -76,7 +76,7 @@ function StockBody() {
   if (stock === undefined) return <ListSkeleton rows={4} />;
   return (
     <>
-      <div className="grid gap-0 rounded-panel bg-card text-card-foreground shadow-panel sm:grid-cols-2 xl:grid-cols-3 [&>div]:border-0 [&>div]:bg-transparent [&>div]:shadow-none">
+      <div className="grid min-w-0 gap-6 py-4 sm:grid-cols-2 xl:grid-cols-3">
         <StatCard
           label={t("totalWeight")}
           value={format.weight(stock.totalGrams)}
@@ -111,7 +111,7 @@ function StockBody() {
           </Link>
         </Button>
       ) : null}
-      <div className="grid min-w-0 items-start gap-4 xl:grid-cols-[minmax(0,1.7fr)_minmax(19rem,1fr)]">
+      <div className="grid min-w-0 items-start gap-8 xl:grid-cols-[minmax(0,1.7fr)_minmax(19rem,1fr)]">
         <div className="min-w-0 space-y-4">
           {stock.kind === "manufacturer" ? (
             <WorkflowTabs
@@ -184,7 +184,7 @@ function StockList({ stock }: { stock: Stock }) {
     return (
       <section
         aria-labelledby="stock-list"
-        className="record-sheet flex flex-col gap-4 rounded-panel p-5 shadow-panel sm:p-6"
+        className="flex min-w-0 flex-col gap-5 border-t border-border/60 pt-6"
       >
         <h2 id="stock-list" className="text-base font-semibold">
           {t(groups[0]?.stage ?? "scrap")}

@@ -22,7 +22,7 @@ export function PrivacyRequests() {
   return (
     <section className="w-full space-y-5">
       <header className="space-y-2">
-        <h1 className="font-display text-3xl font-normal tracking-tight sm:text-5xl">
+        <h1 className="font-display text-4xl font-normal tracking-tight sm:text-5xl">
           {t("title")}
         </h1>
         <p className="max-w-3xl text-sm text-muted-foreground">{t("lead")}</p>
@@ -68,7 +68,7 @@ function RequestForm() {
   return (
     <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
       <form
-        className="space-y-4 rounded-panel bg-card p-5 shadow-panel sm:p-6"
+        className="space-y-5 rounded-2xl border border-border bg-card p-5 sm:p-8"
         onSubmit={(event) => {
           event.preventDefault();
           void send();
@@ -107,10 +107,7 @@ function RequestForm() {
         {status === "error" && <p role="alert">{common("error")}</p>}
       </form>
       {rows.length > 0 && (
-        <ul
-          aria-label={t("title")}
-          className="divide-y rounded-panel bg-card px-5 shadow-panel"
-        >
+        <ul aria-label={t("title")} className="divide-y border-y border-border">
           {rows.map((row) => (
             <li key={row.id} className="space-y-1 py-4">
               <p className="font-medium">{t(row.kind)}</p>

@@ -1,7 +1,13 @@
 "use client";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { useState, useSyncExternalStore } from "react";
+import {
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
 
 import { NativeUpdateControl } from "@/components/app/native-update-control";
 import { Logo } from "@/components/brand/logo";
@@ -27,6 +33,27 @@ export function SiteHeader() {
   const locale = useLocale();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const navigationId = useId();
+  const menuButton = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape" || event.defaultPrevented) return;
+      event.preventDefault();
+      setOpen(false);
+      menuButton.current?.focus();
+    };
+    const desktop = window.matchMedia("(min-width: 1001px)");
+    const onResize = (event: MediaQueryListEvent) => {
+      if (event.matches) setOpen(false);
+    };
+    document.addEventListener("keydown", onKeyDown);
+    desktop.addEventListener("change", onResize);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      desktop.removeEventListener("change", onResize);
+    };
+  }, [open]);
   const isBusinessHost = useSyncExternalStore(
     subscribeHost,
     isBusinessHostSnapshot,
@@ -45,10 +72,12 @@ export function SiteHeader() {
         <Logo className="gap-2 [&>span]:text-2xl [&>svg]:size-9" />
       </Link>
       <nav
+        id={navigationId}
         className={`${styles.nav} ${open ? styles.open : ""}`}
         aria-label={t("menu")}
-        onClick={() => {
-          setOpen(false);
+        onClick={(event) => {
+          if (event.target instanceof Element && event.target.closest("a"))
+            setOpen(false);
         }}
       >
         {isBusiness ? (
@@ -83,6 +112,8 @@ export function SiteHeader() {
         <button
           type="button"
           className={styles.menu}
+          ref={menuButton}
+          aria-controls={navigationId}
           aria-label={t("menu")}
           aria-expanded={open}
           onClick={() => {

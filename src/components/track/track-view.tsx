@@ -26,13 +26,13 @@ export function TrackView({ booking }: { booking: TrackedBooking }) {
 
   if (booking.familyView)
     return (
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-8">
         <StatusHero booking={booking} />
-        <div className="grid items-start gap-4 lg:grid-cols-2">
-          <div className="rounded-[1.75rem] bg-card p-5 text-card-foreground">
+        <div className="grid items-start gap-8 lg:grid-cols-2">
+          <div className="rounded-2xl border border-border bg-card p-5">
             <WhenCard booking={booking} today={today} />
           </div>
-          <div className="space-y-4 rounded-[1.75rem] bg-card p-5 text-card-foreground">
+          <div className="space-y-4 rounded-2xl border border-border bg-card p-5">
             <ShopCard shop={booking.shop} />
             <Timeline timeline={booking.timeline} />
           </div>
@@ -41,11 +41,11 @@ export function TrackView({ booking }: { booking: TrackedBooking }) {
     );
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-8">
       <StatusHero booking={booking} />
-      <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
+      <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
         <div className="min-w-0 space-y-4">
-          <div className="rounded-[1.75rem] bg-card p-5 text-card-foreground sm:p-6">
+          <div className="rounded-2xl border border-border bg-card p-5 sm:p-7">
             <NextActions booking={booking} />
             <WhenCard booking={booking} today={today} />
           </div>
@@ -66,12 +66,12 @@ export function TrackView({ booking }: { booking: TrackedBooking }) {
           <ReceiptReview booking={booking} />
           <ItemsCard booking={booking} />
         </div>
-        <aside className="min-w-0 space-y-4">
-          <div className="rounded-[1.75rem] bg-card p-5 text-card-foreground sm:p-6">
+        <aside className="min-w-0 space-y-6 lg:sticky lg:top-24">
+          <div className="rounded-2xl border border-border bg-card p-5 sm:p-7">
             <ShopCard shop={booking.shop} />
             <Timeline timeline={booking.timeline} />
           </div>
-          <div className="space-y-4 rounded-[1.75rem] bg-card p-5 text-card-foreground sm:p-6">
+          <div className="space-y-4 rounded-2xl border border-border bg-card p-5 sm:p-7">
             <CancelBooking booking={booking} />
             {booking.isMine ? <HouseholdScheduleControls /> : null}
             <CollectionSharing

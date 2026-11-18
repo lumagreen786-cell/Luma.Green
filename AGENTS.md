@@ -30,6 +30,11 @@ exact units, accessibility and native trust boundaries.
   and business.luma.green (business ecosystem and workflows). Deploy routing
   only after DNS/TLS/auth/native compatibility acceptance. Keep old operational
   routes reachable until native and existing-link migration is complete.
+- Owner clarification: restyle every route now, not only shared tokens. One
+  Afterlife style covers public, business, household, account, operational and
+  admin screens, including hosted native screens. Keep one admin console and
+  one backend; the subdomain split does not duplicate either. The owner will
+  perform real-account acceptance later; record it as deferred, never passed.
 - Track routes and states, run pnpm check/build and relevant browser checks.
   No invented live records, generated screenshots, auth shortcuts or native
   release claims. Keep canonical instructions consistent with this approval.

@@ -33,13 +33,13 @@ export function HelpHero({
 }) {
   return (
     <div data-parallax-scene className="relative isolate bg-background">
-      <Container className="relative flex flex-col gap-4 py-6">
+      <Container className="relative flex flex-col gap-6 py-10 sm:py-16">
         {breadcrumbs}
         <div
           data-reveal
           className={cn(
-            "grid items-center gap-4",
-            banner && "lg:grid-cols-[minmax(0,1fr)_7rem]",
+            "grid items-center gap-8",
+            banner && "lg:grid-cols-[minmax(0,1fr)_minmax(16rem,0.7fr)]",
             !banner && art && "md:grid-cols-[1fr_auto]",
           )}
         >
@@ -49,14 +49,14 @@ export function HelpHero({
                 {eyebrow}
               </p>
             ) : null}
-            <h1 className="max-w-3xl font-display text-3xl leading-tight font-normal tracking-tight text-balance sm:text-5xl">
+            <h1 className="max-w-3xl font-display text-4xl leading-tight font-normal tracking-tight text-balance sm:text-6xl">
               {title}
             </h1>
             <p className="max-w-2xl text-sm leading-relaxed text-pretty text-muted-foreground">
               {lead}
             </p>
             {children ? (
-              <div className="mt-3 min-w-0 rounded-panel bg-card p-4 shadow-panel sm:p-5">
+              <div className="mt-3 min-w-0 border-t border-border pt-5">
                 {children}
               </div>
             ) : null}
@@ -65,8 +65,8 @@ export function HelpHero({
             <RoleStoryImage
               scene={banner}
               className="hidden lg:block"
-              frameClassName="h-24 aspect-auto"
-              sizes="(min-width: 1024px) 112px, 100vw"
+              frameClassName="h-64 aspect-auto rounded-2xl"
+              sizes="(min-width: 1024px) 40vw, 100vw"
             />
           ) : null}
           {!banner && art ? (

@@ -73,12 +73,12 @@ function Home({ org }: { org: OrgWorkspace }) {
         />
       </div>
       <Stats trades={trades} listings={mine} />
-      <div className="grid min-w-0 items-start gap-4 xl:grid-cols-[minmax(0,1.7fr)_minmax(19rem,1fr)]">
-        <div className="min-w-0 space-y-4">
+      <div className="grid min-w-0 items-start gap-8 xl:grid-cols-[minmax(0,1.7fr)_minmax(19rem,1fr)]">
+        <div className="min-w-0 space-y-8">
           <WaitingForYou trades={trades} showSide />
           <LatestOffers offers={offers} recycled={recycled} isMaker={isMaker} />
         </div>
-        <aside className="min-w-0 rounded-panel bg-card p-5 text-card-foreground xl:sticky xl:top-6">
+        <aside className="min-w-0 border-t border-border/60 pt-6 xl:sticky xl:top-24">
           <EmployerPaymentControls />
         </aside>
       </div>
@@ -125,7 +125,7 @@ function Stats({
   if (trades === undefined || listings === undefined) {
     return (
       <div
-        className="grid grid-cols-1 gap-0 divide-y divide-border/50 rounded-panel bg-card text-card-foreground shadow-panel sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-3 [&>div]:border-0 [&>div]:bg-transparent [&>div]:shadow-none"
+        className="grid min-w-0 grid-cols-1 gap-6 py-4 sm:grid-cols-2 lg:grid-cols-3"
         aria-busy="true"
       >
         {[0, 1, 2].map((index) => (
@@ -141,7 +141,7 @@ function Stats({
       <h2 id="home-stats" className="sr-only">
         {t("home.statsTitle")}
       </h2>
-      <div className="grid grid-cols-1 gap-0 divide-y divide-border/50 rounded-panel bg-card text-card-foreground shadow-panel sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-3 [&>div]:border-0 [&>div]:bg-transparent [&>div]:shadow-none">
+      <div className="grid min-w-0 grid-cols-1 gap-6 py-4 sm:grid-cols-2 lg:grid-cols-3">
         <StatCard
           label={t("home.stats.gatewayPending")}
           value={format.number(totals.pendingGateway)}

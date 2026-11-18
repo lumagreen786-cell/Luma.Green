@@ -364,7 +364,7 @@ export function Inspections({
           {data.rows.length === 0 ? (
             <p>{t("empty")}</p>
           ) : (
-            <ol className="divide-y divide-border/60 rounded-xl border border-border/60 bg-card px-4 sm:px-5">
+            <ol className="divide-y divide-border border-y border-border">
               {data.rows.map((row) => (
                 <li
                   key={row.id}

@@ -116,7 +116,7 @@ export function ConsoleShell({ children }: { children: ReactNode }) {
       <main
         id="main"
         tabIndex={-1}
-        className="mx-auto w-full max-w-[90rem] min-w-0 flex-1 px-4 py-6 sm:px-8 lg:py-10"
+        className="mx-auto w-full max-w-[90rem] min-w-0 flex-1 px-5 py-10 sm:px-8 lg:px-12 lg:py-14"
       >
         <QueryProvider>{children}</QueryProvider>
       </main>
@@ -130,8 +130,8 @@ function ConsoleNavigation({ name }: { name: string }) {
   const { signOut, busy, error } = useAdminSignOut();
 
   return (
-    <header className="border-b border-border/50 bg-background px-4 py-4 text-foreground sm:px-8">
-      <div className="mx-auto flex max-w-[90rem] items-center justify-between gap-3 pb-4">
+    <header className="border-b border-border bg-background px-5 pt-5 text-foreground sm:px-8 lg:px-12">
+      <div className="mx-auto flex max-w-[90rem] items-center justify-between gap-3 pb-5">
         <Link
           href="/admin"
           aria-label="Admin home"
@@ -158,7 +158,7 @@ function ConsoleNavigation({ name }: { name: string }) {
         />
         <Button
           variant="ghost"
-          className="shrink-0 text-foreground hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring"
+          className="shrink-0 border-transparent text-muted-foreground hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring"
           aria-label={`Sign out ${name}`}
           disabled={busy}
           onClick={() => void signOut()}
@@ -178,9 +178,9 @@ function ConsoleNavigation({ name }: { name: string }) {
       ) : null}
       <nav
         aria-label="Admin"
-        className="mx-auto max-w-[90rem] rounded-panel border-t border-border pt-3"
+        className="mx-auto max-w-[90rem] border-t border-border"
       >
-        <ul className="flex min-w-0 flex-wrap items-center gap-2">
+        <ul className="grid min-w-0 grid-cols-2 items-stretch gap-x-2 sm:flex sm:flex-wrap sm:items-center sm:gap-x-4">
           {nav.map((item) => {
             const isActive = isCurrent(pathname, item.href);
             const count = item.count ? summary?.[item.count.key] : undefined;
@@ -190,10 +190,10 @@ function ConsoleNavigation({ name }: { name: string }) {
                   href={item.href}
                   aria-current={isActive ? "page" : undefined}
                   className={cn(
-                    "relative flex min-h-11 items-center justify-center gap-2 rounded-2xl px-4 py-2 text-sm whitespace-normal transition-colors outline-none focus-visible:ring-3 focus-visible:ring-ring",
+                    "relative flex min-h-12 items-center justify-start gap-2 border-b-2 px-2 py-3 text-sm whitespace-normal transition-colors outline-none focus-visible:ring-3 focus-visible:ring-ring",
                     isActive
-                      ? "bg-primary font-semibold text-primary-foreground"
-                      : "text-foreground hover:bg-accent hover:text-accent-foreground",
+                      ? "border-primary font-semibold text-foreground"
+                      : "border-transparent text-muted-foreground hover:bg-accent hover:text-accent-foreground",
                   )}
                 >
                   <item.icon

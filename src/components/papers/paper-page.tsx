@@ -119,8 +119,8 @@ function PaperBoard({ orgId }: { orgId: Id<"orgs"> }) {
   return (
     <section className="flex min-w-0 flex-col gap-6">
       <AppPageHeader title={t("title")} lead={t("lead")} />
-      <div className="grid min-w-0 items-start gap-6 xl:grid-cols-[19rem_minmax(0,1fr)]">
-        <div className="min-w-0 space-y-4 xl:sticky xl:top-24">
+      <div className="grid min-w-0 items-start gap-8 xl:grid-cols-[18rem_minmax(0,1fr)]">
+        <div className="min-w-0 space-y-5 xl:sticky xl:top-24 xl:border-e xl:border-border xl:pe-6">
           <Link href="/app/stock" className="underline underline-offset-4">
             {t("manual")}
           </Link>
@@ -128,7 +128,7 @@ function PaperBoard({ orgId }: { orgId: Id<"orgs"> }) {
             <p role="status">{t("unavailable")}</p>
           ) : null}
           {available?.canOperate ? (
-            <section className="flex flex-col gap-3 rounded-panel border border-border/60 bg-card p-5 text-card-foreground">
+            <section className="flex flex-col gap-4 border-y border-border py-5">
               <label htmlFor={`${id}-upload`}>{t("upload")}</label>
               <Input
                 id={`${id}-upload`}
@@ -427,11 +427,10 @@ export function PaperEditor({
     }
   }
   return (
-    <section
-      className="space-y-6 rounded-panel border border-border/60 bg-card p-5 text-card-foreground"
-      aria-label={paper.name}
-    >
-      <h2 className="text-lg font-semibold break-words">{paper.name}</h2>
+    <section className="min-w-0 space-y-6" aria-label={paper.name}>
+      <h2 className="font-display text-2xl font-normal tracking-tight break-words">
+        {paper.name}
+      </h2>
       <section className="grid min-w-0 gap-6 2xl:grid-cols-2">
         <PrivatePaper draftId={paper.id} />
         <section className="min-w-0 space-y-4">

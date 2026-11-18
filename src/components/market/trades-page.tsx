@@ -154,12 +154,12 @@ function Trades({
         params.set("tab", value);
         window.history.replaceState(null, "", `?${params.toString()}`);
       }}
-      className="record-sheet gap-4 rounded-panel p-3 shadow-panel sm:p-5"
+      className="min-w-0 gap-6"
     >
-      <div className="-mt-3 flex justify-center sm:-mt-5">
+      <div className="flex min-w-0 border-b border-border/60 pb-4">
         <TabsList
           aria-label={t("trades.tabsLabel")}
-          className="w-fit max-w-full rounded-t-none rounded-b-[28px] bg-[var(--shell)] p-2 pt-0"
+          className="h-auto w-fit max-w-full flex-wrap justify-start rounded-2xl bg-muted/40 p-1.5"
         >
           {(["buying", "selling"] as const).map((value) => (
             <TabsTrigger key={value} value={value}>

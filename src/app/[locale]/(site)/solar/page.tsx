@@ -41,10 +41,10 @@ export default async function SolarPage() {
         lead={t("lead")}
         scene={imageRole}
       />
-      <Container className="pb-8">
+      <Container className="pb-16">
         <SolarPlanner
           between={
-            <details className="rounded-panel bg-card p-5 shadow-panel">
+            <details className="border-y border-border py-6">
               <summary className="cursor-pointer py-2 font-semibold outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
                 {t("subsidy.title")}
               </summary>

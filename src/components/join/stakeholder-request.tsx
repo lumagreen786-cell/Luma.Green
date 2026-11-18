@@ -145,11 +145,11 @@ function RequestForm({
         void send();
       }}
     >
-      <header className="space-y-2">
-        <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
+      <header className="space-y-4">
+        <h1 className="font-display text-3xl leading-tight font-normal tracking-tight sm:text-4xl">
           {participantType ? participants("apply") : t("title")}
         </h1>
-        <p className="rounded-xl bg-accent/30 p-4 text-sm text-muted-foreground">
+        <p className="border-s-2 border-primary ps-4 text-sm text-muted-foreground">
           {t("note")}
         </p>
       </header>
@@ -277,8 +277,8 @@ function ApplicationStatus({ account }: { account: NonNullable<Account> }) {
     rejected: join("status.rejected.title"),
   }[account.status];
   return (
-    <section className="flex flex-col gap-5 rounded-xl bg-muted/40 p-5">
-      <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
+    <section className="flex flex-col gap-6 border-t border-border py-6">
+      <h1 className="font-display text-3xl leading-tight font-normal tracking-tight sm:text-4xl">
         {title}
       </h1>
       <p className="font-medium">{account.organizationName}</p>

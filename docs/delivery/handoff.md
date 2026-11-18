@@ -6,15 +6,18 @@ homepage has direct WhatsApp booking configuration, rotating audiences and a
 15-conversation phone animation. Business domain routing is prepared behind
 `NEXT_PUBLIC_BUSINESS_SITE_ENABLED`, which remains off by default.
 
-All local check stages and the production build passed. See
+Final build, lint, types and all 3,346 unit tests passed. Browser checks passed
+with focused reruns for obsolete presentation assertions; final hosted CI remains. See
 [delivery evidence](afterlife-rollout-2026-11-18.md) and
 [route coverage](afterlife-route-coverage-2026-11-18.md) for scope and limits.
 Protected-state and device acceptance remain separate from fixture captures.
 
-Pending: owner WhatsApp number, access to the Vercel project owning luma.green,
-and Spaceship/authoritative DNS access. Follow the
+Configured: Vercel business domain, Cloudflare CNAME and exact Convex trusted
+origin; HTTPS and allow/deny CORS checks pass. Pending: owner WhatsApp number,
+final browser CI and owner-deferred signed-in business acceptance. The Production
+routing flag is saved as true and will apply on the next deployment. Follow the
 [business-domain rollout](../operations/business-domain-rollout.md) before
-activation. No DNS or production settings have changed. Unrelated procurement
+activation. See the delivery record for the exact live changes. Unrelated procurement
 PDFs and local design captures are not part of this source change.
 
 ## Florin local closeout — 12 November 2026

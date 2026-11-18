@@ -39,7 +39,7 @@ export function PrivacyRequestQueue() {
   return (
     <section
       aria-labelledby="privacy-queue"
-      className="space-y-3 rounded-xl bg-card p-5 sm:p-6"
+      className="space-y-4 border-t border-border pt-8"
     >
       <h2 id="privacy-queue" className="text-xl font-semibold">
         Privacy requests

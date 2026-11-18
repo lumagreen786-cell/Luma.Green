@@ -109,13 +109,14 @@ export function DefinitionConsole() {
     },
   });
   return (
-    <div className="space-y-6 rounded-xl bg-card p-5 sm:p-6">
+    <div className="min-w-0 space-y-6">
       <p className="text-sm text-muted-foreground">
         Review source evidence before activation. An active definition does not
         approve hazard handling, quality, emissions or regulatory scope.
         Existing material family and stage cannot be changed here.
       </p>
       <form
+        className="border-y border-border py-6"
         onSubmit={(e) => {
           void form.handleSubmit(async (values) => {
             setError(false);

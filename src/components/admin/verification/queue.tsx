@@ -104,7 +104,7 @@ export function VerificationQueue({
       {header}
       <section
         aria-labelledby="in-review"
-        className="record-sheet flex flex-col gap-3 rounded-panel p-5 sm:p-6"
+        className="flex min-w-0 flex-col gap-4 border-t border-border pt-6"
       >
         <div className="flex flex-wrap items-baseline justify-between gap-2">
           <h2
@@ -133,7 +133,7 @@ export function VerificationQueue({
       {withApplicant.length > 0 ? (
         <section
           aria-labelledby="with-applicant"
-          className="record-sheet flex flex-col gap-3 rounded-panel p-5 sm:p-6"
+          className="flex min-w-0 flex-col gap-4 border-t border-border pt-6"
         >
           <div className="flex flex-col gap-1">
             <h2

@@ -25,9 +25,9 @@ export function FormHeader({
   step?: string;
 }) {
   return (
-    <header className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-start">
+    <header className="grid gap-4 border-b border-border pb-7 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-start">
       <div className="min-w-0 space-y-2">
-        <h1 className="font-display text-3xl leading-tight font-normal tracking-tight">
+        <h1 className="font-display text-3xl leading-tight font-normal tracking-tight sm:text-4xl">
           {title}
         </h1>
         <p className="text-sm text-muted-foreground">

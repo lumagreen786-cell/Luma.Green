@@ -7,7 +7,7 @@ export const metadata: Metadata = { title: "Verification" };
 
 export default function VerificationPage() {
   return (
-    <div className="flex flex-col gap-10">
+    <div className="mx-auto flex w-full max-w-6xl flex-col gap-12">
       <VerificationWorkspace />
       <StakeholderQueue />
     </div>

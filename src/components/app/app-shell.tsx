@@ -478,7 +478,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         <main
           id="main"
           tabIndex={-1}
-          className="mx-auto flex w-full max-w-[90rem] min-w-0 flex-1 flex-col gap-6 px-4 pt-6 pb-28 sm:px-8 xl:pt-8 xl:pb-16"
+          className="mx-auto flex w-full max-w-[90rem] min-w-0 flex-1 flex-col gap-8 px-4 pt-8 pb-28 sm:px-8 xl:pt-10 xl:pb-16"
         >
           <WorkspacePermissions
             key={

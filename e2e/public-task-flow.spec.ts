@@ -2,19 +2,22 @@ import { expect, test } from "@playwright/test";
 
 import english from "../messages/en.json";
 
-test("a phone visitor can start a collection before reading supporting content", async ({
+test("a phone visitor sees booking availability before supporting content", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/en");
-  const hero = page.getByRole("region", { name: english.home.hero.title });
-  const action = hero.getByRole("link", {
-    name: english.home.hero.sell,
+  const hero = page.getByRole("main").locator("section").first();
+  const action = hero.getByRole("button", {
+    name: english.afterlife.bookNow,
     exact: true,
   });
   await expect(action).toBeInViewport();
-  await action.click();
-  await expect(page).toHaveURL(/\/sell$/u);
+  await expect(action).toBeDisabled();
+  await expect(
+    hero.getByText(english.afterlife.bookingUnavailable, { exact: true }),
+  ).toBeVisible();
+  await expect(page.getByRole("dialog")).toHaveCount(0);
 });
 
 test("standards keep their boundary copy visible and reveal supporting rules on demand", async ({

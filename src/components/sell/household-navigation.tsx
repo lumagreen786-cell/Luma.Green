@@ -24,7 +24,7 @@ export function HouseholdNavigation() {
   const pathname = usePathname();
   return (
     <nav aria-label={t("navigation")} className="bg-background px-4 py-3">
-      <ul className="mx-auto flex max-w-6xl flex-wrap items-center gap-1 rounded-[1.75rem] border border-border bg-card p-2 text-card-foreground shadow-sm">
+      <ul className="mx-auto flex max-w-7xl flex-wrap items-center gap-2 border-b border-border pb-3">
         {tabs.map(({ label, href, icon: Icon }) => (
           <li key={href} className="max-w-full min-w-0">
             <Link

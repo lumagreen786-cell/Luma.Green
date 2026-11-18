@@ -37,19 +37,83 @@ business hostname split. This is source implementation, not a production claim.
 - Two actual-app Playwright checks passed, including direct booking behavior.
   The production build and individual pnpm check stages ran locally; no
   production deployment or real WhatsApp booking is implied.
-- This shared rollout establishes the selected language across all existing web
-  screens. Detailed page-by-page refinement and protected-state acceptance remain
-  a separate review, as the owner requested. No new operational workflow is
-  claimed from the visual preview.
+- The owner clarified full page restyling now. Public, household, account,
+  operational and admin compositions were reviewed and updated, not only shared
+  tokens. Real-account acceptance is deferred by the owner. No new operational
+  workflow is claimed from the visual preview.
 
 ## Activation requirements
 
 - Owner supplies Luma WhatsApp recipient (international digits only).
-- Vercel account/project that owns luma.green; current CLI account does not list
-  Luma in its available team projects. Existing unrelated projects untouched.
-- Spaceship/authenticated authoritative DNS access. Read exact Vercel DNS target
-  before adding business record; preserve apex, mail and verification records.
+- Browser access confirmed to Vercel team `luma-0f95`, project `luma-green`.
+  CLI remains a separate account; unrelated projects were not changed.
+- Spaceship confirms Cloudflare nameservers. Business CNAME added at Cloudflare
+  using the exact Vercel target; existing apex/www records and nameservers kept.
 - See ../operations/business-domain-rollout.md for DNS/TLS, Better Auth origins,
   private-file CORS, Turnstile, locale and native acceptance before enabling flag.
-- No provider spend, production backend mutation, DNS, deployment, binary or OTA
-  publication has occurred in this implementation.
+- DNS and the exact backend trusted-origin setting were configured as recorded
+  below. No provider send, frontend deployment, binary or OTA publication occurred.
+
+## Domain setup receipt — 18 November 2026
+
+- Vercel `luma-0f95/luma-green`: added `business.luma.green` to Production.
+  Vercel reports Valid Configuration after SSL issuance. HTTPS returns HTTP 200
+  from the existing release; this is not Afterlife deployment acceptance.
+- Cloudflare zone `luma.green`: added CNAME `business` to
+  `59238d9ed9b5298a.vercel-dns-017.com`, DNS only, Auto TTL. Existing apex A
+  and www CNAME remain proxied and unchanged. Spaceship nameservers remain
+  `arturo.ns.cloudflare.com` and `diva.ns.cloudflare.com`.
+- Verified Convex production `astute-peccary-795`; preserved `SITE_URL` as
+  `https://luma.green`. Appended `https://business.luma.green` to
+  `EXTRA_TRUSTED_ORIGINS`, retaining `https://luma-green-ten.vercel.app`.
+  Turnstile enforcement variable is unset; enforcement was not changed.
+- PR #61: build, types, lint, unit, security and format checks passed on the
+  initial revision. Browser job timed out on old design assertions. Follow-up
+  updates preserve meaningful coverage and fix mobile menu keyboard handling
+  and a Tamil layout issue; rerun remains required.
+
+- Live non-mutating checks: private-file preflight accepts business and apex
+  origins (204 with exact allowed origin), denies an unrelated origin (403),
+  and business `/api/auth/get-session` and `/login` return 200. This does not
+  prove signed-in access, OTP delivery, upload or recovery acceptance.
+
+## Full-platform scope clarification
+
+One Afterlife design and one admin console apply to all 82 source pages and
+hosted mobile/desktop screens. Per-group records:
+
+- [Public, account and household](afterlife-public-account-pages.md)
+- [Workspace compositions](afterlife-workspace-pages.md)
+- [Admin compositions](afterlife-admin-pages.md)
+
+Operational source/detail coverage is recorded separately after the final
+fixture matrix. Mobile native chrome and Electron offline presentation match
+the web palette; binary/OTA publication remains separate. The owner will test
+real accounts later, so that acceptance is explicitly deferred, not passed.
+
+## Production switch preparation
+
+Vercel Production now has `NEXT_PUBLIC_BUSINESS_SITE_ENABLED=true`. Saving the
+setting succeeded; it needs the next checked deployment to take effect. No
+redeploy of the old frontend was requested. Real-account acceptance is deferred
+by the owner. The WhatsApp recipient remains unset.
+
+## Full-platform final local checks
+
+- Final production build passed (all page groups included).
+- Full lint: zero errors, 122 warnings; web and Convex TypeScript passed.
+- Full unit suite: 411 files, 3,346 tests passed with two workers.
+- Security suite: all 28 passed with local loopback permission. The first
+  sandbox run blocked its listener; that was an environment failure.
+- Browser suite: 950 cases, 931 initially passed. All 19 obsolete presentation
+  assertions were corrected, preserving image loading, fit, heading readability
+  and keyboard checks. Focused reruns passed: motion 1, showcase 37 (including
+  14 failed cases), join 4. This is combined evidence, not a clean full rerun.
+- Workspace visual matrix: 112 captures, zero overflow or page errors.
+- Operational visual matrix: 180 route captures and 21 secondary tabs, zero
+  overflow or page errors. See the group records for fixture-state limits.
+- Read-only review preserved tab drafts, record focus and one admin/backend.
+  Fixed the desktop offline keyboard focus outline in dark mode.
+
+Hosted CI must pass on the final commit before merge. Real-account testing,
+provider delivery and native-device acceptance remain owner-deferred.

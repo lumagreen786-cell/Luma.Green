@@ -3,7 +3,6 @@ import { expect, test } from "@playwright/test";
 import ar from "../messages/ar.json";
 import en from "../messages/en.json";
 import kn from "../messages/kn.json";
-import { actionName } from "../src/components/site/action-name";
 
 for (const [locale, copy] of [
   ["en", en],
@@ -17,15 +16,20 @@ for (const [locale, copy] of [
       }, info) => {
         await page.setViewportSize({ width, height: 900 });
         await page.emulateMedia({ colorScheme, reducedMotion: "reduce" });
-        await page.goto(`/${locale}`);
-        const panel = page.getByRole("tabpanel");
+        await page.goto(`/${locale}/business`);
+        const panel = page.locator("#roles > div > div").filter({
+          has: page.getByRole("heading", {
+            name: copy.afterlife.kabadiwala,
+            exact: true,
+          }),
+        });
         const role = panel.getByRole("link", {
-          name: actionName(copy.join.start, copy.home.roles.kabadiwala.cta),
+          name: copy.afterlife.roleAction,
           exact: true,
         });
         await expect(role).toHaveCount(1);
         await expect(panel.getByRole("heading")).toHaveText(
-          copy.home.roles.kabadiwala.title,
+          copy.afterlife.kabadiwala,
         );
         const image = panel.locator("img");
         await image.scrollIntoViewIfNeeded();
@@ -41,6 +45,14 @@ for (const [locale, copy] of [
         await page.screenshot({ path: info.outputPath("role-card.png") });
         await role.focus();
         await expect(role).toBeFocused();
+        await page.keyboard.press("Enter");
+        await expect(page).toHaveURL(/\/business\/collectors$/u);
+        const join = page
+          .getByRole("main")
+          .getByRole("link", { name: copy.afterlife.roleAction, exact: true })
+          .first();
+        await join.focus();
+        await expect(join).toBeFocused();
         await page.keyboard.press("Enter");
         await expect(page).toHaveURL(/\/login\?next=/u);
         await expect(

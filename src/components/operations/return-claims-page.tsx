@@ -96,14 +96,14 @@ function ReturnClaimsBody({
         title={t("returnClaims.title")}
         lead={t("returnClaims.notice")}
       />
-      <div className="grid min-w-0 items-start gap-6 xl:grid-cols-2">
+      <div className="grid min-w-0 items-start gap-8 xl:grid-cols-2">
         <Section title={t("returnClaims.returnTitle")}>
           {canOperate ? (
             <ProposeReturn
               options={options.filter((option) => option.canReturn)}
             />
           ) : null}
-          <ul className="record-sheet divide-y divide-border/60 rounded-panel px-4 sm:px-5">
+          <ul className="divide-y divide-border border-y border-border">
             {returns.rows.map((row) => (
               <li key={row.id}>
                 <ReturnRecord
@@ -124,7 +124,7 @@ function ReturnClaimsBody({
           {canManage ? (
             <DeclareClaim options={options.filter((row) => row.canClaim)} />
           ) : null}
-          <ul className="record-sheet divide-y divide-border/60 rounded-panel px-4 sm:px-5">
+          <ul className="divide-y divide-border border-y border-border">
             {claims.rows.map((row) => (
               <li key={row.id}>
                 <ClaimRecord row={row} canManage={canManage} />

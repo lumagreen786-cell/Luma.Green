@@ -34,12 +34,6 @@ for (const { locale, copy } of [
 
         await page.evaluate(async () => document.fonts.ready);
         await expect(page.getByRole("complementary")).toHaveCount(0);
-        const formBounds = await page.getByRole("main").boundingBox();
-        expect(formBounds).not.toBeNull();
-        if (formBounds)
-          expect(
-            Math.abs(formBounds.x + formBounds.width / 2 - width / 2),
-          ).toBeLessThanOrEqual(1);
         await expect(
           page.getByRole("button", { name: copy.auth.sendCode, exact: true }),
         ).toBeDisabled();
@@ -48,7 +42,7 @@ for (const { locale, copy } of [
         ).toBeVisible();
         const main = page.getByRole("main");
         const box = await main.boundingBox();
-        if (!box) throw new Error("Centered login content is missing");
+        if (!box) throw new Error("Login content is missing");
         const banner = await page.getByRole("banner").boundingBox();
         if (!banner) throw new Error("Login header is missing");
         // Center the form in the space below the actual responsive header.
@@ -118,52 +112,24 @@ for (const { locale, copy } of [
           fullPage: true,
         });
         await page.goto(`/${locale}`);
-        const hero = page.getByRole("region", {
-          name: copy.home.hero.title,
+        const hero = page.getByRole("main").locator("section").first();
+        await page.evaluate(async () => document.fonts.ready);
+        const collection = hero.getByRole("button", {
+          name: copy.afterlife.bookNow,
           exact: true,
         });
-        const heroImage = hero.locator("[data-recycling-illustration]");
-        await page.evaluate(async () => document.fonts.ready);
-        const collection = hero.locator('a[href$="/sell"]');
         await expect(collection).toBeInViewport();
-        await expect(heroImage).toBeVisible();
-        if (width < 1024) {
-          const previewBounds = await heroImage.boundingBox();
-          const actionBounds = await collection.boundingBox();
-          expect(previewBounds?.y).toBeGreaterThan(
-            (actionBounds?.y ?? 0) + (actionBounds?.height ?? 0),
-          );
-        }
-        if (width === 1440) {
-          const heading = await hero
-            .getByRole("heading", { level: 1 })
-            .boundingBox();
-          const picture = await heroImage.boundingBox();
-          expect(heading).not.toBeNull();
-          expect(picture).not.toBeNull();
-          if (heading && picture) {
-            expect(
-              picture.y,
-              "Dashboard content follows its title",
-            ).toBeGreaterThanOrEqual(heading.y + heading.height);
-            const action = await collection.boundingBox();
-            const prices = await hero
-              .locator('a[href$="/prices"]')
-              .boundingBox();
-            expect(action).not.toBeNull();
-            expect(prices).not.toBeNull();
-            if (!action || !prices)
-              throw new Error("Dashboard actions must render");
-            expect(action.width).toBeLessThan(picture.width);
-            expect(action.y + action.height).toBeLessThanOrEqual(picture.y);
-            expect(Math.abs(prices.y - picture.y)).toBeLessThanOrEqual(1);
-            expect(
-              await page.evaluate(
-                () => document.documentElement.scrollWidth <= innerWidth,
-              ),
-            ).toBe(true);
-          }
-        }
+        await expect(collection).toBeDisabled();
+        await expect(hero.locator("img")).toBeVisible();
+        await expect(hero.getByRole("heading", { level: 1 })).toHaveCSS(
+          "color",
+          "rgb(255, 255, 255)",
+        );
+        expect(
+          await page.evaluate(
+            () => document.documentElement.scrollWidth <= innerWidth,
+          ),
+        ).toBe(true);
         await page.screenshot({ path: testInfo.outputPath("home.png") });
       });
     }

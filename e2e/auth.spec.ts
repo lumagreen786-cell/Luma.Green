@@ -177,7 +177,7 @@ for (const { locale, messages } of [
 ]) {
   for (const width of [390, 1440]) {
     for (const theme of ["light", "dark"] as const) {
-      test(`${locale} centered OTP entry ${String(width)} ${theme}`, async ({
+      test(`${locale} aligned OTP entry ${String(width)} ${theme}`, async ({
         page,
       }, testInfo) => {
         await page.setViewportSize({ width, height: 900 });
@@ -199,9 +199,15 @@ for (const { locale, messages } of [
         const main = await page.getByRole("main").boundingBox();
         const header = await page.getByRole("banner").boundingBox();
         if (!main || !header) throw new Error("Sign-in layout is missing");
-        expect(
-          Math.abs(main.x + main.width / 2 - width / 2),
-        ).toBeLessThanOrEqual(1);
+        if (width < 1024) {
+          expect(
+            Math.abs(main.x + main.width / 2 - width / 2),
+          ).toBeLessThanOrEqual(1);
+        } else if (locale === "ar") {
+          expect(main.x + main.width).toBeLessThan(width / 2);
+        } else {
+          expect(main.x).toBeGreaterThan(width / 2);
+        }
         expect(
           Math.abs(main.y + main.height / 2 - (900 + header.height) / 2),
         ).toBeLessThanOrEqual(2);
@@ -220,7 +226,7 @@ for (const { locale, messages } of [
           ),
         ).toBe(true);
         await page.screenshot({
-          path: testInfo.outputPath("login-centered.png"),
+          path: testInfo.outputPath("login-aligned.png"),
         });
       });
     }

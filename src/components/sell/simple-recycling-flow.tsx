@@ -527,7 +527,7 @@ function RecyclingProgress({
   const format = useFormatter();
   return (
     <div className="space-y-3 border-b border-border/60 pb-5">
-      <ol className="flex flex-wrap gap-2 rounded-[1.75rem] bg-background p-2">
+      <ol className="grid grid-cols-1 gap-2 sm:grid-cols-3">
         {(["details", "schedule"] as const).map((step, index) => (
           <li
             key={step}
@@ -554,7 +554,7 @@ function RecyclingProgress({
         id="recycling-step-title"
         ref={heading}
         tabIndex={-1}
-        className="text-lg font-semibold outline-none"
+        className="text-2xl font-normal tracking-tight outline-none"
       >
         {simple(stage === "details" ? "details" : "chooseShop")}
       </h2>

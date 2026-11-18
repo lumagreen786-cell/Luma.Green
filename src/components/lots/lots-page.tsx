@@ -99,11 +99,11 @@ function IncomingLots() {
           {incoming.rows.length === 0 ? (
             <p className="text-muted-foreground">{t("empty")}</p>
           ) : (
-            <ul className="grid min-w-0 items-start gap-4 xl:grid-cols-2">
+            <ul className="min-w-0 divide-y divide-border border-y border-border">
               {incoming.rows.map((lot) => (
                 <li
                   key={lot.id}
-                  className="grid min-w-0 items-start gap-4 rounded-panel bg-card p-5 text-card-foreground sm:grid-cols-[minmax(0,1fr)_auto]"
+                  className="grid min-w-0 items-start gap-5 py-5 sm:grid-cols-[minmax(0,1fr)_auto]"
                 >
                   <div className="min-w-0 flex-1">
                     <Link
@@ -145,11 +145,11 @@ function HeldLots() {
           {held.rows.length === 0 ? (
             <p className="text-muted-foreground">{t("empty")}</p>
           ) : (
-            <ul className="grid min-w-0 items-start gap-4 xl:grid-cols-2">
+            <ul className="min-w-0 divide-y divide-border border-y border-border">
               {held.rows.map((lot) => (
                 <li
                   key={lot.id}
-                  className="grid min-w-0 items-start gap-4 rounded-panel bg-card p-5 text-card-foreground sm:grid-cols-[minmax(0,1fr)_auto]"
+                  className="grid min-w-0 items-start gap-5 py-5 sm:grid-cols-[minmax(0,1fr)_auto]"
                 >
                   <div className="min-w-0 flex-1">
                     <Link
@@ -164,7 +164,7 @@ function HeldLots() {
                       {t(`handling.${lot.handlingClass}`)}
                     </p>
                   </div>
-                  <div className="space-y-2 rounded-lg bg-muted/50 p-3 sm:text-end">
+                  <div className="space-y-2 border-s border-border ps-4 sm:text-end">
                     <div>
                       <p className="text-xs text-muted-foreground">
                         {t("remaining")}
@@ -204,12 +204,9 @@ function SentLots() {
           {sent.rows.length === 0 ? (
             <p className="text-muted-foreground">{t("empty")}</p>
           ) : (
-            <ul className="grid min-w-0 items-start gap-4 xl:grid-cols-2">
+            <ul className="min-w-0 divide-y divide-border border-y border-border">
               {sent.rows.map((event) => (
-                <li
-                  key={event.id}
-                  className="grid min-w-0 gap-3 rounded-panel bg-card p-5 text-card-foreground"
-                >
+                <li key={event.id} className="grid min-w-0 gap-3 py-5">
                   <div className="flex flex-wrap justify-between gap-3">
                     <span className="font-medium break-words">
                       {event.materialCode} · {event.state}
@@ -305,7 +302,7 @@ function LotDetail({ lotId }: { lotId: Id<"materialLots"> }) {
       {requiresControlledRoute(lot) ? (
         <p className="border-s-2 ps-4 text-sm">{t("controlledBlocked")}</p>
       ) : null}
-      <dl className="grid grid-cols-2 gap-4 rounded-panel bg-card p-5 text-card-foreground sm:grid-cols-3 xl:grid-cols-6">
+      <dl className="grid grid-cols-2 gap-6 border-y border-border py-6 sm:grid-cols-3 xl:grid-cols-6">
         <div>
           <dt className="text-sm text-muted-foreground">{t("streamClass")}</dt>
           <dd>{t(`streams.${lot.streamClass}`)}</dd>
@@ -360,7 +357,7 @@ function LotDetail({ lotId }: { lotId: Id<"materialLots"> }) {
       ) : null}
       <div className="grid min-w-0 items-start gap-6 xl:grid-cols-[minmax(18rem,1fr)_minmax(0,2fr)]">
         <section
-          className="flex min-w-0 flex-col gap-3 rounded-panel bg-card p-5 text-card-foreground"
+          className="flex min-w-0 flex-col gap-4 border-t border-border pt-6"
           aria-labelledby="custody-history"
         >
           <h2 id="custody-history" className="text-lg font-semibold">

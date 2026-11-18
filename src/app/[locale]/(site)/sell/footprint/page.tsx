@@ -12,8 +12,8 @@ export async function generateMetadata() {
 export default async function FootprintPage() {
   const t = await getTranslations("householdTools");
   return (
-    <Container className="flex max-w-6xl flex-col gap-6 py-8">
-      <h1 className="font-display text-2xl font-semibold">
+    <Container className="flex max-w-7xl flex-col gap-8 py-10">
+      <h1 className="border-b border-border pb-6 font-display text-4xl font-normal tracking-tight sm:text-5xl">
         {t("electricityTitle")}
       </h1>
       <ElectricityFootprint />

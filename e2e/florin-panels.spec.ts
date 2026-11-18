@@ -32,7 +32,7 @@ for (const theme of ["light", "dark"] as const) {
     const response = await page.goto("/ta/no-such-page");
     expect(response?.status()).toBe(404);
     const panel = page.getByRole("heading", { level: 1 }).locator("..");
-    await expect(panel).toHaveCSS("border-top-left-radius", "28px");
+    await expect(panel).toHaveCSS("border-top-left-radius", "20px");
     await expect(panel.getByRole("link")).toBeVisible();
     expect(
       await page.evaluate(() => document.documentElement.scrollWidth),
@@ -45,28 +45,38 @@ for (const theme of ["light", "dark"] as const) {
   test(`role details remain readable and bounded in ${theme}`, async ({
     page,
   }) => {
-    await page.emulateMedia({ colorScheme: theme });
-    await page.goto("/en");
-    const roles = page.getByRole("tablist", {
-      name: english.home.roles.heading,
-    });
-    const tabs = await roles.getByRole("tab").all();
-    for (const tab of tabs) {
-      await tab.click();
-      const panel = page.getByRole("tabpanel");
-      await expect(panel.getByRole("heading")).toBeVisible();
-      const colors = await panel.evaluate((element) => {
+    await page.emulateMedia({ colorScheme: theme, reducedMotion: "reduce" });
+    await page.goto("/en/business");
+    const roles = page.locator("#roles");
+    await expect(roles.getByRole("heading", { level: 3 })).toHaveCount(5);
+    const headings = await roles.getByRole("heading", { level: 3 }).all();
+    for (const heading of headings) {
+      const card = heading.locator("..");
+      await expect(heading).toBeVisible();
+      await expect(
+        card.getByRole("link", { name: english.afterlife.roleAction }),
+      ).toBeVisible();
+      const layout = await card.evaluate((element) => {
         const heading = element.querySelector("h3");
+        const image = element.querySelector("img");
+        if (!heading || !image)
+          throw new Error("Role card must have a heading and image");
+        const bounds = element.getBoundingClientRect();
+        const photo = image.getBoundingClientRect();
         return {
-          bg: getComputedStyle(element).backgroundColor,
-          text: heading ? getComputedStyle(heading).color : "",
+          text: getComputedStyle(heading).color,
+          bodyText: getComputedStyle(document.body).color,
+          imageFits:
+            photo.left >= bounds.left - 1 && photo.right <= bounds.right + 1,
+          imageLoaded: image.complete && image.naturalWidth > 0,
+          height: photo.height,
         };
       });
-      expect(colors.bg).toBe("rgb(32, 35, 44)");
-      expect(colors.text).toBe("rgb(245, 246, 248)");
-      const image = panel.locator("figure");
-      const imageBounds = await image.boundingBox();
-      expect(imageBounds?.height).toBeLessThanOrEqual(192);
+      expect(layout.text).toBe(layout.bodyText);
+      expect(layout.imageFits).toBe(true);
+      expect(layout.imageLoaded).toBe(true);
+      expect(layout.height).toBeGreaterThan(0);
+      expect(layout.height).toBeLessThanOrEqual(220);
     }
   });
 }

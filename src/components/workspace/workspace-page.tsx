@@ -116,7 +116,7 @@ export function WorkspacePage() {
     }
   }
   return (
-    <div className="flex min-w-0 flex-col gap-4">
+    <div className="flex min-w-0 flex-col gap-8">
       <AppPageHeader
         title={t("title")}
         actions={
@@ -137,7 +137,7 @@ export function WorkspacePage() {
       {workspaces?.length === 0 ? <p>{t("empty")}</p> : null}
       {workspaces && workspaces.length > 0 ? (
         <>
-          <div className="flex min-w-0 flex-col gap-2 rounded-panel bg-card p-5 shadow-panel sm:flex-row sm:items-center sm:gap-5">
+          <div className="flex min-w-0 flex-col gap-3 border-y border-border py-5 sm:flex-row sm:items-center sm:gap-8">
             <Label htmlFor="workspace-choice">{t("choose")}</Label>
             <Select
               dir={isLocale(locale) ? localeDirection(locale) : "ltr"}
@@ -191,7 +191,7 @@ function TeamSection({ orgId }: { orgId: Id<"orgs"> }) {
       }
     >
       <Tabs
-        className="min-w-0 rounded-panel bg-card p-5 shadow-panel"
+        className="min-w-0 rounded-2xl border border-border bg-card p-5 sm:p-7"
         defaultValue="team"
         dir={isLocale(locale) ? localeDirection(locale) : "ltr"}
       >
@@ -244,7 +244,7 @@ function TeamSection({ orgId }: { orgId: Id<"orgs"> }) {
         ) : null}
       </Tabs>
       {canManage ? (
-        <div className="min-w-0 rounded-panel bg-card p-5 shadow-panel">
+        <div className="min-w-0 rounded-2xl border border-border bg-card p-5 sm:p-7">
           <InviteForm orgId={orgId} actorRole={team.role} />
         </div>
       ) : null}

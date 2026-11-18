@@ -28,15 +28,21 @@ exact units, accessibility and native trust boundaries.
   of a live booking, provider confirmation or private customer record.
 - One Next.js codebase and existing Convex backend serve luma.green (public)
   and business.luma.green (business ecosystem and workflows). Deploy routing
-  only after DNS/TLS/auth/native compatibility acceptance. Keep old operational
+  after DNS/TLS and automated compatibility checks; real-account and device
+  acceptance is owner-deferred. Keep old operational
   routes reachable until native and existing-link migration is complete.
+- Owner clarification: restyle every route now, not only shared tokens. One
+  Afterlife style covers public, business, household, account, operational and
+  admin screens, including hosted native screens. Keep one admin console and
+  one backend; the subdomain split does not duplicate either. The owner will
+  perform real-account acceptance later; record it as deferred, never passed.
 - Track routes and states, run pnpm check/build and relevant browser checks.
   No invented live records, generated screenshots, auth shortcuts or native
   release claims. Keep canonical instructions consistent with this approval.
 
-# Luma design system — Florin, 11 November 2026
+# Historical Florin reference — 11 November 2026
 
-This is the active UI contract. The owner selected the full Florin application,
+The Afterlife contract above supersedes this historical reference. The owner selected the full Florin application,
 including light and dark modes, replacing the Ship X palette and light-only rule.
 Use the project skill [luma-florin-ui](../../../.agents/skills/luma-florin-ui/SKILL.md)
 for every UI change. Do not create or update PDFs for this rollout.

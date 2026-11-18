@@ -11,22 +11,26 @@ export async function BookNow() {
     t("bookingMessage"),
   );
   return (
-    <div className="space-y-2">
+    <div className="max-w-full min-w-0 space-y-2">
       <Button
         asChild={Boolean(href)}
         disabled={!href}
         size="lg"
-        className="gap-3 px-7"
+        className="h-auto min-h-13 max-w-full gap-3 rounded-2xl px-7 py-3 whitespace-normal"
       >
         {href ? (
           <a href={href}>
             <WhatsAppIcon className="size-5" />
-            {t("bookNow")}
+            <span className="min-w-0 [overflow-wrap:anywhere]">
+              {t("bookNow")}
+            </span>
           </a>
         ) : (
-          <span className="inline-flex items-center gap-3">
+          <span className="inline-flex min-w-0 items-center gap-3">
             <WhatsAppIcon className="size-5" />
-            {t("bookNow")}
+            <span className="min-w-0 [overflow-wrap:anywhere]">
+              {t("bookNow")}
+            </span>
           </span>
         )}
       </Button>

@@ -26,6 +26,8 @@
     linear-gradient(rgba(8, 11, 20, 0.55), transparent 35%);
 }
 .heroCopy {
+  min-width: 0;
+  width: 100%;
   position: relative;
   z-index: 1;
   max-width: 960px;

@@ -75,10 +75,10 @@ export default async function StandardsPage() {
         scene="electronics"
       />
 
-      <Container className="grid gap-4 pb-8 lg:grid-cols-[14rem_minmax(0,1fr)] lg:items-start">
+      <Container className="grid gap-10 pb-16 lg:grid-cols-[15rem_minmax(0,1fr)] lg:items-start lg:gap-16">
         <nav
           aria-label={t("onThisPage")}
-          className="flex flex-col gap-3 rounded-panel bg-card p-4 shadow-panel lg:sticky lg:top-24"
+          className="flex flex-col gap-3 border-s border-border ps-4 lg:sticky lg:top-24"
         >
           <p className="text-sm font-medium text-muted-foreground">
             {t("onThisPage")}
@@ -88,7 +88,7 @@ export default async function StandardsPage() {
               <li key={id}>
                 <a
                   href={`#${id}`}
-                  className="inline-flex min-h-11 w-full items-center rounded-full px-3 text-sm font-medium outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
+                  className="inline-flex min-h-11 w-full items-center rounded-xl px-3 text-sm font-medium outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
                 >
                   {t(`${id}.nav`)}
                 </a>

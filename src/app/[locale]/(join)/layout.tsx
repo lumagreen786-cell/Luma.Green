@@ -31,7 +31,7 @@ export default async function JoinLayout({
   const t = await getTranslations("nav");
 
   return (
-    <FocusedPageCanvas image="/images/ship-x/onboarding-background.webp">
+    <FocusedPageCanvas image="/images/showcase/yard-dispatch.webp">
       <SkipLink />
       <header className="sticky top-0 z-30 flex min-h-16 items-center justify-between gap-2 border-b border-border/60 bg-card/95 px-4 py-2 backdrop-blur sm:px-8">
         <Link
@@ -54,7 +54,7 @@ export default async function JoinLayout({
       <main
         id="main"
         tabIndex={-1}
-        className="afterlife-task-panel mx-auto my-6 w-[calc(100%-2rem)] max-w-4xl min-w-0 rounded-panel bg-card p-5 sm:p-6"
+        className="afterlife-task-panel mx-auto my-8 w-[calc(100%-2rem)] max-w-5xl min-w-0 rounded-2xl border border-border bg-card p-5 sm:my-12 sm:p-10"
       >
         {children}
       </main>

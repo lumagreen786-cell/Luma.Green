@@ -36,10 +36,10 @@ export function NormSection({
   return (
     <section
       aria-labelledby={`${id}-title`}
-      className="scroll-mt-24 rounded-panel bg-card p-5 shadow-panel sm:p-6"
+      className="scroll-mt-24 border-t border-border py-6"
     >
       <details id={id} open={id === "codes"} className="group">
-        <summary className="flex min-h-12 cursor-pointer items-center gap-3 font-display text-lg font-semibold outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
+        <summary className="flex min-h-12 cursor-pointer items-center gap-3 font-display text-2xl font-normal outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
           <Icon aria-hidden className="size-5 shrink-0 text-foreground" />
           <h2 id={`${id}-title`}>{title}</h2>
         </summary>
@@ -169,7 +169,7 @@ export async function EscrowSteps() {
     { key: "released", icon: BadgeCheckIcon },
   ] as const;
   return (
-    <ol className="divide-y divide-border/60 rounded-panel border border-border/60 bg-card px-4 shadow-panel sm:px-5">
+    <ol className="divide-y divide-border border-y border-border">
       {steps.map(({ key, icon: Icon }, index) => (
         <li key={key} className="flex items-start gap-4 py-4">
           <span className="flex items-center gap-2">

@@ -45,7 +45,7 @@ export function SaathiEarnings({ impact }: { impact: SaathiImpact }) {
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid min-w-0 grid-cols-1 gap-6 py-4 sm:grid-cols-2">
         <StatCard
           label={t("total")}
           value={format.money(impact.totalPaise)}
@@ -61,7 +61,7 @@ export function SaathiEarnings({ impact }: { impact: SaathiImpact }) {
         />
       </div>
 
-      <div className="grid min-w-0 items-start gap-4 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
+      <div className="grid min-w-0 items-start gap-8 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
         <div className="min-w-0">
           <Section title={t("history")}>
             <ul className="flex min-w-0 flex-col">
@@ -71,7 +71,7 @@ export function SaathiEarnings({ impact }: { impact: SaathiImpact }) {
             </ul>
           </Section>
         </div>
-        <div className="min-w-0 space-y-4">
+        <div className="min-w-0 space-y-8">
           {impact.byKind.length > 1 ? (
             <Section title={t("byKind")}>
               <BarList

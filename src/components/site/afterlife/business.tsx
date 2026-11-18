@@ -36,6 +36,7 @@ export async function AfterlifeBusiness({
     <>
       <section className={styles.hero}>
         <Image
+          unoptimized
           src={`/images/showcase/${collectors ? "kabadiwala-weighing.webp" : "material-yard.webp"}`}
           alt=""
           fill
@@ -94,6 +95,7 @@ export async function AfterlifeBusiness({
               <Reveal key={role.key} className={styles.role}>
                 <div className={styles.roleImage}>
                   <Image
+                    unoptimized
                     src={`/images/showcase/${role.image}`}
                     alt={t("imageAlt")}
                     fill

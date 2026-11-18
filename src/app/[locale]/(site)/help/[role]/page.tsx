@@ -82,7 +82,7 @@ export default async function RoleHelpPage({ params }: Props) {
         <JumpLinks label={t("role.onThisPage")} links={sections} />
       </HelpHero>
 
-      <Container className="grid items-start gap-4 pb-8 lg:grid-cols-2">
+      <Container className="grid items-start gap-8 pb-16 lg:grid-cols-2 lg:gap-12">
         <HelpSection
           className="lg:col-span-2"
           id="guides"

@@ -1,7 +1,7 @@
 # Public and business domain activation
 
-Prepared 18 November 2026. Code preparation does not activate DNS or change a
-Convex deployment. Both sites use the same Next.js project and existing Convex
+Updated 18 November 2026. DNS, HTTPS and the exact Convex trusted origin are
+configured. The Production routing flag is saved and applies on the next deployment. Both sites use the same Next.js project and existing Convex
 production backend. Development continues to use its separate backend.
 
 ## Implemented routing contract
@@ -45,8 +45,9 @@ canonical URLs. Keep privacy/support metadata canonical to their chosen owner.
    `https://business.luma.green` to Convex `EXTRA_TRUSTED_ORIGINS`, retaining
    existing exact origins. This list is already used by Better Auth and private
    file endpoints. Verify origin denial as well as success. No wildcard origin.
-4. Verify login, OTP/TOTP, logout, cookie/session lifetime, invites, email links
-   and recovery on both hosts. Existing host-only sessions do not migrate;
+4. Real-account login, OTP/TOTP, logout, cookie/session lifetime, invites, email
+   links and recovery acceptance is deferred by the owner until after release.
+   Non-mutating session endpoint and exact-origin allow/deny checks passed. Existing host-only sessions do not migrate;
    business users may need to sign in again. Do not broaden cookie Domain to
    `.luma.green` merely to hide that fact. Keep Convex `SITE_URL` on its existing
    origin until outgoing auth/workspace email links have an explicit migration.
@@ -67,7 +68,8 @@ canonical URLs. Keep privacy/support metadata canonical to their chosen owner.
    Domain routing adds no product event or private property and does not change
    Sentry hooks. Never capture auth queries or exact locations.
 8. Deploy the checked code with `NEXT_PUBLIC_BUSINESS_SITE_ENABLED=true` only
-   after the above readiness checks. Test each row in the routing table with
+   after automated readiness checks. The owner has explicitly deferred real-account
+   and native-device acceptance; this does not count as passing those checks. Test each row in the routing table with
    English, a prefixed locale and RTL, plus authorized/denied record access.
 
 ## Rollback
@@ -83,7 +85,8 @@ option. No database migration or deletion is needed for this split.
 Unit tests cover locale/query handling, fixed targets, activation default,
 unknown hosts, preserved auth/API/admin/household routes and next-intl rewrite
 headers. They do not prove DNS, TLS, provider delivery, production session behavior
-or real native-device acceptance. Those checks remain required at activation.
+or real native-device acceptance. The owner deferred account/device checks;
+record their later results separately from this release.
 
 ## Homepage reference photograph
 

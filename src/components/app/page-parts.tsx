@@ -16,7 +16,7 @@ export function AppPageHeader({
   actions?: ReactNode;
 }) {
   return (
-    <header className="grid min-w-0 gap-5 pb-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+    <header className="grid min-w-0 gap-6 border-b border-border/60 pb-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
       <div className="flex min-w-0 flex-1 flex-col gap-2">
         <h1 className="afterlife-page-heading font-display text-4xl leading-[1.05] sm:text-5xl lg:text-[3.5rem]">
           {title}
@@ -85,9 +85,9 @@ export function Section({
   children: ReactNode;
 }) {
   return (
-    <section className="flex min-w-0 flex-col gap-5 rounded-panel border border-border/50 bg-card p-5 text-card-foreground shadow-panel sm:p-6">
-      <div className="flex flex-wrap items-center justify-between gap-3 pb-2">
-        <h2 className="font-display text-lg font-medium tracking-tight">
+    <section className="flex min-w-0 flex-col gap-5 border-t border-border/60 pt-6">
+      <div className="flex min-w-0 flex-wrap items-center justify-between gap-3">
+        <h2 className="font-display text-xl font-medium tracking-tight">
           {title}
         </h2>
         {action}
@@ -109,11 +109,11 @@ export function EmptyState({
   action?: ReactNode;
 }) {
   return (
-    <div className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-x-4 gap-y-2 rounded-panel border border-border/50 bg-card p-6 text-card-foreground shadow-panel">
+    <div className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-x-4 gap-y-3 border-t border-border/60 py-8">
       <span className="row-span-2 text-muted-foreground">
         <Icon aria-hidden className="size-6" strokeWidth={1.75} />
       </span>
-      <p className="font-display text-lg font-medium tracking-tight">{title}</p>
+      <p className="font-display text-xl font-medium tracking-tight">{title}</p>
       {body ? (
         <p className="col-start-2 max-w-lg text-sm leading-relaxed text-muted-foreground">
           {body}
@@ -147,9 +147,9 @@ export function SettingsSection({
   return (
     <section
       aria-labelledby={id}
-      className="grid min-w-0 gap-5 rounded-panel border border-border/50 bg-card p-6 text-card-foreground shadow-panel xl:grid-cols-[minmax(0,1fr)_minmax(0,3fr)] xl:gap-12"
+      className="grid min-w-0 gap-6 border-t border-border/60 py-7 xl:grid-cols-[minmax(0,1fr)_minmax(0,3fr)] xl:gap-12"
     >
-      <h2 id={id} className="font-display text-lg font-medium tracking-tight">
+      <h2 id={id} className="font-display text-xl font-medium tracking-tight">
         {title}
       </h2>
       <div className="min-w-0">{children}</div>

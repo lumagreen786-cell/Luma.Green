@@ -1,12 +1,12 @@
-/** Native equivalents of the Florin light and dark canvas/action tokens. */
+/** Native equivalents of the Afterlife light and dark canvas/action tokens. */
 export const themes = {
   light: {
-    background: "#e7e9ee",
+    background: "#f4f8ee",
     foreground: "#14161c",
     primary: "#9bf80f",
     primaryForeground: "#10130a",
-    muted: "#eff1f4",
-    border: "#14161c17",
+    muted: "#f0f3eb",
+    border: "#14161c26",
     indicator: "#5a9600",
   },
   dark: {
@@ -14,8 +14,8 @@ export const themes = {
     foreground: "#f5f6f8",
     primary: "#9bf80f",
     primaryForeground: "#10130a",
-    muted: "#272a34",
-    border: "#ffffff1a",
+    muted: "#23262f",
+    border: "#ffffff26",
     indicator: "#9bf80f",
   },
 };

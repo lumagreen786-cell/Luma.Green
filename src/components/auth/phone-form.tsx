@@ -85,7 +85,7 @@ export function PhoneForm({
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-2">
-        <h1 className="font-display text-3xl leading-tight font-normal tracking-tight wrap-anywhere">
+        <h1 className="font-display text-4xl leading-tight font-normal tracking-tight wrap-anywhere">
           {t("metaTitle")}
         </h1>
         {canSend ? null : (

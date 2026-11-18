@@ -42,8 +42,8 @@ module.exports = function buildConfig() {
       ]),
     ),
     userInterfaceStyle: "automatic",
-    backgroundColor: "#e7e9ee",
-    splash: { backgroundColor: "#e7e9ee" },
+    backgroundColor: "#f4f8ee",
+    splash: { backgroundColor: "#f4f8ee" },
     runtimeVersion: { policy: "fingerprint" },
     ios: {
       bundleIdentifier: "green.luma.app",

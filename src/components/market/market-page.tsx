@@ -137,8 +137,8 @@ function Lots({
   return (
     <>
       <DemoNote>{t("sampleData")}</DemoNote>
-      <div className="record-sheet grid min-w-0 items-start gap-5 rounded-panel p-4 shadow-panel sm:p-6">
-        <div className="-mt-4 min-w-0 justify-self-center rounded-b-[28px] bg-[var(--shell)] p-2 pt-0 sm:-mt-6">
+      <div className="grid min-w-0 items-start gap-6">
+        <div className="min-w-0 border-b border-border/60 pb-4">
           <MaterialFilter
             options={options}
             value={selected?.code ?? null}

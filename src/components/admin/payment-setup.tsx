@@ -10,6 +10,7 @@ import type { FunctionReturnType } from "convex/server";
 import { ConvexError } from "convex/values";
 import { useState } from "react";
 
+import { AppPageHeader } from "@/components/app/page-parts";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -98,17 +99,11 @@ export function PaymentSetup() {
 
   return (
     <div className="mx-auto flex w-full max-w-7xl flex-col gap-6">
-      <header className="flex flex-col gap-2 pb-2">
-        <h1 className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">
-          Payment setup
-        </h1>
-        <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          Connect each approved business to its existing Cashfree Easy Split
-          vendor. Cashfree owns verification. A saved reference is not approval
-          or a payment.
-        </p>
-      </header>
-      <div className="grid min-w-0 items-start gap-6 lg:grid-cols-[18rem_minmax(0,1fr)]">
+      <AppPageHeader
+        title="Payment setup"
+        lead="Connect each approved business to its existing Cashfree Easy Split vendor. Cashfree owns verification. A saved reference is not approval or a payment."
+      />
+      <div className="grid min-w-0 items-start gap-8 border-t border-border pt-8 lg:grid-cols-[16rem_minmax(0,1fr)] lg:gap-12">
         <section
           aria-labelledby="payment-release-boundary"
           className="space-y-2 border-s-2 border-primary ps-4 text-sm"
@@ -164,7 +159,7 @@ export function PaymentSetup() {
             </p>
           ) : null}
           {status !== "LoadingFirstPage" && results.length > 0 ? (
-            <ul className="divide-y rounded-panel bg-card px-5 text-card-foreground sm:px-6">
+            <ul className="divide-y divide-border border-y border-border">
               {results.map((org) => {
                 const vendor = org.vendors.find((item) => item.mode === mode);
                 return (

@@ -4,6 +4,7 @@ import { useMutation, useQuery } from "convex/react";
 import type { FunctionReturnType } from "convex/server";
 import { useId, useRef, useState } from "react";
 
+import { AppPageHeader } from "@/components/app/page-parts";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -25,17 +26,11 @@ const labels = {
 export function AccountRemovals() {
   const queue = useQuery(api.accountRemoval.reviewQueue);
   return (
-    <section className="w-full space-y-6">
-      <header className="space-y-2">
-        <h1 className="font-display text-3xl font-semibold">
-          Account access and evidence review
-        </h1>
-        <p className="text-sm text-muted-foreground">
-          Access is already closed. Review required retained evidence without
-          changing payments, stock or handovers. Recording a review does not
-          mean that all data was erased.
-        </p>
-      </header>
+    <section className="mx-auto w-full max-w-6xl space-y-8">
+      <AppPageHeader
+        title="Account access and evidence review"
+        lead="Access is already closed. Review required retained evidence without changing payments, stock or handovers. Recording a review does not mean that all data was erased."
+      />
       <RemovalQueue queue={queue} />
     </section>
   );
@@ -45,7 +40,7 @@ function RemovalQueue({ queue }: { queue: Removal[] | undefined }) {
   if (queue === undefined) return <p role="status">Loading requests…</p>;
   if (queue.length === 0) return <p>No requests waiting for review.</p>;
   return (
-    <div className="grid min-w-0 items-start gap-4 xl:grid-cols-2">
+    <div className="min-w-0 divide-y divide-border border-y border-border">
       {queue.map((request) => (
         <RemovalReview key={request.id} request={request} />
       ))}
@@ -97,7 +92,7 @@ function RemovalReview({ request }: { request: Removal }) {
     }
   }
   return (
-    <article className="space-y-4 rounded-panel bg-card p-5 text-card-foreground sm:p-6">
+    <article className="grid min-w-0 gap-6 py-6 lg:grid-cols-[minmax(14rem,0.7fr)_minmax(0,1.3fr)] [&>p]:lg:col-start-2">
       <header className="space-y-1">
         <h2 className="font-semibold">Request {request.id.slice(0, 12)}</h2>
         <p className="text-sm">{labels[request.state]}</p>

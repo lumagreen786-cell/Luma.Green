@@ -106,7 +106,7 @@ export function StatusHero({ booking }: { booking: TrackedBooking }) {
   return (
     <section
       aria-labelledby="track-title"
-      className="flex flex-col gap-5 rounded-[1.75rem] bg-card p-5 text-card-foreground sm:p-6"
+      className="flex flex-col gap-7 border-b border-border pb-8"
     >
       <div className="flex items-start gap-4">
         <span
@@ -123,7 +123,7 @@ export function StatusHero({ booking }: { booking: TrackedBooking }) {
           </p>
           <h1
             id="track-title"
-            className="font-display text-2xl leading-tight font-semibold tracking-tight text-balance wrap-anywhere sm:text-3xl"
+            className="font-display text-3xl leading-tight font-normal tracking-tight text-balance wrap-anywhere sm:text-5xl"
           >
             {heading}
           </h1>

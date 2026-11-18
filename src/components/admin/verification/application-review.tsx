@@ -84,11 +84,7 @@ export function ApplicationReview({
       >
         <Tabs
           defaultValue="application"
-          className={
-            onBack
-              ? "min-w-0"
-              : "record-sheet min-w-0 rounded-panel p-5 shadow-panel sm:p-6"
-          }
+          className={onBack ? "min-w-0" : "min-w-0 border-t border-border pt-5"}
         >
           <TabsList className="h-auto flex-wrap justify-start gap-2">
             <TabsTrigger value="application">Application</TabsTrigger>
@@ -120,7 +116,7 @@ export function ApplicationReview({
           className={
             onBack
               ? "flex min-w-0 flex-col gap-6 border-t pt-6"
-              : "record-detail flex min-w-0 flex-col gap-6 rounded-panel p-5 shadow-panel sm:p-6 lg:sticky lg:top-24 lg:self-start"
+              : "flex min-w-0 flex-col gap-6 rounded-2xl border border-border bg-card p-5 text-card-foreground lg:sticky lg:top-6 lg:self-start"
           }
         >
           {application.status === "submitted" ? (
@@ -183,7 +179,7 @@ function ReviewHeader({
     ? localeMeta[application.locale].english
     : application.locale;
   return (
-    <div className="grid min-w-0 gap-4 rounded-panel bg-card p-5 text-card-foreground sm:p-6 lg:grid-cols-[minmax(0,1fr)_auto]">
+    <div className="grid min-w-0 gap-4 pb-2 lg:grid-cols-[minmax(0,1fr)_auto]">
       <div className="flex flex-wrap items-center gap-2 lg:col-start-2 lg:row-start-1 lg:justify-end">
         <StatusPill tone="neutral">{KIND_LABELS[application.kind]}</StatusPill>
         <StatusPill tone={STATUS_TONES[application.status]}>
@@ -193,7 +189,7 @@ function ReviewHeader({
           <StatusPill tone="info">Version {application.version}</StatusPill>
         ) : null}
       </div>
-      <h1 className="font-display text-2xl leading-tight font-semibold tracking-tight break-words lg:col-start-1 lg:row-start-1">
+      <h1 className="font-display text-3xl leading-tight font-normal tracking-tight break-words sm:text-4xl lg:col-start-1 lg:row-start-1">
         {application.name}
       </h1>
       <dl className="flex flex-wrap items-center gap-x-6 gap-y-3 border-t pt-4 text-sm lg:col-span-2">

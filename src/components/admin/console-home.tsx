@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
+import { AppPageHeader } from "@/components/app/page-parts";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
@@ -37,21 +38,20 @@ export function ConsoleHome() {
 
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 lg:gap-8">
-      <div className="flex flex-wrap items-end justify-between gap-4 pb-2">
-        <div className="flex min-w-0 flex-col gap-2">
-          <h1 className="font-display text-4xl leading-tight font-medium tracking-tight sm:text-5xl lg:text-[3.5rem]">
-            Review and resolve
-          </h1>
-        </div>
-        <Button asChild variant="outline">
-          <Link href="/admin/pilot">
-            View pilot report <ArrowRightIcon aria-hidden className="size-4" />
-          </Link>
-        </Button>
-      </div>
+      <AppPageHeader
+        title="Review and resolve"
+        actions={
+          <Button asChild variant="outline">
+            <Link href="/admin/pilot">
+              View pilot report{" "}
+              <ArrowRightIcon aria-hidden className="size-4" />
+            </Link>
+          </Button>
+        }
+      />
 
       <div
-        className="grid gap-4 rounded-panel bg-card p-5 text-card-foreground sm:grid-cols-3 sm:p-6"
+        className="grid gap-4 border-y border-border py-5 sm:grid-cols-3 sm:gap-8"
         aria-busy={!summary}
       >
         <StatLink
@@ -78,12 +78,9 @@ export function ConsoleHome() {
         />
       </div>
 
-      <div className="grid min-w-0 items-start gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(16rem,1fr)]">
-        <div className="min-w-0 space-y-4">
-          <section
-            aria-labelledby="next-reviews"
-            className="record-sheet min-w-0 rounded-panel p-5 shadow-panel sm:p-6"
-          >
+      <div className="grid min-w-0 items-start gap-10 xl:grid-cols-[minmax(0,1fr)_16rem]">
+        <div className="min-w-0 space-y-10">
+          <section aria-labelledby="next-reviews" className="min-w-0">
             <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-4">
               <h2
                 id="next-reviews"
@@ -126,7 +123,7 @@ export function ConsoleHome() {
               ))}
             </ol>
           </section>
-          <section className="record-sheet flex min-w-0 flex-col gap-4 rounded-panel p-5 shadow-panel sm:p-6">
+          <section className="flex min-w-0 flex-col gap-4 border-t border-border pt-8">
             <header className="flex flex-col gap-1.5">
               <h2 className="font-display text-lg font-semibold tracking-tight">
                 Recent accounts
@@ -139,7 +136,7 @@ export function ConsoleHome() {
         </div>
         <section
           aria-label="Other tasks"
-          className="flex min-w-0 flex-col rounded-panel bg-card p-5 text-card-foreground sm:p-6"
+          className="flex min-w-0 flex-col border-t border-border xl:sticky xl:top-6"
         >
           <Link
             href="/admin/prices"
@@ -199,7 +196,7 @@ function StatLink({
       ) : (
         <span
           className={cn(
-            "text-4xl font-medium tracking-tight tabular-nums",
+            "font-display text-5xl font-normal tracking-tight tabular-nums",
             isUrgent && "text-destructive",
           )}
         >

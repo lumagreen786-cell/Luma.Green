@@ -53,7 +53,7 @@ export function PaymentLifecycleSetup() {
   return (
     <>
       <section
-        className="space-y-4 rounded-panel bg-card p-5 text-card-foreground sm:p-6"
+        className="min-w-0 space-y-5 border-b border-border pb-6"
         aria-labelledby="payment-policy-title"
       >
         <div className="flex flex-wrap items-start justify-between gap-3">
@@ -298,7 +298,7 @@ function FinancialRecords() {
   );
   return (
     <section
-      className="space-y-4 rounded-panel bg-card p-5 text-card-foreground sm:p-6"
+      className="min-w-0 space-y-5 border-b border-border pb-6"
       aria-labelledby="financial-records-title"
     >
       <h2 id="financial-records-title" className="text-lg font-semibold">

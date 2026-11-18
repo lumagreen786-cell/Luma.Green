@@ -7,9 +7,9 @@ export const metadata: Metadata = { title: "Payment setup" };
 
 export default function PaymentsPage() {
   return (
-    <>
+    <div className="mx-auto w-full max-w-6xl">
       <PaymentSetup />
       <DraftBillingSetup />
-    </>
+    </div>
   );
 }

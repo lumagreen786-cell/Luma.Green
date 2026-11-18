@@ -115,6 +115,7 @@ export function BookingPhone({ className }: { className?: string }) {
                   >
                     {kind === "photo" && (
                       <Image
+                        unoptimized
                         src={
                           [0, 1, 3, 8, 12].includes(scenario)
                             ? "/images/showcase/used-box-recovery.webp"

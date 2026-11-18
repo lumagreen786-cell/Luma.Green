@@ -18,6 +18,10 @@ for (const { locale, copy } of [
         name: copy.footer.useHeading,
         exact: true,
       });
+      await expect(nav).toHaveCount(0);
+      await page.goto(`/${locale}/business`);
+      await expect(nav).toHaveCount(0);
+      await page.goto(`/${locale}/sell`);
       await expect(nav).toBeInViewport();
       await expect(nav.getByRole("link")).toHaveCount(4);
       const links = await nav.getByRole("link").all();

@@ -2,7 +2,6 @@ import { expect, test } from "@playwright/test";
 
 import arabic from "../messages/ar.json";
 import english from "../messages/en.json";
-import { actionName } from "../src/components/site/action-name";
 import { locales } from "../src/i18n/locales";
 
 const languages = [
@@ -20,7 +19,10 @@ for (const { locale, messages } of languages) {
         await page.emulateMedia({ colorScheme, reducedMotion: "reduce" });
 
         for (const content of [
-          { route: "", title: messages.home.hero.title },
+          {
+            route: "",
+            title: `${messages.afterlife.heroTitle}${messages.afterlife.heroTitleEnd}`,
+          },
           { route: "/how-it-works", title: messages.howItWorks.title },
           { route: "/join", title: messages.join.title },
         ]) {
@@ -38,22 +40,20 @@ for (const { locale, messages } of languages) {
         }
 
         await page.goto(`/${locale}`);
-        for (const content of [messages.home.hero]) {
-          const region = page.getByRole("region", { name: content.title });
-          await expect(region).toHaveCSS("background-image", "none");
-          const action = region.getByRole("link", {
-            name: actionName(messages.nav.sellScrap, content.sell),
+        const hero = page.getByRole("main").locator("section").first();
+        const action = hero.getByRole("link", {
+          name: messages.afterlife.how,
+          exact: true,
+        });
+        await action.focus();
+        await expect(action).toBeFocused();
+        await expect(action).toHaveAttribute("href", "#how");
+        await expect(
+          hero.getByRole("button", {
+            name: messages.afterlife.bookNow,
             exact: true,
-          });
-          await action.focus();
-          await expect(action).toBeFocused();
-          await expect(action).toHaveAttribute("href", /\/sell$/);
-          expect(
-            await action.evaluate(
-              (element) => getComputedStyle(element, "::before").animationName,
-            ),
-          ).toBe("none");
-        }
+          }),
+        ).toBeDisabled();
       });
     }
   }
@@ -66,31 +66,25 @@ test("public motion keeps headings readable and collection actions usable", asyn
   await page.goto("/how-it-works");
   const animatedHeading = page.getByRole("heading", { level: 1 });
   await expect(animatedHeading).toHaveText(english.howItWorks.title);
-  await expect(animatedHeading).toHaveCSS("animation-name", /heading-arrive/);
+  await expect(animatedHeading).toHaveAttribute("data-text-entrance", "true");
   await expect(animatedHeading).toHaveCSS("opacity", "1");
   await expect(animatedHeading).toHaveCSS("transform", "none");
 
   await page.goto("/");
   const heading = page.getByRole("heading", { level: 1 });
-  await expect(heading).toHaveText(english.home.hero.title);
+  await expect(heading).toHaveText(
+    `${english.afterlife.heroTitle}${english.afterlife.heroTitleEnd}`,
+  );
   await expect(heading).toHaveCSS("animation-name", "none");
   await expect(heading).toHaveCSS("opacity", "1");
   await expect(heading).toHaveCSS("transform", "none");
   const action = page
-    .getByRole("region", { name: english.home.hero.title })
-    .getByRole("link", {
-      name: actionName(english.nav.sellScrap, english.home.hero.sell),
-      exact: true,
-    });
+    .getByRole("main")
+    .getByRole("link", { name: english.afterlife.how, exact: true });
   await action.focus();
   await expect(action).toBeFocused();
-  expect(
-    await action.evaluate(
-      (element) => getComputedStyle(element, "::before").animationName,
-    ),
-  ).toBe("none");
   await page.keyboard.press("Enter");
-  await expect(page).toHaveURL(/\/sell$/);
+  await expect(page).toHaveURL(/#how$/);
 });
 
 for (const locale of locales) {
@@ -108,7 +102,6 @@ for (const locale of locales) {
           .evaluateAll((buttons) =>
             buttons.flatMap((button) => {
               const bounds = button.getBoundingClientRect();
-              const lines: number[] = [];
               let isClipped = false;
               const walker = document.createTreeWalker(
                 button,
@@ -127,8 +120,6 @@ for (const locale of locales) {
                 const range = document.createRange();
                 range.selectNodeContents(node);
                 for (const rect of range.getClientRects()) {
-                  if (lines.every((top) => Math.abs(top - rect.top) >= 3))
-                    lines.push(rect.top);
                   if (
                     rect.left < bounds.left ||
                     rect.right > bounds.right ||
@@ -138,12 +129,8 @@ for (const locale of locales) {
                     isClipped = true;
                 }
               }
-              // Topic filters may wrap at normal size in narrow task panels.
-              // Their complete text must still stay inside the control.
-              const isTopicFilter =
-                button instanceof HTMLElement &&
-                button.dataset.helpTopic !== undefined;
-              return isClipped || (!isTopicFilter && lines.length > 1)
+              // Long translated actions may wrap, but cannot clip their text.
+              return isClipped
                 ? [button.getAttribute("aria-label") ?? button.textContent]
                 : [];
             }),
@@ -165,7 +152,7 @@ for (const locale of locales) {
                   : "",
             })),
           );
-        const expectedActions = { "": 2, "/help": 0, "/help/contact": 0 };
+        const expectedActions = { "": 0, "/help": 0, "/help/contact": 0 };
         expect(namedActions).toHaveLength(
           expectedActions[route as keyof typeof expectedActions],
         );

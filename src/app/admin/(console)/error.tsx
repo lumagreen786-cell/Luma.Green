@@ -28,7 +28,7 @@ export default function ConsoleError({
   const code = convexErrorCode(error);
   const isSessionOver = code !== undefined && SESSION_CODES.has(code);
   return (
-    <div className="mx-auto my-8 flex max-w-lg flex-col items-start gap-4 rounded-panel border border-border/60 bg-card p-6 text-card-foreground shadow-panel sm:p-8">
+    <div className="mx-auto my-12 flex max-w-xl flex-col items-start gap-5 border-y border-border py-8">
       <span className="flex size-8 items-center text-destructive">
         <TriangleAlertIcon aria-hidden className="size-6" />
       </span>
@@ -37,7 +37,7 @@ export default function ConsoleError({
       </h1>
       <p className="text-muted-foreground">
         {isSessionOver
-          ? "Sign in again with your password and authenticator to carry on."
+          ? "Sign in again with your phone code and authenticator to carry on."
           : "Something went wrong on our side. Try again; if it keeps happening, reload the page."}
       </p>
       {isSessionOver ? (

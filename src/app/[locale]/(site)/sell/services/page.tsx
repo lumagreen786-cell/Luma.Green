@@ -22,11 +22,13 @@ export default async function HouseholdServicesPage() {
     { label: services("title"), href: "/account/services", icon: WrenchIcon },
   ];
   return (
-    <Container className="flex max-w-6xl flex-col gap-6 py-8">
-      <h1 className="font-display text-2xl font-semibold">{t("services")}</h1>
-      <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
+    <Container className="flex max-w-7xl flex-col gap-8 py-10">
+      <h1 className="border-b border-border pb-6 font-display text-4xl font-normal tracking-tight sm:text-5xl">
+        {t("services")}
+      </h1>
+      <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
         <HouseholdLocationLookups />
-        <ul className="divide-y divide-border/60 rounded-[1.75rem] border border-border/60 bg-card px-5 text-card-foreground">
+        <ul className="divide-y divide-border border-y border-border">
           {links.map(({ label, href, icon: Icon }) => (
             <li key={href}>
               <Link

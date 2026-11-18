@@ -102,7 +102,10 @@ export function FormJourney<T extends FieldValues>({
           </Button>
         ) : null}
       </div>
-      <ol aria-label={progress("label")} className="flex flex-wrap gap-2">
+      <ol
+        aria-label={progress("label")}
+        className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3"
+      >
         {stages.map((item, index) => (
           <li
             key={item.title}
@@ -122,7 +125,7 @@ export function FormJourney<T extends FieldValues>({
       <h2
         ref={heading}
         tabIndex={-1}
-        className="text-lg font-medium outline-none"
+        className="mt-2 text-2xl font-normal tracking-tight outline-none"
       >
         {stages[stage]?.title}
       </h2>

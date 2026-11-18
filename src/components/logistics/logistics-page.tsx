@@ -76,17 +76,11 @@ function LogisticsWorkspace({
             {status === "LoadingFirstPage" ? (
               <ListSkeleton />
             ) : (
-              <ul
-                className={
-                  selected
-                    ? "divide-y divide-border/60 rounded-panel bg-card px-4 text-card-foreground"
-                    : "grid min-w-0 items-start gap-4 md:grid-cols-2 xl:grid-cols-3"
-                }
-              >
+              <ul className="min-w-0 divide-y divide-border border-y border-border">
                 {results.map((plan) => (
                   <li
                     key={plan._id}
-                    className="flex min-w-0 flex-wrap items-center justify-between gap-4 rounded-panel bg-card p-4 text-card-foreground"
+                    className="flex min-w-0 flex-wrap items-center justify-between gap-5 py-5"
                   >
                     <div className="min-w-0">
                       <p className="font-medium break-words">{plan.title}</p>
@@ -143,7 +137,7 @@ function Version({ version }: { version: Doc<"routePlanVersions"> }) {
   const t = useTranslations("logistics");
   const format = useFormatter();
   return (
-    <section className="space-y-3 rounded-panel border border-border/60 bg-card p-5 text-card-foreground">
+    <section className="space-y-3 border-s border-border py-2 ps-5">
       <h3 className="font-medium">
         {t("revision", { number: version.revision })} · {version.title}
       </h3>

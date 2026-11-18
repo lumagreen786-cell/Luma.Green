@@ -15,7 +15,7 @@ const languages = locales.map((locale) => ({
 }));
 
 for (const width of [390, 768, 1024, 1440]) {
-  test(`join role directory keeps clear images beside readable choices at ${String(width)}px`, async ({
+  test(`join role directory keeps clear images above readable choices at ${String(width)}px`, async ({
     page,
   }) => {
     await page.setViewportSize({ width, height: 900 });
@@ -34,9 +34,11 @@ for (const width of [390, 768, 1024, 1440]) {
     if (!image || !title) throw new Error("Role image and title must render");
     expect(image.width).toBeGreaterThanOrEqual(width < 640 ? 80 : 144);
     expect(image.height).toBeGreaterThanOrEqual(80);
-    expect(title.x).toBeGreaterThanOrEqual(image.x + image.width);
-    expect(title.y).toBeLessThan(image.y + image.height);
-    expect(title.y + title.height).toBeGreaterThan(image.y);
+    expect(title.x).toBeGreaterThanOrEqual(image.x - 1);
+    expect(title.x + title.width).toBeLessThanOrEqual(
+      image.x + image.width + 1,
+    );
+    expect(title.y).toBeGreaterThanOrEqual(image.y + image.height);
     await expect
       .poll(() =>
         recycler.locator("img").evaluate((element: HTMLImageElement) => {
