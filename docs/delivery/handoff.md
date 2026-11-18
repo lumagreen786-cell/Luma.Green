@@ -1,3 +1,35 @@
+## Cookieless public analytics and domain hydration — 18 November 2026
+
+Prepared on `codex/analytics-monitoring`. Public PostHog/Vercel page counts require
+no tap; optional settings honor previous opt-outs. Private routes, forms, replay
+and profiles remain excluded. PostHog uses its documented capture API with an
+in-memory ID, omitted cookies/referrer, abort on stop and no retries. The browser
+SDK was removed after its retry queue failed the opt-out boundary. Vercel has
+query/referrer/attribution guards; Google Analytics cannot activate from this
+flow. All 33 privacy/analytics catalogues reflect the automatic mode.
+
+The business-root header now uses a stable server/client path until hydration.
+True-host English and Arabic regression tests first reproduced React 418, then
+passed after the fix. Final configured build, full `pnpm check` (3,383 web/backend
+tests, 28 security checks and native checks), 14 analytics browser checks and
+2 strict domain checks passed. Tests intercepted all analytics providers.
+Provider setup is recorded in the [observability runbook](../operations/observability.md).
+Checked merge/deployment and live direct-ingestion acceptance remain pending.
+
+## Afterlife production release — 18 November 2026
+
+PR #61 merged after every hosted check passed. Production is commit `17ad125`
+on Vercel deployment `Ad7A6EGuJbmKNauBijm15H52R9qg`. Both public and business
+roots are live with Afterlife; domain redirects preserve locale/query data.
+One backend and one admin console remain. Signed-in and real-device acceptance
+are deferred by the owner; the WhatsApp recipient is still pending.
+
+The owner subsequently requested automatic cookieless public analytics without
+a required consent tap, plus Sentry errors. The separate monitoring follow-up
+must preserve existing opt-outs, exclude private workflows and update privacy
+copy. Sentry project/DSN and IP scrubbing are configured; a local scrubbed test
+arrived. PostHog setup and Vercel integration are tracked in that follow-up.
+
 ## Afterlife implementation — 18 November 2026
 
 Branch: `codex/afterlife-platform`. Approved Afterlife now drives public pages

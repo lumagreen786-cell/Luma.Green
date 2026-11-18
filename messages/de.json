@@ -3411,7 +3411,7 @@
   },
   "analytics": {
     "title": "Freiwillige Nutzungsanalyse",
-    "description": "Erlauben Sie PostHog und Google Analytics, Besuche öffentlicher Seiten zu messen. Formulare, private Seiten und Sitzungsaufzeichnungen werden nicht erfasst. Ihre Wahl ändert den Plattformzugang nicht.",
+    "description": "Besuche öffentlicher Seiten werden automatisch ohne Analyse-Cookies gezählt. PostHog und Vercel können technische Netzwerkdaten verarbeiten. Formulare, private Seiten und Sitzungsaufzeichnungen sind ausgeschlossen. Hier kannst du die Analyse ausschalten.",
     "accept": "Nutzungsanalyse erlauben",
     "decline": "Nutzungsanalyse deaktiviert lassen",
     "withdraw": "Analyse deaktivieren",
@@ -4654,7 +4654,7 @@
     "sharingTitle": "Empfänger der Daten",
     "sharingBody": "Berechtigte Beteiligte und eingerichtete Anbieter für Hosting, SMS, Prüfung, Zahlung und optionale KI erhalten nötige Daten. Die Verarbeitung kann außerhalb Indiens stattfinden.",
     "choicesTitle": "Ihre Wahlmöglichkeiten",
-    "choicesBody": "Standort und Mitteilungen erfordern eine Erlaubnis. Dateien wählen Sie selbst. Die Anmeldung nutzt Sitzungscookies. Analysen benötigen Zustimmung; Fehlerberichte sind davon getrennt. Verwalten Sie Berechtigungen in den Geräteeinstellungen.",
+    "choicesBody": "Besuche öffentlicher Seiten werden automatisch ohne Analyse-Cookies gezählt. PostHog und Vercel können technische Netzwerkdaten verarbeiten. Formulare, private Seiten und Sitzungsaufzeichnungen sind ausgeschlossen. Hier kannst du die Analyse ausschalten. Die Anmeldung verwendet Sitzungs-Cookies. Fehlerberichte sind separat. Standort- und Benachrichtigungsrechte verwaltest du in den Geräteeinstellungen.",
     "requestsTitle": "Anfragen zu Konto und Daten",
     "requestsBody": "Entfernen Sie unten Ihr Konto oder schreiben Sie dem Support für Auskunft, Berichtigung oder Löschung. Bestätigen Sie die Inhaberschaft; senden Sie keine Ausweisdokumente per E-Mail. Klären Sie zuerst offene Aufgaben oder Eigentumsfragen.",
     "retentionTitle": "Was nach der Schließung bleibt",

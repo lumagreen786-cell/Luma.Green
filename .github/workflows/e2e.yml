@@ -10,12 +10,14 @@ on:
       - "src/**"
       - "e2e/**"
       - "e2e-analytics/**"
+      - "e2e-domain/**"
       - "e2e-turnstile/**"
       - "messages/**"
       - "public/**"
       - "next.config.ts"
       - "playwright.config.ts"
       - "playwright.analytics.config.ts"
+      - "playwright.domain.config.ts"
       - "playwright.turnstile.config.ts"
       - "pnpm-lock.yaml"
       - ".github/workflows/e2e.yml"
@@ -68,12 +70,19 @@ jobs:
         run: pnpm exec next build --webpack
         env:
           NEXT_PUBLIC_TELEMETRY_ENABLED: "true"
+          NEXT_PUBLIC_VERCEL_ANALYTICS_ENABLED: "true"
+          NEXT_PUBLIC_BUSINESS_SITE_ENABLED: "true"
           NEXT_PUBLIC_GA_MEASUREMENT_ID: "G-LUMATEST"
           NEXT_PUBLIC_POSTHOG_KEY: "phc_luma_test"
           NEXT_PUBLIC_SENTRY_DSN: "https://public@example.invalid/1"
           SENTRY_AUTH_TOKEN: ""
-      - name: Analytics consent with intercepted providers
+      - name: Public analytics privacy checks
         run: pnpm exec playwright test --config playwright.analytics.config.ts
+
+      - name: Business domain hydration checks
+        run: pnpm exec playwright test --config playwright.domain.config.ts
+        env:
+          LUMA_DOMAIN_REUSE_BUILD: "true"
 
       - name: Upload report
         if: always()

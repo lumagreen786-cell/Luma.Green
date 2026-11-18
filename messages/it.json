@@ -3411,7 +3411,7 @@
   },
   "analytics": {
     "title": "Analisi facoltative",
-    "description": "Consenti a PostHog e Google Analytics di misurare le visite alle pagine pubbliche. Non registriamo moduli, pagine private o riproduzioni di sessioni. La scelta non cambia l'accesso alla piattaforma.",
+    "description": "Le visite alle pagine pubbliche vengono conteggiate automaticamente senza cookie analitici. PostHog e Vercel possono trattare dati tecnici di rete. Moduli, pagine private e registrazioni delle sessioni sono esclusi. Puoi disattivare l’analisi qui.",
     "accept": "Consenti analisi",
     "decline": "Mantieni le analisi disattivate",
     "withdraw": "Disattiva le analisi",
@@ -4654,7 +4654,7 @@
     "sharingTitle": "Destinatari dei dati",
     "sharingBody": "I partecipanti autorizzati e i fornitori configurati di hosting, SMS, verifica, pagamento e IA facoltativa ricevono i dati necessari. Il trattamento può avvenire fuori dall’India.",
     "choicesTitle": "Le tue scelte",
-    "choicesBody": "Posizione e notifiche richiedono il permesso. Scegli tu i file. L’accesso usa cookie di sessione. L’analisi richiede consenso; le segnalazioni di errore sono separate. Gestisci i permessi nelle impostazioni del dispositivo.",
+    "choicesBody": "Le visite alle pagine pubbliche vengono conteggiate automaticamente senza cookie analitici. PostHog e Vercel possono trattare dati tecnici di rete. Moduli, pagine private e registrazioni delle sessioni sono esclusi. Puoi disattivare l’analisi qui. L’accesso usa cookie di sessione. Le segnalazioni degli errori sono separate. Gestisci i permessi di posizione e notifiche nelle impostazioni del dispositivo.",
     "requestsTitle": "Richieste su account e dati",
     "requestsBody": "Rimuovi l’account qui sotto o scrivi all’assistenza per accesso, rettifica o cancellazione. Verifica la titolarità; non inviare documenti d’identità via email. Risolvi prima le attività o la proprietà in sospeso.",
     "retentionTitle": "Cosa resta dopo la chiusura",

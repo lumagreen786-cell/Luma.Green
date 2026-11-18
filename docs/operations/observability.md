@@ -1,24 +1,24 @@
 # Analytics and error monitoring
 
-Status: implementation and setup guide, 1 October 2026. No provider account,
+Status: implementation and setup guide, 18 November 2026. No provider account,
 production receipt or approved privacy notice is confirmed by this document.
 This replaces the earlier deferral in [ADR 0012](../decisions/0012-pilot-analytics-in-convex.md);
-the current decision is [ADR 0016](../decisions/0016-optional-analytics-and-error-monitoring.md).
+[ADR 0016](../decisions/0016-optional-analytics-and-error-monitoring.md) records the prior opt-in design. The owner superseded its required-tap rule on 18 November 2026 with automatic cookieless public counts and an optional opt-out.
 
 ## Enable only the services you need
 
-All services are optional. An empty deployment loads no analytics SDK and starts
+All services are optional. An empty deployment sends no analytics and starts
 no Sentry transport. Set `NEXT_PUBLIC_TELEMETRY_ENABLED=true` in the intended
 Next.js deployment and add the settings for the chosen services below. Public
 settings are injected at build time: rebuild and redeploy after changing them.
 Keep the flag empty or `false` in ordinary local and preview builds. The flag
 is independent of `VERCEL_ENV`; it is an explicit operator decision.
 
-| Service            | Public configuration                                  | Private build configuration                                                |
-| ------------------ | ----------------------------------------------------- | -------------------------------------------------------------------------- |
-| PostHog            | `NEXT_PUBLIC_POSTHOG_KEY`, `NEXT_PUBLIC_POSTHOG_HOST` | None                                                                       |
-| Google Analytics 4 | `NEXT_PUBLIC_GA_MEASUREMENT_ID` (`G-...`)             | None                                                                       |
-| Sentry             | `NEXT_PUBLIC_SENTRY_DSN`                              | `SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, `SENTRY_PROJECT` for source-map uploads |
+| Service          | Public configuration                                  | Private build configuration                                                |
+| ---------------- | ----------------------------------------------------- | -------------------------------------------------------------------------- |
+| PostHog          | `NEXT_PUBLIC_POSTHOG_KEY`, `NEXT_PUBLIC_POSTHOG_HOST` | None                                                                       |
+| Vercel Analytics | `NEXT_PUBLIC_VERCEL_ANALYTICS_ENABLED=true`           | None                                                                       |
+| Sentry           | `NEXT_PUBLIC_SENTRY_DSN`                              | `SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, `SENTRY_PROJECT` for source-map uploads |
 
 The analytics project key, measurement ID and Sentry DSN are browser-visible
 settings. Do not put a PostHog personal API key or Sentry auth token in a
@@ -26,27 +26,30 @@ settings. Do not put a PostHog personal API key or Sentry auth token in a
 before enabling them. No paid plan is required by application code; account
 limits and commercial terms must be checked with each provider.
 
-## PostHog and Google Analytics
+## Cookieless public analytics
 
-The visitor must select **Allow analytics** before the app loads an analytics
-SDK. **Keep analytics off** leaves analytics disabled. The choice is stored in
-this browser under `luma.analytics.v1`; it is not saved to the user account.
-**Analytics settings** on the measured pages lets the visitor change it. A
-withdrawal stops capture and reloads the page to remove vendor listeners. If
-browser storage fails, analytics stays off. Clearing site data removes the
-choice and causes a new prompt.
+PostHog and configured Vercel public counts start without a required tap or initial
+banner. A compact **Analytics settings** control opens the optional settings.
+**Keep analytics off** stops capture and reloads to remove vendor listeners.
+Saved denials under `luma.analytics.v1` remain honored; invalid saved choices,
+failed reads and failed writes keep analytics off. An absent choice permits
+cookieless counts without writing a consent grant. Clearing site data removes
+the opt-out and restores the default. Choices are per browser origin, not account.
+Google Analytics is not loaded by this flow, even with a legacy measurement ID
+or saved grant. A future cookie-based integration needs its own explicit consent
+and privacy review; the cookieless setting cannot enable it.
 
 Only these pages, including their locale variants, send manual page views:
-`/`, `/how-it-works`, `/participants`, `/prices`, `/standards`, `/solar`, `/help`.
+`/`, `/business`, `/business/collectors`, `/how-it-works`, `/participants`, `/prices`, `/standards`, `/solar`, `/help`.
 New pages are excluded unless deliberately added to the allowlist. Login,
 onboarding, `/sell`, contact forms, booking tracking, the business app and admin
 are excluded. Moving from a measured page to an excluded route stops page
-capture; returning resumes it only while the saved choice is still allowed.
+capture; returning resumes it only while the visitor has not opted out.
 
-App properties are the normalized public path and locale. The page URL sent is
+PostHog app properties are the normalized public path and locale. The page URL sent is
 the origin plus that allowlisted path. Query strings, fragments, referral URLs,
 DOM text, real page titles, form values, customer IDs and booking tokens are not
-included by the app's event contract. GA uses the fixed title `Luma.Green`.
+included by the app's event contract. Google Analytics is not activated.
 Providers may still process browser/network metadata and IP addresses at their
 network boundary. Do not describe this as fully anonymous or zero-data traffic.
 
@@ -56,35 +59,20 @@ network boundary. Do not describe this as fully anonymous or zero-data traffic.
    and ingestion host to the public values above. The default host is
    `https://eu.i.posthog.com`; use the host for the actual project.
 2. Keep session replay, autocapture, surveys, feature flags, exception capture,
-   performance capture and heatmaps disabled. The runtime disables these
-   features and permits only manual `$pageview` events.
+   performance capture and heatmaps disabled. No PostHog browser SDK is loaded;
+   the runtime sends only manual `$pageview` events to the documented capture API.
 3. Review retention and ingestion limits. There is no user identification or
-   person profile creation. The SDK keeps its random identifier in memory;
+   person profile creation. The runtime keeps its random identifier in memory;
    it does not persist that identity across reloads. Returning-user and
    cross-device analysis are therefore outside this implementation.
-4. Verify the first consented event in the project's live events view. Confirm
+4. Verify the first automatic public event in the project's live events view. Confirm
    only the allowed properties appear and no events arrive from private pages.
 
-### Google Analytics account
+### Legacy Google Analytics configuration
 
-1. Create a GA4 property and web data stream. Set the public measurement ID,
-   including its `G-` prefix.
-2. In the web stream settings, **disable Enhanced Measurement entirely**.
-   Disable automatic page views, including browser history change measurement.
-   The app supplies manual page views with `send_page_view=false` on config.
-   Automatic measurement can duplicate events or record excluded interactions.
-3. Keep Google Signals, advertising personalization, user-provided data and
-   advertising integrations disabled. The runtime denies advertising consent
-   and disables Google Signals and personalization signals.
-4. Do not install a second Google tag, Google Tag Manager container or platform
-   analytics integration for this same property. This app owns its tag.
-5. Review retention, data sharing and region settings. GA can use analytics
-   cookies after the visitor allows it; withdrawal does not promise to delete
-   historical provider records. Follow the provider's deletion controls when
-   removal is required.
-6. Check Realtime and browser network requests after an allowed page visit.
-   Confirm one manual page view per route transition, a safe page URL and no
-   events from private routes. Provider settings are part of this check.
+Google Analytics delivery was removed from the shared runtime. Existing settings
+are accepted for configuration compatibility but do not load scripts or events.
+Do not add a Google tag or Tag Manager to bypass the cookieless setting.
 
 ## Sentry errors
 
@@ -173,11 +161,11 @@ the result below without copying keys or user data into this file.
 
 1. Select a PostHog project and Sentry project with restricted team access and
    MFA. Record their region and the owner who can disable ingestion.
-2. Review the privacy notice. State that optional public analytics needs visitor
-   consent and that error reporting has a separate purpose and operator gate.
+2. Review the privacy notice. State that public counts start automatically without
+   analytics cookies, offer an opt-out, and that error reporting is separate.
 3. Set the provider controls in the account instructions above. Do not enable
-   extra products offered during setup. Existing GA4 is optional; avoid duplicate
-   traffic reports unless there is a clear reporting need.
+   extra products offered during setup. Google Analytics is inactive; do not add
+   a second analytics script outside the shared runtime.
 4. Set only the existing public build settings in Vercel Production. Keep the
    source-map token private to the trusted build. Keep all operational provider
    secrets on Convex. Rebuild through the normal checked release process.
@@ -192,14 +180,14 @@ the result below without copying keys or user data into this file.
 These are the only implemented analytics events. Consent and the path allowlist
 apply at send time, including after a delayed SDK import.
 
-| Event           | Provider         | Permitted app properties                                                                                            | Intended chart                                                | Limit                                                         |
-| --------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
-| `$pageview`     | PostHog          | Normalized public `page`, supported `locale`; transport key and random in-memory distinct ID; sanitized origin/path | Daily page views, public path share, language share           | No account identity; reloads start a new identifier           |
-| `page_view`     | GA4, if selected | Same page/locale; safe origin/path; fixed title and empty referrer                                                  | Public page views by path/language                            | GA consent cookies and provider settings need separate review |
-| Exception event | Sentry           | Error class, sanitized code location, event time/ID, release/environment metadata                                   | New errors and regressions by release; affected code location | Error values, request data and private context are removed    |
+| Event           | Provider           | Permitted app properties                                                                                            | Intended chart                                                | Limit                                                      |
+| --------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- | ---------------------------------------------------------- |
+| `$pageview`     | PostHog            | Normalized public `page`, supported `locale`; transport key and random in-memory distinct ID; sanitized origin/path | Daily page views, public path share, language share           | No account identity; reloads start a new identifier        |
+| Manual pageview | Vercel, if enabled | Canonical public URL; guarded first-party referrer and vendor network metadata                                      | Public page counts                                            | Re-audit hosted attribution guard before release           |
+| Exception event | Sentry             | Error class, sanitized code location, event time/ID, release/environment metadata                                   | New errors and regressions by release; affected code location | Error values, request data and private context are removed |
 
 Create one small public-traffic dashboard in PostHog: page views over time, path
-and language. Label it **consented public traffic**. Do not label distinct IDs as
+and language. Label it **public traffic with optional opt-out**. Do not label distinct IDs as
 customers. Do not report public page sequences as signup or pickup conversion:
 login, join, booking, account and operational routes are excluded. The proposed
 public action and private funnel contracts are on the
@@ -267,19 +255,19 @@ withdrawal nor changing a key deletes historical provider data.
 All live checks below are **pending account setup**. Local tests prove only the
 configured contract and mocked SDK calls.
 
-| Check                                                 | Required evidence                                                           | Current status                                       |
-| ----------------------------------------------------- | --------------------------------------------------------------------------- | ---------------------------------------------------- |
-| Empty flag/keys                                       | No initialized SDK transport in a fresh build                               | Covered by local tests; live pending                 |
-| DSN only, operator flag off                           | No Sentry initialization from either entry file                             | Covered by local tests; live pending                 |
-| No consent / decline / storage unavailable            | No PostHog or GA load/event                                                 | Covered by local tests; live pending                 |
-| Consent on `/ar/prices` with synthetic query/fragment | One safe manual page view; only allowed fields at receiver                  | Covered by local tests; live pending                 |
-| Navigate into login/join/booking/app/admin            | No analytics event from excluded routes                                     | Covered by local tests; live pending                 |
-| Withdraw, reload and change another same-origin tab   | Capture stays off; no stale delayed load sends events                       | Local contract tests exist; browser/provider pending |
-| Controlled browser error and Next.js request error    | Received scrubbed exception, no message/request/body/user/breadcrumb fields | Local scrubber tests pass; receiver pending          |
-| Error with analytics declined                         | Same error-only behavior, independent of analytics consent                  | Local gates are separate; receiver pending           |
-| Source maps and release                               | Safe test error maps to this deployed code; release matches commit          | Build/account pending                                |
-| Account controls                                      | Access, region, privacy settings, actual retention, cap and alert verified  | Pending                                              |
-| Shutoff                                               | Flag off plus rebuild stops all three integrations with keys retained       | Local gates tested; hosted pending                   |
+| Check                                                | Required evidence                                                           | Current status                                       |
+| ---------------------------------------------------- | --------------------------------------------------------------------------- | ---------------------------------------------------- |
+| Empty flag/keys                                      | No initialized SDK transport in a fresh build                               | Covered by local tests; live pending                 |
+| DSN only, operator flag off                          | No Sentry initialization from either entry file                             | Covered by local tests; live pending                 |
+| Saved opt-out / storage unavailable                  | No analytics load/event                                                     | Covered by local tests; live pending                 |
+| Automatic `/ar/prices` with synthetic query/fragment | PostHog safe page view; Vercel rejects query/fragment                       | Covered by local tests; live pending                 |
+| Navigate into login/join/booking/app/admin           | No analytics event from excluded routes                                     | Covered by local tests; live pending                 |
+| Withdraw, reload and change another same-origin tab  | Capture stays off; no stale delayed load sends events                       | Local contract tests exist; browser/provider pending |
+| Controlled browser error and Next.js request error   | Received scrubbed exception, no message/request/body/user/breadcrumb fields | Local scrubber tests pass; receiver pending          |
+| Error with analytics declined                        | Same error-only behavior, independent of analytics consent                  | Local gates are separate; receiver pending           |
+| Source maps and release                              | Safe test error maps to this deployed code; release matches commit          | Build/account pending                                |
+| Account controls                                     | Access, region, privacy settings, actual retention, cap and alert verified  | Pending                                              |
+| Shutoff                                              | Flag off plus rebuild stops all three integrations with keys retained       | Local gates tested; hosted pending                   |
 
 ### Incident and shutoff steps
 
@@ -323,7 +311,7 @@ SMS action records the result; the sign-in endpoint waits for provider
 acceptance and returns 503 on failure. Existing request limits still apply;
 ambiguous sends are never retried automatically.
 
-PostHog continues to use the existing consent-based public page view. Polls
+PostHog continues to use the existing public page view with an opt-out. Polls
 and provider results add no analytics event and no new Sentry capture: public
 poll failures are expected availability states, while existing sanitized error
 monitoring remains in place. Never send provider payloads or SMS arguments to
@@ -332,9 +320,92 @@ or release change is needed.
 
 ### Afterlife public/business split (18 November 2026)
 
-The homepage and business landing reuse consent-gated public-page analytics and
+The homepage and business landing reuse automatic public-page analytics with an opt-out and
 sanitized Sentry reporting. No new event payload sends phone numbers, prefilled
 message text, simulated chat content or booking details. The animated phone is
 local illustrative content; its message changes are not product events. Check
 page views for both approved hostnames after DNS activation, and verify opted-out
 visitors remain untracked. A WhatsApp link click is not a completed booking.
+
+### Analytics deployment preparation — 18 November 2026
+
+The allowlist now includes `/business` and `/business/collectors`. On
+`business.luma.green`, `/` is reported as `/business`, including localized roots.
+No hostname property is added. Choices remain separate for each origin; an opt-out
+on the public site does not change the business site setting. These hosted web
+changes also apply inside Expo and Electron; no native SDK or permissions change.
+
+PostHog and Sentry retain the existing event and error limits. Configure the
+Luma-specific PostHog project and host, and Luma Sentry project DSN, using the
+settings above. Provider configuration and live received-event acceptance are
+separate from passing local tests. No new Sentry hook is needed for page views.
+
+#### Vercel deployment and vendor-specific limitation
+
+The owner approved metered Vercel Analytics and automatic cookieless public counts.
+`@vercel/analytics` 2.0.1 uses manual pageviews only, with automatic tracking and
+custom events disabled. `NEXT_PUBLIC_VERCEL_ANALYTICS_ENABLED` defaults to false
+and stays false until deployment setup and acceptance. The shared telemetry flag
+must also be enabled. Unknown origins, private routes, query strings, fragments,
+credentials and sensitive or external referrers block loading and delivery.
+Only an empty referrer or exact first-party public URL is allowed. Existing
+opt-outs and storage failures block delivery. The callback repeats these checks
+synchronously before each send, including after private SPA navigation.
+
+The hosted Vercel runtime adds referrer and stored attribution after `beforeSend`.
+The adapter reads `__va_attribution` without changing it: any present value,
+including an empty string, or a storage exception blocks loading and delivery.
+No `identify`, custom events or attribution-writing code is installed. This is a
+vendor-specific defense, not a supported full-payload sanitization API. It depends
+on the inspected hosted runtime's current storage key and synchronous send order.
+Re-audit it whenever the SDK or hosted runtime changes; the hosted script is not
+pinned by the package version. If Vercel changes this behavior, turn the flag off
+until the guard is updated or supported vendor filtering becomes available.
+
+Approved public referrer paths and browser/network metadata can reach Vercel.
+Neither this implementation nor the notice promises anonymity or zero network
+data. PostHog keeps its stricter property allowlist and memory-only identifier.
+Sentry remains automatic and separate from the analytics setting. Do not enable
+replay, heatmaps, advertising, persistent profiles or paid add-on features.
+
+Browser tests serve local app content under intercepted first-party origins and
+stub the documented Vercel script queue. Every ingestion request is intercepted.
+They verify default-on counts, opt-out, route/query/referrer boundaries and
+attribution added before or after load. They do not prove the hosted vendor's
+final payload. Inspect actual received payloads and headers during live
+acceptance, with approved test traffic only. No raw private values may appear.
+
+### Direct PostHog transport and provider setup receipt
+
+The PostHog SDK was replaced with a small direct call to the documented
+[capture API](https://posthog.com/docs/api/capture). Its retry queue can resend an
+already-captured event after opt-out or private navigation without calling the
+application's sanitization hook again. The installed SDK's supported fetch options
+do not provide a safe cancellation boundary. No SDK internals or retry patches
+are used.
+
+The direct call posts only the project API key, `$pageview`, normalized public
+URL, locale, ephemeral in-memory distinct ID and `$process_person_profile:false`.
+Only exact US/EU PostHog cloud ingestion origins are accepted. Fetch omits cookies
+and the Referer header; an AbortController cancels outstanding requests on stop.
+There is no retry, unload beacon, keepalive queue, identification or profile API.
+Resuming creates a new controller, leaving prior requests aborted. Already received
+events cannot be recalled by a later opt-out. Cross-tab changes do not reload a
+private form or discard drafts.
+
+Provider setup reported and verified by the release operator on 18 November 2026:
+PostHog organization **Luma.Green**, project **746365**, US Cloud ingestion
+`https://us.i.posthog.com`; free tier shows 1 million product events, no card and
+no upgrade. Authorized domains are `luma.green` and `business.luma.green`.
+Autocapture, heatmaps, web vitals and replay are off. **Discard client IP data**
+is on; provider GeoIP/bot transforms may process the IP before discard. Production
+public key/host and Vercel Analytics flag are saved for the next checked release.
+Direct-ingestion receipt still needs verification after that release. Never copy
+secret keys into this record.
+
+Sentry project **luma-jb/luma-web** received the operator's scrubbed test event
+`78b7eb12074940df8def3ad4ac2d253a`. No URL or user identity was present; provider
+coarse geography remained and IP storage was blocked. Public DSN and telemetry
+flag were saved for Production. The project uses the free Developer plan. No
+source-map upload token was created; this receipt does not prove source mapping
+or a controlled error from the new deployed application.

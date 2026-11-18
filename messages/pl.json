@@ -3411,7 +3411,7 @@
   },
   "analytics": {
     "title": "Opcjonalna analityka",
-    "description": "Zezwól PostHog i Google Analytics na pomiar wizyt na stronach publicznych. Nie rejestrujemy formularzy, stron prywatnych ani nagrań sesji. Wybór nie zmienia dostępu do platformy.",
+    "description": "Wizyty na stronach publicznych są liczone automatycznie bez analitycznych plików cookie. PostHog i Vercel mogą przetwarzać techniczne dane sieciowe. Formularze, strony prywatne i nagrania sesji są wyłączone. Tutaj możesz wyłączyć analitykę.",
     "accept": "Zezwól na analitykę",
     "decline": "Pozostaw analitykę wyłączoną",
     "withdraw": "Wyłącz analitykę",
@@ -4654,7 +4654,7 @@
     "sharingTitle": "Odbiorcy danych",
     "sharingBody": "Uprawnieni uczestnicy oraz skonfigurowani dostawcy hostingu, SMS, weryfikacji, płatności i opcjonalnej AI otrzymują niezbędne dane. Przetwarzanie może odbywać się poza Indiami.",
     "choicesTitle": "Twój wybór",
-    "choicesBody": "Lokalizacja i powiadomienia wymagają zgody. Samodzielnie wybierasz pliki. Logowanie korzysta z plików cookie sesji. Analityka wymaga zgody; raporty błędów są osobne. Zarządzaj uprawnieniami w ustawieniach urządzenia.",
+    "choicesBody": "Wizyty na stronach publicznych są liczone automatycznie bez analitycznych plików cookie. PostHog i Vercel mogą przetwarzać techniczne dane sieciowe. Formularze, strony prywatne i nagrania sesji są wyłączone. Tutaj możesz wyłączyć analitykę. Logowanie używa sesyjnych plików cookie. Raportowanie błędów działa osobno. Uprawnieniami lokalizacji i powiadomień zarządzaj w ustawieniach urządzenia.",
     "requestsTitle": "Wnioski dotyczące konta i danych",
     "requestsBody": "Usuń konto poniżej lub napisz do pomocy, aby uzyskać dostęp, poprawić albo usunąć dane. Potwierdź własność; nie wysyłaj dokumentów tożsamości e-mailem. Najpierw rozwiąż otwarte zadania lub kwestie własności.",
     "retentionTitle": "Co pozostaje po zamknięciu",

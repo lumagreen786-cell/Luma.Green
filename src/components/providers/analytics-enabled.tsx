@@ -17,7 +17,7 @@ export function AnalyticsEnabled() {
   const lastPage = useRef<string | null>(null);
   useEffect(() => {
     resumeAnalytics();
-    const page = analyticsPage(pathname);
+    const page = analyticsPage(pathname, window.location.hostname);
     if (page === undefined) {
       lastPage.current = null;
       stopAnalytics();

@@ -33,47 +33,54 @@ beforeEach(() => {
   state.path = "/";
   state.stop.mockClear();
 });
-describe("optional analytics controls", () => {
-  it("does not activate analytics until the visitor opts in", async () => {
-    const user = userEvent.setup();
+describe("automatic public analytics controls", () => {
+  it("counts without a required tap and shows only optional settings", () => {
     render(controls());
-    expect(screen.queryByText("Analytics active")).not.toBeInTheDocument();
-    await user.click(screen.getByRole("button", { name: "Allow analytics" }));
-    expect(screen.getByText("Analytics active")).toBeInTheDocument();
-    expect(localStorage.getItem(analyticsChoiceKey)).toBe("granted");
+    expect(screen.getByText("Analytics active")).toBeVisible();
     expect(
-      screen.getByRole("button", { name: "Turn off analytics" }),
+      screen.getByRole("button", { name: "Analytics settings" }),
     ).toBeVisible();
+    expect(
+      screen.queryByRole("button", { name: "Allow analytics" }),
+    ).not.toBeInTheDocument();
+    expect(localStorage.getItem(analyticsChoiceKey)).toBeNull();
   });
-  it("keeps the page usable when declined and lets the visitor change the choice", async () => {
+  it("honors a saved opt-out and allows a new choice", async () => {
+    saveAnalyticsChoice("denied");
     const user = userEvent.setup();
     render(controls());
-    await user.click(
-      screen.getByRole("button", { name: "Keep analytics off" }),
-    );
     expect(screen.queryByText("Analytics active")).not.toBeInTheDocument();
     await user.click(
       screen.getByRole("button", { name: "Analytics settings" }),
     );
-    expect(
-      screen.getByRole("button", { name: "Allow analytics" }),
-    ).toBeVisible();
+    await user.click(screen.getByRole("button", { name: "Allow analytics" }));
+    expect(screen.getByText("Analytics active")).toBeVisible();
   });
-  it("shows the storage failure and keeps analytics off", async () => {
+  it("fails closed when storage reads fail", () => {
+    vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => {
+      throw new Error("storage blocked");
+    });
+    render(controls());
+    expect(screen.queryByText("Analytics active")).not.toBeInTheDocument();
+  });
+  it("shows a failed opt-out and stops analytics", async () => {
     const user = userEvent.setup();
     render(controls());
+    await user.click(
+      screen.getByRole("button", { name: "Analytics settings" }),
+    );
     vi.spyOn(Storage.prototype, "setItem").mockImplementation(() => {
       throw new Error("storage blocked");
     });
-    await user.click(screen.getByRole("button", { name: "Allow analytics" }));
+    await user.click(
+      screen.getByRole("button", { name: "Keep analytics off" }),
+    );
     expect(screen.getByRole("alert")).toHaveTextContent("could not save");
     expect(screen.queryByText("Analytics active")).not.toBeInTheDocument();
     expect(state.stop).toHaveBeenCalled();
   });
-  it("responds to consent withdrawal in another tab", () => {
-    saveAnalyticsChoice("granted");
+  it("responds to an opt-out in another tab", () => {
     render(controls());
-    expect(screen.getByText("Analytics active")).toBeInTheDocument();
     localStorage.setItem(analyticsChoiceKey, "denied");
     fireEvent(
       window,
@@ -85,27 +92,23 @@ describe("optional analytics controls", () => {
     expect(screen.queryByText("Analytics active")).not.toBeInTheDocument();
     expect(state.stop).toHaveBeenCalled();
   });
-  it("shows no consent panel in booking or private routes", () => {
+  it("loads no runtime or controls on a private route", () => {
     state.path = "/t/private-token";
     render(controls());
     expect(screen.queryByRole("complementary")).not.toBeInTheDocument();
+    expect(screen.queryByText("Analytics active")).not.toBeInTheDocument();
   });
-  it("offers direct withdrawal from the privacy notice", async () => {
+  it("offers settings on privacy without measuring it", async () => {
     state.path = "/privacy";
-    saveAnalyticsChoice("granted");
     const user = userEvent.setup();
     render(controls());
+    expect(screen.queryByText("Analytics active")).not.toBeInTheDocument();
     await user.click(
-      screen.getByRole("button", { name: "Turn off analytics" }),
+      screen.getByRole("button", { name: "Analytics settings" }),
+    );
+    await user.click(
+      screen.getByRole("button", { name: "Keep analytics off" }),
     );
     expect(localStorage.getItem(analyticsChoiceKey)).toBe("denied");
-    expect(screen.queryByText("Analytics active")).not.toBeInTheDocument();
-    expect(state.stop).toHaveBeenCalled();
-    expect(screen.queryByRole("complementary")).not.toBeInTheDocument();
-  });
-  it("does not ask for a new choice on the privacy notice", () => {
-    state.path = "/privacy";
-    render(controls());
-    expect(screen.queryByRole("complementary")).not.toBeInTheDocument();
   });
 });

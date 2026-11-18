@@ -2449,7 +2449,7 @@
   "analytics": {
     "close": "Kapat",
     "title": "İsteğe bağlı analiz",
-    "description": "PostHog ve Google Analytics’in herkese açık sayfa ziyaretlerini ölçmesine izin verin. Formları, özel sayfaları veya oturum tekrarlarını kaydetmeyiz. Seçiminiz platforma erişimi değiştirmez.",
+    "description": "Herkese açık sayfa ziyaretleri analiz çerezleri olmadan otomatik sayılır. PostHog ve Vercel teknik ağ verilerini işleyebilir. Formlar, özel sayfalar ve oturum kayıtları kapsam dışıdır. Analizi buradan kapatabilirsiniz.",
     "accept": "Analize izin ver",
     "decline": "Analizi kapalı tut",
     "withdraw": "Analitiği kapat",
@@ -4654,7 +4654,7 @@
     "sharingTitle": "Verileri kim alır",
     "sharingBody": "Yetkili katılımcılar ve yapılandırılmış barındırma, SMS, doğrulama, ödeme ve isteğe bağlı yapay zekâ sağlayıcıları gereken verileri alır. İşleme Hindistan dışında yapılabilir.",
     "choicesTitle": "Seçimleriniz",
-    "choicesBody": "Konum ve bildirimler izin gerektirir. Dosyaları kendiniz seçersiniz. Giriş, oturum çerezleri kullanır. Analiz onay gerektirir; hata raporları ayrıdır. İzinleri cihaz ayarlarında yönetin.",
+    "choicesBody": "Herkese açık sayfa ziyaretleri analiz çerezleri olmadan otomatik sayılır. PostHog ve Vercel teknik ağ verilerini işleyebilir. Formlar, özel sayfalar ve oturum kayıtları kapsam dışıdır. Analizi buradan kapatabilirsiniz. Giriş için oturum çerezleri kullanılır. Hata raporlama ayrıdır. Konum ve bildirim izinlerini cihaz ayarlarından yönetin.",
     "requestsTitle": "Hesap ve veri talepleri",
     "requestsBody": "Aşağıdan hesabınızı kaldırın veya erişim, düzeltme ya da silme için desteğe e-posta gönderin. Sahipliği doğrulayın; kimlik belgelerini e-posta ile göndermeyin. Önce açık işleri veya sahiplik konularını çözün.",
     "retentionTitle": "Kapatma sonrası kalanlar",
