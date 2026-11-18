@@ -1,5 +1,4 @@
-import { cva } from "class-variance-authority";
-
+import { Reveal } from "@/components/afterlife/reveal";
 import {
   RoleStoryImage,
   type StoryScene,
@@ -7,32 +6,9 @@ import {
 import { cn } from "@/lib/utils";
 
 import { Container } from "./container";
-import effects from "./public-effects.module.css";
+import styles from "./public-pages.module.css";
 
-const headerLayout = cva("grid min-w-0 lg:items-center", {
-  variants: {
-    variant: {
-      editorial: "gap-3 py-7 sm:py-9",
-      task: "gap-4 py-7 sm:py-9 lg:grid-cols-[minmax(0,1fr)_6rem]",
-    },
-  },
-  defaultVariants: { variant: "editorial" },
-});
-
-const headerTitle = cva(
-  "max-w-2xl font-display leading-[1.1] font-normal tracking-tight text-balance",
-  {
-    variants: {
-      variant: {
-        editorial: "text-3xl sm:text-5xl",
-        task: "text-3xl leading-tight sm:text-5xl",
-      },
-    },
-    defaultVariants: { variant: "editorial" },
-  },
-);
-
-/** A restrained title and a clear reading order shared by public routes. */
+/** Editorial pages open with their process; task pages keep the action close. */
 export function PageHeader({
   title,
   lead,
@@ -49,41 +25,25 @@ export function PageHeader({
   variant?: "editorial" | "task";
 }) {
   return (
-    <div className="bg-background">
-      <Container className={headerLayout({ variant })}>
-        <div
-          className={cn(
-            "min-w-0 space-y-2",
-            variant === "editorial" && "max-w-3xl",
-          )}
-        >
-          <h1
-            data-text-entrance={atmosphere || undefined}
-            className={cn(
-              headerTitle({ variant }),
-              atmosphere && effects.heading,
-            )}
-          >
-            {title}
-          </h1>
-          <p className="max-w-3xl text-sm leading-relaxed text-pretty text-muted-foreground">
-            {lead}
-          </p>
-          {eyebrow ? (
-            <p className="text-sm font-medium text-muted-foreground">
-              {eyebrow}
-            </p>
-          ) : null}
-        </div>
-        {variant === "task" ? (
-          <RoleStoryImage
-            scene={scene}
-            className="hidden lg:block"
-            frameClassName="h-18 aspect-auto rounded-xl"
-            sizes="96px"
-          />
-        ) : null}
+    <header
+      className={cn(
+        styles.pageHeader,
+        variant === "editorial" ? styles.editorial : styles.task,
+      )}
+    >
+      <RoleStoryImage
+        scene={scene}
+        className={styles.headerImage}
+        frameClassName={styles.headerFrame}
+        sizes="100vw"
+      />
+      <Container className={styles.headerContent}>
+        <Reveal className={styles.headingCopy}>
+          {eyebrow ? <p className={styles.eyebrow}>{eyebrow}</p> : null}
+          <h1 data-text-entrance={atmosphere || undefined}>{title}</h1>
+          <p className={styles.lead}>{lead}</p>
+        </Reveal>
       </Container>
-    </div>
+    </header>
   );
 }

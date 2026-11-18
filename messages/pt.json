@@ -4819,5 +4819,171 @@
     "townhouse": "Casa geminada",
     "farmhouse": "Casa de campo",
     "routeNote": "Para recolha comunitária, use o código comunitário revisto."
+  },
+  "afterlife": {
+    "bookNow": "Reservar agora",
+    "bookingMessage": "Olá Luma, gostaria de reservar uma recolha para reciclagem.",
+    "bookingUnavailable": "As reservas pelo WhatsApp estarão disponíveis em breve.",
+    "how": "Como funciona",
+    "questions": "Perguntas",
+    "business": "Para empresas",
+    "ecosystem": "Ecossistema",
+    "collectors": "Para coletores",
+    "signIn": "Iniciar sessão",
+    "publicSite": "Reservar uma recolha",
+    "menu": "Navegação",
+    "tagline": "Um amanhã mais limpo em movimento.",
+    "heroTitle": "Menos resíduos.",
+    "heroTitleEnd": "Mais possibilidades.",
+    "heroLead": "Envie uma foto. Partilhe a localização. Organize a recolha numa simples conversa.",
+    "phoneEyebrow": "A recolha começa aqui",
+    "phoneTitle": "Algumas mensagens. Um novo começo.",
+    "phoneLead": "Envie uma foto. Escolha um horário. Vamos mantê-lo informado.",
+    "storyEyebrow": "Pensado para o seu dia",
+    "storyTitle": "Uma recolha. Um novo começo.",
+    "storyLead": "Alguns sacos ou uma recolha regular. Comece com uma mensagem. Verificamos o que pode ser recolhido e quando.",
+    "repeat": "Recolhas pontuais ou regulares",
+    "updates": "Atualizações pelo WhatsApp",
+    "faqTitle": "É bom saber.",
+    "faq1q": "O que posso reciclar?",
+    "faq1a": "Envie fotos de papel, cartão, plástico ou metais. O coletor verifica o que é aceite na sua zona.",
+    "faq2q": "Quando é confirmada a recolha?",
+    "faq2a": "A recolha é confirmada quando um coletor autorizado aceita o pedido.",
+    "faq3q": "Como são definidos o peso e o pagamento?",
+    "faq3a": "O coletor regista o peso medido e o valor acordado no momento da recolha.",
+    "closingTitle": "Pronto para a próxima recolha?",
+    "workWith": "Trabalhe com a Luma",
+    "businessPrompt": "Recolhe, separa, recicla ou compra materiais recuperados?",
+    "businessEyebrow": "O ecossistema Luma",
+    "businessTitle": "Bons materiais.",
+    "businessTitleEnd": "Grandes possibilidades.",
+    "businessLead": "Da primeira recolha à próxima utilização. Um espaço conectado para quem torna a reciclagem possível.",
+    "findRole": "Encontre o seu lugar",
+    "rolesTitle": "O seu trabalho. Uma cadeia conectada.",
+    "rolesLead": "Escolha a sua função. Veja como a Luma se adapta ao seu dia.",
+    "roleAction": "Saiba como participar",
+    "kabadiwala": "Comerciantes de sucata",
+    "preprocessor": "Pré-processadores",
+    "recycler": "Recicladores",
+    "manufacturer": "Fabricantes",
+    "saathi": "Parceiros de recolha",
+    "kabadiwalaBody": "Gira pedidos, planeie o seu dia e registe cada recolha.",
+    "preprocessorBody": "Ligue entradas, separação, stock e entregas.",
+    "recyclerBody": "Ligue os registos de entrada, processamento e saída de materiais.",
+    "manufacturerBody": "Encontre materiais recuperados e reúna os registos de compra.",
+    "saathiBody": "Encontre trabalhos de recolha e separação disponíveis.",
+    "businessClosing": "Vamos avançar juntos.",
+    "collectorTitle": "Mais tempo a recolher.",
+    "collectorTitleEnd": "Menos tempo à procura de respostas.",
+    "collectorLead": "Reúna pedidos, planeamento e registos de pesagem numa só vista.",
+    "collectorFlow": "Do pedido à recolha.",
+    "step1": "Reveja o pedido.",
+    "step1Body": "Verifique fotos, zona e horário pedido.",
+    "step2": "Planeie a recolha.",
+    "step2Body": "Aceite trabalhos e mantenha o cliente informado.",
+    "step3": "Registe o resultado.",
+    "step3Body": "Registe o peso medido, o valor acordado e o estado da recolha.",
+    "imageAlt": "Ilustração de materiais recicláveis e trabalhos de recolha",
+    "businessMeta": "Luma para empresas de reciclagem",
+    "homeMeta": "Reserve uma recolha com a Luma pelo WhatsApp.",
+    "collectorMeta": "Gira as suas recolhas com a Luma.",
+    "help": "Ajuda",
+    "privacy": "Privacidade",
+    "status": "Estado do serviço"
+  },
+  "afterlifePhone": {
+    "name": "Luma Green",
+    "description": "Ilustração de uma conversa para recolha. Às fotos, localização e horário preferido segue-se a aceitação do coletor.",
+    "photoAlt": "Materiais recicláveis ilustrativos prontos para recolha",
+    "location": "Localização atual",
+    "locationDetail": "Localização partilhada",
+    "message": "Mensagem",
+    "greeting": "Olá! Claro. Pode enviar uma foto?",
+    "askLocation": "Obrigado! Partilhe a localização e um horário conveniente.",
+    "slotReply": "{slot}, por favor.",
+    "received": "Entendido. Vamos verificar a disponibilidade e confirmar consigo.",
+    "accepted": "O coletor aceitou. {slot}. Está tudo pronto!",
+    "thanks": "Perfeito, obrigado!",
+    "scenario0": {
+      "hello": "Olá, podem recolher jornais antigos?",
+      "caption": "Jornais e cartão.",
+      "slot": "Amanhã, das 9 às 11"
+    },
+    "scenario1": {
+      "hello": "Acabámos de mudar de casa. Podem levar as caixas?",
+      "caption": "Estas são as caixas vazias da mudança.",
+      "slot": "Sábado, das 10 às 12"
+    },
+    "scenario2": {
+      "hello": "Posso organizar uma recolha para o nosso apartamento?",
+      "caption": "Aqui está o que juntámos.",
+      "slot": "Domingo, das 9 às 11"
+    },
+    "scenario3": {
+      "hello": "Temos cartão na nossa loja.",
+      "caption": "As caixas estão dobradas e prontas.",
+      "slot": "Sexta-feira, das 14 às 16"
+    },
+    "scenario4": {
+      "hello": "Podem recolher papel no nosso escritório?",
+      "caption": "Aqui estão os maços de papel.",
+      "slot": "Segunda-feira, das 11 às 13"
+    },
+    "scenario5": {
+      "hello": "Olá! Separei alguns recipientes de plástico.",
+      "caption": "É isto que tenho.",
+      "slot": "Terça-feira, das 9 às 11"
+    },
+    "scenario6": {
+      "hello": "Podem verificar estes objetos de metal?",
+      "caption": "Vou enviar uma foto agora.",
+      "slot": "Quarta-feira, das 15 às 17"
+    },
+    "scenario7": {
+      "hello": "Estou a esvaziar um armário. Podem ajudar?",
+      "caption": "Sobretudo papel e embalagens.",
+      "slot": "Quinta-feira, das 10 às 12"
+    },
+    "scenario8": {
+      "hello": "Gostaríamos de uma recolha regular para a nossa loja.",
+      "caption": "Esta é a nossa quantidade habitual de cartão.",
+      "slot": "Todas as sextas-feiras, das 14 às 16"
+    },
+    "scenario9": {
+      "hello": "Podemos organizar uma recolha mensal?",
+      "caption": "Papel e garrafas de casa.",
+      "slot": "Primeiro sábado, das 9 às 11"
+    },
+    "scenario10": {
+      "hello": "Olá, podem recolher no nosso prédio?",
+      "caption": "Juntámos os materiais.",
+      "slot": "Sábado, das 15 às 17"
+    },
+    "scenario11": {
+      "hello": "Tenho cadernos antigos para reciclar.",
+      "caption": "Aqui está uma foto da pilha.",
+      "slot": "Amanhã, das 11 às 13"
+    },
+    "scenario12": {
+      "hello": "Podem recolher embalagens esta semana?",
+      "caption": "Cartão e recipientes limpos.",
+      "slot": "Quinta-feira, das 14 às 16"
+    },
+    "scenario13": {
+      "hello": "Terminámos a separação em casa.",
+      "caption": "Está tudo pronto junto à porta.",
+      "slot": "Domingo, das 16 às 18"
+    },
+    "scenario14": {
+      "hello": "Olá Luma, gostaria de reservar uma recolha.",
+      "caption": "Aqui está o que queremos reciclar.",
+      "slot": "Segunda-feira, das 9 às 11"
+    }
+  },
+  "afterlifeMotion": {
+    "audiences": "Apartamentos, cafés e escritórios",
+    "apartments": "Apartamentos",
+    "coffeeShops": "Cafés",
+    "offices": "Escritórios"
   }
 }

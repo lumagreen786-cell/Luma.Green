@@ -4819,5 +4819,171 @@
     "townhouse": "Nhà liền kề",
     "farmhouse": "Nhà trang trại",
     "routeNote": "Để thu gom cộng đồng, hãy dùng mã cộng đồng đã được xét duyệt."
+  },
+  "afterlife": {
+    "bookNow": "Đặt ngay",
+    "bookingMessage": "Chào Luma, tôi muốn đặt lịch thu gom vật liệu tái chế.",
+    "bookingUnavailable": "Tính năng đặt lịch qua WhatsApp sẽ sớm có.",
+    "how": "Cách hoạt động",
+    "questions": "Câu hỏi",
+    "business": "Dành cho doanh nghiệp",
+    "ecosystem": "Hệ sinh thái",
+    "collectors": "Dành cho người thu gom",
+    "signIn": "Đăng nhập",
+    "publicSite": "Đặt lịch thu gom",
+    "menu": "Trình đơn",
+    "tagline": "Cùng hướng đến ngày mai sạch hơn.",
+    "heroTitle": "Ít rác thải hơn.",
+    "heroTitleEnd": "Nhiều cơ hội hơn.",
+    "heroLead": "Gửi ảnh. Chia sẻ vị trí. Sắp xếp thu gom vật liệu tái chế chỉ trong một cuộc trò chuyện.",
+    "phoneEyebrow": "Bắt đầu đặt lịch tại đây",
+    "phoneTitle": "Vài tin nhắn. Một khởi đầu mới.",
+    "phoneLead": "Gửi ảnh. Chọn giờ. Chúng tôi sẽ cập nhật cho bạn.",
+    "storyEyebrow": "Phù hợp với lịch của bạn",
+    "storyTitle": "Một lần thu gom. Một khởi đầu mới.",
+    "storyLead": "Vài túi đồ hoặc thu gom định kỳ. Bắt đầu bằng một tin nhắn. Chúng tôi kiểm tra loại vật liệu và thời gian có thể thu gom.",
+    "repeat": "Thu gom một lần hoặc định kỳ",
+    "updates": "Cập nhật qua WhatsApp",
+    "faqTitle": "Thông tin hữu ích.",
+    "faq1q": "Tôi có thể tái chế những gì?",
+    "faq1a": "Gửi ảnh giấy, bìa các tông, nhựa hoặc kim loại. Người thu gom kiểm tra những gì có thể nhận tại khu vực của bạn.",
+    "faq2q": "Khi nào lịch thu gom được xác nhận?",
+    "faq2a": "Lịch thu gom được xác nhận sau khi người thu gom phù hợp chấp nhận yêu cầu.",
+    "faq3q": "Khối lượng và thanh toán được xác định thế nào?",
+    "faq3a": "Người thu gom ghi lại khối lượng cân được và số tiền đã thỏa thuận khi thu gom.",
+    "closingTitle": "Sẵn sàng cho lần thu gom tiếp theo?",
+    "workWith": "Hợp tác với Luma",
+    "businessPrompt": "Bạn thu gom, phân loại, tái chế hay mua vật liệu thu hồi?",
+    "businessEyebrow": "Hệ sinh thái Luma",
+    "businessTitle": "Vật liệu tốt.",
+    "businessTitleEnd": "Cơ hội lớn.",
+    "businessLead": "Từ lần thu gom đầu tiên đến lần sử dụng tiếp theo. Một nơi kết nối những người làm công việc tái chế.",
+    "findRole": "Tìm vai trò của bạn",
+    "rolesTitle": "Công việc của bạn. Một chuỗi kết nối.",
+    "rolesLead": "Chọn vai trò của bạn. Xem Luma hỗ trợ ngày làm việc như thế nào.",
+    "roleAction": "Tìm hiểu cách tham gia",
+    "kabadiwala": "Kabadiwala",
+    "preprocessor": "Đơn vị sơ chế",
+    "recycler": "Đơn vị tái chế",
+    "manufacturer": "Nhà sản xuất",
+    "saathi": "Saathi",
+    "kabadiwalaBody": "Quản lý yêu cầu thu gom, lên kế hoạch và ghi lại mỗi lần thu gom.",
+    "preprocessorBody": "Kết nối việc tiếp nhận, phân loại, tồn kho và bàn giao.",
+    "recyclerBody": "Kết nối hồ sơ tiếp nhận, xử lý và đầu ra vật liệu.",
+    "manufacturerBody": "Tìm vật liệu thu hồi và lưu chung hồ sơ mua hàng.",
+    "saathiBody": "Tìm công việc thu gom và phân loại được hỗ trợ.",
+    "businessClosing": "Cùng tiến về phía trước.",
+    "collectorTitle": "Thêm thời gian thu gom.",
+    "collectorTitleEnd": "Bớt thời gian theo dõi.",
+    "collectorLead": "Xem yêu cầu, lịch thu gom và hồ sơ cân trong một màn hình.",
+    "collectorFlow": "Từ yêu cầu đến thu gom xong.",
+    "step1": "Xem yêu cầu.",
+    "step1Body": "Kiểm tra ảnh, khu vực và khung giờ yêu cầu.",
+    "step2": "Lên kế hoạch thu gom.",
+    "step2Body": "Nhận việc và cập nhật cho khách hàng.",
+    "step3": "Ghi lại kết quả.",
+    "step3Body": "Ghi khối lượng cân được, số tiền đã thỏa thuận và trạng thái thu gom.",
+    "imageAlt": "Minh họa vật liệu tái chế và công việc thu gom",
+    "businessMeta": "Luma dành cho doanh nghiệp tái chế",
+    "homeMeta": "Đặt lịch thu gom vật liệu tái chế với Luma qua WhatsApp.",
+    "collectorMeta": "Quản lý công việc thu gom với Luma.",
+    "help": "Trợ giúp",
+    "privacy": "Quyền riêng tư",
+    "status": "Trạng thái dịch vụ"
+  },
+  "afterlifePhone": {
+    "name": "Luma Green",
+    "description": "Minh họa cuộc trò chuyện đặt lịch thu gom vật liệu tái chế. Sau ảnh, vị trí và giờ mong muốn là xác nhận của người thu gom.",
+    "photoAlt": "Minh họa vật liệu tái chế sẵn sàng để thu gom",
+    "location": "Vị trí hiện tại",
+    "locationDetail": "Đã chia sẻ vị trí",
+    "message": "Tin nhắn",
+    "greeting": "Chào bạn! Được chứ. Bạn gửi ảnh được không?",
+    "askLocation": "Cảm ơn! Hãy chia sẻ vị trí và giờ thuận tiện cho bạn.",
+    "slotReply": "Cho tôi chọn {slot}.",
+    "received": "Đã nhận. Chúng tôi sẽ kiểm tra lịch trống và xác nhận với bạn.",
+    "accepted": "Người thu gom đã chấp nhận. {slot}. Mọi thứ đã sẵn sàng!",
+    "thanks": "Tuyệt vời, cảm ơn!",
+    "scenario0": {
+      "hello": "Chào bạn, có thể thu gom báo cũ không?",
+      "caption": "Báo và bìa các tông.",
+      "slot": "Ngày mai, 9–11 giờ"
+    },
+    "scenario1": {
+      "hello": "Chúng tôi vừa chuyển nhà. Có thể lấy các hộp này không?",
+      "caption": "Đây là các hộp chuyển nhà rỗng.",
+      "slot": "Thứ Bảy, 10–12 giờ"
+    },
+    "scenario2": {
+      "hello": "Tôi có thể đặt lịch cho căn hộ của chúng tôi không?",
+      "caption": "Đây là những gì chúng tôi đã gom.",
+      "slot": "Chủ nhật, 9–11 giờ"
+    },
+    "scenario3": {
+      "hello": "Cửa hàng chúng tôi có bìa các tông.",
+      "caption": "Các hộp đã được ép phẳng và sẵn sàng.",
+      "slot": "Thứ Sáu, 14–16 giờ"
+    },
+    "scenario4": {
+      "hello": "Có thể thu gom giấy tại văn phòng chúng tôi không?",
+      "caption": "Đây là các bó giấy.",
+      "slot": "Thứ Hai, 11–13 giờ"
+    },
+    "scenario5": {
+      "hello": "Chào bạn! Tôi đã phân loại hộp nhựa.",
+      "caption": "Đây là những gì tôi có.",
+      "slot": "Thứ Ba, 9–11 giờ"
+    },
+    "scenario6": {
+      "hello": "Bạn kiểm tra các món kim loại này được không?",
+      "caption": "Tôi gửi ảnh ngay.",
+      "slot": "Thứ Tư, 15–17 giờ"
+    },
+    "scenario7": {
+      "hello": "Tôi đang dọn tủ. Bạn giúp được không?",
+      "caption": "Chủ yếu là giấy và bao bì.",
+      "slot": "Thứ Năm, 10–12 giờ"
+    },
+    "scenario8": {
+      "hello": "Chúng tôi muốn thu gom định kỳ cho cửa hàng.",
+      "caption": "Đây là lượng bìa các tông thông thường.",
+      "slot": "Mỗi thứ Sáu, 14–16 giờ"
+    },
+    "scenario9": {
+      "hello": "Có thể sắp xếp thu gom hằng tháng không?",
+      "caption": "Giấy và chai từ nhà.",
+      "slot": "Thứ Bảy đầu tiên, 9–11 giờ"
+    },
+    "scenario10": {
+      "hello": "Chào bạn, có thể thu gom tại tòa nhà chúng tôi không?",
+      "caption": "Chúng tôi đã để vật liệu cùng một chỗ.",
+      "slot": "Thứ Bảy, 15–17 giờ"
+    },
+    "scenario11": {
+      "hello": "Tôi có vở cũ muốn tái chế.",
+      "caption": "Đây là ảnh chồng vở.",
+      "slot": "Ngày mai, 11–13 giờ"
+    },
+    "scenario12": {
+      "hello": "Tuần này có thể thu gom bao bì không?",
+      "caption": "Bìa các tông và hộp sạch.",
+      "slot": "Thứ Năm, 14–16 giờ"
+    },
+    "scenario13": {
+      "hello": "Chúng tôi đã phân loại xong ở nhà.",
+      "caption": "Mọi thứ sẵn sàng cạnh cửa.",
+      "slot": "Chủ nhật, 16–18 giờ"
+    },
+    "scenario14": {
+      "hello": "Chào Luma, tôi muốn đặt lịch thu gom.",
+      "caption": "Đây là những gì chúng tôi muốn tái chế.",
+      "slot": "Thứ Hai, 9–11 giờ"
+    }
+  },
+  "afterlifeMotion": {
+    "audiences": "Căn hộ, quán cà phê và văn phòng",
+    "apartments": "Căn hộ",
+    "coffeeShops": "Quán cà phê",
+    "offices": "Văn phòng"
   }
 }

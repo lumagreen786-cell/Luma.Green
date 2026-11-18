@@ -1,4 +1,5 @@
 import {
+  Geist,
   Noto_Sans,
   Noto_Sans_Arabic,
   Noto_Sans_Bengali,
@@ -15,13 +16,12 @@ import {
   Noto_Sans_Tamil,
   Noto_Sans_Telugu,
   Noto_Sans_Thai,
-  Urbanist,
 } from "next/font/google";
 
 import type { Locale } from "@/i18n/locales";
 
 /**
- * Noto supplies body copy and all script fallbacks; Urbanist supplies Latin UI/display type.
+ * Noto supplies body copy and all script fallbacks; Geist supplies Latin UI/display type.
  *
  * Noto is the only widely available family with full, visually consistent
  * coverage of every script we ship, so the wordmark and the UI never fall back
@@ -36,8 +36,8 @@ import type { Locale } from "@/i18n/locales";
  * time and rejects spreads or computed values.
  */
 
-export const fontDisplay = Urbanist({
-  variable: "--font-urbanist",
+export const fontDisplay = Geist({
+  variable: "--font-geist",
   subsets: ["latin"],
   display: "swap",
   preload: false,

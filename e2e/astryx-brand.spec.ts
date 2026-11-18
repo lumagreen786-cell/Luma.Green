@@ -2,9 +2,9 @@ import { expect, test } from "@playwright/test";
 
 import english from "../messages/en.json";
 
-// Compare actual rendered Florin colours in both saved modes.
+// Compare actual rendered Afterlife colours in both saved modes.
 const palettes = {
-  light: { background: "#e7e9ee", foreground: "#14161c", primary: "#9bf80f" },
+  light: { background: "#f4f8ee", foreground: "#14161c", primary: "#9bf80f" },
   dark: { background: "#080b14", foreground: "#f5f6f8", primary: "#9bf80f" },
 };
 

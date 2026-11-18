@@ -208,7 +208,7 @@ describe("WebView-only Android shell", () => {
     expect(native.statusBarStyle).toBe("light");
     sendAppearance("synthetic-native-session", "appearance:light");
     expect(native.statusBarStyle).toBe("dark");
-    expect(native.webProps.style).toMatchObject({ backgroundColor: "#e7e9ee" });
+    expect(native.webProps.style).toMatchObject({ backgroundColor: "#f4f8ee" });
     sendAppearance("synthetic-native-session", "appearance:dark");
     expect(native.statusBarStyle).toBe("light");
   });

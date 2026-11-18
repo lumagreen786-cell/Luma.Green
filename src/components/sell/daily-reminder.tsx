@@ -12,8 +12,8 @@ export function DailyReminder() {
   const t = useTranslations("homeReminder");
   const [time, setTime] = useState("08:00");
   return (
-    <section className="flex flex-col gap-4 rounded-[1.75rem] border border-border/60 bg-card p-5 text-card-foreground">
-      <h2 className="text-lg font-semibold">{t("dailyTitle")}</h2>
+    <section className="flex flex-col gap-4 border-t border-border py-6">
+      <h2 className="text-2xl font-normal tracking-tight">{t("dailyTitle")}</h2>
       <form
         className="flex flex-col items-start gap-4"
         onSubmit={(event) => {

@@ -4,6 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { site } from "@/lib/site";
 
 import { Container } from "./container";
+import styles from "./public-pages.module.css";
 
 const sections = [
   "data",
@@ -20,16 +21,16 @@ export function PrivacyContent() {
   const removal = useTranslations("accountRemoval");
   const requests = useTranslations("privacyRequests");
   return (
-    <Container className="grid gap-4 py-6 lg:grid-cols-[15rem_minmax(0,1fr)]">
-      <header className="space-y-2 lg:col-span-2">
-        <h1 className="font-display text-3xl font-normal tracking-tight sm:text-5xl">
+    <Container className="grid gap-10 py-10 sm:py-16 lg:grid-cols-[16rem_minmax(0,1fr)] lg:gap-x-16">
+      <header className="space-y-5 pb-6 lg:col-span-2">
+        <h1 className="font-display text-4xl font-normal tracking-tight sm:text-6xl">
           {t("title")}
         </h1>
         <p className="text-muted-foreground">{t("lead")}</p>
       </header>
       <nav
         aria-label={t("title")}
-        className="flex flex-col self-start rounded-panel bg-card p-3 shadow-panel lg:sticky lg:top-24"
+        className="flex flex-col self-start border-s border-border ps-3 lg:sticky lg:top-24"
       >
         {sections.map((section) => (
           <a
@@ -41,13 +42,13 @@ export function PrivacyContent() {
           </a>
         ))}
       </nav>
-      <div className="grid gap-3">
+      <div className="grid">
         {sections.map((section) => (
           <section
             key={section}
             id={section}
             aria-labelledby={`privacy-${section}`}
-            className="scroll-mt-24 space-y-3 rounded-panel bg-card p-5 shadow-panel sm:p-6"
+            className={`${styles.readingSection} space-y-4`}
           >
             <h2 id={`privacy-${section}`} className="text-lg font-semibold">
               {t(`${section}Title`)}

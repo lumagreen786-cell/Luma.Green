@@ -28,10 +28,20 @@ function show(locale: "en" | "ar" = "en") {
 
 describe("public bottom navigation", () => {
   beforeEach(() => {
-    location.pathname = "/";
+    location.pathname = "/sell";
   });
 
-  it("provides four labelled destinations and selects home only at the root", () => {
+  it.each(["/", "/business", "/business/recyclers"])(
+    "does not render the dock on the marketing route %s",
+    (pathname) => {
+      location.pathname = pathname;
+      show();
+      expect(screen.queryByRole("navigation")).not.toBeInTheDocument();
+      expect(screen.queryAllByRole("link")).toHaveLength(0);
+    },
+  );
+
+  it("provides four labelled destinations and selects the current workflow", () => {
     show();
     const nav = screen.getByRole("navigation", {
       name: english.footer.useHeading,
@@ -41,9 +51,12 @@ describe("public bottom navigation", () => {
         .getAllByRole("link")
         .map((link) => link.getAttribute("href")),
     ).toEqual(["/", "/sell", "/prices", "/help"]);
-    expect(within(nav).getByRole("link", { name: "Home" })).toHaveAttribute(
+    expect(within(nav).getByRole("link", { name: "Recycle" })).toHaveAttribute(
       "aria-current",
       "page",
+    );
+    expect(within(nav).getByRole("link", { name: "Home" })).not.toHaveAttribute(
+      "aria-current",
     );
   });
 

@@ -44,28 +44,28 @@ export default async function PricesPage() {
         scene="fairWeighing"
       />
 
-      <Container className="grid items-start gap-4 pb-8 lg:grid-cols-[minmax(0,1fr)_19rem]">
+      <Container className="grid items-start gap-8 pb-16 lg:grid-cols-[minmax(0,1fr)_20rem]">
         <section
           aria-label={t("title")}
-          className="min-w-0 rounded-panel bg-card p-5 shadow-panel sm:p-6"
+          className="min-w-0 rounded-2xl border border-border bg-card p-5 sm:p-8"
         >
           <PriceBoard />
         </section>
         <div className="grid min-w-0 gap-4">
-          <div className="space-y-3 rounded-xl bg-accent/40 p-5">
+          <div className="space-y-3 border-s-2 border-primary ps-5">
             <p className="text-sm text-muted-foreground">{t("floorHelp")}</p>
             <p className="text-sm text-muted-foreground">
               {sell("basket.weighNote")}
             </p>
           </div>
-          <details className="rounded-panel bg-card p-5 shadow-panel">
+          <details className="border-t border-border py-5">
             <summary className="cursor-pointer py-2 font-semibold outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
               {help("guides.weighingAtDoor.title")}
             </summary>
             <PriceGuide />
           </details>
 
-          <aside className="flex flex-col gap-4 rounded-panel bg-card p-5 shadow-panel">
+          <aside className="flex flex-col gap-4 border-t border-border py-5">
             <div className="flex items-start gap-3">
               <PackageOpenIcon
                 aria-hidden

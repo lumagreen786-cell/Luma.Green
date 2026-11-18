@@ -51,13 +51,13 @@ export default async function HowItWorksPage() {
       />
 
       <Container className="pb-8">
-        <ol className="grid gap-4">
+        <ol className="grid gap-10">
           {loopSteps.map(({ key, icon: Icon }, index) => (
             <li
               key={key}
               data-reveal
               aria-labelledby={`step-${key}`}
-              className="grid min-w-0 gap-5 rounded-panel bg-card p-5 shadow-panel sm:p-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)]"
+              className="grid min-w-0 gap-8 border-t border-border py-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16"
             >
               <div className="grid min-w-0 grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 gap-y-2">
                 <span className="row-span-2 inline-flex size-11 items-center justify-center rounded-full bg-accent text-accent-foreground">
@@ -68,14 +68,14 @@ export default async function HowItWorksPage() {
                 </p>
                 <h2
                   id={`step-${key}`}
-                  className="font-display text-lg font-semibold tracking-tight"
+                  className="font-display text-3xl font-normal tracking-tight"
                 >
                   {loop(`${key}.title`)}
                 </h2>
                 <RoleStoryImage
                   scene={storyRoles[key]}
                   className="col-span-2 mt-2 w-full"
-                  frameClassName="h-40 aspect-auto"
+                  frameClassName="h-64 aspect-auto rounded-2xl"
                 />
               </div>
               <div className="space-y-4 lg:self-center">
@@ -86,7 +86,7 @@ export default async function HowItWorksPage() {
                   <summary className="min-h-11 cursor-pointer py-2 font-semibold outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
                     {loop(`${key}.title`)}
                   </summary>
-                  <ul className="grid gap-4 border-t border-border pt-4">
+                  <ul className="grid gap-10 border-t border-border pt-4">
                     {points.map((point) => (
                       <li key={point} className="flex items-start gap-3">
                         <CheckIcon

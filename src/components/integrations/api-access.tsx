@@ -57,10 +57,10 @@ export function ApiAccess({ data, onCreate, onRevoke }: Props) {
   return (
     <>
       <AppPageHeader title={t("title")} lead={t("lead")} />
-      <div className="grid min-w-0 items-start gap-6 lg:grid-cols-[18rem_minmax(0,1fr)]">
+      <div className="grid min-w-0 items-start gap-8 lg:grid-cols-[18rem_minmax(0,1fr)]">
         <section
           aria-labelledby="api-connection-title"
-          className="flex flex-col gap-3 rounded-panel border border-border/60 bg-card p-5 text-card-foreground"
+          className="flex min-w-0 flex-col gap-4 border-t border-border pt-5 lg:border-e lg:border-t-0 lg:pe-6 lg:pt-0"
         >
           <h2 id="api-connection-title" className="text-lg font-semibold">
             {t("connection")}

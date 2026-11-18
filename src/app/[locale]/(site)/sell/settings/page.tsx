@@ -17,15 +17,17 @@ export default async function SettingsPage() {
     getTranslations("accountSecurity"),
   ]);
   return (
-    <Container className="flex max-w-6xl flex-col gap-6 py-8">
-      <h1 className="font-display text-2xl font-semibold">{t("settings")}</h1>
-      <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
+    <Container className="flex max-w-7xl flex-col gap-8 py-10">
+      <h1 className="border-b border-border pb-6 font-display text-4xl font-normal tracking-tight sm:text-5xl">
+        {t("settings")}
+      </h1>
+      <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
         <HouseholdFamily />
         <div className="space-y-4">
           <DailyReminder />
           <Link
             href="/account/security"
-            className="flex min-h-14 items-center rounded-[1.75rem] bg-card p-5 font-medium text-card-foreground text-foreground hover:underline"
+            className="flex min-h-14 items-center rounded-2xl border border-border bg-card p-5 font-medium text-card-foreground text-foreground hover:underline"
           >
             {account("title")}
           </Link>

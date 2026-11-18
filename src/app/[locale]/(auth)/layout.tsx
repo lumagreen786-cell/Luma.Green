@@ -10,14 +10,14 @@ import { SkipLink } from "@/components/site/skip-link";
  */
 export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
-    <FocusedPageCanvas image="/images/ship-x/login-background.webp">
+    <FocusedPageCanvas image="/images/showcase/material-sorting.webp">
       <SkipLink />
       <SiteHeader />
-      <div className="mx-auto flex w-full max-w-lg flex-1 flex-col justify-center px-4 py-6 sm:px-6 sm:py-8">
+      <div className="mx-auto flex w-full max-w-[90rem] flex-1 flex-col justify-center px-4 py-10 sm:px-8 lg:items-end lg:py-20">
         <main
           id="main"
           tabIndex={-1}
-          className="flex w-full min-w-0 flex-col rounded-panel bg-card p-5 shadow-panel sm:p-6"
+          className="afterlife-task-panel flex w-full max-w-xl min-w-0 flex-col rounded-2xl border border-border bg-card p-6 sm:p-12 lg:me-12"
         >
           {children}
         </main>

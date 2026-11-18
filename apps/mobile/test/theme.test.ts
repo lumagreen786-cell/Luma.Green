@@ -18,7 +18,7 @@ void test("native chrome follows dark/light appearance with readable status-bar 
   assert.equal(shellAppearance("light").colors, themes.light);
   assert.equal(shellAppearance().statusBar, "dark");
   assert.equal(shellAppearance("unexpected").appearance, "light");
-  assert.equal(themes.light.background, "#e7e9ee");
+  assert.equal(themes.light.background, "#f4f8ee");
   assert.equal(themes.dark.background, "#080b14");
   for (const theme of Object.values(themes)) {
     assert.equal(theme.primary, "#9bf80f");
@@ -91,5 +91,5 @@ void test("native configuration permits both system appearances without publishi
     "utf8",
   );
   assert.match(config, /userInterfaceStyle: "automatic"/);
-  assert.match(config, /splash: \{ backgroundColor: "#e7e9ee" \}/);
+  assert.match(config, /splash: \{ backgroundColor: "#f4f8ee" \}/);
 });

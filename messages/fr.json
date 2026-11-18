@@ -4819,5 +4819,171 @@
     "townhouse": "Maison mitoyenne",
     "farmhouse": "Ferme",
     "routeNote": "Pour la collecte collective, utilisez le code de résidence vérifié."
+  },
+  "afterlife": {
+    "bookNow": "Réserver",
+    "bookingMessage": "Bonjour Luma, je souhaite réserver une collecte de recyclables.",
+    "bookingUnavailable": "La réservation sur WhatsApp sera bientôt disponible.",
+    "how": "Comment ça marche",
+    "questions": "Vos questions",
+    "business": "Pour les entreprises",
+    "ecosystem": "Écosystème",
+    "collectors": "Pour les collecteurs",
+    "signIn": "Se connecter",
+    "publicSite": "Réserver une collecte",
+    "menu": "Navigation",
+    "tagline": "Un avenir plus propre en mouvement.",
+    "heroTitle": "Moins de déchets.",
+    "heroTitleEnd": "Plus de possibilités.",
+    "heroLead": "Envoyez une photo. Partagez votre position. Organisez votre collecte dans une simple conversation.",
+    "phoneEyebrow": "La collecte commence ici",
+    "phoneTitle": "Quelques messages. Un nouveau départ.",
+    "phoneLead": "Envoyez une photo. Choisissez un créneau. Nous vous tiendrons au courant.",
+    "storyEyebrow": "Adapté à votre quotidien",
+    "storyTitle": "Une collecte. Un nouveau départ.",
+    "storyLead": "Quelques sacs ou une collecte régulière. Envoyez un message. Nous vérifions quoi collecter et quand.",
+    "repeat": "Collectes ponctuelles ou régulières",
+    "updates": "Suivi sur WhatsApp",
+    "faqTitle": "Bon à savoir.",
+    "faq1q": "Que puis-je recycler ?",
+    "faq1a": "Envoyez des photos de papier, carton, plastique ou métal. Le collecteur vérifie ce qui est accepté dans votre secteur.",
+    "faq2q": "Quand ma collecte est-elle confirmée ?",
+    "faq2a": "Votre collecte est confirmée lorsqu’un collecteur autorisé accepte la demande.",
+    "faq3q": "Comment le poids et le paiement sont-ils définis ?",
+    "faq3a": "Le collecteur enregistre le poids mesuré et le montant convenu lors de la collecte.",
+    "closingTitle": "Prêt pour votre prochaine collecte ?",
+    "workWith": "Travailler avec Luma",
+    "businessPrompt": "Collecter, trier, recycler ou acheter des matières récupérées ?",
+    "businessEyebrow": "L’écosystème Luma",
+    "businessTitle": "De bonnes matières.",
+    "businessTitleEnd": "De grandes possibilités.",
+    "businessLead": "De la première collecte à la prochaine utilisation. Un espace commun pour ceux qui font vivre le recyclage.",
+    "findRole": "Trouvez votre place",
+    "rolesTitle": "Votre travail. Une chaîne connectée.",
+    "rolesLead": "Choisissez votre rôle. Découvrez comment Luma s’intègre à votre quotidien.",
+    "roleAction": "Découvrir comment participer",
+    "kabadiwala": "Ferrailleurs",
+    "preprocessor": "Préparateurs",
+    "recycler": "Recycleurs",
+    "manufacturer": "Fabricants",
+    "saathi": "Partenaires de collecte",
+    "kabadiwalaBody": "Gérez les demandes, planifiez votre journée et enregistrez chaque collecte.",
+    "preprocessorBody": "Reliez les entrées, le tri, les stocks et les transferts.",
+    "recyclerBody": "Reliez les entrées de matières, le traitement et les sorties.",
+    "manufacturerBody": "Trouvez des matières récupérées et regroupez vos documents d’achat.",
+    "saathiBody": "Trouvez des missions de collecte et de tri prises en charge.",
+    "businessClosing": "Avançons ensemble.",
+    "collectorTitle": "Plus de temps pour collecter.",
+    "collectorTitleEnd": "Moins de temps à relancer.",
+    "collectorLead": "Réunissez demandes, planning de collecte et pesées dans une seule vue.",
+    "collectorFlow": "De la demande à la collecte.",
+    "step1": "Examiner la demande.",
+    "step1Body": "Vérifiez les photos, le secteur et le créneau souhaité.",
+    "step2": "Planifier la collecte.",
+    "step2Body": "Acceptez les missions et informez le client.",
+    "step3": "Enregistrer le résultat.",
+    "step3Body": "Enregistrez le poids mesuré, le montant convenu et le statut de collecte.",
+    "imageAlt": "Illustration de matières recyclables et du travail de collecte",
+    "businessMeta": "Luma pour les entreprises du recyclage",
+    "homeMeta": "Réservez une collecte avec Luma sur WhatsApp.",
+    "collectorMeta": "Gérez vos collectes avec Luma.",
+    "help": "Aide",
+    "privacy": "Confidentialité",
+    "status": "État du service"
+  },
+  "afterlifePhone": {
+    "name": "Luma Green",
+    "description": "Illustration d’une conversation pour une collecte. Les photos, la position et le créneau souhaité sont suivis de l’accord du collecteur.",
+    "photoAlt": "Matières recyclables illustratives prêtes à être collectées",
+    "location": "Position actuelle",
+    "locationDetail": "Position partagée",
+    "message": "Écrire un message",
+    "greeting": "Bonjour ! Bien sûr. Pouvez-vous envoyer une photo ?",
+    "askLocation": "Merci ! Partagez votre position et un créneau qui vous convient.",
+    "slotReply": "{slot}, s’il vous plaît.",
+    "received": "C’est noté. Nous vérifions les disponibilités et vous confirmons.",
+    "accepted": "Votre collecteur a accepté. {slot}. Tout est prêt !",
+    "thanks": "Parfait, merci !",
+    "scenario0": {
+      "hello": "Bonjour, pouvez-vous collecter de vieux journaux ?",
+      "caption": "Journaux et carton.",
+      "slot": "Demain, de 9 h à 11 h"
+    },
+    "scenario1": {
+      "hello": "Nous venons de déménager. Pouvez-vous prendre les cartons ?",
+      "caption": "Voici les cartons de déménagement vides.",
+      "slot": "Samedi, de 10 h à 12 h"
+    },
+    "scenario2": {
+      "hello": "Puis-je organiser une collecte pour notre appartement ?",
+      "caption": "Voici ce que nous avons rassemblé.",
+      "slot": "Dimanche, de 9 h à 11 h"
+    },
+    "scenario3": {
+      "hello": "Nous avons du carton dans notre boutique.",
+      "caption": "Les cartons sont aplatis et prêts.",
+      "slot": "Vendredi, de 14 h à 16 h"
+    },
+    "scenario4": {
+      "hello": "Pouvez-vous collecter du papier à notre bureau ?",
+      "caption": "Voici les piles de papier.",
+      "slot": "Lundi, de 11 h à 13 h"
+    },
+    "scenario5": {
+      "hello": "Bonjour ! J’ai trié des récipients en plastique.",
+      "caption": "Voici ce que j’ai.",
+      "slot": "Mardi, de 9 h à 11 h"
+    },
+    "scenario6": {
+      "hello": "Pouvez-vous vérifier ces objets en métal ?",
+      "caption": "J’envoie une photo.",
+      "slot": "Mercredi, de 15 h à 17 h"
+    },
+    "scenario7": {
+      "hello": "Je vide un placard. Pouvez-vous m’aider ?",
+      "caption": "Surtout du papier et des emballages.",
+      "slot": "Jeudi, de 10 h à 12 h"
+    },
+    "scenario8": {
+      "hello": "Nous souhaitons une collecte régulière pour notre boutique.",
+      "caption": "Voici notre quantité habituelle de carton.",
+      "slot": "Chaque vendredi, de 14 h à 16 h"
+    },
+    "scenario9": {
+      "hello": "Peut-on organiser une collecte mensuelle ?",
+      "caption": "Papier et bouteilles de la maison.",
+      "slot": "Premier samedi, de 9 h à 11 h"
+    },
+    "scenario10": {
+      "hello": "Bonjour, pouvez-vous passer à notre immeuble ?",
+      "caption": "Nous avons regroupé les matières.",
+      "slot": "Samedi, de 15 h à 17 h"
+    },
+    "scenario11": {
+      "hello": "J’ai de vieux cahiers à recycler.",
+      "caption": "Voici une photo de la pile.",
+      "slot": "Demain, de 11 h à 13 h"
+    },
+    "scenario12": {
+      "hello": "Pouvez-vous collecter des emballages cette semaine ?",
+      "caption": "Carton et récipients propres.",
+      "slot": "Jeudi, de 14 h à 16 h"
+    },
+    "scenario13": {
+      "hello": "Nous avons terminé le tri à la maison.",
+      "caption": "Tout est prêt près de la porte.",
+      "slot": "Dimanche, de 16 h à 18 h"
+    },
+    "scenario14": {
+      "hello": "Bonjour Luma, je souhaite réserver une collecte.",
+      "caption": "Voici ce que nous souhaitons recycler.",
+      "slot": "Lundi, de 9 h à 11 h"
+    }
+  },
+  "afterlifeMotion": {
+    "audiences": "Appartements, cafés et bureaux",
+    "apartments": "Appartements",
+    "coffeeShops": "Cafés",
+    "offices": "Bureaux"
   }
 }

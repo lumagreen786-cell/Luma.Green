@@ -329,3 +329,12 @@ poll failures are expected availability states, while existing sanitized error
 monitoring remains in place. Never send provider payloads or SMS arguments to
 telemetry. Native shells use the same hosted page; no native module, permission
 or release change is needed.
+
+### Afterlife public/business split (18 November 2026)
+
+The homepage and business landing reuse consent-gated public-page analytics and
+sanitized Sentry reporting. No new event payload sends phone numbers, prefilled
+message text, simulated chat content or booking details. The animated phone is
+local illustrative content; its message changes are not product events. Check
+page views for both approved hostnames after DNS activation, and verify opted-out
+visitors remain untracked. A WhatsApp link click is not a completed booking.

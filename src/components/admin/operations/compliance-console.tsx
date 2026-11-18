@@ -77,7 +77,7 @@ export function FacilityReviewConsole() {
   });
   const facility = data?.facilities.find((f) => f.id === facilityId);
   return (
-    <div className="space-y-6 rounded-xl bg-card p-5 sm:p-6">
+    <div className="min-w-0 space-y-6">
       <details>
         <summary className="min-h-11 cursor-pointer py-3 font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring">
           Find India regulatory references
@@ -91,6 +91,7 @@ export function FacilityReviewConsole() {
         revocation invalidates current approval.
       </p>
       <form
+        className="max-w-4xl border-y border-border py-6"
         onSubmit={(e) => {
           void form.handleSubmit(async (values) => {
             setFailed(false);
@@ -131,7 +132,10 @@ export function FacilityReviewConsole() {
           })(e);
         }}
       >
-        <fieldset disabled={form.formState.isSubmitting} className="space-y-4">
+        <fieldset
+          disabled={form.formState.isSubmitting}
+          className="grid min-w-0 gap-5 sm:grid-cols-2 [&>button]:sm:col-span-2 [&>fieldset]:sm:col-span-2"
+        >
           <AdminChoice
             label="Facility to review"
             value={facilityId}
@@ -276,7 +280,7 @@ export function DestinationConsole() {
     },
   });
   return (
-    <div className="space-y-6 rounded-xl bg-card p-5 sm:p-6">
+    <div className="min-w-0 space-y-6">
       <p className="text-sm text-muted-foreground">
         Record a destination only after checking its authorisation and exact
         material/process scope. This directory cannot prove a collection,
@@ -284,6 +288,7 @@ export function DestinationConsole() {
         entry and deactivate the old one.
       </p>
       <form
+        className="max-w-4xl border-y border-border py-6"
         onSubmit={(e) => {
           void form.handleSubmit(async (values) => {
             setFailed(false);
@@ -306,7 +311,10 @@ export function DestinationConsole() {
           })(e);
         }}
       >
-        <fieldset disabled={form.formState.isSubmitting} className="space-y-4">
+        <fieldset
+          disabled={form.formState.isSubmitting}
+          className="grid min-w-0 gap-5 sm:grid-cols-2 [&>button]:sm:col-span-2 [&>fieldset]:sm:col-span-2"
+        >
           {(
             [
               ["name", "Destination name"],

@@ -53,17 +53,19 @@ export function PublicBottomNav() {
     };
   }, []);
 
+  if (pathname === "/" || pathname.startsWith("/business")) return null;
+
   return (
     <>
       <div aria-hidden className="shrink-0 xl:hidden" style={{ height }} />
       <div
         ref={dock}
         hidden={editing}
-        className="fixed inset-x-0 bottom-0 z-30 px-3 pt-2 pb-[max(0.75rem,env(safe-area-inset-bottom))] xl:hidden"
+        className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-background/95 px-3 pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] backdrop-blur-xl xl:hidden"
       >
         <nav
           aria-label={footer("useHeading")}
-          className="record-sheet mx-auto grid max-w-md grid-cols-4 items-stretch gap-1 rounded-[2rem] border border-border p-2 shadow-panel"
+          className="mx-auto grid max-w-lg grid-cols-4 items-stretch gap-1"
         >
           {destinations.map(({ href, label, icon: Icon }) => {
             const isActive =
@@ -74,14 +76,14 @@ export function PublicBottomNav() {
                 key={href}
                 href={href}
                 aria-current={isActive ? "page" : undefined}
-                className="group flex min-h-16 min-w-0 flex-col items-center justify-start gap-1 rounded-3xl px-1 py-1 text-center text-xs font-medium outline-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring"
+                className="group flex min-h-16 min-w-0 flex-col items-center justify-start gap-1 rounded-xl px-1 py-1 text-center text-xs font-medium outline-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <span
                   className={cn(
-                    "flex size-11 shrink-0 items-center justify-center rounded-full",
+                    "flex size-11 shrink-0 items-center justify-center rounded-xl",
                     isActive
                       ? "bg-primary text-primary-foreground"
-                      : "bg-muted text-foreground",
+                      : "text-muted-foreground",
                   )}
                 >
                   <Icon aria-hidden className="size-5" />

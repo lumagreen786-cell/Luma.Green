@@ -4819,5 +4819,171 @@
     "townhouse": "Townhouse",
     "farmhouse": "Farmhouse",
     "routeNote": "For community pickup, use your reviewed community code."
+  },
+  "afterlifePhone": {
+    "name": "Luma Green",
+    "description": "Illustration of a recycling pickup conversation. Photos, location and a preferred time are followed by collector acceptance.",
+    "photoAlt": "Illustrative recyclable materials ready for collection",
+    "location": "Current location",
+    "locationDetail": "Location shared",
+    "message": "Message",
+    "greeting": "Hi! Of course. Could you send a photo?",
+    "askLocation": "Thanks! Share your location and a time that works for you.",
+    "slotReply": "{slot}, please.",
+    "received": "Got it. We’ll check availability and confirm with you.",
+    "accepted": "Your collector has accepted. {slot}. You’re all set!",
+    "thanks": "Perfect, thank you!",
+    "scenario0": {
+      "hello": "Hi, can you collect some old newspapers?",
+      "caption": "Newspapers and cardboard.",
+      "slot": "Tomorrow, 9–11 AM"
+    },
+    "scenario1": {
+      "hello": "We’ve just moved. Can you take the boxes?",
+      "caption": "These are the empty moving boxes.",
+      "slot": "Saturday, 10 AM–12 PM"
+    },
+    "scenario2": {
+      "hello": "Can I arrange a pickup for our apartment?",
+      "caption": "Here’s what we’ve gathered.",
+      "slot": "Sunday, 9–11 AM"
+    },
+    "scenario3": {
+      "hello": "We have cardboard at our shop.",
+      "caption": "The boxes are flattened and ready.",
+      "slot": "Friday, 2–4 PM"
+    },
+    "scenario4": {
+      "hello": "Could you collect paper from our office?",
+      "caption": "Here are the paper bundles.",
+      "slot": "Monday, 11 AM–1 PM"
+    },
+    "scenario5": {
+      "hello": "Hi! I’ve sorted some plastic containers.",
+      "caption": "This is what I have.",
+      "slot": "Tuesday, 9–11 AM"
+    },
+    "scenario6": {
+      "hello": "Can you check these metal items?",
+      "caption": "Sending a photo now.",
+      "slot": "Wednesday, 3–5 PM"
+    },
+    "scenario7": {
+      "hello": "I’m clearing a cupboard. Can you help?",
+      "caption": "Mostly paper and packaging.",
+      "slot": "Thursday, 10 AM–12 PM"
+    },
+    "scenario8": {
+      "hello": "We’d like a regular pickup for our shop.",
+      "caption": "This is our usual cardboard collection.",
+      "slot": "Every Friday, 2–4 PM"
+    },
+    "scenario9": {
+      "hello": "Can we arrange a monthly collection?",
+      "caption": "Paper and bottles from home.",
+      "slot": "First Saturday, 9–11 AM"
+    },
+    "scenario10": {
+      "hello": "Hi, could you collect from our building?",
+      "caption": "We’ve kept the materials together.",
+      "slot": "Saturday, 3–5 PM"
+    },
+    "scenario11": {
+      "hello": "I have old notebooks to recycle.",
+      "caption": "Here’s a photo of the stack.",
+      "slot": "Tomorrow, 11 AM–1 PM"
+    },
+    "scenario12": {
+      "hello": "Can you collect some packaging this week?",
+      "caption": "Cardboard and clean containers.",
+      "slot": "Thursday, 2–4 PM"
+    },
+    "scenario13": {
+      "hello": "We’ve finished sorting at home.",
+      "caption": "Everything is ready near the door.",
+      "slot": "Sunday, 4–6 PM"
+    },
+    "scenario14": {
+      "hello": "Hi Luma, I’d like to book a pickup.",
+      "caption": "Here’s what we’d like to recycle.",
+      "slot": "Monday, 9–11 AM"
+    }
+  },
+  "afterlifeMotion": {
+    "audiences": "Apartments, coffee shops and offices",
+    "apartments": "Apartments",
+    "coffeeShops": "Coffee shops",
+    "offices": "Offices"
+  },
+  "afterlife": {
+    "bookNow": "Book now",
+    "bookingMessage": "Hi Luma, I would like to book a recycling pickup.",
+    "bookingUnavailable": "WhatsApp booking will be available soon.",
+    "how": "How it works",
+    "questions": "Questions",
+    "business": "For business",
+    "ecosystem": "Ecosystem",
+    "collectors": "For collectors",
+    "signIn": "Sign in",
+    "publicSite": "Book a pickup",
+    "menu": "Menu",
+    "tagline": "Cleaner Tomorrow in Motion.",
+    "heroTitle": "Less waste.",
+    "heroTitleEnd": "More possibility.",
+    "heroLead": "Send a photo. Share your location. Arrange your recycling pickup in one simple chat.",
+    "phoneEyebrow": "A pickup starts here",
+    "phoneTitle": "A few messages. A fresh start.",
+    "phoneLead": "Send a photo. Pick a time. We’ll keep you updated.",
+    "storyEyebrow": "Built around your day",
+    "storyTitle": "A pickup. A fresh start.",
+    "storyLead": "A few bags or a regular collection. Start with a message. We check what can be collected and when.",
+    "repeat": "One-time or repeat collections",
+    "updates": "Updates in WhatsApp",
+    "faqTitle": "Good to know.",
+    "faq1q": "What can I recycle?",
+    "faq1a": "Send photos of your paper, cardboard, plastics or metals. The collector checks what can be accepted in your area.",
+    "faq2q": "When is my pickup confirmed?",
+    "faq2a": "Your pickup is confirmed after an eligible collector accepts the request.",
+    "faq3q": "How are weight and payment decided?",
+    "faq3a": "The collector records the measured weight and agreed amount at collection.",
+    "closingTitle": "Ready for your next pickup?",
+    "workWith": "Work with Luma",
+    "businessPrompt": "Collect, sort, recycle, or buy recovered materials?",
+    "businessEyebrow": "The Luma ecosystem",
+    "businessTitle": "Good materials.",
+    "businessTitleEnd": "Great possibilities.",
+    "businessLead": "From the first collection to the next use. One connected place for the people who make recycling work.",
+    "findRole": "Find your place",
+    "rolesTitle": "Your work. A connected chain.",
+    "rolesLead": "Choose your role. See where Luma fits your day.",
+    "roleAction": "Explore joining",
+    "kabadiwala": "Kabadiwalas",
+    "preprocessor": "Preprocessors",
+    "recycler": "Recyclers",
+    "manufacturer": "Manufacturers",
+    "saathi": "Saathis",
+    "kabadiwalaBody": "Manage pickup requests, plan your day, and record each collection.",
+    "preprocessorBody": "Keep intake, sorting, stock, and handoffs connected.",
+    "recyclerBody": "Connect material intake, processing, and output records.",
+    "manufacturerBody": "Find recovered materials and keep purchase records together.",
+    "saathiBody": "Find supported collection and sorting work.",
+    "businessClosing": "Let’s move it forward.",
+    "collectorTitle": "More time collecting.",
+    "collectorTitleEnd": "Less time chasing.",
+    "collectorLead": "Bring pickup requests, your collection day, and weighing records into one view.",
+    "collectorFlow": "From request to collected.",
+    "step1": "Review the request.",
+    "step1Body": "Check photos, the area, and the requested slot.",
+    "step2": "Plan the collection.",
+    "step2Body": "Accept work and keep the customer updated.",
+    "step3": "Record the outcome.",
+    "step3Body": "Record measured weight, the agreed amount, and collection status.",
+    "imageAlt": "Illustration of recycling materials and collection work",
+    "businessMeta": "Luma for recycling businesses",
+    "homeMeta": "Book a recycling pickup with Luma on WhatsApp.",
+    "collectorMeta": "Manage your collection work with Luma.",
+    "help": "Help",
+    "privacy": "Privacy",
+    "status": "Service status"
   }
 }

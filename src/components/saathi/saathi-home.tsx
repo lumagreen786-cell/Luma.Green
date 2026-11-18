@@ -45,8 +45,8 @@ function SaathiBoard() {
   const { now, later } = splitByDay(board.mine, board.today);
   return (
     <>
-      <div className="grid items-start gap-4 xl:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
-        <div className="min-w-0 space-y-4">
+      <div className="grid min-w-0 items-start gap-8 xl:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
+        <div className="min-w-0 space-y-8">
           <Section
             title={t("today.title")}
             action={
@@ -94,7 +94,7 @@ function SaathiBoard() {
             </Section>
           ) : null}
         </div>
-        <div className="min-w-0 space-y-4">
+        <div className="min-w-0 space-y-8">
           <WeekEarnings earnings={board.earnings} />
           <Section
             title={t("open.title")}

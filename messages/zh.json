@@ -4819,5 +4819,171 @@
     "townhouse": "联排住宅",
     "farmhouse": "农舍",
     "routeNote": "社区回收请使用已审核的社区代码。"
+  },
+  "afterlife": {
+    "bookNow": "立即预约",
+    "bookingMessage": "你好 Luma，我想预约回收上门服务。",
+    "bookingUnavailable": "WhatsApp 预约即将开放。",
+    "how": "如何使用",
+    "questions": "常见问题",
+    "business": "商业合作",
+    "ecosystem": "回收生态",
+    "collectors": "收集人员",
+    "signIn": "登录",
+    "publicSite": "预约上门",
+    "menu": "菜单",
+    "tagline": "让更洁净的明天动起来。",
+    "heroTitle": "减少废弃。",
+    "heroTitleEnd": "更多可能。",
+    "heroLead": "发送照片，分享位置，在一次聊天中安排回收上门。",
+    "phoneEyebrow": "从这里预约",
+    "phoneTitle": "几条消息，焕然一新。",
+    "phoneLead": "发送照片，选择时间。我们会及时告知进展。",
+    "storyEyebrow": "配合你的日程",
+    "storyTitle": "一次回收，新的开始。",
+    "storyLead": "少量物品或定期回收，都可从一条消息开始。我们会确认可回收物品和时间。",
+    "repeat": "单次或定期回收",
+    "updates": "在 WhatsApp 接收更新",
+    "faqTitle": "实用信息",
+    "faq1q": "哪些物品可以回收？",
+    "faq1a": "发送纸张、纸箱、塑料或金属的照片。收集人员会确认当地可接收的物品。",
+    "faq2q": "什么时候确认上门？",
+    "faq2a": "符合条件的收集人员接受请求后，上门预约才会确认。",
+    "faq3q": "如何确定重量和付款？",
+    "faq3a": "收集人员在收取时记录实测重量和商定金额。",
+    "closingTitle": "准备好预约下一次回收了吗？",
+    "workWith": "与 Luma 合作",
+    "businessPrompt": "从事收集、分拣、回收或采购再生材料？",
+    "businessEyebrow": "Luma 回收生态",
+    "businessTitle": "好材料。",
+    "businessTitleEnd": "大有可能。",
+    "businessLead": "从首次收集到再次使用，为推动回收的人们提供连接各环节的平台。",
+    "findRole": "找到你的位置",
+    "rolesTitle": "你的工作，连接整条链。",
+    "rolesLead": "选择角色，了解 Luma 如何融入日常工作。",
+    "roleAction": "了解如何加入",
+    "kabadiwala": "废品回收商",
+    "preprocessor": "预处理企业",
+    "recycler": "再生加工企业",
+    "manufacturer": "制造商",
+    "saathi": "协作人员",
+    "kabadiwalaBody": "管理回收请求、安排日程并记录每次收集。",
+    "preprocessorBody": "连接入库、分拣、库存和交接记录。",
+    "recyclerBody": "连接材料入库、处理和产出记录。",
+    "manufacturerBody": "寻找再生材料并集中保存采购记录。",
+    "saathiBody": "寻找支持的收集和分拣工作。",
+    "businessClosing": "一起向前。",
+    "collectorTitle": "更多时间用于收集。",
+    "collectorTitleEnd": "更少时间用于追踪。",
+    "collectorLead": "在同一页面管理请求、收集日程和称重记录。",
+    "collectorFlow": "从请求到完成收集。",
+    "step1": "查看请求。",
+    "step1Body": "查看照片、区域和预约时段。",
+    "step2": "安排收集。",
+    "step2Body": "接受任务并及时告知客户。",
+    "step3": "记录结果。",
+    "step3Body": "记录实测重量、商定金额和收集状态。",
+    "imageAlt": "回收材料及收集工作的示意图",
+    "businessMeta": "面向回收企业的 Luma",
+    "homeMeta": "通过 WhatsApp 向 Luma 预约回收上门。",
+    "collectorMeta": "使用 Luma 管理收集工作。",
+    "help": "帮助",
+    "privacy": "隐私",
+    "status": "服务状态"
+  },
+  "afterlifePhone": {
+    "name": "Luma Green",
+    "description": "回收预约对话示意。发送照片、位置和期望时间后，由收集人员确认接受。",
+    "photoAlt": "准备收集的可回收物品示意图",
+    "location": "当前位置",
+    "locationDetail": "已分享位置",
+    "message": "消息",
+    "greeting": "你好！可以，请发一张照片。",
+    "askLocation": "谢谢！请分享位置和方便的时间。",
+    "slotReply": "麻烦安排在{slot}。",
+    "received": "收到。我们会查看可用时段并与你确认。",
+    "accepted": "收集人员已接受，时间为{slot}。已安排！",
+    "thanks": "太好了，谢谢！",
+    "scenario0": {
+      "hello": "你好，可以收一些旧报纸吗？",
+      "caption": "报纸和纸箱。",
+      "slot": "明天上午9–11点"
+    },
+    "scenario1": {
+      "hello": "我们刚搬家，可以收这些箱子吗？",
+      "caption": "这些是空的搬家纸箱。",
+      "slot": "周六上午10点至中午12点"
+    },
+    "scenario2": {
+      "hello": "可以为我们的公寓安排回收吗？",
+      "caption": "这些是我们收集的物品。",
+      "slot": "周日上午9–11点"
+    },
+    "scenario3": {
+      "hello": "我们店里有些纸箱。",
+      "caption": "纸箱已压平，准备好了。",
+      "slot": "周五下午2–4点"
+    },
+    "scenario4": {
+      "hello": "可以来办公室收废纸吗？",
+      "caption": "这些是捆好的纸。",
+      "slot": "周一上午11点至下午1点"
+    },
+    "scenario5": {
+      "hello": "你好，我整理了一些塑料容器。",
+      "caption": "这些就是。",
+      "slot": "周二上午9–11点"
+    },
+    "scenario6": {
+      "hello": "可以看看这些金属物品吗？",
+      "caption": "现在发照片。",
+      "slot": "周三下午3–5点"
+    },
+    "scenario7": {
+      "hello": "我在清理柜子，能帮忙吗？",
+      "caption": "主要是纸和包装。",
+      "slot": "周四上午10点至中午12点"
+    },
+    "scenario8": {
+      "hello": "我们想给店里安排定期回收。",
+      "caption": "这是我们平时的纸箱。",
+      "slot": "每周五下午2–4点"
+    },
+    "scenario9": {
+      "hello": "可以安排每月回收吗？",
+      "caption": "家里的纸和瓶子。",
+      "slot": "每月第一个周六上午9–11点"
+    },
+    "scenario10": {
+      "hello": "你好，可以来我们楼里收吗？",
+      "caption": "材料已经集中放好。",
+      "slot": "周六下午3–5点"
+    },
+    "scenario11": {
+      "hello": "我有一些旧笔记本要回收。",
+      "caption": "这是堆放的照片。",
+      "slot": "明天上午11点至下午1点"
+    },
+    "scenario12": {
+      "hello": "这周可以收一些包装吗？",
+      "caption": "纸箱和干净的容器。",
+      "slot": "周四下午2–4点"
+    },
+    "scenario13": {
+      "hello": "家里的物品已分类完毕。",
+      "caption": "所有物品都在门边准备好了。",
+      "slot": "周日下午4–6点"
+    },
+    "scenario14": {
+      "hello": "你好 Luma，我想预约回收。",
+      "caption": "这些是我们想回收的物品。",
+      "slot": "周一上午9–11点"
+    }
+  },
+  "afterlifeMotion": {
+    "audiences": "公寓、咖啡店和办公室",
+    "apartments": "公寓",
+    "coffeeShops": "咖啡店",
+    "offices": "办公室"
   }
 }

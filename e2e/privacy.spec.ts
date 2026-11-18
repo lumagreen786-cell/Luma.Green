@@ -13,7 +13,7 @@ for (const { path, messages } of [
     await page.goto(path);
     await page
       .getByRole("contentinfo")
-      .getByRole("link", { name: messages.privacy.title, exact: true })
+      .getByRole("link", { name: messages.afterlife.privacy, exact: true })
       .click();
     await expect(
       page.getByRole("heading", { name: messages.privacy.title, exact: true }),

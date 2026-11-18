@@ -20,15 +20,15 @@ export function ElectricityFootprint() {
   const [reading, setReading] = useState("");
   const [estimate, setEstimate] = useState<number | null>();
   return (
-    <div className="space-y-4">
+    <div className="space-y-8">
       <form
-        className="grid items-start gap-4 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]"
+        className="grid items-start gap-8 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]"
         onSubmit={(event) => {
           event.preventDefault();
           setEstimate(gridElectricityFootprint(reading, locale));
         }}
       >
-        <div className="flex flex-col gap-5 rounded-[1.75rem] bg-card p-5 text-card-foreground sm:p-6">
+        <div className="flex flex-col gap-6 rounded-2xl border border-border bg-card p-5 sm:p-8">
           <div className="flex flex-col gap-2">
             <Label htmlFor="electricity-reading">
               {t("electricityReading")}
@@ -63,13 +63,13 @@ export function ElectricityFootprint() {
             label={t("calculate")}
           />
         </div>
-        <div className="flex flex-col gap-4 rounded-[1.75rem] bg-card p-5 text-card-foreground sm:p-6">
+        <div className="flex flex-col gap-6 border-t border-border py-6">
           <output
             aria-live="polite"
             className={
               estimate === undefined || estimate === null
                 ? "sr-only"
-                : "rounded-xl bg-accent p-5 text-2xl font-semibold tabular-nums"
+                : "text-4xl font-normal tracking-tight tabular-nums"
             }
           >
             {estimate === undefined || estimate === null

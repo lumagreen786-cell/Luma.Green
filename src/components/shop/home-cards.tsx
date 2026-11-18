@@ -67,7 +67,7 @@ function CardShell({
     <section
       aria-labelledby={id}
       className={cn(
-        "flex min-w-0 flex-col gap-4 rounded-2xl border border-border bg-card p-5 sm:p-6",
+        "flex min-w-0 flex-col gap-5 border-t border-border/60 pt-6",
         isHot && "border-primary/40",
       )}
     >
@@ -78,7 +78,7 @@ function CardShell({
           </h2>
           <BigCount count={count} isHot={isHot} />
         </div>
-        <span className="flex size-10 items-center justify-center rounded-full bg-accent text-accent-foreground">
+        <span className="flex size-10 items-center justify-center text-muted-foreground">
           <Icon aria-hidden className="size-5" />
         </span>
       </div>

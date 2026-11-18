@@ -4819,5 +4819,171 @@
     "townhouse": "타운하우스",
     "farmhouse": "농가 주택",
     "routeNote": "공동 수거에는 검토된 커뮤니티 코드를 사용하세요."
+  },
+  "afterlife": {
+    "bookNow": "지금 예약",
+    "bookingMessage": "안녕하세요 Luma, 재활용 수거를 예약하고 싶어요.",
+    "bookingUnavailable": "WhatsApp 예약이 곧 제공됩니다.",
+    "how": "이용 방법",
+    "questions": "자주 묻는 질문",
+    "business": "사업자 안내",
+    "ecosystem": "재활용 생태계",
+    "collectors": "수거업체 안내",
+    "signIn": "로그인",
+    "publicSite": "수거 예약",
+    "menu": "메뉴",
+    "tagline": "더 깨끗한 내일을 움직입니다.",
+    "heroTitle": "쓰레기는 줄이고.",
+    "heroTitleEnd": "가능성은 넓히고.",
+    "heroLead": "사진을 보내고 위치를 공유하세요. 한 번의 채팅으로 재활용 수거를 예약하세요.",
+    "phoneEyebrow": "수거의 시작",
+    "phoneTitle": "몇 번의 메시지로, 새로운 시작.",
+    "phoneLead": "사진을 보내고 시간을 선택하세요. 진행 상황을 알려드립니다.",
+    "storyEyebrow": "일정에 맞춰",
+    "storyTitle": "한 번의 수거, 새로운 출발.",
+    "storyLead": "소량 수거나 정기 수거 모두 메시지로 시작하세요. 가능한 품목과 시간을 확인합니다.",
+    "repeat": "일회 또는 정기 수거",
+    "updates": "WhatsApp으로 소식 받기",
+    "faqTitle": "알아두세요",
+    "faq1q": "무엇을 재활용할 수 있나요?",
+    "faq1a": "종이, 골판지, 플라스틱, 금속의 사진을 보내주세요. 수거 담당자가 해당 지역에서 가능한 품목을 확인합니다.",
+    "faq2q": "수거는 언제 확정되나요?",
+    "faq2a": "가능한 수거 담당자가 요청을 수락하면 예약이 확정됩니다.",
+    "faq3q": "무게와 금액은 어떻게 정하나요?",
+    "faq3a": "수거 시 실제 무게와 합의한 금액을 담당자가 기록합니다.",
+    "closingTitle": "다음 수거를 예약할까요?",
+    "workWith": "Luma와 함께하기",
+    "businessPrompt": "수거, 분류, 재활용 또는 재생 원료 구매를 하시나요?",
+    "businessEyebrow": "Luma 생태계",
+    "businessTitle": "좋은 원료.",
+    "businessTitleEnd": "더 큰 가능성.",
+    "businessLead": "첫 수거부터 다음 사용까지. 재활용을 이끄는 사람들을 연결합니다.",
+    "findRole": "나의 역할 찾기",
+    "rolesTitle": "업무를 하나의 흐름으로.",
+    "rolesLead": "역할을 선택하고 Luma가 일상 업무를 어떻게 돕는지 알아보세요.",
+    "roleAction": "참여 방법 보기",
+    "kabadiwala": "고물 수거업체",
+    "preprocessor": "전처리 업체",
+    "recycler": "재활용 업체",
+    "manufacturer": "제조업체",
+    "saathi": "작업 파트너",
+    "kabadiwalaBody": "수거 요청, 일정 및 수거 기록을 관리하세요.",
+    "preprocessorBody": "입고, 분류, 재고 및 인계를 연결하세요.",
+    "recyclerBody": "원료 입고, 처리 및 생산 기록을 연결하세요.",
+    "manufacturerBody": "재생 원료를 찾고 구매 기록을 모으세요.",
+    "saathiBody": "지원되는 수거 및 분류 업무를 찾아보세요.",
+    "businessClosing": "함께 앞으로.",
+    "collectorTitle": "수거에 더 많은 시간.",
+    "collectorTitleEnd": "확인하는 수고는 줄이고.",
+    "collectorLead": "요청, 수거 일정, 계량 기록을 한 화면에서 관리하세요.",
+    "collectorFlow": "요청부터 수거 완료까지.",
+    "step1": "요청을 검토하세요.",
+    "step1Body": "사진, 지역, 희망 시간을 확인하세요.",
+    "step2": "수거를 계획하세요.",
+    "step2Body": "요청을 수락하고 고객에게 소식을 전하세요.",
+    "step3": "결과를 기록하세요.",
+    "step3Body": "실측 무게, 합의 금액 및 수거 상태를 기록하세요.",
+    "imageAlt": "재활용 자재와 수거 작업을 보여주는 이미지",
+    "businessMeta": "재활용 사업자를 위한 Luma",
+    "homeMeta": "WhatsApp에서 Luma 재활용 수거를 예약하세요.",
+    "collectorMeta": "Luma로 수거 업무를 관리하세요.",
+    "help": "도움말",
+    "privacy": "개인정보",
+    "status": "서비스 상태"
+  },
+  "afterlifePhone": {
+    "name": "Luma Green",
+    "description": "재활용 수거 대화 예시입니다. 사진, 위치와 희망 시간을 전달하면 담당자가 수락합니다.",
+    "photoAlt": "수거 준비가 된 재활용품 이미지",
+    "location": "현재 위치",
+    "locationDetail": "위치 공유됨",
+    "message": "메시지",
+    "greeting": "안녕하세요! 사진을 보내주실 수 있나요?",
+    "askLocation": "감사합니다! 위치와 편한 시간을 알려주세요.",
+    "slotReply": "{slot} 부탁드려요.",
+    "received": "알겠습니다. 가능한 일정을 확인하고 알려드릴게요.",
+    "accepted": "수거 담당자가 수락했어요. {slot}에 방문합니다. 예약 완료!",
+    "thanks": "좋아요, 감사합니다!",
+    "scenario0": {
+      "hello": "오래된 신문을 수거해 주실 수 있나요?",
+      "caption": "신문과 골판지예요.",
+      "slot": "내일 오전 9–11시"
+    },
+    "scenario1": {
+      "hello": "이사했는데 상자를 수거해 주실 수 있나요?",
+      "caption": "빈 이사 상자예요.",
+      "slot": "토요일 오전 10–12시"
+    },
+    "scenario2": {
+      "hello": "아파트 수거를 예약할 수 있나요?",
+      "caption": "모아둔 물품이에요.",
+      "slot": "일요일 오전 9–11시"
+    },
+    "scenario3": {
+      "hello": "가게에 골판지가 있어요.",
+      "caption": "상자를 접어서 준비했어요.",
+      "slot": "금요일 오후 2–4시"
+    },
+    "scenario4": {
+      "hello": "사무실 종이를 수거할 수 있나요?",
+      "caption": "종이 묶음이에요.",
+      "slot": "월요일 오전 11시–오후 1시"
+    },
+    "scenario5": {
+      "hello": "플라스틱 용기를 분류했어요.",
+      "caption": "이 물품들이에요.",
+      "slot": "화요일 오전 9–11시"
+    },
+    "scenario6": {
+      "hello": "이 금속 물품을 확인해 주실 수 있나요?",
+      "caption": "지금 사진을 보내요.",
+      "slot": "수요일 오후 3–5시"
+    },
+    "scenario7": {
+      "hello": "수납장을 정리하는데 도와주실 수 있나요?",
+      "caption": "대부분 종이와 포장재예요.",
+      "slot": "목요일 오전 10–12시"
+    },
+    "scenario8": {
+      "hello": "가게 정기 수거를 신청하고 싶어요.",
+      "caption": "평소 나오는 골판지예요.",
+      "slot": "매주 금요일 오후 2–4시"
+    },
+    "scenario9": {
+      "hello": "매월 수거를 예약할 수 있나요?",
+      "caption": "집에서 나온 종이와 병이에요.",
+      "slot": "첫째 토요일 오전 9–11시"
+    },
+    "scenario10": {
+      "hello": "저희 건물로 수거 오실 수 있나요?",
+      "caption": "자재를 모아두었어요.",
+      "slot": "토요일 오후 3–5시"
+    },
+    "scenario11": {
+      "hello": "오래된 공책을 재활용하고 싶어요.",
+      "caption": "쌓아놓은 사진이에요.",
+      "slot": "내일 오전 11시–오후 1시"
+    },
+    "scenario12": {
+      "hello": "이번 주에 포장재를 수거할 수 있나요?",
+      "caption": "골판지와 깨끗한 용기예요.",
+      "slot": "목요일 오후 2–4시"
+    },
+    "scenario13": {
+      "hello": "집에서 분류를 마쳤어요.",
+      "caption": "문 옆에 준비해 두었어요.",
+      "slot": "일요일 오후 4–6시"
+    },
+    "scenario14": {
+      "hello": "안녕하세요 Luma, 수거를 예약하고 싶어요.",
+      "caption": "재활용할 물품이에요.",
+      "slot": "월요일 오전 9–11시"
+    }
+  },
+  "afterlifeMotion": {
+    "audiences": "아파트, 카페, 사무실",
+    "apartments": "아파트",
+    "coffeeShops": "카페",
+    "offices": "사무실"
   }
 }

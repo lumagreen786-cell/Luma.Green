@@ -46,8 +46,8 @@ export function PriceTables() {
         lead="Select a city to manage its dated indicative prices."
       />
       <DemoNote>Sample prices for the prototype, not market rates.</DemoNote>
-      <div className="grid min-w-0 items-start gap-4 xl:grid-cols-[minmax(16rem,0.7fr)_minmax(0,1.8fr)]">
-        <aside className="min-w-0 space-y-4 xl:sticky xl:top-6">
+      <div className="grid min-w-0 items-start gap-8 border-t border-border pt-8 xl:grid-cols-[17rem_minmax(0,1fr)]">
+        <aside className="min-w-0 space-y-5 xl:sticky xl:top-6 [&>div]:xl:grid-cols-1">
           <PriceRules />
           <CityField
             value={input}
@@ -62,9 +62,19 @@ export function PriceTables() {
           />
         </aside>
         <div className="min-w-0 space-y-4">
-          {city ? <PriceGroups rows={rows} city={city} /> : null}
-          <CatalogueSetup />
-          <CatalogueNames />
+          {city ? (
+            <PriceGroups rows={rows} city={city} />
+          ) : (
+            <p className="py-6 text-sm text-muted-foreground">
+              Choose a city to see its reference prices.
+            </p>
+          )}
+        </div>
+      </div>
+      <div className="grid min-w-0 items-start gap-8 lg:grid-cols-2">
+        <CatalogueSetup />
+        <CatalogueNames />
+        <div className="min-w-0 lg:col-span-2">
           <MaterialClassification />
         </div>
       </div>
@@ -86,7 +96,7 @@ function PriceRules() {
     },
   ];
   return (
-    <ul className="grid gap-4 rounded-panel bg-card p-5 text-card-foreground sm:gap-6 sm:p-6">
+    <ul className="grid gap-5 border-s-2 border-primary ps-4">
       {rules.map((rule) => (
         <li key={rule.title} className="flex gap-3">
           <rule.icon
@@ -126,7 +136,7 @@ function PriceGroups({
         <section
           key={family}
           aria-labelledby={`family-${family}`}
-          className="min-w-0 rounded-panel bg-card px-5 pb-3 text-card-foreground sm:px-6"
+          className="min-w-0 border-b border-border pb-3"
         >
           <div className="flex items-baseline justify-between gap-2 border-b py-4">
             <h2 id={`family-${family}`} className="font-semibold">

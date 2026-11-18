@@ -251,8 +251,8 @@ export function AppShell({ children }: { children: ReactNode }) {
     <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
       <div className="flex min-h-dvh flex-col bg-background">
         <SkipLink />
-        <div className="hidden bg-background text-foreground xl:block">
-          <div className="mx-auto flex max-w-[100rem] items-center justify-between gap-6 px-8 py-4">
+        <div className="afterlife-shell-header hidden bg-background text-foreground xl:block">
+          <div className="mx-auto flex max-w-[90rem] items-center justify-between gap-6 px-8 py-4">
             <Link
               href="/"
               className="inline-flex min-h-11 shrink-0 items-center rounded-full outline-none focus-visible:ring-3 focus-visible:ring-sidebar-ring"
@@ -280,10 +280,10 @@ export function AppShell({ children }: { children: ReactNode }) {
               {t("signOut")}
             </Button>
           </div>
-          <div className="mx-auto flex max-w-[100rem] items-center gap-4 px-8 pb-4">
+          <div className="mx-auto flex max-w-[90rem] items-center gap-4 px-8 pb-4">
             <nav
               aria-label={t("navLabel")}
-              className="record-sheet flex min-w-0 flex-1 items-center gap-1 rounded-full border border-border p-2 shadow-sm"
+              className="flex min-w-0 flex-1 items-center gap-1 border-t border-border pt-3"
             >
               <div className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto">
                 {(navSearch.trim() ? [...primary, ...more] : primary)
@@ -291,7 +291,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                   .map((item) =>
                     link(
                       item,
-                      "flex min-h-11 shrink-0 items-center gap-2 rounded-full px-4 text-sm font-medium outline-none transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-3 focus-visible:ring-sidebar-ring",
+                      "flex min-h-11 shrink-0 items-center gap-2 rounded-xl px-4 text-sm font-medium outline-none transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-3 focus-visible:ring-sidebar-ring",
                       true,
                     ),
                   )}
@@ -478,7 +478,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         <main
           id="main"
           tabIndex={-1}
-          className="mx-auto flex w-full max-w-[100rem] min-w-0 flex-1 flex-col gap-6 px-4 pt-6 pb-28 sm:px-8 xl:pt-8 xl:pb-16"
+          className="mx-auto flex w-full max-w-[90rem] min-w-0 flex-1 flex-col gap-8 px-4 pt-8 pb-28 sm:px-8 xl:pt-10 xl:pb-16"
         >
           <WorkspacePermissions
             key={

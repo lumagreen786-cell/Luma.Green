@@ -66,7 +66,7 @@ function ServicesContent({ data }: { data: Board }) {
   return (
     <div className="flex min-w-0 flex-col gap-6">
       <div className="grid w-full min-w-0 items-start gap-5 xl:grid-cols-2">
-        <section className="flex min-w-0 flex-col gap-4 rounded-panel border border-border/60 bg-card p-5 text-card-foreground">
+        <section className="flex min-w-0 flex-col gap-5 border-t border-border/60 pt-6">
           <h2 className="text-lg font-semibold">{t("enquiries")}</h2>
           {data.canCreate &&
           (!enquiry ||
@@ -120,7 +120,7 @@ function ServicesContent({ data }: { data: Board }) {
             </article>
           ))}
         </section>
-        <section className="flex min-w-0 flex-col gap-4 rounded-panel border border-border/60 bg-card p-5 text-card-foreground">
+        <section className="flex min-w-0 flex-col gap-5 border-t border-border/60 pt-6">
           <h2 className="text-lg font-semibold">{t("programmes")}</h2>
           <p className="text-sm text-muted-foreground">{t("reported")}</p>
           {data.canCreate &&
@@ -162,7 +162,7 @@ function ServicesContent({ data }: { data: Board }) {
           ))}
         </section>
       </div>
-      <div className="record-sheet grid w-full min-w-0 items-start gap-5 rounded-panel p-5 shadow-panel xl:grid-cols-2 [&>section]:border-0 [&>section]:bg-transparent [&>section]:p-0">
+      <div className="grid w-full min-w-0 items-start gap-8 border-t border-border/60 pt-8 xl:grid-cols-2 [&>section]:border-0 [&>section]:bg-transparent [&>section]:p-0">
         <section className="flex min-w-0 flex-col gap-3 rounded-panel border border-border/60 bg-card p-5 text-card-foreground">
           <h2 className="text-lg font-semibold">{t("received")}</h2>
           {data.received.length === 0 ? (

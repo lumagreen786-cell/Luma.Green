@@ -209,7 +209,7 @@ export function OrgImpactView({ impact }: { impact: OrgImpact }) {
       <div className="flex flex-col gap-2">
         <div
           className={cn(
-            "grid grid-cols-2 gap-4",
+            "grid min-w-0 grid-cols-1 gap-6 py-4 sm:grid-cols-2",
             kpis.length === 4 ? "lg:grid-cols-4" : "lg:grid-cols-3",
           )}
         >
@@ -222,7 +222,7 @@ export function OrgImpactView({ impact }: { impact: OrgImpact }) {
         </p>
       </div>
 
-      <div className="grid min-w-0 items-start gap-6 lg:grid-cols-[minmax(0,1.6fr)_minmax(18rem,1fr)]">
+      <div className="grid min-w-0 items-start gap-8 lg:grid-cols-[minmax(0,1.6fr)_minmax(18rem,1fr)]">
         <div className="min-w-0 space-y-6">
           {impact.families.length > 0 ? <ByFamily impact={impact} /> : null}
           <LedgerExplainer />

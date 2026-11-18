@@ -77,14 +77,14 @@ function FacilityWorkspace({ canManage }: { canManage: boolean }) {
                 {rows === undefined ? (
                   <ListSkeleton />
                 ) : (
-                  <ul className="record-sheet divide-y divide-border/60 rounded-panel px-4 sm:px-5">
+                  <ul className="divide-y divide-border border-y border-border">
                     {rows.map((facility) => (
                       <li
                         key={facility._id}
-                        className="grid min-w-0 items-start gap-5 py-5 lg:grid-cols-[minmax(12rem,1fr)_minmax(0,2fr)]"
+                        className="grid min-w-0 items-start gap-8 py-7 lg:grid-cols-[minmax(12rem,1fr)_minmax(0,2fr)]"
                       >
                         <div className="min-w-0 space-y-2">
-                          <h2 className="font-medium break-words">
+                          <h2 className="font-display text-xl font-normal tracking-tight break-words">
                             {facility.name}
                           </h2>
                           <p className="text-sm break-words">
@@ -110,7 +110,7 @@ function FacilityWorkspace({ canManage }: { canManage: boolean }) {
                             </div>
                           ) : null}
                         </div>
-                        <div className="min-w-0 lg:border-s lg:ps-5">
+                        <div className="min-w-0 lg:border-s lg:border-border lg:ps-8">
                           <FacilityRegistrations facilityId={facility._id} />
                         </div>
                       </li>

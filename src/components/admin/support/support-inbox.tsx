@@ -54,14 +54,14 @@ export function SupportInbox() {
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 lg:gap-8">
       <AppPageHeader title="Support" lead="Call back, then mark answered." />
       <Tabs
-        className="record-sheet gap-5 rounded-panel p-4 shadow-panel sm:p-6"
+        className="min-w-0 gap-6"
         value={filter}
         onValueChange={(value) => {
           if (isFilter(value)) setFilter(value);
         }}
       >
-        <div className="-mt-4 flex justify-center sm:-mt-6">
-          <TabsList className="max-w-full rounded-t-none rounded-b-[28px] bg-[var(--shell)] pt-0">
+        <div className="flex min-w-0 border-b border-border pb-4">
+          <TabsList className="h-auto max-w-full flex-wrap justify-start gap-2 rounded-xl bg-muted p-1">
             <TabsTrigger
               value="open"
               className="tabular-nums"
@@ -119,12 +119,9 @@ function RequestList({
     );
   }
   return (
-    <ul className="grid min-w-0 items-start gap-4 xl:grid-cols-2">
+    <ul className="min-w-0 divide-y divide-border">
       {requests.map((request) => (
-        <li
-          key={request.id}
-          className="min-w-0 rounded-panel bg-card px-5 text-card-foreground sm:px-6"
-        >
+        <li key={request.id} className="min-w-0">
           <RequestRow request={request} />
         </li>
       ))}
@@ -163,7 +160,7 @@ function RequestRow({ request }: { request: SupportRequest }) {
   return (
     <article
       aria-labelledby={headingId}
-      className="flex min-w-0 flex-col gap-4 py-5 sm:py-6"
+      className="grid min-w-0 gap-4 py-6 md:grid-cols-[minmax(0,1fr)_auto] [&>div:first-child]:md:col-span-2 [&>p]:max-w-3xl [&>p]:md:col-span-2 [&>section]:md:col-span-2"
     >
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div className="flex min-w-0 flex-col gap-0.5">

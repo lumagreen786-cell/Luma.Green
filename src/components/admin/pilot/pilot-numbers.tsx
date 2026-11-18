@@ -83,7 +83,7 @@ export function PilotNumbers() {
       ) : (
         <Report summary={summary} />
       )}
-      <section className="flex min-w-0 flex-col gap-4 rounded-panel bg-card p-5 text-card-foreground sm:p-6">
+      <section className="flex min-w-0 flex-col gap-5 border-t border-border pt-6">
         <header className="flex flex-col gap-1.5">
           <h2 className="font-display text-lg font-semibold tracking-tight">
             Not measured yet
@@ -112,7 +112,7 @@ function Report({ summary }: { summary: Summary }) {
     { label: "Cancelled", count: bookings.outcomes.cancelled },
   ];
   return (
-    <div className="grid min-w-0 items-start gap-4 xl:grid-cols-2">
+    <div className="grid min-w-0 items-start gap-x-10 gap-y-10 xl:grid-cols-2">
       {isTruncated ? (
         <p
           role="alert"
@@ -128,7 +128,7 @@ function Report({ summary }: { summary: Summary }) {
           No bookings or submitted applications in this period.
         </p>
       ) : null}
-      <dl className="grid grid-cols-2 gap-x-5 gap-y-6 rounded-panel bg-card p-5 text-card-foreground lg:grid-cols-4 xl:col-span-2">
+      <dl className="grid grid-cols-2 gap-x-6 gap-y-6 border-y border-border py-6 lg:grid-cols-4 xl:col-span-2">
         <Metric
           label="Bookings"
           value={number.format(bookings.count)}
@@ -154,7 +154,7 @@ function Report({ summary }: { summary: Summary }) {
           hint={`Estimate for the same receipts: ${formatRupees(bookings.estimatedPaise)}`}
         />
       </dl>
-      <section className="flex min-w-0 flex-col gap-4 rounded-panel bg-card p-5 text-card-foreground sm:p-6">
+      <section className="flex min-w-0 flex-col gap-5 border-t border-border pt-6">
         <header className="flex flex-col gap-1.5">
           <h2 className="font-display text-lg font-semibold tracking-tight">
             Booking outcomes
@@ -196,7 +196,7 @@ function Report({ summary }: { summary: Summary }) {
           </dl>
         </div>
       </section>
-      <section className="flex min-w-0 flex-col gap-4 rounded-panel bg-card p-5 text-card-foreground sm:p-6">
+      <section className="flex min-w-0 flex-col gap-5 border-t border-border pt-6">
         <header className="flex flex-col gap-1.5">
           <h2 className="font-display text-lg font-semibold tracking-tight">
             Estimate and weighed material
@@ -259,7 +259,7 @@ function Report({ summary }: { summary: Summary }) {
           )}
         </div>
       </section>
-      <section className="flex min-w-0 flex-col gap-4 rounded-panel bg-card p-5 text-card-foreground sm:p-6">
+      <section className="flex min-w-0 flex-col gap-5 border-t border-border pt-6">
         <header className="flex flex-col gap-1.5">
           <h2 className="font-display text-lg font-semibold tracking-tight">
             Application decisions
@@ -307,7 +307,7 @@ function Metric({
   return (
     <div className="min-w-0 py-1">
       <dt className="text-sm text-muted-foreground">{label}</dt>
-      <dd className="mt-2 font-display text-2xl font-semibold tracking-tight break-words tabular-nums">
+      <dd className="mt-2 font-display text-3xl font-normal tracking-tight break-words tabular-nums">
         {value}
       </dd>
       {hint ? (

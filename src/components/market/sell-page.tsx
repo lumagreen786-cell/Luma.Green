@@ -53,7 +53,7 @@ export function SellPage() {
             value: "create",
             label: t("sell.form.title"),
             content: (
-              <section className="max-w-xl">
+              <section className="max-w-3xl rounded-2xl border border-border/60 bg-card p-5 text-card-foreground sm:p-8">
                 <NewListingForm sellerKind={org.kind} city={org.city} />
               </section>
             ),

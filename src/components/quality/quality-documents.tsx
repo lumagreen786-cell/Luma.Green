@@ -94,7 +94,7 @@ function QualityBoard() {
                 ) : (
                   data.incoming.map((file) => (
                     <div
-                      className="grid min-w-0 items-start gap-5 rounded-panel bg-card p-5 text-card-foreground lg:grid-cols-[minmax(0,1.4fr)_minmax(16rem,1fr)]"
+                      className="grid min-w-0 items-start gap-8 border-b border-border py-6 lg:grid-cols-[minmax(0,1.4fr)_minmax(16rem,1fr)]"
                       key={file.id}
                     >
                       <FileItem file={file} canWithdraw={false} />
@@ -264,7 +264,7 @@ function FileItem({
   const withdraw = useMutation(api.qualityFiles.withdraw);
   const action = useQualityAction();
   return (
-    <div className="flex flex-col justify-between gap-3 rounded-panel border border-border/60 bg-card p-4 text-card-foreground sm:flex-row">
+    <div className="flex min-w-0 flex-col justify-between gap-4 border-b border-border py-5 sm:flex-row">
       <div className="min-w-0">
         <p className="font-medium break-words">{file.name}</p>
         <p className="text-sm text-muted-foreground">

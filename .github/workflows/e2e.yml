@@ -34,9 +34,9 @@ jobs:
   e2e:
     name: Playwright (chromium)
     runs-on: ubuntu-latest
-    # The 33-locale browser suite takes about 16 minutes on one worker. Allow
-    # both production builds and the separate analytics checks to finish too.
-    timeout-minutes: 30
+    # The full 33-locale suite now covers about 950 cases on one worker.
+    # Include both production builds and isolated provider-boundary checks.
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
@@ -76,7 +76,7 @@ jobs:
         run: pnpm exec playwright test --config playwright.analytics.config.ts
 
       - name: Upload report
-        if: failure()
+        if: always()
         uses: actions/upload-artifact@v7
         with:
           name: playwright-report

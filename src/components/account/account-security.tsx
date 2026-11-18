@@ -169,7 +169,7 @@ function SecurityForm() {
       />
       <section
         aria-label={t("setupTitle")}
-        className="grid items-start gap-6 rounded-panel bg-card p-5 shadow-panel sm:p-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)]"
+        className="grid items-start gap-6 border-t border-border py-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)]"
       >
         <div className="flex flex-wrap items-center gap-3 border-b border-border pb-5 lg:border-b-0 lg:pe-6 lg:pb-0">
           <StatusIcon

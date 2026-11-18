@@ -165,3 +165,15 @@ collect or send household funds. This is separate from the B2B gateway.
 
 - Backups and restores: [backups.md](backups.md).
 - When something breaks: [incidents.md](incidents.md).
+
+## Afterlife public/business frontend settings
+
+- `NEXT_PUBLIC_BUSINESS_SITE_ENABLED`: Vercel frontend/build flag, default false.
+  Enable only after `business.luma.green` DNS/TLS and origin acceptance. It selects
+  host routing, cross-site links and SEO; it grants no record access.
+- `NEXT_PUBLIC_WHATSAPP_NUMBER`: public recipient in international digits, supplied
+  by the owner. Needed by the rendered `wa.me` anchor. Blank means unavailable;
+  there is no fabricated destination, chat popup or website phone collection.
+
+No separate Convex backend is created for the business host. Backend trusted
+origins and private-file CORS remain deployment-specific Convex settings.

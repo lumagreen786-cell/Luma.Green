@@ -30,6 +30,8 @@ const eslintConfig = defineConfig([
   globalIgnores([
     // Local archived runtimes and dependency caches are not application source.
     ".convex/**",
+    // Standalone, locally reviewed design studies are not application source.
+    "output/design/**",
     ".pnpm-store/**",
     // Vendored upstream design tooling; not application source.
     ".claude/skills/impeccable/**",

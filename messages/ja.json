@@ -4819,5 +4819,171 @@
     "townhouse": "タウンハウス",
     "farmhouse": "農家住宅",
     "routeNote": "共同回収には確認済みのコミュニティコードを使ってください。"
+  },
+  "afterlife": {
+    "bookNow": "今すぐ予約",
+    "bookingMessage": "こんにちは Luma。資源回収を予約したいです。",
+    "bookingUnavailable": "WhatsAppでの予約は近日開始予定です。",
+    "how": "ご利用の流れ",
+    "questions": "よくある質問",
+    "business": "事業者の方へ",
+    "ecosystem": "エコシステム",
+    "collectors": "回収事業者向け",
+    "signIn": "ログイン",
+    "publicSite": "回収を予約",
+    "menu": "メニュー",
+    "tagline": "よりきれいな明日を動かそう。",
+    "heroTitle": "ごみを減らす。",
+    "heroTitleEnd": "可能性を広げる。",
+    "heroLead": "写真を送り、場所を共有。ひとつのチャットで資源回収を手配。",
+    "phoneEyebrow": "回収の第一歩",
+    "phoneTitle": "数通のメッセージで、新しい始まり。",
+    "phoneLead": "写真を送り、時間を選ぶ。進捗をお知らせします。",
+    "storyEyebrow": "あなたの予定に合わせて",
+    "storyTitle": "一度の回収、新たなスタート。",
+    "storyLead": "少量でも定期回収でも、まずはメッセージを。回収できる物と時間を確認します。",
+    "repeat": "単発・定期回収",
+    "updates": "WhatsAppで進捗を確認",
+    "faqTitle": "知っておきたいこと",
+    "faq1q": "何を回収できますか？",
+    "faq1a": "紙、段ボール、プラスチック、金属の写真を送ってください。担当者が地域で回収可能な物を確認します。",
+    "faq2q": "予約はいつ確定しますか？",
+    "faq2a": "対応可能な回収担当者が依頼を受け付けると確定します。",
+    "faq3q": "重量と支払額はどう決まりますか？",
+    "faq3a": "回収時に実測重量と合意した金額を担当者が記録します。",
+    "closingTitle": "次の回収を予約しませんか？",
+    "workWith": "Lumaと働く",
+    "businessPrompt": "回収・選別・再資源化・再生材の購入に携わっていますか？",
+    "businessEyebrow": "Lumaのエコシステム",
+    "businessTitle": "良い素材。",
+    "businessTitleEnd": "広がる可能性。",
+    "businessLead": "最初の回収から次の利用まで。リサイクルを支える人々をひとつにつなぎます。",
+    "findRole": "あなたの役割を見つける",
+    "rolesTitle": "仕事を、ひとつの流れに。",
+    "rolesLead": "役割を選び、Lumaの活用方法をご覧ください。",
+    "roleAction": "参加方法を見る",
+    "kabadiwala": "資源回収店",
+    "preprocessor": "前処理事業者",
+    "recycler": "再資源化事業者",
+    "manufacturer": "製造業者",
+    "saathi": "作業パートナー",
+    "kabadiwalaBody": "回収依頼、日程、実績を管理。",
+    "preprocessorBody": "受入・選別・在庫・引渡しをつなぐ。",
+    "recyclerBody": "材料の受入、加工、出荷記録をつなぐ。",
+    "manufacturerBody": "再生材を探し、購入記録をまとめる。",
+    "saathiBody": "対応する回収・選別の仕事を探す。",
+    "businessClosing": "一緒に前へ。",
+    "collectorTitle": "回収にもっと時間を。",
+    "collectorTitleEnd": "確認の手間は少なく。",
+    "collectorLead": "依頼、回収日程、計量記録をひとつの画面で。",
+    "collectorFlow": "依頼から回収完了まで。",
+    "step1": "依頼を確認。",
+    "step1Body": "写真、エリア、希望時間帯を確認します。",
+    "step2": "回収を計画。",
+    "step2Body": "依頼を受け付け、お客様に状況を伝えます。",
+    "step3": "結果を記録。",
+    "step3Body": "実測重量、合意金額、回収状況を記録します。",
+    "imageAlt": "資源回収とリサイクル材のイメージ",
+    "businessMeta": "回収事業者のためのLuma",
+    "homeMeta": "WhatsAppでLumaの資源回収を予約。",
+    "collectorMeta": "Lumaで回収業務を管理。",
+    "help": "ヘルプ",
+    "privacy": "プライバシー",
+    "status": "サービス状況"
+  },
+  "afterlifePhone": {
+    "name": "Luma Green",
+    "description": "資源回収の予約会話イメージ。写真、場所、希望時間を伝え、担当者が受け付けます。",
+    "photoAlt": "回収準備ができた資源のイメージ",
+    "location": "現在地",
+    "locationDetail": "位置情報を共有しました",
+    "message": "メッセージ",
+    "greeting": "こんにちは！写真を送っていただけますか？",
+    "askLocation": "ありがとうございます。場所とご希望の時間を教えてください。",
+    "slotReply": "{slot}でお願いします。",
+    "received": "承知しました。空き状況を確認してご連絡します。",
+    "accepted": "担当者が受け付けました。{slot}です。手配できました！",
+    "thanks": "助かります、ありがとう！",
+    "scenario0": {
+      "hello": "古い新聞を回収できますか？",
+      "caption": "新聞と段ボールです。",
+      "slot": "明日9〜11時"
+    },
+    "scenario1": {
+      "hello": "引っ越したばかりです。箱を回収できますか？",
+      "caption": "空の引っ越し用段ボールです。",
+      "slot": "土曜10〜12時"
+    },
+    "scenario2": {
+      "hello": "マンションの回収を手配できますか？",
+      "caption": "集めた物はこちらです。",
+      "slot": "日曜9〜11時"
+    },
+    "scenario3": {
+      "hello": "店に段ボールがあります。",
+      "caption": "箱は畳んであります。",
+      "slot": "金曜14〜16時"
+    },
+    "scenario4": {
+      "hello": "事務所の紙を回収できますか？",
+      "caption": "紙の束です。",
+      "slot": "月曜11〜13時"
+    },
+    "scenario5": {
+      "hello": "プラスチック容器を分別しました。",
+      "caption": "これらをお願いします。",
+      "slot": "火曜9〜11時"
+    },
+    "scenario6": {
+      "hello": "この金属製品を確認できますか？",
+      "caption": "今、写真を送ります。",
+      "slot": "水曜15〜17時"
+    },
+    "scenario7": {
+      "hello": "棚を整理中です。お願いできますか？",
+      "caption": "主に紙と包装材です。",
+      "slot": "木曜10〜12時"
+    },
+    "scenario8": {
+      "hello": "店の定期回収をお願いしたいです。",
+      "caption": "普段の段ボールの量です。",
+      "slot": "毎週金曜14〜16時"
+    },
+    "scenario9": {
+      "hello": "毎月の回収は可能ですか？",
+      "caption": "家の紙とボトルです。",
+      "slot": "第1土曜9〜11時"
+    },
+    "scenario10": {
+      "hello": "建物まで回収に来てもらえますか？",
+      "caption": "資源をまとめてあります。",
+      "slot": "土曜15〜17時"
+    },
+    "scenario11": {
+      "hello": "古いノートをリサイクルしたいです。",
+      "caption": "積み重ねた写真です。",
+      "slot": "明日11〜13時"
+    },
+    "scenario12": {
+      "hello": "今週、包装材を回収できますか？",
+      "caption": "段ボールときれいな容器です。",
+      "slot": "木曜14〜16時"
+    },
+    "scenario13": {
+      "hello": "家での分別が終わりました。",
+      "caption": "玄関の近くにまとめました。",
+      "slot": "日曜16〜18時"
+    },
+    "scenario14": {
+      "hello": "こんにちは Luma。回収を予約したいです。",
+      "caption": "回収してほしい物です。",
+      "slot": "月曜9〜11時"
+    }
+  },
+  "afterlifeMotion": {
+    "audiences": "マンション、カフェ、オフィス",
+    "apartments": "マンション",
+    "coffeeShops": "カフェ",
+    "offices": "オフィス"
   }
 }

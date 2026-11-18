@@ -1,0 +1,237 @@
+/* The device and chat use fixed brand colours, independent of page appearance. */
+.root {
+  width: min(100%, 360px);
+  margin-inline: auto;
+}
+.phone {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 433 / 882;
+}
+.phone::before {
+  content: "";
+  position: absolute;
+  inset: 1%;
+  border-radius: 16% / 8%;
+  box-shadow: 0 22px 40px #0002;
+}
+.frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+.screen {
+  position: absolute;
+  left: 4.91%;
+  top: 2.18%;
+  width: 89.95%;
+  height: 95.63%;
+  border-radius: 14.3% / 6.6%;
+  overflow: hidden;
+}
+.chat {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #efeae2;
+  color: #111b21;
+  font-family: Arial, sans-serif;
+}
+.status {
+  height: 42px;
+  flex-shrink: 0;
+  background: #fafafa;
+}
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 54px;
+  padding: 9px 18px;
+  background: #fafafa;
+  border-bottom: 1px solid #dcdedb;
+}
+.header strong {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  background: #edf3e7;
+  border-radius: 50%;
+}
+.feed {
+  padding: 14px 11px;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  background-image: radial-gradient(#d5cec4 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+.message {
+  padding: 7px 9px 4px;
+  border-radius: 0 9px 9px;
+  background: #fff;
+  max-width: 88%;
+  width: fit-content;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 1px #0002;
+  animation: message-in 0.3s ease-out;
+}
+.outgoing {
+  margin-inline-start: auto;
+  background: #d9fdd3;
+  border-radius: 9px 0 9px 9px;
+}
+.message p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: #111b21;
+  text-wrap: pretty;
+}
+.receipt {
+  display: flex;
+  justify-content: end;
+  color: #2498bd;
+  min-height: 6px;
+  margin-top: 2px;
+}
+.photo {
+  width: 100%;
+  height: 108px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 6px;
+}
+.location {
+  overflow: hidden;
+  margin-bottom: 7px;
+  min-width: 180px;
+}
+.map {
+  position: relative;
+  height: 85px;
+  background: #e8e7dc;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  color: #d34b42;
+}
+.map::before,
+.map::after,
+.road {
+  content: "";
+  position: absolute;
+  width: 150%;
+  height: 12px;
+  background: #fff;
+  border: 1px solid #d2d1c7;
+  transform: rotate(-28deg);
+}
+.map::after {
+  transform: rotate(58deg);
+  left: 35px;
+}
+.road {
+  transform: rotate(-28deg);
+  top: 8px;
+}
+.map svg {
+  z-index: 1;
+  stroke: #fff;
+  stroke-width: 1.3;
+}
+.location strong,
+.location small {
+  display: block;
+  font-size: 11px;
+  line-height: 1.5;
+}
+.location strong {
+  margin-top: 6px;
+}
+.location small {
+  color: #61756a;
+  font-size: 10px;
+}
+.typing {
+  display: flex;
+  gap: 3px;
+  width: fit-content;
+  padding: 12px;
+  background: white;
+  border-radius: 9px;
+}
+.typing i {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #8a9690;
+}
+.composer {
+  padding: 10px 12px 23px;
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  background: #f5f3f0;
+  color: #394840;
+}
+.composer > span {
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+  padding: 9px 11px;
+  border: 1px solid #d7dbd7;
+  border-radius: 20px;
+  background: white;
+  color: #68766f;
+  font-size: 12px;
+}
+@keyframes message-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (max-width: 480px) {
+  .root {
+    max-width: 320px;
+  }
+  .message p {
+    font-size: 11px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .message {
+    animation: none;
+  }
+}
+
+.credit {
+  margin-top: 16px;
+  color: var(--muted-foreground);
+  font-size: 11px;
+  line-height: 1.6;
+  text-align: center;
+}
+.credit a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.credit a:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}

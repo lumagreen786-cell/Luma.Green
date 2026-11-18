@@ -69,13 +69,13 @@ export default async function ParticipantsPage() {
       <PageHeader title={t("title")} lead={t("lead")} scene="pellets" />
 
       <Container className="pb-8">
-        <ul className="grid gap-3 md:grid-cols-2">
+        <ul className="grid gap-x-12 gap-y-8 md:grid-cols-2">
           {participants.map(
             ({ key, icon: Icon, title, body, href, action }) => (
               <li key={key}>
                 <section
                   aria-labelledby={`participant-${key}`}
-                  className="grid h-full min-w-0 grid-cols-[5rem_minmax(0,1fr)] gap-4 rounded-panel bg-card p-5 shadow-panel"
+                  className="grid h-full min-w-0 grid-cols-[6rem_minmax(0,1fr)] gap-5 border-t border-border py-6"
                 >
                   <div className="order-2 min-w-0 space-y-2 wrap-anywhere">
                     <div className="flex items-center gap-4">
@@ -84,7 +84,7 @@ export default async function ParticipantsPage() {
                       </span>
                       <h2
                         id={`participant-${key}`}
-                        className="min-w-0 text-base font-semibold tracking-tight"
+                        className="min-w-0 text-xl font-medium tracking-tight"
                       >
                         {title}
                       </h2>

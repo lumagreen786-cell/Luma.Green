@@ -4,10 +4,11 @@ import english from "../messages/en.json";
 import kannada from "../messages/kn.json";
 import malayalam from "../messages/ml.json";
 import tamil from "../messages/ta.json";
-import { actionName } from "../src/components/site/action-name";
 
 const routes = [
   "/",
+  "/business",
+  "/business/collectors",
   "/participants",
   "/how-it-works",
   "/standards",
@@ -72,30 +73,24 @@ for (const { locale, copy } of [
     await page.setViewportSize({ width: 320, height: 740 });
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto(`/${locale}`);
-    await expect(
-      page.getByRole("heading", { level: 1, name: copy.home.hero.title }),
-    ).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1 })).toContainText(
+      copy.afterlife.heroTitle,
+    );
     await page.evaluate(async () => document.fonts.ready);
-    for (const { content, labels } of [
-      {
-        content: copy.home.hero,
-        labels: [
-          actionName(copy.nav.sellScrap, copy.home.hero.sell),
-          actionName(copy.nav.prices, copy.home.hero.prices),
-          copy.home.hero.join,
-        ],
-      },
-    ]) {
-      const section = page.getByRole("region", {
-        name: content.title,
-        exact: true,
-      });
-      for (const label of labels) {
-        await expectActionTextToFit(
-          section.getByRole("link", { name: label, exact: true }),
-        );
-      }
-    }
+    await expectActionTextToFit(
+      page
+        .getByRole("button", { name: copy.afterlife.bookNow, exact: true })
+        .first(),
+    );
+    await expectActionTextToFit(
+      page.getByRole("link", { name: copy.afterlife.how, exact: true }).last(),
+    );
+    await page.goto(`/${locale}/business`);
+    await expectActionTextToFit(
+      page
+        .getByRole("link", { name: copy.afterlife.roleAction, exact: true })
+        .first(),
+    );
 
     await page.goto(`/${locale}/login`);
     await page.evaluate(async () => document.fonts.ready);
@@ -105,61 +100,52 @@ for (const { locale, copy } of [
   });
 }
 
-test("business role tabs expose one readable detail and support keyboard navigation", async ({
+test("business role cards expose all five paths and support keyboard navigation", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/");
-  const region = page.getByRole("region", { name: english.home.hero.join });
-  await expect(region.getByRole("tab")).toHaveCount(5);
-  const first = region.getByRole("tab", {
-    name: english.home.roles.kabadiwala.title,
+  await page.goto("/en/business");
+  const roles = page.locator("#roles");
+  await expect(roles.getByRole("heading", { level: 3 })).toHaveCount(5);
+  const destinations = [
+    "/business/collectors",
+    "/join/preprocessor",
+    "/join/recycler",
+    "/join/manufacturer",
+    "/join/saathi",
+  ];
+  const links = roles.getByRole("link", {
+    name: english.afterlife.roleAction,
     exact: true,
   });
-  await first.focus();
-  await expect(first).toBeFocused();
-  await page.keyboard.press("ArrowDown");
-  const second = region.getByRole("tab", {
-    name: english.home.roles.yard.title,
-    exact: true,
-  });
-  await expect(second).toBeFocused();
-  await expect(second).toHaveAttribute("aria-selected", "true");
-  for (const role of [
-    "kabadiwala",
-    "yard",
-    "recycler",
-    "manufacturer",
-    "saathi",
-  ] as const) {
-    const tab = region.getByRole("tab", {
-      name: english.home.roles[role].title,
-      exact: true,
-    });
-    await tab.focus();
-    await page.keyboard.press("Enter");
-    await expect(tab).toHaveAttribute("aria-selected", "true");
-    const link = region.getByRole("tabpanel").getByRole("link");
-    await expect(region.getByRole("link")).toHaveCount(1);
-    await expect(link).toHaveAttribute("href", `/join/${role}`);
+  await expect(links).toHaveCount(5);
+  for (const [index, destination] of destinations.entries()) {
+    const link = links.nth(index);
+    await expect(link).toHaveAttribute("href", destination);
     await expectActionTextToFit(link);
-    await expect(link).toHaveCSS("animation-name", "none");
     await link.focus();
     await expect(link).toBeFocused();
   }
+  await links.first().focus();
+  await page.keyboard.press("Enter");
+  await expect(page).toHaveURL(/\/business\/collectors$/);
 });
 
-test("mobile navigation shows the brand name and puts language in the side menu", async ({
+test("mobile navigation shows the brand and an accessible language menu", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/kn");
   const header = page.locator("header").first();
   await expect(header.getByRole("img", { name: "Luma.Green" })).toBeVisible();
-  await expect(header.getByText("Luma.Green", { exact: true })).toBeVisible();
-  await expect(header.getByRole("button", { name: /ಕನ್ನಡ/ })).toHaveCount(0);
-  await header.getByRole("button", { name: kannada.nav.openMenu }).click();
-  const menu = page.getByRole("dialog");
+  const toggle = header.getByRole("button", {
+    name: kannada.afterlife.menu,
+    exact: true,
+  });
+  await expect(toggle).toHaveAttribute("aria-expanded", "false");
+  await toggle.click();
+  await expect(toggle).toHaveAttribute("aria-expanded", "true");
+  const menu = header.getByRole("navigation", { name: kannada.afterlife.menu });
   const language = menu.getByRole("button", { name: /ಕನ್ನಡ/ });
   await expect(language).toBeVisible();
   await language.click();
@@ -230,4 +216,19 @@ for (const width of [360, 390, 768, 1024]) {
       }
     });
   }
+}
+
+for (const colorScheme of ["light", "dark"] as const) {
+  test(`editorial photo headings stay white in ${colorScheme}`, async ({
+    page,
+  }) => {
+    await page.emulateMedia({ colorScheme, reducedMotion: "reduce" });
+    await page.goto("/standards");
+    const heading = page.getByRole("heading", { level: 1 });
+    await expect(heading).toHaveCSS("color", "rgb(255, 255, 255)");
+    await expect(heading.locator("..").locator("p").last()).toHaveCSS(
+      "color",
+      "rgb(255, 255, 255)",
+    );
+  });
 }

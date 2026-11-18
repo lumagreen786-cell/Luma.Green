@@ -4819,5 +4819,171 @@
     "townhouse": "Reihenhaus",
     "farmhouse": "Bauernhaus",
     "routeNote": "Für die Gemeinschaftsabholung den geprüften Gemeinschaftscode verwenden."
+  },
+  "afterlife": {
+    "bookNow": "Jetzt buchen",
+    "bookingMessage": "Hallo Luma, ich möchte eine Abholung zum Recycling buchen.",
+    "bookingUnavailable": "Buchungen über WhatsApp sind bald verfügbar.",
+    "how": "So funktioniert es",
+    "questions": "Fragen",
+    "business": "Für Unternehmen",
+    "ecosystem": "Netzwerk",
+    "collectors": "Für Sammler",
+    "signIn": "Anmelden",
+    "publicSite": "Abholung buchen",
+    "menu": "Menü",
+    "tagline": "Eine sauberere Zukunft in Bewegung.",
+    "heroTitle": "Weniger Abfall.",
+    "heroTitleEnd": "Mehr Möglichkeiten.",
+    "heroLead": "Foto senden. Standort teilen. Die Recyclingabholung einfach im Chat vereinbaren.",
+    "phoneEyebrow": "Hier beginnt die Abholung",
+    "phoneTitle": "Ein paar Nachrichten. Ein neuer Anfang.",
+    "phoneLead": "Foto senden. Termin wählen. Wir halten Sie auf dem Laufenden.",
+    "storyEyebrow": "Passt in Ihren Alltag",
+    "storyTitle": "Eine Abholung. Ein neuer Anfang.",
+    "storyLead": "Ein paar Säcke oder regelmäßige Abholungen. Schreiben Sie uns. Wir prüfen, was wann abgeholt werden kann.",
+    "repeat": "Einmalige oder regelmäßige Abholungen",
+    "updates": "Neuigkeiten über WhatsApp",
+    "faqTitle": "Gut zu wissen.",
+    "faq1q": "Was kann ich recyceln?",
+    "faq1a": "Senden Sie Fotos von Papier, Karton, Kunststoff oder Metall. Der Sammler prüft, was in Ihrer Region angenommen wird.",
+    "faq2q": "Wann wird meine Abholung bestätigt?",
+    "faq2a": "Die Abholung ist bestätigt, sobald ein berechtigter Sammler die Anfrage annimmt.",
+    "faq3q": "Wie werden Gewicht und Zahlung festgelegt?",
+    "faq3a": "Der Sammler erfasst bei der Abholung das gemessene Gewicht und den vereinbarten Betrag.",
+    "closingTitle": "Bereit für die nächste Abholung?",
+    "workWith": "Mit Luma arbeiten",
+    "businessPrompt": "Sammeln, sortieren, recyceln oder Sekundärrohstoffe kaufen?",
+    "businessEyebrow": "Das Luma-Netzwerk",
+    "businessTitle": "Gute Materialien.",
+    "businessTitleEnd": "Große Möglichkeiten.",
+    "businessLead": "Von der ersten Abholung bis zur nächsten Nutzung. Ein gemeinsamer Ort für alle, die Recycling möglich machen.",
+    "findRole": "Finden Sie Ihren Platz",
+    "rolesTitle": "Ihre Arbeit. Eine vernetzte Kette.",
+    "rolesLead": "Wählen Sie Ihre Rolle. Entdecken Sie, wie Luma in Ihren Alltag passt.",
+    "roleAction": "Mitmachen entdecken",
+    "kabadiwala": "Schrotthändler",
+    "preprocessor": "Vorverarbeiter",
+    "recycler": "Recycler",
+    "manufacturer": "Hersteller",
+    "saathi": "Sammel- und Sortierkräfte",
+    "kabadiwalaBody": "Abholanfragen verwalten, den Tag planen und jede Abholung erfassen.",
+    "preprocessorBody": "Eingang, Sortierung, Bestand und Übergaben verknüpfen.",
+    "recyclerBody": "Materialeingang, Verarbeitung und Ausgang dokumentieren.",
+    "manufacturerBody": "Sekundärrohstoffe finden und Einkaufsunterlagen zusammenführen.",
+    "saathiBody": "Passende Sammel- und Sortierarbeiten finden.",
+    "businessClosing": "Bringen wir es voran.",
+    "collectorTitle": "Mehr Zeit zum Sammeln.",
+    "collectorTitleEnd": "Weniger Zeit fürs Nachfragen.",
+    "collectorLead": "Abholanfragen, Tagesplanung und Wiegedaten in einer Übersicht.",
+    "collectorFlow": "Von der Anfrage zur Abholung.",
+    "step1": "Anfrage prüfen.",
+    "step1Body": "Fotos, Gebiet und gewünschten Termin prüfen.",
+    "step2": "Abholung planen.",
+    "step2Body": "Aufträge annehmen und Kunden informieren.",
+    "step3": "Ergebnis erfassen.",
+    "step3Body": "Gemessenes Gewicht, vereinbarten Betrag und Abholstatus erfassen.",
+    "imageAlt": "Illustration von Recyclingmaterialien und Sammelarbeiten",
+    "businessMeta": "Luma für Recyclingunternehmen",
+    "homeMeta": "Recyclingabholung mit Luma über WhatsApp buchen.",
+    "collectorMeta": "Sammelarbeiten mit Luma verwalten.",
+    "help": "Hilfe",
+    "privacy": "Datenschutz",
+    "status": "Dienststatus"
+  },
+  "afterlifePhone": {
+    "name": "Luma Green",
+    "description": "Darstellung eines Chats zur Recyclingabholung. Auf Fotos, Standort und Wunschtermin folgt die Zusage des Sammlers.",
+    "photoAlt": "Illustrative recyclingfähige Materialien zur Abholung",
+    "location": "Aktueller Standort",
+    "locationDetail": "Standort geteilt",
+    "message": "Nachricht",
+    "greeting": "Hallo! Natürlich. Können Sie ein Foto senden?",
+    "askLocation": "Danke! Teilen Sie Ihren Standort und einen passenden Termin.",
+    "slotReply": "{slot}, bitte.",
+    "received": "Alles klar. Wir prüfen die Verfügbarkeit und bestätigen den Termin.",
+    "accepted": "Ihr Sammler hat zugesagt. {slot}. Alles ist bereit!",
+    "thanks": "Perfekt, vielen Dank!",
+    "scenario0": {
+      "hello": "Hallo, können Sie alte Zeitungen abholen?",
+      "caption": "Zeitungen und Karton.",
+      "slot": "Morgen, 9–11 Uhr"
+    },
+    "scenario1": {
+      "hello": "Wir sind umgezogen. Können Sie die Kartons mitnehmen?",
+      "caption": "Das sind die leeren Umzugskartons.",
+      "slot": "Samstag, 10–12 Uhr"
+    },
+    "scenario2": {
+      "hello": "Kann ich eine Abholung für unsere Wohnung vereinbaren?",
+      "caption": "Das haben wir gesammelt.",
+      "slot": "Sonntag, 9–11 Uhr"
+    },
+    "scenario3": {
+      "hello": "Wir haben Karton in unserem Laden.",
+      "caption": "Die Kartons sind flach gefaltet und bereit.",
+      "slot": "Freitag, 14–16 Uhr"
+    },
+    "scenario4": {
+      "hello": "Können Sie Papier aus unserem Büro abholen?",
+      "caption": "Hier sind die Papierstapel.",
+      "slot": "Montag, 11–13 Uhr"
+    },
+    "scenario5": {
+      "hello": "Hallo! Ich habe Kunststoffbehälter sortiert.",
+      "caption": "Das habe ich hier.",
+      "slot": "Dienstag, 9–11 Uhr"
+    },
+    "scenario6": {
+      "hello": "Können Sie diese Metallteile prüfen?",
+      "caption": "Ich sende jetzt ein Foto.",
+      "slot": "Mittwoch, 15–17 Uhr"
+    },
+    "scenario7": {
+      "hello": "Ich räume einen Schrank aus. Können Sie helfen?",
+      "caption": "Hauptsächlich Papier und Verpackungen.",
+      "slot": "Donnerstag, 10–12 Uhr"
+    },
+    "scenario8": {
+      "hello": "Wir möchten eine regelmäßige Abholung für unseren Laden.",
+      "caption": "Das ist unsere übliche Kartonmenge.",
+      "slot": "Jeden Freitag, 14–16 Uhr"
+    },
+    "scenario9": {
+      "hello": "Können wir eine monatliche Abholung vereinbaren?",
+      "caption": "Papier und Flaschen von zu Hause.",
+      "slot": "Erster Samstag, 9–11 Uhr"
+    },
+    "scenario10": {
+      "hello": "Hallo, können Sie bei unserem Gebäude abholen?",
+      "caption": "Wir haben alles zusammengestellt.",
+      "slot": "Samstag, 15–17 Uhr"
+    },
+    "scenario11": {
+      "hello": "Ich habe alte Hefte zum Recyceln.",
+      "caption": "Hier ist ein Foto des Stapels.",
+      "slot": "Morgen, 11–13 Uhr"
+    },
+    "scenario12": {
+      "hello": "Können Sie diese Woche Verpackungen abholen?",
+      "caption": "Karton und saubere Behälter.",
+      "slot": "Donnerstag, 14–16 Uhr"
+    },
+    "scenario13": {
+      "hello": "Wir haben zu Hause fertig sortiert.",
+      "caption": "Alles steht an der Tür bereit.",
+      "slot": "Sonntag, 16–18 Uhr"
+    },
+    "scenario14": {
+      "hello": "Hallo Luma, ich möchte eine Abholung buchen.",
+      "caption": "Das möchten wir recyceln.",
+      "slot": "Montag, 9–11 Uhr"
+    }
+  },
+  "afterlifeMotion": {
+    "audiences": "Wohnungen, Cafés und Büros",
+    "apartments": "Wohnungen",
+    "coffeeShops": "Cafés",
+    "offices": "Büros"
   }
 }

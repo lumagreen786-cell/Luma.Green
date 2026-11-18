@@ -50,14 +50,14 @@ function StatusSection({
   }[tone];
   return (
     <section className="flex flex-col gap-5">
-      <div className="flex items-start gap-4 rounded-xl bg-accent/30 p-4">
+      <div className="flex items-start gap-4 border-b border-border pb-7">
         <span
           className={`flex size-11 shrink-0 items-center justify-center rounded-full bg-card ${toneClass}`}
         >
           {icon}
         </span>
         <div className="flex flex-col gap-1">
-          <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
+          <h1 className="font-display text-3xl leading-tight font-normal tracking-tight sm:text-4xl">
             {title}
           </h1>
           <p className="text-muted-foreground">{lead}</p>
@@ -99,7 +99,7 @@ export function StatusView() {
     return (
       <div className="flex flex-col gap-5">
         <div className="flex flex-col gap-1">
-          <h1 className="font-display text-2xl leading-[1.25] font-semibold tracking-tight">
+          <h1 className="font-display text-3xl leading-tight font-normal tracking-tight sm:text-4xl">
             {t("none.title")}
           </h1>
           <p className="text-muted-foreground">{t("none.lead")}</p>

@@ -46,16 +46,16 @@ function StandardsContent() {
         dir={isLocale(locale) ? localeDirection(locale) : "ltr"}
         defaultValue="definitions"
       >
-        <TabsList className="h-auto flex-wrap">
+        <TabsList className="h-auto w-full flex-wrap justify-start border-b border-border pb-4">
           <TabsTrigger value="definitions">{t("definitions")}</TabsTrigger>
           <TabsTrigger value="reviews">{t("reviews")}</TabsTrigger>
           <TabsTrigger value="destinations">{t("destinations")}</TabsTrigger>
         </TabsList>
         <TabsContent
           value="definitions"
-          className="grid min-w-0 items-start gap-5 lg:grid-cols-[15rem_minmax(0,1fr)]"
+          className="grid min-w-0 items-start gap-8 pt-6 lg:grid-cols-[15rem_minmax(0,1fr)]"
         >
-          <div className="min-w-0 space-y-2 rounded-panel bg-card p-4 text-card-foreground lg:sticky lg:top-24">
+          <div className="min-w-0 space-y-3 lg:sticky lg:top-24 lg:border-e lg:border-border lg:pe-6">
             <Label htmlFor={id}>{t("search")}</Label>
             <Input
               id={id}
@@ -70,13 +70,10 @@ function StandardsContent() {
             <ListSkeleton />
           ) : (
             <>
-              <ul className="grid min-w-0 gap-4 xl:grid-cols-2">
+              <ul className="min-w-0 divide-y divide-border border-y border-border">
                 {data.rows.map((row) => (
-                  <li
-                    key={row.id}
-                    className="min-w-0 space-y-3 rounded-panel bg-card p-5 text-card-foreground"
-                  >
-                    <h2 className="font-display text-lg font-semibold">
+                  <li key={row.id} className="min-w-0 space-y-3 py-6">
+                    <h2 className="font-display text-xl font-normal tracking-tight">
                       {row.name}
                     </h2>
                     <p className="break-words">
@@ -106,7 +103,7 @@ function StandardsContent() {
           ) : (
             reviews.map((f) => (
               <section key={f.facilityName} className="space-y-3 border-b py-4">
-                <h2 className="font-display text-lg font-semibold">
+                <h2 className="font-display text-xl font-normal tracking-tight">
                   {f.facilityName}
                 </h2>
                 {f.reviews.length === 0 ? (
@@ -146,10 +143,10 @@ function StandardsContent() {
           {destinations === undefined ? (
             <ListSkeleton />
           ) : (
-            <ul className="divide-y divide-border/60 rounded-panel border border-border/60 bg-card px-4 text-card-foreground sm:px-5">
+            <ul className="divide-y divide-border border-y border-border">
               {destinations.map((d) => (
                 <li key={d.id} className="space-y-2 py-4">
-                  <h2 className="font-display text-lg font-semibold">
+                  <h2 className="font-display text-xl font-normal tracking-tight">
                     {d.name}
                   </h2>
                   <p className="break-words">{d.siteReference}</p>

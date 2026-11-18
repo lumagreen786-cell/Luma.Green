@@ -33,18 +33,18 @@ export function KabadiwalaHome() {
   const shop = useShop();
   if (!shop) return null;
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex min-w-0 flex-col gap-8">
       <div className="min-w-0">
         <Greeting name={shop.name} />
       </div>
       <QueryBoundary>
         <HomeBody city={shop.city} />
-        <div className="grid items-start gap-4 xl:grid-cols-2">
-          <div className="min-w-0 space-y-4 rounded-panel bg-card p-5 text-card-foreground sm:p-6">
+        <div className="grid min-w-0 items-start gap-8 border-t border-border/60 pt-8 xl:grid-cols-2">
+          <div className="min-w-0 space-y-6">
             <DispatchSettings />
             <CollectionAvailabilityControls />
           </div>
-          <div className="min-w-0 space-y-4 rounded-panel bg-card p-5 text-card-foreground sm:p-6">
+          <div className="min-w-0 space-y-6">
             <CollectionVisitControls />
             <EmployerPaymentControls />
           </div>
@@ -60,8 +60,8 @@ function Greeting({ name }: { name: string }) {
   const format = useFormatter();
   const now = useNow();
   return (
-    <header className="grid gap-2 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
-      <h1 className="font-display text-4xl leading-tight font-medium tracking-tight sm:text-5xl">
+    <header className="grid min-w-0 gap-3 border-b border-border/60 pb-8 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
+      <h1 className="afterlife-page-heading font-display text-4xl leading-[1.05] sm:text-5xl lg:text-[3.5rem]">
         {name}
       </h1>
       <p className="text-sm font-medium text-muted-foreground sm:col-start-1 sm:row-start-2">
@@ -87,7 +87,7 @@ function HomeBody({ city }: { city: string }) {
   return (
     <>
       <MoneyStats payouts={payouts} stock={stock} />
-      <div className="grid min-w-0 items-start gap-4 xl:grid-cols-[minmax(0,1.7fr)_minmax(19rem,1fr)]">
+      <div className="grid min-w-0 items-start gap-8 xl:grid-cols-[minmax(0,1.7fr)_minmax(19rem,1fr)]">
         <div className="min-w-0 space-y-4">
           <TodayCard active={requests?.active} today={today} city={city} />
           <PriceCheck card={card} stock={stock} />
@@ -115,7 +115,7 @@ function QuickLink({
   return (
     <Link
       href={href}
-      className="flex min-h-16 items-center gap-3 rounded-panel bg-card p-5 text-card-foreground outline-none hover:bg-muted/40 focus-visible:ring-3 focus-visible:ring-ring/50"
+      className="flex min-h-16 items-center gap-3 border-b border-border/60 py-5 text-foreground outline-none hover:text-primary focus-visible:ring-3 focus-visible:ring-ring/50"
     >
       <span className="flex size-10 shrink-0 items-center justify-center text-foreground">
         <Icon aria-hidden className="size-6" />

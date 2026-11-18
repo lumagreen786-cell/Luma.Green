@@ -98,13 +98,10 @@ function ProductionWorkspace({ canOperate }: { canOperate: boolean }) {
                 {data === undefined ? (
                   <ListSkeleton />
                 ) : (
-                  <ul className="grid items-start gap-4 lg:grid-cols-2">
+                  <ul className="divide-y divide-border border-y border-border">
                     {data.recipes.map((r) => (
-                      <li
-                        key={r.id}
-                        className="min-w-0 space-y-4 rounded-panel border border-border/60 bg-card p-5 text-card-foreground"
-                      >
-                        <h2 className="font-display text-lg font-semibold">
+                      <li key={r.id} className="min-w-0 space-y-5 py-6">
+                        <h2 className="font-display text-2xl font-normal tracking-tight">
                           {r.name} · {r.version}
                         </h2>
                         <p className="break-words">{r.reference}</p>
@@ -146,13 +143,10 @@ function ProductionWorkspace({ canOperate }: { canOperate: boolean }) {
                 {data === undefined ? (
                   <ListSkeleton />
                 ) : (
-                  <ul className="grid items-start gap-4 lg:grid-cols-2">
+                  <ul className="divide-y divide-border border-y border-border">
                     {data.batches.map((b) => (
-                      <li
-                        key={b.id}
-                        className="min-w-0 space-y-4 rounded-panel border border-border/60 bg-card p-5 text-card-foreground"
-                      >
-                        <h2 className="font-display text-lg font-semibold">
+                      <li key={b.id} className="min-w-0 space-y-5 py-6">
+                        <h2 className="font-display text-2xl font-normal tracking-tight">
                           {b.reference}
                         </h2>
                         <dl className="grid gap-4 text-sm sm:grid-cols-2">

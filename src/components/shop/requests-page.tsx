@@ -90,10 +90,10 @@ function RequestTabs({ city, scope }: { city: string; scope: string }) {
       dir={localeDirection(isLocale(locale) ? locale : defaultLocale)}
       value={tab}
       onValueChange={showTab}
-      className="record-sheet gap-5 rounded-panel p-4 shadow-panel sm:p-6"
+      className="min-w-0 gap-6"
     >
-      <div className="-mt-4 flex justify-center sm:-mt-6">
-        <TabsList className="h-auto w-fit max-w-full flex-wrap justify-center gap-2 rounded-t-none rounded-b-[28px] bg-[var(--shell)] p-2 pt-0">
+      <div className="flex min-w-0 border-b border-border/60 pb-4">
+        <TabsList className="h-auto w-fit max-w-full flex-wrap justify-start gap-2 rounded-2xl bg-muted/40 p-1.5">
           {TABS.map((value) => (
             <TabsTrigger
               key={value}

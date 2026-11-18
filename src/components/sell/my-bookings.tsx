@@ -43,7 +43,7 @@ function LiveMyBookings({ showEmpty }: { showEmpty: boolean }) {
     return showEmpty ? <p role="status">{household("loading")}</p> : null;
   if (!bookings || bookings.length === 0)
     return showEmpty ? (
-      <p className="rounded-[1.75rem] bg-card p-6 text-sm text-card-foreground text-muted-foreground">
+      <p className="border-t border-border py-6 text-sm text-muted-foreground">
         {household("noBookings")}
       </p>
     ) : null;
@@ -52,7 +52,7 @@ function LiveMyBookings({ showEmpty }: { showEmpty: boolean }) {
   return (
     <section
       aria-labelledby="my-bookings-title"
-      className="flex min-w-0 flex-col gap-3 rounded-[1.75rem] bg-card p-5 text-card-foreground sm:p-6"
+      className="flex min-w-0 flex-col gap-4 border-t border-border py-6"
     >
       <div className="flex items-center justify-between gap-3">
         <h2 id="my-bookings-title" className="text-lg font-medium">

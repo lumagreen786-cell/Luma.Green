@@ -15,10 +15,12 @@ test("English root renders the brand and primary task", async ({ page }) => {
   await expect(
     page
       .getByRole("contentinfo")
-      .getByRole("link", { name: english.privacy.title, exact: true }),
+      .getByRole("link", { name: english.afterlife.privacy, exact: true }),
   ).toBeVisible();
   const hero = page.getByRole("heading", { level: 1 });
-  await expect(hero).toHaveText(english.home.hero.title);
+  await expect(hero).toHaveText(
+    english.afterlife.heroTitle + english.afterlife.heroTitleEnd,
+  );
   await expect
     .poll(() =>
       hero.evaluate((node) =>
@@ -37,10 +39,10 @@ test("Tamil locale serves translated copy", async ({ page }) => {
   await expect(
     page
       .getByRole("contentinfo")
-      .getByRole("link", { name: tamil.privacy.title, exact: true }),
+      .getByRole("link", { name: tamil.afterlife.privacy, exact: true }),
   ).toBeVisible();
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    tamil.home.hero.title,
+    tamil.afterlife.heroTitle + tamil.afterlife.heroTitleEnd,
   );
 });
 

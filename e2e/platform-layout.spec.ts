@@ -29,9 +29,12 @@ for (const { locale, messages } of [
         expect(form).not.toBeNull();
         if (form) {
           expect(form.width).toBeGreaterThanOrEqual(400);
-          expect(
-            Math.abs(form.x + form.width / 2 - width / 2),
-          ).toBeLessThanOrEqual(1);
+          // Afterlife keeps the task on the end rail, with the photo beside it.
+          if (locale === "ar") {
+            expect(form.x + form.width).toBeLessThan(width / 2);
+          } else {
+            expect(form.x).toBeGreaterThan(width / 2);
+          }
         }
       }
       await page.goto(`/${locale}/prices`);

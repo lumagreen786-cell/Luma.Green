@@ -30,9 +30,9 @@ export function FocusedPageCanvas({
           fill
           sizes="100vw"
           quality={60}
-          className="scale-105 object-cover blur-[2px]"
+          className="object-cover"
         />
-        <div className="absolute inset-0 bg-image-scrim/40" />
+        <div className="absolute inset-0 bg-image-scrim/60" />
       </div>
       <div
         className={cn(

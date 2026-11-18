@@ -238,7 +238,7 @@ const householdPage = householdContent
   : null;
 const challengePage =
   path === "/en/login/factor"
-    ? await AuthFixtureLayout({
+    ? AuthFixtureLayout({
         children: (
           <FactorChallenge
             onVerified={() => {

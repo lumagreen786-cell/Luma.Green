@@ -4819,5 +4819,171 @@
     "townhouse": "Sıra ev",
     "farmhouse": "Çiftlik evi",
     "routeNote": "Topluluk toplaması için incelenmiş topluluk kodunuzu kullanın."
+  },
+  "afterlife": {
+    "bookNow": "Şimdi rezervasyon yap",
+    "bookingMessage": "Merhaba Luma, geri dönüşüm için bir alım rezervasyonu yapmak istiyorum.",
+    "bookingUnavailable": "WhatsApp rezervasyonu yakında kullanılabilecek.",
+    "how": "Nasıl çalışır",
+    "questions": "Sorular",
+    "business": "İşletmeler için",
+    "ecosystem": "Ekosistem",
+    "collectors": "Toplayıcılar için",
+    "signIn": "Giriş yap",
+    "publicSite": "Alım rezervasyonu yap",
+    "menu": "Menü",
+    "tagline": "Daha temiz yarınlara doğru.",
+    "heroTitle": "Daha az atık.",
+    "heroTitleEnd": "Daha çok olasılık.",
+    "heroLead": "Fotoğraf gönderin. Konumunuzu paylaşın. Geri dönüşüm alımını tek bir sohbetle ayarlayın.",
+    "phoneEyebrow": "Alım burada başlar",
+    "phoneTitle": "Birkaç mesaj. Yeni bir başlangıç.",
+    "phoneLead": "Fotoğraf gönderin. Saat seçin. Sizi bilgilendirelim.",
+    "storyEyebrow": "Gününüze uygun",
+    "storyTitle": "Bir alım. Yeni bir başlangıç.",
+    "storyLead": "Birkaç torba veya düzenli alım. Bir mesajla başlayın. Nelerin ne zaman alınabileceğini kontrol ederiz.",
+    "repeat": "Tek seferlik veya düzenli alım",
+    "updates": "WhatsApp üzerinden güncellemeler",
+    "faqTitle": "Bilmeniz gerekenler.",
+    "faq1q": "Neleri geri dönüştürebilirim?",
+    "faq1a": "Kâğıt, karton, plastik veya metallerin fotoğrafını gönderin. Toplayıcı bölgenizde nelerin kabul edildiğini kontrol eder.",
+    "faq2q": "Alımım ne zaman onaylanır?",
+    "faq2a": "Uygun bir toplayıcı talebi kabul ettiğinde alımınız onaylanır.",
+    "faq3q": "Ağırlık ve ödeme nasıl belirlenir?",
+    "faq3a": "Toplayıcı alım sırasında ölçülen ağırlığı ve üzerinde anlaşılan tutarı kaydeder.",
+    "closingTitle": "Bir sonraki alım için hazır mısınız?",
+    "workWith": "Luma ile çalışın",
+    "businessPrompt": "Malzeme topluyor, ayırıyor, geri dönüştürüyor veya geri kazanılmış malzeme mi alıyorsunuz?",
+    "businessEyebrow": "Luma ekosistemi",
+    "businessTitle": "İyi malzemeler.",
+    "businessTitleEnd": "Büyük olanaklar.",
+    "businessLead": "İlk toplamadan sonraki kullanıma. Geri dönüşümü mümkün kılan insanlar için ortak bir yer.",
+    "findRole": "Yerinizi bulun",
+    "rolesTitle": "İşiniz. Bağlantılı bir zincir.",
+    "rolesLead": "Rolünüzü seçin. Luma'nın gününüze nasıl uyduğunu görün.",
+    "roleAction": "Katılmayı keşfedin",
+    "kabadiwala": "Kabadiwalalar",
+    "preprocessor": "Ön işleyiciler",
+    "recycler": "Geri dönüşümcüler",
+    "manufacturer": "Üreticiler",
+    "saathi": "Saathiler",
+    "kabadiwalaBody": "Alım taleplerini yönetin, gününüzü planlayın ve her alımı kaydedin.",
+    "preprocessorBody": "Kabul, ayırma, stok ve teslim kayıtlarını birbirine bağlayın.",
+    "recyclerBody": "Malzeme kabulü, işleme ve çıktı kayıtlarını birleştirin.",
+    "manufacturerBody": "Geri kazanılmış malzemeleri bulun ve satın alma kayıtlarını bir arada tutun.",
+    "saathiBody": "Desteklenen toplama ve ayırma işlerini bulun.",
+    "businessClosing": "Birlikte ilerleyelim.",
+    "collectorTitle": "Toplamaya daha çok zaman.",
+    "collectorTitleEnd": "Takibe daha az zaman.",
+    "collectorLead": "Alım taleplerini, günlük planınızı ve tartım kayıtlarını tek görünümde birleştirin.",
+    "collectorFlow": "Talepten tamamlanan alıma.",
+    "step1": "Talebi inceleyin.",
+    "step1Body": "Fotoğrafları, bölgeyi ve istenen saat aralığını kontrol edin.",
+    "step2": "Alımı planlayın.",
+    "step2Body": "İşi kabul edin ve müşteriyi bilgilendirin.",
+    "step3": "Sonucu kaydedin.",
+    "step3Body": "Ölçülen ağırlığı, anlaşılan tutarı ve alım durumunu kaydedin.",
+    "imageAlt": "Geri dönüştürülebilir malzeme ve toplama çalışması görseli",
+    "businessMeta": "Geri dönüşüm işletmeleri için Luma",
+    "homeMeta": "WhatsApp üzerinden Luma ile geri dönüşüm alımı ayarlayın.",
+    "collectorMeta": "Toplama işlerinizi Luma ile yönetin.",
+    "help": "Yardım",
+    "privacy": "Gizlilik",
+    "status": "Hizmet durumu"
+  },
+  "afterlifePhone": {
+    "name": "Luma Green",
+    "description": "Geri dönüşüm alımı sohbetinin temsili. Fotoğraflar, konum ve tercih edilen saat sonrasında toplayıcı kabul eder.",
+    "photoAlt": "Alıma hazır geri dönüştürülebilir malzemelerin temsili",
+    "location": "Mevcut konum",
+    "locationDetail": "Konum paylaşıldı",
+    "message": "Mesaj",
+    "greeting": "Merhaba! Elbette. Bir fotoğraf gönderebilir misiniz?",
+    "askLocation": "Teşekkürler! Konumunuzu ve size uygun bir saati paylaşın.",
+    "slotReply": "{slot}, lütfen.",
+    "received": "Tamam. Uygunluğu kontrol edip size onay vereceğiz.",
+    "accepted": "Toplayıcınız kabul etti. {slot}. Her şey hazır!",
+    "thanks": "Harika, teşekkürler!",
+    "scenario0": {
+      "hello": "Merhaba, eski gazeteleri alabilir misiniz?",
+      "caption": "Gazete ve karton.",
+      "slot": "Yarın, 09.00–11.00"
+    },
+    "scenario1": {
+      "hello": "Yeni taşındık. Kutuları alabilir misiniz?",
+      "caption": "Bunlar boş taşınma kutuları.",
+      "slot": "Cumartesi, 10.00–12.00"
+    },
+    "scenario2": {
+      "hello": "Apartmanımız için alım ayarlayabilir miyim?",
+      "caption": "Topladıklarımız bunlar.",
+      "slot": "Pazar, 09.00–11.00"
+    },
+    "scenario3": {
+      "hello": "Dükkânımızda karton var.",
+      "caption": "Kutular düzleştirildi ve hazır.",
+      "slot": "Cuma, 14.00–16.00"
+    },
+    "scenario4": {
+      "hello": "Ofisimizden kâğıt alabilir misiniz?",
+      "caption": "Kâğıt desteleri burada.",
+      "slot": "Pazartesi, 11.00–13.00"
+    },
+    "scenario5": {
+      "hello": "Merhaba! Plastik kapları ayırdım.",
+      "caption": "Elimde bunlar var.",
+      "slot": "Salı, 09.00–11.00"
+    },
+    "scenario6": {
+      "hello": "Bu metal eşyaları kontrol edebilir misiniz?",
+      "caption": "Şimdi fotoğraf gönderiyorum.",
+      "slot": "Çarşamba, 15.00–17.00"
+    },
+    "scenario7": {
+      "hello": "Dolabı boşaltıyorum. Yardımcı olabilir misiniz?",
+      "caption": "Çoğunlukla kâğıt ve ambalaj.",
+      "slot": "Perşembe, 10.00–12.00"
+    },
+    "scenario8": {
+      "hello": "Dükkânımız için düzenli alım istiyoruz.",
+      "caption": "Genellikle bu kadar karton topluyoruz.",
+      "slot": "Her cuma, 14.00–16.00"
+    },
+    "scenario9": {
+      "hello": "Aylık alım ayarlayabilir miyiz?",
+      "caption": "Evden kâğıt ve şişeler.",
+      "slot": "Ayın ilk cumartesisi, 09.00–11.00"
+    },
+    "scenario10": {
+      "hello": "Merhaba, binamızdan alım yapabilir misiniz?",
+      "caption": "Malzemeleri bir araya getirdik.",
+      "slot": "Cumartesi, 15.00–17.00"
+    },
+    "scenario11": {
+      "hello": "Geri dönüştürmek istediğim eski defterlerim var.",
+      "caption": "Yığının fotoğrafı burada.",
+      "slot": "Yarın, 11.00–13.00"
+    },
+    "scenario12": {
+      "hello": "Bu hafta ambalaj alabilir misiniz?",
+      "caption": "Karton ve temiz kaplar.",
+      "slot": "Perşembe, 14.00–16.00"
+    },
+    "scenario13": {
+      "hello": "Evde ayırmayı bitirdik.",
+      "caption": "Her şey kapının yanında hazır.",
+      "slot": "Pazar, 16.00–18.00"
+    },
+    "scenario14": {
+      "hello": "Merhaba Luma, alım rezervasyonu yapmak istiyorum.",
+      "caption": "Geri dönüştürmek istediklerimiz bunlar.",
+      "slot": "Pazartesi, 09.00–11.00"
+    }
+  },
+  "afterlifeMotion": {
+    "audiences": "Apartmanlar, kafeler ve ofisler",
+    "apartments": "Apartmanlar",
+    "coffeeShops": "Kafeler",
+    "offices": "Ofisler"
   }
 }

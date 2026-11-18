@@ -41,7 +41,7 @@ test("the logo mark spins once on hover and keyboard focus while its name stays 
   const mark = header.getByRole("img", { name: "Luma.Green", exact: true });
   const wordmark = header.getByText("Luma.Green", { exact: true });
   const homeLink = header
-    .getByRole("link", { name: "Home", exact: true })
+    .getByRole("link", { name: "Luma.Green", exact: true })
     .filter({
       has: page.getByRole("img", { name: "Luma.Green", exact: true }),
     });
@@ -75,7 +75,7 @@ test("reduced motion prevents logo spins and cancels one already in progress", a
   const header = page.getByRole("banner");
   const mark = header.getByRole("img", { name: "Luma.Green", exact: true });
   const homeLink = header
-    .getByRole("link", { name: "Home", exact: true })
+    .getByRole("link", { name: "Luma.Green", exact: true })
     .filter({
       has: page.getByRole("img", { name: "Luma.Green", exact: true }),
     });
@@ -113,9 +113,14 @@ test.describe("home content without JavaScript", () => {
     await expect(
       page
         .getByRole("main")
-        .getByRole("link", { name: english.nav.sellScrap, exact: true })
+        .getByRole("button", { name: english.afterlife.bookNow, exact: true })
         .first(),
     ).toBeVisible();
+    await expect(
+      page
+        .getByRole("main")
+        .getByRole("link", { name: english.afterlife.how, exact: true }),
+    ).toHaveAttribute("href", "#how");
     await expect(page.getByRole("heading", { level: 2 }).first()).toHaveCSS(
       "opacity",
       "1",
@@ -149,7 +154,7 @@ test("motion leaves no hidden content after navigation and preference changes", 
   await page.goto("/en");
   const heading = page.getByRole("heading", { level: 1 });
   await expect(heading).toBeVisible();
-  const reveal = page.locator("#roles-heading");
+  const reveal = page.locator("#how h2");
   await reveal.scrollIntoViewIfNeeded();
   await expect(reveal).toBeVisible();
   await page.emulateMedia({ reducedMotion: "reduce" });
@@ -159,10 +164,9 @@ test("motion leaves no hidden content after navigation and preference changes", 
   await expect(heading).toHaveCSS("opacity", "1");
   await page
     .getByRole("main")
-    .getByRole("link", { name: english.nav.sellScrap, exact: true })
-    .first()
+    .getByRole("link", { name: english.afterlife.how, exact: true })
     .click();
-  await expect(page).toHaveURL(/\/sell$/u);
+  await expect(page).toHaveURL(/#how$/u);
   await page.goBack();
   await expect(heading).toBeVisible();
   await expect(heading).toHaveCSS("transform", "none");
@@ -174,10 +178,8 @@ test("hero image stays stable while scrolling and booking remains available", as
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/en");
-  const hero = page.getByRole("region", {
-    name: english.home.hero.title,
-  });
-  const artwork = hero.locator("[data-recycling-illustration]");
+  const hero = page.getByRole("main").locator("section").first();
+  const artwork = hero.locator("img");
   await expect(artwork).toBeVisible();
   await expect(artwork).toHaveCSS("transform", "none");
   await page.evaluate(() => {
@@ -186,10 +188,10 @@ test("hero image stays stable while scrolling and booking remains available", as
   await expect(artwork).toHaveCSS("transform", "none");
   await page.emulateMedia({ reducedMotion: "reduce" });
   await expect(artwork).toHaveCSS("transform", "none");
-  await hero
-    .getByRole("link", { name: english.nav.sellScrap, exact: true })
-    .click();
-  await expect(page).toHaveURL(/\/sell$/u);
+  await expect(
+    hero.getByRole("button", { name: english.afterlife.bookNow, exact: true }),
+  ).toBeDisabled();
+  await expect(page.getByRole("dialog")).toHaveCount(0);
 });
 
 for (const locale of ["en", "ar"]) {

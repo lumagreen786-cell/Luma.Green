@@ -44,24 +44,24 @@ export default async function ContactPage() {
         scene={imageRole}
       />
 
-      <Container className="grid items-start gap-4 pb-8 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
-        <section className="grid gap-4 rounded-panel bg-card p-5 shadow-panel sm:p-6">
+      <Container className="grid items-start gap-10 pb-16 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:gap-20">
+        <section className="grid gap-6 border-t border-border py-8">
           <div className="flex items-center gap-3">
             <MailIcon aria-hidden className="size-6 text-foreground" />
 
-            <h2 className="text-lg font-semibold">{t("emailHeading")}</h2>
+            <h2 className="text-2xl font-normal">{t("emailHeading")}</h2>
           </div>
-          <div className="rounded-xl bg-accent/40 px-4 py-2">
+          <div className="border-s-2 border-primary ps-5">
             <a href={`mailto:${site.supportEmail}`} className={emailLink}>
               {site.supportEmail}
             </a>
           </div>
         </section>
-        <section className="grid gap-4 rounded-panel bg-card p-5 shadow-panel sm:p-6">
+        <section className="grid gap-6 border-t border-border py-8">
           <div className="flex items-center gap-3">
             <ShieldAlertIcon aria-hidden className="size-6 text-foreground" />
 
-            <h2 className="text-lg font-semibold">{t("securityHeading")}</h2>
+            <h2 className="text-2xl font-normal">{t("securityHeading")}</h2>
           </div>
           <div className="space-y-4">
             <p className="text-sm text-muted-foreground">{t("securityBody")}</p>

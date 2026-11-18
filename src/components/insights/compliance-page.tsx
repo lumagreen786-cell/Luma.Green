@@ -28,16 +28,16 @@ function ComplianceBody() {
 
   return (
     <>
-      <div className="record-sheet grid min-w-0 items-start gap-6 rounded-panel p-4 shadow-panel sm:p-6 xl:grid-cols-[minmax(0,1.2fr)_minmax(19rem,1fr)]">
+      <div className="grid min-w-0 items-start gap-8 xl:grid-cols-[minmax(0,1.2fr)_minmax(19rem,1fr)]">
         <div className="min-w-0 space-y-6">
           <Checklist record={record} />
         </div>
-        <div className="record-detail min-w-0 space-y-6 rounded-panel p-4 sm:p-6">
+        <div className="min-w-0 space-y-8 xl:sticky xl:top-24">
           <ConsentCard consent={record.consent} orgKind={record.orgKind} />
           {record.epr ? <EprSummary epr={record.epr} /> : null}
         </div>
       </div>
-      <div className="record-sheet rounded-panel p-4 shadow-panel sm:p-6">
+      <div className="min-w-0 border-t border-border/60 pt-8">
         <Receipts receipts={record.receipts} />
       </div>
       <DemoNote>{t("demoNote")}</DemoNote>

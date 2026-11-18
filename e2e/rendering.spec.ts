@@ -9,8 +9,8 @@ test.use({ javaScriptEnabled: false });
 const pages = [
   {
     path: "/",
-    title: english.home.hero.title,
-    body: english.home.hero.lead,
+    title: english.afterlife.heroTitle + english.afterlife.heroTitleEnd,
+    body: english.afterlife.heroLead,
     direction: "ltr",
   },
   {

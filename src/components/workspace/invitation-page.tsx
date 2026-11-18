@@ -116,7 +116,7 @@ function InvitationContent({ token }: { token: string }) {
       {!isPending && !isReady ? <p role="alert">{t("unavailable")}</p> : null}
       {invitation?.status === "ready" ? (
         <>
-          <div className="space-y-3 rounded-xl bg-accent/30 p-4">
+          <div className="space-y-4 border-y border-border py-6">
             <p className="text-lg font-semibold break-words">
               {invitation.orgName}
             </p>

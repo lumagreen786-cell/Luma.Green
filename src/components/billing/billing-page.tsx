@@ -125,7 +125,7 @@ function BillingDetails({
         {t("off")}
       </p>
       <div className="grid min-w-0 items-start gap-5">
-        <div className="grid min-w-0 items-start gap-5 xl:grid-cols-2">
+        <div className="grid min-w-0 items-start gap-8 xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
           <section className="record-detail flex min-w-0 flex-col gap-4 rounded-panel p-5">
             <p>
               {t(status.request ? status.request.requestState : "none")}
@@ -218,7 +218,7 @@ function BillingDetails({
           </section>
           {status.drafts ? <DraftHistory drafts={status.drafts} /> : null}
         </div>
-        <section className="record-sheet row-start-1 grid min-w-0 rounded-panel p-5 shadow-panel sm:grid-cols-2 xl:grid-cols-4">
+        <section className="row-start-1 grid min-w-0 gap-6 border-b border-border pb-8 sm:grid-cols-2 xl:grid-cols-4">
           {catalogue.plans.map((plan) => {
             const minimum = formatPaise(plan.monthlyMinPaise, locale),
               maximum =
@@ -236,7 +236,7 @@ function BillingDetails({
             return (
               <div
                 key={plan.id}
-                className="flex min-w-0 flex-col gap-4 border-b p-4 sm:border-e"
+                className="flex min-w-0 flex-col gap-4 border-s border-border ps-5"
               >
                 <h2 className="font-display text-2xl font-medium">
                   {t(`plans.${plan.id}`)}
@@ -261,7 +261,7 @@ function BillingDetails({
           })}
         </section>
         {status.events.length > 0 ? (
-          <section className="record-sheet flex min-w-0 flex-col gap-3 rounded-panel p-5 shadow-panel">
+          <section className="flex min-w-0 flex-col gap-4 border-t border-border pt-6">
             <h2 className="font-medium">{t("history")}</h2>
             <ul className="divide-y">
               {status.events.map((event) => (
@@ -297,7 +297,7 @@ function DraftHistory({ drafts }: { drafts: NonNullable<Status["drafts"]> }) {
   return (
     <section
       aria-labelledby={heading}
-      className="flex min-w-0 flex-col gap-3 rounded-panel bg-card p-5 text-card-foreground"
+      className="flex min-w-0 flex-col gap-4 border-t border-border pt-6"
     >
       <h2 id={heading} className="font-medium">
         {t("draftsTitle")}

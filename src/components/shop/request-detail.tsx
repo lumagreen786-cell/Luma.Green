@@ -52,7 +52,7 @@ export function RequestDetail({ id }: { id: string }) {
   const shop = useShop();
   if (shop === null) return <NotForShop title={t("requests.title")} />;
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex min-w-0 flex-col gap-8">
       <Link
         href="/app/requests"
         className="inline-flex min-h-11 w-fit items-center gap-1 rounded-md text-sm font-medium text-foreground outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
@@ -87,7 +87,7 @@ function RequestBody({ id }: { id: string }) {
   if (detail === null) {
     return (
       <>
-        <h1 className="font-display text-[1.75rem] leading-[1.25] font-semibold tracking-tight">
+        <h1 className="afterlife-page-heading font-display text-4xl leading-[1.05] sm:text-5xl">
           {t("requests.title")}
         </h1>
         <EmptyState
@@ -113,9 +113,9 @@ function RequestView({ detail }: { detail: BookingDetail }) {
 
   return (
     <>
-      <header className="flex flex-col gap-3 rounded-panel bg-card p-5 text-card-foreground sm:p-6">
+      <header className="flex min-w-0 flex-col gap-3 border-b border-border/60 pb-8">
         <div className="flex flex-wrap items-center gap-3">
-          <h1 className="font-display text-[1.75rem] leading-[1.25] font-semibold tracking-tight">
+          <h1 className="afterlife-page-heading font-display text-4xl leading-[1.05] sm:text-5xl">
             {booking.name ?? t("household")}
           </h1>
           <BookingStatusPill status={booking.status} />
@@ -248,7 +248,7 @@ function BookingFacts({
   return (
     <section
       aria-labelledby="facts-title"
-      className="flex flex-col gap-4 rounded-panel bg-card p-5 text-card-foreground sm:p-6"
+      className="flex min-w-0 flex-col gap-5 border-t border-border/60 pt-6"
     >
       <h2 id="facts-title" className="text-base font-semibold">
         {t("request.details")}

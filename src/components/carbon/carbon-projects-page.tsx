@@ -101,8 +101,8 @@ function Projects({
   >(() => new Set());
   if (!rows) return <ListSkeleton />;
   return (
-    <div className="grid min-w-0 items-start gap-4 xl:grid-cols-[minmax(18rem,0.85fr)_minmax(0,1.6fr)]">
-      <aside className="min-w-0 xl:sticky xl:top-6">
+    <div className="grid min-w-0 items-start gap-8 xl:grid-cols-[minmax(16rem,0.7fr)_minmax(0,1.6fr)]">
+      <aside className="min-w-0 xl:sticky xl:top-24">
         {canOperate ? (
           <CreateProject orgId={orgId} />
         ) : (
@@ -113,12 +113,9 @@ function Projects({
         {rows.rows.length === 0 ? (
           <p>{lots("empty")}</p>
         ) : (
-          <ul className="space-y-4">
+          <ul className="divide-y divide-border border-y border-border">
             {rows.rows.map((project) => (
-              <li
-                key={project.id}
-                className="space-y-4 rounded-panel bg-card p-5 text-card-foreground sm:p-6"
-              >
+              <li key={project.id} className="min-w-0 space-y-5 py-6">
                 <ProjectSummary project={project} />
                 {canOperate && !project.industry ? (
                   <AssignIndustry orgId={orgId} project={project} />
@@ -246,7 +243,9 @@ function ProjectSummary({ project }: { project: Project }) {
   const evidence = useTranslations("evidence");
   return (
     <>
-      <h2 className="text-lg font-semibold break-words">{project.name}</h2>
+      <h2 className="font-display text-2xl font-normal tracking-tight break-words">
+        {project.name}
+      </h2>
       <p className="text-sm break-words">
         {project.facilityName} · {methods[project.method]}
         {project.industry ? (
@@ -544,7 +543,7 @@ function CreateProject({ orgId }: { orgId: Id<"orgs"> }) {
       onSubmit={(event) => {
         void submit(event);
       }}
-      className="max-w-2xl space-y-4 rounded-panel bg-card p-5 text-card-foreground sm:p-6"
+      className="max-w-2xl min-w-0 space-y-5 rounded-panel border border-border bg-card p-5 text-card-foreground"
     >
       <div className="space-y-2">
         <Label htmlFor={`${id}-name`}>{t("name")}</Label>

@@ -30,7 +30,7 @@ const roleIcons = {
 export function RoleCards() {
   const t = useTranslations("help");
   return (
-    <ul className="divide-y divide-border rounded-panel bg-card px-5 shadow-panel sm:px-7">
+    <ul className="divide-y divide-border border-y border-border">
       {HELP_ROLES.map((role) => (
         <li
           key={role}
@@ -41,7 +41,7 @@ export function RoleCards() {
             <IconTile icon={roleIcons[role]} size="sm" />
           </div>
           <div className="grid min-w-0 flex-1 gap-2 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
-            <h3 className="text-base font-semibold tracking-tight">
+            <h3 className="text-lg font-medium tracking-tight">
               <Link
                 href={`/help/${role}`}
                 className="outline-none after:absolute after:inset-0"

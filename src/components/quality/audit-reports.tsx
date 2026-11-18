@@ -40,7 +40,7 @@ function ReportsContent({ data }: { data: Board }) {
   return (
     <div className="flex w-full min-w-0 flex-col gap-4">
       <AppPageHeader title={t("title")} lead={t("lead")} />
-      <p className="rounded-xl bg-accent/30 px-5 py-3 text-sm text-foreground">
+      <p className="border-s-2 border-primary ps-4 text-sm text-muted-foreground">
         {t("limit")}
       </p>
       <RecordWorkspace
@@ -221,7 +221,7 @@ function ReportList({
   const revoke = useMutation(api.auditShares.revoke);
   const action = useQualityAction();
   return (
-    <section className="space-y-4 rounded-panel border border-border/60 bg-card p-5 shadow-panel">
+    <section className="min-w-0 space-y-5 border-t border-border pt-6">
       <h2 className="text-lg font-semibold">{t(own ? "sent" : "received")}</h2>
       {rows.length === 0 ? (
         <p>{t("empty")}</p>
@@ -285,10 +285,10 @@ function ReportDetail({ reportId }: { reportId: Id<"auditReports"> }) {
     return <p role="status">{t("unavailable")}</p>;
   const s = report.snapshot;
   return (
-    <section className="space-y-4 rounded-panel border border-border/60 bg-card p-5 shadow-panel">
+    <section className="min-w-0 space-y-5 border-t border-border pt-6">
       <h2 className="text-lg font-semibold">{report.purpose}</h2>
       <p className="rounded-xl bg-attention/20 p-4 text-sm">{t("snapshot")}</p>
-      <div className="grid gap-3 rounded-xl bg-muted/50 p-4 sm:grid-cols-2">
+      <div className="grid gap-4 border-y border-border py-5 sm:grid-cols-2">
         <p className="break-words">
           {s.materialCode} · {s.state} · {format.number(s.declaredGrams)} g
         </p>
@@ -310,7 +310,7 @@ function ReportDetail({ reportId }: { reportId: Id<"auditReports"> }) {
       <p>
         {q(s.inspectingDecision as "accepted" | "rejected" | "conditional")}
       </p>
-      <details className="rounded-xl border border-border p-4">
+      <details className="border-y border-border py-4">
         <summary className="min-h-11 cursor-pointer py-2 font-semibold">
           {q("decisions")}
         </summary>

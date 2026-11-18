@@ -21,9 +21,11 @@ export default async function ActivityPage({
   await requireSession(locale, "/sell/activity");
   const t = await getTranslations("householdTools");
   return (
-    <Container className="max-w-6xl space-y-5 py-8">
-      <h1 className="font-display text-2xl font-semibold">{t("activity")}</h1>
-      <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
+    <Container className="max-w-7xl space-y-8 py-10">
+      <h1 className="border-b border-border pb-6 font-display text-4xl font-normal tracking-tight sm:text-5xl">
+        {t("activity")}
+      </h1>
+      <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
         <MyBookings showEmpty />
         <SharedFamilyCollections />
       </div>

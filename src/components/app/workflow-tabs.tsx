@@ -31,10 +31,10 @@ export function WorkflowTabs({
         setVisited((previous) => new Set([...previous, value]));
       }}
       dir={isLocale(locale) ? localeDirection(locale) : "ltr"}
-      className="record-sheet gap-0 rounded-panel p-3 shadow-panel sm:p-5"
+      className="min-w-0 gap-6"
     >
-      <div className="-mt-3 flex justify-center sm:-mt-5">
-        <TabsList className="h-auto w-fit max-w-full flex-wrap justify-center gap-2 rounded-t-none rounded-b-[28px] bg-[var(--shell)] p-2 pt-0">
+      <div className="flex min-w-0 border-b border-border/60 pb-4">
+        <TabsList className="h-auto w-fit max-w-full flex-wrap justify-start gap-2 rounded-2xl bg-muted/40 p-1.5">
           {items.map((item) => (
             <TabsTrigger
               key={item.value}
@@ -57,7 +57,7 @@ export function WorkflowTabs({
             value={item.value}
             forceMount
             hidden={selected !== item.value}
-            className="pt-5 data-[state=inactive]:hidden"
+            className="min-w-0 data-[state=inactive]:hidden"
           >
             {item.content}
           </TabsContent>

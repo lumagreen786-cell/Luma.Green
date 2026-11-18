@@ -1,0 +1,127 @@
+.pageHeader {
+  position: relative;
+  isolation: isolate;
+  margin-bottom: clamp(2rem, 5vw, 4.5rem);
+}
+.headerImage {
+  overflow: hidden;
+}
+.headerFrame {
+  height: 100%;
+  aspect-ratio: auto;
+}
+.editorial {
+  background: var(--color-brand-950);
+  color: white;
+}
+.editorial .headerImage {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+.editorial::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--image-scrim);
+  opacity: 0.68;
+}
+.headerContent {
+  padding-block: clamp(3rem, 7vw, 7rem);
+}
+.headingCopy {
+  min-width: 0;
+  max-width: 52rem;
+}
+.headingCopy h1 {
+  font-size: clamp(2.5rem, 5.8vw, 5.5rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+.lead {
+  max-width: 42rem;
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+.eyebrow {
+  margin-bottom: 1.25rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+}
+.task {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(15rem, 32%);
+  margin-inline: auto;
+  max-width: 80rem;
+  padding-inline: 3rem;
+  gap: 3rem;
+  padding-top: 3rem;
+}
+.task .headerImage {
+  grid-column: 2;
+  grid-row: 1;
+  border-radius: 1rem;
+  min-height: 16rem;
+}
+.task .headerContent {
+  grid-column: 1;
+  grid-row: 1;
+  padding: 1.5rem 0;
+  align-self: center;
+}
+.task h1 {
+  font-size: clamp(2.5rem, 4.4vw, 4.5rem);
+}
+.task .lead,
+.task .eyebrow {
+  color: var(--muted-foreground);
+}
+.readingSection {
+  border-top: 1px solid var(--border);
+  padding-block: 2rem;
+  scroll-margin-top: 7rem;
+}
+.readingSection h2 {
+  font-size: clamp(1.35rem, 2.3vw, 2rem);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+.readingSection p {
+  max-width: 65ch;
+}
+@media (max-width: 800px) {
+  .task {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 1.5rem 1.25rem 0;
+    gap: 1.5rem;
+  }
+  .task .headerImage {
+    grid-column: 1;
+    grid-row: 2;
+    min-height: 0;
+    height: 10rem;
+  }
+  .task .headerContent {
+    padding: 1rem 0 0;
+  }
+  .editorial .headerContent {
+    padding-block: 4rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pageHeader * {
+    scroll-behavior: auto;
+  }
+}
+
+.editorial .headingCopy h1,
+.editorial .lead,
+.editorial .eyebrow {
+  color: white;
+}

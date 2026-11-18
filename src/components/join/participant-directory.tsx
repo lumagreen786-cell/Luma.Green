@@ -52,10 +52,10 @@ export function ParticipantDirectory() {
           });
       }}
     >
-      <h1 className="font-display text-2xl font-semibold tracking-tight">
+      <h1 className="font-display text-3xl font-normal tracking-tight sm:text-4xl">
         {t("title")}
       </h1>
-      <div className="flex flex-col gap-2 rounded-xl bg-muted p-4">
+      <div className="flex flex-col gap-3 border-y border-border py-5">
         <Label htmlFor="participant-search">{t("search")}</Label>
         <Input
           id="participant-search"
@@ -72,7 +72,7 @@ export function ParticipantDirectory() {
           <details
             key={group}
             open={term ? true : undefined}
-            className="min-w-0 rounded-panel border border-border/60 px-4"
+            className="min-w-0 rounded-2xl border border-border px-4"
           >
             <summary className="min-h-12 cursor-pointer py-3 font-medium">
               {t(`groups.${group}`)}

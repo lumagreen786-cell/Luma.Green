@@ -83,14 +83,15 @@ labelled fixtures. The delivery handoff owns verification and release status.
 
 ## Current UI contract
 
-**11 November 2026 latest owner direction:** The active contract is
-[Luma design system](luma-design-system/README.md), applied through the reusable
-[Florin skill](../../.agents/skills/luma-florin-ui/SKILL.md). Clone the full Florin
-page patterns, both light and dark modes, Urbanist type, lime accents, pill top
-navigation, inset tab counters and large rounded panels. This replaces Ship X,
-the five-colour palette and light-only mode. Preserve original imagery and mobile
-fixes. Do not create or update PDFs. Older visual sections below are historical;
-authentication, privacy and exact-data requirements still apply.
+**18 November 2026 latest owner direction:** The active contract is
+[the Afterlife design system](luma-design-system/README.md). Apply one style
+across public, business, household, account, operational and admin pages,
+including hosted native screens. Keep one admin console and one backend.
+Use both appearances, Geist/Noto type, the original lime/forest palette,
+readable dark photo overlays, aligned open sections and bounded form panels.
+Preserve workflows, authentication, privacy, exact data and existing imagery.
+Earlier Florin, Orbit and Astryx composition rules below are historical.
+Do not create or update PDFs for this rollout.
 
 ### Astryx redesign — 16 October 2026
 

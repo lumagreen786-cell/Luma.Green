@@ -45,7 +45,7 @@ export function VerificationWorkspace() {
     <div
       className={
         selected
-          ? "grid min-w-0 items-start gap-4 xl:grid-cols-[19rem_minmax(0,1fr)]"
+          ? "grid min-w-0 items-start gap-8 xl:grid-cols-[17rem_minmax(0,1fr)]"
           : "min-w-0"
       }
     >
@@ -67,7 +67,7 @@ export function VerificationWorkspace() {
           ref={detail}
           tabIndex={-1}
           aria-label="Application review"
-          className="record-detail min-w-0 space-y-4 rounded-panel p-5 outline-none sm:p-6"
+          className="min-w-0 space-y-6 border-t border-border pt-6 outline-none xl:border-s xl:border-t-0 xl:ps-8 xl:pt-0"
         >
           {decided ? (
             <div

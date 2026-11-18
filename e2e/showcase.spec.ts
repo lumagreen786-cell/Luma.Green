@@ -86,15 +86,17 @@ for (const width of [390, 1440]) {
       await expect(main.locator("[data-page-banner]")).toHaveCount(0);
       if (hasSecondaryArtwork) {
         const artwork = main.locator("figure").first();
-        if (width < 1024) await expect(artwork).toBeHidden();
+        const isHelp = route.includes("/help");
+        if (isHelp && width < 1024) await expect(artwork).toBeHidden();
         else {
           await expectStoryImages(artwork, 1);
           await expect(artwork).toBeVisible();
           const bounds = await artwork.boundingBox();
           if (!bounds) throw new Error("Task artwork must have visible bounds");
-          const isHelp = route.includes("/help");
-          expect(bounds.width).toBeCloseTo(isHelp ? 112 : 96, 0);
-          expect(bounds.height).toBeCloseTo(isHelp ? 96 : 72, 0);
+          expect(bounds.width).toBeGreaterThanOrEqual(250);
+          expect(bounds.height).toBeGreaterThanOrEqual(
+            width < 1024 ? 160 : 256,
+          );
           expect(bounds.x).toBeGreaterThanOrEqual(0);
           expect(bounds.x + bounds.width).toBeLessThanOrEqual(width);
         }
@@ -130,17 +132,15 @@ test("home puts collection ahead of supporting content on a 360px phone", async 
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.setViewportSize({ width: 360, height: 800 });
   await page.goto("/en");
-  const hero = page.getByRole("region", { name: english.home.hero.title });
-  await expect(hero.locator("[data-recycling-illustration]")).toBeVisible();
-  const action = hero.getByRole("link", {
-    name: english.home.hero.sell,
+  const hero = page.getByRole("main").locator("section").first();
+  await expect(hero.locator("img")).toBeVisible();
+  const action = hero.getByRole("button", {
+    name: english.afterlife.bookNow,
     exact: true,
   });
   await expect(action).toBeInViewport();
-  await expectNoDevicePreviews(page);
-  await action.focus();
-  await page.keyboard.press("Enter");
-  await expect(page).toHaveURL(/\/sell$/u);
+  await expect(action).toBeDisabled();
+  await expect(page.locator("#how")).toBeAttached();
 });
 
 test("Arabic participant sections fit a phone without device mockups", async ({
@@ -224,10 +224,7 @@ test("desktop household image loads while sign-in stays focused on its task", as
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/en");
-  await expectStoryImages(
-    page.getByRole("region", { name: english.home.hero.title }),
-    1,
-  );
+  await expectStoryImages(page.getByRole("main").locator("section").first(), 1);
   await page.goto("/en/login");
   await expect(page.getByRole("figure")).toHaveCount(0);
   await expect(

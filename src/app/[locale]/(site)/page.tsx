@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
-import { HomeHero } from "@/components/site/home/hero";
-import { HomeResourceGrid } from "@/components/site/home/resource-grid";
-import { RoleBenefits } from "@/components/site/home/role-benefits";
+import { AfterlifeHome } from "@/components/site/afterlife/home";
 import { localeFromParams } from "@/i18n/paths";
 import { pageMetadata, serializeJsonLd } from "@/lib/seo";
 import { site } from "@/lib/site";
@@ -53,11 +51,7 @@ export default async function HomePage() {
         // JSON-LD must be raw; serializeJsonLd escapes `<`.
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(organization) }}
       />
-      <div>
-        <HomeHero />
-        <RoleBenefits businessOnly />
-        <HomeResourceGrid />
-      </div>
+      <AfterlifeHome />
     </>
   );
 }

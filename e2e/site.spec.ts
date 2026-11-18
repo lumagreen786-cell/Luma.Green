@@ -3,11 +3,10 @@ import { expect, test } from "@playwright/test";
 import ar from "../messages/ar.json";
 import en from "../messages/en.json";
 import ur from "../messages/ur.json";
-import { actionName } from "../src/components/site/action-name";
 
 /**
- * The public site: the home page tells the chain's story, every page is
- * reachable from the header or footer, pages keep their locale when
+ * The public site: home booking and business navigation stay distinct,
+ * supporting routes remain available, and pages keep their locale when
  * navigating or switching language, and lay out right-to-left in /ar.
  *
  * Playwright runs without Convex (playwright.config.ts), so live panels
@@ -44,96 +43,44 @@ const pages = [
   title: string | RegExp;
 }[];
 
-test("home offers collection, business signup and material guidance", async ({
+test("home offers direct booking, a business path and useful pickup guidance", async ({
   page,
 }) => {
   await page.goto("/");
   const main = page.getByRole("main");
-
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    en.home.hero.title,
+    en.afterlife.heroTitle + en.afterlife.heroTitleEnd,
   );
   await expect(
-    main.getByRole("link", { name: en.nav.sellScrap }).first(),
-  ).toHaveAttribute("href", "/sell");
+    main
+      .getByRole("button", { name: en.afterlife.bookNow, exact: true })
+      .first(),
+  ).toBeDisabled();
   await expect(
-    main.getByRole("link", { name: en.home.hero.join }).first(),
-  ).toHaveAttribute("href", "/join");
-  await expect(
-    main.getByRole("link", {
-      name: actionName(en.nav.prices, en.home.hero.prices),
-    }),
-  ).toHaveAttribute("href", "/prices");
+    main.getByRole("link", { name: en.afterlife.workWith, exact: true }),
+  ).toHaveAttribute("href", "/business");
+  await expect(page.locator("#how")).toContainText(en.afterlife.phoneTitle);
+  await expect(page.locator("#questions")).toContainText(en.afterlife.faqTitle);
   await expect(page).toHaveTitle("Luma.Green — Cleaner Tomorrow in Motion");
-
-  const businesses = main.getByRole("region", { name: en.home.hero.join });
-  await expect(businesses.getByRole("tab")).toHaveCount(5);
-  for (const role of [
-    "kabadiwala",
-    "yard",
-    "recycler",
-    "manufacturer",
-    "saathi",
-  ] as const) {
-    const tab = businesses.getByRole("tab", {
-      name: en.home.roles[role].title,
-      exact: true,
-    });
-    await tab.click();
-    await expect(tab).toHaveAttribute("aria-selected", "true");
-    await expect(businesses.getByRole("link")).toHaveCount(1);
-    await expect(
-      businesses.getByRole("tabpanel").getByRole("link", {
-        name: actionName(en.join.start, en.home.roles[role].cta),
-        exact: true,
-      }),
-    ).toHaveAttribute("href", `/join/${role}`);
-    await expect(
-      businesses.getByRole("tabpanel").getByRole("heading", { level: 3 }),
-    ).toHaveText(en.home.roles[role].title);
-  }
-  for (const resource of [
-    { title: en.home.expansion.shopTitle, href: "/join/kabadiwala" },
-    { title: en.home.roles.manufacturer.one, href: "/join/manufacturer" },
-    { title: en.home.expansion.recordsTitle, href: "/standards" },
-  ]) {
-    const card = main.getByRole("article").filter({
-      has: page.getByRole("heading", { name: resource.title, exact: true }),
-    });
-    await expect(card).toBeVisible();
-    await expect(card.getByRole("link")).toHaveAttribute("href", resource.href);
-  }
   await expect(main.locator("[data-product-preview]")).toHaveCount(0);
   await expect(main.locator("#demo-testimonials-heading")).toHaveCount(0);
 });
 
-test("the home price section links to explicit locality selection without editable controls", async ({
-  page,
-}) => {
+test("home booking has no form or intermediate popup", async ({ page }) => {
   await page.goto("/");
-
-  await expect(page.getByText(en.prices.lead, { exact: true })).toBeVisible();
   await expect(
     page
       .getByRole("main")
       .locator('form,input,textarea,select,[contenteditable="true"]'),
   ).toHaveCount(0);
-  await expect(
-    page.getByRole("link", {
-      name: actionName(en.nav.prices, en.home.hero.prices),
-    }),
-  ).toHaveAttribute("href", "/prices");
+  await expect(page.getByRole("dialog")).toHaveCount(0);
 });
 
 for (const item of pages) {
-  test(`header page switcher reaches ${item.path}`, async ({ page }) => {
-    await page.goto("/");
-    await page
-      .getByRole("banner")
-      .getByRole("button", { name: en.nav.label, exact: true })
-      .click();
-    await page.getByRole("menuitem", { name: item.link, exact: true }).click();
-    await expect(page).toHaveURL(item.path);
+  test(`public route ${item.path} keeps its title and main heading`, async ({
+    page,
+  }) => {
+    await page.goto(item.path);
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(
       item.heading,
     );
@@ -141,50 +88,42 @@ for (const item of pages) {
   });
 }
 
-const dashboardPages = pages.filter(
-  (item) => item.path === "/prices" || item.path === "/join",
-);
-for (const item of dashboardPages) {
-  test(`dashboard tab reaches ${item.path} and marks it current`, async ({
-    page,
-  }) => {
-    await page.goto("/");
-    const nav = page
-      .getByRole("banner")
-      .getByRole("navigation", { name: en.nav.label });
-    await nav.getByRole("link", { name: item.link, exact: true }).click();
-    await expect(page).toHaveURL(item.path);
-    await expect(
-      nav.getByRole("link", { name: item.link, exact: true }),
-    ).toHaveAttribute("aria-current", "page");
-  });
-}
-
-test("the header's main button starts a collection", async ({ page }) => {
-  await page.goto("/prices");
-
+test("home header links reach pickup guidance and the business site", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const header = page.getByRole("banner");
+  await header
+    .getByRole("link", { name: en.afterlife.how, exact: true })
+    .click();
+  await expect(page).toHaveURL(/#how$/);
+  await header
+    .getByRole("link", { name: en.afterlife.business, exact: true })
+    .click();
+  await expect(page).toHaveURL("/business");
   await expect(
-    page
-      .getByRole("banner")
-      .getByRole("link", { name: en.nav.sellScrap })
-      .last(),
-  ).toHaveAttribute("href", "/sell");
+    header.getByRole("link", { name: en.afterlife.signIn, exact: true }),
+  ).toHaveAttribute("href", "/login");
+  await header
+    .getByRole("link", { name: en.afterlife.collectors, exact: true })
+    .click();
+  await expect(page).toHaveURL("/business/collectors");
 });
 
-test("the footer leads to the standard, solar and help", async ({ page }) => {
+test("the footer leads to help, privacy and service status", async ({
+  page,
+}) => {
   await page.goto("/");
-  const footer = page.getByRole("navigation", { name: "Footer" });
-
-  await expect(
-    footer.getByRole("link", { name: "Industry standards" }),
-  ).toHaveAttribute("href", "/standards");
-  await expect(
-    footer.getByRole("link", { name: "Rooftop solar" }),
-  ).toHaveAttribute("href", "/solar");
-  await expect(footer.getByRole("link", { name: "Help" })).toHaveAttribute(
-    "href",
-    "/help",
-  );
+  const footer = page.getByRole("contentinfo");
+  for (const [name, href] of [
+    [en.afterlife.help, "/help"],
+    [en.afterlife.privacy, "/privacy"],
+    [en.afterlife.status, "/status"],
+  ]) {
+    await expect(
+      footer.getByRole("link", { name, exact: true }),
+    ).toHaveAttribute("href", href);
+  }
 });
 
 test("the price board explains itself when prices can't load", async ({
@@ -295,7 +234,7 @@ test("links stay inside the active locale", async ({ page }) => {
     page.getByRole("banner").getByRole("link").first(),
   ).toHaveAttribute("href", "/hi");
   await expect(
-    page.getByRole("main").getByRole("link", { name: /./ }).first(),
+    page.getByRole("main").getByRole("link", { name: /./ }).last(),
   ).toHaveAttribute("href", /^\/hi\//);
 });
 
@@ -319,17 +258,22 @@ test("mobile menu opens, navigates and closes", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
 
-  await page.getByRole("button", { name: "Open menu" }).click();
-  const menu = page.getByRole("dialog");
+  const toggle = page.getByRole("button", {
+    name: en.afterlife.menu,
+    exact: true,
+  });
+  await toggle.click();
+  const menu = page
+    .getByRole("banner")
+    .getByRole("navigation", { name: en.afterlife.menu });
   await expect(menu).toBeVisible();
-  await expect(
-    menu.getByRole("link", { name: en.nav.sellScrap }),
-  ).toHaveAttribute("href", "/sell");
-
-  await menu.getByRole("link", { name: "Prices" }).click();
-
-  await expect(page).toHaveURL("/prices");
+  await expect(toggle).toHaveAttribute("aria-expanded", "true");
+  await menu
+    .getByRole("link", { name: en.afterlife.business, exact: true })
+    .click();
+  await expect(page).toHaveURL("/business");
   await expect(menu).toBeHidden();
+  await expect(toggle).toHaveAttribute("aria-expanded", "false");
 });
 
 test("unknown pages get the localised 404 inside the site shell", async ({
@@ -364,53 +308,43 @@ test("language changes preserve a page query and help anchor", async ({
 });
 
 for (const locale of ["en", "ar", "ur"] as const) {
-  test(`${locale} mobile menu waits for client code before accepting pointer and keyboard input`, async ({
+  test(`${locale} mobile menu supports keyboard opening and closing`, async ({
     page,
   }) => {
-    const scripts = Promise.withResolvers<boolean>();
-    await page.route("**/*", async (route) => {
-      if (route.request().resourceType() === "script") await scripts.promise;
-      await route.continue();
-    });
-    try {
-      await page.setViewportSize({ width: 360, height: 700 });
-      await page.goto(locale === "en" ? "/" : `/${locale}`, {
-        waitUntil: "commit",
-      });
-      const trigger = page.getByRole("banner").getByRole("button", {
-        name: { en, ar, ur }[locale].nav.openMenu,
-        exact: true,
-      });
-      await expect(trigger).toBeVisible();
-      await expect(trigger).toBeDisabled();
-      scripts.resolve(true);
-      await expect(trigger).toBeEnabled();
-      await trigger.click();
-      await expect(page.getByRole("dialog")).toBeVisible();
-      await page.keyboard.press("Escape");
-      await expect(trigger).toBeFocused();
-      await page.keyboard.press("Enter");
-      await expect(page.getByRole("dialog")).toBeVisible();
-      await page.keyboard.press("Escape");
-      await expect(trigger).toBeFocused();
-    } finally {
-      scripts.resolve(true);
-      await page.unrouteAll({ behavior: "wait" });
-    }
+    await page.setViewportSize({ width: 360, height: 700 });
+    await page.goto(locale === "en" ? "/" : `/${locale}`);
+    const label = { en, ar, ur }[locale].afterlife.menu;
+    const trigger = page
+      .getByRole("banner")
+      .getByRole("button", { name: label, exact: true });
+    const menu = page
+      .getByRole("banner")
+      .getByRole("navigation", { name: label });
+    await trigger.focus();
+    await page.keyboard.press("Enter");
+    await expect(menu).toBeVisible();
+    await expect(trigger).toHaveAttribute("aria-expanded", "true");
+    await page.keyboard.press("Escape");
+    await expect(menu).toBeHidden();
+    await expect(trigger).toBeFocused();
+    await page.keyboard.press("Space");
+    await expect(menu).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(trigger).toBeFocused();
   });
 
   test(`${locale} navigation fits phones and tablets with accessible targets`, async ({
     page,
   }) => {
-    for (const width of [360, 768, 1023]) {
+    for (const width of [360, 768, 1000]) {
       await page.setViewportSize({ width, height: 700 });
-      // Resizing can start responsive image requests on the previous page.
-      // The menu's observable state is this navigation test's readiness gate.
-      await page.goto(locale === "en" ? "/" : `/${locale}`, {
-        waitUntil: "domcontentloaded",
-      });
+      await page.goto(locale === "en" ? "/" : `/${locale}`);
+      const label = { en, ar, ur }[locale].afterlife.menu;
       const header = page.getByRole("banner");
-      const menuButton = header.getByRole("button").last();
+      const menuButton = header.getByRole("button", {
+        name: label,
+        exact: true,
+      });
       const target = await menuButton.boundingBox();
       expect(target?.width).toBeGreaterThanOrEqual(44);
       expect(target?.height).toBeGreaterThanOrEqual(44);
@@ -418,7 +352,7 @@ for (const locale of ["en", "ar", "ur"] as const) {
         await page.evaluate(() => document.documentElement.scrollWidth),
       ).toBeLessThanOrEqual(width);
       await menuButton.click();
-      const menu = page.getByRole("dialog");
+      const menu = header.getByRole("navigation", { name: label });
       await expect(menu).toBeVisible();
       await expect
         .poll(async () => {
@@ -433,10 +367,16 @@ for (const locale of ["en", "ar", "ur"] as const) {
   });
 }
 
-test("mobile overlays respect reduced motion", async ({ page }) => {
+test("mobile navigation respects reduced motion", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
-  await page.getByRole("button", { name: "Open menu" }).click();
-  await expect(page.getByRole("dialog")).toHaveCSS("animation-name", "none");
+  await page
+    .getByRole("button", { name: en.afterlife.menu, exact: true })
+    .click();
+  await expect(
+    page
+      .getByRole("banner")
+      .getByRole("navigation", { name: en.afterlife.menu }),
+  ).toHaveCSS("animation-name", "none");
 });

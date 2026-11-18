@@ -15,10 +15,10 @@ import { localeMeta, locales } from "../src/i18n/locales";
 
 const headerSizes = [320, 390, 640, 768, 1024, 1280, 1440].map((width) => ({
   width,
-  links: width < 1280 ? 1 : 7,
-  // Appearance plus menu/language; tablet and desktop also expose page switcher.
-  buttons: width < 640 ? 2 : 3,
-  navigation: width < 1280 ? 0 : 1,
+  links: width <= 1000 ? 1 : 4,
+  // Phone: appearance/menu; tablet adds language; desktop removes menu.
+  buttons: width >= 600 && width <= 1000 ? 3 : 2,
+  navigation: width <= 1000 ? 0 : 1,
 }));
 const publicRoutes = [
   "",
@@ -253,31 +253,29 @@ for (const { locale, copy } of [
       await page.emulateMedia({ reducedMotion: "reduce" });
       await page.goto(`/${locale}`);
       const trigger = page.getByRole("banner").getByRole("button", {
-        name: copy.nav.openMenu,
+        name: copy.afterlife.menu,
         exact: true,
       });
       await expect(trigger).toBeEnabled();
       await trigger.focus();
       await expect(trigger).toBeFocused();
       await page.keyboard.press("Enter");
-      const menu = page.getByRole("dialog");
+      const menu = page
+        .getByRole("banner")
+        .getByRole("navigation", { name: copy.afterlife.menu, exact: true });
       await expect(menu).toBeVisible();
-      await expect
-        .poll(() =>
-          menu.evaluate((element) => element.contains(document.activeElement)),
-        )
-        .toBe(true);
+      await expect(trigger).toHaveAttribute("aria-expanded", "true");
       const theme = menu.getByRole("button", {
         name: copy.theme.label,
         exact: true,
       });
-      const language = menu.getByRole("button", {
+      const language = page.getByRole("banner").getByRole("button", {
         name: `${copy.common.language}: ${localeMeta[locale].label}`,
         exact: true,
       });
       for (const control of [
-        menu.getByRole("link", { name: copy.auth.metaTitle, exact: true }),
-        menu.getByRole("link", { name: copy.nav.sellScrap, exact: true }),
+        menu.getByRole("link", { name: copy.afterlife.how, exact: true }),
+        menu.getByRole("link", { name: copy.afterlife.questions, exact: true }),
         language,
       ]) {
         await expectControlTextToFit(control);
@@ -300,13 +298,13 @@ for (const { locale, copy } of [
       await page.keyboard.press("Enter");
       await expect(menu).toBeVisible();
       const destination = menu.getByRole("link", {
-        name: copy.nav.howItWorks,
+        name: copy.afterlife.how,
         exact: true,
       });
       await destination.focus();
       await page.keyboard.press("Enter");
       await expect(page).toHaveURL(
-        locale === "en" ? "/how-it-works" : `/${locale}/how-it-works`,
+        locale === "en" ? "/#how" : `/${locale}#how`,
       );
       await expect(menu).toBeHidden();
       await expectPageToFit(page);
@@ -320,25 +318,31 @@ test("resizing an open compact menu restores desktop navigation", async ({
   await page.setViewportSize({ width: 768, height: 800 });
   await page.goto("/how-it-works");
   await page
-    .getByRole("button", { name: english.nav.openMenu, exact: true })
+    .getByRole("button", { name: english.afterlife.menu, exact: true })
     .click();
-  await expect(page.getByRole("dialog")).toBeVisible();
+  const navigation = page
+    .getByRole("banner")
+    .getByRole("navigation", { name: english.afterlife.menu, exact: true });
+  await expect(navigation).toBeVisible();
   await page.setViewportSize({ width: 1440, height: 900 });
-  await expect(page.getByRole("dialog")).toBeHidden();
+  await expect(navigation).toBeVisible();
   await expect(
-    page
-      .getByRole("banner")
-      .getByRole("link", { name: english.nav.prices, exact: true }),
+    navigation.getByRole("link", {
+      name: english.afterlife.questions,
+      exact: true,
+    }),
   ).toBeVisible();
   await expectPageToFit(page);
   await page.setViewportSize({ width: 768, height: 800 });
   const trigger = page.getByRole("button", {
-    name: english.nav.openMenu,
+    name: english.afterlife.menu,
     exact: true,
   });
   await expect(trigger).toBeVisible();
+  await expect(trigger).toHaveAttribute("aria-expanded", "false");
+  await expect(navigation).toBeHidden();
   await trigger.click();
-  await expect(page.getByRole("dialog")).toBeVisible();
+  await expect(navigation).toBeVisible();
 });
 
 for (const { route, panel, action } of [

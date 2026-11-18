@@ -1,3 +1,25 @@
+## Afterlife implementation — 18 November 2026
+
+Branch: `codex/afterlife-platform`. Approved Afterlife now drives public pages
+and shared app/admin/account/auth/join shells in light and dark modes. The
+homepage has direct WhatsApp booking configuration, rotating audiences and a
+15-conversation phone animation. Business domain routing is prepared behind
+`NEXT_PUBLIC_BUSINESS_SITE_ENABLED`, which remains off by default.
+
+Final build, lint, types and all 3,346 unit tests passed. Browser checks passed
+with focused reruns for obsolete presentation assertions; final hosted CI remains. See
+[delivery evidence](afterlife-rollout-2026-11-18.md) and
+[route coverage](afterlife-route-coverage-2026-11-18.md) for scope and limits.
+Protected-state and device acceptance remain separate from fixture captures.
+
+Configured: Vercel business domain, Cloudflare CNAME and exact Convex trusted
+origin; HTTPS and allow/deny CORS checks pass. Pending: owner WhatsApp number,
+final browser CI and owner-deferred signed-in business acceptance. The Production
+routing flag is saved as true and will apply on the next deployment. Follow the
+[business-domain rollout](../operations/business-domain-rollout.md) before
+activation. See the delivery record for the exact live changes. Unrelated procurement
+PDFs and local design captures are not part of this source change.
+
 ## Florin local closeout — 12 November 2026
 
 Resumed the unfinished Florin changes on `feat/ship-x-homepage`. The local

@@ -4,7 +4,7 @@ import arabic from "../messages/ar.json";
 import english from "../messages/en.json";
 
 for (const mode of ["light", "dark"] as const) {
-  test(`${mode} choice persists across reload and admin navigation`, async ({
+  test(`${mode} choice persists across public, business and admin navigation`, async ({
     page,
   }) => {
     await page.emulateMedia({
@@ -24,8 +24,15 @@ for (const mode of ["light", "dark"] as const) {
     );
     await page.reload();
     await expect(page.locator("html")).toHaveCSS("color-scheme", mode);
+    const canvas = await page
+      .locator("body")
+      .evaluate((element) => getComputedStyle(element).backgroundColor);
+    await page.goto("/business");
+    await expect(page.locator("html")).toHaveCSS("color-scheme", mode);
+    await expect(page.locator("body")).toHaveCSS("background-color", canvas);
     await page.goto("/admin/login");
     await expect(page.locator("html")).toHaveCSS("color-scheme", mode);
+    await expect(page.locator("body")).toHaveCSS("background-color", canvas);
   });
 }
 
@@ -70,18 +77,24 @@ test("Arabic mobile appearance control is in the header and menu reaches sign-in
     .click();
   await expect(page.locator("html")).toHaveCSS("color-scheme", "light");
   await page
-    .getByRole("button", { name: arabic.nav.openMenu, exact: true })
+    .getByRole("button", { name: arabic.afterlife.menu, exact: true })
     .click();
-  const menu = page.getByRole("dialog");
+  const menu = page
+    .getByRole("banner")
+    .getByRole("navigation", { name: arabic.afterlife.menu });
   await expect(
     menu.getByRole("button", { name: arabic.theme.label, exact: true }),
   ).toHaveCount(0);
+  await menu
+    .getByRole("link", { name: arabic.afterlife.business, exact: true })
+    .click();
+  await expect(page).toHaveURL("/ar/business");
+  await page
+    .getByRole("button", { name: arabic.afterlife.menu, exact: true })
+    .click();
   await expect(
-    menu.getByRole("link", { name: arabic.auth.metaTitle, exact: true }),
+    menu.getByRole("link", { name: arabic.afterlife.signIn, exact: true }),
   ).toHaveAttribute("href", "/ar/login");
-  await expect(
-    menu.getByRole("link", { name: arabic.nav.sellScrap, exact: true }),
-  ).toHaveAttribute("href", "/ar/sell");
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth,
