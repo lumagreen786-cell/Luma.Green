@@ -1,6 +1,6 @@
 // @vitest-environment edge-runtime
 import { convexTest } from "convex-test";
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { api } from "./_generated/api";
 import {
@@ -10,6 +10,7 @@ import {
   signIn,
 } from "./lib/auth.testing";
 import { shiftDate } from "./lib/dates";
+import { INDIA_STATES_AND_UTS } from "./lib/geography";
 import { indiaToday } from "./lib/onboarding";
 import { kabadiwalaSchema } from "./lib/onboarding";
 import { orgDraftFrom } from "./lib/review";
@@ -17,7 +18,55 @@ import schema from "./schema";
 
 const modules = convexModules(import.meta.glob("./**/*.*s"));
 
+afterEach(() => vi.unstubAllEnvs());
+
 describe("explicit India city", () => {
+  const shopApplication = {
+    ownerName: "Test Person",
+    shopName: "Synthetic National Shop",
+    gstRegistered: true,
+    gstin: "29ABCDE1234F1Z5",
+    address: "Fixture street, Bengaluru, Karnataka",
+    location: { lat: 12.97, lng: 77.59 },
+    offersPickup: false,
+    phones: [],
+    opens: "09:00",
+    closes: "18:00",
+    weeklyOff: [],
+  };
+
+  it.each(INDIA_STATES_AND_UTS)(
+    "accepts explicit %s in the shared submission schema and activation projection",
+    (state) => {
+      // Deliberately conflicting fixture address, GST prefix and GPS cannot choose the city.
+      const input = {
+        ...shopApplication,
+        city: ` shared   CITY , ${state.toLowerCase()} `,
+      };
+      const parsed = kabadiwalaSchema.parse(input);
+      expect(parsed.city).toBe(`Shared City, ${state}`);
+      expect(
+        orgDraftFrom({ kind: "kabadiwala", kabadiwala: parsed }),
+      ).toMatchObject({
+        city: `Shared City, ${state}`,
+        address: shopApplication.address,
+        location: shopApplication.location,
+        gstin: shopApplication.gstin,
+      });
+    },
+  );
+
+  it.each([undefined, "Shared City", "Shared City, Unknown State"])(
+    "does not infer a missing or invalid jurisdiction %s from other application fields",
+    (city) => {
+      const input = { ...shopApplication, city };
+      expect(kabadiwalaSchema.safeParse(input).success).toBe(false);
+      expect(
+        orgDraftFrom({ kind: "kabadiwala", kabadiwala: input }),
+      ).toBeNull();
+    },
+  );
+
   it("does not activate a legacy editable application without a city", () => {
     expect(
       orgDraftFrom({
@@ -83,6 +132,76 @@ describe("explicit India city", () => {
     ).toEqual([]);
     vi.unstubAllEnvs();
   });
+});
+
+it("routes household discovery through all 36 explicit state partitions without borrowing pilot prices", async () => {
+  vi.stubEnv("AUTH_DEV_MODE", "true");
+  const t = convexTest(schema, modules);
+  registerAuth(t);
+  await seedDemo(t);
+  const pilot = await t.query(api.catalogue.priceQuotes, {
+    city: "Bengaluru",
+    source: "fallback",
+  });
+  expect(
+    pilot.rows.find((row) => row.code === "PAPER-NEWS")?.paisePerKg,
+  ).toBeGreaterThan(0);
+
+  const shops = await t.run(async (ctx) => {
+    const result = [];
+    for (const [index, state] of INDIA_STATES_AND_UTS.entries()) {
+      // Same-name, co-located synthetic records test routing, not real service coverage.
+      const city = `Shared City, ${state}`;
+      const id = await ctx.db.insert("orgs", {
+        kind: "kabadiwala",
+        name: `Synthetic shop ${state}`,
+        slug: `synthetic-national-shop-${String(index)}`,
+        status: "active",
+        city,
+        area: "Fixture area",
+        address: "Fixture street, Bengaluru, Karnataka",
+        location: { lat: 12.97, lng: 77.59 },
+        phones: [],
+        weeklyOff: [],
+        families: ["paper"],
+        offersPickup: true,
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+      });
+      result.push({ id, city });
+    }
+    return result;
+  });
+  for (const shop of shops) {
+    const offers = await t.query(api.households.shops, {
+      city: shop.city.toUpperCase(),
+      items: [{ materialCode: "PAPER-NEWS", kg: 1 }],
+      near: { lat: 12.97, lng: 77.59 },
+    });
+    expect(offers.map((row) => row.id)).toEqual([shop.id]);
+    expect(offers[0].estimatePaise).toBeUndefined();
+    expect(offers[0].fallbackCodes).toEqual(["PAPER-NEWS"]);
+    const localQuotes = await t.query(api.catalogue.priceQuotes, {
+      city: shop.city,
+      source: "fallback",
+    });
+    expect(
+      localQuotes.rows.find((row) => row.code === "PAPER-NEWS")?.paisePerKg,
+    ).toBeNull();
+  }
+  for (const city of [
+    "Shared City",
+    "Shared City, Unknown State",
+    "Shared City, Daman and Diu",
+    "Shared City, Karnataka, India",
+  ])
+    await expect(
+      t.query(api.households.shops, {
+        city,
+        items: [],
+        near: { lat: 12.97, lng: 77.59 },
+      }),
+    ).rejects.toThrow("INVALID_CITY");
 });
 
 it("requires explicit city before activation and never copies another city's reference prices", async () => {

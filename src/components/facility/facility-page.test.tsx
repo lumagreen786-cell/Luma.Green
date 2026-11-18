@@ -148,6 +148,48 @@ it("retains facility inputs on a rejected save", async () => {
   expect(await screen.findByRole("alert")).toBeVisible();
   expect(screen.getByLabelText(en.facility.name)).toHaveValue(facility.name);
 });
+
+it("retains a national activity after a failed save and clears it explicitly", async () => {
+  const activity = {
+    code: "011101",
+    title: "Growing of wheat",
+    sourceVersion: "NIC-2025",
+    sourceQuality: "official_reference",
+  };
+  queries({
+    "industryReference:nationalSearch": {
+      items: [activity],
+      total: 1,
+      nextOffset: null,
+      sourceVersion: "NIC-2025",
+      sourcePublicationUrl: "https://www.mospi.gov.in/reference.pdf",
+    },
+  });
+  mocks.save.mockRejectedValueOnce(new Error("denied"));
+  const user = userEvent.setup();
+  view();
+  await user.click(screen.getByRole("button", { name: en.facility.edit }));
+  await user.click(
+    screen.getByRole("button", { name: en.industry.chooseActivity }),
+  );
+  await user.click(
+    screen.getByRole("button", { name: `${en.industry.select}: 011101` }),
+  );
+  await user.click(screen.getByRole("button", { name: en.lots.save }));
+  expect(await screen.findByRole("alert")).toBeVisible();
+  expect(screen.getByText("011101 · Growing of wheat")).toBeVisible();
+  expect(mocks.save).toHaveBeenLastCalledWith(
+    expect.objectContaining({ industryActivityCode: "011101" }),
+  );
+  expect(screen.getByLabelText(en.facility.name)).toHaveValue(facility.name);
+  await user.click(
+    screen.getByRole("button", { name: en.industry.clearActivity }),
+  );
+  await user.click(screen.getByRole("button", { name: en.lots.save }));
+  expect(mocks.save).toHaveBeenLastCalledWith(
+    expect.objectContaining({ industryActivityCode: null }),
+  );
+});
 it("resets reference pagination when search changes and renders source text plainly", async () => {
   const user = userEvent.setup();
   renderWithIntl(<IndustryExplorer />);

@@ -22,6 +22,8 @@ import { api } from "../../../convex/_generated/api";
 import { PROCESS_KINDS } from "../../../convex/lib/industrialClassification";
 import { FacilityRegistrations } from "./facility-registrations";
 import { IndustryExplorer } from "./industry-explorer";
+import { JurisdictionReference } from "./jurisdiction-reference";
+import { NationalIndustryExplorer } from "./national-industry-explorer";
 
 type Facility = FunctionReturnType<typeof api.industrialProfiles.mine>[number];
 const formSchema = z.object({
@@ -99,6 +101,16 @@ function FacilityWorkspace({ canManage }: { canManage: boolean }) {
                               {facility.sector.name}
                             </p>
                           ) : null}
+                          {facility.industryActivity ? (
+                            <p
+                              lang="en"
+                              dir="ltr"
+                              className="text-sm break-words"
+                            >
+                              {facility.industryActivity.code} ·{" "}
+                              {facility.industryActivity.title}
+                            </p>
+                          ) : null}
                           <ul className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground">
                             {facility.capabilities.map((kind) => (
                               <li key={kind}>{t(`processKinds.${kind}`)}</li>
@@ -124,9 +136,19 @@ function FacilityWorkspace({ canManage }: { canManage: boolean }) {
             ),
           },
           {
+            value: "national-industry",
+            label: industry("nationalTitle"),
+            content: <NationalIndustryExplorer />,
+          },
+          {
             value: "industry",
             label: industry("title"),
             content: <IndustryExplorer />,
+          },
+          {
+            value: "jurisdiction",
+            label: industry("jurisdictionTitle"),
+            content: <JurisdictionReference />,
           },
         ]}
       />
@@ -142,6 +164,11 @@ function FacilityForm({ facility }: { facility?: Facility }) {
   const id = useId();
   const [open, setOpen] = useState(false);
   const [choosing, setChoosing] = useState(false);
+  const [choosingActivity, setChoosingActivity] = useState(false);
+  const [activity, setActivity] = useState<
+    | Pick<NonNullable<Facility["industryActivity"]>, "code" | "title">
+    | undefined
+  >(facility?.industryActivity);
   const [sectorId, setSectorId] = useState(facility?.sectorId);
   const [sectorTitle, setSectorTitle] = useState(facility?.sector?.name ?? "");
   const [capabilities, setCapabilities] = useState<Facility["capabilities"]>(
@@ -181,6 +208,7 @@ function FacilityForm({ facility }: { facility?: Facility }) {
                 ...values,
                 facilityId: facility?._id,
                 sectorId,
+                industryActivityCode: activity?.code ?? null,
                 capabilities,
               });
               setOpen(false);
@@ -211,6 +239,49 @@ function FacilityForm({ facility }: { facility?: Facility }) {
             maxLength={500}
           />
           <div className="flex flex-col gap-2">
+            <p className="text-sm font-medium">{industry("nationalTitle")}</p>
+            {activity ? (
+              <p lang="en" dir="ltr" className="break-words">
+                {activity.code} · {activity.title}
+              </p>
+            ) : null}
+            <div className="flex flex-wrap gap-2">
+              <Button
+                type="button"
+                variant="outline"
+                aria-expanded={choosingActivity}
+                onClick={() => {
+                  setChoosingActivity(!choosingActivity);
+                  setChoosing(false);
+                }}
+              >
+                {industry("chooseActivity")}
+              </Button>
+              {activity ? (
+                <Button
+                  type="button"
+                  variant="ghost"
+                  onClick={() => {
+                    setActivity(undefined);
+                  }}
+                >
+                  {industry("clearActivity")}
+                </Button>
+              ) : null}
+            </div>
+          </div>
+          {choosingActivity ? (
+            <NationalIndustryExplorer
+              onSelect={(item) => {
+                setActivity({
+                  code: item.code,
+                  title: item.title,
+                });
+                setChoosingActivity(false);
+              }}
+            />
+          ) : null}
+          <div className="flex flex-col gap-2">
             <p className="text-sm font-medium">{t("sector")}</p>
             {sectorTitle ? (
               <p lang="en" dir="ltr" className="break-words">
@@ -223,6 +294,7 @@ function FacilityForm({ facility }: { facility?: Facility }) {
                 variant="outline"
                 onClick={() => {
                   setChoosing(!choosing);
+                  setChoosingActivity(false);
                 }}
               >
                 {industry("select")}

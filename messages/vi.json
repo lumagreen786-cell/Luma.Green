@@ -3949,6 +3949,14 @@
     "liveCollected": "Nhà cung cấp đã xác nhận thanh toán."
   },
   "industry": {
+    "jurisdictionTitle": "Tham chiếu tiểu bang và lãnh thổ liên bang",
+    "jurisdictionNote": "Mục trong danh bạ không xác minh giấy phép hoặc khả năng cung cấp dịch vụ.",
+    "chooseJurisdiction": "Chọn tiểu bang hoặc lãnh thổ liên bang",
+    "jurisdictionReview": "Cần xem xét",
+    "nationalTitle": "Các ngành kinh tế quốc gia",
+    "nationalNote": "NIC 2025 mô tả các hoạt động kinh tế. Phân loại này không cấp phép cho cơ sở, quy trình hoặc vật liệu.",
+    "chooseActivity": "Chọn hoạt động",
+    "clearActivity": "Xóa lựa chọn hoạt động",
     "title": "Tham chiếu ngành",
     "lead": "Tìm trong tài liệu tham khảo được cung cấp. Các tham chiếu này chưa được xác minh và không cấp phép giao dịch hay xử lý vật liệu.",
     "sourceNote": "Nội dung tham khảo hiển thị bằng tiếng Anh.",

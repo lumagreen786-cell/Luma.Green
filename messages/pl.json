@@ -3949,6 +3949,14 @@
     "liveCollected": "Płatność potwierdzona przez dostawcę usługi."
   },
   "industry": {
+    "jurisdictionTitle": "Informacje o stanach i terytoriach związkowych",
+    "jurisdictionNote": "Wpis w katalogu nie potwierdza pozwoleń ani dostępności usług.",
+    "chooseJurisdiction": "Wybierz stan lub terytorium związkowe",
+    "jurisdictionReview": "Wymaga weryfikacji",
+    "nationalTitle": "Branże krajowe",
+    "nationalNote": "NIC 2025 opisuje działalność gospodarczą. Nie zatwierdza zakładów, procesów ani materiałów.",
+    "chooseActivity": "Wybierz działalność",
+    "clearActivity": "Wyczyść wybór działalności",
     "title": "Odnośniki branżowe",
     "lead": "Przeszukaj udostępnione materiały referencyjne. Te dane są niezweryfikowane i nie zezwalają na handel ani przetwarzanie materiałów.",
     "sourceNote": "Teksty źródłowe są wyświetlane po angielsku.",

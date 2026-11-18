@@ -1,0 +1,19 @@
+{
+  "scope": "Labelled local real-component fixture captures; no live-account or provider acceptance",
+  "matrixCases": 24,
+  "additionalKeyboardCases": 4,
+  "captures": [
+    {
+      "file": "en-light-1440-industry.png",
+      "sha256": "95d1d212dfe5528fecbb40f394c9919758453fb757b1c002d8e2d7d1460bb36c"
+    },
+    {
+      "file": "en-dark-390-industry.png",
+      "sha256": "eb6dc2d066dc97a5f6fddf01aa42fdefee3e6672e5d99f88ae0ab256d232cb3b"
+    },
+    {
+      "file": "ar-dark-390-state.png",
+      "sha256": "b66ed4ca0b9a6b0b03a04b6a60003197b9c0428b556f142a75eebb08e61092b9"
+    }
+  ]
+}

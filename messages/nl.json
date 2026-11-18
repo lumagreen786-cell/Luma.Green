@@ -3949,6 +3949,14 @@
     "liveCollected": "Betaling bevestigd door de aanbieder."
   },
   "industry": {
+    "jurisdictionTitle": "Verwijzingen voor deelstaten en unieterritoria",
+    "jurisdictionNote": "Een vermelding in de gids bevestigt geen vergunningen of beschikbaarheid van diensten.",
+    "chooseJurisdiction": "Deelstaat of unieterritorium kiezen",
+    "jurisdictionReview": "Controle nodig",
+    "nationalTitle": "Nationale bedrijfstakken",
+    "nationalNote": "NIC 2025 beschrijft economische activiteiten. Dit is geen goedkeuring voor een inrichting, proces of materiaal.",
+    "chooseActivity": "Activiteit kiezen",
+    "clearActivity": "Activiteitskeuze wissen",
     "title": "Industriereferenties",
     "lead": "Zoek in de beschikbare referenties. Deze referenties zijn niet geverifieerd en geven geen toestemming voor materiaalhandel of verwerking.",
     "sourceNote": "Referentieteksten worden in het Engels weergegeven.",

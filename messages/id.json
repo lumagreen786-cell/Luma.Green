@@ -3949,6 +3949,14 @@
     "liveCollected": "Pembayaran dikonfirmasi oleh penyedia."
   },
   "industry": {
+    "jurisdictionTitle": "Referensi negara bagian dan wilayah persatuan",
+    "jurisdictionNote": "Entri direktori tidak memverifikasi izin atau ketersediaan layanan.",
+    "chooseJurisdiction": "Pilih negara bagian atau wilayah persatuan",
+    "jurisdictionReview": "Perlu ditinjau",
+    "nationalTitle": "Industri nasional",
+    "nationalNote": "NIC 2025 menjelaskan kegiatan ekonomi. Klasifikasi ini tidak memberikan persetujuan untuk fasilitas, proses, atau bahan.",
+    "chooseActivity": "Pilih kegiatan",
+    "clearActivity": "Hapus pilihan kegiatan",
     "title": "Referensi industri",
     "lead": "Cari dalam referensi yang tersedia. Referensi ini belum diverifikasi dan tidak memberi izin perdagangan atau pemrosesan material.",
     "sourceNote": "Teks referensi ditampilkan dalam bahasa Inggris.",

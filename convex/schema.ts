@@ -30,6 +30,7 @@ import { vDwellingType } from "./lib/householdDwelling";
 import { householdFootprintTables } from "./lib/householdFootprintSchema";
 import {
   vHandlingClass,
+  vIndustryActivitySnapshot,
   vProcessKind,
   vRegistrationKind,
   vSectorSnapshot,
@@ -909,6 +910,7 @@ export default defineSchema({
     siteReference: v.string(),
     sectorId: v.optional(v.string()),
     sector: v.optional(vSectorSnapshot),
+    industryActivity: v.optional(vIndustryActivitySnapshot),
     capabilities: v.array(vProcessKind),
     createdByProfileId: v.id("profiles"),
     updatedByProfileId: v.id("profiles"),
@@ -1080,6 +1082,7 @@ export default defineSchema({
     ...timestamps,
   })
     .index("by_status_kind", ["status", "sellerKind"])
+    .index("by_lot_org_status", ["specification.lotId", "orgId", "status"])
     .index("by_org", ["orgId"]),
 
   /**

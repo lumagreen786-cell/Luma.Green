@@ -3949,6 +3949,14 @@
     "liveCollected": "Ödeme sağlayıcı tarafından doğrulandı."
   },
   "industry": {
+    "jurisdictionTitle": "Eyalet ve birlik toprağı referansları",
+    "jurisdictionNote": "Dizin kayıtları izinleri veya hizmetin sunulabilirliğini doğrulamaz.",
+    "chooseJurisdiction": "Eyalet veya birlik toprağı seç",
+    "jurisdictionReview": "İnceleme gerekli",
+    "nationalTitle": "Ulusal sektörler",
+    "nationalNote": "NIC 2025 ekonomik faaliyetleri tanımlar. Bir tesis, süreç veya malzeme için onay vermez.",
+    "chooseActivity": "Faaliyet seç",
+    "clearActivity": "Faaliyet seçimini temizle",
     "title": "Sektör referansları",
     "lead": "Sağlanan kaynaklarda arayın. Bu referanslar doğrulanmamıştır; malzeme ticareti veya işleme izni vermez.",
     "sourceNote": "Kaynak metinleri İngilizce gösterilir.",

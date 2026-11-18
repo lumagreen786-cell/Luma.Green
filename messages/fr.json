@@ -3949,6 +3949,14 @@
     "liveCollected": "Paiement confirmé par le prestataire."
   },
   "industry": {
+    "jurisdictionTitle": "Références des États et territoires de l’Union",
+    "jurisdictionNote": "Une inscription dans l’annuaire ne confirme ni les permis ni la disponibilité des services.",
+    "chooseJurisdiction": "Choisir un État ou un territoire de l’Union",
+    "jurisdictionReview": "À vérifier",
+    "nationalTitle": "Industries nationales",
+    "nationalNote": "La NIC 2025 décrit les activités économiques. Elle n’accorde aucune autorisation à une installation, un procédé ou un matériau.",
+    "chooseActivity": "Choisir une activité",
+    "clearActivity": "Effacer l’activité",
     "title": "Références industrielles",
     "lead": "Recherchez dans les références fournies. Ces références ne sont pas vérifiées et n’autorisent ni le commerce ni le traitement de matières.",
     "sourceNote": "Le texte des références est affiché en anglais.",

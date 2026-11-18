@@ -525,7 +525,7 @@ async function takeFromListing(
       listing.materialCode,
       trade.grams,
     );
-    await requireUnreservedLot(ctx, lot);
+    await requireUnreservedLot(ctx, lot, listing._id);
   }
   const grams = listing.grams - trade.grams;
   await ctx.db.patch("listings", listing._id, {
@@ -818,19 +818,38 @@ export const listingLotOptions = query({
       )
       .order("desc")
       .take(100);
-    return rows
-      .filter(
-        (row) =>
-          row.materialCode === args.materialCode &&
-          row.status === "available" &&
-          row.availableGrams > 0 &&
-          hasOfferLotClassification(row),
-      )
-      .map((row) => ({
-        id: row._id,
-        state: row.state,
-        grams: row.availableGrams,
-      }));
+    const choices = [];
+    for (const row of rows) {
+      if (row.availableGrams <= 0) continue;
+      try {
+        const lot = await requireOfferLot(
+          ctx,
+          row._id,
+          org._id,
+          args.materialCode,
+          row.availableGrams,
+        );
+        await requireUnreservedLot(ctx, lot);
+        choices.push({
+          id: lot._id,
+          state: lot.state,
+          grams: lot.availableGrams,
+        });
+      } catch (error) {
+        if (
+          !(error instanceof ConvexError) ||
+          typeof error.data !== "string" ||
+          ![
+            "LOT_NOT_ELIGIBLE",
+            "CONTROLLED_ROUTE_REQUIRED",
+            "QUALITY_RELEASE_REQUIRED",
+            "LOT_RESERVED",
+          ].includes(error.data)
+        )
+          throw error;
+      }
+    }
+    return choices;
   },
 });
 
@@ -892,6 +911,7 @@ async function offerSpecification(
   const lot = input.lotId
     ? await requireOfferLot(ctx, input.lotId, orgId, materialCode, grams)
     : null;
+  if (lot) await requireUnreservedLot(ctx, lot);
   return {
     grade,
     specification: detail,

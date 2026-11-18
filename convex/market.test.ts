@@ -173,10 +173,10 @@ describe("browse", () => {
       if (!row) throw new Error("Missing buyer");
       return row._id;
     });
-    await shop.mutation(api.traceability.dispatch, {
-      lotId,
-      receiverOrgId: destination,
-    });
+    // Represent stale historical custody; current offers now block direct dispatch.
+    await t.run((ctx) =>
+      ctx.db.patch("materialLots", lotId, { orgId: destination }),
+    );
     await expect(
       shop.mutation(api.market.act, { tradeId, action: "accept" }),
     ).rejects.toThrow("LOT_NOT_ELIGIBLE");

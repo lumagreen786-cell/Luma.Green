@@ -3949,6 +3949,14 @@
     "liveCollected": "Payment confirmed by the provider."
   },
   "industry": {
+    "jurisdictionTitle": "State and Union Territory references",
+    "jurisdictionNote": "Directory entries do not verify permits or service availability.",
+    "chooseJurisdiction": "Choose state or Union Territory",
+    "jurisdictionReview": "Needs review",
+    "nationalTitle": "National industries",
+    "nationalNote": "NIC 2025 describes economic activities. It does not approve a facility, process or material.",
+    "chooseActivity": "Choose activity",
+    "clearActivity": "Clear activity",
     "title": "Industry references",
     "lead": "Search the supplied references. These references are unverified and do not grant approval to trade or process material.",
     "sourceNote": "Reference text is shown in English.",
