@@ -1035,6 +1035,14 @@ export default defineSchema({
     createdAt: v.number(),
   })
     .index("by_lot_created", ["lotId", "createdAt"])
+    .index("by_lot_org_specification", [
+      "lotId",
+      "orgId",
+      "specificationReference",
+      "specificationVersion",
+      "buyerOrgId",
+      "decision",
+    ])
     .index("by_org_created", ["orgId", "createdAt"])
     .index("by_supersedes", ["supersedesInspectionId"]),
 

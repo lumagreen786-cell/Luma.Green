@@ -212,7 +212,7 @@ describe("lot evidence read boundaries", () => {
       specificationVersion: "1",
       sampleMethod: "Measured sample",
       results: [{ parameter: "Moisture", unit: "%", value: "2" }],
-      decision: "conditional",
+      decision: "accepted",
     });
     await shop.mutation(api.traceability.dispatch, {
       lotId,

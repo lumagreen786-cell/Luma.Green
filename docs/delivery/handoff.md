@@ -1,3 +1,14 @@
+## Overhaul continuation and checkout recovery — 18 November 2026
+
+The historical missing checkout is restored and its archived file bytes and
+Git staging are verified. Current implementation continues from `f5b360f` on
+`codex/pet-quality-release` in a separate linked checkout. The first change
+closes a release gap where an older passing inspection could bypass an
+unresolved failure for the same buyer and specification. See the
+[recovery and delivery record](overhaul-continuation-2026-11-18.md).
+Local repository checks, the production build and the Convex dry run passed.
+The checked PR and matching backend/web release remain pending.
+
 ## Cookieless public analytics and domain hydration — 18 November 2026
 
 Prepared on `codex/analytics-monitoring`. Public PostHog/Vercel page counts require

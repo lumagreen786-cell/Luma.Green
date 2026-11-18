@@ -10,7 +10,10 @@ import {
   seedDemo,
   signInAs,
 } from "./lib/auth.testing";
-import { isCurrentAcceptedInspection } from "./lib/qualityRelease";
+import {
+  hasQualityRelease,
+  isCurrentAcceptedInspection,
+} from "./lib/qualityRelease";
 import schema from "./schema";
 
 const modules = convexModules(import.meta.glob("./**/*.*s"));
@@ -68,6 +71,165 @@ async function world() {
 }
 
 afterEach(() => vi.unstubAllEnvs());
+
+describe("quality holds on processed PET", () => {
+  it("honors a failed inspection on an otherwise uninspected declared lot", async () => {
+    const { owner, inspector, lotId, recyclerId } = await world();
+    const before = await owner.query(api.traceability.history, { lotId });
+    expect(before.lot.qualityReleased).toBe(true);
+    await inspector.mutation(api.quality.recordInspection, {
+      lotId,
+      specificationReference: "Declared PET specification",
+      specificationVersion: "1",
+      sampleMethod: "Composite sample",
+      results: [{ parameter: "PVC", unit: "ppm", value: "180" }],
+      decision: "rejected",
+    });
+    const after = await owner.query(api.traceability.history, { lotId });
+    expect(after.lot.qualityReleased).toBe(false);
+    await expect(
+      owner.mutation(api.traceability.dispatch, {
+        lotId,
+        receiverOrgId: recyclerId,
+      }),
+    ).rejects.toThrow("QUALITY_RELEASE_REQUIRED");
+  });
+
+  async function processedLot() {
+    const context = await world();
+    const transformationId = await context.owner.mutation(
+      api.traceability.transform,
+      {
+        inputLotId: context.lotId,
+        inputGrams: 10_000,
+        contaminationGrams: 0,
+        processLossGrams: 0,
+        outputs: [
+          {
+            materialCode: "PLASTIC-PET",
+            state: "Sorted PET",
+            grams: 10_000,
+            handlingClass: "non_hazardous",
+            streamClass: "main_product",
+          },
+        ],
+      },
+    );
+    const lot = await context.t.run((ctx) =>
+      ctx.db
+        .query("materialLots")
+        .withIndex("by_parent_transformation", (q) =>
+          q.eq("parentTransformationId", transformationId),
+        )
+        .unique(),
+    );
+    if (!lot) throw new Error("Processed fixture lot missing");
+    const inspection = {
+      lotId: lot._id,
+      buyerOrgId: context.recyclerId,
+      specificationReference: "Buyer PET specification",
+      specificationVersion: "2026-11",
+      sampleMethod: "Composite sample",
+      results: [{ parameter: "PVC", unit: "ppm", value: "80" }],
+      decision: "accepted" as const,
+    };
+    const accepted = await context.inspector.mutation(
+      api.quality.recordInspection,
+      inspection,
+    );
+    return { ...context, lot, inspection, accepted };
+  }
+
+  it.each(["rejected", "conditional"] as const)(
+    "holds a lot with a %s result under the accepted specification",
+    async (decision) => {
+      const { t, inspector, owner, recyclerId, lot, inspection, accepted } =
+        await processedLot();
+      await inspector.mutation(api.quality.recordInspection, {
+        ...inspection,
+        decision,
+        results: [{ parameter: "PVC", unit: "ppm", value: "180" }],
+      });
+      await inspector.mutation(api.quality.recordInspection, inspection);
+      expect(await t.run((ctx) => hasQualityRelease(ctx, lot, accepted))).toBe(
+        false,
+      );
+      const history = await owner.query(api.traceability.history, {
+        lotId: lot._id,
+      });
+      expect(history.lot.qualityReleased).toBe(false);
+      await expect(
+        owner.mutation(api.traceability.dispatch, {
+          lotId: lot._id,
+          receiverOrgId: recyclerId,
+        }),
+      ).rejects.toThrow("QUALITY_RELEASE_REQUIRED");
+      await expect(
+        owner.mutation(api.traceability.transform, {
+          inputLotId: lot._id,
+          inputGrams: 1000,
+          contaminationGrams: 0,
+          processLossGrams: 0,
+          outputs: [
+            { materialCode: "PLASTIC-PET", state: "Baled PET", grams: 1000 },
+          ],
+        }),
+      ).rejects.toThrow("QUALITY_RELEASE_REQUIRED");
+      expect(
+        await t.run((ctx) => ctx.db.get("materialLots", lot._id)),
+      ).toMatchObject({ status: "available", availableGrams: 10_000 });
+    },
+  );
+
+  it("requires approval to resolve a failed result and retains the inspection history", async () => {
+    const { t, inspector, owner, recyclerId, lot, inspection, accepted } =
+      await processedLot();
+    const rejected = await inspector.mutation(api.quality.recordInspection, {
+      ...inspection,
+      decision: "rejected",
+    });
+    const correction = await inspector.mutation(api.quality.proposeCorrection, {
+      ...inspection,
+      supersedesInspectionId: rejected,
+      reason: "Independent lab corrected the sample result",
+    });
+    expect(await t.run((ctx) => hasQualityRelease(ctx, lot, accepted))).toBe(
+      false,
+    );
+    await owner.mutation(api.quality.approveCorrection, {
+      inspectionId: correction,
+    });
+    expect(await t.run((ctx) => hasQualityRelease(ctx, lot, correction))).toBe(
+      true,
+    );
+    const results = await owner.query(api.quality.forLot, { lotId: lot._id });
+    expect(results.rows.find((row) => row.id === rejected)).toMatchObject({
+      decision: "rejected",
+      isSuperseded: true,
+    });
+    await owner.mutation(api.traceability.dispatch, {
+      lotId: lot._id,
+      receiverOrgId: recyclerId,
+    });
+  });
+
+  it("keeps other buyers and specification revisions separate", async () => {
+    const { t, inspector, lot, inspection, accepted } = await processedLot();
+    await inspector.mutation(api.quality.recordInspection, {
+      ...inspection,
+      buyerOrgId: undefined,
+      decision: "rejected",
+    });
+    await inspector.mutation(api.quality.recordInspection, {
+      ...inspection,
+      specificationVersion: "2025-11",
+      decision: "conditional",
+    });
+    expect(await t.run((ctx) => hasQualityRelease(ctx, lot, accepted))).toBe(
+      true,
+    );
+  });
+});
 
 describe("buyer-specific lot inspections", () => {
   it("keeps the original result immutable through correction and separate approval", async () => {
