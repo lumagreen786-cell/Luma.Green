@@ -111,7 +111,7 @@ export function PhoneForm({
             {t("mobileLabel")}
           </Label>
           <div
-            className="flex rounded-full border border-input bg-muted/50 transition-colors focus-within:border-ring focus-within:ring-3 focus-within:ring-ring/20"
+            className="flex overflow-hidden rounded-xl border border-input bg-muted/50 transition-colors focus-within:border-ring focus-within:ring-3 focus-within:ring-ring/20"
             dir="ltr"
           >
             <span className="flex h-12 items-center border-e border-input px-4 text-base font-medium text-muted-foreground tabular-nums">
@@ -125,7 +125,7 @@ export function PhoneForm({
               placeholder="98765 43210"
               aria-invalid={fieldError ? true : undefined}
               aria-describedby={hasHint ? "phone-hint" : undefined}
-              className="h-12 min-w-0 rounded-s-none border-0 bg-transparent text-base tracking-wide shadow-none focus-visible:ring-0 dark:bg-transparent"
+              className="h-12 min-w-0 rounded-none border-0 bg-transparent text-base tracking-wide shadow-none focus-visible:ring-0 dark:bg-transparent"
               {...register("phone")}
             />
           </div>

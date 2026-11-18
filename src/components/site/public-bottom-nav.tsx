@@ -53,6 +53,8 @@ export function PublicBottomNav() {
     };
   }, []);
 
+  if (pathname === "/" || pathname.startsWith("/business")) return null;
+
   return (
     <>
       <div aria-hidden className="shrink-0 xl:hidden" style={{ height }} />

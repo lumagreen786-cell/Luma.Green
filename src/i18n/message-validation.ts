@@ -94,6 +94,7 @@ export function messageContract(message: string): MessageContract {
 // shared. Do not exempt message keys: a later paragraph at that key must fail.
 const sharedLiterals = [
   "Luma.Green",
+  "Luma Green",
   "India", // The country name is spelled identically in several supported languages.
   "Bengaluru",
   "Karnataka",

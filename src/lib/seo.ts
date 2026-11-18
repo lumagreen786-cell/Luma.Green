@@ -3,7 +3,13 @@ import type { Metadata } from "next";
 import { type Locale, localeMeta } from "@/i18n/locales";
 import { languageAlternates, localizedPath } from "@/i18n/paths";
 
+import { clientEnv } from "./env";
 import { site } from "./site";
+import {
+  businessCanonicalUrl,
+  businessHref,
+  isBusinessMarketingPath,
+} from "./site-domains";
 
 /** Public ownership tokens only; these tags do not load a tracking script. */
 export function searchVerificationMetadata({
@@ -45,12 +51,23 @@ export function pageMetadata({
   description,
   absoluteTitle = false,
 }: PageMetadataInput): Metadata {
-  const url = localizedPath(locale, path);
+  const isBusiness =
+    clientEnv.NEXT_PUBLIC_BUSINESS_SITE_ENABLED &&
+    isBusinessMarketingPath(path);
+  const url = isBusiness
+    ? businessHref(path, locale)
+    : localizedPath(locale, path);
+  const languages = languageAlternates(path);
+  if (isBusiness) {
+    for (const [language, alternate] of Object.entries(languages)) {
+      languages[language] = businessCanonicalUrl(path, alternate);
+    }
+  }
 
   return {
     title: absoluteTitle ? { absolute: title } : title,
     description,
-    alternates: { canonical: url, languages: languageAlternates(path) },
+    alternates: { canonical: url, languages },
     openGraph: {
       type: "website",
       siteName: site.name,

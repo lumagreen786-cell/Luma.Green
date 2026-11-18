@@ -4819,5 +4819,171 @@
     "townhouse": "Rumah deret",
     "farmhouse": "Rumah pertanian",
     "routeNote": "Untuk penjemputan komunitas, gunakan kode komunitas yang telah ditinjau."
+  },
+  "afterlife": {
+    "bookNow": "Pesan sekarang",
+    "bookingMessage": "Hai Luma, saya ingin memesan penjemputan bahan daur ulang.",
+    "bookingUnavailable": "Pemesanan WhatsApp akan segera tersedia.",
+    "how": "Cara kerja",
+    "questions": "Pertanyaan",
+    "business": "Untuk bisnis",
+    "ecosystem": "Ekosistem",
+    "collectors": "Untuk pengumpul",
+    "signIn": "Masuk",
+    "publicSite": "Pesan penjemputan",
+    "menu": "Menu navigasi",
+    "tagline": "Bergerak menuju esok yang lebih bersih.",
+    "heroTitle": "Lebih sedikit sampah.",
+    "heroTitleEnd": "Lebih banyak peluang.",
+    "heroLead": "Kirim foto. Bagikan lokasi. Atur penjemputan daur ulang dalam satu percakapan.",
+    "phoneEyebrow": "Penjemputan dimulai di sini",
+    "phoneTitle": "Beberapa pesan. Awal yang baru.",
+    "phoneLead": "Kirim foto. Pilih waktu. Kami akan memberi kabar.",
+    "storyEyebrow": "Sesuai kegiatan Anda",
+    "storyTitle": "Satu penjemputan. Awal yang baru.",
+    "storyLead": "Beberapa kantong atau pengumpulan rutin. Mulai dengan pesan. Kami memeriksa apa yang dapat diambil dan kapan.",
+    "repeat": "Penjemputan sekali atau rutin",
+    "updates": "Kabar melalui WhatsApp",
+    "faqTitle": "Perlu diketahui.",
+    "faq1q": "Apa yang dapat saya daur ulang?",
+    "faq1a": "Kirim foto kertas, kardus, plastik, atau logam Anda. Pengumpul memeriksa bahan yang dapat diterima di area Anda.",
+    "faq2q": "Kapan penjemputan saya dikonfirmasi?",
+    "faq2a": "Penjemputan dikonfirmasi setelah pengumpul yang memenuhi syarat menerima permintaan.",
+    "faq3q": "Bagaimana berat dan pembayaran ditentukan?",
+    "faq3a": "Pengumpul mencatat berat hasil penimbangan dan jumlah yang disepakati saat pengambilan.",
+    "closingTitle": "Siap untuk penjemputan berikutnya?",
+    "workWith": "Bekerja sama dengan Luma",
+    "businessPrompt": "Mengumpulkan, memilah, mendaur ulang, atau membeli bahan pulihan?",
+    "businessEyebrow": "Ekosistem Luma",
+    "businessTitle": "Bahan yang baik.",
+    "businessTitleEnd": "Peluang besar.",
+    "businessLead": "Dari pengumpulan pertama hingga penggunaan berikutnya. Satu tempat terhubung bagi pelaku daur ulang.",
+    "findRole": "Temukan peran Anda",
+    "rolesTitle": "Pekerjaan Anda. Rantai yang terhubung.",
+    "rolesLead": "Pilih peran Anda. Lihat bagaimana Luma mendukung kegiatan Anda.",
+    "roleAction": "Jelajahi cara bergabung",
+    "kabadiwala": "Kabadiwala",
+    "preprocessor": "Prapengolah",
+    "recycler": "Pendaur ulang",
+    "manufacturer": "Produsen",
+    "saathi": "Saathi",
+    "kabadiwalaBody": "Kelola permintaan, rencanakan kegiatan, dan catat setiap pengumpulan.",
+    "preprocessorBody": "Hubungkan penerimaan, pemilahan, stok, dan serah terima.",
+    "recyclerBody": "Hubungkan catatan penerimaan bahan, pengolahan, dan hasil.",
+    "manufacturerBody": "Temukan bahan pulihan dan simpan catatan pembelian bersama.",
+    "saathiBody": "Temukan pekerjaan pengumpulan dan pemilahan yang didukung.",
+    "businessClosing": "Mari bergerak maju.",
+    "collectorTitle": "Lebih banyak waktu mengumpulkan.",
+    "collectorTitleEnd": "Lebih sedikit waktu menindaklanjuti.",
+    "collectorLead": "Lihat permintaan penjemputan, jadwal, dan catatan penimbangan dalam satu tampilan.",
+    "collectorFlow": "Dari permintaan hingga terkumpul.",
+    "step1": "Tinjau permintaan.",
+    "step1Body": "Periksa foto, area, dan waktu yang diminta.",
+    "step2": "Rencanakan pengumpulan.",
+    "step2Body": "Terima pekerjaan dan beri kabar kepada pelanggan.",
+    "step3": "Catat hasilnya.",
+    "step3Body": "Catat berat terukur, jumlah yang disepakati, dan status pengumpulan.",
+    "imageAlt": "Ilustrasi bahan daur ulang dan kegiatan pengumpulan",
+    "businessMeta": "Luma untuk bisnis daur ulang",
+    "homeMeta": "Pesan penjemputan daur ulang dengan Luma melalui WhatsApp.",
+    "collectorMeta": "Kelola kegiatan pengumpulan Anda dengan Luma.",
+    "help": "Bantuan",
+    "privacy": "Privasi",
+    "status": "Status layanan"
+  },
+  "afterlifePhone": {
+    "name": "Luma Green",
+    "description": "Ilustrasi percakapan penjemputan daur ulang. Foto, lokasi, dan waktu pilihan diikuti penerimaan oleh pengumpul.",
+    "photoAlt": "Ilustrasi bahan daur ulang siap diambil",
+    "location": "Lokasi saat ini",
+    "locationDetail": "Lokasi dibagikan",
+    "message": "Pesan",
+    "greeting": "Hai! Tentu. Bisa kirim foto?",
+    "askLocation": "Terima kasih! Bagikan lokasi dan waktu yang sesuai untuk Anda.",
+    "slotReply": "{slot}, ya.",
+    "received": "Baik. Kami akan memeriksa ketersediaan dan mengonfirmasi.",
+    "accepted": "Pengumpul telah menerima permintaan Anda. {slot}. Semua sudah siap!",
+    "thanks": "Bagus, terima kasih!",
+    "scenario0": {
+      "hello": "Hai, bisa mengambil koran lama?",
+      "caption": "Koran dan kardus.",
+      "slot": "Besok, pukul 09.00–11.00"
+    },
+    "scenario1": {
+      "hello": "Kami baru pindah. Bisa mengambil kardusnya?",
+      "caption": "Ini kardus pindahan yang kosong.",
+      "slot": "Sabtu, pukul 10.00–12.00"
+    },
+    "scenario2": {
+      "hello": "Bisa mengatur penjemputan untuk apartemen kami?",
+      "caption": "Ini yang sudah kami kumpulkan.",
+      "slot": "Minggu, pukul 09.00–11.00"
+    },
+    "scenario3": {
+      "hello": "Ada kardus di toko kami.",
+      "caption": "Kardusnya sudah diratakan dan siap.",
+      "slot": "Jumat, pukul 14.00–16.00"
+    },
+    "scenario4": {
+      "hello": "Bisa mengambil kertas dari kantor kami?",
+      "caption": "Ini bundel kertasnya.",
+      "slot": "Senin, pukul 11.00–13.00"
+    },
+    "scenario5": {
+      "hello": "Hai! Saya sudah memilah wadah plastik.",
+      "caption": "Ini yang saya punya.",
+      "slot": "Selasa, pukul 09.00–11.00"
+    },
+    "scenario6": {
+      "hello": "Bisa memeriksa barang logam ini?",
+      "caption": "Saya kirim fotonya sekarang.",
+      "slot": "Rabu, pukul 15.00–17.00"
+    },
+    "scenario7": {
+      "hello": "Saya sedang membersihkan lemari. Bisa membantu?",
+      "caption": "Sebagian besar kertas dan kemasan.",
+      "slot": "Kamis, pukul 10.00–12.00"
+    },
+    "scenario8": {
+      "hello": "Kami ingin penjemputan rutin untuk toko.",
+      "caption": "Ini kardus yang biasanya kami kumpulkan.",
+      "slot": "Setiap Jumat, pukul 14.00–16.00"
+    },
+    "scenario9": {
+      "hello": "Bisa mengatur pengumpulan bulanan?",
+      "caption": "Kertas dan botol dari rumah.",
+      "slot": "Sabtu pertama, pukul 09.00–11.00"
+    },
+    "scenario10": {
+      "hello": "Hai, bisa mengambil dari gedung kami?",
+      "caption": "Bahannya sudah kami kumpulkan.",
+      "slot": "Sabtu, pukul 15.00–17.00"
+    },
+    "scenario11": {
+      "hello": "Saya punya buku tulis lama untuk didaur ulang.",
+      "caption": "Ini foto tumpukannya.",
+      "slot": "Besok, pukul 11.00–13.00"
+    },
+    "scenario12": {
+      "hello": "Bisa mengambil kemasan minggu ini?",
+      "caption": "Kardus dan wadah bersih.",
+      "slot": "Kamis, pukul 14.00–16.00"
+    },
+    "scenario13": {
+      "hello": "Kami selesai memilah di rumah.",
+      "caption": "Semuanya siap di dekat pintu.",
+      "slot": "Minggu, pukul 16.00–18.00"
+    },
+    "scenario14": {
+      "hello": "Hai Luma, saya ingin memesan penjemputan.",
+      "caption": "Ini yang ingin kami daur ulang.",
+      "slot": "Senin, pukul 09.00–11.00"
+    }
+  },
+  "afterlifeMotion": {
+    "audiences": "Apartemen, kedai kopi, dan kantor",
+    "apartments": "Apartemen",
+    "coffeeShops": "Kedai kopi",
+    "offices": "Kantor"
   }
 }

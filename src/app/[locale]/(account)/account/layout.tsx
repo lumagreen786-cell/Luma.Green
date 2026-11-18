@@ -22,7 +22,7 @@ export default async function AccountLayout({
   return (
     <div className="flex min-h-dvh flex-col bg-background">
       <SkipLink />
-      <header className="flex min-h-16 items-center justify-between gap-2 bg-background px-4 py-3 sm:px-8">
+      <header className="afterlife-shell-header flex min-h-16 items-center justify-between gap-2 bg-background px-4 py-3 sm:px-8">
         <Link
           href="/"
           aria-label={t("home")}
@@ -35,10 +35,10 @@ export default async function AccountLayout({
           <AccountMenu />
         </div>
       </header>
-      <div className="mx-auto grid w-full max-w-7xl flex-1 content-start gap-5 px-4 py-5 sm:px-8">
+      <div className="mx-auto grid w-full max-w-[90rem] flex-1 content-start gap-5 px-4 py-5 sm:px-8">
         <nav
           aria-label={account("title")}
-          className="flex min-w-0 flex-wrap gap-2 rounded-panel bg-card p-2 text-card-foreground shadow-panel sm:rounded-full"
+          className="flex min-w-0 flex-wrap gap-2 rounded-panel border-b border-border pb-3 text-foreground"
         >
           <AccountLinks className="font-medium hover:bg-muted aria-[current=page]:hover:bg-primary aria-[current=page]:hover:text-primary-foreground" />
         </nav>

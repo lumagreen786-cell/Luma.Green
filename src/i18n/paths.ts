@@ -10,6 +10,8 @@ import { routing } from "./routing";
  */
 export const publicRoutes = [
   "/",
+  "/business",
+  "/business/collectors",
   "/how-it-works",
   "/participants",
   "/contact",

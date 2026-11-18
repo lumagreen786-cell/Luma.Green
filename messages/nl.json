@@ -4819,5 +4819,171 @@
     "townhouse": "Rijtjeshuis",
     "farmhouse": "Boerderij",
     "routeNote": "Gebruik voor gezamenlijke inzameling de gecontroleerde gemeenschapscode."
+  },
+  "afterlife": {
+    "bookNow": "Nu boeken",
+    "bookingMessage": "Hallo Luma, ik wil graag een ophaalafspraak voor recycling maken.",
+    "bookingUnavailable": "Boeken via WhatsApp is binnenkort beschikbaar.",
+    "how": "Zo werkt het",
+    "questions": "Vragen",
+    "business": "Voor bedrijven",
+    "ecosystem": "Ecosysteem",
+    "collectors": "Voor inzamelaars",
+    "signIn": "Inloggen",
+    "publicSite": "Ophaalafspraak maken",
+    "menu": "Navigatie",
+    "tagline": "Een schonere toekomst in beweging.",
+    "heroTitle": "Minder afval.",
+    "heroTitleEnd": "Meer mogelijkheden.",
+    "heroLead": "Stuur een foto. Deel je locatie. Regel de inzameling in één eenvoudig gesprek.",
+    "phoneEyebrow": "Hier begint de inzameling",
+    "phoneTitle": "Een paar berichten. Een nieuw begin.",
+    "phoneLead": "Stuur een foto. Kies een tijd. We houden je op de hoogte.",
+    "storyEyebrow": "Past bij jouw dag",
+    "storyTitle": "Een inzameling. Een nieuw begin.",
+    "storyLead": "Een paar zakken of een vaste inzameling. Begin met een bericht. We controleren wat we kunnen ophalen en wanneer.",
+    "repeat": "Eenmalige of vaste inzamelingen",
+    "updates": "Updates via WhatsApp",
+    "faqTitle": "Goed om te weten.",
+    "faq1q": "Wat kan ik recyclen?",
+    "faq1a": "Stuur foto’s van papier, karton, plastic of metaal. De inzamelaar controleert wat in jouw buurt wordt geaccepteerd.",
+    "faq2q": "Wanneer is mijn afspraak bevestigd?",
+    "faq2a": "De afspraak is bevestigd zodra een bevoegde inzamelaar het verzoek accepteert.",
+    "faq3q": "Hoe worden gewicht en betaling bepaald?",
+    "faq3a": "De inzamelaar registreert het gemeten gewicht en het afgesproken bedrag bij het ophalen.",
+    "closingTitle": "Klaar voor de volgende inzameling?",
+    "workWith": "Werk met Luma",
+    "businessPrompt": "Inzamelen, sorteren, recyclen of teruggewonnen materialen kopen?",
+    "businessEyebrow": "Het Luma-ecosysteem",
+    "businessTitle": "Goede materialen.",
+    "businessTitleEnd": "Grote mogelijkheden.",
+    "businessLead": "Van de eerste inzameling tot het volgende gebruik. Eén verbonden plek voor de mensen die recycling mogelijk maken.",
+    "findRole": "Vind jouw plek",
+    "rolesTitle": "Jouw werk. Een verbonden keten.",
+    "rolesLead": "Kies je rol. Ontdek hoe Luma in jouw dag past.",
+    "roleAction": "Ontdek hoe je meedoet",
+    "kabadiwala": "Kabadiwala’s",
+    "preprocessor": "Voorbewerkers",
+    "recycler": "Recyclingbedrijven",
+    "manufacturer": "Fabrikanten",
+    "saathi": "Saathi’s",
+    "kabadiwalaBody": "Beheer verzoeken, plan je dag en registreer elke inzameling.",
+    "preprocessorBody": "Verbind ontvangst, sortering, voorraad en overdrachten.",
+    "recyclerBody": "Verbind materiaalontvangst, verwerking en uitvoerregistraties.",
+    "manufacturerBody": "Vind teruggewonnen materialen en houd aankoopgegevens bij elkaar.",
+    "saathiBody": "Vind beschikbare inzamel- en sorteerwerkzaamheden.",
+    "businessClosing": "Samen vooruit.",
+    "collectorTitle": "Meer tijd voor inzameling.",
+    "collectorTitleEnd": "Minder tijd voor nabellen.",
+    "collectorLead": "Inzamelverzoeken, dagplanning en weeggegevens in één overzicht.",
+    "collectorFlow": "Van verzoek tot opgehaald.",
+    "step1": "Bekijk het verzoek.",
+    "step1Body": "Controleer foto’s, gebied en gewenste tijd.",
+    "step2": "Plan de inzameling.",
+    "step2Body": "Accepteer werk en houd de klant op de hoogte.",
+    "step3": "Registreer het resultaat.",
+    "step3Body": "Noteer het gemeten gewicht, afgesproken bedrag en de inzamelstatus.",
+    "imageAlt": "Illustratie van recyclebare materialen en inzamelwerk",
+    "businessMeta": "Luma voor recyclingbedrijven",
+    "homeMeta": "Boek een inzameling met Luma via WhatsApp.",
+    "collectorMeta": "Beheer je inzamelwerk met Luma.",
+    "help": "Hulp",
+    "privacy": "Gegevensbescherming",
+    "status": "Servicestatus"
+  },
+  "afterlifePhone": {
+    "name": "Luma Green",
+    "description": "Illustratie van een gesprek over inzameling. Foto’s, locatie en gewenste tijd worden gevolgd door acceptatie van de inzamelaar.",
+    "photoAlt": "Illustratieve recyclebare materialen klaar voor inzameling",
+    "location": "Huidige locatie",
+    "locationDetail": "Locatie gedeeld",
+    "message": "Bericht",
+    "greeting": "Hallo! Natuurlijk. Kun je een foto sturen?",
+    "askLocation": "Bedankt! Deel je locatie en een tijd die je uitkomt.",
+    "slotReply": "{slot}, graag.",
+    "received": "Begrepen. We controleren de beschikbaarheid en bevestigen de afspraak.",
+    "accepted": "Je inzamelaar heeft geaccepteerd. {slot}. Alles is geregeld!",
+    "thanks": "Perfect, bedankt!",
+    "scenario0": {
+      "hello": "Hallo, kunnen jullie oude kranten ophalen?",
+      "caption": "Kranten en karton.",
+      "slot": "Morgen, 9–11 uur"
+    },
+    "scenario1": {
+      "hello": "We zijn net verhuisd. Kunnen jullie de dozen meenemen?",
+      "caption": "Dit zijn de lege verhuisdozen.",
+      "slot": "Zaterdag, 10–12 uur"
+    },
+    "scenario2": {
+      "hello": "Kan ik een inzameling voor ons appartement regelen?",
+      "caption": "Dit hebben we verzameld.",
+      "slot": "Zondag, 9–11 uur"
+    },
+    "scenario3": {
+      "hello": "We hebben karton in onze winkel.",
+      "caption": "De dozen zijn platgevouwen en klaar.",
+      "slot": "Vrijdag, 14–16 uur"
+    },
+    "scenario4": {
+      "hello": "Kunnen jullie papier ophalen bij ons kantoor?",
+      "caption": "Hier zijn de bundels papier.",
+      "slot": "Maandag, 11–13 uur"
+    },
+    "scenario5": {
+      "hello": "Hallo! Ik heb plastic bakjes gesorteerd.",
+      "caption": "Dit heb ik.",
+      "slot": "Dinsdag, 9–11 uur"
+    },
+    "scenario6": {
+      "hello": "Kunnen jullie deze metalen spullen bekijken?",
+      "caption": "Ik stuur nu een foto.",
+      "slot": "Woensdag, 15–17 uur"
+    },
+    "scenario7": {
+      "hello": "Ik ruim een kast op. Kunnen jullie helpen?",
+      "caption": "Vooral papier en verpakkingen.",
+      "slot": "Donderdag, 10–12 uur"
+    },
+    "scenario8": {
+      "hello": "We willen een vaste inzameling voor onze winkel.",
+      "caption": "Dit is onze gebruikelijke hoeveelheid karton.",
+      "slot": "Elke vrijdag, 14–16 uur"
+    },
+    "scenario9": {
+      "hello": "Kunnen we een maandelijkse inzameling afspreken?",
+      "caption": "Papier en flessen van thuis.",
+      "slot": "Eerste zaterdag, 9–11 uur"
+    },
+    "scenario10": {
+      "hello": "Hallo, kunnen jullie bij ons gebouw ophalen?",
+      "caption": "We hebben de materialen bij elkaar gezet.",
+      "slot": "Zaterdag, 15–17 uur"
+    },
+    "scenario11": {
+      "hello": "Ik heb oude schriften om te recyclen.",
+      "caption": "Hier is een foto van de stapel.",
+      "slot": "Morgen, 11–13 uur"
+    },
+    "scenario12": {
+      "hello": "Kunnen jullie deze week verpakkingen ophalen?",
+      "caption": "Karton en schone bakjes.",
+      "slot": "Donderdag, 14–16 uur"
+    },
+    "scenario13": {
+      "hello": "We zijn klaar met sorteren thuis.",
+      "caption": "Alles staat klaar bij de deur.",
+      "slot": "Zondag, 16–18 uur"
+    },
+    "scenario14": {
+      "hello": "Hallo Luma, ik wil een ophaalafspraak maken.",
+      "caption": "Dit willen we recyclen.",
+      "slot": "Maandag, 9–11 uur"
+    }
+  },
+  "afterlifeMotion": {
+    "audiences": "Appartementen, koffiezaken en kantoren",
+    "apartments": "Appartementen",
+    "coffeeShops": "Koffiezaken",
+    "offices": "Kantoren"
   }
 }

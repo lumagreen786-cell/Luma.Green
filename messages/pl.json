@@ -4819,5 +4819,171 @@
     "townhouse": "Dom szeregowy",
     "farmhouse": "Dom wiejski",
     "routeNote": "Do odbioru wspólnotowego użyj zweryfikowanego kodu wspólnoty."
+  },
+  "afterlife": {
+    "bookNow": "Zarezerwuj teraz",
+    "bookingMessage": "Cześć Luma, chcę zarezerwować odbiór materiałów do recyklingu.",
+    "bookingUnavailable": "Rezerwacje przez WhatsApp będą wkrótce dostępne.",
+    "how": "Jak to działa",
+    "questions": "Pytania",
+    "business": "Dla firm",
+    "ecosystem": "Ekosystem",
+    "collectors": "Dla odbiorców materiałów",
+    "signIn": "Zaloguj się",
+    "publicSite": "Zamów odbiór",
+    "menu": "Nawigacja",
+    "tagline": "Czystsze jutro w ruchu.",
+    "heroTitle": "Mniej odpadów.",
+    "heroTitleEnd": "Więcej możliwości.",
+    "heroLead": "Wyślij zdjęcie. Udostępnij lokalizację. Umów odbiór w jednej prostej rozmowie.",
+    "phoneEyebrow": "Tu zaczyna się odbiór",
+    "phoneTitle": "Kilka wiadomości. Nowy początek.",
+    "phoneLead": "Wyślij zdjęcie. Wybierz termin. Będziemy Cię informować.",
+    "storyEyebrow": "Dopasowane do Twojego dnia",
+    "storyTitle": "Jeden odbiór. Nowy początek.",
+    "storyLead": "Kilka worków lub regularny odbiór. Zacznij od wiadomości. Sprawdzimy, co i kiedy można odebrać.",
+    "repeat": "Odbiory jednorazowe lub cykliczne",
+    "updates": "Aktualizacje w WhatsApp",
+    "faqTitle": "Warto wiedzieć.",
+    "faq1q": "Co mogę oddać do recyklingu?",
+    "faq1a": "Wyślij zdjęcia papieru, tektury, plastiku lub metali. Odbiorca sprawdzi, co jest przyjmowane w Twojej okolicy.",
+    "faq2q": "Kiedy odbiór zostanie potwierdzony?",
+    "faq2a": "Odbiór zostanie potwierdzony, gdy uprawniony odbiorca zaakceptuje zgłoszenie.",
+    "faq3q": "Jak ustala się wagę i płatność?",
+    "faq3a": "Przy odbiorze zapisywana jest zmierzona waga i uzgodniona kwota.",
+    "closingTitle": "Gotowi na kolejny odbiór?",
+    "workWith": "Współpracuj z Luma",
+    "businessPrompt": "Zbierasz, sortujesz, przetwarzasz lub kupujesz odzyskane materiały?",
+    "businessEyebrow": "Ekosystem Luma",
+    "businessTitle": "Dobre materiały.",
+    "businessTitleEnd": "Wielkie możliwości.",
+    "businessLead": "Od pierwszego odbioru do kolejnego użycia. Wspólna przestrzeń dla ludzi, dzięki którym recykling działa.",
+    "findRole": "Znajdź swoje miejsce",
+    "rolesTitle": "Twoja praca. Połączony łańcuch.",
+    "rolesLead": "Wybierz rolę. Sprawdź, jak Luma wpisuje się w Twój dzień.",
+    "roleAction": "Dowiedz się, jak dołączyć",
+    "kabadiwala": "Kabadiwala",
+    "preprocessor": "Zakłady wstępnego przetwarzania",
+    "recycler": "Recyklerzy",
+    "manufacturer": "Producenci",
+    "saathi": "Saathi",
+    "kabadiwalaBody": "Zarządzaj zgłoszeniami, planuj dzień i rejestruj każdy odbiór.",
+    "preprocessorBody": "Połącz przyjęcia, sortowanie, zapasy i przekazania.",
+    "recyclerBody": "Połącz dokumentację przyjęcia, przetwarzania i wydania materiałów.",
+    "manufacturerBody": "Znajdź odzyskane materiały i gromadź dokumenty zakupowe w jednym miejscu.",
+    "saathiBody": "Znajdź dostępne prace przy zbieraniu i sortowaniu.",
+    "businessClosing": "Działajmy dalej.",
+    "collectorTitle": "Więcej czasu na odbiór.",
+    "collectorTitleEnd": "Mniej czasu na ponaglenia.",
+    "collectorLead": "Zgłoszenia, plan dnia i wyniki ważenia w jednym widoku.",
+    "collectorFlow": "Od zgłoszenia do odbioru.",
+    "step1": "Sprawdź zgłoszenie.",
+    "step1Body": "Sprawdź zdjęcia, obszar i wybrany termin.",
+    "step2": "Zaplanuj odbiór.",
+    "step2Body": "Przyjmuj zlecenia i informuj klienta.",
+    "step3": "Zapisz wynik.",
+    "step3Body": "Zapisz zmierzoną wagę, uzgodnioną kwotę i status odbioru.",
+    "imageAlt": "Ilustracja materiałów do recyklingu i prac przy ich zbieraniu",
+    "businessMeta": "Luma dla firm recyklingowych",
+    "homeMeta": "Zarezerwuj odbiór z Luma przez WhatsApp.",
+    "collectorMeta": "Zarządzaj odbiorami z Luma.",
+    "help": "Pomoc",
+    "privacy": "Prywatność",
+    "status": "Stan usługi"
+  },
+  "afterlifePhone": {
+    "name": "Luma Green",
+    "description": "Ilustracja rozmowy o odbiorze. Po zdjęciach, lokalizacji i preferowanym terminie następuje akceptacja odbiorcy.",
+    "photoAlt": "Przykładowe materiały do recyklingu gotowe do odbioru",
+    "location": "Bieżąca lokalizacja",
+    "locationDetail": "Lokalizacja udostępniona",
+    "message": "Wiadomość",
+    "greeting": "Cześć! Oczywiście. Możesz wysłać zdjęcie?",
+    "askLocation": "Dzięki! Udostępnij lokalizację i dogodny termin.",
+    "slotReply": "{slot}, proszę.",
+    "received": "Rozumiem. Sprawdzimy dostępność i potwierdzimy termin.",
+    "accepted": "Odbiorca zaakceptował zgłoszenie. {slot}. Wszystko gotowe!",
+    "thanks": "Świetnie, dziękuję!",
+    "scenario0": {
+      "hello": "Cześć, możecie odebrać stare gazety?",
+      "caption": "Gazety i tektura.",
+      "slot": "Jutro, 9:00–11:00"
+    },
+    "scenario1": {
+      "hello": "Właśnie się przeprowadziliśmy. Możecie zabrać kartony?",
+      "caption": "To puste kartony po przeprowadzce.",
+      "slot": "Sobota, 10:00–12:00"
+    },
+    "scenario2": {
+      "hello": "Czy mogę umówić odbiór z naszego mieszkania?",
+      "caption": "Oto co zebraliśmy.",
+      "slot": "Niedziela, 9:00–11:00"
+    },
+    "scenario3": {
+      "hello": "Mamy tekturę w sklepie.",
+      "caption": "Kartony są złożone i gotowe.",
+      "slot": "Piątek, 14:00–16:00"
+    },
+    "scenario4": {
+      "hello": "Możecie odebrać papier z naszego biura?",
+      "caption": "Oto paczki papieru.",
+      "slot": "Poniedziałek, 11:00–13:00"
+    },
+    "scenario5": {
+      "hello": "Cześć! Mam posortowane plastikowe pojemniki.",
+      "caption": "Oto co mam.",
+      "slot": "Wtorek, 9:00–11:00"
+    },
+    "scenario6": {
+      "hello": "Możecie sprawdzić te metalowe przedmioty?",
+      "caption": "Wysyłam zdjęcie.",
+      "slot": "Środa, 15:00–17:00"
+    },
+    "scenario7": {
+      "hello": "Opróżniam szafę. Możecie pomóc?",
+      "caption": "Głównie papier i opakowania.",
+      "slot": "Czwartek, 10:00–12:00"
+    },
+    "scenario8": {
+      "hello": "Chcemy regularny odbiór dla naszego sklepu.",
+      "caption": "To nasza zwykła ilość tektury.",
+      "slot": "Każdy piątek, 14:00–16:00"
+    },
+    "scenario9": {
+      "hello": "Czy możemy umówić odbiór co miesiąc?",
+      "caption": "Papier i butelki z domu.",
+      "slot": "Pierwsza sobota, 9:00–11:00"
+    },
+    "scenario10": {
+      "hello": "Cześć, możecie odebrać materiały z naszego budynku?",
+      "caption": "Zebraliśmy materiały w jednym miejscu.",
+      "slot": "Sobota, 15:00–17:00"
+    },
+    "scenario11": {
+      "hello": "Mam stare zeszyty do recyklingu.",
+      "caption": "Oto zdjęcie stosu.",
+      "slot": "Jutro, 11:00–13:00"
+    },
+    "scenario12": {
+      "hello": "Możecie odebrać opakowania w tym tygodniu?",
+      "caption": "Tektura i czyste pojemniki.",
+      "slot": "Czwartek, 14:00–16:00"
+    },
+    "scenario13": {
+      "hello": "Skończyliśmy sortowanie w domu.",
+      "caption": "Wszystko gotowe przy drzwiach.",
+      "slot": "Niedziela, 16:00–18:00"
+    },
+    "scenario14": {
+      "hello": "Cześć Luma, chcę zamówić odbiór.",
+      "caption": "Oto co chcemy oddać do recyklingu.",
+      "slot": "Poniedziałek, 9:00–11:00"
+    }
+  },
+  "afterlifeMotion": {
+    "audiences": "Mieszkania, kawiarnie i biura",
+    "apartments": "Mieszkania",
+    "coffeeShops": "Kawiarnie",
+    "offices": "Biura"
   }
 }

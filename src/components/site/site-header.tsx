@@ -1,56 +1,97 @@
-import { getTranslations } from "next-intl/server";
+"use client";
+import { ArrowUpRight, Menu, X } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { useState, useSyncExternalStore } from "react";
 
 import { NativeUpdateControl } from "@/components/app/native-update-control";
 import { Logo } from "@/components/brand/logo";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
-import { Button } from "@/components/ui/button";
-import { Link } from "@/i18n/navigation";
+import { isLocale } from "@/i18n/locales";
+import { Link, usePathname } from "@/i18n/navigation";
+import { businessHref } from "@/lib/site-domains";
 
-import { Container } from "./container";
-import { HeaderAuthAction } from "./header-auth-action";
 import { LanguageSwitcher } from "./language-switcher";
-import { MobileNav } from "./mobile-nav";
-import { SiteNav } from "./site-nav";
-import { SitePageSwitcher } from "./site-page-switcher";
+import styles from "./site-chrome.module.css";
+function subscribeHost(callback: () => void) {
+  window.addEventListener("popstate", callback);
+  return () => {
+    window.removeEventListener("popstate", callback);
+  };
+}
+const isBusinessHostSnapshot = () =>
+  window.location.hostname === "business.luma.green";
+const isServerBusinessHost = () => false;
 
-export async function SiteHeader() {
-  const t = await getTranslations("nav");
-
+export function SiteHeader() {
+  const t = useTranslations("afterlife");
+  const locale = useLocale();
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+  const isBusinessHost = useSyncExternalStore(
+    subscribeHost,
+    isBusinessHostSnapshot,
+    isServerBusinessHost,
+  );
+  const isBusiness = pathname.startsWith("/business") || isBusinessHost;
+  const isHero = ["/", "/business", "/business/collectors"].includes(pathname);
+  const lang = isLocale(locale) ? locale : "en";
   return (
-    <header className="sticky top-0 z-40 border-b border-sidebar-border bg-sidebar text-sidebar-foreground">
-      <Container className="flex min-h-18 items-center gap-2 py-2 sm:min-h-18 sm:gap-4 sm:py-3 lg:px-8 xl:gap-5">
-        <Link
-          href="/"
-          aria-label={t("home")}
-          className="inline-flex min-h-11 shrink-0 items-center rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+    <header className={`${styles.header} ${isHero ? styles.overImage : ""}`}>
+      <Link
+        href={isBusiness ? "/business" : "/"}
+        aria-label="Luma.Green"
+        className={styles.logo}
+      >
+        <Logo className="gap-2 [&>span]:text-2xl [&>svg]:size-9" />
+      </Link>
+      <nav
+        className={`${styles.nav} ${open ? styles.open : ""}`}
+        aria-label={t("menu")}
+        onClick={() => {
+          setOpen(false);
+        }}
+      >
+        {isBusiness ? (
+          <>
+            <Link href="/business#roles">{t("ecosystem")}</Link>
+            <Link href="/business/collectors">{t("collectors")}</Link>
+            <Link href="/login">
+              {t("signIn")}
+              <ArrowUpRight size={15} />
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link href="/#how">{t("how")}</Link>
+            <Link href="/#questions">{t("questions")}</Link>
+            <a href={businessHref("/", lang)}>
+              {t("business")}
+              <ArrowUpRight size={15} />
+            </a>
+          </>
+        )}
+        <div className={styles.mobileLanguage}>
+          <LanguageSwitcher />
+        </div>
+      </nav>
+      <div className={styles.tools}>
+        <div className={styles.desktopLanguage}>
+          <LanguageSwitcher />
+        </div>
+        <ThemeToggle />
+        <NativeUpdateControl compact />
+        <button
+          type="button"
+          className={styles.menu}
+          aria-label={t("menu")}
+          aria-expanded={open}
+          onClick={() => {
+            setOpen(!open);
+          }}
         >
-          <Logo className="gap-2 [&>span]:text-lg [&>svg]:size-7" />
-        </Link>
-        <div className="hidden sm:block">
-          <SitePageSwitcher />
-        </div>
-        <SiteNav
-          dashboard
-          tone="forest"
-          className="me-auto hidden min-w-0 xl:flex"
-        />
-        <div className="ms-auto hidden shrink-0 items-center gap-1 xl:flex">
-          <LanguageSwitcher className="text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground" />
-          <HeaderAuthAction className="px-3 text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground" />
-          <Button
-            asChild
-            size="default"
-            className="ms-2 bg-sidebar-primary px-5 text-sidebar-primary-foreground hover:bg-sidebar-primary/90"
-          >
-            <Link href="/sell">{t("sellScrap")}</Link>
-          </Button>
-        </div>
-        <div className="flex shrink-0 items-center gap-2 max-xl:ms-auto">
-          <ThemeToggle />
-          <NativeUpdateControl compact />
-          <MobileNav className="text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground xl:hidden" />
-        </div>
-      </Container>
+          {open ? <X size={20} /> : <Menu size={20} />}
+        </button>
+      </div>
     </header>
   );
 }

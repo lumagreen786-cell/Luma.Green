@@ -116,7 +116,7 @@ export function ConsoleShell({ children }: { children: ReactNode }) {
       <main
         id="main"
         tabIndex={-1}
-        className="mx-auto w-full max-w-[100rem] min-w-0 flex-1 px-4 py-6 sm:px-8 lg:px-12 lg:py-10"
+        className="mx-auto w-full max-w-[90rem] min-w-0 flex-1 px-4 py-6 sm:px-8 lg:py-10"
       >
         <QueryProvider>{children}</QueryProvider>
       </main>
@@ -131,7 +131,7 @@ function ConsoleNavigation({ name }: { name: string }) {
 
   return (
     <header className="border-b border-border/50 bg-background px-4 py-4 text-foreground sm:px-8">
-      <div className="mx-auto flex max-w-[96rem] items-center justify-between gap-3 pb-4">
+      <div className="mx-auto flex max-w-[90rem] items-center justify-between gap-3 pb-4">
         <Link
           href="/admin"
           aria-label="Admin home"
@@ -170,7 +170,7 @@ function ConsoleNavigation({ name }: { name: string }) {
       {error ? (
         <p
           role="alert"
-          className="mx-auto mb-3 flex max-w-[96rem] items-start gap-2 rounded-xl border border-sidebar-ring bg-card p-3 text-sm text-foreground"
+          className="mx-auto mb-3 flex max-w-[90rem] items-start gap-2 rounded-xl border border-sidebar-ring bg-card p-3 text-sm text-foreground"
         >
           <AlertCircleIcon aria-hidden className="mt-0.5 size-4 shrink-0" />
           {error}
@@ -178,7 +178,7 @@ function ConsoleNavigation({ name }: { name: string }) {
       ) : null}
       <nav
         aria-label="Admin"
-        className="record-sheet mx-auto max-w-[96rem] rounded-panel p-2 shadow-panel"
+        className="mx-auto max-w-[90rem] rounded-panel border-t border-border pt-3"
       >
         <ul className="flex min-w-0 flex-wrap items-center gap-2">
           {nav.map((item) => {

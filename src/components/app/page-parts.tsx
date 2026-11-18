@@ -18,7 +18,7 @@ export function AppPageHeader({
   return (
     <header className="grid min-w-0 gap-5 pb-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
       <div className="flex min-w-0 flex-1 flex-col gap-2">
-        <h1 className="font-display text-4xl leading-[1.05] font-medium tracking-tight sm:text-5xl lg:text-[3.5rem]">
+        <h1 className="afterlife-page-heading font-display text-4xl leading-[1.05] sm:text-5xl lg:text-[3.5rem]">
           {title}
         </h1>
         {lead ? (
@@ -50,7 +50,7 @@ export function StatCard({
   tone?: "neutral" | "good" | "warn";
 }) {
   return (
-    <div className="flex min-w-0 flex-col gap-3 rounded-panel border border-border/50 bg-card p-5 text-card-foreground shadow-panel">
+    <div className="flex min-w-0 flex-col gap-2 border-s border-border ps-5 text-foreground">
       <div className="flex items-start justify-between gap-2">
         <p className="min-w-0 flex-1 text-sm font-medium wrap-anywhere text-muted-foreground">
           {label}
@@ -67,7 +67,7 @@ export function StatCard({
           />
         ) : null}
       </div>
-      <p className="font-display text-3xl font-medium tracking-tight break-words tabular-nums sm:text-4xl">
+      <p className="font-display text-3xl font-normal tracking-tight break-words tabular-nums sm:text-4xl">
         {value}
       </p>
       {hint ? <p className="text-xs text-muted-foreground">{hint}</p> : null}

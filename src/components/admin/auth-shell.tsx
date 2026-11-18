@@ -40,7 +40,7 @@ export function AdminAuthShell({
         tabIndex={-1}
         className="mx-auto flex w-full max-w-xl flex-1 flex-col justify-center px-5 py-8 sm:px-8"
       >
-        <div className="rounded-panel bg-card p-6 text-card-foreground shadow-panel sm:p-8">
+        <div className="afterlife-task-panel rounded-panel bg-card p-6 text-card-foreground sm:p-8">
           <div className="mb-6 flex flex-col gap-3 border-b border-border pb-6">
             <h1 className="font-display text-4xl leading-[1.1] font-medium tracking-tight">
               {title}

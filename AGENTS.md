@@ -1,3 +1,39 @@
+## Active Afterlife design — owner approval, 18 November 2026
+
+The owner approved the Afterlife preview for the full web platform and authorized
+implementation of the public/business domain split. This supersedes Florin,
+Orbit and earlier composition rules. Preserve workflow, authentication, privacy,
+exact units, accessibility and native trust boundaries.
+
+- Reference: `output/design/astryx-homepages/`. Retain both appearances, original
+  lime/forest palette and existing images. The darker-green replacement and
+  cyberpunk pass were rejected. Do not restore them.
+- Photo-backed heroes use dark overlays and white text in both appearances.
+- Use the actual Luma logo. Align mark/name; footer tagline sits below the name.
+- Avoid ornamental summary cards and long explanations. Use clear titles,
+  open sections, aligned actions and useful record panels. Pills are for single
+  rows only; wrapping controls and form containers have bounded corners.
+- Use Geist and Noto fallbacks in production; copied preview Suisse files have
+  no confirmed public-deployment licence. Keep installed Lucide icons and use
+  the WhatsApp brand glyph for WhatsApp actions.
+- GSAP reveal and rotating audience text are restrained, with reduced-motion
+  support and cleanup. Do not hijack scroll or block task controls with motion.
+- Hero audience rotates Apartments, Coffee shops, Offices. Do not label it
+  Homes and waste generators. Public booking CTA is Book now, a direct wa.me
+  link with prefilled message and the configured recipient. No modal or phone
+  form. Until the owner supplies a number, show an honest unavailable action.
+- The phone shows 15 WhatsApp-style sample conversations in a loop, no visible
+  playback controls or date/example labels. Pause offscreen and when hidden;
+  show static content for reduced motion. It is visual content, never evidence
+  of a live booking, provider confirmation or private customer record.
+- One Next.js codebase and existing Convex backend serve luma.green (public)
+  and business.luma.green (business ecosystem and workflows). Deploy routing
+  only after DNS/TLS/auth/native compatibility acceptance. Keep old operational
+  routes reachable until native and existing-link migration is complete.
+- Track routes and states, run pnpm check/build and relevant browser checks.
+  No invented live records, generated screenshots, auth shortcuts or native
+  release claims. Keep canonical instructions consistent with this approval.
+
 ## Active Orbit design — owner decision, 12 November 2026
 
 The owner rejected the Florin UI ("not modern or sleek") and ordered a full redo of every web page, including admin, in the spirit of NextUI/HeroUI, SpaceX and Grok. Keep the lime/forest palette. The new contract is `docs/design/luma-design-system/README.md` (Luma Orbit): dark-first with a light appearance, Geist/Geist Mono with Noto script fallbacks, lime as a signal on hairline surfaces, glass chrome. New, shorter copy is authorized. Old images may be reused; otherwise use `ImageSlot` placeholders and record their fal prompts in `docs/design/luma-design-system/image-slots.md`. This supersedes the Florin, Ship X, light-only and image-placement rules below. Workflow, auth, consent, data and native boundaries still apply. Commit, checked PR and merge are authorized for this redesign. The owner also requires the `ui-ux-pro-max` skill (`.claude/skills/ui-ux-pro-max`) for all UI work: use its Dark Mode (OLED) style, UX/stack searches and pre-delivery checklist; its palette/font picks never replace Luma’s tokens.

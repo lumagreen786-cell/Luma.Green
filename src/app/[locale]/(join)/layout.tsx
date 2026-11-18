@@ -54,7 +54,7 @@ export default async function JoinLayout({
       <main
         id="main"
         tabIndex={-1}
-        className="mx-auto my-6 w-[calc(100%-2rem)] max-w-4xl min-w-0 rounded-panel bg-card p-5 shadow-panel sm:p-6"
+        className="afterlife-task-panel mx-auto my-6 w-[calc(100%-2rem)] max-w-4xl min-w-0 rounded-panel bg-card p-5 sm:p-6"
       >
         {children}
       </main>

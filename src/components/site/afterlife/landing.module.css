@@ -1,0 +1,223 @@
+.hero {
+  position: relative;
+  min-height: min(920px, 100svh);
+  display: flex;
+  align-items: center;
+  background: var(--brand-950);
+  color: white;
+  margin-top: -88px;
+  padding: 180px max(6vw, 24px) 120px;
+  overflow: hidden;
+}
+.heroImage {
+  object-fit: cover;
+  object-position: center;
+}
+.scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(8, 11, 20, 0.88),
+      rgba(8, 11, 20, 0.4) 60%,
+      rgba(8, 11, 20, 0.2)
+    ),
+    linear-gradient(rgba(8, 11, 20, 0.55), transparent 35%);
+}
+.heroCopy {
+  position: relative;
+  z-index: 1;
+  max-width: 960px;
+}
+.hero h1 {
+  color: white;
+  font-size: clamp(54px, 7vw, 104px);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.055em;
+  margin: 24px 0;
+}
+.hero p {
+  max-width: 410px;
+  line-height: 1.6;
+}
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+.textLink {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  min-height: 44px;
+}
+.section {
+  padding: 100px max(6vw, 24px);
+}
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.section h2,
+.story h2 {
+  font-size: clamp(36px, 4.6vw, 66px);
+  line-height: 1.07;
+  letter-spacing: -0.045em;
+  font-weight: 400;
+  margin: 20px 0 26px;
+}
+.section p,
+.story p {
+  max-width: 48ch;
+  line-height: 1.7;
+}
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.phone {
+  display: flex;
+  justify-content: center;
+}
+.story {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.storyImage {
+  min-height: 550px;
+  position: relative;
+}
+.storyCopy {
+  background: var(--muted);
+  padding: 80px max(6vw, 24px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
+}
+.faq details {
+  border-top: 1px solid var(--border);
+  padding: 22px 0;
+}
+.faq summary {
+  cursor: pointer;
+  min-height: 44px;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.faq details p {
+  color: var(--muted-foreground);
+  padding-top: 15px;
+}
+.closing {
+  padding: 80px 24px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 24px;
+  border-block: 1px solid var(--border);
+  text-align: center;
+}
+.closing h2 {
+  font-size: clamp(36px, 5vw, 68px);
+  letter-spacing: -0.045em;
+  line-height: 1.1;
+}
+.businessBand {
+  padding: 28px max(6vw, 24px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.roles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 36px;
+  margin-top: 48px;
+}
+.role {
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.roleImage {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+  border-radius: 16px;
+}
+.role h3 {
+  font-size: 26px;
+  letter-spacing: -0.035em;
+}
+@media (max-width: 800px) {
+  .hero {
+    min-height: 780px;
+    padding-top: 155px;
+  }
+  .hero h1 {
+    font-size: clamp(49px, 12vw, 72px);
+  }
+  .section {
+    padding: 65px 24px;
+  }
+  .split,
+  .story {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .story {
+    gap: 0;
+  }
+  .storyImage {
+    min-height: 350px;
+  }
+  .storyCopy {
+    padding: 48px 24px;
+  }
+  .roles {
+    grid-template-columns: 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero * {
+    animation: none !important;
+  }
+}
+.split > *,
+.story > *,
+.roles > * {
+  min-width: 0;
+}
+.hero h1,
+.section h2,
+.story h2,
+.role h3 {
+  overflow-wrap: anywhere;
+}
+:global(html[lang="ta"]) .hero h1,
+:global(html[lang="ta"]) .section h2,
+:global(html[lang="ta"]) .story h2 {
+  letter-spacing: normal;
+  line-height: 1.25;
+}
+/* Global paragraph tokens must not override text on the photo scrim. */
+.hero p {
+  color: white;
+}

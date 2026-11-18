@@ -4819,5 +4819,171 @@
     "townhouse": "Casa adosada",
     "farmhouse": "Casa de campo",
     "routeNote": "Para la recogida comunitaria, usa el código comunitario revisado."
+  },
+  "afterlife": {
+    "bookNow": "Reservar ahora",
+    "bookingMessage": "Hola Luma, me gustaría reservar una recogida de reciclaje.",
+    "bookingUnavailable": "Las reservas por WhatsApp estarán disponibles pronto.",
+    "how": "Cómo funciona",
+    "questions": "Preguntas",
+    "business": "Para empresas",
+    "ecosystem": "Ecosistema",
+    "collectors": "Para recolectores",
+    "signIn": "Iniciar sesión",
+    "publicSite": "Reservar una recogida",
+    "menu": "Menú",
+    "tagline": "Un mañana más limpio en marcha.",
+    "heroTitle": "Menos residuos.",
+    "heroTitleEnd": "Más posibilidades.",
+    "heroLead": "Envía una foto. Comparte tu ubicación. Organiza la recogida en una sola conversación.",
+    "phoneEyebrow": "La recogida empieza aquí",
+    "phoneTitle": "Unos mensajes. Un nuevo comienzo.",
+    "phoneLead": "Envía una foto. Elige una hora. Te mantendremos al tanto.",
+    "storyEyebrow": "Se adapta a tu día",
+    "storyTitle": "Una recogida. Un nuevo comienzo.",
+    "storyLead": "Unas bolsas o una recogida periódica. Empieza con un mensaje. Comprobamos qué se puede recoger y cuándo.",
+    "repeat": "Recogidas únicas o periódicas",
+    "updates": "Novedades por WhatsApp",
+    "faqTitle": "Conviene saberlo.",
+    "faq1q": "¿Qué puedo reciclar?",
+    "faq1a": "Envía fotos del papel, cartón, plástico o metal. El recolector comprueba qué se acepta en tu zona.",
+    "faq2q": "¿Cuándo se confirma mi recogida?",
+    "faq2a": "Tu recogida se confirma cuando un recolector autorizado acepta la solicitud.",
+    "faq3q": "¿Cómo se deciden el peso y el pago?",
+    "faq3a": "El recolector registra el peso medido y el importe acordado durante la recogida.",
+    "closingTitle": "¿Listo para tu próxima recogida?",
+    "workWith": "Trabaja con Luma",
+    "businessPrompt": "¿Recoges, clasificas, reciclas o compras materiales recuperados?",
+    "businessEyebrow": "El ecosistema Luma",
+    "businessTitle": "Buenos materiales.",
+    "businessTitleEnd": "Grandes posibilidades.",
+    "businessLead": "Desde la primera recogida hasta el siguiente uso. Un espacio conectado para quienes hacen posible el reciclaje.",
+    "findRole": "Encuentra tu lugar",
+    "rolesTitle": "Tu trabajo. Una cadena conectada.",
+    "rolesLead": "Elige tu función. Descubre cómo encaja Luma en tu día.",
+    "roleAction": "Descubre cómo unirte",
+    "kabadiwala": "Comerciantes de chatarra",
+    "preprocessor": "Preprocesadores",
+    "recycler": "Recicladores",
+    "manufacturer": "Fabricantes",
+    "saathi": "Colaboradores de recogida",
+    "kabadiwalaBody": "Gestiona solicitudes, planifica tu día y registra cada recogida.",
+    "preprocessorBody": "Conecta entradas, clasificación, existencias y entregas.",
+    "recyclerBody": "Conecta los registros de entrada, procesamiento y salida de materiales.",
+    "manufacturerBody": "Encuentra materiales recuperados y reúne los registros de compra.",
+    "saathiBody": "Encuentra trabajos de recogida y clasificación disponibles.",
+    "businessClosing": "Avancemos juntos.",
+    "collectorTitle": "Más tiempo recogiendo.",
+    "collectorTitleEnd": "Menos tiempo persiguiendo respuestas.",
+    "collectorLead": "Reúne solicitudes, planificación y registros de pesaje en una sola vista.",
+    "collectorFlow": "De la solicitud a la recogida.",
+    "step1": "Revisa la solicitud.",
+    "step1Body": "Comprueba las fotos, la zona y el horario solicitado.",
+    "step2": "Planifica la recogida.",
+    "step2Body": "Acepta trabajos y mantén informado al cliente.",
+    "step3": "Registra el resultado.",
+    "step3Body": "Registra el peso medido, el importe acordado y el estado de recogida.",
+    "imageAlt": "Ilustración de materiales reciclables y trabajos de recogida",
+    "businessMeta": "Luma para empresas de reciclaje",
+    "homeMeta": "Reserva una recogida con Luma por WhatsApp.",
+    "collectorMeta": "Gestiona tus recogidas con Luma.",
+    "help": "Ayuda",
+    "privacy": "Privacidad",
+    "status": "Estado del servicio"
+  },
+  "afterlifePhone": {
+    "name": "Luma Green",
+    "description": "Ilustración de una conversación de recogida. Tras las fotos, la ubicación y el horario preferido llega la aceptación del recolector.",
+    "photoAlt": "Materiales reciclables ilustrativos listos para recoger",
+    "location": "Ubicación actual",
+    "locationDetail": "Ubicación compartida",
+    "message": "Mensaje",
+    "greeting": "¡Hola! Claro. ¿Puedes enviar una foto?",
+    "askLocation": "¡Gracias! Comparte tu ubicación y una hora que te venga bien.",
+    "slotReply": "{slot}, por favor.",
+    "received": "Entendido. Comprobaremos la disponibilidad y te confirmaremos.",
+    "accepted": "Tu recolector ha aceptado. {slot}. ¡Todo listo!",
+    "thanks": "¡Perfecto, gracias!",
+    "scenario0": {
+      "hello": "Hola, ¿podéis recoger periódicos viejos?",
+      "caption": "Periódicos y cartón.",
+      "slot": "Mañana, de 9 a 11"
+    },
+    "scenario1": {
+      "hello": "Acabamos de mudarnos. ¿Podéis llevaros las cajas?",
+      "caption": "Estas son las cajas vacías de la mudanza.",
+      "slot": "Sábado, de 10 a 12"
+    },
+    "scenario2": {
+      "hello": "¿Puedo organizar una recogida para nuestro apartamento?",
+      "caption": "Esto es lo que hemos reunido.",
+      "slot": "Domingo, de 9 a 11"
+    },
+    "scenario3": {
+      "hello": "Tenemos cartón en nuestra tienda.",
+      "caption": "Las cajas están plegadas y listas.",
+      "slot": "Viernes, de 14 a 16"
+    },
+    "scenario4": {
+      "hello": "¿Podéis recoger papel de nuestra oficina?",
+      "caption": "Aquí están los paquetes de papel.",
+      "slot": "Lunes, de 11 a 13"
+    },
+    "scenario5": {
+      "hello": "¡Hola! He separado unos envases de plástico.",
+      "caption": "Esto es lo que tengo.",
+      "slot": "Martes, de 9 a 11"
+    },
+    "scenario6": {
+      "hello": "¿Podéis revisar estos objetos de metal?",
+      "caption": "Envío una foto ahora.",
+      "slot": "Miércoles, de 15 a 17"
+    },
+    "scenario7": {
+      "hello": "Estoy vaciando un armario. ¿Podéis ayudarme?",
+      "caption": "Sobre todo papel y embalajes.",
+      "slot": "Jueves, de 10 a 12"
+    },
+    "scenario8": {
+      "hello": "Queremos una recogida periódica para nuestra tienda.",
+      "caption": "Esta es nuestra cantidad habitual de cartón.",
+      "slot": "Todos los viernes, de 14 a 16"
+    },
+    "scenario9": {
+      "hello": "¿Podemos organizar una recogida mensual?",
+      "caption": "Papel y botellas de casa.",
+      "slot": "Primer sábado, de 9 a 11"
+    },
+    "scenario10": {
+      "hello": "Hola, ¿podéis recoger en nuestro edificio?",
+      "caption": "Hemos reunido los materiales.",
+      "slot": "Sábado, de 15 a 17"
+    },
+    "scenario11": {
+      "hello": "Tengo cuadernos viejos para reciclar.",
+      "caption": "Aquí va una foto de la pila.",
+      "slot": "Mañana, de 11 a 13"
+    },
+    "scenario12": {
+      "hello": "¿Podéis recoger embalajes esta semana?",
+      "caption": "Cartón y envases limpios.",
+      "slot": "Jueves, de 14 a 16"
+    },
+    "scenario13": {
+      "hello": "Hemos terminado de separar todo en casa.",
+      "caption": "Todo está listo junto a la puerta.",
+      "slot": "Domingo, de 16 a 18"
+    },
+    "scenario14": {
+      "hello": "Hola Luma, me gustaría reservar una recogida.",
+      "caption": "Esto es lo que queremos reciclar.",
+      "slot": "Lunes, de 9 a 11"
+    }
+  },
+  "afterlifeMotion": {
+    "audiences": "Apartamentos, cafeterías y oficinas",
+    "apartments": "Apartamentos",
+    "coffeeShops": "Cafeterías",
+    "offices": "Oficinas"
   }
 }

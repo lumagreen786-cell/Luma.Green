@@ -4819,5 +4819,171 @@
     "townhouse": "Rumah teres",
     "farmhouse": "Rumah ladang",
     "routeNote": "Untuk kutipan komuniti, gunakan kod komuniti yang telah disemak."
+  },
+  "afterlife": {
+    "bookNow": "Tempah sekarang",
+    "bookingMessage": "Hai Luma, saya ingin menempah kutipan bahan kitar semula.",
+    "bookingUnavailable": "Tempahan WhatsApp akan tersedia tidak lama lagi.",
+    "how": "Cara berfungsi",
+    "questions": "Soalan",
+    "business": "Untuk perniagaan",
+    "ecosystem": "Ekosistem",
+    "collectors": "Untuk pengumpul",
+    "signIn": "Log masuk",
+    "publicSite": "Tempah kutipan",
+    "menu": "Menu navigasi",
+    "tagline": "Bergerak ke arah esok yang lebih bersih.",
+    "heroTitle": "Kurang sisa.",
+    "heroTitleEnd": "Lebih peluang.",
+    "heroLead": "Hantar foto. Kongsi lokasi. Aturkan kutipan kitar semula dalam satu perbualan.",
+    "phoneEyebrow": "Kutipan bermula di sini",
+    "phoneTitle": "Beberapa mesej. Permulaan baharu.",
+    "phoneLead": "Hantar foto. Pilih masa. Kami akan memaklumkan perkembangan.",
+    "storyEyebrow": "Mengikut jadual anda",
+    "storyTitle": "Satu kutipan. Permulaan baharu.",
+    "storyLead": "Beberapa beg atau kutipan berkala. Mulakan dengan mesej. Kami menyemak bahan yang boleh dikutip dan masanya.",
+    "repeat": "Kutipan sekali atau berkala",
+    "updates": "Makluman melalui WhatsApp",
+    "faqTitle": "Baik untuk diketahui.",
+    "faq1q": "Apakah yang boleh saya kitar semula?",
+    "faq1a": "Hantar foto kertas, kadbod, plastik atau logam. Pengumpul menyemak bahan yang boleh diterima di kawasan anda.",
+    "faq2q": "Bilakah kutipan saya disahkan?",
+    "faq2a": "Kutipan disahkan selepas pengumpul yang layak menerima permintaan.",
+    "faq3q": "Bagaimanakah berat dan bayaran ditentukan?",
+    "faq3a": "Pengumpul merekodkan berat yang ditimbang dan jumlah yang dipersetujui semasa kutipan.",
+    "closingTitle": "Sedia untuk kutipan seterusnya?",
+    "workWith": "Bekerjasama dengan Luma",
+    "businessPrompt": "Mengumpul, mengasingkan, mengitar semula atau membeli bahan pulih guna?",
+    "businessEyebrow": "Ekosistem Luma",
+    "businessTitle": "Bahan yang baik.",
+    "businessTitleEnd": "Peluang yang besar.",
+    "businessLead": "Dari kutipan pertama hingga kegunaan seterusnya. Satu tempat yang menghubungkan penggiat kitar semula.",
+    "findRole": "Cari peranan anda",
+    "rolesTitle": "Kerja anda. Rantaian yang berhubung.",
+    "rolesLead": "Pilih peranan anda. Lihat cara Luma menyokong hari anda.",
+    "roleAction": "Ketahui cara menyertai",
+    "kabadiwala": "Kabadiwala",
+    "preprocessor": "Prapemproses",
+    "recycler": "Pengitar semula",
+    "manufacturer": "Pengilang",
+    "saathi": "Saathi",
+    "kabadiwalaBody": "Urus permintaan kutipan, rancang hari anda dan rekodkan setiap kutipan.",
+    "preprocessorBody": "Hubungkan penerimaan, pengasingan, stok dan serahan.",
+    "recyclerBody": "Hubungkan rekod penerimaan bahan, pemprosesan dan hasil.",
+    "manufacturerBody": "Cari bahan pulih guna dan satukan rekod pembelian.",
+    "saathiBody": "Cari kerja kutipan dan pengasingan yang disokong.",
+    "businessClosing": "Mari bergerak maju.",
+    "collectorTitle": "Lebih masa mengumpul.",
+    "collectorTitleEnd": "Kurang masa membuat susulan.",
+    "collectorLead": "Lihat permintaan kutipan, jadual dan rekod timbangan dalam satu paparan.",
+    "collectorFlow": "Dari permintaan hingga selesai dikutip.",
+    "step1": "Semak permintaan.",
+    "step1Body": "Semak foto, kawasan dan slot yang diminta.",
+    "step2": "Rancang kutipan.",
+    "step2Body": "Terima kerja dan maklumkan perkembangan kepada pelanggan.",
+    "step3": "Rekodkan hasil.",
+    "step3Body": "Rekodkan berat yang ditimbang, jumlah yang dipersetujui dan status kutipan.",
+    "imageAlt": "Ilustrasi bahan kitar semula dan kerja kutipan",
+    "businessMeta": "Luma untuk perniagaan kitar semula",
+    "homeMeta": "Tempah kutipan kitar semula dengan Luma melalui WhatsApp.",
+    "collectorMeta": "Urus kerja kutipan anda dengan Luma.",
+    "help": "Bantuan",
+    "privacy": "Privasi",
+    "status": "Status perkhidmatan"
+  },
+  "afterlifePhone": {
+    "name": "Luma Green",
+    "description": "Ilustrasi perbualan kutipan kitar semula. Foto, lokasi dan masa pilihan diikuti penerimaan oleh pengumpul.",
+    "photoAlt": "Ilustrasi bahan kitar semula sedia untuk kutipan",
+    "location": "Lokasi semasa",
+    "locationDetail": "Lokasi dikongsi",
+    "message": "Mesej",
+    "greeting": "Hai! Boleh. Boleh hantar foto?",
+    "askLocation": "Terima kasih! Kongsi lokasi dan masa yang sesuai untuk anda.",
+    "slotReply": "{slot}, ya.",
+    "received": "Baik. Kami akan menyemak ketersediaan dan mengesahkannya.",
+    "accepted": "Pengumpul anda telah menerima permintaan. {slot}. Semuanya sedia!",
+    "thanks": "Bagus, terima kasih!",
+    "scenario0": {
+      "hello": "Hai, boleh kutip surat khabar lama?",
+      "caption": "Surat khabar dan kadbod.",
+      "slot": "Esok, 9–11 pagi"
+    },
+    "scenario1": {
+      "hello": "Kami baru berpindah. Boleh ambil kotak ini?",
+      "caption": "Ini kotak pindah yang kosong.",
+      "slot": "Sabtu, 10 pagi–12 tengah hari"
+    },
+    "scenario2": {
+      "hello": "Boleh aturkan kutipan untuk pangsapuri kami?",
+      "caption": "Ini yang kami kumpulkan.",
+      "slot": "Ahad, 9–11 pagi"
+    },
+    "scenario3": {
+      "hello": "Kami ada kadbod di kedai.",
+      "caption": "Kotak sudah diratakan dan sedia.",
+      "slot": "Jumaat, 2–4 petang"
+    },
+    "scenario4": {
+      "hello": "Boleh kutip kertas dari pejabat kami?",
+      "caption": "Ini ikatan kertasnya.",
+      "slot": "Isnin, 11 pagi–1 petang"
+    },
+    "scenario5": {
+      "hello": "Hai! Saya sudah mengasingkan bekas plastik.",
+      "caption": "Ini yang saya ada.",
+      "slot": "Selasa, 9–11 pagi"
+    },
+    "scenario6": {
+      "hello": "Boleh semak barang logam ini?",
+      "caption": "Saya hantar foto sekarang.",
+      "slot": "Rabu, 3–5 petang"
+    },
+    "scenario7": {
+      "hello": "Saya sedang mengemas almari. Boleh bantu?",
+      "caption": "Kebanyakannya kertas dan pembungkusan.",
+      "slot": "Khamis, 10 pagi–12 tengah hari"
+    },
+    "scenario8": {
+      "hello": "Kami mahu kutipan berkala untuk kedai.",
+      "caption": "Ini kutipan kadbod biasa kami.",
+      "slot": "Setiap Jumaat, 2–4 petang"
+    },
+    "scenario9": {
+      "hello": "Boleh aturkan kutipan bulanan?",
+      "caption": "Kertas dan botol dari rumah.",
+      "slot": "Sabtu pertama, 9–11 pagi"
+    },
+    "scenario10": {
+      "hello": "Hai, boleh kutip dari bangunan kami?",
+      "caption": "Kami sudah mengumpulkan bahan bersama.",
+      "slot": "Sabtu, 3–5 petang"
+    },
+    "scenario11": {
+      "hello": "Saya ada buku nota lama untuk dikitar semula.",
+      "caption": "Ini foto timbunannya.",
+      "slot": "Esok, 11 pagi–1 petang"
+    },
+    "scenario12": {
+      "hello": "Boleh kutip pembungkusan minggu ini?",
+      "caption": "Kadbod dan bekas bersih.",
+      "slot": "Khamis, 2–4 petang"
+    },
+    "scenario13": {
+      "hello": "Kami sudah selesai mengasingkan di rumah.",
+      "caption": "Semuanya sedia di tepi pintu.",
+      "slot": "Ahad, 4–6 petang"
+    },
+    "scenario14": {
+      "hello": "Hai Luma, saya ingin menempah kutipan.",
+      "caption": "Ini bahan yang ingin kami kitar semula.",
+      "slot": "Isnin, 9–11 pagi"
+    }
+  },
+  "afterlifeMotion": {
+    "audiences": "Pangsapuri, kedai kopi dan pejabat",
+    "apartments": "Pangsapuri",
+    "coffeeShops": "Kedai kopi",
+    "offices": "Pejabat"
   }
 }

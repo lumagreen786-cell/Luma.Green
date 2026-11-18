@@ -1,0 +1,7 @@
+.audience {
+  display: inline-grid;
+  min-inline-size: 14ch;
+}
+.word {
+  grid-area: 1 / 1;
+}

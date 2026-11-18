@@ -1,0 +1,147 @@
+.header {
+  height: 88px;
+  padding: 0 max(6vw, 24px);
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  position: relative;
+  z-index: 40;
+  border-bottom: 1px solid var(--border);
+  background: var(--background);
+}
+.overImage {
+  background: transparent;
+  color: white;
+  border: 0;
+}
+.logo {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  flex-shrink: 0;
+}
+.logo :global(span) {
+  color: inherit;
+}
+.nav {
+  margin-inline-start: auto;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  font-size: 14px;
+}
+.nav a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.tools {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.overImage .tools > button {
+  color: white;
+}
+.menu {
+  display: none;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+}
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 45px max(6vw, 24px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+.footerBrand {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.footerName {
+  font-size: 24px;
+  letter-spacing: -0.04em;
+  line-height: 1.2;
+}
+.tagline {
+  font-size: 12px;
+  color: var(--muted-foreground);
+  margin-top: 7px;
+}
+.footer nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.footer nav a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 13px;
+}
+@media (max-width: 1000px) {
+  .header {
+    gap: 12px;
+  }
+  .tools {
+    margin-inline-start: auto;
+  }
+  .menu {
+    display: flex;
+  }
+  .nav {
+    display: none;
+    position: absolute;
+    top: 80px;
+    left: 20px;
+    right: 20px;
+    padding: 18px 24px;
+    background: var(--card);
+    color: var(--card-foreground);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+  }
+  .nav.open {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+}
+@media (max-width: 450px) {
+  .header {
+    padding-inline: 18px;
+    gap: 5px;
+  }
+  .logo :global(span) {
+    font-size: 20px;
+  }
+  .tools {
+    gap: 0;
+  }
+  .tools > button {
+    padding-inline: 6px;
+  }
+  .footer {
+    padding-inline: 24px;
+  }
+}
+.mobileLanguage {
+  display: none;
+}
+@media (max-width: 600px) {
+  .desktopLanguage {
+    display: none;
+  }
+  .mobileLanguage {
+    display: block;
+  }
+}

@@ -19,6 +19,16 @@ const optionalUrl = z
   .or(z.literal("").transform((): undefined => undefined));
 
 const clientSchema = z.object({
+  NEXT_PUBLIC_BUSINESS_SITE_ENABLED: z
+    .enum(["true", "false", ""])
+    .optional()
+    .transform((value) => value === "true"),
+  NEXT_PUBLIC_WHATSAPP_NUMBER: z
+    .string()
+    .trim()
+    .regex(/^[1-9]\d{6,14}$/)
+    .optional()
+    .or(z.literal("")),
   NEXT_PUBLIC_TURNSTILE_SITE_KEY: z.string().trim().optional(),
   NEXT_PUBLIC_SITE_URL: optionalUrl,
   NEXT_PUBLIC_CONVEX_URL: optionalUrl,
@@ -40,6 +50,9 @@ const clientSchema = z.object({
 });
 
 export const clientEnv = clientSchema.parse({
+  NEXT_PUBLIC_BUSINESS_SITE_ENABLED:
+    process.env.NEXT_PUBLIC_BUSINESS_SITE_ENABLED,
+  NEXT_PUBLIC_WHATSAPP_NUMBER: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER,
   NEXT_PUBLIC_TURNSTILE_SITE_KEY: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
   NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
   NEXT_PUBLIC_CONVEX_URL: process.env.NEXT_PUBLIC_CONVEX_URL,

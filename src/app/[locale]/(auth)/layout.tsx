@@ -13,11 +13,11 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
     <FocusedPageCanvas image="/images/ship-x/login-background.webp">
       <SkipLink />
       <SiteHeader />
-      <div className="mx-auto flex w-full max-w-lg flex-1 flex-col justify-center px-4 py-6 sm:px-6 sm:py-8">
+      <div className="mx-auto flex w-full max-w-[90rem] flex-1 flex-col justify-center px-4 py-10 sm:px-8 lg:items-end lg:py-16">
         <main
           id="main"
           tabIndex={-1}
-          className="flex w-full min-w-0 flex-col rounded-panel bg-card p-5 shadow-panel sm:p-6"
+          className="afterlife-task-panel flex w-full max-w-lg min-w-0 flex-col rounded-panel bg-card p-6 sm:p-10 lg:me-8"
         >
           {children}
         </main>
